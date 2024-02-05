@@ -1,0 +1,2 @@
+Sprites cambiados:
+* Glalie.
