@@ -42,24 +42,6 @@ static void Task_EReader(u8);
 
 struct EReaderData gEReaderData;
 
-extern const u8 gMultiBootProgram_EReader_Start[];
-extern const u8 gMultiBootProgram_EReader_End[];
-
-static void EReader_Load(struct EReaderData *eReader, int size, u32 *data)
-{
-    volatile u16 backupIME = REG_IME;
-    REG_IME = 0;
-    gIntrTable[1] = EReaderHelper_SerialCallback;
-    gIntrTable[2] = EReaderHelper_Timer3Callback;
-    EReaderHelper_SaveRegsState();
-    EReaderHelper_ClearSendRecvMgr();
-    REG_IE |= INTR_FLAG_VCOUNT;
-    REG_IME = backupIME;
-    eReader->status = 0;
-    eReader->size = size;
-    eReader->data = data;
-}
-
 static void EReader_Reset(struct EReaderData *eReader)
 {
     volatile u16 backupIME = REG_IME;
@@ -397,10 +379,6 @@ static void Task_EReader(u8 taskId)
             data->state = ER_STATE_MSG_SELECT_CONNECT;
         break;
     case ER_STATE_CONNECTING:
-        MG_AddMessageTextPrinter(gJPText_Connecting);
-        // XXX: This (u32 *) cast is discarding the const qualifier from gMultiBootProgram_EReader_Start
-        EReader_Load(&gEReaderData, gMultiBootProgram_EReader_End - gMultiBootProgram_EReader_Start, (u32 *)gMultiBootProgram_EReader_Start);
-        data->state = ER_STATE_TRANSFER;
         break;
     case ER_STATE_TRANSFER:
         data->status = EReader_Transfer(&gEReaderData);
