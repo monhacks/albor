@@ -531,7 +531,6 @@ static void Task_LoadSizeScreen(u8);
 static void Task_HandleSizeScreenInput(u8);
 static void Task_SwitchScreensFromSizeScreen(u8);
 static void LoadScreenSelectBarMain(u16);
-static void LoadScreenSelectBarSubmenu(u16);
 static void HighlightScreenSelectBarItem(u8, u16);
 static void Task_HandleCaughtMonPageInput(u8);
 static void Task_ExitCaughtMonPage(u8);
@@ -624,24 +623,21 @@ static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum);
 
 #define TAG_CATEGORY_ICONS 30004
 
-static const u16 sCategoryIcons_Pal[] = INCBIN_U16("graphics/interface/category_icons.gbapal");
-static const u32 sCategoryIcons_Gfx[] = INCBIN_U32("graphics/interface/category_icons.4bpp.lz");
-
 static const struct OamData sOamData_CategoryIcons =
 {
-    .size = SPRITE_SIZE(16x16),
-    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(32x16),
+    .shape = SPRITE_SHAPE(32x16),
     .priority = 0,
 };
 static const struct CompressedSpriteSheet sSpriteSheet_CategoryIcons =
 {
-    .data = sCategoryIcons_Gfx,
+    .data = gCategoryIcons_Gfx,
     .size = 16*16*3/2,
     .tag = TAG_CATEGORY_ICONS,
 };
 static const struct SpritePalette sSpritePal_CategoryIcons =
 {
-    .data = sCategoryIcons_Pal,
+    .data = gCategoryIcons_Pal,
     .tag = TAG_CATEGORY_ICONS
 };
 static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
@@ -651,12 +647,12 @@ static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
 };
 static const union AnimCmd sSpriteAnim_CategoryIcon1[] =
 {
-    ANIMCMD_FRAME(4, 0),
+    ANIMCMD_FRAME(8, 0),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategoryIcon2[] =
 {
-    ANIMCMD_FRAME(8, 0),
+    ANIMCMD_FRAME(16, 0),
     ANIMCMD_END
 };
 static const union AnimCmd *const sSpriteAnimTable_CategoryIcons[] =
@@ -664,16 +660,6 @@ static const union AnimCmd *const sSpriteAnimTable_CategoryIcons[] =
     sSpriteAnim_CategoryIcon0,
     sSpriteAnim_CategoryIcon1,
     sSpriteAnim_CategoryIcon2,
-};
-static const struct SpriteTemplate sSpriteTemplate_CategoryIcons =
-{
-    .tileTag = TAG_CATEGORY_ICONS,
-    .paletteTag = TAG_CATEGORY_ICONS,
-    .oam = &sOamData_CategoryIcons,
-    .anims = sSpriteAnimTable_CategoryIcons,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy
 };
 
 //Stat bars by DizzyEgg
@@ -4032,7 +4018,6 @@ static void Task_LoadAreaScreen(u8 taskId)
         }
         break;
     case 1:
-        LoadScreenSelectBarSubmenu(0xD);
         LoadPokedexBgPalette(sPokedexView->isSearchResults);
         SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256);
         gMain.state++;
@@ -4084,12 +4069,6 @@ static void Task_SwitchScreensFromAreaScreen(u8 taskId)
 static void LoadScreenSelectBarMain(u16 unused)
 {
     CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap_Clear, 0, 0);
-    CopyBgTilemapBufferToVram(1);
-}
-
-static void LoadScreenSelectBarSubmenu(u16 unused)
-{
-    CopyToBgTilemapBuffer(1, sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 
@@ -4374,37 +4353,35 @@ static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible)
 {
     gSprites[sPokedexView->typeIconSpriteIds[spriteArrayId]].invisible = invisible;
 }
-// different from pokemon_summary_screen
-#define TYPE_ICON_PAL_NUM_0     13
-#define TYPE_ICON_PAL_NUM_1     14
-#define TYPE_ICON_PAL_NUM_2     15
+
 static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] =
 {
-    [TYPE_NORMAL] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_FIGHTING] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_FLYING] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_POISON] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_GROUND] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_ROCK] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_BUG] = TYPE_ICON_PAL_NUM_2,
-    [TYPE_GHOST] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_STEEL] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_MYSTERY] = TYPE_ICON_PAL_NUM_2,
-    [TYPE_FIRE] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_WATER] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_GRASS] = TYPE_ICON_PAL_NUM_2,
-    [TYPE_ELECTRIC] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_PSYCHIC] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_ICE] = TYPE_ICON_PAL_NUM_1,
-    [TYPE_DRAGON] = TYPE_ICON_PAL_NUM_2,
-    [TYPE_DARK] = TYPE_ICON_PAL_NUM_0,
-    [TYPE_FAIRY] = TYPE_ICON_PAL_NUM_1,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = TYPE_ICON_PAL_NUM_0,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = TYPE_ICON_PAL_NUM_1,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = TYPE_ICON_PAL_NUM_1,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = TYPE_ICON_PAL_NUM_2,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = TYPE_ICON_PAL_NUM_0,
+    [TYPE_NORMAL] = 14,
+    [TYPE_FIGHTING] = 14,
+    [TYPE_FLYING] = 14,
+    [TYPE_POISON] = 14,
+    [TYPE_GROUND] = 14,
+    [TYPE_ROCK] = 15,
+    [TYPE_BUG] = 14,
+    [TYPE_GHOST] = 14,
+    [TYPE_STEEL] = 14,
+    [TYPE_MYSTERY] = 14,
+    [TYPE_FIRE] = 14,
+    [TYPE_WATER] = 14,
+    [TYPE_GRASS] = 14,
+    [TYPE_ELECTRIC] = 15,
+    [TYPE_PSYCHIC] = 15,
+    [TYPE_ICE] = 15,
+    [TYPE_DRAGON] = 15,
+    [TYPE_DARK] = 14,
+    [TYPE_FAIRY] = 15,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = 14,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = 14,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = 14,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = 14,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = 14,
 };
+
 static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 {
     struct Sprite *sprite;
@@ -4416,6 +4393,7 @@ static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
     sprite->y = y + 8;
     SetSpriteInvisibility(spriteArrayId, FALSE);
 }
+
 static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
 {
     u8 type1, type2;
@@ -4437,13 +4415,13 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
 
     if (type1 == type2)
     {
-        SetTypeIconPosAndPal(type1, 147, 48, 0);
+        SetTypeIconPosAndPal(type1, 147, 47, 0);
         SetSpriteInvisibility(1, TRUE);
     }
     else
     {
-        SetTypeIconPosAndPal(type1, 147, 48, 0);
-        SetTypeIconPosAndPal(type2, 147 + 33, 48, 1);
+        SetTypeIconPosAndPal(type1, 147, 47, 0);
+        SetTypeIconPosAndPal(type2, 147 + 33, 47, 1);
     }
 
 }
@@ -4452,7 +4430,7 @@ static void CreateTypeIconSprites(void)
     u8 i;
 
     LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
-    LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60);
+    LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
     for (i = 0; i < 2; i++)
     {
         if (sPokedexView->typeIconSpriteIds[i] == 0xFF)
@@ -4896,7 +4874,7 @@ static void LoadTilesetTilemapHGSS(u8 page)
 static u8 ShowCategoryIcon(u32 category)
 {
     if (sPokedexView->categoryIconSpriteId == 0xFF)
-        sPokedexView->categoryIconSpriteId = CreateSprite(&sSpriteTemplate_CategoryIcons, 139, 90, 0);
+        sPokedexView->categoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 139, 90, 0);
 
     gSprites[sPokedexView->categoryIconSpriteId].invisible = FALSE;
     StartSpriteAnim(&gSprites[sPokedexView->categoryIconSpriteId], category);
@@ -5038,8 +5016,8 @@ static void Task_LoadStatsScreen(u8 taskId)
         sPokedexView->typeIconSpriteIds[1] = 0xFF;
         CreateTypeIconSprites();
         sPokedexView->categoryIconSpriteId = 0xFF;
-        LoadCompressedPalette(gMoveTypes_Pal, 0x1D0, 0x60);
-        LoadCompressedSpriteSheet(&sSpriteSheet_CategoryIcons);
+        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
+        LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
         LoadSpritePalette(&sSpritePal_CategoryIcons);
         gMain.state++;
         break;
