@@ -6753,9 +6753,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_GLALIE,                   \
         .categoryName = _("Face"),                          \
         FOOTPRINT(Glalie)                                   \
-        LEARNSETS(Glalie),                                  \
-        .formSpeciesIdTable = sGlalieFormSpeciesIdTable,    \
-        .formChangeTable = sGlalieFormChangeTable
+        LEARNSETS(Glalie)
 
     [SPECIES_GLALIE] =
     {

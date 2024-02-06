@@ -116,9 +116,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_VENUSAUR,                                 \
         .categoryName = _("Seed"),                                          \
         FOOTPRINT(Venusaur)                                                 \
-        LEARNSETS(Venusaur),                                                \
-        .formSpeciesIdTable = sVenusaurFormSpeciesIdTable,                  \
-        .formChangeTable = sVenusaurFormChangeTable
+        LEARNSETS(Venusaur)
 
     [SPECIES_VENUSAUR] =
     {
@@ -346,9 +344,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_CHARIZARD,                            \
         .categoryName = _("Flame"),                                     \
         FOOTPRINT(Charizard)                                            \
-        LEARNSETS(Charizard),                                           \
-        .formSpeciesIdTable = sCharizardFormSpeciesIdTable,             \
-        .formChangeTable = sCharizardFormChangeTable
+        LEARNSETS(Charizard)
 
     [SPECIES_CHARIZARD] =
     {
@@ -619,9 +615,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_BLASTOISE,                            \
         .categoryName = _("Shellfish"),                                 \
         FOOTPRINT(Blastoise)                                            \
-        LEARNSETS(Blastoise),                                           \
-        .formSpeciesIdTable = sBlastoiseFormSpeciesIdTable,             \
-        .formChangeTable = sBlastoiseFormChangeTable
+        LEARNSETS(Blastoise)
 
     [SPECIES_BLASTOISE] =
     {
