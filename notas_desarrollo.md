@@ -1,0 +1,1 @@
+- Implementar repartir experiencia/buscapelea como opciones de menú.

@@ -4130,19 +4130,6 @@ static void SetStatusBarInvisibility(bool8 invisible)
         gSprites[sStatusBar->spriteIds[i]].invisible = invisible;
 }
 
-static const u8 sUnusedSounds[] = {
-    SE_M_CHARM,
-    SE_NOTE_C,
-    SE_NOTE_D,
-    SE_NOTE_E,
-    SE_NOTE_F,
-    SE_NOTE_G,
-    SE_NOTE_A,
-    SE_NOTE_B,
-    SE_NOTE_C_HIGH,
-    SE_RG_CARD_OPEN
-};
-
 static void LoadBerryGfx(void)
 {
     void *ptr = AllocZeroed(0x480);

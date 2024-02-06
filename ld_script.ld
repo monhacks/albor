@@ -325,11 +325,8 @@ SECTIONS {
         src/party_menu.o(.text);
         src/battle_tent.o(.text);
         src/braille.o(.text);
-        src/multiboot.o(.text);
-        src/berry_fix_graphics.o(.text);
         src/battle_controller_player_partner.o(.text);
         src/mirage_tower.o(.text);
-        src/berry_fix_program.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/pokedex_area_region_map.o(.text);
         src/battle_pyramid_bag.o(.text);
@@ -377,7 +374,6 @@ SECTIONS {
     lib_text :
     ALIGN(4)
     {
-        src/libgcnmultiboot.o(.text);
         src/m4a_1.o(.text);
         src/m4a.o(.text);
         src/agb_flash.o(.text);
@@ -396,7 +392,6 @@ SECTIONS {
         *libagbsyscall.a:Div.o(.text);
         *libagbsyscall.a:LZ77UnCompVram.o(.text);
         *libagbsyscall.a:LZ77UnCompWram.o(.text);
-        *libagbsyscall.a:MultiBoot.o(.text);
         *libagbsyscall.a:ObjAffineSet.o(.text);
         *libagbsyscall.a:RLUnCompVram.o(.text);
         *libagbsyscall.a:RLUnCompWram.o(.text);
@@ -688,11 +683,8 @@ SECTIONS {
         src/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/braille.o(.rodata);
-        src/multiboot.o(.rodata);
-        src/berry_fix_graphics.o(.rodata);
         src/battle_controller_player_partner.o(.rodata);
         src/mirage_tower.o(.rodata);
-        src/berry_fix_program.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/pokedex_area_region_map.o(.rodata);
         src/battle_pyramid_bag.o(.rodata);
@@ -1315,14 +1307,6 @@ SECTIONS {
         *libc.a:lseekr.o(.rodata);
         *libc.a:readr.o(.rodata);
         src/libisagbprn.o(.rodata);
-    } > ROM =0
-
-    multiboot_data :
-    ALIGN(4)
-    {
-        data/multiboot_ereader.o(.rodata);
-        data/multiboot_berry_glitch_fix.o(.rodata);
-        data/multiboot_pokemon_colosseum.o(.rodata);
     } > ROM =0
 
     gfx_data :

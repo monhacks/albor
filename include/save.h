@@ -54,8 +54,7 @@ enum
     SAVE_LINK, // Link / Battle Frontier
     SAVE_EREADER, // deprecated in Emerald
     SAVE_HALL_OF_FAME,
-    SAVE_OVERWRITE_DIFFERENT_FILE,
-    SAVE_HALL_OF_FAME_ERASE_BEFORE // unused
+    SAVE_OVERWRITE_DIFFERENT_FILE
 };
 
 // A save sector location holds a pointer to the data for a particular sector
