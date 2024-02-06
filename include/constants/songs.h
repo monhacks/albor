@@ -259,7 +259,7 @@
 #define SE_RG_CARD_FLIP                   249 // SE_RG_CARD1
 #define SE_RG_CARD_FLIPPING               250 // SE_RG_CARD2
 #define SE_RG_CARD_OPEN                   251 // SE_RG_CARD3
-#define SE_RG_BAG_CURSOR                  252 // SE_RG_BAG1
+#define SE_RG_BAG_CURSOR                  252 // -Usada (máquina de discos)
 #define SE_RG_BAG_POCKET                  253 // SE_RG_BAG2
 #define SE_RG_BALL_CLICK                  254 // SE_RG_GETTING
 #define SE_RG_SHOP                        255 // SE_RG_SHOP
@@ -646,7 +646,7 @@
 #define MUS_DP_POKE_MART                  605 // Poké Mart
 #define MUS_DP_GAME_CORNER                606 // Game Corner
 #define MUS_DP_B_TOWER                    607 // Battle Tower
-#define MUS_DP_TV_STATION                 608 // TV Station
+#define MUS_DP_TV_STATION                 608 // -Usada (máquina de discos)
 #define MUS_DP_GALACTIC_HQ_BASEMENT       609 // Deep Within Team Galactic HQ
 #define MUS_DP_AZURE_FLUTE                610 // Azure Flute
 #define MUS_DP_HALL_OF_ORIGIN             611 // Hall of Origin
