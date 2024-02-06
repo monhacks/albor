@@ -594,7 +594,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(Wartortle, 56, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Wartortle,
-        .frontAnimId = ANIM_SHRINK_GROW,
+        .frontAnimId = ANIM_JOLT_RIGHT,
         BACK_PIC(Wartortle, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
