@@ -1897,7 +1897,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
             gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
-        gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
+        gMultiuseSpriteTemplate.anims = sAnims_Trainer;
     }
 }
 
@@ -1909,7 +1909,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
         gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
-    gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
+    gMultiuseSpriteTemplate.anims = sAnims_Trainer;
 }
 
 #define SUBSTRUCT_CASE(n, v1, v2, v3, v4)                               \
