@@ -665,7 +665,7 @@
 #define MUS_DP_ENCOUNTER_CYCLIST          624 // Trainers' Eyes Meet (Cyclist)
 #define MUS_DP_ENCOUNTER_ARTIST           625 // Trainers' Eyes Meet (Artist)
 #define MUS_DP_ENCOUNTER_ELITE_FOUR       626 // The Elite Four Appears!
-#define MUS_DP_ENCOUNTER_CHAMPION         627 // Champion Cynthia
+#define MUS_DP_ENCOUNTER_CHAMPION         627 // - Usada
 #define MUS_DP_VS_WILD                    628 // Battle! (Wild Pokémon)
 #define MUS_DP_VS_GYM_LEADER              629 // Battle! (Gym Leader)
 #define MUS_DP_VS_UXIE_MESPRIT_AZELF      630 // Battle! (Uxie / Mesprit / Azelf)

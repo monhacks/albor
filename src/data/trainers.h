@@ -6826,16 +6826,18 @@ const struct Trainer gTrainers[] = {
         .party = TRAINER_PARTY(sParty_GruntSeafloorCavern5),
     },
 
-    [TRAINER_GRUNT_UNUSED] =
+    [TRAINER_CYNTHIA] =
     {
-        .trainerClass = TRAINER_CLASS_TEAM_MAGMA,
-        .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA,
-        .trainerPic = TRAINER_PIC_AQUA_GRUNT_F,
-        .trainerName = _("GRUNT"),
+        .trainerClass = TRAINER_CLASS_CHAMPION,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_CYNTHIA,
+        .trainerPic = TRAINER_PIC_CYNTHIA,
+        .trainerName = _("Cynthia"),
         .items = {},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = TRAINER_PARTY(sParty_GruntUnused),
+        .mugshotEnabled = TRUE,
+        .mugshotColor = MUGSHOT_COLOR_GREY,
+        .doubleBattle = TRUE,
+        .aiFlags = AI_FLAG_SMART_MON_CHOICES | AI_FLAG_SMART_SWITCHING | AI_FLAG_ACE_POKEMON | AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY,
+        .party = TRAINER_PARTY(sParty_Cynthia),
     },
 
     [TRAINER_GRUNT_MT_PYRE_4] =

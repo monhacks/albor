@@ -7213,15 +7213,68 @@ static const struct TrainerMon sParty_GruntSeafloorCavern5[] = {
     }
 };
 
-static const struct TrainerMon sParty_GruntUnused[] = {
+static const struct TrainerMon sParty_Cynthia[] = {
     {
-    .lvl = 31,
-    .species = SPECIES_WAILMER,
+    .species = SPECIES_SPIRITOMB,
+    .lvl = 64,
+    .heldItem = ITEM_LEFTOVERS,
+    .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(252, 0, 126, 0, 126, 0),
+    .nature = TRAINER_PARTY_NATURE(NATURE_IMPISH),
+    .gender = TRAINER_MON_FEMALE,
+    .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_DARK_PULSE, MOVE_SHADOW_BALL}
     },
     {
-    .lvl = 31,
-    .species = SPECIES_ZUBAT,
-    }
+    .species = SPECIES_ROSERADE,
+    .lvl = 64,
+    .heldItem = ITEM_GRASS_GEM,
+    .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
+    .nature = TRAINER_PARTY_NATURE(NATURE_TIMID),
+    .gender = TRAINER_MON_FEMALE,
+    .moves = {MOVE_SLEEP_POWDER, MOVE_TOXIC_SPIKES, MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB}
+    },
+    {
+    .species = SPECIES_TOGEKISS,
+    .lvl = 64,
+    .heldItem = ITEM_CHOICE_SCARF,
+    .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
+    .nature = TRAINER_PARTY_NATURE(NATURE_MODEST),
+    .gender = TRAINER_MON_FEMALE,
+    .moves = {MOVE_AIR_SLASH, MOVE_THUNDER_WAVE, MOVE_FLAMETHROWER, MOVE_PSYCHIC}
+    },
+    {
+    .species = SPECIES_MILOTIC,
+    .lvl = 64,
+    .heldItem = ITEM_FLAME_ORB,
+    .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(252, 0, 126, 0, 126, 0),
+    .nature = TRAINER_PARTY_NATURE(NATURE_CALM),
+    .gender = TRAINER_MON_FEMALE,
+    .moves = {MOVE_SCALD, MOVE_RECOVER, MOVE_HAZE, MOVE_ICE_BEAM}
+    },
+    {
+    .species = SPECIES_LUCARIO,
+    .lvl = 64,
+    .heldItem = ITEM_ASSAULT_VEST,
+    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 126, 0, 126, 0, 252),
+    .nature = TRAINER_PARTY_NATURE(NATURE_HARDY),
+    .gender = TRAINER_MON_FEMALE,
+    .moves = {MOVE_CLOSE_COMBAT, MOVE_DRAGON_PULSE, MOVE_FLASH_CANNON, MOVE_THUNDER_PUNCH}
+    },
+    {
+    .species = SPECIES_GARCHOMP,
+    .lvl = 65,
+    .heldItem = ITEM_GROUND_GEM,
+    .isShiny = TRUE,
+    .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 252),
+    .nature = TRAINER_PARTY_NATURE(NATURE_JOLLY),
+    .gender = TRAINER_MON_MALE,
+    .moves = {MOVE_SWORDS_DANCE, MOVE_OUTRAGE, MOVE_EARTHQUAKE, MOVE_CRUNCH}
+    },
 };
 
 static const struct TrainerMon sParty_GruntMtPyre4[] = {

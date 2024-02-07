@@ -704,6 +704,21 @@ PetalburgCity_EventScript_GymBoy::
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_NPC
 	end
 
+PetalburgCity_EventScript_Cynthia::
+	trainerbattle_double TRAINER_CYNTHIA, PetalburgCity_Text_CynthiaIntro, PetalburgCity_Text_CynthiaDerrota, 0
+	msgbox PetalburgCity_Text_CynthiaPost, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_Text_CynthiaIntro:
+	.string "…$"
+
+PetalburgCity_Text_CynthiaDerrota:
+	.string "Bú.$"
+
+PetalburgCity_Text_CynthiaPost:
+	.string "Jijiji.$"
+
 PetalburgCity_Text_WhereIsWally:
 	.string "Where has our WALLY gone?\p"
 	.string "We have to leave for VERDANTURF TOWN\n"
