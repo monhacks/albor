@@ -9,6 +9,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *rh-hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
+    *Cilerba por el baile de los Pokémon al subir de nivel.
 
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).

@@ -1,1 +1,2 @@
 - Implementar repartir experiencia/buscapelea como opciones de menú.
+- Implementar animación de subir de nivel no usada.

@@ -1,4 +1,7 @@
 Lista Pokémon:
+* Bulbasaur (paleta shiny)
+* Ivysaur (sprite y paletas)
+* Venusaur (paleta shiny)
 * Charmander (paleta shiny)
 * Charmeleon (paleta shiny)
 * Charizard
