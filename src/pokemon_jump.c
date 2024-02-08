@@ -4347,6 +4347,7 @@ void ResetPokemonJumpRecords(void)
     records->bestJumpScore = 0;
     records->excellentsInRow = 0;
     records->gamesWithMaxPlayers = 0;
+    #endif
 }
 
 static bool32 TryUpdateRecords(u32 jumpScore, u16 jumpsInRow, u16 excellentsInRow)
