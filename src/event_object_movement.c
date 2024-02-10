@@ -1769,6 +1769,18 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
         form %= NUM_UNOWN_FORMS;
         graphicsInfo = &gSpeciesInfo[form ? SPECIES_UNOWN_B + form - 1 : species].followerData;
         break;
+    case SPECIES_VENUSAUR:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[0];
+      break;
+    case SPECIES_BUTTERFREE:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[1];
+      break;
     default:
         graphicsInfo = &gSpeciesInfo[species].followerData;
         break;
@@ -1905,6 +1917,10 @@ static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny)
         break;
     case SPECIES_CASTFORM: // form is based on overworld weather
         *species = GetOverworldCastformSpecies();
+        break;
+    case SPECIES_VENUSAUR:
+    case SPECIES_BUTTERFREE:
+        *form = GetMonGender(mon);
         break;
     }
     return TRUE;

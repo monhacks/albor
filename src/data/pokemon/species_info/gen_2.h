@@ -3018,9 +3018,9 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(Wobbuffet),
         ICON(Wobbuffet, 0),
-    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
-        ICON_FEMALE(Wobbuffet, 0),
-    #endif
+//    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
+//        ICON_FEMALE(Wobbuffetf, 0),
+//    #endif
         FOOTPRINT(Wobbuffet)
         FOLLOWER(Wobbuffet, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Wobbuffet),

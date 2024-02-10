@@ -1,16 +1,16 @@
 Lista Pokémon:
-* Bulbasaur (paleta shiny)
-* Ivysaur (sprite y paletas)
+* Bulbasaur (paleta shiny) X
+* Ivysaur (sprite y paletas) X
 * Venusaur (paleta shiny)
-* Charmander (paleta shiny)
-* Charmeleon (paleta shiny)
-* Charizard
-* Squirtle (sprite y paletas)
-* Wartortle (sprite y paletas)
-* Blastoise (paleta shiny)
-* Caterpie
-* Metapod
-* Butterfree
+* Charmander (paleta shiny) X
+* Charmeleon (paleta shiny) X
+* Charizard X
+* Squirtle (sprite y paletas) X
+* Wartortle (sprite y paletas) X
+* Blastoise (paleta shiny) X
+* Caterpie X
+* Metapod X
+* Butterfree (paleta shiny) X
 *
 *
 *

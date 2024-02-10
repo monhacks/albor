@@ -206,11 +206,11 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
         .shinyPaletteFemale = gMonShinyPalette_## pal##F
 
 #define ICON(sprite, palId)                                 \
-        .iconSprite = gMonIcon_## sprite,                   \
+        .iconSprite = gObjectEventPic_## sprite,            \
         .iconPalIndex = palId
 
 #define ICON_FEMALE(sprite, palId)                          \
-        .iconSpriteFemale = gMonIcon_## sprite##F,          \
+        .iconSpriteFemale = gObjectEventPic_## sprite##F,   \
         .iconPalIndexFemale = palId
 
 #define LEARNSETS(learn)                                    \
@@ -248,7 +248,7 @@ const u8 gOgerponCornerstoneMaskPokedexText[] = _(
     .anims = sAnimTable_Following,                                                          \
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
-},
+},                                                                                          
 #else
 #define FOLLOWER(name, _size, shadow, _tracks)
 #endif
@@ -287,7 +287,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(CircledQuestionMark),
-        ICON(QuestionMark, 0),
+        ICON(Bulbasaur, 0),
         .followerData = {TAG_NONE, OBJ_EVENT_PAL_TAG_DYNAMIC, OBJ_EVENT_PAL_TAG_NONE, 512, 32, 32, 2, SHADOW_SIZE_M, FALSE, COMP, TRACKS_FOOT, &gObjectEventBaseOam_32x32, sOamTables_32x32, sAnimTable_Following, sPicTable_None, gDummySpriteAffineAnimTable},
         LEARNSETS(None),
     },
@@ -311,7 +311,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 20,
         .palette = gMonPalette_Egg,
         .shinyPalette = gMonPalette_Egg,
-        ICON(Egg, 1),
+        ICON(Bulbasaur, 1),
     },
 
     /* You may add any custom species below this point based on the following structure: */

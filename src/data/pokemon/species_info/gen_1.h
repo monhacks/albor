@@ -160,81 +160,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(Venusaur),
         ICON(Venusaur, 4),
+        ICON_FEMALE(Venusaur, 4),
         FOLLOWER(Venusaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_VENUSAUR_MEGA] =
-    {
-        VENUSAUR_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 100,
-        .baseDefense   = 123,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 122,
-        .baseSpDefense = 120,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 313 : 281,
-        .abilities = { ABILITY_THICK_FAT, ABILITY_THICK_FAT, ABILITY_THICK_FAT },
-        .cryId = CRY_VENUSAUR_MEGA,
-        .height = 24,
-        .weight = 1555,
-        .description = COMPOUND_STRING(
-            "In order to support its flower, which\n"
-            "has grown larger due to Mega Evolution,\n"
-            "its back and legs have become stronger."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 388,
-        .trainerOffset = 6,
-        FRONT_PIC(VenusaurMega, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_VenusaurMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(VenusaurMega, 64, 64),
-        .backPicYOffset = 8,
-        .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
-        PALETTES(VenusaurMega),
-        ICON(VenusaurMega, 4),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_VENUSAUR_GIGANTAMAX] =
-    {
-        VENUSAUR_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 82,
-        .baseDefense   = 83,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 100,
-        .expYield = 236,
-        .abilities = { ABILITY_OVERGROW, ABILITY_NONE, ABILITY_CHLOROPHYLL },
-        .cryId = CRY_VENUSAUR,
-        .height = 240,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Spits big amounts of pollen like a volcano.\n"
-            "Breathing too much of it causes fainting.\n"
-            "In battle, it swings around two thick vines\n"
-            "that can easily topple 10-story buildings."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 388,
-        .trainerOffset = 6,
-        FRONT_PIC(VenusaurGigantamax, 64, 64),
-        .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_VenusaurGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(VenusaurGigantamax, 64, 64),
-        .backPicYOffset = 11,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(VenusaurGigantamax),
-        ICON(VenusaurGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_BULBASAUR
 
 #if P_FAMILY_CHARMANDER
@@ -393,120 +321,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Charizard, 0),
         FOLLOWER(Charizard, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_CHARIZARD_MEGA_X] =
-    {
-        CHARIZARD_MISC_INFO,
-        .baseHP        = 78,
-        .baseAttack    = 130,
-        .baseDefense   = 111,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 130,
-        .baseSpDefense = 85,
-        .types = { TYPE_FIRE, TYPE_DRAGON },
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 317 : 285,
-        .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS },
-        .bodyColor = BODY_COLOR_BLACK,
-        .cryId = CRY_CHARIZARD_MEGA_X,
-        .height = 17,
-        .weight = 1105,
-        .description = COMPOUND_STRING(
-            "The overwhelming power that fills its\n"
-            "entire body causes it to turn black\n"
-            "and creates intense blue flames."),
-        .pokemonScale = 256,
-        .pokemonOffset = 1,
-        .trainerScale = 302,
-        .trainerOffset = 3,
-        FRONT_PIC(CharizardMegaX, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CharizardMegaX,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CharizardMegaX, 64, 64),
-        .backPicYOffset = 1,
-        .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(CharizardMegaX),
-        ICON(CharizardMegaX, 0),
-        .isMegaEvolution = TRUE,
-    },
-
-    [SPECIES_CHARIZARD_MEGA_Y] =
-    {
-        CHARIZARD_MISC_INFO,
-        .baseHP        = 78,
-        .baseAttack    = 104,
-        .baseDefense   = 78,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 159,
-        .baseSpDefense = 115,
-        .types = { TYPE_FIRE, TYPE_FLYING },
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 317 : 285,
-        .abilities = { ABILITY_DROUGHT, ABILITY_DROUGHT, ABILITY_DROUGHT },
-        .bodyColor = BODY_COLOR_RED,
-        .cryId = CRY_CHARIZARD_MEGA_Y,
-        .height = 17,
-        .weight = 1005,
-        .description = COMPOUND_STRING(
-            "Its bond with its Trainer is the source\n"
-            "of its power. It boasts speed and\n"
-            "maneuverability greater than that of a\n"
-            "jet fighter."),
-        .pokemonScale = 256,
-        .pokemonOffset = 1,
-        .trainerScale = 302,
-        .trainerOffset = 3,
-        FRONT_PIC(CharizardMegaY, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CharizardMegaY,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CharizardMegaY, 64, 64),
-        .backPicYOffset = 1,
-        .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(CharizardMegaY),
-        ICON(CharizardMegaY, 0),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_CHARIZARD_GIGANTAMAX] =
-    {
-        CHARIZARD_MISC_INFO,
-        .baseHP        = 78,
-        .baseAttack    = 84,
-        .baseDefense   = 78,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 109,
-        .baseSpDefense = 85,
-        .types = { TYPE_FIRE, TYPE_FLYING },
-        .expYield = 240,
-        .abilities = { ABILITY_BLAZE, ABILITY_NONE, ABILITY_SOLAR_POWER },
-        .bodyColor = BODY_COLOR_RED,
-        .cryId = CRY_CHARIZARD,
-        .height = 280,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "The flame inside its body burns\n"
-            "hotter than 3,600 degrees Fahrenheit.\n"
-            "When Charizard roars, that\n"
-            "temperature climbs even higher."),
-        .pokemonScale = 256,
-        .pokemonOffset = 1,
-        .trainerScale = 302,
-        .trainerOffset = 3,
-        FRONT_PIC(CharizardGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CharizardGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CharizardGigantamax, 64, 64),
-        .backPicYOffset = 1,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(CharizardGigantamax),
-        ICON(CharizardGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_CHARMANDER
 
 #if P_FAMILY_SQUIRTLE
@@ -666,80 +480,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Blastoise, 2),
         FOLLOWER(Blastoise, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_BLASTOISE_MEGA] =
-    {
-        BLASTOISE_MISC_INFO,
-        .baseHP        = 79,
-        .baseAttack    = 103,
-        .baseDefense   = 120,
-        .baseSpeed     = 78,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 115,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 315 : 284,
-        .abilities = { ABILITY_MEGA_LAUNCHER, ABILITY_MEGA_LAUNCHER, ABILITY_MEGA_LAUNCHER },
-        .cryId = CRY_BLASTOISE_MEGA,
-        .height = 16,
-        .weight = 1011,
-        .description = COMPOUND_STRING(
-            "The cannon on its back is as powerful\n"
-            "as a tank gun. Its tough legs and back\n"
-            "enable it to withstand the recoil from\n"
-            "firing the cannon."),
-        .pokemonScale = 256,
-        .pokemonOffset = -1,
-        .trainerScale = 293,
-        .trainerOffset = 2,
-        FRONT_PIC(BlastoiseMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_BlastoiseMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(BlastoiseMega, 64, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(BlastoiseMega),
-        ICON(BlastoiseMega, 2),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_BLASTOISE_GIGANTAMAX] =
-    {
-        BLASTOISE_MISC_INFO,
-        .baseHP        = 79,
-        .baseAttack    = 83,
-        .baseDefense   = 100,
-        .baseSpeed     = 78,
-        .baseSpAttack  = 85,
-        .baseSpDefense = 105,
-        .expYield = 239,
-        .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_RAIN_DISH },
-        .cryId = CRY_BLASTOISE,
-        .height = 250,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "It's not very good at precision\n"
-            "shooting. When attacking, it just fires\n"
-            "its 31 cannons over and over and\n"
-            "over."),
-        .pokemonScale = 256,
-        .pokemonOffset = -1,
-        .trainerScale = 293,
-        .trainerOffset = 2,
-        FRONT_PIC(BlastoiseGigantamax, 64, 64),
-        .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_BlastoiseGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(BlastoiseGigantamax, 64, 64),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(BlastoiseGigantamax),
-        ICON(BlastoiseGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_SQUIRTLE
 
 #if P_FAMILY_CATERPIE
@@ -878,9 +618,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_BUTTERFREE,                                       \
         .categoryName = _("Butterfly"),                                             \
         FOOTPRINT(Butterfree)                                                       \
-        LEARNSETS(Butterfree),                                                      \
-        .formSpeciesIdTable = sButterfreeFormSpeciesIdTable,                        \
-        .formChangeTable = sButterfreeFormChangeTable
+        LEARNSETS(Butterfree)
 
     [SPECIES_BUTTERFREE] =
     {
@@ -908,37 +646,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Butterfree),
         ICON(Butterfree, 0),
-        FOLLOWER(Butterfree, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        ICON_FEMALE(Butterfree, 4),
+        FOLLOWER(Butterfree, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_BUTTERFREE_GIGANTAMAX] =
-    {
-        BUTTERFREE_MISC_INFO,
-        .height = 170,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Once it has opponents trapped in a\n"
-            "tornado that could blow away a 10-\n"
-            "ton truck, it finishes them off with\n"
-            "its poisonous scales."),
-        .pokemonScale = 312,
-        .pokemonOffset = 2,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(ButterfreeGigantamax, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_ButterfreeGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 7,
-        BACK_PIC(ButterfreeGigantamax, 64, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ButterfreeGigantamax),
-        ICON(ButterfreeGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_CATERPIE
 
 #if P_FAMILY_WEEDLE
@@ -1872,9 +1582,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Pikachu),
         ICON(Pikachu, 2),
-    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
-        ICON_FEMALE(Pikachu, 2),
-    #endif
+//    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
+//        ICON_FEMALE(Pikachu, 2),
+//    #endif
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .formChangeTable = sPikachuFormChangeTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},

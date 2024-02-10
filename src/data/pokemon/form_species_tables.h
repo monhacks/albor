@@ -1,39 +1,3 @@
-#if P_FAMILY_BULBASAUR
-static const u16 sVenusaurFormSpeciesIdTable[] = {
-    SPECIES_VENUSAUR,
-    SPECIES_VENUSAUR_MEGA,
-    SPECIES_VENUSAUR_GIGANTAMAX,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_BULBASAUR
-
-#if P_FAMILY_CHARMANDER
-static const u16 sCharizardFormSpeciesIdTable[] = {
-    SPECIES_CHARIZARD,
-    SPECIES_CHARIZARD_MEGA_X,
-    SPECIES_CHARIZARD_MEGA_Y,
-    SPECIES_CHARIZARD_GIGANTAMAX,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_CHARMANDER
-
-#if P_FAMILY_SQUIRTLE
-static const u16 sBlastoiseFormSpeciesIdTable[] = {
-    SPECIES_BLASTOISE,
-    SPECIES_BLASTOISE_MEGA,
-    SPECIES_BLASTOISE_GIGANTAMAX,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_SQUIRTLE
-
-#if P_FAMILY_CATERPIE
-static const u16 sButterfreeFormSpeciesIdTable[] = {
-    SPECIES_BUTTERFREE,
-    SPECIES_BUTTERFREE_GIGANTAMAX,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_CATERPIE
-
 #if P_FAMILY_WEEDLE
 static const u16 sBeedrillFormSpeciesIdTable[] = {
     SPECIES_BEEDRILL,
