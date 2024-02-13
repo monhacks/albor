@@ -406,21 +406,6 @@ void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
 static void TrainerHillStartChallenge(void)
 {
     TrainerHillDummy();
-#if FREE_TRAINER_HILL == FALSE
-    if (!ReadTrainerHillAndValidate())
-        gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 1;
-    else
-        gSaveBlock1Ptr->trainerHill.field_3D6E_0f = 0;
-
-    SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
-    gSaveBlock1Ptr->trainerHill.timer = 0;
-    gSaveBlock1Ptr->trainerHill.spokeToOwner = 0;
-    gSaveBlock1Ptr->trainerHill.checkedFinalTime = 0;
-    gSaveBlock1Ptr->trainerHill.maybeECardScanDuringChallenge = 0;
-    gSaveBlock2Ptr->frontier.trainerFlags = 0;
-    gBattleOutcome = 0;
-    gSaveBlock1Ptr->trainerHill.receivedPrize = 0;
-#endif //FREE_TRAINER_HILL
 }
 
 static void GetOwnerState(void)

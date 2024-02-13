@@ -69,7 +69,6 @@ static void CheckPartyIneligibility(void);
 static void ValidateVisitingTrainer(void);
 static void IncrementWinStreak(void);
 static void RestoreHeldItems(void);
-static void SaveRecordBattle(void);
 static void BufferFrontierTrainerName(void);
 static void ResetSketchedMoves(void);
 static void SetFacilityBrainObjectEvent(void);
@@ -572,7 +571,6 @@ static void (* const sFrontierUtilFuncs[])(void) =
     [FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER]   = ValidateVisitingTrainer,
     [FRONTIER_UTIL_FUNC_INCREMENT_STREAK]      = IncrementWinStreak,
     [FRONTIER_UTIL_FUNC_RESTORE_HELD_ITEMS]    = RestoreHeldItems,
-    [FRONTIER_UTIL_FUNC_SAVE_BATTLE]           = SaveRecordBattle,
     [FRONTIER_UTIL_FUNC_BUFFER_TRAINER_NAME]   = BufferFrontierTrainerName,
     [FRONTIER_UTIL_FUNC_RESET_SKETCH_MOVES]    = ResetSketchedMoves,
     [FRONTIER_UTIL_FUNC_SET_BRAIN_OBJECT]      = SetFacilityBrainObjectEvent,
@@ -2122,12 +2120,6 @@ static void RestoreHeldItems(void)
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
         }
     }
-}
-
-static void SaveRecordBattle(void)
-{
-    gSpecialVar_Result = MoveRecordedBattleToSaveData();
-    gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
 }
 
 static void BufferFrontierTrainerName(void)

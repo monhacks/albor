@@ -463,16 +463,6 @@ static void Task_EReader(u8 taskId)
         }
         break;
     case ER_STATE_SAVE:
-        if (TryWriteTrainerHill((struct EReaderTrainerHillSet *)&gDecompressionBuffer))
-        {
-            MG_AddMessageTextPrinter(gJPText_ConnectionComplete);
-            ResetTimer(&data->timer);
-            data->state = ER_STATE_SUCCESS_MSG;
-        }
-        else
-        {
-            data->state = ER_STATE_SAVE_FAILED;
-        }
         break;
     case ER_STATE_SUCCESS_MSG:
         if (UpdateTimer(&data->timer, 120))
