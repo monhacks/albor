@@ -29,7 +29,6 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
-EWRAM_DATA struct SaveBlock3 gSaveblock3 = {};
 EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
 EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
 EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
@@ -40,7 +39,6 @@ EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 bool32 gFlashMemoryPresent;
 struct SaveBlock1 *gSaveBlock1Ptr;
 struct SaveBlock2 *gSaveBlock2Ptr;
-IWRAM_INIT struct SaveBlock3 *gSaveBlock3Ptr = &gSaveblock3;
 struct PokemonStorage *gPokemonStoragePtr;
 
 // code
@@ -55,11 +53,6 @@ void CheckForFlashMemory(void)
     {
         gFlashMemoryPresent = FALSE;
     }
-}
-
-void ClearSav3(void)
-{
-    CpuFill16(0, &gSaveblock3, sizeof(struct SaveBlock3));
 }
 
 void ClearSav2(void)
