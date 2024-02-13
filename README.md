@@ -10,7 +10,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
-    *aarant por los followers Pokémon.
+    *aarant por los followers Pokémon y su sistema de iconos.
 
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).

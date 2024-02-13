@@ -27,9 +27,10 @@ const struct SpritePalette gMonIconPaletteTable[] =
     { gMonIconPalettes[0], POKE_ICON_BASE_PAL_TAG + 0 },
     { gMonIconPalettes[1], POKE_ICON_BASE_PAL_TAG + 1 },
     { gMonIconPalettes[2], POKE_ICON_BASE_PAL_TAG + 2 },
-    { gMonIconPalettes[3], POKE_ICON_BASE_PAL_TAG + 3 },
-    { gMonIconPalettes[4], POKE_ICON_BASE_PAL_TAG + 4 },
-    { gMonIconPalettes[5], POKE_ICON_BASE_PAL_TAG + 5 },
+    // There are only 3 actual palettes, but we repurpose the last 3 as duplicates for the new icon system
+    { gMonIconPalettes[3 % 3], POKE_ICON_BASE_PAL_TAG + 3 },
+    { gMonIconPalettes[4 % 3], POKE_ICON_BASE_PAL_TAG + 4 },
+    { gMonIconPalettes[5 % 3], POKE_ICON_BASE_PAL_TAG + 5 },
 };
 
 static const struct OamData sMonIconOamData =
@@ -135,6 +136,8 @@ static const u16 sSpriteImageSizes[3][4] =
     },
 };
 
+// Note: If you want to use this in your hack, be aware you must allocate palette slots for each icon,
+// i.e via AllocSpritePalette, and set the sprite's palette with SetMonIconPalette
 u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority, u32 personality)
 {
     u8 spriteId;
@@ -161,10 +164,23 @@ u8 CreateMonIcon(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u
     return spriteId;
 }
 
+u8 SetMonIconPalette(struct Pokemon *mon, struct Sprite *sprite, u8 paletteNum) 
+{
+    if (paletteNum < 16)
+    {
+        LoadCompressedPalette(GetMonFrontSpritePal(mon), paletteNum*16 + 0x100, 32);
+        if (sprite)
+        sprite->oam.paletteNum = paletteNum;
+    }
+    return paletteNum;
+}
 
+// Only used with mail and mystery event, which cannot really store a bit for a shiny pokemon,
+// so we just load the palette into the proper slot by species
 u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
 {
     u8 spriteId;
+    u32 index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + gSpeciesInfo[species].iconPalIndex);
     struct MonIconSpriteTemplate iconTemplate =
     {
         .oam = &sMonIconOamData,
@@ -175,6 +191,8 @@ u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s1
         .paletteTag = POKE_ICON_BASE_PAL_TAG + gSpeciesInfo[species].iconPalIndex,
     };
 
+    if (index < 16)
+      LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, 0xFFFF), index*16 + 0x100, 32);
     iconTemplate.image = GetMonIconTiles(species, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 
@@ -223,15 +241,6 @@ void LoadMonIconPalettes(void)
     u8 i;
     for (i = 0; i < ARRAY_COUNT(gMonIconPaletteTable); i++)
         LoadSpritePalette(&gMonIconPaletteTable[i]);
-}
-
-// unused
-void SafeLoadMonIconPalette(u16 species)
-{
-    u8 palIndex;
-    palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
-    if (IndexOfSpritePaletteTag(gMonIconPaletteTable[palIndex].tag) == 0xFF)
-        LoadSpritePalette(&gMonIconPaletteTable[palIndex]);
 }
 
 void LoadMonIconPalette(u16 species)
@@ -302,9 +311,12 @@ void TryLoadAllMonIconPalettesAtOffset(u16 offset)
     s32 i;
     if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
     {
+        u16 whitePalette[16];
+        for (i = 0; i < 16; i++)
+          whitePalette[i] = 0xFFFF;
         for (i = 0; i < (int)ARRAY_COUNT(gMonIconPaletteTable); i++)
         {
-            LoadPalette(gMonIconPaletteTable[i].data, offset, PLTT_SIZE_4BPP);
+            LoadPalette(&whitePalette[0], offset, PLTT_SIZE_4BPP);
             offset += 16;
         }
     }

@@ -310,7 +310,7 @@ void InitTMCase(u8 type, void (* exitCallback)(void), bool8 allowSelectClose)
         sTMCaseStaticResources.allowSelectClose = allowSelectClose;
     gTextFlags.autoScroll = FALSE;
     SetMainCallback2(CB2_SetUpTMCaseUI_Blocking);
-    PlayNewMapMusic(MUS_DP_TV_STATION);
+    FadeOutAndPlayNewMapMusic(MUS_DP_TV_STATION, 4);
 }
 
 static void CB2_Idle(void)
@@ -962,7 +962,8 @@ static void SpriteCb_MonIcon(struct Sprite *sprite)
 #define MON_ICON_START_X  0x10
 #define MON_ICON_START_Y  0x2a
 #define MON_ICON_PADDING  0x20
-        
+#define POKE_ICON_BASE_PAL_TAG 56000 
+
 static void DrawPartyMonIcons(void)
 {
     u8 i;
@@ -1002,6 +1003,8 @@ static void DrawPartyMonIcons(void)
         }
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY));
+        u8 index = i < gPlayerPartyCount ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + i) : 0xFF;
+        SetMonIconPalette(&gPlayerParty[i], &gSprites[spriteIdData[i]], index);
         gSprites[spriteIdData[i]].oam.priority = 0;
         StartSpriteAnim(&gSprites[spriteIdData[i]], 0);
         spriteIdPalette[i] = gSprites[spriteIdData[i]].oam.paletteNum;

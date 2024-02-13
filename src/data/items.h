@@ -11070,9 +11070,9 @@ const struct Item gItemsInfo[] =
         .name = _("Máquina de discos"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Máquina que contiene\n"
-            "todos los discos para\n"
-            "enseñar ataques."),
+            "Máquina con\n"
+            "todos los discos\n"
+            "de ataques."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
