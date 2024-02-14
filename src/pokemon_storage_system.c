@@ -414,7 +414,7 @@ struct PokemonStorageSystemData
     s16 scrollSpeed;
     u16 scrollTimer;
     u8 wallpaperOffset;
-    u8 boxTitleTiles[1024];
+    u8 ALIGNED(4) boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u8 wallpaperLoadBoxId;
     s8 wallpaperLoadDir;
@@ -924,7 +924,6 @@ static const u8 sChooseBoxMenuCenter_Gfx[]   = INCBIN_U8("graphics/pokemon_stora
 static const u8 sChooseBoxMenuSides_Gfx[]    = INCBIN_U8("graphics/pokemon_storage/box_selection_popup_sides.4bpp");
 static const u32 sScrollingBg_Gfx[]          = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.4bpp.lz");
 static const u32 sScrollingBg_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/scrolling_bg.bin.lz");
-static const u16 sDisplayMenu_Pal[]          = INCBIN_U16("graphics/pokemon_storage/display_menu.gbapal"); // Unused
 static const u32 sDisplayMenu_Tilemap[]      = INCBIN_U32("graphics/pokemon_storage/display_menu.bin.lz");
 static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data.bin");
 // sInterface_Pal - parts of the display frame, "PkmnData"'s normal color, Close Box
@@ -937,7 +936,6 @@ static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_stor
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
 static const u16 sWaveform_Pal[]             = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
 static const u32 sWaveform_Gfx[]             = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
-static const u16 sUnused_Pal[]               = INCBIN_U16("graphics/pokemon_storage/unused.gbapal");
 static const u16 sTextWindows_Pal[]          = INCBIN_U16("graphics/pokemon_storage/text_windows.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
