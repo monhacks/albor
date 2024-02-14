@@ -1,9 +1,9 @@
 Lista Pokémon:
 * Bulbasaur (paleta shiny) X
-* Ivysaur (sprite y paletas) X
-* Venusaur (paleta shiny)
-* Charmander (paleta shiny) X
-* Charmeleon (paleta shiny) X
+* Ivysaur (sprite y paletas) X Fix paleta
+* Venusaur (paleta shiny) Fix paleta
+* Charmander (paleta shiny) X Fix ojo
+* Charmeleon (paleta shiny) X Fix pixel
 * Charizard X
 * Squirtle (sprite y paletas) X
 * Wartortle (sprite y paletas) X
@@ -11,791 +11,662 @@ Lista Pokémon:
 * Caterpie X
 * Metapod X
 * Butterfree (paleta shiny) X
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-* Glalie (sprite y ambas paletas)
-* 
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
+* Weedle (paleta shiny) X
+* Kakuna X
+* Beedrill X
+* Pidgey (paleta shiny) X
+* Pidgeotto (paleta shiny) X
+* Pidgeot (paleta shiny) X
+* Rattata
+* Raticate
+* A-Rattata
+* A-Raticate
+* Spearow
+* Fearow
+* Ekans
+* Arbok
+* Pichu
+* Pikachu
+* Raichu
+* A-Raichu
+* Sandshrew
+* Sandslash
+* A-Sandshrew
+* A-Sandslash
+* NidoranH
+* Nidorina
+* Nidoqueen
+* NidoranM
+* Nidorino
+* Nidoking
+* Cleffa
+* Clefairy
+* Clefable
+* Vulpix
+* Ninetales
+* A-Vulpix
+* A-Ninetales
+* Igglybuff
+* Jigglypuff
+* Wigglytuff
+* Zubat
+* Golbat
+* Crobat
+* Oddish
+* Gloom
+* Vileplume
+* Bellossom
+* Paras
+* Parasect
+* Venonat
+* Venomoth
+* Diglett
+* Dugtrio
+* A-Diglett
+* A-Dugtrio
+* Meowth
+* Persian
+* A-Meowth
+* A-Persian
+* Psyduck
+* Golduck
+* Mankey
+* Primeape
+* Annihilape
+* Growlithe
+* Arcanine
+* H-Growlithe
+* H-Arcanine
+* Poliwag
+* Poliwhirl
+* Poliwrath
+* Politoed
+* Abra
+* Kadabra
+* Alakazam
+* Machop
+* Machoke
+* Machamp
+* Bellsprout
+* Weepinbell
+* Victreebell
+* Tentacool
+* Tentacruel
+* Geodude
+* Graveler
+* Golem
+* A-Geodude
+* A-Graveler
+* A-Golem
+* Ponyta
+* Rapidash
+* G-Ponyta
+* G-Rapidash
+* Slowpoke
+* Slowbro
+* Slowking
+* G-Slowpoke
+* G-Slowbro
+* G-Slowking
+* Magnemite
+* Magneton
+* Magnezone
+* Farfetch´d
+* Doduo
+* Dodrio
+* Seel
+* Dewgong
+* Grimer
+* Muk
+* A-Grimer
+* A-Muk
+* Shellder
+* Cloyster
+* Gastly
+* Haunter
+* Gengar
+* Onix
+* Steelix
+* Drowzee
+* Hypno
+* Krabby
+* Kingler
+* Voltorb
+* Electrode
+* H-Voltorb
+* H-Electrode
+* Exeggcute
+* Exeggutor
+* Cubone
+* Marowak
+* A-Marowak
+* Tyrogue
+* Hitmonlee
+* Hitmonchan
+* Hitmontop
+* Lickitung
+* Lickilicky
+* Koffing
+* Weezing
+* G-Weezing
+* Rhyhorn
+* Rhydon
+* Rhyperior
+* Tangela
+* Tangrowth
+* Kangaskhan
+* Horsea
+* Seadra
+* Kingdra
+* Goldeen
+* Seaking
+* Staryu
+* Starmie
+* Mime Jr
+* Mr Mime
+* Scyther
+* Scizor
+* Kleavor
+* Smoochum
+* Jynx
+* Elekid
+* Electabuzz
+* Electivire
+* Magby
+* Magmar
+* Magmortar
+* Pinsir
+* Tauros
+* Magikarp
+* Gyarados
+* Lapras
+* Ditto
+* Eevee
+* Vaporeon
+* Jolteon
+* Flareon
+* Espeon
+* Umbreon
+* Leafeon
+* Glaceon
+* Sylveon
+* Porygon
+* Porygon 2
+* Porygon Z
+* Omanyte
+* Omastar
+* Kabuto
+* Kabutops
+* Aerodactyl
+* Munchlax
+* Snorlax
+* Articuno
+* G-Articuno
+* Zapdos
+* G-Zapdos
+* Moltres
+* G-Moltres
+* Dratini
+* Dragonair
+* Dragonite
+* Mew
+* Mewtwo
+* Chikorita
+* Bayleef
+* Meganium
+* Cyndaquil
+* Quilava
+* Typhlosion
+* H-Typhlosion
+* Totodile
+* Croconaw
+* Feraligator
+* Sentret
+* Furret
+* Hoothoot
+* Noctowl
+* Ledyba
+* Ledian
+* Spinarak
+* Ariados
+* Chinchou
+* Lanturn
+* Togepi
+* Togetic
+* Togekiss 
+* Natu
+* Xatu
+* Mareep
+* Flaafy
+* Ampharos
+* Azurill
+* Marill
+* Azumarill
+* Bonsly
+* Sudowoodo
+* Hoppip
+* Skiploom
+* Jumpluff
+* Aipom
+* Ambipom
+* Sunkern
+* Sunflora
+* Yanma
+* Yanmega
+* Wooper
+* Quagsire
+* P-Wooper
+* Clodsire
+* Murkrow
+* Honchkrow
+* Misdreavus
+* Mismagius
+* Girafarig
+* Pineco
+* Forretress
+* Dunsparce
+* Gligar
+* Gliscor
+* Snubbull
+* Granbull
+* Heracross
+* Sneasel
+* Weavile
+* H-Sneasel
+* Sneasler
+* Teddiursa
+* Ursaring
+* Slugma
+* Magcargo
+* Swinub
+* Piloswine
+* Mamoswine
+* Corsola
+* Remoraid
+* Octillery
+* Delibird
+* Mantyke
+* Mantine
+* Skarmory
+* Houndour
+* Houndoom
+* Phanpy
+* Donphan
+* Stantler
+* Wyrdeer
+* Miltank
+* Raikou
+* Entei
+* Suicune
+* Larvitar
+* Pupitar
+* Tyranitar
+* Lugia
+* Ho-oh
+* Celebi
+* Treecko
+* Grovyle
+* Sceptile
+* Torchic
+* Combusken
+* Blaziken
+* Mudkip
+* Marshtomp
+* Swampert
+* Poochyena
+* Mightyena
+* Wurmple
+* silcoon
+* Beautifly
+* cascoon
+* dustox
+* lotad
+* lombre
+* ludicolo
+* seedot
+* nuzleaf
+* shiftry
+* taillow
+* swellow
+* ralts
+* kirlia
+* gardevoir
+* gallade
+* surskit
+* masquerain
+* shroomish
+* breloom
+* slakoth
+* vigoroth
+* slaking
+* nincada
+* ninjask
+* shedinja
+* whismur
+* loudred
+* exploud
+* makuhita
+* hariyama
+* nosepass
+* probopass
+* sableye
+* mawile
+* aron
+* lairon
+* aggron
+* meditite
+* medicham
+* electrike
+* manectric
+* budew
+* roselia
+* roserade
+* carvanha
+* sharpedo
+* wailmer
+* wailord
+* numel
+* camerupt
+* torkoal
+* trapinch
+* vibrava
+* flygon
+* cacnea
+* cacturne
+* swablu
+* altaria
+* zangoose
+* seviper
+* cosmog
+* cosmoem
+* lunatone
+* solrock
+* baltoy
+* claydol
+* lileep
+* cradily
+* anorith
+* armaldo
+* feebas
+* milotic
+* castform
+* kecleon
+* shuppet
+* banette
+* duskull
+* dusclops
+* dusknoir
+* tropius
+* chingling
+* chimecho
+* absol
+* snorunt
+* glalie
+* froslass
+* spheal
+* sealeo
+* walrein
+* clamperl
+* huntail
+* gorebyss
+* relicanth
+* luvdisc
+* bagon
+* shelgon
+* salamence
+* beldum
+* metang
+* metagross
+* latias
+* latios
+* kyogre
+* groudon
+* rayquaza
+* jirachi
+* deoxys
+* turtwig
+* grotle
+* torterra
+* chimchar
+* monferno
+* infernape
+* piplup
+* prinplup
+* empoleon
+* starly
+* staravia
+* staraptor
+* bidoof
+* bibarel
+* kricketot
+* kricketune
+* shinx
+* luxio
+* luxray
+* cranidos
+* rampardos
+* shieldon
+* bastiodon
+* combee
+* vespiquen
+* pachirisu
+* buizel
+* floatzel
+* cherubi
+* cherrim
+* shellos
+* gastrodon
+* drifloon
+* drifblim
+* buneary
+* lopunny
+* stunky
+* skuntank
+* bronzor
+* bronzong
+* spiritomb
+* gible
+* gabite
+* garchomp
+* riolu
+* lucario
+* hippopotas
+* hippowdon
+* skorupi
+* drapion
+* croagunk
+* toxicroak
+* carnivine
+* snover
+* abomasnow
+* rotom
+* heatran
+* manaphy
+* snivy
+* servine
+* serperior
+* tepig
+* pignite
+* emboar
+* oshawott
+* dewott
+* samurott
+* h-samurott
+* blitzle
+* zebstrika
+* drilbur
+* excadrill
+* cottonee
+* whimsicott
+* sandile
+* krokorok
+* krookodile
+* darumaka
+* darmanitan
+* g-darumaka
+* g-darmanitan
+* scraggy
+* scrafty
+* yamask
+* cofagrigus
+* zorua
+* zoroark
+* h-zorua
+* h-zoroark
+* gothita
+* gothorita
+* gothitelle
+* solosis
+* duosion
+* reuniclus
+* vanillite
+* vanillish
+* vanilluxe
+* foongus
+* amoonguss
+* frillish
+* jellicent
+* joltik
+* galvantula
+* ferroseed
+* ferrothorn
+* elgyem
+* beheeyem
+* litwick
+* lampent
+* chandelure
+* axew
+* fraxure
+* haxorus
+* cubchoo
+* beartic
+* cryogonal
+* golett
+* golurk
+* pawniard
+* bisharp
+* rufflet
+* braviary
+* h-braviary
+* vullaby
+* mandibuzz
+* deino
+* zweilous
+* hydreigon
+* larvesta
+* volcarona
+* chespin
+* quilladin
+* chesnaught
+* fennekin
+* braixen
+* delphox
+* froakie
+* frogadier
+* greninja
+* bunnelby
+* diggersby
+* fletchling
+* fletchinder
+* talonflame
+* litleo
+* pyroar
+* pancham
+* pangoro
+* honedge
+* doublade
+* aegislash
+* tyrunt
+* tyrantrum
+* amaura
+* aurorus
+* carbink
+* diancie
+* goomy
+* sliggoo
+* goodra
+* h-sliggoo
+* h-goodra
+* phantump
+* trevenant
+* bergmite
+* avalugg
+* volcanion
+* rowlet
+* dartrix
+* decidueye
+* h-decidueye
+* litten
+* torracat
+* incineroar
+* popplio
+* brionne
+* primarina
+* rockruff
+* lycanroc
+* mareanie
+* toxapex
+* mudbray
+* mudsdale
+* salandit
+* salazzle
+* stufful
+* bewear
+* bounsweet
+* steenee
+* tsareena
+* sandygast
+* palossand
+* mimikyu
+* jangmo-o
+* hakamo-o
+* kommo-o
+* blipbug
+* dottler
+* orbeetle
+* wooloo
+* dubwool
+* rolycoly
+* carkol
+* coalossal
+* toxel
+* toxtricity
+* impidimp
+* morgrem
+* grimmsnarl
+* snom
+* frosmoth
+* eiscue
+* cufant
+* copperajah
+* dreepy
+* drakloak
+* dragapult
+* smoliv
+* dolliv
+* arboliva
+* charcadet
+* armarouge
+* ceruledge
+* tadbulb
+* bellibolt
+* maschiff
+* mabosstiff
+* shroodle
+* grafaiai
+* klawf
+* flittle
+* espathra
+* varoom
+* revavroom
+* orthworm
+* glimmet
+* glimmora
+* greavard
+* houndstone
+* regirock
+* regice
+* registeel
+* regieleki
+* regidrago
+* regigigas

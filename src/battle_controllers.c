@@ -28,7 +28,6 @@
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
-EWRAM_DATA struct UnusedControllerStruct gUnusedControllerStruct = {}; // Debug? Unused code that writes to it, never read
 
 void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 u8 gBattleControllerData[MAX_BATTLERS_COUNT]; // Used by the battle controllers to store misc sprite/task IDs for each battler
@@ -84,10 +83,6 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
         i = 0;
         SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
     }
-
-    // Below are never read
-    gUnusedFirstBattleVar1 = 0;
-    gUnusedFirstBattleVar2 = 0;
 }
 
 void InitBattleControllers(void)
@@ -2744,25 +2739,21 @@ void BtlController_HandleStatusAnimation(u32 battler)
 
 void BtlController_HandleClearUnkVar(u32 battler)
 {
-    gUnusedControllerStruct.unk = 0;
     BattleControllerComplete(battler);
 }
 
 void BtlController_HandleSetUnkVar(u32 battler)
 {
-    gUnusedControllerStruct.unk = gBattleResources->bufferA[battler][1];
     BattleControllerComplete(battler);
 }
 
 void BtlController_HandleClearUnkFlag(u32 battler)
 {
-    gUnusedControllerStruct.flag = 0;
     BattleControllerComplete(battler);
 }
 
 void BtlController_HandleToggleUnkFlag(u32 battler)
 {
-    gUnusedControllerStruct.flag ^= 1;
     BattleControllerComplete(battler);
 }
 

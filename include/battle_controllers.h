@@ -101,12 +101,6 @@ enum {
 #define RET_ULTRA_BURST    (1 << 6)
 #define RET_DYNAMAX        (1 << 5)
 
-struct UnusedControllerStruct
-{
-    u8 unk:7;
-    u8 flag:1;
-};
-
 struct HpAndStatus
 {
     u16 hp;
@@ -198,7 +192,6 @@ enum
     CONTROLLER_CMDS_COUNT
 };
 
-extern struct UnusedControllerStruct gUnusedControllerStruct;
 extern void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];

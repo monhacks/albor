@@ -158,7 +158,6 @@ struct FrontierMapData
 static EWRAM_DATA struct FrontierPassData *sPassData = NULL;
 static EWRAM_DATA struct FrontierPassGfx *sPassGfx = NULL;
 static EWRAM_DATA struct FrontierMapData *sMapData = NULL;
-static EWRAM_DATA struct FrontierPassSaved sSavedPassData = {0};
 
 static u32 AllocateFrontierPassData(void (*callback)(void));
 static void ShowFrontierMap(void (*callback)(void));
