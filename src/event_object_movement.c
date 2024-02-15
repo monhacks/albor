@@ -1781,6 +1781,18 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
       else
         graphicsInfo = &gPokemonFormGraphics[1];
       break;
+    case SPECIES_RATTATA:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[2];
+      break;
+    case SPECIES_RATICATE:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[3];
+      break;
     default:
         graphicsInfo = &gSpeciesInfo[species].followerData;
         break;
@@ -1920,6 +1932,8 @@ static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny)
         break;
     case SPECIES_VENUSAUR:
     case SPECIES_BUTTERFREE:
+    case SPECIES_RATTATA:
+    case SPECIES_RATICATE:
         *form = GetMonGender(mon);
         break;
     }

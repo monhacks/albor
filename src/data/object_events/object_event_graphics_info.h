@@ -4712,6 +4712,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Follower = {
 
 extern const struct SpriteFrameImage sPicTable_VenusaurF[];
 extern const struct SpriteFrameImage sPicTable_ButterfreeF[];
+extern const struct SpriteFrameImage sPicTable_RattataF[];
+extern const struct SpriteFrameImage sPicTable_RaticateF[];
 
 const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] = 
 {
@@ -4749,6 +4751,42 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Following,
     .images = sPicTable_ButterfreeF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
+  [2] = { //RATTATA_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_RattataF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
+  [3] = { //RATICATE_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_RaticateF,
     .affineAnims = gDummySpriteAffineAnimTable,
 }
 };

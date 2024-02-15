@@ -17,12 +17,12 @@ Lista Pokémon:
 * Pidgey (paleta shiny) X
 * Pidgeotto (paleta shiny) X
 * Pidgeot (paleta shiny) X
-* Rattata
-* Raticate
-* A-Rattata
-* A-Raticate
-* Spearow
-* Fearow
+* Rattata (paleta shiny) X
+* Raticate (paleta shiny) X
+* A-Rattata (sprite con animación y paletas) X Comprobar animación
+* A-Raticate (sprite con animación y paleta shiny) X Comprobar animación
+* Spearow (paleta shiny) X
+* Fearow (paleta shiny) X
 * Ekans
 * Arbok
 * Pichu
@@ -62,8 +62,6 @@ Lista Pokémon:
 * Venomoth
 * Diglett
 * Dugtrio
-* A-Diglett
-* A-Dugtrio
 * Meowth
 * Persian
 * A-Meowth
@@ -118,8 +116,6 @@ Lista Pokémon:
 * Dewgong
 * Grimer
 * Muk
-* A-Grimer
-* A-Muk
 * Shellder
 * Cloyster
 * Gastly
@@ -482,6 +478,7 @@ Lista Pokémon:
 * rotom
 * heatran
 * manaphy
+* victini
 * snivy
 * servine
 * serperior
@@ -618,6 +615,7 @@ Lista Pokémon:
 * sandygast
 * palossand
 * mimikyu
+* drampa
 * jangmo-o
 * hakamo-o
 * kommo-o
@@ -636,9 +634,6 @@ Lista Pokémon:
 * grimmsnarl
 * snom
 * frosmoth
-* eiscue
-* cufant
-* copperajah
 * dreepy
 * drakloak
 * dragapult
@@ -654,12 +649,10 @@ Lista Pokémon:
 * mabosstiff
 * shroodle
 * grafaiai
-* klawf
 * flittle
 * espathra
 * varoom
 * revavroom
-* orthworm
 * glimmet
 * glimmora
 * greavard
