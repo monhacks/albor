@@ -2249,7 +2249,7 @@ static void Controller_HandleTrainerSlideBack(u32 battler)
 
 void Controller_WaitForHealthBar(u32 battler)
 {
-    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR, 0);
+    s16 hpValue = MoveBattleBar(battler, gHealthboxSpriteIds[battler], HEALTH_BAR);
 
     SetHealthboxSpriteVisible(gHealthboxSpriteIds[battler]);
     if (hpValue != -1)
@@ -2689,7 +2689,7 @@ void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText)
     s16 hpVal;
     struct Pokemon *party = GetBattlerParty(battler);
 
-    LoadBattleBarGfx(0);
+    LoadBattleBarGfx();
     hpVal = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
     maxHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_MAX_HP);
     curHP = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_HP);

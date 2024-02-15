@@ -11,6 +11,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
     *aarant por los followers Pokémon y su sistema de iconos.
+    *TheGag96 por el sistema de ICV.
 
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).
@@ -29,3 +30,4 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Cambios de calidad de vida:
     *En batalla, puedes pulsar B para ir rápidamente a la opción de huir.
+    *Los Pokémon varían su color en función de su personalidad.

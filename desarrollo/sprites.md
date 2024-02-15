@@ -1,5 +1,5 @@
 Lista Pokémon:
-* Bulbasaur (paleta shiny) X
+* Bulbasaur (paleta shiny) X Fix laterales
 * Ivysaur (sprite y paletas) X Fix paleta
 * Venusaur (paleta shiny) Fix paleta
 * Charmander (paleta shiny) X Fix ojo

@@ -1745,13 +1745,15 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
 static const u8 sSpanPerImage[4][4] =
 {
-    [ST_OAM_SQUARE]      = {
+    [ST_OAM_SQUARE] = 
+    {
         [ST_OAM_SIZE_0] = 0, // SPRITE_SIZE_8x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_16x16
         [ST_OAM_SIZE_2] = 4, // SPRITE_SIZE_32x32
         [ST_OAM_SIZE_3] = 6  // SPRITE_SIZE_64x64
     },
-    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] = {
+    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] = 
+    {
         [ST_OAM_SIZE_0] = 1, // SPRITE_SIZE_16x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_32x8
         [ST_OAM_SIZE_2] = 3, // SPRITE_SIZE_32x16
@@ -1762,6 +1764,7 @@ static const u8 sSpanPerImage[4][4] =
 // For a given sprite shape & size, returns
 // the value for sheetSpan:
 // i.e, a 32x32 sprite has span 4, because 1 << 4 == 16 == 4x4 tiles
-u32 GetSpanPerImage(u32 shape, u32 size) {
+u32 GetSpanPerImage(u32 shape, u32 size) 
+{
     return sSpanPerImage[shape][size];
 }

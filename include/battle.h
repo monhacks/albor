@@ -965,7 +965,7 @@ struct BattleSpriteData
 
 #include "sprite.h"
 
-struct MonSpritesGfx
+struct MonSpritesGfx //revisar estructura, algo rompe
 {
     void *firstDecompressed; // ptr to the decompressed sprite of the first Pokémon
     union {
