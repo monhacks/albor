@@ -34,6 +34,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "trig.h"
+#include "util.h"
 #include "walda_phrase.h"
 #include "window.h"
 #include "constants/form_change_types.h"
@@ -557,6 +558,7 @@ EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 EWRAM_DATA static u16 *sPaletteSwapBuffer = NULL; // dynamically-allocated buffer to hold box palettes
 EWRAM_DATA static u8 allocCount = 0; // Track number of alloc's vs frees
+EWRAM_DATA static struct BoxPokemon sCurrentBoxPokemon = {0};
 
 // Main tasks
 static void Task_InitPokeStorage(u8);
@@ -4004,6 +4006,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+        UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon);
         sStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -4517,19 +4520,19 @@ static const u32 *_GetMonFrontSpritePal(struct Pokemon *mon, u16 *species)
 
 static void SetBoxMonDynamicPalette(u8 boxId, u8 position) 
 {
-  u16 species;
-  const u32 *palette = _GetMonFrontSpritePal((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], &species);
-  // Decompress species palette into swap buffer
-  if (species == SPECIES_CASTFORM) //???
-  { // needs more than 32 bytes of space; so decompress and copy
-      LZ77UnCompWram(palette, gDecompressionBuffer);
-      CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[(position)*16], 32);
-  } 
-  else 
-  {
-      LZ77UnCompWram(palette, &sPaletteSwapBuffer[(position)*16]);
-  }
-  sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
+    u16 species;
+    const u32 *palette = _GetMonFrontSpritePal((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], &species);
+    // Decompress species palette into swap buffer
+    if (species == SPECIES_CASTFORM) //???
+    { // needs more than 32 bytes of space; so decompress and copy
+        LZ77UnCompWram(palette, gDecompressionBuffer);
+        CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[(position)*16], 32);
+    } 
+    else 
+    {
+        LZ77UnCompWram(palette, &sPaletteSwapBuffer[(position)*16]);
+    }
+    sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
 
 static void InitBoxMonSprites(u8 boxId)
@@ -7064,6 +7067,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
+        CopyMon(&sCurrentBoxPokemon, &mon->box, sizeof(sCurrentBoxPokemon));
         sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
@@ -7087,6 +7091,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
+        CopyMon(&sCurrentBoxPokemon, &boxMon, sizeof(sCurrentBoxPokemon));
         sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {

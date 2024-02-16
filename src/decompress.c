@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "data.h"
 #include "decompress.h"
+#include "palette.h"
 #include "pokemon.h"
 #include "pokemon_debug.h"
 #include "text.h"
@@ -87,6 +88,16 @@ void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
     dest.data = (void *) gDecompressionBuffer;
     dest.tag = tag;
     LoadSpritePalette(&dest);
+}
+
+void LoadCompressedSpritePaletteWithTagHueShifted(const u32 *pal, u16 tag, struct BoxPokemon *boxMon)
+{
+    struct SpritePalette dest;
+
+    LZ77UnCompWram(pal, gDecompressionBuffer);
+    dest.data = (void *) gDecompressionBuffer;
+    dest.tag = tag;
+    LoadUniqueSpritePalette(&dest, boxMon);
 }
 
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer)

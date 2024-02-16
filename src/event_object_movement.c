@@ -1817,7 +1817,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny)
     u8 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
-    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //ETODO
+    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //TODO
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         // Load compressed palette

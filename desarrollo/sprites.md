@@ -22,7 +22,7 @@ Lista Pokémon:
 * A-Rattata (sprite con animación y paletas) X Comprobar animación
 * A-Raticate (sprite con animación y paleta shiny) X Comprobar animación
 * Spearow (paleta shiny) X
-* Fearow (paleta shiny) X
+* Fearow (paleta shiny) X Cambiar primer frame (de voladores en general)
 * Ekans
 * Arbok
 * Pichu
