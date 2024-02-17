@@ -1667,7 +1667,7 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 pa
     if (loadPal) // Always false
         LoadSpritePalette(&palette);
 
-    CpuFastCopy(sHandCursor_Pal, sStorage->chooseBoxSwapPal, 32);
+    CpuFastCopy(sHandCursor_Pal, sStorage->chooseBoxSwapPal, PLTT_SIZE_4BPP);
     LoadSpriteSheets(sheets);
     sChooseBoxMenu = menu;
     menu->tileTag = tileTag;
@@ -1874,23 +1874,23 @@ static void VBlankCB_PokeStorage(void)
     // swap in palette
     if (sPaletteSwapBuffer && sStorage->swapInPalDst) 
     {
-      CpuFastCopy(&sStorage->swapInPal[0], sStorage->swapInPalDst, 32);
-      sStorage->swapInPalDst = NULL;
+        CpuFastCopy(&sStorage->swapInPal[0], sStorage->swapInPalDst, PLTT_SIZE_4BPP);
+        sStorage->swapInPalDst = NULL;
     }
     LoadOam();
     ProcessSpriteCopyRequests();
     // Instead of transferring the entire palette buffer, transfer bg and non-dynamic palettes
     if (sPaletteSwapBuffer && !gPaletteFade.bufferTransferDisabled && !gPaletteFade.active && !sStorage->transferWholePlttFrames) 
     {
-      RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
-      // Skip the 12-1 palettes that are being dynamically swapped anyway
-      RequestDma3Copy(&gPlttBufferFaded[(12+16)*16], (void*) 0x05000380, 32*4, 0);
+        RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
+        // Skip the 12-1 palettes that are being dynamically swapped anyway
+        RequestDma3Copy(&gPlttBufferFaded[PLTT_ID(28)], (void*) 0x05000380, 32*4, 0);
     } 
     else 
     {
-      if (sStorage && sStorage->transferWholePlttFrames > 0)
-        sStorage->transferWholePlttFrames--;
-      TransferPlttBuffer();
+        if (sStorage && sStorage->transferWholePlttFrames > 0)
+            sStorage->transferWholePlttFrames--;
+        TransferPlttBuffer();
     }
     SetGpuReg(REG_OFFSET_BG2HOFS, sStorage->bg2_X);
 }
@@ -1899,7 +1899,7 @@ static s8 SwapInPalNextVBlank(void *palette, void *dst)
 {
   if (!sStorage || gMain.vblankCallback != VBlankCB_PokeStorage)
     return -1;
-  CpuFastCopy(palette, &sStorage->swapInPal[0], 32);
+  CpuFastCopy(palette, &sStorage->swapInPal[0], PLTT_SIZE_4BPP);
   sStorage->swapInPalDst = dst;
   return 0;
 }
@@ -2030,7 +2030,7 @@ static void HBlankCB_PokeStorage(void)
         // If palette color is empty, skip
         if (!(sPaletteSwapBuffer[position] & 0x7FFF))
           continue;
-        CpuFastCopy(&sPaletteSwapBuffer[position], dst, 32);
+        CpuFastCopy(&sPaletteSwapBuffer[position], dst, PLTT_SIZE_4BPP);
       }
       break;
     }
@@ -2038,12 +2038,12 @@ static void HBlankCB_PokeStorage(void)
   if (vCount == 146 && sStorage && sStorage->markingsSwapPal[0]) 
   { // copy markings palette
     u16 *dst = (u16*) (OBJ_PLTT + (11+1)*16*2);
-    CpuFastCopy(&sStorage->markingsSwapPal[0], dst, 32);
+    CpuFastCopy(&sStorage->markingsSwapPal[0], dst, PLTT_SIZE_4BPP);
   }
   if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0]) 
   { // copy choose box palette
     u16 *dst = (u16*) (OBJ_PLTT + (0)*16*2);
-    CpuFastCopy(sStorage->chooseBoxSwapPal, dst, 32);
+    CpuFastCopy(sStorage->chooseBoxSwapPal, dst, PLTT_SIZE_4BPP);
   }
 }
 
@@ -2052,8 +2052,8 @@ static void DisableBoxMonDynamicPalette(u8 position, u8 count)
   u8 i;
   for (i = position; i < position+count && i < IN_BOX_COUNT; i++) 
   {
-    if (sPaletteSwapBuffer[i*16] & 0x7FFF)
-      sPaletteSwapBuffer[i*16] = 0x8000;
+    if (sPaletteSwapBuffer[PLTT_ID(i)] & 0x7FFF)
+      sPaletteSwapBuffer[PLTT_ID(i)] = 0x8000;
   }
 }
 
@@ -2062,8 +2062,8 @@ static void EnableBoxMonDynamicPalette(u8 position, u8 count)
   u8 i;
   for (i = position; i < position+count && i < IN_BOX_COUNT; i++) 
   {
-    if (sPaletteSwapBuffer[i*16] == 0x8000)
-      sPaletteSwapBuffer[i*16] = 0x7FFF;
+    if (sPaletteSwapBuffer[PLTT_ID(i)] == 0x8000)
+      sPaletteSwapBuffer[PLTT_ID(i)] = 0x7FFF;
   }
 }
 
@@ -4526,11 +4526,11 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     if (species == SPECIES_CASTFORM) //???
     { // needs more than 32 bytes of space; so decompress and copy
         LZ77UnCompWram(palette, gDecompressionBuffer);
-        CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[(position)*16], 32);
+        CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
     } 
     else 
     {
-        LZ77UnCompWram(palette, &sPaletteSwapBuffer[(position)*16]);
+        LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
     }
     sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
@@ -4857,7 +4857,7 @@ static void CreatePartyMonsSprites(bool8 visible)
 
     sStorage->transferWholePlttFrames = -1; // keep transferring entire palette buffer until done with party menu
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
-    LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), (0+1)* 16 + 0x100, 32);
+    LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
     sStorage->partySprites[0]->oam.paletteNum = 0+1;
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
@@ -4868,7 +4868,7 @@ static void CreatePartyMonsSprites(bool8 visible)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
-            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), paletteNum*16 + 0x100, 32);
+            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
             sStorage->partySprites[i]->oam.paletteNum = paletteNum;
             count++;
         }
@@ -5095,7 +5095,7 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
         if (sStorage->partySprites[position]->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)) 
         {
             paletteNum = FindFreePartyPaletteSlot();
-            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), paletteNum*16 + 0x100, 32);
+            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
             sStorage->partySprites[position]->oam.paletteNum = paletteNum;
         }
     }
@@ -6466,7 +6466,7 @@ static void MoveMon(void)
             // Set moving sprite palette to currently displayed pokemon
             sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON);
             palette[0] = 0x8000;
-            SwapInPalNextVBlank(&palette[0], &sPaletteSwapBuffer[(sCursorPosition)*16]);
+            SwapInPalNextVBlank(&palette[0], &sPaletteSwapBuffer[PLTT_ID(sCursorPosition)]);
         }
         break;
     default:
@@ -6552,8 +6552,8 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     { // party
         u32 paletteNum = FindFreePartyPaletteSlot();
         // Copy display palette into party palette slot
-        CpuFastCopy(&gPlttBufferUnfaded[displayIndex*16+0x100], &gPlttBufferUnfaded[paletteNum*16+0x100], 32);
-        CpuFastCopy(&gPlttBufferFaded[displayIndex*16+0x100], &gPlttBufferFaded[paletteNum*16+0x100], 32);
+        CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
         sStorage->partySprites[position]->oam.paletteNum = paletteNum;
     } 
     else 
@@ -6562,13 +6562,13 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
         u8 j = position % 6;
         // Copy display palette into swap buffer (at next vblank)
         // This is necessary because copying it while the screen is being drawn will cause flickering
-        SwapInPalNextVBlank(&gPlttBufferFaded[displayIndex*16+0x100], &sPaletteSwapBuffer[(position)*16]);
+        SwapInPalNextVBlank(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &sPaletteSwapBuffer[PLTT_ID(position)]);
         sStorage->boxMonsSprites[position]->oam.paletteNum = (i & 1 ? 6 : 0) + j + 1;
     }
     SetDisplayMonData(&sStorage->movingMon, MODE_PARTY);
     // Set moving sprite palette to currently displayed pokemon's palette
     sStorage->displayMonSprite->invisible = TRUE;
-    LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, 0x20);
+    LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
     sStorage->movingMonSprite->oam.paletteNum = displayIndex;
     sMovingMonOrigBoxId = boxId;
     sMovingMonOrigBoxPos = position;
@@ -8071,7 +8071,7 @@ static void ToggleCursorAutoAction(void)
     if (index == 0xFF)
       return;
     sAutoActionOn = !sAutoActionOn;
-    LoadPalette(sAutoActionOn ? sHandCursor_Pal : sWaveform_Pal, 0x100 + 16*index, 32);
+    LoadPalette(sAutoActionOn ? sHandCursor_Pal : sWaveform_Pal, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
 }
 
 static u8 GetCursorPosition(void)
@@ -9328,7 +9328,7 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
         }
     }
     sStorage->itemIcons[id].sprite->oam.paletteNum = paletteNum;
-    LoadPalette(sStorage->itemIconBuffer, paletteNum * 16 + 0x100, 0x20);
+    LoadPalette(sStorage->itemIconBuffer, OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
 }
 
 static void SetItemIconAffineAnim(u8 id, u8 animNum)

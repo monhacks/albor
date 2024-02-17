@@ -5,6 +5,7 @@
 #include "pokemon_debug.h"
 #include "pokemon_icon.h"
 #include "sprite.h"
+#include "util.h"
 #include "data.h"
 
 #define POKE_ICON_BASE_PAL_TAG 56000
@@ -168,7 +169,9 @@ u8 SetMonIconPalette(struct Pokemon *mon, struct Sprite *sprite, u8 paletteNum)
 {
     if (paletteNum < 16)
     {
-        LoadCompressedPalette(GetMonFrontSpritePal(mon), paletteNum*16 + 0x100, 32);
+        LoadCompressedPalette(GetMonFrontSpritePal(mon), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+        UniquePalette(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), &mon->box);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
         if (sprite)
         sprite->oam.paletteNum = paletteNum;
     }
@@ -192,7 +195,7 @@ u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s1
     };
 
     if (index < 16)
-      LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, 0xFFFF), index*16 + 0x100, 32);
+      LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, 0xFFFF), OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
     iconTemplate.image = GetMonIconTiles(species, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 

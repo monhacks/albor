@@ -1814,6 +1814,7 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
 // Find, or load, the palette for the specified pokemon info
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny)
 {
+    struct Pokemon *mon = GetFirstLiveMon();
     u8 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
@@ -1821,7 +1822,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny)
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         // Load compressed palette
-        LoadCompressedSpritePaletteWithTag(palette, species);
+        LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
             UpdateSpritePaletteWithWeather(paletteNum);

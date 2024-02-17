@@ -1002,7 +1002,7 @@ static void DrawPartyMonIcons(void)
             icon_y = i < 3 ? MON_ICON_START_Y + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING * (i - 3);
         }
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
-        spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY));
+        spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
         u8 index = i < gPlayerPartyCount ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + i) : 0xFF;
         SetMonIconPalette(&gPlayerParty[i], &gSprites[spriteIdData[i]], index);
         gSprites[spriteIdData[i]].oam.priority = 0;

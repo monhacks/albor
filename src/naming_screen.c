@@ -25,6 +25,7 @@
 #include "menu.h"
 #include "text_window.h"
 #include "overworld.h"
+#include "util.h"
 #include "walda_phrase.h"
 #include "main.h"
 #include "constants/event_objects.h"
@@ -1423,10 +1424,12 @@ static void NamingScreen_CreateMonIcon(void)
     index = IndexOfSpritePaletteTag(56000); // POKE_ICON_BASE_PAL_TAG
     if (index < 16) 
     {
-      u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
-      const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
-      LoadCompressedPalette(palette, index*16 + 0x100, 32);
-      gSprites[spriteId].oam.paletteNum = index;
+        u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+        const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
+        LoadCompressedPalette(palette, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
+        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), otId, sNamingScreen->monPersonality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], PLTT_SIZE_4BPP);
+        gSprites[spriteId].oam.paletteNum = index;
     }
     gSprites[spriteId].oam.priority = 3;
 }

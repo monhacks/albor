@@ -1637,7 +1637,7 @@ void FreeSpritePaletteByTag(u16 tag)
     {
         sSpritePaletteTags[index] = TAG_NONE;
         #if DEBUG
-        FillPalette(0, index * 16 + 0x100, 32);
+        FillPalette(0, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
         #endif
     }
 }
@@ -1783,6 +1783,24 @@ u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemo
         sSpritePaletteTags[index] = palette->tag;
         DoLoadSpritePalette(palette->data, PLTT_ID(index));
         UniquePalette(OBJ_PLTT_ID(index), boxMon);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+        return index;
+    }
+}
+
+u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, bool8 isShiny, u32 personality)
+{
+    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
+        UniquePaletteByPersonality(OBJ_PLTT_ID(index), isShiny, personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
         return index;
     }

@@ -65,6 +65,7 @@
 #include "tm_case.h"
 #include "trade.h"
 #include "union_room.h"
+#include "util.h"
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
@@ -1228,7 +1229,9 @@ static void CreatePartyMonSprites(u8 slot)
             CreatePartyMonIconSpriteParameterized(gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].personality, &sPartyMenuBoxes[slot], 0);
             if (index < 16) 
             { // Like SetMonIconPalette, but by species & personality
-                LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), index*16 + 0x100, 32);
+                LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
+                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), SHINY_ODDS, gMultiPartnerParty[actualSlot].personality);
+                CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], PLTT_SIZE_4BPP);
                 gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = index;
             }
 
