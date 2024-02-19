@@ -795,7 +795,7 @@ static const struct WindowTemplate sWindowTemplate_MainMenu =
     .tilemapLeft = 1,
     .tilemapTop = 1,
     .width = 17,
-    .height = 10,
+    .height = 8,
     .paletteNum = 15,
     .baseBlock = 0x1,
 };
@@ -4214,30 +4214,24 @@ static void CreateMovingMonIcon(void)
     u8 priority = GetMonIconPriorityByCursorPos();
 
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
-    sStorage->movingMonSprite->oam.paletteNum = 13; //IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)
+    sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON); //13
     sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
-}
-
-// helper that also returns the species
-static const u32 *_GetMonFrontSpritePal(struct Pokemon *mon, u16 *species)
-{
-    u8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
-    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    *species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    return GetMonSpritePalFromSpeciesAndPersonality(*species, isShiny, personality);
 }
 
 static void SetBoxMonDynamicPalette(u8 boxId, u8 position) 
 {
-    u16 species;
-    const u32 *palette = _GetMonFrontSpritePal((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], &species);
+    struct Pokemon *mon = (struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality); //*
     // Decompress species palette into swap buffer
     if (species == SPECIES_CASTFORM) //???
     { // needs more than 32 bytes of space; so decompress and copy
         LZ77UnCompWram(palette, gDecompressionBuffer);
         CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
     } 
-    else 
+    else
     {
         LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
     }
@@ -6587,7 +6581,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon); //*
-            //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, GetMonData(mon, MON_DATA_IS_SHINY), sStorage->displayMonPersonality);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
@@ -6613,7 +6606,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality); //*
-            //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, isShiny, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
@@ -9545,7 +9537,6 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
     // Update front sprite
     sStorage->displayMonSpecies = species;
     sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, pid); //*
-    //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, isShiny, pid);
     if (!sJustOpenedBag)
     {
         LoadDisplayMonGfx(species, pid);
