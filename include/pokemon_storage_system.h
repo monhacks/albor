@@ -22,7 +22,6 @@ struct PokemonStorage
     /*0x0000*/ u8 currentBox;
     /*0x0001*/ struct BoxPokemon boxes[TOTAL_BOXES_COUNT][IN_BOX_COUNT];
     /*0x8344*/ u8 boxNames[TOTAL_BOXES_COUNT][BOX_NAME_LENGTH + 1];
-    /*0x83C2*/ u8 boxWallpapers[TOTAL_BOXES_COUNT];
     /*0x8432*/ struct Pokemon fusions[MAX_FUSION_STORAGE];
 };
 
@@ -60,19 +59,6 @@ bool32 CheckBoxMonSanityAt(u32 boxId, u32 boxPosition);
 u32 CountStorageNonEggMons(void);
 u32 CountAllStorageMons(void);
 bool32 AnyStorageMonWithMove(u16 moveId);
-
-void ResetWaldaWallpaper(void);
-void SetWaldaWallpaperLockedOrUnlocked(bool32 unlocked);
-bool32 IsWaldaWallpaperUnlocked(void);
-u32 GetWaldaWallpaperPatternId(void);
-void SetWaldaWallpaperPatternId(u8 id);
-u32 GetWaldaWallpaperIconId(void);
-void SetWaldaWallpaperIconId(u8 id);
-u16 *GetWaldaWallpaperColorsPtr(void);
-void SetWaldaWallpaperColors(u16 color1, u16 color2);
-u8 *GetWaldaPhrasePtr(void);
-void SetWaldaPhrase(const u8 *src);
-bool32 IsWaldaPhraseEmpty(void);
 
 void EnterPokeStorage(u8 boxOption);
 void CB2_ReturnToPokeStorage(void);

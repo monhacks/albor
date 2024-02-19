@@ -6,16 +6,13 @@ RustboroCity_Flat1_2F_MapScripts::
 RustboroCity_Flat1_2F_EventScript_WaldasDad::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, TryBufferWaldaPhrase
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Flat1_2F_EventScript_WaldasDadFirstPhrase
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Flat1_2F_EventScript_WaldasDadNewPhrase
 
 RustboroCity_Flat1_2F_EventScript_GivePhrase::
-	special DoWaldaNamingScreen
 	waitstate
 	goto_if_eq VAR_0x8004, 1, RustboroCity_Flat1_2F_EventScript_CancelGivePhrase
 	goto_if_eq VAR_0x8004, 2, RustboroCity_Flat1_2F_EventScript_CancelGiveFirstPhrase
-	specialvar VAR_RESULT, TryGetWallpaperWithWaldaPhrase
 	goto_if_eq VAR_RESULT, TRUE, RustboroCity_Flat1_2F_EventScript_WaldaLikesPhrase
 	goto_if_eq VAR_RESULT, FALSE, RustboroCity_Flat1_2F_EventScript_WaldaDoesntLikePhrase
 	end

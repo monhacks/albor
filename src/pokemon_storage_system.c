@@ -18,7 +18,6 @@
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
-#include "mon_markings.h"
 #include "naming_screen.h"
 #include "overworld.h"
 #include "palette.h"
@@ -34,7 +33,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "trig.h"
-#include "walda_phrase.h"
 #include "window.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
@@ -52,11 +50,10 @@
 
 // PC main menu options
 enum {
+    OPTION_MOVE_MONS,
     OPTION_WITHDRAW,
     OPTION_DEPOSIT,
-    OPTION_MOVE_MONS,
     OPTION_MOVE_ITEMS,
-    OPTION_EXIT,
     OPTIONS_COUNT
 };
 
@@ -65,7 +62,6 @@ enum {
     MSG_EXIT_BOX,
     MSG_WHAT_YOU_DO,
     MSG_PICK_A_THEME,
-    MSG_PICK_A_WALLPAPER,
     MSG_IS_SELECTED,
     MSG_JUMP_TO_WHICH_BOX,
     MSG_DEPOSIT_IN_WHICH_BOX,
@@ -74,7 +70,6 @@ enum {
     MSG_RELEASE_POKE,
     MSG_WAS_RELEASED,
     MSG_BYE_BYE,
-    MSG_MARK_POKE,
     MSG_LAST_POKE,
     MSG_PARTY_FULL,
     MSG_HOLDING_POKE,
@@ -98,9 +93,7 @@ enum {
 // IDs for how to resolve variables in the above messages
 enum {
     MSG_VAR_NONE,
-    MSG_VAR_MON_NAME_1,
-    MSG_VAR_MON_NAME_2, // Unused
-    MSG_VAR_MON_NAME_3, // Unused
+    MSG_VAR_MON_NAME,
     MSG_VAR_RELEASE_MON_1,
     MSG_VAR_RELEASE_MON_2, // Unused
     MSG_VAR_RELEASE_MON_3,
@@ -117,9 +110,7 @@ enum {
     MENU_PLACE,
     MENU_SUMMARY,
     MENU_RELEASE,
-    MENU_MARK,
     MENU_JUMP,
-    MENU_WALLPAPER,
     MENU_NAME,
     MENU_TAKE,
     MENU_GIVE,
@@ -127,30 +118,8 @@ enum {
     MENU_SWITCH,
     MENU_BAG,
     MENU_INFO,
-    MENU_SCENERY_1,
-    MENU_SCENERY_2,
-    MENU_SCENERY_3,
-    MENU_ETCETERA,
-    MENU_FRIENDS,
-    MENU_FOREST,
-    MENU_CITY,
-    MENU_DESERT,
-    MENU_SAVANNA,
-    MENU_CRAG,
-    MENU_VOLCANO,
-    MENU_SNOW,
-    MENU_CAVE,
-    MENU_BEACH,
-    MENU_SEAFLOOR,
-    MENU_RIVER,
-    MENU_SKY,
-    MENU_POLKADOT,
-    MENU_POKECENTER,
-    MENU_MACHINE,
-    MENU_SIMPLE,
 };
-#define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
-#define MENU_WALLPAPERS_START MENU_FOREST
+
 #define GENDER_MASK 0x7FFF
 
 // Return IDs for input handlers
@@ -225,16 +194,14 @@ enum {
     PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
     PALTAG_MISC_1,
-    PALTAG_MARKING_COMBO,
     PALTAG_BOX_TITLE,
     PALTAG_MISC_2,
     PALTAG_ITEM_ICON_0,
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
-    PALTAG_MARKING_MENU,
 };
 
-#define PALTAG_SWAP_BASE PALTAG_MARKING_MENU + 2
+#define PALTAG_SWAP_BASE PALTAG_ITEM_ICON_2 + 2
 #define PALTAG_SWAP_0 PALTAG_SWAP_BASE
 #define PALTAG_SWAP_1 PALTAG_SWAP_0 + 1
 #define PALTAG_SWAP_2 PALTAG_SWAP_1 + 1
@@ -262,12 +229,6 @@ enum {
     GFXTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
     GFXTAG_CHOOSE_BOX_MENU,
     GFXTAG_CHOOSE_BOX_MENU_SIDES, // Used implicitly in LoadChooseBoxMenuGfx
-    GFXTAG_12, // Unused
-    GFXTAG_MARKING_MENU,
-    GFXTAG_14, // Unused
-    GFXTAG_15, // Unused
-    GFXTAG_MARKING_COMBO,
-    GFXTAG_17, // Unused
     GFXTAG_MON_ICON,
 };
 
@@ -355,13 +316,6 @@ enum {
     WIN_ITEM_DESC,
 };
 
-struct Wallpaper
-{
-    const u32 *tiles;
-    const u32 *tilemap;
-    const u16 *palettes;
-};
-
 struct StorageMessage
 {
     const u8 *text;
@@ -410,34 +364,22 @@ struct PokemonStorageSystemData
     u8 closeBoxFlashTimer;
     bool8 closeBoxFlashState;
     s16 newCurrBoxId;
-    u16 bg2_X;
     s16 scrollSpeed;
     u16 scrollTimer;
-    u8 wallpaperOffset;
     u8 ALIGNED(4) boxTitleTiles[1024];
     u8 boxTitleCycleId;
-    u8 wallpaperLoadBoxId;
-    s8 wallpaperLoadDir;
     u16 boxTitlePal[16];
     u16 boxTitlePalOffset;
-    u16 boxTitleAltPalOffset;
     struct Sprite *curBoxTitleSprites[2];
     struct Sprite *nextBoxTitleSprites[2];
     struct Sprite *arrowSprites[2];
-    u32 wallpaperPalBits;
     u16 ALIGNED(4) chooseBoxSwapPal[16]; // Holds dynamic palette to swap into choose box gfx
-    u16 markingsSwapPal[16]; // Used to store dynamic palette to swap into markings combo
     u16 swapInPal[16];
     void *swapInPalDst;
     s8 transferWholePlttFrames; // if >0, number of frames to transfer whole palette buffer
-    s16 wallpaperSetId;
-    s16 wallpaperId;
-    u16 wallpaperTilemap[360];
-    u8 wallpaperChangeState;
     u8 scrollState;
     u8 scrollToBoxId;
     s8 scrollDirection;
-    u8 *wallpaperTiles;
     struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
     struct Sprite *boxMonsSprites[IN_BOX_COUNT];
@@ -482,7 +424,6 @@ struct PokemonStorageSystemData
     u16 displayMonSpecies;
     u16 displayMonItemId;
     bool8 setMosaic;
-    u8 displayMonMarkings;
     u8 displayMonLevel;
     bool8 displayMonIsEgg;
     u8 displayMonName[POKEMON_NAME_LENGTH + 1];
@@ -493,10 +434,7 @@ struct PokemonStorageSystemData
     bool8 (*monPlaceChangeFunc)(void);
     u8 monPlaceChangeState;
     u8 shiftBoxId;
-    struct Sprite *markingComboSprite;
     struct Sprite *waveformSprites[2];
-    u16 *markingComboTilesPtr;
-    struct MonMarkingsMenu markMenu;
     struct ChooseBoxMenu chooseBoxMenu;
     struct Pokemon movingMon;
     struct Pokemon tempMon;
@@ -532,11 +470,11 @@ struct PokemonStorageSystemData
     u16 displayMonPalBuffer[0x40];
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 ALIGNED(4) itemIconBuffer[0x800];
-    u8 wallpaperBgTilemapBuffer[0x1000];
     u8 displayMenuTilemapBuffer[0x800];
 };
 
 static u32 sItemIconGfxBuffer[98];
+static const u8 sArrow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
 
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
 EWRAM_DATA static struct ChooseBoxMenu *sChooseBoxMenu = NULL;
@@ -580,13 +518,11 @@ static void Task_ShowItemInfo(u8);
 static void Task_GiveItemFromBag(u8);
 static void Task_ItemToBag(u8);
 static void Task_TakeItemForMoving(u8);
-static void Task_ShowMarkMenu(u8);
 static void Task_ShowMonSummary(u8);
 static void Task_ReleaseMon(u8);
 static void Task_ReshowPokeStorage(u8);
 static void Task_PokeStorageMain(u8);
 static void Task_JumpBox(u8);
-static void Task_HandleWallpapers(u8);
 static void Task_NameBox(u8);
 static void Task_PrintCantStoreMail(u8);
 static void Task_HandleMovingMonFromParty(u8);
@@ -657,7 +593,6 @@ static void SaveMovingMon(void);
 static void LoadSavedMovingMon(void);
 static void InitSummaryScreenData(void);
 static void SetSelectionAfterSummaryScreen(void);
-static void SetMonMarkings(u8);
 static bool8 IsRemovingLastPartyMon(void);
 static bool8 CanPlaceMon(void);
 static bool8 CanShiftMon(void);
@@ -780,18 +715,6 @@ static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
 static s16 GetBoxTitleBaseX(const u8 *);
 
-// Wallpaper
-static void SetWallpaperForCurrentBox(u8);
-static bool8 DoWallpaperGfxChange(void);
-static void LoadWallpaperGfx(u8, s8);
-static bool32 WaitForWallpaperGfxLoad(void);
-static void DrawWallpaper(const void *, s8, u8);
-static void TrimOldWallpaper(void *);
-static void AddWallpaperSetsMenu(void);
-static void AddWallpapersMenu(u8);
-static u8 GetBoxWallpaper(u8);
-static void SetBoxWallpaper(u8, u8);
-
 // General box
 static void CreateInitBoxTask(u8);
 static bool8 IsInitBoxActive(void);
@@ -817,7 +740,6 @@ static void InitCursorItemIcon(void);
 static void InitPalettesAndSprites(void);
 static void RefreshDisplayMonData(void);
 static void CreateDisplayMonSprite(void);
-static void CreateMarkingComboSprite(void);
 static void CreateWaveformSprites(void);
 static void ClearBottomWindow(void);
 static void InitSupplementalTilemaps(void);
@@ -860,11 +782,10 @@ struct {
     const u8 *desc;
 } static const sMainMenuTexts[OPTIONS_COUNT] =
 {
+    [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
     [OPTION_WITHDRAW]   = {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     [OPTION_DEPOSIT]    = {gText_DepositPokemon,  gText_DepositMonDescription},
-    [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
-    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
-    [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
+    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription}
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
@@ -994,8 +915,8 @@ static const struct BgTemplate sBgTemplates[] =
     {
         .bg = 2,
         .charBaseIndex = 2,
-        .mapBaseIndex = 27,
-        .screenSize = 1,
+        .mapBaseIndex = 31,
+        .screenSize = 0,
         .paletteMode = 0,
         .priority = 2,
         .baseTile = 0
@@ -1003,7 +924,7 @@ static const struct BgTemplate sBgTemplates[] =
     {
         .bg = 3,
         .charBaseIndex = 3,
-        .mapBaseIndex = 31,
+        .mapBaseIndex = 27,
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 3,
@@ -1038,23 +959,21 @@ static const struct StorageMessage sMessages[] =
     [MSG_EXIT_BOX]             = {gText_ExitFromBox,             MSG_VAR_NONE},
     [MSG_WHAT_YOU_DO]          = {gText_WhatDoYouWantToDo,       MSG_VAR_NONE},
     [MSG_PICK_A_THEME]         = {gText_PleasePickATheme,        MSG_VAR_NONE},
-    [MSG_PICK_A_WALLPAPER]     = {gText_PickTheWallpaper,        MSG_VAR_NONE},
-    [MSG_IS_SELECTED]          = {gText_PkmnIsSelected,          MSG_VAR_MON_NAME_1},
+    [MSG_IS_SELECTED]          = {gText_PkmnIsSelected,          MSG_VAR_MON_NAME},
     [MSG_JUMP_TO_WHICH_BOX]    = {gText_JumpToWhichBox,          MSG_VAR_NONE},
     [MSG_DEPOSIT_IN_WHICH_BOX] = {gText_DepositInWhichBox,       MSG_VAR_NONE},
-    [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME_1},
+    [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME},
     [MSG_BOX_IS_FULL]          = {gText_BoxIsFull2,              MSG_VAR_NONE},
     [MSG_RELEASE_POKE]         = {gText_ReleaseThisPokemon,      MSG_VAR_NONE},
     [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON_1},
     [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON_3},
-    [MSG_MARK_POKE]            = {gText_MarkYourPkmn,            MSG_VAR_NONE},
     [MSG_LAST_POKE]            = {gText_ThatsYourLastPkmn,       MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,          MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {gText_YoureHoldingAPkmn,       MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {gText_WhichOneWillYouTake,     MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {gText_YouCantReleaseAnEgg,     MSG_VAR_NONE},
     [MSG_CONTINUE_BOX]         = {gText_ContinueBoxOperations,   MSG_VAR_NONE},
-    [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME_1},
+    [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME},
     [MSG_WORRIED]              = {gText_WasItWorriedAboutYou,    MSG_VAR_NONE},
     [MSG_SURPRISE]             = {gText_FourEllipsesExclamation, MSG_VAR_NONE},
     [MSG_PLEASE_REMOVE_MAIL]   = {gText_PleaseRemoveTheMail,     MSG_VAR_NONE},
@@ -1207,8 +1126,6 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
     [RELEASE_ANIM_RELEASE]   = sAffineAnim_ReleaseMon_Release,
     [RELEASE_ANIM_CAME_BACK] = sAffineAnim_ReleaseMon_CameBack
 };
-
-#include "data/wallpapers.h"
 
 static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
 
@@ -1494,7 +1411,6 @@ static void Task_PCMainMenu(u8 taskId)
             }
             break;
         case MENU_B_PRESSED:
-        case OPTION_EXIT:
             ClearStdWindowAndFrame(task->tWindowId, TRUE);
             UnlockPlayerFieldControls();
             ScriptContext_Enable();
@@ -1630,11 +1546,6 @@ void ResetPokemonStorageSystem(void)
         u8 *dest = StringCopy(GetBoxNamePtr(boxId), gText_Box);
         ConvertIntToDecimalStringN(dest, boxId + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
     }
-
-    for (boxId = 0; boxId < TOTAL_BOXES_COUNT; boxId++)
-        SetBoxWallpaper(boxId, boxId % (MAX_DEFAULT_WALLPAPER + 1));
-
-    ResetWaldaWallpaper();
 }
 
 
@@ -1890,7 +1801,6 @@ static void VBlankCB_PokeStorage(void)
         sStorage->transferWholePlttFrames--;
       TransferPlttBuffer();
     }
-    SetGpuReg(REG_OFFSET_BG2HOFS, sStorage->bg2_X);
 }
 
 static s8 SwapInPalNextVBlank(void *palette, void *dst) 
@@ -2033,11 +1943,6 @@ static void HBlankCB_PokeStorage(void)
       break;
     }
   }
-  if (vCount == 146 && sStorage && sStorage->markingsSwapPal[0]) 
-  { // copy markings palette
-    u16 *dst = (u16*) (OBJ_PLTT + (11+1)*16*2);
-    CpuFastCopy(&sStorage->markingsSwapPal[0], dst, 32);
-  }
   if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0]) 
   { // copy choose box palette
     u16 *dst = (u16*) (OBJ_PLTT + (0)*16*2);
@@ -2144,14 +2049,7 @@ static void Task_InitPokeStorage(u8 taskId)
         if (IsInitBoxActive())
             return;
 
-        if (sStorage->boxOption != OPTION_MOVE_ITEMS)
-        {
-            sStorage->markMenu.baseTileTag = GFXTAG_MARKING_MENU;
-            sStorage->markMenu.basePaletteTag = PALTAG_MARKING_MENU;
-            InitMonMarkingsMenu(&sStorage->markMenu);
-            BufferMonMarkingsMenuTiles();
-        }
-        else
+        if (sStorage->boxOption == OPTION_MOVE_ITEMS)
         {
             CreateItemIconSprites();
             InitCursorItemIcon();
@@ -2667,10 +2565,6 @@ static void Task_OnSelectedMon(u8 taskId)
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_ShowMonSummary);
             break;
-        case MENU_MARK:
-            PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_ShowMarkMenu);
-            break;
         case MENU_TAKE:
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_TakeItemForMoving);
@@ -3026,29 +2920,6 @@ static void Task_ReleaseMon(u8 taskId)
     }
 }
 
-static void Task_ShowMarkMenu(u8 taskId)
-{
-    switch (sStorage->state)
-    {
-    case 0:
-        PrintMessage(MSG_MARK_POKE);
-        sStorage->markMenu.markings = sStorage->displayMonMarkings;
-        OpenMonMarkingsMenu(sStorage->displayMonMarkings, 0xb0, 0x10);
-        sStorage->state++;
-        break;
-    case 1:
-        if (!HandleMonMarkingsMenuInput())
-        {
-            FreeMonMarkingsMenu();
-            ClearBottomWindow();
-            SetMonMarkings(sStorage->markMenu.markings);
-            RefreshDisplayMonData();
-            SetPokeStorageTask(Task_PokeStorageMain);
-        }
-        break;
-    }
-}
-
 static void Task_TakeItemForMoving(u8 taskId)
 {
     switch (sStorage->state)
@@ -3388,101 +3259,11 @@ static void Task_HandleBoxOptions(u8 taskId)
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_NameBox);
             break;
-        case MENU_WALLPAPER:
-            PlaySE(SE_SELECT);
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_HandleWallpapers);
-            break;
         case MENU_JUMP:
             PlaySE(SE_SELECT);
             ClearBottomWindow();
             SetPokeStorageTask(Task_JumpBox);
             break;
-        }
-        break;
-    }
-}
-
-static void Task_HandleWallpapers(u8 taskId)
-{
-    switch (sStorage->state)
-    {
-    case 0:
-        AddWallpaperSetsMenu();
-        PrintMessage(MSG_PICK_A_THEME);
-        sStorage->state++;
-        break;
-    case 1:
-        if (!IsMenuLoading())
-             sStorage->state++;
-        break;
-    case 2:
-        sStorage->wallpaperSetId = HandleMenuInput();
-        switch (sStorage->wallpaperSetId)
-        {
-        case MENU_B_PRESSED:
-            AnimateBoxScrollArrows(TRUE);
-            ClearBottomWindow();
-            SetPokeStorageTask(Task_PokeStorageMain);
-            break;
-        case MENU_SCENERY_1:
-        case MENU_SCENERY_2:
-        case MENU_SCENERY_3:
-        case MENU_ETCETERA:
-            PlaySE(SE_SELECT);
-            RemoveMenu();
-            sStorage->wallpaperSetId -= MENU_WALLPAPER_SETS_START;
-            sStorage->state++;
-            break;
-        case MENU_FRIENDS:
-            // New wallpaper from Walda.
-            PlaySE(SE_SELECT);
-            sStorage->wallpaperId = WALLPAPER_FRIENDS;
-            RemoveMenu();
-            ClearBottomWindow();
-            sStorage->state = 6;
-            break;
-        }
-        break;
-    case 3:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            AddWallpapersMenu(sStorage->wallpaperSetId);
-            PrintMessage(MSG_PICK_A_WALLPAPER);
-            sStorage->state++;
-        }
-        break;
-    case 4:
-        sStorage->wallpaperId = HandleMenuInput();
-        switch (sStorage->wallpaperId)
-        {
-        case MENU_NOTHING_CHOSEN:
-            break;
-        case MENU_B_PRESSED:
-            ClearBottomWindow();
-            sStorage->state = 0;
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            ClearBottomWindow();
-            sStorage->wallpaperId -= MENU_WALLPAPERS_START;
-            SetWallpaperForCurrentBox(sStorage->wallpaperId);
-            sStorage->state++;
-            break;
-        }
-        break;
-    case 5:
-        if (!DoWallpaperGfxChange())
-        {
-            AnimateBoxScrollArrows(TRUE);
-            SetPokeStorageTask(Task_PokeStorageMain);
-        }
-        break;
-    case 6:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            SetWallpaperForCurrentBox(sStorage->wallpaperId);
-            sStorage->state = 5;
         }
         break;
     }
@@ -3829,15 +3610,15 @@ static void FreePokeStorageData(void)
 
 static void SetScrollingBackground(void)
 {
-    SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
-    DecompressAndLoadBgGfxUsingHeap(3, sScrollingBg_Gfx, 0, 0, 0);
+    SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
+    DecompressAndLoadBgGfxUsingHeap(2, sScrollingBg_Gfx, 0, 0, 0);
     LZ77UnCompVram(sScrollingBg_Tilemap, (void *)BG_SCREEN_ADDR(31));
 }
 
 static void ScrollBackground(void)
 {
-    ChangeBgX(3, 128, BG_COORD_ADD);
-    ChangeBgY(3, 128, BG_COORD_SUB);
+    ChangeBgX(2, 128, BG_COORD_ADD);
+    ChangeBgY(2, 128, BG_COORD_SUB);
 }
 
 static void LoadPokeStorageMenuGfx(void)
@@ -3880,23 +3661,8 @@ static void InitPalettesAndSprites(void)
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
-    CreateMarkingComboSprite();
     CreateWaveformSprites();
     RefreshDisplayMonData();
-}
-
-static void CreateMarkingComboSprite(void)
-{
-    sStorage->markingComboSprite = CreateMonMarkingComboSprite(GFXTAG_MARKING_COMBO, PALTAG_MARKING_COMBO, NULL);
-    // Free up 1 palette of space by swapping in the marking palette at the last second
-    CpuFastCopy(&gPlttBufferUnfaded[sStorage->markingComboSprite->oam.paletteNum*16+0x100], &sStorage->markingsSwapPal[0], 32);
-    FreeSpritePaletteByTag(PALTAG_MARKING_COMBO);
-    sStorage->markingComboSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_MISC_2);
-    sStorage->markingComboSprite->oam.priority = 1;
-    sStorage->markingComboSprite->subpriority = 1;
-    sStorage->markingComboSprite->x = 40;
-    sStorage->markingComboSprite->y = 150;
-    sStorage->markingComboTilesPtr = (void *) OBJ_VRAM0 + 32 * GetSpriteTileStartByTag(GFXTAG_MARKING_COMBO);
 }
 
 static void CreateWaveformSprites(void)
@@ -4031,15 +3797,6 @@ static void PrintDisplayMonInfo(void)
     }
 
     CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
-    if (sStorage->displayMonSpecies != SPECIES_NONE)
-    {
-        UpdateMonMarkingTiles(sStorage->displayMonMarkings, sStorage->markingComboTilesPtr);
-        sStorage->markingComboSprite->invisible = FALSE;
-    }
-    else
-    {
-        sStorage->markingComboSprite->invisible = TRUE;
-    }
 }
 
 // Turn the wave animation on the sides of "Pkmn Data" on/off
@@ -4335,9 +4092,7 @@ static void PrintMessage(u8 id)
     {
     case MSG_VAR_NONE:
         break;
-    case MSG_VAR_MON_NAME_1:
-    case MSG_VAR_MON_NAME_2:
-    case MSG_VAR_MON_NAME_3:
+    case MSG_VAR_MON_NAME:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->displayMonName);
         break;
     case MSG_VAR_RELEASE_MON_1:
@@ -4378,51 +4133,6 @@ static void ClearBottomWindow(void)
 {
     ClearStdWindowAndFrameToTransparent(WIN_MESSAGE, FALSE);
     ScheduleBgCopyTilemapToVram(0);
-}
-
-static void AddWallpaperSetsMenu(void)
-{
-    InitMenu();
-    SetMenuText(MENU_SCENERY_1);
-    SetMenuText(MENU_SCENERY_2);
-    SetMenuText(MENU_SCENERY_3);
-    SetMenuText(MENU_ETCETERA);
-    if (IsWaldaWallpaperUnlocked())
-        SetMenuText(MENU_FRIENDS);
-    AddMenu();
-}
-
-static void AddWallpapersMenu(u8 wallpaperSet)
-{
-    InitMenu();
-    switch (wallpaperSet)
-    {
-    case MENU_SCENERY_1 - MENU_WALLPAPER_SETS_START:
-        SetMenuText(MENU_FOREST);
-        SetMenuText(MENU_CITY);
-        SetMenuText(MENU_DESERT);
-        SetMenuText(MENU_SAVANNA);
-        break;
-    case MENU_SCENERY_2 - MENU_WALLPAPER_SETS_START:
-        SetMenuText(MENU_CRAG);
-        SetMenuText(MENU_VOLCANO);
-        SetMenuText(MENU_SNOW);
-        SetMenuText(MENU_CAVE);
-        break;
-    case MENU_SCENERY_3 - MENU_WALLPAPER_SETS_START:
-        SetMenuText(MENU_BEACH);
-        SetMenuText(MENU_SEAFLOOR);
-        SetMenuText(MENU_RIVER);
-        SetMenuText(MENU_SKY);
-        break;
-    case MENU_ETCETERA - MENU_WALLPAPER_SETS_START:
-        SetMenuText(MENU_POLKADOT);
-        SetMenuText(MENU_POKECENTER);
-        SetMenuText(MENU_MACHINE);
-        SetMenuText(MENU_SIMPLE);
-        break;
-    }
-    AddMenu();
 }
 
 static u8 GetCurrentBoxOption(void)
@@ -5367,30 +5077,11 @@ static void Task_InitBox(u8 taskId)
     switch (task->tState)
     {
     case 0:
-        sStorage->wallpaperOffset = 0;
-        sStorage->bg2_X = 0;
-        task->tDmaIdx = RequestDma3Fill(0, sStorage->wallpaperBgTilemapBuffer, sizeof(sStorage->wallpaperBgTilemapBuffer), 1);
-        break;
-    case 1:
-        if (CheckForSpaceForDma3Request(task->tDmaIdx) == -1)
-            return;
-
-        SetBgTilemapBuffer(2, sStorage->wallpaperBgTilemapBuffer);
-        ShowBg(2);
-        break;
-    case 2:
-        LoadWallpaperGfx(task->tBoxId, 0);
-        break;
-    case 3:
-        if (!WaitForWallpaperGfxLoad())
-            return;
-
         InitBoxTitle(task->tBoxId);
         CreateBoxScrollArrows();
         InitBoxMonSprites(task->tBoxId);
-        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(27) | BGCNT_TXT512x256);
         break;
-    case 4:
+    case 1:
         DestroyTask(taskId);
         break;
     default:
@@ -5424,23 +5115,14 @@ static bool8 ScrollToBox(void)
     switch (sStorage->scrollState)
     {
     case 0:
-        LoadWallpaperGfx(sStorage->scrollToBoxId, sStorage->scrollDirection);
-        sStorage->scrollState++;
-    case 1:
-        if (!WaitForWallpaperGfxLoad())
-            return TRUE;
-
         InitBoxMonIconScroll(sStorage->scrollToBoxId, sStorage->scrollDirection);
         CreateIncomingBoxTitle(sStorage->scrollToBoxId, sStorage->scrollDirection);
         StartBoxScrollArrowsSlide(sStorage->scrollDirection);
         break;
-    case 2:
+    case 1:
         iconsScrolling = UpdateBoxMonIconScroll();
         if (sStorage->scrollTimer != 0)
         {
-            sStorage->bg2_X += sStorage->scrollSpeed;
-            if (--sStorage->scrollTimer != 0)
-                return TRUE;
             CycleBoxTitleSprites();
             StopBoxScrollArrowsSlide();
         }
@@ -5466,159 +5148,6 @@ static s8 DetermineBoxScrollDirection(u8 boxId)
     return (i < TOTAL_BOXES_COUNT / 2) ? 1 : -1;
 }
 
-
-//------------------------------------------------------------------------------
-//  SECTION: Wallpaper gfx
-//------------------------------------------------------------------------------
-
-
-static void SetWallpaperForCurrentBox(u8 wallpaperId)
-{
-    u8 boxId = StorageGetCurrentBox();
-    SetBoxWallpaper(boxId, wallpaperId);
-    sStorage->wallpaperChangeState = 0;
-}
-
-static bool8 DoWallpaperGfxChange(void)
-{
-    switch (sStorage->wallpaperChangeState)
-    {
-    case 0:
-        BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 0, 16, RGB_WHITEALPHA);
-        sStorage->wallpaperChangeState++;
-        break;
-    case 1:
-        if (!UpdatePaletteFade())
-        {
-            u8 curBox = StorageGetCurrentBox();
-            LoadWallpaperGfx(curBox, 0);
-            sStorage->wallpaperChangeState++;
-        }
-        break;
-    case 2:
-        if (WaitForWallpaperGfxLoad() == TRUE)
-        {
-            BeginNormalPaletteFade(sStorage->wallpaperPalBits, 1, 16, 0, RGB_WHITEALPHA);
-            sStorage->wallpaperChangeState++;
-        }
-        break;
-    case 3:
-        if (!UpdatePaletteFade())
-            sStorage->wallpaperChangeState++;
-        break;
-    case 4:
-        return FALSE;
-    }
-
-    return TRUE;
-}
-
-static void LoadWallpaperGfx(u8 boxId, s8 direction)
-{
-    u8 wallpaperId;
-    const struct Wallpaper *wallpaper;
-    void *iconGfx;
-    u32 tilesSize, iconSize;
-
-    sStorage->wallpaperLoadBoxId = boxId;
-    sStorage->wallpaperLoadDir = direction;
-    if (sStorage->wallpaperLoadDir != 0)
-    {
-        sStorage->wallpaperOffset = (sStorage->wallpaperOffset == 0);
-        TrimOldWallpaper(sStorage->wallpaperBgTilemapBuffer);
-    }
-
-    wallpaperId = GetBoxWallpaper(sStorage->wallpaperLoadBoxId);
-    if (wallpaperId != WALLPAPER_FRIENDS)
-    {
-        wallpaper = &sWallpapers[wallpaperId];
-        LZ77UnCompWram(wallpaper->tilemap, sStorage->wallpaperTilemap);
-        DrawWallpaper(sStorage->wallpaperTilemap, sStorage->wallpaperLoadDir, sStorage->wallpaperOffset);
-
-        if (sStorage->wallpaperLoadDir != 0)
-            LoadPalette(wallpaper->palettes, BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
-        else
-            CpuCopy16(wallpaper->palettes, &gPlttBufferUnfaded[BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
-
-        sStorage->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
-        LoadBgTiles(2, sStorage->wallpaperTiles, tilesSize, sStorage->wallpaperOffset << 8);
-    }
-    else
-    {
-        wallpaper = &sWaldaWallpapers[GetWaldaWallpaperPatternId()];
-        LZ77UnCompWram(wallpaper->tilemap, sStorage->wallpaperTilemap);
-        DrawWallpaper(sStorage->wallpaperTilemap, sStorage->wallpaperLoadDir, sStorage->wallpaperOffset);
-
-        CpuCopy16(wallpaper->palettes, sStorage->wallpaperTilemap, 0x40);
-        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sStorage->wallpaperTilemap[1], 4);
-        CpuCopy16(GetWaldaWallpaperColorsPtr(), &sStorage->wallpaperTilemap[17], 4);
-
-        if (sStorage->wallpaperLoadDir != 0)
-            LoadPalette(sStorage->wallpaperTilemap, BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2), 2 * PLTT_SIZE_4BPP);
-        else
-            CpuCopy16(sStorage->wallpaperTilemap, &gPlttBufferUnfaded[BG_PLTT_ID(4) + BG_PLTT_ID(sStorage->wallpaperOffset * 2)], 2 * PLTT_SIZE_4BPP);
-
-        sStorage->wallpaperTiles = malloc_and_decompress(wallpaper->tiles, &tilesSize);
-        iconGfx = malloc_and_decompress(sWaldaWallpaperIcons[GetWaldaWallpaperIconId()], &iconSize);
-        CpuCopy32(iconGfx, sStorage->wallpaperTiles + 0x800, iconSize);
-        Free(iconGfx);
-        LoadBgTiles(2, sStorage->wallpaperTiles, tilesSize, sStorage->wallpaperOffset << 8);
-    }
-
-    CopyBgTilemapBufferToVram(2);
-}
-
-static bool32 WaitForWallpaperGfxLoad(void)
-{
-    if (IsDma3ManagerBusyWithBgCopy())
-        return FALSE;
-
-    TRY_FREE_AND_SET_NULL(sStorage->wallpaperTiles);
-
-    return TRUE;
-}
-
-static void DrawWallpaper(const void *tilemap, s8 direction, u8 offset)
-{
-    s16 tileOffset = offset * 256;
-    s16 paletteNum = (offset * 2) + 3;
-    s16 x = ((sStorage->bg2_X / 8 + 10) + (direction * 24)) & 0x3F;
-
-    CopyRectToBgTilemapBufferRect(2, tilemap, 0, 0, 20, 18, x, 2, 20, 18, 17, tileOffset, paletteNum);
-
-    if (direction == 0)
-        return;
-    if (direction > 0)
-        x += 20;
-    else
-        x -= 4;
-
-    FillBgTilemapBufferRect(2, 0, x, 2, 4, 0x12, 17);
-}
-
-static void TrimOldWallpaper(void *tilemap)
-{
-    u16 i;
-    u16 *dest = tilemap;
-    s16 r3 = ((sStorage->bg2_X / 8) + 30) & 0x3F;
-
-    if (r3 <= 31)
-        dest += r3 + 0x260;
-    else
-        dest += r3 + 0x640;
-
-    for (i = 0; i < 0x2C; i++)
-    {
-        *dest++ = 0;
-        r3 = (r3 + 1) & 0x3F;
-        if (r3 == 0)
-            dest -= 0x420;
-        if (r3 == 0x20)
-            dest += 0x3e0;
-    }
-}
-
-
 //------------------------------------------------------------------------------
 //  SECTION: Box Title
 //------------------------------------------------------------------------------
@@ -5632,23 +5161,8 @@ static void InitBoxTitle(u8 boxId)
 
     struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
 
-    u16 wallpaperId = GetBoxWallpaper(boxId);
-
-    sStorage->boxTitlePal[14] = sBoxTitleColors[wallpaperId][0]; // Shadow color
-    sStorage->boxTitlePal[15] = sBoxTitleColors[wallpaperId][1]; // Text Color
-    sStorage->wallpaperPalBits = 0x3f0;
-
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
-
-    // The below seems intended to have separately tracked
-    // the incoming wallpaper title's palette, but as they now
-    // share a palette tag, all colors (and fields in some cases)
-    // this is redundant along with the use of boxTitleAltPalOffset
-    tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
-    sStorage->boxTitleAltPalOffset = OBJ_PLTT_ID(tagIndex) + 14;
-    sStorage->wallpaperPalBits |= (1 << 16) << tagIndex;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
     if (DECAP_ENABLED && DECAP_MIRRORING)
@@ -6932,22 +6446,6 @@ s16 CompactPartySlots(void)
     return retVal;
 }
 
-static void SetMonMarkings(u8 markings)
-{
-    sStorage->displayMonMarkings = markings;
-    if (sIsMonBeingMoved)
-    {
-        SetMonData(&sStorage->movingMon, MON_DATA_MARKINGS, &markings);
-    }
-    else
-    {
-        if (sCursorArea == CURSOR_AREA_IN_PARTY)
-            SetMonData(&gPlayerParty[sCursorPosition], MON_DATA_MARKINGS, &markings);
-        if (sCursorArea == CURSOR_AREA_IN_BOX)
-            SetCurrentBoxMonData(sCursorPosition, MON_DATA_MARKINGS, &markings);
-    }
-}
-
 static bool8 IsRemovingLastPartyMon(void)
 {
     if (sCursorArea == CURSOR_AREA_IN_PARTY && !sIsMonBeingMoved && CountPartyAliveNonEggMonsExcept(sCursorPosition) == 0)
@@ -7076,7 +6574,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             GetMonData(mon, MON_DATA_NICKNAME, sStorage->displayMonName);
             StringGet_Nickname(sStorage->displayMonName);
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
-            sStorage->displayMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
@@ -7101,7 +6598,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             GetBoxMonData(boxMon, MON_DATA_NICKNAME, sStorage->displayMonName);
             StringGet_Nickname(sStorage->displayMonName);
             sStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
-            sStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
@@ -7804,7 +7300,6 @@ static void AddBoxOptionsMenu(void)
 {
     InitMenu();
     SetMenuText(MENU_JUMP);
-    SetMenuText(MENU_WALLPAPER);
     SetMenuText(MENU_NAME);
     SetMenuText(MENU_CANCEL);
 }
@@ -7866,7 +7361,6 @@ static bool8 SetMenuTexts_Mon(void)
             SetMenuText(MENU_STORE);
     }
 
-    SetMenuText(MENU_MARK);
     SetMenuText(MENU_RELEASE);
     SetMenuText(MENU_CANCEL);
     return TRUE;
@@ -8138,9 +7632,7 @@ static const u8 *const sMenuTexts[] =
     [MENU_PLACE]      = gPCText_Place,
     [MENU_SUMMARY]    = gPCText_Summary,
     [MENU_RELEASE]    = gPCText_Release,
-    [MENU_MARK]       = gPCText_Mark,
     [MENU_JUMP]       = gPCText_Jump,
-    [MENU_WALLPAPER]  = gPCText_Wallpaper,
     [MENU_NAME]       = gPCText_Name,
     [MENU_TAKE]       = gPCText_Take,
     [MENU_GIVE]       = gPCText_Give,
@@ -8148,27 +7640,6 @@ static const u8 *const sMenuTexts[] =
     [MENU_SWITCH]     = gPCText_Switch,
     [MENU_BAG]        = gPCText_Bag,
     [MENU_INFO]       = gPCText_Info,
-    [MENU_SCENERY_1]  = gPCText_Scenery1,
-    [MENU_SCENERY_2]  = gPCText_Scenery2,
-    [MENU_SCENERY_3]  = gPCText_Scenery3,
-    [MENU_ETCETERA]   = gPCText_Etcetera,
-    [MENU_FRIENDS]    = gPCText_Friends,
-    [MENU_FOREST]     = gPCText_Forest,
-    [MENU_CITY]       = gPCText_City,
-    [MENU_DESERT]     = gPCText_Desert,
-    [MENU_SAVANNA]    = gPCText_Savanna,
-    [MENU_CRAG]       = gPCText_Crag,
-    [MENU_VOLCANO]    = gPCText_Volcano,
-    [MENU_SNOW]       = gPCText_Snow,
-    [MENU_CAVE]       = gPCText_Cave,
-    [MENU_BEACH]      = gPCText_Beach,
-    [MENU_SEAFLOOR]   = gPCText_Seafloor,
-    [MENU_RIVER]      = gPCText_River,
-    [MENU_SKY]        = gPCText_Sky,
-    [MENU_POLKADOT]   = gPCText_PolkaDot,
-    [MENU_POKECENTER] = gPCText_Pokecenter,
-    [MENU_MACHINE]    = gPCText_Machine,
-    [MENU_SIMPLE]     = gPCText_Simple,
 };
 
 static void SetMenuText(u8 textId)
@@ -9739,20 +9210,6 @@ u8 *GetBoxNamePtr(u8 boxId)
         return NULL;
 }
 
-static u8 GetBoxWallpaper(u8 boxId)
-{
-    if (boxId < TOTAL_BOXES_COUNT)
-        return gPokemonStoragePtr->boxWallpapers[boxId];
-    else
-        return 0;
-}
-
-static void SetBoxWallpaper(u8 boxId, u8 wallpaperId)
-{
-    if (boxId < TOTAL_BOXES_COUNT && wallpaperId < WALLPAPER_COUNT)
-        gPokemonStoragePtr->boxWallpapers[boxId] = wallpaperId;
-}
-
 // For moving to the next Pokémon while viewing the summary screen
 s16 AdvanceStorageMonIndex(struct BoxPokemon *boxMons, u8 currIndex, u8 maxIndex, u8 mode)
 {
@@ -9865,81 +9322,6 @@ bool32 AnyStorageMonWithMove(u16 moveId)
 
     return FALSE;
 }
-
-
-//------------------------------------------------------------------------------
-//  SECTION: Walda
-//------------------------------------------------------------------------------
-
-
-void ResetWaldaWallpaper(void)
-{
-    gSaveBlock1Ptr->waldaPhrase.iconId = 0;
-    gSaveBlock1Ptr->waldaPhrase.patternId = 0;
-    gSaveBlock1Ptr->waldaPhrase.patternUnlocked = FALSE;
-    gSaveBlock1Ptr->waldaPhrase.colors[0] = RGB(21, 25, 30);
-    gSaveBlock1Ptr->waldaPhrase.colors[1] = RGB(6, 12, 24);
-    gSaveBlock1Ptr->waldaPhrase.text[0] = EOS;
-}
-
-void SetWaldaWallpaperLockedOrUnlocked(bool32 unlocked)
-{
-    gSaveBlock1Ptr->waldaPhrase.patternUnlocked = unlocked;
-}
-
-bool32 IsWaldaWallpaperUnlocked(void)
-{
-    return gSaveBlock1Ptr->waldaPhrase.patternUnlocked;
-}
-
-u32 GetWaldaWallpaperPatternId(void)
-{
-    return gSaveBlock1Ptr->waldaPhrase.patternId;
-}
-
-void SetWaldaWallpaperPatternId(u8 id)
-{
-    if (id < ARRAY_COUNT(sWaldaWallpapers))
-        gSaveBlock1Ptr->waldaPhrase.patternId = id;
-}
-
-u32 GetWaldaWallpaperIconId(void)
-{
-    return gSaveBlock1Ptr->waldaPhrase.iconId;
-}
-
-void SetWaldaWallpaperIconId(u8 id)
-{
-    if (id < ARRAY_COUNT(sWaldaWallpaperIcons))
-        gSaveBlock1Ptr->waldaPhrase.iconId = id;
-}
-
-u16 *GetWaldaWallpaperColorsPtr(void)
-{
-    return gSaveBlock1Ptr->waldaPhrase.colors;
-}
-
-void SetWaldaWallpaperColors(u16 color1, u16 color2)
-{
-    gSaveBlock1Ptr->waldaPhrase.colors[0] = color1;
-    gSaveBlock1Ptr->waldaPhrase.colors[1] = color2;
-}
-
-u8 *GetWaldaPhrasePtr(void)
-{
-    return gSaveBlock1Ptr->waldaPhrase.text;
-}
-
-void SetWaldaPhrase(const u8 *src)
-{
-    StringCopy(gSaveBlock1Ptr->waldaPhrase.text, src);
-}
-
-bool32 IsWaldaPhraseEmpty(void)
-{
-    return (gSaveBlock1Ptr->waldaPhrase.text[0] == EOS);
-}
-
 
 //------------------------------------------------------------------------------
 //  SECTION: TilemapUtil

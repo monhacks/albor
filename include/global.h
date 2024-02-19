@@ -809,16 +809,6 @@ typedef union // 3b58
     u8 id;
 } LilycoveLady;
 
-struct WaldaPhrase
-{
-    u16 colors[2]; // Background, foreground.
-    u8 text[16];
-    u8 iconId;
-    u8 patternId;
-    bool8 patternUnlocked;
-    //u8 padding;
-};
-
 struct TrainerNameRecord
 {
     u32 trainerId;
@@ -1000,7 +990,6 @@ struct SaveBlock1
 #if FREE_TRAINER_HILL == FALSE
     /*0x3???*/ struct TrainerHillSave trainerHill;
 #endif //FREE_TRAINER_HILL
-    /*0x3???*/ struct WaldaPhrase waldaPhrase;
     // sizeof: 0x3???
 };
 

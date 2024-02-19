@@ -193,8 +193,6 @@ static const struct Wallpaper sWallpapers[WALLPAPER_COUNT - 1] =
     [WALLPAPER_PLAIN]      = WALLPAPER_ENTRY(Plain),
 };
 
-static const u8 sArrow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
-
 static const u16 sWallpaperPalettes_Zigzagoon[][16] =
 {
     INCBIN_U16("graphics/pokemon_storage/wallpapers/friends_frame1.gbapal"),
@@ -336,70 +334,4 @@ static const u32 sWallpaperIcon_Latis[]        = INCBIN_U32("graphics/pokemon_st
 static const u32 sWallpaperIcon_PlusleJapan[]  = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/plusle_japan.4bpp.lz");
 static const u32 sWallpaperIcon_Minun[]        = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/minun.4bpp.lz");
 static const u32 sWallpaperIcon_Togepi[]       = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/togepi.4bpp.lz");
-static const u32 sWallpaperIcon_Magma[]        = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/magma.4bpp.lz");
-
-static const struct Wallpaper sWaldaWallpapers[] =
-{
-    WALLPAPER_ENTRY(Zigzagoon),
-    WALLPAPER_ENTRY(Screen),
-    WALLPAPER_ENTRY_G(Horizontal),
-    WALLPAPER_ENTRY(Diagonal),
-    WALLPAPER_ENTRY(Block),
-    WALLPAPER_ENTRY_G(Ribbon),
-    WALLPAPER_ENTRY(Pokecenter2),
-    WALLPAPER_ENTRY(Frame),
-    WALLPAPER_ENTRY(Blank),
-    WALLPAPER_ENTRY(Circles),
-    WALLPAPER_ENTRY(Azumarill),
-    WALLPAPER_ENTRY(Pikachu),
-    WALLPAPER_ENTRY(Legendary),
-    WALLPAPER_ENTRY(Dusclops),
-    WALLPAPER_ENTRY(Ludicolo),
-    WALLPAPER_ENTRY(Whiscash),
-};
-
-static const u32 *const sWaldaWallpaperIcons[] =
-{
-    sWallpaperIcon_Aqua,
-    sWallpaperIcon_Heart,
-    sWallpaperIcon_FiveStar,
-    sWallpaperIcon_Brick,
-    sWallpaperIcon_FourStar,
-    sWallpaperIcon_Asterisk,
-    sWallpaperIcon_Dot,
-#if OW_PC_JAPAN_WALDA_ICONS == TRUE
-    sWallpaperIcon_CrossJapan,
-#else
-    gWallpaperIcon_Cross,
-#endif
-    sWallpaperIcon_LineCircle,
-    sWallpaperIcon_PokeBall,
-    sWallpaperIcon_Maze,
-    sWallpaperIcon_Footprint,
-    sWallpaperIcon_BigAsterisk,
-    sWallpaperIcon_Circle,
-    sWallpaperIcon_Koffing,
-    sWallpaperIcon_Ribbon,
-#if OW_PC_JAPAN_WALDA_ICONS == TRUE
-    sWallpaperIcon_BoltJapan,
-#else
-    gWallpaperIcon_Bolt,
-#endif
-    sWallpaperIcon_FourCircles,
-    sWallpaperIcon_Lotad,
-    sWallpaperIcon_Crystal,
-    sWallpaperIcon_Pichu,
-    sWallpaperIcon_Diglett,
-    sWallpaperIcon_Luvdisc,
-    sWallpaperIcon_StarInCircle,
-    sWallpaperIcon_Spinda,
-    sWallpaperIcon_Latis,
-#if OW_PC_JAPAN_WALDA_ICONS == TRUE
-    sWallpaperIcon_PlusleJapan,
-#else
-    gWallpaperIcon_Plusle,
-#endif
-    sWallpaperIcon_Minun,
-    sWallpaperIcon_Togepi,
-    sWallpaperIcon_Magma,
-};
+static const u32 sWallpaperIcon_Magma[]        = INCBIN_U32("graphics/pokemon_storage/wallpapers/icons/magma.4bpp.lz");º
