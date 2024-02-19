@@ -1127,6 +1127,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Rattata),
         ICON(Rattata, 2),
+        ICON_FEMALE(Rattata, 2),
         FOLLOWER(Rattata, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Rattata),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RATICATE}),
@@ -1166,6 +1167,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Raticate),
         ICON(Raticate, 2),
+        ICON_FEMALE(Raticate, 2),
         FOLLOWER(Raticate, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raticate),
     },

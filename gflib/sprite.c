@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
+#include "util.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -1636,7 +1637,7 @@ void FreeSpritePaletteByTag(u16 tag)
     {
         sSpritePaletteTags[index] = TAG_NONE;
         #if DEBUG
-        FillPalette(0, index * 16 + 0x100, 32);
+        FillPalette(0, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
         #endif
     }
 }
@@ -1745,13 +1746,15 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
 static const u8 sSpanPerImage[4][4] =
 {
-    [ST_OAM_SQUARE]      = {
+    [ST_OAM_SQUARE] = 
+    {
         [ST_OAM_SIZE_0] = 0, // SPRITE_SIZE_8x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_16x16
         [ST_OAM_SIZE_2] = 4, // SPRITE_SIZE_32x32
         [ST_OAM_SIZE_3] = 6  // SPRITE_SIZE_64x64
     },
-    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] = {
+    [ST_OAM_H_RECTANGLE ... ST_OAM_V_RECTANGLE] = 
+    {
         [ST_OAM_SIZE_0] = 1, // SPRITE_SIZE_16x8
         [ST_OAM_SIZE_1] = 2, // SPRITE_SIZE_32x8
         [ST_OAM_SIZE_2] = 3, // SPRITE_SIZE_32x16
@@ -1762,6 +1765,43 @@ static const u8 sSpanPerImage[4][4] =
 // For a given sprite shape & size, returns
 // the value for sheetSpan:
 // i.e, a 32x32 sprite has span 4, because 1 << 4 == 16 == 4x4 tiles
-u32 GetSpanPerImage(u32 shape, u32 size) {
+u32 GetSpanPerImage(u32 shape, u32 size) 
+{
     return sSpanPerImage[shape][size];
+}
+
+u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemon *boxMon)
+{
+    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
+        UniquePalette(OBJ_PLTT_ID(index), boxMon);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+        return index;
+    }
+}
+
+u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, bool8 isShiny, u32 personality)
+{
+    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePalette(palette->data, PLTT_ID(index));
+        UniquePaletteByPersonality(OBJ_PLTT_ID(index), isShiny, personality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
+        return index;
+    }
 }

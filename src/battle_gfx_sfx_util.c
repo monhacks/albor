@@ -379,19 +379,6 @@ void SpriteCB_WaitForBattlerBallReleaseAnim(struct Sprite *sprite)
     }
 }
 
-static void UNUSED UnusedDoBattleSpriteAffineAnim(struct Sprite *sprite, bool8 pointless)
-{
-    sprite->animPaused = TRUE;
-    sprite->callback = SpriteCallbackDummy;
-
-    if (!pointless)
-        StartSpriteAffineAnim(sprite, 1);
-    else
-        StartSpriteAffineAnim(sprite, 1);
-
-    AnimateSprite(sprite);
-}
-
 #define sSpeedX data[0]
 
 void SpriteCB_TrainerSlideIn(struct Sprite *sprite)
@@ -626,12 +613,16 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    UniquePalette(paletteOffset, &mon->box);
+    CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
+    UniquePalette(BG_PLTT_ID(8) + BG_PLTT_ID(battler), &mon->box);
+    CpuCopy32(&gPlttBufferFaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], &gPlttBufferUnfaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], PLTT_SIZE_4BPP);
 
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies != SPECIES_NONE)
     {
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
-        CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZEOF(16));
+        CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
     }
 
     // dynamax tint
@@ -642,7 +633,7 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
             BlendPalette(paletteOffset, 16, 4, RGB(12, 0, 31));
         else
             BlendPalette(paletteOffset, 16, 4, RGB(31, 0, 12));
-        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZE_4BPP);
     }
 }
 
@@ -670,32 +661,6 @@ void DecompressTrainerBackPic(u16 backPicId, u8 battler)
 void FreeTrainerFrontPicPalette(u16 frontPicId)
 {
     FreeSpritePaletteByTag(gTrainerSprites[frontPicId].palette.tag);
-}
-
-// Unused.
-void BattleLoadAllHealthBoxesGfxAtOnce(void)
-{
-    u8 numberOfBattlers = 0;
-    u8 i;
-
-    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
-    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[1]);
-    if (!IsDoubleBattle())
-    {
-        LoadCompressedSpriteSheet(&sSpriteSheet_SinglesPlayerHealthbox);
-        LoadCompressedSpriteSheet(&sSpriteSheet_SinglesOpponentHealthbox);
-        numberOfBattlers = 2;
-    }
-    else
-    {
-        LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
-        LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[1]);
-        LoadCompressedSpriteSheet(&sSpriteSheets_DoublesOpponentHealthbox[0]);
-        LoadCompressedSpriteSheet(&sSpriteSheets_DoublesOpponentHealthbox[1]);
-        numberOfBattlers = MAX_BATTLERS_COUNT;
-    }
-    for (i = 0; i < numberOfBattlers; i++)
-        LoadCompressedSpriteSheet(&sSpriteSheets_HealthBar[GetBattlerPosition(i)]);
 }
 
 bool8 BattleLoadAllHealthBoxesGfx(u8 state)
@@ -759,7 +724,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
     return retVal;
 }
 
-void LoadBattleBarGfx(u8 unused)
+void LoadBattleBarGfx(void)
 {
     LZDecompressWram(gBattleInterfaceGfx_BattleBar, gMonSpritesGfxPtr->barFontGfx);
 }
@@ -870,10 +835,11 @@ void CopyBattleSpriteInvisibility(u8 battler)
 
 void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bool8 trackEnemyPersonality)
 {
-    u32 personalityValue, position, paletteOffset, targetSpecies;
+    u32 personalityValue, position, paletteOffset, targetSpecies, otId;
     bool8 isShiny;
     const void *lzPaletteData, *src;
     void *dst;
+    struct BoxPokemon boxMon;
 
     if (IsContest())
     {
@@ -881,6 +847,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         targetSpecies = gContestResources->moveAnim->targetSpecies;
         personalityValue = gContestResources->moveAnim->personality;
         isShiny = gContestResources->moveAnim->isShiny;
+        otId = gContestResources->moveAnim->otId;
 
         HandleLoadSpecialPokePic(FALSE,
                                  gMonSpritesGfxPtr->sprites.ptr[position],
@@ -902,11 +869,13 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
             {
                 personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
                 isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
             }
             else
             {
                 personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
                 isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
             }
 
             HandleLoadSpecialPokePic(FALSE,
@@ -920,11 +889,13 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
             {
                 personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
                 isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
             }
             else
             {
                 personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
                 isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
             }
 
             HandleLoadSpecialPokePic(TRUE,
@@ -940,11 +911,14 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
     lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, isShiny, personalityValue);
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
+    CreateBoxMon(&boxMon, targetSpecies, 5, USE_RANDOM_IVS, TRUE, personalityValue, OT_ID_PRESET, otId);
 
     if (!megaEvo)
     {
+        UniquePalette(paletteOffset, &boxMon);
+        CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
-        CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZEOF(16));
+        CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
         if (!IsContest())
         {
             gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies = targetSpecies;

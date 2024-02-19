@@ -177,7 +177,6 @@ EWRAM_DATA u8 gSelectedTradeMonPositions[2] = {0};
 static EWRAM_DATA struct {
     u8 bg2hofs;
     u8 bg3hofs;
-    u8 filler_2[38];
     u8 partySpriteIds[2][PARTY_SIZE];
     u8 cursorSpriteId;
     u8 cursorPosition;
@@ -187,7 +186,6 @@ static EWRAM_DATA struct {
     bool8 isEgg[2][PARTY_SIZE];
     u8 hpBarLevels[2][PARTY_SIZE];
     u8 bufferPartyState;
-    u8 filler_6A[5];
     u8 callbackId;
     u8 neverRead_70;
     u16 bottomTextTileStart;
@@ -197,12 +195,10 @@ static EWRAM_DATA struct {
     u8 partnerSelectStatus;
     u8 playerConfirmStatus;
     u8 partnerConfirmStatus;
-    u8 filler_7C[2];
     u8 partnerCursorPosition;
     u16 linkData[20];
     u8 timer;
     u8 giftRibbons[GIFT_RIBBONS_COUNT];
-    u8 filler_B4[0x81C];
     struct {
         bool8 active;
         u16 delay;
@@ -215,7 +211,6 @@ static EWRAM_DATA struct {
     struct Pokemon tempMon; // Used as a temp variable when swapping Pokémon
     u32 timer;
     u32 monPersonalities[2];
-    u8 filler_70[2];
     u8 playerFinishStatus;
     u8 partnerFinishStatus;
     u16 linkData[10];
@@ -229,7 +224,6 @@ static EWRAM_DATA struct {
     u8 cableEndSpriteId;
     u8 scheduleLinkTransfer;
     u16 state;
-    u8 filler_96[0x3C];
     u8 releasePokeballSpriteId;
     u8 bouncingPokeballSpriteId;
     u16 texX;
@@ -249,7 +243,6 @@ static EWRAM_DATA struct {
     u16 monSpecies[2];
     u16 cachedMapMusic;
     u8 textColors[3];
-    u8 filler_F9;
     bool8 isCableTrade;
     u8 wirelessWinLeft;
     u8 wirelessWinTop;

@@ -1781,6 +1781,18 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
       else
         graphicsInfo = &gPokemonFormGraphics[1];
       break;
+    case SPECIES_RATTATA:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[2];
+      break;
+    case SPECIES_RATICATE:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[3];
+      break;
     default:
         graphicsInfo = &gSpeciesInfo[species].followerData;
         break;
@@ -1802,14 +1814,15 @@ static const struct ObjectEventGraphicsInfo * SpeciesToGraphicsInfo(u16 species,
 // Find, or load, the palette for the specified pokemon info
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool8 shiny)
 {
+    struct Pokemon *mon = GetFirstLiveMon();
     u8 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
-    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //ETODO
+    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //TODO
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         // Load compressed palette
-        LoadCompressedSpritePaletteWithTag(palette, species);
+        LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
             UpdateSpritePaletteWithWeather(paletteNum);
@@ -1920,6 +1933,8 @@ static bool8 GetMonInfo(struct Pokemon * mon, u16 *species, u8 *form, u8 *shiny)
         break;
     case SPECIES_VENUSAUR:
     case SPECIES_BUTTERFREE:
+    case SPECIES_RATTATA:
+    case SPECIES_RATICATE:
         *form = GetMonGender(mon);
         break;
     }

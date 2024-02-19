@@ -6,11 +6,12 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Lista de créditos
     *Pret por la decompilación de pokeemerald y su wiki.
-    *rh-hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
+    *Rh-hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
-    *aarant por los followers Pokémon y su sistema de iconos.
+    *Aarant por los followers Pokémon y su sistema de iconos.
+    *CitrusBolt por el sistema de ICV.
 
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).
@@ -29,3 +30,4 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Cambios de calidad de vida:
     *En batalla, puedes pulsar B para ir rápidamente a la opción de huir.
+    *Los Pokémon varían su color en función de su personalidad.

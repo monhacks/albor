@@ -2549,9 +2549,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 
         if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
         {
-            LoadBattleBarGfx(0);
+            LoadBattleBarGfx();
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
-            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR);
         }
 
         if (!isDoubles && (elementId == HEALTHBOX_EXP_BAR || elementId == HEALTHBOX_ALL))
@@ -2561,7 +2561,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             s32 currExpBarValue, maxExpBarValue;
             u8 level;
 
-            LoadBattleBarGfx(3);
+            LoadBattleBarGfx();
             species = GetMonData(mon, MON_DATA_SPECIES);
             level = GetMonData(mon, MON_DATA_LEVEL);
             exp = GetMonData(mon, MON_DATA_EXP);
@@ -2569,7 +2569,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
             currExpBarValue = exp - currLevelExp;
             maxExpBarValue = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLevelExp;
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxExpBarValue, currExpBarValue, isDoubles);
-            MoveBattleBar(battlerId, healthboxSpriteId, EXP_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, EXP_BAR);
         }
         if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
             UpdateNickInHealthbox(healthboxSpriteId, mon);
@@ -2595,9 +2595,9 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
         }
         if (elementId == HEALTHBOX_HEALTH_BAR || elementId == HEALTHBOX_ALL)
         {
-            LoadBattleBarGfx(0);
+            LoadBattleBarGfx();
             SetBattleBarStruct(battlerId, healthboxSpriteId, maxHp, currHp, 0);
-            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR, 0);
+            MoveBattleBar(battlerId, healthboxSpriteId, HEALTH_BAR);
         }
         if (elementId == HEALTHBOX_NICK || elementId == HEALTHBOX_ALL)
             UpdateNickInHealthbox(healthboxSpriteId, mon);
@@ -2609,7 +2609,7 @@ void UpdateHealthboxAttribute(u8 healthboxSpriteId, struct Pokemon *mon, u8 elem
 #define B_EXPBAR_PIXELS 64
 #define B_HEALTHBAR_PIXELS 48
 
-s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
+s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar)
 {
     s32 currentBarValue;
 
