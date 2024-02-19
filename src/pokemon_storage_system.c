@@ -4007,6 +4007,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
         UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon);
+        CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
         sStorage->displayMonSprite->invisible = FALSE;
     }
     else
@@ -4504,8 +4505,7 @@ static void CreateMovingMonIcon(void)
     u8 priority = GetMonIconPriorityByCursorPos();
 
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
-    // This shouldn't be hardcoded, but the palette tag isn't loaded when this is called :/
-    sStorage->movingMonSprite->oam.paletteNum = 13; // IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON);
+    sStorage->movingMonSprite->oam.paletteNum = 13; //IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)
     sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
 }
 
@@ -4858,6 +4858,8 @@ static void CreatePartyMonsSprites(bool8 visible)
     sStorage->transferWholePlttFrames = -1; // keep transferring entire palette buffer until done with party menu
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
     LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
+    UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), personality);
+    CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
     sStorage->partySprites[0]->oam.paletteNum = 0+1;
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
@@ -4869,6 +4871,8 @@ static void CreatePartyMonsSprites(bool8 visible)
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
             LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY), personality);
+            CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             sStorage->partySprites[i]->oam.paletteNum = paletteNum;
             count++;
         }
@@ -5096,6 +5100,8 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
         {
             paletteNum = FindFreePartyPaletteSlot();
             LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_IS_SHINY), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
+            CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             sStorage->partySprites[position]->oam.paletteNum = paletteNum;
         }
     }
@@ -6569,6 +6575,8 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     // Set moving sprite palette to currently displayed pokemon's palette
     sStorage->displayMonSprite->invisible = TRUE;
     LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+    UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon);
+    CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
     sStorage->movingMonSprite->oam.paletteNum = displayIndex;
     sMovingMonOrigBoxId = boxId;
     sMovingMonOrigBoxPos = position;
@@ -7082,7 +7090,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
             sStorage->displayMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
-            sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
+            sStorage->displayMonPalette = GetMonFrontSpritePal(mon); //*
+            //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, GetMonData(mon, MON_DATA_IS_SHINY), sStorage->displayMonPersonality);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
@@ -7108,7 +7117,8 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             sStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
             sStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
-            sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality);
+            sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality); //*
+            //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, isShiny, sStorage->displayMonPersonality);
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }
@@ -10153,7 +10163,8 @@ void UpdateSpeciesSpritePSS(struct BoxPokemon *boxMon)
 
     // Update front sprite
     sStorage->displayMonSpecies = species;
-    sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, pid);
+    sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, pid); //*
+    //LoadHueShiftedMonPalette(sStorage->displayMonPalette, sStorage->displayMonPalOffset, isShiny, pid);
     if (!sJustOpenedBag)
     {
         LoadDisplayMonGfx(species, pid);
