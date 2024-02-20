@@ -82,7 +82,7 @@ static void LoadPicPaletteByTagOrSlot(u16 species, bool8 isShiny, u32 personalit
         {
             sCreatingSpriteTemplate.paletteTag = TAG_NONE;
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
-            UniquePaletteByPersonality(OBJ_PLTT_ID(paletteSlot), isShiny, personality);
+            UniquePaletteByPersonality(OBJ_PLTT_ID(paletteSlot), species, isShiny, personality);
             CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(paletteSlot)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteSlot)], PLTT_SIZE_4BPP);
         }
         else
@@ -111,7 +111,7 @@ static void LoadPicPaletteBySlot(u16 species, bool8 isShiny, u32 personality, u8
     if (!isTrainer)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(PLTT_ID(paletteSlot), isShiny, personality);
+        UniquePaletteByPersonality(PLTT_ID(paletteSlot), species, isShiny, personality);
         CpuCopy32(&gPlttBufferFaded[PLTT_ID(paletteSlot)], &gPlttBufferUnfaded[PLTT_ID(paletteSlot)], PLTT_SIZE_4BPP);
     }
     else

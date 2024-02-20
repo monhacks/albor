@@ -4561,7 +4561,7 @@ static void CreatePartyMonsSprites(bool8 visible)
     sStorage->transferWholePlttFrames = -1; // keep transferring entire palette buffer until done with party menu
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
     LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
-    UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), personality);
+    UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), species, GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), personality);
     CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
     sStorage->partySprites[0]->oam.paletteNum = 0+1;
     count = 1;
@@ -4574,7 +4574,7 @@ static void CreatePartyMonsSprites(bool8 visible)
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
             LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY), personality);
+            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), species, GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY), personality);
             CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             sStorage->partySprites[i]->oam.paletteNum = paletteNum;
             count++;
@@ -4803,7 +4803,7 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
         {
             paletteNum = FindFreePartyPaletteSlot();
             LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_IS_SHINY), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
+            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_SPECIES), GetMonData(&gPlayerParty[position], MON_DATA_IS_SHINY), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
             CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             sStorage->partySprites[position]->oam.paletteNum = paletteNum;
         }

@@ -15,7 +15,6 @@ bool8 LoadCompressedSpriteSheetUsingHeap(const struct CompressedSpriteSheet *src
 
 void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src);
 void LoadCompressedSpritePaletteHueShifted(const struct CompressedSpritePalette *src, struct BoxPokemon *boxMon);
-void LoadCompressedSpritePaletteHueShiftedByPersonality(const struct CompressedSpritePalette *src, bool8 isShiny, u32 personality);
 void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag);
 void LoadCompressedSpritePaletteWithTagHueShifted(const u32 *pal, u16 tag, struct BoxPokemon *boxMon);
 void LoadCompressedSpritePaletteWithTagHueShiftedByPersonality(const u32 *pal, u16 tag, bool8 isShiny, u32 personality);

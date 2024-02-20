@@ -1788,7 +1788,7 @@ u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemo
     }
 }
 
-u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, bool8 isShiny, u32 personality)
+u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, u16 species, bool8 isShiny, u32 personality)
 {
     u8 index = IndexOfSpritePaletteTag(0xFFFF);
 
@@ -1800,7 +1800,7 @@ u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, boo
     {
         sSpritePaletteTags[index] = palette->tag;
         DoLoadSpritePalette(palette->data, PLTT_ID(index));
-        UniquePaletteByPersonality(OBJ_PLTT_ID(index), isShiny, personality);
+        UniquePaletteByPersonality(OBJ_PLTT_ID(index), species, isShiny, personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
         return index;
     }

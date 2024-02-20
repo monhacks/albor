@@ -90,16 +90,6 @@ void LoadCompressedSpritePaletteHueShifted(const struct CompressedSpritePalette 
     LoadUniqueSpritePalette(&dest, boxMon);
 }
 
-void LoadCompressedSpritePaletteHueShiftedByPersonality(const struct CompressedSpritePalette *src, bool8 isShiny, u32 personality)
-{
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, gDecompressionBuffer);
-    dest.data = (void *) gDecompressionBuffer;
-    dest.tag = src->tag;
-    LoadUniqueSpritePaletteByPersonality(&dest, isShiny, personality);
-}
-
 void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
 {
     struct SpritePalette dest;
@@ -127,7 +117,7 @@ void LoadCompressedSpritePaletteWithTagHueShiftedByPersonality(const u32 *pal, u
     LZ77UnCompWram(pal, gDecompressionBuffer);
     dest.data = (void *) gDecompressionBuffer;
     dest.tag = tag;
-    LoadUniqueSpritePaletteByPersonality(&dest, isShiny, personality);
+    LoadUniqueSpritePaletteByPersonality(&dest, tag, isShiny, personality);
 }
 
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *src, void *buffer)

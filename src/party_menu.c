@@ -1230,7 +1230,7 @@ static void CreatePartyMonSprites(u8 slot)
             if (index < 16) 
             { // Like SetMonIconPalette, but by species & personality
                 LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
-                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), SHINY_ODDS, gMultiPartnerParty[actualSlot].personality);
+                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), gMultiPartnerParty[actualSlot].species, SHINY_ODDS, gMultiPartnerParty[actualSlot].personality);
                 CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], PLTT_SIZE_4BPP);
                 gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = index;
             }
