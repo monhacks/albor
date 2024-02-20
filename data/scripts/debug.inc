@@ -137,19 +137,19 @@ Debug_EventScript_Text_DefensiveIV:
 	.string "HP IV: {STR_VAR_1}, DEF IV: {STR_VAR_2}, SPDEF IV: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
 	end
 
 Debug_EventScript_Script_2::
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_BUTTERFREE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_BUTTERFREE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_BUTTERFREE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_BUTTERFREE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_BUTTERFREE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	end
 
 Debug_EventScript_Script_3::

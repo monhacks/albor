@@ -4528,7 +4528,7 @@ static u32 GetPokedexMonPersonality(u16 species)
     }
     else
     {
-        return 0;
+        return 0xFF;
     }
 }
 

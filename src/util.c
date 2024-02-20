@@ -279,7 +279,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
     }
 }
 
-#define HUE_SHIFT_RANGE_NORMAL  80
+#define HUE_SHIFT_RANGE_NORMAL  50
 #define HUE_SHITFT_RANGE_SHINY  120
 
 void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
