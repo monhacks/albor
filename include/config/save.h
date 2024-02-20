@@ -10,13 +10,9 @@
 #define FREE_ENIGMA_BERRY                   TRUE   // Frees up E-Reader Enigma Berry data (52 bytes).
 #define FREE_LINK_BATTLE_RECORDS            TRUE   // Frees up link battle record data (88 bytes).
 #define FREE_MYSTERY_GIFT                   TRUE   // Frees up Mystery Gift data (876 bytes).
-                                            // SaveBlock1 total: 2516 bytes
 // SaveBlock2 configs
 #define FREE_BATTLE_TOWER_E_READER          TRUE   // Frees up Battle Tower E-Reader data (188 bytes).
 #define FREE_POKEMON_JUMP                   TRUE   // Frees up Pokémon Jump data (16 bytes).
 #define FREE_RECORD_MIXING_HALL_RECORDS     TRUE   // Frees up hall records for record mixing (1032 bytes).
-                                            // SaveBlock2 total: 1166 bytes
-
-                                            // Grand Total: 3682
 
 #endif // GUARD_CONFIG_SAVE_H
