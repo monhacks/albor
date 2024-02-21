@@ -1,2 +1,3 @@
 - Implementar repartir experiencia/buscapelea como opciones de menú.
 - Implementar animación de subir de nivel no usada.
+- Arreglar formas/evos +3 en Pokédex.
