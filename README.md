@@ -10,7 +10,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
-    *Aarant por los followers Pokémon y su sistema de iconos.
+    *Aarant por los followers Pokémon, su sistema de iconos, la expansión dinámica de paletas en el OW y su sistema de día y noche.
     *CitrusBolt por el sistema de ICV.
 
 ## Cambios a ataques/habilidades/mecánicas:

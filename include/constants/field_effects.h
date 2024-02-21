@@ -20,61 +20,56 @@
 #define FLDEFF_JUMP_SMALL_SPLASH         16
 #define FLDEFF_LONG_GRASS                17
 #define FLDEFF_JUMP_LONG_GRASS           18
-#define FLDEFF_UNUSED_GRASS              19
-#define FLDEFF_UNUSED_GRASS_2            20
-#define FLDEFF_UNUSED_SAND               21
-#define FLDEFF_WATER_SURFACING           22
-#define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 23
-#define FLDEFF_DEEP_SAND_FOOTPRINTS      24
-#define FLDEFF_POKECENTER_HEAL           25
-#define FLDEFF_USE_SECRET_POWER_TREE     26
-#define FLDEFF_USE_SECRET_POWER_SHRUB    27
-#define FLDEFF_TREE_DISGUISE             28
-#define FLDEFF_MOUNTAIN_DISGUISE         29
-#define FLDEFF_NPCFLY_OUT                30
-#define FLDEFF_USE_FLY                   31
-#define FLDEFF_FLY_IN                    32
-#define FLDEFF_QUESTION_MARK_ICON        33
-#define FLDEFF_EMOTE                     33 // shares a slot with FLDEFF_QUESTION_MARK_ICON
-#define FLDEFF_FEET_IN_FLOWING_WATER     34
-#define FLDEFF_BIKE_TIRE_TRACKS          35
-#define FLDEFF_SAND_DISGUISE             36
-#define FLDEFF_USE_ROCK_SMASH            37
-#define FLDEFF_USE_DIG                   38
-#define FLDEFF_SAND_PILE                 39
-#define FLDEFF_USE_STRENGTH              40
-#define FLDEFF_SHORT_GRASS               41
-#define FLDEFF_HOT_SPRINGS_WATER         42
-#define FLDEFF_USE_WATERFALL             43
-#define FLDEFF_USE_DIVE                  44
-#define FLDEFF_POKEBALL_TRAIL            45
-#define FLDEFF_HEART_ICON                46
-#define FLDEFF_NOP_47                    47
-#define FLDEFF_NOP_48                    48
-#define FLDEFF_ASH_PUFF                  49
-#define FLDEFF_ASH_LAUNCH                50
-#define FLDEFF_SWEET_SCENT               51
-#define FLDEFF_SAND_PILLAR               52
-#define FLDEFF_BUBBLES                   53
-#define FLDEFF_SPARKLE                   54
-#define FLDEFF_SECRET_POWER_CAVE         55
-#define FLDEFF_SECRET_POWER_TREE         56
-#define FLDEFF_SECRET_POWER_SHRUB        57
-#define FLDEFF_CUT_GRASS                 58
-#define FLDEFF_FIELD_MOVE_SHOW_MON_INIT  59
-#define FLDEFF_USE_TOMB_PUZZLE_EFFECT    60
-#define FLDEFF_PCTURN_ON                 61
-#define FLDEFF_HALL_OF_FAME_RECORD       62
-#define FLDEFF_USE_TELEPORT              63
-#define FLDEFF_RAYQUAZA_SPOTLIGHT        64
-#define FLDEFF_DESTROY_DEOXYS_ROCK       65
-#define FLDEFF_MOVE_DEOXYS_ROCK          66
-#define FLDEFF_USE_VS_SEEKER             67
-#define FLDEFF_X_ICON                    68
-#define FLDEFF_DOUBLE_EXCL_MARK_ICON     69
-#define FLDEFF_TRACKS_SLITHER            70
-#define FLDEFF_TRACKS_SPOT               71
-#define FLDEFF_TRACKS_BUG                72
+#define FLDEFF_WATER_SURFACING           19
+#define FLDEFF_BERRY_TREE_GROWTH_SPARKLE 20
+#define FLDEFF_DEEP_SAND_FOOTPRINTS      21
+#define FLDEFF_POKECENTER_HEAL           22
+#define FLDEFF_USE_SECRET_POWER_TREE     23
+#define FLDEFF_USE_SECRET_POWER_SHRUB    24
+#define FLDEFF_TREE_DISGUISE             25
+#define FLDEFF_MOUNTAIN_DISGUISE         26
+#define FLDEFF_NPCFLY_OUT                27
+#define FLDEFF_USE_FLY                   28
+#define FLDEFF_FLY_IN                    29
+#define FLDEFF_QUESTION_MARK_ICON        30
+#define FLDEFF_EMOTE                     30 // shares a slot with FLDEFF_QUESTION_MARK_ICON
+#define FLDEFF_FEET_IN_FLOWING_WATER     31
+#define FLDEFF_BIKE_TIRE_TRACKS          32
+#define FLDEFF_SAND_DISGUISE             33
+#define FLDEFF_USE_ROCK_SMASH            34
+#define FLDEFF_USE_DIG                   35
+#define FLDEFF_SAND_PILE                 36
+#define FLDEFF_USE_STRENGTH              37
+#define FLDEFF_SHORT_GRASS               38
+#define FLDEFF_HOT_SPRINGS_WATER         39
+#define FLDEFF_USE_WATERFALL             40
+#define FLDEFF_USE_DIVE                  41
+#define FLDEFF_POKEBALL_TRAIL            42
+#define FLDEFF_HEART_ICON                43
+#define FLDEFF_ASH_PUFF                  44
+#define FLDEFF_ASH_LAUNCH                44
+#define FLDEFF_SWEET_SCENT               46
+#define FLDEFF_SAND_PILLAR               47
+#define FLDEFF_BUBBLES                   48
+#define FLDEFF_SPARKLE                   49
+#define FLDEFF_SECRET_POWER_CAVE         50
+#define FLDEFF_SECRET_POWER_TREE         51
+#define FLDEFF_SECRET_POWER_SHRUB        52
+#define FLDEFF_CUT_GRASS                 53
+#define FLDEFF_FIELD_MOVE_SHOW_MON_INIT  54
+#define FLDEFF_USE_TOMB_PUZZLE_EFFECT    55
+#define FLDEFF_PCTURN_ON                 56
+#define FLDEFF_HALL_OF_FAME_RECORD       57
+#define FLDEFF_USE_TELEPORT              58
+#define FLDEFF_RAYQUAZA_SPOTLIGHT        59
+#define FLDEFF_DESTROY_DEOXYS_ROCK       60
+#define FLDEFF_MOVE_DEOXYS_ROCK          61
+#define FLDEFF_USE_VS_SEEKER             62
+#define FLDEFF_X_ICON                    63
+#define FLDEFF_DOUBLE_EXCL_MARK_ICON     64
+#define FLDEFF_TRACKS_SLITHER            65
+#define FLDEFF_TRACKS_SPOT               66
+#define FLDEFF_TRACKS_BUG                67
 
 #define FLDEFFOBJ_SHADOW_S              0
 #define FLDEFFOBJ_SHADOW_M              1
@@ -93,30 +88,26 @@
 #define FLDEFFOBJ_JUMP_SMALL_SPLASH     14
 #define FLDEFFOBJ_LONG_GRASS            15
 #define FLDEFFOBJ_JUMP_LONG_GRASS       16
-#define FLDEFFOBJ_UNUSED_GRASS          17
-#define FLDEFFOBJ_UNUSED_GRASS_2        18
-#define FLDEFFOBJ_UNUSED_SAND           19
-#define FLDEFFOBJ_WATER_SURFACING       20
-#define FLDEFFOBJ_REFLECTION_DISTORTION 21
-#define FLDEFFOBJ_SPARKLE               22
-#define FLDEFFOBJ_DEEP_SAND_FOOTPRINTS  23
-#define FLDEFFOBJ_TREE_DISGUISE         24
-#define FLDEFFOBJ_MOUNTAIN_DISGUISE     25
-#define FLDEFFOBJ_BIRD                  26
-#define FLDEFFOBJ_BIKE_TIRE_TRACKS      27
-#define FLDEFFOBJ_SAND_DISGUISE         28
-#define FLDEFFOBJ_SAND_PILE             29
-#define FLDEFFOBJ_SHORT_GRASS           30
-#define FLDEFFOBJ_HOT_SPRINGS_WATER     31
-#define FLDEFFOBJ_ASH_PUFF              32
-#define FLDEFFOBJ_ASH_LAUNCH            33
-#define FLDEFFOBJ_BUBBLES               34
-#define FLDEFFOBJ_SMALL_SPARKLE         35
-#define FLDEFFOBJ_RAYQUAZA              36
-
-#define FLDEFFOBJ_TRACKS_SLITHER        37
-#define FLDEFFOBJ_TRACKS_SPOT           38
-#define FLDEFFOBJ_TRACKS_BUG            39
+#define FLDEFFOBJ_WATER_SURFACING       17
+#define FLDEFFOBJ_REFLECTION_DISTORTION 18
+#define FLDEFFOBJ_SPARKLE               19
+#define FLDEFFOBJ_DEEP_SAND_FOOTPRINTS  20
+#define FLDEFFOBJ_TREE_DISGUISE         21
+#define FLDEFFOBJ_MOUNTAIN_DISGUISE     22
+#define FLDEFFOBJ_BIRD                  23
+#define FLDEFFOBJ_BIKE_TIRE_TRACKS      24
+#define FLDEFFOBJ_SAND_DISGUISE         25
+#define FLDEFFOBJ_SAND_PILE             26
+#define FLDEFFOBJ_SHORT_GRASS           27
+#define FLDEFFOBJ_HOT_SPRINGS_WATER     28
+#define FLDEFFOBJ_ASH_PUFF              29
+#define FLDEFFOBJ_ASH_LAUNCH            30
+#define FLDEFFOBJ_BUBBLES               31
+#define FLDEFFOBJ_SMALL_SPARKLE         32
+#define FLDEFFOBJ_RAYQUAZA              33
+#define FLDEFFOBJ_TRACKS_SLITHER        34
+#define FLDEFFOBJ_TRACKS_SPOT           35
+#define FLDEFFOBJ_TRACKS_BUG            36
 
 #define FLDEFF_PAL_TAG_CUT_GRASS          0x1000
 #define FLDEFF_PAL_TAG_SECRET_POWER_TREE  0x1003
@@ -129,13 +120,18 @@
 #define FLDEFF_PAL_TAG_SAND_PILLAR        0x100E
 #define FLDEFF_PAL_TAG_SMALL_SPARKLE      0x100F
 #define FLDEFF_PAL_TAG_HOF_MONITOR        0x1010
-#define FLDEFF_PAL_TAG_UNKNOWN            0x1011
+#define FLDEFF_PAL_TAG_FIELD_MOVE_MON     0x8400
 
+// tile tags, for field effects that may have many copies on screen at once
+#define FLDEFF_TILE_TAG_SHADOW_SMALL        0x1400
+#define FLDEFF_TILE_TAG_SHADOW_MEDIUM       0x1401
+#define FLDEFF_TILE_TAG_SHADOW_LARGE        0x1402
+#define FLDEFF_TILE_TAG_SHADOW_EXTRA_LARGE  0x1403
 
 // Duplicates of event_object_movement tags
-#define FLDEFF_PAL_TAG_MAY 0x1110 // OBJ_EVENT_PAL_TAG_MAY
-#define FLDEFF_PAL_TAG_BRENDAN 0x1100 // OBJ_EVENT_PAL_TAG_BRENDAN
-#define FLDEFF_PAL_TAG_NPC_1 0x1103 // OBJ_EVENT_PAL_TAG_NPC_1
-#define FLDEFF_PAL_TAG_NPC_2 0x1104 // OBJ_EVENT_PAL_TAG_NPC_2
+#define FLDEFF_PAL_TAG_MAY                0x1110 // OBJ_EVENT_PAL_TAG_MAY
+#define FLDEFF_PAL_TAG_BRENDAN            0x1100 // OBJ_EVENT_PAL_TAG_BRENDAN
+#define FLDEFF_PAL_TAG_NPC_1              0x1103 // OBJ_EVENT_PAL_TAG_NPC_1
+#define FLDEFF_PAL_TAG_NPC_2              0x1104 // OBJ_EVENT_PAL_TAG_NPC_2
 
 #endif // GUARD_FIELD_EFFECT_CONSTANTS_H

@@ -2437,7 +2437,6 @@ void RunUnionRoom(void)
     uroom->unreadPlayerId = 0;
 
     gSpecialVar_Result = 0;
-    ListMenuLoadStdPalAt(BG_PLTT_ID(13), 1);
 }
 
 static u16 ReadAsU16(const u8 *ptr)
@@ -4097,7 +4096,6 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data
 {
     u8 levelStr[4];
     u16 species = data->tradeSpecies;
-    u8 type = data->tradeType;
     u8 level = data->tradeLevel;
 
     PrintUnionRoomText(windowId, FONT_NORMAL, playerName, 8, y, colorIdx);
@@ -4107,7 +4105,6 @@ static void TradeBoardPrintItemInfo(u8 windowId, u8 y, struct RfuGameData * data
     }
     else
     {
-        BlitMenuInfoIcon(windowId, type + 1, 68, y);
         PrintUnionRoomText(windowId, FONT_NORMAL, GetSpeciesName(species), 118, y, colorIdx);
         ConvertIntToDecimalStringN(levelStr, level, STR_CONV_MODE_RIGHT_ALIGN, 3);
         PrintUnionRoomText(windowId, FONT_NORMAL, levelStr, 198, y, colorIdx);

@@ -39,7 +39,7 @@ static void AcroBikeTransition_TurnJump(u8);
 static void AcroBikeTransition_WheelieMoving(u8);
 static void AcroBikeTransition_WheelieRisingMoving(u8);
 static void AcroBikeTransition_WheelieLoweringMoving(u8);
-static void AcroBike_TryHistoryUpdate(u16, u16);
+static void AcroBike_TryHistoryUpdate(u16);
 static u8 AcroBike_GetJumpDirection(void);
 static void Bike_UpdateDirTimerHistory(u8);
 static void Bike_UpdateABStartSelectHistory(u8);
@@ -759,10 +759,10 @@ static void AcroBikeTransition_WheelieLoweringMoving(u8 direction)
 void Bike_TryAcroBikeHistoryUpdate(u16 newKeys, u16 heldKeys)
 {
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE)
-        AcroBike_TryHistoryUpdate(newKeys, heldKeys);
+        AcroBike_TryHistoryUpdate(heldKeys);
 }
 
-static void AcroBike_TryHistoryUpdate(u16 newKeys, u16 heldKeys) // newKeys is unused
+static void AcroBike_TryHistoryUpdate(u16 heldKeys)
 {
     u8 direction = Bike_DPadToDirection(heldKeys);
 
@@ -971,8 +971,6 @@ bool8 IsPlayerNotUsingAcroBikeOnBumpySlope(void)
 
 void GetOnOffBike(u8 transitionFlags)
 {
-    gUnusedBikeCameraAheadPanback = FALSE;
-
     if (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);

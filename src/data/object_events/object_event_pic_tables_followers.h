@@ -2349,22 +2349,22 @@ static const struct SpriteFrameImage sPicTable_Milotic[] = {
 #endif //P_FAMILY_FEEBAS
 
 #if P_FAMILY_CASTFORM
-static const struct SpriteFrameImage sPicTable_CastformNormal[] = {
+const struct SpriteFrameImage sPicTable_CastformNormal[] = {
     overworld_ascending_frames(gObjectEventPic_CastformNormal, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_CastformSunny[] = {
+const struct SpriteFrameImage sPicTable_CastformSunny[] = {
     overworld_ascending_frames(gObjectEventPic_CastformSunny, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_CastformRainy[] = {
+const struct SpriteFrameImage sPicTable_CastformRainy[] = {
     overworld_ascending_frames(gObjectEventPic_CastformRainy, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_CastformSnowy[] = {
+const struct SpriteFrameImage sPicTable_CastformSnowy[] = {
     overworld_ascending_frames(gObjectEventPic_CastformSnowy, 4, 4),
 };
 #endif //P_FAMILY_CASTFORM
 
 #if P_FAMILY_KECLEON
-static const struct SpriteFrameImage sPicTable_Kecleon[] = {
+const struct SpriteFrameImage sPicTable_Kecleon[] = {
     overworld_ascending_frames(gObjectEventPic_Kecleon, 4, 4),
 };
 #endif //P_FAMILY_KECLEON
@@ -2578,14 +2578,9 @@ static const struct SpriteFrameImage sPicTable_Groudon[] = {
 #endif //P_FAMILY_GROUDON
 
 #if P_FAMILY_RAYQUAZA
-static const struct SpriteFrameImage sPicTable_Rayquaza[] = {
+const struct SpriteFrameImage sPicTable_Rayquaza[] = {
     overworld_ascending_frames(gObjectEventPic_Rayquaza, 4, 4),
 };
-#if P_MEGA_EVOLUTIONS
-/*static const struct SpriteFrameImage sPicTable_RayquazaMega[] = {
-    overworld_ascending_frames(gObjectEventPic_RayquazaMega, 4, 4),
-};*/
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_RAYQUAZA
 
 #if P_FAMILY_JIRACHI

@@ -901,16 +901,6 @@ static void DoBalloonSoundEffect(s16 metatileId)
     }
 }
 
-bool8 FldEff_Nop47(void)
-{
-    return FALSE;
-}
-
-bool8 FldEff_Nop48(void)
-{
-    return FALSE;
-}
-
 static void DoSecretBaseBreakableDoorEffect(s16 x, s16 y)
 {
     PlaySE(SE_BREAKABLE_DOOR);

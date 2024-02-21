@@ -907,7 +907,6 @@ static void InitWindowTemplatesAndPals(void)
     LoadUserWindowBorderGfx(0, 0x78, BG_PLTT_ID(13));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
-    ListMenuLoadStdPalAt(BG_PLTT_ID(12), 1);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
         FillWindowPixelBuffer(i, 0x00);
     PutWindowTilemap(WIN_LIST);

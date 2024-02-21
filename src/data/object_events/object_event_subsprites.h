@@ -176,7 +176,7 @@ static const struct Subsprite sOamTable_16x32_4[] = {
     }
 };
 
-static const struct SubspriteTable sOamTables_16x32[] = {
+const struct SubspriteTable sOamTables_16x32[] = {
     {},
     {ARRAY_COUNT(sOamTable_16x32_0), sOamTable_16x32_0},
     {ARRAY_COUNT(sOamTable_16x32_1), sOamTable_16x32_1},

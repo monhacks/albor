@@ -146,13 +146,11 @@ static void ReturnToActionsMenuFromCategories(u8 taskId);
 static void ExitTraderDecorationMenu(u8 taskId);
 static void CopyDecorationMenuItemName(u8 *dest, u16 decoration);
 static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct ListMenu *menu);
-static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y);
 static void ShowDecorationItemsWindow(u8 taskId);
 static void HandleDecorationItemsMenuInput(u8 taskId);
 static void PrintDecorationItemDescription(s32 itemIndex);
 static void RemoveDecorationItemsOtherWindows(void);
 static bool8 IsDecorationIndexInSecretBase(u8 idx);
-static bool8 IsDecorationIndexInPlayersRoom(u8 idx);
 static void IdentifyOwnedDecorationsCurrentlyInUse(u8 taskId);
 static void InitDecorationItemsWindow(u8 taskId);
 static void ShowDecorationCategorySummaryWindow(u8 category);
@@ -300,7 +298,7 @@ static const struct ListMenuTemplate sDecorationItemsListMenuTemplate =
 {
     .items = NULL,
     .moveCursorFunc = DecorationItemsMenu_OnCursorMove,
-    .itemPrintFunc = DecorationItemsMenu_PrintDecorationInUse,
+    .itemPrintFunc = NULL,
     .totalItems = 0,
     .maxShowed = 0,
     .windowId = 0,
@@ -921,17 +919,6 @@ static void DecorationItemsMenu_OnCursorMove(s32 itemIndex, bool8 flag, struct L
     PrintDecorationItemDescription(itemIndex);
 }
 
-static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex, u8 y)
-{
-    if (itemIndex != LIST_CANCEL)
-    {
-        if (IsDecorationIndexInSecretBase(itemIndex + 1) == TRUE)
-            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_RED, 92, y + 2);
-        else if (IsDecorationIndexInPlayersRoom(itemIndex + 1) == TRUE)
-            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_BLUE, 92, y + 2);
-    }
-}
-
 static void AddDecorationItemsScrollIndicators(void)
 {
     if (sDecorationItemsMenu->scrollIndicatorsTaskId == TASK_NONE)
@@ -1048,18 +1035,6 @@ static bool8 IsDecorationIndexInSecretBase(u8 idx)
     for (i = 0; i < ARRAY_COUNT(sSecretBaseItemsIndicesBuffer); i++)
     {
         if (sSecretBaseItemsIndicesBuffer[i] == idx)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 IsDecorationIndexInPlayersRoom(u8 idx)
-{
-    u8 i;
-    for (i = 0; i < ARRAY_COUNT(sPlayerRoomItemsIndicesBuffer); i++)
-    {
-        if (sPlayerRoomItemsIndicesBuffer[i] == idx)
             return TRUE;
     }
 
@@ -2128,7 +2103,7 @@ static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u
     }
     else
     {
-        spriteId = CreateObjectGraphicsSprite(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+        spriteId = CreateObjectGraphicsSpriteWithTag(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, paletteTag);
     }
     return spriteId;
 }

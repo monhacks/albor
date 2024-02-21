@@ -33,7 +33,6 @@ static u8 sSelectedStory;
 
 struct BardSong gBardSong;
 
-static EWRAM_DATA u16 sUnknownBardRelated = 0;
 static EWRAM_DATA struct MauvilleManStoryteller * sStorytellerPtr = NULL;
 static EWRAM_DATA u8 sStorytellerWindowId = 0;
 
@@ -575,7 +574,6 @@ static void Task_BardSong(u8 taskId)
         break;
     case BARD_STATE_GET_WORD:
     {
-        struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
         u8 *str = &gStringVar4[task->tCharIndex];
         u16 wordLen = 0;
 
@@ -588,11 +586,6 @@ static void Task_BardSong(u8 taskId)
             str++;
             wordLen++;
         }
-
-        if (!task->tUseTemporaryLyrics)
-            sUnknownBardRelated = MACRO2(bard->songLyrics[task->tCurrWord]);
-        else
-            sUnknownBardRelated = MACRO2(bard->temporaryLyrics[task->tCurrWord]);
 
         gBardSong.length /= wordLen;
         if (gBardSong.length <= 0)

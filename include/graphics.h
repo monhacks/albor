@@ -1716,12 +1716,6 @@ extern const u32 gItemIconPalette_TwiceSpicedRadish[];
 extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
-//menu graphics
-extern const u16 gMenuInfoElements1_Pal[16];
-extern const u16 gMenuInfoElements2_Pal[16];
-extern const u16 gMenuInfoElements3_Pal[16];
-extern const u8 gMenuInfoElements_Gfx[];
-
 // item menu graphics
 extern const u32 gBagScreen_Gfx[];
 extern const u32 gBagScreen_GfxTileMap[];
@@ -2180,7 +2174,6 @@ extern const u32 gBattleAnimSpriteGfx_Vine2[];
 extern const u32 gBattleAnimSpriteGfx_Teeth[];
 extern const u32 gBattleAnimSpriteGfx_Bone2[];
 extern const u32 gBattleAnimSpriteGfx_WhiteBag[];
-extern const u32 gBattleAnimSpriteGfx_Unknown[];
 extern const u32 gBattleAnimSpriteGfx_PurpleCoral[];
 extern const u32 gBattleAnimSpriteGfx_PurpleDroplet[];
 extern const u32 gBattleAnimSpriteGfx_Shock2[];
@@ -2207,7 +2200,6 @@ extern const u32 gBattleAnimSpriteGfx_IceSpikes[];
 extern const u32 gBattleAnimSpriteGfx_HandsAndFeet[];
 extern const u32 gBattleAnimSpriteGfx_MistCloud[];
 extern const u32 gBattleAnimSpriteGfx_Clamp[];
-//extern const struct CompressedSpriteSheet gBattleAnimSpriteGfx_146[];
 extern const u32 gBattleAnimSpriteGfx_Bubble[];
 extern const u32 gBattleAnimSpriteGfx_Orbs[];
 extern const u32 gBattleAnimSpriteGfx_WaterImpact[];
@@ -2479,7 +2471,6 @@ extern const u32 gBattleAnimSpritePal_Vine2[];
 extern const u32 gBattleAnimSpritePal_Teeth[];
 extern const u32 gBattleAnimSpritePal_Bone2[];
 extern const u32 gBattleAnimSpritePal_WhiteBag[];
-extern const u32 gBattleAnimSpritePal_Unknown[];
 extern const u32 gBattleAnimSpritePal_PurpleCoral[];
 extern const u32 gBattleAnimSpritePal_PurpleCoral[];
 extern const u32 gBattleAnimSpritePal_Shock2[];
