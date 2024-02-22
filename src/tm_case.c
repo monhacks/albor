@@ -88,7 +88,6 @@ static EWRAM_DATA struct {
 static EWRAM_DATA void *sTilemapBuffer = NULL;
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
 static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
-static EWRAM_DATA u16 * sTMSpritePaletteBuffer = NULL;
 static EWRAM_DATA u8    spriteIdData[PARTY_SIZE] = {};
 static EWRAM_DATA u16   spriteIdPalette[PARTY_SIZE] = {};
 
@@ -444,7 +443,6 @@ static void ResetBufferPointers_NoFree(void)
     sTilemapBuffer = NULL;
     sListMenuItemsBuffer = NULL;
     sListMenuStringsBuffer = NULL;
-    sTMSpritePaletteBuffer = NULL;
 }
 
 static void LoadBGTemplates(void)
@@ -743,8 +741,6 @@ static void DestroyTMCaseBuffers(void)
         Free(sListMenuItemsBuffer);
     if (sListMenuStringsBuffer != NULL)
         Free(sListMenuStringsBuffer);
-    if (sTMSpritePaletteBuffer != NULL)
-        Free(sTMSpritePaletteBuffer);
     FreeAllWindowBuffers();
 }
 
