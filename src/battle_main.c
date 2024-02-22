@@ -113,8 +113,6 @@ static void HandleEndTurn_BattleLost(void);
 static void HandleEndTurn_RanFromBattle(void);
 static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
-static void SpriteCB_UnusedBattleInit(struct Sprite *sprite);
-static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
 static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
@@ -151,6 +149,7 @@ EWRAM_DATA u8 gCurrentTurnActionNumber = 0;
 EWRAM_DATA u8 gCurrentActionFuncId = 0;
 EWRAM_DATA struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gTypeIconSpriteId = 0;
 EWRAM_DATA u8 gCurrMovePos = 0;
 EWRAM_DATA u8 gChosenMovePos = 0;
 EWRAM_DATA u16 gCurrentMove = 0;
@@ -200,7 +199,6 @@ EWRAM_DATA u16 gBattleWeather = 0;
 EWRAM_DATA struct WishFutureKnock gWishFutureKnock = {0};
 EWRAM_DATA u16 gIntroSlideFlags = 0;
 EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
-EWRAM_DATA struct BattleEnigmaBerry gEnigmaBerries[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
 EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
 EWRAM_DATA u8 *gLinkBattleSendBuffer = NULL;
@@ -250,17 +248,6 @@ static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 static const struct ScanlineEffectParams sIntroScanlineParams32Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
-};
-
-const struct SpriteTemplate gUnusedBattleInitSprite =
-{
-    .tileTag = 0,
-    .paletteTag = 0,
-    .oam = &gDummyOamData,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_UnusedBattleInit,
 };
 
 static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
@@ -635,153 +622,6 @@ static void BufferPartyVsScreenHealth_AtStart(void)
     gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi |= FlagGet(FLAG_SYS_FRONTIER_PASS) << 7;
 }
 
-static void SetPlayerBerryDataInBattleStruct(void)
-{
-    s32 i;
-    struct BattleStruct *battleStruct = gBattleStruct;
-    struct BattleEnigmaBerry *battleBerry = &battleStruct->multiBuffer.linkBattlerHeader.battleEnigmaBerry;
-
-    if (IsEnigmaBerryValid() == TRUE)
-    {
-    #if FREE_ENIGMA_BERRY == FALSE
-        for (i = 0; i < BERRY_NAME_LENGTH; i++)
-            battleBerry->name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
-        battleBerry->name[i] = EOS;
-
-        for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
-            battleBerry->itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
-
-        battleBerry->holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-        battleBerry->holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
-    #endif //FREE_ENIGMA_BERRY
-    }
-    else
-    {
-        const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY_E_READER));
-
-        for (i = 0; i < BERRY_NAME_LENGTH; i++)
-            battleBerry->name[i] = berryData->name[i];
-        battleBerry->name[i] = EOS;
-
-        for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
-            battleBerry->itemEffect[i] = 0;
-
-        battleBerry->holdEffect = HOLD_EFFECT_NONE;
-        battleBerry->holdEffectParam = 0;
-    }
-}
-
-static void SetAllPlayersBerryData(void)
-{
-    s32 i, j;
-
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        if (IsEnigmaBerryValid() == TRUE)
-        {
-        #if FREE_ENIGMA_BERRY == FALSE
-            for (i = 0; i < BERRY_NAME_LENGTH; i++)
-            {
-                gEnigmaBerries[0].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
-                gEnigmaBerries[2].name[i] = gSaveBlock1Ptr->enigmaBerry.berry.name[i];
-            }
-            gEnigmaBerries[0].name[i] = EOS;
-            gEnigmaBerries[2].name[i] = EOS;
-
-            for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
-            {
-                gEnigmaBerries[0].itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
-                gEnigmaBerries[2].itemEffect[i] = gSaveBlock1Ptr->enigmaBerry.itemEffect[i];
-            }
-
-            gEnigmaBerries[0].holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            gEnigmaBerries[2].holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-            gEnigmaBerries[0].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
-            gEnigmaBerries[2].holdEffectParam = gSaveBlock1Ptr->enigmaBerry.holdEffectParam;
-        #endif //FREE_ENIGMA_BERRY
-        }
-        else
-        {
-            const struct Berry *berryData = GetBerryInfo(ItemIdToBerryType(ITEM_ENIGMA_BERRY_E_READER));
-
-            for (i = 0; i < BERRY_NAME_LENGTH; i++)
-            {
-                gEnigmaBerries[0].name[i] = berryData->name[i];
-                gEnigmaBerries[2].name[i] = berryData->name[i];
-            }
-            gEnigmaBerries[0].name[i] = EOS;
-            gEnigmaBerries[2].name[i] = EOS;
-
-            for (i = 0; i < BERRY_ITEM_EFFECT_COUNT; i++)
-            {
-                gEnigmaBerries[0].itemEffect[i] = 0;
-                gEnigmaBerries[2].itemEffect[i] = 0;
-            }
-
-            gEnigmaBerries[0].holdEffect = HOLD_EFFECT_NONE;
-            gEnigmaBerries[2].holdEffect = HOLD_EFFECT_NONE;
-            gEnigmaBerries[0].holdEffectParam = 0;
-            gEnigmaBerries[2].holdEffectParam = 0;
-        }
-    }
-    else
-    {
-        s32 numPlayers;
-        struct BattleEnigmaBerry *src;
-        u32 battler;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                numPlayers = 2;
-            else
-                numPlayers = 4;
-
-            for (i = 0; i < numPlayers; i++)
-            {
-                src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
-                battler = gLinkPlayers[i].id;
-
-                for (j = 0; j < BERRY_NAME_LENGTH; j++)
-                    gEnigmaBerries[battler].name[j] = src->name[j];
-                gEnigmaBerries[battler].name[j] = EOS;
-
-                for (j = 0; j < BERRY_ITEM_EFFECT_COUNT; j++)
-                    gEnigmaBerries[battler].itemEffect[j] = src->itemEffect[j];
-
-                gEnigmaBerries[battler].holdEffect = src->holdEffect;
-                gEnigmaBerries[battler].holdEffectParam = src->holdEffectParam;
-            }
-        }
-        else
-        {
-            for (i = 0; i < 2; i++)
-            {
-                src = (struct BattleEnigmaBerry *)(gBlockRecvBuffer[i] + 2);
-
-                for (j = 0; j < BERRY_NAME_LENGTH; j++)
-                {
-                    gEnigmaBerries[i].name[j] = src->name[j];
-                    gEnigmaBerries[i + 2].name[j] = src->name[j];
-                }
-                gEnigmaBerries[i].name[j] = EOS;
-                gEnigmaBerries[i + 2].name[j] = EOS;
-
-                for (j = 0; j < BERRY_ITEM_EFFECT_COUNT; j++)
-                {
-                    gEnigmaBerries[i].itemEffect[j] = src->itemEffect[j];
-                    gEnigmaBerries[i + 2].itemEffect[j] = src->itemEffect[j];
-                }
-
-                gEnigmaBerries[i].holdEffect = src->holdEffect;
-                gEnigmaBerries[i + 2].holdEffect = src->holdEffect;
-                gEnigmaBerries[i].holdEffectParam = src->holdEffectParam;
-                gEnigmaBerries[i + 2].holdEffectParam = src->holdEffectParam;
-            }
-        }
-    }
-}
-
 // This was inlined in Ruby/Sapphire
 static void FindLinkBattleMaster(u8 numPlayers, u8 multiPlayerId)
 {
@@ -878,7 +718,6 @@ static void CB2_HandleStartBattle(void)
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
-                    SetPlayerBerryDataInBattleStruct();
 
                     if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
                     {
@@ -898,7 +737,6 @@ static void CB2_HandleStartBattle(void)
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 15;
-            SetAllPlayersBerryData();
         }
         break;
     case 2:
@@ -908,7 +746,6 @@ static void CB2_HandleStartBattle(void)
 
             ResetBlockReceivedFlags();
             FindLinkBattleMaster(2, playerMultiplayerId);
-            SetAllPlayersBerryData();
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
@@ -1098,7 +935,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
-                    SetPlayerBerryDataInBattleStruct();
                     SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
@@ -1112,7 +948,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 13;
-            SetAllPlayersBerryData();
         }
         break;
     case 2:
@@ -1122,7 +957,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
 
             ResetBlockReceivedFlags();
             FindLinkBattleMaster(2, playerMultiplayerId);
-            SetAllPlayersBerryData();
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
@@ -1488,7 +1322,6 @@ static void CB2_HandleStartMultiBattle(void)
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureLo) = 0;
                     *(&gBattleStruct->multiBuffer.linkBattlerHeader.versionSignatureHi) = 3;
                     BufferPartyVsScreenHealth_AtStart();
-                    SetPlayerBerryDataInBattleStruct();
 
                     SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE]++;
@@ -1502,7 +1335,6 @@ static void CB2_HandleStartMultiBattle(void)
             if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED))
                 gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 7;
-            SetAllPlayersBerryData();
         }
         break;
     case 2:
@@ -1510,7 +1342,6 @@ static void CB2_HandleStartMultiBattle(void)
         {
             ResetBlockReceivedFlags();
             FindLinkBattleMaster(4, playerMultiplayerId);
-            SetAllPlayersBerryData();
             var = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[var].data[1] = 0x10E;
             gTasks[var].data[2] = 0x5A;
@@ -1799,57 +1630,6 @@ void CB2_QuitRecordedBattle(void)
 
 #define sState data[0]
 #define sDelay data[4]
-
-static void SpriteCB_UnusedBattleInit(struct Sprite *sprite)
-{
-    sprite->sState = 0;
-    sprite->callback = SpriteCB_UnusedBattleInit_Main;
-}
-
-static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
-{
-    u16 *arr = (u16 *)gDecompressionBuffer;
-
-    switch (sprite->sState)
-    {
-    case 0:
-        sprite->sState++;
-        sprite->data[1] = 0;
-        sprite->data[2] = 0x281;
-        sprite->data[3] = 0;
-        sprite->sDelay = 1;
-        // fall through
-    case 1:
-        sprite->sDelay--;
-        if (sprite->sDelay == 0)
-        {
-            s32 i;
-            s32 r2;
-            s32 r0;
-
-            sprite->sDelay = 2;
-            r2 = sprite->data[1] + sprite->data[3] * 32;
-            r0 = sprite->data[2] - sprite->data[3] * 32;
-            for (i = 0; i < 29; i += 2)
-            {
-                arr[r2 + i] = 0x3D;
-                arr[r0 + i] = 0x3D;
-            }
-            sprite->data[3]++;
-            if (sprite->data[3] == 21)
-            {
-                sprite->sState++;
-                sprite->data[1] = 32;
-            }
-        }
-        break;
-    case 2:
-        sprite->data[1]--;
-        if (sprite->data[1] == 20)
-            SetMainCallback2(CB2_InitBattle);
-        break;
-    }
-}
 
 static u32 Crc32B (const u8 *data, u32 size)
 {
@@ -2784,11 +2564,6 @@ static void SpriteCB_BattleSpriteSlideLeft(struct Sprite *sprite)
             sprite->data[1] = 0;
         }
     }
-}
-
-static void UNUSED SetIdleSpriteCallback(struct Sprite *sprite)
-{
-    sprite->callback = SpriteCB_Idle;
 }
 
 static void SpriteCB_Idle(struct Sprite *sprite)
@@ -3991,10 +3766,7 @@ u8 IsRunningFromBattleImpossible(u32 battler)
 {
     u32 holdEffect, i;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
+    holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
 
     gPotentialItemEffectBattler = battler;
 

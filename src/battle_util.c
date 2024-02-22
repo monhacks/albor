@@ -445,10 +445,7 @@ bool32 TryRunFromBattle(u32 battler)
     u8 pyramidMultiplier;
     u8 speedVar;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
+    holdEffect = ItemId_GetHoldEffect(gBattleMons[battler].item);
 
     gPotentialItemEffectBattler = battler;
 
@@ -8153,26 +8150,17 @@ u32 GetBattlerHoldEffect(u32 battler, bool32 checkNegating)
 
     gPotentialItemEffectBattler = battler;
 
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
-        return gEnigmaBerries[battler].holdEffect;
-    else
-        return ItemId_GetHoldEffect(gBattleMons[battler].item);
+    return ItemId_GetHoldEffect(gBattleMons[battler].item);
 }
 
 static u32 GetBattlerItemHoldEffectParam(u32 battler, u32 item)
 {
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-        return gEnigmaBerries[battler].holdEffectParam;
-    else
-        return ItemId_GetHoldEffectParam(item);
+    return ItemId_GetHoldEffectParam(item);
 }
 
 u32 GetBattlerHoldEffectParam(u32 battler)
 {
-    if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
-        return gEnigmaBerries[battler].holdEffectParam;
-    else
-        return ItemId_GetHoldEffectParam(gBattleMons[battler].item);
+    return ItemId_GetHoldEffectParam(gBattleMons[battler].item);
 }
 
 bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
@@ -10207,10 +10195,7 @@ bool32 CanMegaEvolve(u32 battler)
 
     itemId = GetMonData(mon, MON_DATA_HELD_ITEM);
 
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-        holdEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(itemId);
+    holdEffect = ItemId_GetHoldEffect(itemId);
 
     // Check if there is an entry in the evolution table for regular Mega Evolution.
     if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM) != SPECIES_NONE)
@@ -10272,10 +10257,7 @@ bool32 CanUltraBurst(u32 battler)
     // Check if there is an entry in the evolution table for Ultra Burst.
     if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE)
     {
-        if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-            holdEffect = gEnigmaBerries[battler].holdEffect;
-        else
-            holdEffect = ItemId_GetHoldEffect(itemId);
+        holdEffect = ItemId_GetHoldEffect(itemId);
 
         // Can Ultra Burst via Z Crystal.
         if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)

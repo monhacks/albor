@@ -28,9 +28,6 @@
 #include "constants/battle_anim.h"
 #include "constants/battle_partner.h"
 
-// .rodata
-static const u16 sUnrefArray[] = {0x0300, 0x0000}; //OamData?
-
 static const struct OamData sVsLetter_V_OamData =
 {
     .y = 0,
@@ -246,15 +243,6 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x0298,
     },
-    [B_WIN_MOVE_TYPE] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x02a0,
-    },
     [B_WIN_SWITCH_PROMPT] = {
         .bg = 0,
         .tilemapLeft = 21,
@@ -467,15 +455,6 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x0298,
     },
-    [B_WIN_MOVE_TYPE] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 57,
-        .width = 8,
-        .height = 2,
-        .paletteNum = 5,
-        .baseBlock = 0x02a0,
-    },
     [B_WIN_SWITCH_PROMPT] = {
         .bg = 0,
         .tilemapLeft = 21,
@@ -685,24 +664,6 @@ const struct BattleBackground sBattleTerrainTable[] =
         .palette = gBattleTerrainPalette_Plain,
     },
 };
-
-static void UNUSED CB2_UnusedBattleInit(void);
-
-static void UNUSED UnusedBattleInit(void)
-{
-    u8 spriteId;
-
-    ResetSpriteData();
-    spriteId = CreateSprite(&gUnusedBattleInitSprite, 0, 0, 0);
-    gSprites[spriteId].invisible = TRUE;
-    SetMainCallback2(CB2_UnusedBattleInit);
-}
-
-static void UNUSED CB2_UnusedBattleInit(void)
-{
-    AnimateSprites();
-    BuildOamBuffer();
-}
 
 void BattleInitBgsAndWindows(void)
 {

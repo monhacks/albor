@@ -100,8 +100,6 @@ static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(u32 battler);
 
-EWRAM_DATA static u8 sTypeIconSpriteId = NULL;
-
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
     [CONTROLLER_GETMONDATA]               = BtlController_HandleGetMonData,
@@ -165,7 +163,7 @@ static EWRAM_DATA bool8 sBallSwapped = FALSE;
 
 void SetControllerToPlayer(u32 battler)
 {
-    sTypeIconSpriteId = 0xFF;
+    gTypeIconSpriteId = 0xFF;
     gBattlerControllerEndFuncs[battler] = PlayerBufferExecCompleted;
     gBattlerControllerFuncs[battler] = PlayerBufferRunCommand;
     gDoingBattleAnim = FALSE;
@@ -256,10 +254,10 @@ static void HandleInputChooseAction(u32 battler)
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
 
-    if (sTypeIconSpriteId != 0xFF)
+    if (gTypeIconSpriteId != 0xFF)
     {
-        DestroySpriteAndFreeResources(&gSprites[sTypeIconSpriteId]);
-        sTypeIconSpriteId = 0xFF;
+        DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
+        gTypeIconSpriteId = 0xFF;
     }
 
     if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
@@ -468,6 +466,7 @@ static void HandleInputChooseTarget(u32 battler)
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         TryHideLastUsedBall();
         HideTriggerSprites();
+        DestroySprite(&gSprites[gTypeIconSpriteId]);
         PlayerBufferExecCompleted(battler);
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -695,6 +694,11 @@ static void HandleInputChooseMove(u32 battler)
 
     if (JOY_NEW(A_BUTTON))
     {
+        if (gTypeIconSpriteId != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
+            gTypeIconSpriteId = 0xFF;
+        }
         PlaySE(SE_SELECT);
         if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CURSE)
         {
@@ -1783,18 +1787,16 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 
     LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
     LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
-    if (sTypeIconSpriteId != 0xFF)
+    if (gTypeIconSpriteId != 0xFF)
     {
-        DestroySpriteAndFreeResources(&gSprites[sTypeIconSpriteId]);
-        sTypeIconSpriteId = 0xFF;
+        DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
+        gTypeIconSpriteId = 0xFF;
     }
-    sTypeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 216, 144, 1);
-    sprite = &gSprites[sTypeIconSpriteId];
+    gTypeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 216, 144, 1);
+    sprite = &gSprites[gTypeIconSpriteId];
     StartSpriteAnim(sprite, type);
     sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[type];
-	FillWindowPixelRect(B_WIN_MOVE_TYPE, 14, 0, 0, 32, 16);
-	PutWindowTilemap(B_WIN_MOVE_TYPE);
-	CopyWindowToVram(B_WIN_MOVE_TYPE, COPYWIN_FULL);
+    sprite->oam.priority = 0;
 
     FillPalette(sTypeColorsDark[type], BG_PLTT_ID(1) + 1, 2);
     CpuCopy16(gPlttBufferUnfaded + 10, (void*)(BG_PLTT_ID(1) + 1), 2);

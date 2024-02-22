@@ -178,10 +178,7 @@ bool32 IsViableZMove(u8 battler, u16 move)
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;
 
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-        return FALSE;   // HoldEffect = gEnigmaBerries[battler].holdEffect;
-    else
-        holdEffect = ItemId_GetHoldEffect(item);
+    holdEffect = ItemId_GetHoldEffect(item);
 
     if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
     {
@@ -554,7 +551,7 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
     *(txtPtr)++ = FONT_NORMAL;
 
     StringCopy(txtPtr, gTypeNames[zMoveType]);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
 #define Z_EFFECT_BS_LENGTH  5
