@@ -535,7 +535,7 @@ static void ZMoveSelectionDisplayPpNumber(u32 battler)
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, 1, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);
 }
 
 static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
@@ -551,7 +551,7 @@ static void ZMoveSelectionDisplayMoveType(u16 zMove, u32 battler)
     *(txtPtr)++ = FONT_NORMAL;
 
     StringCopy(txtPtr, gTypeNames[zMoveType]);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);
 }
 
 #define Z_EFFECT_BS_LENGTH  5

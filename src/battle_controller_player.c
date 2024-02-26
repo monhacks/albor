@@ -1680,81 +1680,160 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     *(txtPtr)++ = CHAR_SLASH;
     ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[battler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
 
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);
 }
+#define TAG_BATTLE_TYPES 30005
 
-static const u16 sTypeColorsDark[] =
+static const struct OamData sOamData_BattleTypes =
 {
-    [TYPE_NONE] = RGB(25, 25, 25),
-    [TYPE_NORMAL] = RGB(13, 13, 7),
-    [TYPE_FIGHTING] = RGB(18, 1, 0),
-    [TYPE_FLYING] = RGB(13, 10, 28),
-    [TYPE_POISON] = RGB(12, 2, 12),
-    [TYPE_GROUND] = RGB(24, 18, 5),
-    [TYPE_ROCK] = RGB(16, 12, 1),
-    [TYPE_BUG] = RGB(13, 16, 0),
-    [TYPE_GHOST] = RGB(6, 3, 11),
-    [TYPE_STEEL] = RGB(16, 16, 21),
-    [TYPE_MYSTERY] = RGB(3, 3, 11),
-    [TYPE_FIRE] = RGB(28, 8, 1),
-    [TYPE_WATER] = RGB(5, 10, 28),
-    [TYPE_GRASS] = RGB(7, 19, 3),
-    [TYPE_ELECTRIC] = RGB(30, 21, 1),
-    [TYPE_PSYCHIC] = RGB(30, 3, 9),
-    [TYPE_ICE] = RGB(11, 22, 22),
-    [TYPE_DRAGON] = RGB(6, 1, 30),
-    [TYPE_DARK] = RGB(6, 3, 2),
-    [TYPE_FAIRY] = RGB(28, 16, 17),
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 1,
+    .paletteNum = 0,
+    .affineParam = 0,
 };
 
-static const u16 sTypeColors[] =
-{
-    [TYPE_NONE] = RGB(27, 27, 27),
-    [TYPE_NORMAL] = RGB(21, 21, 15),
-    [TYPE_FIGHTING] = RGB(24, 6, 5),
-    [TYPE_FLYING] = RGB(21, 18, 30),
-    [TYPE_POISON] = RGB(20, 8, 20),
-    [TYPE_GROUND] = RGB(28, 24, 13),
-    [TYPE_ROCK] = RGB(23, 20, 7),
-    [TYPE_BUG] = RGB(21, 23, 4),
-    [TYPE_GHOST] = RGB(14, 11, 19),
-    [TYPE_STEEL] = RGB(23, 23, 26),
-    [TYPE_MYSTERY] = RGB(11, 11, 19),
-    [TYPE_FIRE] = RGB(30, 16, 6),
-    [TYPE_WATER] = RGB(13, 18, 30),
-    [TYPE_GRASS] = RGB(15, 25, 10),
-    [TYPE_ELECTRIC] = RGB(31, 26, 6),
-    [TYPE_PSYCHIC] = RGB(31, 11, 17),
-    [TYPE_ICE] = RGB(19, 27, 27),
-    [TYPE_DRAGON] = RGB(14, 7, 31),
-    [TYPE_DARK] = RGB(14, 11, 9),
-    [TYPE_FAIRY] = RGB(30, 22, 23),
+static const union AnimCmd sSpriteAnim_TypeNormal[] = {
+    ANIMCMD_FRAME(TYPE_NORMAL * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
 };
 
-static const u16 sTypeColorsLight[] =
-{
-    [TYPE_NONE] = RGB(29, 29, 29),
-    [TYPE_NORMAL] = RGB(24, 24, 19),
-    [TYPE_FIGHTING] = RGB(26, 10, 9),
-    [TYPE_FLYING] = RGB(24, 21, 30),
-    [TYPE_POISON] = RGB(23, 12, 23),
-    [TYPE_GROUND] = RGB(29, 26, 17),
-    [TYPE_ROCK] = RGB(25, 23, 11),
-    [TYPE_BUG] = RGB(24, 25, 8),
-    [TYPE_GHOST] = RGB(18, 15, 22),
-    [TYPE_STEEL] = RGB(25, 25, 27),
-    [TYPE_MYSTERY] = RGB(15, 15, 22),
-    [TYPE_FIRE] = RGB(30, 20, 10),
-    [TYPE_WATER] = RGB(17, 21, 30),
-    [TYPE_GRASS] = RGB(19, 27, 14),
-    [TYPE_ELECTRIC] = RGB(31, 27, 10),
-    [TYPE_PSYCHIC] = RGB(31, 15, 21),
-    [TYPE_ICE] = RGB(22, 28, 28),
-    [TYPE_DRAGON] = RGB(18, 11, 31),
-    [TYPE_DARK] = RGB(18, 15, 13),
-    [TYPE_FAIRY] = RGB(30, 25, 26),
+static const union AnimCmd sSpriteAnim_TypeFighting[] = {
+    ANIMCMD_FRAME(TYPE_FIGHTING * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
 };
 
+static const union AnimCmd sSpriteAnim_TypeFlying[] = {
+    ANIMCMD_FRAME(TYPE_FLYING * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypePoison[] = {
+    ANIMCMD_FRAME(TYPE_POISON * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGround[] = {
+    ANIMCMD_FRAME(TYPE_GROUND * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeRock[] = {
+    ANIMCMD_FRAME(TYPE_ROCK * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeBug[] = {
+    ANIMCMD_FRAME(TYPE_BUG * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGhost[] = {
+    ANIMCMD_FRAME(TYPE_GHOST * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeSteel[] = {
+    ANIMCMD_FRAME(TYPE_STEEL * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeMystery[] = {
+    ANIMCMD_FRAME(TYPE_MYSTERY * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFire[] = {
+    ANIMCMD_FRAME(TYPE_FIRE * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeWater[] = {
+    ANIMCMD_FRAME(TYPE_WATER * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeGrass[] = {
+    ANIMCMD_FRAME(TYPE_GRASS * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeElectric[] = {
+    ANIMCMD_FRAME(TYPE_ELECTRIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypePsychic[] = {
+    ANIMCMD_FRAME(TYPE_PSYCHIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeIce[] = {
+    ANIMCMD_FRAME(TYPE_ICE * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeDragon[] = {
+    ANIMCMD_FRAME(TYPE_DRAGON * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeDark[] = {
+    ANIMCMD_FRAME(TYPE_DARK * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd sSpriteAnim_TypeFairy[] = {
+    ANIMCMD_FRAME(TYPE_FAIRY * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sSpriteAnimTable_BattleTypes[NUMBER_OF_MON_TYPES] = {
+    sSpriteAnim_TypeNormal,
+    sSpriteAnim_TypeFighting,
+    sSpriteAnim_TypeFlying,
+    sSpriteAnim_TypePoison,
+    sSpriteAnim_TypeGround,
+    sSpriteAnim_TypeRock,
+    sSpriteAnim_TypeBug,
+    sSpriteAnim_TypeGhost,
+    sSpriteAnim_TypeSteel,
+    sSpriteAnim_TypeMystery,
+    sSpriteAnim_TypeFire,
+    sSpriteAnim_TypeWater,
+    sSpriteAnim_TypeGrass,
+    sSpriteAnim_TypeElectric,
+    sSpriteAnim_TypePsychic,
+    sSpriteAnim_TypeIce,
+    sSpriteAnim_TypeDragon,
+    sSpriteAnim_TypeDark,
+    sSpriteAnim_TypeFairy,
+};
+
+const struct CompressedSpriteSheet gSpriteSheet_BattleTypes =
+{
+    .data = gBattleTypes_Gfx,
+    .size = (NUMBER_OF_MON_TYPES) * 0x100,
+    .tag = TAG_BATTLE_TYPES
+};
+const struct SpriteTemplate gSpriteTemplate_BattleTypes =
+{
+    .tileTag = TAG_BATTLE_TYPES,
+    .paletteTag = TAG_BATTLE_TYPES,
+    .oam = &sOamData_BattleTypes,
+    .anims = sSpriteAnimTable_BattleTypes,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
 
 static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
 {
@@ -1785,7 +1864,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     u8 type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
     struct Sprite *sprite;
 
-    LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
+    LoadCompressedSpriteSheet(&gSpriteSheet_BattleTypes);
     LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
     if (gTypeIconSpriteId != 0xFF)
     {
@@ -1794,16 +1873,8 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     }
     gTypeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 216, 144, 1);
     sprite = &gSprites[gTypeIconSpriteId];
-    StartSpriteAnim(sprite, type);
     sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[type];
     sprite->oam.priority = 0;
-
-    FillPalette(sTypeColorsDark[type], BG_PLTT_ID(1) + 1, 2);
-    CpuCopy16(gPlttBufferUnfaded + 10, (void*)(BG_PLTT_ID(1) + 1), 2);
-    FillPalette(sTypeColors[type], BG_PLTT_ID(1) + 2, 2);
-    CpuCopy16(gPlttBufferUnfaded + 11, (void*)(BG_PLTT_ID(1) + 2), 2);
-    FillPalette(sTypeColorsLight[type], BG_PLTT_ID(1) + 4, 2);
-    CpuCopy16(gPlttBufferUnfaded + 12, (void*)(BG_PLTT_ID(1) + 4), 2);
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)

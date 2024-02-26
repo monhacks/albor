@@ -1019,7 +1019,7 @@ extern u8 gCurrentTurnActionNumber;
 extern u8 gCurrentActionFuncId;
 extern struct BattlePokemon gBattleMons[MAX_BATTLERS_COUNT];
 extern u8 gBattlerSpriteIds[MAX_BATTLERS_COUNT];
-extern u8 gTypeIconSpriteId;
+extern u8 gTypeIconSpriteId[4];
 extern u8 gCurrMovePos;
 extern u8 gChosenMovePos;
 extern u16 gCurrentMove;
