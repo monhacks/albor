@@ -96,6 +96,7 @@ void BattleAI_SetupItems(void)
 {
     s32 i;
     u8 *data = (u8 *)BATTLE_HISTORY;
+    const u16 *items = GetTrainerItemsFromId(gTrainerBattleOpponent_A);
 
     for (i = 0; i < sizeof(struct BattleHistory); i++)
         data[i] = 0;
@@ -110,9 +111,9 @@ void BattleAI_SetupItems(void)
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
-            if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
+            if (items[i] != ITEM_NONE)
             {
-                BATTLE_HISTORY->trainerItems[BATTLE_HISTORY->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
+                BATTLE_HISTORY->trainerItems[BATTLE_HISTORY->itemsNo] = items[i];
                 BATTLE_HISTORY->itemsNo++;
             }
         }
@@ -166,18 +167,23 @@ static u32 GetAiFlags(u16 trainerId)
         else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else
-            flags = gTrainers[trainerId].aiFlags;
+            flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
         flags |= AI_FLAG_DOUBLE_BATTLE;
+    }
 
     return flags;
 }
 
 void BattleAI_SetupFlags(void)
 {
-    AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
+    if (IsAiVsAiBattle())
+        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = GetAiFlags(gPartnerTrainerId);
+    else
+        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
 
 #if DEBUG_OVERWORLD_MENU == TRUE
     if (gIsDebugBattle)
@@ -206,6 +212,10 @@ void BattleAI_SetupFlags(void)
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = GetAiFlags(gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE));
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && IsAiVsAiBattle())
+    {
+        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT];
     }
     else
     {
