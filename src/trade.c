@@ -3061,15 +3061,6 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
     }
 }
 
-// Functionally nop after commented code
-static void TryEnableNationalDexFromLinkPartner(void)
-{
-    u8 UNUSED mpId = GetMultiplayerId();
-    // Originally in Ruby but commented out
-    /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
-        EnableNationalPokedex();*/
-}
-
 static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 {
     u8 friendship;
@@ -3096,8 +3087,6 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
         GiveMailToMon(playerMon, &gTradeMail[partnerMail]);
 
     UpdatePokedexForReceivedMon(playerPartyIdx);
-    if (gReceivedRemoteLinkPlayers)
-        TryEnableNationalDexFromLinkPartner();
 }
 
 static void HandleLinkDataSend(void)

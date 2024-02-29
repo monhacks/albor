@@ -4382,8 +4382,8 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         SetTypeIconPosAndPal(type1, 147, 47, 0);
         SetTypeIconPosAndPal(type2, 147 + 33, 47, 1);
     }
-
 }
+
 static void CreateTypeIconSprites(void)
 {
     u8 i;
