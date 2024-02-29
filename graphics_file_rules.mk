@@ -6,7 +6,7 @@ BATINTGFXDIR := graphics/battle_interface
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
-BATTYPESGFXDIR := graphics/types/battle
+BATTYPESGFXDIR := graphics/battle_interface/types
 RAYQUAZAGFXDIR := graphics/rayquaza_scene
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
@@ -246,10 +246,6 @@ graphics/pokenav/region_map/map.8bpp: %.8bpp: %.png
 $(MISCGFXDIR)/japanese_hof.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 29 -Wnum_tiles
 
-$(BATINTGFXDIR)/textbox.gbapal: $(BATINTGFXDIR)/textbox_0.gbapal \
-                                $(BATINTGFXDIR)/textbox_1.gbapal
-	@cat $^ >$@
-
 $(BTLANMSPRGFXDIR)/ice_cube.4bpp: $(BTLANMSPRGFXDIR)/ice_cube_0.4bpp \
                                   $(BTLANMSPRGFXDIR)/ice_cube_1.4bpp \
                                   $(BTLANMSPRGFXDIR)/ice_cube_2.4bpp \
@@ -291,11 +287,16 @@ graphics/party_menu/bg.4bpp: %.4bpp: %.png
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 
-$(BATTYPESGFXDIR)/types.4bpp: $(types:%=$(BATTYPESGFXDIR)/%.4bpp)
-	@cat $^ >$@
-
 $(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
                                   $(TYPESGFXDIR)/move_types_2.gbapal
+	@cat $^ >$@
+
+$(BATTYPESGFXDIR)/icon_types.4bpp: $(types:%=$(BATTYPESGFXDIR)/%.4bpp)
+	@cat $^ >$@
+
+$(BATTYPESGFXDIR)/icon_types.gbapal: $(BATTYPESGFXDIR)/icon_types_1.gbapal \
+                                     $(BATTYPESGFXDIR)/icon_types_2.gbapal \
+                                     $(BATTYPESGFXDIR)/icon_types_3.gbapal 
 	@cat $^ >$@
 
 graphics/bag/menu.4bpp: %.4bpp: %.png

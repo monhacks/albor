@@ -1951,7 +1951,8 @@ extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];
 extern const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[];
 
 extern const u32 gMoveTypes_Gfx[];
-extern const u32 gBattleTypes_Gfx[];
+extern const u32 gIconTypes_Gfx[];
+extern const u32 gIconTypes_Pal[];
 extern const u32 gSummaryMoveSelect_Gfx[];
 extern const u32 gSummaryMoveSelect_Pal[];
 extern const u32 gStatusGfx_Icons[];
@@ -2047,6 +2048,50 @@ extern const u32 gBattleArenaJudgmentSymbolsGfx[];
 extern const u32 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u32 gBattleWindowTextPalette[];
+
+extern const u32 gBattleActionsPal[];
+extern const u32 gBattleActionsPalFight[];
+extern const u32 gBattleActionsPalPokemon[];
+extern const u32 gBattleActionsPalRun[];
+
+extern const u32 gIconTypeNormal[];
+extern const u32 gIconTypeBug[];
+extern const u32 gIconTypeFire[];
+extern const u32 gIconTypeFairy[];
+extern const u32 gIconTypeGrass[];
+extern const u32 gIconTypeFight[];
+extern const u32 gIconTypeFlying[];
+extern const u32 gIconTypeSteel[];
+extern const u32 gIconTypeWater[];
+extern const u32 gIconTypeRock[];
+extern const u32 gIconTypeGround[];
+extern const u32 gIconTypeGhost[];
+extern const u32 gIconTypeDragon[];
+extern const u32 gIconTypeDark[];
+extern const u32 gIconTypeElectric[];
+extern const u32 gIconTypePsychic[];
+extern const u32 gIconTypeIce[];
+extern const u32 gIconTypeMystery[];
+extern const u32 gIconTypePoison[];
+extern const u32 gIconTypePalNormal[];
+extern const u32 gIconTypePalBug[];
+extern const u32 gIconTypePalFire[];
+extern const u32 gIconTypePalFairy[];
+extern const u32 gIconTypePalGrass[];
+extern const u32 gIconTypePalFight[];
+extern const u32 gIconTypePalFlying[];
+extern const u32 gIconTypePalSteel[];
+extern const u32 gIconTypePalWater[];
+extern const u32 gIconTypePalRock[];
+extern const u32 gIconTypePalGround[];
+extern const u32 gIconTypePalGhost[];
+extern const u32 gIconTypePalDragon[];
+extern const u32 gIconTypePalDark[];
+extern const u32 gIconTypePalElectric[];
+extern const u32 gIconTypePalPsychic[];
+extern const u32 gIconTypePalIce[];
+extern const u32 gIconTypePalMystery[];
+extern const u32 gIconTypePalPoison[];
 
 extern const u32 gContest2Pal[];
 
