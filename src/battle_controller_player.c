@@ -2088,19 +2088,6 @@ static void HandleChooseActionAfterDma3(u32 battler)
     {
         gBattle_BG0_X = 0;
         gBattle_BG0_Y = DISPLAY_HEIGHT;
-        if (gBattleStruct->aiDelayTimer != 0)
-        {
-            gBattleStruct->aiDelayFrames = gMain.vblankCounter1 - gBattleStruct->aiDelayTimer;
-            gBattleStruct->aiDelayTimer = 0;
-            #if DEBUG_AI_DELAY_TIMER
-            {
-                static const u8 sText_AIDelay[] = _("AI delay:\n{B_BUFF1} frames");
-                PREPARE_HWORD_NUMBER_BUFFER(gBattleTextBuff1, 3, gBattleStruct->aiDelayFrames);
-                BattleStringExpandPlaceholdersToDisplayedString(sText_AIDelay);
-                BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
-            }
-            #endif // DEBUG_AI_DELAY_TIMER
-        }
         gBattlerControllerFuncs[battler] = HandleInputChooseAction;
     }
 }
@@ -2111,7 +2098,6 @@ static void PlayerHandleChooseAction(u32 battler)
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
-    BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
 
     for (i = 0; i < 4; i++)
         ActionSelectionDestroyCursorAt(i);
@@ -2119,8 +2105,6 @@ static void PlayerHandleChooseAction(u32 battler)
     TryRestoreLastUsedBall();
     ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 }
 
 static void PlayerHandleYesNoBox(u32 battler)

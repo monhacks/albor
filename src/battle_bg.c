@@ -162,24 +162,6 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 0,
         .baseBlock = 0x0090,
     },
-    [B_WIN_ACTION_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 35,
-        .width = 14,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x01c0,
-    },
-    [B_WIN_ACTION_MENU] = {
-        .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 35,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0190,
-    },
     [B_WIN_MOVE_NAME_1] = {
         .bg = 0,
         .tilemapLeft = 3,
@@ -382,24 +364,6 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .height = 4,
         .paletteNum = 0,
         .baseBlock = 0x0090,
-    },
-    [B_WIN_ACTION_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 1,
-        .tilemapTop = 35,
-        .width = 14,
-        .height = 4,
-        .paletteNum = 0,
-        .baseBlock = 0x01c0,
-    },
-    [B_WIN_ACTION_MENU] = {
-        .bg = 0,
-        .tilemapLeft = 17,
-        .tilemapTop = 35,
-        .width = 12,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x0190,
     },
     [B_WIN_MOVE_NAME_1] = {
         .bg = 0,
@@ -716,8 +680,8 @@ void InitBattleBgsVideo(void)
 
 void LoadBattleMenuWindowGfx(void)
 {
-    LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
-    LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
+    //LoadUserWindowBorderGfx(2, 0x12, BG_PLTT_ID(1));
+    //LoadUserWindowBorderGfx(2, 0x22, BG_PLTT_ID(1));
     LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
@@ -843,6 +807,7 @@ void LoadBattleTextboxAndBackground(void)
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gBattleActionsPal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
     LoadBattleMenuWindowGfx();
     if (B_TERRAIN_BG_CHANGE == TRUE)
         DrawTerrainTypeBattleBackground();
@@ -1212,6 +1177,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         break;
     case 2:
         LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gBattleActionsPal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         break;
     case 3:
         if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_EREADER_TRAINER))
