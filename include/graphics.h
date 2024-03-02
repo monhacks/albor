@@ -2049,7 +2049,6 @@ extern const u32 gBattleArenaJudgmentSymbolsPalette[];
 
 extern const u32 gBattleWindowTextPalette[];
 
-extern const u32 gBattleActionsPal[];
 extern const u32 gBattleActionsPalFight[];
 extern const u32 gBattleActionsPalPokemon[];
 extern const u32 gBattleActionsPalRun[];

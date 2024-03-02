@@ -177,8 +177,6 @@ static void WallyHandleActions(u32 battler)
         if (--gBattleStruct->wallyWaitFrames == 0)
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(0);
-            ActionSelectionCreateCursorAt(1, 0);
             gBattleStruct->wallyWaitFrames = B_WAIT_TIME_LONG;
             gBattleStruct->wallyBattleState++;
         }
@@ -344,14 +342,7 @@ static void HandleChooseActionAfterDma3(u32 battler)
 
 static void WallyHandleChooseAction(u32 battler)
 {
-    s32 i;
-
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
-
-    for (i = 0; i < 4; i++)
-        ActionSelectionDestroyCursorAt(i);
-
-    ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
 }
 
 static void WallyHandleChooseMove(u32 battler)

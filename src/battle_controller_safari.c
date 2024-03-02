@@ -145,9 +145,7 @@ static void HandleInputChooseAction(u32 battler)
         if (gActionSelectionCursor[battler] & 1)
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
             gActionSelectionCursor[battler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
         }
     }
     else if (JOY_NEW(DPAD_RIGHT))
@@ -155,9 +153,7 @@ static void HandleInputChooseAction(u32 battler)
         if (!(gActionSelectionCursor[battler] & 1))
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
             gActionSelectionCursor[battler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
         }
     }
     else if (JOY_NEW(DPAD_UP))
@@ -165,9 +161,7 @@ static void HandleInputChooseAction(u32 battler)
         if (gActionSelectionCursor[battler] & 2)
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
             gActionSelectionCursor[battler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
         }
     }
     else if (JOY_NEW(DPAD_DOWN))
@@ -175,17 +169,13 @@ static void HandleInputChooseAction(u32 battler)
         if (!(gActionSelectionCursor[battler] & 2))
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
             gActionSelectionCursor[battler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
         }
     }
     else if (B_QUICK_MOVE_CURSOR_TO_RUN && JOY_NEW(B_BUTTON))
     {
         PlaySE(SE_SELECT);
-        ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
         gActionSelectionCursor[battler] = 3;
-        ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     }
 }
 
@@ -284,14 +274,7 @@ static void HandleChooseActionAfterDma3(u32 battler)
 
 static void SafariHandleChooseAction(u32 battler)
 {
-    s32 i;
-
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
-
-    for (i = 0; i < 4; i++)
-        ActionSelectionDestroyCursorAt(i);
-
-    ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
 }
 
 static void SafariHandleChooseItem(u32 battler)

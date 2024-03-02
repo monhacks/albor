@@ -249,8 +249,6 @@ static u32 GetNextBall(u32 ballId)
 
 static void HandleInputChooseAction(u32 battler)
 {
-    u16 itemId = gBattleResources->bufferA[battler][2] | (gBattleResources->bufferA[battler][3] << 8);
-
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
 
@@ -328,16 +326,13 @@ static void HandleInputChooseAction(u32 battler)
 
         switch (gActionSelectionCursor[battler])
         {
-        case 0: // Top left
+        case 0:
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_MOVE, 0);
             break;
-        case 1: // Top right
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_USE_ITEM, 0);
-            break;
-        case 2: // Bottom left
+        case 1:
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_SWITCH, 0);
             break;
-        case 3: // Bottom right
+        case 2:
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
             break;
         }
@@ -345,42 +340,44 @@ static void HandleInputChooseAction(u32 battler)
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
-        if (gActionSelectionCursor[battler] & 1) // if is B_ACTION_USE_ITEM or B_ACTION_RUN
+        if (gActionSelectionCursor[battler] & 1) // De Pokémon a Luchar
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
-            gActionSelectionCursor[battler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+            gActionSelectionCursor[battler] -= 1;
+            LoadCompressedPalette(gBattleActionsPalFight, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        }
+        else if (gActionSelectionCursor[battler] & 2)// De Huir a Pokémon
+        {
+            PlaySE(SE_SELECT);
+            gActionSelectionCursor[battler] -= 1;
+            LoadCompressedPalette(gBattleActionsPalPokemon, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+        }
+        else // De Luchar a Huir
+        {
+            PlaySE(SE_SELECT);
+            gActionSelectionCursor[battler] += 2;
+            LoadCompressedPalette(gBattleActionsPalRun, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
     }
     else if (JOY_NEW(DPAD_RIGHT))
     {
-        if (!(gActionSelectionCursor[battler] & 1)) // if is B_ACTION_USE_MOVE or B_ACTION_SWITCH
+        if (gActionSelectionCursor[battler] & 2) // De Huir a Luchar
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
-            gActionSelectionCursor[battler] ^= 1;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+            gActionSelectionCursor[battler] -= 2;
+            LoadCompressedPalette(gBattleActionsPalFight, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
-    }
-    else if (JOY_NEW(DPAD_UP))
-    {
-        if (gActionSelectionCursor[battler] & 2) // if is B_ACTION_SWITCH or B_ACTION_RUN
+        else if (gActionSelectionCursor[battler] & 1) // De Pokémon a Huir
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
-            gActionSelectionCursor[battler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+            gActionSelectionCursor[battler] += 1;
+            LoadCompressedPalette(gBattleActionsPalRun, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
-    }
-    else if (JOY_NEW(DPAD_DOWN))
-    {
-        if (!(gActionSelectionCursor[battler] & 2)) // if is B_ACTION_USE_MOVE or B_ACTION_USE_ITEM
+        else // De Luchar a Pokémon
         {
             PlaySE(SE_SELECT);
-            ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
-            gActionSelectionCursor[battler] ^= 2;
-            ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+            gActionSelectionCursor[battler] += 1;
+            LoadCompressedPalette(gBattleActionsPalPokemon, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -390,11 +387,6 @@ static void HandleInputChooseAction(u32 battler)
          && !(gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)])
          && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
         {
-            // Return item to bag if partner had selected one.
-            if (gBattleResources->bufferA[battler][1] == B_ACTION_USE_ITEM)
-            {
-                AddBagItem(itemId, 1);
-            }
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted(battler);
@@ -404,9 +396,8 @@ static void HandleInputChooseAction(u32 battler)
             if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)) // If wild battle, pressing B moves cursor to "Run".
             {
                 PlaySE(SE_SELECT);
-                ActionSelectionDestroyCursorAt(gActionSelectionCursor[battler]);
-                gActionSelectionCursor[battler] = 3;
-                ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
+                gActionSelectionCursor[battler] = 2;
+                LoadCompressedPalette(gBattleActionsPalRun, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
             }
         }
     }
@@ -1896,26 +1887,6 @@ void MoveSelectionDestroyCursorAt(u8 cursorPosition)
     CopyBgTilemapBufferToVram(0);
 }
 
-void ActionSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
-{
-    u16 src[2];
-    src[0] = 1;
-    src[1] = 2;
-
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 7 * (cursorPosition & 1) + 16, 35 + (cursorPosition & 2), 1, 2, 0x11);
-    CopyBgTilemapBufferToVram(0);
-}
-
-void ActionSelectionDestroyCursorAt(u8 cursorPosition)
-{
-    u16 src[2];
-    src[0] = 0x1016;
-    src[1] = 0x1016;
-
-    CopyToBgTilemapBufferRect_ChangePalette(0, src, 7 * (cursorPosition & 1) + 16, 35 + (cursorPosition & 2), 1, 2, 0x11);
-    CopyBgTilemapBufferToVram(0);
-}
-
 void CB2_SetUpReshowBattleScreenAfterMenu(void)
 {
     SetMainCallback2(ReshowBattleScreenAfterMenu);
@@ -2094,16 +2065,10 @@ static void HandleChooseActionAfterDma3(u32 battler)
 
 static void PlayerHandleChooseAction(u32 battler)
 {
-    s32 i;
 
     gBattlerControllerFuncs[battler] = HandleChooseActionAfterDma3;
-    BattleTv_ClearExplosionFaintCause();
-
-    for (i = 0; i < 4; i++)
-        ActionSelectionDestroyCursorAt(i);
 
     TryRestoreLastUsedBall();
-    ActionSelectionCreateCursorAt(gActionSelectionCursor[battler], 0);
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
 }
 
