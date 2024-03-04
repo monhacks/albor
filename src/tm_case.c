@@ -89,7 +89,6 @@ static EWRAM_DATA void *sTilemapBuffer = NULL;
 static EWRAM_DATA struct ListMenuItem * sListMenuItemsBuffer = NULL;
 static EWRAM_DATA u8 (* sListMenuStringsBuffer)[29] = NULL;
 static EWRAM_DATA u8    spriteIdData[PARTY_SIZE] = {};
-static EWRAM_DATA u16   spriteIdPalette[PARTY_SIZE] = {};
 
 static void CB2_SetUpTMCaseUI_Blocking(void);
 static bool8 DoSetUpTMCaseUI(void);
@@ -1002,7 +1001,6 @@ static void DrawPartyMonIcons(void)
         SetMonIconPalette(&gPlayerParty[i], &gSprites[spriteIdData[i]], index);
         gSprites[spriteIdData[i]].oam.priority = 0;
         StartSpriteAnim(&gSprites[spriteIdData[i]], 0);
-        spriteIdPalette[i] = gSprites[spriteIdData[i]].oam.paletteNum;
     }
 }
 
