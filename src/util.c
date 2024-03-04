@@ -293,6 +293,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 #define NORMAL_HUE_X2_SHINY_HUE_NEG_SUAVE       7
 #define NORMAL_HUE_X2_SHINY_MOD                 8
 #define NORMAL_HUE_NEG_SHINY_MOD                9
+#define NORMAL_HUE_SHINY_HUE_NEG                10
 
 static const s8 sColorVariationModes[NUM_SPECIES] =
 {
@@ -304,7 +305,7 @@ static const s8 sColorVariationModes[NUM_SPECIES] =
     [SPECIES_BLASTOISE]     = NORMAL_HUE_X2_SHINY_HUE_NEG,
     [SPECIES_CATERPIE]      = NORMAL_HUE_X2_SHINY_MOD,
     [SPECIES_METAPOD]       = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_BUTTERFREE]    = NORMAL_HUE_NEG_SHINY_MOD,
+    [SPECIES_BUTTERFREE]    = NORMAL_MOD_SHINY_MOD,
     [SPECIES_PIDGEY]        = NORMAL_HUE_X2_SHINY_HUE,
 };
 
@@ -332,6 +333,7 @@ void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
             case NORMAL_HUE_NEG_SHINY_HUE_NEG:
             case NORMAL_MOD_SHINY_HUE_NEG:
             case NORMAL_HUE_X2_SHINY_HUE_NEG:
+            case NORMAL_HUE_SHINY_HUE_NEG:
                 shift = value % HUE_SHIFT_RANGE_SHINY - (HUE_SHIFT_RANGE_SHINY * 2 + 1);
                 break;
             case NORMAL_HUE_X2_SHINY_HUE_NEG_SUAVE:
@@ -349,6 +351,7 @@ void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
         switch (variationMode)
         {
             case NORMAL_HUE_SHINY_HUE:
+            case NORMAL_HUE_SHINY_HUE_NEG:
             default:
                 shift = value % (HUE_SHIFT_RANGE_NORMAL + 1);
                 break;
@@ -532,6 +535,7 @@ void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 p
             case NORMAL_HUE_NEG_SHINY_HUE_NEG:
             case NORMAL_MOD_SHINY_HUE_NEG:
             case NORMAL_HUE_X2_SHINY_HUE_NEG:
+            case NORMAL_HUE_SHINY_HUE_NEG:
                 shift = value % HUE_SHIFT_RANGE_SHINY - (HUE_SHIFT_RANGE_SHINY * 2 + 1);
                 break;
             case NORMAL_HUE_X2_SHINY_HUE_NEG_SUAVE:
@@ -549,6 +553,7 @@ void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 p
         switch (variationMode)
         {
             case NORMAL_HUE_SHINY_HUE:
+            case NORMAL_HUE_SHINY_HUE_NEG:
             default:
                 shift = value % (HUE_SHIFT_RANGE_NORMAL + 1);
                 break;

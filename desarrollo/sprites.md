@@ -1,9 +1,9 @@
 Lista Pokémon:
-* Bulbasaur (paleta shiny) X Fix laterales
-* Ivysaur (sprite y paletas) X Fix paleta
-* Venusaur (paleta shiny) Fix paleta
-* Charmander (paleta shiny) X Fix ojo
-* Charmeleon (paleta shiny) X Fix pixel
+* Bulbasaur (paleta shiny) X
+* Ivysaur (sprite y paletas) X
+* Venusaur (paleta shiny)
+* Charmander (paleta shiny) X
+* Charmeleon (paleta shiny) X
 * Charizard X
 * Squirtle (sprite y paletas) X
 * Wartortle (sprite y paletas) X
@@ -22,7 +22,7 @@ Lista Pokémon:
 * A-Rattata (sprite con animación y paletas) X Comprobar animación
 * A-Raticate (sprite con animación y paleta shiny) X Comprobar animación
 * Spearow (paleta shiny) X
-* Fearow (paleta shiny) X Cambiar primer frame (de voladores en general)
+* Fearow (paleta shiny) X
 * Ekans
 * Arbok
 * Pichu
