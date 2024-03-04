@@ -101,8 +101,7 @@ static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(u32 battler);
 
-static EWRAM_DATA u8    monIconData[PARTY_SIZE] = {};
-//static EWRAM_DATA u16   monIconPalette[PARTY_SIZE] = {};
+static EWRAM_DATA u8 monIconData;
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
@@ -2089,14 +2088,11 @@ static void PlayerHandleChooseAction(u32 battler)
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
     LoadMonIconPalettePersonality(species, personality);
-    monIconData[gBattlerPartyIndexes[battler]] = CreateMonIcon(species, SpriteCb_MonIcon, 20, 132, 1, personality);
+    monIconData = CreateMonIcon(species, SpriteCb_MonIcon, 20, 132, 1, personality);
     u8 index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
-    //u8 index = slot < PARTY_SIZE ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + slot) : 0xFF;
-    SetMonIconPalette(&gPlayerParty[gBattlerPartyIndexes[battler]], &gSprites[monIconData[gBattlerPartyIndexes[battler]]], index);
-    gSprites[monIconData[gBattlerPartyIndexes[battler]]].oam.priority = 0;
-    StartSpriteAnim(&gSprites[monIconData[gBattlerPartyIndexes[battler]]], 0);
-    //gSprites[monIconData[gBattlerPartyIndexes[battler]]].oam.paletteNum = index;
-    //monIconPalette[gBattlerPartyIndexes[battler]] = gSprites[gBattlerPartyIndexes[battler]].oam.paletteNum;
+    SetMonIconPalette(&gPlayerParty[gBattlerPartyIndexes[battler]], &gSprites[monIconData], index);
+    gSprites[monIconData].oam.priority = 0;
+    StartSpriteAnim(&gSprites[monIconData], 0);
 }
 
 static void PlayerHandleYesNoBox(u32 battler)
@@ -2176,7 +2172,7 @@ static void PlayerHandleChooseMove(u32 battler)
 
 void InitMoveSelectionsVarsAndStrings(u32 battler)
 {
-    DestroySpriteAndFreeResources(&gSprites[monIconData[gBattlerPartyIndexes[battler]]]);
+    DestroySpriteAndFreeResources(&gSprites[monIconData]);
     MoveSelectionDisplayMoveNames(battler);
     gMultiUsePlayerCursor = 0xFF;
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 0);
