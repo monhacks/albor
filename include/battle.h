@@ -969,7 +969,7 @@ struct BattleSpriteData
 
 #include "sprite.h"
 
-struct MonSpritesGfx //revisar estructura, algo rompe
+struct MonSpritesGfx
 {
     void *firstDecompressed; // ptr to the decompressed sprite of the first Pokémon
     union {
@@ -978,9 +978,8 @@ struct MonSpritesGfx //revisar estructura, algo rompe
     } sprites;
     struct SpriteTemplate templates[MAX_BATTLERS_COUNT];
     struct SpriteFrameImage frameImages[MAX_BATTLERS_COUNT][MAX_MON_PIC_FRAMES];
-    u8 unusedArr[0x80];
+    u8 padding[0x80]; //necesario
     u8 *barFontGfx;
-    void *unusedPtr;
     u16 *buffer;
 };
 
