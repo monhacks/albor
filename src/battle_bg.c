@@ -165,37 +165,37 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
     [B_WIN_MOVE_NAME_1] = {
         .bg = 0,
         .tilemapLeft = 3,
-        .tilemapTop = 55,
-        .width = 12,
-        .height = 2,
-        .paletteNum = 10,
+        .tilemapTop = 54,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 12,
         .baseBlock = 0x0300,
     },
     [B_WIN_MOVE_NAME_2] = {
         .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 55,
-        .width = 12,
-        .height = 2,
-        .paletteNum = 11,
+        .tilemapLeft = 18,
+        .tilemapTop = 54,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 13,
         .baseBlock = 0x0318,
     },
     [B_WIN_MOVE_NAME_3] = {
         .bg = 0,
         .tilemapLeft = 3,
-        .tilemapTop = 58,
-        .width = 12,
-        .height = 2,
-        .paletteNum = 12,
+        .tilemapTop = 57,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 14,
         .baseBlock = 0x0328,
     },
     [B_WIN_MOVE_NAME_4] = {
         .bg = 0,
-        .tilemapLeft = 11,
-        .tilemapTop = 58,
-        .width = 12,
-        .height = 2,
-        .paletteNum = 13,
+        .tilemapLeft = 18,
+        .tilemapTop = 57,
+        .width = 9,
+        .height = 3,
+        .paletteNum = 15,
         .baseBlock = 0x0340,
     },
     [B_WIN_PP_1] = {
@@ -808,6 +808,10 @@ void LoadBattleTextboxAndBackground(void)
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
     LoadCompressedPalette(gBattleActionsPalFight, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadBattleMenuWindowGfx();
     if (B_TERRAIN_BG_CHANGE == TRUE)
         DrawTerrainTypeBattleBackground();
