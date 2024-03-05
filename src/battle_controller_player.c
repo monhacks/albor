@@ -393,6 +393,7 @@ static void HandleInputChooseAction(u32 battler)
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted(battler);
+            DestroySpriteAndFreeResources(&gSprites[monIconData]);
         }
         else if (B_QUICK_MOVE_CURSOR_TO_RUN)
         {
