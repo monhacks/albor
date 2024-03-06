@@ -2250,44 +2250,44 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .shadowColor = 5,
     },
     [B_WIN_PP_1] = {
-        .fillValue = PIXEL_FILL(0xE),
+        .fillValue = PIXEL_FILL(3),
         .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
+        .x = 2,
+        .y = 4,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = 1,
+        .bgColor = 3,
+        .shadowColor = 2,
     },
     [B_WIN_PP_2] = {
-        .fillValue = PIXEL_FILL(0xE),
+        .fillValue = PIXEL_FILL(3),
         .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
+        .x = 2,
+        .y = 4,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = 1,
+        .bgColor = 3,
+        .shadowColor = 2,
     },
     [B_WIN_PP_3] = {
-        .fillValue = PIXEL_FILL(0xE),
+        .fillValue = PIXEL_FILL(3),
         .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
+        .x = 2,
+        .y = 4,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = 1,
+        .bgColor = 3,
+        .shadowColor = 2,
     },
     [B_WIN_PP_4] = {
-        .fillValue = PIXEL_FILL(0xE),
+        .fillValue = PIXEL_FILL(3),
         .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
+        .x = 2,
+        .y = 4,
         .speed = 0,
-        .fgColor = 12,
-        .bgColor = 14,
-        .shadowColor = 11,
+        .fgColor = 1,
+        .bgColor = 3,
+        .shadowColor = 2,
     },
     [B_WIN_SWITCH_PROMPT] = {
         .fillValue = PIXEL_FILL(0xE),
@@ -2624,9 +2624,9 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .x = 0,
         .y = 1,
         .speed = 1,
-        .fgColor = 2,
-        .bgColor = 1,
-        .shadowColor = 3,
+        .fgColor = 1,
+        .bgColor = 3,
+        .shadowColor = 2,
     },
 };
 
@@ -3765,25 +3765,6 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         PutWindowTilemap(windowId);
         CopyWindowToVram(windowId, COPYWIN_FULL);
     }
-}
-
-void SetPpNumbersPaletteInMoveSelection(u32 battler)
-{
-    struct ChooseMoveStruct *chooseMoveStruct = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    const u16 *palPtr = gPPTextPalette;
-    u8 var;
-
-    if (!gBattleStruct->zmove.viewing)
-        var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[battler]],
-                         chooseMoveStruct->maxPp[gMoveSelectionCursor[battler]]);
-    else
-        var = GetCurrentPpToMaxPpState(chooseMoveStruct->currentPp[gMoveSelectionCursor[battler]], gMovesInfo[gMoveSelectionCursor[battler]].pp);
-
-    gPlttBufferUnfaded[BG_PLTT_ID(5) + 12] = palPtr[(var * 2) + 0];
-    gPlttBufferUnfaded[BG_PLTT_ID(5) + 11] = palPtr[(var * 2) + 1];
-
-    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(5) + 12], &gPlttBufferFaded[BG_PLTT_ID(5) + 12], PLTT_SIZEOF(1));
-    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(5) + 11], &gPlttBufferFaded[BG_PLTT_ID(5) + 11], PLTT_SIZEOF(1));
 }
 
 u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp)

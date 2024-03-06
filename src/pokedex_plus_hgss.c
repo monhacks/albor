@@ -625,12 +625,6 @@ static const struct OamData sOamData_CategoryIcons =
     .shape = SPRITE_SHAPE(32x16),
     .priority = 0,
 };
-static const struct CompressedSpriteSheet sSpriteSheet_CategoryIcons =
-{
-    .data = gCategoryIcons_Gfx,
-    .size = 16*16*3/2,
-    .tag = TAG_CATEGORY_ICONS,
-};
 static const struct SpritePalette sSpritePal_CategoryIcons =
 {
     .data = gCategoryIcons_Pal,
@@ -744,7 +738,7 @@ static const u16 sStatBarPalette[16] = {
     [COLOR_ID_FONT] = RGB_BLACK,
     [COLOR_ID_FONT_SHADOW] = RGB(22, 22, 22),
 };
-static const struct SpritePalette sStatBarSpritePal[] = //{sStatBarPalette, TAG_STAT_BAR};
+static const struct SpritePalette sStatBarSpritePal[] =
 {
     {sStatBarPalette, TAG_STAT_BAR},
     {sStatBarPalette, TAG_STAT_BAR_BG},

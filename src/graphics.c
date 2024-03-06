@@ -1199,7 +1199,6 @@ const u32 gBattleArenaJudgmentSymbolsGfx[] = INCBIN_U32("graphics/battle_frontie
 const u32 gBattleArenaJudgmentSymbolsPalette[] = INCBIN_U32("graphics/battle_frontier/arena_judgment_symbols.gbapal.lz");
 
 const u32 gBattleWindowTextPalette[] = INCBIN_U32("graphics/battle_interface/text.gbapal.lz");
-const u16 gPPTextPalette[] = INCBIN_U16("graphics/battle_interface/text_pp.gbapal");
 
 const u32 gBattleActionsPalFight[] = INCBIN_U32("graphics/battle_interface/battle_actions_fight.gbapal.lz");
 const u32 gBattleActionsPalPokemon[] = INCBIN_U32("graphics/battle_interface/battle_actions_pokemon.gbapal.lz");

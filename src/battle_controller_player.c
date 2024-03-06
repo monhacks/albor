@@ -101,7 +101,10 @@ static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(u32 battler);
 
+#define TAG_ICON_TYPES 30005
+
 static EWRAM_DATA u8 monIconData;
+static EWRAM_DATA u8 sIconTypeId[MAX_MON_MOVES] = {0};
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
 {
@@ -166,7 +169,10 @@ static EWRAM_DATA bool8 sBallSwapped = FALSE;
 
 void SetControllerToPlayer(u32 battler)
 {
-    gTypeIconSpriteId = 0xFF;
+    sIconTypeId[0] = 0xFF;
+    sIconTypeId[1] = 0xFF;
+    sIconTypeId[2] = 0xFF;
+    sIconTypeId[3] = 0xFF;
     gBattlerControllerEndFuncs[battler] = PlayerBufferExecCompleted;
     gBattlerControllerFuncs[battler] = PlayerBufferRunCommand;
     gDoingBattleAnim = FALSE;
@@ -255,12 +261,30 @@ static void HandleInputChooseAction(u32 battler)
     DoBounceEffect(battler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(battler, BOUNCE_MON, 7, 1);
 
-    if (gTypeIconSpriteId != 0xFF)
+    if (sIconTypeId[0] != 0xFF)
     {
-        DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
-        gTypeIconSpriteId = 0xFF;
-    }
+        DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+        sIconTypeId[0] = 0xFF;
 
+    }
+    if (sIconTypeId[1] != 0xFF)
+    {
+        DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+        sIconTypeId[1] = 0xFF;
+
+    }
+    if (sIconTypeId[2] != 0xFF)
+    {
+        DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+        sIconTypeId[2] = 0xFF;
+
+    }
+    if (sIconTypeId[3] != 0xFF)
+    {
+        DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+        sIconTypeId[3] = 0xFF;
+
+    }
     if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         gPlayerDpadHoldFrames++;
     else
@@ -461,7 +485,10 @@ static void HandleInputChooseTarget(u32 battler)
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         TryHideLastUsedBall();
         HideTriggerSprites();
-        DestroySprite(&gSprites[gTypeIconSpriteId]);
+        DestroySprite(&gSprites[sIconTypeId[0]]);
+        DestroySprite(&gSprites[sIconTypeId[1]]);
+        DestroySprite(&gSprites[sIconTypeId[2]]);
+        DestroySprite(&gSprites[sIconTypeId[3]]);
         PlayerBufferExecCompleted(battler);
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -689,10 +716,25 @@ static void HandleInputChooseMove(u32 battler)
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (gTypeIconSpriteId != 0xFF)
+        if (sIconTypeId[0] != 0xFF)
         {
-            DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
-            gTypeIconSpriteId = 0xFF;
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+            sIconTypeId[0] = 0xFF;
+        }
+        if (sIconTypeId[1] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+            sIconTypeId[1] = 0xFF;
+        }
+        if (sIconTypeId[2] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+            sIconTypeId[2] = 0xFF;
+        }
+        if (sIconTypeId[3] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+            sIconTypeId[3] = 0xFF;
         }
         PlaySE(SE_SELECT);
         if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CURSE)
@@ -1663,22 +1705,20 @@ static void MoveSelectionDisplayMoveNames(u32 battler)
 
 static void MoveSelectionDisplayPpNumber(u32 battler)
 {
-    u8 *txtPtr;
-    struct ChooseMoveStruct *moveInfo;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     if (gBattleResources->bufferA[battler][2] == TRUE) // check if we didn't want to display pp number
         return;
 
-    SetPpNumbersPaletteInMoveSelection(battler);
-    moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[battler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    *(txtPtr)++ = CHAR_SLASH;
-    ConvertIntToDecimalStringN(txtPtr, moveInfo->maxPp[gMoveSelectionCursor[battler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-
+    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);
+    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);
+    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);
+    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);
 }
-
-#define TAG_ICON_TYPES 30005
 
 static const struct OamData sOamData_IconTypes =
 {
@@ -1856,19 +1896,44 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
 static void MoveSelectionDisplayMoveType(u32 battler)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    u8 type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;
-    struct Sprite *sprite;
+    //s32 i;
+    struct Sprite *sprite1, *sprite2, *sprite3, *sprite4;
 
+    LoadCompressedSpriteSheet(&sSpriteSheet_IconTypes);
     LoadCompressedPalette(gIconTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
-    if (gTypeIconSpriteId != 0xFF)
+
+    if (sIconTypeId[0] == 0xFF)
     {
-        DestroySpriteAndFreeResources(&gSprites[gTypeIconSpriteId]);
-        gTypeIconSpriteId = 0xFF;
+        sIconTypeId[0] = CreateSprite(&sSpriteTemplate_IconTypes, 9, 124, 0);
+        sprite1 = &gSprites[sIconTypeId[0]];
+		StartSpriteAnim(sprite1, gMovesInfo[moveInfo->moves[0]].type);
+	    sprite1->oam.paletteNum = sMoveTypeToOamPaletteNum[gMovesInfo[moveInfo->moves[0]].type];
+		sprite1->oam.priority = 0;
     }
-    gTypeIconSpriteId = CreateSpriteAtEnd(&sSpriteTemplate_IconTypes, 216, 144, 1);
-    sprite = &gSprites[gTypeIconSpriteId];
-    sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[type];
-    sprite->oam.priority = 0;
+    if (sIconTypeId[1] == 0xFF)
+    {
+        sIconTypeId[1] = CreateSprite(&sSpriteTemplate_IconTypes, 129, 124, 0);
+        sprite2 = &gSprites[sIconTypeId[1]];
+		StartSpriteAnim(sprite2, gMovesInfo[moveInfo->moves[1]].type);
+	    sprite2->oam.paletteNum = sMoveTypeToOamPaletteNum[gMovesInfo[moveInfo->moves[1]].type];
+		sprite2->oam.priority = 0;
+    }
+    if (sIconTypeId[2] == 0xFF)
+    {
+        sIconTypeId[2] = CreateSprite(&sSpriteTemplate_IconTypes, 9, 148, 0);
+        sprite3 = &gSprites[sIconTypeId[2]];
+		StartSpriteAnim(sprite3, gMovesInfo[moveInfo->moves[2]].type);
+	    sprite3->oam.paletteNum = sMoveTypeToOamPaletteNum[gMovesInfo[moveInfo->moves[2]].type];
+		sprite3->oam.priority = 0;
+    }
+    if (sIconTypeId[3] == 0xFF)
+    {
+        sIconTypeId[3] = CreateSprite(&sSpriteTemplate_IconTypes, 129, 148, 0);
+        sprite4 = &gSprites[sIconTypeId[3]];
+		StartSpriteAnim(sprite4, gMovesInfo[moveInfo->moves[3]].type);
+	    sprite4->oam.paletteNum = sMoveTypeToOamPaletteNum[gMovesInfo[moveInfo->moves[3]].type];
+		sprite4->oam.priority = 0;
+    }
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 baseTileNum)
