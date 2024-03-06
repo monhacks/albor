@@ -1893,12 +1893,264 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
     [TYPE_FAIRY] = 13,
 };
 
+void LoadPalettesTypes(u32 battler)
+{
+    u32 pal1, pal2, pal3, pal4;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
+
+    pal1 = gMovesInfo[moveInfo->moves[0]].type;
+    pal2 = gMovesInfo[moveInfo->moves[1]].type;
+    pal3 = gMovesInfo[moveInfo->moves[2]].type;
+    pal4 = gMovesInfo[moveInfo->moves[3]].type;
+
+    switch (pal1)
+    {
+    case TYPE_BUG:
+        LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DARK:
+        LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DRAGON:
+        LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ELECTRIC:
+        LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FAIRY:
+        LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIGHTING:
+        LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIRE:
+        LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FLYING:
+        LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GHOST:
+        LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GRASS:
+        LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GROUND:
+        LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ICE:
+        LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_MYSTERY:
+        LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_NORMAL:
+        LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_POISON:
+        LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_PSYCHIC:
+        LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ROCK:
+        LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_STEEL:
+        LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_WATER:
+        LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
+        break;
+    }
+    switch (pal2)
+    {
+    case TYPE_BUG:
+        LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DARK:
+        LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DRAGON:
+        LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ELECTRIC:
+        LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FAIRY:
+        LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIGHTING:
+        LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIRE:
+        LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FLYING:
+        LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GHOST:
+        LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GRASS:
+        LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GROUND:
+        LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ICE:
+        LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_MYSTERY:
+        LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_NORMAL:
+        LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_POISON:
+        LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_PSYCHIC:
+        LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ROCK:
+        LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_STEEL:
+        LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_WATER:
+        LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+        break;
+    }
+    switch (pal3)
+    {
+    case TYPE_BUG:
+        LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DARK:
+        LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DRAGON:
+        LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ELECTRIC:
+        LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FAIRY:
+        LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIGHTING:
+        LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIRE:
+        LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FLYING:
+        LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GHOST:
+        LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GRASS:
+        LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GROUND:
+        LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ICE:
+        LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_MYSTERY:
+        LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_NORMAL:
+        LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_POISON:
+        LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_PSYCHIC:
+        LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ROCK:
+        LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_STEEL:
+        LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_WATER:
+        LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
+        break;
+    }
+    switch (pal4)
+    {
+    case TYPE_BUG:
+        LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DARK:
+        LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_DRAGON:
+        LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ELECTRIC:
+        LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FAIRY:
+        LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIGHTING:
+        LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FIRE:
+        LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_FLYING:
+        LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GHOST:
+        LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GRASS:
+        LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_GROUND:
+        LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ICE:
+        LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_MYSTERY:
+        LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_NORMAL:
+        LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_POISON:
+        LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_PSYCHIC:
+        LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_ROCK:
+        LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_STEEL:
+        LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    case TYPE_WATER:
+        LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+        break;
+    }
+}
+
 static void MoveSelectionDisplayMoveType(u32 battler)
 {
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    //s32 i;
     struct Sprite *sprite1, *sprite2, *sprite3, *sprite4;
 
+    LoadPalettesTypes(battler);
     LoadCompressedSpriteSheet(&sSpriteSheet_IconTypes);
     LoadCompressedPalette(gIconTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
 

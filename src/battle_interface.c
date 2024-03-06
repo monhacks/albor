@@ -1379,7 +1379,7 @@ void ChangeMegaTriggerSprite(u8 spriteId, u8 animId)
 
 void CreateMegaTriggerSprite(u8 battlerId, u8 palId)
 {
-    LoadSpritePalette(&sSpritePalette_MegaTrigger);
+    //LoadSpritePalette(&sSpritePalette_MegaTrigger);
     if (GetSpriteTileStartByTag(TAG_MEGA_TRIGGER_TILE) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_MegaTrigger);
     if (gBattleStruct->mega.triggerSpriteId == 0xFF)
@@ -1508,7 +1508,7 @@ void ChangeBurstTriggerSprite(u8 spriteId, u8 animId)
 
 void CreateBurstTriggerSprite(u8 battlerId, u8 palId)
 {
-    LoadSpritePalette(&sSpritePalette_BurstTrigger);
+    //LoadSpritePalette(&sSpritePalette_BurstTrigger);
     if (GetSpriteTileStartByTag(TAG_BURST_TRIGGER_TILE) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_BurstTrigger);
     if (gBattleStruct->burst.triggerSpriteId == 0xFF)
@@ -1687,7 +1687,7 @@ static const s8 sIndicatorPositions[][2] =
 void MegaIndicator_LoadSpritesGfx(void)
 {
     LoadSpriteSheets(sMegaIndicator_SpriteSheets);
-    LoadSpritePalettes(sMegaIndicator_SpritePalettes);
+    //LoadSpritePalettes(sMegaIndicator_SpritePalettes);
 }
 
 static bool32 MegaIndicator_ShouldBeInvisible(u32 battlerId, struct Sprite *sprite)
