@@ -382,7 +382,7 @@ struct PokemonStorageSystemData
     s8 scrollDirection;
     struct Sprite *movingMonSprite;
     struct Sprite *partySprites[PARTY_SIZE];
-    struct Sprite *boxMonsSprites[IN_BOX_COUNT];
+    struct Sprite *boxMonsSprites[IN_BOX_COUNT + 1];
     struct Sprite **shiftMonSpritePtr;
     struct Sprite **releaseMonSpritePtr;
     u16 numIconsPerSpecies[MAX_MON_ICONS];
