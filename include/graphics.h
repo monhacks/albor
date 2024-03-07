@@ -2072,6 +2072,8 @@ extern const u32 gMoveTypePalIce[];
 extern const u32 gMoveTypePalMystery[];
 extern const u32 gMoveTypePalPoison[];
 
+extern const u32 gBattleMoveBoxCursor[];
+
 extern const u32 gContest2Pal[];
 
 extern const u32 gSmokescreenImpactTiles[];

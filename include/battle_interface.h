@@ -63,6 +63,7 @@ enum
 #define TAG_ZMOVE_TRIGGER_PAL           0xD77B
 #define TAG_BURST_TRIGGER_PAL           0xD77C
 #define TAG_DYNAMAX_TRIGGER_PAL         0xD77D
+#define TAG_ACTION_BOX_CURSOR           0xD77E
 
 enum
 {

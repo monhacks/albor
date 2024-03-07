@@ -588,6 +588,11 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
     }
 };
 
+static const struct SpriteSheet sSpriteSheet_Cursor[] =
+{
+    {gBattleMoveBoxCursor, 0x100, TAG_ACTION_BOX_CURSOR}
+};
+
 static const u8 sEmptyWhiteText_GrayHighlight[] = __("{COLOR WHITE}{HIGHLIGHT DARK_GRAY}              ");
 static const u8 sEmptyWhiteText_TransparentHighlight[] = __("{COLOR WHITE}{HIGHLIGHT TRANSPARENT}              ");
 

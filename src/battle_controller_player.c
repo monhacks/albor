@@ -265,25 +265,21 @@ static void HandleInputChooseAction(u32 battler)
     {
         DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
         sIconTypeId[0] = 0xFF;
-
     }
     if (sIconTypeId[1] != 0xFF)
     {
         DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
         sIconTypeId[1] = 0xFF;
-
     }
     if (sIconTypeId[2] != 0xFF)
     {
         DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
         sIconTypeId[2] = 0xFF;
-
     }
     if (sIconTypeId[3] != 0xFF)
     {
         DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
         sIconTypeId[3] = 0xFF;
-
     }
     if (JOY_REPEAT(DPAD_ANY) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         gPlayerDpadHoldFrames++;
@@ -485,10 +481,6 @@ static void HandleInputChooseTarget(u32 battler)
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         TryHideLastUsedBall();
         HideTriggerSprites();
-        DestroySprite(&gSprites[sIconTypeId[0]]);
-        DestroySprite(&gSprites[sIconTypeId[1]]);
-        DestroySprite(&gSprites[sIconTypeId[2]]);
-        DestroySprite(&gSprites[sIconTypeId[3]]);
         PlayerBufferExecCompleted(battler);
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
@@ -716,26 +708,6 @@ static void HandleInputChooseMove(u32 battler)
 
     if (JOY_NEW(A_BUTTON))
     {
-        if (sIconTypeId[0] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
-            sIconTypeId[0] = 0xFF;
-        }
-        if (sIconTypeId[1] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
-            sIconTypeId[1] = 0xFF;
-        }
-        if (sIconTypeId[2] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
-            sIconTypeId[2] = 0xFF;
-        }
-        if (sIconTypeId[3] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
-            sIconTypeId[3] = 0xFF;
-        }
         PlaySE(SE_SELECT);
         if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CURSE)
         {
@@ -846,6 +818,26 @@ static void HandleInputChooseMove(u32 battler)
         case 3: // Entire field
             gBattlerControllerFuncs[battler] = HandleInputShowEntireFieldTargets;
             break;
+        }
+        if (sIconTypeId[0] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+            sIconTypeId[0] = 0xFF;
+        }
+        if (sIconTypeId[1] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+            sIconTypeId[1] = 0xFF;
+        }
+        if (sIconTypeId[2] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+            sIconTypeId[2] = 0xFF;
+        }
+        if (sIconTypeId[3] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+            sIconTypeId[3] = 0xFF;
         }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
