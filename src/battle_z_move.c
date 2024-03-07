@@ -247,7 +247,7 @@ void CreateZMoveTriggerSprite(u8 battler, bool8 viable)
 {
     s16 x, y;
 
-    LoadSpritePalette(&sSpritePalette_ZMoveTrigger);
+    //LoadSpritePalette(&sSpritePalette_ZMoveTrigger);
     if (GetSpriteTileStartByTag(TAG_ZMOVE_TRIGGER_TILE) == 0xFFFF)
         LoadCompressedSpriteSheetUsingHeap(&sSpriteSheet_ZMoveTrigger);
 

@@ -1172,7 +1172,7 @@ void ChangeDynamaxTriggerSprite(u8 spriteId, u8 animId)
 
 void CreateDynamaxTriggerSprite(u8 battlerId, u8 palId)
 {
-    LoadSpritePalette(&sSpritePalette_DynamaxTrigger);
+    //LoadSpritePalette(&sSpritePalette_DynamaxTrigger);
     if (GetSpriteTileStartByTag(TAG_DYNAMAX_TRIGGER_TILE) == 0xFFFF)
         LoadSpriteSheet(&sSpriteSheet_DynamaxTrigger);
     if (gBattleStruct->dynamax.triggerSpriteId == 0xFF)

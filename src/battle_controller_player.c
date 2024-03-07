@@ -819,26 +819,6 @@ static void HandleInputChooseMove(u32 battler)
             gBattlerControllerFuncs[battler] = HandleInputShowEntireFieldTargets;
             break;
         }
-        if (sIconTypeId[0] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
-            sIconTypeId[0] = 0xFF;
-        }
-        if (sIconTypeId[1] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
-            sIconTypeId[1] = 0xFF;
-        }
-        if (sIconTypeId[2] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
-            sIconTypeId[2] = 0xFF;
-        }
-        if (sIconTypeId[3] != 0xFF)
-        {
-            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
-            sIconTypeId[3] = 0xFF;
-        }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
