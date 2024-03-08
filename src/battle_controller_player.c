@@ -64,7 +64,6 @@ static void PlayerHandleYesNoBox(u32 battler);
 static void PlayerHandleChooseMove(u32 battler);
 static void PlayerHandleChooseItem(u32 battler);
 static void PlayerHandleChoosePokemon(u32 battler);
-static void PlayerHandleCmd23(u32 battler);
 static void PlayerHandleHealthBarUpdate(u32 battler);
 static void PlayerHandleStatusXor(u32 battler);
 static void PlayerHandleDMA3Transfer(u32 battler);
@@ -72,7 +71,6 @@ static void PlayerHandlePlayBGM(u32 battler);
 static void PlayerHandleTwoReturnValues(u32 battler);
 static void PlayerHandleChosenMonReturnValue(u32 battler);
 static void PlayerHandleOneReturnValue(u32 battler);
-static void PlayerHandleOneReturnValue_Duplicate(u32 battler);
 static void PlayerHandleIntroTrainerBallThrow(u32 battler);
 static void PlayerHandleDrawPartyStatusSummary(u32 battler);
 static void PlayerHandleEndBounceEffect(u32 battler);
@@ -131,7 +129,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_CHOOSEMOVE]               = PlayerHandleChooseMove,
     [CONTROLLER_OPENBAG]                  = PlayerHandleChooseItem,
     [CONTROLLER_CHOOSEPOKEMON]            = PlayerHandleChoosePokemon,
-    [CONTROLLER_23]                       = PlayerHandleCmd23,
     [CONTROLLER_HEALTHBARUPDATE]          = PlayerHandleHealthBarUpdate,
     [CONTROLLER_EXPUPDATE]                = PlayerHandleExpUpdate,
     [CONTROLLER_STATUSICONUPDATE]         = BtlController_HandleStatusIconUpdate,
@@ -140,11 +137,9 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_DATATRANSFER]             = BtlController_Empty,
     [CONTROLLER_DMA3TRANSFER]             = PlayerHandleDMA3Transfer,
     [CONTROLLER_PLAYBGM]                  = PlayerHandlePlayBGM,
-    [CONTROLLER_32]                       = BtlController_Empty,
     [CONTROLLER_TWORETURNVALUES]          = PlayerHandleTwoReturnValues,
     [CONTROLLER_CHOSENMONRETURNVALUE]     = PlayerHandleChosenMonReturnValue,
     [CONTROLLER_ONERETURNVALUE]           = PlayerHandleOneReturnValue,
-    [CONTROLLER_ONERETURNVALUE_DUPLICATE] = PlayerHandleOneReturnValue_Duplicate,
     [CONTROLLER_HITANIMATION]             = BtlController_HandleHitAnimation,
     [CONTROLLER_CANTSWITCH]               = BtlController_Empty,
     [CONTROLLER_PLAYSE]                   = BtlController_HandlePlaySE,
@@ -482,6 +477,26 @@ static void HandleInputChooseTarget(u32 battler)
         TryHideLastUsedBall();
         HideTriggerSprites();
         PlayerBufferExecCompleted(battler);
+        if (sIconTypeId[0] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+            sIconTypeId[0] = 0xFF;
+        }
+        if (sIconTypeId[1] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+            sIconTypeId[1] = 0xFF;
+        }
+        if (sIconTypeId[2] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+            sIconTypeId[2] = 0xFF;
+        }
+        if (sIconTypeId[3] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+            sIconTypeId[3] = 0xFF;
+        }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -642,6 +657,26 @@ static void HandleInputShowEntireFieldTargets(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, gMoveSelectionCursor[battler] | (gMultiUsePlayerCursor << 8));
         HideTriggerSprites();
         PlayerBufferExecCompleted(battler);
+        if (sIconTypeId[0] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+            sIconTypeId[0] = 0xFF;
+        }
+        if (sIconTypeId[1] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+            sIconTypeId[1] = 0xFF;
+        }
+        if (sIconTypeId[2] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+            sIconTypeId[2] = 0xFF;
+        }
+        if (sIconTypeId[3] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+            sIconTypeId[3] = 0xFF;
+        }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -675,6 +710,26 @@ static void HandleInputShowTargets(u32 battler)
         HideTriggerSprites();
         TryHideLastUsedBall();
         PlayerBufferExecCompleted(battler);
+        if (sIconTypeId[0] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+            sIconTypeId[0] = 0xFF;
+        }
+        if (sIconTypeId[1] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+            sIconTypeId[1] = 0xFF;
+        }
+        if (sIconTypeId[2] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+            sIconTypeId[2] = 0xFF;
+        }
+        if (sIconTypeId[3] != 0xFF)
+        {
+            DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+            sIconTypeId[3] = 0xFF;
+        }
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -799,6 +854,26 @@ static void HandleInputChooseMove(u32 battler)
             HideTriggerSprites();
             TryHideLastUsedBall();
             PlayerBufferExecCompleted(battler);
+            if (sIconTypeId[0] != 0xFF)
+            {
+                DestroySpriteAndFreeResources(&gSprites[sIconTypeId[0]]);
+                sIconTypeId[0] = 0xFF;
+            }
+            if (sIconTypeId[1] != 0xFF)
+            {
+                DestroySpriteAndFreeResources(&gSprites[sIconTypeId[1]]);
+                sIconTypeId[1] = 0xFF;
+            }
+            if (sIconTypeId[2] != 0xFF)
+            {
+                DestroySpriteAndFreeResources(&gSprites[sIconTypeId[2]]);
+                sIconTypeId[2] = 0xFF;
+            }
+            if (sIconTypeId[3] != 0xFF)
+            {
+                DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
+                sIconTypeId[3] = 0xFF;
+            }
             break;
         case 1:
             gBattlerControllerFuncs[battler] = HandleInputChooseTarget;
@@ -2508,13 +2583,6 @@ static void PlayerHandleChoosePokemon(u32 battler)
     }
 }
 
-static void PlayerHandleCmd23(u32 battler)
-{
-    BattleStopLowHpSound();
-    BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
-    PlayerBufferExecCompleted(battler);
-}
-
 static void PlayerHandleHealthBarUpdate(u32 battler)
 {
     BtlController_HandleHealthBarUpdate(battler, TRUE);
@@ -2604,12 +2672,6 @@ static void PlayerHandleChosenMonReturnValue(u32 battler)
 static void PlayerHandleOneReturnValue(u32 battler)
 {
     BtlController_EmitOneReturnValue(battler, BUFFER_B, 0);
-    PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleOneReturnValue_Duplicate(u32 battler)
-{
-    BtlController_EmitOneReturnValue_Duplicate(battler, BUFFER_B, 0);
     PlayerBufferExecCompleted(battler);
 }
 

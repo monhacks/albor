@@ -153,7 +153,6 @@ enum
     CONTROLLER_CHOOSEMOVE,
     CONTROLLER_OPENBAG,
     CONTROLLER_CHOOSEPOKEMON,
-    CONTROLLER_23,
     CONTROLLER_HEALTHBARUPDATE,
     CONTROLLER_EXPUPDATE,
     CONTROLLER_STATUSICONUPDATE,
@@ -162,11 +161,9 @@ enum
     CONTROLLER_DATATRANSFER,
     CONTROLLER_DMA3TRANSFER,
     CONTROLLER_PLAYBGM,
-    CONTROLLER_32,
     CONTROLLER_TWORETURNVALUES,
     CONTROLLER_CHOSENMONRETURNVALUE,
     CONTROLLER_ONERETURNVALUE,
-    CONTROLLER_ONERETURNVALUE_DUPLICATE,
     CONTROLLER_HITANIMATION,
     CONTROLLER_CANTSWITCH,
     CONTROLLER_PLAYSE,
@@ -227,7 +224,6 @@ void BtlController_EmitDataTransfer(u32 battler, u32 bufferId, u16 size, void *d
 void BtlController_EmitTwoReturnValues(u32 battler, u32 bufferId, u8 ret8, u32 ret32);
 void BtlController_EmitChosenMonReturnValue(u32 battler, u32 bufferId, u8 partyId, u8 *battlePartyOrder);
 void BtlController_EmitOneReturnValue(u32 battler, u32 bufferId, u16 ret);
-void BtlController_EmitOneReturnValue_Duplicate(u32 battler, u32 bufferId, u16 ret);
 void BtlController_EmitHitAnimation(u32 battler, u32 bufferId);
 void BtlController_EmitCantSwitch(u32 battler, u32 bufferId);
 void BtlController_EmitPlaySE(u32 battler, u32 bufferId, u16 songId);
