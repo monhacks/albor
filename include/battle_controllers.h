@@ -288,8 +288,8 @@ void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);
 void InitMoveSelectionsVarsAndStrings(u32 battler);
-void MoveSelectionCreateCursorAt(u8 cursorPos, u8 arg1);
-void MoveSelectionDestroyCursorAt(u8 cursorPosition);
+void MoveSelectionCreateCursorAt(u8 cursorPos);
+void MoveSelectionDestroyCursor(void);
 
 // recorded player controller
 void SetControllerToRecordedPlayer(u32 battler);

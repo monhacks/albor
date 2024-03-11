@@ -2052,11 +2052,6 @@ const u8 gText_MoveInterfacePP[] = _("PP ");
 const u8 gText_MoveInterfaceDynamicColors[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
 const u8 gText_WhichMoveToForget4[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Which move should\nbe forgotten?");
 const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Yes\nNo");
-const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Switch\nwhich?");
-const u8 gText_BattleSwitchWhich2[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
-const u8 gText_BattleSwitchWhich3[] = _("{UP_ARROW}");
-const u8 gText_BattleSwitchWhich4[] = _("{ESCAPE 4}");
-const u8 gText_BattleSwitchWhich5[] = _("-");
 
 const u8 gText_SafariBalls[] = _("{HIGHLIGHT DARK_GRAY}SAFARI BALLS");
 const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GRAY}Left: $" "{HIGHLIGHT DARK_GRAY}");
@@ -2289,16 +2284,6 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
         .bgColor = 3,
         .shadowColor = 2,
     },
-    [B_WIN_SWITCH_PROMPT] = {
-        .fillValue = PIXEL_FILL(0xE),
-        .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
-        .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
-    },
     [B_WIN_YESNO] = {
         .fillValue = PIXEL_FILL(0xE),
         .fontId = FONT_NORMAL,
@@ -2508,16 +2493,6 @@ static const struct BattleWindowText sTextOnWindowsInfo_Arena[] =
         .fgColor = 12,
         .bgColor = 14,
         .shadowColor = 11,
-    },
-    [B_WIN_SWITCH_PROMPT] = {
-        .fillValue = PIXEL_FILL(0xE),
-        .fontId = FONT_NARROW,
-        .x = 0,
-        .y = 1,
-        .speed = 0,
-        .fgColor = 13,
-        .bgColor = 14,
-        .shadowColor = 15,
     },
     [B_WIN_YESNO] = {
         .fillValue = PIXEL_FILL(0xE),

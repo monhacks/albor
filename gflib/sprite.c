@@ -1508,6 +1508,17 @@ void FreeSpriteTileRanges(void)
     }
 }
 
+u8 GetSpriteIndexByTileTag(u16 tag)
+{
+    u8 i;
+    
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].template->tileTag == tag)
+            return i;
+    
+    return 0xFF;
+}
+
 u16 GetSpriteTileStartByTag(u16 tag)
 {
     u8 index = IndexOfSpriteTileTag(tag);
@@ -1584,7 +1595,8 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
             break;
 }
 
-u8 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum) {
+u8 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum) 
+{
     paletteNum = min(15, paletteNum);
     sSpritePaletteTags[paletteNum] = palette->tag;
     DoLoadSpritePalette(palette->data, paletteNum * 16);

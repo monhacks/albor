@@ -230,6 +230,117 @@ static const struct OamData sOamData_64x32 =
     .affineParam = 0,
 };
 
+static const struct SpriteSheet sSpriteSheet_BattleInterfaceSelector =
+{
+    gBattleInterfaceSelector, 0x100, TAG_BATTLE_INTERFACE_SELECTOR
+};
+
+static const struct OamData sOamData_BattleInterfaceSelector =
+{
+    .y = 0,
+    .affineMode = 0,
+    .objMode = 0,
+    .mosaic = 0,
+    .bpp = 0,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sBattleInterfaceSelectorAnim[] =
+{
+    ANIMCMD_FRAME(0, 20),
+    ANIMCMD_FRAME(4, 20),
+    ANIMCMD_JUMP(0)
+};
+
+static const union AnimCmd sBattleInterfaceSelectorPause[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END
+};
+
+static const union AnimCmd *const sBattleInterfaceSelectorAnimTable[] =
+{
+    sBattleInterfaceSelectorAnim,
+    sBattleInterfaceSelectorPause
+};
+
+static const struct Subsprite sBattleInterfaceSelectorSubsprites[] =
+{
+    {0,     0,  0,  0,  0,      0},
+    {120,   0,  0,  0,  1,      0},
+    {0,    14,  0,  0,  2,      0},
+    {120,  14,  0,  0,  3,      0}
+};
+
+static const struct Subsprite sBattleInterfaceSelectorPausedSubsprites[] =
+{
+    {0,     0,  0,  0,  0,      1},
+    {120,   0,  0,  0,  1,      1},
+    {0,    14,  0,  0,  2,      1},
+    {120,  14,  0,  0,  3,      1}
+};
+
+static const struct SubspriteTable sBattleInterfaceSelectorSubspriteTable[] =
+{
+    {ARRAY_COUNT(sBattleInterfaceSelectorSubsprites), sBattleInterfaceSelectorSubsprites},
+};
+
+static void SpriteCallback_BattleInterfaceSelector(struct Sprite *sprite)
+{
+    if (sprite->oam.affineParam & 0x10)
+    {
+        sprite->x = 3;
+        sprite->y = 23 * (sprite->oam.affineParam & 0xF) + 113;
+    }
+    else
+    {
+        sprite->x = 120 + 59 * (sprite->oam.affineParam % 2);
+        sprite->y = 113 + 23 * (sprite->oam.affineParam / 2);
+    }
+}
+
+static const struct SpriteTemplate sBattleInterfaceSelector =
+{
+    .tileTag = TAG_BATTLE_INTERFACE_SELECTOR,
+    .paletteTag = TAG_HEALTHBOX_PAL,
+    .oam = &sOamData_BattleInterfaceSelector,
+    .anims = sBattleInterfaceSelectorAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallback_BattleInterfaceSelector
+};
+
+void MoveSelectionCreateCursorAt(u8 cursorPos)
+{
+    u8 index = GetSpriteIndexByTileTag(TAG_BATTLE_INTERFACE_SELECTOR);
+
+    if (index == 0xFF)
+    {
+        LoadSpriteSheet(&sSpriteSheet_BattleInterfaceSelector);
+        index = CreateSprite(&sBattleInterfaceSelector, 3, 113 + 23 * cursorPos, 0);
+    }
+    gSprites[index].oam.affineParam = (0x10 | cursorPos);
+    SetSubspriteTables(&gSprites[index], sBattleInterfaceSelectorSubspriteTable);
+    StartSpriteAnim(&gSprites[index], 0);
+}
+
+void MoveSelectionDestroyCursor(void)
+{
+    u8 cursorId = GetSpriteIndexByTileTag(TAG_BATTLE_INTERFACE_SELECTOR);
+    if (cursorId != 0xFF)
+    {
+        FreeSpriteTilesByTag(TAG_BATTLE_INTERFACE_SELECTOR);
+        DestroySprite(&gSprites[cursorId]);
+    }
+}
+
 static const struct SpriteTemplate sHealthboxPlayerSpriteTemplates[2] =
 {
     {
@@ -586,11 +697,6 @@ static const struct SpriteTemplate sStatusSummaryBallsSpriteTemplates[2] =
         .affineAnims = gDummySpriteAffineAnimTable,
         .callback = SpriteCB_StatusSummaryBalls_Enter
     }
-};
-
-static const struct SpriteSheet sSpriteSheet_Cursor[] =
-{
-    {gBattleMoveBoxCursor, 0x100, TAG_ACTION_BOX_CURSOR}
 };
 
 static const u8 sEmptyWhiteText_GrayHighlight[] = __("{COLOR WHITE}{HIGHLIGHT DARK_GRAY}              ");

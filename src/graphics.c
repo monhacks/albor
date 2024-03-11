@@ -1224,7 +1224,7 @@ const u32 gMoveTypePalIce[] = INCBIN_U32("graphics/battle_interface/types/move_i
 const u32 gMoveTypePalMystery[] = INCBIN_U32("graphics/battle_interface/types/move_mystery.gbapal.lz");
 const u32 gMoveTypePalPoison[] = INCBIN_U32("graphics/battle_interface/types/move_poison.gbapal.lz");
 
-const u32 gBattleMoveBoxCursor[] = INCBIN_U32("graphics/battle_interface/cursor.4bpp");
+const u32 gBattleInterfaceSelector[] = INCBIN_U32("graphics/battle_interface/selector.4bpp");
 
 const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_frontier/dome_anim1.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_1[] = INCBIN_U16("graphics/battle_frontier/dome_anim2.gbapal");

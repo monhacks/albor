@@ -458,19 +458,18 @@
 #define B_WIN_PP_2                6
 #define B_WIN_PP_3                7
 #define B_WIN_PP_4                8
-#define B_WIN_SWITCH_PROMPT       9 // "Switch which?"
-#define B_WIN_YESNO               10
-#define B_WIN_LEVEL_UP_BOX        11
-#define B_WIN_LEVEL_UP_BANNER     12
-#define B_WIN_VS_PLAYER           13
-#define B_WIN_VS_OPPONENT         14
-#define B_WIN_VS_MULTI_PLAYER_1   15
-#define B_WIN_VS_MULTI_PLAYER_2   16
-#define B_WIN_VS_MULTI_PLAYER_3   17
-#define B_WIN_VS_MULTI_PLAYER_4   18
-#define B_WIN_VS_OUTCOME_DRAW     19
-#define B_WIN_VS_OUTCOME_LEFT     20
-#define B_WIN_VS_OUTCOME_RIGHT    21
+#define B_WIN_YESNO               9
+#define B_WIN_LEVEL_UP_BOX        10
+#define B_WIN_LEVEL_UP_BANNER     11
+#define B_WIN_VS_PLAYER           12
+#define B_WIN_VS_OPPONENT         13
+#define B_WIN_VS_MULTI_PLAYER_1   14
+#define B_WIN_VS_MULTI_PLAYER_2   15
+#define B_WIN_VS_MULTI_PLAYER_3   16
+#define B_WIN_VS_MULTI_PLAYER_4   17
+#define B_WIN_VS_OUTCOME_DRAW     18
+#define B_WIN_VS_OUTCOME_LEFT     19
+#define B_WIN_VS_OUTCOME_RIGHT    20
 
 // The following are duplicate id values for windows that Battle Arena uses differently.
 #define ARENA_WIN_PLAYER_NAME      15

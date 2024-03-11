@@ -234,15 +234,6 @@ static const struct WindowTemplate sStandardBattleWindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 674,
     },
-    [B_WIN_SWITCH_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x02b0,
-    },
     [B_WIN_YESNO] = {
         .bg = 0,
         .tilemapLeft = 26,
@@ -436,15 +427,6 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .height = 2,
         .paletteNum = 5,
         .baseBlock = 0x0290,
-    },
-    [B_WIN_SWITCH_PROMPT] = {
-        .bg = 0,
-        .tilemapLeft = 21,
-        .tilemapTop = 55,
-        .width = 8,
-        .height = 4,
-        .paletteNum = 5,
-        .baseBlock = 0x02b0,
     },
     [B_WIN_YESNO] = {
         .bg = 0,

@@ -63,7 +63,7 @@ enum
 #define TAG_ZMOVE_TRIGGER_PAL           0xD77B
 #define TAG_BURST_TRIGGER_PAL           0xD77C
 #define TAG_DYNAMAX_TRIGGER_PAL         0xD77D
-#define TAG_ACTION_BOX_CURSOR           0xD77E
+#define TAG_BATTLE_INTERFACE_SELECTOR   0xD77F
 
 enum
 {
@@ -121,5 +121,7 @@ void TryAddLastUsedBallItemSprites(void);
 void SwapBallToDisplay(bool32 sameBall);
 void ArrowsChangeColorLastBallCycle(bool32 showArrows);
 void UpdateAbilityPopup(u8 battlerId);
+void MoveSelectionCreateCursorAt(u8 cursorPos);
+void MoveSelectionDestroyCursor(void);
 
 #endif // GUARD_BATTLE_INTERFACE_H

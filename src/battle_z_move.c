@@ -396,7 +396,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
         // Clear move slots
         for (i = 0; i < MAX_MON_MOVES; ++i)
         {
-            MoveSelectionDestroyCursorAt(i);
+            MoveSelectionDestroyCursor();
             StringCopy(gDisplayedStringBattle, gText_EmptyString2);
             BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
         }
@@ -499,7 +499,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_1);
 
         ZMoveSelectionDisplayPpNumber(battler);
-        MoveSelectionCreateCursorAt(0, 0);
+        MoveSelectionCreateCursorAt(0);
         return TRUE;
     }
 
