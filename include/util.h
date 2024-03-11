@@ -18,5 +18,6 @@ void DoBgAffineSet(struct BgAffineDstData *dest, u32 texX, u32 texY, s16 scrX, s
 void CopySpriteTiles(u8 shape, u8 size, u8 *tiles, u16 *tilemap, u8 *output);
 void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon);
 void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 personality);
+void UniquePaletteBuffered(u16 * buffer, u16 species, u32 personality, bool8 isShiny);
 
 #endif // GUARD_UTIL_H

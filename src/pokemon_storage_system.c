@@ -4208,9 +4208,6 @@ static void CreateMovingMonIcon(void)
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
     sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON); //13
     sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
-    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), sStorage->movingMonSprite->oam.paletteNum, PLTT_SIZE_4BPP);
-    UniquePaletteByPersonality(sStorage->movingMonSprite->oam.paletteNum, species, isShiny, personality);
-    CpuFastCopy(&gPlttBufferFaded[sStorage->movingMonSprite->oam.paletteNum], &gPlttBufferUnfaded[sStorage->movingMonSprite->oam.paletteNum], PLTT_SIZE_4BPP);
 }
 
 static void SetBoxMonDynamicPalette(u8 boxId, u8 position) 
@@ -4229,10 +4226,8 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     else
     {
         LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
+        UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], MON_DATA_PERSONALITY), IsMonShiny((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position]));
     }
-    LoadCompressedPalette(palette, sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
-    UniquePaletteByPersonality(sPaletteSwapBuffer[PLTT_ID(position)], species, isShiny, personality);
-    CpuFastCopy(&gPlttBufferFaded[sPaletteSwapBuffer[PLTT_ID(position)]], &gPlttBufferUnfaded[sPaletteSwapBuffer[PLTT_ID(position)]], PLTT_SIZE_4BPP);
     sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
 
