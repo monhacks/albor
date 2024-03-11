@@ -69,7 +69,6 @@ enum {
     MSG_BOX_IS_FULL,
     MSG_RELEASE_POKE,
     MSG_WAS_RELEASED,
-    MSG_BYE_BYE,
     MSG_LAST_POKE,
     MSG_PARTY_FULL,
     MSG_HOLDING_POKE,
@@ -94,9 +93,7 @@ enum {
 enum {
     MSG_VAR_NONE,
     MSG_VAR_MON_NAME,
-    MSG_VAR_RELEASE_MON_1,
-    MSG_VAR_RELEASE_MON_2, // Unused
-    MSG_VAR_RELEASE_MON_3,
+    MSG_VAR_RELEASE_MON,
     MSG_VAR_ITEM_NAME,
 };
 
@@ -126,8 +123,6 @@ enum {
 enum {
     INPUT_NONE,
     INPUT_MOVE_CURSOR,
-    INPUT_2, // Unused
-    INPUT_3, // Unused
     INPUT_CLOSE_BOX,
     INPUT_SHOW_PARTY,
     INPUT_HIDE_PARTY,
@@ -495,7 +490,6 @@ EWRAM_DATA static bool8 sAutoActionOn = 0;
 EWRAM_DATA static bool8 sJustOpenedBag = 0;
 EWRAM_DATA static u16 *sPaletteSwapBuffer = NULL; // dynamically-allocated buffer to hold box palettes
 EWRAM_DATA static u8 allocCount = 0; // Track number of alloc's vs frees
-EWRAM_DATA static struct BoxPokemon sCurrentBoxPokemon = {0};
 
 // Main tasks
 static void Task_InitPokeStorage(u8);
@@ -966,8 +960,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME},
     [MSG_BOX_IS_FULL]          = {gText_BoxIsFull2,              MSG_VAR_NONE},
     [MSG_RELEASE_POKE]         = {gText_ReleaseThisPokemon,      MSG_VAR_NONE},
-    [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON_1},
-    [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON_3},
+    [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON},
     [MSG_LAST_POKE]            = {gText_ThatsYourLastPkmn,       MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,          MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {gText_YoureHoldingAPkmn,       MSG_VAR_NONE},
@@ -2844,7 +2837,7 @@ static void Task_ReleaseMon(u8 taskId)
     case 4:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
-            PrintMessage(MSG_BYE_BYE);
+            PrintMessage(MSG_WAS_RELEASED);
             sStorage->state++;
         }
         break;
@@ -3741,7 +3734,7 @@ static void CreateDisplayMonSprite(void)
         if (tileStart == 0)
             break;
 
-        palSlot = LoadSpritePalette(&palette);
+        palSlot = LoadUniqueSpritePaletteByPersonality(&palette, sStorage->displayMonSpecies, SHINY_ODDS, sStorage->displayMonPersonality);
         if (palSlot == 0xFF)
             break;
 
@@ -3771,7 +3764,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
-        UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon);
+        UniquePaletteByPersonality(sStorage->displayMonPalOffset, species, SHINY_ODDS, pid); //Funciona (en primera pantalla de equipo)
         CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
         sStorage->displayMonSprite->invisible = FALSE;
     }
@@ -4098,9 +4091,7 @@ static void PrintMessage(u8 id)
     case MSG_VAR_MON_NAME:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->displayMonName);
         break;
-    case MSG_VAR_RELEASE_MON_1:
-    case MSG_VAR_RELEASE_MON_2:
-    case MSG_VAR_RELEASE_MON_3:
+    case MSG_VAR_RELEASE_MON:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->releaseMonName);
         break;
     case MSG_VAR_ITEM_NAME:
@@ -4211,11 +4202,15 @@ static void CreateMovingMonIcon(void)
 {
     u32 personality = GetMonData(&sStorage->movingMon, MON_DATA_PERSONALITY);
     u16 species = GetMonData(&sStorage->movingMon, MON_DATA_SPECIES_OR_EGG);
+    bool8 isShiny = GetMonData(&sStorage->movingMon, MON_DATA_IS_SHINY);
     u8 priority = GetMonIconPriorityByCursorPos();
 
     sStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
     sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON); //13
     sStorage->movingMonSprite->callback = SpriteCB_HeldMon;
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), sStorage->movingMonSprite->oam.paletteNum, PLTT_SIZE_4BPP);
+    UniquePaletteByPersonality(sStorage->movingMonSprite->oam.paletteNum, species, isShiny, personality);
+    CpuFastCopy(&gPlttBufferFaded[sStorage->movingMonSprite->oam.paletteNum], &gPlttBufferUnfaded[sStorage->movingMonSprite->oam.paletteNum], PLTT_SIZE_4BPP);
 }
 
 static void SetBoxMonDynamicPalette(u8 boxId, u8 position) 
@@ -4235,6 +4230,9 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     {
         LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
     }
+    LoadCompressedPalette(palette, sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+    UniquePaletteByPersonality(sPaletteSwapBuffer[PLTT_ID(position)], species, isShiny, personality);
+    CpuFastCopy(&gPlttBufferFaded[sPaletteSwapBuffer[PLTT_ID(position)]], &gPlttBufferUnfaded[sPaletteSwapBuffer[PLTT_ID(position)]], PLTT_SIZE_4BPP);
     sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
 
@@ -4551,7 +4549,7 @@ static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
         sStorage->boxMonsSprites[boxPosition]->oam.objMode = objMode;
 }
 
-static void CreatePartyMonsSprites(bool8 visible)
+static void CreatePartyMonsSprites(bool8 visible) //iconos de Pokémon de equipo
 {
     u16 i, count;
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
@@ -6082,7 +6080,7 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     // Set moving sprite palette to currently displayed pokemon's palette
     sStorage->displayMonSprite->invisible = TRUE;
     LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
-    UniquePalette(sStorage->displayMonPalOffset, &sCurrentBoxPokemon);
+    UniquePalette(sStorage->displayMonPalOffset, GetBoxedMonPtr(boxId, position));
     CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
     sStorage->movingMonSprite->oam.paletteNum = displayIndex;
     sMovingMonOrigBoxId = boxId;
@@ -6566,7 +6564,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct Pokemon *mon = (struct Pokemon *)pokemon;
 
-        CopyMon(&sCurrentBoxPokemon, &mon->box, sizeof(sCurrentBoxPokemon));
         sStorage->displayMonSpecies = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
@@ -6580,7 +6577,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             StringGet_Nickname(sStorage->displayMonName);
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
-            sStorage->displayMonPalette = GetMonFrontSpritePal(mon); //*
+            sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
@@ -6589,7 +6586,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     {
         struct BoxPokemon *boxMon = (struct BoxPokemon *)pokemon;
 
-        CopyMon(&sCurrentBoxPokemon, &boxMon, sizeof(sCurrentBoxPokemon));
         sStorage->displayMonSpecies = GetBoxMonData(pokemon, MON_DATA_SPECIES_OR_EGG);
         if (sStorage->displayMonSpecies != SPECIES_NONE)
         {
