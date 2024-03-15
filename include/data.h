@@ -124,6 +124,23 @@ struct FollowerMessagePool
     u16 length;
 };
 
+struct TypeInfo
+{
+    u8 name[TYPE_NAME_LENGTH + 1];
+    u8 generic[21];
+    u8 palette;
+    u16 zMove;
+    u16 maxMove;
+    //u16 enhanceItem;
+    //u16 berry;
+    //u16 gem;
+    //u16 plate;
+    //u16 memory;
+    //u16 zCrystal;
+    //u16 teraShard;
+    //u16 arceusForm;
+};
+
 // Follower text messages
 extern const struct FollowerMsgInfo gFollowerHappyMessages[];
 extern const struct FollowerMsgInfo gFollowerNeutralMessages[];
