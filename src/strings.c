@@ -860,7 +860,6 @@ const u8 gPCText_Move[] = _("MOVE");
 const u8 gPCText_Place[] = _("PLACE");
 const u8 gPCText_Summary[] = _("Sumario");
 const u8 gPCText_Release[] = _("RELEASE");
-const u8 gPCText_Mark[] = _("MARK");
 const u8 gPCText_Name[] = _("Nombre");
 const u8 gPCText_Jump[] = _("JUMP");
 const u8 gPCText_Take[] = _("Tomar");

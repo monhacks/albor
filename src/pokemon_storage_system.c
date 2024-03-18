@@ -94,9 +94,7 @@ enum {
 enum {
     MSG_VAR_NONE,
     MSG_VAR_MON_NAME,
-    MSG_VAR_RELEASE_MON_1,
-    MSG_VAR_RELEASE_MON_2, // Unused
-    MSG_VAR_RELEASE_MON_3,
+    MSG_VAR_RELEASE_MON,
     MSG_VAR_ITEM_NAME,
 };
 
@@ -469,8 +467,8 @@ struct PokemonStorageSystemData
     struct Sprite *displayMonSprite;
     u16 displayMonPalBuffer[0x40];
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
-    u8 ALIGNED(4) itemIconBuffer[0x800];
-    u8 displayMenuTilemapBuffer[0x800];
+    u8 ALIGNED(4) itemIconBuffer[2048];
+    u8 ALIGNED(4) displayMenuTilemapBuffer[4096];
 };
 
 static u32 sItemIconGfxBuffer[98];
@@ -777,15 +775,18 @@ static void TilemapUtil_Draw(u8);
 void SetMonFormPSS(struct BoxPokemon *boxMon);
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
-struct {
+struct 
+{
     const u8 *text;
     const u8 *desc;
-} static const sMainMenuTexts[OPTIONS_COUNT] =
+} 
+
+static const sMainMenuTexts[OPTIONS_COUNT] =
 {
     [OPTION_MOVE_MONS]  = {gText_MovePokemon,     gText_MoveMonDescription},
     [OPTION_WITHDRAW]   = {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     [OPTION_DEPOSIT]    = {gText_DepositPokemon,  gText_DepositMonDescription},
-    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription}
+    [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
@@ -915,8 +916,8 @@ static const struct BgTemplate sBgTemplates[] =
     {
         .bg = 2,
         .charBaseIndex = 2,
-        .mapBaseIndex = 31,
-        .screenSize = 0,
+        .mapBaseIndex = 27,
+        .screenSize = 1,
         .paletteMode = 0,
         .priority = 2,
         .baseTile = 0
@@ -924,7 +925,7 @@ static const struct BgTemplate sBgTemplates[] =
     {
         .bg = 3,
         .charBaseIndex = 3,
-        .mapBaseIndex = 27,
+        .mapBaseIndex = 31,
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 3,
@@ -965,8 +966,8 @@ static const struct StorageMessage sMessages[] =
     [MSG_WAS_DEPOSITED]        = {gText_PkmnWasDeposited,        MSG_VAR_MON_NAME},
     [MSG_BOX_IS_FULL]          = {gText_BoxIsFull2,              MSG_VAR_NONE},
     [MSG_RELEASE_POKE]         = {gText_ReleaseThisPokemon,      MSG_VAR_NONE},
-    [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON_1},
-    [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON_3},
+    [MSG_WAS_RELEASED]         = {gText_PkmnWasReleased,         MSG_VAR_RELEASE_MON},
+    [MSG_BYE_BYE]              = {gText_ByeByePkmn,              MSG_VAR_RELEASE_MON},
     [MSG_LAST_POKE]            = {gText_ThatsYourLastPkmn,       MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,          MSG_VAR_NONE},
     [MSG_HOLDING_POKE]         = {gText_YoureHoldingAPkmn,       MSG_VAR_NONE},
@@ -1568,7 +1569,7 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 pa
     };
     struct SpriteSheet sheets[] =
     {
-        {sChooseBoxMenuCenter_Gfx, 0x800, tileTag},
+        {sChooseBoxMenuCenter_Gfx, 2048, tileTag},
         {sChooseBoxMenuSides_Gfx,  0x180, tileTag + 1},
         {}
     };
@@ -2048,12 +2049,8 @@ static void Task_InitPokeStorage(u8 taskId)
     case 9:
         if (IsInitBoxActive())
             return;
-
-        if (sStorage->boxOption == OPTION_MOVE_ITEMS)
-        {
-            CreateItemIconSprites();
-            InitCursorItemIcon();
-        }
+        CreateItemIconSprites();
+        InitCursorItemIcon();
         break;
     case 10:
         SetMonIconTransparency();
@@ -3610,15 +3607,15 @@ static void FreePokeStorageData(void)
 
 static void SetScrollingBackground(void)
 {
-    SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
-    DecompressAndLoadBgGfxUsingHeap(2, sScrollingBg_Gfx, 0, 0, 0);
+    SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
+    DecompressAndLoadBgGfxUsingHeap(3, sScrollingBg_Gfx, 0, 0, 0);
     LZ77UnCompVram(sScrollingBg_Tilemap, (void *)BG_SCREEN_ADDR(31));
 }
 
 static void ScrollBackground(void)
 {
-    ChangeBgX(2, 128, BG_COORD_ADD);
-    ChangeBgY(2, 128, BG_COORD_SUB);
+    ChangeBgX(3, 128, BG_COORD_ADD);
+    ChangeBgY(3, 128, BG_COORD_SUB);
 }
 
 static void LoadPokeStorageMenuGfx(void)
@@ -4095,9 +4092,7 @@ static void PrintMessage(u8 id)
     case MSG_VAR_MON_NAME:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->displayMonName);
         break;
-    case MSG_VAR_RELEASE_MON_1:
-    case MSG_VAR_RELEASE_MON_2:
-    case MSG_VAR_RELEASE_MON_3:
+    case MSG_VAR_RELEASE_MON:
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, sStorage->releaseMonName);
         break;
     case MSG_VAR_ITEM_NAME:
@@ -5055,7 +5050,6 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
 
 
 #define tState  data[0]
-#define tDmaIdx data[1]
 #define tBoxId  data[2]
 
 static void CreateInitBoxTask(u8 boxId)
@@ -5077,11 +5071,15 @@ static void Task_InitBox(u8 taskId)
     switch (task->tState)
     {
     case 0:
+        ShowBg(2);
+        break;
+    case 1:
         InitBoxTitle(task->tBoxId);
         CreateBoxScrollArrows();
         InitBoxMonSprites(task->tBoxId);
+        SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(27) | BGCNT_TXT512x256);
         break;
-    case 1:
+    case 2:
         DestroyTask(taskId);
         break;
     default:
@@ -5093,7 +5091,6 @@ static void Task_InitBox(u8 taskId)
 }
 
 #undef tState
-#undef tDmaIdx
 #undef tBoxId
 
 static void SetUpScrollToBox(u8 boxId)
@@ -5123,6 +5120,8 @@ static bool8 ScrollToBox(void)
         iconsScrolling = UpdateBoxMonIconScroll();
         if (sStorage->scrollTimer != 0)
         {
+            if (--sStorage->scrollTimer != 0)
+                return TRUE;
             CycleBoxTitleSprites();
             StopBoxScrollArrowsSlide();
         }
@@ -7433,7 +7432,7 @@ static void CreateCursorSprites(void)
     u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] =
     {
-        {sHandCursor_Gfx, 0x800, GFXTAG_CURSOR},
+        {sHandCursor_Gfx, 2048, GFXTAG_CURSOR},
         {sHandCursorShadow_Gfx, 0x80, GFXTAG_CURSOR_SHADOW},
         {}
     };
