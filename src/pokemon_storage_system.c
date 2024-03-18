@@ -76,7 +76,6 @@ enum {
     MSG_CANT_RELEASE_EGG,
     MSG_CONTINUE_BOX,
     MSG_CAME_BACK,
-    MSG_WORRIED,
     MSG_SURPRISE,
     MSG_PLEASE_REMOVE_MAIL,
     MSG_IS_SELECTED2,
@@ -969,7 +968,6 @@ static const struct StorageMessage sMessages[] =
     [MSG_CANT_RELEASE_EGG]     = {gText_YouCantReleaseAnEgg,     MSG_VAR_NONE},
     [MSG_CONTINUE_BOX]         = {gText_ContinueBoxOperations,   MSG_VAR_NONE},
     [MSG_CAME_BACK]            = {gText_PkmnCameBack,            MSG_VAR_MON_NAME},
-    [MSG_WORRIED]              = {gText_WasItWorriedAboutYou,    MSG_VAR_NONE},
     [MSG_SURPRISE]             = {gText_FourEllipsesExclamation, MSG_VAR_NONE},
     [MSG_PLEASE_REMOVE_MAIL]   = {gText_PleaseRemoveTheMail,     MSG_VAR_NONE},
     [MSG_IS_SELECTED2]         = {gText_PkmnIsSelected,          MSG_VAR_ITEM_NAME},
@@ -2899,13 +2897,6 @@ static void Task_ReleaseMon(u8 taskId)
         }
         break;
     case 12:
-        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
-        {
-            PrintMessage(MSG_WORRIED);
-            sStorage->state++;
-        }
-        break;
-    case 13:
         if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
         {
             ClearBottomWindow();
