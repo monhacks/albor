@@ -253,8 +253,6 @@ enum {
     ITEM_CB_TO_MON,
     ITEM_CB_SWAP_TO_HAND,
     ITEM_CB_SWAP_TO_MON,
-    ITEM_CB_UNUSED_1,
-    ITEM_CB_UNUSED_2,
     ITEM_CB_HIDE_PARTY,
 };
 
@@ -350,7 +348,7 @@ struct PokemonStorageSystemData
     u8 screenChangeType;
     bool8 isReopening;
     u8 taskId;
-    u16 partyMenuTilemapBuffer[0x108];
+    u16 partyMenuTilemapBuffer[264];
     u16 partyMenuY;
     u8 partyMenuMoveTimer;
     u8 showPartyMenuState;
@@ -461,7 +459,7 @@ struct PokemonStorageSystemData
     u16 displayMonPalOffset;
     u16 *displayMonTilePtr;
     struct Sprite *displayMonSprite;
-    u16 displayMonPalBuffer[0x40];
+    u16 displayMonPalBuffer[64];
     u8 ALIGNED(4) tileBuffer[MON_PIC_SIZE * MAX_MON_PIC_FRAMES];
     u8 ALIGNED(4) itemIconBuffer[2048];
     u8 ALIGNED(4) displayMenuTilemapBuffer[4096];
@@ -794,7 +792,7 @@ static const struct WindowTemplate sWindowTemplate_MainMenu =
     .width = 17,
     .height = 8,
     .paletteNum = 15,
-    .baseBlock = 0x1,
+    .baseBlock = 1,
 };
 
 static const union AnimCmd sAnim_ChooseBoxMenu_TopLeft[] =
@@ -831,7 +829,7 @@ static const union AnimCmd *const sAnims_ChooseBoxMenu[] =
 
 static const union AffineAnimCmd sAffineAnim_ChooseBoxMenu[] =
 {
-    AFFINEANIMCMD_FRAME(0xE0, 0xE0, 0, 0),
+    AFFINEANIMCMD_FRAME(224, 224, 0, 0),
     AFFINEANIMCMD_END
 };
 
@@ -867,7 +865,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 9,
         .height = 7,
         .paletteNum = 3,
-        .baseBlock = 0xC0,
+        .baseBlock = 192,
     },
     [WIN_MESSAGE] = {
         .bg = 0,
@@ -876,7 +874,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 18,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x14,
+        .baseBlock = 20,
     },
     [WIN_ITEM_DESC] = {
         .bg = 0,
@@ -885,7 +883,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .width = 21,
         .height = 7,
         .paletteNum = 15,
-        .baseBlock = 0x14,
+        .baseBlock = 20,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -908,7 +906,7 @@ static const struct BgTemplate sBgTemplates[] =
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 1,
-        .baseTile = 0x100
+        .baseTile = 256
     },
     {
         .bg = 2,
@@ -991,7 +989,7 @@ static const struct WindowTemplate sYesNoWindowTemplate =
     .width = 5,
     .height = 4,
     .paletteNum = 15,
-    .baseBlock = 0x5C,
+    .baseBlock = 92,
 };
 
 static const struct OamData sOamData_DisplayMon =
@@ -1238,17 +1236,17 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     {
         for (i = tileBytesToBuffer; i != 0; i--)
         {
-            CpuCopy16(tileData1, dst, 0x80);
-            CpuCopy16(tileData2, dst + 0x80, 0x80);
-            tileData1 += 0x80;
-            tileData2 += 0x80;
-            dst += 0x100;
+            CpuCopy16(tileData1, dst, 128);
+            CpuCopy16(tileData2, dst + 128, 128);
+            tileData1 += 128;
+            tileData2 += 128;
+            dst += 256;
         }
     }
 
     // Never used. bytesToBuffer is always passed <= 6, so remainingBytes is always <= 0 here
     if (remainingBytes > 0)
-        CpuFill16((zero2 << 4) | zero2, dst, (u32)(remainingBytes) * 0x100);
+        CpuFill16((zero2 << 4) | zero2, dst, (u32)(remainingBytes) * 256);
 
     RemoveWindow(windowId);
 }
@@ -1565,7 +1563,7 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu, u16 tileTag, u16 pa
     struct SpriteSheet sheets[] =
     {
         {sChooseBoxMenuCenter_Gfx, 2048, tileTag},
-        {sChooseBoxMenuSides_Gfx,  0x180, tileTag + 1},
+        {sChooseBoxMenuSides_Gfx,  384, tileTag + 1},
         {}
     };
 
@@ -1744,7 +1742,7 @@ static void ChooseBoxMenu_PrintInfo(void)
     AddTextPrinterParameterized3(windowId, FONT_NORMAL, center, 17, sChooseBoxMenu_TextColors, TEXT_SKIP_DRAW, numBoxMonsText);
 
     winTileData = GetWindowAttribute(windowId, WINDOW_TILE_DATA);
-    CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 0x100 + (GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32), 0x400);
+    CpuCopy32((void *)winTileData, (void *)OBJ_VRAM0 + 256 + (GetSpriteTileStartByTag(sChooseBoxMenu->tileTag) * 32), 1024);
 
     RemoveWindow(windowId);
 }
@@ -1789,7 +1787,7 @@ static void VBlankCB_PokeStorage(void)
     {
         RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
         // Skip the 12-1 palettes that are being dynamically swapped anyway
-        RequestDma3Copy(&gPlttBufferFaded[PLTT_ID(28)], (void*) 0x05000380, 32*4, 0);
+        RequestDma3Copy(&gPlttBufferFaded[PLTT_ID(28)], (void*) 83886976, 32*4, 0);
     } 
     else 
     {
@@ -1882,7 +1880,7 @@ static void ResetForPokeStorage(void)
     FreeSpriteTileRanges();
     FreeAllSpritePalettes();
     ClearDma3Requests();
-    gReservedSpriteTileCount = 0x280;
+    gReservedSpriteTileCount = 640;
     gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     TilemapUtil_Init(TILEMAPID_COUNT);
@@ -1917,33 +1915,32 @@ static void SetPokeStorageTask(TaskFunc newFunc)
 // Manages swapping palettes mid draw to make all icon palettes appear
 static void HBlankCB_PokeStorage(void) 
 {
-  u8 vCount = REG_VCOUNT;
-  u32 i;
-  if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gPaletteFade.active && gPaletteFade.y == 16 && gPaletteFade.mode == 2)) // HARDWARE_FADE
+    u8 vCount = REG_VCOUNT;
+    u32 i;
+    if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gPaletteFade.active && gPaletteFade.y == 16 && gPaletteFade.mode == 2)) // HARDWARE_FADE
     return;
-  // For each row in the pc box
-  for (i = 0; i < IN_BOX_ROWS; i++) 
-  {
-    if (vCount == 28-8+24*i) 
-    { // -8 is to keep the right palette when being switched
-      u32 position = IN_BOX_COLUMNS*16*i;
-      u16* dst = (u16*) (OBJ_PLTT + (i & 1 ? 7 : 1)*16*2); // Points into Palette RAM directly
-      u32 j;
-      for (j = 0; j < IN_BOX_COLUMNS; j++, position += 16, dst += 16) 
-      {
-        // If palette color is empty, skip
-        if (!(sPaletteSwapBuffer[position] & 0x7FFF))
-          continue;
-        CpuFastCopy(&sPaletteSwapBuffer[position], dst, PLTT_SIZE_4BPP);
-      }
-      break;
+    // For each row in the pc box
+    for (i = 0; i < IN_BOX_ROWS; i++) 
+    {
+        if (vCount == 28-8+24*i) 
+        { // -8 is to keep the right palette when being switched
+            u32 position = IN_BOX_COLUMNS*16*i;
+            u16* dst = (u16*) (OBJ_PLTT + (i & 1 ? 7 : 1)*16*2); // Points into Palette RAM directly
+            u32 j;
+            for (j = 0; j < IN_BOX_COLUMNS; j++, position += 16, dst += 16) 
+            { // If palette color is empty, skip
+                if (!(sPaletteSwapBuffer[position] & 0x7FFF))
+                continue;
+                CpuFastCopy(&sPaletteSwapBuffer[position], dst, PLTT_SIZE_4BPP);
+            }
+            break;
+        }
     }
-  }
-  if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0]) 
-  { // copy choose box palette
-    u16 *dst = (u16*) (OBJ_PLTT + (0)*16*2);
-    CpuFastCopy(sStorage->chooseBoxSwapPal, dst, PLTT_SIZE_4BPP);
-  }
+    if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0]) 
+    { // copy choose box palette
+        u16 *dst = (u16*) (OBJ_PLTT + (0)*16*2);
+        CpuFastCopy(sStorage->chooseBoxSwapPal, dst, PLTT_SIZE_4BPP);
+    }
 }
 
 static void DisableBoxMonDynamicPalette(u8 position, u8 count) 
@@ -1952,7 +1949,7 @@ static void DisableBoxMonDynamicPalette(u8 position, u8 count)
   for (i = position; i < position+count && i < IN_BOX_COUNT; i++) 
   {
     if (sPaletteSwapBuffer[PLTT_ID(i)] & 0x7FFF)
-      sPaletteSwapBuffer[PLTT_ID(i)] = 0x8000;
+      sPaletteSwapBuffer[PLTT_ID(i)] = 32768;
   }
 }
 
@@ -1961,7 +1958,7 @@ static void EnableBoxMonDynamicPalette(u8 position, u8 count)
   u8 i;
   for (i = position; i < position+count && i < IN_BOX_COUNT; i++) 
   {
-    if (sPaletteSwapBuffer[PLTT_ID(i)] == 0x8000)
+    if (sPaletteSwapBuffer[PLTT_ID(i)] == 32768)
       sPaletteSwapBuffer[PLTT_ID(i)] = 0x7FFF;
   }
 }
@@ -2005,8 +2002,8 @@ static void Task_InitPokeStorage(u8 taskId)
     case 2:
         PutWindowTilemap(WIN_DISPLAY_INFO);
         ClearWindowTilemap(WIN_MESSAGE);
-        CpuFill32(0, (void *)VRAM, 0x200);
-        LoadUserWindowBorderGfx(WIN_MESSAGE, 0xB, BG_PLTT_ID(14));
+        CpuFill32(0, (void *)VRAM, 512);
+        LoadUserWindowBorderGfx(WIN_MESSAGE, 11, BG_PLTT_ID(14));
         break;
     case 3:
         ResetAllBgCoords();
@@ -2091,7 +2088,7 @@ static void Task_ReshowPokeStorage(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
         BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
         BeginHardwarePaletteFade(0xFF, 0, 16, 0, TRUE);
         EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
@@ -3896,7 +3893,7 @@ static bool8 HidePartyMenu(void)
         sStorage->partyMenuY--;
         TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, -1);
         TilemapUtil_Update(TILEMAPID_PARTY_MENU);
-        FillBgTilemapBufferRect_Palette0(1, 0x100, 10, sStorage->partyMenuY, 12, 1);
+        FillBgTilemapBufferRect_Palette0(1, 256, 10, sStorage->partyMenuY, 12, 1);
         MovePartySprites(-8);
         // Re-enable box palette swapping
         if (sStorage->partyMenuMoveTimer == 0) 
@@ -4933,7 +4930,7 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
 
     // Treat female mons as a seperate species as they may have a different icon than males
     if (gSpeciesInfo[species].iconSpriteFemale != NULL && IsPersonalityFemale(species, personality))
-        species |= 0x8000; // 1 << 15
+        species |= 32768; // 1 << 15
 
     // Search icon list for this species
     for (i = 0; i < MAX_MON_ICONS; i++)
@@ -4962,7 +4959,7 @@ static u16 TryLoadMonIconTiles(u16 species, u32 personality)
     sStorage->numIconsPerSpecies[i]++;
     offset = 16 * i;
     species &= GENDER_MASK;
-    CpuFastCopy(GetMonIconTiles(species, personality), (void *)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 0x200);
+    CpuFastCopy(GetMonIconTiles(species, personality), (void *)(OBJ_VRAM0) + offset * TILE_SIZE_4BPP, 512);
 
     return offset;
 }
@@ -4974,7 +4971,7 @@ static void RemoveSpeciesFromIconList(u16 species)
 
     for (i = 0; i < MAX_MON_ICONS; i++)
     {
-        if (sStorage->iconSpeciesList[i] == (species | 0x8000))
+        if (sStorage->iconSpeciesList[i] == (species | 32768))
         {
             hasFemale = TRUE;
             break;
@@ -5148,7 +5145,7 @@ static void InitBoxTitle(u8 boxId)
     s16 x;
     u16 i;
 
-    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 512, GFXTAG_BOX_TITLE};
 
     tagIndex = IndexOfSpritePaletteTag(PALTAG_BOX_TITLE);
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
@@ -5183,7 +5180,7 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
 {
     s16 x, adjustedX;
     u16 i;
-    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 0x200, GFXTAG_BOX_TITLE};
+    struct SpriteSheet spriteSheet = {sStorage->boxTitleTiles, 512, GFXTAG_BOX_TITLE};
     struct SpriteTemplate template = sSpriteTemplate_BoxTitle;
 
     sStorage->boxTitleCycleId = (sStorage->boxTitleCycleId == 0);
@@ -5965,7 +5962,7 @@ static void MoveMon(void)
             SetMovingMonSprite(MODE_BOX, sCursorPosition);
             // Set moving sprite palette to currently displayed pokemon
             sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON);
-            palette[0] = 0x8000;
+            palette[0] = 32768;
             SwapInPalNextVBlank(&palette[0], &sPaletteSwapBuffer[PLTT_ID(sCursorPosition)]);
         }
         break;
@@ -7427,7 +7424,7 @@ static void CreateCursorSprites(void)
     struct SpriteSheet spriteSheets[] =
     {
         {sHandCursor_Gfx, 2048, GFXTAG_CURSOR},
-        {sHandCursorShadow_Gfx, 0x80, GFXTAG_CURSOR_SHADOW},
+        {sHandCursorShadow_Gfx, 128, GFXTAG_CURSOR_SHADOW},
         {}
     };
 
@@ -7744,7 +7741,7 @@ static const struct WindowTemplate sWindowTemplate_MultiMove =
     .width = 20,
     .height = 18,
     .paletteNum = 9,
-    .baseBlock = 0xA,
+    .baseBlock = 10,
 };
 
 EWRAM_DATA static struct
@@ -7831,13 +7828,13 @@ static bool8 MultiMove_Start(void)
         sMultiMove->toRow = sMultiMove->fromRow;
         ChangeBgX(0, -1024, BG_COORD_SET);
         ChangeBgY(0, -1024, BG_COORD_SET);
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 0x20, 0x20);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
         FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
         MultiMove_SetIconToBg(sMultiMove->fromColumn, sMultiMove->fromRow);
         SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
         PutWindowTilemap(sStorage->multiMoveWindowId);
         CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_FULL);
-        BlendPalettes(0x3F00, 8, RGB_WHITE);
+        BlendPalettes(16128, 8, RGB_WHITE);
         StartCursorAnim(CURSOR_ANIM_OPEN);
         SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
         sMultiMove->state++;
@@ -8397,7 +8394,7 @@ static void CreateItemIconSprites(void)
     if (sStorage->boxOption == OPTION_MOVE_ITEMS)
     {
         spriteSheet.data = sItemIconGfxBuffer;
-        spriteSheet.size = 0x200;
+        spriteSheet.size = 512;
         spriteTemplate = sSpriteTemplate_ItemIcon;
 
         for (i = 0; i < MAX_ITEM_ICONS; i++)
@@ -8768,12 +8765,12 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
     if (id >= MAX_ITEM_ICONS)
         return;
 
-    CpuFastFill(0, sStorage->itemIconBuffer, 0x200);
+    CpuFastFill(0, sStorage->itemIconBuffer, 512);
     LZ77UnCompWram(itemTiles, sStorage->tileBuffer);
     for (i = 0; i < 3; i++)
-        CpuFastCopy(&sStorage->tileBuffer[i * 0x60], &sStorage->itemIconBuffer[i * 0x80], 0x60);
+        CpuFastCopy(&sStorage->tileBuffer[i * 96], &sStorage->itemIconBuffer[i * 128], 96);
 
-    CpuFastCopy(sStorage->itemIconBuffer, sStorage->itemIcons[id].tiles, 0x200);
+    CpuFastCopy(sStorage->itemIconBuffer, sStorage->itemIcons[id].tiles, 512);
     LZ77UnCompWram(itemPal, sStorage->itemIconBuffer);
     // Load into free item palette slot,
     // the one not being used by an item icon
@@ -8880,7 +8877,7 @@ static void PrintItemDescription(void)
 static void InitItemInfoWindow(void)
 {
     sStorage->itemInfoWindowOffset = 21;
-    LoadBgTiles(0, sItemInfoFrame_Gfx, 0x80, 0x13A);
+    LoadBgTiles(0, sItemInfoFrame_Gfx, 128, 314);
     DrawItemInfoWindow(0);
 }
 
@@ -8894,7 +8891,7 @@ static bool8 UpdateItemInfoWindowSlideIn(void)
     sStorage->itemInfoWindowOffset--;
     pos = 21 - sStorage->itemInfoWindowOffset;
     for (i = 0; i < pos; i++)
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sStorage->itemInfoWindowOffset + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 20 + sStorage->itemInfoWindowOffset + i, i, 13, 1, 7, 15, 21);
 
     DrawItemInfoWindow(pos);
     return (sStorage->itemInfoWindowOffset != 0);
@@ -8914,7 +8911,7 @@ static bool8 UpdateItemInfoWindowSlideOut(void)
     pos = 21 - sStorage->itemInfoWindowOffset;
     for (i = 0; i < pos; i++)
     {
-        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 0x14 + sStorage->itemInfoWindowOffset + i, i, 13, 1, 7, 15, 21);
+        WriteSequenceToBgTilemapBuffer(0, GetBgAttribute(0, BG_ATTR_BASETILE) + 20 + sStorage->itemInfoWindowOffset + i, i, 13, 1, 7, 15, 21);
     }
 
     if (pos >= 0)
@@ -8929,12 +8926,12 @@ static void DrawItemInfoWindow(u32 x)
 {
     if (x != 0)
     {
-        FillBgTilemapBufferRect(0, 0x13A, 0, 0xC, x, 1, 15);
-        FillBgTilemapBufferRect(0, 0x93A, 0, 0x14, x, 1, 15);
+        FillBgTilemapBufferRect(0, 314, 0, 12, x, 1, 15);
+        FillBgTilemapBufferRect(0, 2362, 0, 20, x, 1, 15);
     }
-    FillBgTilemapBufferRect(0, 0x13B, x, 0xD, 1, 7, 15);
-    FillBgTilemapBufferRect(0, 0x13C, x, 0xC, 1, 1, 15);
-    FillBgTilemapBufferRect(0, 0x13D, x, 0x14, 1, 1, 15);
+    FillBgTilemapBufferRect(0, 315, x, 13, 1, 7, 15);
+    FillBgTilemapBufferRect(0, 316, x, 12, 1, 1, 15);
+    FillBgTilemapBufferRect(0, 317, x, 20, 1, 1, 15);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -9341,7 +9338,7 @@ struct TilemapUtil_RectData
 
 struct TilemapUtil
 {
-    struct TilemapUtil_RectData prev; // Only read in unused function
+    struct TilemapUtil_RectData prev;
     struct TilemapUtil_RectData cur;
     const void *tilemap;
     u16 altWidth;
@@ -9369,17 +9366,6 @@ static void TilemapUtil_Init(u8 count)
 static void TilemapUtil_Free(void)
 {
     Free(sTilemapUtil);
-}
-
-static void UNUSED TilemapUtil_UpdateAll(void)
-{
-    s32 i;
-
-    for (i = 0; i < sNumTilemapUtilIds; i++)
-    {
-        if (sTilemapUtil[i].active == TRUE)
-            TilemapUtil_Update(i);
-    }
 }
 
 struct
