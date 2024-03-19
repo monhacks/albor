@@ -772,9 +772,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_BEEDRILL,                 \
         .categoryName = _("Poison Bee"),                    \
         FOOTPRINT(Beedrill)                                 \
-        LEARNSETS(Beedrill),                                \
-        .formSpeciesIdTable = sBeedrillFormSpeciesIdTable,  \
-        .formChangeTable = sBeedrillFormChangeTable
+        LEARNSETS(Beedrill)
 
     [SPECIES_BEEDRILL] =
     {
@@ -975,9 +973,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_PIDGEOT,                  \
         .categoryName = _("Bird"),                          \
         FOOTPRINT(Pidgeot)                                  \
-        LEARNSETS(Pidgeot),                                 \
-        .formSpeciesIdTable = sPidgeotFormSpeciesIdTable,   \
-        .formChangeTable = sPidgeotFormChangeTable
+        LEARNSETS(Pidgeot)
 
     [SPECIES_PIDGEOT] =
     {
@@ -1554,8 +1550,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_PIKACHU,                                      \
         .categoryName = _("Mouse"),                                             \
         FOOTPRINT(Pikachu)                                                      \
-        LEARNSETS(Pikachu),                                                     \
-        .formSpeciesIdTable = sPikachuFormSpeciesIdTable
+        LEARNSETS(Pikachu)
 
 #define PIKACHU_REGULAR_SIZE_INFO   \
         .height = 4,                \
@@ -1588,7 +1583,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 //        ICON_FEMALE(Pikachu, 2),
 //    #endif
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        .formChangeTable = sPikachuFormChangeTable,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
                                 {EVO_NONE, 0, SPECIES_RAICHU_ALOLAN}),
     },
@@ -3844,7 +3838,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Meowth, 1),
         FOLLOWER(Meowth, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Meowth),
-        .formChangeTable = sMeowthFormChangeTable,
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PERSIAN}),
     },
 
@@ -4879,9 +4872,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_ALAKAZAM,                 \
         .categoryName = _("Psi"),                           \
         FOOTPRINT(Alakazam)                                 \
-        LEARNSETS(Alakazam),                                \
-        .formSpeciesIdTable = sAlakazamFormSpeciesIdTable,  \
-        .formChangeTable = sAlakazamFormChangeTable
+        LEARNSETS(Alakazam)
 
     [SPECIES_ALAKAZAM] =
     {
@@ -5107,9 +5098,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_MACHAMP,                                  \
         .categoryName = _("Superpower"),                                    \
         FOOTPRINT(Machamp)                                                  \
-        LEARNSETS(Machamp),                                                 \
-        .formSpeciesIdTable = sMachampFormSpeciesIdTable,                   \
-        .formChangeTable = sMachampFormChangeTable
+        LEARNSETS(Machamp)
 
     [SPECIES_MACHAMP] =
     {
@@ -5984,7 +5973,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Slowbro, 0),
         FOLLOWER(Slowbro, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Slowbro),
-        .formChangeTable = sSlowbroFormChangeTable,
     },
 
 #if P_GEN_2_CROSS_EVOS
@@ -6360,9 +6348,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Farfetch'd"),                                \
         .cryId = CRY_FARFETCHD,                                        \
         .natDexNum = NATIONAL_DEX_FARFETCHD,                           \
-        .categoryName = _("Wild Duck"),                                \
-        FOOTPRINT(Farfetchd)                                           \
-        .formSpeciesIdTable = sFarfetchdFormSpeciesIdTable
+        .categoryName = _("Wild Duck")
 
     [SPECIES_FARFETCHD] =
     {
@@ -7103,9 +7089,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_GENGAR,               \
         .categoryName = _("Shadow"),                    \
         FOOTPRINT(Gengar)                               \
-        LEARNSETS(Gengar),                              \
-        .formSpeciesIdTable = sGengarFormSpeciesIdTable,\
-        .formChangeTable = sGengarFormChangeTable
+        LEARNSETS(Gengar)
 
     [SPECIES_GENGAR] =
     {
@@ -7545,9 +7529,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_KINGLER,                                              \
         .categoryName = _("Pincer"),                                                    \
         FOOTPRINT(Kingler)                                                              \
-        LEARNSETS(Kingler),                                                             \
-        .formSpeciesIdTable = sKinglerFormSpeciesIdTable,                               \
-        .formChangeTable = sKinglerFormChangeTable
+        LEARNSETS(Kingler)
 
     [SPECIES_KINGLER] =
     {
@@ -7843,9 +7825,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Exeggutor"),                      \
         .cryId = CRY_EXEGGUTOR,                             \
         .natDexNum = NATIONAL_DEX_EXEGGUTOR,                \
-        .categoryName = _("Coconut"),                       \
-        FOOTPRINT(Exeggutor)                                \
-        .formSpeciesIdTable = sExeggutorFormSpeciesIdTable
+        .categoryName = _("Coconut")
 
 #define EXEGGUTOR_SP_DEF (P_UPDATED_STATS >= GEN_7 ? 75 : 65)
 
@@ -8955,9 +8935,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .trainerScale = 387,                                    \
         .trainerOffset = 8,                                     \
         FOOTPRINT(Kangaskhan)                                   \
-        LEARNSETS(Kangaskhan),                                  \
-        .formSpeciesIdTable = sKangaskhanFormSpeciesIdTable,    \
-        .formChangeTable = sKangaskhanFormChangeTable
+        LEARNSETS(Kangaskhan)
 
     [SPECIES_KANGASKHAN] =
     {
@@ -9461,9 +9439,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),          \
         .speciesName = _("Mr. Mime"),                               \
         .cryId = CRY_MR_MIME,                                       \
-        .natDexNum = NATIONAL_DEX_MR_MIME,                          \
-        FOOTPRINT(MrMime)                                           \
-        .formSpeciesIdTable = sMrMimeFormSpeciesIdTable
+        .natDexNum = NATIONAL_DEX_MR_MIME
 
     [SPECIES_MR_MIME] =
     {
@@ -10240,9 +10216,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_PINSIR,               \
         .categoryName = _("Stag Beetle"),               \
         FOOTPRINT(Pinsir)                               \
-        LEARNSETS(Pinsir),                              \
-        .formSpeciesIdTable = sPinsirFormSpeciesIdTable,\
-        .formChangeTable = sPinsirFormChangeTable
+        LEARNSETS(Pinsir)
 
     [SPECIES_PINSIR] =
     {
@@ -10337,9 +10311,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonScale = 256,                                    \
         .pokemonOffset = 0,                                     \
         .trainerScale = 256,                                    \
-        .trainerOffset = 0,                                     \
-        FOOTPRINT(Tauros)                                       \
-        .formSpeciesIdTable = sTaurosFormSpeciesIdTable
+        .trainerOffset = 0
 
     [SPECIES_TAUROS] =
     {
@@ -10524,9 +10496,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .trainerScale = 481,                                            \
         .trainerOffset = 13,                                            \
         FOOTPRINT(Gyarados)                                             \
-        LEARNSETS(Gyarados),                                            \
-        .formSpeciesIdTable = sGyaradosFormSpeciesIdTable,              \
-        .formChangeTable = sGyaradosFormChangeTable
+        LEARNSETS(Gyarados)
 
     [SPECIES_GYARADOS] =
     {
@@ -10622,9 +10592,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_LAPRAS,                                               \
         .categoryName = _("Transport"),                                                 \
         FOOTPRINT(Lapras)                                                               \
-        LEARNSETS(Lapras),                                                              \
-        .formSpeciesIdTable = sLaprasFormSpeciesIdTable,                                \
-        .formChangeTable = sLaprasFormChangeTable
+        LEARNSETS(Lapras)
 
     [SPECIES_LAPRAS] =
     {
@@ -10758,9 +10726,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_EEVEE,                                                \
         .categoryName = _("Evolution"),                                                 \
         FOOTPRINT(Eevee)                                                                \
-        LEARNSETS(Eevee),                                                               \
-        .formSpeciesIdTable = sEeveeFormSpeciesIdTable,                                 \
-        .formChangeTable = sEeveeFormChangeTable
+        LEARNSETS(Eevee)
 
     [SPECIES_EEVEE] =
     {
@@ -11613,9 +11579,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_AERODACTYL,               \
         .categoryName = _("Fossil"),                        \
         FOOTPRINT(Aerodactyl)                               \
-        LEARNSETS(Aerodactyl),                              \
-        .formSpeciesIdTable = sAerodactylFormSpeciesIdTable,\
-        .formChangeTable = sAerodactylFormChangeTable
+        LEARNSETS(Aerodactyl)
 
     [SPECIES_AERODACTYL] =
     {
@@ -11770,9 +11734,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_SNORLAX,                                      \
         .categoryName = _("Sleeping"),                                          \
         FOOTPRINT(Snorlax)                                                      \
-        LEARNSETS(Snorlax),                                                     \
-        .formSpeciesIdTable = sSnorlaxFormSpeciesIdTable,                       \
-        .formChangeTable = sSnorlaxFormChangeTable
+        LEARNSETS(Snorlax)
 
     [SPECIES_SNORLAX] =
     {
@@ -12303,8 +12265,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .categoryName = _("Genetic"),                                   \
         FOOTPRINT(Mewtwo)                                               \
         LEARNSETS(Mewtwo),                                              \
-        .formSpeciesIdTable = sMewtwoFormSpeciesIdTable,                \
-        .formChangeTable = sMewtwoFormChangeTable,                      \
         .isLegendary = TRUE
 
     [SPECIES_MEWTWO] =

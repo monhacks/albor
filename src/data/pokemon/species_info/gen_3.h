@@ -115,9 +115,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_SCEPTILE,                             \
         .categoryName = _("Forest"),                                    \
         FOOTPRINT(Sceptile)                                             \
-        LEARNSETS(Sceptile),                                            \
-        .formSpeciesIdTable = sSceptileFormSpeciesIdTable,              \
-        .formChangeTable = sSceptileFormChangeTable
+        LEARNSETS(Sceptile)
 
     [SPECIES_SCEPTILE] =
     {
@@ -323,9 +321,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .trainerScale = 301,                                \
         .trainerOffset = 4,                                 \
         FOOTPRINT(Blaziken)                                 \
-        LEARNSETS(Blaziken),                                \
-        .formSpeciesIdTable = sBlazikenFormSpeciesIdTable,  \
-        .formChangeTable = sBlazikenFormChangeTable
+        LEARNSETS(Blaziken)
 
     [SPECIES_BLAZIKEN] =
     {
@@ -509,9 +505,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_SWAMPERT,                              \
         .categoryName = _("Mud Fish"),                                   \
         FOOTPRINT(Swampert)                                              \
-        LEARNSETS(Swampert),                                             \
-        .formSpeciesIdTable = sSwampertFormSpeciesIdTable,               \
-        .formChangeTable = sSwampertFormChangeTable
+        LEARNSETS(Swampert)
 
     [SPECIES_SWAMPERT] =
     {
@@ -1870,9 +1864,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .trainerScale = 256,                                \
         .trainerOffset = 0,                                 \
         FOOTPRINT(Gardevoir)                                \
-        LEARNSETS(Gardevoir),                               \
-        .formSpeciesIdTable = sGardevoirFormSpeciesIdTable, \
-        .formChangeTable = sGardevoirFormChangeTable
+        LEARNSETS(Gardevoir)
 
     [SPECIES_GARDEVOIR] =
     {
@@ -3046,9 +3038,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Darkness"),                              \
         .height = 5,                                                \
         FOOTPRINT(Sableye)                                          \
-        LEARNSETS(Sableye),                                         \
-        .formSpeciesIdTable = sSableyeFormSpeciesIdTable,           \
-        .formChangeTable = sSableyeFormChangeTable
+        LEARNSETS(Sableye)
 
     [SPECIES_SABLEYE] =
     {
@@ -3143,9 +3133,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_MAWILE,                            \
         .categoryName = _("Deceiver"),                               \
         FOOTPRINT(Mawile)                                            \
-        LEARNSETS(Mawile),                                           \
-        .formSpeciesIdTable = sMawileFormSpeciesIdTable,             \
-        .formChangeTable = sMawileFormChangeTable
+        LEARNSETS(Mawile)
 
     [SPECIES_MAWILE] =
     {
@@ -3336,9 +3324,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_AGGRON,                       \
         .categoryName = _("Iron Armor"),                        \
         FOOTPRINT(Aggron)                                       \
-        LEARNSETS(Aggron),                                      \
-        .formSpeciesIdTable = sAggronFormSpeciesIdTable,        \
-        .formChangeTable = sAggronFormChangeTable
+        LEARNSETS(Aggron)
 
     [SPECIES_AGGRON] =
     {
@@ -3493,9 +3479,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .trainerScale = 256,                                        \
         .trainerOffset = 0,                                         \
         FOOTPRINT(Medicham)                                         \
-        LEARNSETS(Medicham),                                        \
-        .formSpeciesIdTable = sMedichamFormSpeciesIdTable,          \
-        .formChangeTable = sMedichamFormChangeTable
+        LEARNSETS(Medicham)
 
     [SPECIES_MEDICHAM] =
     {
@@ -3624,9 +3608,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_MANECTRIC,                \
         .categoryName = _("Discharge"),                     \
         FOOTPRINT(Manectric)                                \
-        LEARNSETS(Manectric),                               \
-        .formSpeciesIdTable = sManectricFormSpeciesIdTable, \
-        .formChangeTable = sManectricFormChangeTable
+        LEARNSETS(Manectric)
 
     [SPECIES_MANECTRIC] =
     {
@@ -4267,9 +4249,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_SHARPEDO,                     \
         .categoryName = _("Brutal"),                            \
         FOOTPRINT(Sharpedo)                                     \
-        LEARNSETS(Sharpedo),                                    \
-        .formSpeciesIdTable = sSharpedoFormSpeciesIdTable,      \
-        .formChangeTable = sSharpedoFormChangeTable
+        LEARNSETS(Sharpedo)
 
     [SPECIES_SHARPEDO] =
     {
@@ -4512,9 +4492,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_CAMERUPT,                 \
         .categoryName = _("Eruption"),                      \
         FOOTPRINT(Camerupt)                                 \
-        LEARNSETS(Camerupt),                                \
-        .formSpeciesIdTable = sCameruptFormSpeciesIdTable,  \
-        .formChangeTable = sCameruptFormChangeTable
+        LEARNSETS(Camerupt)
 
     [SPECIES_CAMERUPT] =
     {
@@ -5129,9 +5107,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_ALTARIA,                             \
         .categoryName = _("Humming"),                                  \
         FOOTPRINT(Altaria)                                             \
-        LEARNSETS(Altaria),                                            \
-        .formSpeciesIdTable = sAltariaFormSpeciesIdTable,              \
-        .formChangeTable = sAltariaFormChangeTable
+        LEARNSETS(Altaria)
 
     [SPECIES_ALTARIA] =
     {
@@ -6307,9 +6283,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_BANETTE,                          \
         .categoryName = _("Marionette"),                            \
         FOOTPRINT(Banette)                                          \
-        LEARNSETS(Banette),                                         \
-        .formSpeciesIdTable = sBanetteFormSpeciesIdTable,           \
-        .formChangeTable = sBanetteFormChangeTable
+        LEARNSETS(Banette)
 
     [SPECIES_BANETTE] =
     {
@@ -6738,9 +6712,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .trainerScale = 256,                                \
         .trainerOffset = 0,                                 \
         FOOTPRINT(Absol)                                    \
-        LEARNSETS(Absol),                                   \
-        .formSpeciesIdTable = sAbsolFormSpeciesIdTable,     \
-        .formChangeTable = sAbsolFormChangeTable
+        LEARNSETS(Absol)
 
     [SPECIES_ABSOL] =
     {
@@ -7531,9 +7503,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_SALAMENCE,                \
         .categoryName = _("Dragon"),                        \
         FOOTPRINT(Salamence)                                \
-        LEARNSETS(Salamence),                               \
-        .formSpeciesIdTable = sSalamenceFormSpeciesIdTable, \
-        .formChangeTable = sSalamenceFormChangeTable
+        LEARNSETS(Salamence)
 
     [SPECIES_SALAMENCE] =
     {
@@ -7733,9 +7703,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_METAGROSS,                    \
         .categoryName = _("Iron Leg"),                          \
         FOOTPRINT(Metagross)                                    \
-        LEARNSETS(Metagross),                                   \
-        .formSpeciesIdTable = sMetagrossFormSpeciesIdTable,     \
-        .formChangeTable = sMetagrossFormChangeTable
+        LEARNSETS(Metagross)
 
     [SPECIES_METAGROSS] =
     {
@@ -8004,8 +7972,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Eon"),                                       \
         FOOTPRINT(Latias)                                               \
         LEARNSETS(Latias),                                              \
-        .formSpeciesIdTable = sLatiasFormSpeciesIdTable,                \
-        .formChangeTable = sLatiasFormChangeTable,                      \
         .isLegendary = TRUE
 
     [SPECIES_LATIAS] =
@@ -8106,9 +8072,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_LATIOS,                               \
         .categoryName = _("Eon"),                                       \
         FOOTPRINT(Latios)                                               \
-        LEARNSETS(Latios),                                              \
-        .formSpeciesIdTable = sLatiosFormSpeciesIdTable,                \
-        .formChangeTable = sLatiosFormChangeTable
+        LEARNSETS(Latios)
 
     [SPECIES_LATIOS] =
     {
@@ -8209,9 +8173,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_KYOGRE,                                           \
         .categoryName = _("Sea Basin"),                                             \
         FOOTPRINT(Kyogre)                                                           \
-        LEARNSETS(Kyogre),                                                          \
-        .formSpeciesIdTable = sKyogreFormSpeciesIdTable,                            \
-        .formChangeTable = sKyogreFormChangeTable
+        LEARNSETS(Kyogre)
 
     [SPECIES_KYOGRE] =
     {
@@ -8308,9 +8270,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .natDexNum = NATIONAL_DEX_GROUDON,                                          \
         .categoryName = _("Continent"),                                             \
         FOOTPRINT(Groudon)                                                          \
-        LEARNSETS(Groudon),                                                         \
-        .formSpeciesIdTable = sGroudonFormSpeciesIdTable,                           \
-        .formChangeTable = sGroudonFormChangeTable
+        LEARNSETS(Groudon)
 
     [SPECIES_GROUDON] =
     {
@@ -8410,8 +8370,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Sky High"),                                              \
         FOOTPRINT(Rayquaza)                                                         \
         LEARNSETS(Rayquaza),                                                        \
-        .formSpeciesIdTable = sRayquazaFormSpeciesIdTable,                          \
-        .formChangeTable = sRayquazaFormChangeTable,                                \
         .isLegendary = TRUE
 
     [SPECIES_RAYQUAZA] =

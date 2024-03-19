@@ -1421,9 +1421,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .trainerScale = 256,                                           \
         .trainerOffset = 0,                                            \
         FOOTPRINT(Ampharos)                                            \
-        LEARNSETS(Ampharos),                                           \
-        .formSpeciesIdTable = sAmpharosFormSpeciesIdTable,             \
-        .formChangeTable = sAmpharosFormChangeTable
+        LEARNSETS(Ampharos)
 
 #define AMPHAROS_DEFENSE (P_UPDATED_STATS >= GEN_6 ? 85 : 75)
 
@@ -3775,9 +3773,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .natDexNum = NATIONAL_DEX_HERACROSS,                \
         .categoryName = _("Single Horn"),                   \
         FOOTPRINT(Heracross)                                \
-        LEARNSETS(Heracross),                               \
-        .formSpeciesIdTable = sHeracrossFormSpeciesIdTable, \
-        .formChangeTable = sHeracrossFormChangeTable
+        LEARNSETS(Heracross)
 
     [SPECIES_HERACROSS] =
     {
@@ -4536,9 +4532,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .pokemonScale = 410,                                             \
         .pokemonOffset = 15,                                             \
         .trainerScale = 256,                                             \
-        .trainerOffset = 0,                                              \
-        FOOTPRINT(Corsola)                                               \
-        .formSpeciesIdTable = sCorsolaFormSpeciesIdTable
+        .trainerOffset = 0
 
     [SPECIES_CORSOLA] =
     {
@@ -5033,9 +5027,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .natDexNum = NATIONAL_DEX_HOUNDOOM,                 \
         .categoryName = _("Dark"),                          \
         FOOTPRINT(Houndoom)                                 \
-        LEARNSETS(Houndoom),                                \
-        .formSpeciesIdTable = sHoundoomFormSpeciesIdTable,  \
-        .formChangeTable = sHoundoomFormChangeTable
+        LEARNSETS(Houndoom)
 
     [SPECIES_HOUNDOOM] =
     {
@@ -5717,9 +5709,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .natDexNum = NATIONAL_DEX_TYRANITAR,                    \
         .categoryName = _("Armor"),                             \
         FOOTPRINT(Tyranitar)                                    \
-        LEARNSETS(Tyranitar),                                   \
-        .formSpeciesIdTable = sTyranitarFormSpeciesIdTable,     \
-        .formChangeTable = sTyranitarFormChangeTable
+        LEARNSETS(Tyranitar)
 
     [SPECIES_TYRANITAR] =
     {

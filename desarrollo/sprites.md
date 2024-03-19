@@ -634,6 +634,7 @@ Lista Pokémon:
 * grimmsnarl
 * snom
 * frosmoth
+* eiscue (ice/normal)
 * dreepy
 * drakloak
 * dragapult
