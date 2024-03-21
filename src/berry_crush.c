@@ -233,7 +233,6 @@ struct BerryCrushGame_Results
 {
     u32 powder;
     u16 time;
-    u16 targetPressesPerSec; // Never read
     u16 silkiness;
     u16 totalAPresses;
     u16 stats[2][MAX_RFU_PLAYERS];
@@ -273,7 +272,6 @@ struct BerryCrushGame_Gfx
     struct Sprite *sparkleSprites[11];
     struct Sprite *timerSprites[2];
     u8 resultsState;
-    u8 unused;
     u8 resultsWindowId;
     u8 nameWindowIds[MAX_RFU_PLAYERS];
     u16 bgBuffers[4][0x800];
@@ -288,7 +286,6 @@ struct BerryCrushGame
     u8 taskId;
     u8 textSpeed;
     u8 cmdState;
-    u8 unused; // Never read
     u8 nextCmd;
     u8 afterPalFadeCmd;
     u16 cmdTimer;
@@ -300,7 +297,6 @@ struct BerryCrushGame
     s32 powder;
     s32 targetDepth;
     u8 newDepth;
-    bool8 noRoomForPowder:1; // Never read
     bool8 newRecord:1;
     bool8 playedSound:1;
     bool8 endGame:1;
@@ -1114,8 +1110,6 @@ static void SaveResults(void)
     sGame->powder = sGame->results.powder;
     if (GiveBerryPowder(sGame->powder))
         return;
-
-    sGame->noRoomForPowder = TRUE;
 }
 
 static void VBlankCB(void)
@@ -3025,7 +3019,6 @@ static u32 Cmd_TabulateResults(struct BerryCrushGame *game, u8 *args)
     case 3:
         memset(&game->results, 0, sizeof(game->results));
         game->results.time = game->timer;
-        game->results.targetPressesPerSec = game->targetAPresses / (game->timer / 60);
 
         // Calculate silkiness
         // Silkiness is the percentage of times big sparkles were produced when possible,
@@ -3445,7 +3438,6 @@ static void ResetGame(struct BerryCrushGame *game)
     u8 i = 0;
 
     IncrementGameStat(GAME_STAT_PLAYED_BERRY_CRUSH);
-    game->unused = 0;
     game->cmdTimer = 0;
     game->gameState = STATE_RESET;
     game->playAgainState = 0;
@@ -3454,7 +3446,6 @@ static void ResetGame(struct BerryCrushGame *game)
     game->totalAPresses = 0;
     game->targetDepth = 0;
     game->newDepth = 0;
-    game->noRoomForPowder = FALSE;
     game->newRecord = FALSE;
     game->playedSound = FALSE;
     game->endGame = FALSE;

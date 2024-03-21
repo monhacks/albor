@@ -2181,7 +2181,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
     },
     [B_WIN_MOVE_NAME_1] = {
         .fillValue = PIXEL_FILL(2),
-        .fontId = FONT_NORMAL,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 4,
         .speed = 0,
@@ -2191,7 +2191,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
     },
     [B_WIN_MOVE_NAME_2] = {
         .fillValue = PIXEL_FILL(2),
-        .fontId = FONT_NORMAL,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 4,
         .speed = 0,
@@ -2201,7 +2201,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
     },
     [B_WIN_MOVE_NAME_3] = {
         .fillValue = PIXEL_FILL(2),
-        .fontId = FONT_NORMAL,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 4,
         .speed = 0,
@@ -2211,7 +2211,7 @@ static const struct BattleWindowText sTextOnWindowsInfo_Normal[] =
     },
     [B_WIN_MOVE_NAME_4] = {
         .fillValue = PIXEL_FILL(2),
-        .fontId = FONT_NORMAL,
+        .fontId = FONT_NARROW,
         .x = 0,
         .y = 4,
         .speed = 0,

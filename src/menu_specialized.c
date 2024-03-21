@@ -1539,7 +1539,7 @@ void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bg
                                      TEXT_SKIP_DRAW,
                                      sLvlUpStatStrings[i]);
 
-        StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_Dash);
+        StringCopy(text, (statsDiff[i] >= 0) ? gText_Plus : gText_OneDash);
         AddTextPrinterParameterized3(windowId,
                                      FONT_NORMAL,
                                      56,

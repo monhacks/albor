@@ -63,7 +63,6 @@ static u16 TryConfirmWords(void);
 static u8 GetEasyChatScreenFrameId(void);
 static u8 GetEachChatScreenTemplateId(u8);
 static void GetQuizTitle(u8 *);
-static void ClearUnusedField(void);
 static bool8 InitEasyChatScreenControl(void);
 static bool8 LoadEasyChatScreen(void);
 static void FreeEasyChatScreenControl(void);
@@ -1649,7 +1648,6 @@ static bool8 InitEasyChatScreenStruct(u8 type, u16 *words, u8 displayedPersonTyp
     sEasyChatScreen->mainCursorRow = 0;
     sEasyChatScreen->inAlphabetMode = FALSE;
     sEasyChatScreen->displayedPersonType = displayedPersonType;
-    sEasyChatScreen->unused = 0;
     templateId = GetEachChatScreenTemplateId(type);
     if (type == EASY_CHAT_TYPE_QUIZ_QUESTION)
     {
@@ -1744,7 +1742,6 @@ static u16 HandleEasyChatInput_Phrase(void)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            ClearUnusedField();
             sEasyChatScreen->inputState = INPUTSTATE_KEYBOARD;
             sEasyChatScreen->keyboardColumn = 0;
             sEasyChatScreen->keyboardRow = 0;
@@ -2824,11 +2821,6 @@ static bool32 CanScrollDown(void)
     return FALSE;
 }
 
-static int FooterHasFourOptions_(void)
-{
-    return FooterHasFourOptions();
-}
-
 static bool8 IsPhraseDifferentThanPlayerInput(const u16 *phrase, u8 phraseLength)
 {
     u8 i;
@@ -2995,11 +2987,6 @@ static u16 DidPlayerInputABerryMasterWifePhrase(void)
     }
 
     return 0;
-}
-
-static void ClearUnusedField(void)
-{
-    sEasyChatScreen->unused = 0;
 }
 
 static bool32 DummyWordCheck(int easyChatWord)
@@ -3904,7 +3891,6 @@ static bool8 InitEasyChatScreenControl_(void)
     sScreenControl->scrollIndicatorDownSprite = NULL;
     sScreenControl->startButtonSprite = NULL;
     sScreenControl->selectButtonSprite = NULL;
-    sScreenControl->fourFooterOptions = FooterHasFourOptions_();
     return TRUE;
 }
 

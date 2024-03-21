@@ -81,7 +81,6 @@ struct UsePokeblockMenuPokemon
 {
     u8 boxId; // Because this screen is never used for the PC this is always set to TOTAL_BOXES_COUNT to refer to party
     u8 monId;
-    u16 data; // never read
 };
 
 struct UsePokeblockMenu
@@ -1160,7 +1159,6 @@ static void LoadPartyInfo(void)
         {
             sMenu->party[numMons].boxId = TOTAL_BOXES_COUNT;
             sMenu->party[numMons].monId = i;
-            sMenu->party[numMons].data = 0;
             numMons++;
         }
     }

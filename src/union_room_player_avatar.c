@@ -81,7 +81,6 @@ static const u8 sOppositeFacingDirection[] = {
 // Compare to sUnionRoomGroupOffsets, the direction each group member
 // needs to be facing in order to face the group leader in the center.
 static const u8 sMemberFacingDirections[MAX_RFU_PLAYERS] = {
-    DIR_SOUTH, // Leader, but never read
     DIR_WEST,
     DIR_SOUTH,
     DIR_EAST,

@@ -30,6 +30,7 @@
 #include "recorded_battle.h"
 #include "reshow_battle_screen.h"
 #include "sound.h"
+#include "strings.h"
 #include "string_util.h"
 #include "task.h"
 #include "test_runner.h"
@@ -331,6 +332,7 @@ static void HandleInputChooseAction(u32 battler)
             TryHideLastUsedBall();
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
             PlayerBufferExecCompleted(battler);
+            DestroySpriteAndFreeResources(&gSprites[monIconData]);
         }
         return;
     }
@@ -408,6 +410,7 @@ static void HandleInputChooseAction(u32 battler)
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted(battler);
             DestroySpriteAndFreeResources(&gSprites[monIconData]);
+            MoveSelectionDestroyCursor();
         }
         else if (B_QUICK_MOVE_CURSOR_TO_RUN)
         {
@@ -437,6 +440,7 @@ static void HandleInputChooseAction(u32 battler)
         TryHideLastUsedBall();
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
         PlayerBufferExecCompleted(battler);
+        DestroySpriteAndFreeResources(&gSprites[monIconData]);
     }
 #endif
 }
@@ -496,6 +500,7 @@ static void HandleInputChooseTarget(u32 battler)
             DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
             sIconTypeId[3] = 0xFF;
         }
+        MoveSelectionDestroyCursor();
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -676,6 +681,7 @@ static void HandleInputShowEntireFieldTargets(u32 battler)
             DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
             sIconTypeId[3] = 0xFF;
         }
+        MoveSelectionDestroyCursor();
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -729,6 +735,7 @@ static void HandleInputShowTargets(u32 battler)
             DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
             sIconTypeId[3] = 0xFF;
         }
+        MoveSelectionDestroyCursor();
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
@@ -873,6 +880,7 @@ static void HandleInputChooseMove(u32 battler)
                 DestroySpriteAndFreeResources(&gSprites[sIconTypeId[3]]);
                 sIconTypeId[3] = 0xFF;
             }
+            MoveSelectionDestroyCursor();
             break;
         case 1:
             gBattlerControllerFuncs[battler] = HandleInputChooseTarget;
@@ -911,6 +919,7 @@ static void HandleInputChooseMove(u32 battler)
             HideTriggerSprites();
             PlayerBufferExecCompleted(battler);
             LoadBattleMenuWindowGfx();
+            MoveSelectionDestroyCursor();
         }
     }
     else if (JOY_NEW(DPAD_LEFT) && !gBattleStruct->zmove.viewing)
@@ -1524,20 +1533,36 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
             ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);     
         }
+        else
+        {
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_1);     
+        }
         if (moveInfo->moves[1] != MOVE_NONE)
         {
             ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);     
+        }
+        else
+        {
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_2);     
         }
         if (moveInfo->moves[2] != MOVE_NONE)
         {
             ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);     
         }
+        else
+        {
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_3);     
+        }
         if (moveInfo->moves[3] != MOVE_NONE)
         {
             ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);     
+        }
+        else
+        {
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_4);     
         }
 }
 

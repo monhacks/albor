@@ -267,7 +267,6 @@ struct Pokemon
 struct MonSpritesGfxManager
 {
     u32 numSprites:4;
-    u32 numSprites2:4; // Never read
     u32 numFrames:8;
     u32 active:8;
     u32 dataSize:4;

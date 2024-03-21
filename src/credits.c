@@ -75,7 +75,6 @@ struct CreditsData
 
 struct CreditsEntry
 {
-    u8 unk; // Never read
     bool8 isTitle;
     const u8 *text;
 };
@@ -569,7 +568,6 @@ static void Task_LoadShowMons(u8 taskId)
         gTasks[taskId].tTaskId_ShowMons = CreateTask(Task_ShowMons, 0);
         gTasks[gTasks[taskId].tTaskId_ShowMons].tState = 1;
         gTasks[gTasks[taskId].tTaskId_ShowMons].tMainTaskId = taskId;
-        gTasks[gTasks[taskId].tTaskId_ShowMons].data[2] = gTasks[taskId].tSceneNum; // data[2] never read
 
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_BG3HOFS, 0);
@@ -1158,7 +1156,6 @@ static void SetBikeScene(u8 scene, u8 taskId)
 
     gTasks[taskId].tTaskId_BikeScene = CreateTask(Task_BikeScene, 0);
     gTasks[gTasks[taskId].tTaskId_BikeScene].tState = 0;
-    gTasks[gTasks[taskId].tTaskId_BikeScene].data[1] = taskId; // data[1] is never read
     gTasks[gTasks[taskId].tTaskId_BikeScene].tPlayer = gTasks[taskId].tPlayerSpriteId;
     gTasks[gTasks[taskId].tTaskId_BikeScene].tRival = gTasks[taskId].tRivalSpriteId;
     gTasks[gTasks[taskId].tTaskId_BikeScene].tDelay = 0;

@@ -169,18 +169,6 @@ static const union AffineAnimCmd *const sAffineAnims_FlickeringShrinkOrb[] =
     sAffineAnim_FlickeringShrinkOrb
 };
 
-// Unused
-static const struct SpriteTemplate sFlickeringShrinkOrbSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_ORB,
-    .paletteTag = ANIM_TAG_ORB,
-    .oam = &gOamData_AffineDouble_ObjNormal_16x16,
-    .anims = sAnims_FlickeringShrinkOrb,
-    .images = NULL,
-    .affineAnims = sAffineAnims_FlickeringShrinkOrb,
-    .callback = AnimTranslateLinearAndFlicker_Flipped,
-};
-
 static const struct Subsprite sFrozenIceCubeSubsprites[] =
 {
     {

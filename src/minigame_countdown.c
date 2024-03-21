@@ -151,11 +151,8 @@ static const TaskFunc sStaticCountdownFuncs[][4] =
 // tSpriteIds(2) is used for for the rightmost part of 'Start'
 #define tSpriteIds(i)     data[13 + i]
 
-#define sInterval       data[1] // Never read
 #define sAnimNum        data[2]
 #define sTaskId         data[3]
-#define sId             data[4] // Never read
-#define sNumberSpriteId data[5] // Never read
 
 static void StaticCountdown_CreateSprites(u8 taskId, s16 *data)
 {
@@ -171,10 +168,7 @@ static void StaticCountdown_CreateSprites(u8 taskId, s16 *data)
         sprite = &gSprites[tSpriteIds(i)];
         sprite->oam.priority = tPriority;
         sprite->invisible = TRUE;
-        sprite->sInterval = tInterval;
         sprite->sTaskId = taskId;
-        sprite->sId = i;
-        sprite->sNumberSpriteId = tSpriteIds(0);
     }
 }
 

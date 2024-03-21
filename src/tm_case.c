@@ -642,7 +642,7 @@ static void PrintMoveInfo(u16 itemId)
         TMCase_Print(WIN_MOVE_INFO, FONT_BIG, gText_Pri, 137, 0, 1, 0, 0, COLOR_TITLE);
         if (gMovesInfo[move].priority == 0)
         {
-            TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL, gText_Dash, 164, 0, 1, 0, 0, COLOR_LIGHT);
+            TMCase_Print(WIN_MOVE_INFO, FONT_NORMAL, gText_OneDash, 164, 0, 1, 0, 0, COLOR_LIGHT);
         }
         if (gMovesInfo[move].priority > 0)
         {

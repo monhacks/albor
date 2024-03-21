@@ -384,12 +384,9 @@ static void Task_Sparkles_CircleInward_End(u8 taskId)
     DestroyTask(taskId);
 }
 
-#define tSpecies data[2] // Never read
-
 u8 EvolutionSparkles_SprayAndFlash(u16 species)
 {
     u8 taskId = CreateTask(Task_Sparkles_SprayAndFlash_Init, 0);
-    gTasks[taskId].tSpecies = species;
     return taskId;
 }
 
@@ -438,7 +435,6 @@ static void Task_Sparkles_SprayAndFlash_End(u8 taskId)
 u8 EvolutionSparkles_SprayAndFlash_Trade(u16 species)
 {
     u8 taskId = CreateTask(Task_Sparkles_SprayAndFlashTrade_Init, 0);
-    gTasks[taskId].tSpecies = species;
     return taskId;
 }
 

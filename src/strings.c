@@ -1482,7 +1482,6 @@ const u8 gText_Speed[] = _("Velocidad");
 const u8 gText_SpAtk[] = _("At. esp.");
 const u8 gText_SpDef[] = _("Def. esp.");
 const u8 gText_Plus[] = _("{PLUS}");
-const u8 gText_Dash[] = _("-");
 const u8 gText_FromSpace[] = _("From ");
 const u8 gText_MixingRecords[] = _("Mixing records…");
 const u8 gText_RecordMixingComplete[] = _("Record mixing completed.\nThank you for waiting.");

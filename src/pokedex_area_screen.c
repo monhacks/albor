@@ -146,7 +146,6 @@ static const struct PokedexAreaMapTemplate sPokedexAreaMapTemplate =
     .bg = 3,
     .offset = 0,
     .mode = 0,
-    .unk = 2,
 };
 
 static const u8 sAreaMarkerTiles[];

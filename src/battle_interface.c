@@ -273,18 +273,38 @@ static const union AnimCmd *const sBattleInterfaceSelectorAnimTable[] =
 
 static const struct Subsprite sBattleInterfaceSelectorSubsprites[] =
 {
-    {0,     0,  0,  0,  0,      0},
-    {120,   0,  0,  0,  1,      0},
-    {0,    14,  0,  0,  2,      0},
-    {120,  14,  0,  0,  3,      0}
-};
-
-static const struct Subsprite sBattleInterfaceSelectorPausedSubsprites[] =
-{
-    {0,     0,  0,  0,  0,      1},
-    {120,   0,  0,  0,  1,      1},
-    {0,    14,  0,  0,  2,      1},
-    {120,  14,  0,  0,  3,      1}
+    {
+        .x = -3,
+        .y = -1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SHAPE(16x16),
+        .tileOffset = 0,
+        .priority = 0
+    },
+    {
+        .x = 109,
+        .y = -1,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SHAPE(16x16),
+        .tileOffset = 1,
+        .priority = 0
+    },
+    {
+        .x = -3,
+        .y = 15,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SHAPE(16x16),
+        .tileOffset = 2,
+        .priority = 0
+    },
+    {
+        .x = 109,
+        .y = 15,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SHAPE(16x16),
+        .tileOffset = 3,
+        .priority = 0
+    }
 };
 
 static const struct SubspriteTable sBattleInterfaceSelectorSubspriteTable[] =

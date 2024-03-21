@@ -1430,7 +1430,6 @@ void AnimTask_BlendBackground(u8 taskId)
 
 #define tShakeNum    data[0]
 #define tMaxShakes   data[1]
-#define tShakeOffset data[2] // Never read, gBattleAnimArgs[1] is used directly instead
 #define tVertical    data[3]
 #define tPatternId   data[4]
 
@@ -1443,7 +1442,6 @@ void AnimTask_ShakeTargetInPattern(u8 taskId)
     if (gTasks[taskId].tShakeNum == 0)
     {
         gTasks[taskId].tMaxShakes = gBattleAnimArgs[0];
-        gTasks[taskId].tShakeOffset = gBattleAnimArgs[1];
         gTasks[taskId].tVertical = gBattleAnimArgs[2];
         gTasks[taskId].tPatternId = gBattleAnimArgs[3];
     }

@@ -200,7 +200,6 @@ struct DodrioGame_PlayerCommData
 struct DodrioGame_Player
 {
     u8 name[16];
-    bool32 receivedGameStatePacket; // Never read
     struct DodrioGame_Berries berries;
     struct DodrioGame_PlayerCommData comm;
 }; // size = 0x3C
@@ -228,7 +227,6 @@ struct DodrioGame
     /*0x0010*/ u8 ALIGNED(4) state;
     /*0x0014*/ u8 ALIGNED(4) timer;
     /*0x0018*/ u8 ALIGNED(4) funcId;
-    /*0x001C*/ u8 ALIGNED(4) prevFuncId; // Set, never read
     /*0x0020*/ bool8 ALIGNED(4) isLeader;
     /*0x0024*/ u8 ALIGNED(4) numPlayers;
     /*0x0028*/ u8 ALIGNED(4) multiplayerId;
@@ -253,7 +251,6 @@ struct DodrioGame
     /*0x010C*/ u8 ALIGNED(4) playAgainStates[MAX_RFU_PLAYERS];
     /*0x0112*/ u16 berriesPickedInRow;
     /*0x0114*/ u16 maxBerriesPickedInRow;
-    /*0x0118*/ bool32 startCountdown; // Never read
     /*0x011C*/ bool32 startGame;
     /*0x0120*/ bool32 berriesFalling;
     /*0x0124*/ u8 ALIGNED(4) clearRecvCmdTimer;
@@ -680,7 +677,6 @@ static void InitDodrioGame(struct DodrioGame * game)
     game->state = 0;
     game->timer = 0;
     game->funcId = FUNC_INTRO;
-    game->prevFuncId = FUNC_INTRO;
     game->startGame = FALSE;
     game->berriesFalling = FALSE;
     game->countdownEndDelay = 0;
@@ -838,7 +834,6 @@ static void InitCountdown(void)
         sGame->state++;
         break;
     default:
-        sGame->startCountdown = TRUE;
         SetGameFunc(FUNC_COUNTDOWN);
         break;
     }
@@ -1451,16 +1446,6 @@ static void RecvLinkData_Gameplay(void)
     u8 i;
     u8 numPlayers = sGame->numPlayers;
 
-    sGame->players[0].receivedGameStatePacket = RecvPacket_GameState(0,
-                                                  &sGame->players[0],
-                                                  &sGame->players[0].comm,
-                                                  &sGame->players[1].comm,
-                                                  &sGame->players[2].comm,
-                                                  &sGame->players[3].comm,
-                                                  &sGame->players[4].comm,
-                                                  &sGame->numGraySquares,
-                                                  &sGame->berriesFalling,
-                                                  &sGame->allReadyToEnd);
     sGame->clearRecvCmds = TRUE;
 
     for (i = 1; i < numPlayers; i++)
@@ -1528,16 +1513,6 @@ static void RecvLinkData_ReadyToEnd(void)
     u8 i;
     u8 numPlayers = sGame->numPlayers;
 
-    sGame->players[0].receivedGameStatePacket = RecvPacket_GameState(0,
-                                                  &sGame->players[0],
-                                                  &sGame->players[0].comm,
-                                                  &sGame->players[1].comm,
-                                                  &sGame->players[2].comm,
-                                                  &sGame->players[3].comm,
-                                                  &sGame->players[4].comm,
-                                                  &sGame->numGraySquares,
-                                                  &sGame->berriesFalling,
-                                                  &sGame->allReadyToEnd);
     sGame->clearRecvCmds = TRUE;
 
     for (i = 1; i < numPlayers; i++)
@@ -1798,7 +1773,6 @@ static void CreateDodrioGameTask(TaskFunc func)
 
 static void SetGameFunc(u8 funcId)
 {
-    sGame->prevFuncId = sGame->funcId;
     sGame->funcId = funcId;
     sGame->state = 0;
     sGame->timer = 0;

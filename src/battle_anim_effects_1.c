@@ -54,7 +54,6 @@ static void AnimTrickBag_Step2(struct Sprite *);
 static void AnimTrickBag_Step3(struct Sprite *);
 static void AnimFlyingParticle(struct Sprite *);
 static void AnimFlyingParticle_Step(struct Sprite *);
-static void AnimSlidingHit(struct Sprite *);
 static void AnimWhipHit(struct Sprite *);
 static void AnimFlickeringPunch(struct Sprite *);
 static void AnimAirCutterSlice(struct Sprite *);
@@ -1402,30 +1401,6 @@ static const union AnimCmd sAnim_SlidingHit[] =
 static const union AnimCmd *const sAnims_SlidingHit[] =
 {
     sAnim_SlidingHit,
-};
-
-// Unused
-static const struct SpriteTemplate sSlidingHit1SpriteTemplate =
-{
-    .tileTag = ANIM_TAG_HIT,
-    .paletteTag = ANIM_TAG_HIT,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_SlidingHit,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSlidingHit,
-};
-
-// Unused
-static const struct SpriteTemplate sSlidingHit2SpriteTemplate =
-{
-    .tileTag = ANIM_TAG_HIT_2,
-    .paletteTag = ANIM_TAG_HIT_2,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_SlidingHit,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimSlidingHit,
 };
 
 static const union AffineAnimCmd sAffineAnim_FlickeringPunch_Normal[] = {
@@ -5052,23 +5027,6 @@ static void AnimWhipHit_WaitEnd(struct Sprite *sprite)
 {
     if (sprite->animEnded)
         DestroyAnimSprite(sprite);
-}
-
-static void AnimSlidingHit(struct Sprite *sprite)
-{
-    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-    {
-        sprite->x -= gBattleAnimArgs[0];
-        sprite->y += gBattleAnimArgs[1];
-    }
-    else
-    {
-        sprite->x += gBattleAnimArgs[0];
-        sprite->y += gBattleAnimArgs[1];
-    }
-
-    sprite->callback = RunStoredCallbackWhenAnimEnds;
-    StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
 }
 
 static void AnimWhipHit(struct Sprite *sprite)

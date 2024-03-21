@@ -96,13 +96,6 @@ enum {
     TAG_HEAD_FEMALE,
 };
 
-// Error return codes. Never read
-enum {
-    SUCCESS,
-    ERR_ALREADY_DONE,
-    ERR_ALLOC_FAILED,
-};
-
 struct FrontierPassData
 {
     void (*callback)(void);
@@ -148,7 +141,6 @@ struct FrontierMapData
     struct Sprite *playerHeadSprite;
     struct Sprite *mapIndicatorSprite;
     u8 cursorPos;
-    u8 unused;
     u8 tilemapBuff0[BG_SCREEN_SIZE * 2];
     u8 tilemapBuff1[BG_SCREEN_SIZE * 2];
     u8 tilemapBuff2[BG_SCREEN_SIZE * 2];
@@ -597,12 +589,7 @@ static u32 AllocateFrontierPassData(void (*callback)(void))
 {
     u8 i;
 
-    if (sPassData != NULL)
-        return ERR_ALREADY_DONE;
-
     sPassData = AllocZeroed(sizeof(*sPassData));
-    if (sPassData == NULL)
-        return ERR_ALLOC_FAILED;
 
     sPassData->callback = callback;
     i = GetCurrentRegionMapSectionId();
@@ -631,37 +618,25 @@ static u32 AllocateFrontierPassData(void (*callback)(void))
         if (FlagGet(FLAG_SYS_TOWER_GOLD + i * 2))
             sPassData->facilitySymbols[i]++;
     }
-
-    return SUCCESS;
+    return 0;
 }
 
 static u32 FreeFrontierPassData(void)
 {
-    if (sPassData == NULL)
-        return ERR_ALREADY_DONE;
-
     memset(sPassData, 0, sizeof(*sPassData)); // Why clear data, if it's going to be freed anyway?
     FREE_AND_SET_NULL(sPassData);
-    return SUCCESS;
+    return 0;
 }
 
 static u32 AllocateFrontierPassGfx(void)
 {
-    if (sPassGfx != NULL)
-        return ERR_ALREADY_DONE;
-
     sPassGfx = AllocZeroed(sizeof(*sPassGfx));
-    if (sPassGfx == NULL)
-        return ERR_ALLOC_FAILED;
-
-    return SUCCESS;
+    return 0;
 }
 
 static u32 FreeFrontierPassGfx(void)
 {
     FreeAllWindowBuffers();
-    if (sPassGfx == NULL)
-        return ERR_ALREADY_DONE;
 
     TRY_FREE_AND_SET_NULL(sPassGfx->battleRecordTilemap);
     TRY_FREE_AND_SET_NULL(sPassGfx->mapAndCardTilemap);
@@ -669,7 +644,7 @@ static u32 FreeFrontierPassGfx(void)
 
     memset(sPassGfx, 0, sizeof(*sPassGfx)); // Why clear data, if it's going to be freed anyway?
     FREE_AND_SET_NULL(sPassGfx);
-    return SUCCESS;
+    return 0;
 }
 
 static void VBlankCB_FrontierPass(void)

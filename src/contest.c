@@ -1181,10 +1181,6 @@ static void InitContestResources(void)
     eContest = (struct Contest){};
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
-        eContest.unk[i] = 0xFF;
-    }
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-    {
         eContestantStatus[i] = (struct ContestantStatus){};
     }
     for (i = 0; i < CONTESTANT_COUNT; i++)
@@ -1223,7 +1219,6 @@ static void AllocContestResources(void)
     gContestResources->gfxState = AllocZeroed(sizeof(struct ContestGraphicsState) * CONTESTANT_COUNT);
     gContestResources->moveAnim = AllocZeroed(sizeof(struct ContestMoveAnimData));
     gContestResources->tv = AllocZeroed(sizeof(struct ContestTV) * CONTESTANT_COUNT);
-    gContestResources->unused = AllocZeroed(sizeof(struct ContestUnused));
     gContestResources->contestBgTilemaps[0] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[1] = AllocZeroed(0x1000);
     gContestResources->contestBgTilemaps[2] = AllocZeroed(0x1000);
@@ -1245,7 +1240,6 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->gfxState);
     FREE_AND_SET_NULL(gContestResources->moveAnim);
     FREE_AND_SET_NULL(gContestResources->tv);
-    FREE_AND_SET_NULL(gContestResources->unused);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[0]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[1]);
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[2]);
@@ -1800,7 +1794,6 @@ static void Task_AppealSetup(u8 taskId)
     if (++gTasks[taskId].data[0] > 19)
     {
         eContest.turnNumber = 0;
-        eContest.unusedRng = 0;
         if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && IsPlayerLinkLeader())
         {
             s32 i;
@@ -3249,30 +3242,6 @@ static void SwapMoveDescAndContestTilemaps(void)
     CpuCopy16(gContestResources->contestBgTilemaps[2], gContestResources->contestBgTilemaps[2] + 0x500, 32 * 20);
 }
 
-// Functionally unused
-static u16 GetMoveEffectSymbolTileOffset(u16 move, u8 contestant)
-{
-    u16 offset;
-
-    switch (gContestEffects[gMovesInfo[move].contestEffect].effectType)
-    {
-    case 0:
-    case 1:
-    case 8:
-        offset = 0x9082;
-        break;
-    case 2:
-    case 3:
-        offset = 0x9088;
-        break;
-    default:
-        offset = 0x9086;
-        break;
-    }
-    offset += 0x9000 + (contestant << 12);
-    return offset;
-}
-
 static void PrintContestMoveDescription(u16 move)
 {
     u8 category;
@@ -3571,7 +3540,6 @@ static void SetContestantStatusesForNextRound(void)
         eContestantStatus[i].effectStringId = CONTEST_STRING_NONE;
         eContestantStatus[i].effectStringId2 = CONTEST_STRING_NONE;
         eContestantStatus[i].conditionMod = CONDITION_NO_CHANGE;
-        eContestantStatus[i].repeatedPrevMove = eContestantStatus[i].repeatedMove;
         eContestantStatus[i].repeatedMove = FALSE;
         eContestantStatus[i].turnOrderModAction = 0;
         eContestantStatus[i].appealTripleCondition = 0;

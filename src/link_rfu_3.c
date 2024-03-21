@@ -20,8 +20,6 @@ enum {
 
 EWRAM_DATA u8 gWirelessStatusIndicatorSpriteId = 0;
 
-static u8 sSequenceArrayValOffset;
-
 static const u16 sWirelessLinkIconPalette[] = INCBIN_U16("graphics/link/wireless_icon.gbapal");
 static const u32 sWirelessLinkIconPic[] = INCBIN_U32("graphics/link/wireless_icon.4bpp.lz");
 
@@ -537,7 +535,6 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->compatibility.version = GAME_VERSION;
     data->compatibility.hasNews = FALSE;
     data->compatibility.hasCard = FALSE;
-    data->compatibility.unknown = FALSE;
     data->compatibility.canLinkNationally = FlagGet(FLAG_IS_CHAMPION);
     data->compatibility.hasNationalDex = IsNationalPokedexEnabled();
     data->compatibility.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
