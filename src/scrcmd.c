@@ -1571,22 +1571,12 @@ bool8 ScrCmd_multichoicegrid(struct ScriptContext *ctx)
 
 bool8 ScrCmd_erasebox(struct ScriptContext *ctx)
 {
-    u8 UNUSED left = ScriptReadByte(ctx);
-    u8 UNUSED top = ScriptReadByte(ctx);
-    u8 UNUSED right = ScriptReadByte(ctx);
-    u8 UNUSED bottom = ScriptReadByte(ctx);
-
     // Menu_EraseWindowRect(left, top, right, bottom);
     return FALSE;
 }
 
 bool8 ScrCmd_drawboxtext(struct ScriptContext *ctx)
 {
-    u8 UNUSED left = ScriptReadByte(ctx);
-    u8 UNUSED top = ScriptReadByte(ctx);
-    u8 UNUSED multichoiceId = ScriptReadByte(ctx);
-    bool8 UNUSED ignoreBPress = ScriptReadByte(ctx);
-
     /*if (Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext_Stop();
@@ -1930,8 +1920,6 @@ bool8 ScrCmd_hidemoneybox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_updatemoneybox(struct ScriptContext *ctx)
 {
-    u8 UNUSED x = ScriptReadByte(ctx);
-    u8 UNUSED y = ScriptReadByte(ctx);
     u8 ignore = ScriptReadByte(ctx);
 
     if (!ignore)
@@ -1950,18 +1938,12 @@ bool8 ScrCmd_showcoinsbox(struct ScriptContext *ctx)
 
 bool8 ScrCmd_hidecoinsbox(struct ScriptContext *ctx)
 {
-    u8 UNUSED x = ScriptReadByte(ctx);
-    u8 UNUSED y = ScriptReadByte(ctx);
-
     HideCoinsWindow();
     return FALSE;
 }
 
 bool8 ScrCmd_updatecoinsbox(struct ScriptContext *ctx)
 {
-    u8 UNUSED x = ScriptReadByte(ctx);
-    u8 UNUSED y = ScriptReadByte(ctx);
-
     PrintCoinsString(GetCoins());
     return FALSE;
 }
@@ -2282,11 +2264,6 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
 // Below two are functions for elevators in RS, do nothing in Emerald
 bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
 {
-    u8 UNUSED v3 = ScriptReadByte(ctx);
-    u16 UNUSED v5 = VarGet(ScriptReadHalfword(ctx));
-    u16 UNUSED v7 = VarGet(ScriptReadHalfword(ctx));
-    u16 UNUSED v9 = VarGet(ScriptReadHalfword(ctx));
-
     //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
     return FALSE;
 }

@@ -55,7 +55,6 @@ enum
 // Windows displayed in the facilities map view.
 enum
 {
-    MAP_WINDOW_UNUSED, // Overlaps the "Battle Frontier" title area of the map
     MAP_WINDOW_NAME,
     MAP_WINDOW_DESCRIPTION,
     MAP_WINDOW_COUNT
@@ -298,15 +297,6 @@ static const struct WindowTemplate sPassWindowTemplates[WINDOW_COUNT] =
 
 static const struct WindowTemplate sMapWindowTemplates[] =
 {
-    [MAP_WINDOW_UNUSED] = {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 1,
-        .width = 15,
-        .height = 5,
-        .paletteNum = 15,
-        .baseBlock = 0x1,
-    },
     [MAP_WINDOW_NAME] = {
         .bg = 0,
         .tilemapLeft = 20,

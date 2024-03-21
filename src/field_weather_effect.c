@@ -947,18 +947,6 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
     sprite->tFallCounter = 0;
 }
 
-static void UNUSED WaitSnowflakeSprite(struct Sprite *sprite)
-{
-    if (++gWeatherPtr->snowflakeTimer > 18)
-    {
-        sprite->invisible = FALSE;
-        sprite->callback = UpdateSnowflakeSprite;
-        sprite->y = 250 - (gSpriteCoordOffsetY + sprite->centerToCornerVecY);
-        sprite->tPosY = sprite->y * 128;
-        gWeatherPtr->snowflakeTimer = 0;
-    }
-}
-
 static void UpdateSnowflakeSprite(struct Sprite *sprite)
 {
     s16 x;
@@ -2454,11 +2442,6 @@ static void UpdateBubbleSprite(struct Sprite *sprite)
 #undef tCounter
 
 //------------------------------------------------------------------------------
-
-static void UNUSED UnusedSetCurrentAbnormalWeather(u32 weather, u32 unknown)
-{
-    sCurrentAbnormalWeather = weather;
-}
 
 #define tState         data[0]
 #define tWeatherA      data[1]

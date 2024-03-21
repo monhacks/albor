@@ -276,44 +276,6 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
     SetGpuReg(REG_OFFSET_BG0VOFS + bgNum * 4, 0);
 }
 
-static void UNUSED LoadLinkTestBgGfx(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
-{
-    LoadPalette(sLinkTestDigitsPal, BG_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-    DmaCopy16(3, sLinkTestDigitsGfx, (u16 *)BG_CHAR_ADDR(charBaseBlock), sizeof sLinkTestDigitsGfx);
-    gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
-    gLinkTestBGInfo.paletteNum = paletteNum;
-    gLinkTestBGInfo.baseChar = 0;
-    SetGpuReg(sBGControlRegs[bgNum], BGCNT_SCREENBASE(screenBaseBlock) | BGCNT_CHARBASE(charBaseBlock));
-}
-
-static void UNUSED LinkTestScreen(void)
-{
-    int i;
-
-    ResetSpriteData();
-    FreeAllSpritePalettes();
-    ResetTasks();
-    SetVBlankCallback(VBlankCB_LinkError);
-    ResetBlockSend();
-    gLinkType = LINKTYPE_TRADE;
-    OpenLink();
-    SeedRng(gMain.vblankCounter2);
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        gSaveBlock2Ptr->playerTrainerId[i] = Random() % 256;
-
-    InitLinkTestBG(0, 2, 4, 0, 0);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
-    CreateTask(Task_DestroySelf, 0);
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-    UpdatePaletteFade();
-    sDummy3 = FALSE;
-    InitLocalLinkPlayer();
-    CreateTask(Task_PrintTestData, 0);
-    SetMainCallback2(CB2_LinkTest);
-}
-
 void SetLocalLinkPlayerId(u8 playerId)
 {
     gLocalLinkPlayer.id = playerId;
@@ -775,15 +737,6 @@ u32 LinkDummy_Return2(void)
     return 2;
 }
 
-static bool32 UNUSED IsFullLinkGroupWithNoRS(void)
-{
-    if (GetLinkPlayerCount() != MAX_LINK_PLAYERS || AreAnyLinkPlayersUsingVersions(VERSION_RUBY, VERSION_SAPPHIRE) < 0)
-    {
-        return FALSE;
-    }
-    return TRUE;
-}
-
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void)
 {
     if (AreAnyLinkPlayersUsingVersions(VERSION_RUBY, VERSION_SAPPHIRE) >= 0)
@@ -1007,16 +960,6 @@ void SetBerryBlenderLinkCallback(void)
         gLinkCallback = LinkCB_BerryBlenderSendHeldKeys;
 }
 
-static u32 UNUSED GetBerryBlenderKeySendAttempts(void)
-{
-    return gBerryBlenderKeySendAttempts;
-}
-
-static void UNUSED SendBerryBlenderNoSpaceForPokeblocks(void)
-{
-    BuildSendCmd(LINKCMD_BLENDER_NO_PBLOCK_SPACE);
-}
-
 u8 GetMultiplayerId(void)
 {
     if (gWirelessCommType == TRUE)
@@ -1158,33 +1101,6 @@ static void LinkTest_PrintHex(u32 num, u8 x, u8 y, u8 length)
     }
 }
 
-static void UNUSED LinkTest_PrintInt(int num, u8 x, u8 y, u8 length)
-{
-    char buff[16];
-    int negX;
-    int i;
-
-    negX = -1;
-    if (num < 0)
-    {
-        negX = x;
-        num = -num;
-    }
-    for (i = 0; i < length; i++)
-    {
-        buff[i] = num % 10;
-        num /= 10;
-    }
-    for (i = length - 1; i >= 0; i--)
-    {
-        LinkTest_PrintNumChar(buff[i], x, y);
-        x++;
-    }
-
-    if (negX != -1)
-        LinkTest_PrintNumChar(*"\n", negX, y);
-}
-
 static void LinkTest_PrintString(const char *str, u8 x, u8 y)
 {
     int xOffset;
@@ -1290,11 +1206,6 @@ u8 GetSavedPlayerCount(void)
     return gSavedLinkPlayerCount;
 }
 
-static u8 UNUSED GetSavedMultiplayerId(void)
-{
-    return gSavedMultiplayerId;
-}
-
 bool8 DoesLinkPlayerCountMatchSaved(void)
 {
     int i;
@@ -1372,11 +1283,6 @@ bool8 IsLinkMaster(void)
         return Rfu_IsMaster();
 
     return EXTRACT_MASTER(gLinkStatus);
-}
-
-static u8 UNUSED GetDummy2(void)
-{
-    return sDummy2;
 }
 
 void SetCloseLinkCallbackAndType(u16 type)

@@ -1519,14 +1519,26 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     if (gBattleResources->bufferA[battler][2] == TRUE) // check if we didn't want to display pp number
         return;
 
-    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);
-    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);
-    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);
-    ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);
+        if (moveInfo->moves[0] != MOVE_NONE)
+        {
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);     
+        }
+        if (moveInfo->moves[1] != MOVE_NONE)
+        {
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);     
+        }
+        if (moveInfo->moves[2] != MOVE_NONE)
+        {
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);     
+        }
+        if (moveInfo->moves[3] != MOVE_NONE)
+        {
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);     
+        }
 }
 
 static const struct OamData sOamData_IconTypes =
@@ -1963,7 +1975,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     LoadCompressedSpriteSheet(&sSpriteSheet_IconTypes);
     LoadCompressedPalette(gIconTypes_Pal, OBJ_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
 
-    if (sIconTypeId[0] == 0xFF)
+    if (sIconTypeId[0] == 0xFF && moveInfo->moves[0] != MOVE_NONE)
     {
         sIconTypeId[0] = CreateSprite(&sSpriteTemplate_IconTypes, 9, 124, 0);
         sprite1 = &gSprites[sIconTypeId[0]];
@@ -1972,7 +1984,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 		sprite1->oam.priority = 0;
 		sprite1->subpriority = 1;
     }
-    if (sIconTypeId[1] == 0xFF)
+    if (sIconTypeId[1] == 0xFF && moveInfo->moves[1] != MOVE_NONE)
     {
         sIconTypeId[1] = CreateSprite(&sSpriteTemplate_IconTypes, 129, 124, 0);
         sprite2 = &gSprites[sIconTypeId[1]];
@@ -1981,7 +1993,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 		sprite2->oam.priority = 0;
 		sprite2->subpriority = 1;
     }
-    if (sIconTypeId[2] == 0xFF)
+    if (sIconTypeId[2] == 0xFF && moveInfo->moves[2] != MOVE_NONE)
     {
         sIconTypeId[2] = CreateSprite(&sSpriteTemplate_IconTypes, 9, 148, 0);
         sprite3 = &gSprites[sIconTypeId[2]];
@@ -1990,7 +2002,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 		sprite3->oam.priority = 0;
 		sprite3->subpriority = 1;
     }
-    if (sIconTypeId[3] == 0xFF)
+    if (sIconTypeId[3] == 0xFF && moveInfo->moves[3] != MOVE_NONE)
     {
         sIconTypeId[3] = CreateSprite(&sSpriteTemplate_IconTypes, 129, 148, 0);
         sprite4 = &gSprites[sIconTypeId[3]];

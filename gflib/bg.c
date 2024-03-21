@@ -72,14 +72,6 @@ void ResetBgControlStructs(void)
     }
 }
 
-void Unused_ResetBgControlStruct(u32 bg)
-{
-    if (!IsInvalidBg(bg))
-    {
-        sGpuBgConfigs.configs[bg] = sZeroedBgControlStruct;
-    }
-}
-
 enum
 {
     BG_CTRL_ATTR_VISIBLE = 1,

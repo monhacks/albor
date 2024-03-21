@@ -409,20 +409,6 @@ static void Handle_Input_Debug_Pokemon(u8);
 static void ReloadPokemonSprites(struct PokemonDebugMenu *data);
 static void Exit_Debug_Pokemon(u8);
 
-//Text handling functions
-static void UNUSED PadString(const u8 *src, u8 *dst)
-{
-    u32 i;
-
-    for (i = 0; i < 17 && src[i] != EOS; i++)
-        dst[i] = src[i];
-
-    for (; i < 17; i++)
-        dst[i] = CHAR_SPACE;
-
-    dst[i] = EOS;
-}
-
 static void PrintInstructionsOnWindow(struct PokemonDebugMenu *data)
 {
     u8 fontId = 0;

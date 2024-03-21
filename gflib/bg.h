@@ -42,7 +42,6 @@ struct BgTemplate
 void ResetBgs(void);
 u32 GetBgMode(void);
 void ResetBgControlStructs(void);
-void Unused_ResetBgControlStruct(u32 bg);
 u8 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode);
 void SetTextModeAndHideBgs(void);
 bool32 IsInvalidBg(u32 bg);

@@ -1303,11 +1303,6 @@ static void SetBattledTrainersFlags(void)
     FlagSet(GetTrainerAFlag());
 }
 
-static void UNUSED SetBattledTrainerFlag(void)
-{
-    FlagSet(GetTrainerAFlag());
-}
-
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
     return FlagGet(TRAINER_FLAGS_START + trainerId);

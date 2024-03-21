@@ -3320,31 +3320,6 @@ static void PrintContestMoveDescription(u16 move)
     Contest_PrintTextToBg0WindowStd(WIN_SLASH, gText_Slash);
 }
 
-static void DrawMoveEffectSymbol(u16 move, u8 contestant)
-{
-    u8 contestantOffset = gContestantTurnOrder[contestant] * 5 + 2;
-
-    if (!Contest_IsMonsTurnDisabled(contestant) && move != MOVE_NONE)
-    {
-        u16 tile = GetMoveEffectSymbolTileOffset(move, contestant);
-
-        ContestBG_FillBoxWithIncrementingTile(0, tile,      20, contestantOffset,     2, 1, 17, 1);
-        ContestBG_FillBoxWithIncrementingTile(0, tile + 16, 20, contestantOffset + 1, 2, 1, 17, 1);
-    }
-    else
-    {
-        ContestBG_FillBoxWithTile(0, 0, 20, contestantOffset, 2, 2, 17);
-    }
-}
-
-static void UNUSED DrawMoveEffectSymbols(void)
-{
-    s32 i;
-
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-        DrawMoveEffectSymbol(eContestantStatus[i].currMove, i);
-}
-
 static u16 GetStarTileOffset(void)
 {
     return 0x2034;
@@ -4306,24 +4281,6 @@ static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
     ResetBlendForContestantBoxBlink();
 }
 
-static void UNUSED ContestDebugTogglePointTotal(void)
-{
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL)
-        eContestDebugMode = CONTEST_DEBUG_MODE_OFF;
-    else
-        eContestDebugMode = CONTEST_DEBUG_MODE_PRINT_POINT_TOTAL;
-
-    if(eContestDebugMode == CONTEST_DEBUG_MODE_OFF)
-    {
-        DrawContestantWindowText();
-        SwapMoveDescAndContestTilemaps();
-    }
-    else
-    {
-        ContestDebugDoPrint();
-    }
-}
-
 static void ContestDebugDoPrint(void)
 {
     u8 i;
@@ -4958,17 +4915,6 @@ static void Task_ShowAndUpdateApplauseMeter(u8 taskId)
         }
         break;
     }
-}
-
-static void UNUSED HideApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].x2 = 0;
-    gSprites[eContest.applauseMeterSpriteId].invisible = FALSE;
-}
-
-static void UNUSED ShowApplauseMeterNoAnim(void)
-{
-    gSprites[eContest.applauseMeterSpriteId].invisible = TRUE;
 }
 
 #define tDelay  data[10]

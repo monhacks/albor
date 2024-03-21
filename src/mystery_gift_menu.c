@@ -580,33 +580,6 @@ bool32 PrintMysteryGiftMenuMessage(u8 *textState, const u8 *str)
     return FALSE;
 }
 
-static void HideDownArrow(void)
-{
-    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, FALSE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-}
-
-static void ShowDownArrow(void)
-{
-    DrawDownArrow(WIN_MSG, DOWN_ARROW_X, DOWN_ARROW_Y, 1, TRUE, &sDownArrowCounterAndYCoordIdx[0], &sDownArrowCounterAndYCoordIdx[1]);
-}
-
-static bool32 UNUSED HideDownArrowAndWaitButton(u8 *textState)
-{
-    switch (*textState)
-    {
-    case 0:
-        HideDownArrow();
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
-            (*textState)++;
-        break;
-    case 1:
-        ShowDownArrow();
-        *textState = 0;
-        return TRUE;
-    }
-    return FALSE;
-}
-
 static bool32 PrintStringAndWait2Seconds(u8 *counter, const u8 *str)
 {
     if (*counter == 0)
@@ -714,7 +687,6 @@ s8 DoMysteryGiftYesNo(u8 *textState, u16 * windowId, bool8 yesNoBoxPlacement, co
 // Handle the "Receive/Send/Toss" menu that appears when selecting Wonder Card/News
 static s32 HandleGiftSelectMenu(u8 *textState, u16 * windowId, bool32 cannotToss, bool32 cannotSend)
 {
-    struct WindowTemplate UNUSED windowTemplate;
     s32 input;
 
     switch (*textState)
@@ -734,7 +706,6 @@ static s32 HandleGiftSelectMenu(u8 *textState, u16 * windowId, bool32 cannotToss
         (*textState)++;
         break;
     case 1:
-        windowTemplate = sWindowTemplate_YesNoBox;
         if (cannotSend)
         {
             if (!cannotToss)
