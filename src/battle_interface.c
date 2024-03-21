@@ -232,7 +232,7 @@ static const struct OamData sOamData_64x32 =
 
 static const struct SpriteSheet sSpriteSheet_BattleInterfaceSelector =
 {
-    gBattleInterfaceSelector, 0x100, TAG_BATTLE_INTERFACE_SELECTOR
+    gBattleInterfaceSelector, 256, TAG_BATTLE_INTERFACE_SELECTOR
 };
 
 static const struct OamData sOamData_BattleInterfaceSelector =
@@ -274,32 +274,32 @@ static const union AnimCmd *const sBattleInterfaceSelectorAnimTable[] =
 static const struct Subsprite sBattleInterfaceSelectorSubsprites[] =
 {
     {
-        .x = -3,
-        .y = -1,
+        .x = 0,
+        .y = 0,
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SHAPE(16x16),
         .tileOffset = 0,
         .priority = 0
     },
     {
-        .x = 109,
-        .y = -1,
+        .x = 112,
+        .y = 0,
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SHAPE(16x16),
         .tileOffset = 1,
         .priority = 0
     },
     {
-        .x = -3,
-        .y = 15,
+        .x = 0,
+        .y = 16,
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SHAPE(16x16),
         .tileOffset = 2,
         .priority = 0
     },
     {
-        .x = 109,
-        .y = 15,
+        .x = 112,
+        .y = 16,
         .shape = SPRITE_SHAPE(16x16),
         .size = SPRITE_SHAPE(16x16),
         .tileOffset = 3,
@@ -312,20 +312,6 @@ static const struct SubspriteTable sBattleInterfaceSelectorSubspriteTable[] =
     {ARRAY_COUNT(sBattleInterfaceSelectorSubsprites), sBattleInterfaceSelectorSubsprites},
 };
 
-static void SpriteCallback_BattleInterfaceSelector(struct Sprite *sprite)
-{
-    if (sprite->oam.affineParam & 0x10)
-    {
-        sprite->x = 3;
-        sprite->y = 23 * (sprite->oam.affineParam & 0xF) + 113;
-    }
-    else
-    {
-        sprite->x = 120 + 59 * (sprite->oam.affineParam % 2);
-        sprite->y = 113 + 23 * (sprite->oam.affineParam / 2);
-    }
-}
-
 static const struct SpriteTemplate sBattleInterfaceSelector =
 {
     .tileTag = TAG_BATTLE_INTERFACE_SELECTOR,
@@ -334,7 +320,7 @@ static const struct SpriteTemplate sBattleInterfaceSelector =
     .anims = sBattleInterfaceSelectorAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallback_BattleInterfaceSelector
+    .callback = SpriteCallbackDummy
 };
 
 void MoveSelectionCreateCursorAt(u8 cursorPos)
@@ -344,9 +330,23 @@ void MoveSelectionCreateCursorAt(u8 cursorPos)
     if (index == 0xFF)
     {
         LoadSpriteSheet(&sSpriteSheet_BattleInterfaceSelector);
-        index = CreateSprite(&sBattleInterfaceSelector, 3, 113 + 23 * cursorPos, 0);
+        switch (cursorPos)
+        {
+        case 0:
+            index = CreateSprite(&sBattleInterfaceSelector, 0, 112, 0);
+            break;
+        case 1:
+            index = CreateSprite(&sBattleInterfaceSelector, 120, 112, 0);
+            break;
+        case 2:
+            index = CreateSprite(&sBattleInterfaceSelector, 0, 136, 0);
+            break;
+        case 3:
+            index = CreateSprite(&sBattleInterfaceSelector, 120, 136, 0);
+            break;
+        }
     }
-    gSprites[index].oam.affineParam = (0x10 | cursorPos);
+    gSprites[index].oam.affineParam = (16 | cursorPos);
     SetSubspriteTables(&gSprites[index], sBattleInterfaceSelectorSubspriteTable);
     StartSpriteAnim(&gSprites[index], 0);
 }
@@ -1082,11 +1082,6 @@ static void UpdateSpritePos(u8 spriteId, s16 x, s16 y)
 {
     gSprites[spriteId].x = x;
     gSprites[spriteId].y = y;
-}
-
-void DummyBattleInterfaceFunc(u8 healthboxSpriteId, bool8 isDoubleBattleBattlerOnly)
-{
-
 }
 
 static void TryToggleHealboxVisibility(u32 priority, u32 healthboxLeftSpriteId, u32 healthboxRightSpriteId, u32 healthbarSpriteId)

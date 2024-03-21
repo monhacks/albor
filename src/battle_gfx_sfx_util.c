@@ -768,10 +768,6 @@ bool8 BattleInitAllSprites(u8 *state1, u8 *battler)
         break;
     case 4:
         InitBattlerHealthboxCoords(*battler);
-        if (GetBattlerPosition(*battler) <= B_POSITION_OPPONENT_LEFT)
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battler], FALSE);
-        else
-            DummyBattleInterfaceFunc(gHealthboxSpriteIds[*battler], TRUE);
 
         (*battler)++;
         if (*battler == gBattlersCount)
