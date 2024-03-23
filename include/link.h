@@ -331,7 +331,6 @@ extern u16 gLinkSavedIme;
 extern struct LinkPlayer gLocalLinkPlayer;
 
 bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
-bool32 LinkDummy_Return2(void);
 void SetLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 bool8 SendBlockRequest(u8 type);

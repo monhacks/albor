@@ -916,7 +916,7 @@
 #define MUS_HG_RADIO_TRAINER              863 // Pokégear Radio: Trainer Channel
 #define MUS_HG_RADIO_VARIETY              864 // Pokégear Radio: Variety Channel
 #define MUS_HG_VS_KYOGRE_GROUDON          865 // Battle! (Super-Ancient Pokémon)
-#define MUS_HG_POKEWALKER                 866 // Pokéwalker
+#define MUS_HG_POKEWALKER                 866 // -Usada (storage)
 #define MUS_HG_VS_ARCEUS                  867 // Arceus
 #define MUS_HG_HEAL                       868 // Pokémon Healed
 #define MUS_HG_LEVEL_UP                   869 // Level Up!

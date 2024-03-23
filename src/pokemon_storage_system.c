@@ -847,7 +847,6 @@ static const u16 sPkmnData_Tilemap[]         = INCBIN_U16("graphics/pokemon_stor
 static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/pokemon_storage/interface.gbapal");
 static const u16 sPkmnDataGray_Pal[]         = INCBIN_U16("graphics/pokemon_storage/pkmn_data_gray.gbapal");
 static const u16 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_storage/scrolling_bg.gbapal");
-static const u16 sScrollingBgMoveItems_Pal[] = INCBIN_U16("graphics/pokemon_storage/scrolling_bg_move_items.gbapal");
 static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
 static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_storage/party_slot_filled.bin");
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
@@ -1971,6 +1970,7 @@ static void Task_InitPokeStorage(u8 taskId)
         SetVBlankCallback(NULL);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetForPokeStorage();
+        FadeOutAndPlayNewMapMusic(MUS_HG_POKEWALKER, 4);
         if (sStorage->isReopening)
         {
             switch (sWhichToReshow)
@@ -3368,6 +3368,7 @@ static void Task_GiveItemFromBag(u8 taskId)
 
 static void Task_OnCloseBoxPressed(u8 taskId)
 {
+    u16 music = GetCurrLocationDefaultMusic();
     switch (sStorage->state)
     {
     case 0:
@@ -3387,6 +3388,7 @@ static void Task_OnCloseBoxPressed(u8 taskId)
             PrintMessage(MSG_EXIT_BOX);
             ShowYesNoWindow(0);
             sStorage->state = 2;
+            FadeOutAndPlayNewMapMusic(music, 8);
         }
         break;
     case 1:
@@ -3431,6 +3433,8 @@ static void Task_OnCloseBoxPressed(u8 taskId)
 
 static void Task_OnBPressed(u8 taskId)
 {
+    u16 music = GetCurrLocationDefaultMusic();
+
     switch (sStorage->state)
     {
     case 0:
@@ -3480,6 +3484,7 @@ static void Task_OnBPressed(u8 taskId)
             break;
         case 1:
         case MENU_B_PRESSED:
+            FadeOutAndPlayNewMapMusic(music, 8);
             PlaySE(SE_PC_OFF);
             ClearBottomWindow();
             sStorage->state++;
@@ -3636,10 +3641,7 @@ static void InitPalettesAndSprites(void)
     LoadPalette(sInterface_Pal, BG_PLTT_ID(0), sizeof(sInterface_Pal));
     LoadPalette(sPkmnDataGray_Pal, BG_PLTT_ID(2), sizeof(sPkmnDataGray_Pal));
     LoadPalette(sTextWindows_Pal, BG_PLTT_ID(15), sizeof(sTextWindows_Pal));
-    if (sStorage->boxOption != OPTION_MOVE_ITEMS)
-        LoadPalette(sScrollingBg_Pal, BG_PLTT_ID(3), sizeof(sScrollingBg_Pal));
-    else
-        LoadPalette(sScrollingBgMoveItems_Pal, BG_PLTT_ID(3), sizeof(sScrollingBgMoveItems_Pal));
+    LoadPalette(sScrollingBg_Pal, BG_PLTT_ID(3), sizeof(sScrollingBg_Pal));
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
@@ -8877,7 +8879,7 @@ static void PrintItemDescription(void)
 static void InitItemInfoWindow(void)
 {
     sStorage->itemInfoWindowOffset = 21;
-    LoadBgTiles(0, sItemInfoFrame_Gfx, 128, 314);
+    LoadBgTiles(0, sItemInfoFrame_Gfx, 128, 311);
     DrawItemInfoWindow(0);
 }
 

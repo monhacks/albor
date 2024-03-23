@@ -56,8 +56,6 @@ static struct BlockTransfer sBlockSend;
 static struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
 static u32 sBlockSendDelayCounter;
 static u32 sPlayerDataExchangeStatus;
-static u8 sLinkTestLastBlockSendPos;
-static u8 sLinkTestLastBlockRecvPos[MAX_LINK_PLAYERS];
 static u8 sNumVBlanksWithoutSerialIntr;
 static bool8 sSendBufferEmpty;
 static u16 sSendNonzeroCheck;
@@ -70,10 +68,8 @@ u32 gLinkDebugSeed;
 struct LinkPlayerBlock gLocalLinkPlayerBlock;
 bool8 gLinkErrorOccurred;
 u32 gLinkDebugFlags;
-u32 gLinkFiller1;
 bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
 u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
-u32 gLinkFiller2;
 u16 gLinkHeldKeys;
 u16 ALIGNED(4) gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH];
 u32 gLinkStatus;
@@ -90,15 +86,11 @@ void (*gLinkCallback)(void);
 u8 gShouldAdvanceLinkState;
 u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS];
 u8 gBlockRequestType;
-u32 gLinkFiller3;
-u32 gLinkFiller4;
-u32 gLinkFiller5;
 u8 gLastSendQueueCount;
 struct Link gLink;
 u8 gLastRecvQueueCount;
 u16 gLinkSavedIme;
 
-static EWRAM_DATA u8 sLinkTestDebugValuesEnabled = 0;
 EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
 EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
@@ -126,8 +118,6 @@ static void LinkCB_BlockSendBegin(void);
 static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
 static void SetBlockReceivedFlag(u8);
-static u16 LinkTestCalcBlockChecksum(const u16 *, u16);
-static void LinkTest_PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 
 static void LinkCB_ReadyCloseLink(void);
@@ -918,51 +908,6 @@ void CheckShouldAdvanceLinkState(void)
 {
     if ((gLinkStatus & LINK_STAT_MASTER) && EXTRACT_PLAYER_COUNT(gLinkStatus) > 1)
         gShouldAdvanceLinkState = 1;
-}
-
-static u16 LinkTestCalcBlockChecksum(const u16 *src, u16 size)
-{
-    u16 chksum;
-    u16 i;
-
-    chksum = 0;
-    for (i = 0; i < size / 2; i++)
-        chksum += src[i];
-
-    return chksum;
-}
-
-static void LinkTest_PrintNumChar(char val, u8 x, u8 y)
-{
-    u16 *vAddr;
-
-    vAddr = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
-    vAddr[y * 32 + x] = (gLinkTestBGInfo.paletteNum << 12) | (val + 1 + gLinkTestBGInfo.baseChar);
-}
-
-static void LinkTest_PrintChar(char val, u8 x, u8 y)
-{
-    u16 *vAddr;
-
-    vAddr = (u16 *)BG_SCREEN_ADDR(gLinkTestBGInfo.screenBaseBlock);
-    vAddr[y * 32 + x] = (gLinkTestBGInfo.paletteNum << 12) | (val + gLinkTestBGInfo.baseChar);
-}
-
-static void LinkTest_PrintHex(u32 num, u8 x, u8 y, u8 length)
-{
-    char buff[16];
-    int i;
-
-    for (i = 0; i < length; i++)
-    {
-        buff[i] = num & 0xF;
-        num >>= 4;
-    }
-    for (i = length - 1; i >= 0; i--)
-    {
-        LinkTest_PrintNumChar(buff[i], x, y);
-        x++;
-    }
 }
 
 static void LinkCB_RequestPlayerDataExchange(void)
