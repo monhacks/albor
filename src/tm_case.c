@@ -128,7 +128,7 @@ static const struct BgTemplate sBGTemplates[] = {
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 1,
-        .baseTile = 0x000
+        .baseTile = 0
     }, {
         .bg = 1,
         .charBaseIndex = 0,
@@ -136,7 +136,7 @@ static const struct BgTemplate sBGTemplates[] = {
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 0,
-        .baseTile = 0x000
+        .baseTile = 0
     }, {
         .bg = 2,
         .charBaseIndex = 0,
@@ -144,7 +144,7 @@ static const struct BgTemplate sBGTemplates[] = {
         .screenSize = 0,
         .paletteMode = 0,
         .priority = 2,
-        .baseTile = 0x000
+        .baseTile = 0
     }
 };
 
@@ -173,7 +173,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .width = 19,
         .height = 14,
         .paletteNum = 1,
-        .baseBlock = 0x081
+        .baseBlock = 129
     },
     [WIN_TITLE] = {
         .bg = 0,
@@ -182,7 +182,7 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .width = 14,
         .height = 2,
         .paletteNum = 1,
-        .baseBlock = 0x235
+        .baseBlock = 565
     },
     [WIN_MOVE_INFO] = {
         .bg = 0,
@@ -203,7 +203,7 @@ static const struct WindowTemplate sYesNoWindowTemplate = {
     .width = 6,
     .height = 4,
     .paletteNum = 15,
-    .baseBlock = 0x335
+    .baseBlock = 821
 };
 
 static const struct WindowTemplate sWindowTemplates_ContextMenu[] = {
@@ -214,7 +214,7 @@ static const struct WindowTemplate sWindowTemplates_ContextMenu[] = {
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x1cf
+        .baseBlock = 463
     },
     [WIN_EXIT] = {
         .bg = 1,
@@ -223,7 +223,7 @@ static const struct WindowTemplate sWindowTemplates_ContextMenu[] = {
         .width = 5,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 0x1cf
+        .baseBlock = 463
     },
 };
 
@@ -450,7 +450,7 @@ static void LoadBGTemplates(void)
     ResetVramOamAndBgCntRegs();
     ResetAllBgsCoordinates();
     ptr = &sTilemapBuffer;
-    *ptr = AllocZeroed(0x800);
+    *ptr = AllocZeroed(2048);
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
@@ -899,11 +899,11 @@ static void InitWindowTemplatesAndPals(void)
 
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
-    LoadUserWindowBorderGfx(0, 0x78, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, 120, BG_PLTT_ID(13));
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
     for (i = 0; i < ARRAY_COUNT(sWindowTemplates) - 1; i++)
-        FillWindowPixelBuffer(i, 0x00);
+        FillWindowPixelBuffer(i, 0);
     PutWindowTilemap(WIN_LIST);
     PutWindowTilemap(WIN_TITLE);
     PutWindowTilemap(WIN_MOVE_INFO);
@@ -917,7 +917,7 @@ static void TMCase_Print(u8 windowId, u8 fontId, const u8 * str, u8 x, u8 y, u8 
 
 static void TMCase_SetWindowBorder(u8 windowId)
 {
-    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 0x78, 13);
+    DrawStdFrameWithCustomTileAndPalette(windowId, FALSE, 120, 13);
 }
 
 static void PrintTitle(void)
@@ -953,9 +953,9 @@ static void SpriteCb_MonIcon(struct Sprite *sprite)
 }
 #undef sMonIconStill
 
-#define MON_ICON_START_X  0x10
-#define MON_ICON_START_Y  0x2a
-#define MON_ICON_PADDING  0x20
+#define MON_ICON_START_X  8
+#define MON_ICON_START_Y  30
+#define MON_ICON_PADDING  16
 #define POKE_ICON_BASE_PAL_TAG 56000 
 
 static void DrawPartyMonIcons(void)
