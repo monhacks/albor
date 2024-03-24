@@ -153,6 +153,11 @@ Debug_EventScript_Script_2::
 	end
 
 Debug_EventScript_Script_3::
+	giveegg SPECIES_BULBASAUR
+	giveegg SPECIES_CHARMANDER
+	giveegg SPECIES_SQUIRTLE
+	giveegg SPECIES_CATERPIE
+	giveegg SPECIES_PIDGEY
 	end
 
 Debug_EventScript_Script_4::
