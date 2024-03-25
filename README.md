@@ -6,7 +6,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Lista de créditos
     *Pret por la decompilación de pokeemerald y su wiki.
-    *Rh-hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
+    *Rom Hacking Hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
