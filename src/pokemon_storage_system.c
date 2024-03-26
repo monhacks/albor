@@ -217,7 +217,6 @@ enum {
     GFXTAG_BOX_TITLE,
     GFXTAG_BOX_TITLE_ALT,
     GFXTAG_WAVEFORM,
-    GFXTAG_ARROW,
     GFXTAG_ITEM_ICON_0,
     GFXTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     GFXTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
@@ -323,7 +322,6 @@ struct ChooseBoxMenu
 {
     struct Sprite *menuSprite;
     struct Sprite *menuSideSprites[4];
-    struct Sprite *arrowSprites[2];
     bool32 loadedPalette;
     u16 tileTag;
     u16 paletteTag;
@@ -364,7 +362,6 @@ struct PokemonStorageSystemData
     u16 boxTitlePalOffset;
     struct Sprite *curBoxTitleSprites[2];
     struct Sprite *nextBoxTitleSprites[2];
-    struct Sprite *arrowSprites[2];
     u16 ALIGNED(4) chooseBoxSwapPal[16]; // Holds dynamic palette to swap into choose box gfx
     u16 swapInPal[16];
     void *swapInPalDst;
@@ -466,7 +463,6 @@ struct PokemonStorageSystemData
 };
 
 static u32 sItemIconGfxBuffer[98];
-static const u8 sArrow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/arrow.4bpp");
 
 EWRAM_DATA static u8 sPreviousBoxOption = 0;
 EWRAM_DATA static struct ChooseBoxMenu *sChooseBoxMenu = NULL;
@@ -536,7 +532,6 @@ static void ChooseBoxMenu_DestroySprites(void);
 static void ChooseBoxMenu_MoveLeft(void);
 static void ChooseBoxMenu_MoveRight(void);
 static void ChooseBoxMenu_PrintInfo(void);
-static void SpriteCB_ChooseBoxArrow(struct Sprite *);
 
 // Options menus
 static void InitMenu(void);
@@ -691,14 +686,6 @@ static void TrySetCursorFistAnim(void);
 static bool8 IsCursorOnCloseBox(void);
 static bool8 IsCursorOnBoxTitle(void);
 static bool8 IsCursorInBox(void);
-
-// Scroll arrows
-static void CreateBoxScrollArrows(void);
-static void StartBoxScrollArrowsSlide(s8);
-static void StopBoxScrollArrowsSlide(void);
-static void AnimateBoxScrollArrows(bool8);
-static void SpriteCB_Arrow(struct Sprite *);
-static struct Sprite *CreateChooseBoxArrows(u16, u16, u8, u8, u8);
 
 // Box title
 static void InitBoxTitle(u8);
@@ -1120,8 +1107,6 @@ static const union AffineAnimCmd *const sAffineAnims_ReleaseMon[] =
     [RELEASE_ANIM_CAME_BACK] = sAffineAnim_ReleaseMon_CameBack
 };
 
-static const struct SpriteSheet sSpriteSheet_Arrow = {sArrow_Gfx, sizeof(sArrow_Gfx), GFXTAG_ARROW};
-
 static const struct OamData sOamData_BoxTitle =
 {
     .shape = SPRITE_SHAPE(32x16),
@@ -1156,42 +1141,6 @@ static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
-};
-
-static const struct OamData sOamData_Arrow =
-{
-    .shape = SPRITE_SHAPE(8x16),
-    .size = SPRITE_SIZE(8x16),
-    .priority = 2
-};
-
-static const union AnimCmd sAnim_Arrow_Left[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_Arrow_Right[] =
-{
-    ANIMCMD_FRAME(2, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sAnims_Arrow[] =
-{
-    sAnim_Arrow_Left,
-    sAnim_Arrow_Right
-};
-
-static const struct SpriteTemplate sSpriteTemplate_Arrow =
-{
-    .tileTag = GFXTAG_ARROW,
-    .paletteTag = PALTAG_MISC_1,
-    .oam = &sOamData_Arrow,
-    .anims = sAnims_Arrow,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Arrow
 };
 
 static const u16 ALIGNED(4) sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
@@ -1665,15 +1614,6 @@ static void ChooseBoxMenu_CreateSprites(u8 curBox)
         }
         StartSpriteAnim(sChooseBoxMenu->menuSideSprites[i], anim);
     }
-    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->arrowSprites); i++)
-    {
-        sChooseBoxMenu->arrowSprites[i] = CreateChooseBoxArrows(72 * i + 124, 88, i, 0, sChooseBoxMenu->subpriority);
-        if (sChooseBoxMenu->arrowSprites[i])
-        {
-            sChooseBoxMenu->arrowSprites[i]->data[0] = (i == 0 ? -1 : 1);
-            sChooseBoxMenu->arrowSprites[i]->callback = SpriteCB_ChooseBoxArrow;
-        }
-    }
     ChooseBoxMenu_PrintInfo();
 }
 
@@ -1692,11 +1632,6 @@ static void ChooseBoxMenu_DestroySprites(void)
             DestroySprite(sChooseBoxMenu->menuSideSprites[i]);
             sChooseBoxMenu->menuSideSprites[i] = NULL;
         }
-    }
-    for (i = 0; i < ARRAY_COUNT(sChooseBoxMenu->arrowSprites); i++)
-    {
-        if (sChooseBoxMenu->arrowSprites[i])
-            DestroySprite(sChooseBoxMenu->arrowSprites[i]);
     }
 }
 
@@ -1745,21 +1680,6 @@ static void ChooseBoxMenu_PrintInfo(void)
 
     RemoveWindow(windowId);
 }
-
-static void SpriteCB_ChooseBoxArrow(struct Sprite *sprite)
-{
-    if (++sprite->data[1] > 3)
-    {
-        sprite->data[1] = 0;
-        sprite->x2 += sprite->data[0];
-        if (++sprite->data[2] > 5)
-        {
-            sprite->data[2] = 0;
-            sprite->x2 = 0;
-        }
-    }
-}
-
 
 //------------------------------------------------------------------------------
 //  SECTION: Main tasks
@@ -3233,7 +3153,6 @@ static void Task_HandleBoxOptions(u8 taskId)
         {
         case MENU_B_PRESSED:
         case MENU_CANCEL:
-            AnimateBoxScrollArrows(TRUE);
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
             break;
@@ -3273,7 +3192,6 @@ static void Task_JumpBox(u8 taskId)
             FreeChooseBoxMenu();
             if (sStorage->newCurrBoxId == BOXID_CANCELED || sStorage->newCurrBoxId == StorageGetCurrentBox())
             {
-                AnimateBoxScrollArrows(TRUE);
                 SetPokeStorageTask(Task_PokeStorageMain);
             }
             else
@@ -5064,7 +4982,6 @@ static void Task_InitBox(u8 taskId)
         break;
     case 1:
         InitBoxTitle(task->tBoxId);
-        CreateBoxScrollArrows();
         InitBoxMonSprites(task->tBoxId);
         SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(2) | BGCNT_CHARBASE(2) | BGCNT_SCREENBASE(27) | BGCNT_TXT512x256);
         break;
@@ -5103,7 +5020,6 @@ static bool8 ScrollToBox(void)
     case 0:
         InitBoxMonIconScroll(sStorage->scrollToBoxId, sStorage->scrollDirection);
         CreateIncomingBoxTitle(sStorage->scrollToBoxId, sStorage->scrollDirection);
-        StartBoxScrollArrowsSlide(sStorage->scrollDirection);
         break;
     case 1:
         iconsScrolling = UpdateBoxMonIconScroll();
@@ -5112,7 +5028,6 @@ static bool8 ScrollToBox(void)
             if (--sStorage->scrollTimer != 0)
                 return TRUE;
             CycleBoxTitleSprites();
-            StopBoxScrollArrowsSlide();
         }
         return iconsScrolling;
     }
@@ -5266,158 +5181,7 @@ static s16 GetBoxTitleBaseX(const u8 *string)
     return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL, string, 0) / 2;
 }
 
-
-//------------------------------------------------------------------------------
-//  SECTION: Scroll arrows
-//------------------------------------------------------------------------------
-
-
-// Sprite data for box scroll arrows
-#define sState data[0]
 #define sTimer data[1]
-#define sSpeed data[3]
-
-static void CreateBoxScrollArrows(void)
-{
-    u16 i;
-
-    LoadSpriteSheet(&sSpriteSheet_Arrow);
-    for (i = 0; i < 2; i++)
-    {
-        u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, 92 + i * 136, 28, 22);
-        if (spriteId != MAX_SPRITES)
-        {
-            struct Sprite *sprite = &gSprites[spriteId];
-            StartSpriteAnim(sprite, i);
-            sprite->sSpeed = (i == 0) ? -1 : 1;
-            sStorage->arrowSprites[i] = sprite;
-        }
-    }
-    if (IsCursorOnBoxTitle())
-        AnimateBoxScrollArrows(TRUE);
-}
-
-// Slide box scroll arrows horizontally for box change
-static void StartBoxScrollArrowsSlide(s8 direction)
-{
-    u16 i;
-
-    for (i = 0; i < 2; i++)
-    {
-        sStorage->arrowSprites[i]->x2 = 0;
-        sStorage->arrowSprites[i]->sState = 2;
-    }
-    if (direction < 0)
-    {
-        sStorage->arrowSprites[0]->sTimer = 29;
-        sStorage->arrowSprites[1]->sTimer = 5;
-        sStorage->arrowSprites[0]->data[2] = 72;
-        sStorage->arrowSprites[1]->data[2] = 72;
-    }
-    else
-    {
-        sStorage->arrowSprites[0]->sTimer = 5;
-        sStorage->arrowSprites[1]->sTimer = 29;
-        sStorage->arrowSprites[0]->data[2] = DISPLAY_WIDTH + 8;
-        sStorage->arrowSprites[1]->data[2] = DISPLAY_WIDTH + 8;
-    }
-    sStorage->arrowSprites[0]->data[7] = 0;
-    sStorage->arrowSprites[1]->data[7] = 1;
-}
-
-// New box's scroll arrows have entered, stop sliding and set their position
-static void StopBoxScrollArrowsSlide(void)
-{
-    u16 i;
-
-    for (i = 0; i < 2; i++)
-    {
-        sStorage->arrowSprites[i]->x = 136 * i + 92;
-        sStorage->arrowSprites[i]->x2 = 0;
-        sStorage->arrowSprites[i]->invisible = FALSE;
-    }
-    AnimateBoxScrollArrows(TRUE);
-}
-
-// Bounce scroll arrows while title is selected
-static void AnimateBoxScrollArrows(bool8 animate)
-{
-    u16 i;
-
-    if (animate)
-    {
-        // Start arrows moving
-        for (i = 0; i < 2; i++)
-        {
-            sStorage->arrowSprites[i]->sState = 1;
-            sStorage->arrowSprites[i]->sTimer = 0;
-            sStorage->arrowSprites[i]->data[2] = 0;
-            sStorage->arrowSprites[i]->data[4] = 0;
-        }
-    }
-    else
-    {
-        // Stop arrows moving
-        for (i = 0; i < 2; i++)
-            sStorage->arrowSprites[i]->sState = 0;
-    }
-}
-
-static void SpriteCB_Arrow(struct Sprite *sprite)
-{
-    switch (sprite->sState)
-    {
-    case 0:
-        sprite->x2 = 0;
-        break;
-    case 1:
-        if (++sprite->sTimer > 3)
-        {
-            sprite->sTimer = 0;
-            sprite->x2 += sprite->sSpeed;
-            if (++sprite->data[2] > 5)
-            {
-                sprite->data[2] = 0;
-                sprite->x2 = 0;
-            }
-        }
-        break;
-    case 2:
-        sprite->sState = 3;
-        break;
-    case 3:
-        sprite->x -= sStorage->scrollSpeed;
-        if (sprite->x <= 72 || sprite->x >= DISPLAY_WIDTH + 8)
-            sprite->invisible = TRUE;
-        if (--sprite->sTimer == 0)
-        {
-            sprite->x = sprite->data[2];
-            sprite->invisible = FALSE;
-            sprite->sState = 4;
-        }
-        break;
-    case 4:
-        sprite->x -= sStorage->scrollSpeed;
-        break;
-    }
-}
-
-#undef sState
-#undef sSpeed
-
-// Arrows for Deposit/Jump Box selection
-static struct Sprite *CreateChooseBoxArrows(u16 x, u16 y, u8 animId, u8 priority, u8 subpriority)
-{
-    u8 spriteId = CreateSprite(&sSpriteTemplate_Arrow, x, y, subpriority);
-    if (spriteId == MAX_SPRITES)
-        return NULL;
-
-    animId %= 2;
-    StartSpriteAnim(&gSprites[spriteId], animId);
-    gSprites[spriteId].oam.priority = priority;
-    gSprites[spriteId].callback = SpriteCallbackDummy;
-    return &gSprites[spriteId];
-}
 
 
 //------------------------------------------------------------------------------
@@ -5711,9 +5475,6 @@ static void DoCursorNewPosUpdate(void)
     {
     case CURSOR_AREA_BUTTONS:
         SetMovingMonPriority(1);
-        break;
-    case CURSOR_AREA_BOX_TITLE:
-        AnimateBoxScrollArrows(TRUE);
         break;
     case CURSOR_AREA_IN_PARTY:
         sStorage->cursorShadowSprite->subpriority = 13;
@@ -6677,7 +6438,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     }
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Input handlers
 //
@@ -6776,6 +6536,10 @@ static u8 InBoxInput_Normal(void)
             cursorPosition = 0;
             break;
         }
+        else if (JOY_HELD(L_BUTTON))
+            return INPUT_SCROLL_LEFT;
+        else if (JOY_HELD(R_BUTTON))
+            return INPUT_SCROLL_RIGHT;
 
         if ((JOY_NEW(A_BUTTON)) && SetSelectionMenuTexts())
         {
@@ -7146,22 +6910,13 @@ static u8 HandleInput_OnBox(void)
             break;
         }
 
-        if (JOY_HELD(DPAD_LEFT))
+        if (JOY_HELD(L_BUTTON))
             return INPUT_SCROLL_LEFT;
-        if (JOY_HELD(DPAD_RIGHT))
+        if (JOY_HELD(R_BUTTON))
             return INPUT_SCROLL_RIGHT;
-
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        {
-            if (JOY_HELD(L_BUTTON))
-                return INPUT_SCROLL_LEFT;
-            if (JOY_HELD(R_BUTTON))
-                return INPUT_SCROLL_RIGHT;
-        }
 
         if (JOY_NEW(A_BUTTON))
         {
-            AnimateBoxScrollArrows(FALSE);
             AddBoxOptionsMenu();
             return INPUT_BOX_OPTIONS;
         }
@@ -7181,8 +6936,6 @@ static u8 HandleInput_OnBox(void)
 
     if (retVal != INPUT_NONE)
     {
-        if (cursorArea != CURSOR_AREA_BOX_TITLE)
-            AnimateBoxScrollArrows(FALSE);
         SetCursorPosition(cursorArea, cursorPosition);
     }
 
