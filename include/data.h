@@ -141,6 +141,10 @@ struct TypeInfo
     //u16 arceusForm;
 };
 
+// Egg palette tables
+extern const struct CompressedSpritePalette gEgg1PaletteTable[];
+extern const struct CompressedSpritePalette gEgg2PaletteTable[];
+
 // Follower text messages
 extern const struct FollowerMsgInfo gFollowerHappyMessages[];
 extern const struct FollowerMsgInfo gFollowerNeutralMessages[];

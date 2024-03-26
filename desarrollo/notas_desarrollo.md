@@ -5,3 +5,4 @@
                * Para capturar, basta con tener Pokéballs, y para seleccionarla, mantener pulsado B a la vez que R.
 - Crear ataques como Tornado, Vendaval...
 - Limpiar palette.c
+- Crear huevos personalizados en pokédex
