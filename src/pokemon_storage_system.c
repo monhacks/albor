@@ -4139,16 +4139,32 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
     const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality); //*
-    // Decompress species palette into swap buffer
-    if (species == SPECIES_CASTFORM) //???
-    { // needs more than 32 bytes of space; so decompress and copy
-        LZ77UnCompWram(palette, gDecompressionBuffer);
-        CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
-    } 
+    const struct CompressedSpritePalette *pal1, *pal2;
+
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+    {
+        pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0]];
+        pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1]];
+        LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+        LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP/2);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP/2);
+    }
     else
     {
-        LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
-        UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], MON_DATA_PERSONALITY), IsMonShiny((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position]));
+        // Decompress species palette into swap buffer
+        if (species == SPECIES_CASTFORM) //???
+        { // needs more than 32 bytes of space; so decompress and copy
+            LZ77UnCompWram(palette, gDecompressionBuffer);
+            CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+        } 
+        else
+        {
+            LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
+            UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], MON_DATA_PERSONALITY), IsMonShiny((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position]));
+        }
     }
     sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
@@ -4472,31 +4488,65 @@ static void CreatePartyMonsSprites(bool8 visible) //iconos de Pokémon de equipo
     u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES_OR_EGG);
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
     u8 paletteNum;
+    const struct CompressedSpritePalette *pal1, *pal2;
 
     sStorage->transferWholePlttFrames = -1; // keep transferring entire palette buffer until done with party menu
     sStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
-    LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
-    UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), species, GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), personality);
-    CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
-    sStorage->partySprites[0]->oam.paletteNum = 0+1;
+    if (GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG))
+    {
+        pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[0], MON_DATA_SPECIES)].types[0]];
+        pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[0], MON_DATA_SPECIES)].types[1]];
+        LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
+        LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
+    }
+    else
+    {
+        LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
+        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), species, GetMonData(&gPlayerParty[0], MON_DATA_IS_SHINY), personality);
+        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
+    }
+    sStorage->partySprites[0]->oam.paletteNum = 1;
     count = 1;
+
     for (i = 1; i < PARTY_SIZE; i++)
     {
         species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         paletteNum = (i >= 3 ? i + 3 : i) + 1;
-        if (species != SPECIES_NONE)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
         {
+            pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[i], MON_DATA_SPECIES)].types[0]];
+            pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[i], MON_DATA_SPECIES)].types[1]];
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
-            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), species, GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY), personality);
-            CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
             sStorage->partySprites[i]->oam.paletteNum = paletteNum;
-            count++;
+            count++;            
         }
         else
         {
-            sStorage->partySprites[i] = NULL;
+            if (species != SPECIES_NONE)
+            {
+                personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+                sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), species, GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY), personality);
+                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+                sStorage->partySprites[i]->oam.paletteNum = paletteNum;
+                count++;
+            }
+            else
+            {
+                sStorage->partySprites[i] = NULL;
+            }
         }
     }
 
