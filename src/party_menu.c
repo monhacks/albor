@@ -258,7 +258,6 @@ void (*gItemUseCB)(u8, TaskFunc);
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);
 static bool8 ShowPartyMenu(void);
-static bool8 ReloadPartyMenu(void);
 static void SetPartyMonsAllowedInMinigame(void);
 static void ExitPartyMenu(void);
 static bool8 AllocPartyMenuBg(void);
@@ -704,104 +703,6 @@ static bool8 ShowPartyMenu(void)
         break;
     case 22:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        gMain.state++;
-        break;
-    default:
-        SetVBlankCallback(VBlankCB_PartyMenu);
-        SetMainCallback2(CB2_UpdatePartyMenu);
-        return TRUE;
-    }
-    return FALSE;
-}
-
-static bool8 ReloadPartyMenu(void)
-{
-    switch (gMain.state)
-    {
-    case 0:
-        SetVBlankHBlankCallbacksToNull();
-        ClearScheduledBgCopiesToVram();
-        gMain.state++;
-        break;
-    case 1:
-        ScanlineEffect_Stop();
-        gMain.state++;
-        break;
-    case 2:
-        ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = TRUE;
-        gMain.state++;
-        break;
-    case 3:
-        ResetSpriteData();
-        gMain.state++;
-        break;
-    case 4:
-        FreeAllSpritePalettes();
-        gMain.state++;
-        break;
-    case 5:
-        SetPartyMonsAllowedInMinigame();
-        gMain.state++;
-        break;
-    case 6:
-        sPartyMenuInternal->data[0] = 0;
-        gMain.state++;
-        break;
-    case 7:
-        LoadPartyMenuWindows();
-        gMain.state++;
-        break;
-    case 8:
-        LoadPartyMenuBoxes(gPartyMenu.layout);
-        sPartyMenuInternal->data[0] = 0;
-        gMain.state++;
-        break;
-    case 9:
-        LoadHeldItemIcons();
-        gMain.state++;
-        break;
-    case 10:
-        LoadPartyMenuPokeballGfx();
-        gMain.state++;
-        break;
-    case 11:
-        LoadPartyMenuAilmentGfx();
-        gMain.state++;
-        break;
-    case 12:
-        LoadMonIconPalettes();
-        gMain.state++;
-        break;
-    case 13:
-        if (CreatePartyMonSpritesLoop())
-        {
-            sPartyMenuInternal->data[0] = 0;
-            gMain.state++;
-        }
-        break;
-    case 14:
-        if (RenderPartyMenuBoxes())
-        {
-            sPartyMenuInternal->data[0] = 0;
-            gMain.state++;
-        }
-        break;
-    case 15:
-        CreateCancelConfirmPokeballSprites();
-        gMain.state++;
-        break;
-    case 16:
-        CreateCancelConfirmWindows(sPartyMenuInternal->chooseHalf);
-        gMain.state++;
-        break;
-    case 17:
-        BlendPalettes(PALETTES_ALL, 16, RGB_WHITEALPHA);
-        gPaletteFade.bufferTransferDisabled = FALSE;
-        gMain.state++;
-        break;
-    case 18:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
         gMain.state++;
         break;
     default:

@@ -4757,20 +4757,37 @@ u8 FindFreePartyPaletteSlot(void)
 static void SetPlacedMonSprite(u8 boxId, u8 position)
 {
     u32 paletteNum;
+    const struct CompressedSpritePalette *pal1, *pal2;
 
     if (boxId == TOTAL_BOXES_COUNT) // party mon
     {
         sStorage->partySprites[position] = sStorage->movingMonSprite;
         sStorage->partySprites[position]->oam.priority = 1;
         sStorage->partySprites[position]->subpriority = 12;
-        // If currently using displayed mon palette, load party sprite palette into free party palette slot
-        if (sStorage->partySprites[position]->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)) 
+
+        if (GetMonData(&gPlayerParty[position], MON_DATA_IS_EGG))
         {
             paletteNum = FindFreePartyPaletteSlot();
-            LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-            UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_SPECIES), GetMonData(&gPlayerParty[position], MON_DATA_IS_SHINY), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
-            CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[position], MON_DATA_SPECIES)].types[0]];
+            pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[position], MON_DATA_SPECIES)].types[1]];
+            LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
             sStorage->partySprites[position]->oam.paletteNum = paletteNum;
+        }
+        else // If currently using displayed mon palette, load party sprite palette into free party palette slot
+        {
+            if (sStorage->partySprites[position]->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)) 
+            {
+                paletteNum = FindFreePartyPaletteSlot();
+                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_SPECIES), GetMonData(&gPlayerParty[position], MON_DATA_IS_SHINY), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
+                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+                sStorage->partySprites[position]->oam.paletteNum = paletteNum;
+            }
         }
     }
     else
