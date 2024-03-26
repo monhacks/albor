@@ -23,8 +23,8 @@ Lista Pokémon:
 * A-Raticate (sprite con animación y paleta shiny) X Comprobar animación
 * Spearow (paleta shiny) X
 * Fearow (paleta shiny) X
-* Ekans
-* Arbok
+* Ekans X
+* Arbok X
 * Pichu
 * Pikachu
 * Raichu

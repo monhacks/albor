@@ -1408,13 +1408,6 @@ void ItemUseOutOfBattle_ZygardeCube(u8 taskId)
     }
 }
 
-void ItemUseOutOfBattle_Fusion(u8 taskId)
-{
-    gItemUseCB = ItemUseCB_Fusion;
-    gTasks[taskId].data[0] = FALSE;
-    SetUpItemUseCallback(taskId);
-}
-
 void Task_UseHoneyOnField(u8 taskId)
 {
     //ResetInitialPlayerAvatarState();

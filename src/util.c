@@ -307,6 +307,8 @@ static const s8 sColorVariationModes[NUM_SPECIES] =
     [SPECIES_METAPOD]       = NORMAL_HUE_X2_SHINY_HUE,
     [SPECIES_BUTTERFREE]    = NORMAL_MOD_SHINY_MOD,
     [SPECIES_PIDGEY]        = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_EKANS]         = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_ARBOK]         = NORMAL_HUE_X2_SHINY_HUE,
 };
 
 void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)

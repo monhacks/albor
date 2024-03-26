@@ -242,10 +242,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Ekans[] = INCBIN_U32("graphics/pokemon/ekans/normal.gbapal.lz");
     const u32 gMonBackPic_Ekans[] = INCBIN_U32("graphics/pokemon/ekans/back.4bpp.lz");
     const u32 gMonShinyPalette_Ekans[] = INCBIN_U32("graphics/pokemon/ekans/shiny.gbapal.lz");
-    const u8 gMonIcon_Ekans[] = INCBIN_U8("graphics/pokemon/ekans/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Ekans[] = INCBIN_U8("graphics/pokemon/ekans/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Ekans[] = INCBIN_COMP("graphics/pokemon/ekans/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -254,10 +250,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Arbok[] = INCBIN_U32("graphics/pokemon/arbok/normal.gbapal.lz");
     const u32 gMonBackPic_Arbok[] = INCBIN_U32("graphics/pokemon/arbok/back.4bpp.lz");
     const u32 gMonShinyPalette_Arbok[] = INCBIN_U32("graphics/pokemon/arbok/shiny.gbapal.lz");
-    const u8 gMonIcon_Arbok[] = INCBIN_U8("graphics/pokemon/arbok/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Arbok[] = INCBIN_U8("graphics/pokemon/arbok/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Arbok[] = INCBIN_COMP("graphics/pokemon/arbok/follower.4bpp");
 #endif //P_FOLLOWERS

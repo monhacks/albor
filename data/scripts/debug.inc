@@ -137,19 +137,19 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
-	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
 	end
 
 Debug_EventScript_Script_2::
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_VENUSAUR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	end
 
 Debug_EventScript_Script_3::

@@ -10811,7 +10811,7 @@ const struct Item gItemsInfo[] =
             "certain Pokémon."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_ZYGARDE_CUBE] =
@@ -10853,7 +10853,7 @@ const struct Item gItemsInfo[] =
             "using a Solgaleo."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_N_LUNARIZER] =
@@ -10867,7 +10867,7 @@ const struct Item gItemsInfo[] =
             "using a Lunala."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_REINS_OF_UNITY] =
@@ -10882,7 +10882,7 @@ const struct Item gItemsInfo[] =
             "beloved steed."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_Fusion,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
 // Battle Mechanic Key Items
