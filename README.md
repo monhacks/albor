@@ -6,12 +6,12 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Lista de créditos
     *Pret por la decompilación de pokeemerald y su wiki.
-    *Rh-hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
+    *Rom Hacking Hideout por pokeemerald-expansion que este hack utiliza como base para la gran mayoría de sus mecánicas de batalla.
     *CyanSMP64 por la expansión de música.
     *TheXaman por su TM Case.
     *Cilerba por el baile de los Pokémon al subir de nivel.
     *Aarant por los followers Pokémon, su sistema de iconos, la expansión dinámica de paletas en el OW y su sistema de día y noche.
-    *CitrusBolt por el sistema de ICV.
+    *CitrusBolt por el sistema de ICV y por su sistema de huevos del color de sus tipos.
 
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).

@@ -250,11 +250,6 @@ CableClub_EventScript_WelcomeToCableClub::
 	goto CableClub_EventScript_SelectCableClubRoom
 	end
 
-CableClub_EventScript_UnusedWelcomeToCableClub::
-	msgbox CableClub_Text_WhichService, MSGBOX_DEFAULT
-	goto CableClub_EventScript_SelectCableClubRoom
-	end
-
 CableClub_EventScript_SelectCableClubRoom::
 	setvar VAR_0x8004, 0
 	goto_if_set FLAG_VISITED_MAUVILLE_CITY, CableClub_EventScript_CableClubUnlockedRecordCorner

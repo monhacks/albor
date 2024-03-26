@@ -4438,7 +4438,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
     if (species == NUM_SPECIES)
         return NATIONAL_DEX_NONE;
 
-    return species;
+    return GET_BASE_SPECIES_ID(species);
 }
 
 u16 NationalToHoennOrder(u16 nationalNum)
@@ -5441,7 +5441,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId)
 
 const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     return GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);

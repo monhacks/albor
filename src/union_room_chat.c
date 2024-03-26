@@ -255,7 +255,6 @@ static void SetBgTilemapBuffers(void);
 static void ClearBg0(void);
 static void LoadKeyboardWindowGfx(void);
 static void LoadChatWindowGfx(void);
-static void LoadChatUnkPalette(void);
 static void LoadChatMessagesWindow(void);
 static void DrawKeyboardWindow(void);
 static void LoadKeyboardSwapWindow(void);
@@ -526,7 +525,6 @@ static const u8 *const sUnionRoomKeyboardText[UNION_ROOM_KB_PAGE_COUNT - 1][UNIO
     }
 };
 
-static const u16 sUnusedPalette[] = INCBIN_U16("graphics/union_room_chat/unused.gbapal"); // Loaded but never apparently used
 static const u16 sChatMessagesWindow_Pal[] = INCBIN_U16("graphics/union_room_chat/chat_messages_window.gbapal");
 
 static const struct BgTemplate sBgTemplates[] = {
@@ -2267,7 +2265,6 @@ static bool32 Display_LoadGfx(u8 *state)
         LoadChatWindowGfx();
         break;
     case 4:
-        LoadChatUnkPalette();
         break;
     case 5:
         LoadChatMessagesWindow();
@@ -3097,12 +3094,6 @@ static void LoadChatWindowGfx(void)
 
     CopyToBgTilemapBuffer(2, gUnionRoomChat_Background_Tilemap, 0, 0);
     CopyBgTilemapBufferToVram(2);
-}
-
-static void LoadChatUnkPalette(void)
-{
-    LoadPalette(sUnusedPalette, BG_PLTT_ID(8), sizeof(sUnusedPalette));
-    RequestDma3Fill(0, (void *)BG_CHAR_ADDR(1) + TILE_SIZE_4BPP, TILE_SIZE_4BPP, 1);
 }
 
 static void LoadChatMessagesWindow(void)

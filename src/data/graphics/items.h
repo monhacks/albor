@@ -957,58 +957,24 @@ const u32 gItemIconPalette_Diancite[] = INCBIN_U32("graphics/items/icon_palettes
 
 // Gems
 
-const u32 gItemIcon_NormalGem[] = INCBIN_U32("graphics/items/icons/normal_gem.4bpp.lz");
+const u32 gItemIcon_Gem[] = INCBIN_U32("graphics/items/icons/gem.4bpp.lz");
 const u32 gItemIconPalette_NormalGem[] = INCBIN_U32("graphics/items/icon_palettes/normal_gem.gbapal.lz");
-
-const u32 gItemIcon_FireGem[] = INCBIN_U32("graphics/items/icons/fire_gem.4bpp.lz");
 const u32 gItemIconPalette_FireGem[] = INCBIN_U32("graphics/items/icon_palettes/fire_gem.gbapal.lz");
-
-const u32 gItemIcon_WaterGem[] = INCBIN_U32("graphics/items/icons/water_gem.4bpp.lz");
 const u32 gItemIconPalette_WaterGem[] = INCBIN_U32("graphics/items/icon_palettes/water_gem.gbapal.lz");
-
-const u32 gItemIcon_ElectricGem[] = INCBIN_U32("graphics/items/icons/electric_gem.4bpp.lz");
 const u32 gItemIconPalette_ElectricGem[] = INCBIN_U32("graphics/items/icon_palettes/electric_gem.gbapal.lz");
-
-const u32 gItemIcon_GrassGem[] = INCBIN_U32("graphics/items/icons/grass_gem.4bpp.lz");
 const u32 gItemIconPalette_GrassGem[] = INCBIN_U32("graphics/items/icon_palettes/grass_gem.gbapal.lz");
-
-const u32 gItemIcon_IceGem[] = INCBIN_U32("graphics/items/icons/ice_gem.4bpp.lz");
 const u32 gItemIconPalette_IceGem[] = INCBIN_U32("graphics/items/icon_palettes/ice_gem.gbapal.lz");
-
-const u32 gItemIcon_FightingGem[] = INCBIN_U32("graphics/items/icons/fighting_gem.4bpp.lz");
 const u32 gItemIconPalette_FightingGem[] = INCBIN_U32("graphics/items/icon_palettes/fighting_gem.gbapal.lz");
-
-const u32 gItemIcon_PoisonGem[] = INCBIN_U32("graphics/items/icons/poison_gem.4bpp.lz");
 const u32 gItemIconPalette_PoisonGem[] = INCBIN_U32("graphics/items/icon_palettes/poison_gem.gbapal.lz");
-
-const u32 gItemIcon_GroundGem[] = INCBIN_U32("graphics/items/icons/ground_gem.4bpp.lz");
 const u32 gItemIconPalette_GroundGem[] = INCBIN_U32("graphics/items/icon_palettes/ground_gem.gbapal.lz");
-
-const u32 gItemIcon_FlyingGem[] = INCBIN_U32("graphics/items/icons/flying_gem.4bpp.lz");
 const u32 gItemIconPalette_FlyingGem[] = INCBIN_U32("graphics/items/icon_palettes/flying_gem.gbapal.lz");
-
-const u32 gItemIcon_PsychicGem[] = INCBIN_U32("graphics/items/icons/psychic_gem.4bpp.lz");
 const u32 gItemIconPalette_PsychicGem[] = INCBIN_U32("graphics/items/icon_palettes/psychic_gem.gbapal.lz");
-
-const u32 gItemIcon_BugGem[] = INCBIN_U32("graphics/items/icons/bug_gem.4bpp.lz");
 const u32 gItemIconPalette_BugGem[] = INCBIN_U32("graphics/items/icon_palettes/bug_gem.gbapal.lz");
-
-const u32 gItemIcon_RockGem[] = INCBIN_U32("graphics/items/icons/rock_gem.4bpp.lz");
 const u32 gItemIconPalette_RockGem[] = INCBIN_U32("graphics/items/icon_palettes/rock_gem.gbapal.lz");
-
-const u32 gItemIcon_GhostGem[] = INCBIN_U32("graphics/items/icons/ghost_gem.4bpp.lz");
 const u32 gItemIconPalette_GhostGem[] = INCBIN_U32("graphics/items/icon_palettes/ghost_gem.gbapal.lz");
-
-const u32 gItemIcon_DragonGem[] = INCBIN_U32("graphics/items/icons/dragon_gem.4bpp.lz");
 const u32 gItemIconPalette_DragonGem[] = INCBIN_U32("graphics/items/icon_palettes/dragon_gem.gbapal.lz");
-
-const u32 gItemIcon_DarkGem[] = INCBIN_U32("graphics/items/icons/dark_gem.4bpp.lz");
 const u32 gItemIconPalette_DarkGem[] = INCBIN_U32("graphics/items/icon_palettes/dark_gem.gbapal.lz");
-
-const u32 gItemIcon_SteelGem[] = INCBIN_U32("graphics/items/icons/steel_gem.4bpp.lz");
 const u32 gItemIconPalette_SteelGem[] = INCBIN_U32("graphics/items/icon_palettes/steel_gem.gbapal.lz");
-
-const u32 gItemIcon_FairyGem[] = INCBIN_U32("graphics/items/icons/fairy_gem.4bpp.lz");
 const u32 gItemIconPalette_FairyGem[] = INCBIN_U32("graphics/items/icon_palettes/fairy_gem.gbapal.lz");
 
 // Z-Crystals
@@ -1950,9 +1916,8 @@ const u32 gItemIconPalette_RainbowPass[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_Tea[] = INCBIN_U32("graphics/items/icons/tea.4bpp.lz");
 const u32 gItemIconPalette_Tea[] = INCBIN_U32("graphics/items/icon_palettes/tea.gbapal.lz");
 
-const u32 gItemIcon_Gem[] = INCBIN_U32("graphics/items/icons/gem.4bpp.lz");
+const u32 gItemIcon_RubySapphire[] = INCBIN_U32("graphics/items/icons/ruby_sapphire.4bpp.lz");
 const u32 gItemIconPalette_Ruby[] = INCBIN_U32("graphics/items/icon_palettes/ruby.gbapal.lz");
-
 const u32 gItemIconPalette_Sapphire[] = INCBIN_U32("graphics/items/icon_palettes/sapphire.gbapal.lz");
 
 const u32 gItemIcon_AbilityShield[] = INCBIN_U32("graphics/items/icons/ability_shield.4bpp.lz");
