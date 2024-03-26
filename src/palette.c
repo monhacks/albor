@@ -14,38 +14,6 @@ enum
     TIME_OF_DAY_FADE
 };
 
-// These are structs for some unused palette system.
-// The full functionality of this system is unknown.
-
-#define NUM_PALETTE_STRUCTS 16
-
-struct PaletteStructTemplate
-{
-    u16 id;
-    u16 *src;
-    bool16 pst_field_8_0:1;
-    u16 unused:9;
-    u16 size:5;
-    u8 time1;
-    u8 srcCount:5;
-    u8 state:3;
-    u8 time2;
-};
-
-struct PaletteStruct
-{
-    const struct PaletteStructTemplate *template;
-    bool32 active:1;
-    bool32 flag:1;
-    u32 baseDestOffset:9;
-    u32 destOffset:10;
-    u32 srcIndex:7;
-    u8 countdown1;
-    u8 countdown2;
-};
-
-static void PaletteStruct_Reset(u8);
-static u8 PaletteStruct_GetPalNum(u16);
 static u8 UpdateNormalPaletteFade(void);
 static void BeginFastPaletteFadeInternal(u8);
 static u8 UpdateFastPaletteFade(void);
@@ -59,15 +27,9 @@ static void Task_BlendPalettesGradually(u8 taskId);
 // unaligned word reads are issued in BlendPalette otherwise
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferUnfaded[PLTT_BUFFER_SIZE] = {0};
 ALIGNED(4) EWRAM_DATA u16 gPlttBufferFaded[PLTT_BUFFER_SIZE] = {0};
-static EWRAM_DATA struct PaletteStruct sPaletteStructs[NUM_PALETTE_STRUCTS] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 static EWRAM_DATA u32 sPlttBufferTransferPending = 0;
 EWRAM_DATA u8 ALIGNED(2) gPaletteDecompressionBuffer[PLTT_SIZE] = {0};
-
-static const struct PaletteStructTemplate sDummyPaletteStructTemplate = {
-    .id = 0xFFFF,
-    .state = 1
-};
 
 static const u8 sRoundedDownGrayscaleMap[] = {
      0,  0,  0,  0,  0,
@@ -148,16 +110,6 @@ u8 UpdatePaletteFade(void)
     sPlttBufferTransferPending = gPaletteFade.multipurpose1 | dummy;
 
     return result;
-}
-
-void ResetPaletteFade(void)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
-        PaletteStruct_Reset(i);
-
-    ResetPaletteFadeControl();
 }
 
 bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u16 blendColor)
@@ -256,26 +208,7 @@ bool8 BeginTimeOfDayPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 ta
     }
 }
 
-void PaletteStruct_ResetById(u16 id)
-{
-    u8 paletteNum = PaletteStruct_GetPalNum(id);
-    if (paletteNum != NUM_PALETTE_STRUCTS)
-        PaletteStruct_Reset(paletteNum);
-}
-
-static void PaletteStruct_Reset(u8 paletteNum)
-{
-    sPaletteStructs[paletteNum].template = &sDummyPaletteStructTemplate;
-    sPaletteStructs[paletteNum].active = FALSE;
-    sPaletteStructs[paletteNum].baseDestOffset = 0;
-    sPaletteStructs[paletteNum].destOffset = 0;
-    sPaletteStructs[paletteNum].srcIndex = 0;
-    sPaletteStructs[paletteNum].flag = 0;
-    sPaletteStructs[paletteNum].countdown1 = 0;
-    sPaletteStructs[paletteNum].countdown2 = 0;
-}
-
-void ResetPaletteFadeControl(void)
+void ResetPaletteFade(void)
 {
     gPaletteFade.multipurpose1 = 0;
     gPaletteFade.multipurpose2 = 0;
@@ -293,17 +226,6 @@ void ResetPaletteFadeControl(void)
     gPaletteFade.softwareFadeFinishingCounter = 0;
     gPaletteFade.objPaletteToggle = 0;
     gPaletteFade.deltaY = 2;
-}
-
-static u8 PaletteStruct_GetPalNum(u16 id)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_PALETTE_STRUCTS; i++)
-        if (sPaletteStructs[i].template->id == id)
-            return i;
-
-    return NUM_PALETTE_STRUCTS;
 }
 
 // Like normal palette fade, but respects sprite/tile palettes immune to time of day fading
@@ -945,20 +867,26 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
     tint1 = blend1->isTint;
     coeff1 = tint1 ? 8*2 : blend1->coeff*2;
 
-    if (tint0) {
+    if (tint0) 
+    {
         r0 = (color0 << 24) >> 24;
         g0 = (color0 << 16) >> 24;
         b0 = (color0 << 8) >> 24;
-    } else {
+    } 
+    else 
+    {
         r0 = (color0 << 27) >> 27;
         g0 = (color0 << 22) >> 27;
         b0 = (color0 << 17) >> 27;
     }
-    if (tint1) {
+    if (tint1) 
+    {
         r1 = (color1 << 24) >> 24;
         g1 = (color1 << 16) >> 24;
         b1 = (color1 << 8) >> 24;
-    } else {
+    } 
+    else 
+    {
         r1 = (color1 << 27) >> 27;
         g1 = (color1 << 22) >> 27;
         b1 = (color1 << 17) >> 27;
@@ -968,32 +896,41 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
     defB = (defaultColor << 17) >> 27;
 
     do {
-        if (palettes & 1) {
+        if (palettes & 1) 
+        {
             u16 *srcEnd = src + 16;
             u32 altBlendColor = *dst++ = *src++; // color 0 is copied through
-            if (altBlendColor >> 15) { // Transparency high bit set; alt blend color
+            if (altBlendColor >> 15) 
+            { // Transparency high bit set; alt blend color
                 altR = (altBlendColor << 27) >> 27;
                 altG = (altBlendColor << 22) >> 27;
                 altB = (altBlendColor << 17) >> 27;
-            } else {
+            } 
+            else 
+            {
                 altBlendColor = 0;
             }
-            while (src != srcEnd) {
+            while (src != srcEnd) 
+            {
                 u32 srcColor = *src;
                 s32 r = (srcColor << 27) >> 27;
                 s32 g = (srcColor << 22) >> 27;
                 s32 b = (srcColor << 17) >> 27;
                 s32 r2, g2, b2;
 
-                if (srcColor >> 15) {
-                    if (altBlendColor) { // Use alternate blend color
+                if (srcColor >> 15) 
+                {
+                    if (altBlendColor) 
+                    { // Use alternate blend color
                         r2 = r + (((altR - r) * (s32)coeff1) >> 5);
                         g2 = g + (((altG - g) * (s32)coeff1) >> 5);
                         b2 = b + (((altB - b) * (s32)coeff1) >> 5);
                         r  = r + (((altR - r) * (s32)coeff0) >> 5);
                         g  = g + (((altG - g) * (s32)coeff0) >> 5);
                         b  = b + (((altB - b) * (s32)coeff0) >> 5);
-                    } else { // Use default blend color
+                    } 
+                    else 
+                    { // Use default blend color
                         r2 = r + (((defR - r) * (s32)coeff1) >> 5);
                         g2 = g + (((defG - g) * (s32)coeff1) >> 5);
                         b2 = b + (((defB - b) * (s32)coeff1) >> 5);
@@ -1001,12 +938,17 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
                         g  = g + (((defG - g) * (s32)coeff0) >> 5);
                         b  = b + (((defB - b) * (s32)coeff0) >> 5);
                     }
-                } else { // Use provided blend colors
-                    if (!tint1) { // blend-based
+                } 
+                else 
+                { // Use provided blend colors
+                    if (!tint1) 
+                    { // blend-based
                         r2 = (r + (((r1 - r) * (s32)coeff1) >> 5));
                         g2 = (g + (((g1 - g) * (s32)coeff1) >> 5));
                         b2 = (b + (((b1 - b) * (s32)coeff1) >> 5));
-                    } else { // tint-based
+                    } 
+                    else 
+                    { // tint-based
                         r2 = (u16)((r1 * r)) >> 8;
                         g2 = (u16)((g1 * g)) >> 8;
                         b2 = (u16)((b1 * b)) >> 8;
@@ -1017,11 +959,14 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
                         if (b2 > 31)
                             b2 = 31;
                     }
-                    if (!tint0) { // blend-based
+                    if (!tint0) 
+                    { // blend-based
                         r = (r + (((r0 - r) * (s32)coeff0) >> 5));
                         g = (g + (((g0 - g) * (s32)coeff0) >> 5));
                         b = (b + (((b0 - b) * (s32)coeff0) >> 5));
-                    } else { // tint-based
+                    } 
+                    else 
+                    { // tint-based
                         r = (u16)((r0 * r)) >> 8;
                         g = (u16)((g0 * g)) >> 8;
                         b = (u16)((b0 * b)) >> 8;
@@ -1040,7 +985,9 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
                 // *dst++ = RGB2(r, g, b) | (srcColor >> 15) << 15;
                 src++;
             }
-        } else {
+        } 
+        else 
+        {
             src += 16;
             dst += 16;
         }
@@ -1049,12 +996,14 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
 }
 
 // Apply weighted average to palettes, preserving high bits of dst throughout
-void AvgPaletteWeighted(u16 *src0, u16 *src1, u16 *dst, u16 weight0) {
+void AvgPaletteWeighted(u16 *src0, u16 *src1, u16 *dst, u16 weight0) 
+{
     u16 *srcEnd = src0 + 16;
     src0++;
     src1++;
     dst++; // leave dst transparency unchanged
-    while (src0 != srcEnd) {
+    while (src0 != srcEnd) 
+    {
         u32 src0Color = *src0++;
         s32 r0 = (src0Color << 27) >> 27;
         s32 g0 = (src0Color << 22) >> 27;
