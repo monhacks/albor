@@ -25,9 +25,9 @@ Lista Pokémon:
 * Fearow (paleta shiny) X
 * Ekans X
 * Arbok X
-* Pichu
-* Pikachu
-* Raichu
+* Pichu (paleta shiny) X
+* Pikachu (paleta shiny, female follower) X
+* Raichu (paleta shiny, female follower) X
 * A-Raichu
 * Sandshrew
 * Sandslash

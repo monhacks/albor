@@ -294,6 +294,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 #define NORMAL_HUE_X2_SHINY_MOD                 8
 #define NORMAL_HUE_NEG_SHINY_MOD                9
 #define NORMAL_HUE_SHINY_HUE_NEG                10
+#define NORMAL_MOD_SHINY_HUE                    11
 
 static const s8 sColorVariationModes[NUM_SPECIES] =
 {
@@ -309,6 +310,8 @@ static const s8 sColorVariationModes[NUM_SPECIES] =
     [SPECIES_PIDGEY]        = NORMAL_HUE_X2_SHINY_HUE,
     [SPECIES_EKANS]         = NORMAL_HUE_X2_SHINY_HUE,
     [SPECIES_ARBOK]         = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_PICHU]         = NORMAL_MOD_SHINY_HUE,
+    [SPECIES_PIKACHU]       = NORMAL_MOD_SHINY_HUE,
 };
 
 void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
@@ -329,6 +332,7 @@ void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
             case NORMAL_HUE_SHINY_HUE:
             case NORMAL_HUE_X2_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE:
+            case NORMAL_MOD_SHINY_HUE:
             default:
                 shift = value % (HUE_SHIFT_RANGE_SHINY + 1);
                 break;
@@ -369,6 +373,7 @@ void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
                 shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
+            case NORMAL_MOD_SHINY_HUE:
             case NORMAL_MOD_SHINY_HUE_NEG:
                 willHueShift = FALSE;
                 break;
@@ -531,6 +536,7 @@ void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 p
             case NORMAL_HUE_SHINY_HUE:
             case NORMAL_HUE_X2_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE:
+            case NORMAL_MOD_SHINY_HUE:
             default:
                 shift = value % (HUE_SHIFT_RANGE_SHINY + 1);
                 break;
@@ -571,6 +577,7 @@ void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 p
                 shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
+            case NORMAL_MOD_SHINY_HUE:
             case NORMAL_MOD_SHINY_HUE_NEG:
                 willHueShift = FALSE;
                 break;
@@ -733,6 +740,7 @@ void UniquePaletteBuffered(u16 * buffer, u16 species, u32 personality, bool8 isS
             case NORMAL_HUE_SHINY_HUE:
             case NORMAL_HUE_X2_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE:
+            case NORMAL_MOD_SHINY_HUE:
             default:
                 shift = value % (HUE_SHIFT_RANGE_SHINY + 1);
                 break;
@@ -773,6 +781,7 @@ void UniquePaletteBuffered(u16 * buffer, u16 species, u32 personality, bool8 isS
                 shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
+            case NORMAL_MOD_SHINY_HUE:
             case NORMAL_MOD_SHINY_HUE_NEG:
                 willHueShift = FALSE;
                 break;

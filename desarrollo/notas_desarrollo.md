@@ -5,4 +5,5 @@
                * Para capturar, basta con tener Pokéballs, y para seleccionarla, mantener pulsado B a la vez que R.
 - Crear ataques como Tornado, Vendaval...
 - L/R icons en storage.
-- Crear huevos personalizados en pokédex
+- Crear huevos personalizados en pokédex.
+- Comprobar por qué está roto el storage.

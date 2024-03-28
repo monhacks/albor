@@ -1484,8 +1484,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .trainerScale = 256,                                                            \
         .trainerOffset = 0,                                                             \
         FOOTPRINT(Pichu)                                                                \
-        LEARNSETS(Pichu),                                                               \
-        .formSpeciesIdTable = sPichuFormSpeciesIdTable
+        LEARNSETS(Pichu)
 
     [SPECIES_PICHU] =
     {
@@ -1501,22 +1500,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Pichu, 1),
         FOLLOWER(Pichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PIKACHU}),
-    },
-
-    [SPECIES_PICHU_SPIKY_EARED] =
-    {
-        PICHU_MISC_INFO,
-        .noFlip = TRUE,
-        FRONT_PIC(PichuSpikyEared, 32, 40),
-        .frontPicYOffset = 13,
-        .frontAnimFrames = sAnims_PichuSpikyEared,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PichuSpikyEared, 48, 56),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PichuSpikyEared),
-        ICON(PichuSpikyEared, 1),
-        FOLLOWER(PichuSpikyEared, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 #endif //P_GEN_2_CROSS_EVOS
 
@@ -1579,304 +1562,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Pikachu),
         ICON(Pikachu, 2),
-//    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
-//        ICON_FEMALE(Pikachu, 2),
-//    #endif
+    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
+        ICON_FEMALE(Pikachu, 2),
+    #endif
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
                                 {EVO_NONE, 0, SPECIES_RAICHU_ALOLAN}),
     },
-
-#if P_COSPLAY_PIKACHU_FORMS
-#define PIKACHU_COSPLAY_MISC_INFO                               \
-    PIKACHU_MISC_INFO,                                          \
-    PIKACHU_REGULAR_SIZE_INFO,                                  \
-    .genderRatio = MON_FEMALE,                                  \
-    .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),  \
-    .description = gPikachuPokedexText
-
-    [SPECIES_PIKACHU_COSPLAY]   =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        FRONT_PIC(PikachuCosplay, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuCosplay,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuCosplay, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuCosplay),
-        ICON(PikachuCosplay, 2),
-    },
-
-    [SPECIES_PIKACHU_ROCK_STAR] =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        FRONT_PIC(PikachuRockStar, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuRockStar,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuRockStar, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuRockStar),
-        ICON(PikachuRockStar, 1),
-    },
-
-    [SPECIES_PIKACHU_BELLE] =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        .noFlip = TRUE,
-        FRONT_PIC(PikachuBelle, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuBelle,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuBelle, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuBelle),
-        ICON(PikachuBelle, 0),
-    },
-
-    [SPECIES_PIKACHU_POP_STAR] =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        .noFlip = TRUE,
-        FRONT_PIC(PikachuPopStar, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuPopStar,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuPopStar, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuPopStar),
-        ICON(PikachuPopStar, 0),
-    },
-
-    [SPECIES_PIKACHU_PH_D] =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        FRONT_PIC(PikachuPhD, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuPhD,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuPhD, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuPhD),
-        ICON(PikachuPhD, 1),
-    },
-
-    [SPECIES_PIKACHU_LIBRE] =
-    {
-        PIKACHU_COSPLAY_MISC_INFO,
-        FRONT_PIC(PikachuLibre, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuLibre,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuLibre, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuLibre),
-        ICON(PikachuLibre, 0),
-    },
-
-#endif //P_COSPLAY_PIKACHU_FORMS
-
-#if P_CAP_PIKACHU_FORMS
-
-#define PIKACHU_CAP_MISC_INFO                                                   \
-    PIKACHU_MISC_INFO,                                                          \
-    PIKACHU_REGULAR_SIZE_INFO,                                                  \
-    .genderRatio = MON_MALE,                                                    \
-    .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED)
-
-    [SPECIES_PIKACHU_ORIGINAL_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .noFlip = TRUE,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across many different regions."),
-        FRONT_PIC(PikachuOriginalCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuOriginalCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuOriginalCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuOriginalCap),
-        ICON(PikachuOriginalCap, 0),
-    },
-
-    [SPECIES_PIKACHU_HOENN_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Hoenn region together."),
-        FRONT_PIC(PikachuHoennCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuHoennCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuHoennCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuHoennCap),
-        ICON(PikachuHoennCap, 0),
-    },
-
-    [SPECIES_PIKACHU_SINNOH_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Sinnoh region together."),
-        FRONT_PIC(PikachuSinnohCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuSinnohCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuSinnohCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuSinnohCap),
-        ICON(PikachuSinnohCap, 0),
-    },
-
-    [SPECIES_PIKACHU_UNOVA_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Unova region together."),
-        FRONT_PIC(PikachuUnovaCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuUnovaCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuUnovaCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuUnovaCap),
-        ICON(PikachuUnovaCap, 0),
-    },
-
-    [SPECIES_PIKACHU_KALOS_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Kalos region together."),
-        FRONT_PIC(PikachuKalosCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuKalosCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuKalosCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuKalosCap),
-        ICON(PikachuKalosCap, 0),
-    },
-
-    [SPECIES_PIKACHU_ALOLA_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the Alola region together."),
-        FRONT_PIC(PikachuAlolaCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuAlolaCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuAlolaCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuAlolaCap),
-        ICON(PikachuAlolaCap, 0),
-    },
-
-    [SPECIES_PIKACHU_PARTNER_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .noFlip = TRUE,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed as the two overcame\n"
-            "many hardships together."),
-        FRONT_PIC(PikachuPartnerCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuPartnerCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuPartnerCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuPartnerCap),
-        ICON(PikachuPartnerCap, 0),
-    },
-
-    [SPECIES_PIKACHU_WORLD_CAP] =
-    {
-        PIKACHU_CAP_MISC_INFO,
-        .description = COMPOUND_STRING(
-            "This Pikachu wears its partner's cap, which\n"
-            "is proof of the strong bond Pikachu and\n"
-            "its partner formed during adventures\n"
-            "across the world together."),
-        FRONT_PIC(PikachuWorldCap, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_PikachuWorldCap,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuWorldCap, 64, 56),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuWorldCap),
-        ICON(PikachuWorldCap, 0),
-    },
-
-#endif //P_CAP_PIKACHU_FORMS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_PIKACHU_GIGANTAMAX] =
-    {
-        PIKACHU_MISC_INFO,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
-        .height = 210,
-        .weight = 0,
-        .pokemonScale = 479,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        .description = COMPOUND_STRING(
-            "When it smashes its opponents with\n"
-            "its bolt-shaped tail, it delivers a\n"
-            "surge of electricity equivalent to a\n"
-            "lightning strike."),
-        FRONT_PIC(PikachuGigantamax, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_PikachuGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(PikachuGigantamax, 64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PikachuGigantamax),
-        ICON(PikachuGigantamax, 2),
-        .formChangeTable = sPikachuFormChangeTable,
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 
 #define RAICHU_SPEED (P_UPDATED_STATS >= GEN_6 ? 110 : 100)
 
@@ -5282,7 +4974,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
         .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_GLUTTONY },
         .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Victreebel"),
+        .speciesName = _("Victreebell"),
         .cryId = CRY_VICTREEBEL,
         .natDexNum = NATIONAL_DEX_VICTREEBEL,
         .categoryName = _("Flycatcher"),
@@ -7271,9 +6963,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_STEELIX,                      \
         .categoryName = _("Iron Snake"),                        \
         FOOTPRINT(Steelix)                                      \
-        LEARNSETS(Steelix),                                     \
-        .formSpeciesIdTable = sSteelixFormSpeciesIdTable,       \
-        .formChangeTable = sSteelixFormChangeTable
+        LEARNSETS(Steelix)
 
     [SPECIES_STEELIX] =
     {
@@ -9642,9 +9332,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .natDexNum = NATIONAL_DEX_SCIZOR,               \
         .categoryName = _("Pincer"),                    \
         FOOTPRINT(Scizor)                               \
-        LEARNSETS(Scizor),                              \
-        .formSpeciesIdTable = sScizorFormSpeciesIdTable,\
-        .formChangeTable = sScizorFormChangeTable
+        LEARNSETS(Scizor)
 
     [SPECIES_SCIZOR] =
     {
@@ -10346,83 +10034,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Tauros, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Tauros),
     },
-
-#if P_PALDEAN_FORMS
-#define TAUROS_PALDEAN_MISC_INFO                                                    \
-        .baseHP        = 75,                                                        \
-        .baseAttack    = 110,                                                       \
-        .baseDefense   = 105,                                                       \
-        .baseSpeed     = 100,                                                       \
-        .baseSpAttack  = 30,                                                        \
-        .baseSpDefense = 70,                                                        \
-        .evYield_Attack = 2,                                                        \
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_ANGER_POINT, ABILITY_CUD_CHEW }, \
-        .bodyColor = BODY_COLOR_BLACK,                                              \
-        .frontAnimFrames = sAnims_TaurosPaldean,                                    \
-        /*.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,*/                                \
-        .backAnimId = BACK_ANIM_V_SHAKE_LOW,                                        \
-        .isPaldeanForm = TRUE
-
-    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED] =
-    {
-        TAUROS_MISC_INFO,
-        TAUROS_PALDEAN_MISC_INFO,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .weight = 1150,
-        .description = COMPOUND_STRING(
-            "This Pokémon has a muscular body\n"
-            "and excels at close-quarters combat.\n"
-            "It uses its short horns to strike\n"
-            "the opponent’s weak spots."),
-        FRONT_PIC(TaurosPaldeanCombatBreed, 64, 64),
-        .frontPicYOffset = 5,
-        BACK_PIC(TaurosPaldeanCombatBreed, 64, 48),
-        .backPicYOffset = 9,
-        PALETTES(TaurosPaldeanCombatBreed),
-        ICON(TaurosPaldeanCombatBreed, 0),
-        LEARNSETS(TaurosPaldeanCombatBreed),
-    },
-
-    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED] =
-    {
-        TAUROS_MISC_INFO,
-        TAUROS_PALDEAN_MISC_INFO,
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_FIRE),
-        .weight = 850,
-        .description = COMPOUND_STRING(
-            "When heated by fire energy, its horns can\n"
-            "get hotter than 1,800 degrees Fahrenheit.\n"
-            "Those gored by them will suffer\n"
-            "both wounds and burns."),
-        FRONT_PIC(TaurosPaldeanBlazeBreed, 64, 64),
-        .frontPicYOffset = 5,
-        BACK_PIC(TaurosPaldeanBlazeBreed, 64, 48),
-        .backPicYOffset = 9,
-        PALETTES(TaurosPaldeanBlazeBreed),
-        ICON(TaurosPaldeanBlazeBreed, 0),
-        LEARNSETS(TaurosPaldeanBlazeBreed),
-    },
-
-    [SPECIES_TAUROS_PALDEAN_AQUA_BREED] =
-    {
-        TAUROS_MISC_INFO,
-        TAUROS_PALDEAN_MISC_INFO,
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_WATER),
-        .weight = 1100,
-        .description = COMPOUND_STRING(
-            "This Pokémon blasts water from holes on\n"
-            "the tips of its horns--the high-pressure\n"
-            "jets pierce right through\n"
-            "Tauros’s enemies."),
-        FRONT_PIC(TaurosPaldeanAquaBreed, 64, 64),
-        .frontPicYOffset = 5,
-        BACK_PIC(TaurosPaldeanAquaBreed, 64, 48),
-        .backPicYOffset = 9,
-        PALETTES(TaurosPaldeanAquaBreed),
-        ICON(TaurosPaldeanAquaBreed, 0),
-        LEARNSETS(TaurosPaldeanAquaBreed),
-    },
-#endif //P_PALDEAN_FORMS
 #endif //P_FAMILY_TAUROS
 
 #if P_FAMILY_MAGIKARP

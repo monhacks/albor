@@ -3995,6 +3995,8 @@ extern const struct SpriteFrameImage sPicTable_VenusaurF[];
 extern const struct SpriteFrameImage sPicTable_ButterfreeF[];
 extern const struct SpriteFrameImage sPicTable_RattataF[];
 extern const struct SpriteFrameImage sPicTable_RaticateF[];
+extern const struct SpriteFrameImage sPicTable_PikachuF[];
+extern const struct SpriteFrameImage sPicTable_RaichuF[];
 
 const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] = 
 {
@@ -4068,6 +4070,42 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Following,
     .images = sPicTable_RaticateF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
+  [4] = { //PIKACHU_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_PikachuF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
+  [5] = { //RAICHU_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_RaichuF,
     .affineAnims = gDummySpriteAffineAnimTable,
 }
 };

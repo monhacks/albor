@@ -490,7 +490,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
         .abilities = { ABILITY_TORRENT, ABILITY_NONE, ABILITY_SHEER_FORCE },
         .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Feraligatr"),
+        .speciesName = _("Feraligator"),
         .cryId = CRY_FERALIGATR,
         .natDexNum = NATIONAL_DEX_FERALIGATR,
         .categoryName = _("Big Jaw"),
@@ -3077,55 +3077,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         LEARNSETS(Girafarig),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_TWIN_BEAM, SPECIES_FARIGIRAF}),
     },
-
-#if P_GEN_9_CROSS_EVOS
-    [SPECIES_FARIGIRAF] =
-    {
-        .baseHP        = 120,
-        .baseAttack    = 90,
-        .baseDefense   = 70,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 110,
-        .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_NORMAL, TYPE_PSYCHIC),
-        .catchRate = 45,
-        .expYield = 260,
-        .evYield_HP = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_CUD_CHEW, ABILITY_ARMOR_TAIL, ABILITY_SAP_SIPPER },
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Farigiraf"),
-        .cryId = CRY_FARIGIRAF,
-        .natDexNum = NATIONAL_DEX_FARIGIRAF,
-        .categoryName = _("Long Neck"),
-        .height = 32,
-        .weight = 1600,
-        .description = COMPOUND_STRING(
-            "Now that the brain waves from the\n"
-            "head and tail are synced up, the\n"
-            "psychic power of this Pokémon is 10\n"
-            "times stronger than Girafarig's."),
-        .pokemonScale = 356,
-        .pokemonOffset = 17,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Farigiraf, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Farigiraf,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Farigiraf, 64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Farigiraf),
-        ICON(Farigiraf, 0),
-        //FOOTPRINT(Farigiraf)
-        LEARNSETS(Farigiraf),
-    },
-#endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_GIRAFARIG
 
 #if P_FAMILY_PINECO
@@ -3281,74 +3232,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Dunsparce)
         FOLLOWER(Dunsparce, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Dunsparce),
-        .evolutions = EVOLUTION({EVO_MOVE_TWO_SEGMENT, MOVE_HYPER_DRILL, SPECIES_DUDUNSPARCE_TWO_SEGMENT},
-                                {EVO_MOVE_THREE_SEGMENT, MOVE_HYPER_DRILL, SPECIES_DUDUNSPARCE_THREE_SEGMENT}),
     },
-
-#if P_GEN_9_CROSS_EVOS
-#define DUDUNSPARCE_MISC_INFO(segments)                                             \
-        .baseHP        = 125,                                                       \
-        .baseAttack    = 100,                                                       \
-        .baseDefense   = 80,                                                        \
-        .baseSpeed     = 55,                                                        \
-        .baseSpAttack  = 85,                                                        \
-        .baseSpDefense = 75,                                                        \
-        .types = MON_TYPES(TYPE_NORMAL),                                            \
-        .catchRate = 45,                                                            \
-        .expYield = 182,                                                            \
-        .evYield_HP = 2,                                                            \
-        .genderRatio = PERCENT_FEMALE(50),                                          \
-        .eggCycles = 20,                                                            \
-        .friendship = STANDARD_FRIENDSHIP,                                          \
-        .growthRate = GROWTH_MEDIUM_FAST,                                           \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),                               \
-        .abilities = { ABILITY_SERENE_GRACE, ABILITY_RUN_AWAY, ABILITY_RATTLED },   \
-        .bodyColor = BODY_COLOR_YELLOW,                                             \
-        .speciesName = _("Dudunsprce"),                                             \
-        .cryId = CRY_DUDUNSPARCE,                                                   \
-        .natDexNum = NATIONAL_DEX_DUDUNSPARCE,                                      \
-        .categoryName = _("Land Snake"),                                            \
-        .pokemonScale = 356,                                                        \
-        .pokemonOffset = 17,                                                        \
-        .trainerScale = 256,                                                        \
-        .trainerOffset = 0,                                                         \
-        FRONT_PIC(Dudunsparce ##segments##Segment, 64, 64),                         \
-        .frontPicYOffset = 10,                                                      \
-        .frontAnimFrames = sAnims_Dudunsparce,                                      \
-        BACK_PIC(Dudunsparce ##segments##Segment, 64, 64),                          \
-        .backPicYOffset = 11,                                                       \
-        PALETTES(Dudunsparce),                                                      \
-        ICON(Dudunsparce, 0),                                                       \
-        LEARNSETS(Dudunsparce),                                                     \
-        .formSpeciesIdTable = sDudunsparceFormSpeciesIdTable
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        //.backAnimId = BACK_ANIM_NONE,
-        //FOOTPRINT(Dudunsparce)
-
-    [SPECIES_DUDUNSPARCE_TWO_SEGMENT] =
-    {
-        DUDUNSPARCE_MISC_INFO(Two),
-        .height = 36,
-        .weight = 392,
-        .description = COMPOUND_STRING(
-            "This Pokémon uses its hard tail to\n"
-            "make its nest by boring holes into\n"
-            "bedrock deep underground. The nest\n"
-            "can reach lengths of over six miles."),
-    },
-
-    [SPECIES_DUDUNSPARCE_THREE_SEGMENT] =
-    {
-        DUDUNSPARCE_MISC_INFO(Three),
-        .height = 45,
-        .weight = 474,
-        .description = COMPOUND_STRING(
-            "A recent study uncovered that the\n"
-            "number of segments a\n"
-            "Dudunsparce's body has is determined by the\n"
-            "Pokémon's genes."),
-    },
-#endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_DUNSPARCE
 
 #if P_FAMILY_GLIGAR
@@ -4142,100 +4026,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         ICON(Ursaring, 2),
         FOOTPRINT(Ursaring)
         FOLLOWER(Ursaring, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(Ursaring),
-        .evolutions = EVOLUTION({EVO_ITEM_NIGHT, ITEM_PEAT_BLOCK, SPECIES_URSALUNA},
-                                {EVO_NONE, 0, SPECIES_URSALUNA_BLOODMOON}),
+        LEARNSETS(Ursaring)
     },
-
-#if P_GEN_8_CROSS_EVOS
-#define URSALUNA_MISC_INFO                                  \
-        .expYield = 275,                                    \
-        .types = MON_TYPES(TYPE_GROUND, TYPE_NORMAL),       \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),       \
-        .bodyColor = BODY_COLOR_BROWN,                      \
-        .speciesName = _("Ursaluna"),                       \
-        .cryId = CRY_URSALUNA,                              \
-        .natDexNum = NATIONAL_DEX_URSALUNA,                 \
-        .categoryName = _("Peat"),                          \
-        .formSpeciesIdTable = sUrsalunaFormSpeciesIdTable
-
-    [SPECIES_URSALUNA] =
-    {
-        URSALUNA_MISC_INFO,
-        .baseHP        = 130,
-        .baseAttack    = 140,
-        .baseDefense   = 105,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 80,
-        .catchRate = 20,
-        .evYield_Attack = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .abilities = { ABILITY_GUTS, ABILITY_BULLETPROOF, ABILITY_UNNERVE },
-        .height = 24,
-        .weight = 2900,
-        .description = COMPOUND_STRING(
-            "Swampy terrain gives Ursaluna its burly\n"
-            "physique and newfound capacity to\n"
-            "manipulate peat at will."),
-        .pokemonScale = 256,
-        .pokemonOffset = 3,
-        .trainerScale = 369,
-        .trainerOffset = 7,
-        FRONT_PIC(Ursaluna, 56, 56),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_Ursaluna,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Ursaluna, 64, 40),
-        .backPicYOffset = 14,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Ursaluna),
-        ICON(Ursaluna, 2),
-        FOLLOWER(Ursaluna, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        //FOOTPRINT(Ursaluna)
-        LEARNSETS(Ursaluna),
-    },
-
-    [SPECIES_URSALUNA_BLOODMOON] =
-    {
-        URSALUNA_MISC_INFO,
-        .baseHP        = 113,
-        .baseAttack    = 70,
-        .baseDefense   = 120,
-        .baseSpeed     = 52,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 65,
-        .catchRate = 5,
-        .evYield_SpAttack = 3,
-        .genderRatio = MON_MALE,
-        .abilities = { ABILITY_MINDS_EYE, ABILITY_NONE },
-        .height = 27,
-        .weight = 3330,
-        .description = COMPOUND_STRING(
-            "It crossed the sea and drifted\n"
-            "ashore in a new land. Surviving in this\n"
-            "place led it to take on a unique\n"
-            "appearance and gain special powers."),
-        .pokemonScale = 256,
-        .pokemonOffset = 3,
-        .trainerScale = 369,
-        .trainerOffset = 7,
-        FRONT_PIC(UrsalunaBloodmoon, 64, 64),
-        //.frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_UrsalunaBloodmoon,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(UrsalunaBloodmoon, 64, 40),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(UrsalunaBloodmoon),
-        //ICON(UrsalunaBloodmoon, 0),
-        //FOOTPRINT(UrsalunaBloodmoon)
-        LEARNSETS(UrsalunaBloodmoon),
-    },
-#endif //P_GEN_8_CROSS_EVOS
 #endif //P_FAMILY_TEDDIURSA
 
 #if P_FAMILY_SLUGMA

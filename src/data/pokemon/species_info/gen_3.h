@@ -1952,9 +1952,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .trainerScale = 296,                                \
         .trainerOffset = 1,                                 \
         FOOTPRINT(Gallade)                                  \
-        LEARNSETS(Gallade),                                 \
-        .formSpeciesIdTable = sGalladeFormSpeciesIdTable,   \
-        .formChangeTable = sGalladeFormChangeTable
+        LEARNSETS(Gallade)
 
     [SPECIES_GALLADE] =
     {
