@@ -64,6 +64,8 @@ struct TrainerBacksprite
 #define TRAINER_PARTY_IVS(hp, atk, def, spatk, spdef, speed) (hp | (atk << 5) | (def << 10) | (spatk << 15) | (spdef << 20) | (speed << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, spatk, spdef, speed) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
 
+// Shared by both trainer and frontier mons
+// See CreateNPCTrainerPartyFromTrainer and CreateFacilityMon
 struct TrainerMon
 {
     const u8 *nickname;
