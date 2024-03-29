@@ -278,8 +278,31 @@ static const union AnimCmd sAnim_Raticate_1[] =
 };
 
 #if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(RattataAlolan);
-PLACEHOLDER_ANIM_SINGLE_FRAME(RaticateAlolan);
+static const union AnimCmd sAnim_RattataAlolan_1[] =
+{
+    ANIMCMD_FRAME(1, 11),
+    ANIMCMD_FRAME(0, 11),
+    ANIMCMD_FRAME(1, 11),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_RaticateAlolan_1[] =
+{
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(0, 5),
+    ANIMCMD_END,
+};
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_RATTATA
 
@@ -350,29 +373,6 @@ static const union AnimCmd sAnim_Pikachu_1[] =
     ANIMCMD_END,
 };
 
-#if P_COSPLAY_PIKACHU_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuCosplay);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuRockStar);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuBelle);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuPopStar);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuPhD);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuLibre);
-#endif //P_COSPLAY_PIKACHU_FORMS
-#if P_CAP_PIKACHU_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuOriginalCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuHoennCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuSinnohCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuUnovaCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuKalosCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuAlolaCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuPartnerCap);
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuWorldCap);
-#endif //P_CAP_PIKACHU_FORMS
-
-#if P_GIGANTAMAX_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(PikachuGigantamax);
-#endif //P_GIGANTAMAX_FORMS
-
 static const union AnimCmd sAnim_Raichu_1[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -384,7 +384,15 @@ static const union AnimCmd sAnim_Raichu_1[] =
 };
 
 #if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(RaichuAlolan);
+static const union AnimCmd sAnim_RaichuAlolan_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_PIKACHU
 
@@ -866,7 +874,17 @@ static const union AnimCmd sAnim_Primeape_1[] =
 };
 
 #if P_GEN_9_CROSS_EVOS
-PLACEHOLDER_ANIM_SINGLE_FRAME(Annihilape);
+static const union AnimCmd sAnim_Annihilape_1[] =
+{
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
 #endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_MANKEY
 
@@ -10213,27 +10231,6 @@ SINGLE_ANIMATION(Arbok);
 SINGLE_ANIMATION(Pichu);
 #endif //P_GEN_2_CROSS_EVOS
 SINGLE_ANIMATION(Pikachu);
-#if P_COSPLAY_PIKACHU_FORMS
-SINGLE_ANIMATION(PikachuCosplay);
-SINGLE_ANIMATION(PikachuRockStar);
-SINGLE_ANIMATION(PikachuBelle);
-SINGLE_ANIMATION(PikachuPopStar);
-SINGLE_ANIMATION(PikachuPhD);
-SINGLE_ANIMATION(PikachuLibre);
-#endif //P_COSPLAY_PIKACHU_FORMS
-#if P_CAP_PIKACHU_FORMS
-SINGLE_ANIMATION(PikachuOriginalCap);
-SINGLE_ANIMATION(PikachuHoennCap);
-SINGLE_ANIMATION(PikachuSinnohCap);
-SINGLE_ANIMATION(PikachuUnovaCap);
-SINGLE_ANIMATION(PikachuKalosCap);
-SINGLE_ANIMATION(PikachuAlolaCap);
-SINGLE_ANIMATION(PikachuPartnerCap);
-SINGLE_ANIMATION(PikachuWorldCap);
-#endif //P_CAP_PIKACHU_FORMS
-#if P_GIGANTAMAX_FORMS
-SINGLE_ANIMATION(PikachuGigantamax);
-#endif //P_GIGANTAMAX_FORMS
 SINGLE_ANIMATION(Raichu);
 #if P_ALOLAN_FORMS
 SINGLE_ANIMATION(RaichuAlolan);

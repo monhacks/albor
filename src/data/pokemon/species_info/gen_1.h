@@ -1191,10 +1191,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(RattataAlolan, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_RattataAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(RattataAlolan, 64, 56),
         .backPicYOffset = 7,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(RattataAlolan),
         ICON(RattataAlolan, 2),
         FOLLOWER(RattataAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
@@ -1230,10 +1230,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(RaticateAlolan, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_RaticateAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(RaticateAlolan, 64, 48),
         .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(RaticateAlolan),
         ICON(RaticateAlolan, 2),
         FOLLOWER(RaticateAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
@@ -1663,11 +1663,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(RaichuAlolan, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_RaichuAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_ROTATE_TO_SIDES,
         .enemyMonElevation = 4,
         BACK_PIC(RaichuAlolan, 56, 56),
         .backPicYOffset = 6,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(RaichuAlolan),
         ICON(RaichuAlolan, 2),
         FOLLOWER(RaichuAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
@@ -3972,7 +3972,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Primeape),
         ICON(Primeape, 2),
-        FOOTPRINT(Primeape)
         FOLLOWER(Primeape, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Primeape),
         .evolutions = EVOLUTION({EVO_LEVEL_MOVE_TWENTY_TIMES, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
@@ -4016,13 +4015,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(Annihilape, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Annihilape,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_GLOW_PURPLE,
         BACK_PIC(Annihilape, 64, 64),
         .backPicYOffset = 1,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         PALETTES(Annihilape),
         ICON(Annihilape, 0),
-        //FOOTPRINT(Annihilape)
+        FOLLOWER(Annihilape, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Annihilape),
     },
 #endif //P_GEN_9_CROSS_EVOS

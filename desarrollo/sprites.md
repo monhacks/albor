@@ -19,8 +19,8 @@ Lista Pokémon:
 * Pidgeot (paleta shiny) X
 * Rattata (paleta shiny) X
 * Raticate (paleta shiny) X
-* A-Rattata (sprite con animación y paletas) X Comprobar animación
-* A-Raticate (sprite con animación y paleta shiny) X Comprobar animación
+* A-Rattata (sprite con animación y paletas) X
+* A-Raticate (sprite con animación y paleta shiny) X
 * Spearow (paleta shiny) X
 * Fearow (paleta shiny) X
 * Ekans X
@@ -28,7 +28,7 @@ Lista Pokémon:
 * Pichu (paleta shiny) X
 * Pikachu (paleta shiny, female follower) X
 * Raichu (paleta shiny, female follower) X
-* A-Raichu
+* A-Raichu (paleta shiny) X
 * Sandshrew
 * Sandslash
 * A-Sandshrew
@@ -70,7 +70,7 @@ Lista Pokémon:
 * Golduck
 * Mankey
 * Primeape
-* Annihilape
+* Annihilape X
 * Growlithe
 * Arcanine
 * H-Growlithe

@@ -410,6 +410,7 @@ struct PokemonStorageSystemData
     u8 cursorPalNums[2];
     const u32 *displayMonPalette;
     u32 displayMonPersonality;
+    bool8 displayMonIsShiny;
     u16 displayMonSpecies;
     u16 displayMonItemId;
     bool8 setMosaic;
@@ -3687,7 +3688,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(sStorage->displayMonPalOffset, species, 0, pid); //Funciona (en primera pantalla de equipo)
+        UniquePaletteByPersonality(sStorage->displayMonPalOffset, species, sStorage->displayMonIsShiny, pid); //*
         CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
         sStorage->displayMonSprite->invisible = FALSE;
     }
@@ -4163,7 +4164,7 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
         else
         {
             LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
-            UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position], MON_DATA_PERSONALITY), IsMonShiny((struct Pokemon *)&gPokemonStoragePtr->boxes[boxId][position]));
+            UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData(mon, MON_DATA_PERSONALITY), IsMonShiny(mon));
         }
     }
     sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
@@ -6409,6 +6410,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             StringGet_Nickname(sStorage->displayMonName);
             sStorage->displayMonLevel = GetMonData(mon, MON_DATA_LEVEL);
             sStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
+            sStorage->displayMonIsShiny = GetMonData(mon, MON_DATA_IS_SHINY);
             sStorage->displayMonPalette = GetMonFrontSpritePal(mon);
             gender = GetMonGender(mon);
             sStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
@@ -6436,6 +6438,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             StringGet_Nickname(sStorage->displayMonName);
             sStorage->displayMonLevel = GetLevelFromBoxMonExp(boxMon);
             sStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
+            sStorage->displayMonIsShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY);
             sStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(sStorage->displayMonSpecies, isShiny, sStorage->displayMonPersonality); //*
             gender = GetGenderFromSpeciesAndPersonality(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
             sStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
