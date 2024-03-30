@@ -8,5 +8,5 @@
 - Crear huevos personalizados en pokédex.
 - Comprobar por qué está roto el storage.
 - Intentar crear animaciones de entrenadores.
-- Implementar opción de todos los Pokémon shiny.
-- Borrar opción de huevos.
+- Insertar gráfico de tabla de tipos + características de tipos como opción.
+- Añadir características especiales a cada tipo.

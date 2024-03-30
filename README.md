@@ -25,6 +25,21 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Las posibilidades de encontrar un Pokémon shiny son de 1/4096.
     *Los EVs máximos son 504 en total, y 252 por stat.
 
+## Cambios a tabla de tipos:
+    * Roca x0,5 a roca.
+    * Normal x1 a acero.
+    * Psíquico x2 a acero.
+    * Bicho x2 a hada.
+    * Bicho x2 a fantasma.
+    * Veneno x2 a bicho.
+    * Planta x1 a dragón.
+    * Fuego x0 a dragón.
+    * Agua x0,5 a hielo.
+    * Eléctrico x2 a acero.
+    * Tierra x0,5 a normal.
+    * Planta x1 a acero.
+    * Volador x0,5 a acero.
+
 ## Cambios a Pokémon:
     *Se han cambiado las paletas shiny de muchos Pokémon.
 

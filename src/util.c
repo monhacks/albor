@@ -280,8 +280,8 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
     }
 }
 
-#define HUE_SHIFT_RANGE_NORMAL  60
-#define HUE_SHIFT_RANGE_SHINY   120
+#define HUE_SHIFT_RANGE_NORMAL  50
+#define HUE_SHIFT_RANGE_SHINY   100
 
 #define NORMAL_HUE_SHINY_HUE                    0
 #define NORMAL_MOD_SHINY_MOD                    1 //Muy suave
