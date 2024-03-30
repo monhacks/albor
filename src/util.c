@@ -298,20 +298,29 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
 
 static const s8 sColorVariationModes[NUM_SPECIES] =
 {
-    [SPECIES_BULBASAUR]     = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_IVYSAUR]       = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_VENUSAUR]      = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_SQUIRTLE]      = NORMAL_MOD_SHINY_HUE_NEG,
-    [SPECIES_WARTORTLE]     = NORMAL_HUE_X2_SHINY_HUE_NEG,
-    [SPECIES_BLASTOISE]     = NORMAL_HUE_X2_SHINY_HUE_NEG,
-    [SPECIES_CATERPIE]      = NORMAL_HUE_X2_SHINY_MOD,
-    [SPECIES_METAPOD]       = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_BUTTERFREE]    = NORMAL_MOD_SHINY_MOD,
-    [SPECIES_PIDGEY]        = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_EKANS]         = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_ARBOK]         = NORMAL_HUE_X2_SHINY_HUE,
-    [SPECIES_PICHU]         = NORMAL_MOD_SHINY_HUE,
-    [SPECIES_PIKACHU]       = NORMAL_MOD_SHINY_HUE,
+    [SPECIES_BULBASAUR]         = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_IVYSAUR]           = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_VENUSAUR]          = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_SQUIRTLE]          = NORMAL_MOD_SHINY_HUE_NEG,
+    [SPECIES_WARTORTLE]         = NORMAL_HUE_X2_SHINY_HUE_NEG,
+    [SPECIES_BLASTOISE]         = NORMAL_HUE_X2_SHINY_HUE_NEG,
+    [SPECIES_CATERPIE]          = NORMAL_HUE_X2_SHINY_MOD,
+    [SPECIES_METAPOD]           = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_BUTTERFREE]        = NORMAL_MOD_SHINY_MOD,
+    [SPECIES_WEEDLE]            = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_KAKUNA]            = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_BEEDRILL]          = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_RATTATA]           = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_RATTATA_ALOLAN]    = NORMAL_HUE_NEG_SHINY_HUE,
+    [SPECIES_RATICATE]          = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_RATICATE_ALOLAN]   = NORMAL_HUE_NEG_SHINY_HUE,
+    [SPECIES_SPEAROW]           = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_EKANS]             = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_ARBOK]             = NORMAL_HUE_X2_SHINY_HUE,
+    [SPECIES_PICHU]             = NORMAL_MOD_SHINY_HUE,
+    [SPECIES_PIKACHU]           = NORMAL_MOD_SHINY_HUE,
+    [SPECIES_RAICHU_ALOLAN]     = NORMAL_HUE_SHINY_HUE_NEG,
+    [SPECIES_ANNIHILAPE]        = NORMAL_HUE_X2_SHINY_HUE,
 };
 
 void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
@@ -370,7 +379,7 @@ void UniquePalette(u16 palOffset, struct BoxPokemon *boxMon)
             case NORMAL_HUE_NEG_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE_NEG:
             case NORMAL_HUE_NEG_SHINY_MOD:
-                shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
+                shift = value % (HUE_SHIFT_RANGE_NORMAL * 150 / 100) - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
             case NORMAL_MOD_SHINY_HUE:
@@ -574,7 +583,7 @@ void UniquePaletteByPersonality(u16 palOffset, u16 species, bool8 isShiny, u32 p
             case NORMAL_HUE_NEG_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE_NEG:
             case NORMAL_HUE_NEG_SHINY_MOD:
-                shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
+                shift = value % (HUE_SHIFT_RANGE_NORMAL * 150 / 100) - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
             case NORMAL_MOD_SHINY_HUE:
@@ -778,7 +787,7 @@ void UniquePaletteBuffered(u16 * buffer, u16 species, u32 personality, bool8 isS
             case NORMAL_HUE_NEG_SHINY_HUE:
             case NORMAL_HUE_NEG_SHINY_HUE_NEG:
             case NORMAL_HUE_NEG_SHINY_MOD:
-                shift = value % HUE_SHIFT_RANGE_NORMAL - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
+                shift = value % (HUE_SHIFT_RANGE_NORMAL * 150 / 100) - (HUE_SHIFT_RANGE_NORMAL * 2 + 1);
                 break;
             case NORMAL_MOD_SHINY_MOD:
             case NORMAL_MOD_SHINY_HUE:

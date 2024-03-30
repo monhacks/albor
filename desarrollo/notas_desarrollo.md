@@ -7,3 +7,6 @@
 - L/R icons en storage.
 - Crear huevos personalizados en pokédex.
 - Comprobar por qué está roto el storage.
+- Intentar crear animaciones de entrenadores.
+- Implementar opción de todos los Pokémon shiny.
+- Borrar opción de huevos.

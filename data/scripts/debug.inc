@@ -137,19 +137,45 @@ Debug_EventScript_Text_DefensiveIVs:
 	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
+	givemon SPECIES_BULBASAUR, 1, ITEM_NONE
+	givemon SPECIES_IVYSAUR, 1, ITEM_NONE
+	givemon SPECIES_VENUSAUR, 1, ITEM_NONE
+	givemon SPECIES_CHARMANDER, 1, ITEM_NONE
+	givemon SPECIES_CHARMELEON, 1, ITEM_NONE
+	givemon SPECIES_CHARIZARD, 1, ITEM_NONE
+	givemon SPECIES_SQUIRTLE, 1, ITEM_NONE
+	givemon SPECIES_WARTORTLE, 1, ITEM_NONE
+	givemon SPECIES_BLASTOISE, 1, ITEM_NONE
+	givemon SPECIES_CATERPIE, 1, ITEM_NONE
+	givemon SPECIES_METAPOD, 1, ITEM_NONE
+	givemon SPECIES_BUTTERFREE, 1, ITEM_NONE
+	givemon SPECIES_WEEDLE, 1, ITEM_NONE
+	givemon SPECIES_KAKUNA, 1, ITEM_NONE
+	givemon SPECIES_BEEDRILL, 1, ITEM_NONE
+	givemon SPECIES_PIDGEY, 1, ITEM_NONE
+	givemon SPECIES_PIDGEOTTO, 1, ITEM_NONE
+	givemon SPECIES_PIDGEOT, 1, ITEM_NONE
+	givemon SPECIES_RATTATA, 1, ITEM_NONE
+	givemon SPECIES_RATTATA_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_RATICATE, 1, ITEM_NONE
+	givemon SPECIES_RATICATE_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_SPEAROW, 1, ITEM_NONE
+	givemon SPECIES_FEAROW, 1, ITEM_NONE
+	givemon SPECIES_EKANS, 1, ITEM_NONE
+	givemon SPECIES_ARBOK, 1, ITEM_NONE
+	givemon SPECIES_PICHU, 1, ITEM_NONE
+	givemon SPECIES_PIKACHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU, 1, ITEM_NONE
-	givemon SPECIES_RAICHU, 1, ITEM_NONE
-	givemon SPECIES_RAICHU, 1, ITEM_NONE
-	givemon SPECIES_RAICHU, 1, ITEM_NONE
-	givemon SPECIES_RAICHU, 1, ITEM_NONE
+	givemon SPECIES_RAICHU_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
 	end
 
 Debug_EventScript_Script_2::
-	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	end
 
 Debug_EventScript_Script_3::

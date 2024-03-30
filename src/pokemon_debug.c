@@ -37,6 +37,7 @@
 #include "task.h"
 #include "text_window.h"
 #include "trainer_pokemon_sprites.h"
+#include "util.h"
 
 #include "constants/items.h"
 #include "constants/event_objects.h"
@@ -1140,16 +1141,12 @@ void CB2_Debug_Pokemon(void)
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             offset_y = gSpeciesInfo[species].backPicYOffset;
             data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
-            gSprites[data->backspriteId].oam.paletteNum = 4;
+            gSprites[data->backspriteId].oam.paletteNum = 1;
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
-            //Icon Sprite
-            data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
-            gSprites[data->iconspriteId].oam.priority = 0;
-
             //Follower Sprite
-            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+            data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_ICON_X, DEBUG_ICON_Y, 0);
             gSprites[data->followerspriteId].oam.priority = 0;
             gSprites[data->followerspriteId].anims = sAnims_Follower;
 
@@ -1655,10 +1652,10 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     s16 offset_y;
     u8 front_x = sBattlerCoords[0][1].x;
     u8 front_y;
+    u32 personality;
 
     DestroySprite(&gSprites[data->frontspriteId]);
     DestroySprite(&gSprites[data->backspriteId]);
-    DestroySprite(&gSprites[data->iconspriteId]);
     DestroySprite(&gSprites[data->followerspriteId]);
 
     FreeMonSpritesGfx();
@@ -1685,6 +1682,9 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
     data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
     gSprites[data->frontspriteId].oam.paletteNum = 1;
+    personality = Random32();
+    UniquePaletteByPersonality(OBJ_PLTT_ID(1), species, data->isShiny, personality);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     //Front Shadow
@@ -1696,16 +1696,12 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gSpeciesInfo[species].backPicYOffset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, DEBUG_MON_BACK_X, DEBUG_MON_BACK_Y + offset_y, 0);
-    gSprites[data->backspriteId].oam.paletteNum = 5;
+    gSprites[data->backspriteId].oam.paletteNum = 1;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
-    //Icon Sprite
-    data->iconspriteId = CreateMonIcon(species, SpriteCB_MonIcon, DEBUG_ICON_X, DEBUG_ICON_Y, 4, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
-    gSprites[data->iconspriteId].oam.priority = 0;
-
     //Follower Sprite
-    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_FOLLOWER_X, DEBUG_FOLLOWER_Y, 0);
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, DEBUG_ICON_X, DEBUG_ICON_Y, 0);
     gSprites[data->followerspriteId].oam.priority = 0;
     gSprites[data->followerspriteId].anims = sAnims_Follower;
 
