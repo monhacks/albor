@@ -504,8 +504,8 @@ static const u8 sDebugText_Give[] =          _("Give X…{CLEAR_TO 110}{RIGHT_AR
 static const u8 sDebugText_Sound[] =         _("Sound…{CLEAR_TO 110}{RIGHT_ARROW}");
 static const u8 sDebugText_Cancel[] =        _("Salir");
 // Script menu
-static const u8 sDebugText_Util_Script_1[] = _("Da todos los Pokémon");
-static const u8 sDebugText_Util_Script_2[] = _("Da 5 Pokémon shiny");
+static const u8 sDebugText_Util_Script_1[] = _("Give all Pokémon");
+static const u8 sDebugText_Util_Script_2[] = _("Give all Pokémon shiny");
 static const u8 sDebugText_Util_Script_3[] = _("Da 5 huevos");
 static const u8 sDebugText_Util_Script_4[] = _("Script 4");
 static const u8 sDebugText_Util_Script_5[] = _("Script 5");

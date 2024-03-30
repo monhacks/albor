@@ -397,7 +397,7 @@ Lista Pokémon:
 * chimecho
 * absol
 * snorunt
-* glalie
+* glalie (sprite) X
 * froslass
 * spheal
 * sealeo
