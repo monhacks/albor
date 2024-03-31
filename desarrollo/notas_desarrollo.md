@@ -10,3 +10,15 @@
 - Intentar crear animaciones de entrenadores.
 - Insertar gráfico de tabla de tipos + características de tipos como opción.
 - Añadir características especiales a cada tipo.
+- Balance:  *480 - 40
+            *500 - 45
+            *520 - 50
+            *540 - 55
+            *560 - 60
+            *580 - 65
+            *600 - 70
+            *620 - 75
+            *640 - 80
+- Crear ataque a Charizard: Fuego azul (super efectivo contra roca).
+- Ojo que piel seca se ha dejado sin efecto.
+- Crear ataque volador/bicho tipo desenrrollar (Efecto mariposa).

@@ -115,7 +115,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     #else
         .name = _("CompoundEyes"),
     #endif
-        .description = COMPOUND_STRING("Raises accuracy."),
+        .description = COMPOUND_STRING("+20% precisión."),
         .aiRating = 7,
     },
 
@@ -368,8 +368,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_THICK_FAT] =
     {
-        .name = _("Thick Fat"),
-        .description = COMPOUND_STRING("Heat-and-cold protection."),
+        .name = _("Sebo"),
+        .description = COMPOUND_STRING("Resiste hielo y fuego."),
         .aiRating = 7,
         .breakable = TRUE,
     },
@@ -714,8 +714,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SOLAR_POWER] =
     {
-        .name = _("Solar Power"),
-        .description = COMPOUND_STRING("Powers up in sunshine."),
+        .name = _("Poder solar"),
+        .description = COMPOUND_STRING("+25% de potencia en sol."),
         .aiRating = 3,
     },
 
@@ -1154,8 +1154,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MOXIE] =
     {
-        .name = _("Moxie"),
-        .description = COMPOUND_STRING("KOs raise Attack."),
+        .name = _("Autoestima"),
+        .description = COMPOUND_STRING("KOs suben ataque"),
         .aiRating = 7,
     },
 
@@ -1347,11 +1347,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MEGA_LAUNCHER] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Mega Launcher"),
+        .name = _("Megadisparador"),
     #else
         .name = _("MegaLauncher"),
     #endif
-        .description = COMPOUND_STRING("Boosts pulse moves."),
+        .description = COMPOUND_STRING("+25% balísticos."),
         .aiRating = 7,
     },
 
@@ -1393,8 +1393,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_AERILATE] =
     {
-        .name = _("Aerilate"),
-        .description = COMPOUND_STRING("Normal moves become Flying."),
+        .name = _("Piel celeste"),
+        .description = COMPOUND_STRING("Ataques voladores +25%."),
         .aiRating = 8,
     },
 
@@ -1537,8 +1537,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_BERSERK] =
     {
-        .name = _("Berserk"),
-        .description = COMPOUND_STRING("Boosts Sp. Atk at low HP."),
+        .name = _("Cólera"),
+        .description = COMPOUND_STRING("+1 At. esp. si PS -50%."),
         .aiRating = 5,
     },
 
@@ -2598,5 +2598,27 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
+    },
+
+    [ABILITY_OLOR_FLUVIAL] =
+    {
+        .name = _("Olor fluvial"),
+        .description = COMPOUND_STRING("+25% evasión si llueve."),
+        .aiRating = 2,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_DISPARO_CERTERO] =
+    {
+        .name = _("Disparo certero"),
+        .description = COMPOUND_STRING("+20% precisión."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_ATAQUE_RELAMPAGO] =
+    {
+        .name = _("Ataque relámpago"),
+        .description = COMPOUND_STRING("+1 prioridad balísticos."),
+        .aiRating = 7,
     },
 };

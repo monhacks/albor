@@ -4822,7 +4822,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     }
     else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
         priority += 3;
-
+    else if (ability == ABILITY_ATAQUE_RELAMPAGO && gMovesInfo[move].ballisticMove)
+    {
+        priority++;
+    }
     if (gProtectStructs[battler].quash)
         priority = -8;
 
@@ -5809,7 +5812,6 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
              && gMovesInfo[move].effect != EFFECT_NATURAL_GIFT
              && ((attackerAbility == ABILITY_PIXILATE && (ateType = TYPE_FAIRY))
                  || (attackerAbility == ABILITY_REFRIGERATE && (ateType = TYPE_ICE))
-                 || (attackerAbility == ABILITY_AERILATE && (ateType = TYPE_FLYING))
                  || ((attackerAbility == ABILITY_GALVANIZE) && (ateType = TYPE_ELECTRIC))
                 )
              )

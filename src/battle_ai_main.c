@@ -2911,6 +2911,11 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     {
                         RETURN_SCORE_PLUS(3);
                     }
+                    else if (aiData->abilities[battlerAtk] == ABILITY_DISPARO_CERTERO
+                     && HasMoveWithLowAccuracy(battlerAtkPartner, FOE(battlerAtkPartner), 90, TRUE, atkPartnerAbility, aiData->abilities[FOE(battlerAtkPartner)], atkPartnerHoldEffect, aiData->holdEffects[FOE(battlerAtkPartner)]))
+                    {
+                        RETURN_SCORE_PLUS(3);
+                    }
                 }
                 break;
             case EFFECT_ROLE_PLAY:
