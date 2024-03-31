@@ -267,9 +267,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
 #define CHARIZARD_MISC_INFO                                             \
         .catchRate = 45,                                                \
-        .evYield_SpAttack = 2,       
-        .evYield_Attack = 1,                                       \
-        .genderRatio = PERCENT_FEMALE(25),                            \
+        .evYield_SpAttack = 2,                                          \
+        .evYield_Attack = 1,                                            \
+        .genderRatio = PERCENT_FEMALE(25),                              \
         .eggCycles = 20,                                                \
         .friendship = STANDARD_FRIENDSHIP,                              \
         .growthRate = GROWTH_MEDIUM_SLOW,                               \
@@ -491,17 +491,17 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseDefense   = 35,
         .baseSpeed     = 45,
         .baseSpAttack  = 20,
-        .baseSpDefense = 20,
+        .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_BUG),
         .catchRate = 255,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 39 : 53,
-        .evYield_HP = 1,
+        .evYield_SpDefense = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_NONE, ABILITY_RUN_AWAY },
+        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_TINTED_LENS, ABILITY_RUN_AWAY },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Caterpie"),
         .cryId = CRY_CATERPIE,
@@ -541,17 +541,17 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseDefense   = 55,
         .baseSpeed     = 30,
         .baseSpAttack  = 25,
-        .baseSpDefense = 25,
+        .baseSpDefense = 75,
         .types = MON_TYPES(TYPE_BUG),
         .catchRate = 120,
         .expYield = 72,
-        .evYield_Defense = 2,
+        .evYield_SpDefense = 2,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHED_SKIN, ABILITY_NONE },
+        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_TINTED_LENS, ABILITY_SHED_SKIN },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Metapod"),
         .cryId = CRY_METAPOD,
@@ -596,11 +596,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
 #define BUTTERFREE_MISC_INFO                                                        \
         .baseHP        = 60,                                                        \
-        .baseAttack    = 45,                                                        \
-        .baseDefense   = 50,                                                        \
-        .baseSpeed     = 70,                                                        \
-        .baseSpDefense = 80,                                                        \
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_6 ? 90 : 80,                        \
+        .baseAttack    = 40,                                                        \
+        .baseDefense   = 60,                                                        \
+        .baseSpeed     = 90,                                                        \
+        .baseSpDefense = 110,                                                       \
+        .baseSpAttack  = 120,                                                       \
         .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),                                  \
         .catchRate = 45,                                                            \
         .expYield = BUTTERFREE_EXP_YIELD,                                           \
@@ -612,7 +612,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,                                          \
         .growthRate = GROWTH_MEDIUM_FAST,                                           \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                                 \
-        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_NONE, ABILITY_TINTED_LENS },  \
+        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_TINTED_LENS, ABILITY_ALAS_HIDROFOBAS },  \
         .bodyColor = BODY_COLOR_WHITE,                                              \
         .speciesName = _("Butterfree"),                                             \
         .cryId = CRY_BUTTERFREE,                                                    \
@@ -656,8 +656,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_WEEDLE] =
     {
         .baseHP        = 40,
-        .baseAttack    = 35,
-        .baseDefense   = 30,
+        .baseAttack    = 50,
+        .baseDefense   = 35,
         .baseSpeed     = 50,
         .baseSpAttack  = 20,
         .baseSpDefense = 20,
@@ -670,7 +670,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_NONE, ABILITY_RUN_AWAY },
+        .abilities = { ABILITY_SNIPER, ABILITY_POISON_TOUCH, ABILITY_RUN_AWAY },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Weedle"),
         .cryId = CRY_WEEDLE,
@@ -707,11 +707,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_KAKUNA] =
     {
         .baseHP        = 45,
-        .baseAttack    = 25,
-        .baseDefense   = 50,
+        .baseAttack    = 45,
+        .baseDefense   = 60,
         .baseSpeed     = 35,
         .baseSpAttack  = 25,
-        .baseSpDefense = 25,
+        .baseSpDefense = 35,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 72 : 71,
@@ -721,7 +721,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHED_SKIN, ABILITY_NONE },
+        .abilities = { ABILITY_SNIPER, ABILITY_POISON_TOUCH, ABILITY_SHED_SKIN },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Kakuna"),
         .cryId = CRY_KAKUNA,
@@ -755,13 +755,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEEDRILL}),
     },
 
-#define BEEDRILL_ATTACK (P_UPDATED_STATS >= GEN_6 ? 90 : 80)
-
 #define BEEDRILL_MISC_INFO                                  \
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),          \
         .catchRate = 45,                                    \
         .evYield_Attack = 2,                                \
-        .evYield_SpDefense = 1,                             \
+        .evYield_Speed = 1,                                 \
         .itemRare = ITEM_POISON_BARB,                       \
         .genderRatio = PERCENT_FEMALE(50),                  \
         .eggCycles = 15,                                    \
@@ -778,12 +776,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_BEEDRILL] =
     {
         BEEDRILL_MISC_INFO,
-        .baseHP        = 65,
-        .baseDefense   = 40,
-        .baseSpeed     = 75,
-        .baseSpAttack  = 45,
-        .baseSpDefense = 80,
-        .baseAttack    = BEEDRILL_ATTACK,
+        .baseHP        = 70,
+        .baseDefense   = 80,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 60,
+        .baseAttack    = 110,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 198,
     #elif P_UPDATED_EXP_YIELDS >= GEN_7
@@ -793,7 +791,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #else
         .expYield = 159,
     #endif
-        .abilities = { ABILITY_SWARM, ABILITY_NONE, ABILITY_SNIPER },
+        .abilities = { ABILITY_SNIPER, ABILITY_POISON_TOUCH, ABILITY_ENJAMBRE },
         .cryId = CRY_BEEDRILL,
         .height = 10,
         .weight = 295,

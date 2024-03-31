@@ -13135,28 +13135,28 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_BLUE_FLARE] =
     {
-        .name = COMPOUND_STRING("Blue Flare"),
+        .name = COMPOUND_STRING("Llama azul"),
         .description = COMPOUND_STRING(
-            "Engulfs the foe in a blue\n"
-            "flame. May inflict a burn."),
-        .effect = EFFECT_HIT,
-        .power = 130,
+            "Super efectivo contra\n"
+            "tipos Roca. 10% de quemar."),
+        .effect = EFFECT_SUPER_EFFECTIVE_ON_ARG,
+        .power = 70,
         .type = TYPE_FIRE,
-        .accuracy = 85,
-        .pp = 5,
+        .accuracy = 100,
+        .pp = 20,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = TYPE_ROCK,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_BURN,
-            .chance = 20,
+            .chance = 10,
         }),
         .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
         .contestComboMoves = {0}
     },
-
     [MOVE_FIERY_DANCE] =
     {
         .name = COMPOUND_STRING("Fiery Dance"),

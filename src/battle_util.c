@@ -3524,6 +3524,10 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 {
                     gMultiHitCounter = 5;
                 }
+                else if (ability == ABILITY_ENJAMBRE)
+                {
+                    gMultiHitCounter = 5;
+                }
                 else if (ability == ABILITY_BATTLE_BOND
                 && gCurrentMove == MOVE_WATER_SHURIKEN
                 && gBattleMons[gBattlerAttacker].species == SPECIES_GRENINJA_ASH)
@@ -5016,6 +5020,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (moveType == TYPE_GROUND)
                     effect = 1;
                 break;
+            case ABILITY_ALAS_HIDROFOBAS:
+                if (moveType == TYPE_WATER)
+                    effect = 2, statId = STAT_SPEED, statAmount = 1;
+                break;
             }
 
             if (effect == 1) // Drain Hp ability.
@@ -6138,6 +6146,8 @@ u32 IsAbilityPreventingEscape(u32 battler)
     u32 id;
     if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
         return 0;
+    if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
+        return 0;
     if ((id = IsAbilityOnOpposingSide(battler, ABILITY_SHADOW_TAG))
         && (B_SHADOW_TAG_ESCAPE >= GEN_4 && GetBattlerAbility(battler) != ABILITY_SHADOW_TAG))
         return id;
@@ -6154,6 +6164,8 @@ bool32 CanBattlerEscape(u32 battler) // no ability check
     if (GetBattlerHoldEffect(battler, TRUE) == HOLD_EFFECT_SHED_SHELL)
         return TRUE;
     else if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+        return TRUE;
+    else if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
         return TRUE;
     else if (gBattleMons[battler].status2 & (STATUS2_ESCAPE_PREVENTION | STATUS2_WRAPPED))
         return FALSE;

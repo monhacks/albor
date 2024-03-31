@@ -1664,7 +1664,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     {
     case ABILITY_COMPOUND_EYES:
     case ABILITY_DISPARO_CERTERO:
-        calc = (calc * 120) / 100;
+        calc = (calc * 130) / 100;
         break;
     case ABILITY_VICTORY_STAR:
         calc = (calc * 110) / 100; // 1.1 victory star boost
@@ -1767,7 +1767,7 @@ static void Cmd_accuracycheck(void)
     }
     else if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT
         || (gSpecialStatuses[gBattlerAttacker].multiHitOn
-        && (abilityAtk == ABILITY_SKILL_LINK || holdEffectAtk == HOLD_EFFECT_LOADED_DICE
+        && (abilityAtk == ABILITY_SKILL_LINK || abilityAtk == ABILITY_ENJAMBRE || holdEffectAtk == HOLD_EFFECT_LOADED_DICE
         || !(gMovesInfo[move].effect == EFFECT_TRIPLE_KICK || gMovesInfo[move].effect == EFFECT_POPULATION_BOMB))))
     {
         // No acc checks for second hit of Parental Bond or multi hit moves, except Triple Kick/Triple Axel/Population Bomb
@@ -11779,6 +11779,10 @@ static void Cmd_setmultihitcounter(void)
     else
     {
         if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SKILL_LINK)
+        {
+            gMultiHitCounter = 5;
+        }
+        else if (GetBattlerAbility(gBattlerAttacker) == ABILITY_ENJAMBRE)
         {
             gMultiHitCounter = 5;
         }

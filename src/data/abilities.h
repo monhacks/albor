@@ -111,11 +111,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_COMPOUND_EYES] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Compound Eyes"),
+        .name = _("Ojo compuesto"),
     #else
         .name = _("CompoundEyes"),
     #endif
-        .description = COMPOUND_STRING("+20% precisión."),
+        .description = COMPOUND_STRING("+30% precisión."),
         .aiRating = 7,
     },
 
@@ -390,9 +390,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_RUN_AWAY] =
     {
-        .name = _("Run Away"),
-        .description = COMPOUND_STRING("Makes escaping easier."),
-        .aiRating = 0,
+        .name = _("Fuga"),
+        .description = COMPOUND_STRING("Permite huir siempre."),
+        .aiRating = 1,
     },
 
     [ABILITY_KEEN_EYE] =
@@ -700,8 +700,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SKILL_LINK] =
     {
-        .name = _("Skill Link"),
-        .description = COMPOUND_STRING("Multi-hit moves hit 5 times."),
+        .name = _("Encadenado"),
+        .description = COMPOUND_STRING("Multigolpes siempre 5."),
         .aiRating = 7,
     },
 
@@ -735,8 +735,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SNIPER] =
     {
-        .name = _("Sniper"),
-        .description = COMPOUND_STRING("Boosts critical hits."),
+        .name = _("Francotirador"),
+        .description = COMPOUND_STRING("Críticos +50% de daño."),
         .aiRating = 3,
     },
 
@@ -828,8 +828,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_TINTED_LENS] =
     {
-        .name = _("Tinted Lens"),
-        .description = COMPOUND_STRING("Ups “not very effective”."),
+        .name = _("Cromolente"),
+        .description = COMPOUND_STRING("x2 daño poco efectivo."),
         .aiRating = 7,
     },
 
@@ -1077,8 +1077,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POISON_TOUCH] =
     {
-        .name = _("Poison Touch"),
-        .description = COMPOUND_STRING("Poisons foe on contact."),
+        .name = _("Toque tóxico"),
+        .description = COMPOUND_STRING("30% de envenenar si ataca."),
         .aiRating = 4,
     },
 
@@ -2611,7 +2611,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DISPARO_CERTERO] =
     {
         .name = _("Disparo certero"),
-        .description = COMPOUND_STRING("+20% precisión."),
+        .description = COMPOUND_STRING("+30% precisión."),
         .aiRating = 7,
     },
 
@@ -2619,6 +2619,21 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Ataque relámpago"),
         .description = COMPOUND_STRING("+1 prioridad balísticos."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_ALAS_HIDROFOBAS] =
+    {
+        .name = _("Alas hidrófobas"),
+        .description = COMPOUND_STRING("+1 velocidad si recibe agua."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_ENJAMBRE] =
+    {
+        .name = _("Enjambre"),
+        .description = COMPOUND_STRING("Multigolpes siempre 5."),
         .aiRating = 7,
     },
 };

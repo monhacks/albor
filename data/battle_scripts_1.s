@@ -4145,6 +4145,7 @@ BattleScript_EffectMeanLook::
 .if B_GHOSTS_ESCAPE >= GEN_6
 	jumpiftype BS_TARGET, TYPE_GHOST, BattleScript_ButItFailed
 .endif
+	jumpifability BS_TARGET, ABILITY_RUN_AWAY, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	seteffectprimary MOVE_EFFECT_PREVENT_ESCAPE
