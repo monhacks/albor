@@ -4826,6 +4826,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     {
         priority++;
     }
+    else if (ability == ABILITY_OJOS_PRESTOS && gMovesInfo[move].eyesMove)
+    {
+        priority++;
+    }
     if (gProtectStructs[battler].quash)
         priority = -8;
 
@@ -5817,15 +5821,6 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
              )
     {
         gBattleStruct->dynamicMoveType = ateType | F_DYNAMIC_TYPE_SET;
-        if (!IsDynamaxed(battlerAtk))
-            gBattleStruct->ateBoost[battlerAtk] = 1;
-    }
-    else if (gMovesInfo[move].type != TYPE_NORMAL
-             && gMovesInfo[move].effect != EFFECT_HIDDEN_POWER
-             && gMovesInfo[move].effect != EFFECT_WEATHER_BALL
-             && attackerAbility == ABILITY_NORMALIZE)
-    {
-        gBattleStruct->dynamicMoveType = TYPE_NORMAL | F_DYNAMIC_TYPE_SET;
         if (!IsDynamaxed(battlerAtk))
             gBattleStruct->ateBoost[battlerAtk] = 1;
     }

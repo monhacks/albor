@@ -24,6 +24,10 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Se ha implementado el buscapelea.
     *Las posibilidades de encontrar un Pokémon shiny son de 1/4096.
     *Los EVs máximos son 504 en total, y 252 por stat.
+    *Los ataques de pulsos/auras y balas se han unificado, por lo que las habilidades Megadisparador y Antibalas funcionan con todos.
+    *Se han cambiado muchas habilidades y se han añadido muchas otras. No hay habilidades inútiles en el juego, y todos los Pokémon tienen 3 habilidades (excepto Pokémon con habilidades intrínsecas, como Shedinja, Mimikyu...).
+    *Forcejeo tiene STAB de tipo Normal.
+    *Se ha cambiado cómo funciona el STAB: Pokémon con 1 solo tipo tienen 50% de STAB, mientras que Pokémon con 2 tipos tienen 25% de STAB con cada uno de sus tipos.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.
@@ -42,7 +46,17 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Cambios a Pokémon:
     *Se han cambiado las paletas shiny de muchos Pokémon.
+    *Los stats de los Pokémon siguen un sistema por escalones, donde cada escalón tiene un stat asignado para el ataque que no se usa (No en el caso de atacantes mixtos):
+        - 480 -> 40
+        - 500 -> 45
+        - 520 -> 50
+        - 540 -> 55
+        - 560 -> 60
+        - 580 -> 65
+        - 600 -> 70
+        - 620 -> 75
+        - 640 -> 80
 
 ## Cambios de calidad de vida:
     *En batalla, puedes pulsar B para ir rápidamente a la opción de huir.
-    *Los Pokémon varían su color en función de su personalidad.
+    *Los Pokémon varían su color en función de su personalidad, y se aplica a sus iconos/minis.

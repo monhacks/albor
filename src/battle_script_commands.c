@@ -1667,6 +1667,7 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
         calc = (calc * 130) / 100;
         break;
     case ABILITY_VICTORY_STAR:
+    case ABILITY_KEEN_EYE:
         calc = (calc * 110) / 100; // 1.1 victory star boost
         break;
     case ABILITY_HUSTLE:

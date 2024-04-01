@@ -397,9 +397,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_KEEN_EYE] =
     {
-        .name = _("Keen Eye"),
-        .description = COMPOUND_STRING("Prevents loss of accuracy."),
-        .aiRating = 1,
+        .name = _("Vista lince"),
+        .description = COMPOUND_STRING("+10% precisión y no baja."),
+        .aiRating = 4,
         .breakable = TRUE,
     },
 
@@ -728,9 +728,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_NORMALIZE] =
     {
-        .name = _("Normalize"),
-        .description = COMPOUND_STRING("Moves become Normal-type."),
-        .aiRating = -1,
+        .name = _("Normalidad"),
+        .description = COMPOUND_STRING("Ataques normales +25%."),
+        .aiRating = 8,
     },
 
     [ABILITY_SNIPER] =
@@ -1155,7 +1155,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MOXIE] =
     {
         .name = _("Autoestima"),
-        .description = COMPOUND_STRING("KOs suben ataque"),
+        .description = COMPOUND_STRING("KOs suben ataque."),
         .aiRating = 7,
     },
 
@@ -2634,6 +2634,28 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Enjambre"),
         .description = COMPOUND_STRING("Multigolpes siempre 5."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_BELLO_PLUMAJE] =
+    {
+        .name = _("Bello plumaje"),
+        .description = COMPOUND_STRING("Protege de prioridad."),
+        .aiRating = 5,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_OJOS_PRESTOS] =
+    {
+        .name = _("Ojos prestos"),
+        .description = COMPOUND_STRING("+1 prioridad miradas."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_CARA_DURA] =
+    {
+        .name = _("Cara dura"),
+        .description = COMPOUND_STRING("+25% cabezazos."),
         .aiRating = 7,
     },
 };

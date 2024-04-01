@@ -23,6 +23,6 @@
 - Ojo que piel seca se ha dejado sin efecto.
 - Crear ataque volador/bicho tipo desenrrollar (Efecto mariposa).
 - Llama azul asignar a Chandelure, Charizard...
-- Crear ataque Colmena (paliza de tipo bicho).
 - Cambiar habilidad enjambre (copia de Skill link), asignar a Vespiquen, Beedrill.
 - Ursaring Tierra/Hada.
+- Creado movimiento Colmena: asignar a Beedrill, Vespiquen.

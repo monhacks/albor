@@ -130,12 +130,13 @@ static const u16 sSizeScreenSilhouette_Pal[] = INCBIN_U16("graphics/pokedex/size
 
 static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
 static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");
-static const u8 sText_Stats_HP[] = _C("PS");
-static const u8 sText_Stats_Attack[] = _("ATK");
-static const u8 sText_Stats_Defense[] = _("DEF");
-static const u8 sText_Stats_Speed[] = _("SPE");
-static const u8 sText_Stats_SpAttack[] = _("SP.A");
-static const u8 sText_Stats_SpDefense[] = _("SP.D");
+static const u8 sText_Stats_HP[] = _C("PS:");
+static const u8 sText_Stats_Attack[] = _("Ata:");
+static const u8 sText_Stats_Defense[] = _("Def:");
+static const u8 sText_Stats_Speed[] = _("Vel:");
+static const u8 sText_Stats_SpAttack[] = _("AEsp:");
+static const u8 sText_Stats_SpDefense[] = _("DEsp:");
+static const u8 sText_Stats_Total[] = _("Total:");
 static const u8 sText_Stats_EV_Plus1[] = _("{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus2[] = _("{UP_ARROW_2}{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus3[] = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
@@ -149,13 +150,6 @@ static const u8 sText_Stats_Gender_50[] = _("♀ 1/1 ♂");     //_("♀ 50 / 50
 static const u8 sText_Stats_Gender_75[] = _("♀ 3/1 ♂");     //_("♀ 75 / 25 ♂");
 static const u8 sText_Stats_Gender_87_5[] = _("♀ 7/1 ♂");
 static const u8 sText_Stats_Gender_100[] = _("♀");
-static const u8 sText_Stats_CatchRate[] = _("CATCH{0x5B}: ");
-static const u8 sText_Stats_CatchRate_Legend[] = _("LEGENDARY");
-static const u8 sText_Stats_CatchRate_VeryHard[] = _("VERY HARD");
-static const u8 sText_Stats_CatchRate_Difficult[] = _("DIFFICULT");
-static const u8 sText_Stats_CatchRate_Medium[] = _("MEDIUM");
-static const u8 sText_Stats_CatchRate_Relaxed[] = _("RELAXED");
-static const u8 sText_Stats_CatchRate_Easy[] = _("EASY");
 static const u8 sText_Stats_ExpYield[] = _("EXP YIELD: ");
 static const u8 sText_Stats_EggCycles[] = _("HATCH STEPS:");
 static const u8 sText_Stats_EggCycles_VeryFast[] = _("{EMOJI_BOLT}{EMOJI_DIZZYEGG}");
@@ -381,7 +375,6 @@ struct PokemonStats
     u8  evYield_SpAttack;
     u8  evYield_Defense;
     u8  evYield_SpDefense;
-    u8  catchRate;
     u8  growthRate;
     u8  eggGroup1;
     u8  eggGroup2;
@@ -1373,7 +1366,6 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
         .paletteNum = 15,
         .baseBlock = 641,
     },
-
     DUMMY_WIN_TEMPLATE
 };
 
@@ -1386,8 +1378,10 @@ static const struct WindowTemplate sInfoScreen_WindowTemplates[] =
 #define WIN_STATS_MOVES_DESCRIPTION 7
 #define WIN_STATS_MOVES_BOTTOM 8
 #define WIN_STATS_ABILITIES 9
-#define WIN_STATS_LEFT_UNUSED 10
-#define WIN_STATS_END WIN_STATS_LEFT_UNUSED
+#define WIN_STATS_LEFT_BLANK 10
+
+#define WIN_STATS_END WIN_STATS_LEFT_BLANK
+
 static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
 {
     [WIN_STATS_TOPBAR] =
@@ -1480,7 +1474,7 @@ static const struct WindowTemplate sStatsScreen_WindowTemplates[] =
         .paletteNum = 0,
         .baseBlock = 1 + 60 + 40 + 48 + 96 + 24 + 72 + 72 + 36,
     },
-    [WIN_STATS_LEFT_UNUSED] =
+    [WIN_STATS_LEFT_BLANK] =
     {
         .bg = 2,
         .tilemapLeft = 0,
@@ -4729,7 +4723,6 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.evYield_SpAttack    = evs[STAT_SPEED];
     sPokedexView->sPokemonStats.evYield_Defense     = evs[STAT_SPATK];
     sPokedexView->sPokemonStats.evYield_SpDefense   = evs[STAT_SPDEF];
-    sPokedexView->sPokemonStats.catchRate           = gSpeciesInfo[species].catchRate;
     sPokedexView->sPokemonStats.growthRate          = gSpeciesInfo[species].growthRate;
     sPokedexView->sPokemonStats.eggGroup1           = gSpeciesInfo[species].eggGroups[0];
     sPokedexView->sPokemonStats.eggGroup2           = gSpeciesInfo[species].eggGroups[1];
@@ -5493,23 +5486,13 @@ static void PrintStatsScreen_Left(u8 taskId)
     //TOGGLE--------------------------------------
     if (gTasks[taskId].data[5] == 0)
     {
-        u32 catchRate = sPokedexView->sPokemonStats.catchRate;
         u32 growthRate = sPokedexView->sPokemonStats.growthRate;
+        u32 totalStats = sPokedexView->sPokemonStats.baseHP + sPokedexView->sPokemonStats.baseAttack + sPokedexView->sPokemonStats.baseDefense + sPokedexView->sPokemonStats.baseSpAttack +sPokedexView->sPokemonStats.baseSpDefense + sPokedexView->sPokemonStats.baseSpeed;
 
-        //Catch rate
-        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate, base_x, base_y + base_y_offset*base_i);
-        if (catchRate <= 10)
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Legend, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        else if (catchRate <= 70)
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_VeryHard, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        else if (catchRate <= 100)
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Difficult, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        else if (catchRate <= 150)
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Medium, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        else if (catchRate <= 200)
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Relaxed, base_x + x_offset_column, base_y + base_y_offset*base_i);
-        else
-            PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_CatchRate_Easy, base_x + x_offset_column, base_y + base_y_offset*base_i);
+        //Total stats
+        PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Total, base_x, base_y + base_y_offset*base_i);
+        ConvertIntToDecimalStringN(strBase, totalStats, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        PrintStatsScreenTextSmall(WIN_STATS_LEFT, strBase, base_x+base_x_offset, base_y + base_y_offset*base_i);
         base_i++;
 
         //Growth rate
