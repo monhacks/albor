@@ -4822,6 +4822,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     {
         priority++;
     }
+    else if (ability == ABILITY_RUN_AWAY && gMovesInfo[move].effect == EFFECT_HIT_ESCAPE)
+    {
+        priority++;
+    }
     if (gProtectStructs[battler].quash)
         priority = -8;
 

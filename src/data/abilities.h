@@ -391,7 +391,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RUN_AWAY] =
     {
         .name = _("Fuga"),
-        .description = COMPOUND_STRING("Permite huir siempre."),
+        .description = COMPOUND_STRING("+1 prioridad cambio."),
         .aiRating = 1,
     },
 
