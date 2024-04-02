@@ -2694,7 +2694,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 6,
     },
 
-    [ABILITY_SUEÑO_ELECTRICO] =
+    [ABILITY_SUENO_ELECTRICO] =
     {
         .name = _("Sueño eléctrico"),
         .description = COMPOUND_STRING("Paraliza si atacan dormido."),
