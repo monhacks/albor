@@ -50,7 +50,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Bulbasaur)
         FOLLOWER(Bulbasaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bulbasaur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_IVYSAUR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_IVYSAUR}),
     },
 
     [SPECIES_IVYSAUR] =
@@ -100,7 +100,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Ivysaur)
         FOLLOWER(Ivysaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ivysaur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_VENUSAUR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VENUSAUR}),
     },
 
 #define VENUSAUR_MISC_INFO                                                  \
@@ -212,7 +212,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Charmander)
         LEARNSETS(Charmander),
         FOLLOWER(Charmander, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_CHARMELEON}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARMELEON}),
     },
 
     [SPECIES_CHARMELEON] =
@@ -262,7 +262,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Charmeleon)
         LEARNSETS(Charmeleon),
         FOLLOWER(Charmeleon, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHARIZARD}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CHARIZARD}),
     },
 
 #define CHARIZARD_MISC_INFO                                             \
@@ -371,7 +371,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Squirtle)
         FOLLOWER(Squirtle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Squirtle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_WARTORTLE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WARTORTLE}),
     },
 
     [SPECIES_WARTORTLE] =
@@ -421,7 +421,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Wartortle)
         FOLLOWER(Wartortle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Wartortle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLASTOISE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BLASTOISE}),
     },
 
 #define BLASTOISE_MISC_INFO                                             \
@@ -531,7 +531,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Caterpie, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Caterpie),
         .tmIlliterate = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 7, SPECIES_METAPOD}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_METAPOD}),
     },
 
     [SPECIES_METAPOD] =
@@ -581,7 +581,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Metapod, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Metapod),
         .tmIlliterate = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BUTTERFREE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BUTTERFREE}),
     },
 
 #if P_UPDATED_EXP_YIELDS >= GEN_8
@@ -701,7 +701,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Weedle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Weedle),
         .tmIlliterate = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 7, SPECIES_KAKUNA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_KAKUNA}),
     },
 
     [SPECIES_KAKUNA] =
@@ -752,7 +752,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Kakuna, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Kakuna),
         .tmIlliterate = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEEDRILL}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BEEDRILL}),
     },
 
 #define BEEDRILL_MISC_INFO                                  \
@@ -816,44 +816,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Beedrill, 2),
         FOLLOWER(Beedrill, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_BEEDRILL_MEGA] =
-    {
-        BEEDRILL_MISC_INFO,
-        .baseHP        = 65,
-        .baseAttack    = BEEDRILL_ATTACK + 60,
-        .baseDefense   = 40,
-        .baseSpeed     = 145,
-        .baseSpAttack  = 15,
-        .baseSpDefense = 80,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 248 : 223,
-        .abilities = { ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY, ABILITY_ADAPTABILITY },
-        .cryId = CRY_BEEDRILL_MEGA,
-        .height = 14,
-        .weight = 405,
-        .description = COMPOUND_STRING(
-            "Its legs have become poison stingers.\n"
-            "It stabs its prey repeatedly with the\n"
-            "stingers on its limbs, dealing the final\n"
-            "blow with the stinger on its rear."),
-        .pokemonScale = 366,
-        .pokemonOffset = 2,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(BeedrillMega, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_BeedrillMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 5,
-        BACK_PIC(BeedrillMega, 64, 64),
-        .backPicYOffset = 5,
-        .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(BeedrillMega),
-        ICON(BeedrillMega, 2),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_WEEDLE
 
 #if P_FAMILY_PIDGEY
@@ -903,7 +865,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Pidgey)
         FOLLOWER(Pidgey, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Pidgey),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_PIDGEOTTO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_PIDGEOTTO}),
     },
 
     [SPECIES_PIDGEOTTO] =
@@ -953,7 +915,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Pidgeotto)
         FOLLOWER(Pidgeotto, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Pidgeotto),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_PIDGEOT}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_PIDGEOT}),
     },
 
 #define PIDGEOT_MISC_INFO                                   \
@@ -1015,43 +977,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Pidgeot, 0),
         FOLLOWER(Pidgeot, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_PIDGEOT_MEGA] =
-    {
-        PIDGEOT_MISC_INFO,
-        .baseHP        = 83,
-        .baseAttack    = 80,
-        .baseDefense   = 80,
-        .baseSpeed     = PIDGEOT_SPEED + 20,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 80,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 290 : 261,
-        .abilities = { ABILITY_NO_GUARD, ABILITY_NO_GUARD, ABILITY_NO_GUARD },
-        .cryId = CRY_PIDGEOT_MEGA,
-        .height = 22,
-        .weight = 505,
-        .description = COMPOUND_STRING(
-            "With its muscular strength now greatly\n"
-            "increased, it can fly continuously\n"
-            "for two weeks without resting."),
-        .pokemonScale = 269,
-        .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(PidgeotMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_PidgeotMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 8,
-        BACK_PIC(PidgeotMega, 64, 64),
-        .backPicYOffset = 7,
-        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(PidgeotMega),
-        ICON(PidgeotMega, 0),
-        .isMegaEvolution = TRUE,
-    },
-#endif
 #endif //P_FAMILY_PIDGEY
 
 #if P_FAMILY_RATTATA
@@ -1082,7 +1007,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #define RATICATE_MISC_INFO                                          \
         .catchRate = 127,                                           \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 145 : 116,    \
-        .evYield_Speed = 2,                                         \
         .speciesName = _("Raticate"),                               \
         .cryId = CRY_RATICATE,                                      \
         .natDexNum = NATIONAL_DEX_RATICATE,                         \
@@ -1096,7 +1020,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         RATTATA_FAMILY_MISC_INFO,
         RATTATA_MISC_INFO,
         .types = MON_TYPES(TYPE_NORMAL),
-        .abilities = { ABILITY_RUN_AWAY, ABILITY_GUTS, ABILITY_HUSTLE },
+        .abilities = { ABILITY_RUN_AWAY, ABILITY_STRONG_JAW, ABILITY_PESTE_BUBONICA },
         .bodyColor = BODY_COLOR_PURPLE,
         .height = 3,
         .weight = 35,
@@ -1123,21 +1047,22 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON_FEMALE(Rattata, 2),
         FOLLOWER(Rattata, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Rattata),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RATICATE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RATICATE}),
     },
 
     [SPECIES_RATICATE] =
     {
         RATTATA_FAMILY_MISC_INFO,
         RATICATE_MISC_INFO,
-        .baseHP        = 55,
-        .baseAttack    = 81,
+        .baseHP        = 115,
+        .baseAttack    = 94,
         .baseDefense   = 60,
-        .baseSpeed     = 97,
-        .baseSpAttack  = 50,
+        .baseSpeed     = 101,
+        .baseSpAttack  = 40,
         .baseSpDefense = 70,
+        .evYield_HP = 2,
         .types = MON_TYPES(TYPE_NORMAL),
-        .abilities = { ABILITY_RUN_AWAY, ABILITY_GUTS, ABILITY_HUSTLE },
+        .abilities = { ABILITY_RUN_AWAY, ABILITY_STRONG_JAW, ABILITY_PESTE_BUBONICA },
         .bodyColor = BODY_COLOR_BROWN,
         .weight = 185,
         .description = COMPOUND_STRING(
@@ -1172,7 +1097,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         RATTATA_MISC_INFO,
         .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
         .itemRare = ITEM_PECHA_BERRY,
-        .abilities = { ABILITY_GLUTTONY, ABILITY_HUSTLE, ABILITY_THICK_FAT },
+        .abilities = { ABILITY_GLUTTONY, ABILITY_THICK_FAT, ABILITY_PESTE_BUBONICA },
         .bodyColor = BODY_COLOR_BLACK,
         .height = 3,
         .weight = 38,
@@ -1197,22 +1122,23 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(RattataAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(RattataAlolan),
         .isAlolanForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 20, SPECIES_RATICATE_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_RATICATE_ALOLAN}),
     },
 
     [SPECIES_RATICATE_ALOLAN] =
     {
         RATTATA_FAMILY_MISC_INFO,
         RATICATE_MISC_INFO,
-        .baseHP        = 75,
-        .baseAttack    = 71,
-        .baseDefense   = 70,
-        .baseSpeed     = 77,
+        .baseHP        = 101,
+        .baseAttack    = 94,
+        .baseDefense   = 115,
+        .baseSpeed     = 60,
         .baseSpAttack  = 40,
-        .baseSpDefense = 80,
+        .baseSpDefense = 70,
+        .evYield_Defense = 2,
         .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
         .itemRare = ITEM_PECHA_BERRY,
-        .abilities = { ABILITY_GLUTTONY, ABILITY_HUSTLE, ABILITY_THICK_FAT },
+        .abilities = { ABILITY_GLUTTONY, ABILITY_THICK_FAT, ABILITY_PESTE_BUBONICA },
         .bodyColor = BODY_COLOR_BLACK,
         .weight = 255,
         .description = COMPOUND_STRING(
@@ -1249,7 +1175,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 31,
         .baseSpDefense = 31,
-        .types = MON_TYPES(TYPE_NORMAL, TYPE_FLYING),
+        .types = MON_TYPES(TYPE_DARK, TYPE_FLYING),
         .catchRate = 255,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 52 : 58,
         .evYield_Speed = 1,
@@ -1259,7 +1185,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
-        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER },
+        .abilities = { ABILITY_LONG_REACH, ABILITY_CARPINTERO, ABILITY_AVE_RAPAZ },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Spearow"),
         .cryId = CRY_SPEAROW,
@@ -1288,18 +1214,18 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Spearow)
         FOLLOWER(Spearow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Spearow),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_FEAROW}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FEAROW}),
     },
 
     [SPECIES_FEAROW] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 90,
-        .baseDefense   = 65,
+        .baseHP        = 100,
+        .baseAttack    = 100,
+        .baseDefense   = 70,
         .baseSpeed     = 100,
-        .baseSpAttack  = 61,
-        .baseSpDefense = 61,
-        .types = MON_TYPES(TYPE_NORMAL, TYPE_FLYING),
+        .baseSpAttack  = 40,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_DARK, TYPE_FLYING),
         .catchRate = 90,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 155 : 162,
         .evYield_Speed = 2,
@@ -1309,7 +1235,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
-        .abilities = { ABILITY_KEEN_EYE, ABILITY_NONE, ABILITY_SNIPER },
+        .abilities = { ABILITY_LONG_REACH, ABILITY_CARPINTERO, ABILITY_AVE_RAPAZ },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Fearow"),
         .cryId = CRY_FEAROW,
@@ -1396,12 +1322,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_ARBOK] =
     {
-        .baseHP        = 60,
-        .baseAttack    = P_UPDATED_STATS >= GEN_7 ? 95 : 85,
-        .baseDefense   = 69,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 79,
+        .baseHP        = 85,
+        .baseAttack    = 105,
+        .baseDefense   = 80,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_POISON),
         .catchRate = 90,
     #if P_UPDATED_EXP_YIELDS >= GEN_7
@@ -1456,9 +1382,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseAttack    = 40,                                                            \
         .baseDefense   = 15,                                                            \
         .baseSpeed     = 60,                                                            \
-        .baseSpAttack  = 35,                                                            \
-        .baseSpDefense = 35,                                                            \
-        .types = MON_TYPES(TYPE_ELECTRIC),                                              \
+        .baseSpAttack  = 40,                                                            \
+        .baseSpDefense = 55,                                                            \
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),                                  \
         .catchRate = 190,                                                               \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 41 : 42,                          \
         .evYield_Speed = 1,                                                             \
@@ -1467,7 +1393,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_MEDIUM_FAST,                                               \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),                      \
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },           \
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUEÑO_ELECTRICO, ABILITY_GENERADOR },           \
         .bodyColor = BODY_COLOR_YELLOW,                                                 \
         .speciesName = _("Pichu"),                                                      \
         .cryId = CRY_PICHU,                                                             \
@@ -1509,13 +1435,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #endif
 
 #define PIKACHU_MISC_INFO                                                       \
-        .baseHP        = 35,                                                    \
-        .baseAttack    = 55,                                                    \
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 40 : 30,                    \
+        .baseHP        = 45,                                                    \
+        .baseAttack    = 80,                                                    \
+        .baseDefense   = 40,                                                    \
         .baseSpeed     = 90,                                                    \
-        .baseSpAttack  = 50,                                                    \
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 50 : 40,                    \
-        .types = MON_TYPES(TYPE_ELECTRIC),                                      \
+        .baseSpAttack  = 80,                                                    \
+        .baseSpDefense = 60,                                                    \
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),                          \
         .catchRate = 190,                                                       \
         .expYield = PIKACHU_EXP_YIELD,                                          \
         .evYield_Speed = 2,                                                     \
@@ -1523,7 +1449,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 10,                                                        \
         .friendship = STANDARD_FRIENDSHIP,                                      \
         .growthRate = GROWTH_MEDIUM_FAST,                                       \
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },   \
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUEÑO_ELECTRICO, ABILITY_GENERADOR },   \
         .bodyColor = BODY_COLOR_YELLOW,                                         \
         .speciesName = _("Pikachu"),                                            \
         .cryId = CRY_PIKACHU,                                                   \
@@ -1564,10 +1490,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #endif
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
-                                {EVO_NONE, 0, SPECIES_RAICHU_ALOLAN}),
+                                {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLAN}),
     },
-
-#define RAICHU_SPEED (P_UPDATED_STATS >= GEN_6 ? 110 : 100)
 
 #if P_UPDATED_EXP_YIELDS >= GEN_8
     #define RAICHU_EXP_YIELD 243
@@ -1582,7 +1506,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #define RAICHU_MISC_INFO                                                \
         .catchRate = 75,                                                \
         .expYield = RAICHU_EXP_YIELD,                                   \
-        .evYield_Speed = 3,                                             \
         .genderRatio = PERCENT_FEMALE(50),                              \
         .eggCycles = 10,                                                \
         .friendship = STANDARD_FRIENDSHIP,                              \
@@ -1599,13 +1522,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     {
         RAICHU_MISC_INFO,
         .baseHP        = 60,
-        .baseAttack    = 90,
-        .baseDefense   = 55,
-        .baseSpeed     = RAICHU_SPEED,
-        .baseSpAttack  = 90,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_ELECTRIC),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_LIGHTNING_ROD },
+        .baseAttack    = 100,
+        .baseDefense   = 60,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
+        .evYield_Speed = 3,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
+        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUEÑO_ELECTRICO, ABILITY_GENERADOR },
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 8,
         .weight = 300,
@@ -1637,13 +1561,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     {
         RAICHU_MISC_INFO,
         .baseHP        = 60,
-        .baseAttack    = 85,
-        .baseDefense   = 50,
-        .baseSpeed     = RAICHU_SPEED,
-        .baseSpAttack  = 95,
-        .baseSpDefense = 85,
+        .baseAttack    = 50,
+        .baseDefense   = 60,
+        .baseSpeed     = 110,
+        .baseSpAttack  = 120,
+        .baseSpDefense = 140,
+        .evYield_SpDefense = 3,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_PSYCHIC),
-        .abilities = { ABILITY_SURGE_SURFER, ABILITY_NONE },
+        .abilities = { ABILITY_LEVITATE, ABILITY_TINTED_LENS, ABILITY_SURFERO },
         .bodyColor = BODY_COLOR_BROWN,
         .isAlolanForm = TRUE,
         .height = 7,

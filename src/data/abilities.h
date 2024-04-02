@@ -176,8 +176,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_INTIMIDATE] =
     {
-        .name = _("Intimidate"),
-        .description = COMPOUND_STRING("Lowers the foe's Attack."),
+        .name = _("Intimidación"),
+        .description = COMPOUND_STRING("Baja el ataque rival."),
         .aiRating = 7,
     },
 
@@ -207,8 +207,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_LEVITATE] =
     {
-        .name = _("Levitate"),
-        .description = COMPOUND_STRING("Not hit by Ground attacks."),
+        .name = _("Levitación"),
+        .description = COMPOUND_STRING("Inmunidad a Tierra."),
         .aiRating = 7,
         .breakable = TRUE,
     },
@@ -277,9 +277,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ILLUMINATE] =
     {
-        .name = _("Illuminate"),
-        .description = COMPOUND_STRING("Encounter rate increases."),
-        .aiRating = 0,
+        .name = _("Iluminación"),
+        .description = COMPOUND_STRING("Resiste fantasma y siniestro."),
+        .aiRating = 7,
         .breakable = TRUE,
     },
 
@@ -627,8 +627,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_GLUTTONY] =
     {
-        .name = _("Gluttony"),
-        .description = COMPOUND_STRING("Eats Berries early."),
+        .name = _("Gula"),
+        .description = COMPOUND_STRING("Come bayas 50% PS."),
         .aiRating = 3,
     },
 
@@ -1084,8 +1084,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_REGENERATOR] =
     {
-        .name = _("Regenerator"),
-        .description = COMPOUND_STRING("Heals upon switching out."),
+        .name = _("Regeneración"),
+        .description = COMPOUND_STRING("Cura 1/3 al cambiar."),
         .aiRating = 8,
     },
 
@@ -1301,8 +1301,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_STRONG_JAW] =
     {
-        .name = _("Strong Jaw"),
-        .description = COMPOUND_STRING("Boosts biting moves."),
+        .name = _("Mandíbula fuerte"),
+        .description = COMPOUND_STRING("+25% mordiscos."),
         .aiRating = 6,
     },
 
@@ -1639,8 +1639,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CORROSION] =
     {
-        .name = _("Corrosion"),
-        .description = COMPOUND_STRING("Poisons any type."),
+        .name = _("Corrosión"),
+        .description = COMPOUND_STRING("Veneno x2 contra acero."),
         .aiRating = 5,
     },
 
@@ -2657,5 +2657,47 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Cara dura"),
         .description = COMPOUND_STRING("+25% cabezazos."),
         .aiRating = 7,
+    },
+
+    [ABILITY_PESTE_BUBONICA] =
+    {
+        .name = _("Peste bubónica"),
+        .description = COMPOUND_STRING("Mordiscos 50% de envenenar."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_AVE_RAPAZ] =
+    {
+        .name = _("Ave rapaz"),
+        .description = COMPOUND_STRING("Volador x2 a Normal."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_CARPINTERO] =
+    {
+        .name = _("Carpintero"),
+        .description = COMPOUND_STRING("+25% picos."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_SURFERO] =
+    {
+        .name = _("Surfero"),
+        .description = COMPOUND_STRING("Ataques de Agua +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_GENERADOR] =
+    {
+        .name = _("Generador"),
+        .description = COMPOUND_STRING("+25% Eléctricos de equipo."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_SUEÑO_ELECTRICO] =
+    {
+        .name = _("Sueño eléctrico"),
+        .description = COMPOUND_STRING("Paraliza si atacan dormido."),
+        .aiRating = 4,
     },
 };

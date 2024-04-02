@@ -6,7 +6,6 @@
 - Crear ataques como Tornado, Vendaval...
 - L/R icons en storage.
 - Crear huevos personalizados en pokédex.
-- Comprobar por qué está roto el storage.
 - Intentar crear animaciones de entrenadores.
 - Insertar gráfico de tabla de tipos + características de tipos como opción.
 - Añadir características especiales a cada tipo.
@@ -19,10 +18,10 @@
             *600 - 70
             *620 - 75
             *640 - 80
-- Crear ataque a Charizard: Fuego azul (super efectivo contra roca).
-- Ojo que piel seca se ha dejado sin efecto.
-- Crear ataque volador/bicho tipo desenrrollar (Efecto mariposa).
 - Llama azul asignar a Chandelure, Charizard...
-- Cambiar habilidad enjambre (copia de Skill link), asignar a Vespiquen, Beedrill.
+- Asignar habilidad Enjambre a Vespiquen.
 - Ursaring Tierra/Hada.
-- Creado movimiento Colmena: asignar a Beedrill, Vespiquen.
+- Asignar Colmena a Beedrill, Vespiquen.
+- Testear Generador.
+- Destruir icono Pokémon al darle a huir.
+- Implementar la opción de rendirse contra entrenadores.

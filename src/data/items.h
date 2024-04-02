@@ -2655,15 +2655,16 @@ const struct Item gItemsInfo[] =
 
     [ITEM_STRANGE_SOUVENIR] =
     {
-        .name = _("StrngeSouvnr"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 10,
+        .name = _("Estatuilla rara"),
+        .price = 3000,
         .description = COMPOUND_STRING(
-            "An ornament that\n"
-            "depicts a Pokémon\n"
-            "from Alola."),
+            "Recuerdo de Alola,\n"
+            "que le encanta a\n"
+            "algunos Pokémon."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .effect = gItemEffect_EvoItem,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .flingPower = 30,
     },
 

@@ -28,6 +28,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Se han cambiado muchas habilidades y se han añadido muchas otras. No hay habilidades inútiles en el juego, y todos los Pokémon tienen 3 habilidades (excepto Pokémon con habilidades intrínsecas, como Shedinja, Mimikyu...).
     *Forcejeo tiene STAB de tipo Normal.
     *Se ha cambiado cómo funciona el STAB: Pokémon con 1 solo tipo tienen 50% de STAB, mientras que Pokémon con 2 tipos tienen 25% de STAB con cada uno de sus tipos.
+    *Clima soleado y lluvioso potencian un 25% los ataques de fuego y agua (aunque siguen reduciéndose 50% la potencia de sus contrapartes).
+    *Pokémon de tipo Acero ya no son inmunes ni a daño climático ni a ser envenenados (Pueden ser envenenados por ataques de estado de tipo Veneno). La habilidad Corrosión se ha modificado: permite golpear x2 a Acero con Veneno.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

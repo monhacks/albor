@@ -896,7 +896,7 @@ void BS_TrySetStatus1(void)
     switch (status1)
     {
         case STATUS1_POISON:
-            if (CanBePoisoned(gBattlerAttacker, gBattlerTarget))
+            if (CanBePoisoned(gBattlerTarget))
             {
                 gBattleMons[gBattlerTarget].status1 |= STATUS1_POISON;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 0;
