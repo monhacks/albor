@@ -1551,8 +1551,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_LONG_REACH] =
     {
-        .name = _("Long Reach"),
-        .description = COMPOUND_STRING("Never makes contact."),
+        .name = _("Remoto"),
+        .description = COMPOUND_STRING("No hace contacto."),
         .aiRating = 3,
     },
 

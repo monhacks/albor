@@ -1388,7 +1388,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_LONELY,
+        .secondaryId = NATURE_OFENSIVA,
         .flingPower = 10,
     },
 
@@ -1403,7 +1403,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_ADAMANT,
+        .secondaryId = NATURE_OFENSIVA,
         .flingPower = 10,
     },
 
@@ -1418,7 +1418,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_NAUGHTY,
+        .secondaryId = NATURE_OFENSIVA,
         .flingPower = 10,
     },
 
@@ -1433,7 +1433,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_BRAVE,
+        .secondaryId = NATURE_OFENSIVA,
         .flingPower = 10,
     },
 
@@ -1448,7 +1448,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_BOLD,
+        .secondaryId = NATURE_DEFENSIVA,
         .flingPower = 10,
     },
 
@@ -1463,7 +1463,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_IMPISH,
+        .secondaryId = NATURE_DEFENSIVA,
         .flingPower = 10,
     },
 
@@ -1478,7 +1478,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_LAX,
+        .secondaryId = NATURE_DEFENSIVA,
         .flingPower = 10,
     },
 
@@ -1493,7 +1493,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_RELAXED,
+        .secondaryId = NATURE_DEFENSIVA,
         .flingPower = 10,
     },
 
@@ -1508,7 +1508,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_MODEST,
+        .secondaryId = NATURE_OFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1523,7 +1523,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_MILD,
+        .secondaryId = NATURE_OFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1538,7 +1538,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_RASH,
+        .secondaryId = NATURE_OFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1553,7 +1553,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_QUIET,
+        .secondaryId = NATURE_OFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1568,7 +1568,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_CALM,
+        .secondaryId = NATURE_DEFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1583,7 +1583,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_GENTLE,
+        .secondaryId = NATURE_DEFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1598,7 +1598,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_CAREFUL,
+        .secondaryId = NATURE_DEFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1613,7 +1613,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_SASSY,
+        .secondaryId = NATURE_DEFENSIVA_ESPECIAL,
         .flingPower = 10,
     },
 
@@ -1628,7 +1628,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_TIMID,
+        .secondaryId = NATURE_RAPIDA,
         .flingPower = 10,
     },
 
@@ -1643,7 +1643,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_HASTY,
+        .secondaryId = NATURE_RAPIDA,
         .flingPower = 10,
     },
 
@@ -1658,7 +1658,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_JOLLY,
+        .secondaryId = NATURE_RAPIDA,
         .flingPower = 10,
     },
 
@@ -1673,7 +1673,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_NAIVE,
+        .secondaryId = NATURE_RAPIDA,
         .flingPower = 10,
     },
 
@@ -1688,7 +1688,7 @@ const struct Item gItemsInfo[] =
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_Mint,
-        .secondaryId = NATURE_SERIOUS,
+        .secondaryId = NATURE_RAPIDA,
         .flingPower = 10,
     },
 

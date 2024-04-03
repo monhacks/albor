@@ -7220,7 +7220,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .heldItem = ITEM_LEFTOVERS,
     .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(252, 0, 126, 0, 126, 0),
-    .nature = NATURE_IMPISH,
+    .nature = NATURE_DEFENSIVA,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_REST, MOVE_SLEEP_TALK, MOVE_DARK_PULSE, MOVE_SHADOW_BALL}
     },
@@ -7230,7 +7230,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .heldItem = ITEM_GRASS_GEM,
     .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
-    .nature = NATURE_TIMID,
+    .nature = NATURE_RAPIDA,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_SLEEP_POWDER, MOVE_TOXIC_SPIKES, MOVE_ENERGY_BALL, MOVE_SLUDGE_BOMB}
     },
@@ -7240,7 +7240,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .heldItem = ITEM_CHOICE_SCARF,
     .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
-    .nature = NATURE_MODEST,
+    .nature = NATURE_OFENSIVA_ESPECIAL,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_AIR_SLASH, MOVE_THUNDER_WAVE, MOVE_FLAMETHROWER, MOVE_PSYCHIC}
     },
@@ -7250,7 +7250,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .heldItem = ITEM_FLAME_ORB,
     .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(252, 0, 126, 0, 126, 0),
-    .nature = NATURE_CALM,
+    .nature = NATURE_DEFENSIVA_ESPECIAL,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_SCALD, MOVE_RECOVER, MOVE_HAZE, MOVE_ICE_BEAM}
     },
@@ -7260,7 +7260,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .heldItem = ITEM_ASSAULT_VEST,
     .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(0, 126, 0, 126, 0, 252),
-    .nature = NATURE_HARDY,
+    .nature = NATURE_OFENSIVA,
     .gender = TRAINER_MON_FEMALE,
     .moves = {MOVE_CLOSE_COMBAT, MOVE_DRAGON_PULSE, MOVE_FLASH_CANNON, MOVE_THUNDER_PUNCH}
     },
@@ -7271,7 +7271,7 @@ static const struct TrainerMon sParty_Cynthia[] = {
     .isShiny = TRUE,
     .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 252),
-    .nature = NATURE_JOLLY,
+    .nature = NATURE_RAPIDA,
     .gender = TRAINER_MON_MALE,
     .moves = {MOVE_SWORDS_DANCE, MOVE_OUTRAGE, MOVE_EARTHQUAKE, MOVE_CRUNCH}
     },

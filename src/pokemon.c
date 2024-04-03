@@ -344,60 +344,20 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
 
 const u8 *const gNatureNamePointers[NUM_NATURES] =
 {
-    [NATURE_HARDY] = COMPOUND_STRING("Hardy"),
-    [NATURE_LONELY] = COMPOUND_STRING("Lonely"),
-    [NATURE_BRAVE] = COMPOUND_STRING("Brave"),
-    [NATURE_ADAMANT] = COMPOUND_STRING("Adamant"),
-    [NATURE_NAUGHTY] = COMPOUND_STRING("Naughty"),
-    [NATURE_BOLD] = COMPOUND_STRING("Bold"),
-    [NATURE_DOCILE] = COMPOUND_STRING("Docile"),
-    [NATURE_RELAXED] = COMPOUND_STRING("Relaxed"),
-    [NATURE_IMPISH] = COMPOUND_STRING("Impish"),
-    [NATURE_LAX] = COMPOUND_STRING("Lax"),
-    [NATURE_TIMID] = COMPOUND_STRING("Timid"),
-    [NATURE_HASTY] = COMPOUND_STRING("Hasty"),
-    [NATURE_SERIOUS] = COMPOUND_STRING("Serious"),
-    [NATURE_JOLLY] = COMPOUND_STRING("Jolly"),
-    [NATURE_NAIVE] = COMPOUND_STRING("Naive"),
-    [NATURE_MODEST] = COMPOUND_STRING("Modest"),
-    [NATURE_MILD] = COMPOUND_STRING("Mild"),
-    [NATURE_QUIET] = COMPOUND_STRING("Quiet"),
-    [NATURE_BASHFUL] = COMPOUND_STRING("Bashful"),
-    [NATURE_RASH] = COMPOUND_STRING("Rash"),
-    [NATURE_CALM] = COMPOUND_STRING("Calm"),
-    [NATURE_GENTLE] = COMPOUND_STRING("Gentle"),
-    [NATURE_SASSY] = COMPOUND_STRING("Sassy"),
-    [NATURE_CAREFUL] = COMPOUND_STRING("Careful"),
-    [NATURE_QUIRKY] = COMPOUND_STRING("Quirky"),
+    [NATURE_OFENSIVA] = COMPOUND_STRING("Ofensiva"),
+    [NATURE_DEFENSIVA] = COMPOUND_STRING("Defensiva"),
+    [NATURE_OFENSIVA_ESPECIAL] = COMPOUND_STRING("Ofensiva especial"),
+    [NATURE_DEFENSIVA_ESPECIAL] = COMPOUND_STRING("Defensiva especial"),
+    [NATURE_RAPIDA] = COMPOUND_STRING("Rápida"),
 };
 
 const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
-{                      // Attack  Defense  Speed  Sp.Atk  Sp. Def
-    [NATURE_HARDY]   = {    0,      0,      0,      0,      0   },
-    [NATURE_LONELY]  = {   +1,     -1,      0,      0,      0   },
-    [NATURE_BRAVE]   = {   +1,      0,     -1,      0,      0   },
-    [NATURE_ADAMANT] = {   +1,      0,      0,     -1,      0   },
-    [NATURE_NAUGHTY] = {   +1,      0,      0,      0,     -1   },
-    [NATURE_BOLD]    = {   -1,     +1,      0,      0,      0   },
-    [NATURE_DOCILE]  = {    0,      0,      0,      0,      0   },
-    [NATURE_RELAXED] = {    0,     +1,     -1,      0,      0   },
-    [NATURE_IMPISH]  = {    0,     +1,      0,     -1,      0   },
-    [NATURE_LAX]     = {    0,     +1,      0,      0,     -1   },
-    [NATURE_TIMID]   = {   -1,      0,     +1,      0,      0   },
-    [NATURE_HASTY]   = {    0,     -1,     +1,      0,      0   },
-    [NATURE_SERIOUS] = {    0,      0,      0,      0,      0   },
-    [NATURE_JOLLY]   = {    0,      0,     +1,     -1,      0   },
-    [NATURE_NAIVE]   = {    0,      0,     +1,      0,     -1   },
-    [NATURE_MODEST]  = {   -1,      0,      0,     +1,      0   },
-    [NATURE_MILD]    = {    0,     -1,      0,     +1,      0   },
-    [NATURE_QUIET]   = {    0,      0,     -1,     +1,      0   },
-    [NATURE_BASHFUL] = {    0,      0,      0,      0,      0   },
-    [NATURE_RASH]    = {    0,      0,      0,     +1,     -1   },
-    [NATURE_CALM]    = {   -1,      0,      0,      0,     +1   },
-    [NATURE_GENTLE]  = {    0,     -1,      0,      0,     +1   },
-    [NATURE_SASSY]   = {    0,      0,     -1,      0,     +1   },
-    [NATURE_CAREFUL] = {    0,      0,      0,     -1,     +1   },
-    [NATURE_QUIRKY]  = {    0,      0,      0,      0,      0   },
+{                               // Attack  Defense  Speed  Sp.Atk  Sp. Def
+    [NATURE_OFENSIVA]           = {1,      0,       0,     0,      0},
+    [NATURE_DEFENSIVA]          = {0,      1,       0,     0,      0},
+    [NATURE_OFENSIVA_ESPECIAL]  = {0,      0,       0,     1,      0},
+    [NATURE_DEFENSIVA_ESPECIAL] = {0,      0,       0,     0,      1},
+    [NATURE_RAPIDA]             = {0,      0,       1,     0,      0},
 };
 
 #include "data/graphics/pokemon.h"
@@ -4187,19 +4147,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_HARDY:
-                    case NATURE_BRAVE:
-                    case NATURE_ADAMANT:
-                    case NATURE_NAUGHTY:
-                    case NATURE_DOCILE:
-                    case NATURE_IMPISH:
-                    case NATURE_LAX:
-                    case NATURE_HASTY:
-                    case NATURE_JOLLY:
-                    case NATURE_NAIVE:
-                    case NATURE_RASH:
-                    case NATURE_SASSY:
-                    case NATURE_QUIRKY:
+                    case NATURE_OFENSIVA:
+                    case NATURE_OFENSIVA_ESPECIAL:
+                    case NATURE_RAPIDA:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }
@@ -4211,18 +4161,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_LONELY:
-                    case NATURE_BOLD:
-                    case NATURE_RELAXED:
-                    case NATURE_TIMID:
-                    case NATURE_SERIOUS:
-                    case NATURE_MODEST:
-                    case NATURE_MILD:
-                    case NATURE_QUIET:
-                    case NATURE_BASHFUL:
-                    case NATURE_CALM:
-                    case NATURE_GENTLE:
-                    case NATURE_CAREFUL:
+                    case NATURE_DEFENSIVA:
+                    case NATURE_DEFENSIVA_ESPECIAL:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }

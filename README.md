@@ -31,6 +31,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Clima soleado y lluvioso potencian un 25% los ataques de fuego y agua (aunque siguen reduciéndose 50% la potencia de sus contrapartes).
     *Pokémon de tipo Acero ya no son inmunes ni a daño climático ni a ser envenenados (Pueden ser envenenados por ataques de estado de tipo Veneno). La habilidad Corrosión se ha modificado: permite golpear x2 a Acero con Veneno.
     *Habilidad Fuga te permite huir siempre (incluido movimientos como Atadura, o habilidades como Sombra Trampa), y +1 de prioridad movimientos de cambio como Ida y Vuelta.
+    *Se han modificado las naturalezas: Ahora son 5 (Ofensiva, Defensiva, Ofensiva especial, Defensiva especial y Rápida), y no bajan ninguna estadística, solo suben la correspondiente.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

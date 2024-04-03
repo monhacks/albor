@@ -26,7 +26,7 @@ static const struct TrainerMon sTestParty1[] =
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 4, 0),
         .lvl = 67,
         .moves = {MOVE_AIR_SLASH, MOVE_BARRIER, MOVE_SOLAR_BEAM, MOVE_EXPLOSION},
-        .nature = NATURE_HASTY,
+        .nature = NATURE_RAPIDA,
         .nickname = COMPOUND_STRING("Bubbles"),
         .dynamaxLevel = 5,
     },
@@ -114,8 +114,8 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(StringCompare(nickBuffer, COMPOUND_STRING("Wobbuffet")) == 0);
 
     EXPECT(GetMonGender(&testParty[0]) == MON_FEMALE);
-    EXPECT(GetNature(&testParty[0]) == NATURE_HASTY);
-    EXPECT(GetNature(&testParty[1]) == NATURE_HARDY);
+    EXPECT(GetNature(&testParty[0]) == NATURE_RAPIDA);
+    EXPECT(GetNature(&testParty[1]) == NATURE_OFENSIVA);
 
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_DYNAMAX_LEVEL), 5);
     EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 0);
