@@ -25,3 +25,4 @@
 - Testear Generador.
 - Destruir icono Pokémon al darle a huir.
 - Implementar la opción de rendirse contra entrenadores.
+- Crear bomba ácida.
