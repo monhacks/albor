@@ -4709,6 +4709,9 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #else
     #define ARCEUS_EXP_YIELD 255
 #endif
+    #define ARCEUS_ICON(typeName, iconPal)   \
+        .iconSprite = gMonIcon_ArceusNormal, \
+        .iconPalIndex = 1,
 
 #define ARCEUS_SPECIES_INFO(type, typeName)                                             \
     {                                                                                   \
