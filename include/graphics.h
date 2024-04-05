@@ -297,27 +297,6 @@ extern const u32 gBattleTerrainPalette_StadiumGlacia[];
 extern const u32 gBattleTerrainPalette_StadiumDrake[];
 extern const u32 gBattleTerrainPalette_StadiumWallace[];
 
-// Pokédex
-extern const u32 gPokedexInterface_Gfx[];
-extern const u16 gPokedexBgHoenn_Pal[];
-extern const u32 gPokedexMenu_Gfx[];
-extern const u8 gPokedexList_Tilemap[];
-extern const u8 gPokedexListUnderlay_Tilemap[];
-extern const u8 gPokedexStartMenuMain_Tilemap[];
-extern const u8 gPokedexStartMenuSearchResults_Tilemap[];
-extern const u16 gPokedexSearchResults_Pal[];
-extern const u16 gPokedexBgNational_Pal[];
-extern const u8 gPokedexInfoScreen_Tilemap[];
-extern const u8 gPokedexCryScreen_Tilemap[];
-extern const u8 gPokedexSizeScreen_Tilemap[];
-extern const u8 gPokedexScreenSelectBarMain_Tilemap[];
-extern const u8 gPokedexScreenSelectBarSubmenu_Tilemap[];
-extern const u16 gPokedexCaughtScreen_Pal[];
-extern const u32 gPokedexSearchMenu_Gfx[];
-extern const u32 gPokedexSearchMenuHoenn_Tilemap[];
-extern const u32 gPokedexSearchMenuNational_Tilemap[];
-extern const u16 gPokedexSearchMenu_Pal[];
-
 // berry tag screen
 extern const u32 gBerryCheck_Gfx[];
 extern const u32 gBerryCheck_Pal[];
@@ -1742,7 +1721,6 @@ extern const u32 gBagScreen_Gfx[];
 extern const u32 gBagScreen_GfxTileMap[];
 extern const u32 gBagScreenFemale_Pal[];
 extern const u32 gBagScreenMale_Pal[];
-extern const u8 gBagMenuHMIcon_Gfx[];
 
 // item menu icons graphics
 extern const u32 gBagMaleTiles[];

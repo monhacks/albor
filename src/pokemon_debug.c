@@ -168,16 +168,6 @@ static const struct WindowTemplate sPokemonDebugWindowTemplate[] =
         .paletteNum = 0xF,
         .baseBlock = 1 + 30 + 60 + 36
     },
-    [WIN_FOOTPRINT] =
-    {
-        .bg = 0,
-        .tilemapLeft = 27,
-        .tilemapTop = 14,
-        .width = 2,
-        .height = 2,
-        .paletteNum = 0xF,
-        .baseBlock = 1 + 30 + 60 + 36 + 144,
-    },
     DUMMY_WIN_TEMPLATE,
 };
 
@@ -1168,10 +1158,6 @@ void CB2_Debug_Pokemon(void)
             //BattleNg Name
             PrintBattleBgName(taskId);
 
-            //Footprint
-            DrawFootprint(WIN_FOOTPRINT, species);
-            CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
-
             gMain.state++;
             break;
         case 4:
@@ -1723,10 +1709,6 @@ static void ReloadPokemonSprites(struct PokemonDebugMenu *data)
 
     //Arrow invisibility
     SetArrowInvisibility(data);
-
-    //Footprint
-    DrawFootprint(WIN_FOOTPRINT, species);
-    CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
 }
 
 static void Exit_Debug_Pokemon(u8 taskId)

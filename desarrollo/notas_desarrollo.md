@@ -27,3 +27,8 @@
 - Implementar la opción de rendirse contra entrenadores.
 - Crear bomba ácida.
 - Crear bg basado en moxie boosted.
+- Mankey evoluciona a Primeape o Annihilape (20 veces Puño furia). Darle el movimiento a su learnset para que evolucione en torno al 30.
+
+*ramscript
+*limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
+*pixeles snorunt

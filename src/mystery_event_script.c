@@ -285,14 +285,6 @@ bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 MEScrCmd_givenationaldex(struct ScriptContext *ctx)
-{
-    EnableNationalPokedex();
-    StringExpandPlaceholders(gStringVar4, gText_MysteryEventNationalDex);
-    ctx->mStatus = MEVENT_STATUS_SUCCESS;
-    return FALSE;
-}
-
 bool8 MEScrCmd_addrareword(struct ScriptContext *ctx)
 {
     UnlockTrendySaying(ScriptReadByte(ctx));

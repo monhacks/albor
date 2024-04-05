@@ -6,18 +6,10 @@
 
 bool16 ScriptGetPokedexInfo(void)
 {
-    if (gSpecialVar_0x8004 == 0) // is national dex not present?
-    {
-        gSpecialVar_0x8005 = GetHoennPokedexCount(FLAG_GET_SEEN);
-        gSpecialVar_0x8006 = GetHoennPokedexCount(FLAG_GET_CAUGHT);
-    }
-    else
-    {
-        gSpecialVar_0x8005 = GetNationalPokedexCount(FLAG_GET_SEEN);
-        gSpecialVar_0x8006 = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-    }
+    gSpecialVar_0x8005 = GetNationalPokedexCount(FLAG_GET_SEEN);
+    gSpecialVar_0x8006 = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
-    return IsNationalPokedexEnabled();
+    return TRUE;
 }
 
 #define BIRCH_DEX_STRINGS 21
@@ -50,19 +42,7 @@ static const u8 *const sBirchDexRatingTexts[BIRCH_DEX_STRINGS] =
 // This shows your Hoenn Pokédex rating and not your National Dex.
 const u8 *GetPokedexRatingText(u32 count)
 {
-    u32 i, j;
-    u16 maxDex = HOENN_DEX_COUNT - 1;
-    // doesNotCountForRegionalPokedex
-    for(i = 0; i < HOENN_DEX_COUNT; i++)
-    {
-        j = NationalPokedexNumToSpecies(HoennToNationalOrder(i + 1));
-        if (gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired)
-        {
-            if (GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
-                count--;
-            maxDex--;
-        }
-    }
+    u16 maxDex = NATIONAL_DEX_COUNT - 1;
     return sBirchDexRatingTexts[(count * (BIRCH_DEX_STRINGS - 1)) / maxDex];
 }
 

@@ -619,8 +619,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SNOW_CLOAK] =
     {
-        .name = _("Snow Cloak"),
-        .description = COMPOUND_STRING("Ups evasion in Hail or Snow."),
+        .name = _("Manto níveo"),
+        .description = COMPOUND_STRING("+25% evasión en nieve."),
         .aiRating = 3,
         .breakable = TRUE,
     },
@@ -634,8 +634,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ANGER_POINT] =
     {
-        .name = _("Anger Point"),
-        .description = COMPOUND_STRING("Critical hits raise Attack."),
+        .name = _("Irascible"),
+        .description = COMPOUND_STRING("+6 At. si crítico."),
         .aiRating = 4,
     },
 
@@ -865,8 +865,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ICE_BODY] =
     {
-        .name = _("Ice Body"),
-        .description = COMPOUND_STRING("HP recovery in Hail or Snow."),
+        .name = _("Gélido"),
+        .description = COMPOUND_STRING("Recupera 1/16 PS en nieve."),
         .aiRating = 3,
     },
 
@@ -966,8 +966,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_DEFIANT] =
     {
-        .name = _("Defiant"),
-        .description = COMPOUND_STRING("Lowered stats up Attack."),
+        .name = _("Competitivo"),
+        .description = COMPOUND_STRING("+2 At. si bajan estadísticas."),
         .aiRating = 5,
     },
 
@@ -980,8 +980,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CURSED_BODY] =
     {
-        .name = _("Cursed Body"),
-        .description = COMPOUND_STRING("Disables moves on contact."),
+        .name = _("Cuerpo maldito"),
+        .description = COMPOUND_STRING("50% de anular ataque recibido."),
         .aiRating = 4,
     },
 
@@ -2699,5 +2699,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Sueño eléctrico"),
         .description = COMPOUND_STRING("Paraliza si atacan dormido."),
         .aiRating = 4,
+    },
+
+    [ABILITY_VOZ_HELADA] =
+    {
+        .name = _("Voz helada"),
+        .description = COMPOUND_STRING("Sonido 50% de helar."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_IRA_PRIMATE] =
+    {
+        .name = _("Ira primate"),
+        .description = COMPOUND_STRING("+1 At. cada golpe recibido."),
+        .aiRating = 6,
     },
 };

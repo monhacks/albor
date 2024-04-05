@@ -857,10 +857,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Mankey[] = INCBIN_U32("graphics/pokemon/mankey/normal.gbapal.lz");
     const u32 gMonBackPic_Mankey[] = INCBIN_U32("graphics/pokemon/mankey/back.4bpp.lz");
     const u32 gMonShinyPalette_Mankey[] = INCBIN_U32("graphics/pokemon/mankey/shiny.gbapal.lz");
-    const u8 gMonIcon_Mankey[] = INCBIN_U8("graphics/pokemon/mankey/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Mankey[] = INCBIN_U8("graphics/pokemon/mankey/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Mankey[] = INCBIN_COMP("graphics/pokemon/mankey/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -869,10 +865,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Primeape[] = INCBIN_U32("graphics/pokemon/primeape/normal.gbapal.lz");
     const u32 gMonBackPic_Primeape[] = INCBIN_U32("graphics/pokemon/primeape/back.4bpp.lz");
     const u32 gMonShinyPalette_Primeape[] = INCBIN_U32("graphics/pokemon/primeape/shiny.gbapal.lz");
-    const u8 gMonIcon_Primeape[] = INCBIN_U8("graphics/pokemon/primeape/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Primeape[] = INCBIN_U8("graphics/pokemon/primeape/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Primeape[] = INCBIN_COMP("graphics/pokemon/primeape/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -6408,10 +6400,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Snorunt[] = INCBIN_U32("graphics/pokemon/snorunt/normal.gbapal.lz");
     const u32 gMonBackPic_Snorunt[] = INCBIN_U32("graphics/pokemon/snorunt/back.4bpp.lz");
     const u32 gMonShinyPalette_Snorunt[] = INCBIN_U32("graphics/pokemon/snorunt/shiny.gbapal.lz");
-    const u8 gMonIcon_Snorunt[] = INCBIN_U8("graphics/pokemon/snorunt/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Snorunt[] = INCBIN_U8("graphics/pokemon/snorunt/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Snorunt[] = INCBIN_COMP("graphics/pokemon/snorunt/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -6429,10 +6417,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Froslass[] = INCBIN_U32("graphics/pokemon/froslass/normal.gbapal.lz");
     const u32 gMonBackPic_Froslass[] = INCBIN_U32("graphics/pokemon/froslass/back.4bpp.lz");
     const u32 gMonShinyPalette_Froslass[] = INCBIN_U32("graphics/pokemon/froslass/shiny.gbapal.lz");
-    const u8 gMonIcon_Froslass[] = INCBIN_U8("graphics/pokemon/froslass/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Froslass[] = INCBIN_U8("graphics/pokemon/froslass/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Froslass[] = INCBIN_COMP("graphics/pokemon/froslass/follower.4bpp");
 #endif //P_FOLLOWERS

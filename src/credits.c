@@ -1506,7 +1506,7 @@ static u8 CreateCreditsMonSprite(u16 nationalDexNum, s16 x, s16 y, u16 position)
     u8 monSpriteId;
     u8 bgSpriteId;
 
-    monSpriteId = CreateMonSpriteFromNationalDexNumber(nationalDexNum, x, y, position);
+    monSpriteId = CreateMonSpriteFromNationalDexNumberHGSS(nationalDexNum, x, y, position);
     gSprites[monSpriteId].oam.priority = 1;
     gSprites[monSpriteId].sPosition = position + 1;
     gSprites[monSpriteId].invisible = TRUE;

@@ -19157,7 +19157,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_RAGE_FIST] =
     {
-        .name = COMPOUND_STRING("Rage Fist"),
+        .name = COMPOUND_STRING("Puño furia"),
         .description = COMPOUND_STRING(
             "The more the user has been\n"
             "hit, the stronger the move."),

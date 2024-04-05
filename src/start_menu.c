@@ -675,7 +675,7 @@ static bool8 StartMenuPokedexCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        SetMainCallback2(CB2_OpenPokedex);
+        SetMainCallback2(CB2_OpenPokedexPlusHGSS);
 
         return TRUE;
     }

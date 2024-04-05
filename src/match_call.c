@@ -1919,8 +1919,8 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
         return;
     }
 
-    numSeen = GetHoennPokedexCount(FLAG_GET_SEEN);
-    numCaught = GetHoennPokedexCount(FLAG_GET_CAUGHT);
+    numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
+    numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
     ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 3);
     str = StringCopy(buffer, gBirchDexRatingText_AreYouCurious);
@@ -1930,15 +1930,12 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
     StringCopy(str, GetPokedexRatingText(numCaught));
     str = StringExpandPlaceholders(destStr, buffer);
 
-    if (IsNationalPokedexEnabled())
-    {
-        *(str++) = CHAR_PROMPT_CLEAR;
-        numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
-        numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-        ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 4);
-        ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(str, gBirchDexRatingText_OnANationwideBasis);
-    }
+    *(str++) = CHAR_PROMPT_CLEAR;
+    numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);
+    numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    ConvertIntToDecimalStringN(gStringVar1, numSeen, STR_CONV_MODE_LEFT_ALIGN, 4);
+    ConvertIntToDecimalStringN(gStringVar2, numCaught, STR_CONV_MODE_LEFT_ALIGN, 4);
+    StringExpandPlaceholders(str, gBirchDexRatingText_OnANationwideBasis);
 
     Free(buffer);
 }

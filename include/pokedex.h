@@ -5,12 +5,6 @@ extern void (*gPokedexVBlankCB)(void);
 
 enum
 {
-    DEX_MODE_HOENN,
-    DEX_MODE_NATIONAL
-};
-
-enum
-{
     FLAG_GET_SEEN,
     FLAG_GET_CAUGHT,
     FLAG_SET_SEEN,
@@ -19,17 +13,15 @@ enum
 
 void ResetPokedex(void);
 u16 GetNationalPokedexCount(u8);
-u16 GetHoennPokedexCount(u8);
 u8 DisplayCaughtMonDexPage(u16 species, bool32 isShiny, u32 personality);
-s8 GetSetPokedexFlag(u16 nationalNum, u8 caseId);
-void DrawFootprint(u8 windowId, u16 species);
-u16 CreateMonSpriteFromNationalDexNumber(u16, s16, s16, u16);
-bool16 HasAllHoennMons(void);
+s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID);
+u16 CreateMonSpriteFromNationalDexNumberHGSS(u16 nationalNum, s16 x, s16 y, u16 paletteSlot);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
-void CB2_OpenPokedex(void);
 void PrintMonMeasurements(u16 species, u32 owned);
 u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);
+void CB2_OpenPokedexPlusHGSS(void);
+void Task_DisplayCaughtMonDexPageHGSS(u8);
 
 #endif // GUARD_POKEDEX_H

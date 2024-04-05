@@ -200,7 +200,6 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    EnableNationalPokedex();
 }
 
 static void ResetMiniGamesRecords(void)

@@ -33,9 +33,7 @@ struct GFRomHeader
     u32 flagsOffset;
     u32 varsOffset;
     u32 pokedexOffset;
-    u32 seen1Offset;
-    u32 seen2Offset;
-    u32 pokedexVar;
+    u32 seenOffset;
     u32 pokedexFlag;
     u32 mysteryEventFlag;
     u32 pokedexCount;
@@ -84,10 +82,6 @@ struct GFRomHeader
     u8 pcItemsCount;
     u32 pcItemsOffset;
     u32 giftRibbonsOffset;
-#if FREE_ENIGMA_BERRY == FALSE
-    u32 enigmaBerryOffset;
-    u32 enigmaBerrySize;
-#endif //FREE_ENIGMA_BERRY
     const u8 *moveDescriptions;
     u32 unk20;
 };
@@ -99,22 +93,12 @@ static const struct GFRomHeader sGFRomHeader = {
     .version = GAME_VERSION,
     .language = GAME_LANGUAGE,
     .gameName = "pokemon emerald version",
-    //.monFrontPics = gMonFrontPicTable, // Handled in gSpeciesInfo
-    //.monBackPics = gMonBackPicTable, // Handled in gSpeciesInfo
-    //.monNormalPalettes = gMonPaletteTable, // Handled in gSpeciesInfo
-    //.monShinyPalettes = gMonShinyPaletteTable, // Handled in gSpeciesInfo
-    //.monIcons = gMonIconTable,
-    //.monIconPaletteIds = gMonIconPaletteIndices,
     .monIconPalettes = gMonIconPaletteTable,
-    //.monSpeciesNames = gSpeciesNames, // Handled in gSpeciesInfo
-    //.moveNames = gMoveNames, // Handled in gMovesInfo
     .decorations = gDecorations,
     .flagsOffset = offsetof(struct SaveBlock1, flags),
     .varsOffset = offsetof(struct SaveBlock1, vars),
     .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seen1Offset = offsetof(struct SaveBlock1, dexSeen),
-    .seen2Offset = offsetof(struct SaveBlock1, dexSeen), // dex flags are combined, just provide the same pointer
-    .pokedexVar = VAR_NATIONAL_DEX - VARS_START,
+    .seenOffset = offsetof(struct SaveBlock1, dexSeen),
     .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
     .mysteryEventFlag = FLAG_SYS_MYSTERY_EVENT_ENABLE,
     .pokedexCount = NATIONAL_DEX_COUNT,
@@ -148,8 +132,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
     .unk18 = 0x00000000,
     .speciesInfo = gSpeciesInfo,
-    //.abilityNames = gAbilityNames, //handled in gAbilitiesInfo
-    //.abilityDescriptions = gAbilityDescriptionPointers, //handled in gAbilitiesInfo
     .items = gItemsInfo,
     .moves = gMovesInfo,
     .ballGfx = gBallSpriteSheets,
@@ -164,10 +146,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
-#if FREE_ENIGMA_BERRY == FALSE
-    .enigmaBerryOffset = offsetof(struct SaveBlock1, enigmaBerry),
-    .enigmaBerrySize = sizeof(struct EnigmaBerry),
-#endif //FREE_ENIGMA_BERRY
     .moveDescriptions = NULL,
     .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG
 };

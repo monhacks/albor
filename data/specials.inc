@@ -344,7 +344,7 @@ gSpecials::
 	def_special Script_FadeOutMapMusic
 	def_special SetPacifidlogTMReceivedDay
 	def_special GetDaysUntilPacifidlogTMAvailable
-	def_special HasAllHoennMons
+	def_special HasAllMons
 	def_special MonOTNameNotPlayer
 	def_special BufferLottoTicketNumber
 	def_special TryHideBattleTowerReporter
@@ -503,7 +503,6 @@ gSpecials::
 	def_special SaveForBattleTowerLink
 	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle
-	def_special EnableNationalPokedex
 	def_special ScriptMenu_CreateLilycoveSSTidalMultichoice
 	def_special GetLilycoveSSTidalSelection
 	def_special TurnOnTVScreen

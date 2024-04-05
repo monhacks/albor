@@ -24,8 +24,6 @@ Debug_CheatStart::
 	setflag FLAG_SYS_POKEDEX_GET
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 2
-	setflag FLAG_SYS_NATIONAL_DEX
-	special EnableNationalPokedex
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_SYS_B_DASH
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4 @ 4: Received Running Shoes
@@ -167,8 +165,12 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PIKACHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU_ALOLAN, 1, ITEM_NONE
-	givemon SPECIES_GLALIE, 1, ITEM_NONE
+	givemon SPECIES_MANKEY, 1, ITEM_NONE
+	givemon SPECIES_PRIMEAPE, 1, ITEM_NONE
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
+	givemon SPECIES_SNORUNT, 1, ITEM_NONE
+	givemon SPECIES_GLALIE, 1, ITEM_NONE
+	givemon SPECIES_FROSLASS, 1, ITEM_NONE
 	end
 
 Debug_EventScript_Script_2::
@@ -202,8 +204,12 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RAICHU_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_GLALIE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_MANKEY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_PRIMEAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SNORUNT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_GLALIE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_FROSLASS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	end
 
 Debug_EventScript_Script_3::

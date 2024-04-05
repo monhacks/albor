@@ -210,7 +210,6 @@ static void SetRectangleCursorPos_GroupMode(s8, s8);
 static void SetRectangleCursorPos_AlphabetMode(s8, s8);
 static void SpriteCB_WordSelectCursor(struct Sprite *);
 static void SetWordSelectCursorPos(u8, u8);
-static bool8 EasyChatIsNationalPokedexEnabled(void);
 static u16 GetRandomUnlockedEasyChatPokemon(void);
 static void SetUnlockedEasyChatGroups(void);
 static void SetUnlockedWordsByAlphabet(void);
@@ -5097,8 +5096,6 @@ static bool8 IsEasyChatGroupUnlocked(u8 groupId)
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
         return FlagGet(FLAG_SYS_GAME_CLEAR);
-    case EC_GROUP_POKEMON_NATIONAL:
-        return EasyChatIsNationalPokedexEnabled();
     default:
         return TRUE;
     }
@@ -5437,11 +5434,6 @@ u16 UnlockRandomTrendySaying(void)
     return EC_EMPTY_WORD;
 }
 
-static bool8 EasyChatIsNationalPokedexEnabled(void)
-{
-    return IsNationalPokedexEnabled();
-}
-
 static u16 GetRandomUnlockedEasyChatPokemon(void)
 {
     u16 i;
@@ -5544,8 +5536,7 @@ static void SetUnlockedEasyChatGroups(void)
     if (FlagGet(FLAG_UNLOCKED_TRENDY_SAYINGS))
         sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_TRENDY_SAYING;
 
-    if (IsNationalPokedexEnabled())
-        sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_POKEMON_NATIONAL;
+    sWordData->unlockedGroupIds[sWordData->numUnlockedGroups++] = EC_GROUP_POKEMON_NATIONAL;
 }
 
 static u8 GetNumUnlockedEasyChatGroups(void)

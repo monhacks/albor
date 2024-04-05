@@ -6795,7 +6795,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_INNER_FOCUS, ABILITY_ICE_BODY, ABILITY_MOODY },
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_ICE_BODY, ABILITY_RUN_AWAY },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Snorunt"),
         .cryId = CRY_SNORUNT,
@@ -6825,14 +6825,13 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOOTPRINT(Snorunt)
         FOLLOWER(Snorunt, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Snorunt),
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_GLALIE},
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GLALIE},
                                 {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
     },
 
 #define GLALIE_MISC_INFO                                    \
-        .types = MON_TYPES(TYPE_ICE),                                  \
+        .types = MON_TYPES(TYPE_ICE, TYPE_ROCK),            \
         .catchRate = 75,                                    \
-        .evYield_HP = 2,                                    \
         .genderRatio = PERCENT_FEMALE(50),                  \
         .eggCycles = 20,                                    \
         .friendship = STANDARD_FRIENDSHIP,                  \
@@ -6848,14 +6847,16 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_GLALIE] =
     {
         GLALIE_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 80,
-        .baseDefense   = 80,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 80,
+        .baseHP        = 60,
+        .baseAttack    = 110,
+        .baseDefense   = 110,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 60,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 168 : 187,
-        .abilities = { ABILITY_INNER_FOCUS, ABILITY_ICE_BODY, ABILITY_MOODY },
+        .abilities = { ABILITY_LEVITATE, ABILITY_ICE_BODY, ABILITY_CARA_DURA },
+        .evYield_Attack  = 1,
+        .evYield_Defense = 1,
         .cryId = CRY_GLALIE,
         .height = 15,
         .weight = 2565,
@@ -6881,62 +6882,26 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOLLOWER(Glalie, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_GLALIE_MEGA] =
-    {
-        GLALIE_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 120,
-        .baseDefense   = 80,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 120,
-        .baseSpDefense = 80,
-        .expYield = 203,
-        .abilities = { ABILITY_REFRIGERATE, ABILITY_REFRIGERATE, ABILITY_REFRIGERATE },
-        .cryId = CRY_GLALIE_MEGA,
-        .height = 21,
-        .weight = 3502,
-        .description = COMPOUND_STRING(
-            "The power of Mega Evolution was so strong\n"
-            "that it smashed Glalie's jaw. Its inability\n"
-            "to eat very well leaves Glalie irritated."),
-        .pokemonScale = 256,
-        .pokemonOffset = 3,
-        .trainerScale = 344,
-        .trainerOffset = 0,
-        FRONT_PIC(GlalieMega, 56, 64),
-        .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_GlalieMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 8,
-        BACK_PIC(GlalieMega, 64, 48),
-        .backPicYOffset = 10,
-        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(GlalieMega),
-        ICON(GlalieMega, 0),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
-
 #if P_GEN_4_CROSS_EVOS
     [SPECIES_FROSLASS] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 80,
-        .baseDefense   = 70,
+        .baseHP        = 60,
+        .baseAttack    = 40,
+        .baseDefense   = 60,
         .baseSpeed     = 110,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 70,
+        .baseSpAttack  = 110,
+        .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_ICE, TYPE_GHOST),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 168 : 187,
-        .evYield_Speed = 2,
+        .evYield_SpAttack   = 1,
+        .evYield_Speed      = 1,
         .genderRatio = MON_FEMALE,
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
-        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_NONE, ABILITY_CURSED_BODY },
+        .abilities = { ABILITY_SNOW_CLOAK, ABILITY_CURSED_BODY, ABILITY_VOZ_HELADA },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Froslass"),
         .cryId = CRY_FROSLASS,

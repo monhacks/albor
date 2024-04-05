@@ -1562,13 +1562,6 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     if (gSpeciesInfo[partnerSpecies].cannotBeTraded)
         return PARTNER_MON_INVALID;
 
-    // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
-    {
-        if (sTradeMenu->isEgg[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
-            return PARTNER_MON_INVALID;
-    }
-
     if (hasLiveMon)
         hasLiveMon = BOTH_MONS_VALID;
 
@@ -2380,16 +2373,6 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
     }
 
-    // Cant trade Eggs or non-Hoenn mons if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
-    {
-        if (species2[monIdx] == SPECIES_EGG)
-            return CANT_TRADE_EGG_YET;
-
-        if (!IsSpeciesInHoennDex(species2[monIdx]))
-            return CANT_TRADE_NATIONAL;
-    }
-
     partner = &gLinkPlayers[GetMultiplayerId() ^ 1];
     if ((partner->version & 0xFF) != VERSION_RUBY &&
         (partner->version & 0xFF) != VERSION_SAPPHIRE)
@@ -2399,9 +2382,6 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
         {
             if (species2[monIdx] == SPECIES_EGG)
                 return CANT_TRADE_PARTNER_EGG_YET;
-
-            if (!IsSpeciesInHoennDex(species2[monIdx]))
-                return CANT_TRADE_INVALID_MON;
         }
     }
 
@@ -2474,7 +2454,6 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
 {
     bool8 playerHasNationalDex = player.hasNationalDex;
     bool8 playerCanLinkNationally = player.canLinkNationally;
-    bool8 partnerHasNationalDex = partner.hasNationalDex;
     bool8 partnerCanLinkNationally = partner.canLinkNationally;
     u8 partnerVersion = partner.version;
 
@@ -2516,17 +2495,7 @@ int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct Rf
     {
         if (playerSpecies2 == SPECIES_EGG)
             return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
-
-        if (!IsSpeciesInHoennDex(playerSpecies2))
-            return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
-
-        if (!IsSpeciesInHoennDex(partnerSpecies))
-            return UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED;
     }
-
-    // If the partner doesn't have the National Dex then the player's offer has to be a Hoenn Pokémon
-    if (!partnerHasNationalDex && !IsSpeciesInHoennDex(playerSpecies2))
-        return UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON;
 
     // Trade is allowed
     return UR_TRADE_MSG_NONE;
@@ -2547,9 +2516,6 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
     if (species2 == SPECIES_EGG)
         return CANT_REGISTER_EGG;
 
-    if (IsSpeciesInHoennDex(species2))
-        return CAN_REGISTER_MON;
-
     return CANT_REGISTER_MON_NOW;
 }
 
@@ -2557,7 +2523,7 @@ int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 sp
 // Unlike later generations, this version of Spin Trade isnt only for Eggs
 int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
 {
-    int i, version, versions, canTradeAnyMon, numMonsLeft;
+    int i, version, versions, numMonsLeft;
     int speciesArray[PARTY_SIZE];
 
     // Make Eggs not count for numMonsLeft
@@ -2569,7 +2535,6 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
     }
 
     versions = 0;
-    canTradeAnyMon = TRUE;
     for (i = 0; i < GetLinkPlayerCount(); i++)
     {
         version = gLinkPlayers[i].version & 0xFF;
@@ -2578,30 +2543,6 @@ int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
             versions = 0;
         else
             versions |= 1;
-    }
-
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        struct LinkPlayer *player = &gLinkPlayers[i];
-
-        // Does player not have National Dex
-        do
-        {
-            if (!(player->progressFlags & 0xF))
-                canTradeAnyMon = FALSE;
-
-            if (versions && (player->progressFlags / 16))
-                canTradeAnyMon = FALSE;
-        } while (0);
-    }
-
-    if (canTradeAnyMon == FALSE)
-    {
-        if (!IsSpeciesInHoennDex(speciesArray[monIdx]))
-            return CANT_TRADE_NATIONAL;
-
-        if (speciesArray[monIdx] == SPECIES_NONE)
-            return CANT_TRADE_EGG_YET;
     }
 
     numMonsLeft = 0;
