@@ -180,16 +180,7 @@ struct Time
 
 struct Pokedex
 {
-    /*0x00*/ u8 order;
-    /*0x01*/ u8 mode;
-};
-
-struct PokemonJumpRecords
-{
-    u16 jumpsInRow;
-    u16 excellentsInRow;
-    u16 gamesWithMaxPlayers;
-    u32 bestJumpScore;
+    /*0x00*/ u32 order;
 };
 
 struct BerryPickingResults
@@ -494,9 +485,6 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice;
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x1EC*/ struct BerryCrush berryCrush;
-#if FREE_POKEMON_JUMP == FALSE
-    /*0x1FC*/ struct PokemonJumpRecords pokeJump;
-#endif //FREE_POKEMON_JUMP
     /*0x20C*/ struct BerryPickingResults berryPick;
 #if FREE_RECORD_MIXING_HALL_RECORDS == FALSE
     /*0x21C*/ struct RankingHall1P hallRecords1P[HALL_FACILITIES_COUNT][FRONTIER_LVL_MODE_COUNT][HALL_RECORDS_COUNT]; // From record mixing.

@@ -98,7 +98,6 @@ SECTIONS {
         src/berry_crush.o(.text);
         src/berry_powder.o(.text);
         src/dodrio_berry_picking.o(.text);
-        src/pokemon_jump.o(.text);
         src/minigame_countdown.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
@@ -488,7 +487,6 @@ SECTIONS {
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
         src/dodrio_berry_picking.o(.rodata);
-        src/pokemon_jump.o(.rodata);
         src/minigame_countdown.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);

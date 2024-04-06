@@ -29,7 +29,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "pokemon_jump.h"
 #include "random.h"
 #include "save_location.h"
 #include "script.h"
@@ -325,7 +324,6 @@ static void GetAwaitingCommunicationText(u8 *dst, u8 activity)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_BATTLE_TOWER:
@@ -354,7 +352,6 @@ static bool32 IsActivityWithVariableGroupSize(u32 activity)
 {
     switch (activity)
     {
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
@@ -749,7 +746,6 @@ static void Leader_GetAcceptNewMemberPrompt(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_PlayerContactedYouShareX);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
@@ -793,7 +789,6 @@ static void GetYouAskedToJoinGroupPleaseWaitMessage(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_AwaitingPlayersResponse);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
@@ -822,7 +817,6 @@ static void GetGroupLeaderSentAnOKMessage(u8 *dst, u8 activity)
         StringExpandPlaceholders(dst, sText_PlayerSentBackOK);
         break;
     case ACTIVITY_BATTLE_MULTI:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_RECORD_CORNER:
@@ -1091,7 +1085,6 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             case ACTIVITY_BATTLE_MULTI:
             case ACTIVITY_TRADE:
             case ACTIVITY_CHAT:
-            case ACTIVITY_POKEMON_JUMP:
             case ACTIVITY_BERRY_CRUSH:
             case ACTIVITY_BERRY_PICK:
             case ACTIVITY_SPIN_TRADE:
@@ -1640,7 +1633,6 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_BATTLE_DOUBLE:
     case ACTIVITY_BATTLE_MULTI:
     case ACTIVITY_TRADE:
-    case ACTIVITY_POKEMON_JUMP:
     case ACTIVITY_BERRY_CRUSH:
     case ACTIVITY_BERRY_PICK:
     case ACTIVITY_SPIN_TRADE:
@@ -1717,10 +1709,6 @@ static void Task_StartActivity(u8 taskId)
     case ACTIVITY_CARD | IN_UNION_ROOM:
         CreateTrainerCardInBuffer(gBlockSendBuffer, FALSE);
         SetMainCallback2(CB2_ShowCard);
-        break;
-    case ACTIVITY_POKEMON_JUMP:
-        WarpForWirelessMinigame(USING_MINIGAME, 5, 1);
-        StartPokemonJump(GetCursorSelectionMonId(), CB2_LoadMap);
         break;
     case ACTIVITY_BERRY_CRUSH:
         WarpForWirelessMinigame(USING_BERRY_CRUSH, 9, 1);
