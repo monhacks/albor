@@ -10425,13 +10425,13 @@ Golbat
 Level: 35
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
-=== TRAINER_GRUNT_UNUSED ===
-Name: GRUNT
-Class: Team Magma
-Pic: Aqua Grunt F
+=== TRAINER_CYNTHIA ===
+Name: CYNTHIA
+Class: Champion
+Pic: Cynthia
 Gender: Female
-Music: Aqua
-Double Battle: No
+Music: Cynthia
+Double Battle: Yes
 AI: Check Bad Move
 
 Wailmer
