@@ -9,14 +9,14 @@
 #define OW_TIMES_OF_DAY                 GEN_LATEST // Different generations have the times of day change at different times.
 #define OW_DOUBLE_APPROACH_WITH_ONE_MON TRUE      // If enabled, you can be spotted by two trainers at the same time even if you only have one eligible Pokémon in your party.
 
-// PC settings
-#define OW_PC_PRESS_B               GEN_LATEST // In Gen4, pressing B when holding a Pokémon is equivalent to placing it. In Gen3, it gives the "You're holding a Pokémon!" error.
-#define OW_PC_HEAL                  GEN_7      // In Gen8+, Pokémon are not healed when deposited in the PC.
-
 // Berry settings
 // These generational defines only make a distinction for Berries!
 #define GEN_6_XY GEN_6
 #define GEN_6_ORAS GEN_LATEST + 1
+
+// PC settings
+#define OW_PC_PRESS_B               GEN_LATEST // In Gen4, pressing B when holding a Pokémon is equivalent to placing it. In Gen3, it gives the "You're holding a Pokémon!" error.
+#define OW_PC_HEAL                  GEN_7 // In Gen8+, Pokémon are not healed when deposited in the PC.
 
 #define OW_BERRY_MUTATIONS             FALSE      // If enabled, Berry plants can mutate based on berries planted next to them.
 #define OW_BERRY_MUTATION_CHANCE       25         // Determines the % chance of a mutation.

@@ -273,6 +273,9 @@ const struct CompressedSpritePalette gEgg2PaletteTable[] =
     [TYPE_NONE]     =   {gMonPalette_Egg_Normal2, SPECIES_EGG}
 };
 
-#include "data/trainer_parties.h"
-#include "data/trainers.h"
 #include "data/text/follower_messages.h"
+
+const struct Trainer gTrainers[] =
+{
+#include "data/trainers.h"
+};
