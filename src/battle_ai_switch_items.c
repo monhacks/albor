@@ -1457,6 +1457,8 @@ static u32 GetSwitchinStatusDamage(u32 battler)
                 statusDamage = maxHP / 8;
             if(ability == ABILITY_HEATPROOF)
                 statusDamage = statusDamage / 2;
+            if (gBattleWeather & B_WEATHER_RAIN)
+                statusDamage = 0;
             if (statusDamage == 0)
                 statusDamage = 1;
         }
@@ -1466,6 +1468,8 @@ static u32 GetSwitchinStatusDamage(u32 battler)
                 statusDamage = maxHP / 16;
             else
                 statusDamage = maxHP / 8;
+            if (gBattleWeather & B_WEATHER_SUN)
+                statusDamage = 0;
             if (statusDamage == 0)
                 statusDamage = 1;
         }

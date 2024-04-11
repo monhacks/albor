@@ -2714,4 +2714,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("+1 At. cada golpe recibido."),
         .aiRating = 6,
     },
+
+    [ABILITY_LUNA_MENGUANTE] =
+    {
+        .name = _("Luna menguante"),
+        .description = COMPOUND_STRING("Ataques siniestros +25%."),
+        .aiRating = 8,
+    },
 };

@@ -20,7 +20,6 @@
             *640 - 80
 - Llama azul asignar a Chandelure, Charizard...
 - Asignar habilidad Enjambre a Vespiquen.
-- Ursaring Tierra/Hada.
 - Asignar Colmena a Beedrill, Vespiquen.
 - Testear Generador.
 - Destruir icono Pokémon al darle a huir.
@@ -29,6 +28,7 @@
 - Crear bg basado en moxie boosted.
 - Mankey evoluciona a Primeape o Annihilape (20 veces Puño furia). Darle el movimiento a su learnset para que evolucione en torno al 30.
 - Hacer glaciación un surf con probabilidad de helar.
+- Crear ataque Agua helada (Escaldar pero que congele). Milotic, Lapras, Dewgong.
+- Falta balancear Parálisis, Dormido, Confuso, Enamorado, Envenenado (y gravemente envenenado), Retroceso.
 
-*ramscript
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).

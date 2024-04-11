@@ -2484,17 +2484,24 @@ u8 DoBattlerEndTurnEffects(void)
                 && gBattleMons[battler].hp != 0)
             {
                 MAGIC_GUARD_CHECK;
-                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
-                if (ability == ABILITY_HEATPROOF)
+                if (gBattleWeather & B_WEATHER_RAIN)
                 {
-                    if (gBattleMoveDamage > (gBattleMoveDamage / 2) + 1) // Record ability if the burn takes less damage than it normally would.
-                        RecordAbilityBattle(battler, ABILITY_HEATPROOF);
-                    gBattleMoveDamage /= 2;
+                    gBattleMoveDamage = 0;
                 }
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                BattleScriptExecute(BattleScript_BurnTurnDmg);
-                effect++;
+                else
+                {
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
+                    if (ability == ABILITY_HEATPROOF)
+                    {
+                        if (gBattleMoveDamage > (gBattleMoveDamage / 2) + 1) // Record ability if the burn takes less damage than it normally would.
+                            RecordAbilityBattle(battler, ABILITY_HEATPROOF);
+                        gBattleMoveDamage /= 2;
+                    }
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_BurnTurnDmg);
+                    effect++;
+                }
             }
             gBattleStruct->turnEffectsTracker++;
             break;
@@ -2503,11 +2510,18 @@ u8 DoBattlerEndTurnEffects(void)
                 && gBattleMons[battler].hp != 0)
             {
                 MAGIC_GUARD_CHECK;
-                gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
-                if (gBattleMoveDamage == 0)
-                    gBattleMoveDamage = 1;
-                BattleScriptExecute(BattleScript_FrostbiteTurnDmg);
-                effect++;
+                if (gBattleWeather & B_WEATHER_SUN)
+                {
+                    gBattleMoveDamage = 0;
+                }
+                else
+                {
+                    gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (B_BURN_DAMAGE >= GEN_7 ? 16 : 8);
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_FrostbiteTurnDmg);
+                    effect++;
+                }
             }
             gBattleStruct->turnEffectsTracker++;
             break;
@@ -8969,6 +8983,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (moveType == TYPE_FLYING)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
+    case ABILITY_LUNA_MENGUANTE:
+        if (moveType == TYPE_DARK)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
     case ABILITY_NORMALIZE:
         if (moveType == TYPE_NORMAL)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
@@ -11194,7 +11212,10 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         secondaryEffectChance *= 2;
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
-
+    if (gBattleWeather & B_WEATHER_SNOW && additionalEffect->moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE)
+        secondaryEffectChance *= 2;
+    if (gBattleWeather & B_WEATHER_SUN && additionalEffect->moveEffect == MOVE_EFFECT_BURN)
+        secondaryEffectChance *= 2;
     return secondaryEffectChance;
 }
 
