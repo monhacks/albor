@@ -972,8 +972,6 @@ static void (* const sApprenticeFunctions[])(void) =
     [APPRENTICE_FUNC_OPEN_BAG]            = Script_ApprenticeOpenBagMenu,
     [APPRENTICE_FUNC_TRY_SET_HELD_ITEM]   = TrySetApprenticeHeldItem,
     [APPRENTICE_FUNC_SAVE]                = SaveApprentice,
-    [APPRENTICE_FUNC_SET_GFX_SAVED]       = SetSavedApprenticeTrainerGfxId,
-    [APPRENTICE_FUNC_SET_GFX]             = SetPlayerApprenticeTrainerGfxId,
     [APPRENTICE_FUNC_SHOULD_LEAVE]        = GetShouldApprenticeLeave,
     [APPRENTICE_FUNC_SHIFT_SAVED]         = ShiftSavedApprentices,
 };

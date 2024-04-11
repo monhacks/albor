@@ -4967,7 +4967,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
     else
     {
-        StringCopy(gStringVar4, gText_CommunicationError);
+        StringCopy(gStringVar4, gText_No);
         item = ITEM_MASTER_BALL;
     }
 

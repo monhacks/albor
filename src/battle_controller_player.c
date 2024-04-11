@@ -8,7 +8,6 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
-#include "battle_tv.h"
 #include "battle_z_move.h"
 #include "bg.h"
 #include "data.h"
@@ -997,8 +996,6 @@ static void SetLinkBattleEndCallbacks(u32 battler)
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
-            if (gBattleOutcome == B_OUTCOME_WON)
-                TryPutLinkBattleTvShowOnAir();
             FreeAllWindowBuffers();
         }
     }
@@ -1010,8 +1007,6 @@ static void SetLinkBattleEndCallbacks(u32 battler)
             gMain.inBattle = FALSE;
             gMain.callback1 = gPreBattleCallback1;
             SetMainCallback2(CB2_InitEndLinkBattle);
-            if (gBattleOutcome == B_OUTCOME_WON)
-                TryPutLinkBattleTvShowOnAir();
             FreeAllWindowBuffers();
         }
     }
@@ -2188,12 +2183,12 @@ static void PlayerHandlePause(u32 battler)
 
 static void PlayerHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, TRUE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void PlayerHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, TRUE, TRUE);
+    BtlController_HandlePrintString(battler, TRUE);
 }
 
 static void PlayerHandlePrintSelectionString(u32 battler)
@@ -2478,7 +2473,7 @@ static void PlayerHandleEndBounceEffect(u32 battler)
 
 static void PlayerHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, FALSE, TRUE);
+    BtlController_HandleBattleAnimation(battler, TRUE);
 }
 
 static void PlayerHandleLinkStandbyMsg(u32 battler)

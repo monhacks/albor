@@ -109,8 +109,6 @@ static void SetLeadApprenticeMon(void);
 static void Script_ApprenticeOpenBagMenu(void);
 static void TrySetApprenticeHeldItem(void);
 static void SaveApprentice(void);
-static void SetSavedApprenticeTrainerGfxId(void);
-static void SetPlayerApprenticeTrainerGfxId(void);
 static void GetShouldApprenticeLeave(void);
 static void ShiftSavedApprentices(void);
 
@@ -1011,7 +1009,6 @@ static void FreeQuestionData(void)
 static void ApprenticeBufferString(void)
 {
     u8 *stringDst;
-    u8 text[16];
     u32 speciesArrayId;
 
     switch (gSpecialVar_0x8005)
@@ -1050,8 +1047,6 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, ItemId_GetName(PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data));
         break;
     case APPRENTICE_BUFF_NAME:
-        TVShowConvertInternationalString(text, GetApprenticeNameInLanguage(PLAYER_APPRENTICE.id, GAME_LANGUAGE), GAME_LANGUAGE);
-        StringCopy(stringDst, text);
         break;
     case APPRENTICE_BUFF_LEVEL:
         if (PLAYER_APPRENTICE.lvlMode == APPRENTICE_LVL_MODE_50)
@@ -1175,55 +1170,6 @@ static void SaveApprentice(void)
     StringCopy(gSaveBlock2Ptr->apprentices[0].playerName, gSaveBlock2Ptr->playerName);
     gSaveBlock2Ptr->apprentices[0].language = gGameLanguage;
     CalcApprenticeChecksum(&gSaveBlock2Ptr->apprentices[0]);
-}
-
-// Never called, APPRENTICE_FUNC_SET_GFX_SAVED is unused
-static void SetSavedApprenticeTrainerGfxId(void)
-{
-    u8 i;
-    u8 objectEventGfxId;
-    u8 class = gApprentices[gSaveBlock2Ptr->apprentices[0].id].facilityClass;
-
-    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-        return;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-    }
-}
-
-static void SetPlayerApprenticeTrainerGfxId(void)
-{
-    u8 i;
-    u8 objectEventGfxId;
-    u8 class = gApprentices[PLAYER_APPRENTICE.id].facilityClass;
-
-    for (i = 0; i < ARRAY_COUNT(gTowerMaleFacilityClasses) && gTowerMaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerMaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerMaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-        return;
-    }
-
-    for (i = 0; i < ARRAY_COUNT(gTowerFemaleFacilityClasses) && gTowerFemaleFacilityClasses[i] != class; i++)
-        ;
-    if (i != ARRAY_COUNT(gTowerFemaleFacilityClasses))
-    {
-        objectEventGfxId = gTowerFemaleTrainerGfxIds[i];
-        VarSet(VAR_OBJ_GFX_ID_0, objectEventGfxId);
-    }
 }
 
 // Both of the below functions may have been dummied / used for debug

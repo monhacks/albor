@@ -19,7 +19,6 @@
 #include "event_data.h"
 #include "money.h"
 #include "trainer_hill.h"
-#include "tv.h"
 #include "coins.h"
 #include "text.h"
 #include "overworld.h"
@@ -41,7 +40,6 @@
 #include "player_pc.h"
 #include "field_specials.h"
 #include "berry_powder.h"
-#include "mystery_gift.h"
 #include "union_room_chat.h"
 #include "constants/items.h"
 
@@ -160,8 +158,6 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
-    ClearTVShowData();
-    ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
@@ -193,9 +189,7 @@ void NewGameInitData(void)
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
     ResetAllApprenticeData();
-    ClearRankingHallRecords();
     InitMatchCallCounters();
-    ClearMysteryGift();
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();

@@ -60,7 +60,7 @@ static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_CyndaquilDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_ChikoritaDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc,
-    gText_Exit,
+    gText_Salir,
 };
 
 static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
@@ -70,7 +70,7 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
     BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc,
-    gText_Exit
+    gText_Salir
 };
 
 static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
@@ -81,7 +81,7 @@ static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
     BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
     BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
-    gText_Exit
+    gText_Salir
 };
 
 static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
@@ -95,5 +95,5 @@ static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc,
     BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc,
     BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc,
-    gText_Exit
+    gText_Salir
 };

@@ -199,12 +199,6 @@ void ConvertInternationalContestantName(u8 *str)
     }
 }
 
-void TVShowConvertInternationalString(u8 *dest, const u8 *src, int language)
-{
-    StringCopy(dest, src);
-    ConvertInternationalString(dest, language);
-}
-
 // It's impossible to distinguish between Latin languages just from a string alone, so the function defaults to LANGUAGE_ENGLISH. This is the case in all of the versions of the game.
 int GetNicknameLanguage(u8 *str)
 {

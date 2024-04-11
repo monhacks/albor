@@ -7,7 +7,6 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
 #include "item_menu.h"
@@ -423,12 +422,12 @@ static void RecordedOpponentHandleTrainerSlideBack(u32 battler)
 
 static void RecordedOpponentHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, FALSE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void RecordedOpponentHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, FALSE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void RecordedOpponentHandleChooseAction(u32 battler)
@@ -504,7 +503,7 @@ static void RecordedOpponentHandleDrawPartyStatusSummary(u32 battler)
 
 static void RecordedOpponentHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, FALSE, FALSE);
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void RecordedOpponentHandleEndLinkBattle(u32 battler)

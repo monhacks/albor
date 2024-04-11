@@ -517,26 +517,12 @@ BerryBlender_EventScript_ExpertMPlayerHasBerries:
 	end
 
 BerryBlender_EventScript_ExpertMNoBerries:
-	checkitem ITEM_POKEBLOCK_CASE
-	goto_if_eq VAR_RESULT, FALSE, BerryBlender_EventScript_ExpertMNoSpareBerries
-	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	goto_if_eq VAR_RESULT, 65535, BerryBlender_EventScript_ExpertMNoSpareBerries
-	dotimebasedevents
-	goto_if_set FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY, BerryBlender_EventScript_ExpertMNoSpareBerries
-	goto BerryBlender_EventScript_ExpertMGiveBerry
 	end
 
 BerryBlender_EventScript_ExpertMNoSpareBerries:
-	msgbox BerryBlender_Text_DontHaveAnyBerriesNoneToSpare, MSGBOX_DEFAULT
-	release
 	end
 
 BerryBlender_EventScript_ExpertMGiveBerry:
-	msgbox BerryBlender_Text_DontHaveAnyBerriesHaveOne, MSGBOX_DEFAULT
-	giveitem ITEM_PECHA_BERRY
-	setflag FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY
-	msgbox BerryBlender_Text_UseItToMakePokeblocksTogether, MSGBOX_DEFAULT
-	release
 	end
 
 BerryBlender_Movement_BlendLeaderWalkInPlace:
@@ -544,167 +530,73 @@ BerryBlender_Movement_BlendLeaderWalkInPlace:
 	step_end
 
 BerryBlender_EventScript_BerryBlenderLink::
-	lockall
-	specialvar VAR_RESULT, PlayerHasBerries
-	goto_if_eq VAR_RESULT, FALSE, BerryBlender_EventScript_LinkBlenderNoBerries
-	checkitem ITEM_POKEBLOCK_CASE
-	goto_if_eq VAR_RESULT, FALSE, BerryBlender_EventScript_LinkBlenderNoCase
-	specialvar VAR_RESULT, GetFirstFreePokeblockSlot
-	goto_if_ne VAR_RESULT, 65535, BerryBlender_EventScript_LinkBlenderSaveGame
-	goto_if_eq VAR_RESULT, 65535, BerryBlender_EventScript_LinkBlenderCaseFull
 	end
 
 BerryBlender_EventScript_LinkBlenderSaveGame:
-	msgbox BerryBlender_Text_SaveGameBeforeBerryBlenderLink, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryBlender_EventScript_TryDoLinkBlender
-	goto_if_eq VAR_RESULT, NO, BerryBlender_EventScript_CancelLinkBlender
 	end
 
 BerryBlender_EventScript_LinkBlenderNoBerries:
-	msgbox BerryBlender_Text_NoBerriesLink, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_TryDoLinkBlender:
-	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, FALSE, BerryBlender_EventScript_CancelLinkBlender
-	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	goto_if_eq VAR_RESULT, TRUE, BerryBlender_EventScript_StartDecideLinkLeader
-	message BerryBlender_Text_SearchingForFriends
-	waitmessage
-	special TryBerryBlenderLinkup
-	waitstate
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, BerryBlender_EventScript_SpawnLinkPartners
-	goto_if_eq VAR_RESULT, LINKUP_SOMEONE_NOT_READY, BerryBlender_EventScript_CloseLinkNotReady
-	goto_if_eq VAR_RESULT, LINKUP_DIFF_SELECTIONS, BerryBlender_EventScript_CloseLinkDifferentSelections
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, BerryBlender_EventScript_CloseLink
-	goto_if_eq VAR_RESULT, LINKUP_CONNECTION_ERROR, BerryBlender_EventScript_LinkError
 	end
 
 BerryBlender_EventScript_TwoPlayerLink:
-	msgbox BerryBlender_Text_Player1Arrived, MSGBOX_DEFAULT
-	goto BerryBlender_EventScript_DoLinkBerryBlending
 	end
 
 BerryBlender_EventScript_ThreePlayerLink:
-	msgbox BerryBlender_Text_Player1And2Arrived, MSGBOX_DEFAULT
-	goto BerryBlender_EventScript_DoLinkBerryBlending
 	end
 
 BerryBlender_EventScript_FourPlayerLink:
-	msgbox BerryBlender_Text_AllPlayersArrived, MSGBOX_DEFAULT
-	goto BerryBlender_EventScript_DoLinkBerryBlending
 	end
 
 BerryBlender_EventScript_DoLinkBerryBlending:
-	setvar VAR_0x8004, 0  @ number of opponents, 0 indicates Link
-	fadescreen FADE_TO_BLACK
-	removeobject 240 @ Unclear where these local IDs come from,
-	removeobject 239 @ but presumably they'd be the 4 link players
-	removeobject 238
-	removeobject 237
-	special DoBerryBlending
-	waitstate
-	releaseall
 	end
 
 BerryBlender_EventScript_CancelLinkBlender:
-	releaseall
 	end
 
 BerryBlender_EventScript_LinkBlenderCaseFull:
-	msgbox BerryBlender_Text_PokeblockCaseIsFullLink, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_LinkBlenderNoCase:
-	msgbox BerryBlender_Text_DontHavePokeblockCaseLink, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_CloseLinkNotReady:
-	special CloseLink
-	msgbox Text_SomeoneIsNotReadyToLink, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_CloseLinkDifferentSelections:
-	special CloseLink
-	msgbox Text_PlayersMadeDifferentSelections, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_CloseLink:
-	special CloseLink
-	msgbox gText_PokeblockLinkCanceled, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_LinkError:
-	special CloseLink
-	msgbox Text_LinkErrorPleaseReset, MSGBOX_DEFAULT
-	releaseall
 	end
 
 BerryBlender_EventScript_SpawnLinkPartners:
-	fadescreen FADE_TO_BLACK
-	specialvar VAR_RESULT, GetLinkPartnerNames
-	copyvar VAR_0x8008, VAR_RESULT
-	copyvar VAR_0x8004, VAR_0x8008
-	special SpawnLinkPartnerObjectEvent
-	goto BerryBlender_EventScript_LinkPlayersArrived
 	end
 
 BerryBlender_EventScript_LinkPlayersArrived:
-	fadescreen FADE_FROM_BLACK
-	switch VAR_0x8008
-	case 2, BerryBlender_EventScript_TwoPlayerLink
-	case 3, BerryBlender_EventScript_ThreePlayerLink
-	case 4, BerryBlender_EventScript_FourPlayerLink
 	end
 
 BerryBlender_EventScript_StartDecideLinkLeader:
-	setvar VAR_0x8004, LINK_GROUP_BERRY_BLENDER
-	goto BerryBlender_EventScript_DecideLinkLeader
 	end
 
 BerryBlender_EventScript_DecideLinkLeader:
-	message LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader
-	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
-	switch VAR_RESULT
-	case 0, BerryBlender_EventScript_TryJoinGroup
-	case 1, BerryBlender_EventScript_TryLeadGroup
-	case 2, BerryBlender_EventScript_CloseLink
-	case MULTI_B_PRESSED, BerryBlender_EventScript_CloseLink
 	end
 
 BerryBlender_EventScript_TryLeadGroup:
-	call BerryBlender_EventScript_TryBecomeLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, BerryBlender_EventScript_LinkLeaderDecided
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, BerryBlender_EventScript_DecideLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, BerryBlender_EventScript_TryLeadGroup
-	release
 	end
 
 BerryBlender_EventScript_TryJoinGroup:
-	call BerryBlender_EventScript_TryJoinLinkGroup
-	goto_if_eq VAR_RESULT, LINKUP_SUCCESS, BerryBlender_EventScript_LinkLeaderDecided
-	goto_if_eq VAR_RESULT, LINKUP_FAILED, BerryBlender_EventScript_DecideLinkLeader
-	goto_if_eq VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN, BerryBlender_EventScript_TryJoinGroup
-	release
 	end
 
 BerryBlender_EventScript_TryBecomeLinkLeader:
-	special TryBecomeLinkLeader
-	waitstate
 	return
 
 BerryBlender_EventScript_TryJoinLinkGroup:
-	special TryJoinLinkGroup
-	waitstate
 	return
 
 BerryBlender_EventScript_LinkLeaderDecided:
-	goto BerryBlender_EventScript_SpawnLinkPartners
 	end

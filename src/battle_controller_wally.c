@@ -5,7 +5,6 @@
 #include "battle_interface.h"
 #include "battle_message.h"
 #include "battle_setup.h"
-#include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
 #include "item.h"
@@ -311,12 +310,12 @@ static void WallyHandleBallThrowAnim(u32 battler)
 
 static void WallyHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, FALSE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void WallyHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, FALSE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void WallyHandlePrintSelectionString(u32 battler)
@@ -412,7 +411,7 @@ static void WallyHandleDrawPartyStatusSummary(u32 battler)
 
 static void WallyHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, TRUE, FALSE);
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void WallyHandleEndLinkBattle(u32 battler)

@@ -10,7 +10,6 @@
 #include "battle_script_commands.h"
 #include "battle_ai_switch_items.h"
 #include "battle_gfx_sfx_util.h"
-#include "battle_util2.h"
 #include "battle_bg.h"
 #include "pokeball.h"
 #include "battle_debug.h"
@@ -72,7 +71,6 @@
 struct __attribute__((packed, aligned(2))) BattleMoveEffect
 {
     const u8 *battleScript;
-    u16 battleTvScore:3;
     u16 encourageEncore:1;
     u16 twoTurnEffect:1;
     u16 semiInvulnerableEffect:1;
@@ -454,91 +452,6 @@ struct BattleResults
     u8 catchAttempts[POKEBALL_COUNT];     // 0x36
 };
 
-struct BattleTv_Side
-{
-    u32 spikesMonId:3;
-    u32 reflectMonId:3;
-    u32 lightScreenMonId:3;
-    u32 safeguardMonId:3;
-    u32 mistMonId:3;
-    u32 futureSightMonId:3;
-    u32 doomDesireMonId:3;
-    u32 perishSongMonId:3;
-    u32 wishMonId:3;
-    u32 grudgeMonId:3;
-    u32 usedMoveSlot:2;
-    u32 spikesMoveSlot:2;
-    u32 reflectMoveSlot:2;
-    u32 lightScreenMoveSlot:2;
-    u32 safeguardMoveSlot:2;
-    u32 mistMoveSlot:2;
-    u32 futureSightMoveSlot:2;
-    u32 doomDesireMoveSlot:2;
-    u32 perishSongMoveSlot:2;
-    u32 wishMoveSlot:2;
-    u32 grudgeMoveSlot:2;
-    u32 destinyBondMonId:3;
-    u32 destinyBondMoveSlot:2;
-    u32 faintCause:4;
-    u32 faintCauseMonId:3;
-    u32 explosion:1;
-    u32 explosionMoveSlot:2;
-    u32 explosionMonId:3;
-    u32 perishSong:1;
-};
-
-struct BattleTv_Position
-{
-    u32 curseMonId:3;
-    u32 leechSeedMonId:3;
-    u32 nightmareMonId:3;
-    u32 wrapMonId:3;
-    u32 attractMonId:3;
-    u32 confusionMonId:3;
-    u32 curseMoveSlot:2;
-    u32 leechSeedMoveSlot:2;
-    u32 nightmareMoveSlot:2;
-    u32 wrapMoveSlot:2;
-    u32 attractMoveSlot:2;
-    u32 confusionMoveSlot:2;
-    u32 waterSportMoveSlot:2;
-    u32 waterSportMonId:3;
-    u32 mudSportMonId:3;
-    u32 mudSportMoveSlot:2;
-    u32 ingrainMonId:3;
-    u32 ingrainMoveSlot:2;
-    u32 attackedByMonId:3;
-    u32 attackedByMoveSlot:2;
-};
-
-struct BattleTv_Mon
-{
-    u32 psnMonId:3;
-    u32 badPsnMonId:3;
-    u32 brnMonId:3;
-    u32 prlzMonId:3;
-    u32 slpMonId:3;
-    u32 frzMonId:3;
-    u32 psnMoveSlot:2;
-    u32 badPsnMoveSlot:2;
-    u32 brnMoveSlot:2;
-    u32 prlzMoveSlot:2;
-    u32 slpMoveSlot:2;
-    u32 frzMoveSlot:2;
-};
-
-struct BattleTv
-{
-    struct BattleTv_Mon mon[NUM_BATTLE_SIDES][PARTY_SIZE];
-    struct BattleTv_Position pos[NUM_BATTLE_SIDES][2]; // [side][flank]
-    struct BattleTv_Side side[NUM_BATTLE_SIDES];
-};
-
-struct BattleTvMovePoints
-{
-    s16 points[2][PARTY_SIZE * 4];
-};
-
 struct LinkBattlerHeader
 {
     u8 versionSignatureLo;
@@ -709,8 +622,6 @@ struct BattleStruct
     u8 startingStatus; // status to apply at battle start. defined in constants/battle.h
     u8 startingStatusTimer;
     u8 atkCancellerTracker;
-    struct BattleTvMovePoints tvMovePoints;
-    struct BattleTv tv;
     u8 AI_monToSwitchIntoId[MAX_BATTLERS_COUNT];
     s8 arenaMindPoints[2];
     s8 arenaSkillPoints[2];

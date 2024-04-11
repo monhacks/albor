@@ -7,6 +7,11 @@ EventScript_PC::
 	goto EventScript_PCMainMenu
 	end
 
+EventScript_TV::
+	msgbox Text_EsteProgramaLeEncantaAMama, MSGBOX_DEFAULT
+	closemessage
+	end
+
 EventScript_PCMainMenu::
 	message gText_WhichPCShouldBeAccessed
 	waitmessage
@@ -72,3 +77,6 @@ EventScript_AccessPokemonBoxLink::
 	waitstate
 	goto EventScript_TurnOffPC
 	end
+
+Text_EsteProgramaLeEncantaAMama:
+	.string "Este programa le encanta a mamá.$"

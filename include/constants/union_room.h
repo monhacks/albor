@@ -24,7 +24,6 @@
 #define ACTIVITY_TRADE              4
 #define ACTIVITY_CHAT               5
 #define ACTIVITY_WONDER_CARD_DUP    6 // Duplicates of later WONDER constants
-#define ACTIVITY_WONDER_NEWS_DUP    7 //
 #define ACTIVITY_CARD               8
 #define ACTIVITY_POKEMON_JUMP       9
 #define ACTIVITY_BERRY_CRUSH        10
@@ -43,7 +42,6 @@
 #define ACTIVITY_PLYRTALK           20
 
 #define ACTIVITY_WONDER_CARD        21
-#define ACTIVITY_WONDER_NEWS        22
 
 #define ACTIVITY_CONTEST_COOL       23
 #define ACTIVITY_CONTEST_BEAUTY     24
@@ -63,7 +61,6 @@
 #define LINK_GROUP_BERRY_CRUSH          5
 #define LINK_GROUP_BERRY_PICKING        6
 #define LINK_GROUP_WONDER_CARD          7
-#define LINK_GROUP_WONDER_NEWS          8
 #define LINK_GROUP_UNION_ROOM_RESUME    9
 #define LINK_GROUP_UNION_ROOM_INIT      10
 #define LINK_GROUP_UNK_11               11

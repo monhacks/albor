@@ -286,17 +286,6 @@ const struct Tileset gTileset_OceanicMuseum =
     .callback = NULL,
 };
 
-const struct Tileset gTileset_CableClub =
-{
-    .isCompressed = FALSE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_CableClub,
-    .palettes = gTilesetPalettes_CableClub,
-    .metatiles = gMetatiles_CableClub,
-    .metatileAttributes = gMetatileAttributes_CableClub,
-    .callback = NULL,
-};
-
 const struct Tileset gTileset_SeashoreHouse =
 {
     .isCompressed = TRUE,

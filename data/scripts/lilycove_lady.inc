@@ -339,9 +339,6 @@ LilycoveCity_PokemonCenter_1F_EventScript_ContestLady::
 
 @ Redundant with above script, VAR_RESULT will always be FALSE here
 LilycoveCity_PokemonCenter_1F_EventScript_NotGivenPokeblock::
-	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock::
@@ -426,15 +423,9 @@ LilycoveCity_PokemonCenter_1F_EventScript_MonLikedPokeblock::
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow::
-	specialvar VAR_RESULT, ShouldContestLadyShowGoOnAir
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow
-	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow::
-	msgbox LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests, MSGBOX_DEFAULT
-	special PutLilycoveContestLadyShowOnTheAir
-	release
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase::

@@ -95,8 +95,6 @@
 #define LINKTYPE_BATTLE_TOWER_50       0x2266
 #define LINKTYPE_BATTLE_TOWER_OPEN     0x2277
 #define LINKTYPE_BATTLE_TOWER          0x2288
-#define LINKTYPE_RECORD_MIX_BEFORE     0x3311
-#define LINKTYPE_RECORD_MIX_AFTER      0x3322
 #define LINKTYPE_BERRY_BLENDER_SETUP   0x4411
 #define LINKTYPE_BERRY_BLENDER         0x4422
 #define LINKTYPE_MYSTERY_EVENT         0x5501
@@ -249,8 +247,6 @@ extern u32 gBerryBlenderKeySendAttempts;
 extern bool8 gLinkVSyncDisabled;
 extern u32 gLinkStatus;
 
-
-bool8 IsWirelessAdapterConnected(void);
 void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);

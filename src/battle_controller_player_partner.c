@@ -325,12 +325,12 @@ static void PlayerPartnerHandleTrainerSlideBack(u32 battler)
 
 static void PlayerPartnerHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, FALSE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void PlayerPartnerHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, FALSE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void PlayerPartnerHandleChooseAction(u32 battler)
@@ -444,7 +444,7 @@ static void PlayerPartnerHandleDrawPartyStatusSummary(u32 battler)
 
 static void PlayerPartnerHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, FALSE, FALSE);
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void PlayerPartnerHandleEndLinkBattle(u32 battler)

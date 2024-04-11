@@ -248,7 +248,7 @@ static void SafariHandleBallThrowAnim(u32 battler)
 
 static void SafariHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, FALSE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void SafariHandlePrintSelectionString(u32 battler)
@@ -308,7 +308,7 @@ static void SafariHandleIntroTrainerBallThrow(u32 battler)
 
 static void SafariHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, TRUE, FALSE);
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void SafariHandleEndLinkBattle(u32 battler)

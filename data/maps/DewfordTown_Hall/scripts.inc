@@ -50,14 +50,6 @@ DewfordTown_Hall_EventScript_RejectTrendLink::
 	end
 
 DewfordTown_Hall_EventScript_ExpertM::
-	lock
-	faceplayer
-	call Common_EventScript_BufferTrendyPhrase
-	msgbox DewfordTown_Hall_Text_TVShowAboutTrend, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_EXPERT_M, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	release
 	end
 
 DewfordTown_Hall_EventScript_Twin::
@@ -295,11 +287,6 @@ DewfordTown_Hall_Text_NotEasyToKeepUp:
 	.string "Is that so?!\p"
 	.string "It's not easy for an older fellow like\n"
 	.string "me to keep up with trends!$"
-
-DewfordTown_Hall_Text_TVShowAboutTrend:
-	.string "This whole business about\n"
-	.string "“{STR_VAR_1}”…\l"
-	.string "Isn't there a TV show on it?$"
 
 DewfordTown_Hall_Text_IsTrendMorePopularAcrossSea:
 	.string "Across the sea…\p"

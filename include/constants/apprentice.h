@@ -34,10 +34,8 @@
 #define APPRENTICE_FUNC_OPEN_BAG             19
 #define APPRENTICE_FUNC_TRY_SET_HELD_ITEM    20
 #define APPRENTICE_FUNC_SAVE                 21
-#define APPRENTICE_FUNC_SET_GFX_SAVED        22
-#define APPRENTICE_FUNC_SET_GFX              23
-#define APPRENTICE_FUNC_SHOULD_LEAVE         24
-#define APPRENTICE_FUNC_SHIFT_SAVED          25
+#define APPRENTICE_FUNC_SHOULD_LEAVE         22
+#define APPRENTICE_FUNC_SHIFT_SAVED          23
 
 #define APPRENTICE_MSG_PLEASE_TEACH             0
 #define APPRENTICE_MSG_REJECT                   1

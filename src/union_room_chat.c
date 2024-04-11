@@ -628,7 +628,7 @@ static const struct SubtaskInfo sDisplaySubtasks[] = {
 
 static const struct MessageWindowInfo sDisplayStdMessages[] = {
     [STDMESSAGE_QUIT_CHATTING] = {
-        .text = gText_QuitChatting,
+        .text = 0,
         .boxType = 1,
         .x = 0,
         .y = 1,
@@ -638,7 +638,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_REGISTER_WHERE] = {
-        .text = gText_RegisterTextWhere,
+        .text = gText_No,
         .boxType = 1,
         .x = 0,
         .y = 1,
@@ -648,7 +648,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_REGISTER_HERE] = {
-        .text = gText_RegisterTextHere,
+        .text = gText_No,
         .boxType = 1,
         .x = 0,
         .y = 1,
@@ -658,7 +658,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_INPUT_TEXT] = {
-        .text = gText_InputText,
+        .text = gText_No,
         .boxType = 1,
         .x = 0,
         .y = 1,
@@ -668,7 +668,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_EXITING_CHAT] = {
-        .text = gText_ExitingChat,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -678,7 +678,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_LEADER_LEFT] = {
-        .text = gText_LeaderLeftEndingChat,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -688,7 +688,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = FALSE
     },
     [STDMESSAGE_ASK_SAVE] = {
-        .text = gText_RegisteredTextChangedOKToSave,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -698,7 +698,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = TRUE
     },
     [STDMESSAGE_ASK_OVERWRITE] = {
-        .text = gText_AlreadySavedFile_Chat,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -708,7 +708,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = TRUE
     },
     [STDMESSAGE_SAVING_NO_OFF] = {
-        .text = gText_SavingDontTurnOff_Chat,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -718,7 +718,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = TRUE
     },
     [STDMESSAGE_SAVED_THE_GAME] = {
-        .text = gText_PlayerSavedGame_Chat,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -728,7 +728,7 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = TRUE
     },
     [STDMESSAGE_WARN_LEADER_LEAVE] = {
-        .text = gText_IfLeaderLeavesChatEnds,
+        .text = gText_No,
         .boxType = 2,
         .x = 0,
         .y = 1,
@@ -742,11 +742,11 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
 static const u8 sText_Ellipsis[] = _("…");
 
 static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT + 1] = {
-    [UNION_ROOM_KB_PAGE_UPPER]    = {gText_Upper, {NULL}},
-    [UNION_ROOM_KB_PAGE_LOWER]    = {gText_Lower, {NULL}},
-    [UNION_ROOM_KB_PAGE_EMOJI]    = {gText_Symbols, {NULL}},
-    [UNION_ROOM_KB_PAGE_REGISTER] = {gText_Register2, {NULL}},
-    [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, {NULL}},
+    [UNION_ROOM_KB_PAGE_UPPER]    = {gText_No, {NULL}},
+    [UNION_ROOM_KB_PAGE_LOWER]    = {gText_No, {NULL}},
+    [UNION_ROOM_KB_PAGE_EMOJI]    = {gText_No, {NULL}},
+    [UNION_ROOM_KB_PAGE_REGISTER] = {gText_No, {NULL}},
+    [UNION_ROOM_KB_PAGE_COUNT]    = {gText_No, {NULL}},
 };
 
 static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");

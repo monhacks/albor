@@ -186,7 +186,6 @@ extern void (*gBattlerControllerEndFuncs[MAX_BATTLERS_COUNT])(u32 battler);
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 
 // general functions
-void HandleLinkBattleSetup(void);
 void SetUpBattleVarsAndBirchZigzagoon(void);
 void InitBattleControllers(void);
 bool32 IsValidForBattle(struct Pokemon *mon);
@@ -259,8 +258,8 @@ void BtlController_HandleTrainerSlideBack(u32 battlerId, s16 data0, bool32 start
 void BtlController_HandleFaintAnimation(u32 battler);
 void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
 void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture);
-void BtlController_HandleMoveAnimation(u32 battler, bool32 updateTvData);
-void BtlController_HandlePrintString(u32 battler, bool32 updateTvData, bool32 arenaPtsDeduct);
+void BtlController_HandleMoveAnimation(u32 battler);
+void BtlController_HandlePrintString(u32 battler, bool32 arenaPtsDeduct);
 void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText);
 void DoStatusIconUpdate(u32 battler);
 void BtlController_HandleStatusIconUpdate(u32 battler);
@@ -276,7 +275,7 @@ bool32 TwoOpponentIntroMons(u32 battlerId); // Double battle with both opponent 
 void BtlController_HandleIntroTrainerBallThrow(u32 battler, u16 tagTrainerPal, const u32 *trainerPal, s16 framesToWait, void (*controllerCallback)(u32 battler));
 void BtlController_HandleDrawPartyStatusSummary(u32 battler, u32 side, bool32 considerDelay);
 void BtlController_HandleHidePartyStatusSummary(u32 battler);
-void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE, bool32 updateTvData);
+void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
 
 // player controller
 void SetControllerToPlayer(u32 battler);

@@ -1231,7 +1231,7 @@ static void StorytellerDisplayStory(u32 player)
 static void PrintStoryList(void)
 {
     s32 i;
-    s32 width = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
+    s32 width = GetStringWidth(FONT_NORMAL, gText_Salir, 0);
     for (i = 0; i < NUM_STORYTELLER_TALES; i++)
     {
         s32 curWidth;
@@ -1252,7 +1252,7 @@ static void PrintStoryList(void)
             break;
         AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, GetStoryTitleByStat(gameStatID), 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     }
-    AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Salir, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
     CopyWindowToVram(sStorytellerWindowId, COPYWIN_FULL);
 }

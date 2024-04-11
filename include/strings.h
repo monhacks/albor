@@ -114,7 +114,7 @@ extern const u8 gText_Third[];
 extern const u8 gText_NoDecorations[];
 extern const u8 gText_NoDecorationsInUse[];
 
-extern const u8 gText_Exit[];
+extern const u8 gText_Salir[];
 extern const u8 gText_Cancel[];
 
 extern const u8 gText_ThrowAwayVar1[];
@@ -173,8 +173,6 @@ extern const u8 gText_MoveCloserToLinkPartner[];
 extern const u8 gText_CommErrorCheckConnections[];
 extern const u8 gText_ABtnTitleScreen[];
 extern const u8 gText_ABtnRegistrationCounter[];
-extern const u8 gText_MixingRecords[];
-extern const u8 gText_RecordMixingComplete[];
 extern const u8 gText_EmptyString2[];
 extern const u8 gText_Confirm3[];
 extern const u8 gText_Cancel4[];
@@ -324,16 +322,12 @@ extern const u8 gText_YesNo[];
 // main menu/birch speech text
 extern const u8 gText_SaveFileErased[];
 extern const u8 gText_SaveFileCorrupted[];
-extern const u8 gJPText_No1MSubCircuit[];
 extern const u8 gText_BatteryRunDry[];
 extern const u8 gText_MainMenuNewGame[];
 extern const u8 gText_MainMenuOption[];
 extern const u8 gText_MainMenuContinue[];
-extern const u8 gText_MainMenuMysteryGift2[];
 extern const u8 gText_MainMenuMysteryEvents[];
-extern const u8 gText_MainMenuMysteryGift[];
 extern const u8 gText_WirelessNotConnected[];
-extern const u8 gText_MysteryGiftCantUse[];
 extern const u8 gText_MysteryEventsCantUse[];
 extern const u8 gText_Birch_Welcome[];
 extern const u8 gText_ThisIsAPokemon[];
@@ -465,7 +459,6 @@ extern const u8 gText_PkmnCantBeTradedNow[];
 extern const u8 gText_PkmnCantBeTraded[];
 extern const u8 gText_EggCantBeTradedNow[];
 extern const u8 gText_OnlyPkmnForBattle[];
-extern const u8 gJPText_AreYouSureYouWantToSpinTradeMon[];
 extern const u8 gText_PauseUntilPress[];
 extern const u8 gText_CantUseUntilNewBadge[];
 extern const u8 gText_ReturnToHealingSpot[];
@@ -629,7 +622,6 @@ extern const u8 gText_Son[];
 extern const u8 gText_Daughter[];
 
 // Multichoice strings
-extern const u8 gText_Exit[];
 extern const u8 gText_1F[];
 extern const u8 gText_2F[];
 extern const u8 gText_3F[];
@@ -1307,16 +1299,6 @@ extern const u8 gText_TrainerHill2F[];
 extern const u8 gText_TrainerHill3F[];
 extern const u8 gText_TrainerHill4F[];
 
-// Cable Club multichoice text
-extern const u8 CableClub_Text_TradeUsingLinkCable[];
-extern const u8 CableClub_Text_BattleUsingLinkCable[];
-extern const u8 CableClub_Text_RecordCornerUsingLinkCable[];
-extern const u8 CableClub_Text_CancelSelectedItem[];
-extern const u8 CableClub_Text_YouMayTradeHere[];
-extern const u8 CableClub_Text_YouMayBattleHere[];
-extern const u8 CableClub_Text_CanMixRecords[];
-extern const u8 CableClub_Text_CanMakeBerryPowder[];
-
 // Rotom Catalog text
 extern const u8 gText_LightBulb[];
 extern const u8 gText_MicrowaveOven[];
@@ -1324,7 +1306,6 @@ extern const u8 gText_WashingMachine[];
 extern const u8 gText_Refrigerator[];
 extern const u8 gText_ElectricFan[];
 extern const u8 gText_LawnMower[];
-extern const u8 gText_Exit[];
 
 // Zygarde Cube text
 extern const u8 gText_ChangeForm[];
@@ -2078,10 +2059,8 @@ extern const u8 gText_MaleSymbol4[];
 extern const u8 gText_FemaleSymbol4[];
 extern const u8 gText_GenderlessSymbol[];
 extern const u8 gText_NewLine2[];
-extern const u8 gText_Exit4[];
 extern const u8 gText_Lv[];
 extern const u8 gExpandedPlaceholder_Empty[];
-extern const u8 gText_Exit[];
 extern const u8 gDaycareText_GetAlongVeryWell[];
 extern const u8 gDaycareText_GetAlong[];
 extern const u8 gDaycareText_DontLikeOther[];
@@ -2723,21 +2702,6 @@ extern const u8 gText_UnionRoomChatKeyboard_Emoji8[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji9[];
 extern const u8 gText_UnionRoomChatKeyboard_Emoji10[];
 
-// E-Reader
-extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
-extern const u8 gJPText_SelectConnectFromEReaderMenu[];
-extern const u8 gJPText_SelectConnectWithGBA[];
-extern const u8 gJPText_LinkIsIncorrect[];
-extern const u8 gJPText_CardReadingHasBeenHalted[];
-extern const u8 gJPText_Connecting[];
-extern const u8 gJPText_ConnectionErrorCheckLink[];
-extern const u8 gJPText_ConnectionErrorTryAgain[];
-extern const u8 gJPText_AllowEReaderToLoadCard[];
-extern const u8 gJPText_ConnectionComplete[];
-extern const u8 gJPText_NewTrainerHasComeToHoenn[];
-extern const u8 gJPText_PleaseWaitAMoment[];
-extern const u8 gJPText_WriteErrorUnableToSaveData[];
-
 // Berry Powder Menu
 extern const u8 gText_Powder[];
 
@@ -2754,92 +2718,6 @@ extern const u8 gText_Sorry[];
 extern const u8 gText_YaySmileEmoji[];
 extern const u8 gText_ThankYou[];
 extern const u8 gText_ByeBye[];
-
-// Mystery Gift
-extern const u8 gText_MysteryGift[];
-extern const u8 gText_PickOKCancel[];
-extern const u8 gText_PickOKExit[];
-extern const u8 gJPText_MysteryGift[];
-extern const u8 gJPText_DecideStop[];
-extern const u8 gText_WonderCards[];
-extern const u8 gText_WonderNews[];
-extern const u8 gText_Exit3[];
-extern const u8 gText_WirelessCommunication[];
-extern const u8 gText_Friend2[];
-extern const u8 gText_Cancel2[];
-extern const u8 gText_Receive[];
-extern const u8 gText_Send[];
-extern const u8 gText_Toss[];
-extern const u8 gText_WhatToDoWithCards[];
-extern const u8 gText_WhatToDoWithNews[];
-extern const u8 gText_IfThrowAwayCardEventWontHappen[];
-extern const u8 gText_OkayToDiscardNews[];
-extern const u8 gText_WonderNewsThrownAway[];
-extern const u8 gText_WonderCardThrownAway[];
-extern const u8 gText_DataWillBeSaved[];
-extern const u8 gText_SaveCompletedPressA[];
-extern const u8 gText_NothingSentOver[];
-extern const u8 gText_RecordUploadedViaWireless[];
-extern const u8 gText_WonderCardReceivedFrom[];
-extern const u8 gText_WonderCardReceived[];
-extern const u8 gText_WonderNewsReceivedFrom[];
-extern const u8 gText_WonderNewsReceived[];
-extern const u8 gText_NewStampReceived[];
-extern const u8 gText_AlreadyHadCard[];
-extern const u8 gText_AlreadyHadStamp[];
-extern const u8 gText_AlreadyHadNews[];
-extern const u8 gText_NoMoreRoomForStamps[];
-extern const u8 gText_CommunicationCanceled[];
-extern const u8 gText_CantAcceptNewsFromTrainer[];
-extern const u8 gText_CantAcceptCardFromTrainer[];
-extern const u8 gText_CommunicationError[];
-extern const u8 gText_NewTrainerReceived[];
-extern const u8 gText_RecordUploadedViaWireless[];
-extern const u8 gText_WonderCardSentTo[];
-extern const u8 gText_WonderNewsSentTo[];
-extern const u8 gText_StampSentTo[];
-extern const u8 gText_OtherTrainerHasCard[];
-extern const u8 gText_OtherTrainerHasStamp[];
-extern const u8 gText_OtherTrainerHasNews[];
-extern const u8 gText_NoMoreRoomForStamps[];
-extern const u8 gText_OtherTrainerCanceled[];
-extern const u8 gText_GiftSentTo[];
-extern const u8 gText_CantSendGiftToTrainer[];
-extern const u8 gText_DontHaveCardNewOneInput[];
-extern const u8 gText_DontHaveNewsNewOneInput[];
-extern const u8 gText_WhereShouldCardBeAccessed[];
-extern const u8 gText_WhereShouldNewsBeAccessed[];
-extern const u8 gText_Communicating[];
-extern const u8 gText_ThrowAwayWonderCard[];
-extern const u8 gText_HaventReceivedCardsGift[];
-extern const u8 gText_CommunicationCompleted[];
-extern const u8 gText_HaventReceivedGiftOkayToDiscard[];
-extern const u8 gText_SendingWonderCard[];
-extern const u8 gText_SendingWonderNews[];
-extern const u8 gText_WirelessCommStatus[];
-extern const u8 gText_PeopleTrading[];
-extern const u8 gText_PeopleBattling[];
-extern const u8 gText_PeopleInUnionRoom[];
-extern const u8 gText_PeopleCommunicating[];
-extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
-extern const u8 gText_RefusedBattle[];
-extern const u8 gText_BattleWasRefused[];
-extern const u8 gText_QuitChatting[];
-extern const u8 gText_RegisterTextWhere[];
-extern const u8 gText_RegisterTextHere[];
-extern const u8 gText_InputText[];
-extern const u8 gText_ExitingChat[];
-extern const u8 gText_LeaderLeftEndingChat[];
-extern const u8 gText_RegisteredTextChangedOKToSave[];
-extern const u8 gText_AlreadySavedFile_Chat[];
-extern const u8 gText_SavingDontTurnOff_Chat[];
-extern const u8 gText_PlayerSavedGame_Chat[];
-extern const u8 gText_IfLeaderLeavesChatEnds[];
-extern const u8 gText_Upper[];
-extern const u8 gText_Lower[];
-extern const u8 gText_Symbols[];
-extern const u8 gText_Register2[];
-extern const u8 gText_Exit2[];
 
 // Dodrio Berry Picking
 extern const u8 gText_BerryPickingRecords[];

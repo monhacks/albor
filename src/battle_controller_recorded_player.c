@@ -415,12 +415,12 @@ static void RecordedPlayerHandleTrainerSlideBack(u32 battler)
 
 static void RecordedPlayerHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, FALSE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void RecordedPlayerHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, FALSE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void ChooseActionInBattlePalace(u32 battler)
@@ -521,7 +521,7 @@ static void RecordedPlayerHandleDrawPartyStatusSummary(u32 battler)
 
 static void RecordedPlayerHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, FALSE, FALSE);
+    BtlController_HandleBattleAnimation(battler, FALSE);
 }
 
 static void RecordedPlayerHandleEndLinkBattle(u32 battler)

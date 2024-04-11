@@ -7,7 +7,6 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "battle_tv.h"
 #include "bg.h"
 #include "data.h"
 #include "link.h"
@@ -239,12 +238,12 @@ static void LinkPartnerHandleTrainerSlideBack(u32 battler)
 
 static void LinkPartnerHandleMoveAnimation(u32 battler)
 {
-    BtlController_HandleMoveAnimation(battler, TRUE);
+    BtlController_HandleMoveAnimation(battler);
 }
 
 static void LinkPartnerHandlePrintString(u32 battler)
 {
-    BtlController_HandlePrintString(battler, TRUE, FALSE);
+    BtlController_HandlePrintString(battler, FALSE);
 }
 
 static void LinkPartnerHandleHealthBarUpdate(u32 battler)
@@ -267,7 +266,7 @@ static void LinkPartnerHandleDrawPartyStatusSummary(u32 battler)
 
 static void LinkPartnerHandleBattleAnimation(u32 battler)
 {
-    BtlController_HandleBattleAnimation(battler, FALSE, TRUE);
+    BtlController_HandleBattleAnimation(battler, TRUE);
 }
 
 static void LinkPartnerHandleLinkStandbyMsg(u32 battler)

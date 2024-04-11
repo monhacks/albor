@@ -69,7 +69,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         .paletteNum = 15,
         .baseBlock = 1
     };
-    s32 windowWidth = GetStringWidth(FONT_NORMAL, gText_Exit, 0);
+    s32 windowWidth = GetStringWidth(FONT_NORMAL, gText_Salir, 0);
     s32 fiveMarksWidth = GetStringWidth(FONT_NORMAL, gText_FiveMarks, 0);
     for (i = 0; i < NUM_TRADER_ITEMS; i++)
     {
@@ -91,7 +91,7 @@ void CreateAvailableDecorationsMenu(u8 taskId)
         else
             AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gDecorations[trader->decorations[i]].name, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     }
-    AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gText_Exit, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(tWindowId, FONT_NORMAL, gText_Salir, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(tWindowId, NUM_TRADER_ITEMS + 1, 0);
     ScheduleBgCopyTilemapToVram(0);
 }

@@ -34,7 +34,6 @@ static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");
 static const u8 sText_Summary[] = _("Sumario");
 static const u8 sText_Trade[] = _("TRADE");
 static const u8 sText_CancelTrade[] = _("Cancel trade?");
-static const u8 sJPText_PressBButtonToQuit[] = _("Bボタン　で　もどります");
 static const u8 sText_Summary2[] = _("Sumario");
 static const u8 sText_Trade2[] = _("TRADE");
 static const u8 sText_CommunicationStandby[] = _("{COLOR DARK_GRAY}{HIGHLIGHT WHITE}{SHADOW LIGHT_GRAY}Communication standby…\nPlease wait.");
@@ -332,8 +331,7 @@ static const u8 *const sActionTexts[] =
     [TEXT_CHOOSE_MON]   = sText_ChooseAPkmn,
     [TEXT_SUMMARY]      = sText_Summary,
     [TEXT_TRADE]        = sText_Trade,
-    [TEXT_CANCEL_TRADE] = sText_CancelTrade,
-    [TEXT_JP_QUIT]      = sJPText_PressBButtonToQuit
+    [TEXT_CANCEL_TRADE] = sText_CancelTrade
 };
 
 static const struct MenuAction sSelectTradeMonActions[] =

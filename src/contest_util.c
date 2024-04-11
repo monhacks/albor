@@ -36,7 +36,6 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
-#include "tv.h"
 #include "util.h"
 #include "window.h"
 #include "constants/event_objects.h"
@@ -597,15 +596,6 @@ static void Task_ShowContestResults(u8 taskId)
         {
         case 0:
             SaveLinkContestResults();
-            if (gContestFinalStandings[gContestPlayerMonIndex] == 0)
-            {
-                IncrementGameStat(GAME_STAT_WON_LINK_CONTEST);
-                gSpecialVar_0x8005 = TVSHOW_CONTEST_LIVE_UPDATES;
-                InterviewBefore();
-                if (gSpecialVar_Result != TRUE)
-                    InterviewAfter();
-            }
-
             TryGainNewFanFromCounter(FANCOUNTER_FINISHED_CONTEST);
             SaveContestWinner(gSpecialVar_ContestRank); // Save for lobby painting
             SaveContestWinner(CONTEST_SAVE_FOR_ARTIST);
@@ -1010,9 +1000,6 @@ static void Task_WaitForLinkPartnersDisconnect(u8 taskId)
 
 static void Task_TrySetContestInterviewData(u8 taskId)
 {
-    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
-        BravoTrainerPokemonProfile_BeforeInterview2(gContestFinalStandings[gContestPlayerMonIndex]);
-
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_EndShowContestResults;
 }
@@ -1990,8 +1977,6 @@ void GiveMonContestRibbon(void)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON, &ribbonData);
-            if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-                TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_COOL_RIBBON);
         }
         break;
     case CONTEST_CATEGORY_BEAUTY:
@@ -2000,8 +1985,6 @@ void GiveMonContestRibbon(void)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON, &ribbonData);
-            if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-                TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_BEAUTY_RIBBON);
         }
         break;
     case CONTEST_CATEGORY_CUTE:
@@ -2010,8 +1993,6 @@ void GiveMonContestRibbon(void)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON, &ribbonData);
-            if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-                TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_CUTE_RIBBON);
         }
         break;
     case CONTEST_CATEGORY_SMART:
@@ -2020,8 +2001,6 @@ void GiveMonContestRibbon(void)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON, &ribbonData);
-            if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-                TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_SMART_RIBBON);
         }
         break;
     case CONTEST_CATEGORY_TOUGH:
@@ -2030,8 +2009,6 @@ void GiveMonContestRibbon(void)
         {
             ribbonData++;
             SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON, &ribbonData);
-            if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-                TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_TOUGH_RIBBON);
         }
         break;
     }
@@ -2534,8 +2511,6 @@ bool8 GiveMonArtistRibbon(void)
     {
         hasArtistRibbon = 1;
         SetMonData(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON, &hasArtistRibbon);
-        if (GetRibbonCount(&gPlayerParty[gContestMonPartyIndex]) > NUM_CUTIES_RIBBONS)
-            TryPutSpotTheCutiesOnAir(&gPlayerParty[gContestMonPartyIndex], MON_DATA_ARTIST_RIBBON);
 
         return TRUE;
     }

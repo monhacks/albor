@@ -47,7 +47,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "trainer_see.h"
-#include "tv.h"
 #include "window.h"
 #include "list_menu.h"
 #include "malloc.h"
@@ -56,7 +55,6 @@
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
-EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
@@ -290,20 +288,6 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
             ScriptCall(ctx, *ptr);
     }
     return FALSE;
-}
-
-bool8 ScrCmd_returnram(struct ScriptContext *ctx)
-{
-    ScriptJump(ctx, gRamScriptRetAddr);
-    return FALSE;
-}
-
-bool8 ScrCmd_endram(struct ScriptContext *ctx)
-{
-    FlagClear(FLAG_SAFE_FOLLOWER_MOVEMENT);
-    ClearRamScript();
-    StopScript(ctx);
-    return TRUE;
 }
 
 bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
@@ -2081,14 +2065,6 @@ bool8 ScrCmd_setberrytree(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_getpokenewsactive(struct ScriptContext *ctx)
-{
-    u16 newsKind = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = IsPokeNewsActive(newsKind);
-    return FALSE;
-}
-
 bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 {
     ChooseContestMon();
@@ -2371,18 +2347,6 @@ bool8 ScrCmd_checkmonmodernfatefulencounter(struct ScriptContext *ctx)
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
     gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
-    return FALSE;
-}
-
-bool8 ScrCmd_trywondercardscript(struct ScriptContext *ctx)
-{
-    const u8 *script = GetSavedRamScriptIfValid();
-
-    if (script)
-    {
-        gRamScriptRetAddr = ctx->scriptPtr;
-        ScriptJump(ctx, script);
-    }
     return FALSE;
 }
 

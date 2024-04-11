@@ -844,12 +844,6 @@ MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller::
 	release
 	end
 
-@ Unused
-MauvilleCity_PokemonCenter_1F_EventScript_WaitingForRecordMix::
-	msgbox MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested, MSGBOX_DEFAULT
-	release
-	end
-
 MauvilleCity_PokemonCenter_1F_EventScript_StorytellerEnd::
 	release
 	end

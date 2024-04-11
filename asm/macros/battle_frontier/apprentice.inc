@@ -145,7 +145,6 @@
 
 	@ Set the object event gfx for the Apprentice based on their trainer class
 	.macro apprentice_setgfx
-	setvar VAR_0x8004, APPRENTICE_FUNC_SET_GFX
 	special CallApprenticeFunction
 	.endm
 

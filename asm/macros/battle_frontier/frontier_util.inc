@@ -62,7 +62,6 @@
 
 	@ Checks if the Battle Frontier TV special should air, and if so attempts to set it up
 	.macro frontier_checkairshow
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_AIR_TV_SHOW
 	special CallFrontierUtilFunc
 	.endm
 

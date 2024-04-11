@@ -18,7 +18,6 @@
 #include "vs_seeker.h"
 #include "menu.h"
 #include "string_util.h"
-#include "tv.h"
 #include "malloc.h"
 #include "field_screen_effect.h"
 #include "gym_leader_rematch.h"

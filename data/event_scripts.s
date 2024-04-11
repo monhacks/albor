@@ -15,7 +15,6 @@
 #include "constants/battle_tent.h"
 #include "constants/battle_tower.h"
 #include "constants/berry.h"
-#include "constants/cable_club.h"
 #include "constants/coins.h"
 #include "constants/contest.h"
 #include "constants/daycare.h"
@@ -52,7 +51,6 @@
 #include "constants/trade.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
-#include "constants/tv.h"
 #include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
@@ -911,10 +909,6 @@ gText_PlayerHandedOverTheItem::
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gText_ThankYouForAccessingMysteryGift::
-	.string "Thank you for accessing the\n"
-	.string "MYSTERY GIFT System.$"
-
 gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
@@ -944,25 +938,13 @@ EventScript_SelectWithoutRegisteredItem::
 Common_EventScript_NopReturn::
 	return
 
-@ Unused
-EventScript_CableClub_SetVarResult1::
-	setvar VAR_RESULT, 1
-	return
-
-EventScript_CableClub_SetVarResult0::
-	setvar VAR_RESULT, 0
-	return
-
 Common_EventScript_UnionRoomAttendant::
-	call CableClub_EventScript_UnionRoomAttendant
 	end
 
 Common_EventScript_WirelessClubAttendant::
-	call CableClub_EventScript_WirelessClubAttendant
 	end
 
 Common_EventScript_DirectCornerAttendant::
-	call CableClub_EventScript_DirectCornerAttendant
 	end
 
 Common_EventScript_RemoveStaticPokemon::
@@ -994,18 +976,12 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
 	.include "data/scripts/secret_base.inc"
-	.include "data/scripts/cable_club.inc"
-	.include "data/text/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.include "data/text/contest_strings.inc"
 	.include "data/text/contest_link.inc"
 	.include "data/text/contest_painting.inc"
 	.include "data/text/trick_house_mechadolls.inc"
-	.include "data/scripts/tv.inc"
-	.include "data/text/tv.inc"
 	.include "data/scripts/interview.inc"
-	.include "data/scripts/gabby_and_ty.inc"
-	.include "data/text/pokemon_news.inc"
 	.include "data/scripts/mauville_man.inc"
 	.include "data/scripts/field_move_scripts.inc"
 	.include "data/scripts/item_ball_scripts.inc"

@@ -126,11 +126,11 @@ static const struct WindowTemplate sWindowTemplates[] = {
 };
 
 static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
-    [0]                    = gText_WirelessCommStatus,
-    [GROUPTYPE_TRADE + 1]  = gText_PeopleTrading,
-    [GROUPTYPE_BATTLE + 1] = gText_PeopleBattling,
-    [GROUPTYPE_UNION + 1]  = gText_PeopleInUnionRoom,
-    [GROUPTYPE_TOTAL + 1]  = gText_PeopleCommunicating
+    [0]                    = gText_No,
+    [GROUPTYPE_TRADE + 1]  = gText_No,
+    [GROUPTYPE_BATTLE + 1] = gText_No,
+    [GROUPTYPE_UNION + 1]  = gText_No,
+    [GROUPTYPE_TOTAL + 1]  = gText_No
 };
 
 // Activity, group type, number of players
@@ -142,7 +142,6 @@ static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_BATTLE_MULTI,                  GROUPTYPE_BATTLE, 4},
     {ACTIVITY_TRADE,                         GROUPTYPE_TRADE,  2},
     {ACTIVITY_WONDER_CARD_DUP,               GROUPTYPE_TOTAL,  2},
-    {ACTIVITY_WONDER_NEWS_DUP,               GROUPTYPE_TOTAL,  2},
     {ACTIVITY_BERRY_CRUSH,                   GROUPTYPE_TOTAL,  0},
     {ACTIVITY_BERRY_PICK,                    GROUPTYPE_TOTAL,  0},
     {ACTIVITY_SEARCH,                        GROUPTYPE_NONE,   0},
@@ -159,7 +158,6 @@ static const u8 sActivityGroupInfo[][3] = {
     {ACTIVITY_ACCEPT | IN_UNION_ROOM,        GROUPTYPE_UNION,  1},
     {ACTIVITY_DECLINE | IN_UNION_ROOM,       GROUPTYPE_UNION,  1},
     {ACTIVITY_WONDER_CARD,                   GROUPTYPE_TOTAL,  2},
-    {ACTIVITY_WONDER_NEWS,                   GROUPTYPE_TOTAL,  2},
     {ACTIVITY_CONTEST_COOL,                  GROUPTYPE_TOTAL,  0},
     {ACTIVITY_CONTEST_BEAUTY,                GROUPTYPE_TOTAL,  0},
     {ACTIVITY_CONTEST_CUTE,                  GROUPTYPE_TOTAL,  0},

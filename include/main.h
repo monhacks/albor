@@ -73,5 +73,6 @@ void RestoreSerialTimer3IntrHandlers(void);
 void StartTimer1(void);
 void SeedRngAndSetTrainerId(void);
 u16 GetGeneratedTrainerIdLower(void);
+size_t CountDigits(int value);
 
 #endif // GUARD_MAIN_H

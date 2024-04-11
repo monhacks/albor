@@ -3,7 +3,6 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "bg.h"
-#include "cable_club.h"
 #include "data.h"
 #include "daycare.h"
 #include "decompress.h"
@@ -19,8 +18,6 @@
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
-#include "mystery_gift.h"
-#include "mystery_gift_menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -81,7 +78,6 @@ enum {
     TEXT_SUMMARY,
     TEXT_TRADE,
     TEXT_CANCEL_TRADE,
-    TEXT_JP_QUIT,
 };
 
 // Indexes for sMessages
@@ -473,7 +469,6 @@ static void CB2_CreateTradeMenu(void)
             {
                 OpenLink();
                 gMain.state++;
-                CreateTask(Task_WaitForLinkPlayerConnection, 1);
             }
         }
         else
@@ -1719,31 +1714,6 @@ static void CB_InitExitCanceledTrade(void)
     }
 }
 
-static void CB_ExitCanceledTrade(void)
-{
-    if (gWirelessCommType)
-    {
-        if (IsLinkTradeTaskFinished() && GetNumQueuedActions() == 0)
-        {
-            Free(sMenuTextTileBuffer);
-            Free(sTradeMenu);
-            FreeAllWindowBuffers();
-            DestroyWirelessStatusIndicatorSprite();
-            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
-        }
-    }
-    else
-    {
-        if (!gReceivedRemoteLinkPlayers)
-        {
-            Free(sMenuTextTileBuffer);
-            Free(sTradeMenu);
-            FreeAllWindowBuffers();
-            SetMainCallback2(CB2_ReturnToFieldFromMultiplayer);
-        }
-    }
-}
-
 static void CB_WaitToStartRfuTrade(void)
 {
     if (!Rfu_SetLinkRecovery(FALSE) && GetNumQueuedActions() == 0)
@@ -1800,7 +1770,6 @@ static void RunTradeMenuCallback(void)
         CB_InitExitCanceledTrade();
         break;
     case CB_EXIT_CANCELED_TRADE:
-        CB_ExitCanceledTrade();
         break;
     case CB_START_LINK_TRADE:
         CB_StartLinkTrade();
@@ -4598,8 +4567,6 @@ static void CB2_SaveAndEndTrade(void)
     case 50:
         if (!InUnionRoom())
             IncrementGameStat(GAME_STAT_POKEMON_TRADES);
-        if (gWirelessCommType)
-            MysteryGift_TryIncrementStat(CARD_STAT_NUM_TRADES, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
 
         SetContinueGameWarpStatusToDynamicWarp();
         LinkFullSave_Init();

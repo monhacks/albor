@@ -32,7 +32,6 @@
 #include "text.h"
 #include "tilesets.h"
 #include "trader.h"
-#include "tv.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
 #include "constants/songs.h"
@@ -735,7 +734,7 @@ static void PrintDecorationCategoryMenuItems(u8 taskId)
             PrintDecorationCategoryMenuItem(windowId, i, 8, i * 16, FALSE, TEXT_SKIP_DRAW);
     }
 
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Exit : gText_Cancel, 8, i * 16 + 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Salir : gText_Cancel, 8, i * 16 + 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -1648,8 +1647,6 @@ static void PlaceDecoration(u8 taskId)
     }
 
     gSprites[sDecor_CameraSpriteObjectIdx1].y += 2;
-    if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
-        TryPutSecretBaseVisitOnAir();
 
     CancelDecorating_(taskId);
 }
@@ -2257,8 +2254,6 @@ static void Task_PutAwayDecoration(u8 taskId)
         {
             StringExpandPlaceholders(gStringVar4, gText_DecorationReturnedToPC);
             DisplayItemMessageOnField(taskId, gStringVar4, ContinuePuttingAwayDecorationsPrompt);
-            if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
-                TryPutSecretBaseVisitOnAir();
         }
         break;
     }

@@ -31,29 +31,18 @@ LilycoveCity_ContestHall_MapScripts::
 	.byte 0
 
 LilycoveCity_ContestHall_EventScript_Boy1::
-	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestHall_EventScript_Boy2::
-	msgbox LilycoveCity_ContestHall_Text_EnteredBunchOfContests, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestHall_EventScript_Girl::
-	msgbox LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestHall_EventScript_Sailor::
-	msgbox LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous, MSGBOX_NPC
 	end
 
 LilycoveCity_ContestHall_EventScript_SmartContestMC::
-	lock
-	faceplayer
-	msgbox LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_SMART_MC, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	release
 	end
 
 LilycoveCity_ContestHall_EventScript_SmartContestJudge::

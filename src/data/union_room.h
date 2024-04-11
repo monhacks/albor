@@ -5,17 +5,6 @@ ALIGNED(4) static const u8 sText_PleaseStartOver[] = _("Please start over from t
 ALIGNED(4) static const u8 sText_WirelessSearchCanceled[] = _("The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.");
 ALIGNED(4) static const u8 sText_AwaitingCommunication[] = _("{STR_VAR_1}! Awaiting\ncommunication from another player.");
 ALIGNED(4) static const u8 sText_AwaitingLinkPressStart[] = _("{STR_VAR_1}! Awaiting link!\nPress START when everyone's ready.");
-ALIGNED(4) static const u8 sJPText_SingleBattle[] = _("シングルバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_DoubleBattle[] = _("ダブルバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_MultiBattle[] = _("マルチバトルを かいさいする");
-ALIGNED(4) static const u8 sJPText_TradePokemon[] = _("ポケモンこうかんを かいさいする");
-ALIGNED(4) static const u8 sJPText_Chat[] = _("チャットを かいさいする");
-ALIGNED(4) static const u8 sJPText_DistWonderCard[] = _("ふしぎなカードをくばる");
-ALIGNED(4) static const u8 sJPText_DistWonderNews[] = _("ふしぎなニュースをくばる");
-ALIGNED(4) static const u8 sJPText_HoldBerryCrush[] = _("きのみマッシャーを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldBerryPicking[] = _("きのみどりを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldSpinTrade[] = _("ぐるぐるこうかんを かいさいする");
-ALIGNED(4) static const u8 sJPText_HoldSpinShop[] = _("ぐるぐるショップを かいさいする");
 
 static const u8 sText_1PlayerNeeded[] = _("1 player\nneeded.");
 static const u8 sText_2PlayersNeeded[] = _("2 players\nneeded.");
@@ -419,7 +408,6 @@ ALIGNED(4) static const u8 sText_ChooseTrainerDoubleBattle[] = _("Please choose 
 ALIGNED(4) static const u8 sText_ChooseLeaderMultiBattle[] = _("Please choose the LEADER\nfor a MULTI BATTLE.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToTradeWith[] = _("Please choose the TRAINER to\ntrade with.");
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderCards[] = _("Please choose the TRAINER who is\nsharing WONDER CARDS.");
-ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please choose the TRAINER who is\nsharing WONDER NEWS.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryCrush[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryBlender[] = _("BERRY BLENDER!\nPlease choose the LEADER.");
@@ -441,7 +429,6 @@ static const u8 *const sChooseTrainerTexts[NUM_LINK_GROUP_TYPES] =
     [LINK_GROUP_BERRY_CRUSH]       = sText_ChooseLeaderBerryCrush,
     [LINK_GROUP_BERRY_PICKING]     = sText_ChooseLeaderBerryPicking,
     [LINK_GROUP_WONDER_CARD]       = sText_ChooseTrainerToShareWonderCards,
-    [LINK_GROUP_WONDER_NEWS]       = sText_ChooseTrainerToShareWonderNews,
     [LINK_GROUP_UNION_ROOM_RESUME] = NULL,
     [LINK_GROUP_UNION_ROOM_INIT]   = NULL,
     [LINK_GROUP_UNK_11]            = NULL,
@@ -483,7 +470,6 @@ ALIGNED(4) static const u8 sText_PokemonTrades[] = _("POKéMON TRADES");
 ALIGNED(4) static const u8 sText_Chat[] = _("CHAT");
 ALIGNED(4) static const u8 sText_Cards[] = _("CARDS");
 ALIGNED(4) static const u8 sText_WonderCards[] = _("WONDER CARDS");
-ALIGNED(4) static const u8 sText_WonderNews[] = _("WONDER NEWS");
 ALIGNED(4) static const u8 sText_BerryCrush[] = _("BERRY CRUSH");
 ALIGNED(4) static const u8 sText_BerryPicking[] = _("BERRY-PICKING");
 ALIGNED(4) static const u8 sText_Search[] = _("Buscar");
@@ -530,7 +516,6 @@ static const u8 *const sLinkGroupActivityNameTexts[] = {
     [ACTIVITY_TRADE]             = sText_PokemonTrades,
     [ACTIVITY_CHAT]              = sText_Chat,
     [ACTIVITY_WONDER_CARD_DUP]   = sText_WonderCards,
-    [ACTIVITY_WONDER_NEWS_DUP]   = sText_WonderNews,
     [ACTIVITY_CARD]              = sText_Cards,
     [ACTIVITY_BERRY_CRUSH]       = sText_BerryCrush,
     [ACTIVITY_BERRY_PICK]        = sText_BerryPicking,
@@ -544,7 +529,6 @@ static const u8 *const sLinkGroupActivityNameTexts[] = {
     [ACTIVITY_NPCTALK]           = sText_EmptyString,
     [ACTIVITY_PLYRTALK]          = sText_EmptyString,
     [ACTIVITY_WONDER_CARD]       = sText_WonderCards,
-    [ACTIVITY_WONDER_NEWS]       = sText_WonderNews,
     [ACTIVITY_CONTEST_COOL]      = sText_CoolContest,
     [ACTIVITY_CONTEST_BEAUTY]    = sText_BeautyContest,
     [ACTIVITY_CONTEST_CUTE]      = sText_CuteContest,
@@ -578,7 +562,6 @@ static const u32 sLinkGroupToActivityAndCapacity[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH       | LINK_GROUP_CAPACITY(2, 5),
     [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK        | LINK_GROUP_CAPACITY(3, 5),
     [LINK_GROUP_WONDER_CARD]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
-    [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
     [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
     [LINK_GROUP_UNION_ROOM_INIT]   = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
     [LINK_GROUP_UNK_11]            = ACTIVITY_NONE              | LINK_GROUP_CAPACITY(0, 0),
@@ -904,7 +887,6 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_Trade[]           = {ACTIVITY_TR
 ALIGNED(4) static const u8 sAcceptedActivityIds_BerryCrush[]      = {ACTIVITY_BERRY_CRUSH, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_BerryPicking[]    = {ACTIVITY_BERRY_PICK, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_WonderCard[]      = {ACTIVITY_WONDER_CARD, 0xff};
-ALIGNED(4) static const u8 sAcceptedActivityIds_WonderNews[]      = {ACTIVITY_WONDER_NEWS, 0xff};
 ALIGNED(4) static const u8 sAcceptedActivityIds_Resume[]          = {
     IN_UNION_ROOM | ACTIVITY_NONE,
     IN_UNION_ROOM | ACTIVITY_BATTLE_SINGLE,
@@ -926,7 +908,6 @@ ALIGNED(4) static const u8 sAcceptedActivityIds_Unk11[]           = {
     ACTIVITY_BERRY_CRUSH,
     ACTIVITY_BERRY_PICK,
     ACTIVITY_WONDER_CARD,
-    ACTIVITY_WONDER_NEWS,
     ACTIVITY_SPIN_TRADE,
     0xff
 };
@@ -948,7 +929,6 @@ static const u8 *const sAcceptedActivityIds[NUM_LINK_GROUP_TYPES] = {
     [LINK_GROUP_BERRY_CRUSH]       = sAcceptedActivityIds_BerryCrush,
     [LINK_GROUP_BERRY_PICKING]     = sAcceptedActivityIds_BerryPicking,
     [LINK_GROUP_WONDER_CARD]       = sAcceptedActivityIds_WonderCard,
-    [LINK_GROUP_WONDER_NEWS]       = sAcceptedActivityIds_WonderNews,
     [LINK_GROUP_UNION_ROOM_RESUME] = sAcceptedActivityIds_Resume,
     [LINK_GROUP_UNION_ROOM_INIT]   = sAcceptedActivityIds_Init,
     [LINK_GROUP_UNK_11]            = sAcceptedActivityIds_Unk11,
@@ -973,7 +953,6 @@ static const u8 sLinkGroupToURoomActivity[NUM_LINK_GROUP_TYPES + 2] =
     [LINK_GROUP_BERRY_CRUSH]       = ACTIVITY_BERRY_CRUSH,
     [LINK_GROUP_BERRY_PICKING]     = ACTIVITY_BERRY_PICK,
     [LINK_GROUP_WONDER_CARD]       = ACTIVITY_WONDER_CARD,
-    [LINK_GROUP_WONDER_NEWS]       = ACTIVITY_WONDER_NEWS,
     [LINK_GROUP_UNION_ROOM_RESUME] = ACTIVITY_NONE,
     [LINK_GROUP_UNION_ROOM_INIT]   = ACTIVITY_NONE,
     [LINK_GROUP_UNK_11]            = ACTIVITY_NONE,

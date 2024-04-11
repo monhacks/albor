@@ -3,7 +3,6 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_tower.h"
-#include "cable_club.h"
 #include "data.h"
 #include "decoration.h"
 #include "diploma.h"
@@ -24,7 +23,6 @@
 #include "load_save.h"
 #include "list_menu.h"
 #include "main.h"
-#include "mystery_gift.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -44,7 +42,6 @@
 #include "strings.h"
 #include "task.h"
 #include "text.h"
-#include "tv.h"
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
@@ -58,7 +55,6 @@
 #include "constants/items.h"
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
-#include "constants/mystery_gift.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
 #include "constants/moves.h"
@@ -483,18 +479,7 @@ bool32 ShouldDoRivalRayquazaCall(void)
 
 u8 GetLinkPartnerNames(void)
 {
-    u8 i;
-    u8 j = 0;
-    u8 myLinkPlayerNumber = GetMultiplayerId();
     u8 nLinkPlayers = GetLinkPlayerCount();
-    for (i = 0; i < nLinkPlayers; i++)
-    {
-        if (myLinkPlayerNumber != i)
-        {
-            StringCopy(gTVStringVarPtrs[j], gLinkPlayers[i].name);
-            j++;
-        }
-    }
     return nLinkPlayers;
 }
 
@@ -1314,24 +1299,8 @@ u16 GetSlotMachineId(void)
         SLOT_MACHINE_LUCKIER,
         SLOT_MACHINE_LUCKIEST
     };
-    static const u8 sSlotMachineServiceDayIds[SLOT_MACHINE_COUNT] = {
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKY,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIER,
-        SLOT_MACHINE_LUCKIEST,
-        SLOT_MACHINE_LUCKIEST
-    };
 
     u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
-    if (IsPokeNewsActive(POKENEWS_GAME_CORNER))
-        return sSlotMachineServiceDayIds[rnd % SLOT_MACHINE_COUNT];
 
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
@@ -1394,8 +1363,6 @@ void GiveLeadMonEffortRibbon(void)
     ribbonSet = TRUE;
     leadMon = &gPlayerParty[GetLeadMonIndex()];
     SetMonData(leadMon, MON_DATA_EFFORT_RIBBON, &ribbonSet);
-    if (GetRibbonCount(leadMon) > NUM_CUTIES_RIBBONS)
-        TryPutSpotTheCutiesOnAir(leadMon, MON_DATA_EFFORT_RIBBON);
 }
 
 bool8 Special_AreLeadMonEVsMaxedOut(void)
@@ -1597,7 +1564,7 @@ void BufferLottoTicketNumber(void)
 {
     if (gSpecialVar_Result >= 10000)
     {
-        ConvertIntToDecimalString(0, gSpecialVar_Result);
+        ConvertIntToDecimalStringN(0, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
     }
     else if (gSpecialVar_Result >= 1000)
     {
@@ -1624,25 +1591,6 @@ void BufferLottoTicketNumber(void)
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
-    }
-}
-
-u16 GetMysteryGiftCardStat(void)
-{
-    switch (gSpecialVar_Result)
-    {
-    case GET_NUM_STAMPS:
-        return MysteryGift_GetCardStat(CARD_STAT_NUM_STAMPS);
-    case GET_MAX_STAMPS:
-        return MysteryGift_GetCardStat(CARD_STAT_MAX_STAMPS);
-    case GET_CARD_BATTLES_WON:
-        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_WON);
-    case GET_CARD_BATTLES_LOST: // Never occurs
-        return MysteryGift_GetCardStat(CARD_STAT_BATTLES_LOST);
-    case GET_CARD_NUM_TRADES: // Never occurs
-        return MysteryGift_GetCardStat(CARD_STAT_NUM_TRADES);
-    default:
-        return 0;
     }
 }
 
@@ -2398,7 +2346,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
 {
     [SCROLL_MULTI_NONE] =
     {
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_GLASS_WORKSHOP_VENDOR] =
     {
@@ -2409,7 +2357,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_BlackFlute,
         gText_PrettyChair,
         gText_PrettyDesk,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_POKEMON_FAN_CLUB_RATER] =
     {
@@ -2438,7 +2386,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_CyndaquilDoll80BP,
         gText_ChikoritaDoll80BP,
         gText_TotodileDoll80BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2] =
     {
@@ -2447,7 +2395,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_VenusaurDoll256BP,
         gText_CharizardDoll256BP,
         gText_BlastoiseDoll256BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
     {
@@ -2457,7 +2405,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1BP,
         gText_Carbos1BP,
         gText_HpUp1BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
     {
@@ -2470,7 +2418,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_KingsRock64BP,
         gText_FocusBand64BP,
         gText_ScopeLens64BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
     {
@@ -2485,7 +2433,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Zinc1000,
         gText_HPUp1000,
         gText_PPUp3000,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_RECEPTIONIST] =
     {
@@ -2498,7 +2446,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_BattlePyramid,
         gText_RankingHall,
         gText_ExchangeService,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_1] =
     {
@@ -2512,7 +2460,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Counter48BP,
         gText_ThunderWave48BP,
         gText_SwordsDance48BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BF_MOVE_TUTOR_2] =
     {
@@ -2526,7 +2474,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_IcePunch48BP,
         gText_ThunderPunch48BP,
         gText_FirePunch48BP,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
     {
@@ -2536,7 +2484,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_NavelRock,
         gText_BirthIsland,
         gText_FarawayIsland,
-        gText_Exit
+        gText_Salir
     },
     [SCROLL_MULTI_BATTLE_TENT_RULES] =
     {
@@ -2546,7 +2494,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_PokemonMoves,
         gText_Underpowered,
         gText_WhenInDanger,
-        gText_Exit
+        gText_Salir
     }
 };
 
@@ -3085,7 +3033,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         BattleFrontier_Lounge7_Text_CounterDesc,
         BattleFrontier_Lounge7_Text_ThunderWaveDesc,
         BattleFrontier_Lounge7_Text_SwordsDanceDesc,
-        gText_Exit,
+        gText_Salir,
     };
 
     static const u8 *const sBattleFrontier_TutorMoveDescriptions2[] =
@@ -3100,7 +3048,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         BattleFrontier_Lounge7_Text_IcePunchDesc,
         BattleFrontier_Lounge7_Text_ThunderPunchDesc,
         BattleFrontier_Lounge7_Text_FirePunchDesc,
-        gText_Exit,
+        gText_Salir,
     };
 
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
@@ -3560,9 +3508,6 @@ void BattleTowerReconnectLink(void)
     // of Task_LinkRetireStatusWithBattleTowerPartner
     sBattleTowerMultiBattleTypeFlags = gBattleTypeFlags;
     gBattleTypeFlags = 0;
-
-    if (!gReceivedRemoteLinkPlayers)
-        CreateTask(Task_ReconnectWithLinkPlayers, 5);
 }
 
 void LinkRetireStatusWithBattleTowerPartner(void)
@@ -3580,8 +3525,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
-            gTasks[taskId].tState++;
+        gTasks[taskId].tState++;
         break;
     case 1:
         if (IsLinkTaskFinished() == TRUE)

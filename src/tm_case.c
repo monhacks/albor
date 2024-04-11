@@ -150,7 +150,7 @@ static const struct BgTemplate sBGTemplates[] = {
 
 static const struct MenuAction sMenuActions[] = {
     [ACTION_USE]  = {gText_Use,  {Action_Use}},
-    [ACTION_EXIT] = {gText_Exit, {Action_Exit}},
+    [ACTION_EXIT] = {gText_Salir, {Action_Exit}},
 };
 
 static const u8 sMenuActionIndices_Field[] = {ACTION_USE, ACTION_EXIT};

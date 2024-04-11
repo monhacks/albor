@@ -62,12 +62,6 @@ BattleFrontier_RankingHall_EventScript_PyramidRecords::
 	end
 
 BattleFrontier_RankingHall_EventScript_ShowRecords::
-	special ShowRankingHallRecordsWindow
-	waitbuttonpress
-	special ScrollRankingHallRecordsWindow
-	waitbuttonpress
-	special RemoveRecordsWindow
-	releaseall
 	end
 
 BattleFrontier_RankingHall_EventScript_Attendant::

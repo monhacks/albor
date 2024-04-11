@@ -504,28 +504,6 @@ const u16 ALIGNED(4) gTilesetPalettes_OceanicMuseum[][16] =
 	INCBIN_U16("data/tilesets/secondary/oceanic_museum/palettes/15.gbapal"),
 };
 
-const u32 gTilesetTiles_CableClub[] = INCBIN_U32("data/tilesets/secondary/cable_club/tiles.4bpp");
-
-const u16 ALIGNED(4) gTilesetPalettes_CableClub[][16] =
-{
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/00.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/01.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/02.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/03.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/04.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/05.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/06.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/07.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/08.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/09.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/10.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/11.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/12.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/13.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/14.gbapal"),
-	INCBIN_U16("data/tilesets/secondary/cable_club/palettes/15.gbapal"),
-};
-
 const u32 gTilesetTiles_SeashoreHouse[] = INCBIN_U32("data/tilesets/secondary/seashore_house/tiles.4bpp.lz");
 
 const u16 ALIGNED(4) gTilesetPalettes_SeashoreHouse[][16] =

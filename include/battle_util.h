@@ -252,5 +252,10 @@ u8 GetBattlerType(u32 battler, u8 typeIndex);
 bool8 CanMonParticipateInSkyBattle(struct Pokemon *mon);
 bool8 IsMonBannedFromSkyBattles(u16 species);
 void RemoveBattlerType(u32 battler, u8 type);
+void AllocateBattleResources(void);
+void FreeBattleResources(void);
+void AdjustFriendshipOnBattleFaint(u8 battler);
+void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
+u32 BattlePalace_TryEscapeStatus(u8 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

@@ -11,7 +11,6 @@
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
-#include "tv.h"
 #include "link.h"
 #include "script.h"
 #include "battle_debug.h"
@@ -880,7 +879,6 @@ void FishingWildEncounter(u8 rod)
         species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     }
     IncrementGameStat(GAME_STAT_FISHING_ENCOUNTERS);
-    SetPokemonAnglerSpecies(species);
     gIsFishingEncounter = TRUE;
     BattleSetup_StartWildBattle();
 }

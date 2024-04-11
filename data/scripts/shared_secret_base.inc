@@ -82,18 +82,6 @@ SecretBase_EventScript_PCRegistryMenu::
 	special ShowSecretBaseRegistryMenu
 	end
 
-SecretBase_EventScript_RecordMixingPC::
-	lockall
-	message SecretBase_Text_BootUpPC
-	playse SE_PC_LOGIN
-	dofieldeffect FLDEFF_PCTURN_ON
-	waitstate
-	waitmessage
-	waitbuttonpress
-	playse SE_SELECT
-	goto SecretBase_EventScript_PCRegisterMenu
-	end
-
 SecretBase_EventScript_PCRegisterMenu::
 	message SecretBase_Text_WhatWouldYouLikeToDo
 	waitmessage

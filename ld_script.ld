@@ -84,16 +84,8 @@ SECTIONS {
         src/link_rfu_3.o(.text);
         src/link_rfu_2.o(.text);
         src/union_room.o(.text);
-        src/mystery_gift_menu.o(.text);
         src/union_room_player_avatar.o(.text);
         src/wireless_communication_status_screen.o(.text);
-        src/union_room_battle.o(.text);
-        src/mystery_gift.o(.text);
-        src/mystery_gift_view.o(.text);
-        src/mystery_gift_server.o(.text);
-        src/mystery_gift_client.o(.text);
-        src/mystery_gift_link.o(.text);
-        src/wonder_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
         src/berry_powder.o(.text);
@@ -109,7 +101,6 @@ SECTIONS {
         src/battle_util.o(.text);
         src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
-        src/battle_util2.o(.text);
         src/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
         src/battle_controller_opponent.o(.text);
@@ -163,7 +154,6 @@ SECTIONS {
         src/field_weather_effect.o(.text);
         src/field_screen_effect.o(.text);
         src/battle_setup.o(.text);
-        src/cable_club.o(.text);
         src/trainer_see.o(.text);
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
@@ -189,9 +179,7 @@ SECTIONS {
         src/naming_screen.o(.text);
         src/money.o(.text);
         src/contest_effect.o(.text);
-        src/record_mixing.o(.text);
         src/secret_base.o(.text);
-        src/tv.o(.text);
         src/contest_util.o(.text);
         src/script_pokemon_util.o(.text);
         src/field_poison.o(.text);
@@ -298,7 +286,6 @@ SECTIONS {
         src/evolution_graphics.o(.text);
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
-        src/battle_tv.o(.text);
         src/pokemon_animation.o(.text);
         src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
@@ -473,16 +460,8 @@ SECTIONS {
         src/link_rfu_2.o(.rodata);
         src/link_rfu_2.o(.rodata.str1.4);
         src/union_room.o(.rodata);
-        src/mystery_gift_menu.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
-        src/union_room_battle.o(.rodata);
-        src/mystery_gift.o(.rodata);
-        src/mystery_gift_view.o(.rodata);
-        src/mystery_gift_server.o(.rodata);
-        src/mystery_gift_client.o(.rodata);
-        src/mystery_gift_scripts.o(.rodata);
-        src/wonder_news.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
@@ -544,7 +523,6 @@ SECTIONS {
         src/field_weather_effect.o(.rodata);
         src/field_screen_effect.o(.rodata);
         src/battle_setup.o(.rodata);
-        src/cable_club.o(.rodata);
         src/trainer_see.o(.rodata);
         src/wild_encounter.o(.rodata);
         src/field_effect.o(.rodata);
@@ -568,9 +546,7 @@ SECTIONS {
         src/naming_screen.o(.rodata);
         src/money.o(.rodata);
         src/contest_effect.o(.rodata);
-        src/record_mixing.o(.rodata);
         src/secret_base.o(.rodata);
-        src/tv.o(.rodata);
         src/contest_util.o(.rodata);
         src/script_pokemon_util.o(.rodata);
         src/pokemon_size_record.o(.rodata)
@@ -659,7 +635,6 @@ SECTIONS {
         src/intro_credits_graphics.o(.rodata);
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
-        src/battle_tv.o(.rodata);
         src/pokemon_animation.o(.rodata);
         src/battle_controller_recorded_opponent.o(.rodata);
         src/battle_controller_recorded_player.o(.rodata);
@@ -714,7 +689,6 @@ SECTIONS {
         src/fonts.o(.rodata);
         src/international_string_util.o(.rodata);
         src/mystery_event_msg.o(.rodata);
-        data/mystery_gift.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
         src/pokemon_debug.o(.rodata);

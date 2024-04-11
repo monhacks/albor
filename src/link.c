@@ -129,7 +129,6 @@ static void LinkCB_StandbyForAll(void);
 
 static void TrySetLinkErrorBuffer(void);
 static void CB2_PrintErrorMessage(void);
-static void SetWirelessCommType0_Internal(void);
 static void DisableSerial(void);
 static void EnableSerial(void);
 static void CheckMasterOrSlave(void);
@@ -210,22 +209,6 @@ static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
 };
 
 static const u8 sTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
-
-bool8 IsWirelessAdapterConnected(void)
-{
-    SetWirelessCommType1();
-    InitRFUAPI();
-    if (rfu_LMAN_REQBN_softReset_and_checkID() == RFU_ID)
-    {
-        rfu_REQ_stopMode();
-        rfu_waitREQComplete();
-        return TRUE;
-    }
-    SetWirelessCommType0_Internal();
-    CloseLink();
-    RestoreSerialTimer3IntrHandlers();
-    return FALSE;
-}
 
 void Task_DestroySelf(u8 taskId)
 {
@@ -1446,12 +1429,6 @@ void SetWirelessCommType1(void)
 {
     if (gReceivedRemoteLinkPlayers == 0)
         gWirelessCommType = 1;
-}
-
-static void SetWirelessCommType0_Internal(void)
-{
-    if (gReceivedRemoteLinkPlayers == 0)
-        gWirelessCommType = 0;
 }
 
 void SetWirelessCommType0(void)

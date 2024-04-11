@@ -1257,12 +1257,6 @@
 	.byte \disable
 	.endm
 
-	@ Gets whether the effects of the specified PokeNews program are active. newsKind is a POKENEWS_* constant.
-	.macro getpokenewsactive newsKind:req
-	.byte 0x96
-	.2byte \newsKind
-	.endm
-
 	@ Fades the screen to and from black and white. Modes are FADE_(TO/FROM)_(WHITE/BLACK)
 	.macro fadescreen mode:req
 	.byte 0x97

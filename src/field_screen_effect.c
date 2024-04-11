@@ -1,5 +1,4 @@
 #include "global.h"
-#include "cable_club.h"
 #include "event_data.h"
 #include "fieldmap.h"
 #include "field_camera.h"
@@ -161,7 +160,6 @@ static void Task_ReturnToFieldCableLink(u8 taskId)
     switch (task->tState)
     {
     case 0:
-        task->data[1] = CreateTask_ReestablishCableClubLink();
         task->tState++;
         break;
     case 1:
@@ -218,29 +216,6 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
             UnlockPlayerFieldControls();
             DestroyTask(taskId);
         }
-        break;
-    }
-}
-
-void Task_ReturnToFieldRecordMixing(u8 taskId)
-{
-    struct Task *task = &gTasks[taskId];
-
-    switch (task->tState)
-    {
-    case 0:
-        SetLinkStandbyCallback();
-        task->tState++;
-        break;
-    case 1:
-        if (IsLinkTaskFinished())
-            task->tState++;
-        break;
-    case 2:
-        StartSendingKeysToLink();
-        ResetAllMultiplayerState();
-        UnlockPlayerFieldControls();
-        DestroyTask(taskId);
         break;
     }
 }
@@ -574,37 +549,6 @@ void DoPortholeWarp(void)
     WarpFadeOutScreen();
     CreateTask(Task_WarpAndLoadMap, 10);
     gFieldCallback = FieldCB_ShowPortholeView;
-}
-
-static void Task_DoCableClubWarp(u8 taskId)
-{
-    struct Task *task = &gTasks[taskId];
-
-    switch (task->tState)
-    {
-    case 0:
-        LockPlayerFieldControls();
-        task->tState++;
-        break;
-    case 1:
-        if (!PaletteFadeActive() && BGMusicStopped())
-            task->tState++;
-        break;
-    case 2:
-        WarpIntoMap();
-        SetMainCallback2(CB2_ReturnToFieldCableClub);
-        DestroyTask(taskId);
-        break;
-    }
-}
-
-void DoCableClubWarp(void)
-{
-    LockPlayerFieldControls();
-    TryFadeOutOldMapMusic();
-    WarpFadeOutScreen();
-    PlaySE(SE_EXIT);
-    CreateTask(Task_DoCableClubWarp, 10);
 }
 
 static void Task_ReturnToWorldFromLinkRoom(u8 taskId)

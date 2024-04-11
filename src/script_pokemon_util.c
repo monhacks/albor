@@ -21,7 +21,6 @@
 #include "script.h"
 #include "sprite.h"
 #include "string_util.h"
-#include "tv.h"
 #include "wild_encounter.h"
 #include "constants/abilities.h"
 #include "constants/items.h"

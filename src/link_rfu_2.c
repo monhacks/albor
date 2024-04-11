@@ -16,7 +16,6 @@
 #include "task.h"
 #include "text.h"
 #include "save.h"
-#include "mystery_gift_menu.h"
 
 enum {
     RFUSTATE_INIT,
@@ -1946,8 +1945,6 @@ static void RfuCheckErrorStatus(void)
 {
     if (gRfu.errorState == RFU_ERROR_STATE_OCCURRED && lman.childClockSlave_flag == 0)
     {
-        if (gMain.callback2 == CB2_MysteryGiftEReader || lman.init_param->mboot_flag)
-            gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;
         SetLinkErrorBuffer((gRfu.errorInfo << 16) | (gRfu.errorParam0 << 8) | gRfu.errorParam1, gRfu.recvQueue.count, gRfu.sendQueue.count, RfuGetStatus() == RFU_STATUS_CONNECTION_ERROR);
@@ -2671,8 +2668,7 @@ static void Task_RfuReconnectWithParent(u8 taskId)
                 if (TryReconnectParent())
                     DestroyTask(taskId);
             }
-            else if (GetHostRfuGameData()->activity == ACTIVITY_WONDER_CARD
-                  || GetHostRfuGameData()->activity == ACTIVITY_WONDER_NEWS)
+            else if (GetHostRfuGameData()->activity == ACTIVITY_WONDER_CARD)
             {
                 tTime++;
             }

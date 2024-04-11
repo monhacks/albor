@@ -56,7 +56,6 @@ bool8 MetatileBehavior_IsSecretBaseCave(u8);
 bool8 MetatileBehavior_IsSecretBaseTree(u8);
 bool8 MetatileBehavior_IsSecretBaseShrub(u8);
 bool8 MetatileBehavior_IsSecretBasePC(u8);
-bool8 MetatileBehavior_IsRecordMixingSecretBasePC(u8);
 bool8 MetatileBehavior_IsSecretBaseTrainerSpot(u8);
 bool8 MetatileBehavior_IsSecretBaseImpassable(u8);
 bool8 MetatileBehavior_IsSecretBaseDecorationBase(u8);

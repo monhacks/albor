@@ -49,7 +49,6 @@
 #include "test_runner.h"
 #include "text.h"
 #include "trig.h"
-#include "tv.h"
 #include "util.h"
 #include "wild_encounter.h"
 #include "window.h"
@@ -64,7 +63,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-#include "cable_club.h"
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -720,7 +718,6 @@ void CB2_InitBattle(void)
         }
         else if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
         {
-            HandleLinkBattleSetup();
             SetMainCallback2(CB2_PreInitMultiBattle);
         }
         else
@@ -2345,17 +2342,7 @@ static void EndLinkBattleInSteps(void)
                     FreeBattleSpritesData();
                     FreeMonSpritesGfx();
                 }
-                else if (gReceivedRemoteLinkPlayers == 0)
-                {
-                    // Player can't record battle but
-                    // another player can, reconnect with them
-                    CreateTask(Task_ReconnectWithLinkPlayers, 5);
-                    gBattleCommunication[MULTIUSE_STATE]++;
-                }
-                else
-                {
-                    gBattleCommunication[MULTIUSE_STATE]++;
-                }
+                gBattleCommunication[MULTIUSE_STATE]++;
             }
             else
             {
@@ -2380,8 +2367,7 @@ static void EndLinkBattleInSteps(void)
             gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 5:
-        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
-            gBattleCommunication[MULTIUSE_STATE]++;
+        gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 6:
         if (IsLinkTaskFinished() == TRUE)
@@ -2518,13 +2504,10 @@ static void AskRecordBattle(void)
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case STATE_LINK:
-        if (gMain.anyLinkBattlerHasFrontierPass && gReceivedRemoteLinkPlayers == 0)
-            CreateTask(Task_ReconnectWithLinkPlayers, 5);
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case STATE_WAIT_LINK:
-        if (!FuncIsActiveTask(Task_ReconnectWithLinkPlayers))
-            gBattleCommunication[MULTIUSE_STATE]++;
+        gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case STATE_ASK_RECORD:
         if (!gPaletteFade.active)
@@ -5493,7 +5476,6 @@ static void HandleEndTurn_FinishBattle(void)
                     }
                 }
             }
-            TryPutPokemonTodayOnAir();
         }
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
@@ -5505,9 +5487,6 @@ static void HandleEndTurn_FinishBattle(void)
                                   | BATTLE_TYPE_EREADER_TRAINER
                                   | BATTLE_TYPE_WALLY_TUTORIAL))
             && gBattleResults.shinyWildMon)
-        {
-            TryPutBreakingNewsOnAir();
-        }
 
         RecordedBattle_SetPlaybackFinished();
         if (gTestRunnerEnabled)

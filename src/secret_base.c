@@ -32,7 +32,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "tv.h"
 #include "window.h"
 #include "constants/event_bg.h"
 #include "constants/decorations.h"
@@ -60,13 +59,6 @@ struct SecretBaseRegistryMenu
 {
     struct ListMenuItem items[11];
     u8 names[11][32];
-};
-
-struct SecretBaseRecordMixer
-{
-    struct SecretBase *secretBases;
-    u32 version;
-    u32 language;
 };
 
 struct SecretBaseEntranceMetatiles
@@ -1197,10 +1189,6 @@ void GetSecretBaseOwnerAndState(void)
 
 void SecretBasePerStepCallback(u8 taskId)
 {
-    s16 x;
-    s16 y;
-    u8 behavior;
-    u16 tileId;
     s16 *data;
 
     data = gTasks[taskId].data;
@@ -1216,108 +1204,6 @@ void SecretBasePerStepCallback(u8 taskId)
         tState = 1;
         break;
     case 1:
-        // End if player hasn't moved
-        PlayerGetDestCoords(&x, &y);
-        if (x == tPlayerX && y == tPlayerY)
-            return;
-
-        tPlayerX = x;
-        tPlayerY = y;
-        VarSet(VAR_SECRET_BASE_STEP_COUNTER, VarGet(VAR_SECRET_BASE_STEP_COUNTER) + 1);
-        behavior = MapGridGetMetatileBehaviorAt(x, y);
-        tileId = MapGridGetMetatileIdAt(x, y);
-        if (tileId == METATILE_SecretBase_SolidBoard_Top || tileId == METATILE_SecretBase_SolidBoard_Bottom)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SOLID_BOARD);
-        }
-        else if (tileId == METATILE_SecretBase_SmallChair
-              || tileId == METATILE_SecretBase_PokemonChair
-              || tileId == METATILE_SecretBase_HeavyChair
-              || tileId == METATILE_SecretBase_PrettyChair
-              || tileId == METATILE_SecretBase_ComfortChair
-              || tileId == METATILE_SecretBase_RaggedChair
-              || tileId == METATILE_SecretBase_BrickChair
-              || tileId == METATILE_SecretBase_CampChair
-              || tileId == METATILE_SecretBase_HardChair)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CHAIR);
-        }
-        else if (tileId == METATILE_SecretBase_RedTent_DoorTop
-              || tileId == METATILE_SecretBase_RedTent_Door
-              || tileId == METATILE_SecretBase_BlueTent_DoorTop
-              || tileId == METATILE_SecretBase_BlueTent_Door)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_TENT);
-        }
-        else if ((behavior == MB_IMPASSABLE_NORTHEAST && tileId == METATILE_SecretBase_Stand_CornerRight)
-              || (behavior == MB_IMPASSABLE_NORTHWEST && MapGridGetMetatileIdAt(x, y) == METATILE_SecretBase_Stand_CornerLeft))
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_STAND);
-        }
-        else if (behavior == MB_IMPASSABLE_WEST_AND_EAST && tileId == METATILE_SecretBase_Slide_StairLanding)
-        {
-            if (sInFriendSecretBase == TRUE)
-            {
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_USED_SLIDE);
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_DECLINED_SLIDE);
-            }
-        }
-        else if (behavior == MB_SLIDE_SOUTH && tileId == METATILE_SecretBase_Slide_SlideTop)
-        {
-            if (sInFriendSecretBase == TRUE)
-            {
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SLIDE);
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) ^ SECRET_BASE_DECLINED_SLIDE);
-            }
-        }
-        else if (MetatileBehavior_IsSecretBaseGlitterMat(behavior) == TRUE)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_GLITTER_MAT);
-        }
-        else if (MetatileBehavior_IsSecretBaseBalloon(behavior) == TRUE)
-        {
-            PopSecretBaseBalloon(MapGridGetMetatileIdAt(x, y), x, y);
-            if (sInFriendSecretBase == TRUE)
-            {
-                switch ((int)MapGridGetMetatileIdAt(x, y))
-                {
-                case METATILE_SecretBase_RedBalloon:
-                case METATILE_SecretBase_BlueBalloon:
-                case METATILE_SecretBase_YellowBalloon:
-                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_BALLOON);
-                    break;
-                case METATILE_SecretBase_MudBall:
-                    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_MUD_BALL);
-                    break;
-                }
-            }
-        }
-        else if (MetatileBehavior_IsSecretBaseBreakableDoor(behavior) == TRUE)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BREAKABLE_DOOR);
-
-            ShatterSecretBaseBreakableDoor(x, y);
-        }
-        else if (MetatileBehavior_IsSecretBaseSoundMat(behavior) == TRUE){
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_NOTE_MAT);
-        }
-        else if (MetatileBehavior_IsSecretBaseJumpMat(behavior) == TRUE)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_JUMP_MAT);
-        }
-        else if (MetatileBehavior_IsSecretBaseSpinMat(behavior) == TRUE)
-        {
-            if (sInFriendSecretBase == TRUE)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SPIN_MAT);
-        }
         break;
     case 2:
         // This state is never reached, and tFldEff is never set
@@ -1333,556 +1219,44 @@ void SecretBasePerStepCallback(u8 taskId)
 #undef tPlayerY
 #undef tFldEff
 
-static void SaveSecretBase(u8 secretBaseIdx, struct SecretBase *secretBase, u32 version, u32 language)
-{
-    int stringLength;
-    u8 *name;
-
-    gSaveBlock1Ptr->secretBases[secretBaseIdx] = *secretBase;
-    gSaveBlock1Ptr->secretBases[secretBaseIdx].registryStatus = NEW;
-    if (version == VERSION_SAPPHIRE || version == VERSION_RUBY)
-        gSaveBlock1Ptr->secretBases[secretBaseIdx].language = GAME_LANGUAGE;
-
-    if (version == VERSION_EMERALD && language == LANGUAGE_JAPANESE)
-    {
-        name = gSaveBlock1Ptr->secretBases[secretBaseIdx].trainerName;
-        for (stringLength = 0; stringLength < PLAYER_NAME_LENGTH; stringLength++)
-        {
-            if (name[stringLength] == EOS)
-                break;
-        }
-
-        if (stringLength > 5)
-            gSaveBlock1Ptr->secretBases[secretBaseIdx].language = GAME_LANGUAGE;
-    }
-}
-
-static bool8 SecretBasesHaveSameTrainerId(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
-{
-    u8 i;
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-    {
-        if (secretBase1->trainerId[i] != secretBase2->trainerId[i])
-            return FALSE;
-    }
-
-    return TRUE;
-}
-
-static bool8 SecretBasesHaveSameTrainerName(struct SecretBase *sbr1, struct SecretBase *sbr2)
-{
-    u8 i;
-    for (i = 0; i < PLAYER_NAME_LENGTH && (sbr1->trainerName[i] != EOS || sbr2->trainerName[i] != EOS); i++)
-    {
-        if (sbr1->trainerName[i] != sbr2->trainerName[i])
-            return FALSE;
-    }
-
-    return TRUE;
-}
-
-static bool8 SecretBasesBelongToSamePlayer(struct SecretBase *secretBase1, struct SecretBase *secretBase2)
-{
-    if (secretBase1->gender == secretBase2->gender
-     && SecretBasesHaveSameTrainerId(secretBase1, secretBase2)
-     && SecretBasesHaveSameTrainerName(secretBase1, secretBase2))
-    {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-static s16 GetSecretBaseIndexFromId(u8 secretBaseId)
-{
-    s16 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == secretBaseId)
-            return i;
-    }
-
-    return -1;
-}
-
-static u8 FindAvailableSecretBaseIndex(void)
-{
-    s16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->secretBases[i].secretBaseId == 0)
-            return i;
-    }
-
-    return 0;
-}
-
-static u8 FindUnregisteredSecretBaseIndex(void)
-{
-    s16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
-    {
-        if (gSaveBlock1Ptr->secretBases[i].registryStatus == UNREGISTERED && gSaveBlock1Ptr->secretBases[i].toRegister == FALSE)
-            return i;
-    }
-
-    return 0;
-}
-
-static u8 TrySaveFriendsSecretBase(struct SecretBase *secretBase, u32 version, u32 language)
-{
-    s16 index;
-
-    // Secret base has no location
-    if (!secretBase->secretBaseId)
-        return 0;
-
-    index = GetSecretBaseIndexFromId(secretBase->secretBaseId);
-    if (index != 0)
-    {
-        // An existing secret base is using this location
-        if (index != -1)
-        {
-            if (gSaveBlock1Ptr->secretBases[index].toRegister == TRUE)
-                return 0;
-
-            if (gSaveBlock1Ptr->secretBases[index].registryStatus != NEW || secretBase->toRegister == TRUE)
-            {
-                // Overwrite unregistered base at this location
-                SaveSecretBase(index, secretBase, version, language);
-                return index;
-            }
-        }
-        // No secret base is using this location, find a spot to save it
-        else
-        {
-            index = FindAvailableSecretBaseIndex();
-            if (index != 0)
-            {
-                // Save in empty space
-                SaveSecretBase(index, secretBase, version, language);
-                return index;
-            }
-
-            index = FindUnregisteredSecretBaseIndex();
-            if (index != 0)
-            {
-                // Overwrite unregistered base
-                SaveSecretBase(index, secretBase, version, language);
-                return index;
-            }
-        }
-    }
-
-    // Unable to save. Either...
-    // - This was the player's base
-    // - A registered base exists at this location
-    // - The secret base limit has been filled with registered bases
-    return 0;
-}
-
-// Moves the registered secret bases to the beginning of the array, so that
-// they won't be forgotten during record mixing.
-static void SortSecretBasesByRegistryStatus(void)
-{
-    u8 i;
-    u8 j;
-    struct SecretBase *secretBases;
-
-    secretBases = gSaveBlock1Ptr->secretBases;
-    for (i = 1; i < SECRET_BASES_COUNT - 1; i++)
-    {
-        for (j = i + 1; j < SECRET_BASES_COUNT; j++)
-        {
-            if ((secretBases[i].registryStatus == UNREGISTERED && secretBases[j].registryStatus == REGISTERED)
-             || (secretBases[i].registryStatus == NEW && secretBases[j].registryStatus != NEW))
-            {
-                struct SecretBase temp;
-                SWAP(secretBases[i], secretBases[j], temp)
-            }
-        }
-    }
-}
-
-// Used to save a record mixing friends' bases other than their own
-// registryStatus is so registered bases can be attempted first
-static void TrySaveFriendsSecretBases(struct SecretBaseRecordMixer *mixer, u8 registryStatus)
-{
-    u16 i;
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
-    {
-        if (mixer->secretBases[i].registryStatus == registryStatus)
-            TrySaveFriendsSecretBase(&mixer->secretBases[i], mixer->version, mixer->language);
-    }
-}
-
-static bool8 SecretBaseBelongsToPlayer(struct SecretBase *secretBase)
-{
-    u8 i;
-
-    if (secretBase->secretBaseId == 0)
-        return FALSE;
-
-    if (secretBase->secretBaseId && secretBase->gender != gSaveBlock2Ptr->playerGender)
-        return FALSE;
-
-    // Check if the player's trainer Id matches the secret base's id.
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-    {
-        if (secretBase->trainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
-            return FALSE;
-    }
-
-    for (i = 0; i < PLAYER_NAME_LENGTH && (secretBase->trainerName[i] != EOS || gSaveBlock2Ptr->playerName[i] != EOS); i++)
-    {
-        if (secretBase->trainerName[i] != gSaveBlock2Ptr->playerName[i])
-            return FALSE;
-    }
-
-    return TRUE;
-}
-
-#define DELETED_BASE_A  (1 << 0)
-#define DELETED_BASE_B  (1 << 1)
-#define DELETED_BASE_C  (1 << 2)
-
-static void DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(struct SecretBase *basesA, struct SecretBase *basesB, struct SecretBase *basesC)
-{
-    u8 i;
-    u8 sbFlags = 0;
-
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (!(sbFlags & DELETED_BASE_A))
-        {
-            if (SecretBaseBelongsToPlayer(&basesA[i]) == TRUE)
-            {
-                ClearSecretBase(&basesA[i]);
-                sbFlags |= DELETED_BASE_A;
-            }
-        }
-
-        if (!(sbFlags & DELETED_BASE_B))
-        {
-            if (SecretBaseBelongsToPlayer(&basesB[i]) == TRUE)
-            {
-                ClearSecretBase(&basesB[i]);
-                sbFlags |= DELETED_BASE_B;
-            }
-        }
-
-        if (!(sbFlags & DELETED_BASE_C))
-        {
-            if (SecretBaseBelongsToPlayer(&basesC[i]) == TRUE)
-            {
-                ClearSecretBase(&basesC[i]);
-                sbFlags |= DELETED_BASE_C;
-            }
-        }
-
-        if (sbFlags == (DELETED_BASE_A | DELETED_BASE_B | DELETED_BASE_C))
-        {
-            break;
-        }
-    }
-}
-
-#undef DELETED_BASE_A
-#undef DELETED_BASE_B
-#undef DELETED_BASE_C
-
-// returns TRUE if secretBase was deleted, FALSE otherwise
-static bool8 ClearDuplicateOwnedSecretBase(struct SecretBase *secretBase, struct SecretBase *secretBases, u8 idx)
-{
-    u8 i;
-
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (secretBases[i].secretBaseId != 0)
-        {
-            if (SecretBasesBelongToSamePlayer(secretBase, &secretBases[i]) == TRUE)
-            {
-                if (idx == 0)
-                {
-                    ClearSecretBase(&secretBases[i]);
-                    return FALSE;
-                }
-
-                if (secretBase->numSecretBasesReceived > secretBases[i].numSecretBasesReceived)
-                {
-                    ClearSecretBase(&secretBases[i]);
-                    return FALSE;
-                }
-
-                secretBases[i].toRegister = secretBase->toRegister;
-                ClearSecretBase(secretBase);
-                return TRUE;
-            }
-        }
-    }
-
-    return FALSE;
-}
-
-static void ClearDuplicateOwnedSecretBases(struct SecretBase *playersBases, struct SecretBase *friendsBasesA, struct SecretBase *friendsBasesB, struct SecretBase *friendsBasesC)
-{
-    u8 i;
-
-    for (i = 1; i < SECRET_BASES_COUNT; i++)
-    {
-        if (playersBases[i].secretBaseId)
-        {
-            if (playersBases[i].registryStatus == REGISTERED)
-            {
-                // Mark registered bases, so if they're deleted as a duplicate they
-                // will be re-registered later
-                playersBases[i].toRegister = TRUE;
-            }
-            if (!ClearDuplicateOwnedSecretBase(&playersBases[i], friendsBasesA, i))
-            {
-                if (!ClearDuplicateOwnedSecretBase(&playersBases[i], friendsBasesB, i))
-                {
-                    ClearDuplicateOwnedSecretBase(&playersBases[i], friendsBasesC, i);
-                }
-            }
-        }
-    }
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (friendsBasesA[i].secretBaseId)
-        {
-            friendsBasesA[i].battledOwnerToday = 0;
-            if (!ClearDuplicateOwnedSecretBase(&friendsBasesA[i], friendsBasesB, i))
-            {
-                ClearDuplicateOwnedSecretBase(&friendsBasesA[i], friendsBasesC, i);
-            }
-        }
-    }
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (friendsBasesB[i].secretBaseId)
-        {
-            friendsBasesB[i].battledOwnerToday = 0;
-            ClearDuplicateOwnedSecretBase(&friendsBasesB[i], friendsBasesC, i);
-        }
-        if (friendsBasesC[i].secretBaseId)
-        {
-            friendsBasesC[i].battledOwnerToday = 0;
-        }
-    }
-}
-
-static void TrySaveRegisteredDuplicate(struct SecretBase *base, u32 version, u32 language)
-{
-    if (base->toRegister == TRUE)
-    {
-        TrySaveFriendsSecretBase(base, version, language);
-        ClearSecretBase(base);
-    }
-}
-
-static void TrySaveRegisteredDuplicates(struct SecretBaseRecordMixer *mixers)
-{
-    u16 i;
-
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        TrySaveRegisteredDuplicate(&mixers[0].secretBases[i], mixers[0].version, mixers[0].language);
-        TrySaveRegisteredDuplicate(&mixers[1].secretBases[i], mixers[1].version, mixers[1].language);
-        TrySaveRegisteredDuplicate(&mixers[2].secretBases[i], mixers[2].version, mixers[2].language);
-    }
-}
-
-static void SaveRecordMixBases(struct SecretBaseRecordMixer *mixers)
-{
-    DeleteFirstOldBaseFromPlayerInRecordMixingFriendsRecords(mixers[0].secretBases, mixers[1].secretBases, mixers[2].secretBases);
-    ClearDuplicateOwnedSecretBases(gSaveBlock1Ptr->secretBases, mixers[0].secretBases, mixers[1].secretBases, mixers[2].secretBases);
-
-    // First, save any registered secret bases that were deleted as duplicates
-    TrySaveRegisteredDuplicates(mixers);
-
-    // Then try to save the record mixing friends' own bases
-    TrySaveFriendsSecretBase(mixers[0].secretBases, mixers[0].version, mixers[0].language);
-    TrySaveFriendsSecretBase(mixers[1].secretBases, mixers[1].version, mixers[1].language);
-    TrySaveFriendsSecretBase(mixers[2].secretBases, mixers[2].version, mixers[2].language);
-
-    // Then try to save as many of their registered bases as possible
-    TrySaveFriendsSecretBases(&mixers[0], REGISTERED);
-    TrySaveFriendsSecretBases(&mixers[1], REGISTERED);
-    TrySaveFriendsSecretBases(&mixers[2], REGISTERED);
-
-    // Lastly save as many of their unregistered bases as possible
-    TrySaveFriendsSecretBases(&mixers[0], UNREGISTERED);
-    TrySaveFriendsSecretBases(&mixers[1], UNREGISTERED);
-    TrySaveFriendsSecretBases(&mixers[2], UNREGISTERED);
-}
-
-#define INIT_SECRET_BASE_RECORD_MIXER(linkId1, linkId2, linkId3)        \
-            mixers[0].secretBases = secretBases + linkId1 * recordSize; \
-            mixers[0].version = gLinkPlayers[linkId1].version & 0xFF;   \
-            mixers[0].language = gLinkPlayers[linkId1].language;        \
-            mixers[1].secretBases = secretBases + linkId2 * recordSize; \
-            mixers[1].version = gLinkPlayers[linkId2].version & 0xFF;   \
-            mixers[1].language = gLinkPlayers[linkId2].language;        \
-            mixers[2].secretBases = secretBases + linkId3 * recordSize; \
-            mixers[2].version = gLinkPlayers[linkId3].version & 0xFF;   \
-            mixers[2].language = gLinkPlayers[linkId3].language;
-
-void ReceiveSecretBasesData(void *secretBases, size_t recordSize, u8 linkIdx)
-{
-    struct SecretBaseRecordMixer mixers[3];
-    u16 i;
-
-    if (linkIdx > 3)
-        return;
-
-    if (FlagGet(FLAG_RECEIVED_SECRET_POWER))
-    {
-        switch (GetLinkPlayerCount())
-        {
-        case 2:
-            memset(secretBases + 2 * recordSize, 0, recordSize);
-            memset(secretBases + 3 * recordSize, 0, recordSize);
-            break;
-        case 3:
-            memset(secretBases + 3 * recordSize, 0, recordSize);
-            break;
-        }
-
-        switch (linkIdx)
-        {
-        case 0:
-            INIT_SECRET_BASE_RECORD_MIXER(1, 2, 3)
-            break;
-        case 1:
-            INIT_SECRET_BASE_RECORD_MIXER(2, 3, 0)
-            break;
-        case 2:
-            INIT_SECRET_BASE_RECORD_MIXER(3, 0, 1)
-            break;
-        case 3:
-            INIT_SECRET_BASE_RECORD_MIXER(0, 1, 2)
-            break;
-        }
-
-        SaveRecordMixBases(mixers);
-
-        for (i = 1; i < SECRET_BASES_COUNT; i++)
-        {
-            // In the process of deleting duplicate bases, if a base the player has registered is deleted it is
-            // flagged with the temporary toRegister flag, so it can be re-registered after it has been newly saved
-            if (gSaveBlock1Ptr->secretBases[i].toRegister == TRUE)
-            {
-                gSaveBlock1Ptr->secretBases[i].registryStatus = REGISTERED;
-                gSaveBlock1Ptr->secretBases[i].toRegister = FALSE;
-            }
-        }
-
-        SortSecretBasesByRegistryStatus();
-        for (i = 1; i < SECRET_BASES_COUNT; i++)
-        {
-            // Unmark "new" bases, they've been saved now and are no longer important
-            if (gSaveBlock1Ptr->secretBases[i].registryStatus == NEW)
-                gSaveBlock1Ptr->secretBases[i].registryStatus = UNREGISTERED;
-        }
-
-        if (gSaveBlock1Ptr->secretBases[0].secretBaseId != 0
-         && gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived != 0xFFFF)
-        {
-            gSaveBlock1Ptr->secretBases[0].numSecretBasesReceived++;
-        }
-    }
-}
-
-void ClearJapaneseSecretBases(struct SecretBase *bases)
-{
-    u32 i;
-    for (i = 0; i < SECRET_BASES_COUNT; i++)
-    {
-        if (bases[i].language == LANGUAGE_JAPANESE)
-            ClearSecretBase(&bases[i]);
-    }
-}
-
 void InitSecretBaseVars(void)
 {
-    VarSet(VAR_SECRET_BASE_STEP_COUNTER, 0);
-    VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, 0);
-    VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, 0);
-    VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, 0);
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, TRUE);
-    else
-        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
-
     sInFriendSecretBase = FALSE;
 }
 
 void CheckLeftFriendsSecretBase(void)
 {
-    if (VarGet(VAR_SECRET_BASE_IS_NOT_LOCAL) && sInFriendSecretBase == TRUE && !CurMapIsSecretBase())
-    {
-        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
-        sInFriendSecretBase = FALSE;
-        TryPutSecretBaseSecretsOnAir();
-        VarSet(VAR_SECRET_BASE_STEP_COUNTER, 0);
-        VarSet(VAR_SECRET_BASE_LAST_ITEM_USED, 0);
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, 0);
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, 0);
-        VarSet(VAR_SECRET_BASE_IS_NOT_LOCAL, FALSE);
-    }
+    sInFriendSecretBase = FALSE;
 }
 
 void CheckInteractedWithFriendsDollDecor(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_DOLL);
+
 }
 
 void CheckInteractedWithFriendsCushionDecor(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_CUSHION);
+
 }
 
 void DeclinedSecretBaseBattle(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-    {
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~(SECRET_BASE_BATTLED_WON | SECRET_BASE_BATTLED_LOST | SECRET_BASE_DECLINED_BATTLE));
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~(SECRET_BASE_BATTLED_DRAW));
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_DECLINED_BATTLE);
-    }
+
 }
 
 void WonSecretBaseBattle(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-    {
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~(SECRET_BASE_BATTLED_WON | SECRET_BASE_BATTLED_LOST | SECRET_BASE_DECLINED_BATTLE));
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~(SECRET_BASE_BATTLED_DRAW));
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_BATTLED_WON);
-    }
+
 }
 
 void LostSecretBaseBattle(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-    {
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~(SECRET_BASE_BATTLED_WON | SECRET_BASE_BATTLED_LOST | SECRET_BASE_DECLINED_BATTLE));
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~(SECRET_BASE_BATTLED_DRAW));
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_BATTLED_LOST);
-    }
+
 }
 
 void DrewSecretBaseBattle(void)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-    {
-        VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) & ~(SECRET_BASE_BATTLED_WON | SECRET_BASE_BATTLED_LOST | SECRET_BASE_DECLINED_BATTLE));
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) & ~(SECRET_BASE_BATTLED_DRAW));
-        VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_BATTLED_DRAW);
-    }
+
 }
 
 void CheckInteractedWithFriendsPosterDecor(void)
@@ -1907,8 +1281,6 @@ void CheckInteractedWithFriendsPosterDecor(void)
         case METATILE_SecretBase_RedPoster:
         case METATILE_SecretBase_BluePoster:
         case METATILE_SecretBase_CutePoster:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_POSTER);
             break;
     }
 }
@@ -1922,8 +1294,6 @@ void CheckInteractedWithFriendsFurnitureBottom(void)
     {
         case METATILE_SecretBase_GlassOrnament_Base1:
         case METATILE_SecretBase_GlassOrnament_Base2:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_GLASS_ORNAMENT);
             break;
         case METATILE_SecretBase_RedPlant_Base1:
         case METATILE_SecretBase_RedPlant_Base2:
@@ -1943,24 +1313,16 @@ void CheckInteractedWithFriendsFurnitureBottom(void)
         case METATILE_SecretBase_GorgeousPlant_BaseRight1:
         case METATILE_SecretBase_GorgeousPlant_BaseLeft2:
         case METATILE_SecretBase_GorgeousPlant_BaseRight2:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_LOW_TV_FLAGS, VarGet(VAR_SECRET_BASE_LOW_TV_FLAGS) | SECRET_BASE_USED_PLANT);
             break;
         case METATILE_SecretBase_Fence_Horizontal:
         case METATILE_SecretBase_Fence_Vertical:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_FENCE);
             break;
         case METATILE_SecretBase_Tire_BottomLeft:
         case METATILE_SecretBase_Tire_BottomRight:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_TIRE);
             break;
         case METATILE_SecretBase_RedBrick_Bottom:
         case METATILE_SecretBase_YellowBrick_Bottom:
         case METATILE_SecretBase_BlueBrick_Bottom:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BRICK);
             break;
         case METATILE_SecretBase_SmallDesk:
         case METATILE_SecretBase_PokemonDesk:
@@ -1985,8 +1347,6 @@ void CheckInteractedWithFriendsFurnitureBottom(void)
         case METATILE_SecretBase_PrettyDesk_BottomLeft:
         case METATILE_SecretBase_PrettyDesk_BottomMid:
         case METATILE_SecretBase_PrettyDesk_BottomRight:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_DESK);
             break;
     }
 }
@@ -2009,8 +1369,6 @@ void CheckInteractedWithFriendsFurnitureMiddle(void)
         case METATILE_SecretBase_HardDesk_Center:
         case METATILE_SecretBase_PrettyDesk_TopMid:
         case METATILE_SecretBase_PrettyDesk_Center:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_DESK);
             break;
     }
 }
@@ -2044,19 +1402,13 @@ void CheckInteractedWithFriendsFurnitureTop(void)
         case METATILE_SecretBase_PrettyDesk_TopRight:
         case METATILE_SecretBase_PrettyDesk_MidLeft:
         case METATILE_SecretBase_PrettyDesk_MidRight:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_DESK);
             break;
         case METATILE_SecretBase_Tire_TopLeft:
         case METATILE_SecretBase_Tire_TopRight:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_TIRE);
             break;
         case METATILE_SecretBase_RedBrick_Top:
         case METATILE_SecretBase_YellowBrick_Top:
         case METATILE_SecretBase_BlueBrick_Top:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_BRICK);
             break;
     }
 }
@@ -2070,8 +1422,6 @@ void CheckInteractedWithFriendsSandOrnament(void)
     {
         case METATILE_SecretBase_SandOrnament_Base1:
         case METATILE_SecretBase_SandOrnament_Base2:
-            if (VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                VarSet(VAR_SECRET_BASE_HIGH_TV_FLAGS, VarGet(VAR_SECRET_BASE_HIGH_TV_FLAGS) | SECRET_BASE_USED_SAND_ORNAMENT);
             break;
     }
 }

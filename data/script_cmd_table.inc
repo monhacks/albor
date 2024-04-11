@@ -12,8 +12,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_callstd                           @ 0x09
 	.4byte ScrCmd_gotostd_if                        @ 0x0a
 	.4byte ScrCmd_callstd_if                        @ 0x0b
-	.4byte ScrCmd_returnram                         @ 0x0c
-	.4byte ScrCmd_endram                            @ 0x0d
+	.4byte ScrCmd_nop1                         		@ 0x0c
+	.4byte ScrCmd_nop1                            	@ 0x0d
 	.4byte ScrCmd_setmysteryeventstatus             @ 0x0e
 	.4byte ScrCmd_loadword                          @ 0x0f
 	.4byte ScrCmd_loadbyte                          @ 0x10
@@ -150,7 +150,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_showmoneybox                      @ 0x93
 	.4byte ScrCmd_hidemoneybox                      @ 0x94
 	.4byte ScrCmd_updatemoneybox                    @ 0x95
-	.4byte ScrCmd_getpokenewsactive                 @ 0x96
+	.4byte ScrCmd_nop1                 				@ 0x96
 	.4byte ScrCmd_fadescreen                        @ 0x97
 	.4byte ScrCmd_fadescreenspeed                   @ 0x98
 	.4byte ScrCmd_setflashlevel                     @ 0x99
@@ -207,7 +207,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1                              @ 0xcc
 	.4byte ScrCmd_setmonmodernfatefulencounter      @ 0xcd
 	.4byte ScrCmd_checkmonmodernfatefulencounter    @ 0xce
-	.4byte ScrCmd_trywondercardscript               @ 0xcf
+	.4byte ScrCmd_nop1               				@ 0xcf
 	.4byte ScrCmd_nop1                              @ 0xd0
 	.4byte ScrCmd_warpspinenter                     @ 0xd1
 	.4byte ScrCmd_setmonmetlocation                 @ 0xd2

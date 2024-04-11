@@ -82,7 +82,6 @@ struct WirelessLink_Group
     u8 listTaskId;
     u8 leaderId;
     u8 listenTaskId;
-    bool8 isWonderNews;
     u8 refreshTimer;
     u8 delayBeforePrint;
 };
@@ -143,10 +142,6 @@ extern u8 gUnionRoomRequestedMonType;
 
 u8 CreateTask_CreateTradeMenu(void);
 void SetUsingUnionRoomStartMenu(void);
-void CreateTask_LinkMysteryGiftWithFriend(u32 activity);
-void CreateTask_LinkMysteryGiftOverWireless(u32 activity);
-void CreateTask_SendMysteryGift(u32 activity);
 u8 CreateTask_ListenToWireless(void);
-void StartUnionRoomBattle(u16 battleFlags);
 
 #endif //GUARD_UNION_ROOM_H

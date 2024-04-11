@@ -51,13 +51,10 @@ EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA static u16 sPlayerMonMoves[MAX_BATTLERS_COUNT / 2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static bool8 sIsPlaybackFinished = 0;
-EWRAM_DATA static u8 sRecordMixFriendName[PLAYER_NAME_LENGTH + 1] = {0};
-EWRAM_DATA static u8 sRecordMixFriendClass = 0;
 EWRAM_DATA static u8 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
 EWRAM_DATA static u8 sBattleOutcome = 0;
 
-static u8 sRecordMixFriendLanguage;
 static u8 sApprenticeLanguage;
 
 static u8 GetNextRecordedDataByte(u8 *, u8 *, u8 *);
@@ -293,12 +290,7 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
     sTextSpeed = src->textSpeed;
     sAI_Scripts = src->AI_scripts;
 
-    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-        sRecordMixFriendName[i] = src->recordMixFriendName[i];
-
-    sRecordMixFriendClass = src->recordMixFriendClass;
     sApprenticeId = src->apprenticeId;
-    sRecordMixFriendLanguage = src->recordMixFriendLanguage;
     sApprenticeLanguage = src->apprenticeLanguage;
 
     for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
@@ -515,29 +507,9 @@ bool8 RecordedBattle_CanStopPlayback(void)
     return (sIsPlaybackFinished == FALSE);
 }
 
-void GetRecordedBattleRecordMixFriendName(u8 *dst)
-{
-    s32 i;
-
-    for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-        dst[i] = sRecordMixFriendName[i];
-    dst[PLAYER_NAME_LENGTH] = EOS;
-    ConvertInternationalString(dst, sRecordMixFriendLanguage);
-}
-
-u8 GetRecordedBattleRecordMixFriendClass(void)
-{
-    return sRecordMixFriendClass;
-}
-
 u8 GetRecordedBattleApprenticeId(void)
 {
     return sApprenticeId;
-}
-
-u8 GetRecordedBattleRecordMixFriendLanguage(void)
-{
-    return sRecordMixFriendLanguage;
 }
 
 u8 GetRecordedBattleApprenticeLanguage(void)
