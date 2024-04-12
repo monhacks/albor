@@ -421,11 +421,7 @@ static const struct SpriteTemplate sSpriteTemplate_64x64 =
 static const u32 sCompressedStatuses[] =
 {
     STATUS1_NONE,
-    STATUS1_SLEEP_TURN(1),
-    STATUS1_SLEEP_TURN(2),
-    STATUS1_SLEEP_TURN(3),
-    STATUS1_SLEEP_TURN(4),
-    STATUS1_SLEEP_TURN(5),
+    STATUS1_SLEEP,
     STATUS1_POISON,
     STATUS1_BURN,
     STATUS1_FREEZE,

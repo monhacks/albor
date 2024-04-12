@@ -1086,6 +1086,7 @@ const u8* CancelMultiTurnMoves(u32 battler)
 bool32 WasUnableToUseMove(u32 battler)
 {
     if (gProtectStructs[battler].prlzImmobility
+        || gProtectStructs[battler].sleepImmobility
         || gProtectStructs[battler].usedImprisonedMove
         || gProtectStructs[battler].loveImmobility
         || gProtectStructs[battler].usedDisabledMove
@@ -2760,11 +2761,7 @@ u8 DoBattlerEndTurnEffects(void)
                     }
                     else
                     {
-                        if (B_SLEEP_TURNS >= GEN_5)
-                            gBattleMons[battler].status1 |= ((Random() % 3) + 2);
-                        else
-                            gBattleMons[battler].status1 |= ((Random() % 4) + 3);
-
+                        gBattleMons[battler].status1 |= STATUS1_SLEEP;
                         BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[battler].status1);
                         MarkBattlerForControllerExec(battler);
                         BattleScriptExecute(BattleScript_YawnMakesAsleep);
@@ -3180,7 +3177,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_ASLEEP: // check being asleep
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP)
+            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP) && !RandomPercentage(RNG_SLEEP, 75))
             {
                 if (UproarWakeUpCheck(gBattlerAttacker))
                 {
@@ -3206,18 +3203,11 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                     {
                         if (gChosenMove != MOVE_SNORE && gChosenMove != MOVE_SLEEP_TALK)
                         {
-                            gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
+                            gProtectStructs[gBattlerAttacker].sleepImmobility = TRUE;
+                            gBattlescriptCurrInstr = BattleScript_MoveUsedIsParalyzed;
                             gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
-                            effect = 2;
+                            effect = 1;
                         }
-                    }
-                    else
-                    {
-                        gBattleMons[gBattlerAttacker].status2 &= ~STATUS2_NIGHTMARE;
-                        BattleScriptPushCursor();
-                        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
-                        gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
-                        effect = 2;
                     }
                 }
             }
@@ -9576,9 +9566,11 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
     if (B_SANDSTORM_SPDEF_BOOST >= GEN_4 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_ROCK) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SANDSTORM) && !usesDefStat)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
     // snow def boost for ice types
-    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_SNOW) && usesDefStat)
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_HAIL) && usesDefStat)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
-
+    // somnolientos -25% defensa
+    if (gBattleMons[battlerDef].status1 & STATUS1_BURN && usesDefStat)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.75));
     // The defensive stats of a Player's Pokémon are boosted by x1.1 (+10%) if they have the 5th badge and 7th badges.
     // Having the 5th badge boosts physical defense while having the 7th badge boosts special defense.
     if (ShouldGetStatBadgeBoost(FLAG_BADGE05_GET, battlerDef) && IS_MOVE_PHYSICAL(move))
@@ -9659,13 +9651,21 @@ static inline uq4_12_t GetBurnOrFrostBiteModifier(u32 battlerAtk, u32 move, u32 
         && IS_MOVE_PHYSICAL(move)
         && (B_BURN_FACADE_DMG < GEN_6 || gMovesInfo[move].effect != EFFECT_FACADE)
         && abilityAtk != ABILITY_GUTS)
-        return UQ_4_12(0.75);
+    {
+        return UQ_4_12(0.75);        
+    }
     if (gBattleMons[battlerAtk].status1 & STATUS1_FROSTBITE
         && IS_MOVE_SPECIAL(move)
         && (B_BURN_FACADE_DMG < GEN_6 || gMovesInfo[move].effect != EFFECT_FACADE)
         && abilityAtk != ABILITY_GUTS)
+    {
         return UQ_4_12(0.75);
-    return UQ_4_12(1.0);
+    }
+    else 
+    {
+        return UQ_4_12(1.0);
+    }
+
 }
 
 static inline uq4_12_t GetCriticalModifier(bool32 isCrit)
@@ -11212,7 +11212,7 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
         secondaryEffectChance *= 2;
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
-    if (gBattleWeather & B_WEATHER_SNOW && additionalEffect->moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE)
+    if (gBattleWeather & B_WEATHER_HAIL && additionalEffect->moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE)
         secondaryEffectChance *= 2;
     if (gBattleWeather & B_WEATHER_SUN && additionalEffect->moveEffect == MOVE_EFFECT_BURN)
         secondaryEffectChance *= 2;

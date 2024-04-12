@@ -17,7 +17,6 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).
     *Alas vendaval funciona como en 6ª generación: no necesita la salud al máximo para funcionar.
     *10% de posibilidades de encuentro doble con Pokémon salvajes.
-    *Helado sustituye a congelamiento.
     *Las gemas suben la potencia de un movimiento un 50%.
     *Las MTs son reusables.
     *Se ha implementado el repartir experiencia de 6ª gen.
@@ -33,8 +32,11 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Habilidad Fuga te permite huir siempre (incluido movimientos como Atadura, o habilidades como Sombra Trampa), y +1 de prioridad movimientos de cambio como Ida y Vuelta.
     *Se han modificado las naturalezas: Ahora son 5 (Ofensiva, Defensiva, Ofensiva especial, Defensiva especial y Rápida), y no bajan ninguna estadística, solo suben la correspondiente.
     *Los cambios de Stats se han modificado: Cada cambio positivo o negativo equivale a 25% (Un danza espada es una subida del 50%).
-    *Quemado y helado dañan 1/16 PS y reducen el daño un 25% (en vez de un 50%). El daño por quemadura no hace efecto en lluvia, y el daño de congelación no hace daño en sol. Los ataques que tengan como efecto secundario quemar tienen x2 de probabilidades de hacerlo en Sol, igual que los ataques que congelen en Nieve.
+    *Quemado y congelado dañan 1/16 PS y reducen el daño un 25% (en vez de un 50%). El daño por quemadura no hace efecto en lluvia, y el daño de congelación no hace daño en sol. Los ataques que tengan como efecto secundario quemar tienen x2 de probabilidades de hacerlo en Sol, igual que los ataques que congelen en Granizo.
+    *Granizo potencia la defensa de los tipo Hielo un 50%.
     *El daño de ataques en dobles que atacan a ambos rivales se divide al 50% (en vez de al 75%).
+    *La parálisis reduce 50% la velocidad, y da un 25% de posibilidades de no atacar.
+    *Somnoliento sustituye a la mecánica de dormido: Un Pokémon somnoliento tiene un 25% de posibilidades de no atacar, y se reduce su defensa un 25%. Además, no se cura con el paso de los turnos, excepto si recibe Espabila. El movimiento Descanso autoinflige somnoliento, y los ataques Ronquido y Sonámbulo siguen funcionando como previamente.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

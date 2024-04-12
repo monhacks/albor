@@ -899,10 +899,7 @@ void BS_TrySetStatus1(void)
         case STATUS1_SLEEP:
             if (CanSleep(gBattlerTarget))
             {
-                if (B_SLEEP_TURNS >= GEN_5)
-                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 3) + 2);
-                else
-                    gBattleMons[gBattlerTarget].status1 |=  STATUS1_SLEEP_TURN((Random() % 4) + 3);
+                gBattleMons[gBattlerTarget].status1 |= STATUS1_SLEEP;
                 gBattleCommunication[MULTISTRING_CHOOSER] = 4;
                 effect++;
             }

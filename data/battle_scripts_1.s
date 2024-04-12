@@ -7260,6 +7260,13 @@ BattleScript_MoveUsedIsParalyzed::
 	cancelmultiturnmoves BS_ATTACKER
 	goto BattleScript_MoveEnd
 
+BattleScript_EstaSomnoliento::
+	printstring STRINGID_ESTASOMNOLIENTO
+	waitmessage B_WAIT_TIME_LONG
+	statusanimation BS_ATTACKER
+	cancelmultiturnmoves BS_ATTACKER
+	goto BattleScript_MoveEnd
+
 BattleScript_PowderMoveNoEffect::
 	attackstring
 	ppreduce
