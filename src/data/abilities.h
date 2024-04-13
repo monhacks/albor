@@ -2721,4 +2721,85 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Ataques siniestros +25%."),
         .aiRating = 8,
     },
+
+    [ABILITY_NUEVE_COLAS] =
+    {
+        .name = _("Nueve colas"),
+        .description = COMPOUND_STRING("50% de maldecir al contacto."),
+        .aiRating = 3,
+    },
+
+    [ABILITY_VIDAS_PASADAS] =
+    {
+        .name = _("Vidas pasadas"),
+        .description = COMPOUND_STRING("Ataques fantasmas +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_EXTRASENSORIAL] =
+    {
+        .name = _("Extrasensorial"),
+        .description = COMPOUND_STRING("Ataques psíquicos +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_PARASITO] =
+    {
+        .name = _("Parásito"),
+        .description = COMPOUND_STRING("50% de drenadoras al contacto."),
+        .aiRating = 3,
+    },
+
+    [ABILITY_TIERRA_HUMEDA] =
+    {
+        .name = _("Tierra húmeda"),
+        .description = COMPOUND_STRING("Resiste fuego, inmune quemaduras."),
+        .aiRating = 3,
+    },
+
+
+    [ABILITY_HIBERNADOR] =
+    {
+        .name = _("Hibernador"),
+        .description = COMPOUND_STRING("+50% evasión si duerme."),
+        .aiRating = 2,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_TERRITORIAL] =
+    {
+        .name = _("Territorial"),
+        .description = COMPOUND_STRING("Impide que le quiten objeto."),
+        .aiRating = 3,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_HUMEDAD_RELATIVA] =
+    {
+        .name = _("Humedad relativa"),
+        .description = COMPOUND_STRING("Beneficios de granizo en lluvia."),
+        .aiRating = 3,
+    },
+
+    [ABILITY_VOZ_CANTANTE] =
+    {
+        .name = _("Voz cantante"),
+        .description = COMPOUND_STRING("+1 prioridad sonido."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_GLOBO] =
+    {
+        .name = _("Globo"),
+        .description = COMPOUND_STRING("+1 defensa si recibe viento."),
+        .aiRating = 4,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_VOZ_DULCE] =
+    {
+        .name = _("Voz dulce"),
+        .description = COMPOUND_STRING("Sonido 50% de adormecer."),
+        .aiRating = 4,
+    },
 };

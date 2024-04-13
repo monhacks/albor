@@ -1517,6 +1517,11 @@ static bool32 AccuracyCalcHelper(u16 move)
             JumpIfMoveFailed(7, move);
             return TRUE;
         }
+        else if ((gBattleWeather & (B_WEATHER_RAIN)) && gMovesInfo[move].effect == EFFECT_BLIZZARD && GetBattlerAbility(gBattlerTarget) == ABILITY_HUMEDAD_RELATIVA)
+        {
+            JumpIfMoveFailed(7, move);
+            return TRUE;
+        }
     }
 
     if (B_MINIMIZE_DMG_ACC >= GEN_6
@@ -1611,6 +1616,10 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     case ABILITY_TANGLED_FEET:
         if (gBattleMons[battlerDef].status2 & STATUS2_CONFUSION)
             calc = (calc * 50) / 100; // 1.5 tangled feet loss
+        break;
+    case ABILITY_HIBERNADOR:
+        if (gBattleMons[battlerDef].status1 & STATUS1_SLEEP)
+            calc = (calc * 50) / 100;
         break;
     }
 
@@ -2833,7 +2842,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             statusChanged = TRUE;
             break;
         case STATUS1_BURN:
-            if ((battlerAbility == ABILITY_WATER_VEIL || battlerAbility == ABILITY_WATER_BUBBLE)
+            if ((battlerAbility == ABILITY_WATER_VEIL || battlerAbility == ABILITY_WATER_BUBBLE || battlerAbility == ABILITY_TIERRA_HUMEDA)
               && (primary == TRUE || certain == TRUE))
             {
                 gLastUsedAbility = battlerAbility;
@@ -3336,7 +3345,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gBattlescriptCurrInstr++;
                     }
                     else if (gBattleMons[gBattlerTarget].item
-                        && GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
+                        && (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD || GetBattlerAbility(gBattlerTarget) == ABILITY_TERRITORIAL))
                     {
                         BattleScriptPushCursor();
                         gBattlescriptCurrInstr = BattleScript_NoItemSteal;
@@ -3551,7 +3560,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 break;
             case MOVE_EFFECT_BUG_BITE:
                 if (ItemId_GetPocket(gBattleMons[gEffectBattler].item) == POCKET_BERRIES
-                    && battlerAbility != ABILITY_STICKY_HOLD)
+                    && (battlerAbility != ABILITY_STICKY_HOLD || battlerAbility != ABILITY_TERRITORIAL))
                 {
                     // target loses their berry
                     gLastUsedItem = gBattleMons[gEffectBattler].item;
@@ -5241,7 +5250,7 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
         && CanBattlerGetOrLoseItem(battlerDef, gBattleMons[battlerDef].item)
         && !NoAliveMonsForEitherParty())
     {
-        if (GetBattlerAbility(battlerDef) == ABILITY_STICKY_HOLD && IsBattlerAlive(battlerDef))
+        if ((GetBattlerAbility(battlerDef) == ABILITY_STICKY_HOLD || GetBattlerAbility(battlerDef) == ABILITY_TERRITORIAL) && IsBattlerAlive(battlerDef))
         {
             gBattlerAbility = battlerDef;
             BattleScriptPushCursor();
@@ -5806,7 +5815,7 @@ static void Cmd_moveend(void)
               && !(gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerTarget)] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]])
               && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)
               && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-              && (GetBattlerAbility(gBattlerTarget) != ABILITY_STICKY_HOLD || !IsBattlerAlive(gBattlerTarget)))
+              && (GetBattlerAbility(gBattlerTarget) != ABILITY_STICKY_HOLD || GetBattlerAbility(gBattlerTarget) != ABILITY_TERRITORIAL || !IsBattlerAlive(gBattlerTarget)))
             {
                 StealTargetItem(gBattlerAttacker, gBattlerTarget);
                 gBattleScripting.battler = gBattlerAbility = gBattlerAttacker;
@@ -6064,7 +6073,7 @@ static void Cmd_moveend(void)
                     {
                         gBattlerTarget = gBattlerAbility = battler;
                         // Battle scripting is super brittle so we shall do the item exchange now (if possible)
-                        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD)
+                        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_STICKY_HOLD || GetBattlerAbility(gBattlerAttacker) != ABILITY_TERRITORIAL)
                             StealTargetItem(gBattlerTarget, gBattlerAttacker);  // Target takes attacker's item
 
                         gEffectBattler = gBattlerAttacker;
@@ -10610,7 +10619,7 @@ static void Cmd_various(void)
             VARIOUS_ARGS(const u8 *failInstr);
             u16 ability = GetBattlerAbility(battler);
             if (GetBattlerSide(battler) == GetBattlerSide(gBattlerAttacker)
-             && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER))
+             && (ability == ABILITY_WIND_RIDER || ability == ABILITY_WIND_POWER || ability == ABILITY_GLOBO))
             {
                 gLastUsedAbility = ability;
                 RecordAbilityBattle(battler, gLastUsedAbility);
@@ -13938,7 +13947,7 @@ static void Cmd_tryswapitems(void)
             gBattlescriptCurrInstr = cmd->failInstr;
         }
         // check if ability prevents swapping
-        else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD)
+        else if (GetBattlerAbility(gBattlerTarget) == ABILITY_STICKY_HOLD || GetBattlerAbility(gBattlerTarget) == ABILITY_TERRITORIAL)
         {
             gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
             gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
@@ -14518,6 +14527,34 @@ static void Cmd_pickup(void)
                 && (Random() % 16) == 0)
             {
                 heldItem = ITEM_BERRY_JUICE;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+            }
+            else if ((species == SPECIES_TEDDIURSA || SPECIES_COMBEE || SPECIES_VESPIQUEN)
+                && heldItem == ITEM_NONE
+                && (Random() % 16) == 0)
+            {
+                heldItem = ITEM_HONEY;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+            }
+            else if ((species == SPECIES_MUNCHLAX || SPECIES_SNORLAX)
+                && heldItem == ITEM_NONE
+                && (Random() % 16) == 0)
+            {
+                heldItem = ITEM_LEFTOVERS;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+            }
+            else if ((species == SPECIES_GRIMER || SPECIES_MUK || SPECIES_GRIMER_ALOLAN || SPECIES_MUK_ALOLAN)
+                && heldItem == ITEM_NONE
+                && (Random() % 16) == 0)
+            {
+                heldItem = ITEM_BLACK_SLUDGE;
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+            }
+            else if ((species == SPECIES_PARAS || SPECIES_PARASECT)
+                && heldItem == ITEM_NONE
+                && (Random() % 16) == 0)
+            {
+                heldItem = ITEM_BIG_MUSHROOM;
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
             }
         }

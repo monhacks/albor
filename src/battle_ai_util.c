@@ -2561,7 +2561,7 @@ bool32 CanKnockOffItem(u32 battler, u32 item)
       )) && GetBattlerSide(battler) == B_SIDE_PLAYER)
         return FALSE;
 
-    if (AI_DATA->abilities[battler] == ABILITY_STICKY_HOLD)
+    if (AI_DATA->abilities[battler] == ABILITY_STICKY_HOLD || AI_DATA->abilities[battler] == ABILITY_TERRITORIAL)
         return FALSE;
 
     if (!CanBattlerGetOrLoseItem(battler, item))
@@ -2701,6 +2701,7 @@ bool32 AI_CanConfuse(u32 battlerAtk, u32 battlerDef, u32 defAbility, u32 battler
 bool32 AI_CanBeBurned(u32 battler, u32 ability)
 {
     if (ability == ABILITY_WATER_VEIL
+      || ability == ABILITY_TIERRA_HUMEDA
       || ability == ABILITY_WATER_BUBBLE
       || ability == ABILITY_COMATOSE
       || IS_BATTLER_OF_TYPE(battler, TYPE_FIRE)

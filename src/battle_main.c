@@ -4816,6 +4816,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     {
         priority++;
     }
+    else if (ability == ABILITY_VOZ_CANTANTE && gMovesInfo[move].soundMove)
+    {
+        priority++;
+    }
     if (gProtectStructs[battler].quash)
         priority = -8;
 

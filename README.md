@@ -37,6 +37,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *El daño de ataques en dobles que atacan a ambos rivales se divide al 50% (en vez de al 75%).
     *La parálisis reduce 50% la velocidad, y da un 25% de posibilidades de no atacar.
     *Somnoliento sustituye a la mecánica de dormido: Un Pokémon somnoliento tiene un 25% de posibilidades de no atacar, y se reduce su defensa un 25%. Además, no se cura con el paso de los turnos, excepto si recibe Espabila. El movimiento Descanso autoinflige somnoliento, y los ataques Ronquido y Sonámbulo siguen funcionando como previamente.
+    *Algunas especies de Pokémon pueden encontrar objetos si no llevan ningún objeto equipado aunque no tengan la habilidad recogida: Snorlax puede encontrar Restos, Teddiursa puede encontrar Miel...
+    *Habilidad Humedad relativa (Glaceon): Beneficios del Granizo también en Lluvia: Ventisca no falla, x2 de posibilidad de congelar, +50% de defensa.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

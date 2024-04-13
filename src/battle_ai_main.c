@@ -1728,7 +1728,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_TRICK:
         case EFFECT_KNOCK_OFF:
-            if (aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD)
+            if (aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD || aiData->abilities[battlerDef] == ABILITY_TERRITORIAL)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_INGRAIN:
@@ -4480,13 +4480,13 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
                     score += AI_ShouldCopyStatChanges(battlerAtk, battlerDef);
                     break;
                 case MOVE_EFFECT_BUG_BITE:   // And pluck
-                    if (gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD)
+                    if (gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD || aiData->abilities[battlerDef] == ABILITY_TERRITORIAL)
                         break;
                     else if (ItemId_GetPocket(aiData->items[battlerDef]) == POCKET_BERRIES)
                         ADJUST_SCORE(DECENT_EFFECT);
                     break;
                 case MOVE_EFFECT_INCINERATE:
-                    if (gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD)
+                    if (gBattleMons[battlerDef].status2 & STATUS2_SUBSTITUTE || aiData->abilities[battlerDef] == ABILITY_STICKY_HOLD || aiData->abilities[battlerDef] == ABILITY_TERRITORIAL)
                         break;
                     else if (ItemId_GetPocket(aiData->items[battlerDef]) == POCKET_BERRIES || aiData->holdEffects[battlerDef] == HOLD_EFFECT_GEMS)
                         ADJUST_SCORE(DECENT_EFFECT);
@@ -4527,7 +4527,8 @@ static u32 AI_CalcMoveScore(u32 battlerAtk, u32 battlerDef, u32 move)
                         && CanBattlerGetOrLoseItem(battlerDef, aiData->items[battlerDef])
                         && CanBattlerGetOrLoseItem(battlerAtk, aiData->items[battlerDef])
                         && !HasMoveEffect(battlerAtk, EFFECT_ACROBATICS)
-                        && aiData->abilities[battlerDef] != ABILITY_STICKY_HOLD)
+                        && aiData->abilities[battlerDef] != ABILITY_STICKY_HOLD
+                        && aiData->abilities[battlerDef] != ABILITY_TERRITORIAL)
                         {
                             switch (aiData->holdEffects[battlerDef])
                             {

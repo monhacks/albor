@@ -710,8 +710,10 @@
 #define STRINGID_GENERADOR                            708
 #define STRINGID_BOOSTERENERGYACTIVATES               709
 #define STRINGID_ESTASOMNOLIENTO                      710
+#define STRINGID_NUEVECOLAS                           711
+#define STRINGID_PARASITO                             712
 
-#define BATTLESTRINGS_COUNT                           711
+#define BATTLESTRINGS_COUNT                           713
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

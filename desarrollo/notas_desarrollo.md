@@ -30,5 +30,6 @@
 - Hacer glaciación un surf con probabilidad de helar.
 - Crear ataque Agua helada (Escaldar pero que congele). Milotic, Lapras, Dewgong.
 - Falta balancear Parálisis, Dormido, Confuso, Enamorado, Envenenado (y gravemente envenenado), Retroceso.
+- Testear Parásito, Nueve Colas, Humedad relativa, Globo.
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).

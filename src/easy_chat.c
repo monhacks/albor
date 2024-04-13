@@ -1446,7 +1446,6 @@ void ShowEasyChatScreen(void)
     int i;
     u16 *words;
     struct MauvilleManBard *bard;
-    u8 displayedPersonType = EASY_CHAT_PERSON_DISPLAY_NONE;
     switch (gSpecialVar_0x8004)
     {
     case EASY_CHAT_TYPE_PROFILE:
@@ -1515,7 +1514,6 @@ void ShowEasyChatScreen(void)
     }
 
     CleanupOverworldWindowsAndTilemaps();
-    DoEasyChatScreen(gSpecialVar_0x8004, words, CB2_ReturnToFieldContinueScript, displayedPersonType);
 }
 
 static void CB2_QuizLadyQuestion(void)

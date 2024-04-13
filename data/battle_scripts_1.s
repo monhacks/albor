@@ -2621,6 +2621,7 @@ BattleScript_TryTailwindAbilitiesLoop_Iter:
 	trywindriderpower BS_TARGET, BattleScript_TryTailwindAbilitiesLoop_Increment
 	jumpifability BS_TARGET, ABILITY_WIND_RIDER, BattleScript_TryTailwindAbilitiesLoop_WindRider
 	jumpifability BS_TARGET, ABILITY_WIND_POWER, BattleScript_TryTailwindAbilitiesLoop_WindPower
+	jumpifability BS_TARGET, ABILITY_GLOBO, BattleScript_TryTailwindAbilitiesLoop_Globo
 BattleScript_TryTailwindAbilitiesLoop_Increment:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_TryTailwindAbilitiesLoop_Iter
@@ -2638,6 +2639,11 @@ BattleScript_TryTailwindAbilitiesLoop_WindPower:
 	setcharge BS_TARGET
 	printstring STRINGID_BEINGHITCHARGEDPKMNWITHPOWER
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_TryTailwindAbilitiesLoop_Increment
+
+BattleScript_TryTailwindAbilitiesLoop_Globo:
+	call BattleScript_AbilityPopUp
+	modifybattlerstatstage BS_TARGET, STAT_DEF, INCREASE, 1, BattleScript_TryTailwindAbilitiesLoop_Increment, ANIM_ON
 	goto BattleScript_TryTailwindAbilitiesLoop_Increment
 
 BattleScript_EffectMircleEye::
@@ -4893,8 +4899,9 @@ BattleScript_EffectWillOWisp::
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
-	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
-	jumpifability BS_TARGET, ABILITY_WATER_BUBBLE, BattleScript_WaterVeilPrevents
+	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_AbilityPreventsBurn
+	jumpifability BS_TARGET, ABILITY_WATER_BUBBLE, BattleScript_AbilityPreventsBurn
+	jumpifability BS_TARGET, ABILITY_TIERRA_HUMEDA, BattleScript_AbilityPreventsBurn
 	jumpifability BS_TARGET, ABILITY_COMATOSE, BattleScript_AbilityProtectsDoesntAffect
 	jumpifability BS_TARGET, ABILITY_PURIFYING_SALT, BattleScript_AbilityProtectsDoesntAffect
 	jumpifflowerveil BattleScript_FlowerVeilProtects
@@ -4909,7 +4916,7 @@ BattleScript_EffectWillOWisp::
 	seteffectprimary MOVE_EFFECT_BURN
 	goto BattleScript_MoveEnd
 
-BattleScript_WaterVeilPrevents::
+BattleScript_AbilityPreventsBurn::
 	call BattleScript_AbilityPopUp
 	copybyte gEffectBattler, gBattlerTarget
 	setbyte cMULTISTRING_CHOOSER, B_MSG_ABILITY_PREVENTS_MOVE_STATUS
@@ -8554,6 +8561,19 @@ BattleScript_CuteCharmActivates::
 	printstring STRINGID_PKMNSXINFATUATEDY
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_TryDestinyKnotTarget
+	return
+
+BattleScript_NueveColas::
+	call BattleScript_AbilityPopUp
+	status2animation BS_ATTACKER, STATUS2_CURSED
+	printstring STRINGID_NUEVECOLAS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_Parasito::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_PARASITO
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_GooeyActivates::

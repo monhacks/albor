@@ -5030,6 +5030,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (gMovesInfo[gCurrentMove].windMove && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
                     effect = 2, statId = STAT_ATK;
                 break;
+            case ABILITY_GLOBO:
+                if (gMovesInfo[gCurrentMove].windMove && !(GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove) & MOVE_TARGET_USER))
+                    effect = 2, statId = STAT_DEF;
+                break;
             case ABILITY_EARTH_EATER:
                 if (moveType == TYPE_GROUND)
                     effect = 1;
@@ -5488,6 +5492,36 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_NUEVE_COLAS:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerAttacker].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && (IsMoveMakingContact(move, gBattlerAttacker))
+             && TARGET_TURN_DAMAGED
+             && RandomWeighted(RNG_NUEVE_COLAS, 2, 1))
+            {
+                gBattleMons[gBattlerAttacker].status2 |= STATUS2_CURSED;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_NueveColas;
+                effect++;
+            }
+            break;
+        case ABILITY_PARASITO:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerAttacker].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && (IsMoveMakingContact(move, gBattlerAttacker))
+             && TARGET_TURN_DAMAGED
+             && !(gStatuses3[gBattlerAttacker] & STATUS3_LEECHSEED)
+             && !(IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GRASS))
+             && RandomWeighted(RNG_PARASITO, 2, 1))
+            {
+                gStatuses3[gBattlerAttacker] |= STATUS3_LEECHSEED;
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_Parasito;
+                effect++;
+            }
+            break;
         case ABILITY_ILLUSION:
             if (gBattleStruct->illusion[gBattlerTarget].on && !gBattleStruct->illusion[gBattlerTarget].broken && TARGET_TURN_DAMAGED)
             {
@@ -5708,6 +5742,23 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_VOZ_DULCE:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerTarget].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && CanSleep(gBattlerTarget)
+             && (gMovesInfo[move].soundMove)
+             && TARGET_TURN_DAMAGED // Need to actually hit the target
+             && (Random() % 2) == 0)
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
+                effect++;
+            }
+            break;
         case ABILITY_VOZ_HELADA:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp != 0
@@ -5840,6 +5891,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case ABILITY_WATER_VEIL:
             case ABILITY_WATER_BUBBLE:
+            case ABILITY_TIERRA_HUMEDA:
                 if (gBattleMons[battler].status1 & STATUS1_BURN)
                 {
                     StringCopy(gBattleTextBuff1, gText_Burn);
@@ -8973,6 +9025,14 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (moveType == TYPE_FLYING)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
+    case ABILITY_VIDAS_PASADAS:
+        if (moveType == TYPE_GHOST)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
+    case ABILITY_EXTRASENSORIAL:
+        if (moveType == TYPE_PSYCHIC)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
     case ABILITY_LUNA_MENGUANTE:
         if (moveType == TYPE_DARK)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
@@ -9350,6 +9410,14 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
                 RecordAbilityBattle(battlerDef, ABILITY_ILLUMINATE);
         }
         break;
+    case ABILITY_TIERRA_HUMEDA:
+        if (moveType == TYPE_FIRE)
+        {
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(0.5));
+            if (updateFlags)
+                RecordAbilityBattle(battlerDef, ABILITY_TIERRA_HUMEDA);
+        }
+        break;
     }
 
     // ally's abilities
@@ -9567,6 +9635,8 @@ static inline u32 CalcDefenseStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
     // snow def boost for ice types
     if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_HAIL) && usesDefStat)
+        modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
+    if (IS_BATTLER_OF_TYPE(battlerDef, TYPE_ICE) && IsBattlerWeatherAffected(battlerDef, B_WEATHER_RAIN) && usesDefStat && defAbility == ABILITY_HUMEDAD_RELATIVA)
         modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
     // somnolientos -25% defensa
     if (gBattleMons[battlerDef].status1 & STATUS1_BURN && usesDefStat)
@@ -11213,6 +11283,8 @@ u32 CalcSecondaryEffectChance(u32 battler, u32 battlerAbility, const struct Addi
     if (hasRainbow && additionalEffect->moveEffect != MOVE_EFFECT_SECRET_POWER)
         secondaryEffectChance *= 2;
     if (gBattleWeather & B_WEATHER_HAIL && additionalEffect->moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE)
+        secondaryEffectChance *= 2;
+    if (gBattleWeather & B_WEATHER_RAIN && additionalEffect->moveEffect == MOVE_EFFECT_FREEZE_OR_FROSTBITE && battlerAbility == ABILITY_HUMEDAD_RELATIVA)
         secondaryEffectChance *= 2;
     if (gBattleWeather & B_WEATHER_SUN && additionalEffect->moveEffect == MOVE_EFFECT_BURN)
         secondaryEffectChance *= 2;
