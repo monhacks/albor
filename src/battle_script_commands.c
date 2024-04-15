@@ -9322,6 +9322,32 @@ static void Cmd_various(void)
         }
         break;
     }
+    case VARIOUS_TRY_ACTIVATE_CARNIVORO:
+    {
+        VARIOUS_ARGS();
+
+        u16 battlerAbility = GetBattlerAbility(battler);
+
+        if ((battlerAbility == ABILITY_CARNIVORO)
+          && HasAttackerFaintedTarget()
+          && !NoAliveMonsForEitherParty())
+        {
+            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 3;
+            gBattleMoveDamage += gBattleMons[battler].hp;
+            if (gBattleMoveDamage > gBattleMons[battler].maxHP)
+                gBattleMoveDamage = gBattleMons[battler].maxHP;
+            BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_HP_BATTLE,
+                                         gBitTable[*(gBattleStruct->battlerPartyIndexes + battler)],
+                                         sizeof(gBattleMoveDamage),
+                                         &gBattleMoveDamage);
+            MarkBattlerForControllerExec(battler);
+            BattleScriptPush(cmd->nextInstr);
+            gLastUsedAbility = battlerAbility;
+            gBattlescriptCurrInstr = BattleScript_Carnivoro;
+            return;
+        }
+        break;
+    }
     case VARIOUS_TRY_ACTIVATE_GRIM_NEIGH:   // and as one shadow rider
     {
         VARIOUS_ARGS();

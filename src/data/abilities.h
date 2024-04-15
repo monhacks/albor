@@ -2802,4 +2802,18 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Sonido 50% de adormecer."),
         .aiRating = 4,
     },
+
+    [ABILITY_ULTRASONIDO] =
+    {
+        .name = _("Ultrasonido"),
+        .description = COMPOUND_STRING("Sonido 50% de confundir."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_CARNIVORO] =
+    {
+        .name = _("Carnívoro"),
+        .description = COMPOUND_STRING("Recupera 1/3 de PS al vencer."),
+        .aiRating = 7,
+    },
 };

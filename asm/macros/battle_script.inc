@@ -2493,3 +2493,7 @@
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	.endm
+
+	.macro tryactivatecarnivoro battler:req
+	various \battler, VARIOUS_TRY_ACTIVATE_CARNIVORO
+	.endm
