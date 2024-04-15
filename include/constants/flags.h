@@ -303,7 +303,9 @@
 
 #define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
 #define FLAG_RECEIVED_EXP_SHARE              0x110
-#define FLAG_POKERUS_EXPLAINED               0x111
+
+#define FLAG_UNUSED_0x111                    0x111
+
 #define FLAG_RECEIVED_RUNNING_SHOES          0x112
 #define FLAG_RECEIVED_QUICK_CLAW             0x113
 #define FLAG_RECEIVED_KINGS_ROCK             0x114
@@ -967,7 +969,9 @@
 #define FLAG_HIDE_MAUVILLE_CITY_WATTSON                             0x390
 #define FLAG_HIDE_MAUVILLE_GYM_WATTSON                              0x391
 #define FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS                        0x392
+
 #define FLAG_UNUSED_0x393                                           0x393
+
 #define FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE                             0x394
 #define FLAG_HIDE_MT_PYRE_SUMMIT_TEAM_AQUA                          0x395
 #define FLAG_HIDE_BATTLE_TOWER_REPORTER                             0x396
@@ -1087,7 +1091,9 @@
 #define FLAG_ITEM_ROUTE_120_NUGGET                                  0x406
 #define FLAG_ITEM_ROUTE_120_FULL_HEAL                               0x407
 #define FLAG_ITEM_ROUTE_123_CALCIUM                                 0x408
+
 #define FLAG_UNUSED_0x409                                           0x409
+
 #define FLAG_ITEM_ROUTE_127_ZINC                                    0x40A
 #define FLAG_ITEM_ROUTE_127_CARBOS                                  0x40B
 #define FLAG_ITEM_ROUTE_132_RARE_CANDY                              0x40C
@@ -1179,27 +1185,37 @@
 #define FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL                            0x462
 #define FLAG_ITEM_NEW_MAUVILLE_PARALYZE_HEAL                        0x463
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL                      0x464
+
 #define FLAG_UNUSED_0x465                                           0x465
 #define FLAG_UNUSED_0x466                                           0x466
 #define FLAG_UNUSED_0x467                                           0x467
 #define FLAG_UNUSED_0x468                                           0x468
+
 #define FLAG_ITEM_MT_PYRE_2F_ULTRA_BALL                             0x469
 #define FLAG_ITEM_MT_PYRE_4F_SEA_INCENSE                            0x46A
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_WEST_MAX_REVIVE                 0x46B
 #define FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET                           0x46C
+
 #define FLAG_UNUSED_0x46D                                           0x46D
+
 #define FLAG_ITEM_ROUTE_119_NUGGET                                  0x46E
 #define FLAG_ITEM_ROUTE_104_POTION                                  0x46F
+
 #define FLAG_UNUSED_0x470                                           0x470
+
 #define FLAG_ITEM_ROUTE_103_PP_UP                                   0x471
+
 #define FLAG_UNUSED_0x472                                           0x472
+
 #define FLAG_ITEM_ROUTE_108_STAR_PIECE                              0x473
 #define FLAG_ITEM_ROUTE_109_POTION                                  0x474
 #define FLAG_ITEM_ROUTE_110_ELIXIR                                  0x475
 #define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
 #define FLAG_ITEM_ROUTE_113_HYPER_POTION                            0x477
 #define FLAG_ITEM_ROUTE_115_HEAL_POWDER                             0x478
+
 #define FLAG_UNUSED_0x479                                           0x479
+
 #define FLAG_ITEM_ROUTE_116_POTION                                  0x47A
 #define FLAG_ITEM_ROUTE_119_ELIXIR_2                                0x47B
 #define FLAG_ITEM_ROUTE_120_REVIVE                                  0x47C
@@ -1287,8 +1303,9 @@
 #define FLAG_VISITED_SOOTOPOLIS_CITY                (SYSTEM_FLAGS + 0x1D)
 #define FLAG_VISITED_EVER_GRANDE_CITY               (SYSTEM_FLAGS + 0x1E)
 
-#define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F) // Seems to be related to linking.
-#define FLAG_NURSE_UNION_ROOM_REMINDER              (SYSTEM_FLAGS + 0x20)
+#define FLAG_IS_CHAMPION                            (SYSTEM_FLAGS + 0x1F)
+
+#define FLAG_SYS_UNUSED_0x20                        (SYSTEM_FLAGS + 0x20)
 
 #define FLAG_SYS_VS_SEEKER                          (SYSTEM_FLAGS + 0x21)
 #define FLAG_SYS_UNUSED_0x22                        (SYSTEM_FLAGS + 0x22)

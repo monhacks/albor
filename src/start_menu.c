@@ -4,6 +4,7 @@
 #include "battle_pyramid_bag.h"
 #include "bg.h"
 #include "debug.h"
+#include "decompress.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_object_lock.h"
@@ -52,6 +53,81 @@
 #define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
 #endif
 
+#define TAG_SAVING_ANIMATION 0x1000
+static const u16 sSavingAnimation_Pal[] = INCBIN_U16("graphics/text_window/saving_animation.gbapal");
+const u32 gSavingAnimation_Gfx[] = INCBIN_U32("graphics/text_window/saving_animation.4bpp.lz");
+static u8 spriteId;
+
+static const struct OamData sOam_SavingAnimation =
+{
+    .y = DISPLAY_HEIGHT,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(16x16),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sAnim_SavingAnimation[] =
+{
+    ANIMCMD_FRAME(0, 6),
+    ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(8, 6),
+    ANIMCMD_FRAME(12, 6),
+    ANIMCMD_FRAME(16, 6),
+    ANIMCMD_FRAME(20, 6),
+    ANIMCMD_FRAME(24, 6),
+    ANIMCMD_FRAME(28, 6),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd * const sAnims_SavingAnimation[] = { sAnim_SavingAnimation, };
+
+static const struct CompressedSpriteSheet sSpriteSheet_SavingAnimation[] =
+{
+    {
+        .data = gSavingAnimation_Gfx,
+        .size = 16*16*4,
+        .tag = TAG_SAVING_ANIMATION
+    },
+    {}
+};
+
+static const struct SpritePalette sSpritePalettes_SavingAnimation[] =
+{
+    {
+        .data = sSavingAnimation_Pal,
+        .tag = TAG_SAVING_ANIMATION
+    },
+    {},
+};
+
+static const struct SpriteTemplate sSpriteTemplate_SavingAnimation =
+{
+    .tileTag = TAG_SAVING_ANIMATION,
+    .paletteTag = TAG_SAVING_ANIMATION,
+    .oam = &sOam_SavingAnimation,
+    .anims = sAnims_SavingAnimation,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+void ShowSavingAnimation(void)
+{
+    LoadCompressedSpriteSheet(&sSpriteSheet_SavingAnimation[0]);
+    LoadSpritePalettes(sSpritePalettes_SavingAnimation);
+
+    spriteId = CreateSprite(&sSpriteTemplate_SavingAnimation, 232, 145, 2);
+};
+
 // Menu actions
 enum
 {
@@ -92,7 +168,6 @@ EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
-EWRAM_DATA static u8 sSaveDialogTimer = 0;
 EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
@@ -121,18 +196,9 @@ static bool8 HandleStartMenuInput(void);
 
 // Save dialog callbacks
 static u8 SaveConfirmSaveCallback(void);
-static u8 SaveYesNoCallback(void);
-static u8 SaveConfirmInputCallback(void);
-static u8 SaveFileExistsCallback(void);
-static u8 SaveConfirmOverwriteDefaultNoCallback(void);
-static u8 SaveConfirmOverwriteCallback(void);
-static u8 SaveOverwriteInputCallback(void);
-static u8 SaveSavingMessageCallback(void);
 static u8 SaveDoSaveCallback(void);
 static u8 SaveSuccessCallback(void);
 static u8 SaveReturnSuccessCallback(void);
-static u8 SaveErrorCallback(void);
-static u8 SaveReturnErrorCallback(void);
 static u8 BattlePyramidConfirmRetireCallback(void);
 static u8 BattlePyramidRetireYesNoCallback(void);
 static u8 BattlePyramidRetireInputCallback(void);
@@ -266,9 +332,6 @@ static u8 RunSaveCallback(void);
 static void ShowSaveMessage(const u8 *message, u8 (*saveCallback)(void));
 static void HideSaveMessageWindow(void);
 static void HideSaveInfoWindow(void);
-static void SaveStartTimer(void);
-static bool8 SaveSuccesTimer(void);
-static bool8 SaveErrorTimer(void);
 static void InitBattlePyramidRetire(void);
 static void VBlankCB_LinkBattleSave(void);
 static bool32 InitSaveWindowAfterLinkBattle(u8 *par1);
@@ -277,13 +340,6 @@ static void ShowSaveInfoWindow(void);
 static void RemoveSaveInfoWindow(void);
 static void HideStartMenuWindow(void);
 static void HideStartMenuDebug(void);
-
-void SetDexPokemonPokenavFlags(void) // unused
-{
-    FlagSet(FLAG_SYS_POKEDEX_GET);
-    FlagSet(FLAG_SYS_POKEMON_GET);
-    FlagSet(FLAG_SYS_POKENAV_GET);
-}
 
 static void BuildStartMenuActions(void)
 {
@@ -990,173 +1046,34 @@ static void HideSaveInfoWindow(void)
     RemoveSaveInfoWindow();
 }
 
-static void SaveStartTimer(void)
-{
-    sSaveDialogTimer = 60;
-}
-
-static bool8 SaveSuccesTimer(void)
-{
-    sSaveDialogTimer--;
-
-    if (JOY_HELD(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        return TRUE;
-    }
-    if (sSaveDialogTimer == 0)
-    {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-static bool8 SaveErrorTimer(void)
-{
-    if (sSaveDialogTimer != 0)
-    {
-        sSaveDialogTimer--;
-    }
-    else if (JOY_HELD(A_BUTTON))
-    {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
 static u8 SaveConfirmSaveCallback(void)
 {
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     ShowSaveInfoWindow();
+    ShowSavingAnimation();
+    ShowSaveMessage(gText_Guardando, SaveDoSaveCallback);
 
-    if (InBattlePyramid())
-    {
-        ShowSaveMessage(gText_BattlePyramidConfirmRest, SaveYesNoCallback);
-    }
-    else
-    {
-        ShowSaveMessage(gText_ConfirmSave, SaveYesNoCallback);
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveYesNoCallback(void)
-{
-    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
-    sSaveDialogCallback = SaveConfirmInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveConfirmInputCallback(void)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0: // Yes
-        switch (gSaveFileStatus)
-        {
-        case SAVE_STATUS_EMPTY:
-        case SAVE_STATUS_CORRUPT:
-            if (gDifferentSaveFile == FALSE)
-            {
-                sSaveDialogCallback = SaveFileExistsCallback;
-                return SAVE_IN_PROGRESS;
-            }
-
-            sSaveDialogCallback = SaveSavingMessageCallback;
-            return SAVE_IN_PROGRESS;
-        default:
-            sSaveDialogCallback = SaveFileExistsCallback;
-            return SAVE_IN_PROGRESS;
-        }
-    case MENU_B_PRESSED:
-    case 1: // No
-        HideSaveInfoWindow();
-        HideSaveMessageWindow();
-        return SAVE_CANCELED;
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-// A different save file exists
-static u8 SaveFileExistsCallback(void)
-{
-    if (gDifferentSaveFile == TRUE)
-    {
-        ShowSaveMessage(gText_DifferentSaveFile, SaveConfirmOverwriteDefaultNoCallback);
-    }
-    else
-    {
-        ShowSaveMessage(gText_AlreadySavedFile, SaveConfirmOverwriteCallback);
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveConfirmOverwriteDefaultNoCallback(void)
-{
-    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
-    sSaveDialogCallback = SaveOverwriteInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveConfirmOverwriteCallback(void)
-{
-    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
-    sSaveDialogCallback = SaveOverwriteInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveOverwriteInputCallback(void)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0: // Yes
-        sSaveDialogCallback = SaveSavingMessageCallback;
-        return SAVE_IN_PROGRESS;
-    case MENU_B_PRESSED:
-    case 1: // No
-        HideSaveInfoWindow();
-        HideSaveMessageWindow();
-        return SAVE_CANCELED;
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveSavingMessageCallback(void)
-{
-    ShowSaveMessage(gText_SavingDontTurnOff, SaveDoSaveCallback);
     return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDoSaveCallback(void)
 {
-    u8 saveStatus;
-
     IncrementGameStat(GAME_STAT_SAVED_GAME);
-    PausePyramidChallenge();
 
     if (gDifferentSaveFile == TRUE)
     {
-        saveStatus = TrySavingData(SAVE_OVERWRITE_DIFFERENT_FILE);
+        TrySavingData(SAVE_OVERWRITE_DIFFERENT_FILE);
         gDifferentSaveFile = FALSE;
     }
     else
     {
-        saveStatus = TrySavingData(SAVE_NORMAL);
+        TrySavingData(SAVE_NORMAL);
     }
 
-    if (saveStatus == SAVE_STATUS_OK)
-        ShowSaveMessage(gText_PlayerSavedGame, SaveSuccessCallback);
-    else
-        ShowSaveMessage(gText_SaveError, SaveErrorCallback);
+    DestroySprite(&gSprites[spriteId]);
+    sSaveDialogCallback = SaveSuccessCallback;
 
-    SaveStartTimer();
     return SAVE_IN_PROGRESS;
 }
 
@@ -1173,7 +1090,7 @@ static u8 SaveSuccessCallback(void)
 
 static u8 SaveReturnSuccessCallback(void)
 {
-    if (!IsSEPlaying() && SaveSuccesTimer())
+    if (!IsSEPlaying())
     {
         HideSaveInfoWindow();
         return SAVE_SUCCESS;
@@ -1181,30 +1098,6 @@ static u8 SaveReturnSuccessCallback(void)
     else
     {
         return SAVE_IN_PROGRESS;
-    }
-}
-
-static u8 SaveErrorCallback(void)
-{
-    if (!IsTextPrinterActive(0))
-    {
-        PlaySE(SE_BOO);
-        sSaveDialogCallback = SaveReturnErrorCallback;
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveReturnErrorCallback(void)
-{
-    if (!SaveErrorTimer())
-    {
-        return SAVE_IN_PROGRESS;
-    }
-    else
-    {
-        HideSaveInfoWindow();
-        return SAVE_ERROR;
     }
 }
 
@@ -1316,7 +1209,7 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             FillWindowPixelBuffer(0, PIXEL_FILL(1));
             AddTextPrinterParameterized2(0,
                                         FONT_NORMAL,
-                                        gText_SavingDontTurnOffPower,
+                                        gText_Guardando,
                                         TEXT_SKIP_DRAW,
                                         NULL,
                                         TEXT_COLOR_DARK_GRAY,
