@@ -31,5 +31,7 @@
 - Crear ataque Agua helada (Escaldar pero que congele). Milotic, Lapras, Dewgong.
 - Falta balancear Parálisis, Dormido, Confuso, Enamorado, Envenenado (y gravemente envenenado), Retroceso.
 - Testear Parásito, Nueve Colas, Humedad relativa, Globo.
+- Testear Mimetismo, Percusionista.
+- Lucky Punch objeto característico de Hitmonchan (hacer que lo lleve equipado).
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).

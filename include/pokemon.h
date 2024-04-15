@@ -453,6 +453,7 @@ struct MoveInfo
     u32 soundMove:1;
     u32 ballisticMove:1;
     u32 peckMove:1;
+    u32 hammerMove:1;
     u32 powderMove:1;
     u32 danceMove:1;
     u32 windMove:1;

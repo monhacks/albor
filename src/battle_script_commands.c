@@ -1253,6 +1253,35 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
+    if ((GetBattlerAbility(gBattlerTarget) == ABILITY_COLOR_CHANGE) && (gBattlerAttacker != gBattlerTarget)) 
+    {
+        u32 currentType;
+        u32 bestType = gBattleMons[gBattlerTarget].type1;
+        u16 bestModifier = GetTypeModifier(moveType, bestType);
+
+        for (currentType = TYPE_NORMAL; currentType < NUMBER_OF_MON_TYPES; ++currentType) 
+        {
+            u16 currentModifier = GetTypeModifier(moveType, currentType);
+            if (currentModifier < bestModifier) 
+            {
+                bestModifier = currentModifier;
+                bestType = currentType;
+            }
+            if (bestModifier == UQ_4_12(0.0))
+                break;
+        }
+
+        if (gBattleMons[gBattlerTarget].type1 != bestType) 
+        {
+            SET_BATTLER_TYPE(gBattlerTarget, bestType);
+            PREPARE_TYPE_BUFFER(gBattleTextBuff1, bestType);
+            gBattlerAbility = gBattlerTarget;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
+            return;
+        }
+    }
+
     if (AtkCanceller_UnableToUseMove2())
         return;
     if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
@@ -1845,9 +1874,11 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[battlerAtk].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                     + 2 * (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerAtk) == AFFECTION_FIVE_HEARTS)
-                    + (abilityAtk == ABILITY_SUPER_LUCK)
+                    + (abilityAtk == ABILITY_SUPER_LUCK)               
                     + gBattleStruct->bonusCritStages[gBattlerAttacker];
 
+        if (gMovesInfo[gCurrentMove].soundMove && (abilityAtk == ABILITY_PERCUSIONISTA))
+        critChance = +1;
         // Record ability only if move had at least +3 chance to get a crit
         if (critChance >= 3 && recordAbility && (abilityDef == ABILITY_BATTLE_ARMOR || abilityDef == ABILITY_SHELL_ARMOR))
             RecordAbilityBattle(battlerDef, abilityDef);

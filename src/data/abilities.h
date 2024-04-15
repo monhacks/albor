@@ -129,9 +129,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_COLOR_CHANGE] =
     {
-        .name = _("Color Change"),
-        .description = COMPOUND_STRING("Changes type to foe's move."),
-        .aiRating = 2,
+        .name = _("Mimetismo"),
+        .description = COMPOUND_STRING("Cambia tipo antes de defender."),
+        .aiRating = 8,
     },
 
     [ABILITY_IMMUNITY] =
@@ -2815,5 +2815,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Carnívoro"),
         .description = COMPOUND_STRING("Recupera 1/3 de PS al vencer."),
         .aiRating = 7,
+    },
+
+    [ABILITY_PERCUSIONISTA] =
+    {
+        .name = _("Percusionista"),
+        .description = COMPOUND_STRING("Sonido +1 crítico + 25% pot."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_MARTILLADOR] =
+    {
+        .name = _("Martillador"),
+        .description = COMPOUND_STRING("Martillos +25%."),
+        .aiRating = 8,
     },
 };
