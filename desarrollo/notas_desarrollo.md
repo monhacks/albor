@@ -33,5 +33,6 @@
 - Testear Parásito, Nueve Colas, Humedad relativa, Globo.
 - Testear Mimetismo, Percusionista.
 - Lucky Punch objeto característico de Hitmonchan (hacer que lo lleve equipado).
+- Testear Impenetrable.
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).

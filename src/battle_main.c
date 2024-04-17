@@ -4801,6 +4801,10 @@ s8 GetMovePriority(u32 battler, u16 move)
     {
         priority++;
     }
+    else if (ability == ABILITY_TIERRA_SUELTA && gMovesInfo[move].type == TYPE_GROUND)
+    {
+        priority++;
+    }
     else if (ability == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
     {
         gProtectStructs[battler].pranksterElevated = 1;

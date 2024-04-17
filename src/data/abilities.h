@@ -190,8 +190,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ROUGH_SKIN] =
     {
-        .name = _("Rough Skin"),
-        .description = COMPOUND_STRING("Hurts to touch."),
+        .name = _("Piel tosca"),
+        .description = COMPOUND_STRING("Daña 12,5% al contacto."),
         .aiRating = 6,
     },
 
@@ -301,8 +301,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_POISON_POINT] =
     {
-        .name = _("Poison Point"),
-        .description = COMPOUND_STRING("Poisons foe on contact."),
+        .name = _("Punto tóxico"),
+        .description = COMPOUND_STRING("50% de envenenar si contacto def."),
         .aiRating = 4,
     },
 
@@ -605,8 +605,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_RIVALRY] =
     {
-        .name = _("Rivalry"),
-        .description = COMPOUND_STRING("Powers up against rivals."),
+        .name = _("Rivalidad"),
+        .description = COMPOUND_STRING("Mismo género +25%."),
         .aiRating = 1,
     },
 
@@ -1205,8 +1205,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_IRON_BARBS] =
     {
-        .name = _("Iron Barbs"),
-        .description = COMPOUND_STRING("Hurts to touch."),
+        .name = _("Puntiagudo"),
+        .description = COMPOUND_STRING("Daña 12,5% al contacto."),
         .aiRating = 6,
     },
 
@@ -2400,8 +2400,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SHARPNESS] =
     {
-        .name = _("Sharpness"),
-        .description = COMPOUND_STRING("Strengthens slicing moves."),
+        .name = _("Cortante"),
+        .description = COMPOUND_STRING("Cortantes +25%."),
         .aiRating = 7,
     },
 
@@ -2831,5 +2831,26 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Martillador"),
         .description = COMPOUND_STRING("Martillos +25%."),
         .aiRating = 8,
+    },
+
+    [ABILITY_TIERRA_SUELTA] =
+    {
+        .name = _("Tierra suelta"),
+        .description = COMPOUND_STRING("Tierra +1 prioridad ."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_PUNZON] =
+    {
+        .name = _("Punzón"),
+        .description = COMPOUND_STRING("Lanza púas al contacto."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_IMPENETRABLE] =
+    {
+        .name = _("Impenetrable"),
+        .description = COMPOUND_STRING("Ajusta defensas favorablemente."),
+        .aiRating = 7,
     },
 };
