@@ -9097,6 +9097,14 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (gMovesInfo[move].hammerMove)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
+    case ABILITY_DINOCOLA:
+        if (gMovesInfo[move].tailMove)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
+    case ABILITY_CORNAMENTA:
+        if (gMovesInfo[move].hornMove)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
     case ABILITY_WATER_BUBBLE:
         if (moveType == TYPE_WATER)
            modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));

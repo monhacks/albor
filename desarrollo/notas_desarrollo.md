@@ -34,5 +34,7 @@
 - Testear Mimetismo, Percusionista.
 - Lucky Punch objeto característico de Hitmonchan (hacer que lo lleve equipado).
 - Testear Impenetrable.
+- Indicar que Breaking Swipe tiene boost de Dinocola.
+- Indicar que Poison Sting, Smart Strike tienen boost de Cornamenta.
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).

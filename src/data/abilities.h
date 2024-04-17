@@ -2853,4 +2853,18 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Ajusta defensas favorablemente."),
         .aiRating = 7,
     },
+
+    [ABILITY_DINOCOLA] =
+    {
+        .name = _("Dinocola"),
+        .description = COMPOUND_STRING("Colas +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_CORNAMENTA] =
+    {
+        .name = _("Cornamenta"),
+        .description = COMPOUND_STRING("Cuernos +25%."),
+        .aiRating = 8,
+    },
 };
