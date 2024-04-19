@@ -308,10 +308,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Sandshrew[] = INCBIN_U32("graphics/pokemon/sandshrew/normal.gbapal.lz");
     const u32 gMonBackPic_Sandshrew[] = INCBIN_U32("graphics/pokemon/sandshrew/back.4bpp.lz");
     const u32 gMonShinyPalette_Sandshrew[] = INCBIN_U32("graphics/pokemon/sandshrew/shiny.gbapal.lz");
-    const u8 gMonIcon_Sandshrew[] = INCBIN_U8("graphics/pokemon/sandshrew/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Sandshrew[] = INCBIN_U8("graphics/pokemon/sandshrew/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Sandshrew[] = INCBIN_COMP("graphics/pokemon/sandshrew/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -320,10 +316,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_Sandslash[] = INCBIN_U32("graphics/pokemon/sandslash/normal.gbapal.lz");
     const u32 gMonBackPic_Sandslash[] = INCBIN_U32("graphics/pokemon/sandslash/back.4bpp.lz");
     const u32 gMonShinyPalette_Sandslash[] = INCBIN_U32("graphics/pokemon/sandslash/shiny.gbapal.lz");
-    const u8 gMonIcon_Sandslash[] = INCBIN_U8("graphics/pokemon/sandslash/icon.4bpp");
-#if P_FOOTPRINTS
-    const u8 gMonFootprint_Sandslash[] = INCBIN_U8("graphics/pokemon/sandslash/footprint.1bpp");
-#endif //P_FOOTPRINTS
 #if P_FOLLOWERS
     const u32 gObjectEventPic_Sandslash[] = INCBIN_COMP("graphics/pokemon/sandslash/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -333,7 +325,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_SandshrewAlolan[] = INCBIN_U32("graphics/pokemon/sandshrew/alolan/normal.gbapal.lz");
     const u32 gMonBackPic_SandshrewAlolan[] = INCBIN_U32("graphics/pokemon/sandshrew/alolan/back.4bpp.lz");
     const u32 gMonShinyPalette_SandshrewAlolan[] = INCBIN_U32("graphics/pokemon/sandshrew/alolan/shiny.gbapal.lz");
-    const u8 gMonIcon_SandshrewAlolan[] = INCBIN_U8("graphics/pokemon/sandshrew/alolan/icon.4bpp");
 #if P_FOLLOWERS
     const u32 gObjectEventPic_SandshrewAlolan[] = INCBIN_COMP("graphics/pokemon/sandshrew/alolan/follower.4bpp");
 #endif //P_FOLLOWERS
@@ -342,7 +333,6 @@ const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/ico
     const u32 gMonPalette_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/normal.gbapal.lz");
     const u32 gMonBackPic_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/back.4bpp.lz");
     const u32 gMonShinyPalette_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/shiny.gbapal.lz");
-    const u8 gMonIcon_SandslashAlolan[] = INCBIN_U8("graphics/pokemon/sandslash/alolan/icon.4bpp");
 #if P_FOLLOWERS
     const u32 gObjectEventPic_SandslashAlolan[] = INCBIN_COMP("graphics/pokemon/sandslash/alolan/follower.4bpp");
 #endif //P_FOLLOWERS
