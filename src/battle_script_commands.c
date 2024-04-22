@@ -1696,6 +1696,9 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     if (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerDef) == AFFECTION_FIVE_HEARTS)
         calc = (calc * 90) / 100;
 
+    if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_FOG)
+        calc = (calc * 60) / 100; // modified by 3/5
+
     return calc;
 }
 
@@ -3066,7 +3069,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
             }
 
             // for synchronize
-
             if (gBattleScripting.moveEffect == MOVE_EFFECT_POISON
              || gBattleScripting.moveEffect == MOVE_EFFECT_TOXIC
              || gBattleScripting.moveEffect == MOVE_EFFECT_PARALYSIS
@@ -3075,6 +3077,10 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 gBattleStruct->synchronizeMoveEffect = gBattleScripting.moveEffect;
                 gHitMarker |= HITMARKER_SYNCHRONISE_EFFECT;
              }
+
+            if (gBattleScripting.moveEffect == MOVE_EFFECT_POISON || gBattleScripting.moveEffect == MOVE_EFFECT_TOXIC)
+                gBattleStruct->poisonPuppeteerConfusion = TRUE;
+
             return;
         }
         else if (statusChanged == FALSE)
@@ -5090,7 +5096,8 @@ static void PlayAnimation(u32 battler, u8 animId, const u16 *argPtr, const u8 *n
           || animId == B_ANIM_SUN_CONTINUES
           || animId == B_ANIM_SANDSTORM_CONTINUES
           || animId == B_ANIM_HAIL_CONTINUES
-          || animId == B_ANIM_SNOW_CONTINUES)
+          || animId == B_ANIM_SNOW_CONTINUES
+          || animId == B_ANIM_FOG_CONTINUES)
     {
         BtlController_EmitBattleAnimation(battler, BUFFER_A, animId, &gDisableStructs[battler], *argPtr);
         MarkBattlerForControllerExec(battler);
@@ -6284,6 +6291,7 @@ static void Cmd_moveend(void)
             gBattleStruct->swapDamageCategory = FALSE;
             gBattleStruct->enduredDamage = 0;
             gBattleStruct->additionalEffectsCounter = 0;
+            gBattleStruct->poisonPuppeteerConfusion = FALSE;
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_COUNT:
@@ -8407,6 +8415,13 @@ static bool32 TryDefogClear(u32 battlerAtk, bool32 clear)
         DEFOG_CLEAR(SIDE_STATUS_TOXIC_SPIKES, toxicSpikesAmount, BattleScript_ToxicSpikesDefog, 0);
         DEFOG_CLEAR(SIDE_STATUS_STICKY_WEB, stickyWebAmount, BattleScript_StickyWebDefog, 0);
         DEFOG_CLEAR(SIDE_STATUS_STEELSURGE, steelsurgeAmount, BattleScript_SteelsurgeDefog, 0);
+        if (gBattleWeather & B_WEATHER_FOG)
+        {
+            gBattleWeather &= ~B_WEATHER_FOG;
+            BattleScriptPushCursor();
+            gBattlescriptCurrInstr = BattleScript_FogEnded_Ret;
+            return TRUE;
+        }
         if (B_DEFOG_CLEARS_TERRAIN >= GEN_8 && (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY))
         {
             RemoveAllTerrains();
