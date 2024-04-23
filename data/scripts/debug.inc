@@ -164,6 +164,10 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PIKACHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_SANDSHREW, 1, ITEM_NONE
+	givemon SPECIES_SANDSHREW_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_SANDSLASH, 1, ITEM_NONE
+	givemon SPECIES_SANDSLASH_ALOLAN, 1, ITEM_NONE
 	givemon SPECIES_MANKEY, 1, ITEM_NONE
 	givemon SPECIES_PRIMEAPE, 1, ITEM_NONE
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
@@ -203,6 +207,10 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RAICHU_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSHREW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSHREW_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSLASH, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSLASH_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_MANKEY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PRIMEAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
