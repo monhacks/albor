@@ -330,7 +330,6 @@ static const u8 sText_CriticalHit[] = _("¡Un golpe crítico!");
 static const u8 sText_OneHitKO[] = _("It's a one-hit KO!");
 static const u8 sText_123Poof[] = _("{PAUSE 32}1, {PAUSE 15}2, y{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}¡Guau!\p");
 static const u8 sText_AndEllipsis[] = _("Y…\p");
-static const u8 sText_HMMovesCantBeForgotten[] = _("HM moves can't be\nforgotten now.\p");
 static const u8 sText_NotVeryEffective[] = _("No es muy efectivo…");
 static const u8 sText_SuperEffective[] = _("¡Es super efectivo!");
 static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}¡Lograste huir!\p");
@@ -369,6 +368,9 @@ static const u8 sText_HailStopped[] = _("Ha cesado el granizo.");
 static const u8 sText_StartedSnow[] = _("It started to snow!");
 static const u8 sText_SnowContinues[] = _("Snow continues to fall.");
 static const u8 sText_SnowStopped[] = _("The snow stopped.");
+static const u8 sText_FogCreptUp[] = _("Fog crept up as thick as soup!");
+static const u8 sText_FogIsDeep[] = _("The fog is deep…");
+static const u8 sText_FogLifted[] = _("The fog lifted.");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to spit up\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to swallow\na thing!");
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
@@ -437,20 +439,12 @@ static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
 static const u8 sText_FoePkmnPrefix4[] = _("Foe");
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
 static const u8 sText_AttackerUsedX[] = _("¡{B_ATK_NAME_WITH_PREFIX} usó\n{B_BUFF3}!");
-static const u8 sText_HP[] = _("PS");
-static const u8 sText_Attack[] = _("Ataque");
-static const u8 sText_Defense[] = _("Defensa");
-static const u8 sText_Speed[] = _("Velocidad");
-static const u8 sText_SpAttack[] = _("At. esp.");
-static const u8 sText_SpDefense[] = _("Def. esp.");
-static const u8 sText_Accuracy[] = _("precisión");
-static const u8 sText_Evasiveness[] = _("evasión");
 
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
-    sText_HP, sText_Attack, sText_Defense,
-    sText_Speed, sText_SpAttack, sText_SpDefense,
-    sText_Accuracy, sText_Evasiveness
+    gText_PS, gText_Ataque, gText_Defensa,
+    gText_Velocidad, gText_AtEsp, gText_DefEsp,
+    gText_Precision, gText_Evasion
 };
 
 static const u8 sText_PokeblockWasTooSpicy[] = _("was too spicy!");
@@ -1226,6 +1220,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_STARTEDSNOW - BATTLESTRINGS_TABLE_START] = sText_StartedSnow,
     [STRINGID_SNOWCONTINUES -BATTLESTRINGS_TABLE_START] = sText_SnowContinues,
     [STRINGID_SNOWSTOPPED - BATTLESTRINGS_TABLE_START] = sText_SnowStopped,
+    [STRINGID_FOGCREPTUP - BATTLESTRINGS_TABLE_START] = sText_FogCreptUp,
+    [STRINGID_FOGISDEEP - BATTLESTRINGS_TABLE_START] = sText_FogIsDeep,
+    [STRINGID_FOGLIFTED - BATTLESTRINGS_TABLE_START] = sText_FogLifted,
     [STRINGID_FAILEDTOSPITUP - BATTLESTRINGS_TABLE_START] = sText_FailedToSpitUp,
     [STRINGID_FAILEDTOSWALLOW - BATTLESTRINGS_TABLE_START] = sText_FailedToSwallow,
     [STRINGID_WINDBECAMEHEATWAVE - BATTLESTRINGS_TABLE_START] = sText_WindBecameHeatWave,
@@ -1301,7 +1298,6 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_FIREWEAKENED - BATTLESTRINGS_TABLE_START] = sText_FireWeakened,
     [STRINGID_PKMNHIDUNDERWATER - BATTLESTRINGS_TABLE_START] = sText_PkmnHidUnderwater,
     [STRINGID_PKMNSPRANGUP - BATTLESTRINGS_TABLE_START] = sText_PkmnSprangUp,
-    [STRINGID_HMMOVESCANTBEFORGOTTEN - BATTLESTRINGS_TABLE_START] = sText_HMMovesCantBeForgotten,
     [STRINGID_XFOUNDONEY - BATTLESTRINGS_TABLE_START] = sText_XFoundOneY,
     [STRINGID_PLAYERDEFEATEDTRAINER1 - BATTLESTRINGS_TABLE_START] = sText_PlayerDefeatedLinkTrainerTrainer1,
     [STRINGID_SOOTHINGAROMA - BATTLESTRINGS_TABLE_START] = sText_SoothingAroma,
@@ -1675,6 +1671,7 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_SUNLIGHT]  = STRINGID_SUNLIGHTGOTBRIGHT,
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
     [B_MSG_STARTED_SNOW]      = STRINGID_STARTEDSNOW,
+    [B_MSG_STARTED_FOG]       = STRINGID_FOGCREPTUP, // Unused, can use for custom moves that set fog
 };
 
 const u16 gSandStormHailSnowContinuesStringIds[] =
@@ -1927,10 +1924,10 @@ const u16 gWeatherStartsStringIds[] =
     [WEATHER_RAIN]               = STRINGID_ITISRAINING,
     [WEATHER_SNOW]               = (B_OVERWORLD_SNOW >= GEN_9 ? STRINGID_STARTEDSNOW : STRINGID_STARTEDHAIL),
     [WEATHER_RAIN_THUNDERSTORM]  = STRINGID_ITISRAINING,
-    [WEATHER_FOG_HORIZONTAL]     = STRINGID_ITISRAINING,
+    [WEATHER_FOG_HORIZONTAL]     = STRINGID_FOGISDEEP,
     [WEATHER_VOLCANIC_ASH]       = STRINGID_ITISRAINING,
     [WEATHER_SANDSTORM]          = STRINGID_SANDSTORMISRAGING,
-    [WEATHER_FOG_DIAGONAL]       = STRINGID_ITISRAINING,
+    [WEATHER_FOG_DIAGONAL]       = STRINGID_FOGISDEEP,
     [WEATHER_UNDERWATER]         = STRINGID_ITISRAINING,
     [WEATHER_SHADE]              = STRINGID_ITISRAINING,
     [WEATHER_DROUGHT]            = STRINGID_SUNLIGHTSTRONG,

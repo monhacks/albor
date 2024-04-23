@@ -2682,11 +2682,18 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         {
             if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == sFieldMoves[j])
             {
-                AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
-                break;
+                if (sFieldMoves[j] != MOVE_FLY)
+                    if (sFieldMoves[j] != MOVE_FLASH)
+                        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
+                        break;
             }
         }
     }
+
+    if (sPartyMenuInternal->numActions < 5 && CanLearnTeachableMove(GetMonData(&mons[slotId], MON_DATA_SPECIES), MOVE_FLY))
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 5 + MENU_FIELD_MOVES);
+    if (sPartyMenuInternal->numActions < 5 && CanLearnTeachableMove(GetMonData(&mons[slotId], MON_DATA_SPECIES), MOVE_FLASH))
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, 1 + MENU_FIELD_MOVES);
 
     if (!InBattlePike())
     {
@@ -3793,13 +3800,7 @@ static void CursorCb_FieldMove(u8 taskId)
     }
     else
     {
-        // All field moves before WATERFALL are HMs.
-        if (fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE)
-        {
-            DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
-            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        }
-        else if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
+        if (sFieldMoveCursorCallbacks[fieldMove].fieldMoveFunc() == TRUE)
         {
             switch (fieldMove)
             {
@@ -4395,27 +4396,27 @@ static void GetMedicineItemEffectMessage(u16 item, u32 statusCured)
         StringExpandPlaceholders(gStringVar4, gText_PkmnBecameHealthy);
         break;
     case ITEM_EFFECT_HP_EV:
-        StringCopy(gStringVar2, gText_HP3);
+        StringCopy(gStringVar2, gText_PS);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(gStringVar2, gText_Attack3);
+        StringCopy(gStringVar2, gText_Ataque);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(gStringVar2, gText_Defense3);
+        StringCopy(gStringVar2, gText_Defensa);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(gStringVar2, gText_Speed2);
+        StringCopy(gStringVar2, gText_Velocidad);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(gStringVar2, gText_SpAtk3);
+        StringCopy(gStringVar2, gText_AtEsp);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(gStringVar2, gText_SpDef3);
+        StringCopy(gStringVar2, gText_DefEsp);
         StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
         break;
     case ITEM_EFFECT_PP_UP:
@@ -4958,22 +4959,22 @@ static void ItemEffectToStatString(u8 effectType, u8 *dest)
     switch (effectType)
     {
     case ITEM_EFFECT_HP_EV:
-        StringCopy(dest, gText_HP3);
+        StringCopy(dest, gText_PS);
         break;
     case ITEM_EFFECT_ATK_EV:
-        StringCopy(dest, gText_Attack3);
+        StringCopy(dest, gText_Ataque);
         break;
     case ITEM_EFFECT_DEF_EV:
-        StringCopy(dest, gText_Defense3);
+        StringCopy(dest, gText_Defensa);
         break;
     case ITEM_EFFECT_SPEED_EV:
-        StringCopy(dest, gText_Speed2);
+        StringCopy(dest, gText_Velocidad);
         break;
     case ITEM_EFFECT_SPATK_EV:
-        StringCopy(dest, gText_SpAtk3);
+        StringCopy(dest, gText_AtEsp);
         break;
     case ITEM_EFFECT_SPDEF_EV:
-        StringCopy(dest, gText_SpDef3);
+        StringCopy(dest, gText_DefEsp);
         break;
     }
 }
