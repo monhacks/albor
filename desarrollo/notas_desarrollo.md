@@ -38,3 +38,5 @@
 - Indicar que Poison Sting, Smart Strike tienen boost de Cornamenta.
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
+
+*Utilidades: porytiles compile-primary -Wall -o $HOME/desktop/pokeemerald/data/tilesets/primary/test $HOME/desktop/pokeemerald/tiles $HOME/desktop/pokeemerald/include/constants/metatile_behaviors.h
