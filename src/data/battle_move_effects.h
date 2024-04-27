@@ -1882,4 +1882,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectTidyUp, // TODO: Assign points
         .encourageEncore = TRUE,
     },
+
+    [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+        .battleTvScore = 0, // TODO: Assign points
+    },
 };

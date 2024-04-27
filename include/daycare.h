@@ -3,7 +3,7 @@
 
 #include "constants/daycare.h"
 
-u8 *GetMonNickname2(struct Pokemon *mon, u8 *dest);
+u8 *GetMonNicknameVanilla(struct Pokemon *mon, u8 *dest);
 u8 *GetBoxMonNickname(struct BoxPokemon *mon, u8 *dest);
 u8 CountPokemonInDaycare(struct DayCare *daycare);
 s8 Daycare_FindEmptySpot(struct DayCare *daycare);
