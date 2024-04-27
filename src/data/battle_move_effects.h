@@ -1886,6 +1886,5 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     [EFFECT_TERA_BLAST] =
     {
         .battleScript = BattleScript_EffectPhotonGeyser,
-        .battleTvScore = 0, // TODO: Assign points
     },
 };
