@@ -1493,11 +1493,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectStrengthSap, // TODO: Assign points
     },
 
-    [EFFECT_MIND_BLOWN] =
-    {
-        .battleScript = BattleScript_EffectMindBlown, // TODO: Assign points
-    },
-
     [EFFECT_PURIFY] =
     {
         .battleScript = BattleScript_EffectPurify, // TODO: Assign points
@@ -1714,7 +1709,12 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAX_HP_50_RECOIL] =
     {
-        .battleScript = BattleScript_EffectMaxHp50Recoil, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
+    },
+
+    [EFFECT_MIND_BLOWN] =
+    {
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_EXTREME_EVOBOOST] =
@@ -1884,6 +1884,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     },
 
     [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+    },
+
+    [EFFECT_TERA_STARSTORM] =
     {
         .battleScript = BattleScript_EffectPhotonGeyser,
     },

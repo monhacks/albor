@@ -263,17 +263,7 @@ u16 ChooseMoveAndTargetInBattlePalace(u32 battler)
         }
     }
 
-    if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
-    {
-        if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST && moveInfo->monType3 != TYPE_GHOST)
-            moveTarget = MOVE_TARGET_USER;
-        else
-            moveTarget = MOVE_TARGET_SELECTED;
-    }
-    else
-    {
-        moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveId]);
-    }
+    moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[chosenMoveId]);
 
     if (moveTarget & MOVE_TARGET_USER)
         chosenMoveId |= (battler << 8);
@@ -872,9 +862,9 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         {
             if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality)
             {
-                personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
-                isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
-                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_PERSONALITY);
+                isShiny = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_OT_ID);
             }
             else
             {
@@ -892,9 +882,9 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
         {
             if (B_TRANSFORM_SHINY >= GEN_4 && trackEnemyPersonality)
             {
-                personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_PERSONALITY);
-                isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_IS_SHINY);
-                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_OT_ID);
+                personalityValue = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_PERSONALITY);
+                isShiny = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_IS_SHINY);
+                otId = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerDef]], MON_DATA_OT_ID);
             }
             else
             {

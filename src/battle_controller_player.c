@@ -775,17 +775,8 @@ static void HandleInputChooseMove(u32 battler)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (moveInfo->moves[gMoveSelectionCursor[battler]] == MOVE_CURSE)
-        {
-            if (moveInfo->monType1 != TYPE_GHOST && moveInfo->monType2 != TYPE_GHOST && moveInfo->monType3 != TYPE_GHOST)
-                moveTarget = MOVE_TARGET_USER;
-            else
-                moveTarget = MOVE_TARGET_SELECTED;
-        }
-        else
-        {
-            moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[gMoveSelectionCursor[battler]]);
-        }
+
+        moveTarget = GetBattlerMoveTargetType(battler, moveInfo->moves[gMoveSelectionCursor[battler]]);
 
         if (gBattleStruct->zmove.viewing)
         {
@@ -983,6 +974,7 @@ static void HandleInputChooseMove(u32 battler)
         {
             gBattleStruct->tera.playerSelect ^= 1;
             ChangeTeraTriggerSprite(gBattleStruct->tera.triggerSpriteId, gBattleStruct->tera.playerSelect);
+            MoveSelectionDisplayMoveType(battler); // For Tera Blast / Tera Starstorm
             PlaySE(SE_SELECT);
         }
     }

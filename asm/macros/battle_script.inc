@@ -1632,10 +1632,22 @@
 	.macro trygulpmissile
 	callnative BS_TryGulpMissile
 	.endm
-
+	
+	.macro tryactivategulpmissile
+	callnative BS_TryActivateGulpMissile
+	.endm
+	
 	.macro tryquash failInstr:req
 	callnative BS_TryQuash
 	.4byte \failInstr
+	.endm
+
+	.macro removeweather
+	callnative BS_RemoveWeather
+	.endm
+	
+	.macro applyterastallization
+	callnative BS_ApplyTerastallization
 	.endm
 
 @ various command changed to more readable macros
@@ -2370,10 +2382,6 @@
 
 	.macro dmgtocurrattackerhp
 	manipulatedamage DMG_CURR_ATTACKER_HP
-	.endm
-
-	.macro dmg_1_2_attackerhp
-	manipulatedamage DMG_1_2_ATTACKER_HP
 	.endm
 
 	.macro jumpifflowerveil jumpInstr:req
