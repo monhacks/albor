@@ -2,7 +2,6 @@
 #include "strings.h"
 #include "battle_pyramid_bag.h"
 #include "item_menu.h"
-#include "text.h"
 
 ALIGNED(4)
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
@@ -146,7 +145,7 @@ const u8 gText_LeagueChamp[] = _("LEAGUE CHAMPION!\nCONGRATULATIONS!");
 const u8 gText_Number[] = _("Nº. ");
 const u8 gText_Level[] = _("Nv. ");
 const u8 gText_Name[] = _("Nombre");
-const u8 gText_IDNumber[] = _C("ID Nº.");
+const u8 gText_IDNumber[] = _("IDNo.");
 const u8 gText_BirchInTrouble[] = _("PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!");
 const u8 gText_ConfirmStarterChoice[] = _("Do you choose this POKéMON?");
 const u8 gText_FlyToWhere[] = _("FLY to where?");
@@ -193,14 +192,14 @@ const u8 gText_NoPokemon[] = _("No hay Pokémon.");
 const u8 gText_MoveVar1Where[] = _("Move the\n{STR_VAR_1}\nwhere?");
 const u8 gText_Var1CantBeHeld[] = _("{STR_VAR_1} no puede llevarse.");
 const u8 gText_Var1CantBeHeldHere[] = _("The {STR_VAR_1} can't be held\nhere.");
-const u8 gText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}(s)?");
-const u8 gText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_1}(s).");
+const u8 gText_DepositHowManyVar1[] = _("Deposit how many\n{STR_VAR_1}?");
+const u8 gText_DepositedVar2Var1s[] = _("Deposited {STR_VAR_2}\n{STR_VAR_1}.");
 const u8 gText_NoRoomForItems[] = _("There's no room to\nstore items.");
 const u8 gText_CantStoreImportantItems[] = _("Important items\ncan't be stored in\nthe PC!");
 const u8 gText_TooImportantToToss[] = _("That's much too\nimportant to toss\nout!");
-const u8 gText_TossHowManyVar1s[] = _("Toss out how many\n{STR_VAR_1}(s)?");
-const u8 gText_ThrewAwayVar2Var1s[] = _("Threw away {STR_VAR_2}\n{STR_VAR_1}(s).");
-const u8 gText_ConfirmTossItems[] = _("Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?");
+const u8 gText_TossHowManyVar1s[] = _("Toss out how many\n{STR_VAR_1}?");
+const u8 gText_ThrewAwayVar2Var1s[] = _("Threw away {STR_VAR_2}\n{STR_VAR_1}.");
+const u8 gText_ConfirmTossItems[] = _("Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}?");
 const u8 gText_DadsAdvice[] = _("DAD's advice…\n{PLAYER}, there's a time and place for\leverything!{PAUSE_UNTIL_PRESS}");
 const u8 gText_CantDismountBike[] = _("You can't dismount your BIKE here.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ItemFinderNearby[] = _("Huh?\nThe ITEMFINDER's responding!\pThere's an item buried around here!{PAUSE_UNTIL_PRESS}");
@@ -453,7 +452,7 @@ ALIGNED(4) const u8 gText_CantTradeWithTrainer[] = _("You can't trade with that\
 ALIGNED(4) const u8 gText_NotPkmnOtherTrainerWants[] = _("That isn't the type of POKéMON\nthat the other TRAINER wants.");
 ALIGNED(4) const u8 gText_ThatIsntAnEgg[] = _("That isn't an EGG.");
 const u8 gText_Register[] = _("REGISTER");
-const u8 gText_OTSlash[] = _C("OT/");
+const u8 gText_OTSlash[] = _("OT/");
 const u8 gText_RentalPkmn[] = _("RENTAL POKéMON");
 const u8 gText_TypeSlash[] = _("Tipo/");
 const u8 gText_Appeal[] = _("APPEAL");
@@ -540,8 +539,8 @@ const u8 gText_TakeOutItemsFromPC[] = _("Take out items from the PC.");
 const u8 gText_ThrowAwayItemsInPC[] = _("Throw away items stored in the PC.");
 const u8 gText_NoItems[] = _("There are no items.{PAUSE_UNTIL_PRESS}");
 const u8 gText_NoRoomInBag[] = _("There is no more\nroom in the BAG.");
-const u8 gText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}(s)?");
-const u8 gText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).");
+const u8 gText_WithdrawHowManyItems[] = _("Withdraw how many\n{STR_VAR_1}?");
+const u8 gText_WithdrawXItems[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}.");
 const u8 gText_Read[] = _("READ");
 const u8 gText_MoveToBag[] = _("MOVE TO BAG");
 const u8 gText_Give2[] = _("Dar");
@@ -983,15 +982,9 @@ const u8 gText_GamePlayCannotBeContinued[] = _("{COLOR RED}“Game play cannot b
 const u8 gText_CheckCompleted[] = _("Check completed.\nAttempting to save again.\nPlease wait.");
 const u8 gText_SaveCompleteGameCannotContinue[] = _("Save completed.\n{COLOR RED}“Game play cannot be continued.\nReturning to the title screen.”");
 const u8 gText_SaveCompletePressA[] = _("Save completed.\n{COLOR RED}“Please press the A Button.”");
-#if (DECAP_ENABLED) && !(DECAP_MAP_NAMES)
-const u8 gText_Ferry[] = _C("FERRY");
-const u8 gText_SecretBase[] = _C("SECRET BASE");
-const u8 gText_Hideout[] = _C("HIDEOUT");
-#else
 const u8 gText_Ferry[] = _("FERRY");
 const u8 gText_SecretBase[] = _("SECRET BASE");
 const u8 gText_Hideout[] = _("HIDEOUT");
-#endif
 const u8 gText_ResetRTCConfirmCancel[] = _("Reset RTC?\nA: Confirm, B: Cancel");
 const u8 gText_PresentTime[] = _("Present time in game");
 const u8 gText_PreviousTime[] = _("Previous time in game");
@@ -1089,7 +1082,7 @@ const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} survived the poisoning.\nTh
 #endif
 const u8 gText_Marco[] = _("MARCO");
 const u8 gText_TrainerCardName[] = _("NAME: ");
-const u8 gText_TrainerCardIDNo[] = _C("IDNo.");
+const u8 gText_TrainerCardIDNo[] = _("IDNo.");
 const u8 gText_TrainerCardMoney[] = _("MONEY");
 const u8 gText_TrainerCardPokedex[] = _("Pokédex");
 const u8 gText_EmptyString6[] = _("");
@@ -1437,7 +1430,7 @@ const u8 gEasyChatGroupName_Pokemon2[] = _("POKéMON2");
 
 const u8 gText_ThreeQuestionMarks[] = _("???");
 const u8 gText_MaxPS[] = _("PS máx.");
-const u8 gText_PS[] = _C("PS");
+const u8 gText_PS[] = _("PS");
 const u8 gText_Ataque[] = _("Ataque");
 const u8 gText_Defensa[] = _("Defensa");
 const u8 gText_Velocidad[] = _("Velocidad");
@@ -1621,6 +1614,6 @@ const u8 gText_FontNormal[] = _("{FONT_NORMAL}");
 const u8 gText_FontBig[] = _("{FONT_BIG}");
 const u8 gText_UpArrow[] = _("{UP_ARROW}");
 const u8 gText_DownArrow[] = _("{DOWN_ARROW}");
-const u8 gText_MT[] = _C("MT");
-const u8 gText_MO[] = _C("MO");
+const u8 gText_MT[] = _("MT");
+const u8 gText_MO[] = _("MO");
 const u8 gText_Use[] = _("Usar");

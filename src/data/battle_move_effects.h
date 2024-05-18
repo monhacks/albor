@@ -26,7 +26,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_EXPLOSION] =
     {
-        .battleScript = BattleScript_EffectExplosion, // TODO: Assign points
+        .battleScript = BattleScript_EffectExplosion,
     },
 
     [EFFECT_DREAM_EATER] =
@@ -83,7 +83,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_SPECIAL_ATTACK_UP_3] =
     {
-        .battleScript = BattleScript_EffectSpecialAttackUp3, // TODO: Assign points
+        .battleScript = BattleScript_EffectSpecialAttackUp3,
     },
 
     [EFFECT_ATTACK_DOWN] =
@@ -180,7 +180,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_FUSION_COMBO] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_SUPER_FANG] =
@@ -196,7 +196,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_HEAL_BLOCK] =
     {
-        .battleScript = BattleScript_EffectHealBlock, // TODO: Assign points
+        .battleScript = BattleScript_EffectHealBlock,
         .encourageEncore = TRUE,
     },
 
@@ -266,7 +266,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_TRANSFORM] =
     {
-        .battleScript = BattleScript_EffectTransform, // TODO: Assign points
+        .battleScript = BattleScript_EffectTransform,
     },
 
     [EFFECT_ATTACK_DOWN_2] =
@@ -475,7 +475,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_HEALING_WISH] =
     {
-        .battleScript = BattleScript_EffectHealingWish, // TODO: Assign points
+        .battleScript = BattleScript_EffectHealingWish,
     },
 
     [EFFECT_PROTECT] =
@@ -575,7 +575,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_CAPTIVATE] =
     {
-        .battleScript = BattleScript_EffectCaptivate, // TODO: Assign points
+        .battleScript = BattleScript_EffectCaptivate,
     },
 
     [EFFECT_MORNING_SUN] =
@@ -615,7 +615,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_FELL_STINGER] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_BELLY_DRUM] =
@@ -718,7 +718,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_WORRY_SEED] =
     {
-        .battleScript = BattleScript_EffectWorrySeed, // TODO: Assign points
+        .battleScript = BattleScript_EffectWorrySeed,
         .encourageEncore = TRUE,
     },
 
@@ -773,7 +773,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_NATURE_POWER] =
     {
-        .battleScript = BattleScript_EffectNaturePower, // TODO: Assign points
+        .battleScript = BattleScript_EffectNaturePower,
     },
 
     [EFFECT_CHARGE] =
@@ -902,7 +902,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MUD_SPORT] =
     {
-        .battleScript = BattleScript_EffectMudSport, // TODO: Assign points
+        .battleScript = BattleScript_EffectMudSport,
         .encourageEncore = TRUE,
     },
 
@@ -954,819 +954,819 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_PLEDGE] =
     {
-        .battleScript = BattleScript_EffectPledge, // TODO: Assign points
+        .battleScript = BattleScript_EffectPledge,
     },
 
     [EFFECT_FLING] =
     {
-        .battleScript = BattleScript_EffectFling, // TODO: Assign points
+        .battleScript = BattleScript_EffectFling,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_NATURAL_GIFT] =
     {
-        .battleScript = BattleScript_EffectNaturalGift, // TODO: Assign points
+        .battleScript = BattleScript_EffectNaturalGift,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_VARY_POWER_BASED_ON_HP] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ASSURANCE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_TRUMP_CARD] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ACROBATICS] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_HEAT_CRASH] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_PUNISHMENT] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_STORED_POWER] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ELECTRO_BALL] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_GYRO_BALL] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ECHOED_VOICE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_PAYBACK] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ROUND] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_BRINE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_RETALIATE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_BULLDOZE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_FOUL_PLAY] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_PSYSHOCK] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ROOST] =
     {
-        .battleScript = BattleScript_EffectRoost, // TODO: Assign points
+        .battleScript = BattleScript_EffectRoost,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_GRAVITY] =
     {
-        .battleScript = BattleScript_EffectGravity, // TODO: Assign points
+        .battleScript = BattleScript_EffectGravity,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_MIRACLE_EYE] =
     {
-        .battleScript = BattleScript_EffectMircleEye, // TODO: Assign points
+        .battleScript = BattleScript_EffectMircleEye,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TAILWIND] =
     {
-        .battleScript = BattleScript_EffectTailwind, // TODO: Assign points
+        .battleScript = BattleScript_EffectTailwind,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_EMBARGO] =
     {
-        .battleScript = BattleScript_EffectEmbargo, // TODO: Assign points
+        .battleScript = BattleScript_EffectEmbargo,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_AQUA_RING] =
     {
-        .battleScript = BattleScript_EffectAquaRing, // TODO: Assign points
+        .battleScript = BattleScript_EffectAquaRing,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TRICK_ROOM] =
     {
-        .battleScript = BattleScript_EffectTrickRoom, // TODO: Assign points
+        .battleScript = BattleScript_EffectTrickRoom,
     },
 
     [EFFECT_WONDER_ROOM] =
     {
-        .battleScript = BattleScript_EffectWonderRoom, // TODO: Assign points
+        .battleScript = BattleScript_EffectWonderRoom,
     },
 
     [EFFECT_MAGIC_ROOM] =
     {
-        .battleScript = BattleScript_EffectMagicRoom, // TODO: Assign points
+        .battleScript = BattleScript_EffectMagicRoom,
     },
 
     [EFFECT_MAGNET_RISE] =
     {
-        .battleScript = BattleScript_EffectMagnetRise, // TODO: Assign points
+        .battleScript = BattleScript_EffectMagnetRise,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TOXIC_SPIKES] =
     {
-        .battleScript = BattleScript_EffectToxicSpikes, // TODO: Assign points
+        .battleScript = BattleScript_EffectToxicSpikes,
     },
 
     [EFFECT_GASTRO_ACID] =
     {
-        .battleScript = BattleScript_EffectGastroAcid, // TODO: Assign points
+        .battleScript = BattleScript_EffectGastroAcid,
     },
 
     [EFFECT_STEALTH_ROCK] =
     {
-        .battleScript = BattleScript_EffectStealthRock, // TODO: Assign points
+        .battleScript = BattleScript_EffectStealthRock,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TELEKINESIS] =
     {
-        .battleScript = BattleScript_EffectTelekinesis, // TODO: Assign points
+        .battleScript = BattleScript_EffectTelekinesis,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_POWER_SWAP] =
     {
-        .battleScript = BattleScript_EffectPowerSwap, // TODO: Assign points
+        .battleScript = BattleScript_EffectPowerSwap,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_GUARD_SWAP] =
     {
-        .battleScript = BattleScript_EffectGuardSwap, // TODO: Assign points
+        .battleScript = BattleScript_EffectGuardSwap,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_HEART_SWAP] =
     {
-        .battleScript = BattleScript_EffectHeartSwap, // TODO: Assign points
+        .battleScript = BattleScript_EffectHeartSwap,
     },
 
     [EFFECT_POWER_SPLIT] =
     {
-        .battleScript = BattleScript_EffectPowerSplit, // TODO: Assign points
+        .battleScript = BattleScript_EffectPowerSplit,
     },
 
     [EFFECT_GUARD_SPLIT] =
     {
-        .battleScript = BattleScript_EffectGuardSplit, // TODO: Assign points
+        .battleScript = BattleScript_EffectGuardSplit,
     },
 
     [EFFECT_STICKY_WEB] =
     {
-        .battleScript = BattleScript_EffectStickyWeb, // TODO: Assign points
+        .battleScript = BattleScript_EffectStickyWeb,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_METAL_BURST] =
     {
-        .battleScript = BattleScript_EffectMetalBurst, // TODO: Assign points
+        .battleScript = BattleScript_EffectMetalBurst,
     },
 
     [EFFECT_LUCKY_CHANT] =
     {
-        .battleScript = BattleScript_EffectLuckyChant, // TODO: Assign points
+        .battleScript = BattleScript_EffectLuckyChant,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_SUCKER_PUNCH] =
     {
-        .battleScript = BattleScript_EffectSuckerPunch, // TODO: Assign points
+        .battleScript = BattleScript_EffectSuckerPunch,
     },
 
     [EFFECT_SIMPLE_BEAM] =
     {
-        .battleScript = BattleScript_EffectSimpleBeam, // TODO: Assign points
+        .battleScript = BattleScript_EffectSimpleBeam,
     },
 
     [EFFECT_ENTRAINMENT] =
     {
-        .battleScript = BattleScript_EffectEntrainment, // TODO: Assign points
+        .battleScript = BattleScript_EffectEntrainment,
     },
 
     [EFFECT_HEAL_PULSE] =
     {
-        .battleScript = BattleScript_EffectHealPulse, // TODO: Assign points
+        .battleScript = BattleScript_EffectHealPulse,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_QUASH] =
     {
-        .battleScript = BattleScript_EffectQuash, // TODO: Assign points
+        .battleScript = BattleScript_EffectQuash,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_ION_DELUGE] =
     {
-        .battleScript = BattleScript_EffectIonDeluge, // TODO: Assign points
+        .battleScript = BattleScript_EffectIonDeluge,
     },
 
     [EFFECT_SUPER_EFFECTIVE_ON_ARG] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_TOPSY_TURVY] =
     {
-        .battleScript = BattleScript_EffectTopsyTurvy, // TODO: Assign points
+        .battleScript = BattleScript_EffectTopsyTurvy,
     },
 
     [EFFECT_MISTY_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectMistyTerrain, // TODO: Assign points
+        .battleScript = BattleScript_EffectMistyTerrain,
     },
 
     [EFFECT_GRASSY_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectGrassyTerrain, // TODO: Assign points
+        .battleScript = BattleScript_EffectGrassyTerrain,
     },
 
     [EFFECT_ELECTRIC_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectElectricTerrain, // TODO: Assign points
+        .battleScript = BattleScript_EffectElectricTerrain,
     },
 
     [EFFECT_PSYCHIC_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectPsychicTerrain, // TODO: Assign points
+        .battleScript = BattleScript_EffectPsychicTerrain,
     },
 
     [EFFECT_ATTACK_ACCURACY_UP] =
     {
-        .battleScript = BattleScript_EffectAttackAccUp, // TODO: Assign points
+        .battleScript = BattleScript_EffectAttackAccUp,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_ATTACK_SPATK_UP] =
     {
-        .battleScript = BattleScript_EffectAttackSpAttackUp, // TODO: Assign points
+        .battleScript = BattleScript_EffectAttackSpAttackUp,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TWO_TYPED_MOVE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_ME_FIRST] =
     {
-        .battleScript = BattleScript_EffectMeFirst, // TODO: Assign points
+        .battleScript = BattleScript_EffectMeFirst,
     },
 
     [EFFECT_QUIVER_DANCE] =
     {
-        .battleScript = BattleScript_EffectQuiverDance, // TODO: Assign points
+        .battleScript = BattleScript_EffectQuiverDance,
     },
 
     [EFFECT_COIL] =
     {
-        .battleScript = BattleScript_EffectCoil, // TODO: Assign points
+        .battleScript = BattleScript_EffectCoil,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_ELECTRIFY] =
     {
-        .battleScript = BattleScript_EffectElectrify, // TODO: Assign points
+        .battleScript = BattleScript_EffectElectrify,
     },
 
     [EFFECT_REFLECT_TYPE] =
     {
-        .battleScript = BattleScript_EffectReflectType, // TODO: Assign points
+        .battleScript = BattleScript_EffectReflectType,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_SOAK] =
     {
-        .battleScript = BattleScript_EffectSoak, // TODO: Assign points
+        .battleScript = BattleScript_EffectSoak,
     },
 
     [EFFECT_GROWTH] =
     {
-        .battleScript = BattleScript_EffectGrowth, // TODO: Assign points
+        .battleScript = BattleScript_EffectGrowth,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_LAST_RESORT] =
     {
-        .battleScript = BattleScript_EffectLastResort, // TODO: Assign points
+        .battleScript = BattleScript_EffectLastResort,
     },
 
     [EFFECT_SHELL_SMASH] =
     {
-        .battleScript = BattleScript_EffectShellSmash, // TODO: Assign points
+        .battleScript = BattleScript_EffectShellSmash,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_SHIFT_GEAR] =
     {
-        .battleScript = BattleScript_EffectShiftGear, // TODO: Assign points
+        .battleScript = BattleScript_EffectShiftGear,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_DEFENSE_UP_3] =
     {
-        .battleScript = BattleScript_EffectDefenseUp3, // TODO: Assign points
+        .battleScript = BattleScript_EffectDefenseUp3,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_NOBLE_ROAR] =
     {
-        .battleScript = BattleScript_EffectNobleRoar, // TODO: Assign points
+        .battleScript = BattleScript_EffectNobleRoar,
     },
 
     [EFFECT_VENOM_DRENCH] =
     {
-        .battleScript = BattleScript_EffectVenomDrench, // TODO: Assign points
+        .battleScript = BattleScript_EffectVenomDrench,
     },
 
     [EFFECT_TOXIC_THREAD] =
     {
-        .battleScript = BattleScript_EffectToxicThread, // TODO: Assign points
+        .battleScript = BattleScript_EffectToxicThread,
     },
 
     [EFFECT_HIT_SWITCH_TARGET] =
     {
-        .battleScript = BattleScript_EffectHitSwitchTarget, // TODO: Assign points
+        .battleScript = BattleScript_EffectHitSwitchTarget,
     },
 
     [EFFECT_FINAL_GAMBIT] =
     {
-        .battleScript = BattleScript_EffectFinalGambit, // TODO: Assign points
+        .battleScript = BattleScript_EffectFinalGambit,
     },
 
     [EFFECT_CHANGE_TYPE_ON_ITEM] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_AUTOTOMIZE] =
     {
-        .battleScript = BattleScript_EffectAutotomize, // TODO: Assign points
+        .battleScript = BattleScript_EffectAutotomize,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_COPYCAT] =
     {
-        .battleScript = BattleScript_EffectCopycat, // TODO: Assign points
+        .battleScript = BattleScript_EffectCopycat,
     },
 
     [EFFECT_DEFOG] =
     {
-        .battleScript = BattleScript_EffectDefog, // TODO: Assign points
+        .battleScript = BattleScript_EffectDefog,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_HIT_ENEMY_HEAL_ALLY] =
     {
-        .battleScript = BattleScript_EffectHitEnemyHealAlly, // TODO: Assign points
+        .battleScript = BattleScript_EffectHitEnemyHealAlly,
     },
 
     [EFFECT_SYNCHRONOISE] =
     {
-        .battleScript = BattleScript_EffectSynchronoise, // TODO: Assign points
+        .battleScript = BattleScript_EffectSynchronoise,
     },
 
     [EFFECT_PSYCHO_SHIFT] =
     {
-        .battleScript = BattleScript_EffectPsychoShift, // TODO: Assign points
+        .battleScript = BattleScript_EffectPsychoShift,
     },
 
     [EFFECT_POWER_TRICK] =
     {
-        .battleScript = BattleScript_EffectPowerTrick, // TODO: Assign points
+        .battleScript = BattleScript_EffectPowerTrick,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_AFTER_YOU] =
     {
-        .battleScript = BattleScript_EffectAfterYou, // TODO: Assign points
+        .battleScript = BattleScript_EffectAfterYou,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_BESTOW] =
     {
-        .battleScript = BattleScript_EffectBestow, // TODO: Assign points
+        .battleScript = BattleScript_EffectBestow,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_ROTOTILLER] =
     {
-        .battleScript = BattleScript_EffectRototiller, // TODO: Assign points
+        .battleScript = BattleScript_EffectRototiller,
     },
 
     [EFFECT_FLOWER_SHIELD] =
     {
-        .battleScript = BattleScript_EffectFlowerShield, // TODO: Assign points
+        .battleScript = BattleScript_EffectFlowerShield,
     },
 
     [EFFECT_SPEED_SWAP] =
     {
-        .battleScript = BattleScript_EffectSpeedSwap, // TODO: Assign points
+        .battleScript = BattleScript_EffectSpeedSwap,
     },
 
     [EFFECT_REVELATION_DANCE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_AURORA_VEIL] =
     {
-        .battleScript = BattleScript_EffectAuroraVeil, // TODO: Assign points
+        .battleScript = BattleScript_EffectAuroraVeil,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_THIRD_TYPE] =
     {
-        .battleScript = BattleScript_EffectThirdType, // TODO: Assign points
+        .battleScript = BattleScript_EffectThirdType,
     },
 
     [EFFECT_ACUPRESSURE] =
     {
-        .battleScript = BattleScript_EffectAcupressure, // TODO: Assign points
+        .battleScript = BattleScript_EffectAcupressure,
     },
 
     [EFFECT_AROMATIC_MIST] =
     {
-        .battleScript = BattleScript_EffectAromaticMist, // TODO: Assign points
+        .battleScript = BattleScript_EffectAromaticMist,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_POWDER] =
     {
-        .battleScript = BattleScript_EffectPowder, // TODO: Assign points
+        .battleScript = BattleScript_EffectPowder,
     },
 
     [EFFECT_BELCH] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_PARTING_SHOT] =
     {
-        .battleScript = BattleScript_EffectPartingShot, // TODO: Assign points
+        .battleScript = BattleScript_EffectPartingShot,
     },
 
     [EFFECT_MAT_BLOCK] =
     {
-        .battleScript = BattleScript_EffectMatBlock, // TODO: Assign points
+        .battleScript = BattleScript_EffectMatBlock,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_STOMPING_TANTRUM] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_INSTRUCT] =
     {
-        .battleScript = BattleScript_EffectInstruct, // TODO: Assign points
+        .battleScript = BattleScript_EffectInstruct,
     },
 
     [EFFECT_LASER_FOCUS] =
     {
-        .battleScript = BattleScript_EffectLaserFocus, // TODO: Assign points
+        .battleScript = BattleScript_EffectLaserFocus,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_MAGNETIC_FLUX] =
     {
-        .battleScript = BattleScript_EffectMagneticFlux, // TODO: Assign points
+        .battleScript = BattleScript_EffectMagneticFlux,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_GEAR_UP] =
     {
-        .battleScript = BattleScript_EffectGearUp, // TODO: Assign points
+        .battleScript = BattleScript_EffectGearUp,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_STRENGTH_SAP] =
     {
-        .battleScript = BattleScript_EffectStrengthSap, // TODO: Assign points
-    },
-
-    [EFFECT_MIND_BLOWN] =
-    {
-        .battleScript = BattleScript_EffectMindBlown, // TODO: Assign points
+        .battleScript = BattleScript_EffectStrengthSap,
     },
 
     [EFFECT_PURIFY] =
     {
-        .battleScript = BattleScript_EffectPurify, // TODO: Assign points
+        .battleScript = BattleScript_EffectPurify,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_FAIL_IF_NOT_ARG_TYPE] =
     {
-        .battleScript = BattleScript_FailIfNotArgType, // TODO: Assign points
+        .battleScript = BattleScript_FailIfNotArgType,
     },
 
     [EFFECT_SHORE_UP] =
     {
-        .battleScript = BattleScript_EffectShoreUp, // TODO: Assign points
+        .battleScript = BattleScript_EffectShoreUp,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_GEOMANCY] =
     {
-        .battleScript = BattleScript_EffectGeomancy, // TODO: Assign points
+        .battleScript = BattleScript_EffectGeomancy,
         .twoTurnEffect = TRUE,
     },
 
     [EFFECT_FAIRY_LOCK] =
     {
-        .battleScript = BattleScript_EffectFairyLock, // TODO: Assign points
+        .battleScript = BattleScript_EffectFairyLock,
     },
 
     [EFFECT_ALLY_SWITCH] =
     {
-        .battleScript = BattleScript_EffectAllySwitch, // TODO: Assign points
+        .battleScript = BattleScript_EffectAllySwitch,
     },
 
     [EFFECT_RELIC_SONG] =
     {
-        .battleScript = BattleScript_EffectRelicSong, // TODO: Assign points
+        .battleScript = BattleScript_EffectRelicSong,
     },
 
     [EFFECT_BODY_PRESS] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_EERIE_SPELL] =
     {
-        .battleScript = BattleScript_EffectEerieSpell, // TODO: Assign points
+        .battleScript = BattleScript_EffectEerieSpell,
     },
 
     [EFFECT_JUNGLE_HEALING] =
     {
-        .battleScript = BattleScript_EffectJungleHealing, // TODO: Assign points
+        .battleScript = BattleScript_EffectJungleHealing,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_COACHING] =
     {
-        .battleScript = BattleScript_EffectCoaching, // TODO: Assign points
+        .battleScript = BattleScript_EffectCoaching,
     },
 
     [EFFECT_LASH_OUT] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_GRASSY_GLIDE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_DYNAMAX_DOUBLE_DMG] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_DECORATE] =
     {
-        .battleScript = BattleScript_EffectDecorate, // TODO: Assign points
+        .battleScript = BattleScript_EffectDecorate,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_SNIPE_SHOT] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_RECOIL_HP_25] =
     {
-        .battleScript = BattleScript_EffectRecoilHP25, // TODO: Assign points
+        .battleScript = BattleScript_EffectRecoilHP25,
     },
 
     [EFFECT_STUFF_CHEEKS] =
     {
-        .battleScript = BattleScript_EffectStuffCheeks, // TODO: Assign points
+        .battleScript = BattleScript_EffectStuffCheeks,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_GRAV_APPLE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_GLITZY_GLOW] =
     {
-        .battleScript = BattleScript_EffectGlitzyGlow, // TODO: Assign points
+        .battleScript = BattleScript_EffectGlitzyGlow,
     },
 
     [EFFECT_BADDY_BAD] =
     {
-        .battleScript = BattleScript_EffectBaddyBad, // TODO: Assign points
+        .battleScript = BattleScript_EffectBaddyBad,
     },
 
     [EFFECT_SAPPY_SEED] =
     {
-        .battleScript = BattleScript_EffectSappySeed, // TODO: Assign points
+        .battleScript = BattleScript_EffectSappySeed,
     },
 
     [EFFECT_FREEZY_FROST] =
     {
-        .battleScript = BattleScript_EffectFreezyFrost, // TODO: Assign points
+        .battleScript = BattleScript_EffectFreezyFrost,
     },
 
     [EFFECT_SPARKLY_SWIRL] =
     {
-        .battleScript = BattleScript_EffectSparklySwirl, // TODO: Assign points
+        .battleScript = BattleScript_EffectSparklySwirl,
     },
 
     [EFFECT_PLASMA_FISTS] =
     {
-        .battleScript = BattleScript_EffectPlasmaFists, // TODO: Assign points
+        .battleScript = BattleScript_EffectPlasmaFists,
     },
 
     [EFFECT_HYPERSPACE_FURY] =
     {
-        .battleScript = BattleScript_EffectHyperspaceFury, // TODO: Assign points
+        .battleScript = BattleScript_EffectHyperspaceFury,
     },
 
     [EFFECT_AURA_WHEEL] =
     {
-        .battleScript = BattleScript_EffectAuraWheel, // TODO: Assign points
+        .battleScript = BattleScript_EffectAuraWheel,
     },
 
     [EFFECT_PHOTON_GEYSER] =
     {
-        .battleScript = BattleScript_EffectPhotonGeyser, // TODO: Assign points
+        .battleScript = BattleScript_EffectPhotonGeyser,
     },
 
     [EFFECT_SHELL_SIDE_ARM] =
     {
-        .battleScript = BattleScript_EffectShellSideArm, // TODO: Assign points
+        .battleScript = BattleScript_EffectShellSideArm,
     },
 
     [EFFECT_TERRAIN_PULSE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_NO_RETREAT] =
     {
-        .battleScript = BattleScript_EffectNoRetreat, // TODO: Assign points
+        .battleScript = BattleScript_EffectNoRetreat,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TAR_SHOT] =
     {
-        .battleScript = BattleScript_EffectTarShot, // TODO: Assign points
+        .battleScript = BattleScript_EffectTarShot,
     },
 
     [EFFECT_POLTERGEIST] =
     {
-        .battleScript = BattleScript_EffectPoltergeist, // TODO: Assign points
+        .battleScript = BattleScript_EffectPoltergeist,
     },
 
     [EFFECT_OCTOLOCK] =
     {
-        .battleScript = BattleScript_EffectOctolock, // TODO: Assign points
+        .battleScript = BattleScript_EffectOctolock,
     },
 
     [EFFECT_CLANGOROUS_SOUL] =
     {
-        .battleScript = BattleScript_EffectClangorousSoul, // TODO: Assign points
+        .battleScript = BattleScript_EffectClangorousSoul,
     },
 
     [EFFECT_BOLT_BEAK] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_SKY_DROP] =
     {
-        .battleScript = BattleScript_EffectSkyDrop, // TODO: Assign points
+        .battleScript = BattleScript_EffectSkyDrop,
         .twoTurnEffect = TRUE,
         .semiInvulnerableEffect = TRUE,
     },
 
     [EFFECT_EXPANDING_FORCE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_RISING_VOLTAGE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_BEAK_BLAST] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_COURT_CHANGE] =
     {
-        .battleScript = BattleScript_EffectCourtChange, // TODO: Assign points
+        .battleScript = BattleScript_EffectCourtChange,
     },
 
     [EFFECT_MAX_HP_50_RECOIL] =
     {
-        .battleScript = BattleScript_EffectMaxHp50Recoil, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
+    },
+
+    [EFFECT_MIND_BLOWN] =
+    {
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_EXTREME_EVOBOOST] =
     {
-        .battleScript = BattleScript_EffectExtremeEvoboost, // TODO: Assign points
+        .battleScript = BattleScript_EffectExtremeEvoboost,
     },
 
     [EFFECT_HIT_SET_REMOVE_TERRAIN] =
     {
-        .battleScript = BattleScript_EffectHitSetRemoveTerrain, // TODO: Assign points
+        .battleScript = BattleScript_EffectHitSetRemoveTerrain,
     },
 
     [EFFECT_DARK_VOID] =
     {
-        .battleScript = BattleScript_EffectDarkVoid, // TODO: Assign points
+        .battleScript = BattleScript_EffectDarkVoid,
     },
 
     [EFFECT_VICTORY_DANCE] =
     {
-        .battleScript = BattleScript_EffectVictoryDance, // TODO: Assign points
+        .battleScript = BattleScript_EffectVictoryDance,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_TEATIME] =
     {
-        .battleScript = BattleScript_EffectTeatime, // TODO: Assign points
+        .battleScript = BattleScript_EffectTeatime,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_ATTACK_UP_USER_ALLY] =
     {
-        .battleScript = BattleScript_EffectAttackUpUserAlly, // TODO: Assign points
+        .battleScript = BattleScript_EffectAttackUpUserAlly,
     },
 
     [EFFECT_SHELL_TRAP] =
     {
-        .battleScript = BattleScript_EffectShellTrap, // TODO: Assign points
+        .battleScript = BattleScript_EffectShellTrap,
     },
 
     [EFFECT_PSYBLADE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_HYDRO_STEAM] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_REVIVAL_BLESSING] =
     {
-        .battleScript = BattleScript_EffectRevivalBlessing, // TODO: Assign points
+        .battleScript = BattleScript_EffectRevivalBlessing,
     },
 
     [EFFECT_SNOWSCAPE] =
@@ -1776,93 +1776,93 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_TAKE_HEART] =
     {
-        .battleScript = BattleScript_EffectTakeHeart, // TODO: Assign points
+        .battleScript = BattleScript_EffectTakeHeart,
     },
 
     [EFFECT_COLLISION_COURSE] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_CORROSIVE_GAS] =
     {
-        .battleScript = BattleScript_EffectCorrosiveGas, // TODO: Assign points
+        .battleScript = BattleScript_EffectCorrosiveGas,
     },
 
     [EFFECT_POPULATION_BOMB] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_SALT_CURE] =
     {
-        .battleScript = BattleScript_EffectSaltCure, // TODO: Assign points
+        .battleScript = BattleScript_EffectSaltCure,
     },
 
     [EFFECT_CHILLY_RECEPTION] =
     {
-        .battleScript = BattleScript_EffectChillyReception, // TODO: Assign points
+        .battleScript = BattleScript_EffectChillyReception,
     },
 
     [EFFECT_MAX_MOVE] =
     {
-        .battleScript = BattleScript_EffectMaxMove, // TODO: Assign points
+        .battleScript = BattleScript_EffectMaxMove,
     },
 
     [EFFECT_GLAIVE_RUSH] =
     {
-        .battleScript = BattleScript_EffectGlaiveRush, // TODO: Assign points
+        .battleScript = BattleScript_EffectGlaiveRush,
     },
 
     [EFFECT_RAGING_BULL] =
     {
-        .battleScript = BattleScript_EffectBrickBreak, // TODO: Assign points
+        .battleScript = BattleScript_EffectBrickBreak,
     },
 
     [EFFECT_RAGE_FIST] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_DOODLE] =
     {
-        .battleScript = BattleScript_EffectDoodle, // TODO: Assign points
+        .battleScript = BattleScript_EffectDoodle,
     },
 
     [EFFECT_FILLET_AWAY] =
     {
-        .battleScript = BattleScript_EffectFilletAway, // TODO: Assign points
+        .battleScript = BattleScript_EffectFilletAway,
     },
 
     [EFFECT_IVY_CUDGEL] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_FICKLE_BEAM] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_BLIZZARD] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_RAIN_ALWAYS_HIT] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_SHED_TAIL] =
     {
-        .battleScript = BattleScript_EffectShedTail, // TODO: Assign points
+        .battleScript = BattleScript_EffectShedTail,
         .encourageEncore = TRUE,
     },
 
     [EFFECT_UPPER_HAND] =
     {
-        .battleScript = BattleScript_EffectUpperHand, // TODO: Assign points
+        .battleScript = BattleScript_EffectUpperHand,
         .encourageEncore = TRUE,
     },
 
@@ -1874,12 +1874,28 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_LAST_RESPECTS] =
     {
-        .battleScript = BattleScript_EffectHit, // TODO: Assign points
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_TIDY_UP] =
     {
-        .battleScript = BattleScript_EffectTidyUp, // TODO: Assign points
+        .battleScript = BattleScript_EffectTidyUp,
         .encourageEncore = TRUE,
+    },
+
+    [EFFECT_SPICY_EXTRACT] =
+    {
+        .battleScript = BattleScript_EffectSpicyExtract,
+        .encourageEncore = TRUE,
+    },
+
+    [EFFECT_TERA_BLAST] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
+    },
+
+    [EFFECT_TERA_STARSTORM] =
+    {
+        .battleScript = BattleScript_EffectPhotonGeyser,
     },
 };

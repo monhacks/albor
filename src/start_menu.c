@@ -49,10 +49,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_START_MENU)
-#define AddTextPrinterParameterized (AddTextPrinterFixedCaseParameterized)
-#endif
-
 #define TAG_SAVING_ANIMATION 0x1000
 static const u16 sSavingAnimation_Pal[] = INCBIN_U16("graphics/text_window/saving_animation.gbapal");
 const u32 gSavingAnimation_Gfx[] = INCBIN_U32("graphics/text_window/saving_animation.4bpp.lz");
