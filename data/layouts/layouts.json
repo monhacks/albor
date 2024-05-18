@@ -4086,8 +4086,8 @@
       "name": "Test_Layout",
       "width": 20,
       "height": 20,
-      "primary_tileset": "gTileset_Test",
-      "secondary_tileset": "gTileset_Petalburg",
+      "primary_tileset": "gTileset_Principal",
+      "secondary_tileset": "gTileset_TestSecondary",
       "border_filepath": "data/layouts/Test/border.bin",
       "blockdata_filepath": "data/layouts/Test/map.bin"
     }

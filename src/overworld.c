@@ -1446,43 +1446,57 @@ const struct BlendSettings gTimeOfDayBlend[] =
     [TIME_NIGHT]   = {.coeff = 10, .blendColor = TINT_NIGHT, .isTint = TRUE},
 };
 
-u8 UpdateTimeOfDay(void) {
+u8 UpdateTimeOfDay(void) 
+{
     s32 hours, minutes;
     RtcCalcLocalTime();
     hours = gLocalTime.hours;
     minutes = gLocalTime.minutes;
-    if (hours < 4) { // night
+    if (hours < 4) 
+    { // night
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
-    } else if (hours < 7) { // night->morning
+    } 
+    else if (hours < 7) 
+    { // night->morning
         currentTimeBlend.time0 = TIME_NIGHT;
         currentTimeBlend.time1 = TIME_MORNING;
         currentTimeBlend.weight = 256 - 256 * ((hours - 4) * 60 + minutes) / ((7-4)*60);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIME_DAY;
-    } else if (hours < 10) { // morning->day
+    } 
+    else if (hours < 10) 
+    { // morning->day
         currentTimeBlend.time0 = TIME_MORNING;
         currentTimeBlend.time1 = TIME_DAY;
         currentTimeBlend.weight = 256 - 256 * ((hours - 7) * 60 + minutes) / ((10-7)*60);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2 + 128;
         gTimeOfDay = TIME_DAY;
-    } else if (hours < 18) { // day
+    } 
+    else if (hours < 18) 
+    { // day
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
-    } else if (hours < 20) { // day->evening
+    } 
+    else if (hours < 20) 
+    { // day->evening
         currentTimeBlend.time0 = TIME_DAY;
         currentTimeBlend.time1 = TIME_EVENING;
         currentTimeBlend.weight = 256 - 256 * ((hours - 18) * 60 + minutes) / ((20-18)*60);
         currentTimeBlend.altWeight = currentTimeBlend.weight / 2 + 128;
         gTimeOfDay = TIME_EVENING;
-    } else if (hours < 22) { // evening->night
+    } 
+    else if (hours < 22) 
+    { // evening->night
         currentTimeBlend.time0 = TIME_EVENING;
         currentTimeBlend.time1 = TIME_NIGHT;
         currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((22-20)*60);
         currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
         gTimeOfDay = TIME_NIGHT;
-    } else { // 22-24, night
+    } 
+    else 
+    { // 22-24, night
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
@@ -1496,7 +1510,8 @@ bool8 MapHasNaturalLight(u8 mapType) { // Whether a map type is naturally lit/ou
 }
 
 // Update & mix day / night bg palettes (into unfaded)
-void UpdateAltBgPalettes(u16 palettes) {
+void UpdateAltBgPalettes(u16 palettes) 
+{
     const struct Tileset *primary = gMapHeader.mapLayout->primaryTileset;
     const struct Tileset *secondary = gMapHeader.mapLayout->secondaryTileset;
     u32 i = 1;
@@ -1508,8 +1523,10 @@ void UpdateAltBgPalettes(u16 palettes) {
     palettes >>= 1; // start at palette 1
     if (!palettes)
         return;
-    while (palettes) {
-        if (palettes & 1) {
+    while (palettes) 
+    {
+        if (palettes & 1) 
+        {
             if (i < NUM_PALS_IN_PRIMARY)
                 AvgPaletteWeighted(&((u16*)primary->palettes)[i*16], &((u16*)primary->palettes)[((i+9)%16)*16], gPlttBufferUnfaded + i * 16, currentTimeBlend.altWeight);
             else
@@ -1520,8 +1537,10 @@ void UpdateAltBgPalettes(u16 palettes) {
     }
 }
 
-void UpdatePalettesWithTime(u32 palettes) {
-  if (MapHasNaturalLight(gMapHeader.mapType)) {
+void UpdatePalettesWithTime(u32 palettes) 
+{
+    if (MapHasNaturalLight(gMapHeader.mapType)) 
+    {
     u32 i;
     u32 mask = 1 << 16;
     if (palettes >= 0x10000)
@@ -1538,7 +1557,7 @@ void UpdatePalettesWithTime(u32 palettes) {
       (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0],
       (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1],
       currentTimeBlend.weight);
-  }
+    }
 }
 
 u8 UpdateSpritePaletteWithTime(u8 paletteNum) 

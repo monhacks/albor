@@ -13,6 +13,26 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Aarant por los followers Pokémon, su sistema de iconos, la expansión dinámica de paletas en el OW y su sistema de día y noche.
     *CitrusBolt por el sistema de ICV y por su sistema de huevos del color de sus tipos.
 
+    *GRÁFICOS:
+        -Wraitex
+        -KyleDove
+        -WesleyFG
+        -EvoLiNa
+        -The-Red-eX
+        -Pablus94
+        -Phyromatical
+        -Farore
+        -Magiscarf
+        -Ekat99
+        -Derlo
+        -LunaMaddalena
+        -Cope
+        -Princess Phoenix
+        -InmortalKaktus
+        -BurtonKun
+        -Zeo
+
+
 ## Cambios a ataques/habilidades/mecánicas:
     *Aguijón letal aumenta 2 veces el ataque (en vez de 3).
     *Alas vendaval funciona como en 6ª generación: no necesita la salud al máximo para funcionar.

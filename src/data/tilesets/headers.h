@@ -28,7 +28,7 @@ const struct Tileset gTileset_General =
 const struct Tileset gTileset_Petalburg =
 {
     .isCompressed = TRUE,
-    .swapPalettes = SWAP_PAL(9),
+    .swapPalettes = SWAP_PAL(11),
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_Petalburg,
     .palettes = gTilesetPalettes_Petalburg,
@@ -96,7 +96,7 @@ const struct Tileset gTileset_Lavaridge =
 const struct Tileset gTileset_Fallarbor =
 {
     .isCompressed = TRUE,
-    .swapPalettes = SWAP_PAL(7),
+    .swapPalettes = SWAP_PAL(11),
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_Fallarbor,
     .palettes = gTilesetPalettes_Fallarbor,
@@ -131,7 +131,7 @@ const struct Tileset gTileset_Lilycove =
 const struct Tileset gTileset_Mossdeep =
 {
     .isCompressed = TRUE,
-    .swapPalettes = SWAP_PAL(8),
+    .swapPalettes = SWAP_PAL(11),
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_Mossdeep,
     .palettes = gTilesetPalettes_Mossdeep,
@@ -149,13 +149,13 @@ const struct Tileset gTileset_EverGrande =
     .metatiles = gMetatiles_EverGrande,
     .metatileAttributes = gMetatileAttributes_EverGrande,
     .callback = InitTilesetAnim_EverGrande,
-    .swapPalettes = SWAP_PAL(8),
+    .swapPalettes = SWAP_PAL(11),
 };
 
 const struct Tileset gTileset_Pacifidlog =
 {
     .isCompressed = TRUE,
-    .swapPalettes = SWAP_PAL(9),
+    .swapPalettes = SWAP_PAL(11),
     .isSecondary = TRUE,
     .tiles = gTilesetTiles_Pacifidlog,
     .palettes = gTilesetPalettes_Pacifidlog,
@@ -814,6 +814,17 @@ const struct Tileset gTileset_UnionRoom =
     .palettes = gTilesetPalettes_UnionRoom,
     .metatiles = gMetatiles_UnionRoom,
     .metatileAttributes = gMetatileAttributes_UnionRoom,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_Principal =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_Principal,
+    .palettes = gTilesetPalettes_Principal,
+    .metatiles = gMetatiles_Principal,
+    .metatileAttributes = gMetatileAttributes_Principal,
     .callback = NULL,
 };
 

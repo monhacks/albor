@@ -36,7 +36,11 @@
 - Testear Impenetrable.
 - Indicar que Breaking Swipe tiene boost de Dinocola.
 - Indicar que Poison Sting, Smart Strike tienen boost de Cornamenta.
+- Campo magnético
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
 
-*Utilidades: porytiles compile-primary -Wall -o $HOME/desktop/pokeemerald/data/tilesets/primary/test $HOME/desktop/pokeemerald/tiles $HOME/desktop/pokeemerald/include/constants/metatile_behaviors.h
+*paletas: 0-12 tileset primario 0-9 (es necesario?) secundario 10-12 (chequear SWAP_PAL)
+*paletas primary: 0/arboles 1/centro_pokemon 2/hierba_y_hierba_alta 3/agua 4/agua_playa
+
+porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/porytiles/tilesets/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h
