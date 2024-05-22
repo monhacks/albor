@@ -39,6 +39,13 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
         -Hek El Grande
         -Shawn Frost
         -ChaoticCherryCake
+        -Maxewenx
+        -SeraaWaH
+        -NSora-96
+        -PresidentLandon
+        -KingTapir
+        -Aveontrainer
+
 
 
 ## Cambios a ataques/habilidades/mecánicas:
