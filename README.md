@@ -45,6 +45,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
         -PresidentLandon
         -KingTapir
         -Aveontrainer
+        -Rayquaza-dot
+        -peekychew
 
 
 
