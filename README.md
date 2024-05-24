@@ -31,6 +31,23 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
         -InmortalKaktus
         -BurtonKun
         -Zeo
+        -Mysticalmew
+        -Dewitty
+        -Ultimospriter
+        -Thunderdove
+        -TyranitarDark
+        -Hek El Grande
+        -Shawn Frost
+        -ChaoticCherryCake
+        -Maxewenx
+        -SeraaWaH
+        -NSora-96
+        -PresidentLandon
+        -KingTapir
+        -Aveontrainer
+        -Rayquaza-dot
+        -peekychew
+
 
 
 ## Cambios a ataques/habilidades/mecánicas:
