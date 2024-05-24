@@ -4545,7 +4545,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_FEINT_ATTACK] =
     {
         .name = COMPOUND_STRING("Finta"),
-        .description = sFeintDescription,
+        .description = COMPOUND_STRING(
+            "Draws the foe close, then\n"
+            "strikes without fail."),
         .effect = EFFECT_HIT,
         .power = 60,
         .type = TYPE_DARK,
