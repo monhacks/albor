@@ -47,7 +47,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
         -Aveontrainer
         -Rayquaza-dot
         -peekychew
-
+        -Zer0
+        -Anarlaurendil
 
 
 ## Cambios a ataques/habilidades/mecánicas:
