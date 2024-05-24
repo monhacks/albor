@@ -196,7 +196,7 @@
       "name": "Route104_Layout",
       "width": 40,
       "height": 80,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_Principal",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/Route104/border.bin",
       "blockdata_filepath": "data/layouts/Route104/map.bin"

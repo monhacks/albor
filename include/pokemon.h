@@ -543,9 +543,6 @@ enum {
     AFFINE_TURN_DOWN_SLOW,
     AFFINE_TURN_DOWN_SLIGHT,
     AFFINE_TURN_UP_HIGH,
-    AFFINE_UNUSED_1,
-    AFFINE_UNUSED_2,
-    AFFINE_UNUSED_3,
     NUM_MON_AFFINES,
 };
 
@@ -586,7 +583,6 @@ struct NatureInfo
 {
     const u8 *name;
     u8 statUp;
-    u8 statDown;
     u8 backAnim;
     u8 pokeBlockAnim[2];
     u8 battlePalacePercents[4];
