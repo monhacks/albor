@@ -2730,21 +2730,13 @@ void SetBattleTowerLinkPlayerGfx(void)
 
 void ShowNatureGirlMessage(void)
 {
-    static const u8 *const sNatureGirlMessages[NUM_NATURES] = {
-        [NATURE_OFENSIVA]               = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-        [NATURE_DEFENSIVA]              = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-        [NATURE_OFENSIVA_ESPECIAL]      = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-        [NATURE_DEFENSIVA_ESPECIAL]     = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-        [NATURE_RAPIDA]                 = BattleFrontier_Lounge5_Text_NatureGirlHardy,
-    };
-
     u8 nature;
 
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = 0;
 
     nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
-    ShowFieldMessage(sNatureGirlMessages[nature]);
+    ShowFieldMessage(gNaturesInfo[nature].natureGirlMessage);
 }
 
 void UpdateFrontierGambler(u16 daysSince)

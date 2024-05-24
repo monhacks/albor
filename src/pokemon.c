@@ -95,22 +95,71 @@ const struct SpindaSpot gSpindaSpotGraphics[] =
     {.x = 34, .y = 26, .image = INCBIN_U16("graphics/pokemon/spinda/spots/spot_3.1bpp")}
 };
 
-const u8 *const gNatureNamePointers[NUM_NATURES] =
-{
-    [NATURE_OFENSIVA] = COMPOUND_STRING("Ofensiva"),
-    [NATURE_DEFENSIVA] = COMPOUND_STRING("Defensiva"),
-    [NATURE_OFENSIVA_ESPECIAL] = COMPOUND_STRING("Ofensiva especial"),
-    [NATURE_DEFENSIVA_ESPECIAL] = COMPOUND_STRING("Defensiva especial"),
-    [NATURE_RAPIDA] = COMPOUND_STRING("Rápida"),
-};
+// In Battle Palace, moves are chosen based on the pokemons nature rather than by the player
+// Moves are grouped into "Attack", "Defense", or "Support" (see PALACE_MOVE_GROUP_*)
+// Each nature has a certain percent chance of selecting a move from a particular group
+// and a separate percent chance for each group when at or below 50% HP
+// The table below doesn't list percentages for Support because you can subtract the other two
+// Support percentages are listed in comments off to the side instead
+#define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
 
-const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
-{                               // Attack  Defense  Speed  Sp.Atk  Sp. Def
-    [NATURE_OFENSIVA]           = {1,      0,       0,     0,      0},
-    [NATURE_DEFENSIVA]          = {0,      1,       0,     0,      0},
-    [NATURE_OFENSIVA_ESPECIAL]  = {0,      0,       0,     1,      0},
-    [NATURE_DEFENSIVA_ESPECIAL] = {0,      0,       0,     0,      1},
-    [NATURE_RAPIDA]             = {0,      0,       1,     0,      0},
+const struct NatureInfo gNaturesInfo[NUM_NATURES] =
+{
+    [NATURE_OFENSIVA] =
+    {
+        .name = COMPOUND_STRING("Ofensiva"),
+        .statUp = STAT_ATK,
+        .backAnim = 1,
+        .pokeBlockAnim = {ANIM_HARDY, AFFINE_NONE},
+        .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlHardy,
+        .battlePalacePercents = PALACE_STYLE(61, 7, 61, 7), //32% support >= 50% HP, 32% support < 50% HP
+        .battlePalaceFlavorText = B_MSG_EAGER_FOR_MORE,
+        .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
+    },
+    [NATURE_DEFENSIVA] =
+    {
+        .name = COMPOUND_STRING("Defensiva"),
+        .statUp = STAT_DEF,
+        .backAnim = 2,
+        .pokeBlockAnim = {ANIM_LONELY, AFFINE_NONE},
+        .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlLonely,
+        .battlePalacePercents = PALACE_STYLE(20, 25, 84, 8), //55%,  8%
+        .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
+        .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
+    },
+    [NATURE_OFENSIVA_ESPECIAL] =
+    {
+        .name = COMPOUND_STRING("Ofensiva esp."),
+        .statUp = STAT_SPATK,
+        .backAnim = 1,
+        .pokeBlockAnim = {ANIM_BRAVE, AFFINE_TURN_UP},
+        .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlBrave,
+        .battlePalacePercents = PALACE_STYLE(70, 15, 32, 60), //15%, 8%
+        .battlePalaceFlavorText = B_MSG_GETTING_IN_POS,
+        .battlePalaceSmokescreen = PALACE_TARGET_WEAKER,
+    },
+    [NATURE_DEFENSIVA_ESPECIAL] =
+    {
+        .name = COMPOUND_STRING("Defensiva esp."),
+        .statUp = STAT_SPDEF,
+        .backAnim = 2,
+        .pokeBlockAnim = {ANIM_ADAMANT, AFFINE_NONE},
+        .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlAdamant,
+        .battlePalacePercents = PALACE_STYLE(38, 31, 70, 15), //31%, 15%
+        .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
+        .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
+    },
+    [NATURE_RAPIDA] =
+    {
+        .name = COMPOUND_STRING("Rápida"),
+        .statUp = STAT_SPEED,
+        .backAnim = 0,
+        .pokeBlockAnim = {ANIM_NAUGHTY, AFFINE_NONE},
+        .natureGirlMessage = BattleFrontier_Lounge5_Text_NatureGirlNaughty,
+        .battlePalacePercents = PALACE_STYLE(20, 70, 70, 22), //10%, 8%
+        .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
+        .battlePalaceSmokescreen = PALACE_TARGET_WEAKER,
+    }
 };
 
 #include "data/graphics/pokemon.h"
@@ -140,6 +189,7 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #endif
 
 #include "data/pokemon/teachable_learnsets.h"
+#include "data/pokemon/egg_moves.h"
 #include "data/pokemon/form_species_tables.h"
 #include "data/pokemon/form_change_tables.h"
 #include "data/pokemon/form_change_table_pointers.h"
@@ -2907,6 +2957,14 @@ const u16 *GetSpeciesTeachableLearnset(u16 species)
     return learnset;
 }
 
+const u16 *GetSpeciesEggMoves(u16 species)
+{
+    const u16 *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].eggMoveLearnset;
+    if (learnset == NULL)
+        return sNoneEggMoveLearnset;
+    return learnset;
+}
+
 const struct Evolution *GetSpeciesEvolutions(u16 species)
 {
     const struct Evolution *evolutions = gSpeciesInfo[SanitizeSpeciesId(species)].evolutions;
@@ -4327,38 +4385,13 @@ u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
 
 u16 ModifyStatByNature(u8 nature, u16 stat, u8 statIndex)
 {
-// Because this is a u16 it will be unable to store the
-// result of the multiplication for any stat > 595 for a
-// positive nature and > 728 for a negative nature.
-// Neither occur in the base game, but this can happen if
-// any Nature-affected base stat is increased to a value
-// above 248. The closest by default is Shuckle at 230.
-#ifdef BUGFIX
-    u32 retVal;
-#else
-    u16 retVal;
-#endif
-
     // Don't modify HP, Accuracy, or Evasion by nature
     if (statIndex <= STAT_HP || statIndex > NUM_NATURE_STATS)
         return stat;
-
-    switch (gNatureStatTable[nature][statIndex - 1])
-    {
-    case 1:
-        retVal = stat * 110;
-        retVal /= 100;
-        break;
-    case -1:
-        retVal = stat * 90;
-        retVal /= 100;
-        break;
-    default:
-        retVal = stat;
-        break;
-    }
-
-    return retVal;
+    else if (statIndex == gNaturesInfo[nature].statUp)
+        return stat * 110 / 100;
+    else
+        return stat;
 }
 
 #define IS_LEAGUE_BATTLE(trainerClass)              \

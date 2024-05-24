@@ -1087,32 +1087,6 @@ static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
     [BATTLE_TERRAIN_PLAIN]            = (B_CAMOUFLAGE_TYPES >= GEN_4 ? TYPE_GROUND : TYPE_NORMAL),
 };
 
-// In Battle Palace, moves are chosen based on the pokemons nature rather than by the player
-// Moves are grouped into "Attack", "Defense", or "Support" (see PALACE_MOVE_GROUP_*)
-// Each nature has a certain percent chance of selecting a move from a particular group
-// and a separate percent chance for each group when at or below 50% HP
-// The table below doesn't list percentages for Support because you can subtract the other two
-// Support percentages are listed in comments off to the side instead
-#define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
-
-const ALIGNED(4) u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4] =
-{
-    [NATURE_OFENSIVA]           = PALACE_STYLE(56, 22, 56, 22),  // 22%, 22%
-    [NATURE_DEFENSIVA]          = PALACE_STYLE(56, 22, 56, 22),  // 22%, 22%
-    [NATURE_OFENSIVA_ESPECIAL]  = PALACE_STYLE(56, 22, 56, 22),  // 22%, 22%
-    [NATURE_DEFENSIVA_ESPECIAL] = PALACE_STYLE(56, 22, 56, 22),  // 22%, 22%
-    [NATURE_RAPIDA]             = PALACE_STYLE(56, 22, 56, 22)  // 22%, 22%
-};
-
-static const u8 sBattlePalaceNatureToFlavorTextId[NUM_NATURES] =
-{
-    [NATURE_OFENSIVA]           = B_MSG_EAGER_FOR_MORE,
-    [NATURE_DEFENSIVA]          = B_MSG_EAGER_FOR_MORE,
-    [NATURE_OFENSIVA_ESPECIAL]  = B_MSG_EAGER_FOR_MORE,
-    [NATURE_DEFENSIVA_ESPECIAL] = B_MSG_EAGER_FOR_MORE,
-    [NATURE_RAPIDA]             = B_MSG_EAGER_FOR_MORE,
-};
-
 static bool32 NoTargetPresent(u8 battler, u32 move)
 {
     if (!IsBattlerAlive(gBattlerTarget))
@@ -9208,7 +9182,7 @@ static void Cmd_various(void)
         {
             gBattleStruct->palaceFlags |= gBitTable[battler];
             gBattleCommunication[0] = TRUE;
-            gBattleCommunication[MULTISTRING_CHOOSER] = sBattlePalaceNatureToFlavorTextId[GetNatureFromPersonality(gBattleMons[battler].personality)];
+            gBattleCommunication[MULTISTRING_CHOOSER] = gNaturesInfo[GetNatureFromPersonality(gBattleMons[battler].personality)].battlePalaceFlavorText;
         }
         break;
     }

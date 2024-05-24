@@ -428,15 +428,6 @@ static const u8 sBackAnimationIds[] =
     [(BACK_ANIM_SHAKE_GLOW_BLUE - 1) * 3]         = ANIM_SHAKE_GLOW_BLUE_FAST, ANIM_SHAKE_GLOW_BLUE, ANIM_SHAKE_GLOW_BLUE_SLOW,
 };
 
-static const u8 sBackAnimNatureModTable[NUM_NATURES] =
-{
-    [NATURE_OFENSIVA]           = 2,
-    [NATURE_DEFENSIVA]          = 1,
-    [NATURE_OFENSIVA_ESPECIAL]  = 2,
-    [NATURE_DEFENSIVA_ESPECIAL] = 1,
-    [NATURE_RAPIDA]             = 0,
-};
-
 static const union AffineAnimCmd sMonAffineAnim_0[] =
 {
     AFFINEANIMCMD_FRAME(256, 256, 0, 0),
@@ -559,7 +550,7 @@ void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
     nature = GetNature(&gPlayerParty[gBattlerPartyIndexes[battlerId]]);
 
     // * 3 below because each back anim has 3 variants depending on nature
-    animId = 3 * backAnimSet + sBackAnimNatureModTable[nature];
+    animId = 3 * backAnimSet + gNaturesInfo[nature].backAnim;
     gTasks[taskId].tAnimId = sBackAnimationIds[animId];
 }
 

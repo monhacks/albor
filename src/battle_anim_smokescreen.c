@@ -17,15 +17,6 @@ static void SpriteCB_SmokescreenImpact(struct Sprite *);
 
 // The below data for smokescreen starts and ends with some data that belongs to battle_gfx_sfx_util.c
 
-const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
-{
-    [NATURE_OFENSIVA]               = PALACE_TARGET_RANDOM,
-    [NATURE_DEFENSIVA]              = PALACE_TARGET_RANDOM,
-    [NATURE_OFENSIVA_ESPECIAL]      = PALACE_TARGET_RANDOM,
-    [NATURE_DEFENSIVA_ESPECIAL]     = PALACE_TARGET_RANDOM,
-    [NATURE_RAPIDA]                 = PALACE_TARGET_RANDOM,
-};
-
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
     .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN

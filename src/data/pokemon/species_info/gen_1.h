@@ -50,6 +50,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Bulbasaur)
         FOLLOWER(Bulbasaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bulbasaur),
+        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_IVYSAUR}),
     },
 
@@ -100,6 +101,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Ivysaur)
         FOLLOWER(Ivysaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ivysaur),
+        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VENUSAUR}),
     },
 
@@ -161,6 +163,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Venusaur),
         ICON(Venusaur, 4),
         ICON_FEMALE(Venusaur, 4),
+        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
         FOLLOWER(Venusaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 #endif //P_FAMILY_BULBASAUR
@@ -211,6 +214,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Charmander, 0),
         FOOTPRINT(Charmander)
         LEARNSETS(Charmander),
+        .eggMoveLearnset = sCharmanderEggMoveLearnset,
         FOLLOWER(Charmander, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARMELEON}),
     },
@@ -261,6 +265,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Charmeleon, 0),
         FOOTPRINT(Charmeleon)
         LEARNSETS(Charmeleon),
+        .eggMoveLearnset = sCharmanderEggMoveLearnset,
         FOLLOWER(Charmeleon, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CHARIZARD}),
     },
@@ -320,6 +325,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Charizard),
         ICON(Charizard, 0),
+        .eggMoveLearnset = sCharmanderEggMoveLearnset,
         FOLLOWER(Charizard, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 #endif //P_FAMILY_CHARMANDER
@@ -371,6 +377,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Squirtle)
         FOLLOWER(Squirtle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Squirtle),
+        .eggMoveLearnset = sSquirtleEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WARTORTLE}),
     },
 
@@ -421,6 +428,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Wartortle)
         FOLLOWER(Wartortle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Wartortle),
+        .eggMoveLearnset = sSquirtleEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BLASTOISE}),
     },
 
@@ -479,6 +487,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         PALETTES(Blastoise),
         ICON(Blastoise, 2),
+        .eggMoveLearnset = sSquirtleEggMoveLearnset,
         FOLLOWER(Blastoise, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 #endif //P_FAMILY_SQUIRTLE
@@ -865,6 +874,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Pidgey)
         FOLLOWER(Pidgey, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Pidgey),
+        .eggMoveLearnset = sPidgeyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_PIDGEOTTO}),
     },
 
@@ -915,6 +925,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Pidgeotto)
         FOLLOWER(Pidgeotto, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Pidgeotto),
+        .eggMoveLearnset = sPidgeyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_PIDGEOT}),
     },
 
@@ -975,6 +986,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
         PALETTES(Pidgeot),
         ICON(Pidgeot, 0),
+        .eggMoveLearnset = sPidgeyEggMoveLearnset,
         FOLLOWER(Pidgeot, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 #endif //P_FAMILY_PIDGEY
