@@ -1059,6 +1059,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON_FEMALE(Rattata, 2),
         FOLLOWER(Rattata, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Rattata),
+        .eggMoveLearnset = sRattataEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RATICATE}),
     },
 
@@ -1100,6 +1101,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON_FEMALE(Raticate, 2),
         FOLLOWER(Raticate, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raticate),
+        .eggMoveLearnset = sRattataEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
@@ -1134,6 +1136,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(RattataAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(RattataAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sRattataAlolanEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_RATICATE_ALOLAN}),
     },
 
@@ -1174,6 +1177,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(RaticateAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(RaticateAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sRattataAlolanEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_RATTATA
@@ -1227,6 +1231,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Spearow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Spearow),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FEAROW}),
+        .eggMoveLearnset = sSpearowEggMoveLearnset,
     },
 
     [SPECIES_FEAROW] =
@@ -1278,6 +1283,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Fearow)
         FOLLOWER(Fearow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Fearow),
+        .eggMoveLearnset = sSpearowEggMoveLearnset,
     },
 #endif //P_FAMILY_SPEAROW
 
@@ -1329,7 +1335,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Ekans)
         FOLLOWER(Ekans, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Ekans),
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_ARBOK}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ARBOK}),
+        .eggMoveLearnset = sEkansEggMoveLearnset,
     },
 
     [SPECIES_ARBOK] =
@@ -1384,6 +1391,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Arbok)
         FOLLOWER(Arbok, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Arbok),
+        .eggMoveLearnset = sEkansEggMoveLearnset,
     },
 #endif //P_FAMILY_EKANS
 
@@ -1433,6 +1441,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Pichu),
         ICON(Pichu, 1),
+        .eggMoveLearnset = sPichuEggMoveLearnset,
         FOLLOWER(Pichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PIKACHU}),
     },
@@ -1497,6 +1506,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Pikachu),
         ICON(Pikachu, 2),
+        .eggMoveLearnset = sPichuEggMoveLearnset,
     #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
         ICON_FEMALE(Pikachu, 2),
     #endif
@@ -1566,6 +1576,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Raichu, 0),
         FOLLOWER(Raichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raichu),
+        .eggMoveLearnset = sPichuEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
@@ -1606,6 +1617,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(RaichuAlolan, 2),
         FOLLOWER(RaichuAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(RaichuAlolan),
+        .eggMoveLearnset = sPichuEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_PIKACHU
@@ -1678,6 +1690,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Sandshrew, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sandshrew),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SANDSLASH}),
+        .eggMoveLearnset = sSandshrewEggMoveLearnset,
     },
 
     [SPECIES_SANDSLASH] =
@@ -1714,6 +1727,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Sandslash, 2),
         FOLLOWER(Sandslash, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sandslash),
+        .eggMoveLearnset = sSandshrewEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
@@ -1753,6 +1767,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(SandshrewAlolan),
         .isAlolanForm = TRUE,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLAN}),
+        .eggMoveLearnset = sSandshrewAlolanEggMoveLearnset,
     },
 
     [SPECIES_SANDSLASH_ALOLAN] =
@@ -1790,6 +1805,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(SandslashAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(SandslashAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sSandshrewEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_SANDSHREW
@@ -1842,7 +1858,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(NidoranF)
         FOLLOWER(NidoranF, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(NidoranF),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_NIDORINA}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINA}),
+        .eggMoveLearnset = sNidoranFEggMoveLearnset,
     },
 
     [SPECIES_NIDORINA] =
@@ -1892,6 +1909,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Nidorina, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Nidorina),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOQUEEN}),
+        .eggMoveLearnset = sNidoranFEggMoveLearnset,
     },
 
     [SPECIES_NIDOQUEEN] =
@@ -1948,6 +1966,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Nidoqueen)
         FOLLOWER(Nidoqueen, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Nidoqueen),
+        .eggMoveLearnset = sNidoranFEggMoveLearnset,
     },
 
     [SPECIES_NIDORAN_M] =
@@ -1996,7 +2015,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(NidoranM)
         FOLLOWER(NidoranM, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(NidoranM),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_NIDORINO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINO}),
+        .eggMoveLearnset = sNidoranMEggMoveLearnset,
     },
 
     [SPECIES_NIDORINO] =
@@ -2046,6 +2066,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Nidorino, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Nidorino),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOKING}),
+        .eggMoveLearnset = sNidoranMEggMoveLearnset,
     },
 
     [SPECIES_NIDOKING] =
@@ -2103,6 +2124,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Nidoking)
         FOLLOWER(Nidoking, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Nidoking),
+        .eggMoveLearnset = sNidoranMEggMoveLearnset,
     },
 #endif //P_FAMILY_NIDORAN
 
@@ -2163,6 +2185,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Cleffa, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Cleffa),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CLEFAIRY}),
+        .eggMoveLearnset = sCleffaEggMoveLearnset,
     },
 #endif //P_GEN_2_CROSS_EVOS
 
@@ -2215,6 +2238,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Clefairy, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Clefairy),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_CLEFABLE}),
+        .eggMoveLearnset = sCleffaEggMoveLearnset,
     },
 
     [SPECIES_CLEFABLE] =
@@ -2273,6 +2297,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Clefable)
         FOLLOWER(Clefable, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Clefable),
+        .eggMoveLearnset = sCleffaEggMoveLearnset,
     },
 #endif //P_FAMILY_CLEFAIRY
 
