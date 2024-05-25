@@ -49,6 +49,10 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
         -peekychew
         -Zer0
         -Anarlaurendil
+        -Dante
+        -Zetavares852
+        -PrinceLegendario
+        -DeNerdyDude
 
 
 ## Cambios a ataques/habilidades/mecánicas:
