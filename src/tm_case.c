@@ -227,22 +227,6 @@ static const struct WindowTemplate sWindowTemplates_ContextMenu[] = {
     },
 };
 
-
-#define TAG_CATEGORY_ICONS 30004
-
-static const struct OamData sOamData_CategoryIcons =
-{
-    .size = SPRITE_SIZE(32x16),
-    .shape = SPRITE_SHAPE(32x16),
-    .priority = 0,
-};
-
-static const struct SpritePalette sSpritePal_CategoryIcons =
-{
-    .data = gCategoryIcons_Pal,
-    .tag = TAG_CATEGORY_ICONS
-};
-
 static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
 {
     ANIMCMD_FRAME(0, 0),
@@ -603,7 +587,7 @@ static void PrintMoveInfo(u16 itemId)
         }
         // Draw category icon
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
-        LoadSpritePalette(&sSpritePal_CategoryIcons);
+        LoadSpritePalette(&gSpritePal_CategoryIcons);
         move = ItemIdToBattleMoveId(itemId);
         if (sTMCaseDynamicResources->categoryIconSpriteId == 0xFF)
         {

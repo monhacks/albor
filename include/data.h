@@ -5,17 +5,6 @@
 #include "constants/trainers.h"
 
 #define SPECIES_SHINY_TAG 5000
-#define N_FOLLOWER_HAPPY_MESSAGES 31
-#define N_FOLLOWER_NEUTRAL_MESSAGES 14
-#define N_FOLLOWER_SAD_MESSAGES 3
-#define N_FOLLOWER_UPSET_MESSAGES 3
-#define N_FOLLOWER_ANGRY_MESSAGES 5
-#define N_FOLLOWER_PENSIVE_MESSAGES 20
-#define N_FOLLOWER_LOVE_MESSAGES 10
-#define N_FOLLOWER_SURPRISE_MESSAGES 20
-#define N_FOLLOWER_CURIOUS_MESSAGES 7
-#define N_FOLLOWER_MUSIC_MESSAGES 14
-#define N_FOLLOWER_POISONED_MESSAGES 1
 
 #define MAX_TRAINER_ITEMS 4
 
@@ -134,6 +123,9 @@ struct TypeInfo
     u8 palette;
     u16 zMove;
     u16 maxMove;
+    u16 teraTypeRGBValue;    // Most values pulled from the Tera type icon palette.
+    u16 damageCategory:2;    // Used for B_PHYSICAL_SPECIAL_SPLIT <= GEN_3
+    u16 padding:14;
     const u32 *const paletteTMHM;
     //u16 enhanceItem;
     //u16 berry;
@@ -148,19 +140,6 @@ struct TypeInfo
 // Egg palette tables
 extern const struct CompressedSpritePalette gEgg1PaletteTable[];
 extern const struct CompressedSpritePalette gEgg2PaletteTable[];
-
-// Follower text messages
-extern const struct FollowerMsgInfo gFollowerHappyMessages[];
-extern const struct FollowerMsgInfo gFollowerNeutralMessages[];
-extern const struct FollowerMsgInfo gFollowerSadMessages[];
-extern const struct FollowerMsgInfo gFollowerUpsetMessages[];
-extern const struct FollowerMsgInfo gFollowerAngryMessages[];
-extern const struct FollowerMsgInfo gFollowerPensiveMessages[];
-extern const struct FollowerMsgInfo gFollowerLoveMessages[];
-extern const struct FollowerMsgInfo gFollowerSurpriseMessages[];
-extern const struct FollowerMsgInfo gFollowerCuriousMessages[];
-extern const struct FollowerMsgInfo gFollowerMusicMessages[];
-extern const struct FollowerMsgInfo gFollowerPoisonedMessages[];
 
 extern const u16 gMinigameDigits_Pal[];
 extern const u32 gMinigameDigits_Gfx[];
@@ -193,6 +172,19 @@ extern const struct Trainer gTrainers[];
 extern const struct Trainer gBattlePartners[];
 
 extern const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT];
+
+// Follower text messages
+extern const struct FollowerMsgInfo gFollowerHappyMessages[];
+extern const struct FollowerMsgInfo gFollowerNeutralMessages[];
+extern const struct FollowerMsgInfo gFollowerSadMessages[];
+extern const struct FollowerMsgInfo gFollowerUpsetMessages[];
+extern const struct FollowerMsgInfo gFollowerAngryMessages[];
+extern const struct FollowerMsgInfo gFollowerPensiveMessages[];
+extern const struct FollowerMsgInfo gFollowerLoveMessages[];
+extern const struct FollowerMsgInfo gFollowerSurpriseMessages[];
+extern const struct FollowerMsgInfo gFollowerCuriousMessages[];
+extern const struct FollowerMsgInfo gFollowerMusicMessages[];
+extern const struct FollowerMsgInfo gFollowerPoisonedMessages[];
 
 static inline u16 SanitizeTrainerId(u16 trainerId)
 {

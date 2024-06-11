@@ -1,10 +1,3 @@
-
-static const struct SpriteFrameImage sPicTable_None[] = {
-    overworld_ascending_frames(gObjectEventPic_None, 4, 4),
-};
-
-#if P_FOLLOWERS
-
 #if P_FAMILY_BULBASAUR
 static const struct SpriteFrameImage sPicTable_Bulbasaur[] = {
     overworld_ascending_frames(gObjectEventPic_Bulbasaur, 4, 4),
@@ -4360,8 +4353,6 @@ static const struct SpriteFrameImage sPicTable_Yveltal[] = {
 static const struct SpriteFrameImage sPicTable_Zygarde50[] = {
     overworld_ascending_frames(gObjectEventPic_Zygarde50, 4, 4),
 };
-    //const u32 gObjectEventPic_Zygarde10[] = INCBIN_COMP("graphics/pokemon/zygarde/10_percent/follower.4bpp");
-    //const u32 gObjectEventPic_ZygardeComplete[] = INCBIN_COMP("graphics/pokemon/zygarde/complete/follower.4bpp");
 #endif //P_FAMILY_ZYGARDE
 
 #if P_FAMILY_DIANCIE
@@ -5206,8 +5197,8 @@ static const struct SpriteFrameImage sPicTable_Milcery[] = {
     overworld_ascending_frames(gObjectEventPic_Milcery, 4, 4),
 };
 
-static const struct SpriteFrameImage sPicTable_AlcremieStrawberryVanillaCream[] = {
-    overworld_ascending_frames(gObjectEventPic_AlcremieStrawberryVanillaCream, 4, 4),
+static const struct SpriteFrameImage sPicTable_AlcremieStrawberry[] = {
+    overworld_ascending_frames(gObjectEventPic_AlcremieStrawberry, 4, 4),
 };
 #if P_GIGANTAMAX_FORMS
 /*static const struct SpriteFrameImage sPicTable_AlcremieGigantamax[] = {
@@ -6025,5 +6016,3 @@ static const struct SpriteFrameImage sPicTable_TerapagosStellar[] = {
     overworld_ascending_frames(gObjectEventPic_Pecharunt, 4, 4),
 };*/
 #endif //P_FAMILY_PECHARUNT
-
-#endif //P_FOLLOWERS

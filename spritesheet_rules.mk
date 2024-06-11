@@ -393,7 +393,7 @@ $(OBJEVENTGFXDIR)/people/woman_5.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/youngster.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
-$(OBJEVENTGFXDIR)/misc/animated_ball.4bpp: %.4bpp: %.png
+$(OBJEVENTGFXDIR)/misc/ball_poke.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
 $(OBJEVENTGFXDIR)/berry_trees/aguav.4bpp: %.4bpp: %.png
@@ -2794,6 +2794,9 @@ $(POKEMONGFXDIR)/espurr/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/meowstic/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(POKEMONGFXDIR)/meowstic/female/follower.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(POKEMONGFXDIR)/honedge/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
@@ -3109,13 +3112,13 @@ $(POKEMONGFXDIR)/drampa/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/dhelmise/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/jangmo_o.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/jangmo_o/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/hakamo_o.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/hakamo_o/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/kommo_o.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/kommo_o/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/tapu_koko/follower.4bpp: %.4bpp: %.png
@@ -3379,7 +3382,7 @@ $(POKEMONGFXDIR)/runerigus/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/milcery/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/alcremie/follower.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/alcremie/strawberry/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/falinks/follower.4bpp: %.4bpp: %.png
@@ -3449,7 +3452,7 @@ $(POKEMONGFXDIR)/zamazenta/crowned_shield/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/eternatus/follower.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 8 -mheight 8
+	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/kubfu/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
@@ -3475,10 +3478,10 @@ $(POKEMONGFXDIR)/spectrier/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/calyrex/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/calyrex_shadow_rider/follower.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/calyrex/shadow_rider/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/calyrex_ice_rider/follower.4bpp: %.4bpp: %.png
+$(POKEMONGFXDIR)/calyrex/ice_rider/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/annihilape/follower.4bpp: %.4bpp: %.png

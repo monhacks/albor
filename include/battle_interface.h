@@ -146,5 +146,6 @@ void ArrowsChangeColorLastBallCycle(bool32 showArrows);
 void UpdateAbilityPopup(u8 battlerId);
 void MoveSelectionCreateCursorAt(u8 cursorPos);
 void MoveSelectionDestroyCursor(void);
+void CategoryIcons_LoadSpritesGfx(void);
 
 #endif // GUARD_BATTLE_INTERFACE_H

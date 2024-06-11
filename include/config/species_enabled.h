@@ -394,7 +394,7 @@
 #define P_FAMILY_FLETCHLING              FALSE //TRUE
 #define P_FAMILY_SCATTERBUG              P_GEN_6_POKEMON
 #define P_FAMILY_LITLEO                  FALSE //TRUE
-#define P_FAMILY_FLABEBE                 P_GEN_6_POKEMON
+#define P_FAMILY_FLABEBE                 FALSE
 #define P_FAMILY_SKIDDO                  P_GEN_6_POKEMON
 #define P_FAMILY_PANCHAM                 FALSE //TRUE
 #define P_FAMILY_FURFROU                 P_GEN_6_POKEMON

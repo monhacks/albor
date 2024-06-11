@@ -735,7 +735,7 @@ static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 #define TAG_MON_MARKINGS 30003
 #define TAG_CATEGORY_ICONS 30004
 
-static const struct OamData sOamData_CategoryIcons =
+const struct OamData gOamData_CategoryIcons =
 {
     .size = SPRITE_SIZE(32x16),
     .shape = SPRITE_SHAPE(32x16),
@@ -749,7 +749,7 @@ const struct CompressedSpriteSheet gSpriteSheet_CategoryIcons =
     .tag = TAG_CATEGORY_ICONS,
 };
 
-static const struct SpritePalette sSpritePal_CategoryIcons =
+const struct SpritePalette gSpritePal_CategoryIcons =
 {
     .data = gCategoryIcons_Pal,
     .tag = TAG_CATEGORY_ICONS
@@ -784,7 +784,7 @@ const struct SpriteTemplate gSpriteTemplate_CategoryIcons =
 {
     .tileTag = TAG_CATEGORY_ICONS,
     .paletteTag = TAG_CATEGORY_ICONS,
-    .oam = &sOamData_CategoryIcons,
+    .oam = &gOamData_CategoryIcons,
     .anims = sSpriteAnimTable_CategoryIcons,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -806,6 +806,10 @@ static const struct OamData sOamData_MoveTypes =
     .priority = 1,
     .paletteNum = 0,
     .affineParam = 0,
+};
+static const union AnimCmd sSpriteAnim_TypeNone[] = {
+    ANIMCMD_FRAME(TYPE_NONE * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeNormal[] = {
     ANIMCMD_FRAME(TYPE_NORMAL * 8, 0, FALSE, FALSE),
@@ -908,31 +912,32 @@ static const union AnimCmd sSpriteAnim_CategoryTough[] = {
     ANIMCMD_END
 };
 static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] = {
-    sSpriteAnim_TypeNormal,
-    sSpriteAnim_TypeFighting,
-    sSpriteAnim_TypeFlying,
-    sSpriteAnim_TypePoison,
-    sSpriteAnim_TypeGround,
-    sSpriteAnim_TypeRock,
-    sSpriteAnim_TypeBug,
-    sSpriteAnim_TypeGhost,
-    sSpriteAnim_TypeSteel,
-    sSpriteAnim_TypeMystery,
-    sSpriteAnim_TypeFire,
-    sSpriteAnim_TypeWater,
-    sSpriteAnim_TypeGrass,
-    sSpriteAnim_TypeElectric,
-    sSpriteAnim_TypePsychic,
-    sSpriteAnim_TypeIce,
-    sSpriteAnim_TypeDragon,
-    sSpriteAnim_TypeDark,
-    sSpriteAnim_TypeFairy,
-    sSpriteAnim_TypeStellar,
-    sSpriteAnim_CategoryCool,
-    sSpriteAnim_CategoryBeauty,
-    sSpriteAnim_CategoryCute,
-    sSpriteAnim_CategorySmart,
-    sSpriteAnim_CategoryTough,
+    [TYPE_NONE] = sSpriteAnim_TypeNone,
+    [TYPE_NORMAL] = sSpriteAnim_TypeNormal,
+    [TYPE_FIGHTING] = sSpriteAnim_TypeFighting,
+    [TYPE_FLYING] = sSpriteAnim_TypeFlying,
+    [TYPE_POISON] = sSpriteAnim_TypePoison,
+    [TYPE_GROUND] = sSpriteAnim_TypeGround,
+    [TYPE_ROCK] = sSpriteAnim_TypeRock,
+    [TYPE_BUG] = sSpriteAnim_TypeBug,
+    [TYPE_GHOST] = sSpriteAnim_TypeGhost,
+    [TYPE_STEEL] = sSpriteAnim_TypeSteel,
+    [TYPE_MYSTERY] = sSpriteAnim_TypeMystery,
+    [TYPE_FIRE] = sSpriteAnim_TypeFire,
+    [TYPE_WATER] = sSpriteAnim_TypeWater,
+    [TYPE_GRASS] = sSpriteAnim_TypeGrass,
+    [TYPE_ELECTRIC] = sSpriteAnim_TypeElectric,
+    [TYPE_PSYCHIC] = sSpriteAnim_TypePsychic,
+    [TYPE_ICE] = sSpriteAnim_TypeIce,
+    [TYPE_DRAGON] = sSpriteAnim_TypeDragon,
+    [TYPE_DARK] = sSpriteAnim_TypeDark,
+    [TYPE_FAIRY] = sSpriteAnim_TypeFairy,
+    [TYPE_STELLAR] = sSpriteAnim_TypeStellar,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = sSpriteAnim_CategoryCool,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = sSpriteAnim_CategoryBeauty,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = sSpriteAnim_CategoryCute,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = sSpriteAnim_CategorySmart,
+    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = sSpriteAnim_CategoryTough,
 };
 
 const struct CompressedSpriteSheet gSpriteSheet_MoveTypes =
@@ -1429,7 +1434,7 @@ static bool8 DecompressGraphics(void)
     case 12:
         LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
-        LoadSpritePalette(&sSpritePal_CategoryIcons);
+        LoadSpritePalette(&gSpritePal_CategoryIcons);
         sMonSummaryScreen->switchCounter = 0;
         return TRUE;
     }

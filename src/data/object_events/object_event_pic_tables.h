@@ -270,10 +270,6 @@ static const struct SpriteFrameImage sPicTable_Nurse[] = {
     overworld_frame(gObjectEventPic_Nurse, 2, 4, 3),
 };
 
-static const struct SpriteFrameImage sPicTable_ItemBall[] = {
-    obj_frame_tiles(gObjectEventPic_ItemBall),
-};
-
 static const struct SpriteFrameImage sPicTable_ProfBirch[] = {
     overworld_ascending_frames(gObjectEventPic_ProfBirch, 2, 4),
 };
@@ -956,6 +952,15 @@ static const struct SpriteFrameImage sPicTable_RubySapphireMay[] = {
     overworld_ascending_frames(gObjectEventPic_RubySapphireMayNormal, 2, 4),
 };
 
+static const struct SpriteFrameImage sPicTable_PokeBall[] = {
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 0),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 1),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 2),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 3),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 4),
+    overworld_frame(gObjectEventPic_PokeBall, 2, 4, 0),
+};
+
 #if OW_MON_POKEBALLS
 
 #define POKEBALL_PIC_FRAMES(name)                              \
@@ -966,53 +971,39 @@ static const struct SpriteFrameImage sPicTable_RubySapphireMay[] = {
     overworld_frame(gObjectEventPic_##name##Ball, 2, 4, 4),    \
     overworld_frame(gObjectEventPic_##name##Ball, 2, 4, 0)
 
-
 static const struct SpriteFrameImage sPicTable_Ball_MASTER[] = {
     POKEBALL_PIC_FRAMES(Master),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_ULTRA[] = {
     POKEBALL_PIC_FRAMES(Ultra),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_GREAT[] = {
     POKEBALL_PIC_FRAMES(Great),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_SAFARI[] = {
     POKEBALL_PIC_FRAMES(Safari),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_NET[] = {
     POKEBALL_PIC_FRAMES(Net),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_DIVE[] = {
     POKEBALL_PIC_FRAMES(Dive),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_NEST[] = {
     POKEBALL_PIC_FRAMES(Nest),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_REPEAT[] = {
     POKEBALL_PIC_FRAMES(Repeat),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_TIMER[] = {
     POKEBALL_PIC_FRAMES(Timer),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_LUXURY[] = {
     POKEBALL_PIC_FRAMES(Luxury),
 };
-
 static const struct SpriteFrameImage sPicTable_Ball_PREMIER[] = {
     POKEBALL_PIC_FRAMES(Premier),
 };
-
-// Gen IV/Sinnoh
-#ifdef ITEM_DUSK_BALL
 static const struct SpriteFrameImage sPicTable_Ball_DUSK[] = {
     POKEBALL_PIC_FRAMES(Dusk),
 };
@@ -1025,15 +1016,9 @@ static const struct SpriteFrameImage sPicTable_Ball_QUICK[] = {
 static const struct SpriteFrameImage sPicTable_Ball_CHERISH[] = {
     POKEBALL_PIC_FRAMES(Cherish),
 };
-#endif
-#ifdef ITEM_PARK_BALL
 static const struct SpriteFrameImage sPicTable_Ball_PARK[] = {
     POKEBALL_PIC_FRAMES(Park),
 };
-#endif
-
-// Gen II/Johto Apricorns
-#ifdef ITEM_FAST_BALL
 static const struct SpriteFrameImage sPicTable_Ball_FAST[] = {
     POKEBALL_PIC_FRAMES(Fast),
 };
@@ -1058,27 +1043,15 @@ static const struct SpriteFrameImage sPicTable_Ball_MOON[] = {
 static const struct SpriteFrameImage sPicTable_Ball_SPORT[] = {
     POKEBALL_PIC_FRAMES(Sport),
 };
-#endif
-
-// Gen V
-#ifdef ITEM_DREAM_BALL
 static const struct SpriteFrameImage sPicTable_Ball_DREAM[] = {
     POKEBALL_PIC_FRAMES(Dream),
 };
-#endif
-
-// Gen VII
-#ifdef ITEM_BEAST_BALL
 static const struct SpriteFrameImage sPicTable_Ball_BEAST[] = {
     POKEBALL_PIC_FRAMES(Beast),
 };
-#endif
-
-// Gen VIII
 #ifdef ITEM_STRANGE_BALL
 static const struct SpriteFrameImage sPicTable_Ball_STRANGE[] = {
     POKEBALL_PIC_FRAMES(Strange),
 };
 #endif
-
 #endif

@@ -473,6 +473,7 @@
 #define B_WIN_VS_OUTCOME_DRAW     18
 #define B_WIN_VS_OUTCOME_LEFT     19
 #define B_WIN_VS_OUTCOME_RIGHT    20
+#define B_WIN_MOVE_DESCRIPTION    21
 
 // The following are duplicate id values for windows that Battle Arena uses differently.
 #define ARENA_WIN_PLAYER_NAME      15

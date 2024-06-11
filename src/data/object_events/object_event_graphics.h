@@ -91,7 +91,6 @@ const u32 gObjectEventPic_CyclingTriathleteF[] = INCBIN_U32("graphics/object_eve
 const u32 gObjectEventPic_Man4[] = INCBIN_U32("graphics/object_events/pics/people/man_4.4bpp");
 const u32 gObjectEventPic_Man5[] = INCBIN_U32("graphics/object_events/pics/people/man_5.4bpp");
 const u32 gObjectEventPic_Nurse[] = INCBIN_U32("graphics/object_events/pics/people/nurse.4bpp");
-const u32 gObjectEventPic_ItemBall[] = INCBIN_U32("graphics/object_events/pics/misc/item_ball.4bpp");
 const u32 gObjectEventPic_ProfBirch[] = INCBIN_U32("graphics/object_events/pics/people/prof_birch.4bpp");
 const u32 gObjectEventPic_ReporterM[] = INCBIN_U32("graphics/object_events/pics/people/reporter_m.4bpp");
 const u32 gObjectEventPic_ReporterF[] = INCBIN_U32("graphics/object_events/pics/people/reporter_f.4bpp");
@@ -306,7 +305,7 @@ const u32 gObjectEventPic_Greta[] = INCBIN_U32("graphics/object_events/pics/peop
 const u32 gObjectEventPic_Noland[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/noland.4bpp");
 const u32 gObjectEventPic_Lucy[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/lucy.4bpp");
 const u32 gObjectEventPic_Brandon[] = INCBIN_U32("graphics/object_events/pics/people/frontier_brains/brandon.4bpp");
-const u32 gObjectEventPic_AnimatedBall[] = INCBIN_U32("graphics/object_events/pics/misc/animated_ball.4bpp");
+const u32 gObjectEventPic_PokeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_poke.4bpp");
 
 const u16 gObjectEventPaletteLight[] = INCBIN_U16("graphics/object_events/palettes/light.gbapal");
 const u16 gObjectEventPaletteLight2[] = INCBIN_U16("graphics/object_events/palettes/light2.gbapal");
@@ -315,7 +314,6 @@ const u16 gObjectEventPaletteEmotes[] = INCBIN_U16("graphics/misc/emotes.gbapal"
 const u16 gObjectEventPaletteNeonLight[] = INCBIN_U16("graphics/object_events/palettes/neon_light.gbapal");
 
 #if OW_MON_POKEBALLS
-// Vanilla
 const u32 gObjectEventPic_MasterBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_master.4bpp");
 const u32 gObjectEventPic_UltraBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_ultra.4bpp");
 const u32 gObjectEventPic_GreatBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_great.4bpp");
@@ -327,18 +325,11 @@ const u32 gObjectEventPic_RepeatBall[] = INCBIN_U32("graphics/object_events/pics
 const u32 gObjectEventPic_TimerBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_timer.4bpp");
 const u32 gObjectEventPic_LuxuryBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_luxury.4bpp");
 const u32 gObjectEventPic_PremierBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_premier.4bpp");
-// Gen IV/Sinnoh
-#ifdef ITEM_DUSK_BALL
 const u32 gObjectEventPic_DuskBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_dusk.4bpp");
 const u32 gObjectEventPic_HealBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_heal.4bpp");
 const u32 gObjectEventPic_QuickBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_quick.4bpp");
 const u32 gObjectEventPic_CherishBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_cherish.4bpp");
-#endif
-#ifdef ITEM_PARK_BALL
 const u32 gObjectEventPic_ParkBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_park.4bpp");
-#endif
-// Gen II/Johto Apricorns
-#ifdef ITEM_FAST_BALL
 const u32 gObjectEventPic_FastBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_fast.4bpp");
 const u32 gObjectEventPic_LevelBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_level.4bpp");
 const u32 gObjectEventPic_LureBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_lure.4bpp");
@@ -347,16 +338,8 @@ const u32 gObjectEventPic_LoveBall[] = INCBIN_U32("graphics/object_events/pics/m
 const u32 gObjectEventPic_FriendBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_friend.4bpp");
 const u32 gObjectEventPic_MoonBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_moon.4bpp");
 const u32 gObjectEventPic_SportBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_sport.4bpp");
-#endif
-// Gen V
-#ifdef ITEM_DREAM_BALL
 const u32 gObjectEventPic_DreamBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_dream.4bpp");
-#endif
-// Gen VII
-#ifdef ITEM_BEAST_BALL
 const u32 gObjectEventPic_BeastBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_beast.4bpp");
-#endif
-// Gen VIII
 #ifdef ITEM_STRANGE_BALL
 const u32 gObjectEventPic_StrangeBall[] = INCBIN_U32("graphics/object_events/pics/misc/ball_strange.4bpp");
 #endif

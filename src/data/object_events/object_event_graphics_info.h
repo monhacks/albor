@@ -1100,25 +1100,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Nurse = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {
-    .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
-    .size = 128,
-    .width = 16,
-    .height = 16,
-    .paletteSlot = PALSLOT_NPC_3,
-    .shadowSize = SHADOW_SIZE_S,
-    .inanimate = TRUE,
-    .compressed = FALSE,
-    .tracks = TRACKS_NONE,
-    .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = sOamTables_16x16,
-    .anims = sAnimTable_Inanimate,
-    .images = sPicTable_ItemBall,
-    .affineAnims = gDummySpriteAffineAnimTable,
-};
-
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BerryTree = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_1,
@@ -3914,11 +3895,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RubySapphireMay = 
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-static const struct SpriteFrameImage sPicTable_AnimatedBall[] = {
-    overworld_ascending_frames(gObjectEventPic_AnimatedBall, 2, 4),
-};
-
-const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AnimatedBall = {
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokeBall = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_3,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -3933,7 +3910,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AnimatedBall = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Following,
-    .images = sPicTable_AnimatedBall,
+    .images = sPicTable_PokeBall,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

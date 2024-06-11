@@ -123,6 +123,8 @@ top:
 
         gIntrTable[7] = Intr_Timer2;
 
+        gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+
         // The current test restarted the ROM (e.g. by jumping to NULL).
         if (sCurrentTest.address != 0)
         {
@@ -177,7 +179,7 @@ top:
                 break;
         }
 
-        MgbaPrintf_(":N%s", gTestRunnerState.test->name);
+        Test_MgbaPrintf(":N%s", gTestRunnerState.test->name);
         gTestRunnerState.result = TEST_RESULT_PASS;
         gTestRunnerState.expectedResult = TEST_RESULT_PASS;
         gTestRunnerState.expectLeaks = FALSE;
@@ -246,7 +248,7 @@ top:
                  || !(EWRAM_START <= (uintptr_t)block->next && (uintptr_t)block->next < EWRAM_END)
                  || (block->next <= block && block->next != head))
                 {
-                    MgbaPrintf_("gHeap corrupted block at 0x%p", block);
+                    Test_MgbaPrintf("gHeap corrupted block at 0x%p", block);
                     gTestRunnerState.result = TEST_RESULT_ERROR;
                     break;
                 }
@@ -255,9 +257,9 @@ top:
                 {
                     const char *location = MemBlockLocation(block);
                     if (location)
-                        MgbaPrintf_("%s: %d bytes not freed", location, block->size);
+                        Test_MgbaPrintf("%s: %d bytes not freed", location, block->size);
                     else
-                        MgbaPrintf_("<unknown>: %d bytes not freed", block->size);
+                        Test_MgbaPrintf("<unknown>: %d bytes not freed", block->size);
                     gTestRunnerState.result = TEST_RESULT_FAIL;
                 }
                 block = block->next;
@@ -280,7 +282,7 @@ top:
             if (gTestRunnerState.result == gTestRunnerState.expectedResult)
             {
                 color = "\e[32m";
-                MgbaPrintf_(":N%s", gTestRunnerState.test->name);
+                Test_MgbaPrintf(":N%s", gTestRunnerState.test->name);
             }
             else if (gTestRunnerState.result != TEST_RESULT_ASSUMPTION_FAIL || gTestRunnerSkipIsFail)
             {
@@ -339,18 +341,18 @@ top:
             if (gTestRunnerState.result == TEST_RESULT_PASS)
             {
                 if (gTestRunnerState.result != gTestRunnerState.expectedResult)
-                    MgbaPrintf_(":U%s%s\e[0m", color, result);
+                    Test_MgbaPrintf(":U%s%s\e[0m", color, result);
                 else
-                    MgbaPrintf_(":P%s%s\e[0m", color, result);
+                    Test_MgbaPrintf(":P%s%s\e[0m", color, result);
             }
             else if (gTestRunnerState.result == TEST_RESULT_ASSUMPTION_FAIL)
-                MgbaPrintf_(":A%s%s\e[0m", color, result);
+                Test_MgbaPrintf(":A%s%s\e[0m", color, result);
             else if (gTestRunnerState.result == TEST_RESULT_TODO)
-                MgbaPrintf_(":T%s%s\e[0m", color, result);
+                Test_MgbaPrintf(":T%s%s\e[0m", color, result);
             else if (gTestRunnerState.expectedResult == gTestRunnerState.result)
-                MgbaPrintf_(":K%s%s\e[0m", color, result);
+                Test_MgbaPrintf(":K%s%s\e[0m", color, result);
             else
-                MgbaPrintf_(":F%s%s\e[0m", color, result);
+                Test_MgbaPrintf(":F%s%s\e[0m", color, result);
         }
 
         break;
@@ -392,7 +394,7 @@ static void FunctionTest_Run(void *data)
     do
     {
         if (gFunctionTestRunnerState->parameters)
-            MgbaPrintf_(":N%s %d/%d", gTestRunnerState.test->name, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters);
+            Test_MgbaPrintf(":N%s %d/%d", gTestRunnerState.test->name, gFunctionTestRunnerState->runParameter + 1, gFunctionTestRunnerState->parameters);
         gFunctionTestRunnerState->parameters = 0;
         function();
     } while (++gFunctionTestRunnerState->runParameter < gFunctionTestRunnerState->parameters);
@@ -514,7 +516,7 @@ static void MgbaExit_(u8 exitCode)
     asm("swi 0x3" :: "r" (_exitCode));
 }
 
-s32 MgbaPrintf_(const char *fmt, ...)
+s32 Test_MgbaPrintf(const char *fmt, ...)
 {
     va_list va;
     va_start(va, fmt);
@@ -667,7 +669,11 @@ static s32 MgbaVPrintf_(const char *fmt, va_list va)
 /* Entry point for the Debugging and Control System. Handles illegal
  * instructions, which are typically caused by branching to an invalid
  * address. */
+#if MODERN
 __attribute__((naked, section(".dacs"), target("arm")))
+#else
+__attribute__((naked, section(".dacs")))
+#endif
 void DACSEntry(void)
 {
     asm(".arm\n\

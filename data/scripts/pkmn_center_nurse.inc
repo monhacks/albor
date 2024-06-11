@@ -9,7 +9,7 @@ Common_EventScript_PkmnCenterNurse::
 	end
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-	applymovement VAR_0x800B, Common_Movement_WalkInPlaceFasterLeft
+	applymovement VAR_0x800B, Movement_PkmnCenterNurse_Turn @ Changed from Common_Movement_WalkInPlaceFasterLeft to force the follower to enter their Poké Ball
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
 	waitfieldeffect FLDEFF_POKECENTER_HEAL
@@ -22,3 +22,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	delay 3
 	closemessage
 	end
+
+Movement_PkmnCenterNurse_Turn:
+	walk_in_place_faster_left
+	step_end

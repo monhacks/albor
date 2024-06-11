@@ -614,19 +614,6 @@ static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum);
 
 void (*gPokedexVBlankCB)(void);
 
-#define TAG_CATEGORY_ICONS 30004
-
-static const struct OamData sOamData_CategoryIcons =
-{
-    .size = SPRITE_SIZE(32x16),
-    .shape = SPRITE_SHAPE(32x16),
-    .priority = 0,
-};
-static const struct SpritePalette sSpritePal_CategoryIcons =
-{
-    .data = gCategoryIcons_Pal,
-    .tag = TAG_CATEGORY_ICONS
-};
 static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
 {
     ANIMCMD_FRAME(0, 0),
@@ -1679,7 +1666,7 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
 
 static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES] = // + 2 for "None" and terminator, - 2 for Mystery and Stellar
 {
-    {gText_DexEmptyString, gText_DexSearchTypeNone},
+    {gText_DexEmptyString, gTypesInfo[TYPE_NONE].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_NORMAL].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FIGHTING].name},
     {gText_DexEmptyString, gTypesInfo[TYPE_FLYING].name},
@@ -4632,7 +4619,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         sPokedexView->categoryIconSpriteId = 0xFF;
         LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
-        LoadSpritePalette(&sSpritePal_CategoryIcons);
+        LoadSpritePalette(&gSpritePal_CategoryIcons);
         gMain.state++;
         break;
     case 4:

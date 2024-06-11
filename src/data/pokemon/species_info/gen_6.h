@@ -1289,7 +1289,12 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         PALETTES(Floette ##form##Flower),                                       \
         ICON(Floette##form##Flower, iconPal),                                   \
         FOOTPRINT(Floette)                                                      \
-        FOLLOWER(Floette##form##Flower, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT) \
+        FOLLOWER(                                                               \
+            sPicTable_Floette ##form##Flower,                                   \
+            SIZE_32x32,                                                         \
+            SHADOW_SIZE_M,                                                      \
+            TRACKS_FOOT,                                                        \
+        )                                                                       \
         .formSpeciesIdTable = sFloetteFormSpeciesIdTable
 
 #define FLOETTE_NORMAL_INFO(form, FORM, iconPal)                                                \

@@ -99,7 +99,7 @@
 #define OBJ_EVENT_GFX_UNUSED_95       95
 #define OBJ_EVENT_GFX_UNUSED_96        96
 #define OBJ_EVENT_GFX_BIRCHS_BAG                  97
-#define OBJ_EVENT_GFX_ANIMATED_BALL               98
+#define OBJ_EVENT_GFX_POKE_BALL                   98
 #define OBJ_EVENT_GFX_ARTIST                      99
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL       100
 #define OBJ_EVENT_GFX_RIVAL_BRENDAN_MACH_BIKE    101
@@ -276,28 +276,10 @@
 #define OW_SPECIES(x) (((x)->graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE)
 #define OW_FORM(x) ((x)->graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS)
 
-// If true, follower pokemon will bob up and down
-// during their idle & walking animations
-#define OW_MON_BOBBING  TRUE
-
-// If true, adds a small amount of overhead
-// to OW code so that large (48x48, 64x64) OWs
-// will display correctly under bridges, etc.
-#define LARGE_OW_SUPPORT TRUE
-
-// See global.h for the toggle of OW_GFX_COMPRESS
-// Compressed gfx are incompatible with non-power-of-two sprite sizes:
-// (You should not use 48x48 sprites/tables for compressed gfx)
-// 16x32, 32x32, 64x64 etc are fine
-
-// Followers will emerge from the pokeball they are stored in,
-// instead of a normal pokeball
-#define OW_MON_POKEBALLS TRUE
-
-#define SHADOW_SIZE_S   0
-#define SHADOW_SIZE_M   1
-#define SHADOW_SIZE_L   2
-#define SHADOW_SIZE_NONE 3
+#define SHADOW_SIZE_S    0
+#define SHADOW_SIZE_M    1
+#define SHADOW_SIZE_L    2
+#define SHADOW_SIZE_NONE 3   // Originally SHADOW_SIZE_XL, which went unused due to shadowSize in ObjectEventGraphicsInfo being only 2 bits.
 
 #define F_INANIMATE                        (1 << 6)
 #define F_DISABLE_REFLECTION_PALETTE_LOAD  (1 << 7)
@@ -349,6 +331,7 @@
 #define LOCALID_BATTLE_FRONTIER_MART_CLERK 1
 #define LOCALID_SLATEPORT_ENERGY_GURU 25
 
+// Moved from src/event_object_movement.c so that they're accesible from other files.
 #define OBJ_EVENT_PAL_TAG_BRENDAN                 0x1100
 #define OBJ_EVENT_PAL_TAG_BRENDAN_REFLECTION      0x1101
 #define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION       0x1102
