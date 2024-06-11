@@ -19,24 +19,24 @@ extern const u8 EventScript_FollowerDance[];
 extern const u8 EventScript_FollowerLookUp[];
 
 // 'Generic', unconditional happy messages
-static const u8 sHappyMsg00[] = _("{STR_VAR_1} began poking you in the\nstomach.");
-static const u8 sHappyMsg01[] = _("{STR_VAR_1} is happy but shy.");
-static const u8 sHappyMsg02[] = _("{STR_VAR_1} is coming along happily.");
-static const u8 sHappyMsg03[] = _("{STR_VAR_1} is composed.");
-static const u8 sHappyMsg04[] = _("{STR_VAR_1} seems to be feeling\ngreat about walking with you!");
-static const u8 sHappyMsg05[] = _("{STR_VAR_1} is glowing with health.");
-static const u8 sHappyMsg06[] = _("{STR_VAR_1} looks very happy.");
-static const u8 sHappyMsg07[] = _("{STR_VAR_1} put in extra effort.");
-static const u8 sHappyMsg08[] = _("{STR_VAR_1} is smelling the scents\nof the surrounding air.");
-static const u8 sHappyMsg09[] = _("{STR_VAR_1} is jumping for joy!");
-static const u8 sHappyMsg10[] = _("{STR_VAR_1} is still feeling great!");
-static const u8 sHappyMsg11[] = _("Your POKéMON has caught the scent of\nsmoke.");
-static const u8 sHappyMsg12[] = _("{STR_VAR_1} is poking at your belly.");
-static const u8 sHappyMsg13[] = _("Your POKéMON stretched out its body\nand is relaxing.");
-static const u8 sHappyMsg14[] = _("{STR_VAR_1} looks like it wants to\nlead!");
-static const u8 sHappyMsg15[] = _("{STR_VAR_1} is doing it's best to\nkeep up with you.");
-static const u8 sHappyMsg16[] = _("{STR_VAR_1} is happily cuddling up\nto you!");
-static const u8 sHappyMsg17[] = _("{STR_VAR_1} is full of life!");
+static const u8 sHappyMsg00[] = _("¡{STR_VAR_1} te hace cosquillas\nen la tripa!");
+static const u8 sHappyMsg01[] = _("{STR_VAR_1} está feliz, pero se esconde.");
+static const u8 sHappyMsg02[] = _("{STR_VAR_1} va genial.");
+static const u8 sHappyMsg03[] = _("{STR_VAR_1} está sereno.");
+static const u8 sHappyMsg04[] = _("¡Se nota que a {STR_VAR_1} le\nencanta pasear contigo!");
+static const u8 sHappyMsg05[] = _("{STR_VAR_1} está radiante.");
+static const u8 sHappyMsg06[] = _("{STR_VAR_1} parece muy feliz.");
+static const u8 sHappyMsg07[] = _("{STR_VAR_1} se está esforzando.");
+static const u8 sHappyMsg08[] = _("{STR_VAR_1} está olisqueando\nlos alrededores.");
+static const u8 sHappyMsg09[] = _("¡{STR_VAR_1} da saltos de alegría!");
+static const u8 sHappyMsg10[] = _("¡{STR_VAR_1} sigue muy alegre!");
+static const u8 sHappyMsg11[] = _("{STR_VAR_1} ha captado un\nolor especial.");
+static const u8 sHappyMsg12[] = _("{STR_VAR_1} te hurga por \nla camiseta.");
+static const u8 sHappyMsg13[] = _("Tu {STR_VAR_1} se está\nestirando y relajándose.");
+static const u8 sHappyMsg14[] = _("¡A {STR_VAR_1} le gusta liderar!");
+static const u8 sHappyMsg15[] = _("{STR_VAR_1} lo está dando\ntodo para seguir contigo.");
+static const u8 sHappyMsg16[] = _("¡{STR_VAR_1} está felizmente\nabrazándose contigo!");
+static const u8 sHappyMsg17[] = _("¡{STR_VAR_1} está lleno de vida!");
 static const u8 sHappyMsg18[] = _("{STR_VAR_1} seems to be very happy!");
 static const u8 sHappyMsg19[] = _("{STR_VAR_1} is so happy that it\ncan't stand still!");
 static const u8 sHappyMsg20[] = _("{STR_VAR_1} nodded slowly.");
@@ -49,10 +49,10 @@ static const u8 sHappyMsg26[] = _("{STR_VAR_1} gives you a happy look\nand a smi
 static const u8 sHappyMsg27[] = _("Your POKéMON is smelling the scent\nof flowers.");
 static const u8 sHappyMsg28[] = _("{STR_VAR_1} seems very happy to see\nyou!");
 static const u8 sHappyMsg29[] = _("{STR_VAR_1} faced this way and\ngrinned.");
-static const u8 sHappyMsg30[] = _("{STR_VAR_1} happily cuddled up to\nyou!");
+static const u8 sHappyMsg30[] = _("{STR_VAR_1} se acurruca contigo…");
 // Conditional messages begin here, index 31
-static const u8 sHappyMsg31[] = _("Your POKéMON seems happy about the\ngreat weather.");
-static const u8 sHappyMsg32[] = _("{STR_VAR_1} is very composed and\nsure of itself!");
+static const u8 sHappyMsg31[] = _("Tu {STR_VAR_1} parece disfrutar\ndel buen tiempo.");
+static const u8 sHappyMsg32[] = _("¡{STR_VAR_1} está seguro\nde sí mismo!");
 
 const struct FollowerMsgInfo gFollowerHappyMessages[] = {
     {sHappyMsg00, EventScript_FollowerPokingPlayer},
@@ -103,15 +103,15 @@ const struct FollowerMsgInfo gFollowerNeutralMessages[] = {
 };
 
 // Unconditional sad messages
-static const u8 sSadMsg00[] = _("{STR_VAR_1} is dizzy.");
+static const u8 sSadMsg00[] = _("{STR_VAR_1} está mareado.");
 static const u8 sSadMsg01[] = _("{STR_VAR_1} is stepping on your\nfeet!");
-static const u8 sSadMsg02[] = _("{STR_VAR_1} seems a little tired.");
+static const u8 sSadMsg02[] = _("{STR_VAR_1} parece un poco cansado.");
 // Conditional messages begin, index 3
-static const u8 sSadMsg03[] = _("{STR_VAR_1} is not happy.");
-static const u8 sSadMsg04[] = _("{STR_VAR_1} is going to fall down!\n");
-static const u8 sSadMsg05[] = _("{STR_VAR_1} seems to be about to\nfall over!");
-static const u8 sSadMsg06[] = _("{STR_VAR_1} is trying very hard to\nkeep up with you…");
-static const u8 sSadMsg07[] = _("{STR_VAR_1} is nervous.");
+static const u8 sSadMsg03[] = _("{STR_VAR_1} no está contento.");
+static const u8 sSadMsg04[] = _("¡{STR_VAR_1} está dando tumbos!\n");
+static const u8 sSadMsg05[] = _("¡Parece que {STR_VAR_1}\nestá a punto de caerse!");
+static const u8 sSadMsg06[] = _("{STR_VAR_1} hace un gran esfuerzo\n para seguirte el ritmo…");
+static const u8 sSadMsg07[] = _("{STR_VAR_1} está nervioso.");
 
 const struct FollowerMsgInfo gFollowerSadMessages[] = {
     {sSadMsg00, EventScript_FollowerDizzy},
@@ -120,11 +120,11 @@ const struct FollowerMsgInfo gFollowerSadMessages[] = {
 };
 
 // Unconditional upset messages
-static const u8 sUpsetMsg00[] = _("{STR_VAR_1} seems unhappy somehow…");
-static const u8 sUpsetMsg01[] = _("{STR_VAR_1} is making an unhappy\nface.");
-static const u8 sUpsetMsg02[] = _("…Your POKéMON seems a little\ncold.");
+static const u8 sUpsetMsg00[] = _("{STR_VAR_1} parece un poco descontento…");
+static const u8 sUpsetMsg01[] = _("{STR_VAR_1} está haciendo pucheros…");
+static const u8 sUpsetMsg02[] = _("{STR_VAR_1} está helado…");
 // Conditional messages, index 3
-static const u8 sUpsetMsg03[] = _("{STR_VAR_1} is taking shelter in the\ngrass from the rain.");
+static const u8 sUpsetMsg03[] = _("{STR_VAR_1} se está cubriendo de la lluvia\ncon la hierba.");
 
 const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
     {sUpsetMsg00}, {sUpsetMsg01},
@@ -133,7 +133,7 @@ const struct FollowerMsgInfo gFollowerUpsetMessages[] = {
 };
 
 // Unconditional angry messages
-static const u8 sAngryMsg00[] = _("{STR_VAR_1} let out a roar!");
+static const u8 sAngryMsg00[] = _("¡{STR_VAR_1} está rugiendo!");
 static const u8 sAngryMsg01[] = _("{STR_VAR_1} is making a face like\nits angry!");
 static const u8 sAngryMsg02[] = _("{STR_VAR_1} seems to be angry for\nsome reason.");
 static const u8 sAngryMsg03[] = _("Your POKéMON turned to face the\nother way, showing a defiant face.");
@@ -249,7 +249,7 @@ static const u8 sCuriousMsg01[] = _("Your POKéMON wasn't watching where\nit was
 static const u8 sCuriousMsg02[] = _("Sniff, sniff! Is there something\nnearby?");
 static const u8 sCuriousMsg03[] = _("{STR_VAR_1} is rolling a pebble\naround playfully.");
 static const u8 sCuriousMsg04[] = _("{STR_VAR_1} is wandering around and\nsearching for something.");
-static const u8 sCuriousMsg05[] = _("{STR_VAR_1} is sniffing at you.");
+static const u8 sCuriousMsg05[] = _("{STR_VAR_1} te está olfateando.");
 static const u8 sCuriousMsg06[] = _("{STR_VAR_1} seems to be a little\nhesitant…");
 
 const struct FollowerMsgInfo gFollowerCuriousMessages[] = {
@@ -274,9 +274,9 @@ static const u8 sMusicMsg09[] = _("{STR_VAR_1} is working hard to show\noff its 
 static const u8 sMusicMsg10[] = _("Whoa! {STR_VAR_1} suddenly danced in\nhappiness!");
 static const u8 sMusicMsg11[] = _("{STR_VAR_1} is cheerful!");
 static const u8 sMusicMsg12[] = _("{STR_VAR_1} is jumping around in a\ncarefree way!");
-static const u8 sMusicMsg13[] = _("Your POKéMON seems to be smelling a\nnostalgically familiar scent…");
+static const u8 sMusicMsg13[] = _("Parece que a {STR_VAR_1} le\nha venido un olor familiar…");
 // Conditional music messages, index 14
-static const u8 sMusicMsg14[] = _("{STR_VAR_1} is very happy about the\nrain.");
+static const u8 sMusicMsg14[] = _("{STR_VAR_1} ama la lluvia.");
 
 const struct FollowerMsgInfo gFollowerMusicMessages[] = {
     {sMusicMsg00, EventScript_FollowerLookAround},
@@ -294,7 +294,7 @@ const struct FollowerMsgInfo gFollowerMusicMessages[] = {
 };
 
 
-static const u8 sPoisonedMsg00[] = _("{STR_VAR_1} is shivering with the\neffects of being poisoned.");
+static const u8 sPoisonedMsg00[] = _("{STR_VAR_1} está temblando por los\nefectos del veneno.");
 
 const struct FollowerMsgInfo gFollowerPoisonedMessages[] = {
     {sPoisonedMsg00, EventScript_FollowerIsShivering},

@@ -53,7 +53,6 @@
 // Set .compressed = OW_GFX_COMPRESS
 #define COMP OW_GFX_COMPRESS
 
-#if P_FOLLOWERS
 #define FOLLOWER(name, _size, shadow, _tracks)                                              \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
@@ -73,9 +72,6 @@
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
-#else
-#define FOLLOWER(name, _size, shadow, _tracks)
-#endif
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
