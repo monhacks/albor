@@ -11,6 +11,6 @@
 #define DEBUG_BATTLE_MENU               TRUE    // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
 
 // Pokémon Debug
-#define DEBUG_POKEMON_MENU              TRUE    // Enables a debug menu for pokemon sprites and icons, accessed by pressing SELECT in the summary screen.
+#define DEBUG_POKEMON_SPRITE_VISUALIZER TRUE    // Enables a debug menu for Pokémon sprites and icons, accessed by pressing Select in the summary screen.
 
 #endif // GUARD_CONFIG_DEBUG_H

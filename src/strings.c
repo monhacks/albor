@@ -1617,3 +1617,5 @@ const u8 gText_DownArrow[] = _("{DOWN_ARROW}");
 const u8 gText_MT[] = _("MT");
 const u8 gText_MO[] = _("MO");
 const u8 gText_Use[] = _("Usar");
+const u8 gText_AM[] = _("AM");
+const u8 gText_PM[] = _("PM");

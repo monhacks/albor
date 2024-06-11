@@ -2904,4 +2904,8 @@ extern const u8 gText_Pri[];
 extern const u8 gText_UpArrow[];
 extern const u8 gText_DownArrow[];
 
+// Map name pop-up
+extern const u8 gText_AM[];
+extern const u8 gText_PM[];
+
 #endif // GUARD_STRINGS_H

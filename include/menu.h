@@ -41,6 +41,7 @@ struct MenuAction
 };
 
 extern const u16 gStandardMenuPalette[];
+extern EWRAM_DATA u8 gPopupTaskId;
 
 void FreeAllOverworldWindowBuffers(void);
 void InitStandardTextBoxWindows(void);
@@ -124,5 +125,9 @@ void PrintMenuActionTextsAtPos(u8 windowId, u8 fontId, u8 left, u8 top, u8 lineH
 void Menu_LoadStdPal(void);
 u8 Menu_InitCursor(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos);
 u8 Menu_InitCursorInternal(u8 windowId, u8 fontId, u8 left, u8 top, u8 cursorHeight, u8 numChoices, u8 initialCursorPos, bool8 APressMuted);
+u8 AddSecondaryPopUpWindow(void);
+u8 GetSecondaryPopUpWindowId(void);
+void RemoveSecondaryPopUpWindow(void);
+void HBlankCB_DoublePopupWindow(void);
 
 #endif // GUARD_MENU_H
