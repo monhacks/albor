@@ -43,4 +43,4 @@
 *paletas: 0-12 tileset primario 0-9 (es necesario?) secundario 10-12 (chequear SWAP_PAL)
 *paletas primary: 0/arboles 1/centro_pokemon 2/hierba_y_hierba_alta 3/agua 4/agua_playa
 
-porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/porytiles/tilesets/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h
+porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/desarrollo/graficos /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h

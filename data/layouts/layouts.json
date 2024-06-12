@@ -4084,8 +4084,8 @@
     {
       "id": "LAYOUT_TEST",
       "name": "Test_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 50,
+      "height": 50,
       "primary_tileset": "gTileset_Principal",
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/Test/border.bin",
