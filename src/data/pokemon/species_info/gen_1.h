@@ -105,39 +105,29 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VENUSAUR}),
     },
 
-#define VENUSAUR_MISC_INFO                                                  \
-        .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),                        \
-        .catchRate = 45,                                                    \
-        .evYield_SpAttack = 2,                                              \
-        .evYield_SpDefense = 1,                                             \
-        .genderRatio = PERCENT_FEMALE(25),                                \
-        .eggCycles = 20,                                                    \
-        .friendship = STANDARD_FRIENDSHIP,                                  \
-        .growthRate = GROWTH_MEDIUM_SLOW,                                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),    \
-        .bodyColor = BODY_COLOR_GREEN,                                      \
-        .speciesName = _("Venusaur"),                                       \
-        .natDexNum = NATIONAL_DEX_VENUSAUR,                                 \
-        .categoryName = _("Seed"),                                          \
-        FOOTPRINT(Venusaur)                                                 \
-        LEARNSETS(Venusaur)
-
     [SPECIES_VENUSAUR] =
     {
-        VENUSAUR_MISC_INFO,
         .baseHP        = 95,
         .baseAttack    = 100,
         .baseDefense   = 85,
         .baseSpeed     = 80,
         .baseSpAttack  = 100,
         .baseSpDefense = 100,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
+        .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
+        .catchRate = 45,
+        .evYield_SpAttack = 2,
+        .evYield_SpDefense = 1,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_GRASS),
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Venusaur"),
+        .natDexNum = NATIONAL_DEX_VENUSAUR,
+        .categoryName = _("Seed"),
+        LEARNSETS(Venusaur),
         .expYield = 263,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 236,
-    #else
-        .expYield = 208,
-    #endif
         .abilities = { ABILITY_SOLAR_POWER, ABILITY_THICK_FAT, ABILITY_OLOR_FLUVIAL },
         .cryId = CRY_VENUSAUR,
         .height = 20,
@@ -4439,43 +4429,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Alakazam, 2),
         FOLLOWER(Alakazam, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_ALAKAZAM_MEGA] =
-    {
-        ALAKAZAM_MISC_INFO,
-        .baseHP        = 55,
-        .baseAttack    = 50,
-        .baseDefense   = 65,
-        .baseSpeed     = 150,
-        .baseSpAttack  = 175,
-        .baseSpDefense = ALAKAZAM_SP_DEF + 10,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,
-        .abilities = { ABILITY_TRACE, ABILITY_TRACE, ABILITY_TRACE },
-        .cryId = CRY_ALAKAZAM_MEGA,
-        .height = 12,
-        .weight = 480,
-        .description = COMPOUND_STRING(
-            "Having traded away its muscles, Alakazam's\n"
-            "true power has been unleashed. With its\n"
-            "psychic powers, it can foresee all things."),
-        .pokemonScale = 256,
-        .pokemonOffset = 3,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(AlakazamMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_AlakazamMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 7,
-        BACK_PIC(AlakazamMega, 64, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(AlakazamMega),
-        ICON(AlakazamMega, 2),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_ABRA
 
 #if P_FAMILY_MACHOP
@@ -4646,34 +4599,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Machamp, 0),
         FOLLOWER(Machamp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_MACHAMP_GIGANTAMAX] =
-    {
-        MACHAMP_MISC_INFO,
-        .height = 250,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "One of these Pokémon once used\n"
-            "its immeasurable strength to lift a\n"
-            "large ship that was in trouble. It\n"
-            "then carried the ship to port."),
-        .pokemonScale = 280,
-        .pokemonOffset = 1,
-        .trainerScale = 269,
-        .trainerOffset = -1,
-        FRONT_PIC(MachampGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_MachampGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MachampGigantamax, 64, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MachampGigantamax),
-        ICON(MachampGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_MACHOP
 
 #if P_FAMILY_BELLSPROUT
@@ -5535,46 +5460,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_GEN_2_CROSS_EVOS
 
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_SLOWBRO_MEGA] =
-    {
-        SLOWBRO_MISC_INFO,
-        .baseHP        = 95,
-        .baseAttack    = 75,
-        .baseDefense   = 180,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 130,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_WATER, TYPE_PSYCHIC),
-        .expYield = 207,
-        .evYield_Defense = 2,
-        .abilities = { ABILITY_SHELL_ARMOR, ABILITY_SHELL_ARMOR, ABILITY_SHELL_ARMOR },
-        .height = 20,
-        .weight = 1200,
-        .description = COMPOUND_STRING(
-            "When bathed in the energy of Mega\n"
-            "Evolution, Shellder converts into\n"
-            "impregnable armor. There is virtually no\n"
-            "change in Slowpoke."),
-        .pokemonScale = 256,
-        .pokemonOffset = 6,
-        .trainerScale = 296,
-        .trainerOffset = 2,
-        FRONT_PIC(SlowbroMega, 56, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_SlowbroMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SlowbroMega, 64, 48),
-        .backPicYOffset = 9,
-        .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(SlowbroMega),
-        ICON(SlowbroMega, 0),
-        LEARNSETS(Slowbro),
-        .formChangeTable = sSlowbroFormChangeTable,
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
-
 #if P_GALARIAN_FORMS
     [SPECIES_SLOWPOKE_GALARIAN] =
     {
@@ -5906,95 +5791,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Farfetchd, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Farfetchd),
     },
-
-#if P_GALARIAN_FORMS
-    [SPECIES_FARFETCHD_GALARIAN] =
-    {
-        FARFETCHD_MISC_INFO,
-        .baseHP        = 52,
-        .baseAttack    = FARFETCHD_ATTACK + 5,
-        .baseDefense   = 55,
-        .baseSpeed     = 55,
-        .baseSpAttack  = 58,
-        .baseSpDefense = 62,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .itemCommon = ITEM_LEEK,
-        .abilities = { ABILITY_STEADFAST, ABILITY_NONE, ABILITY_SCRAPPY },
-        .height = 8,
-        .weight = 420,
-        .description = COMPOUND_STRING(
-            "The stalks of leeks are thicker and longer\n"
-            "in the Galar region. Brave Farfetch'd\n"
-            "warriors that adapted to these stalks\n"
-            "took on a unique form."),
-        .pokemonScale = 330,
-        .pokemonOffset = 2,
-        .trainerScale = 293,
-        .trainerOffset = 2,
-        FRONT_PIC(FarfetchdGalarian, 64, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_FarfetchdGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(FarfetchdGalarian, 64, 48),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(FarfetchdGalarian),
-        ICON(FarfetchdGalarian, 1),
-        FOLLOWER(FarfetchdGalarian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(FarfetchdGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_CRITICAL_HITS, 3, SPECIES_SIRFETCHD}),
-    },
-
-    [SPECIES_SIRFETCHD] =
-    {
-        .baseHP        = 62,
-        .baseAttack    = 135,
-        .baseDefense   = 95,
-        .baseSpeed     = 65,
-        .baseSpAttack  = 68,
-        .baseSpDefense = 82,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .catchRate = 45,
-        .expYield = 177,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_LEEK,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_FIELD),
-        .abilities = { ABILITY_STEADFAST, ABILITY_NONE, ABILITY_SCRAPPY },
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Sirfetch'd"),
-        .cryId = CRY_SIRFETCHD,
-        .natDexNum = NATIONAL_DEX_SIRFETCHD,
-        .categoryName = _("Wild Duck"),
-        .height = 8,
-        .weight = 1170,
-        .description = COMPOUND_STRING(
-            "Only Farfetch'd that have survived many\n"
-            "battles can attain this evolution. When\n"
-            "this Pokémon's leek withers, it will\n"
-            "retire from combat."),
-        .pokemonScale = 366,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(Sirfetchd, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Sirfetchd,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Sirfetchd, 64, 48),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Sirfetchd),
-        ICON(Sirfetchd, 1),
-        FOOTPRINT(Sirfetchd)
-        FOLLOWER(Sirfetchd, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(Sirfetchd),
-    },
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_FARFETCHD
 
 #if P_FAMILY_DODUO
@@ -6586,8 +6382,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Haunter)
         FOLLOWER(Haunter, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Haunter),
-        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GENGAR},
-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GENGAR}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_GENGAR}),
     },
 
 #if P_UPDATED_ABILITIES >= GEN_7
@@ -6651,78 +6446,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Gengar, 2),
         FOLLOWER(Gengar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_GENGAR_MEGA] =
-    {
-        GENGAR_MISC_INFO,
-        .baseHP        = 60,
-        .baseAttack    = 65,
-        .baseDefense   = 80,
-        .baseSpeed     = 130,
-        .baseSpAttack  = 170,
-        .baseSpDefense = 95,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 300 : 270,
-        .abilities = { ABILITY_SHADOW_TAG, ABILITY_SHADOW_TAG, ABILITY_SHADOW_TAG },
-        .isMegaEvolution = TRUE,
-        .height = 14,
-        .weight = 405,
-        .description = COMPOUND_STRING(
-            "Gengar's relationships are warped. It\n"
-            "tries to take the lives of anyone and\n"
-            "everyone. It will even try to curse the\n"
-            "Trainer who is its master!"),
-        .pokemonScale = 256,
-        .pokemonOffset = 2,
-        .trainerScale = 302,
-        .trainerOffset = 2,
-        FRONT_PIC(GengarMega, 64, 64),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_GengarMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(GengarMega, 64, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(GengarMega),
-        ICON(GengarMega, 2),
-    },
-#endif //P_MEGA_EVOLUTIONS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_GENGAR_GIGANTAMAX] =
-    {
-        GENGAR_MISC_INFO,
-        .baseHP        = 60,
-        .baseAttack    = 65,
-        .baseDefense   = 60,
-        .baseSpeed     = 110,
-        .baseSpAttack  = 130,
-        .baseSpDefense = 75,
-        .expYield = 225,
-        .abilities = GENGAR_ABILITIES,
-        .isGigantamax = TRUE,
-        .height = 200,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Rumor has it that its gigantic\n"
-            "mouth leads not into its body, filled\n"
-            "with cursed energy, but instead\n"
-            "directly to the afterlife."),
-        .pokemonScale = 256,
-        .pokemonOffset = 2,
-        .trainerScale = 302,
-        .trainerOffset = 2,
-        FRONT_PIC(GengarGigantamax, 64, 64),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_GengarGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(GengarGigantamax, 64, 64),
-        .backPicYOffset = 6,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GengarGigantamax),
-        ICON(GengarGigantamax, 2),
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_GASTLY
 
 #if P_FAMILY_ONIX
@@ -6831,43 +6554,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Steelix, 0),
         FOLLOWER(Steelix, SIZE_64x64, SHADOW_SIZE_M, TRACKS_SLITHER)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_STEELIX_MEGA] =
-    {
-        STEELIX_MISC_INFO,
-        .baseHP        = 75,
-        .baseAttack    = 125,
-        .baseDefense   = 230,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 95,
-        .expYield = 214,
-        .abilities = { ABILITY_SAND_FORCE, ABILITY_SAND_FORCE, ABILITY_SAND_FORCE },
-        .cryId = CRY_STEELIX_MEGA,
-        .height = 105,
-        .weight = 7400,
-        .description = COMPOUND_STRING(
-            "The cells within its body, crystallized by\n"
-            "the energy produced from Mega Evolution,\n"
-            "are stronger than any mineral and able\n"
-            "to withstand any temperature."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 516,
-        .trainerOffset = 13,
-        FRONT_PIC(SteelixMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_SteelixMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SteelixMega, 64, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(SteelixMega),
-        ICON(SteelixMega, 0),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_ONIX
 
@@ -7076,34 +6762,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Kingler, 0),
         FOLLOWER(Kingler, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_KINGLER_GIGANTAMAX] =
-    {
-        KINGLER_MISC_INFO,
-        .height = 190,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "The flow of Gigantamax energy has\n"
-            "spurred this Pokémon's left pincer\n"
-            "to grow to an enormous size. That\n"
-            "claw can pulverize anything."),
-        .pokemonScale = 256,
-        .pokemonOffset = 2,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(KinglerGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_KinglerGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(KinglerGigantamax, 64, 64),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(KinglerGigantamax),
-        ICON(KinglerGigantamax, 0),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_KRABBY
 
 #if P_FAMILY_VOLTORB
@@ -8447,38 +8105,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Kangaskhan, 2),
         FOLLOWER(Kangaskhan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_KANGASKHAN_MEGA] =
-    {
-        KANGASKHAN_MISC_INFO,
-        .baseHP        = 105,
-        .baseAttack    = 125,
-        .baseDefense   = 100,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 100,
-        .expYield = 207,
-        .abilities = { ABILITY_PARENTAL_BOND, ABILITY_PARENTAL_BOND, ABILITY_PARENTAL_BOND },
-        .isMegaEvolution = TRUE,
-        .cryId = CRY_KANGASKHAN_MEGA,
-        .weight = 1000,
-        .description = COMPOUND_STRING(
-            "When the mother sees the back of her\n"
-            "Mega-Evolved child, it makes her think\n"
-            "of the day when her child will inevitably\n"
-            "leave her."),
-        FRONT_PIC(KangaskhanMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_KangaskhanMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(KangaskhanMega, 64, 56),
-        .backPicYOffset = 6,
-        .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(KangaskhanMega),
-        ICON(KangaskhanMega, 2),
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_KANGASKHAN
 
 #if P_FAMILY_HORSEA
@@ -9161,43 +8787,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Scizor, 0),
         FOLLOWER(Scizor, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_SCIZOR_MEGA] =
-    {
-        SCIZOR_MISC_INFO,
-        .baseHP        = 70,
-        .baseAttack    = 150,
-        .baseDefense   = 140,
-        .baseSpeed     = 75,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 100,
-        .expYield = 210,
-        .abilities = { ABILITY_TECHNICIAN, ABILITY_TECHNICIAN, ABILITY_TECHNICIAN },
-        .isMegaEvolution = TRUE,
-        .cryId = CRY_SCIZOR_MEGA,
-        .height = 20,
-        .weight = 1250,
-        .description = COMPOUND_STRING(
-            "The excess energy that bathes this\n"
-            "Pokémon keeps it in constant danger of\n"
-            "overflow. It can't sustain a battle over\n"
-            "long periods of time."),
-        .pokemonScale = 278,
-        .pokemonOffset = 1,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(ScizorMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_ScizorMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(ScizorMega, 64, 56),
-        .backPicYOffset = 4,
-        .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(ScizorMega),
-        ICON(ScizorMega, 0),
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_GEN_2_CROSS_EVOS
 
 #if P_GEN_8_CROSS_EVOS
@@ -9732,45 +9321,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Pinsir, 2),
         FOLLOWER(Pinsir, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_PINSIR_MEGA] =
-    {
-        PINSIR_MISC_INFO,
-        .baseHP        = 65,
-        .baseAttack    = 155,
-        .baseDefense   = 120,
-        .baseSpeed     = 105,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
-        .expYield = 210,
-        .abilities = { ABILITY_AERILATE, ABILITY_AERILATE, ABILITY_AERILATE },
-        .cryId = CRY_PINSIR_MEGA,
-        .height = 17,
-        .weight = 590,
-        .description = COMPOUND_STRING(
-            "The influence of Mega Evolution leaves it\n"
-            "in a state of constant excitement.\n"
-            "It pierces enemies with its two large\n"
-            "horns before shredding them."),
-        .pokemonScale = 256,
-        .pokemonOffset = 2,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(PinsirMega, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_PinsirMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 4,
-        BACK_PIC(PinsirMega, 64, 56),
-        .backPicYOffset = 7,
-        .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(PinsirMega),
-        ICON(PinsirMega, 2),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_PINSIR
 
 #if P_FAMILY_TAUROS
@@ -9932,40 +9482,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Gyarados, 0),
         FOLLOWER(Gyarados, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_GYARADOS_MEGA] =
-    {
-        GYARADOS_MISC_INFO,
-        .baseHP        = 95,
-        .baseAttack    = 155,
-        .baseDefense   = 109,
-        .baseSpeed     = 81,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 130,
-        .types = MON_TYPES(TYPE_WATER, TYPE_DARK),
-        .expYield = 224,
-        .abilities = { ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER, ABILITY_MOLD_BREAKER },
-        .cryId = CRY_GYARADOS_MEGA,
-        .weight = 3050,
-        .description = COMPOUND_STRING(
-            "Although it obeys its instinctive drive to\n"
-            "destroy everything within its reach, it\n"
-            "will respond to orders from a Trainer it\n"
-            "truly trusts."),
-        FRONT_PIC(GyaradosMega, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_GyaradosMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 6,
-        BACK_PIC(GyaradosMega, 64, 64),
-        .backPicYOffset = 2,
-        .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(GyaradosMega),
-        ICON(GyaradosMega, 0),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_MAGIKARP
 
 #if P_FAMILY_LAPRAS
@@ -10021,34 +9537,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Lapras, 2),
         FOLLOWER(Lapras, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_LAPRAS_GIGANTAMAX] =
-    {
-        LAPRAS_MISC_INFO,
-        .height = 240,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Over 5,000 people can ride on its\n"
-            "shell at once. And it's a very\n"
-            "comfortable ride, without the slightest\n"
-            "shaking or swaying."),
-        .pokemonScale = 257,
-        .pokemonOffset = 10,
-        .trainerScale = 423,
-        .trainerOffset = 8,
-        FRONT_PIC(LaprasGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_LaprasGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(LaprasGigantamax, 64, 64),
-        .backPicYOffset = 1,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(LaprasGigantamax),
-        ICON(LaprasGigantamax, 2),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_LAPRAS
 
 #if P_FAMILY_DITTO
@@ -10167,34 +9655,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
                                 {EVO_FRIENDSHIP_MOVE_TYPE, TYPE_FAIRY, SPECIES_SYLVEON}),
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_EEVEE_GIGANTAMAX] =
-    {
-        EEVEE_MISC_INFO,
-        .height = 180,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Having gotten even friendlier and\n"
-            "more innocent, Eevee tries to play\n"
-            "with anyone around, only to end up\n"
-            "crushing them with its immense body."),
-        .pokemonScale = 476,
-        .pokemonOffset = 18,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(EeveeGigantamax, 64, 64),
-        .frontPicYOffset = 8,
-        .frontAnimFrames = sAnims_EeveeGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(EeveeGigantamax, 64, 64),
-        .backPicYOffset = 7,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(EeveeGigantamax),
-        ICON(EeveeGigantamax, 2),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 
     [SPECIES_VAPOREON] =
     {
@@ -11018,43 +10478,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Aerodactyl, 2),
         FOLLOWER(Aerodactyl, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_AERODACTYL_MEGA] =
-    {
-        AERODACTYL_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 135,
-        .baseDefense   = 85,
-        .baseSpeed     = 150,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 95,
-        .expYield = 215,
-        .abilities = { ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS, ABILITY_TOUGH_CLAWS },
-        .cryId = CRY_AERODACTYL_MEGA,
-        .height = 21,
-        .weight = 790,
-        .description = COMPOUND_STRING(
-            "The power of Mega Evolution has\n"
-            "completely restored its genes. The rocks\n"
-            "on its body are harder than diamond."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 302,
-        .trainerOffset = 4,
-        FRONT_PIC(AerodactylMega, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_AerodactylMega,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 7,
-        BACK_PIC(AerodactylMega, 64, 64),
-        .backPicYOffset = 8,
-        .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(AerodactylMega),
-        ICON(AerodactylMega, 2),
-        .isMegaEvolution = TRUE,
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_AERODACTYL
 
 #if P_FAMILY_SNORLAX
@@ -11163,34 +10586,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Snorlax, 3),
         FOLLOWER(Snorlax, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_SNORLAX_GIGANTAMAX] =
-    {
-        SNORLAX_MISC_INFO,
-        .height = 350,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Gigantamax energy has affected\n"
-            "stray seeds and even pebbles that\n"
-            "got stuck to Snorlax, making them grow\n"
-            "to a huge size."),
-        .pokemonScale = 256,
-        .pokemonOffset = 4,
-        .trainerScale = 423,
-        .trainerOffset = 11,
-        FRONT_PIC(SnorlaxGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_SnorlaxGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SnorlaxGigantamax, 64, 64),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(SnorlaxGigantamax),
-        ICON(SnorlaxGigantamax, 3),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_SNORLAX
 
 #if P_FAMILY_ARTICUNO
@@ -11710,81 +11105,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Mewtwo, 2),
         FOLLOWER(Mewtwo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
-
-#if P_MEGA_EVOLUTIONS
-    [SPECIES_MEWTWO_MEGA_X] =
-    {
-        SPECIES_MEWTWO_MISC_INFO,
-        .baseHP        = 106,
-        .baseAttack    = 190,
-        .baseDefense   = 100,
-        .baseSpeed     = 130,
-        .baseSpAttack  = 154,
-        .baseSpDefense = 100,
-        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FIGHTING),
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 390 : 351,
-        .abilities = { ABILITY_STEADFAST, ABILITY_STEADFAST, ABILITY_STEADFAST },
-        .isMegaEvolution = TRUE,
-        .cryId = CRY_MEWTWO_MEGA_X,
-        .height = 23,
-        .weight = 1270,
-        .description = COMPOUND_STRING(
-            "Psychic power has augmented its muscles.\n"
-            "It has a grip strength of one ton and can\n"
-            "sprint a hundred meters in two seconds\n"
-            "flat!"),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 309,
-        .trainerOffset = 4,
-        FRONT_PIC(MewtwoMegaX, 48, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_MewtwoMegaX,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MewtwoMegaX, 56, 64),
-        .backPicYOffset = 1,
-        .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(MewtwoMegaX),
-        ICON(MewtwoMegaX, 2),
-    },
-
-    [SPECIES_MEWTWO_MEGA_Y] =
-    {
-        SPECIES_MEWTWO_MISC_INFO,
-        .baseHP        = 106,
-        .baseAttack    = 150,
-        .baseDefense   = 70,
-        .baseSpeed     = 140,
-        .baseSpAttack  = 194,
-        .baseSpDefense = 120,
-        .types = MON_TYPES(TYPE_PSYCHIC),
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 390 : 351,
-        .abilities = { ABILITY_INSOMNIA, ABILITY_INSOMNIA, ABILITY_INSOMNIA },
-        .isMegaEvolution = TRUE,
-        .cryId = CRY_MEWTWO_MEGA_Y,
-        .height = 15,
-        .weight = 330,
-        .description = COMPOUND_STRING(
-            "Despite its diminished size, its mental\n"
-            "power has grown phenomenally. With a mere\n"
-            "thought, it can smash a skyscraper to\n"
-            "smithereens."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 309,
-        .trainerOffset = 4,
-        FRONT_PIC(MewtwoMegaY, 40, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_MewtwoMegaY,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 3,
-        BACK_PIC(MewtwoMegaY, 64, 64),
-        .backPicYOffset = 2,
-        .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(MewtwoMegaY),
-        ICON(MewtwoMegaY, 2),
-    },
-#endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_MEWTWO
 
 #if P_FAMILY_MEW

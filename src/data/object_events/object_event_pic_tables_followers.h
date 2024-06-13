@@ -511,14 +511,6 @@ static const struct SpriteFrameImage sPicTable_Magnezone[] = {
 static const struct SpriteFrameImage sPicTable_Farfetchd[] = {
     overworld_ascending_frames(gObjectEventPic_Farfetchd, 4, 4),
 };
-#if P_GALARIAN_FORMS
-static const struct SpriteFrameImage sPicTable_FarfetchdGalarian[] = {
-    overworld_ascending_frames(gObjectEventPic_FarfetchdGalarian, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Sirfetchd[] = {
-    overworld_ascending_frames(gObjectEventPic_Sirfetchd, 4, 4),
-};
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_FARFETCHD
 
 #if P_FAMILY_DODUO
