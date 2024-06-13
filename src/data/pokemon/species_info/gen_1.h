@@ -3200,7 +3200,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_WONDER_SKIN },
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_NINJA },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Venomoth"),
         .cryId = CRY_VENOMOTH,
@@ -3605,135 +3605,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .isAlolanForm = TRUE,
     },
 #endif //P_ALOLAN_FORMS
-
-#if P_GALARIAN_FORMS
-    [SPECIES_MEOWTH_GALARIAN] =
-    {
-        MEOWTH_MISC_INFO,
-        .baseHP        = 50,
-        .baseAttack    = 65,
-        .baseDefense   = 55,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 40,
-        .evYield_Attack = 1,
-        .types = MON_TYPES(TYPE_STEEL),
-        .abilities = { ABILITY_PICKUP, ABILITY_TOUGH_CLAWS, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_BROWN,
-        .height = 4,
-        .weight = 75,
-        .description = COMPOUND_STRING(
-            "Living with a savage, seafaring people has\n"
-            "hardened its body so much that parts of it\n"
-            "turned to iron. Darker coins are harder\n"
-            "and garner more respect among Meowth."),
-        .pokemonScale = 480,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(MeowthGalarian, 48, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_MeowthGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MeowthGalarian, 64, 56),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MeowthGalarian),
-        ICON(MeowthGalarian, 0),
-        FOLLOWER(MeowthGalarian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(MeowthGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PERRSERKER}),
-    },
-
-    [SPECIES_PERRSERKER] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 110,
-        .baseDefense   = 100,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_STEEL),
-        .catchRate = 90,
-        .expYield = 154,
-        .evYield_Attack = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_BATTLE_ARMOR, ABILITY_TOUGH_CLAWS, ABILITY_STEELY_SPIRIT },
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Perrserker"),
-        .cryId = CRY_PERRSERKER,
-        .natDexNum = NATIONAL_DEX_PERRSERKER,
-        .categoryName = _("Viking"),
-        .height = 8,
-        .weight = 280,
-        .description = COMPOUND_STRING(
-            "What appears to be an iron helmet is\n"
-            "actually hardened hair. This Pokémon\n"
-            "lives for the thrill of battle."),
-        .pokemonScale = 366,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(Perrserker, 48, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_Perrserker,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Perrserker, 64, 56),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Perrserker),
-        ICON(Perrserker, 2),
-        FOOTPRINT(Perrserker)
-        FOLLOWER(Perrserker, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(Perrserker),
-    },
-#endif //P_GALARIAN_FORMS
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_MEOWTH_GIGANTAMAX] =
-    {
-        MEOWTH_MISC_INFO,
-        .baseHP        = 40,
-        .baseAttack    = 45,
-        .baseDefense   = 35,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 40,
-        .evYield_Speed = 1,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .itemRare = ITEM_QUICK_CLAW,
-        .abilities = { ABILITY_PICKUP, ABILITY_TECHNICIAN, ABILITY_UNNERVE },
-        .bodyColor = BODY_COLOR_YELLOW,
-        .height = 330,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "The pattern that has appeared on\n"
-            "its giant coin is thought to be the\n"
-            "key to unlocking the secrets of the\n"
-            "Dynamax phenomenon."),
-        .pokemonScale = 480,
-        .pokemonOffset = 19,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(MeowthGigantamax, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_MeowthGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MeowthGigantamax, 64, 64),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MeowthGigantamax),
-        ICON(MeowthGigantamax, 1),
-        LEARNSETS(Meowth),
-        .isGigantamax = TRUE,
-        .formChangeTable = sMeowthFormChangeTable,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_MEOWTH
 
 #if P_FAMILY_PSYDUCK
@@ -7511,44 +7382,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Exeggutor, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Exeggutor),
     },
-
-#if P_ALOLAN_FORMS
-    [SPECIES_EXEGGUTOR_ALOLAN] =
-    {
-        EXEGGUTOR_MISC_INFO,
-        .baseHP        = 95,
-        .baseAttack    = 105,
-        .baseDefense   = 85,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 125,
-        .baseSpDefense = EXEGGUTOR_SP_DEF,
-        .types = MON_TYPES(TYPE_GRASS, TYPE_DRAGON),
-        .abilities = { ABILITY_FRISK, ABILITY_NONE, ABILITY_HARVEST },
-        .height = 109,
-        .weight = 4156,
-        .description = COMPOUND_STRING(
-            "Alola is the best environment for\n"
-            "this Pokémon. Local people take pride\n"
-            "in its appearance, saying this is how\n"
-            "Exeggutor ought to look."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 309,
-        .trainerOffset = 5,
-        FRONT_PIC(ExeggutorAlolan, 64, 64),
-        .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_ExeggutorAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(ExeggutorAlolan, 64, 56),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ExeggutorAlolan),
-        ICON(ExeggutorAlolan, 1),
-        FOLLOWER(ExeggutorAlolan, SIZE_64x64, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(ExeggutorAlolan),
-        .isAlolanForm = TRUE,
-    },
-#endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_EXEGGCUTE
 
 #if P_FAMILY_CUBONE

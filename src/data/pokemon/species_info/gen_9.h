@@ -4847,55 +4847,6 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     },
 #endif //P_FAMILY_ROARING_MOON
 
-#if P_FAMILY_IRON_VALIANT
-    [SPECIES_IRON_VALIANT] =
-    {
-        .baseHP        = 74,
-        .baseAttack    = 130,
-        .baseDefense   = 90,
-        .baseSpeed     = 116,
-        .baseSpAttack  = 120,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_FAIRY, TYPE_FIGHTING),
-        .catchRate = 10,
-        .expYield = 295,
-        .evYield_Attack = 3,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 50,
-        .friendship = 0,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
-        .abilities = { ABILITY_QUARK_DRIVE, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_WHITE,
-        .isParadoxForm = TRUE,
-        .speciesName = _("IronVliant"),
-        .cryId = CRY_IRON_VALIANT,
-        .natDexNum = NATIONAL_DEX_IRON_VALIANT,
-        .categoryName = _("Paradox"),
-        .height = 14,
-        .weight = 350,
-        .description = COMPOUND_STRING(
-            "It has some similarities to a mad\n"
-            "scientist's invention covered in a\n"
-            "paranormal magazine."),
-        .pokemonScale = 356,
-        .pokemonOffset = 17,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(IronValiant, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_IronValiant,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(IronValiant, 64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(IronValiant),
-        ICON(IronValiant, 4),
-        //FOOTPRINT(IronValiant)
-        LEARNSETS(IronValiant),
-    },
-#endif //P_FAMILY_IRON_VALIANT
-
 #if P_FAMILY_KORAIDON
     [SPECIES_KORAIDON] =
     {

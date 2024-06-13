@@ -2869,4 +2869,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Cuernos +25%."),
         .aiRating = 8,
     },
+
+    [ABILITY_NINJA] =
+    {
+        .name = _("Ninja"),
+        .description = COMPOUND_STRING("No contacto y Siniestro +25%."),
+        .aiRating = 10,
+    },
 };

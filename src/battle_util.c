@@ -8486,6 +8486,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
             return FALSE;
     }
     else if ((atkHoldEffect == HOLD_EFFECT_PUNCHING_GLOVE && gMovesInfo[move].punchingMove)
+           || GetBattlerAbility(battlerAtk) == ABILITY_NINJA
            || GetBattlerAbility(battlerAtk) == ABILITY_LONG_REACH)
     {
         return FALSE;
@@ -9249,6 +9250,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         break;
     case ABILITY_PERCUSIONISTA:
         if (gMovesInfo[move].soundMove)
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
+    case ABILITY_NINJA:
+        if (moveType == TYPE_DARK)
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
     case ABILITY_STEELY_SPIRIT:

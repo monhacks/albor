@@ -3782,6 +3782,7 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move)
 {
     if (gMovesInfo[move].makesContact
       && ability != ABILITY_LONG_REACH
+      && ability != ABILITY_NINJA
       && holdEffect != HOLD_EFFECT_PROTECTIVE_PADS)
         return TRUE;
     return FALSE;

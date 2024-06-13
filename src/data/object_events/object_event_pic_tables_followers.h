@@ -298,29 +298,12 @@ static const struct SpriteFrameImage sPicTable_Meowth[] = {
 static const struct SpriteFrameImage sPicTable_Persian[] = {
     overworld_ascending_frames(gObjectEventPic_Persian, 4, 4),
 };
-#if P_ALOLAN_FORMS
 static const struct SpriteFrameImage sPicTable_MeowthAlolan[] = {
     overworld_ascending_frames(gObjectEventPic_MeowthAlolan, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_PersianAlolan[] = {
     overworld_ascending_frames(gObjectEventPic_PersianAlolan, 4, 4),
 };
-#endif //P_ALOLAN_FORMS
-
-#if P_GALARIAN_FORMS
-static const struct SpriteFrameImage sPicTable_MeowthGalarian[] = {
-    overworld_ascending_frames(gObjectEventPic_MeowthGalarian, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Perrserker[] = {
-    overworld_ascending_frames(gObjectEventPic_Perrserker, 4, 4),
-};
-#endif //P_GALARIAN_FORMS
-
-#if P_GIGANTAMAX_FORMS
-/*static const struct SpriteFrameImage sPicTable_MeowthGigantamax[] = {
-    overworld_ascending_frames(gObjectEventPic_MeowthGigantamax, 4, 4),
-};*/
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_MEOWTH
 
 #if P_FAMILY_PSYDUCK
@@ -667,11 +650,6 @@ static const struct SpriteFrameImage sPicTable_Exeggcute[] = {
 static const struct SpriteFrameImage sPicTable_Exeggutor[] = {
     overworld_ascending_frames(gObjectEventPic_Exeggutor, 4, 4),
 };
-#if P_ALOLAN_FORMS
-static const struct SpriteFrameImage sPicTable_ExeggutorAlolan[] = {
-    overworld_ascending_frames(gObjectEventPic_ExeggutorAlolan, 4, 4),
-};
-#endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_EXEGGCUTE
 
 #if P_FAMILY_CUBONE
