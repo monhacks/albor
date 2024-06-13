@@ -3565,7 +3565,7 @@ static void IncreaseStatUpScoreInternal(u32 battlerAtk, u32 battlerDef, u32 stat
         return;
 
     // Don't increase stats if opposing battler has Opportunist
-    if (AI_DATA->abilities[battlerDef] == ABILITY_OPPORTUNIST)
+    if (AI_DATA->abilities[battlerDef] == ABILITY_OPPORTUNIST || AI_DATA->abilities[battlerDef] == ABILITY_REY_DEL_MAR)
         return;
 
     switch (statId)

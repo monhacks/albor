@@ -4747,6 +4747,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_COSTAR:
+        case ABILITY_REY_DEL_MAR:
             if (!gSpecialStatuses[battler].switchInAbilityDone
              && IsDoubleBattle()
              && IsBattlerAlive(BATTLE_PARTNER(battler))
@@ -6029,6 +6030,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             switch (GetBattlerAbility(battler))
             {
             case ABILITY_OPPORTUNIST:
+            case ABILITY_REY_DEL_MAR:
                 if (gProtectStructs[battler].activateOpportunist == 2)
                 {
                     gBattleScripting.savedBattler = gBattlerAttacker;

@@ -337,7 +337,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_MEGA_LAUNCHER, ABILITY_DISPARO_CERTERO, ABILITY_ATAQUE_RELAMPAGO },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Squirtle"),
@@ -388,7 +388,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_MEGA_LAUNCHER, ABILITY_DISPARO_CERTERO, ABILITY_ATAQUE_RELAMPAGO },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Wartortle"),
@@ -430,7 +430,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,                                                \
         .friendship = STANDARD_FRIENDSHIP,                              \
         .growthRate = GROWTH_MEDIUM_SLOW,                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),  \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),  \
         .bodyColor = BODY_COLOR_BLUE,                                   \
         .speciesName = _("Blastoise"),                                  \
         .natDexNum = NATIONAL_DEX_BLASTOISE,                            \
@@ -529,7 +529,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Caterpie)
         FOLLOWER(Caterpie, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Caterpie),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_METAPOD}),
     },
 
@@ -579,7 +578,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Metapod)
         FOLLOWER(Metapod, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Metapod),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BUTTERFREE}),
     },
 
@@ -699,7 +697,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Weedle)
         FOLLOWER(Weedle, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Weedle),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_KAKUNA}),
     },
 
@@ -750,7 +747,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Kakuna)
         FOLLOWER(Kakuna, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Kakuna),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BEEDRILL}),
     },
 
@@ -1402,7 +1398,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 10,                                                                \
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_MEDIUM_FAST,                                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),                      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                      \
         .abilities = { ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR },           \
         .bodyColor = BODY_COLOR_YELLOW,                                                 \
         .speciesName = _("Pichu"),                                                      \
@@ -1868,7 +1864,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
         .abilities = { ABILITY_POISON_POINT, ABILITY_RIVALRY, ABILITY_IMPENETRABLE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Nidorina"),
@@ -1926,7 +1922,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_FIELD),
         .abilities = { ABILITY_POISON_POINT, ABILITY_RIVALRY, ABILITY_IMPENETRABLE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Nidoqueen"),
@@ -2143,7 +2139,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 10,
         .friendship = 140,
         .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_CUTE_CHARM, ABILITY_MAGIC_GUARD, ABILITY_FRIEND_GUARD },
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
@@ -2484,7 +2480,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 10,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_VOZ_CANTANTE, ABILITY_GLOBO, ABILITY_VOZ_DULCE },
         .bodyColor = BODY_COLOR_PINK,
         .noFlip = TRUE,
@@ -3614,7 +3610,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FIELD),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_FIELD),
         .abilities = { ABILITY_DAMP, ABILITY_CLOUD_NINE, ABILITY_SWIFT_SWIM },
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Psyduck"),
@@ -3663,7 +3659,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FIELD),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_FIELD),
         .abilities = { ABILITY_DAMP, ABILITY_CLOUD_NINE, ABILITY_SWIFT_SWIM },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Golduck"),
@@ -4047,7 +4043,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_DAMP, ABILITY_SWIFT_SWIM },
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
@@ -4098,7 +4094,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_DAMP, ABILITY_SWIFT_SWIM },
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
@@ -4160,7 +4156,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_DAMP, ABILITY_SWIFT_SWIM },
         .bodyColor = BODY_COLOR_BLUE,
         .noFlip = TRUE,
@@ -4217,7 +4213,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO),
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_DAMP, ABILITY_DRIZZLE },
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = TRUE,
@@ -4776,7 +4772,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_CLEAR_BODY, ABILITY_LIQUID_OOZE, ABILITY_RAIN_DISH },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Tentacool"),
@@ -4826,7 +4822,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_CLEAR_BODY, ABILITY_LIQUID_OOZE, ABILITY_RAIN_DISH },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Tentacruel"),
@@ -5310,7 +5306,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,                                                   \
         .friendship = STANDARD_FRIENDSHIP,                                 \
         .growthRate = GROWTH_MEDIUM_FAST,                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1), \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO), \
         .bodyColor = BODY_COLOR_PINK,                                      \
         .speciesName = _("Slowpoke"),                                      \
         .natDexNum = NATIONAL_DEX_SLOWPOKE,                                \
@@ -5331,7 +5327,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,                                                   \
         .friendship = STANDARD_FRIENDSHIP,                                 \
         .growthRate = GROWTH_MEDIUM_FAST,                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1), \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO), \
         .bodyColor = BODY_COLOR_PINK,                                      \
         .speciesName = _("Slowbro"),                                       \
         .cryId = CRY_SLOWBRO,                                              \
@@ -5347,7 +5343,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,                                                   \
         .friendship = STANDARD_FRIENDSHIP,                                 \
         .growthRate = GROWTH_MEDIUM_FAST,                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1), \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO), \
         .bodyColor = BODY_COLOR_PINK,                                      \
         .speciesName = _("Slowking"),                                      \
         .cryId = CRY_SLOWKING,                                             \
@@ -5921,7 +5917,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FIELD),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_FIELD),
         .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Seel"),
@@ -5970,7 +5966,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_FIELD),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_FIELD),
         .abilities = { ABILITY_THICK_FAT, ABILITY_HYDRATION, ABILITY_ICE_BODY },
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Dewgong"),
@@ -6198,7 +6194,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SHELL_ARMOR, ABILITY_SKILL_LINK, ABILITY_OVERCOAT },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Shellder"),
@@ -6250,7 +6246,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SHELL_ARMOR, ABILITY_SKILL_LINK, ABILITY_OVERCOAT },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Cloyster"),
@@ -6677,7 +6673,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_HYPER_CUTTER, ABILITY_SHELL_ARMOR, ABILITY_SHEER_FORCE },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Krabby"),
@@ -6725,7 +6721,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,                                                                \
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_MEDIUM_FAST,                                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),                                 \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),                                 \
         .abilities = { ABILITY_HYPER_CUTTER, ABILITY_SHELL_ARMOR, ABILITY_MARTILLADOR },\
         .bodyColor = BODY_COLOR_RED,                                                    \
         .noFlip = TRUE,                                                                 \
@@ -7195,7 +7191,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_GUTS, ABILITY_STEADFAST, ABILITY_VITAL_SPIRIT },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Tyrogue"),
@@ -7815,7 +7811,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,
         .friendship = 140,
         .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_NATURAL_CURE, ABILITY_SERENE_GRACE, ABILITY_FRIEND_GUARD },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Happiny"),
@@ -8125,7 +8121,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_SNIPER, ABILITY_DAMP },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Horsea"),
@@ -8176,7 +8172,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_POISON_POINT, ABILITY_SNIPER, ABILITY_DAMP },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Seadra"),
@@ -8236,7 +8232,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_SNIPER, ABILITY_DAMP },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Kingdra"),
@@ -8288,8 +8284,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_LIGHTNING_ROD },
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_LIGHTNING_ROD, ABILITY_REY_DEL_MAR },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Goldeen"),
         .cryId = CRY_GOLDEEN,
@@ -8320,7 +8316,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Goldeen)
         FOLLOWER(Goldeen, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Goldeen),
-        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_SEAKING}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SEAKING}),
     },
 
     [SPECIES_SEAKING] =
@@ -8340,8 +8336,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2),
-        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_WATER_VEIL, ABILITY_LIGHTNING_ROD },
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ),
+        .abilities = { ABILITY_SWIFT_SWIM, ABILITY_LIGHTNING_ROD, ABILITY_REY_DEL_MAR },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Seaking"),
         .cryId = CRY_SEAKING,
@@ -8394,7 +8390,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_ILLUMINATE, ABILITY_NATURAL_CURE, ABILITY_ANALYTIC },
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
@@ -8446,7 +8442,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_ILLUMINATE, ABILITY_NATURAL_CURE, ABILITY_ANALYTIC },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Starmie"),
@@ -8501,7 +8497,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_SOUNDPROOF, ABILITY_FILTER, ABILITY_TECHNICIAN },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Mime Jr."),
@@ -8589,95 +8585,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(MrMime, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(MrMime),
     },
-
-#if P_GALARIAN_FORMS
-    [SPECIES_MR_MIME_GALARIAN] =
-    {
-        MR_MIME_MISC_INFO,
-        .baseHP        = 50,
-        .baseAttack    = 65,
-        .baseDefense   = 65,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 90,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_ICE, TYPE_PSYCHIC),
-        .evYield_Speed = 2,
-        .abilities = { ABILITY_VITAL_SPIRIT, ABILITY_SCREEN_CLEANER, ABILITY_ICE_BODY },
-        .bodyColor = BODY_COLOR_WHITE,
-        .categoryName = _("Dancing"),
-        .height = 14,
-        .weight = 568,
-        .description = COMPOUND_STRING(
-            "Its talent is tap-dancing. It can radiate\n"
-            "chilliness from the bottoms of its feet to\n"
-            "to create a floor of ice, which this\n"
-            "Pokémon can kick up to use as a barrier."),
-        .pokemonScale = 258,
-        .pokemonOffset = 6,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(MrMimeGalarian, 56, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_MrMimeGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MrMimeGalarian, 64, 48),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MrMimeGalarian),
-        ICON(MrMimeGalarian, 0),
-        FOLLOWER(MrMimeGalarian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(MrMimeGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_MR_RIME}),
-    },
-
-    [SPECIES_MR_RIME] =
-    {
-        .baseHP        = 80,
-        .baseAttack    = 85,
-        .baseDefense   = 75,
-        .baseSpeed     = 70,
-        .baseSpAttack  = 110,
-        .baseSpDefense = 100,
-        .types = MON_TYPES(TYPE_ICE, TYPE_PSYCHIC),
-        .catchRate = 45,
-        .expYield = 182,
-        .evYield_SpAttack = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 25,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_TANGLED_FEET, ABILITY_SCREEN_CLEANER, ABILITY_ICE_BODY },
-        .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Mr. Rime"),
-        .cryId = CRY_MR_RIME,
-        .natDexNum = NATIONAL_DEX_MR_RIME,
-        .categoryName = _("Comedian"),
-        .height = 15,
-        .weight = 582,
-        .description = COMPOUND_STRING(
-            "It's highly skilled at tap-dancing. It\n"
-            "waves its cane of ice in time with its\n"
-            "graceful movements."),
-        .pokemonScale = 268,
-        .pokemonOffset = 2,
-        .trainerScale = 271,
-        .trainerOffset = 0,
-        FRONT_PIC(MrRime, 56, 64),
-        .frontPicYOffset = 4,
-        .frontAnimFrames = sAnims_MrRime,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MrRime, 64, 56),
-        .backPicYOffset = 6,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MrRime),
-        ICON(MrRime, 0),
-        FOOTPRINT(MrRime)
-        FOLLOWER(MrRime, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(MrRime),
-    },
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_MR_MIME
 
 #if P_FAMILY_SCYTHER
@@ -8858,7 +8765,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_OBLIVIOUS, ABILITY_FOREWARN, ABILITY_HYDRATION },
         .bodyColor = BODY_COLOR_PINK,
         .speciesName = _("Smoochum"),
@@ -8961,7 +8868,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
@@ -9125,7 +9032,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 25,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_FLAME_BODY, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
@@ -9394,7 +9301,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 5,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_RATTLED },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Magikarp"),
@@ -9426,7 +9333,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Magikarp)
         FOLLOWER(Magikarp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Magikarp),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GYARADOS}),
     },
 
@@ -9437,7 +9343,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 5,                                                 \
         .friendship = STANDARD_FRIENDSHIP,                              \
         .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_2, EGG_GROUP_DRAGON),\
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ, EGG_GROUP_DRAGON),\
         .bodyColor = BODY_COLOR_BLUE,                                   \
         .speciesName = _("Gyarados"),                                   \
         .natDexNum = NATIONAL_DEX_GYARADOS,                             \
@@ -9502,7 +9408,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,                                                                \
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_SLOW,                                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_WATER_1),              \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),              \
         .abilities = { ABILITY_WATER_ABSORB, ABILITY_SHELL_ARMOR, ABILITY_HYDRATION },  \
         .bodyColor = BODY_COLOR_BLUE,                                                   \
         .speciesName = _("Lapras"),                                                     \
@@ -9588,7 +9494,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Ditto)
         FOLLOWER(Ditto, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Ditto),
-        .tmIlliterate = TRUE,
     },
 #endif //P_FAMILY_DITTO
 
@@ -10233,7 +10138,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_SHELL_ARMOR, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Omanyte"),
@@ -10282,7 +10187,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_SHELL_ARMOR, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Omastar"),
@@ -10338,7 +10243,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_BATTLE_ARMOR, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Kabuto"),
@@ -10393,7 +10298,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 30,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_WATER_3),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_INVERTEBRADO),
         .abilities = { ABILITY_SWIFT_SWIM, ABILITY_BATTLE_ARMOR, ABILITY_WEAK_ARMOR },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Kabutops"),
@@ -10500,7 +10405,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_PICKUP, ABILITY_THICK_FAT, ABILITY_GLUTTONY },
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("Munchlax"),
@@ -10594,7 +10499,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .genderRatio = MON_GENDERLESS,                                              \
         .friendship = 35,                                                           \
         .growthRate = GROWTH_SLOW,                                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),                  \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                  \
         .speciesName = _("Articuno"),                                               \
         .cryId = CRY_ARTICUNO,                                                      \
         .natDexNum = NATIONAL_DEX_ARTICUNO,                                         \
@@ -10694,7 +10599,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .genderRatio = MON_GENDERLESS,                                  \
         .friendship = 35,                                               \
         .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),      \
         .bodyColor = BODY_COLOR_YELLOW,                                 \
         .speciesName = _("Zapdos"),                                     \
         .cryId = CRY_ZAPDOS,                                            \
@@ -10797,7 +10702,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .genderRatio = MON_GENDERLESS,                                  \
         .friendship = 35,                                               \
         .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),      \
         .speciesName = _("Moltres"),                                    \
         .cryId = CRY_MOLTRES,                                           \
         .natDexNum = NATIONAL_DEX_MOLTRES,                              \
@@ -10908,7 +10813,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_MARVEL_SCALE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Dratini"),
@@ -10958,7 +10863,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_SHED_SKIN, ABILITY_NONE, ABILITY_MARVEL_SCALE },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Dragonair"),
@@ -11014,7 +10919,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 40,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_WATER_1, EGG_GROUP_DRAGON),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_DRAGON),
         .abilities = { ABILITY_INNER_FOCUS, ABILITY_NONE, ABILITY_MULTISCALE },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Dragonite"),
@@ -11055,7 +10960,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 120,                                               \
         .friendship = 0,                                                \
         .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),      \
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),      \
         .bodyColor = BODY_COLOR_PURPLE,                                 \
         .speciesName = _("Mewtwo"),                                     \
         .natDexNum = NATIONAL_DEX_MEWTWO,                               \
@@ -11132,7 +11037,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggCycles = 120,
         .friendship = 100,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_NO_EGGS_DISCOVERED),
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
         .abilities = { ABILITY_SYNCHRONIZE, ABILITY_NONE },
         .bodyColor = BODY_COLOR_PINK,
         .isMythical = TRUE,

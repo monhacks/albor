@@ -2876,4 +2876,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("No contacto y Siniestro +25%."),
         .aiRating = 10,
     },
+
+    [ABILITY_REY_DEL_MAR] =
+    {
+        .name = _("Rey del mar"),
+        .description = COMPOUND_STRING("Copia cambios de stats."),
+        .aiRating = 5,
+    },
 };

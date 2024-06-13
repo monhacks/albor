@@ -105,7 +105,7 @@
 #define P_FAMILY_LICKITUNG               P_GEN_1_POKEMON
 #define P_FAMILY_KOFFING                 P_GEN_1_POKEMON
 #define P_FAMILY_RHYHORN                 P_GEN_1_POKEMON
-#define P_FAMILY_CHANSEY                 P_GEN_1_POKEMON
+#define P_FAMILY_CHANSEY                 FALSE
 #define P_FAMILY_TANGELA                 P_GEN_1_POKEMON
 #define P_FAMILY_KANGASKHAN              P_GEN_1_POKEMON
 #define P_FAMILY_HORSEA                  P_GEN_1_POKEMON
@@ -120,7 +120,7 @@
 #define P_FAMILY_TAUROS                  P_GEN_1_POKEMON
 #define P_FAMILY_MAGIKARP                P_GEN_1_POKEMON
 #define P_FAMILY_LAPRAS                  P_GEN_1_POKEMON
-#define P_FAMILY_DITTO                   P_GEN_1_POKEMON
+#define P_FAMILY_DITTO                   FALSE
 #define P_FAMILY_EEVEE                   P_GEN_1_POKEMON
 #define P_FAMILY_PORYGON                 P_GEN_1_POKEMON
 #define P_FAMILY_OMANYTE                 P_GEN_1_POKEMON

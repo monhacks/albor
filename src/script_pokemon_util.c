@@ -325,7 +325,7 @@ u32 ScriptGiveMonParameterized(u16 species, u8 level, u16 item, u8 ball, u8 natu
     if (nature >= NUM_NATURES)
     {
         if (OW_SYNCHRONIZE_NATURE >= GEN_6
-         && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_NO_EGGS_DISCOVERED || OW_SYNCHRONIZE_NATURE == GEN_7))
+         && (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_BABY || OW_SYNCHRONIZE_NATURE == GEN_7))
             nature = PickWildMonNature();
         else
             nature = Random() % NUM_NATURES;

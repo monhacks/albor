@@ -45,7 +45,6 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "data/pokemon/pokedex_orders.h"
 
 enum
 {
@@ -93,12 +92,7 @@ enum
 
 enum
 {
-   ORDER_NUMERICAL,
-   ORDER_ALPHABETICAL,
-   ORDER_HEAVIEST,
-   ORDER_LIGHTEST,
-   ORDER_TALLEST,
-   ORDER_SMALLEST
+   ORDER_NUMERICAL
 };
 
 enum
@@ -113,10 +107,6 @@ enum
     NAME_VWX,
     NAME_YZ,
 };
-
-extern const u16 gPokedexOrder_Alphabetical[];
-extern const u16 gPokedexOrder_Height[];
-extern const u16 gPokedexOrder_Weight[];
 
 // static .rodata strings
 
@@ -1625,11 +1615,6 @@ static const u8 sSearchMovementMap_ShiftNatDex[SEARCH_COUNT][4] =
 static const struct SearchOptionText sDexOrderOptions[] =
 {
     [ORDER_NUMERICAL]    = {gText_DexSortNumericalDescription, gText_DexSortNumericalTitle},
-    [ORDER_ALPHABETICAL] = {gText_DexSortAtoZDescription,      gText_DexSortAtoZTitle},
-    [ORDER_HEAVIEST]     = {gText_DexSortHeaviestDescription,  gText_DexSortHeaviestTitle},
-    [ORDER_LIGHTEST]     = {gText_DexSortLightestDescription,  gText_DexSortLightestTitle},
-    [ORDER_TALLEST]      = {gText_DexSortTallestDescription,   gText_DexSortTallestTitle},
-    [ORDER_SMALLEST]     = {gText_DexSortSmallestDescription,  gText_DexSortSmallestTitle},
     {},
 };
 
@@ -1691,11 +1676,6 @@ static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES] 
 static const u8 sOrderOptions[] =
 {
     ORDER_NUMERICAL,
-    ORDER_ALPHABETICAL,
-    ORDER_HEAVIEST,
-    ORDER_LIGHTEST,
-    ORDER_TALLEST,
-    ORDER_SMALLEST,
 };
 
 static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES] =
@@ -2246,76 +2226,6 @@ static void CreatePokedexList(u8 order)
                 if (sPokedexView->pokedexList[r5].seen)
                     sPokedexView->pokemonListCount = r5 + 1;
                 r5++;
-            }
-        }
-        break;
-    case ORDER_ALPHABETICAL:
-        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Alphabetical); i++)
-        {
-            dexNum = gPokedexOrder_Alphabetical[i];
-
-            if (dexNum <= NATIONAL_DEX_COUNT && GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
-            {
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = dexNum;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].owned = GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT);
-                sPokedexView->pokemonListCount++;
-            }
-        }
-        break;
-    case ORDER_HEAVIEST:
-        for (i = NATIONAL_DEX_COUNT - 1; i >= 0; i--)
-        {
-            dexNum = gPokedexOrder_Weight[i];
-
-            if (NationalPokedexNumToSpecies(dexNum) <= NATIONAL_DEX_COUNT && GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
-            {
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = dexNum;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].owned = TRUE;
-                sPokedexView->pokemonListCount++;
-            }
-        }
-        break;
-    case ORDER_LIGHTEST:
-        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
-        {
-            dexNum = gPokedexOrder_Weight[i];
-
-            if (NationalPokedexNumToSpecies(dexNum) <= NATIONAL_DEX_COUNT && GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
-            {
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = dexNum;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].owned = TRUE;
-                sPokedexView->pokemonListCount++;
-            }
-        }
-        break;
-    case ORDER_TALLEST:
-        for (i = NATIONAL_DEX_COUNT - 1; i >= 0; i--)
-        {
-            dexNum = gPokedexOrder_Height[i];
-
-            if (NationalPokedexNumToSpecies(dexNum) <= NATIONAL_DEX_COUNT && GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
-            {
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = dexNum;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].owned = TRUE;
-                sPokedexView->pokemonListCount++;
-            }
-        }
-        break;
-    case ORDER_SMALLEST:
-        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
-        {
-            dexNum = gPokedexOrder_Height[i];
-
-            if (NationalPokedexNumToSpecies(dexNum) <= NATIONAL_DEX_COUNT && GetSetPokedexFlag(dexNum, FLAG_GET_CAUGHT))
-            {
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].dexNum = dexNum;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].seen = TRUE;
-                sPokedexView->pokedexList[sPokedexView->pokemonListCount].owned = TRUE;
-                sPokedexView->pokemonListCount++;
             }
         }
         break;
@@ -5393,7 +5303,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         base_i++;
 
         //Egg cycles
-        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_NO_EGGS_DISCOVERED || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_NO_EGGS_DISCOVERED) //Species without eggs (legendaries etc)
+        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_BABY || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_BABY) //Species without eggs (legendaries etc)
         {
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_EggCycles, base_x, base_y + base_y_offset*base_i);
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_ThreeDashes, 78, base_y + base_y_offset*base_i);
@@ -5431,7 +5341,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_MONSTER     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_MONSTER);
             break;
-        case EGG_GROUP_WATER_1     :
+        case EGG_GROUP_ANFIBIO     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_1);
             break;
         case EGG_GROUP_BUG         :
@@ -5452,7 +5362,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_HUMAN_LIKE  :
             StringCopy(gStringVar1, sText_Stats_eggGroup_HUMAN_LIKE);
             break;
-        case EGG_GROUP_WATER_3     :
+        case EGG_GROUP_INVERTEBRADO     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_3);
             break;
         case EGG_GROUP_MINERAL     :
@@ -5461,7 +5371,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_AMORPHOUS   :
             StringCopy(gStringVar1, sText_Stats_eggGroup_AMORPHOUS);
             break;
-        case EGG_GROUP_WATER_2     :
+        case EGG_GROUP_PEZ     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_2);
             break;
         case EGG_GROUP_DITTO       :
@@ -5470,7 +5380,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_DRAGON      :
             StringCopy(gStringVar1, sText_Stats_eggGroup_DRAGON);
             break;
-        case EGG_GROUP_NO_EGGS_DISCOVERED:
+        case EGG_GROUP_BABY:
             StringCopy(gStringVar1, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
             break;
         }
@@ -5482,7 +5392,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_MONSTER     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MONSTER);
                 break;
-            case EGG_GROUP_WATER_1     :
+            case EGG_GROUP_ANFIBIO     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_1);
                 break;
             case EGG_GROUP_BUG         :
@@ -5503,7 +5413,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_HUMAN_LIKE  :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_HUMAN_LIKE);
                 break;
-            case EGG_GROUP_WATER_3     :
+            case EGG_GROUP_INVERTEBRADO     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_3);
                 break;
             case EGG_GROUP_MINERAL     :
@@ -5512,7 +5422,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_AMORPHOUS   :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_AMORPHOUS);
                 break;
-            case EGG_GROUP_WATER_2     :
+            case EGG_GROUP_PEZ     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_2);
                 break;
             case EGG_GROUP_DITTO       :
@@ -5521,7 +5431,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_DRAGON      :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DRAGON);
                 break;
-            case EGG_GROUP_NO_EGGS_DISCOVERED:
+            case EGG_GROUP_BABY:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
                 break;
             }
@@ -8116,21 +8026,6 @@ static void SetDefaultSearchOrder(u8 taskId)
     default:
     case ORDER_NUMERICAL:
         selected = ORDER_NUMERICAL;
-        break;
-    case ORDER_ALPHABETICAL:
-        selected = ORDER_ALPHABETICAL;
-        break;
-    case ORDER_HEAVIEST:
-        selected = ORDER_HEAVIEST;
-        break;
-    case ORDER_LIGHTEST:
-        selected = ORDER_LIGHTEST;
-        break;
-    case ORDER_TALLEST:
-        selected = ORDER_TALLEST;
-        break;
-    case ORDER_SMALLEST:
-        selected = ORDER_SMALLEST;
         break;
     }
     gTasks[taskId].tCursorPos_Order = selected;

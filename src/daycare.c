@@ -1228,7 +1228,7 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     }
 
     // check unbreedable egg group
-    if (eggGroups[0][0] == EGG_GROUP_NO_EGGS_DISCOVERED || eggGroups[1][0] == EGG_GROUP_NO_EGGS_DISCOVERED)
+    if (eggGroups[0][0] == EGG_GROUP_BABY || eggGroups[1][0] == EGG_GROUP_BABY)
         return PARENTS_INCOMPATIBLE;
     // two Ditto can't breed
     if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
@@ -1245,26 +1245,19 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     // neither parent is Ditto
     else
     {
-        if (genders[0] == genders[1])
-            return PARENTS_INCOMPATIBLE;
-        if (genders[0] == MON_GENDERLESS || genders[1] == MON_GENDERLESS)
+        if (genders[0] == genders[1] && genders[0] != MON_GENDERLESS)
             return PARENTS_INCOMPATIBLE;
         if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
             return PARENTS_INCOMPATIBLE;
-
+        if (genders[0] == MON_GENDERLESS && genders[1] == MON_GENDERLESS)
+            return PARENTS_LOW_COMPATIBILITY;
         if (species[0] == species[1])
         {
-            if (trainerIds[0] == trainerIds[1])
-                return PARENTS_MED_COMPATIBILITY; // same species, same trainer
-
-            return PARENTS_MAX_COMPATIBILITY; // same species, different trainers
+            return PARENTS_MAX_COMPATIBILITY;
         }
         else
         {
-            if (trainerIds[0] != trainerIds[1])
-                return PARENTS_MED_COMPATIBILITY; // different species, different trainers
-
-            return PARENTS_LOW_COMPATIBILITY; // different species, same trainer
+            return PARENTS_MED_COMPATIBILITY;
         }
     }
 }
