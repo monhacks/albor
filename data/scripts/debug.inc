@@ -174,6 +174,7 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_SNORUNT, 1, ITEM_NONE
 	givemon SPECIES_GLALIE, 1, ITEM_NONE
 	givemon SPECIES_FROSLASS, 1, ITEM_NONE
+	release
 	end
 
 Debug_EventScript_Script_2::
@@ -217,24 +218,31 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_SNORUNT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GLALIE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_FROSLASS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	release
 	end
 
 Debug_EventScript_Script_3::
+	release
 	end
 
 Debug_EventScript_Script_4::
+	release
 	end
 
 Debug_EventScript_Script_5::
+	release
 	end
 
 Debug_EventScript_Script_6::
+	release
 	end
 
 Debug_EventScript_Script_7::
+	release
 	end
 
 Debug_EventScript_Script_8::
+	release
 	end
 
 Debug_CheckSaveBlock::
