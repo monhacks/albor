@@ -373,7 +373,8 @@
 #define OBJ_EVENT_PAL_TAG_CASTFORM_SUNNY          0x1126
 #define OBJ_EVENT_PAL_TAG_CASTFORM_RAINY          0x1127
 #define OBJ_EVENT_PAL_TAG_CASTFORM_SNOWY          0x1128
-#if OW_MON_POKEBALLS
+
+#if OW_FOLLOWERS_POKEBALLS
 // Vanilla
 #define OBJ_EVENT_PAL_TAG_BALL_MASTER             0x1150
 #define OBJ_EVENT_PAL_TAG_BALL_ULTRA              0x1151
@@ -405,9 +406,7 @@
 #define OBJ_EVENT_PAL_TAG_BALL_DREAM              0x1168
 // Gen VII
 #define OBJ_EVENT_PAL_TAG_BALL_BEAST              0x1169
-// Gen VIII
-#define OBJ_EVENT_PAL_TAG_BALL_STRANGE            0x116A
-#endif
+#endif //OW_FOLLOWERS_POKEBALLS
 // Used as a placeholder follower graphic
 #define OBJ_EVENT_PAL_TAG_LIGHT                   0x8001
 #define OBJ_EVENT_PAL_TAG_LIGHT_2                 0x8002

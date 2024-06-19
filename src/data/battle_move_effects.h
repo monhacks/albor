@@ -1634,11 +1634,6 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectPhotonGeyser,
     },
 
-    [EFFECT_SHELL_SIDE_ARM] =
-    {
-        .battleScript = BattleScript_EffectShellSideArm,
-    },
-
     [EFFECT_TERRAIN_PULSE] =
     {
         .battleScript = BattleScript_EffectHit,

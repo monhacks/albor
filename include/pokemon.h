@@ -320,7 +320,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC4*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
