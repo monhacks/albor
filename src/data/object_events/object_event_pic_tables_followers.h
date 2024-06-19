@@ -1304,104 +1304,6 @@ static const struct SpriteFrameImage sPicTable_Mismagius[] = {
 #endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_MISDREAVUS
 
-#if P_FAMILY_UNOWN
-static const struct SpriteFrameImage sPicTable_UnownA[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownA, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownB[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownB, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownC[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownC, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownD[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownD, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownE[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownE, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownF[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownF, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownG[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownG, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownH[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownH, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownI[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownI, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownJ[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownJ, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownK[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownK, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownL[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownL, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownM[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownM, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownN[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownN, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownO[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownO, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownP[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownP, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownQ[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownQ, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownR[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownR, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownS[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownS, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownT[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownT, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownU[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownU, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownV[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownV, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownW[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownW, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownX[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownX, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownY[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownY, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownZ[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownZ, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownExclamationMark[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownExclamationMark, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_UnownQuestionMark[] = {
-    overworld_ascending_frames(gObjectEventPic_UnownQuestionMark, 4, 4),
-};
-#endif //P_FAMILY_UNOWN
-
-#if P_FAMILY_WOBBUFFET
-#if P_GEN_3_CROSS_EVOS
-static const struct SpriteFrameImage sPicTable_Wynaut[] = {
-    overworld_ascending_frames(gObjectEventPic_Wynaut, 4, 4),
-};
-#endif //P_GEN_3_CROSS_EVOS
-static const struct SpriteFrameImage sPicTable_Wobbuffet[] = {
-    overworld_ascending_frames(gObjectEventPic_Wobbuffet, 4, 4),
-};
-#endif //P_FAMILY_WOBBUFFET
-
 #if P_FAMILY_GIRAFARIG
 static const struct SpriteFrameImage sPicTable_Girafarig[] = {
     overworld_ascending_frames(gObjectEventPic_Girafarig, 4, 4),
@@ -1416,12 +1318,6 @@ static const struct SpriteFrameImage sPicTable_Forretress[] = {
     overworld_ascending_frames(gObjectEventPic_Forretress, 4, 4),
 };
 #endif //P_FAMILY_PINECO
-
-#if P_FAMILY_DUNSPARCE
-static const struct SpriteFrameImage sPicTable_Dunsparce[] = {
-    overworld_ascending_frames(gObjectEventPic_Dunsparce, 4, 4),
-};
-#endif //P_FAMILY_DUNSPARCE
 
 #if P_FAMILY_GLIGAR
 static const struct SpriteFrameImage sPicTable_Gligar[] = {
@@ -1478,21 +1374,12 @@ static const struct SpriteFrameImage sPicTable_Heracross[] = {
 static const struct SpriteFrameImage sPicTable_Sneasel[] = {
     overworld_ascending_frames(gObjectEventPic_Sneasel, 4, 4),
 };
-#if P_GEN_4_CROSS_EVOS
 static const struct SpriteFrameImage sPicTable_Weavile[] = {
     overworld_ascending_frames(gObjectEventPic_Weavile, 4, 4),
-};
-
-#endif //P_GEN_4_CROSS_EVOS
-
-#if P_HISUIAN_FORMS
-static const struct SpriteFrameImage sPicTable_SneaselHisuian[] = {
-    overworld_ascending_frames(gObjectEventPic_SneaselHisuian, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Sneasler[] = {
     overworld_ascending_frames(gObjectEventPic_Sneasler, 4, 4),
 };
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_SNEASEL
 
 #if P_FAMILY_TEDDIURSA
@@ -1532,14 +1419,6 @@ static const struct SpriteFrameImage sPicTable_Mamoswine[] = {
 static const struct SpriteFrameImage sPicTable_Corsola[] = {
     overworld_ascending_frames(gObjectEventPic_Corsola, 4, 4),
 };
-#if P_GALARIAN_FORMS
-static const struct SpriteFrameImage sPicTable_CorsolaGalarian[] = {
-    overworld_ascending_frames(gObjectEventPic_CorsolaGalarian, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Cursola[] = {
-    overworld_ascending_frames(gObjectEventPic_Cursola, 4, 4),
-};
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_CORSOLA
 
 #if P_FAMILY_REMORAID

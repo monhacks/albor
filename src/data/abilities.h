@@ -2856,6 +2856,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
     },
 
+    [ABILITY_RESERVA_NATURAL] =
+    {
+        .name = _("Reserva natural"),
+        .description = COMPOUND_STRING("Ajusta defensas favorablemente."),
+        .aiRating = 7,
+    },
+
     [ABILITY_DINOCOLA] =
     {
         .name = _("Dinocola"),
@@ -2881,6 +2888,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Rey del mar"),
         .description = COMPOUND_STRING("Copia cambios de stats."),
+        .aiRating = 5,
+    },
+
+    [ABILITY_FUNDICION] =
+    {
+        .name = _("Fundición"),
+        .description = COMPOUND_STRING("Fuego x2 contra roca."),
         .aiRating = 5,
     },
 };

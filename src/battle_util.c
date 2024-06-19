@@ -4399,6 +4399,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_IMPENETRABLE:
+        case ABILITY_RESERVA_NATURAL:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
                 u32 statId, opposingBattler;
@@ -10419,6 +10420,12 @@ static inline void MulByTypeEffectiveness(uq4_12_t *modifier, u32 move, u32 move
             RecordAbilityBattle(battlerAtk, abilityAtk);
     }
     else if (moveType == TYPE_POISON && defType == TYPE_STEEL && abilityAtk == ABILITY_CORROSION && mod == UQ_4_12(0.0))
+    {
+        mod = UQ_4_12(2.0);
+        if (recordAbilities)
+            RecordAbilityBattle(battlerAtk, abilityAtk);
+    }
+    else if (moveType == TYPE_FIRE && defType == TYPE_ROCK && abilityAtk == ABILITY_AVE_RAPAZ && mod == UQ_4_12(0.5))
     {
         mod = UQ_4_12(2.0);
         if (recordAbilities)

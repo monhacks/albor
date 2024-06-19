@@ -206,9 +206,6 @@ gCryTable::
 .endif @ P_FAMILY_MAGNEMITE
 .if P_FAMILY_FARFETCHD == TRUE
 	cry Cry_Farfetchd
-.if P_GALARIAN_FORMS == TRUE
-	cry Cry_Sirfetchd
-.endif @ P_GALARIAN_FORMS
 .endif @ P_FAMILY_FARFETCHD
 .if P_FAMILY_DODUO == TRUE
 	cry Cry_Doduo
@@ -331,9 +328,6 @@ gCryTable::
 	cry Cry_MimeJr
 .endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_MrMime
-.if P_GALARIAN_FORMS == TRUE
-	cry Cry_MrRime
-.endif @ P_GALARIAN_FORMS
 .endif @ P_FAMILY_MR_MIME
 .if P_FAMILY_SCYTHER == TRUE
 	cry Cry_Scyther
@@ -573,9 +567,6 @@ gCryTable::
 .endif @ P_FAMILY_WOBBUFFET
 .if P_FAMILY_GIRAFARIG == TRUE
 	cry Cry_Girafarig
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry Cry_Farigiraf
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_GIRAFARIG
 .if P_FAMILY_PINECO == TRUE
 	cry Cry_Pineco
@@ -2634,9 +2625,6 @@ gCryTable_Reverse::
 .endif @ P_FAMILY_MAGNEMITE
 .if P_FAMILY_FARFETCHD == TRUE
 	cry_reverse Cry_Farfetchd
-.if P_GALARIAN_FORMS == TRUE
-	cry_reverse Cry_Sirfetchd
-.endif @ P_GALARIAN_FORMS
 .endif @ P_FAMILY_FARFETCHD
 .if P_FAMILY_DODUO == TRUE
 	cry_reverse Cry_Doduo
@@ -2759,9 +2747,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_MimeJr
 .endif @ P_GEN_4_CROSS_EVOS
 	cry_reverse Cry_MrMime
-.if P_GALARIAN_FORMS == TRUE
-	cry_reverse Cry_MrRime
-.endif @ P_GALARIAN_FORMS
 .endif @ P_FAMILY_MR_MIME
 .if P_FAMILY_SCYTHER == TRUE
 	cry_reverse Cry_Scyther
@@ -3001,9 +2986,6 @@ gCryTable_Reverse::
 .endif @ P_FAMILY_WOBBUFFET
 .if P_FAMILY_GIRAFARIG == TRUE
 	cry_reverse Cry_Girafarig
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry_reverse Cry_Farigiraf
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_GIRAFARIG
 .if P_FAMILY_PINECO == TRUE
 	cry_reverse Cry_Pineco

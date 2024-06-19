@@ -158,7 +158,7 @@
 #define P_FAMILY_WOBBUFFET               FALSE
 #define P_FAMILY_GIRAFARIG               P_GEN_2_POKEMON
 #define P_FAMILY_PINECO                  P_GEN_2_POKEMON
-#define P_FAMILY_DUNSPARCE               P_GEN_2_POKEMON
+#define P_FAMILY_DUNSPARCE               FALSE
 #define P_FAMILY_GLIGAR                  P_GEN_2_POKEMON
 #define P_FAMILY_SNUBBULL                P_GEN_2_POKEMON
 #define P_FAMILY_QWILFISH                FALSE
@@ -508,7 +508,7 @@
 #define P_FAMILY_PINCURCHIN              P_GEN_8_POKEMON
 #define P_FAMILY_SNOM                    FALSE //TRUE
 #define P_FAMILY_STONJOURNER             P_GEN_8_POKEMON
-#define P_FAMILY_EISCUE                  P_GEN_8_POKEMON
+#define P_FAMILY_EISCUE                  FALSE
 #define P_FAMILY_INDEEDEE                P_GEN_8_POKEMON
 #define P_FAMILY_MORPEKO                 P_GEN_8_POKEMON
 #define P_FAMILY_CUFANT                  P_GEN_8_POKEMON

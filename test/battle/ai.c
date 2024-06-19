@@ -527,7 +527,7 @@ AI_SINGLE_BATTLE_TEST("First Impression is not chosen if it's blocked by certain
     u16 ability;
 
     PARAMETRIZE { species = SPECIES_BRUXISH; ability = ABILITY_DAZZLING; }
-    PARAMETRIZE { species = SPECIES_FARIGIRAF; ability = ABILITY_ARMOR_TAIL; }
+    PARAMETRIZE { species = SPECIES_GIRAFARIG; ability = ABILITY_ARMOR_TAIL; }
     PARAMETRIZE { species = SPECIES_TSAREENA; ability = ABILITY_QUEENLY_MAJESTY; }
 
     GIVEN {

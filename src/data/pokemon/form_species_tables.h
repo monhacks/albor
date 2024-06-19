@@ -230,14 +230,6 @@ static const u16 sWooperFormSpeciesIdTable[] = {
 };
 #endif //P_FAMILY_WOOPER
 
-#if P_FAMILY_SNEASEL
-static const u16 sSneaselFormSpeciesIdTable[] = {
-    SPECIES_SNEASEL,
-    SPECIES_SNEASEL_HISUIAN,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_SNEASEL
-
 #if P_FAMILY_ZIGZAGOON
 static const u16 sZigzagoonFormSpeciesIdTable[] = {
     SPECIES_ZIGZAGOON,

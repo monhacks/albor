@@ -3075,7 +3075,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Girafarig)
         FOLLOWER(Girafarig, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Girafarig),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_TWIN_BEAM, SPECIES_FARIGIRAF}),
     },
 #endif //P_FAMILY_GIRAFARIG
 
@@ -3735,38 +3734,34 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
 #endif //P_FAMILY_HERACROSS
 
 #if P_FAMILY_SNEASEL
-#define SNEASEL_MISC_INFO                                       \
-        .baseHP        = 55,                                    \
-        .baseAttack    = 95,                                    \
-        .baseDefense   = 55,                                    \
-        .baseSpeed     = 115,                                   \
-        .baseSpAttack  = 35,                                    \
-        .baseSpDefense = 75,                                    \
-        .catchRate = 60,                                        \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 86 : 132, \
-        .evYield_Speed = 1,                                     \
-        .itemRare = ITEM_QUICK_CLAW,                            \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 20,                                        \
-        .friendship = 35,                                       \
-        .growthRate = GROWTH_MEDIUM_SLOW,                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),           \
-        .noFlip = TRUE,                                         \
-        .speciesName = _("Sneasel"),                            \
-        .cryId = CRY_SNEASEL,                                   \
-        .natDexNum = NATIONAL_DEX_SNEASEL,                      \
-        .categoryName = _("Sharp Claw"),                        \
-        .height = 9,                                            \
-        .pokemonScale = 413,                                    \
-        .pokemonOffset = -3,                                    \
-        .trainerScale = 256,                                    \
-        .trainerOffset = 0,                                     \
-        FOOTPRINT(Sneasel)                                      \
-        .formSpeciesIdTable = sSneaselFormSpeciesIdTable
-
     [SPECIES_SNEASEL] =
     {
-        SNEASEL_MISC_INFO,
+        .baseHP        = 55,
+        .baseAttack    = 95,
+        .baseDefense   = 55,
+        .baseSpeed     = 115,
+        .baseSpAttack  = 35,
+        .baseSpDefense = 75,
+        .catchRate = 60,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 86 : 132,
+        .evYield_Speed = 1,
+        .itemRare = ITEM_QUICK_CLAW,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .noFlip = TRUE,
+        .speciesName = _("Sneasel"),
+        .cryId = CRY_SNEASEL,
+        .natDexNum = NATIONAL_DEX_SNEASEL,
+        .categoryName = _("Sharp Claw"),
+        .height = 9,
+        .pokemonScale = 413,
+        .pokemonOffset = -3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FOOTPRINT(Sneasel)
         .types = MON_TYPES(TYPE_DARK, TYPE_ICE),
         .abilities = { ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_PICKPOCKET },
         .bodyColor = BODY_COLOR_BLACK,
@@ -3847,37 +3842,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     },
 #endif //P_GEN_4_CROSS_EVOS
 
-#if P_HISUIAN_FORMS
-    [SPECIES_SNEASEL_HISUIAN] =
-    {
-        SNEASEL_MISC_INFO,
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_POISON),
-        .abilities = { ABILITY_INNER_FOCUS, ABILITY_KEEN_EYE, ABILITY_PICKPOCKET },
-        .bodyColor = BODY_COLOR_GRAY,
-        .weight = 270,
-        .description = COMPOUND_STRING(
-            "Its sturdy, curved claws are ideal for\n"
-            "traversing precipitous cliffs. From the\n"
-            "tips of these claws drips a venom that\n"
-            "infiltrates the nerves of any prey caught."),
-        FRONT_PIC(SneaselHisuian, 56, 56),
-        FRONT_PIC_FEMALE(SneaselHisuian, 56, 56),
-        .frontPicYOffset = 8,
-        .frontAnimFrames = sAnims_SneaselHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SneaselHisuian, 56, 64),
-        BACK_PIC_FEMALE(SneaselHisuian, 56, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(SneaselHisuian),
-        ICON(SneaselHisuian, 2),
-        FOLLOWER(SneaselHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(SneaselHisuian),
-        .isHisuianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_ITEM_HOLD_DAY, ITEM_RAZOR_CLAW, SPECIES_SNEASLER},
-                                {EVO_ITEM_DAY, ITEM_RAZOR_CLAW, SPECIES_SNEASLER}),
-    },
-
     [SPECIES_SNEASLER] =
     {
         .baseHP        = 80,
@@ -3925,7 +3889,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         //FOOTPRINT(Sneasler)
         LEARNSETS(Sneasler),
     },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_SNEASEL
 
 #if P_FAMILY_TEDDIURSA
@@ -4049,7 +4012,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_WEAK_ARMOR },
+        .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_FUNDICION },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Slugma"),
         .cryId = CRY_SLUGMA,
@@ -4078,7 +4041,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Slugma)
         FOLLOWER(Slugma, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Slugma),
-        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_MAGCARGO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGCARGO}),
     },
 
     [SPECIES_MAGCARGO] =
@@ -4104,7 +4067,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_WEAK_ARMOR },
+        .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_FUNDICION },
         .bodyColor = BODY_COLOR_RED,
         .noFlip = TRUE,
         .speciesName = _("Magcargo"),
@@ -4339,7 +4302,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .types = MON_TYPES(TYPE_WATER, TYPE_ROCK),
         .evYield_Defense = 1,
         .itemRare = ITEM_LUMINOUS_MOSS,
-        .abilities = { ABILITY_HUSTLE, ABILITY_NATURAL_CURE, ABILITY_REGENERATOR },
+        .abilities = { ABILITY_RESERVA_NATURAL, ABILITY_NATURAL_CURE, ABILITY_REGENERATOR },
         .bodyColor = BODY_COLOR_PINK,
         .weight = 50,
         .description = COMPOUND_STRING(
@@ -4359,89 +4322,6 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOLLOWER(Corsola, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Corsola),
     },
-
-#if P_GALARIAN_FORMS
-    [SPECIES_CORSOLA_GALARIAN] =
-    {
-        CORSOLA_MISC_INFO,
-        .baseHP        = CORSOLA_HP - 5,
-        .baseAttack    = 55,
-        .baseDefense   = CORSOLA_DEFENSES + 5,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 65,
-        .baseSpDefense = CORSOLA_DEFENSES + 5,
-        .types = MON_TYPES(TYPE_GHOST),
-        .abilities = { ABILITY_WEAK_ARMOR, ABILITY_NONE, ABILITY_CURSED_BODY },
-        .bodyColor = BODY_COLOR_WHITE,
-        .weight = 5,
-        .description = COMPOUND_STRING(
-            "Sudden climate change wiped out this\n"
-            "ancient kind of Corsola. With its branches,\n"
-            "it absorbs others' life-force. It curses\n"
-            "those unaware that kick it by accident."),
-        FRONT_PIC(CorsolaGalarian, 48, 48),
-        .frontPicYOffset = 11,
-        .frontAnimFrames = sAnims_CorsolaGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CorsolaGalarian, 56, 48),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(CorsolaGalarian),
-        ICON(CorsolaGalarian, 0),
-        FOLLOWER(CorsolaGalarian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(CorsolaGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_CURSOLA}),
-    },
-
-    [SPECIES_CURSOLA] =
-    {
-        .baseHP        = 60,
-        .baseAttack    = 95,
-        .baseDefense   = 50,
-        .baseSpeed     = 30,
-        .baseSpAttack  = 145,
-        .baseSpDefense = 130,
-        .types = MON_TYPES(TYPE_GHOST),
-        .catchRate = 30,
-        .expYield = 179,
-        .evYield_SpAttack = 2,
-        .genderRatio = PERCENT_FEMALE(75),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_INVERTEBRADO),
-        .abilities = { ABILITY_WEAK_ARMOR, ABILITY_NONE, ABILITY_PERISH_BODY },
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Cursola"),
-        .cryId = CRY_CURSOLA,
-        .natDexNum = NATIONAL_DEX_CURSOLA,
-        .categoryName = _("Coral"),
-        .height = 10,
-        .weight = 4,
-        .description = COMPOUND_STRING(
-            "Its shell is overflowing with its\n"
-            "heightened otherworldly energy. The\n"
-            "ectoplasm serves as protection for this\n"
-            "Pokémon's core spirit."),
-        .pokemonScale = 305,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(Cursola, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Cursola,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Cursola, 64, 56),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Cursola),
-        ICON(Cursola, 0),
-        FOOTPRINT(Cursola)
-        FOLLOWER(Cursola, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(Cursola),
-    },
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_CORSOLA
 
 #if P_FAMILY_REMORAID
@@ -4724,7 +4604,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
-        .abilities = { ABILITY_KEEN_EYE, ABILITY_STURDY, ABILITY_WEAK_ARMOR },
+        .abilities = { ABILITY_KEEN_EYE, ABILITY_STURDY, ABILITY_IMPENETRABLE },
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Skarmory"),
         .cryId = CRY_SKARMORY,
