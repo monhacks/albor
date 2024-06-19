@@ -4087,7 +4087,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
 }
 };
 
-#if OW_MON_POKEBALLS
+#if OW_FOLLOWERS_POKEBALLS
 
 #define POKEBALL_GFX_INFO(NAME)                                     \
     [BALL_##NAME] = {                                               \
@@ -4147,10 +4147,6 @@ const struct ObjectEventGraphicsInfo gPokeballGraphics[POKEBALL_COUNT] = {
     // Gen VII
     #ifdef ITEM_BEAST_BALL
     POKEBALL_GFX_INFO(BEAST),
-    #endif
-    // Gen VIII
-    #ifdef ITEM_STRANGE_BALL
-    POKEBALL_GFX_INFO(STRANGE),
     #endif
 };
 #endif
