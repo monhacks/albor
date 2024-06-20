@@ -4497,30 +4497,6 @@ static const union AnimCmd sAnim_Seviper_1[] =
 };
 #endif //P_FAMILY_SEVIPER
 
-#if P_FAMILY_LUNATONE
-static const union AnimCmd sAnim_Lunatone_1[] =
-{
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_LUNATONE
-
-#if P_FAMILY_SOLROCK
-static const union AnimCmd sAnim_Solrock_1[] =
-{
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_SOLROCK
-
 #if P_FAMILY_BARBOACH
 static const union AnimCmd sAnim_Barboach_1[] =
 {
@@ -9353,8 +9329,26 @@ static const union AnimCmd sAnim_TapuFini_1[] =
 #if P_FAMILY_COSMOG
 PLACEHOLDER_ANIM_SINGLE_FRAME(Cosmog);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Cosmoem);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Solgaleo);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Lunala);
+
+static const union AnimCmd sAnim_Lunatone_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Solrock_1[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
 #endif //P_FAMILY_COSMOG
 
 #if P_FAMILY_NIHILEGO
@@ -11195,12 +11189,6 @@ SINGLE_ANIMATION(Zangoose);
 #if P_FAMILY_SEVIPER
 SINGLE_ANIMATION(Seviper);
 #endif //P_FAMILY_SEVIPER
-#if P_FAMILY_LUNATONE
-SINGLE_ANIMATION(Lunatone);
-#endif //P_FAMILY_LUNATONE
-#if P_FAMILY_SOLROCK
-SINGLE_ANIMATION(Solrock);
-#endif //P_FAMILY_SOLROCK
 #if P_FAMILY_BARBOACH
 SINGLE_ANIMATION(Barboach);
 SINGLE_ANIMATION(Whiscash);
@@ -12224,8 +12212,8 @@ SINGLE_ANIMATION(TapuFini);
 #if P_FAMILY_COSMOG
 SINGLE_ANIMATION(Cosmog);
 SINGLE_ANIMATION(Cosmoem);
-SINGLE_ANIMATION(Solgaleo);
-SINGLE_ANIMATION(Lunala);
+SINGLE_ANIMATION(Lunatone);
+SINGLE_ANIMATION(Solrock);
 #endif //P_FAMILY_COSMOG
 #if P_FAMILY_NIHILEGO
 SINGLE_ANIMATION(Nihilego);

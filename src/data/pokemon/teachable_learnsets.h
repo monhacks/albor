@@ -15783,7 +15783,15 @@ static const u16 sSeviperTeachableLearnset[] = {
 };
 #endif //P_FAMILY_SEVIPER
 
-#if P_FAMILY_LUNATONE
+#if P_FAMILY_COSMOG
+static const u16 sCosmogTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sCosmoemTeachableLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sLunatoneTeachableLearnset[] = {
     MOVE_BLIZZARD,
     MOVE_CALM_MIND,
@@ -15822,9 +15830,7 @@ static const u16 sLunatoneTeachableLearnset[] = {
     MOVE_SWIFT,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_LUNATONE
 
-#if P_FAMILY_SOLROCK
 static const u16 sSolrockTeachableLearnset[] = {
     MOVE_CALM_MIND,
     MOVE_DOUBLE_TEAM,
@@ -15865,7 +15871,7 @@ static const u16 sSolrockTeachableLearnset[] = {
     MOVE_SWORDS_DANCE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_SOLROCK
+#endif //P_FAMILY_COSMOG
 
 #if P_FAMILY_BARBOACH
 static const u16 sBarboachTeachableLearnset[] = {
@@ -30728,88 +30734,6 @@ static const u16 sTapuFiniTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_TAPU_FINI
-
-#if P_FAMILY_COSMOG
-static const u16 sCosmogTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sCosmoemTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sSolgaleoTeachableLearnset[] = {
-    MOVE_CALM_MIND,
-    MOVE_DOUBLE_TEAM,
-    MOVE_EARTHQUAKE,
-    MOVE_FACADE,
-    MOVE_FIRE_BLAST,
-    MOVE_FLAMETHROWER,
-    MOVE_HYPER_BEAM,
-    MOVE_IRON_TAIL,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_PSYCHIC,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_ROAR,
-    MOVE_ROCK_TOMB,
-    MOVE_SAFEGUARD,
-    MOVE_SHOCK_WAVE,
-    MOVE_SOLAR_BEAM,
-    MOVE_SUNNY_DAY,
-    MOVE_THUNDER,
-    MOVE_THUNDERBOLT,
-    MOVE_TOXIC,
-    MOVE_BODY_SLAM,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_PSYCH_UP,
-    MOVE_ROCK_SLIDE,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_THUNDER_WAVE,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sLunalaTeachableLearnset[] = {
-    MOVE_AERIAL_ACE,
-    MOVE_BLIZZARD,
-    MOVE_CALM_MIND,
-    MOVE_DOUBLE_TEAM,
-    MOVE_FACADE,
-    MOVE_FLY,
-    MOVE_HYPER_BEAM,
-    MOVE_ICE_BEAM,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_PSYCHIC,
-    MOVE_RAIN_DANCE,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_ROAR,
-    MOVE_SAFEGUARD,
-    MOVE_SHADOW_BALL,
-    MOVE_SHOCK_WAVE,
-    MOVE_SOLAR_BEAM,
-    MOVE_SUNNY_DAY,
-    MOVE_THUNDER,
-    MOVE_THUNDERBOLT,
-    MOVE_TOXIC,
-    MOVE_DREAM_EATER,
-    MOVE_ENDURE,
-    MOVE_ICY_WIND,
-    MOVE_PSYCH_UP,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_THUNDER_WAVE,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_FAMILY_COSMOG
 
 #if P_FAMILY_NIHILEGO
 static const u16 sNihilegoTeachableLearnset[] = {

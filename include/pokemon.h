@@ -595,15 +595,6 @@ struct NatureInfo
     const u8 *natureGirlMessage;
 };
 
-#define SPINDA_SPOT_WIDTH 16
-#define SPINDA_SPOT_HEIGHT 16
-
-struct SpindaSpot
-{
-    u8 x, y;
-    u16 image[SPINDA_SPOT_HEIGHT];
-};
-
 struct LevelUpMove
 {
     u16 move;
@@ -765,7 +756,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, s
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
-void DrawSpindaSpots(u32 personality, u8 *dest, bool32 isSecondFrame);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 u8 GetPlayerFlankId(void);
 u16 GetLinkTrainerFlankId(u8 id);

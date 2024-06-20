@@ -17,7 +17,6 @@ MISCGFXDIR := graphics/misc
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
-SPINDAGFXDIR := graphics/pokemon/spinda/spots
 
 types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
@@ -416,15 +415,3 @@ $(NAMINGGFXDIR)/cursor_squished.4bpp: %.4bpp: %.png
 
 $(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 5 -Wnum_tiles
-
-$(SPINDAGFXDIR)/spot_0.1bpp: %.1bpp: %.png
-	$(GFX) $< $@ -plain -data_width 2
-
-$(SPINDAGFXDIR)/spot_1.1bpp: %.1bpp: %.png
-	$(GFX) $< $@ -plain -data_width 2
-
-$(SPINDAGFXDIR)/spot_2.1bpp: %.1bpp: %.png
-	$(GFX) $< $@ -plain -data_width 2
-
-$(SPINDAGFXDIR)/spot_3.1bpp: %.1bpp: %.png
-	$(GFX) $< $@ -plain -data_width 2

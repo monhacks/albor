@@ -2156,9 +2156,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .natDexNum = NATIONAL_DEX_LOPUNNY,                                \
         .categoryName = _("Rabbit"),                                      \
         FOOTPRINT(Lopunny)                                                \
-        LEARNSETS(Lopunny),                                               \
-        .formSpeciesIdTable = sLopunnyFormSpeciesIdTable,                 \
-        .formChangeTable = sLopunnyFormChangeTable
+        LEARNSETS(Lopunny),
 
     [SPECIES_LOPUNNY] =
     {
@@ -2762,9 +2760,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .trainerScale = 326,                                            \
         .trainerOffset = 4,                                             \
         FOOTPRINT(Garchomp)                                             \
-        LEARNSETS(Garchomp),                                            \
-        .formSpeciesIdTable = sGarchompFormSpeciesIdTable,              \
-        .formChangeTable = sGarchompFormChangeTable
+        LEARNSETS(Garchomp),
 
     [SPECIES_GARCHOMP] =
     {
@@ -2899,9 +2895,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .natDexNum = NATIONAL_DEX_LUCARIO,                                 \
         .categoryName = _("Aura"),                                         \
         FOOTPRINT(Lucario)                                                 \
-        LEARNSETS(Lucario),                                                \
-        .formSpeciesIdTable = sLucarioFormSpeciesIdTable,                  \
-        .formChangeTable = sLucarioFormChangeTable
+        LEARNSETS(Lucario),
 
     [SPECIES_LUCARIO] =
     {
@@ -3512,9 +3506,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .natDexNum = NATIONAL_DEX_ABOMASNOW,                           \
         .categoryName = _("Frost Tree"),                               \
         FOOTPRINT(Abomasnow)                                           \
-        LEARNSETS(Abomasnow),                                          \
-        .formSpeciesIdTable = sAbomasnowFormSpeciesIdTable,            \
-        .formChangeTable = sAbomasnowFormChangeTable
+        LEARNSETS(Abomasnow),
 
     [SPECIES_ABOMASNOW] =
     {

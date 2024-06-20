@@ -2022,17 +2022,20 @@ static const struct SpriteFrameImage sPicTable_Seviper[] = {
 };
 #endif //P_FAMILY_SEVIPER
 
-#if P_FAMILY_LUNATONE
+#if P_FAMILY_COSMOG
+static const struct SpriteFrameImage sPicTable_Cosmog[] = {
+    overworld_ascending_frames(gObjectEventPic_Cosmog, 4, 4),
+};
+static const struct SpriteFrameImage sPicTable_Cosmoem[] = {
+    overworld_ascending_frames(gObjectEventPic_Cosmoem, 4, 4),
+};
 static const struct SpriteFrameImage sPicTable_Lunatone[] = {
     overworld_ascending_frames(gObjectEventPic_Lunatone, 4, 4),
 };
-#endif //P_FAMILY_LUNATONE
-
-#if P_FAMILY_SOLROCK
 static const struct SpriteFrameImage sPicTable_Solrock[] = {
     overworld_ascending_frames(gObjectEventPic_Solrock, 4, 4),
 };
-#endif //P_FAMILY_SOLROCK
+#endif //P_FAMILY_COSMOG
 
 #if P_FAMILY_BARBOACH
 static const struct SpriteFrameImage sPicTable_Barboach[] = {
@@ -4576,21 +4579,6 @@ static const struct SpriteFrameImage sPicTable_TapuFini[] = {
     overworld_ascending_frames(gObjectEventPic_TapuFini, 4, 4),
 };
 #endif //P_FAMILY_TAPU_FINI
-
-#if P_FAMILY_COSMOG
-static const struct SpriteFrameImage sPicTable_Cosmog[] = {
-    overworld_ascending_frames(gObjectEventPic_Cosmog, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Cosmoem[] = {
-    overworld_ascending_frames(gObjectEventPic_Cosmoem, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Solgaleo[] = {
-    overworld_ascending_frames(gObjectEventPic_Solgaleo, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Lunala[] = {
-    overworld_ascending_frames(gObjectEventPic_Lunala, 4, 4),
-};
-#endif //P_FAMILY_COSMOG
 
 #if P_FAMILY_NIHILEGO
 static const struct SpriteFrameImage sPicTable_Nihilego[] = {

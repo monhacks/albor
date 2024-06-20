@@ -178,12 +178,6 @@ void LoadSpecialPokePic(void *dest, s32 species, u32 personality, bool8 isFrontP
         else
             LZ77UnCompWram(gSpeciesInfo[SPECIES_NONE].backPic, dest);
     }
-
-    if (species == SPECIES_SPINDA && isFrontPic)
-    {
-        DrawSpindaSpots(personality, dest, FALSE);
-        DrawSpindaSpots(personality, dest, TRUE);
-    }
 }
 
 u32 GetDecompressedDataSize(const u32 *ptr)

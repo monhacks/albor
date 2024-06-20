@@ -5288,7 +5288,112 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     },
 #endif //P_FAMILY_SEVIPER
 
-#if P_FAMILY_LUNATONE
+    [SPECIES_COSMOG] =
+    {
+        .baseHP        = 43,
+        .baseAttack    = 29,
+        .baseDefense   = 31,
+        .baseSpeed     = 37,
+        .baseSpAttack  = 29,
+        .baseSpDefense = 31,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 45,
+        .expYield = 40,
+        .evYield_HP = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = { ABILITY_UNAWARE, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_BLUE,
+        .isLegendary = TRUE,
+        .speciesName = _("Cosmog"),
+        .cryId = CRY_COSMOG,
+        .natDexNum = NATIONAL_DEX_COSMOG,
+        .categoryName = _("Nebula"),
+        .height = 2,
+        .weight = 1,
+        .description = COMPOUND_STRING(
+            "In ages past, it was called the child of\n"
+            "the stars. It's said to be a Pokémon from\n"
+            "another world, but no specific details\n"
+            "are known."),
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FRONT_PIC(Cosmog, 56, 48),
+        .frontPicYOffset = 10,
+        .frontAnimFrames = sAnims_Cosmog,
+        .frontAnimId = ANIM_H_JUMPS_V_STRETCH,
+        .enemyMonElevation = 7,
+        BACK_PIC(Cosmog, 64, 48),
+        .backPicYOffset = 10,
+        //.backAnimId = BACK_ANIM_NONE,
+        PALETTES(Cosmog),
+        ICON(Cosmog, 2),
+        FOOTPRINT(Cosmog)
+        FOLLOWER(Cosmog, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        LEARNSETS(Cosmog),
+        .tmIlliterate = TRUE,
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_COSMOEM}),
+    },
+
+    [SPECIES_COSMOEM] =
+    {
+        .baseHP        = 43,
+        .baseAttack    = 29,
+        .baseDefense   = 131,
+        .baseSpeed     = 37,
+        .baseSpAttack  = 29,
+        .baseSpDefense = 131,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 45,
+        .expYield = 140,
+        .evYield_Defense = 1,
+        .evYield_SpDefense = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = { ABILITY_STURDY, ABILITY_NONE },
+        .bodyColor = BODY_COLOR_BLUE,
+        .isLegendary = TRUE,
+        .speciesName = _("Cosmoem"),
+        .cryId = CRY_COSMOEM,
+        .natDexNum = NATIONAL_DEX_COSMOEM,
+        .categoryName = _("Protostar"),
+        .height = 1,
+        .weight = 9999,
+        .description = COMPOUND_STRING(
+            "Motionless as if dead, its body is faintly\n"
+            "warm to the touch. There's something\n"
+            "accumulating around the black core\n"
+            "within its hard shell."),
+        .pokemonScale = 682,
+        .pokemonOffset = 24,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FRONT_PIC(Cosmoem, 48, 48),
+        .frontPicYOffset = 9,
+        .frontAnimFrames = sAnims_Cosmoem,
+        .frontAnimId = ANIM_RISING_WOBBLE,
+        .enemyMonElevation = 3,
+        BACK_PIC(Cosmoem, 64, 40),
+        .backPicYOffset = 17,
+        //.backAnimId = BACK_ANIM_NONE,
+        PALETTES(Cosmoem),
+        ICON(Cosmoem, 0),
+        FOOTPRINT(Cosmoem)
+        FOLLOWER(Cosmoem, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        LEARNSETS(Cosmoem),
+        .tmIlliterate = TRUE,
+        .evolutions = EVOLUTION({EVO_LEVEL_DAY, 40, SPECIES_SOLROCK},
+                                {EVO_LEVEL_NIGHT, 40, SPECIES_LUNATONE}),
+    },
+
     [SPECIES_LUNATONE] =
     {
         .baseHP        = P_UPDATED_STATS >= GEN_7 ? 90 : 70,
@@ -5345,9 +5450,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOLLOWER(Lunatone, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Lunatone),
     },
-#endif //P_FAMILY_LUNATONE
 
-#if P_FAMILY_SOLROCK
     [SPECIES_SOLROCK] =
     {
         .baseHP        = P_UPDATED_STATS >= GEN_7 ? 90 : 70,
@@ -5404,7 +5507,6 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOLLOWER(Solrock, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Solrock),
     },
-#endif //P_FAMILY_SOLROCK
 
 #if P_FAMILY_BARBOACH
     [SPECIES_BARBOACH] =

@@ -1605,18 +1605,6 @@ Cry_Forretress::
 	.incbin "sound/direct_sound_samples/cries/forretress.bin"
 .endif @ P_FAMILY_PINECO
 
-.if P_FAMILY_DUNSPARCE == TRUE
-	.align 2
-Cry_Dunsparce::
-	.incbin "sound/direct_sound_samples/cries/dunsparce.bin"
-
-.if P_GEN_9_CROSS_EVOS == TRUE
-	.align 2
-Cry_Dudunsparce::
-	.incbin "sound/direct_sound_samples/cries/dudunsparce.bin"
-.endif @ P_GEN_9_CROSS_EVOS
-.endif @ P_FAMILY_DUNSPARCE
-
 .if P_FAMILY_GLIGAR == TRUE
 	.align 2
 Cry_Gligar::
@@ -2389,17 +2377,23 @@ Cry_Seviper::
 	.incbin "sound/direct_sound_samples/cries/seviper.bin"
 .endif @ P_FAMILY_SEVIPER
 
-.if P_FAMILY_LUNATONE == TRUE
+.if P_FAMILY_COSMOG == TRUE
+	.align 2
+Cry_Cosmog::
+	.incbin "sound/direct_sound_samples/cries/cosmog.bin"
+
+	.align 2
+Cry_Cosmoem::
+	.incbin "sound/direct_sound_samples/cries/cosmoem.bin"
+
 	.align 2
 Cry_Lunatone::
 	.incbin "sound/direct_sound_samples/cries/lunatone.bin"
-.endif @ P_FAMILY_LUNATONE
 
-.if P_FAMILY_SOLROCK == TRUE
 	.align 2
 Cry_Solrock::
 	.incbin "sound/direct_sound_samples/cries/solrock.bin"
-.endif @ P_FAMILY_SOLROCK
+.endif @ P_FAMILY_COSMOG
 
 .if P_FAMILY_BARBOACH == TRUE
 	.align 2
@@ -4750,24 +4744,6 @@ Cry_TapuBulu::
 Cry_TapuFini::
 	.incbin "sound/direct_sound_samples/cries/tapu_fini.bin"
 .endif @ P_FAMILY_TAPU_FINI
-
-.if P_FAMILY_COSMOG == TRUE
-	.align 2
-Cry_Cosmog::
-	.incbin "sound/direct_sound_samples/cries/cosmog.bin"
-
-	.align 2
-Cry_Cosmoem::
-	.incbin "sound/direct_sound_samples/cries/cosmoem.bin"
-
-	.align 2
-Cry_Solgaleo::
-	.incbin "sound/direct_sound_samples/cries/solgaleo.bin"
-
-	.align 2
-Cry_Lunala::
-	.incbin "sound/direct_sound_samples/cries/lunala.bin"
-.endif @ P_FAMILY_COSMOG
 
 .if P_FAMILY_NIHILEGO == TRUE
 	.align 2
