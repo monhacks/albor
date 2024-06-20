@@ -348,13 +348,13 @@
 #define P_FAMILY_ALOMOMOLA               P_GEN_5_POKEMON
 #define P_FAMILY_JOLTIK                  FALSE //TRUE
 #define P_FAMILY_FERROSEED               FALSE //TRUE
-#define P_FAMILY_KLINK                   P_GEN_5_POKEMON
+#define P_FAMILY_KLINK                   FALSE //TRUE
 #define P_FAMILY_TYNAMO                  P_GEN_5_POKEMON
 #define P_FAMILY_ELGYEM                  FALSE //TRUE
 #define P_FAMILY_LITWICK                 FALSE //TRUE
 #define P_FAMILY_AXEW                    FALSE //TRUE
 #define P_FAMILY_CUBCHOO                 FALSE //TRUE
-#define P_FAMILY_CRYOGONAL               FALSE //TRUE
+#define P_FAMILY_CRYOGONAL               P_GEN_5_POKEMON
 #define P_FAMILY_SHELMET                 P_GEN_5_POKEMON
 #define P_FAMILY_STUNFISK                P_GEN_5_POKEMON
 #define P_FAMILY_MIENFOO                 P_GEN_5_POKEMON
