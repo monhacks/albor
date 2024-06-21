@@ -3206,19 +3206,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
 #endif //P_MEGA_EVOLUTIONS
 #endif //P_FAMILY_SWABLU
 
-#if P_FAMILY_COSMOG
-    const u32 gMonFrontPic_Cosmog[] = INCBIN_U32("graphics/pokemon/cosmog/front.4bpp.lz");
-    const u32 gMonPalette_Cosmog[] = INCBIN_U32("graphics/pokemon/cosmog/normal.gbapal.lz");
-    const u32 gMonBackPic_Cosmog[] = INCBIN_U32("graphics/pokemon/cosmog/back.4bpp.lz");
-    const u32 gMonShinyPalette_Cosmog[] = INCBIN_U32("graphics/pokemon/cosmog/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Cosmog[] = INCBIN_U32("graphics/pokemon/cosmog/follower.4bpp");
-
-    const u32 gMonFrontPic_Cosmoem[] = INCBIN_U32("graphics/pokemon/cosmoem/front.4bpp.lz");
-    const u32 gMonPalette_Cosmoem[] = INCBIN_U32("graphics/pokemon/cosmoem/normal.gbapal.lz");
-    const u32 gMonBackPic_Cosmoem[] = INCBIN_U32("graphics/pokemon/cosmoem/back.4bpp.lz");
-    const u32 gMonShinyPalette_Cosmoem[] = INCBIN_U32("graphics/pokemon/cosmoem/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Cosmoem[] = INCBIN_U32("graphics/pokemon/cosmoem/follower.4bpp");
-
+#if P_FAMILY_LUNATONE_SOLROCK
     const u32 gMonFrontPic_Lunatone[] = INCBIN_U32("graphics/pokemon/lunatone/anim_front.4bpp.lz");
     const u32 gMonPalette_Lunatone[] = INCBIN_U32("graphics/pokemon/lunatone/normal.gbapal.lz");
     const u32 gMonBackPic_Lunatone[] = INCBIN_U32("graphics/pokemon/lunatone/back.4bpp.lz");
@@ -3230,7 +3218,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonBackPic_Solrock[] = INCBIN_U32("graphics/pokemon/solrock/back.4bpp.lz");
     const u32 gMonShinyPalette_Solrock[] = INCBIN_U32("graphics/pokemon/solrock/shiny.gbapal.lz");
     const u32 gObjectEventPic_Solrock[] = INCBIN_U32("graphics/pokemon/solrock/follower.4bpp");
-#endif //P_FAMILY_COSMOG
+#endif //P_FAMILY_LUNATONE_SOLROCK
 
 #if P_FAMILY_BALTOY
     const u32 gMonFrontPic_Baltoy[] = INCBIN_U32("graphics/pokemon/baltoy/anim_front.4bpp.lz");

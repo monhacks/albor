@@ -2377,15 +2377,7 @@ Cry_Seviper::
 	.incbin "sound/direct_sound_samples/cries/seviper.bin"
 .endif @ P_FAMILY_SEVIPER
 
-.if P_FAMILY_COSMOG == TRUE
-	.align 2
-Cry_Cosmog::
-	.incbin "sound/direct_sound_samples/cries/cosmog.bin"
-
-	.align 2
-Cry_Cosmoem::
-	.incbin "sound/direct_sound_samples/cries/cosmoem.bin"
-
+.if P_FAMILY_LUNATONE_SOLROCK == TRUE
 	.align 2
 Cry_Lunatone::
 	.incbin "sound/direct_sound_samples/cries/lunatone.bin"
@@ -2393,7 +2385,7 @@ Cry_Lunatone::
 	.align 2
 Cry_Solrock::
 	.incbin "sound/direct_sound_samples/cries/solrock.bin"
-.endif @ P_FAMILY_COSMOG
+.endif @ P_FAMILY_LUNATONE_SOLROCK
 
 .if P_FAMILY_BARBOACH == TRUE
 	.align 2

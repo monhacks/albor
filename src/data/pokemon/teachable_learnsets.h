@@ -15783,15 +15783,7 @@ static const u16 sSeviperTeachableLearnset[] = {
 };
 #endif //P_FAMILY_SEVIPER
 
-#if P_FAMILY_COSMOG
-static const u16 sCosmogTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sCosmoemTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
+#if P_FAMILY_LUNATONE_SOLROCK
 static const u16 sLunatoneTeachableLearnset[] = {
     MOVE_BLIZZARD,
     MOVE_CALM_MIND,
@@ -15871,7 +15863,7 @@ static const u16 sSolrockTeachableLearnset[] = {
     MOVE_SWORDS_DANCE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_COSMOG
+#endif //P_FAMILY_LUNATONE_SOLROCK
 
 #if P_FAMILY_BARBOACH
 static const u16 sBarboachTeachableLearnset[] = {

@@ -39,6 +39,7 @@
 - Campo magnético
 - Indicar que Rey del mar es una copia de Costar + Oportunista.
 - Indicar y comprobar que Ditto ya no está en el juego, pero que la mayoría de Pokémon que antes no podían criar, ahora sí lo hacen: Los Pokémon legendarios son género neutro y se les ha añadido grupos huevo acordes, para criar solo hay que juntar 2 Pokémon sin género del mismo grupo huevo. 
+- Last Respects como una versión de paliza fantasma.
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
 
 *paletas: 0-12 tileset primario 0-9 (es necesario?) secundario 10-12 (chequear SWAP_PAL)

@@ -919,12 +919,10 @@ gCryTable::
 .if P_FAMILY_SEVIPER == TRUE
 	cry Cry_Seviper
 .endif @ P_FAMILY_SEVIPER
-.if P_FAMILY_COSMOG == TRUE
-	cry Cry_Cosmog
-	cry Cry_Cosmoem
+.if P_FAMILY_LUNATONE_SOLROCK == TRUE
 	cry Cry_Lunatone
 	cry Cry_Solrock
-.endif @ P_FAMILY_COSMOG
+.endif @ P_FAMILY_LUNATONE_SOLROCK
 .if P_FAMILY_BARBOACH == TRUE
 	cry Cry_Barboach
 	cry Cry_Whiscash
@@ -3332,12 +3330,10 @@ gCryTable_Reverse::
 .if P_FAMILY_SEVIPER == TRUE
 	cry_reverse Cry_Seviper
 .endif @ P_FAMILY_SEVIPER
-.if P_FAMILY_COSMOG == TRUE
-	cry_reverse Cry_Cosmog
-	cry_reverse Cry_Cosmoem
+.if P_FAMILY_LUNATONE_SOLROCK == TRUE
 	cry_reverse Cry_Lunatone
 	cry_reverse Cry_Solrock
-.endif @ P_FAMILY_COSMOG
+.endif @ P_FAMILY_LUNATONE_SOLROCK
 .if P_FAMILY_BARBOACH == TRUE
 	cry_reverse Cry_Barboach
 	cry_reverse Cry_Whiscash

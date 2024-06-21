@@ -2897,4 +2897,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Fuego x2 contra roca."),
         .aiRating = 5,
     },
+
+    [ABILITY_NAVAJAS] =
+    {
+        .name = _("Navajas"),
+        .description = COMPOUND_STRING("+25% mordiscos."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_BANO_DE_BARRO] =
+    {
+        .name = _("Baño de barro"),
+        .description = COMPOUND_STRING("+PS si recibe Tierra."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
 };

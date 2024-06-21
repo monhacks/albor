@@ -99,6 +99,8 @@ static void SpriteCB_GlacialLance_Step1(struct Sprite* sprite);
 static void SpriteCB_GlacialLance_Step2(struct Sprite* sprite);
 static void SpriteCB_GlacialLance(struct Sprite* sprite);
 static void SpriteCB_TripleArrowKick(struct Sprite* sprite);
+static void AnimEmboarCarga(struct Sprite *);
+static void AnimEmboarCarga_Step(struct Sprite *);
 
 // const data
 // general
@@ -6392,6 +6394,16 @@ const struct SpriteTemplate gArrowRaidFlyStrikeSpriteTemplate =
     .affineAnims = sArrowRaidFlyStrikeAffineAnimTable,
     .callback = AnimFlyBallAttack
 };
+const struct SpriteTemplate gEmboarCargaSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_EMBOAR,
+    .paletteTag = ANIM_TAG_EMBOAR,
+    .oam = &gOamData_AffineNormal_ObjNormal_64x64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimEmboarCarga
+};
 static const union AffineAnimCmd sArrowRaidArrowUpAffineAnims[] = {
     AFFINEANIMCMD_FRAME(0, 0, 0xa0, 1),
     AFFINEANIMCMD_END
@@ -7378,6 +7390,42 @@ static void AnimGrowingShockWaveOrbOnTarget(struct Sprite *sprite)
             DestroySpriteAndMatrix(sprite);
         break;
     }
+}
+
+static void AnimEmboarCarga(struct Sprite *sprite)
+{
+    u16 rotation;
+    s16 posx = sprite->x;
+    s16 posy = sprite->y;
+
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+
+    sprite->data[4] = sprite->x << 4;
+    sprite->data[5] = sprite->y << 4;
+
+    sprite->data[6] = ((posx - sprite->x) << 4) / 12;
+    sprite->data[7] = ((posy - sprite->y) << 4) / 12;
+
+    rotation = ArcTan2Neg(posx - sprite->x, posy - sprite->y);
+    rotation -= 16384;
+
+    TrySetSpriteRotScale(sprite, TRUE, 0x100, 0x100, rotation);
+
+    sprite->callback = AnimEmboarCarga_Step;
+}
+
+void AnimEmboarCarga_Step(struct Sprite *sprite)
+{
+    sprite->data[4] += sprite->data[6];
+    sprite->data[5] += sprite->data[7];
+
+    sprite->x = sprite->data[4] >> 4;
+    sprite->y = sprite->data[5] >> 4;
+
+    if (sprite->x > DISPLAY_WIDTH + 45 || sprite->x < -45
+     || sprite->y > 157 || sprite->y < -45)
+        DestroySpriteAndMatrix(sprite);
 }
 
 static void AnimEllipticalGustAttacker(struct Sprite *sprite)

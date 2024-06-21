@@ -447,6 +447,7 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
             return TRUE;
         break;
     case ABILITY_EARTH_EATER:
+    case ABILITY_BANO_DE_BARRO:
         if (moveType == TYPE_GROUND)
             return TRUE;
         break;

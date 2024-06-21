@@ -15734,20 +15734,7 @@ static const struct LevelUpMove sTapuFiniLevelUpLearnset[] = {
 };
 #endif //P_FAMILY_TAPU_FINI
 
-#if P_FAMILY_COSMOG
-static const struct LevelUpMove sCosmogLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 1, MOVE_SPLASH),
-    LEVEL_UP_MOVE(23, MOVE_TELEPORT),
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sCosmoemLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_COSMIC_POWER),
-    LEVEL_UP_MOVE( 1, MOVE_COSMIC_POWER),
-    LEVEL_UP_MOVE( 1, MOVE_TELEPORT),
-    LEVEL_UP_END
-};
-
+#if P_FAMILY_LUNATONE_SOLROCK
 static const struct LevelUpMove sLunatoneLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_TACKLE),
     LEVEL_UP_MOVE( 1, MOVE_HARDEN),
@@ -15775,7 +15762,7 @@ static const struct LevelUpMove sSolrockLevelUpLearnset[] = {
     LEVEL_UP_MOVE(49, MOVE_EXPLOSION),
     LEVEL_UP_END
 };
-#endif //P_FAMILY_COSMOG
+#endif //P_FAMILY_LUNATONE_SOLROCK
 
 #if P_FAMILY_NIHILEGO
 static const struct LevelUpMove sNihilegoLevelUpLearnset[] = {

@@ -221,7 +221,7 @@
 #define P_FAMILY_SWABLU                  P_GEN_3_POKEMON
 #define P_FAMILY_ZANGOOSE                FALSE
 #define P_FAMILY_SEVIPER                 FALSE
-#define P_FAMILY_COSMOG                  P_GEN_3_POKEMON
+#define P_FAMILY_LUNATONE_SOLROCK        P_GEN_3_POKEMON
 #define P_FAMILY_BARBOACH                FALSE
 #define P_FAMILY_CORPHISH                FALSE
 #define P_FAMILY_BALTOY                  P_GEN_3_POKEMON
@@ -417,7 +417,7 @@
 #define P_FAMILY_ZYGARDE                 P_GEN_6_POKEMON
 #define P_FAMILY_DIANCIE                 FALSE //TRUE //modificar
 #define P_FAMILY_HOOPA                   P_GEN_6_POKEMON
-#define P_FAMILY_VOLCANION               P_GEN_6_POKEMON
+#define P_FAMILY_VOLCANION               FALSE //TRUE
 
 #define P_FAMILY_ROWLET                  FALSE //TRUE
 #define P_FAMILY_LITTEN                  FALSE //TRUE
@@ -552,7 +552,7 @@
 #define P_FAMILY_FINIZEN                 P_GEN_9_POKEMON
 #define P_FAMILY_VAROOM                  FALSE //TRUE
 #define P_FAMILY_CYCLIZAR                P_GEN_9_POKEMON
-#define P_FAMILY_ORTHWORM                FALSE //TRUE
+#define P_FAMILY_ORTHWORM                P_GEN_9_POKEMON
 #define P_FAMILY_GLIMMET                 FALSE //TRUE
 #define P_FAMILY_GREAVARD                FALSE //TRUE
 #define P_FAMILY_FLAMIGO                 P_GEN_9_POKEMON
