@@ -1432,8 +1432,9 @@ const u32 gItemIconPalette_EjectButton[] = INCBIN_U32("graphics/items/icon_palet
 const u32 gItemIcon_WeaknessPolicy[] = INCBIN_U32("graphics/items/icons/weakness_policy.4bpp.lz");
 const u32 gItemIconPalette_WeaknessPolicy[] = INCBIN_U32("graphics/items/icon_palettes/weakness_policy.gbapal.lz");
 
-const u32 gItemIcon_AssaultVest[] = INCBIN_U32("graphics/items/icons/assault_vest.4bpp.lz");
-const u32 gItemIconPalette_AssaultVest[] = INCBIN_U32("graphics/items/icon_palettes/assault_vest.gbapal.lz");
+const u32 gItemIcon_Chaleco[] = INCBIN_U32("graphics/items/icons/chaleco.4bpp.lz");
+const u32 gItemIconPalette_ChalecoAsalto[] = INCBIN_U32("graphics/items/icon_palettes/chaleco_asalto.gbapal.lz");
+const u32 gItemIconPalette_ChalecoTactico[] = INCBIN_U32("graphics/items/icon_palettes/chaleco_tactico.gbapal.lz");
 
 const u32 gItemIcon_SafetyGoggles[] = INCBIN_U32("graphics/items/icons/safety_goggles.4bpp.lz");
 const u32 gItemIconPalette_SafetyGoggles[] = INCBIN_U32("graphics/items/icon_palettes/safety_goggles.gbapal.lz");

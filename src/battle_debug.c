@@ -2162,7 +2162,8 @@ static const u8 sText_HoldEffectKeeBerry[] = _("Kee Berry");
 static const u8 sText_HoldEffectMarangaBerry[] = _("Maranga Berry");
 static const u8 sText_HoldEffectFloatStone[] = _("Float Stone");
 static const u8 sText_HoldEffectEviolite[] = _("Eviolite");
-static const u8 sText_HoldEffectAssaultVest[] = _("Assault Vest");
+static const u8 sText_HoldEffectAssaultVest[] = _("Chaleco asalto");
+static const u8 sText_HoldEffectChalecoTactico[] = _("Chaleco táctico");
 static const u8 sText_HoldEffectDrive[] = _("Drive");
 static const u8 sText_HoldEffectGems[] = _("Gems");
 static const u8 sText_HoldEffectRockyHelmet[] = _("Rocky Helmet");
@@ -2335,6 +2336,7 @@ static const u8 *const sHoldEffectNames[] =
     [HOLD_EFFECT_BLUNDER_POLICY] = sText_HoldEffectBlunderPolicy,
     [HOLD_EFFECT_HEAVY_DUTY_BOOTS] = sText_HoldEffectHeavyDutyBoots,
     [HOLD_EFFECT_THROAT_SPRAY] = sText_HoldEffectThroatSpray,
+    [HOLD_EFFECT_CHALECO_TACTICO] = sText_HoldEffectChalecoTactico,
 };
 static const u8 *GetHoldEffectName(u16 holdEffect)
 {

@@ -83,6 +83,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Habilidad Humedad relativa (Glaceon): Beneficios del Granizo también en Lluvia: Ventisca no falla, x2 de posibilidad de congelar, +50% de defensa.
     *Mimetismo es el antiguo Cambia Color: habilidad característica de Kecleon, cambia de tipo a uno que sea resistente o inmune ANTES de recibir el ataque.
     *Para usar una MO basta con que el Pokémon pueda aprenderla, no hace falta tenerla ni saber el movimiento (Se acabaron los esclavos MO).
+    *Nuevo item: Chaleco táctico, sube defensa 50% pero impide uso de movimientos de estado.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

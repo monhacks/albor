@@ -1001,7 +1001,12 @@
 // HOPO BERRY
 // LEGEND PLATE
 
-#define ITEMS_COUNT 828
+//Custom
+#define ITEM_CHALECO_TACTICO 828
+
+#define ITEMS_CUSTOM_COUNT 829
+
+#define ITEMS_COUNT ITEMS_CUSTOM_COUNT
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations

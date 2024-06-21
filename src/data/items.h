@@ -8941,7 +8941,7 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ASSAULT_VEST] =
     {
-        .name = _("Assault Vest"),
+        .name = _("Chaleco asalto"),
         .price = (I_PRICE >= GEN_9) ? 50000 : 1000,
         .holdEffect = HOLD_EFFECT_ASSAULT_VEST,
         .holdEffectParam = 50,
@@ -8953,8 +8953,26 @@ const struct Item gItemsInfo[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 80,
-        .iconPic = gItemIcon_AssaultVest,
-        .iconPalette = gItemIconPalette_AssaultVest,
+        .iconPic = gItemIcon_Chaleco,
+        .iconPalette = gItemIconPalette_ChalecoAsalto,
+    },
+
+    [ITEM_CHALECO_TACTICO] =
+    {
+        .name = _("Chaleco táctico"),
+        .price = (I_PRICE >= GEN_9) ? 50000 : 1000,
+        .holdEffect = HOLD_EFFECT_CHALECO_TACTICO,
+        .holdEffectParam = 50,
+        .description = COMPOUND_STRING(
+            "Raises Def but\n"
+            "prevents the use\n"
+            "of status moves."),
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .flingPower = 80,
+        .iconPic = gItemIcon_Chaleco,
+        .iconPalette = gItemIconPalette_ChalecoTactico,
     },
 
     [ITEM_SAFETY_GOGGLES] =
