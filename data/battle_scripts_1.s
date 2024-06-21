@@ -10126,3 +10126,26 @@ BattleScript_EffectSnow::
 	call BattleScript_CheckPrimalWeather
 	setfieldweather ENUM_WEATHER_SNOW
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_EffectAmoladoras::
+	setstatchanger STAT_ATK, 1, FALSE
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_CantRaiseMultipleStats
+	jumpifstatus2 BS_ATTACKER, STATUS2_FOCUS_ENERGY_ANY, BattleScript_EffectAmoladorasAtaque
+	setfocusenergy BS_TARGET
+BattleScript_EffectAmoladorasAtaque::
+	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StatUpEnd
+	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectAmoladorasAnimacion
+	pause B_WAIT_TIME_SHORT
+	goto BattleScript_EffectAmoladorasString
+BattleScript_EffectAmoladorasAnimacion::
+	attackanimation
+	waitanimation
+	setgraphicalstatchangevalues
+	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+BattleScript_EffectAmoladorasString::
+	printstring STRINGID_AMOLADORAS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd

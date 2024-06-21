@@ -3962,6 +3962,23 @@ HoneClawsAnim:
 	delay 10
 	return
 
+Move_AMOLADORAS::
+	loadspritegfx ANIM_TAG_SHARP_TEETH
+	call AmoladorasAnim
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_SHARP_TEETH, 0, 6, 6, RGB_BLACK
+	call AmoladorasAnim
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_SHARP_TEETH, 0, 10, 10, RGB_BLACK
+	call AmoladorasAnim
+	end
+AmoladorasAnim:
+	playsewithpan SE_M_BITE, SOUND_PAN_TARGET
+	createsprite gSharpTeethSpriteTemplate, ANIM_ATTACKER, 2, 0, -16, 0, -400, -400, 10
+	delay 10
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createsprite gSharpTeethSpriteTemplate, ANIM_ATTACKER, 2, 0, 16, 4, -400, -400, 10
+	delay 10
+	return
+
 Move_WIDE_GUARD::
 	loadspritegfx ANIM_TAG_ICE_SPIKES @motion from icy wind
 	loadspritegfx ANIM_TAG_PINK_PETAL @pink color

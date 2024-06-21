@@ -1893,4 +1893,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
     {
         .battleScript = BattleScript_EffectHit,
     },
+
+    [EFFECT_AMOLADORAS] =
+    {
+        .battleScript = BattleScript_EffectAmoladoras,
+        .encourageEncore = TRUE,
+    },
 };

@@ -20759,6 +20759,31 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .contestComboMoves = {COMBO_STARTER_FOCUS_ENERGY, COMBO_STARTER_HARDEN},
         .battleAnimScript = Move_CARGA_JABATO,
     },
+
+    [MOVE_AMOLADORAS] =
+    {
+        .name = COMPOUND_STRING("Amoladoras"),
+        .description = COMPOUND_STRING(
+            "Afila sus colmillos para\n"
+            "subir críticos y ataque."),
+        .effect = EFFECT_AMOLADORAS,
+        .power = 0,
+        .type = TYPE_FIGHTING,
+        .accuracy = 0,
+        .pp = 15,
+        .target = MOVE_TARGET_USER,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .zMove = { .effect = Z_EFFECT_ATK_UP_1 },
+        .snatchAffected = TRUE,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .contestEffect = CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS,
+        .contestCategory = CONTEST_CATEGORY_COOL,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {0},
+        .battleAnimScript = Move_AMOLADORAS,
+    },
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

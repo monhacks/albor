@@ -1126,6 +1126,12 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             if (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_ATK) || !HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
                 ADJUST_SCORE(-10);
             break;
+        case EFFECT_AMOLADORAS:
+            if (!BattlerStatCanRise(battlerAtk, aiData->abilities[battlerAtk], STAT_ATK) || !HasMoveWithCategory(battlerAtk, DAMAGE_CATEGORY_PHYSICAL))
+                ADJUST_SCORE(-10);
+            if (gBattleMons[battlerAtk].status2 & STATUS2_FOCUS_ENERGY_ANY)
+                ADJUST_SCORE(-10);
+            break;
         case EFFECT_STUFF_CHEEKS:
             if (ItemId_GetPocket(gBattleMons[battlerAtk].item) != POCKET_BERRIES)
                 return 0;   // cannot even select
@@ -3537,6 +3543,15 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
           || HasHighCritRatioMove(battlerAtk))
             ADJUST_SCORE(GOOD_EFFECT);
         break;
+    case EFFECT_AMOLADORAS:
+        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK, &score);
+        if (aiData->abilities[battlerAtk] == ABILITY_SUPER_LUCK
+          || aiData->abilities[battlerAtk] == ABILITY_SNIPER
+          || aiData->abilities[battlerAtk] == ABILITY_PERCUSIONISTA
+          || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_SCOPE_LENS
+          || HasHighCritRatioMove(battlerAtk))
+            ADJUST_SCORE(GOOD_EFFECT);
+        break;
     case EFFECT_CONFUSE:
         IncreaseConfusionScore(battlerAtk, battlerDef, move, &score);
         break;
@@ -4792,6 +4807,7 @@ static s32 AI_SetupFirstTurn(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
     case EFFECT_CONVERSION:
     case EFFECT_LIGHT_SCREEN:
     case EFFECT_FOCUS_ENERGY:
+    case EFFECT_AMOLADORAS:
     case EFFECT_CONFUSE:
     case EFFECT_ATTACK_UP_2:
     case EFFECT_DEFENSE_UP_2:
@@ -5083,6 +5099,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_LIGHT_SCREEN:
             case EFFECT_MIST:
             case EFFECT_FOCUS_ENERGY:
+            case EFFECT_AMOLADORAS:
             case EFFECT_CONVERSION_2:
             case EFFECT_SAFEGUARD:
             case EFFECT_BELLY_DRUM:
@@ -5109,6 +5126,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_AURORA_VEIL:
             case EFFECT_MIST:
             case EFFECT_FOCUS_ENERGY:
+            case EFFECT_AMOLADORAS:
             case EFFECT_RAGE:
             case EFFECT_CONVERSION_2:
             case EFFECT_LOCK_ON:
@@ -5190,6 +5208,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_DRAGON_DANCE:
             case EFFECT_DEFENSE_UP_3:
             case EFFECT_SPECIAL_ATTACK_UP_3:
+            case EFFECT_AMOLADORAS:
                 ADJUST_SCORE(-2);
                 break;
             default:
