@@ -162,11 +162,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
 
-static EWRAM_DATA bool8 sDescriptionSubmenu = 0;
-
-static EWRAM_DATA bool8 sAckBallUseBtn = FALSE;
-static EWRAM_DATA bool8 sBallSwapped = FALSE;
-
 void SetControllerToPlayer(u32 battler)
 {
     sIconTypeId[0] = 0xFF;
@@ -286,62 +281,63 @@ static void HandleInputChooseAction(u32 battler)
     else
         gPlayerDpadHoldFrames = 0;
 
-#if B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
-    if (!gLastUsedBallMenuPresent)
+    if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE)
     {
-        sAckBallUseBtn = FALSE;
+        if (!gLastUsedBallMenuPresent)
+        {
+            gBattleStruct->ackBallUseBtn = FALSE;
+        }
+        else if (JOY_NEW(B_LAST_USED_BALL_BUTTON))
+        {
+            gBattleStruct->ackBallUseBtn = TRUE;
+            gBattleStruct->ballSwapped = FALSE;
+            ArrowsChangeColorLastBallCycle(TRUE);
+        }
+
+        if (gBattleStruct->ackBallUseBtn)
+        {
+            if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT)))
+            {
+                bool32 sameBall = FALSE;
+                u32 nextBall = GetNextBall(gBallToDisplay);
+                gBattleStruct->ballSwapped = TRUE;
+                if (gBallToDisplay == nextBall)
+                    sameBall = TRUE;
+                else
+                    gBallToDisplay = nextBall;
+                SwapBallToDisplay(sameBall);
+                PlaySE(SE_SELECT);
+            }
+            else if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT)))
+            {
+                bool32 sameBall = FALSE;
+                u32 prevBall = GetPrevBall(gBallToDisplay);
+                gBattleStruct->ballSwapped = TRUE;
+                if (gBallToDisplay == prevBall)
+                    sameBall = TRUE;
+                else
+                    gBallToDisplay = prevBall;
+                SwapBallToDisplay(sameBall);
+                PlaySE(SE_SELECT);
+            }
+            else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && gBattleStruct->ballSwapped))
+            {
+                gBattleStruct->ackBallUseBtn = FALSE;
+                gBattleStruct->ballSwapped = FALSE;
+                ArrowsChangeColorLastBallCycle(FALSE);
+            }
+            else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+            {
+                gBattleStruct->ackBallUseBtn = FALSE;
+                PlaySE(SE_SELECT);
+                ArrowsChangeColorLastBallCycle(FALSE);
+                TryHideLastUsedBall();
+                BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
+                PlayerBufferExecCompleted(battler);
+            }
+            return;
+        }
     }
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON))
-    {
-        sAckBallUseBtn = TRUE;
-        sBallSwapped = FALSE;
-        ArrowsChangeColorLastBallCycle(TRUE);
-    }
-    if (sAckBallUseBtn)
-    {
-        if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_DOWN) || JOY_NEW(DPAD_RIGHT)))
-        {
-            bool8 sameBall = FALSE;
-            u16 nextBall = GetNextBall(gBallToDisplay);
-            sBallSwapped = TRUE;
-            if (gBallToDisplay == nextBall)
-                sameBall = TRUE;
-            else
-                gBallToDisplay = nextBall;
-            SwapBallToDisplay(sameBall);
-            PlaySE(SE_SELECT);
-        }
-        else if (JOY_HELD(B_LAST_USED_BALL_BUTTON) && (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_LEFT)))
-        {
-            bool8 sameBall = FALSE;
-            u16 prevBall = GetPrevBall(gBallToDisplay);
-            sBallSwapped = TRUE;
-            if (gBallToDisplay == prevBall)
-                sameBall = TRUE;
-            else
-                gBallToDisplay = prevBall;
-            SwapBallToDisplay(sameBall);
-            PlaySE(SE_SELECT);
-        }
-        else if (JOY_NEW(B_BUTTON) || (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && sBallSwapped))
-        {
-            sAckBallUseBtn = FALSE;
-            sBallSwapped = FALSE;
-            ArrowsChangeColorLastBallCycle(FALSE);
-        }
-        else if (!JOY_HELD(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
-        {
-            sAckBallUseBtn = FALSE;
-            PlaySE(SE_SELECT);
-            ArrowsChangeColorLastBallCycle(FALSE);
-            TryHideLastUsedBall();
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_THROW_BALL, 0);
-            PlayerBufferExecCompleted(battler);
-            DestroySpriteAndFreeResources(&gSprites[monIconData]);
-        }
-        return;
-    }
-#endif
 
     if (JOY_NEW(A_BUTTON))
     {
@@ -431,15 +427,13 @@ static void HandleInputChooseAction(u32 battler)
     {
         SwapHpBarsWithHpText();
     }
-#if DEBUG_BATTLE_MENU == TRUE
-    else if (JOY_NEW(SELECT_BUTTON))
+    else if (DEBUG_BATTLE_MENU == TRUE && JOY_NEW(SELECT_BUTTON))
     {
         BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_DEBUG, 0);
         PlayerBufferExecCompleted(battler);
     }
-#endif
-#if B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == FALSE
-    else if (JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
+    else if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == FALSE
+             && JOY_NEW(B_LAST_USED_BALL_BUTTON) && CanThrowLastUsedBall())
     {
         PlaySE(SE_SELECT);
         TryHideLastUsedBall();
@@ -447,7 +441,6 @@ static void HandleInputChooseAction(u32 battler)
         PlayerBufferExecCompleted(battler);
         DestroySpriteAndFreeResources(&gSprites[monIconData]);
     }
-#endif
 }
 
 static void HandleInputChooseTarget(u32 battler)
@@ -778,7 +771,7 @@ static void HandleInputChooseMove(u32 battler)
     else
         gPlayerDpadHoldFrames = 0;
 
-    if (JOY_NEW(A_BUTTON) && !sDescriptionSubmenu)
+    if (JOY_NEW(A_BUTTON) && !gBattleStruct->descriptionSubmenu)
     {
         PlaySE(SE_SELECT);
 
@@ -906,7 +899,7 @@ static void HandleInputChooseMove(u32 battler)
             break;
         }
     }
-    else if ((JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)  && !sDescriptionSubmenu)
+    else if ((JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)  && !gBattleStruct->descriptionSubmenu)
     {
         PlaySE(SE_SELECT);
         if (gBattleStruct->zmove.viewing)
@@ -937,7 +930,7 @@ static void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (sDescriptionSubmenu)
+            if (gBattleStruct->descriptionSubmenu)
                 MoveSelectionDisplayMoveDescription(battler);
         }
     }
@@ -952,7 +945,7 @@ static void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (sDescriptionSubmenu)
+            if (gBattleStruct->descriptionSubmenu)
                 MoveSelectionDisplayMoveDescription(battler);
         }
     }
@@ -966,7 +959,7 @@ static void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (sDescriptionSubmenu)
+            if (gBattleStruct->descriptionSubmenu)
                 MoveSelectionDisplayMoveDescription(battler);
         }
     }
@@ -981,15 +974,15 @@ static void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (sDescriptionSubmenu)
+            if (gBattleStruct->descriptionSubmenu)
                 MoveSelectionDisplayMoveDescription(battler);
         }
     }
-    else if (sDescriptionSubmenu)
+    else if (gBattleStruct->descriptionSubmenu)
     {
         if (JOY_NEW(L_BUTTON) || JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
         {
-            sDescriptionSubmenu = FALSE;
+            gBattleStruct->descriptionSubmenu = FALSE;
             if (gCategoryIconSpriteId != 0xFF)
             {
                 DestroySprite(&gSprites[gCategoryIconSpriteId]);
@@ -1006,7 +999,7 @@ static void HandleInputChooseMove(u32 battler)
     }
     else if (JOY_NEW(L_BUTTON))
     {
-        sDescriptionSubmenu = TRUE;
+        gBattleStruct->descriptionSubmenu = TRUE;
         MoveSelectionDisplayMoveDescription(battler);
     }
 }
@@ -1617,6 +1610,11 @@ static const struct OamData sOamData_IconTypes =
     .affineParam = 0,
 };
 
+static const union AnimCmd sSpriteAnim_IconTypeNone[] = {
+    ANIMCMD_FRAME(TYPE_NONE * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
 static const union AnimCmd sSpriteAnim_IconTypeNormal[] = {
     ANIMCMD_FRAME(TYPE_NORMAL * 4, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -1712,7 +1710,13 @@ static const union AnimCmd sSpriteAnim_IconTypeFairy[] = {
     ANIMCMD_END
 };
 
+static const union AnimCmd sSpriteAnim_IconTypeStellar[] = {
+    ANIMCMD_FRAME(TYPE_STELLAR * 4, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
+
 static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES] = {
+    sSpriteAnim_IconTypeNone,
     sSpriteAnim_IconTypeNormal,
     sSpriteAnim_IconTypeFighting,
     sSpriteAnim_IconTypeFlying,
@@ -1732,6 +1736,7 @@ static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_IconTypeDragon,
     sSpriteAnim_IconTypeDark,
     sSpriteAnim_IconTypeFairy,
+    sSpriteAnim_IconTypeStellar,
 };
 
 const struct CompressedSpriteSheet sSpriteSheet_IconTypes =
@@ -1752,6 +1757,7 @@ const struct SpriteTemplate sSpriteTemplate_IconTypes =
 };
 static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
 {
+    [TYPE_NONE] = 14,
     [TYPE_NORMAL] = 14,
     [TYPE_FIGHTING] = 13,
     [TYPE_FLYING] = 14,
@@ -1771,6 +1777,7 @@ static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
     [TYPE_DRAGON] = 13,
     [TYPE_DARK] = 13,
     [TYPE_FAIRY] = 13,
+    [TYPE_STELLAR] = 14,
 };
 
 void LoadPalettesTypes(u32 battler)
@@ -2079,7 +2086,7 @@ static void MoveSelectionDisplayMoveDescription(u32 battler)
     u16 pwr = gMovesInfo[move].power;
     u16 acc = gMovesInfo[move].accuracy;
     u8 cat = gMovesInfo[move].category;
-    
+
     u8 pwr_num[3], acc_num[3];
     u8 cat_desc[7] = _("CAT: ");
     u8 pwr_desc[7] = _("PWR: ");

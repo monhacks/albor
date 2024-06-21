@@ -1,5 +1,6 @@
 #include "global.h"
 #include "malloc.h"
+#include "battle_main.h"
 #include "bg.h"
 #include "decompress.h"
 #include "gpu_regs.h"
@@ -250,29 +251,6 @@ static const union AnimCmd *const sSpriteAnimTable_CategoryIcons[] =
     sSpriteAnim_CategoryIcon0,
     sSpriteAnim_CategoryIcon1,
     sSpriteAnim_CategoryIcon2,
-};
-
-static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
-{
-    [TYPE_NORMAL] = 14,
-    [TYPE_FIGHTING] = 14,
-    [TYPE_FLYING] = 14,
-    [TYPE_POISON] = 14,
-    [TYPE_GROUND] = 14,
-    [TYPE_ROCK] = 15,
-    [TYPE_BUG] = 14,
-    [TYPE_GHOST] = 14,
-    [TYPE_STEEL] = 14,
-    [TYPE_MYSTERY] = 14,
-    [TYPE_FIRE] = 14,
-    [TYPE_WATER] = 14,
-    [TYPE_GRASS] = 14,
-    [TYPE_ELECTRIC] = 15,
-    [TYPE_PSYCHIC] = 15,
-    [TYPE_ICE] = 15,
-    [TYPE_DRAGON] = 15,
-    [TYPE_DARK] = 14,
-    [TYPE_FAIRY] = 15,
 };
 
 void InitTMCase(u8 type, void (* exitCallback)(void), bool8 allowSelectClose)
@@ -583,7 +561,7 @@ static void PrintMoveInfo(u16 itemId)
 		    sTMCaseDynamicResources->typeIconSpriteId = CreateSpriteAtEnd(&gSpriteTemplate_MoveTypes, 16, 152, 0);
 		    sprite = &gSprites[sTMCaseDynamicResources->typeIconSpriteId];
 		    StartSpriteAnim(sprite, gMovesInfo[move].type);
-		    sprite->oam.paletteNum = sMoveTypeToOamPaletteNum[gMovesInfo[move].type];
+		    sprite->oam.paletteNum = gTypesInfo[gMovesInfo[move].type].palette;
         }
         // Draw category icon
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
