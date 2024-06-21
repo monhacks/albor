@@ -1757,6 +1757,8 @@ static bool32 CanAbilityTrapOpponent(u16 ability, u32 opponent)
         return TRUE;
     else if (ability == ABILITY_MAGNET_PULL && IS_BATTLER_OF_TYPE(opponent, TYPE_STEEL))
         return TRUE;
+    else if (ability == ABILITY_MATAMOSCAS && IS_BATTLER_OF_TYPE(opponent, TYPE_BUG))
+        return TRUE;
     else
         return FALSE;
 }

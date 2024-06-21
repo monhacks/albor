@@ -431,6 +431,7 @@ bool32 IsDamageMoveUnusable(u32 move, u32 battlerAtk, u32 battlerDef)
             return TRUE;
         break;
     case ABILITY_FLASH_FIRE:
+    case ABILITY_CERO_ABSOLUTO:
         if (moveType == TYPE_FIRE)
             return TRUE;
         break;
@@ -1221,7 +1222,7 @@ s32 AI_DecideKnownAbilityForTurn(u32 battlerId)
         return AI_PARTY->mons[GetBattlerSide(battlerId)][gBattlerPartyIndexes[battlerId]].ability;
 
     // Abilities that prevent fleeing - treat as always known
-    if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP)
+    if (knownAbility == ABILITY_SHADOW_TAG || knownAbility == ABILITY_MAGNET_PULL || knownAbility == ABILITY_ARENA_TRAP || knownAbility == ABILITY_MATAMOSCAS)
         return knownAbility;
 
     for (i = 0; i < NUM_ABILITY_SLOTS; i++)

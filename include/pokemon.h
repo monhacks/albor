@@ -480,6 +480,7 @@ struct MoveInfo
     u32 cantUseTwice:1;
     u32 headMove:1;
     u32 eyesMove:1;
+    u32 lickMove:1;
 
     // Ban flags
     u32 gravityBanned:1;

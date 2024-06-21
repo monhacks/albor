@@ -2912,4 +2912,33 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
+    [ABILITY_ESCALOFRIO] =
+    {
+        .name = _("Escalofrío"),
+        .description = COMPOUND_STRING("+25% hielo."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_CERO_ABSOLUTO] =
+    {
+        .name = _("Cero absoluto"),
+        .description = COMPOUND_STRING("Inmune a fuego."),
+        .aiRating = 7,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_LENGUALARGA] =
+    {
+        .name = _("Lengualarga"),
+        .description = COMPOUND_STRING("Lenguas +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_MATAMOSCAS] =
+    {
+        .name = _("Matamoscas"),
+        .description = COMPOUND_STRING("Atrapa bichos."),
+        .aiRating = 9,
+    },
 };

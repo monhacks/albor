@@ -6502,6 +6502,8 @@ u32 IsAbilityPreventingEscape(u32 battler)
         return id;
     if ((id = IsAbilityOnOpposingSide(battler, ABILITY_MAGNET_PULL)) && IS_BATTLER_OF_TYPE(battler, TYPE_STEEL))
         return id;
+    if ((id = IsAbilityOnOpposingSide(battler, ABILITY_MATAMOSCAS)) && IS_BATTLER_OF_TYPE(battler, TYPE_BUG))
+        return id;
 
     return 0;
 }
@@ -9251,6 +9253,14 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (gMovesInfo[move].hornMove)
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
         break;
+    case ABILITY_LENGUALARGA:
+        if (gMovesInfo[move].lickMove)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
+    case ABILITY_ESCALOFRIO:
+        if (moveType == TYPE_ICE)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.25));
+        break;
     case ABILITY_WATER_BUBBLE:
         if (moveType == TYPE_WATER)
            modifier = uq4_12_multiply(modifier, UQ_4_12(2.0));
@@ -10639,6 +10649,7 @@ uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType)
 
         if ((modifier <= UQ_4_12(1.0)  &&  abilityDef == ABILITY_WONDER_GUARD)
          || (moveType == TYPE_FIRE     &&  abilityDef == ABILITY_FLASH_FIRE)
+         || (moveType == TYPE_FIRE     &&  abilityDef == ABILITY_CERO_ABSOLUTO)
          || (moveType == TYPE_GRASS    &&  abilityDef == ABILITY_SAP_SIPPER)
          || (moveType == TYPE_GROUND   && (abilityDef == ABILITY_LEVITATE
                                        ||  abilityDef == ABILITY_EARTH_EATER
