@@ -3193,6 +3193,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Carbink)
         FOLLOWER(Carbink, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Carbink),
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DIANCIE}),
     },
 #endif //P_FAMILY_CARBINK
 
