@@ -4414,62 +4414,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
 #endif //P_FAMILY_CRESSELIA
 
 #if P_FAMILY_MANAPHY
-    [SPECIES_PHIONE] =
-    {
-        .baseHP        = 80,
-        .baseAttack    = 80,
-        .baseDefense   = 80,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_WATER),
-        .catchRate = 30,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 240,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 216,
-    #else
-        .expYield = 165,
-    #endif
-        .evYield_HP = 1,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 40,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_FAIRY),
-        .abilities = { ABILITY_HYDRATION, ABILITY_NONE },
-        .bodyColor = BODY_COLOR_BLUE,
-        .isMythical = TRUE,
-        .speciesName = _("Phione"),
-        .cryId = CRY_PHIONE,
-        .natDexNum = NATIONAL_DEX_PHIONE,
-        .categoryName = _("Sea Drifter"),
-        .height = 4,
-        .weight = 31,
-        .description = COMPOUND_STRING(
-            "When the water warms, they inflate the\n"
-            "flotation sac on their heads and drift\n"
-            "languidly on the sea in packs.\n"
-            "It always returns to where it was born."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Phione, 56, 40),
-        .frontPicYOffset = 12,
-        .frontAnimFrames = sAnims_Phione,
-        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        .enemyMonElevation = 8,
-        BACK_PIC(Phione, 64, 48),
-        .backPicYOffset = 9,
-        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Phione),
-        ICON(Phione, 0),
-        FOOTPRINT(Phione)
-        FOLLOWER(Phione, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(Phione),
-    },
-
     [SPECIES_MANAPHY] =
     {
         .baseHP        = 100,

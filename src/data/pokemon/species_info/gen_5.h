@@ -7444,57 +7444,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOOTPRINT(Bisharp)
         FOLLOWER(Bisharp, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bisharp),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_KINGAMBIT}),
     },
-
-#if P_GEN_9_CROSS_EVOS
-    [SPECIES_KINGAMBIT] =
-    {
-        .baseHP        = 100,
-        .baseAttack    = 135,
-        .baseDefense   = 120,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_DARK, TYPE_STEEL),
-        .catchRate = 25,
-        .expYield = 275,
-        .evYield_Attack = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_DEFIANT, ABILITY_SUPREME_OVERLORD, ABILITY_PRESSURE },
-        .bodyColor = BODY_COLOR_BLACK,
-        .speciesName = _("Kingambit"),
-        .cryId = CRY_KINGAMBIT,
-        .natDexNum = NATIONAL_DEX_KINGAMBIT,
-        .categoryName = _("Big Blade"),
-        .height = 20,
-        .weight = 1200,
-        .description = COMPOUND_STRING(
-            "Though it commands a massive army\n"
-            "in battle, it's not skilled at\n"
-            "devising complex strategies. It just uses\n"
-            "brute strength to keep pushing."),
-        .pokemonScale = 356,
-        .pokemonOffset = 17,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Kingambit, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Kingambit,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Kingambit, 64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Kingambit),
-        ICON(Kingambit, 3),
-        //FOOTPRINT(Kingambit)
-        LEARNSETS(Kingambit),
-    },
-#endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_PAWNIARD
 
 #if P_FAMILY_BOUFFALANT
