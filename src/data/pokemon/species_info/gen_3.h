@@ -6689,7 +6689,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 
 #if P_FAMILY_ABSOL
 #define ABSOL_MISC_INFO                                     \
-        .types = MON_TYPES(TYPE_DARK),                      \
+        .types = MON_TYPES(TYPE_DARK, TYPE_FAIRY),          \
         .catchRate = 30,                                    \
         .evYield_Attack = 2,                                \
         .genderRatio = PERCENT_FEMALE(50),                  \

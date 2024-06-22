@@ -903,7 +903,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Shinx)
         FOLLOWER(Shinx, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Shinx),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_LUXIO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LUXIO}),
     },
 
     [SPECIES_LUXIO] =
@@ -954,7 +954,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         FOOTPRINT(Luxio)
         FOLLOWER(Luxio, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Luxio),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_LUXRAY}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_LUXRAY}),
     },
 
     [SPECIES_LUXRAY] =
@@ -965,7 +965,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 70,
         .baseSpAttack  = 95,
         .baseSpDefense = 79,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_DARK),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 262,

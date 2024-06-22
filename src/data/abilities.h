@@ -1325,11 +1325,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_STANCE_CHANGE] =
     {
     #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Stance Change"),
+        .name = _("Cambio táctico"),
     #else
         .name = _("StanceChange"),
     #endif
-        .description = COMPOUND_STRING("Transforms as it battles."),
+        .description = COMPOUND_STRING("Cambia al luchar."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1340,8 +1340,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_GALE_WINGS] =
     {
-        .name = _("Gale Wings"),
-        .description = COMPOUND_STRING("Flying moves go first."),
+        .name = _("Alas vendaval"),
+        .description = COMPOUND_STRING("Volador +1 prioridad."),
         .aiRating = 6,
     },
 
@@ -2940,5 +2940,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Matamoscas"),
         .description = COMPOUND_STRING("Atrapa bichos."),
         .aiRating = 9,
+    },
+
+    [ABILITY_ENVIO_EXPRESS] =
+    {
+        .name = _("Envío express"),
+        .description = COMPOUND_STRING("Regalos +1 prioridad."),
+        .aiRating = 6,
     },
 };

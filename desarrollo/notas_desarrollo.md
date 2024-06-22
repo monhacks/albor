@@ -41,6 +41,12 @@
 - Indicar y comprobar que Ditto ya no está en el juego, pero que la mayoría de Pokémon que antes no podían criar, ahora sí lo hacen: Los Pokémon legendarios son género neutro y se les ha añadido grupos huevo acordes, para criar solo hay que juntar 2 Pokémon sin género del mismo grupo huevo. 
 - Last Respects como una versión de paliza fantasma.
 - Darle Amoladoras y Carga jabato a Emboar.
+- Darle bunker a Tentacruel.
+- Cambiar animación de Presente.
+- Dentera: ataque custom de Vanilluxe que impide movimientos de mordedura.
+- Crear ataque Abducción.
+- Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
+- Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
 

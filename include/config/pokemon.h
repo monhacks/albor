@@ -30,7 +30,7 @@
 #define P_MOTHER_EGG_MOVE_INHERITANCE   GEN_LATEST  // Since Gen 6, the mother can also pass down Egg Moves.
 #define P_NATURE_INHERITANCE            GEN_LATEST  // In Gen 3, Everstone grants Ditto and mothers a 50% chance to pass on Nature. Since Gen 4, anyone can pass on nature. Since Gen 5, the chance is 100%.
 #define P_ABILITY_INHERITANCE           GEN_LATEST  // In B2W2, a female Pokémon has an 80% chance of passing down their ability if bred with a male. Since Gen 6, the chance is 80% for normal ability and 60% for Hidden Ability, and anyone can pass down their abilities if bred with Ditto. NOTE: BW's effect: 60% chance to pass down HA and random for normal ability has been omitted.
-#define P_EGG_MOVE_TRANSFER             GEN_7       // Starting in Gen 8, if two Pokémon of the same species are together in the Daycare, one knows an Egg Move, and the other has an empty slot, the other Pokémon will receive the Egg Move in the empty slot. In Gen 9, if a Pokémon holds a Mirror Herb, it will receive Egg Moves from the other regardless of species.
+#define P_EGG_MOVE_TRANSFER             GEN_8       // Starting in Gen 8, if two Pokémon of the same species are together in the Daycare, one knows an Egg Move, and the other has an empty slot, the other Pokémon will receive the Egg Move in the empty slot. In Gen 9, if a Pokémon holds a Mirror Herb, it will receive Egg Moves from the other regardless of species.
 
 // Species-specific settings
 #define P_SHEDINJA_BALL             GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
@@ -49,7 +49,7 @@
 #define P_TWO_FRAME_FRONT_SPRITES   TRUE        // In Pokémon Emerald, Pokémon front sprites always consist of two frames. This config can revert it to only use the first frame, as is the case in the other Gen 3 games.
 
 // Learnset helper toggles
-#define P_LEARNSET_HELPER_TEACHABLE TRUE        // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.
+#define P_LEARNSET_HELPER_TEACHABLE FALSE        // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.

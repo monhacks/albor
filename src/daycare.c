@@ -559,10 +559,7 @@ static void InheritIVs(struct Pokemon *egg, struct DayCare *daycare)
     u8 availableIVs[NUM_STATS];
     u8 whichParents[5];
     u8 iv;
-    u8 howManyIVs = 3;
-
-    if (motherItem == ITEM_DESTINY_KNOT || fatherItem == ITEM_DESTINY_KNOT)
-        howManyIVs = 5;
+    u8 howManyIVs = 5;
 
     // Initialize a list of IV indices.
     for (i = 0; i < NUM_STATS; i++)
