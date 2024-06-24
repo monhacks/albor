@@ -1899,4 +1899,10 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectAmoladoras,
         .encourageEncore = TRUE,
     },
+
+    [EFFECT_GUARDIAN_OF_ALOLA] =
+    {
+        .battleScript = BattleScript_DamageToQuarterTargetHP,
+    },
+
 };
