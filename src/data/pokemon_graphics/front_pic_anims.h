@@ -418,7 +418,15 @@ static const union AnimCmd sAnim_Sandslash_1[] =
 };
 
 #if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(SandshrewAlolan);
+static const union AnimCmd sAnim_SandshrewAlolan_1[] =
+{
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 10),
+    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_END,
+};
 PLACEHOLDER_ANIM_SINGLE_FRAME(SandslashAlolan);
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_SANDSHREW

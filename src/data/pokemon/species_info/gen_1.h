@@ -1743,10 +1743,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(SandshrewAlolan, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_SandshrewAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_CONCAVE_ARC_SMALL_TWICE,
         BACK_PIC(SandshrewAlolan, 56, 40),
         .backPicYOffset = 13,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(SandshrewAlolan),
         ICON(SandshrewAlolan, 0),
         FOLLOWER(SandshrewAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
