@@ -14821,7 +14821,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_WATER_SHURIKEN] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("WatrShuriken", "Water Shuriken"),
+        .name = COMPOUND_STRING("Shuriken de agua"),
         .description = COMPOUND_STRING(
             "Throws 2 to 5 stars that\n"
             "are sure to strike first."),
@@ -14842,7 +14842,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_MYSTICAL_FIRE] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("MysticalFire", "Mystical Fire"),
+        .name = COMPOUND_STRING("Llama embrujada"),
         .description = COMPOUND_STRING(
             "Breathes a special, hot\n"
             "fire. Lowers Sp. Atk."),
