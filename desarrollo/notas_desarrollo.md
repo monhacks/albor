@@ -18,9 +18,6 @@
             *600 - 70
             *620 - 75
             *640 - 80
-- Llama azul asignar a Chandelure, Charizard...
-- Asignar habilidad Enjambre a Vespiquen.
-- Asignar Colmena a Beedrill, Vespiquen.
 - Testear Generador.
 - Destruir icono Pokémon al darle a huir.
 - Implementar la opción de rendirse contra entrenadores.
@@ -47,6 +44,21 @@
 - Crear ataque Abducción.
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
+- Faltan 2 Pokémon para 600 (SPRITES HELIOPTILE + HELIOLISK)
+
+-Lista de moves hechos:
+*Bomba huevo.
+*Amoladoras.
+*Carga jabato.
+*Colmena.
+*Llama azul.
+*Canto encantador.
+*Niebla aromática.
+*Ojitos tiernos.
+*Bombardeo.
+
+
+
 
 *limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
 

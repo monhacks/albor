@@ -2013,6 +2013,7 @@ static const struct LevelUpMove sExeggutorAlolanLevelUpLearnset[] = {
     LEVEL_UP_MOVE(27, MOVE_EGG_BOMB),
     LEVEL_UP_MOVE(37, MOVE_WOOD_HAMMER),
     LEVEL_UP_MOVE(47, MOVE_LEAF_STORM),
+    //LEVEL_UP_MOVE(, MOVE_EGG_BOMB),
     LEVEL_UP_END
 };
 #endif //P_ALOLAN_FORMS
