@@ -4223,6 +4223,20 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     // const u32 gObjectEventPic_AegislashBlade[] = INCBIN_U32("graphics/pokemon/aegislash/blade/follower.4bpp");
 #endif //P_FAMILY_HONEDGE
 
+#if P_FAMILY_HELIOPTILE
+    const u32 gMonFrontPic_Helioptile[] = INCBIN_U32("graphics/pokemon/helioptile/anim_front.4bpp.lz");
+    const u32 gMonPalette_Helioptile[] = INCBIN_U32("graphics/pokemon/helioptile/normal.gbapal.lz");
+    const u32 gMonBackPic_Helioptile[] = INCBIN_U32("graphics/pokemon/helioptile/back.4bpp.lz");
+    const u32 gMonShinyPalette_Helioptile[] = INCBIN_U32("graphics/pokemon/helioptile/shiny.gbapal.lz");
+    const u32 gObjectEventPic_Helioptile[] = INCBIN_U32("graphics/pokemon/helioptile/follower.4bpp");
+
+    const u32 gMonFrontPic_Heliolisk[] = INCBIN_U32("graphics/pokemon/heliolisk/anim_front.4bpp.lz");
+    const u32 gMonPalette_Heliolisk[] = INCBIN_U32("graphics/pokemon/heliolisk/normal.gbapal.lz");
+    const u32 gMonBackPic_Heliolisk[] = INCBIN_U32("graphics/pokemon/heliolisk/back.4bpp.lz");
+    const u32 gMonShinyPalette_Heliolisk[] = INCBIN_U32("graphics/pokemon/heliolisk/shiny.gbapal.lz");
+    const u32 gObjectEventPic_Heliolisk[] = INCBIN_U32("graphics/pokemon/heliolisk/follower.4bpp");
+#endif //P_FAMILY_HELIOPTILE
+
 #if P_FAMILY_TYRUNT
     const u32 gMonFrontPic_Tyrunt[] = INCBIN_U32("graphics/pokemon/tyrunt/anim_front.4bpp.lz");
     const u32 gMonPalette_Tyrunt[] = INCBIN_U32("graphics/pokemon/tyrunt/normal.gbapal.lz");
@@ -4500,6 +4514,26 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonShinyPalette_KommoO[] = INCBIN_U32("graphics/pokemon/kommo_o/shiny.gbapal.lz");
     const u32 gObjectEventPic_KommoO[] = INCBIN_U32("graphics/pokemon/kommo_o/follower.4bpp");
 #endif //P_FAMILY_JANGMO_O
+
+#if P_FAMILY_ROOKIDEE
+    const u32 gMonFrontPic_Rookidee[] = INCBIN_U32("graphics/pokemon/rookidee/anim_front.4bpp.lz");
+    const u32 gMonPalette_Rookidee[] = INCBIN_U32("graphics/pokemon/rookidee/normal.gbapal.lz");
+    const u32 gMonBackPic_Rookidee[] = INCBIN_U32("graphics/pokemon/rookidee/back.4bpp.lz");
+    const u32 gMonShinyPalette_Rookidee[] = INCBIN_U32("graphics/pokemon/rookidee/shiny.gbapal.lz");
+    const u32 gObjectEventPic_Rookidee[] = INCBIN_U32("graphics/pokemon/rookidee/follower.4bpp");
+
+    const u32 gMonFrontPic_Corvisquire[] = INCBIN_U32("graphics/pokemon/corvisquire/anim_front.4bpp.lz");
+    const u32 gMonPalette_Corvisquire[] = INCBIN_U32("graphics/pokemon/corvisquire/normal.gbapal.lz");
+    const u32 gMonBackPic_Corvisquire[] = INCBIN_U32("graphics/pokemon/corvisquire/back.4bpp.lz");
+    const u32 gMonShinyPalette_Corvisquire[] = INCBIN_U32("graphics/pokemon/corvisquire/shiny.gbapal.lz");
+    const u32 gObjectEventPic_Corvisquire[] = INCBIN_U32("graphics/pokemon/corvisquire/follower.4bpp");
+
+    const u32 gMonFrontPic_Corviknight[] = INCBIN_U32("graphics/pokemon/corviknight/anim_front.4bpp.lz");
+    const u32 gMonPalette_Corviknight[] = INCBIN_U32("graphics/pokemon/corviknight/normal.gbapal.lz");
+    const u32 gMonBackPic_Corviknight[] = INCBIN_U32("graphics/pokemon/corviknight/back.4bpp.lz");
+    const u32 gMonShinyPalette_Corviknight[] = INCBIN_U32("graphics/pokemon/corviknight/shiny.gbapal.lz");
+    const u32 gObjectEventPic_Corviknight[] = INCBIN_U32("graphics/pokemon/corviknight/follower.4bpp");
+#endif //P_FAMILY_ROOKIDEE
 
 #if P_FAMILY_BLIPBUG
     const u32 gMonFrontPic_Blipbug[] = INCBIN_U32("graphics/pokemon/blipbug/front.4bpp.lz");

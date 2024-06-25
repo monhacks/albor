@@ -85,8 +85,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Para usar una MO basta con que el Pokémon pueda aprenderla, no hace falta tenerla ni saber el movimiento (Se acabaron los esclavos MO).
     *Nuevo item: Chaleco táctico, sube defensa 50% pero impide uso de movimientos de estado.
     *Presente ahora es una copia de Bola polen de tipo Hada exclusivo de Delibird (ahora Hielo-Hada). Además, cuenta con habilidad oculta Envío express, que le da +1 de prioridad a este movimiento.
-    *En total, hay 595 Pokémon + 46 formas Alola/Galar/Hisui/Paldea desde la 1ª a la 9ª generación, todos obtenibles.
-    *En la guardería, se transmiten 6 IVs al huevo. Es decir, si ambos padres tienen 31 IVs en ataque, por ejemplo, es seguro que la cría tenga 31 IVs en ataque.
+    *En total, hay 600 Pokémon + 46 formas Alola/Galar/Hisui/Paldea desde la 1ª a la 9ª generación, todos obtenibles.
+    *En la guardería, se transmiten 6 IVs al huevo. Por ejemplo, si ambos padres tienen 31 IVs en ataque, es seguro que su cría tenga 31 IVs en ataque.
     *Se pueden transmitir movimientos huevo entre 2 Pokémon de la misma especie si se deja a ambos en la guardería, uno conoce el movimiento huevo y el otro tiene un hueco libre.
 
 ## Cambios a tabla de tipos:

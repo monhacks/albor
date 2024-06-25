@@ -400,7 +400,7 @@
 #define P_FAMILY_BINACLE                 P_GEN_6_POKEMON
 #define P_FAMILY_SKRELP                  P_GEN_6_POKEMON
 #define P_FAMILY_CLAUNCHER               P_GEN_6_POKEMON
-#define P_FAMILY_HELIOPTILE              P_GEN_6_POKEMON
+#define P_FAMILY_HELIOPTILE              FALSE //TRUE
 #define P_FAMILY_TYRUNT                  FALSE //TRUE
 #define P_FAMILY_AMAURA                  FALSE //TRUE
 #define P_FAMILY_HAWLUCHA                P_GEN_6_POKEMON
@@ -478,7 +478,7 @@
 #define P_FAMILY_SCORBUNNY               P_GEN_8_POKEMON
 #define P_FAMILY_SOBBLE                  P_GEN_8_POKEMON
 #define P_FAMILY_SKWOVET                 P_GEN_8_POKEMON
-#define P_FAMILY_ROOKIDEE                P_GEN_8_POKEMON
+#define P_FAMILY_ROOKIDEE                FALSE //TRUE
 #define P_FAMILY_BLIPBUG                 FALSE //TRUE
 #define P_FAMILY_NICKIT                  P_GEN_8_POKEMON
 #define P_FAMILY_GOSSIFLEUR              P_GEN_8_POKEMON
