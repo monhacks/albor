@@ -131,40 +131,6 @@ void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId)
     StartSpriteAnim(&gSprites[spriteId], animId);
 }
 
-void CreateGimmickTriggerSprite(u32 battler)
-{
-    const struct GimmickInfo * gimmick = &gGimmicksInfo[gBattleStruct->gimmick.usableGimmick[battler]];
-
-    // Exit if there shouldn't be a sprite produced.
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT
-     || gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_NONE
-     || gimmick->triggerSheet == NULL)
-    {
-        return;
-    }
-
-    LoadSpritePalette(gimmick->triggerPal);
-    if (GetSpriteTileStartByTag(TAG_GIMMICK_TRIGGER_TILE) == 0xFFFF)
-        LoadSpriteSheet(gimmick->triggerSheet);
-
-    if (gBattleStruct->gimmick.triggerSpriteId == 0xFF)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-            gBattleStruct->gimmick.triggerSpriteId = CreateSprite(gimmick->triggerTemplate,
-                                                                  gSprites[gHealthboxSpriteIds[battler]].x - DOUBLES_GIMMICK_TRIGGER_POS_X_SLIDE,
-                                                                  gSprites[gHealthboxSpriteIds[battler]].y - DOUBLES_GIMMICK_TRIGGER_POS_Y_DIFF, 0);
-        else
-            gBattleStruct->gimmick.triggerSpriteId = CreateSprite(gimmick->triggerTemplate,
-                                                                  gSprites[gHealthboxSpriteIds[battler]].x - SINGLES_GIMMICK_TRIGGER_POS_X_SLIDE,
-                                                                  gSprites[gHealthboxSpriteIds[battler]].y - SINGLES_GIMMICK_TRIGGER_POS_Y_DIFF, 0);
-    }
-
-    gSprites[gBattleStruct->gimmick.triggerSpriteId].tBattler = battler;
-    gSprites[gBattleStruct->gimmick.triggerSpriteId].tHide = FALSE;
-
-    ChangeGimmickTriggerSprite(gBattleStruct->gimmick.triggerSpriteId, 0);
-}
-
 bool32 IsGimmickTriggerSpriteActive(void)
 {
     if (GetSpriteTileStartByTag(TAG_GIMMICK_TRIGGER_TILE) == 0xFFFF)
@@ -254,24 +220,6 @@ static void SpriteCb_GimmickTrigger(struct Sprite *sprite)
 // data fields for healthboxMain
 // oam.affineParam holds healthboxRight spriteId
 #define hMain_Battler               data[6]
-
-void LoadIndicatorSpritesGfx(void)
-{
-    u32 gimmick;
-    for (gimmick = 0; gimmick < GIMMICKS_COUNT; ++gimmick)
-    {
-        if (gimmick == GIMMICK_TERA) // special case
-            LoadSpriteSheets(sTeraIndicatorSpriteSheets);
-        else if (gGimmicksInfo[gimmick].indicatorSheet != NULL)
-            LoadSpriteSheet(gGimmicksInfo[gimmick].indicatorSheet);
-
-        if (gGimmicksInfo[gimmick].indicatorPal != NULL)
-            LoadSpritePalette(gGimmicksInfo[gimmick].indicatorPal);
-    }
-    // Primal reversion graphics aren't loaded as part of gimmick data
-    LoadSpriteSheet(&sSpriteSheet_AlphaIndicator);
-    LoadSpriteSheet(&sSpriteSheet_OmegaIndicator);
-}
 
 static void SpriteCb_GimmickIndicator(struct Sprite *sprite)
 {
@@ -366,24 +314,6 @@ static const s8 sIndicatorPositions[][2] =
     [B_POSITION_PLAYER_RIGHT] = {52, -9},
     [B_POSITION_OPPONENT_RIGHT] = {44, -9},
 };
-
-void CreateIndicatorSprite(u32 battler)
-{
-    u32 position, spriteId;
-    s16 xHealthbox = 0, x = 0, y = 0;
-
-    position = GetBattlerPosition(battler);
-    GetBattlerHealthboxCoords(battler, &xHealthbox, &y);
-
-    x = sIndicatorPositions[position][0];
-    y += sIndicatorPositions[position][1];
-
-    spriteId = CreateSpriteAtEnd(&sSpriteTemplate_GimmickIndicator, 0, y, 0);
-    gBattleStruct->gimmick.indicatorSpriteId[battler] = spriteId;
-    gSprites[spriteId].tBattler = battler;
-    gSprites[spriteId].tPosX = x;
-    gSprites[spriteId].invisible = FALSE;
-}
 
 #undef tBattler
 #undef tPosX

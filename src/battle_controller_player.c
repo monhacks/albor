@@ -2345,14 +2345,6 @@ static void PlayerHandleChooseMove(u32 battler)
         InitMoveSelectionsVarsAndStrings(battler);
         gBattleStruct->gimmick.playerSelect = FALSE;
 
-        AssignUsableZMoves(battler, moveInfo->moves);
-        gBattleStruct->zmove.viable = (gBattleStruct->zmove.possibleZMoves[battler] & gBitTable[gMoveSelectionCursor[battler]]) != 0;
-
-        if (!IsGimmickTriggerSpriteActive())
-            gBattleStruct->gimmick.triggerSpriteId = 0xFF;
-        if (!(gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_Z_MOVE && !gBattleStruct->zmove.viable))
-            CreateGimmickTriggerSprite(battler);
-
         gBattlerControllerFuncs[battler] = HandleChooseMoveAfterDma3;
     }
 }
