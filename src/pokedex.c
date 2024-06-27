@@ -2159,8 +2159,7 @@ static u32 CreatePokedexMonSprite(u16 num, s16 x, s16 y)
 }
 
 #define sIsDownArrow data[1]
-#define LIST_RIGHT_SIDE_TEXT_X 147
-#define LIST_RIGHT_SIDE_TEXT_Y 13
+
 static void CreateInterfaceSprites(u8 page)
 {
     u8 spriteId;
@@ -2178,8 +2177,8 @@ static void CreateInterfaceSprites(u8 page)
 
     if (page == PAGE_MAIN)
     {
-        u8 counterXDist  = 6;
-        u8 counterX1s    = LIST_RIGHT_SIDE_TEXT_X + 16 - (sPokedexView->seenCount > 999 ? 0 : 1);
+        u8 counterXDist  = 7;
+        u8 counterX1s    = 159;
         u8 counterX10s   = counterX1s - counterXDist;
         u8 counterX100s  = counterX10s - counterXDist;
         u8 counterX1000s = counterX100s - counterXDist;
@@ -2187,7 +2186,7 @@ static void CreateInterfaceSprites(u8 page)
         //****************************
         // National seen value - 1000s
         drawNextDigit = FALSE;
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s, 78 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s, 8, 1);
         digitNum = sPokedexView->seenCount / 1000;
         StartSpriteAnim(&gSprites[spriteId], digitNum);
         if (digitNum != 0)
@@ -2196,7 +2195,7 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National seen value - 100s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s, 78 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s, 8, 1);
         digitNum = (sPokedexView->seenCount % 1000) / 100;
         if (digitNum != 0 || drawNextDigit)
         {
@@ -2207,7 +2206,7 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National seen value - 10s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s, 78 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s, 8, 1);
         digitNum = ((sPokedexView->seenCount % 1000) % 100) / 10;
         if (digitNum != 0 || drawNextDigit)
             StartSpriteAnim(&gSprites[spriteId], digitNum);
@@ -2215,13 +2214,13 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National seen value - 1s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s, 78 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s, 8, 1);
         digitNum = ((sPokedexView->seenCount % 1000) % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], digitNum);
 
         // National owned value - 1000s
         drawNextDigit = FALSE;
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s, 88 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s + 56, 8, 1);
         digitNum = sPokedexView->ownCount / 1000;
         StartSpriteAnim(&gSprites[spriteId], digitNum);
         if (digitNum != 0)
@@ -2230,7 +2229,7 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National owned value - 100s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s, 88 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s + 56, 8, 1);
         digitNum = (sPokedexView->ownCount % 1000) / 100;
         if (digitNum != 0 || drawNextDigit)
         {
@@ -2241,7 +2240,7 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National owned value - 10s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s, 88 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s + 56, 8, 1);
         digitNum = ((sPokedexView->ownCount % 1000) % 100) / 10;
         if (digitNum != 0 || drawNextDigit)
             StartSpriteAnim(&gSprites[spriteId], digitNum);
@@ -2249,7 +2248,7 @@ static void CreateInterfaceSprites(u8 page)
             gSprites[spriteId].invisible = TRUE;
 
         // National owned value - 1s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s, 88 - LIST_RIGHT_SIDE_TEXT_Y, 1);
+        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s + 56, 8, 1);
         digitNum = ((sPokedexView->ownCount % 1000) % 100) % 10;
         StartSpriteAnim(&gSprites[spriteId], digitNum);
     }
@@ -4654,7 +4653,7 @@ static void PrintStatsScreen_Abilities(u8 taskId)
         if (ability1 != ABILITY_NONE && ability1 != ability0)
         {
             PrintStatsScreenTextSmallWhite(WIN_STATS_ABILITIES, gAbilitiesInfo[ability1].name, abilities_x, abilities_y + 30);
-            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilitiesInfo[ability1].description, abilities_x, abilities_y + 44);
+            PrintStatsScreenTextSmall(WIN_STATS_ABILITIES, gAbilitiesInfo[ability1].description, abilities_x, abilities_y + 56);
         }
     }
     else //Hidden abilities
