@@ -2764,6 +2764,9 @@ u8 GetMonsStateToDoubles(void)
     s32 i;
     CalculatePlayerPartyCount();
 
+    if (OW_DOUBLE_APPROACH_WITH_ONE_MON)
+        return PLAYER_HAS_TWO_USABLE_MONS;
+
     if (gPlayerPartyCount == 1)
         return gPlayerPartyCount; // PLAYER_HAS_ONE_MON
 
@@ -5684,8 +5687,6 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                     break;
                 case FORM_CHANGE_WITHDRAW:
                 case FORM_CHANGE_FAINT:
-                    targetSpecies = formChanges[i].targetSpecies;
-                    break;
                 case FORM_CHANGE_STATUS:
                     if (GetBoxMonData(boxMon, MON_DATA_STATUS, NULL) & formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
@@ -6024,3 +6025,4 @@ const u8 *GetMoveAnimationScript(u16 moveId)
     }
     return gMovesInfo[moveId].battleAnimScript;
 }
+
