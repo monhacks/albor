@@ -74,14 +74,9 @@ void *gAgbMainLoop_sp;
 
 static EWRAM_DATA u16 sTrainerId = 0;
 
-//EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
-
-static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);
 static void CallCallbacks(void);
-#ifdef BUGFIX
 static void SeedRngWithRtc(void);
-#endif
 static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
@@ -98,33 +93,19 @@ void AgbMain()
     InitIntrHandlers();
     m4aSoundInit();
     EnableVCountIntrAtLine150();
-    InitRFU();
     RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
-#ifdef BUGFIX
     SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
-#endif
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
     InitHeap(gHeap, HEAP_SIZE);
 
-    gSoftResetDisabled = FALSE;
-
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2(NULL);
 
-    gLinkTransferringData = FALSE;
-
-#ifndef NDEBUG
-#if (LOG_HANDLER == LOG_HANDLER_MGBA_PRINT)
-    (void) MgbaOpen();
-#elif (LOG_HANDLER == LOG_HANDLER_AGB_PRINT)
-    AGBPrintfInit();
-#endif
-#endif
     gAgbMainLoop_sp = __builtin_frame_address(0);
     AgbMainLoop();
 }
@@ -134,47 +115,11 @@ void AgbMainLoop(void)
     for (;;)
     {
         ReadKeys();
-
-        if (gSoftResetDisabled == FALSE
-         && JOY_HELD_RAW(A_BUTTON)
-         && JOY_HELD_RAW(B_START_SELECT) == B_START_SELECT)
-        {
-            rfu_REQ_stopMode();
-            rfu_waitREQComplete();
-            DoSoftReset();
-        }
-
-        if (Overworld_SendKeysToLinkIsRunning() == TRUE)
-        {
-            gLinkTransferringData = TRUE;
-            UpdateLinkAndCallCallbacks();
-            gLinkTransferringData = FALSE;
-        }
-        else
-        {
-            gLinkTransferringData = FALSE;
-            UpdateLinkAndCallCallbacks();
-
-            if (Overworld_RecvKeysFromLinkIsRunning() == TRUE)
-            {
-                gMain.newKeys = 0;
-                ClearSpriteCopyRequests();
-                gLinkTransferringData = TRUE;
-                UpdateLinkAndCallCallbacks();
-                gLinkTransferringData = FALSE;
-            }
-        }
-
+        CallCallbacks();
         PlayTimeCounter_Update();
         MapMusicMain();
         WaitForVBlank();
     }
-}
-
-static void UpdateLinkAndCallCallbacks(void)
-{
-    if (!HandleLinkConnection())
-        CallCallbacks();
 }
 
 static void InitMainCallbacks(void)
@@ -250,28 +195,19 @@ void EnableVCountIntrAtLine150(void)
     EnableInterrupts(INTR_FLAG_VCOUNT);
 }
 
-// FRLG commented this out to remove RTC, however Emerald didn't undo this!
-#ifdef BUGFIX
 static void SeedRngWithRtc(void)
 {
-    #if HQ_RANDOM == FALSE
-        u32 seed = RtcGetMinuteCount();
-        seed = (seed >> 16) ^ (seed & 0xFFFF);
-        SeedRng(seed);
-    #else
-        #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
-        u32 seconds;
-        struct SiiRtcInfo rtc;
-        RtcGetInfo(&rtc);
-        seconds =
-            ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
-            * MINUTES_PER_HOUR + BCD8(rtc.minute))
-            * SECONDS_PER_MINUTE + BCD8(rtc.second);
-        SeedRng(seconds);
-        #undef BCD8
-    #endif
+    #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
+    u32 seconds;
+    struct SiiRtcInfo rtc;
+    RtcGetInfo(&rtc);
+    seconds =
+        ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+        * MINUTES_PER_HOUR + BCD8(rtc.minute))
+        * SECONDS_PER_MINUTE + BCD8(rtc.second);
+    SeedRng(seconds);
+    #undef BCD8
 }
-#endif
 
 void InitKeys(void)
 {
@@ -377,16 +313,6 @@ void SetSerialCallback(IntrCallback callback)
 
 static void VBlankIntr(void)
 {
-    if (gWirelessCommType != 0)
-        RfuVSync();
-    else if (gLinkVSyncDisabled == FALSE)
-        LinkVSync();
-
-    gMain.vblankCounter1++;
-
-    if (gTrainerHillVBlankCounter && *gTrainerHillVBlankCounter < 0xFFFFFFFF)
-        (*gTrainerHillVBlankCounter)++;
-
     if (gMain.vblankCallback)
         gMain.vblankCallback();
 
@@ -398,12 +324,9 @@ static void VBlankIntr(void)
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
     m4aSoundMain();
-    TryReceiveLinkBattleData();
 
     if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED))))
         AdvanceRandom();
-
-    UpdateWirelessStatusIndicatorSprite();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;
     gMain.intrCheck |= INTR_FLAG_VBLANK;

@@ -2319,34 +2319,11 @@ static void HandleChooseMoveAfterDma3(u32 battler)
     }
 }
 
-// arenaMindPoints is used here as a placeholder for a timer.
-
-static void PlayerChooseMoveInBattlePalace(u32 battler)
-{
-    if (--*(gBattleStruct->arenaMindPoints + battler) == 0)
-    {
-        gBattlePalaceMoveSelectionRngValue = gRngValue;
-        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace(battler));
-        PlayerBufferExecCompleted(battler);
-    }
-}
-
 static void PlayerHandleChooseMove(u32 battler)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-    {
-        *(gBattleStruct->arenaMindPoints + battler) = 8;
-        gBattlerControllerFuncs[battler] = PlayerChooseMoveInBattlePalace;
-    }
-    else
-    {
-        struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-
-        InitMoveSelectionsVarsAndStrings(battler);
-        gBattleStruct->gimmick.playerSelect = FALSE;
-
-        gBattlerControllerFuncs[battler] = HandleChooseMoveAfterDma3;
-    }
+    InitMoveSelectionsVarsAndStrings(battler);
+    gBattleStruct->gimmick.playerSelect = FALSE;
+    gBattlerControllerFuncs[battler] = HandleChooseMoveAfterDma3;
 }
 
 void InitMoveSelectionsVarsAndStrings(u32 battler)

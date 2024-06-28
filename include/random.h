@@ -24,7 +24,6 @@
 * also available in non-HQ mode for consistency.
 */
 
-#if HQ_RANDOM == TRUE
 struct Sfc32State {
     u32 a;
     u32 b;
@@ -70,40 +69,6 @@ static inline u16 Random2(void)
 }
 
 void AdvanceRandom(void);
-#else
-typedef u32 rng_value_t;
-
-#define RNG_VALUE_EMPTY 0
-
-//Returns a 16-bit pseudorandom number
-u16 Random(void);
-u16 Random2(void);
-
-//Sets the initial seed value of the pseudorandom number generator
-void SeedRng(u16 seed);
-void SeedRng2(u16 seed);
-
-//Returns a 32-bit pseudorandom number
-#define Random32() (Random() | (Random() << 16))
-#define Random2_32() (Random2() | (Random2() << 16))
-
-static inline u16 LocalRandom(rng_value_t *val)
-{
-    *val = ISO_RANDOMIZE1(*val);
-    return *val >> 16;
-}
-
-static inline void AdvanceRandom(void)
-{
-    Random();
-}
-
-static inline rng_value_t LocalRandomSeed(u32 seed)
-{
-    return seed;
-}
-
-#endif
 
 extern rng_value_t gRngValue;
 extern rng_value_t gRng2Value;
