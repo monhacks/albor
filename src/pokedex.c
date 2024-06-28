@@ -1230,7 +1230,7 @@ void CB2_OpenPokedexPlusHGSS(void)
         EnableInterrupts(1);
         SetVBlankCallback(VBlankCB_Pokedex);
         SetMainCallback2(CB2_Pokedex);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x80);
+        FadeOutAndPlayNewMapMusic(MUS_HG_RADIO_VARIETY, 4);
         break;
     }
 }
@@ -1399,13 +1399,15 @@ static void PrintTitle(void)
 
 static void Task_ClosePokedex(u8 taskId)
 {
+    u16 music = GetCurrLocationDefaultMusic();
+
     if (!gPaletteFade.active)
     {
         ClearMonSprites();
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        FadeOutAndPlayNewMapMusic(music, 8);
         Free(sPokedexView);
     }
 }

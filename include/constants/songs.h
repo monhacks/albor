@@ -914,7 +914,7 @@
 #define MUS_HG_RADIO_ROUTE101             861 // Pokégear Radio: Route 101
 #define MUS_HG_RADIO_ROUTE201             862 // Pokégear Radio: Route 201
 #define MUS_HG_RADIO_TRAINER              863 // Pokégear Radio: Trainer Channel
-#define MUS_HG_RADIO_VARIETY              864 // Pokégear Radio: Variety Channel
+#define MUS_HG_RADIO_VARIETY              864 // -Usada (pokédex)
 #define MUS_HG_VS_KYOGRE_GROUDON          865 // Battle! (Super-Ancient Pokémon)
 #define MUS_HG_POKEWALKER                 866 // -Usada (storage)
 #define MUS_HG_VS_ARCEUS                  867 // Arceus
