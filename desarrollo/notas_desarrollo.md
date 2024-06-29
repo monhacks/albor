@@ -44,7 +44,7 @@
 - Crear ataque Abducción.
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
-- Faltan 2 Pokémon para 600 (SPRITES HELIOPTILE + HELIOLISK)
+- Destruir icono en batalla al darle a huir contra entrenador.
 
 -Lista de moves hechos:
 *Bomba huevo.

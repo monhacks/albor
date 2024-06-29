@@ -209,7 +209,6 @@ static const u32 sPokedexPlusHGSS_Interface_DECA_Gfx[] = INCBIN_U32("graphics/po
 static const u32 sPokedexPlusHGSS_Menu_1_Gfx[] = INCBIN_U32("graphics/pokedex/tileset_menu1.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Menu_2_Gfx[] = INCBIN_U32("graphics/pokedex/tileset_menu2.4bpp.lz");
 static const u32 sPokedexPlusHGSS_Menu_3_Gfx[] = INCBIN_U32("graphics/pokedex/tileset_menu3.4bpp.lz");
-static const u32 sPokedexPlusHGSS_StartMenuMain_Tilemap[] = INCBIN_U32("graphics/pokedex/tilemap_start_menu.bin.lz");
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap[] = INCBIN_U32("graphics/pokedex/SelectBar.bin.lz");
 static const u32 sPokedexPlusHGSS_ScreenSelectBarSubmenu_Tilemap_Clear[] = INCBIN_U32("graphics/pokedex/SelectBar_clear.bin.lz");
 static const u32 sFondoLista[] = INCBIN_U32("graphics/pokedex/fondo_lista.bin.lz");
@@ -221,7 +220,7 @@ static const u32 sPokedexPlusHGSS_ScreenEvolution_Tilemap[] = INCBIN_U32("graphi
 static const u32 sPokedexPlusHGSS_ScreenEvolution_Tilemap_PE[] = INCBIN_U32("graphics/pokedex/tilemap_evo_screen_PE.bin.lz");
 static const u32 sPokedexPlusHGSS_ScreenForms_Tilemap[] = INCBIN_U32("graphics/pokedex/tilemap_forms_screen.bin.lz");
 
-#define SCROLLING_MON_X 146
+#define SCROLLING_MON_X 30
 #define HGSS_DECAPPED TRUE
 #define HGSS_DARK_MODE TRUE
 #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES FALSE
@@ -378,7 +377,6 @@ static void SpriteCB_Scrollbar(struct Sprite *sprite);
 static void SpriteCB_ScrollArrow(struct Sprite *sprite);
 static void SpriteCB_DexListInterfaceText(struct Sprite *sprite);
 static void SpriteCB_RotatingPokeBall(struct Sprite *sprite);
-static void SpriteCB_SeenOwnInfo(struct Sprite *sprite);
 static void SpriteCB_DexListStartMenuCursor(struct Sprite *sprite);
 static void SpriteCB_PokedexListMonSprite(struct Sprite *sprite);
 static u8 LoadInfoScreen(struct PokedexListItem *, u8 monSpriteId);
@@ -415,7 +413,7 @@ static u16 GetNextPosition(u8, u16, u16, u16);
 static void SetSpriteInvisibility(u8 spriteArrayId, bool8 invisible);
 static void CreateTypeIconSprites(void);
 static void ScrollBackground(void);
-static void PrintTitle(void);
+static void PrintTitleSeenAndOwn(void);
 
 //Stats screen HGSS_Ui
 static void LoadTilesetTilemapHGSS(u8 page);
@@ -703,66 +701,6 @@ static const union AnimCmd sSpriteAnim_MenuText[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit0[] =
-{
-    ANIMCMD_FRAME(176, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit1[] =
-{
-    ANIMCMD_FRAME(178, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit2[] =
-{
-    ANIMCMD_FRAME(180, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit3[] =
-{
-    ANIMCMD_FRAME(182, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit4[] =
-{
-    ANIMCMD_FRAME(184, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit5[] =
-{
-    ANIMCMD_FRAME(186, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit6[] =
-{
-    ANIMCMD_FRAME(188, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit7[] =
-{
-    ANIMCMD_FRAME(190, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit8[] =
-{
-    ANIMCMD_FRAME(192, 30),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sSpriteAnim_NationalSeenOwnDigit9[] =
-{
-    ANIMCMD_FRAME(194, 30),
-    ANIMCMD_END
-};
-
 static const union AnimCmd sSpriteAnim_DexListStartMenuCursor[] =
 {
     ANIMCMD_FRAME(4, 30),
@@ -789,20 +727,6 @@ static const union AnimCmd *const sSpriteAnimTable_InterfaceText[] =
     sSpriteAnim_StartButton,
     sSpriteAnim_SelectButton,
     sSpriteAnim_MenuText
-};
-
-static const union AnimCmd *const sSpriteAnimTable_NationalSeenOwnNumber[] =
-{
-    sSpriteAnim_NationalSeenOwnDigit0,
-    sSpriteAnim_NationalSeenOwnDigit1,
-    sSpriteAnim_NationalSeenOwnDigit2,
-    sSpriteAnim_NationalSeenOwnDigit3,
-    sSpriteAnim_NationalSeenOwnDigit4,
-    sSpriteAnim_NationalSeenOwnDigit5,
-    sSpriteAnim_NationalSeenOwnDigit6,
-    sSpriteAnim_NationalSeenOwnDigit7,
-    sSpriteAnim_NationalSeenOwnDigit8,
-    sSpriteAnim_NationalSeenOwnDigit9
 };
 
 static const union AnimCmd *const sSpriteAnimTable_DexListStartMenuCursor[] =
@@ -854,17 +778,6 @@ static const struct SpriteTemplate sRotatingPokeBallSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCB_RotatingPokeBall,
-};
-
-static const struct SpriteTemplate sNationalDexSeenOwnNumberSpriteTemplate =
-{
-    .tileTag = TAG_DEX_INTERFACE,
-    .paletteTag = TAG_DEX_INTERFACE,
-    .oam = &sOamData_Dex8x16,
-    .anims = sSpriteAnimTable_NationalSeenOwnNumber,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_SeenOwnInfo,
 };
 
 static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
@@ -937,28 +850,50 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
 
 #define WIN_POKEMON_LIST 0
 #define WIN_TITLE 1
+#define WIN_SEEN 2
+#define WIN_OWN 3
 
 static const struct WindowTemplate sPokemonList_WindowTemplate[] =
 {
     [WIN_POKEMON_LIST] =
     {
-        .bg = 2,
+        .bg = 0,
         .tilemapLeft = 0,
         .tilemapTop = 0,
         .width = 32,
         .height = 32,
         .paletteNum = 0,
-        .baseBlock = 1,
+        .baseBlock = 0,
     },
     [WIN_TITLE] =
     {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 0,
-        .width = 10,
+        .width = 7,
         .height = 2,
         .paletteNum = 0,
-        .baseBlock = 641,
+        .baseBlock = 0,
+    },
+    [WIN_SEEN] =
+    {
+        .bg = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 0,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 0,
+    },
+    [WIN_OWN] =
+    {
+        .bg = 0,
+        .tilemapLeft = 24,
+        .tilemapTop = 0,
+        .width = 4,
+        .height = 2,
+        .paletteNum = 0,
+        .baseBlock = 0,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -1392,9 +1327,13 @@ static void ScrollBackground(void)
     ChangeBgY(3, 128, BG_COORD_SUB);
 }
 
-static void PrintTitle(void)
+static void PrintTitleSeenAndOwn(void)
 {
     AddTextPrinterParameterized3(WIN_TITLE, FONT_BIG, 0, 0, sTextColors[COLOR_TITLE], 0, gText_SavingPokedex);
+    ConvertIntToDecimalStringN(gStringVar1, sPokedexView->ownCount, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized3(WIN_SEEN, FONT_BIG, 6, 0, sTextColors[COLOR_TITLE], 0, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar1, sPokedexView->seenCount, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized3(WIN_OWN, FONT_BIG, 5, 0, sTextColors[COLOR_TITLE], 0, gStringVar1);
 }
 
 static void Task_ClosePokedex(u8 taskId)
@@ -1446,14 +1385,15 @@ static bool8 LoadPokedexListPage(u8 page)
         DecompressAndLoadBgGfxUsingHeap(3, sTilesFondo, 0x2000, 0, 0);
         CopyToBgTilemapBuffer(1, sFondoLista, 0, 0);
         CopyToBgTilemapBuffer(3, sFondoScrolling, 0, 0);
-        CopyToBgTilemapBuffer(0, sPokedexPlusHGSS_StartMenuMain_Tilemap, 0, 0x280);
         ResetPaletteFade();
         LoadPokedexBgPalette();
-        InitWindows(sPokemonList_WindowTemplate);
+        //InitWindows(sPokemonList_WindowTemplate);
         DeactivateAllTextPrinters();
-        PutWindowTilemap(WIN_POKEMON_LIST);
-        CopyWindowToVram(WIN_POKEMON_LIST, COPYWIN_FULL);
-        PutWindowTilemap(WIN_TITLE);
+        //PutWindowTilemap(WIN_POKEMON_LIST);
+        //CopyWindowToVram(WIN_POKEMON_LIST, COPYWIN_FULL);
+        //PutWindowTilemap(WIN_TITLE);
+        //PutWindowTilemap(WIN_SEEN);
+        //PutWindowTilemap(WIN_OWN);
         gMain.state = 1;
         break;
     case 1:
@@ -1472,7 +1412,7 @@ static bool8 LoadPokedexListPage(u8 page)
     case 3:
         if (page == PAGE_MAIN)
             CreatePokedexList();
-        PrintTitle();
+        PrintTitleSeenAndOwn();
         CreateMonSpritesAtPos(sPokedexView->selectedPokemon);
         sPokedexView->statBarsSpriteId = 0xFF;  //stat bars
         CreateStatBars(&sPokedexView->pokedexList[sPokedexView->selectedPokemon]); //stat bars
@@ -1560,8 +1500,7 @@ static void PrintMonDexNum(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 to
 static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
     static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
-    fontId = GetFontIdToFit(str, fontId, 0, 50);
-    AddTextPrinterParameterized4(windowId, fontId, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, FONT_NORMAL, left * 8, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
 }
 
 #define MON_LIST_X 2
@@ -1825,7 +1764,7 @@ bool16 HasAllMons(void)
 static void CreateCaughtBall(bool16 owned, u8 x, u8 y)
 {
     if (owned)
-        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 6, y * 8, 8, 16);
+        BlitBitmapToWindow(0, sCaughtBall_Gfx, x * 6, (y * 8) + 1, 8, 16);
     else
         FillWindowPixelRect(0, PIXEL_FILL(0), x * 6, y * 8, 8, 16);
 }
@@ -2165,8 +2104,6 @@ static u32 CreatePokedexMonSprite(u16 num, s16 x, s16 y)
 static void CreateInterfaceSprites(u8 page)
 {
     u8 spriteId;
-    u16 digitNum;
-    bool32 drawNextDigit;
 
     // Scroll arrows
     spriteId = CreateSprite(&sScrollArrowSpriteTemplate, 10, 4, 0);
@@ -2179,93 +2116,9 @@ static void CreateInterfaceSprites(u8 page)
 
     if (page == PAGE_MAIN)
     {
-        u8 counterXDist  = 7;
-        u8 counterX1s    = 159;
-        u8 counterX10s   = counterX1s - counterXDist;
-        u8 counterX100s  = counterX10s - counterXDist;
-        u8 counterX1000s = counterX100s - counterXDist;
-
-        //****************************
-        // National seen value - 1000s
-        drawNextDigit = FALSE;
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s, 8, 1);
-        digitNum = sPokedexView->seenCount / 1000;
-        StartSpriteAnim(&gSprites[spriteId], digitNum);
-        if (digitNum != 0)
-            drawNextDigit = TRUE;
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National seen value - 100s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s, 8, 1);
-        digitNum = (sPokedexView->seenCount % 1000) / 100;
-        if (digitNum != 0 || drawNextDigit)
-        {
-            drawNextDigit = TRUE;
-            StartSpriteAnim(&gSprites[spriteId], digitNum);
-        }
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National seen value - 10s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s, 8, 1);
-        digitNum = ((sPokedexView->seenCount % 1000) % 100) / 10;
-        if (digitNum != 0 || drawNextDigit)
-            StartSpriteAnim(&gSprites[spriteId], digitNum);
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National seen value - 1s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s, 8, 1);
-        digitNum = ((sPokedexView->seenCount % 1000) % 100) % 10;
-        StartSpriteAnim(&gSprites[spriteId], digitNum);
-
-        // National owned value - 1000s
-        drawNextDigit = FALSE;
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1000s + 56, 8, 1);
-        digitNum = sPokedexView->ownCount / 1000;
-        StartSpriteAnim(&gSprites[spriteId], digitNum);
-        if (digitNum != 0)
-            drawNextDigit = TRUE;
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National owned value - 100s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX100s + 56, 8, 1);
-        digitNum = (sPokedexView->ownCount % 1000) / 100;
-        if (digitNum != 0 || drawNextDigit)
-        {
-            drawNextDigit = TRUE;
-            StartSpriteAnim(&gSprites[spriteId], digitNum);
-        }
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National owned value - 10s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX10s + 56, 8, 1);
-        digitNum = ((sPokedexView->ownCount % 1000) % 100) / 10;
-        if (digitNum != 0 || drawNextDigit)
-            StartSpriteAnim(&gSprites[spriteId], digitNum);
-        else
-            gSprites[spriteId].invisible = TRUE;
-
-        // National owned value - 1s
-        spriteId = CreateSprite(&sNationalDexSeenOwnNumberSpriteTemplate, counterX1s + 56, 8, 1);
-        digitNum = ((sPokedexView->ownCount % 1000) % 100) % 10;
-        StartSpriteAnim(&gSprites[spriteId], digitNum);
-    }
-
-    if (page == PAGE_MAIN)
-    {
         spriteId = CreateSprite(&sDexListStartMenuCursorSpriteTemplate, 136, 96, 1);
         gSprites[spriteId].invisible = TRUE;
     }
-}
-
-static void SpriteCB_SeenOwnInfo(struct Sprite *sprite)
-{
-    if (sPokedexView->currentPage != PAGE_MAIN)
-        DestroySprite(sprite);
 }
 
 static void SpriteCB_MoveMonForInfoScreen(struct Sprite *sprite)
