@@ -4107,13 +4107,15 @@ s8 GetMovePriority(u32 battler, u16 move)
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         return gMovesInfo[MOVE_MAX_GUARD].priority;
 
-    if (ability == ABILITY_GALE_WINGS
-        && (B_GALE_WINGS < GEN_7 || BATTLER_MAX_HP(battler))
-        && gMovesInfo[move].type == TYPE_FLYING)
+    if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TYPE_FLYING)
     {
         priority++;
     }
     else if (ability == ABILITY_TIERRA_SUELTA && gMovesInfo[move].type == TYPE_GROUND)
+    {
+        priority++;
+    }
+    else if (ability == ABILITY_PACIFICADOR && gMovesInfo[move].type == TYPE_FAIRY)
     {
         priority++;
     }

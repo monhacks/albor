@@ -256,8 +256,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SERENE_GRACE] =
     {
-        .name = _("Serene Grace"),
-        .description = COMPOUND_STRING("Promotes added effects."),
+        .name = _("Dicha"),
+        .description = COMPOUND_STRING("x2% efectos secundarios."),
         .aiRating = 8,
     },
 
@@ -785,21 +785,21 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MOLD_BREAKER] =
     {
-        .name = _("Mold Breaker"),
+        .name = _("Rompemoldes"),
         .description = COMPOUND_STRING("Moves hit through abilities."),
         .aiRating = 7,
     },
 
     [ABILITY_SUPER_LUCK] =
     {
-        .name = _("Super Luck"),
-        .description = COMPOUND_STRING("Critical hits land often."),
+        .name = _("Afortunado"),
+        .description = COMPOUND_STRING("+2 índice crítico."),
         .aiRating = 3,
     },
 
     [ABILITY_AFTERMATH] =
     {
-        .name = _("Aftermath"),
+        .name = _("Resquicio"),
         .description = COMPOUND_STRING("Fainting damages the foe."),
         .aiRating = 5,
     },
@@ -2954,5 +2954,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Fotosíntesis"),
         .description = COMPOUND_STRING("Recupera 1/8 PS en sol."),
         .aiRating = 3,
+    },
+
+    [ABILITY_PACIFICADOR] =
+    {
+        .name = _("Pacificador"),
+        .description = COMPOUND_STRING("Hada +1 prioridad."),
+        .aiRating = 6,
     },
 };

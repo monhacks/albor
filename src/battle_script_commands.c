@@ -1921,7 +1921,7 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
                     + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[battlerAtk].species == SPECIES_CHANSEY)
                     + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                     + 2 * (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerAtk) == AFFECTION_FIVE_HEARTS)
-                    + (abilityAtk == ABILITY_SUPER_LUCK)               
+                    + 2 * (abilityAtk == ABILITY_SUPER_LUCK)               
                     + gBattleStruct->bonusCritStages[gBattlerAttacker];
 
         if (gMovesInfo[gCurrentMove].soundMove && (abilityAtk == ABILITY_PERCUSIONISTA))
