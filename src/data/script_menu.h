@@ -533,21 +533,6 @@ static const struct MenuAction MultichoiceList_FrontierItemChoose[] =
     {gText_Salir},
 };
 
-static const struct MenuAction MultichoiceList_LinkContestInfo[] =
-{
-    {gText_LinkContest},
-    {gText_AboutE_Mode},
-    {gText_AboutG_Mode},
-    {gText_Cancel2},
-};
-
-static const struct MenuAction MultichoiceList_LinkContestMode[] =
-{
-    {gText_E_Mode},
-    {gText_G_Mode},
-    {gText_Salir},
-};
-
 static const struct MenuAction MultichoiceList_ForcedStartMenu[] =
 {
     {gText_MenuOptionPokedex},
@@ -872,8 +857,6 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_LINK_LEADER]                = MULTICHOICE(MultichoiceList_LinkLeader),
     [MULTI_CONTEST_RANK]               = MULTICHOICE(MultichoiceList_ContestRank),
     [MULTI_FRONTIER_ITEM_CHOOSE]       = MULTICHOICE(MultichoiceList_FrontierItemChoose),
-    [MULTI_LINK_CONTEST_INFO]          = MULTICHOICE(MultichoiceList_LinkContestInfo),
-    [MULTI_LINK_CONTEST_MODE]          = MULTICHOICE(MultichoiceList_LinkContestMode),
     [MULTI_FORCED_START_MENU]          = MULTICHOICE(MultichoiceList_ForcedStartMenu),
     [MULTI_FRONTIER_GAMBLER_BET]       = MULTICHOICE(MultichoiceList_FrontierGamblerBet),
     [MULTI_TENT]                       = MULTICHOICE(MultichoiceList_Tent),

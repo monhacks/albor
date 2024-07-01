@@ -178,17 +178,7 @@ void SetControllerToPlayer(u32 battler)
 static void PlayerBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = PlayerBufferRunCommand;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        u8 playerId = GetMultiplayerId();
-
-        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
-        gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
-    }
-    else
-    {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
-    }
+    gBattleControllerExecFlags &= ~gBitTable[battler];
 }
 
 static void PlayerBufferRunCommand(u32 battler)
@@ -985,27 +975,13 @@ static void ReloadMoveNames(u32 battler)
 
 static void SetLinkBattleEndCallbacks(u32 battler)
 {
-    if (gWirelessCommType == 0)
+    if (gReceivedRemoteLinkPlayers == 0)
     {
-        if (gReceivedRemoteLinkPlayers == 0)
-        {
-            m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = FALSE;
-            gMain.callback1 = gPreBattleCallback1;
-            SetMainCallback2(CB2_InitEndLinkBattle);
-            FreeAllWindowBuffers();
-        }
-    }
-    else
-    {
-        if (IsLinkTaskFinished())
-        {
-            m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = FALSE;
-            gMain.callback1 = gPreBattleCallback1;
-            SetMainCallback2(CB2_InitEndLinkBattle);
-            FreeAllWindowBuffers();
-        }
+        m4aSongNumStop(SE_LOW_HEALTH);
+        gMain.inBattle = FALSE;
+        gMain.callback1 = gPreBattleCallback1;
+        SetMainCallback2(CB2_InitEndLinkBattle);
+        FreeAllWindowBuffers();
     }
 }
 
@@ -1018,11 +994,7 @@ void SetBattleEndCallbacks(u32 battler)
         {
             if (IsLinkTaskFinished())
             {
-                if (gWirelessCommType == 0)
-                    SetCloseLinkCallback();
-                else
-                    SetLinkStandbyCallback();
-
+                SetCloseLinkCallback();
                 gBattlerControllerFuncs[battler] = SetLinkBattleEndCallbacks;
             }
         }

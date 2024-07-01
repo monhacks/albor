@@ -18,9 +18,6 @@ gContestRankHyper::
 gContestRankMaster::
 	.string "MASTER RANK$"
 
-gContestLink::
-	.string "LINK$"
-
 gContestCoolness::
 	.string "COOLNESS$"
 

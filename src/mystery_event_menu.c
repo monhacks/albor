@@ -241,7 +241,6 @@ static void CB2_MysteryEventMenu(void)
     case 8:
         if (GetBlockReceivedStatus())
         {
-            ResetBlockReceivedFlags();
             gMain.state++;
         }
         break;

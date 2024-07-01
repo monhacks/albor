@@ -11870,9 +11870,6 @@ void AllocateBattleResources(void)
     gBattleResources->aiParty = AllocZeroed(sizeof(*gBattleResources->aiParty));
     gBattleResources->battleHistory = AllocZeroed(sizeof(*gBattleResources->battleHistory));
 
-    gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
-    gLinkBattleRecvBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
-
     gBattleAnimBgTileBuffer = AllocZeroed(0x2000);
     gBattleAnimBgTilemapBuffer = AllocZeroed(0x1000);
 
@@ -11903,9 +11900,6 @@ void FreeBattleResources(void)
         FREE_AND_SET_NULL(gBattleResources->aiParty);
         FREE_AND_SET_NULL(gBattleResources->battleHistory);
         FREE_AND_SET_NULL(gBattleResources);
-
-        FREE_AND_SET_NULL(gLinkBattleSendBuffer);
-        FREE_AND_SET_NULL(gLinkBattleRecvBuffer);
 
         FREE_AND_SET_NULL(gBattleAnimBgTileBuffer);
         FREE_AND_SET_NULL(gBattleAnimBgTilemapBuffer);

@@ -79,16 +79,6 @@ SECTIONS {
         gflib/sprite.o(.text);
         gflib/string_util.o(.text);
         src/link.o(.text);
-        src/AgbRfu_LinkManager.o(.text);
-        src/link_rfu_3.o(.text);
-        src/link_rfu_2.o(.text);
-        src/union_room.o(.text);
-        src/union_room_player_avatar.o(.text);
-        src/wireless_communication_status_screen.o(.text);
-        src/union_room_chat.o(.text);
-        src/berry_crush.o(.text);
-        src/berry_powder.o(.text);
-        src/dodrio_berry_picking.o(.text);
         src/minigame_countdown.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
@@ -179,7 +169,6 @@ SECTIONS {
         src/money.o(.text);
         src/contest_effect.o(.text);
         src/secret_base.o(.text);
-        src/contest_util.o(.text);
         src/script_pokemon_util.o(.text);
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
@@ -187,7 +176,6 @@ SECTIONS {
         src/field_special_scene.o(.text);
         src/rotating_gate.o(.text);
         src/safari_zone.o(.text);
-        src/contest_link.o(.text);
         src/item_use.o(.text);
         src/battle_anim_effects_1.o(.text);
         src/battle_anim_effects_2.o(.text);
@@ -335,7 +323,6 @@ SECTIONS {
         src/ereader_screen.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
-        src/contest_link_util.o(.text);
         src/gym_leader_rematch.o(.text);
         src/battle_transition_frontier.o(.text);
         src/international_string_util.o(.text);
@@ -366,10 +353,6 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
-        src/librfu_stwi.o(.text);
-        src/librfu_intr.o(.text);
-        src/librfu_rfu.o(.text);
-        src/librfu_sio32id.o(.text);
         src/libisagbprn.o(.text);
         *libagbsyscall.a:ArcTan2.o(.text);
         *libagbsyscall.a:BgAffineSet.o(.text);
@@ -453,17 +436,6 @@ SECTIONS {
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
-        src/AgbRfu_LinkManager.o(.rodata);
-        src/link_rfu_3.o(.rodata);
-        src/link_rfu_2.o(.rodata);
-        src/link_rfu_2.o(.rodata.str1.4);
-        src/union_room.o(.rodata);
-        src/union_room_player_avatar.o(.rodata);
-        src/wireless_communication_status_screen.o(.rodata);
-        src/union_room_chat.o(.rodata);
-        src/berry_crush.o(.rodata);
-        src/berry_powder.o(.rodata);
-        src/dodrio_berry_picking.o(.rodata);
         src/minigame_countdown.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
@@ -490,7 +462,6 @@ SECTIONS {
         src/battle_interface.o(.rodata);
         src/pokeball.o(.rodata);
         src/trade.o(.rodata);
-        src/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
         src/overworld.o(.rodata);
         src/tilesets.o(.rodata);
@@ -545,13 +516,11 @@ SECTIONS {
         src/money.o(.rodata);
         src/contest_effect.o(.rodata);
         src/secret_base.o(.rodata);
-        src/contest_util.o(.rodata);
         src/script_pokemon_util.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         src/fldeff_misc.o(.rodata);
         src/field_special_scene.o(.rodata);
         src/rotating_gate.o(.rodata);
-        src/contest_link.o(.rodata);
         src/item_use.o(.rodata);
         src/battle_anim_effects_1.o(.rodata);
         src/battle_anim_effects_2.o(.rodata);
@@ -1598,8 +1567,6 @@ SECTIONS {
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
         src/siirtc.o(.rodata);
-        src/librfu_rfu.o(.rodata);
-        src/librfu_sio32id.o(.rodata);
         *libgcc.a:_divdi3.o(.rodata);
         *libgcc.a:_udivdi3.o(.rodata);
         *libc.a:memcpy.o(.rodata);

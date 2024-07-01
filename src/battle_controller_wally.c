@@ -269,17 +269,7 @@ static void Intro_WaitForShinyAnimAndHealthbox(u32 battler)
 static void WallyBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = WallyBufferRunCommand;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        u8 playerId = GetMultiplayerId();
-
-        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
-        gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
-    }
-    else
-    {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
-    }
+    gBattleControllerExecFlags &= ~gBitTable[battler];
 }
 
 #define sSpeedX data[0]

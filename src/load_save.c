@@ -1,6 +1,5 @@
 #include "global.h"
 #include "malloc.h"
-#include "berry_powder.h"
 #include "item.h"
 #include "load_save.h"
 #include "main.h"
@@ -92,7 +91,6 @@ void MoveSaveBlocks_ResetHeap(void)
     hblankCB = gMain.hblankCallback;
     gMain.vblankCallback = NULL;
     gMain.hblankCallback = NULL;
-    gTrainerHillVBlankCounter = NULL;
 
     saveBlock2Copy = (struct SaveBlock2 *)(gHeap);
     saveBlock1Copy = (struct SaveBlock1 *)(gHeap + sizeof(struct SaveBlock2));

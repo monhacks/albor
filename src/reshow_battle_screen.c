@@ -145,12 +145,6 @@ static void CB2_ReshowBattleScreenAfterMenu(void)
                 species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[opponentBattler]], MON_DATA_SPECIES);
                 SetBattlerShadowSpriteCallback(opponentBattler, species);
             }
-
-            if (gWirelessCommType != 0 && gReceivedRemoteLinkPlayers)
-            {
-                LoadWirelessStatusIndicatorSpriteGfx();
-                CreateWirelessStatusIndicatorSprite(0, 0);
-            }
         }
         break;
     default:

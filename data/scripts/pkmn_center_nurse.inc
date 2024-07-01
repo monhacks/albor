@@ -17,10 +17,8 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	waitmovement 0
 	special HealPlayerParty
 	callnative UpdateFollowingPokemon
-	message gText_VuelveCuandoQuieras
-	waitmessage
-	delay 3
-	closemessage
+	msgbox gText_VuelveCuandoQuieras, MSGBOX_DEFAULT
+	release
 	end
 
 Movement_PkmnCenterNurse_Turn:

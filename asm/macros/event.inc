@@ -1269,8 +1269,7 @@
 	.byte 0x8d
 	.endm
 
-	@ Starts communication to initialize a link contest.
-	.macro contestlinktransfer
+	.macro unused0x8e
 	.byte 0x8e
 	.endm
 

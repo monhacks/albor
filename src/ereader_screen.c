@@ -413,7 +413,6 @@ static void Task_EReader(u8 taskId)
         }
         else if (GetBlockReceivedStatus())
         {
-            ResetBlockReceivedFlags();
             data->state = ER_STATE_VALIDATE_CARD;
         }
         break;

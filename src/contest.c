@@ -5,7 +5,6 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "contest.h"
-#include "contest_link.h"
 #include "data.h"
 #include "decompress.h"
 #include "graphics.h"
@@ -25,14 +24,12 @@
 #include "text.h"
 #include "scanline_effect.h"
 #include "util.h"
-#include "contest_util.h"
 #include "dma3.h"
 #include "battle_message.h"
 #include "event_scripts.h"
 #include "event_data.h"
 #include "strings.h"
 #include "contest_effect.h"
-#include "contest_link.h"
 #include "international_string_util.h"
 #include "data.h"
 #include "contest_ai.h"
@@ -45,13 +42,7 @@
 // This file's functions.
 static void LoadContestPalettes(void);
 static void Task_StartContestWaitFade(u8 taskId);
-static void Task_TryStartLinkContest(u8 taskId);
-static void Task_CommunicateMonIdxs(u8 taskId);
-static void Task_EndCommunicateMonIdxs(u8 taskId);
-static void Task_ReadyStartLinkContest(u8 taskId);
 static bool8 SetupContestGraphics(u8 *stateVar);
-static void Task_WaitToRaiseCurtainAtStart(u8 taskId);
-static void Task_RaiseCurtainAtStart(u8 taskId);
 static void VBlankCB_Contest(void);
 static void CB2_ContestMain(void);
 static void Task_DisplayAppealNumberText(u8 taskId);
@@ -61,13 +52,11 @@ static void Task_HandleMoveSelectInput(u8 taskId);
 static void DrawMoveSelectArrow(s8);
 static void EraseMoveSelectArrow(s8);
 static void Task_SelectedMove(u8 taskId);
-static void Task_EndCommunicateMoveSelections(u8 taskId);
 static void Task_HideMoveSelectScreen(u8 taskId);
 static void Task_HideApplauseMeterForAppealStart(u8 taskId);
 static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId);
 static void Task_AppealSetup(u8 taskId);
 static void Task_DoAppeals(u8 taskId);
-static void Task_EndWaitForLink(u8);
 static void SpriteCB_MonSlideIn(struct Sprite *);
 static void SpriteCB_MonSlideOut(struct Sprite *);
 static void Task_FinishRoundOfAppeals(u8);
@@ -86,11 +75,8 @@ static void Task_EndAppeals(u8);
 static void Task_WaitForOutOfTimeMsg(u8);
 static void Task_DropCurtainAtAppealsEnd(u8);
 static void Task_TryCommunicateFinalStandings(u8);
-static void Task_CommunicateFinalStandings(u8);
-static void Task_EndCommunicateFinalStandings(u8);
 static void Task_ContestReturnToField(u8);
 static void FieldCB_ContestReturnToField(void);
-static bool8 IsPlayerLinkLeader(void);
 static void PrintContestantTrainerName(u8);
 static void PrintContestantTrainerNameWithColor(u8, u8);
 static void PrintContestantMonName(u8);
@@ -103,7 +89,6 @@ static u16 SanitizeSpecies(u16);
 static void ContestClearGeneralTextWindow(void);
 static u16 GetChosenMove(u8);
 static void GetAllChosenMoves(void);
-static void ContestPrintLinkStandby(void);
 static void FillContestantWindowBgs(void);
 static void CreateSliderHeartSprites(void);
 static void SetBottomSliderHeartsInvisibility(bool8);
@@ -179,8 +164,6 @@ static void Task_WaitRaiseCurtainAtRoundEnd(u8);
 static void Task_StartRaiseCurtainAtRoundEnd(u8);
 static void Task_WaitForSliderHeartAnim(u8);
 static void SetBattleTargetSpritePosition(void);
-static void StripPlayerNameForLinkContest(u8 *);
-static void StripMonNameForLinkContest(u8 *, s32);
 static void SwapMoveDescAndContestTilemaps(void);
 
 // An index into a palette where the text color for each contestant is stored.
@@ -337,13 +320,8 @@ EWRAM_DATA u8 gContestFinalStandings[CONTESTANT_COUNT] = {0};
 EWRAM_DATA u8 gContestMonPartyIndex = 0;
 EWRAM_DATA u8 gContestPlayerMonIndex = 0;
 EWRAM_DATA u8 gContestantTurnOrder[CONTESTANT_COUNT] = {0};
-EWRAM_DATA u8 gLinkContestFlags = 0;
-// Bit 0: Is a link contest
-// Bit 1: Link contest uses wireless adapter
-EWRAM_DATA u8 gContestLinkLeaderIndex = 0;
 EWRAM_DATA u16 gSpecialVar_ContestCategory = 0;
 EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
-EWRAM_DATA u8 gNumLinkContestPlayers = 0;
 EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
 static EWRAM_DATA u8 sContestBgCopyFlags = 0;
@@ -1091,15 +1069,6 @@ static void CopyMoveNameToFit(u8 *dest, u32 move)
     WrapFontIdToFit(dest, end, FONT_NORMAL, 84);
 }
 
-static void TaskDummy1(u8 taskId)
-{
-}
-
-void ResetLinkContestBoolean(void)
-{
-    gLinkContestFlags = 0;
-}
-
 static void SetupContestGpuRegs(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
@@ -1159,14 +1128,7 @@ static void InitContestWindows(void)
 {
     InitWindows(sContestWindowTemplates);
     DeactivateAllTextPrinters();
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
-        gTextFlags.canABSpeedUpPrint = FALSE;
-    }
-    else
-    {
-        gTextFlags.canABSpeedUpPrint = TRUE;
-    }
+    gTextFlags.canABSpeedUpPrint = TRUE;
 }
 
 static void LoadContestPalettes(void)
@@ -1200,8 +1162,7 @@ static void InitContestResources(void)
     *gContestResources->excitement = (struct ContestExcitement){};
     memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
 
-    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
-        SortContestants(FALSE);
+    SortContestants(FALSE);
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1302,11 +1263,6 @@ void CB2_StartContest(void)
         SetVBlankCallback(VBlankCB_Contest);
         eContest.mainTaskId = CreateTask(Task_StartContestWaitFade, 10);
         SetMainCallback2(CB2_ContestMain);
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(8, 8);
-        }
         break;
     }
 }
@@ -1316,76 +1272,6 @@ static void Task_StartContestWaitFade(u8 taskId)
     if (!gPaletteFade.active)
     {
         gTasks[taskId].data[0] = 0;
-        gTasks[taskId].func = Task_TryStartLinkContest;
-    }
-}
-
-// If this is a link contest try to start appeals communication
-// Otherwise skip ahead
-static void Task_TryStartLinkContest(u8 taskId)
-{
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        {
-            switch (gTasks[taskId].data[0])
-            {
-            case 0:
-                ContestPrintLinkStandby();
-                gTasks[taskId].data[0]++;
-                // fallthrough
-            case 1:
-                if (IsLinkTaskFinished())
-                {
-                    SetLinkStandbyCallback();
-                    gTasks[taskId].data[0]++;
-                }
-                return;
-            case 2:
-                if (IsLinkTaskFinished() != TRUE)
-                    return;
-                gTasks[taskId].data[0]++;
-                break;
-            }
-        }
-
-        if (!gPaletteFade.active)
-        {
-            gPaletteFade.bufferTransferDisabled = FALSE;
-            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
-                ContestPrintLinkStandby();
-            CreateTask(Task_CommunicateMonIdxs, 0);
-            gTasks[taskId].data[0] = 0;
-            gTasks[taskId].func = TaskDummy1;
-        }
-    }
-    else
-    {
-        gTasks[taskId].func = Task_WaitToRaiseCurtainAtStart;
-    }
-}
-
-static void Task_CommunicateMonIdxs(u8 taskId)
-{
-    SetTaskFuncWithFollowupFunc(taskId, Task_LinkContest_CommunicateMonIdxs, Task_EndCommunicateMonIdxs);
-}
-
-static void Task_EndCommunicateMonIdxs(u8 taskId)
-{
-    gTasks[taskId].data[0] = 1;
-    gTasks[taskId].func = Task_ReadyStartLinkContest;
-}
-
-static void Task_ReadyStartLinkContest(u8 taskId)
-{
-    // data[0] always 1 here
-    gTasks[taskId].data[0]--;
-    if (gTasks[taskId].data[0] <= 0)
-    {
-        GetMultiplayerId();  // unused return value
-        DestroyTask(taskId);
-        gTasks[eContest.mainTaskId].func = Task_WaitToRaiseCurtainAtStart;
-        gRngValue = gContestRngValue;
     }
 }
 
@@ -1464,61 +1350,6 @@ static bool8 SetupContestGraphics(u8 *stateVar)
 
     (*stateVar)++;
     return FALSE;
-}
-
-static void Task_WaitToRaiseCurtainAtStart(u8 taskId)
-{
-    gPaletteFade.bufferTransferDisabled = FALSE;
-    if (!gPaletteFade.active)
-    {
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = 0;
-        gTasks[taskId].func = Task_RaiseCurtainAtStart;
-    }
-}
-
-static void Task_RaiseCurtainAtStart(u8 taskId)
-{
-    switch (gTasks[taskId].data[0])
-    {
-    case 0:
-        if (gTasks[taskId].data[1]++ <= 60)
-            break;
-        gTasks[taskId].data[1] = 0;
-        PlaySE12WithPanning(SE_CONTEST_CURTAIN_RISE, 0);
-        gTasks[taskId].data[0]++;
-        break;
-    case 1:
-        *(s16 *)&gBattle_BG1_Y += 7;
-        if ((s16)gBattle_BG1_Y <= DISPLAY_HEIGHT)
-            break;
-        gTasks[taskId].data[0]++;
-        break;
-    case 2:
-        UpdateContestantBoxOrder();
-        gTasks[taskId].data[0]++;
-        break;
-    case 3:
-    {
-        u32 bg0Cnt = GetGpuReg(REG_OFFSET_BG0CNT);
-        u32 bg2Cnt = GetGpuReg(REG_OFFSET_BG2CNT);
-        ((struct BgCnt *)&bg0Cnt)->priority = 0;
-        ((struct BgCnt *)&bg2Cnt)->priority = 0;
-        SetGpuReg(REG_OFFSET_BG0CNT, bg0Cnt);
-        SetGpuReg(REG_OFFSET_BG2CNT, bg2Cnt);
-        SlideApplauseMeterIn();
-        gTasks[taskId].data[0]++;
-        break;
-    }
-    case 4:
-    default:
-        if (eContest.applauseMeterIsMoving)
-            break;
-        gTasks[taskId].data[0] = 0;
-        gTasks[taskId].data[1] = 0;
-        gTasks[taskId].func = Task_DisplayAppealNumberText;
-        break;
-    }
 }
 
 static void CB2_ContestMain(void)
@@ -1721,29 +1552,8 @@ static void EraseMoveSelectArrow(s8 moveIndex)
 
 static void Task_SelectedMove(u8 taskId)
 {
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
-        u16 move = GetChosenMove(gContestPlayerMonIndex);
-        u8 taskId2;
-
-        eContestantStatus[gContestPlayerMonIndex].currMove = move;
-        taskId2 = CreateTask(Task_LinkContest_CommunicateMoveSelections, 0);
-        SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateMoveSelections, Task_EndCommunicateMoveSelections);
-        gTasks[taskId].func = TaskDummy1;
-        ContestPrintLinkStandby();
-        SetBottomSliderHeartsInvisibility(FALSE);
-    }
-    else
-    {
-        GetAllChosenMoves();
-        gTasks[taskId].func = Task_HideMoveSelectScreen;
-    }
-}
-
-static void Task_EndCommunicateMoveSelections(u8 taskId)
-{
-    DestroyTask(taskId);
-    gTasks[eContest.mainTaskId].func = Task_HideMoveSelectScreen;
+    GetAllChosenMoves();
+    gTasks[taskId].func = Task_HideMoveSelectScreen;
 }
 
 static void Task_HideMoveSelectScreen(u8 taskId)
@@ -1799,15 +1609,6 @@ static void Task_AppealSetup(u8 taskId)
     if (++gTasks[taskId].data[0] > 19)
     {
         eContest.turnNumber = 0;
-        if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) && IsPlayerLinkLeader())
-        {
-            s32 i;
-
-            for (i = 0; i + gNumLinkContestPlayers < CONTESTANT_COUNT; i++)
-            {
-                eContestantStatus[gNumLinkContestPlayers + i].currMove = GetChosenMove(gNumLinkContestPlayers + i);
-            }
-        }
         gTasks[taskId].tState = APPEALSTATE_START_TURN;
         gTasks[taskId].func = Task_DoAppeals;
     }
@@ -1827,23 +1628,8 @@ static void Task_DoAppeals(u8 taskId)
             ;
         eContest.currentContestant = i;
         contestant = eContest.currentContestant;
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        {
-            u8 taskId2;
-
-            eContest.waitForLink = TRUE;
-            if (IsPlayerLinkLeader())
-                CalculateAppealMoveImpact(eContest.currentContestant);
-            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
-            ContestPrintLinkStandby();
-            gTasks[taskId].tState = APPEALSTATE_WAIT_LINK;
-        }
-        else
-        {
-            CalculateAppealMoveImpact(eContest.currentContestant);
-            gTasks[taskId].tState = APPEALSTATE_CHECK_SKIP_TURN;
-        }
+        CalculateAppealMoveImpact(eContest.currentContestant);
+        gTasks[taskId].tState = APPEALSTATE_CHECK_SKIP_TURN;
         return;
     case APPEALSTATE_WAIT_LINK:
         if (!eContest.waitForLink)
@@ -2515,12 +2301,6 @@ static void Task_DoAppeals(u8 taskId)
     }
 }
 
-static void Task_EndWaitForLink(u8 taskId)
-{
-    eContest.waitForLink = FALSE;
-    DestroyTask(taskId);
-}
-
 static void SpriteCB_MonSlideIn(struct Sprite *sprite)
 {
     if (sprite->x2 != 0)
@@ -2552,27 +2332,9 @@ static void Task_FinishRoundOfAppeals(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        {
-            u8 taskId2;
-
-            eContest.waitForLink = TRUE;
-            if (IsPlayerLinkLeader())
-            {
-                RankContestants();
-                SetAttentionLevels();
-            }
-            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
-            ContestPrintLinkStandby();
-            gTasks[taskId].data[0] = 1;
-        }
-        else
-        {
-            RankContestants();
-            SetAttentionLevels();
-            gTasks[taskId].data[0] = 2;
-        }
+        RankContestants();
+        SetAttentionLevels();
+        gTasks[taskId].data[0] = 2;
         break;
     case 1:
         if (!eContest.waitForLink)
@@ -2774,33 +2536,9 @@ static void Task_TryCommunicateFinalStandings(u8 taskId)
     if (gTasks[taskId].data[0]++ >= 50)
     {
         gTasks[taskId].data[0] = 0;
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        {
-            gTasks[taskId].func = Task_CommunicateFinalStandings;
-        }
-        else
-        {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            gTasks[taskId].func = Task_ContestReturnToField;
-        }
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        gTasks[taskId].func = Task_ContestReturnToField;
     }
-}
-
-static void Task_CommunicateFinalStandings(u8 taskId)
-{
-    u8 taskId2 = CreateTask(Task_LinkContest_CommunicateFinalStandings, 0);
-
-    SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateFinalStandings, Task_EndCommunicateFinalStandings);
-    gTasks[taskId].func = TaskDummy1;
-    ContestPrintLinkStandby();
-    SetBottomSliderHeartsInvisibility(FALSE);
-}
-
-static void Task_EndCommunicateFinalStandings(u8 taskId)
-{
-    DestroyTask(taskId);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    gTasks[eContest.mainTaskId].func = Task_ContestReturnToField;
 }
 
 static void Task_ContestReturnToField(u8 taskId)
@@ -2824,15 +2562,7 @@ static void FieldCB_ContestReturnToField(void)
 
 static void TryPutPlayerLast(void)
 {
-    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
-        gContestPlayerMonIndex = CONTESTANT_COUNT - 1;
-}
-
-static bool8 IsPlayerLinkLeader(void)
-{
-    if (gContestPlayerMonIndex == gContestLinkLeaderIndex)
-        return TRUE;
-    return FALSE;
+    gContestPlayerMonIndex = CONTESTANT_COUNT - 1;
 }
 
 void CreateContestMonFromParty(u8 partyIndex)
@@ -2846,8 +2576,6 @@ void CreateContestMonFromParty(u8 partyIndex)
     s16 tough;
 
     StringCopy(name, gSaveBlock2Ptr->playerName);
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        StripPlayerNameForLinkContest(name);
     memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
     if (gSaveBlock2Ptr->playerGender == MALE)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
@@ -2858,10 +2586,6 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
     GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
     StringGet_Nickname(name);
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-    {
-        StripMonNameForLinkContest(name, GetMonData(&gPlayerParty[partyIndex], MON_DATA_LANGUAGE));
-    }
     memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, POKEMON_NAME_LENGTH + 1);
     StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
     gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
@@ -2921,7 +2645,7 @@ void SetContestants(u8 contestType, u8 rank)
 
     TryPutPlayerLast();
 
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
+    if (FlagGet(FLAG_SYS_GAME_CLEAR))
         allowPostgameContestants = TRUE;
 
     // Find all suitable opponents
@@ -2967,54 +2691,6 @@ void SetContestants(u8 contestType, u8 rank)
     }
 
     CreateContestMonFromParty(gContestMonPartyIndex);
-}
-
-void SetLinkAIContestants(u8 contestType, u8 rank, bool32 isPostgame)
-{
-    s32 i, j;
-    u8 opponentsCount = 0;
-    u8 opponents[100];
-
-    if (gNumLinkContestPlayers == CONTESTANT_COUNT)
-        return;
-
-    // Find all suitable AI opponents
-    for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
-    {
-        if (rank != gContestOpponents[i].whichRank)
-            continue;
-
-        if (isPostgame == TRUE)
-        {
-            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_NO_POSTGAME)
-                continue;
-        }
-        else
-        {
-            if (gPostgameContestOpponentFilter[i] == CONTEST_FILTER_ONLY_POSTGAME)
-                continue;
-        }
-        if ((contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
-            || (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
-            || (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
-            || (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
-            || (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough))
-            opponents[opponentsCount++] = i;
-    }
-    opponents[opponentsCount] = CONTESTANT_NONE;
-
-    // Fill remaining contestant slots with random AI opponents from the list
-    for (i = 0; i < CONTESTANT_COUNT - gNumLinkContestPlayers; i++)
-    {
-        u16 rnd = GetContestRand() % opponentsCount;
-
-        gContestMons[gNumLinkContestPlayers + i] = gContestOpponents[opponents[rnd]];
-        StripPlayerNameForLinkContest(gContestMons[gNumLinkContestPlayers + i].trainerName);
-        StripMonNameForLinkContest(gContestMons[gNumLinkContestPlayers + i].nickname, GAME_LANGUAGE);
-        for (j = rnd; opponents[j] != CONTESTANT_NONE; j++)
-            opponents[j] = opponents[j + 1];
-        opponentsCount--;
-    }
 }
 
 u8 GetContestEntryEligibility(struct Pokemon *pkmn)
@@ -3638,17 +3314,6 @@ static void DetermineFinalStandings(void)
         gContestFinalStandings[standings[i].contestant] = i;
 }
 
-void SaveLinkContestResults(void)
-{
-    if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
-    {
-        gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] =
-        ((gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1) > 9999) ? 9999 :
-        (gSaveBlock2Ptr->contestLinkResults[gSpecialVar_ContestCategory][gContestFinalStandings[gContestPlayerMonIndex]] + 1);
-
-    }
-}
-
 static bool8 DidContestantPlaceHigher(s32 a, s32 b, struct ContestFinalStandings *standings)
 {
     bool8 retVal;
@@ -3669,14 +3334,6 @@ static bool8 DidContestantPlaceHigher(s32 a, s32 b, struct ContestFinalStandings
     else
         retVal = FALSE;
     return retVal;
-}
-
-static void ContestPrintLinkStandby(void)
-{
-    gBattle_BG0_Y = 0;
-    gBattle_BG2_Y = 0;
-    ContestClearGeneralTextWindow();
-    Contest_StartTextPrinter(gText_LinkStandby4, FALSE);
 }
 
 static void FillContestantWindowBgs(void)
@@ -5089,23 +4746,8 @@ static void Task_ResetForNextRound(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        {
-            u8 taskId2;
-
-            eContest.waitForLink = TRUE;
-            if (IsPlayerLinkLeader())
-                SetContestantStatusesForNextRound();
-            taskId2 = CreateTask(Task_LinkContest_CommunicateAppealsState, 0);
-            SetTaskFuncWithFollowupFunc(taskId2, Task_LinkContest_CommunicateAppealsState, Task_EndWaitForLink);
-            ContestPrintLinkStandby();
-            gTasks[taskId].data[0] = 2;
-        }
-        else
-        {
-            SetContestantStatusesForNextRound();
-            gTasks[taskId].data[0] = 3;
-        }
+        SetContestantStatusesForNextRound();
+        gTasks[taskId].data[0] = 3;
         break;
     case 2:
         if (!eContest.waitForLink)
@@ -5398,10 +5040,7 @@ static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
     }
     else
     {
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-            speed = 4;
-        else
-            speed = GetPlayerTextSpeedDelay();
+        speed = GetPlayerTextSpeedDelay();
         AddTextPrinter(&printerTemplate, speed, 0);
     }
 
@@ -5429,16 +5068,6 @@ static bool32 Contest_RunTextPrinters(void)
 static void Contest_SetBgCopyFlags(u32 flagIndex)
 {
     sContestBgCopyFlags |= 1 << flagIndex;
-}
-
-void ResetContestLinkResults(void)
-{
-    s32 i;
-    s32 j;
-
-    for(i = 0; i < CONTEST_CATEGORIES_COUNT; i++)
-        for(j = 0; j < CONTESTANT_COUNT; j++)
-            gSaveBlock2Ptr->contestLinkResults[i][j] = 0;
 }
 
 bool8 SaveContestWinner(u8 rank)
@@ -5486,10 +5115,7 @@ bool8 SaveContestWinner(u8 rank)
         gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
         StringCopyN(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);
         StringCopy(gSaveBlock1Ptr->contestWinners[id].trainerName, gContestMons[i].trainerName);
-        if(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-            gSaveBlock1Ptr->contestWinners[id].contestRank = CONTEST_RANK_LINK;
-        else
-            gSaveBlock1Ptr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
+        gSaveBlock1Ptr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
 
         if (rank != CONTEST_SAVE_FOR_MUSEUM)
             gSaveBlock1Ptr->contestWinners[id].contestCategory = gSpecialVar_ContestCategory;
@@ -5559,115 +5185,3 @@ void ClearContestWinnerPicsInContestHall(void)
 }
 
 #define APPEAL_MOVES_END 0xFFFF
-
-static u8 GetMonNicknameLanguage(u8 *nickname)
-{
-    u8 ret = GAME_LANGUAGE;
-
-    if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
-        return GAME_LANGUAGE;
-
-    if (StringLength(nickname) <= 5)
-    {
-        // Name is short enough that it might be Japanese.
-        // Make sure  all the character values are valid latin name characters.
-        while (*nickname != EOS)
-        {
-            if ((*nickname >= CHAR_A && *nickname <= CHAR_z)
-                || (*nickname >= CHAR_0 && *nickname <= CHAR_9)
-                || *nickname == CHAR_SPACE
-                || *nickname == CHAR_PERIOD
-                || *nickname == CHAR_COMMA
-                || *nickname == CHAR_EXCL_MARK
-                || *nickname == CHAR_QUESTION_MARK
-                || *nickname == CHAR_MALE
-                || *nickname == CHAR_FEMALE
-                || *nickname == CHAR_SLASH
-                || *nickname == CHAR_HYPHEN
-                || *nickname == CHAR_ELLIPSIS
-                || *nickname == CHAR_DBL_QUOTE_LEFT
-                || *nickname == CHAR_DBL_QUOTE_RIGHT
-                || *nickname == CHAR_SGL_QUOTE_LEFT
-#ifdef BUGFIX
-                || *nickname == CHAR_SGL_QUOTE_RIGHT
-#else
-                || *nickname == CHAR_DBL_QUOTE_LEFT // Most likely a typo, CHAR_SGL_QUOTE_RIGHT should be here instead.
-#endif
-                )
-            {
-                nickname++;
-            }
-            else
-            {
-                // Invalid latin name character, assume the name was Japanese.
-                ret = LANGUAGE_JAPANESE;
-                break;
-            }
-        }
-    }
-
-    return ret;
-}
-
-static void StripPlayerNameForLinkContest(u8 *playerName)
-{
-    u8 chr = playerName[5];
-
-    playerName[5] = EOS;
-    playerName[PLAYER_NAME_LENGTH] = chr;
-}
-
-static void StripMonNameForLinkContest(u8 *monName, s32 language)
-{
-    u8 chr;
-
-    StripExtCtrlCodes(monName);
-    if (language == LANGUAGE_JAPANESE)
-    {
-        monName[5] = EOS;
-        monName[POKEMON_NAME_LENGTH] = EXT_CTRL_CODE_BEGIN;
-    }
-    else
-    {
-        chr = monName[5];
-        monName[5] = EOS;
-        monName[POKEMON_NAME_LENGTH] = chr;
-    }
-}
-
-void StripPlayerAndMonNamesForLinkContest(struct ContestPokemon *mon, s32 language)
-{
-    u8 *name = mon->nickname;
-
-    if (language == LANGUAGE_JAPANESE)
-    {
-        ConvertInternationalString(name, GetMonNicknameLanguage(name));
-    }
-    else if (name[POKEMON_NAME_LENGTH] == EXT_CTRL_CODE_BEGIN)
-    {
-        ConvertInternationalString(name, LANGUAGE_JAPANESE);
-    }
-    else
-    {
-        name[5] = name[POKEMON_NAME_LENGTH];
-        name[POKEMON_NAME_LENGTH] = EOS;
-    }
-
-    name = mon->trainerName;
-    if (language == LANGUAGE_JAPANESE)
-    {
-        name[7] = EOS;
-        name[6] = name[4];
-        name[5] = name[3];
-        name[4] = name[2];
-        name[3] = name[1];
-        name[2] = mon->trainerName[0];
-        name[1] = EXT_CTRL_CODE_JPN;
-        name[0] = EXT_CTRL_CODE_BEGIN;
-    }
-    else
-    {
-        name[5] = name[PLAYER_NAME_LENGTH];
-        name[PLAYER_NAME_LENGTH] = EOS;
-    }
-}

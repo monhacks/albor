@@ -30,7 +30,6 @@
 #include "frontier_util.h"
 #include "pokedex.h"
 #include "save.h"
-#include "link_rfu.h"
 #include "main.h"
 #include "contest.h"
 #include "item_menu.h"
@@ -39,15 +38,12 @@
 #include "secret_base.h"
 #include "player_pc.h"
 #include "field_specials.h"
-#include "berry_powder.h"
-#include "union_room_chat.h"
 #include "constants/items.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
-static void ResetMiniGamesRecords(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 
@@ -162,7 +158,6 @@ void NewGameInitData(void)
     ClearBerryTrees();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
     SetCoins(0);
-    ResetLinkContestBoolean();
     ResetGameStats();
     ClearAllContestWinnerPics();
     ClearPlayerLinkBattleRecords();
@@ -184,19 +179,8 @@ void NewGameInitData(void)
     ResetLotteryCorner();
     WarpToTruck();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
-    ResetMiniGamesRecords();
-    InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();
     ResetAllApprenticeData();
     InitMatchCallCounters();
-    WipeTrainerNameRecords();
     ResetTrainerHillResults();
-    ResetContestLinkResults();
-}
-
-static void ResetMiniGamesRecords(void)
-{
-    CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
-    SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
-    CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }

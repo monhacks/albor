@@ -44,7 +44,6 @@ static void LinkOpponentHandleLinkStandbyMsg(u32 battler);
 static void LinkOpponentHandleEndLinkBattle(u32 battler);
 
 static void LinkOpponentBufferRunCommand(u32 battler);
-static void LinkOpponentBufferExecCompleted(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 
 static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
@@ -104,7 +103,6 @@ static void (*const sLinkOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 batt
 
 void SetControllerToLinkOpponent(u32 battler)
 {
-    gBattlerControllerEndFuncs[battler] = LinkOpponentBufferExecCompleted;
     gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
 }
 
@@ -114,8 +112,6 @@ static void LinkOpponentBufferRunCommand(u32 battler)
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sLinkOpponentBufferCommands))
             sLinkOpponentBufferCommands[gBattleResources->bufferA[battler][0]](battler);
-        else
-            LinkOpponentBufferExecCompleted(battler);
     }
 }
 
@@ -124,7 +120,6 @@ static void Intro_DelayAndEnd(u32 battler)
     if (--gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay == (u8)-1)
     {
         gBattleSpritesDataPtr->healthBoxesData[battler].introEndDelay = 0;
-        LinkOpponentBufferExecCompleted(battler);
     }
 }
 
@@ -289,7 +284,6 @@ static void TryShinyAnimAfterMonAnim(u32 battler)
             gBattleSpritesDataPtr->healthBoxesData[battler].finishedShinyMonAnim = FALSE;
             FreeSpriteTilesByTag(ANIM_TAG_GOLD_STARS);
             FreeSpritePaletteByTag(ANIM_TAG_GOLD_STARS);
-            LinkOpponentBufferExecCompleted(battler);
         }
     }
 }
@@ -313,7 +307,6 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
             || gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy_2)
         {
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-            LinkOpponentBufferExecCompleted(battler);
         }
     }
 }
@@ -353,22 +346,6 @@ static void SwitchIn_TryShinyAnim(u32 battler)
         DestroySprite(&gSprites[gBattleControllerData[battler]]);
         SetBattlerShadowSpriteCallback(battler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES));
         gBattlerControllerFuncs[battler] = SwitchIn_ShowHealthbox;
-    }
-}
-
-static void LinkOpponentBufferExecCompleted(u32 battler)
-{
-    gBattlerControllerFuncs[battler] = LinkOpponentBufferRunCommand;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        u8 playerId = GetMultiplayerId();
-
-        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
-        gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
-    }
-    else
-    {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
     }
 }
 
@@ -428,11 +405,7 @@ static void LinkOpponentHandleDrawTrainerPic(u32 battler)
     else
     {
         xPos = 176;
-        if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-        {
-            trainerPicId = GetUnionRoomTrainerPic();
-        }
-        else if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
+        if ((gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_FIRE_RED
                  || (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].version & 0xFF) == VERSION_LEAF_GREEN)
         {
             if (gLinkPlayers[GetMultiplayerId() ^ BIT_SIDE].gender != MALE)
@@ -467,7 +440,6 @@ static void LinkOpponentHandleTrainerSlide(u32 battler)
         trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_B);
 
     BtlController_HandleTrainerSlide(battler, trainerPicId);
-    LinkOpponentBufferExecCompleted(battler); // Possibly a bug, because execution should be completed after the slide in finishes. See Controller_WaitForTrainerPic.
 }
 
 static void LinkOpponentHandleTrainerSlideBack(u32 battler)
@@ -508,7 +480,6 @@ static void LinkOpponentHandleBattleAnimation(u32 battler)
 static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
 {
     RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
-    LinkOpponentBufferExecCompleted(battler);
 }
 
 static void LinkOpponentHandleEndLinkBattle(u32 battler)
@@ -523,6 +494,5 @@ static void LinkOpponentHandleEndLinkBattle(u32 battler)
     gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
-    LinkOpponentBufferExecCompleted(battler);
     gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
 }

@@ -24,7 +24,6 @@
 #include "heal_location.h"
 #include "io_reg.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -128,7 +127,6 @@ static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
 // can process it.
 static u16 (*sPlayerKeyInterceptCallback)(u32);
 static bool8 sReceivingFromLink;
-static u8 sRfuKeepAliveTimer;
 
 u16 *gOverworldTilemapBuffer_Bg2;
 u16 *gOverworldTilemapBuffer_Bg1;
@@ -1852,21 +1850,11 @@ static void FieldClearVBlankHBlankCallbacks(void)
 {
     if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();
-
-    if (gWirelessCommType != 0)
-    {
-        EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-        DisableInterrupts(INTR_FLAG_HBLANK);
-    }
-    else
-    {
-        u16 savedIme = REG_IME;
-        REG_IME = 0;
-        REG_IE &= ~INTR_FLAG_HBLANK;
-        REG_IE |= INTR_FLAG_VBLANK;
-        REG_IME = savedIme;
-    }
-
+    u16 savedIme = REG_IME;
+    REG_IME = 0;
+    REG_IE &= ~INTR_FLAG_HBLANK;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = savedIme;
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
 }
@@ -2059,11 +2047,6 @@ static bool32 ReturnToFieldLink(u8 *state)
         (*state)++;
         break;
     case 11:
-        if (gWirelessCommType != 0)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
         (*state)++;
         break;
     case 12:
@@ -2213,18 +2196,7 @@ void ResetAllMultiplayerState(void)
 
 static void SetKeyInterceptCallback(u16 (*func)(u32))
 {
-    sRfuKeepAliveTimer = 0;
     sPlayerKeyInterceptCallback = func;
-}
-
-// Once every ~60 frames, if the link state hasn't changed (timer reset by calls
-// to SetKeyInterceptCallback), it does a bunch of sanity checks on the connection.
-// I'm not sure if sRfuKeepAliveTimer is reset in the process, though; rfu stuff is
-// still undocumented.
-static void CheckRfuKeepAliveTimer(void)
-{
-    if (gWirelessCommType != 0 && ++sRfuKeepAliveTimer > 60)
-        LinkRfu_FatalError();
 }
 
 static void ResetAllPlayerLinkStates(void)
@@ -2264,7 +2236,6 @@ static u16 KeyInterCB_SelfIdle(u32 key)
 
 static u16 KeyInterCB_Idle(u32 key)
 {
-    CheckRfuKeepAliveTimer();
     return LINK_KEY_CODE_EMPTY;
 }
 
@@ -2390,9 +2361,7 @@ bool32 Overworld_SendKeysToLinkIsRunning(void)
 
 bool32 IsSendingKeysOverCable(void)
 {
-    if (gWirelessCommType != 0)
-        return FALSE;
-    else if (!IsSendingKeysToLink())
+    if (!IsSendingKeysToLink())
         return FALSE;
     else
         return TRUE;
@@ -2400,10 +2369,7 @@ bool32 IsSendingKeysOverCable(void)
 
 static u32 GetLinkSendQueueLength(void)
 {
-    if (gWirelessCommType != 0)
-        return gRfu.sendQueue.count;
-    else
-        return gLink.sendQueue.count;
+    return gLink.sendQueue.count;
 }
 
 void ClearLinkPlayerObjectEvents(void)

@@ -2,8 +2,6 @@
 #include "crt0.h"
 #include "malloc.h"
 #include "link.h"
-#include "link_rfu.h"
-#include "librfu.h"
 #include "m4a.h"
 #include "bg.h"
 #include "rtc.h"
@@ -79,7 +77,6 @@ static void CallCallbacks(void);
 static void SeedRngWithRtc(void);
 static void ReadKeys(void);
 void InitIntrHandlers(void);
-static void WaitForVBlank(void);
 void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
@@ -118,14 +115,13 @@ void AgbMainLoop(void)
         CallCallbacks();
         PlayTimeCounter_Update();
         MapMusicMain();
-        WaitForVBlank();
+        VBlankIntrWait();
     }
 }
 
 static void InitMainCallbacks(void)
 {
     gMain.vblankCounter1 = 0;
-    gTrainerHillVBlankCounter = NULL;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(gInitialMainCB2);
@@ -367,33 +363,6 @@ static void SerialIntr(void)
 
 static void IntrDummy(void)
 {}
-
-static void WaitForVBlank(void)
-{
-    gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-
-    if (gWirelessCommType != 0)
-    {
-        // Desynchronization may occur if wireless adapter is connected
-        // and we call VBlankIntrWait();
-        while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
-            ;
-    }
-    else
-    {
-        VBlankIntrWait();
-    }
-}
-
-void SetTrainerHillVBlankCounter(u32 *counter)
-{
-    gTrainerHillVBlankCounter = counter;
-}
-
-void ClearTrainerHillVBlankCounter(void)
-{
-    gTrainerHillVBlankCounter = NULL;
-}
 
 void DoSoftReset(void)
 {

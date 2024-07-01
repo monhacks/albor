@@ -20,28 +20,6 @@ const u8 gText_NamingScreenKeyboard_56789[] = _("{CLEAR 11}5{CLEAR 16}6{CLEAR 16
 const u8 gText_NamingScreenKeyboard_Symbols1[] = _("{CLEAR 12}!{CLEAR 17}?{CLEAR 16}♂{CLEAR 16}♀{CLEAR 16}/{CLEAR 17}-");
 const u8 gText_NamingScreenKeyboard_Symbols2[] = _("{CLEAR 11}…{CLEAR 16}“{CLEAR 16}”{CLEAR 18}‘{CLEAR 19}'{CLEAR 18} ");
 
-// Union Room Chat keyboard
-const u8 gText_UnionRoomChatKeyboard_ABCDE[] = _("ABCDE");
-const u8 gText_UnionRoomChatKeyboard_FGHIJ[] = _("FGHIJ");
-const u8 gText_UnionRoomChatKeyboard_KLMNO[] = _("KLMNO");
-const u8 gText_UnionRoomChatKeyboard_PQRST[] = _("PQRST");
-const u8 gText_UnionRoomChatKeyboard_UVWXY[] = _("UVWXY");
-const u8 gText_UnionRoomChatKeyboard_Z[] = _("Z    ");
-const u8 gText_UnionRoomChatKeyboard_01234Upper[] = _("01234");
-const u8 gText_UnionRoomChatKeyboard_56789Upper[] = _("56789");
-const u8 gText_UnionRoomChatKeyboard_PunctuationUpper[] = _(".,!? ");
-const u8 gText_UnionRoomChatKeyboard_SymbolsUpper[] = _("-/&… ");
-const u8 gText_UnionRoomChatKeyboard_abcde[] = _("abcde");
-const u8 gText_UnionRoomChatKeyboard_fghij[] = _("fghij");
-const u8 gText_UnionRoomChatKeyboard_klmno[] = _("klmno");
-const u8 gText_UnionRoomChatKeyboard_pqrst[] = _("pqrst");
-const u8 gText_UnionRoomChatKeyboard_uvwxy[] = _("uvwxy");
-const u8 gText_UnionRoomChatKeyboard_z[] = _("z    ");
-const u8 gText_UnionRoomChatKeyboard_01234Lower[] = _("01234");
-const u8 gText_UnionRoomChatKeyboard_56789Lower[] = _("56789");
-const u8 gText_UnionRoomChatKeyboard_PunctuationLower[] = _(".,!? ");
-const u8 gText_UnionRoomChatKeyboard_SymbolsLower[] = _("-/&… ");
-
 const u8 gText_EmptyTextInput1[] = _("");
 const u8 gText_EmptyTextInput2[] = _("");
 const u8 gText_EmptyTextInput3[] = _("");
@@ -50,15 +28,3 @@ const u8 gText_EmptyTextInput5[] = _("");
 const u8 gText_EmptyTextInput6[] = _("");
 const u8 gText_EmptyTextInput7[] = _("");
 const u8 gText_EmptyTextInput8[] = _("");
-
-// Union Room Chat keyboard emojis
-const u8 gText_UnionRoomChatKeyboard_Emoji1[] = _("{EMOJI_MISCHIEVOUS}{EMOJI_HAPPY}{EMOJI_ANGRY}{EMOJI_SURPRISED}{EMOJI_BIGANGER}");
-const u8 gText_UnionRoomChatKeyboard_Emoji2[] = _("{EMOJI_BIGSMILE}{EMOJI_EVIL}{EMOJI_NEUTRAL}{EMOJI_TIRED}{EMOJI_SHOCKED}");
-const u8 gText_UnionRoomChatKeyboard_Emoji3[] = _("{EMOJI_LEAF}{EMOJI_FIRE}{EMOJI_WATER}{EMOJI_BOLT}{EMOJI_BALL}");
-const u8 gText_UnionRoomChatKeyboard_Emoji4[] = _("♂♀{EMOJI_LEFT_PAREN}{EMOJI_RIGHT_PAREN}{EMOJI_TILDE}");
-const u8 gText_UnionRoomChatKeyboard_Emoji5[] = _("{EMOJI_LEFT_EYE}{EMOJI_RIGHT_EYE}{EMOJI_SMALLWHEEL}{EMOJI_SPHERE}{EMOJI_IRRITATED}");
-const u8 gText_UnionRoomChatKeyboard_Emoji6[] = _("{EMOJI_AT}{EMOJI_BIGWHEEL}{EMOJI_TONGUE}{EMOJI_ACUTE}{EMOJI_GRAVE}");
-const u8 gText_UnionRoomChatKeyboard_Emoji7[] = _("{EMOJI_RIGHT_FIST}{EMOJI_LEFT_FIST}{EMOJI_TRIANGLE_OUTLINE}{EMOJI_UNION}{EMOJI_GREATER_THAN}");
-const u8 gText_UnionRoomChatKeyboard_Emoji8[] = _("{EMOJI_CIRCLE}{EMOJI_TRIANGLE}{EMOJI_SQUARE}{EMOJI_HEART}{EMOJI_MOON}");
-const u8 gText_UnionRoomChatKeyboard_Emoji9[] = _("{EMOJI_NOTE}{EMOJI_PLUS}{EMOJI_MINUS}{EMOJI_EQUALS}{EMOJI_PIPE}");
-const u8 gText_UnionRoomChatKeyboard_Emoji10[] = _("{EMOJI_HIGHBAR}{EMOJI_UNDERSCORE};: ");

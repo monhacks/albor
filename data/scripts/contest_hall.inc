@@ -100,15 +100,6 @@ LilycoveCity_ContestLobby_EventScript_CancelEnterContest::
 	end
 
 LilycoveCity_ContestLobby_EventScript_ChooseContestMon::
-	msgbox LilycoveCity_ContestLobby_Text_EnterWhichPokemon1, MSGBOX_DEFAULT
-	choosecontestmon
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
-	special TryEnterContestMon
-	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST, LilycoveCity_ContestLobby_EventScript_CantEnterLowRank
-	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_EQUAL_RANK, LilycoveCity_ContestLobby_EventScript_EnterMon
-	goto_if_eq VAR_RESULT, CAN_ENTER_CONTEST_HIGH_RANK, LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon
-	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_EGG, LilycoveCity_ContestLobby_EventScript_CantEnterEgg
-	goto_if_eq VAR_RESULT, CANT_ENTER_CONTEST_FAINTED, LilycoveCity_ContestLobby_EventScript_CantEnterFainted
 	end
 
 LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
@@ -199,26 +190,6 @@ LilycoveCity_ContestLobby_EventScript_EnterMon::
 	return
 
 ContestHall_EventScript_DoContest::
-	special LinkContestTryShowWirelessIndicator
-	setvar VAR_0x8006, 0
-	lockall
-	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4FaceUp
-	waitmovement 0
-	applymovement LOCALID_MC, ContestHall_Movement_MCWalkDown
-	waitmovement 0
-	releaseall
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_GetContestRankStringId
-	call ContestHall_EventScript_GetContestCategory
-	call ContestHall_EventScript_ContestGettingStarted
-	call ContestHall_EventScript_ShowContestMons
-	call ContestHall_EventScript_DoContestAppeals
-	call ContestHall_EventScript_ContestResults
-	call ContestHall_EventScript_GetWinnerObjEventId
-	call ContestHall_EventScript_CongratulateWinner
-	call ContestHall_EventScript_AudienceLookAround
-	call ContestHall_EventScript_GiveWinnerPrize
-	setvar VAR_CONTEST_HALL_STATE, 2
 	return
 
 ContestHall_EventScript_GetContestRankStringId::
@@ -293,10 +264,6 @@ ContestHall_EventScript_GettingStarted::
 	return
 
 ContestHall_EventScript_GettingStartedLink::
-	specialvar VAR_RESULT, IsWirelessContest
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_GettingStartedWireless
-	messageautoscroll ContestHall_Text_GettingStartedParticipantsAsFollowsLink
-	waitmessage
 	return
 
 ContestHall_EventScript_GettingStartedWireless::
@@ -323,13 +290,9 @@ ContestHall_EventScript_ShowContestMons::
 	return
 
 ContestHall_EventScript_TryWaitForLink::
-	specialvar VAR_RESULT, IsWirelessContest
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_WaitForLink
 	return
 
 ContestHall_EventScript_WaitForLink::
-	special LinkContestWaitForConnection
-	waitstate
 	return
 
 ContestHall_EventScript_ContestantWalkToCenter::
@@ -376,25 +339,6 @@ ContestHall_EventScript_Player4WalkToCenter::
 	return
 
 ContestHall_EventScript_ShowContestMonPic::
-	special BufferContestTrainerAndMonNames
-	addvar VAR_0x8006, 1
-	buffernumberstring STR_VAR_2, VAR_0x8006
-	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
-	waitmovement 0
-	releaseall
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_CheckIfContestWithRSPlayer
-	addobject LOCALID_POKEBALL
-	playse SE_LEDGE
-	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_ContestantDelay32
-	waitmovement 0
-	releaseall
-	addvar VAR_0x8006, -1
-	playse SE_BALL_OPEN
-	special ShowContestEntryMonPic
-	call ContestHall_EventScript_EntryXTrainersMon
 	return
 
 ContestHall_EventScript_EntryXTrainersMon::
@@ -430,10 +374,6 @@ ContestHall_EventScript_AudienceWillVote::
 	return
 
 ContestHall_EventScript_AudienceWillVoteLink::
-	specialvar VAR_RESULT, IsWirelessContest
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_AudienceWillVoteWireless
-	messageautoscroll ContestHall_Text_SeenContestantsAudienceWillVote
-	waitmessage
 	return
 
 ContestHall_EventScript_AudienceWillVoteWireless::
@@ -490,44 +430,9 @@ ContestHall_EventScript_AudienceReactToContestant::
 @ VAR_TEMP_1 through VAR_TEMP_8 represent each of the 8 audience members that are actual object events
 @    and are set to 9 if they havent displayed a heart yet, and 1 if they have
 ContestHall_EventScript_AudienceHeartEmotes::
-	special GetContestMonCondition
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_GetNumberOfHeartsNormal
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_GetNumberOfHeartsSuper
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_HYPER, ContestHall_EventScript_GetNumberOfHeartsHyper
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_MASTER, ContestHall_EventScript_GetNumberOfHeartsMaster
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_GetNumberOfHeartsLink
-	setvar VAR_TEMP_1, 9
-	setvar VAR_TEMP_2, 9
-	setvar VAR_TEMP_3, 9
-	setvar VAR_TEMP_4, 9
-	setvar VAR_TEMP_5, 9
-	setvar VAR_TEMP_6, 9
-	setvar VAR_TEMP_7, 9
-	setvar VAR_TEMP_8, 9
-	call_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts
-	setvar VAR_TEMP_1, 0
-	setvar VAR_TEMP_2, 0
-	setvar VAR_TEMP_3, 0
-	setvar VAR_TEMP_4, 0
-	setvar VAR_TEMP_5, 0
-	setvar VAR_TEMP_6, 0
-	setvar VAR_TEMP_7, 0
-	setvar VAR_TEMP_8, 0
 	return
 
 ContestHall_EventScript_DisplayHearts::
-	setvar VAR_RESULT, 8
-	special GenerateContestRand
-	call_if_eq VAR_RESULT, 0, ContestHall_EventScript_TryDisplayHeartAudienceMember1
-	call_if_eq VAR_RESULT, 1, ContestHall_EventScript_TryDisplayHeartAudienceMember2
-	call_if_eq VAR_RESULT, 2, ContestHall_EventScript_TryDisplayHeartAudienceMember3
-	call_if_eq VAR_RESULT, 3, ContestHall_EventScript_TryDisplayHeartAudienceMember4
-	call_if_eq VAR_RESULT, 4, ContestHall_EventScript_TryDisplayHeartAudienceMember5
-	call_if_eq VAR_RESULT, 5, ContestHall_EventScript_TryDisplayHeartAudienceMember6
-	call_if_eq VAR_RESULT, 6, ContestHall_EventScript_TryDisplayHeartAudienceMember7
-	call_if_eq VAR_RESULT, 7, ContestHall_EventScript_TryDisplayHeartAudienceMember8
-	goto_if_gt VAR_TEMP_0, 0, ContestHall_EventScript_DisplayHearts  @ Still more hearts to display
-	waitmovement 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsNormal::
@@ -719,16 +624,6 @@ ContestHall_EventScript_AudienceMember8AlreadyEmoted::
 	return
 
 ContestHall_EventScript_ContestantReturn::
-	closemessage
-	release
-	removeobject LOCALID_POKEBALL
-	special HideContestEntryMonPic
-	call ContestHall_EventScript_TryWaitForLink
-	switch VAR_0x8006
-	case 0, ContestHall_EventScript_Player1WalkBack
-	case 1, ContestHall_EventScript_Player2WalkBack
-	case 2, ContestHall_EventScript_Player3WalkBack
-	case 3, ContestHall_EventScript_Player4WalkBack
 	return
 
 ContestHall_EventScript_Player1WalkBack::
@@ -764,27 +659,6 @@ ContestHall_EventScript_Player4WalkBack::
 	return
 
 ContestHall_EventScript_DoContestAppeals::
-	lockall
-	applymovement LOCALID_MC, ContestHall_Movement_FaceContestants2
-	waitmovement 0
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_LetsAppeal
-	waitmessage
-	applymovement LOCALID_MC, ContestHall_Movement_WalkStageLeft
-	applymovement LOCALID_JUDGE, ContestHall_Movement_WalkStageRight
-	waitmovement 0
-	releaseall
-	call ContestHall_EventScript_TryWaitForLink
-	setvar VAR_TEMP_9, 1
-	special LinkContestTryHideWirelessIndicator
-	startcontest
-	special LinkContestTryShowWirelessIndicator
-	setvar VAR_TEMP_9, 0
-	lockall
-	applymovement LOCALID_MC, ContestHall_Movement_WalkStageRight
-	applymovement LOCALID_JUDGE, ContestHall_Movement_WalkStageLeft
-	waitmovement 0
-	releaseall
 	return
 
 ContestHall_EventScript_LetsAppeal::
@@ -793,10 +667,6 @@ ContestHall_EventScript_LetsAppeal::
 	return
 
 ContestHall_EventScript_LetsAppealLink::
-	specialvar VAR_RESULT, IsWirelessContest
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_LetsAppealWireless
-	messageautoscroll ContestHall_Text_VotingCompleteLetsAppeal
-	waitmessage
 	return
 
 ContestHall_EventScript_LetsAppealWireless::
@@ -813,26 +683,6 @@ ContestHall_EventScript_LetsAppealWireless::
 	return
 
 ContestHall_EventScript_ContestResults::
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_ThatsItForJudging
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_ThankYouForAppeals
-	call ContestHall_EventScript_TryWaitForLink
-	applymovement LOCALID_MC, ContestHall_Movement_MCFaceJudge
-	waitmovement 0
-	call ContestHall_EventScript_JudgeLooksReady
-	call ContestHall_EventScript_TryWaitForLink
-	call ContestHall_EventScript_WeWillDeclareWinner
-	call ContestHall_EventScript_TryWaitForLink
-	applymovement LOCALID_MC, ContestHall_Movement_FaceContestants
-	waitmovement 0
-	closemessage
-	releaseall
-	special LinkContestTryHideWirelessIndicator
-	setvar VAR_TEMP_9, 1
-	showcontestresults
-	setvar VAR_TEMP_9, 0
-	playbgm MUS_CONTEST_WINNER, FALSE
 	return
 
 ContestHall_EventScript_ThatsItForJudging::
@@ -884,12 +734,6 @@ ContestHall_EventScript_WeWillDeclareWinnerLink::
 	return
 
 ContestHall_EventScript_GetWinnerObjEventId::
-	special GetContestWinnerId
-	switch VAR_0x8005
-	case 0, ContestHall_EventScript_GetPlayer1ObjEventId
-	case 1, ContestHall_EventScript_GetPlayer2ObjEventId
-	case 2, ContestHall_EventScript_GetPlayer3ObjEventId
-	case 3, ContestHall_EventScript_GetPlayer4ObjEventId
 	return
 
 ContestHall_EventScript_GetPlayer1ObjEventId::
@@ -909,16 +753,6 @@ ContestHall_EventScript_GetPlayer4ObjEventId::
 	return
 
 ContestHall_EventScript_CongratulateWinner::
-	special BufferContestWinnerTrainerName
-	special BufferContestWinnerMonName
-	addvar VAR_0x8005, 1
-	buffernumberstring STR_VAR_2, VAR_0x8005
-	addvar VAR_0x8005, -1
-	call ContestHall_EventScript_CongratsWinner
-	applymovement VAR_TEMP_3, ContestHall_Movement_WinningPlayerWalkUp
-	waitmovement 0
-	playse SE_M_ENCORE2
-	setvar VAR_TEMP_1, 0
 	return
 
 ContestHall_EventScript_CongratsWinner::
@@ -1017,39 +851,15 @@ ContestHall_EventScript_VObjectAudienceLookAround::
 	return
 
 ContestHall_EventScript_GiveWinnerPrize::
-	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EndLinkContest
-	call ContestHall_EventScript_CheckShouldSkipPrize
-	goto_if_set FLAG_TEMP_2, ContestHall_EventScript_SkipPrize
-	lockall
-	msgbox ContestHall_Text_AcceptYourPrize, MSGBOX_DEFAULT
-	releaseall
-	call ContestHall_EventScript_WinnerApproachForPrize
-	call ContestHall_EventScript_GivePrizeIfWinner
-	playse SE_M_ENCORE2
-	setvar VAR_TEMP_1, 0
-	call ContestHall_EventScript_AudienceLookAround
-	delay 30
-	special ShouldReadyContestArtist
-	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
 ContestHall_EventScript_SkipPrize::
-	lockall
-	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
-	releaseall
-	delay 90
-	special ShouldReadyContestArtist
-	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
 	return
 
 ContestHall_EventScript_CheckShouldSkipPrize::
-	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_CheckPlayerWon
 	return
 
 ContestHall_EventScript_CheckPlayerWon::
-	special GetContestWinnerId
-	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_CheckRankIsMaster
 	return
 
 ContestHall_EventScript_CheckRankIsMaster::
@@ -1069,12 +879,6 @@ ContestHall_EventScript_SetReadyForContestArtist::
 	return
 
 ContestHall_EventScript_EndLinkContest::
-	delay 60
-	special GetContestPlayerId
-	special GetContestWinnerId
-	special ShouldReadyContestArtist
-	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForLinkContestArtist
-	closemessage
 	return
 
 ContestHall_EventScript_SetReadyForLinkContestArtist::
@@ -1123,21 +927,9 @@ ContestHall_EventScript_Player4ApproachForPrize::
 
 @ In NPC Contests, the player is always entry 4 (id number 3)
 ContestHall_EventScript_GivePrizeIfWinner::
-	special GetContestWinnerId
-	goto_if_eq VAR_0x8005, 3, ContestHall_EventScript_GiveContestPrizes
-	lockall
-	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
-	releaseall
 	return
 
 ContestHall_EventScript_GiveContestPrizes::
-	call_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_SetSketchFlag
-	specialvar VAR_RESULT, HasMonWonThisContestBefore
-	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_ReceiveContestRibbon
-	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_GiveLuxuryBall
-	lockall
-	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
-	releaseall
 	return
 
 ContestHall_EventScript_NoRoomForLuxuryBall::
@@ -1157,17 +949,6 @@ ContestHall_EventScript_GiveLuxuryBall::
 	return
 
 ContestHall_EventScript_ReceiveContestRibbon::
-	special GiveMonContestRibbon
-	incrementgamestat GAME_STAT_RECEIVED_RIBBONS
-	setflag FLAG_SYS_RIBBON_GET
-	lockall
-	msgbox ContestHall_Text_ConferRibbonAsPrize, MSGBOX_DEFAULT
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox ContestHall_Text_ReceivedRibbon, MSGBOX_DEFAULT
-	waitfanfare
-	special BufferContestWinnerMonName
-	msgbox ContestHall_Text_PutRibbonOnMon, MSGBOX_DEFAULT
-	releaseall
 	return
 
 ContestHall_Movement_MCWalkDown:
@@ -1353,18 +1134,13 @@ ContestHall_Movement_Player2ApproachForPrize:
 	walk_up
 	step_end
 
-@ IsContestWithRSPlayer has no side effect, so this is nop
 ContestHall_EventScript_CheckIfContestWithRSPlayer::
-	specialvar VAR_RESULT, IsContestWithRSPlayer
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_RetRSPlayer
 	return
 
 ContestHall_EventScript_RetRSPlayer::
 	return
 
 LilycoveCity_ContestLobby_EventScript_DelayIfContestWithRSPlayer::
-	specialvar VAR_RESULT, IsContestWithRSPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer
 	return
 
 LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer::

@@ -7,7 +7,6 @@ ContestHall_MapScripts::
 	.byte 0
 
 ContestHall_OnReturn:
-	special LoadLinkContestPlayerPalettes
 	end
 
 ContestHall_OnTransition:
@@ -17,13 +16,6 @@ ContestHall_OnTransition:
 	end
 
 ContestHall_EventScript_ReadyContestMusic::
-	call ContestHall_EventScript_TryWaitForLink
-	special GetContestMultiplayerId
-	call_if_eq VAR_RESULT, 0, ContestHall_EventScript_SaveContestMusicPlayer1
-	call_if_eq VAR_RESULT, 1, ContestHall_EventScript_SaveContestMusicPlayer2
-	call_if_eq VAR_RESULT, 2, ContestHall_EventScript_SaveContestMusicPlayer3
-	call_if_eq VAR_RESULT, 3, ContestHall_EventScript_SaveContestMusicPlayer4
-	call_if_eq VAR_RESULT, 4, ContestHall_EventScript_SaveContestMusic
 	return
 
 ContestHall_EventScript_SaveContestMusicPlayer1::
@@ -68,9 +60,6 @@ ContestHall_EventScript_Contest::
 	end
 
 ContestHall_EventScript_SetContestObjects::
-	special LoadLinkContestPlayerPalettes
-	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
-	call ContestHall_EventScript_CreateAudience
 	end
 
 @ There are 8 audience member object events, 7 of which are given random gfx below (the 8th is the Artist)
@@ -128,42 +117,6 @@ ContestHall_EventScript_SetRandomAudience7::
 	return
 
 ContestHall_EventScript_GetRandomAudienceGfxId::
-	setvar VAR_RESULT, 32
-	special GenerateContestRand
-	addvar VAR_RESULT, 1
-	switch VAR_RESULT
-	case 1, ContestHall_EventScript_RandomAudienceNinjaBoy
-	case 2, ContestHall_EventScript_RandomAudienceTwin
-	case 3, ContestHall_EventScript_RandomAudienceBoy1
-	case 4, ContestHall_EventScript_RandomAudienceGirl1
-	case 5, ContestHall_EventScript_RandomAudienceGirl2
-	case 6, ContestHall_EventScript_RandomAudienceLittleBoy
-	case 7, ContestHall_EventScript_RandomAudienceGirl
-	case 8, ContestHall_EventScript_RandomAudienceBoy3
-	case 9, ContestHall_EventScript_RandomAudienceGirl3
-	case 10, ContestHall_EventScript_RandomAudienceRichBoy
-	case 11, ContestHall_EventScript_RandomAudienceFatMan
-	case 12, ContestHall_EventScript_RandomAudiencePokefanF
-	case 13, ContestHall_EventScript_RandomAudienceMan1
-	case 14, ContestHall_EventScript_RandomAudienceWoman2
-	case 15, ContestHall_EventScript_RandomAudienceExpertM
-	case 16, ContestHall_EventScript_RandomAudienceExpertF
-	case 17, ContestHall_EventScript_RandomAudiencePokefanM
-	case 18, ContestHall_EventScript_RandomAudienceWoman4
-	case 19, ContestHall_EventScript_RandomAudienceCook
-	case 20, ContestHall_EventScript_RandomAudienceLass
-	case 21, ContestHall_EventScript_RandomAudienceOldWoman
-	case 22, ContestHall_EventScript_RandomAudienceCamper
-	case 23, ContestHall_EventScript_RandomAudiencePicnicker
-	case 24, ContestHall_EventScript_RandomAudienceMan3
-	case 25, ContestHall_EventScript_RandomAudienceWoman5
-	case 26, ContestHall_EventScript_RandomAudienceYoungster
-	case 27, ContestHall_EventScript_RandomAudienceBugCatcher
-	case 28, ContestHall_EventScript_RandomAudiencePsychicM
-	case 29, ContestHall_EventScript_RandomAudienceSchoolKidM
-	case 30, ContestHall_EventScript_RandomAudienceBlackBelt
-	case 31, ContestHall_EventScript_RandomAudienceBeauty
-	case 32, ContestHall_EventScript_RandomAudienceScientist1
 	end
 
 ContestHall_EventScript_RandomAudienceNinjaBoy::
@@ -295,14 +248,6 @@ ContestHall_EventScript_RandomAudienceScientist1::
 	return
 
 ContestHall_EventScript_CreateAudience::
-	specialvar VAR_RESULT, IsWirelessContest
-	goto_if_eq VAR_RESULT, TRUE, ContestHall_EventScript_CreateWirelessContestAudience
-	switch VAR_CONTEST_TYPE
-	case CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_CreateNormalContestAudience
-	case CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_CreateSuperContestAudience
-	case CONTEST_TYPE_NPC_HYPER, ContestHall_EventScript_CreateHyperContestAudience
-	case CONTEST_TYPE_NPC_MASTER, ContestHall_EventScript_CreateMasterContestAudience
-	case CONTEST_TYPE_LINK, ContestHall_EventScript_CreateMasterContestAudience
 	return
 
 ContestHall_EventScript_CreateNormalContestAudience::
@@ -400,13 +345,6 @@ ContestHall_EventScript_CreateWirelessContestAudience::
 	return
 
 ContestHall_EventScript_SetExitWarp::
-	special ClearLinkContestFlags
-	switch VAR_CONTEST_TYPE
-	case CONTEST_TYPE_NPC_NORMAL, ContestHall_EventScript_SetExitWarpNormalContest
-	case CONTEST_TYPE_NPC_SUPER, ContestHall_EventScript_SetExitWarpSuperContest
-	case CONTEST_TYPE_NPC_HYPER, ContestHall_EventScript_SetExitWarpHyperContest
-	case CONTEST_TYPE_NPC_MASTER, ContestHall_EventScript_SetExitWarpMasterContest
-	case CONTEST_TYPE_LINK, ContestHall_EventScript_SetExitWarpLinkContest
 	return
 
 ContestHall_EventScript_SetExitWarpNormalContest::

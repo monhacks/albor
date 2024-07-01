@@ -43,7 +43,6 @@ static void LinkPartnerHandleLinkStandbyMsg(u32 battler);
 static void LinkPartnerHandleEndLinkBattle(u32 battler);
 
 static void LinkPartnerBufferRunCommand(u32 battler);
-static void LinkPartnerBufferExecCompleted(u32 battler);
 static void SwitchIn_WaitAndEnd(u32 battler);
 
 static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
@@ -103,7 +102,6 @@ static void (*const sLinkPartnerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battl
 
 void SetControllerToLinkPartner(u32 battler)
 {
-    gBattlerControllerEndFuncs[battler] = LinkPartnerBufferExecCompleted;
     gBattlerControllerFuncs[battler] = LinkPartnerBufferRunCommand;
 }
 
@@ -113,15 +111,12 @@ static void LinkPartnerBufferRunCommand(u32 battler)
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sLinkPartnerBufferCommands))
             sLinkPartnerBufferCommands[gBattleResources->bufferA[battler][0]](battler);
-        else
-            LinkPartnerBufferExecCompleted(battler);
     }
 }
 
 static void WaitForMonAnimAfterLoad(u32 battler)
 {
-    if (gSprites[gBattlerSpriteIds[battler]].animEnded && gSprites[gBattlerSpriteIds[battler]].x2 == 0)
-        LinkPartnerBufferExecCompleted(battler);
+
 }
 
 static void SwitchIn_ShowSubstitute(u32 battler)
@@ -138,11 +133,7 @@ static void SwitchIn_ShowSubstitute(u32 battler)
 
 static void SwitchIn_WaitAndEnd(u32 battler)
 {
-    if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive
-        && gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
-    {
-        LinkPartnerBufferExecCompleted(battler);
-    }
+
 }
 
 static void SwitchIn_ShowHealthbox(u32 battler)
@@ -179,22 +170,6 @@ static void SwitchIn_TryShinyAnim(u32 battler)
     {
         DestroySprite(&gSprites[gBattleControllerData[battler]]);
         gBattlerControllerFuncs[battler] = SwitchIn_ShowHealthbox;
-    }
-}
-
-static void LinkPartnerBufferExecCompleted(u32 battler)
-{
-    gBattlerControllerFuncs[battler] = LinkPartnerBufferRunCommand;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        u8 playerId = GetMultiplayerId();
-
-        PrepareBufferDataTransferLink(battler, 2, 4, &playerId);
-        gBattleResources->bufferA[battler][0] = CONTROLLER_TERMINATOR_NOP;
-    }
-    else
-    {
-        gBattleControllerExecFlags &= ~gBitTable[battler];
     }
 }
 
@@ -272,7 +247,6 @@ static void LinkPartnerHandleBattleAnimation(u32 battler)
 static void LinkPartnerHandleLinkStandbyMsg(u32 battler)
 {
     RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
-    LinkPartnerBufferExecCompleted(battler);
 }
 
 static void LinkPartnerHandleEndLinkBattle(u32 battler)
@@ -282,6 +256,5 @@ static void LinkPartnerHandleEndLinkBattle(u32 battler)
     gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
     FadeOutMapMusic(5);
     BeginFastPaletteFade(3);
-    LinkPartnerBufferExecCompleted(battler);
     gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
 }

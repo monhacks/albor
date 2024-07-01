@@ -6,23 +6,6 @@ UnionRoom_MapScripts::
 	.byte 0
 
 UnionRoom_OnResume:
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_1
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_2
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_3
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_4
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_5
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_6
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_7
-	setflag FLAG_HIDE_UNION_ROOM_PLAYER_8
-	removeobject LOCALID_UNION_ROOM_PLAYER_1
-	removeobject LOCALID_UNION_ROOM_PLAYER_2
-	removeobject LOCALID_UNION_ROOM_PLAYER_3
-	removeobject LOCALID_UNION_ROOM_PLAYER_4
-	removeobject LOCALID_UNION_ROOM_PLAYER_5
-	removeobject LOCALID_UNION_ROOM_PLAYER_6
-	removeobject LOCALID_UNION_ROOM_PLAYER_7
-	removeobject LOCALID_UNION_ROOM_PLAYER_8
-	special RunUnionRoom
 	end
 
 UnionRoom_OnTransition:
@@ -30,73 +13,28 @@ UnionRoom_OnTransition:
 	end
 
 UnionRoom_EventScript_Player1::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_1
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player2::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_2
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player3::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_3
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player4::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_4
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player5::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_5
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player6::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_6
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player7::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_7
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Player8::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_PLAYER_8
-	waitstate
-	release
 	end
 
 UnionRoom_EventScript_Attendant::
-	lock
-	faceplayer
-	setvar VAR_RESULT, UR_INTERACT_ATTENDANT
-	waitstate
-	release
 	end

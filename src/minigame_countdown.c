@@ -1,7 +1,6 @@
 #include "global.h"
 #include "decompress.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "sound.h"
 #include "task.h"
 #include "trig.h"
@@ -45,7 +44,6 @@ extern const struct OamData gOamData_AffineOff_ObjNormal_32x32;
 static void Task_StaticCountdown_Init(u8 taskId);
 static void Task_StaticCountdown_Free(u8 taskId);
 static void Task_StaticCountdown_Start(u8 taskId);
-static void Task_StaticCountdown_Run(u8 taskId);
 
 static const u16 s321Start_Static_Pal[] = INCBIN_U16("graphics/link/321start_static.gbapal");
 static const u32 s321Start_Static_Gfx[] = INCBIN_U32("graphics/link/321start_static.4bpp.lz");
@@ -126,8 +124,7 @@ static const TaskFunc sStaticCountdownFuncs[][4] =
     {
         [FUNC_INIT]  = Task_StaticCountdown_Init,
         [FUNC_FREE]  = Task_StaticCountdown_Free,
-        [FUNC_START] = Task_StaticCountdown_Start,
-        [FUNC_RUN]   = Task_StaticCountdown_Run
+        [FUNC_START] = Task_StaticCountdown_Start
     },
 };
 
@@ -249,39 +246,6 @@ static void Task_StaticCountdown_Start(u8 taskId)
     gSprites[tSpriteIds(0)].callback = SpriteCB_StaticCountdown;
     gSprites[tSpriteIds(0)].invisible = FALSE;
     gTasks[taskId].tState = STATE_RUN;
-}
-
-// Increment timer for progressing the countdown.
-// If the player is the link leader, increment a
-// separate timer and send it to group members for
-// them to read and use.
-static void Task_StaticCountdown_Run(u8 taskId)
-{
-    u16 packet[RFU_PACKET_SIZE];
-    s16 *data = gTasks[taskId].data;
-
-    if (gReceivedRemoteLinkPlayers)
-    {
-        // Read link timer
-        if (gRecvCmds[0][1] == LINKCMD_COUNTDOWN)
-            tTimer = gRecvCmds[0][2];
-
-        if (GetMultiplayerId() == 0)
-        {
-            // Player is link leader.
-            // Send timer to group members
-            tLinkTimer++;
-            memset(packet, 0, sizeof(packet));
-            packet[0] = LINKCMD_COUNTDOWN;
-            packet[1] = tLinkTimer;
-            Rfu_SendPacket(packet);
-        }
-    }
-    else
-    {
-        // Local, just increment own timer
-        tTimer++;
-    }
 }
 
 #undef tState

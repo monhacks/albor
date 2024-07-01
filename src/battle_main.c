@@ -28,7 +28,6 @@
 #include "international_string_util.h"
 #include "item.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -200,8 +199,6 @@ EWRAM_DATA u16 gIntroSlideFlags = 0;
 EWRAM_DATA u8 gSentPokesToOpponent[2] = {0};
 EWRAM_DATA struct BattleScripting gBattleScripting = {0};
 EWRAM_DATA struct BattleStruct *gBattleStruct = NULL;
-EWRAM_DATA u8 *gLinkBattleSendBuffer = NULL;
-EWRAM_DATA u8 *gLinkBattleRecvBuffer = NULL;
 EWRAM_DATA struct BattleResources *gBattleResources = NULL;
 EWRAM_DATA u8 gActionSelectionCursor[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gMoveSelectionCursor[MAX_BATTLERS_COUNT] = {0};
@@ -593,64 +590,12 @@ static void BufferPartyVsScreenHealth_AtStart(void)
 // This was inlined in Ruby/Sapphire
 static void FindLinkBattleMaster(u8 numPlayers, u8 multiPlayerId)
 {
-    u8 found = 0;
 
-    // If player 1 is playing the minimum version, player 1 is master.
-    if (gBlockRecvBuffer[0][0] == 0x100)
-    {
-        if (multiPlayerId == 0)
-            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
-        else
-            gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
-        found++;
-    }
-
-    if (found == 0)
-    {
-        // If multiple different versions are being used, player 1 is master.
-        s32 i;
-
-        for (i = 0; i < numPlayers; i++)
-        {
-            if (gBlockRecvBuffer[0][0] != gBlockRecvBuffer[i][0])
-                break;
-        }
-
-        if (i == numPlayers)
-        {
-            if (multiPlayerId == 0)
-                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
-            else
-                gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
-            found++;
-        }
-
-        if (found == 0)
-        {
-            // Lowest index player with the highest game version is master.
-            for (i = 0; i < numPlayers; i++)
-            {
-                if (gBlockRecvBuffer[i][0] == 0x300 && i != multiPlayerId)
-                {
-                    if (i < multiPlayerId)
-                        break;
-                }
-                if (gBlockRecvBuffer[i][0] > 0x300 && i != multiPlayerId)
-                    break;
-            }
-
-            if (i == numPlayers)
-                gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER | BATTLE_TYPE_TRAINER;
-            else
-                gBattleTypeFlags |= BATTLE_TYPE_TRAINER;
-        }
-    }
 }
 
 static void CB2_HandleStartBattle(void)
 {
     u8 playerMultiplayerId;
-    u8 enemyMultiplayerId;
 
     RunTasks();
     AnimateSprites();
@@ -658,7 +603,6 @@ static void CB2_HandleStartBattle(void)
 
     playerMultiplayerId = GetMultiplayerId();
     gBattleScripting.multiplayerId = playerMultiplayerId;
-    enemyMultiplayerId = playerMultiplayerId ^ BIT_SIDE;
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -672,8 +616,6 @@ static void CB2_HandleStartBattle(void)
             FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gWirelessCommType)
-            LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -696,8 +638,6 @@ static void CB2_HandleStartBattle(void)
                     SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
-                if (gWirelessCommType)
-                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -712,16 +652,12 @@ static void CB2_HandleStartBattle(void)
         {
             u8 taskId;
 
-            ResetBlockReceivedFlags();
             FindLinkBattleMaster(2, playerMultiplayerId);
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
             gTasks[taskId].data[2] = 0x5A;
             gTasks[taskId].data[5] = 0;
             gTasks[taskId].data[3] = gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsLo | (gBattleStruct->multiBuffer.linkBattlerHeader.vsScreenHealthFlagsHi << 8);
-            gTasks[taskId].data[4] = gBlockRecvBuffer[enemyMultiplayerId][1];
-            RecordedBattle_SetFrontierPassFlagFromHword(gBlockRecvBuffer[playerMultiplayerId][1]);
-            RecordedBattle_SetFrontierPassFlagFromHword(gBlockRecvBuffer[enemyMultiplayerId][1]);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -738,8 +674,6 @@ static void CB2_HandleStartBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             // Recv Pokémon 1-2
-            ResetBlockReceivedFlags();
-            memcpy(gEnemyParty, gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -755,8 +689,6 @@ static void CB2_HandleStartBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             // Recv Pokémon 3-4
-            ResetBlockReceivedFlags();
-            memcpy(&gEnemyParty[2], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -772,8 +704,6 @@ static void CB2_HandleStartBattle(void)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
             // Recv Pokémon 5-6
-            ResetBlockReceivedFlags();
-            memcpy(&gEnemyParty[4], gBlockRecvBuffer[enemyMultiplayerId], sizeof(struct Pokemon) * 2);
 
             TryCorrectShedinjaLanguage(&gEnemyParty[0]);
             TryCorrectShedinjaLanguage(&gEnemyParty[1]);
@@ -819,9 +749,6 @@ static void CB2_HandleStartBattle(void)
         // Receive rng seed for recorded battle (only read it if partner is the link master)
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
-            ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-                memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[enemyMultiplayerId], sizeof(gRecordedBattleRngSeed));
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
@@ -854,7 +781,6 @@ static void CB2_HandleStartBattle(void)
 static void CB2_HandleStartMultiPartnerBattle(void)
 {
     u8 playerMultiplayerId;
-    u8 partnerMultiplayerId;
 
     RunTasks();
     AnimateSprites();
@@ -862,7 +788,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
 
     playerMultiplayerId = GetMultiplayerId();
     gBattleScripting.multiplayerId = playerMultiplayerId;
-    partnerMultiplayerId = playerMultiplayerId ^ BIT_SIDE;
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -876,8 +801,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gWirelessCommType)
-            LoadWirelessStatusIndicatorSpriteGfx();
         // fall through
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -906,9 +829,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
                     SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE] = 2;
                 }
-
-                if (gWirelessCommType)
-                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -923,7 +843,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         {
             u8 taskId;
 
-            ResetBlockReceivedFlags();
             FindLinkBattleMaster(2, playerMultiplayerId);
             taskId = CreateTask(InitLinkBattleVsScreen, 0);
             gTasks[taskId].data[1] = 0x10E;
@@ -944,22 +863,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv partner's Pokémon 1-2, and copy partner's and own Pokémon into party positions
-            ResetBlockReceivedFlags();
-            if (gLinkPlayers[playerMultiplayerId].id != 0)
-            {
-                memcpy(gPlayerParty, gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon) * 2);
-                memcpy(&gPlayerParty[MULTI_PARTY_SIZE], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
-            }
-            else
-            {
-                memcpy(gPlayerParty, gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon) * 2);
-                memcpy(&gPlayerParty[MULTI_PARTY_SIZE], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon) * 2);
-            }
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 5:
         if (IsLinkTaskFinished())
@@ -970,22 +873,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 6:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv partner's Pokémon 3, and copy partner's and own Pokémon into party positions
-            ResetBlockReceivedFlags();
-            if (gLinkPlayers[playerMultiplayerId].id != 0)
-            {
-                memcpy(&gPlayerParty[2], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon));
-                memcpy(&gPlayerParty[2 + MULTI_PARTY_SIZE], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
-            }
-            else
-            {
-                memcpy(&gPlayerParty[2], gBlockRecvBuffer[playerMultiplayerId], sizeof(struct Pokemon));
-                memcpy(&gPlayerParty[2 + MULTI_PARTY_SIZE], gBlockRecvBuffer[partnerMultiplayerId], sizeof(struct Pokemon));
-            }
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 7:
         if (IsLinkTaskFinished())
@@ -996,14 +883,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 8:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv enemy Pokémon 1-2 (if not master)
-            ResetBlockReceivedFlags();
-            if (GetMultiplayerId() != 0)
-                memcpy(gEnemyParty, gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 9:
         if (IsLinkTaskFinished())
@@ -1014,14 +893,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 10:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv enemy Pokémon 3-4 (if not master)
-            ResetBlockReceivedFlags();
-            if (GetMultiplayerId() != 0)
-                memcpy(&gEnemyParty[2], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 11:
         if (IsLinkTaskFinished())
@@ -1032,27 +903,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 12:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv enemy Pokémon 5-6 (if not master)
-            ResetBlockReceivedFlags();
-            if (GetMultiplayerId() != 0)
-                memcpy(&gEnemyParty[4], gBlockRecvBuffer[0], sizeof(struct Pokemon) * 2);
-
-            TryCorrectShedinjaLanguage(&gPlayerParty[0]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[1]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[2]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[3]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[4]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[5]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[0]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[1]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[2]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[3]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[4]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[5]);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 13:
         InitBattleControllers();
@@ -1073,14 +923,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         break;
     case 15:
-        // Receive rng seed for recorded battle (only read it if partner is the link master)
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            ResetBlockReceivedFlags();
-            if (!(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-                memcpy(&gRecordedBattleRngSeed, gBlockRecvBuffer[partnerMultiplayerId], sizeof(gRecordedBattleRngSeed));
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 16:
         // Finish, start battle
@@ -1121,18 +963,9 @@ static void SetMultiPartnerMenuParty(u8 offset)
 
 static void CB2_PreInitMultiBattle(void)
 {
-    s32 i;
     u8 playerMultiplierId;
-    s32 numPlayers = MAX_BATTLERS_COUNT;
-    u8 blockMask = 0xF;
     u32 *savedBattleTypeFlags;
     void (**savedCallback)(void);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-    {
-        numPlayers = 2;
-        blockMask = 3;
-    }
 
     playerMultiplierId = GetMultiplayerId();
     gBattleScripting.multiplayerId = playerMultiplierId;
@@ -1155,62 +988,19 @@ static void CB2_PreInitMultiBattle(void)
         }
         break;
     case 1:
-        if ((GetBlockReceivedStatus() & blockMask) == blockMask)
-        {
-            ResetBlockReceivedFlags();
-            for (i = 0; i < numPlayers; i++)
-            {
-                if (i == playerMultiplierId)
-                    continue;
-
-                if (numPlayers == MAX_LINK_PLAYERS)
-                {
-                    if ((!(gLinkPlayers[i].id & 1) && !(gLinkPlayers[playerMultiplierId].id & 1))
-                        || (gLinkPlayers[i].id & 1 && gLinkPlayers[playerMultiplierId].id & 1))
-                    {
-                        memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], sizeof(gMultiPartnerParty));
-                    }
-                }
-                else
-                {
-                    memcpy(gMultiPartnerParty, gBlockRecvBuffer[i], sizeof(gMultiPartnerParty));
-                }
-            }
-            gBattleCommunication[MULTIUSE_STATE]++;
-            *savedCallback = gMain.savedCallback;
-            *savedBattleTypeFlags = gBattleTypeFlags;
-            gMain.savedCallback = CB2_PreInitMultiBattle;
-            ShowPartyMenuToShowcaseMultiBattleParty();
-        }
         break;
     case 2:
         if (IsLinkTaskFinished() && !gPaletteFade.active)
         {
             gBattleCommunication[MULTIUSE_STATE]++;
-            if (gWirelessCommType)
-                SetLinkStandbyCallback();
-            else
-                SetCloseLinkCallback();
+            SetCloseLinkCallback();
         }
         break;
     case 3:
-        if (gWirelessCommType)
-        {
-            if (IsLinkRfuTaskFinished())
-            {
-                gBattleTypeFlags = *savedBattleTypeFlags;
-                gMain.savedCallback = *savedCallback;
-                SetMainCallback2(CB2_InitBattleInternal);
-                FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
-            }
-        }
-        else if (gReceivedRemoteLinkPlayers == 0)
-        {
-            gBattleTypeFlags = *savedBattleTypeFlags;
-            gMain.savedCallback = *savedCallback;
-            SetMainCallback2(CB2_InitBattleInternal);
-            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
-        }
+        gBattleTypeFlags = *savedBattleTypeFlags;
+        gMain.savedCallback = *savedCallback;
+        SetMainCallback2(CB2_InitBattleInternal);
+        FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         break;
     }
 }
@@ -1255,7 +1045,6 @@ static void CB2_HandleStartMultiBattle(void)
 {
     u8 playerMultiplayerId;
     s32 id;
-    u8 var;
 
     playerMultiplayerId = GetMultiplayerId();
     gBattleScripting.multiplayerId = playerMultiplayerId;
@@ -1276,8 +1065,6 @@ static void CB2_HandleStartMultiBattle(void)
             FillAroundBattleWindows();
             gBattleCommunication[MULTIUSE_STATE] = 1;
         }
-        if (gWirelessCommType)
-            LoadWirelessStatusIndicatorSpriteGfx();
         break;
     case 1:
         if (gBattleTypeFlags & BATTLE_TYPE_LINK)
@@ -1294,8 +1081,6 @@ static void CB2_HandleStartMultiBattle(void)
                     SendBlock(BitmaskAllOtherLinkPlayers(), &gBattleStruct->multiBuffer.linkBattlerHeader, sizeof(gBattleStruct->multiBuffer.linkBattlerHeader));
                     gBattleCommunication[MULTIUSE_STATE]++;
                 }
-                if (gWirelessCommType)
-                    CreateWirelessStatusIndicatorSprite(0, 0);
             }
         }
         else
@@ -1306,42 +1091,7 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 2:
-        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-        {
-            ResetBlockReceivedFlags();
-            FindLinkBattleMaster(4, playerMultiplayerId);
-            var = CreateTask(InitLinkBattleVsScreen, 0);
-            gTasks[var].data[1] = 0x10E;
-            gTasks[var].data[2] = 0x5A;
-            gTasks[var].data[5] = 0;
-            gTasks[var].data[3] = 0;
-            gTasks[var].data[4] = 0;
-
-            for (id = 0; id < MAX_LINK_PLAYERS; id++)
-            {
-                RecordedBattle_SetFrontierPassFlagFromHword(gBlockRecvBuffer[id][1]);
-                switch (gLinkPlayers[id].id)
-                {
-                case 0:
-                    gTasks[var].data[3] |= gBlockRecvBuffer[id][1] & 0x3F;
-                    break;
-                case 1:
-                    gTasks[var].data[4] |= gBlockRecvBuffer[id][1] & 0x3F;
-                    break;
-                case 2:
-                    gTasks[var].data[3] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
-                    break;
-                case 3:
-                    gTasks[var].data[4] |= (gBlockRecvBuffer[id][1] & 0x3F) << 6;
-                    break;
-                }
-            }
-            ZeroEnemyPartyMons();
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
-        else
-            break;
-        // fall through
+        break;
     case 3:
         if (IsLinkTaskFinished())
         {
@@ -1350,60 +1100,6 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-        {
-            ResetBlockReceivedFlags();
-            for (id = 0; id < MAX_LINK_PLAYERS; id++)
-            {
-                if (id == playerMultiplayerId)
-                {
-                    switch (gLinkPlayers[id].id)
-                    {
-                    case 0:
-                    case 3:
-                        memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                        break;
-                    case 1:
-                    case 2:
-                        memcpy(gPlayerParty + MULTI_PARTY_SIZE, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                        break;
-                    }
-                }
-                else
-                {
-                    if ((!(gLinkPlayers[id].id & 1) && !(gLinkPlayers[playerMultiplayerId].id & 1))
-                     || ((gLinkPlayers[id].id & 1) && (gLinkPlayers[playerMultiplayerId].id & 1)))
-                    {
-                        switch (gLinkPlayers[id].id)
-                        {
-                        case 0:
-                        case 3:
-                            memcpy(gPlayerParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                            break;
-                        case 1:
-                        case 2:
-                            memcpy(gPlayerParty + MULTI_PARTY_SIZE, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        switch (gLinkPlayers[id].id)
-                        {
-                        case 0:
-                        case 3:
-                            memcpy(gEnemyParty, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                            break;
-                        case 1:
-                        case 2:
-                            memcpy(gEnemyParty + MULTI_PARTY_SIZE, gBlockRecvBuffer[id], sizeof(struct Pokemon) * 2);
-                            break;
-                        }
-                    }
-                }
-            }
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 5:
         if (IsLinkTaskFinished())
@@ -1413,74 +1109,6 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 6:
-        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-        {
-            ResetBlockReceivedFlags();
-            for (id = 0; id < MAX_LINK_PLAYERS; id++)
-            {
-                if (id == playerMultiplayerId)
-                {
-                    switch (gLinkPlayers[id].id)
-                    {
-                    case 0:
-                    case 3:
-                        memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                        break;
-                    case 1:
-                    case 2:
-                        memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                        break;
-                    }
-                }
-                else
-                {
-                    if ((!(gLinkPlayers[id].id & 1) && !(gLinkPlayers[playerMultiplayerId].id & 1))
-                     || ((gLinkPlayers[id].id & 1) && (gLinkPlayers[playerMultiplayerId].id & 1)))
-                    {
-                        switch (gLinkPlayers[id].id)
-                        {
-                        case 0:
-                        case 3:
-                            memcpy(gPlayerParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                            break;
-                        case 1:
-                        case 2:
-                            memcpy(gPlayerParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        switch (gLinkPlayers[id].id)
-                        {
-                        case 0:
-                        case 3:
-                            memcpy(gEnemyParty + 2, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                            break;
-                        case 1:
-                        case 2:
-                            memcpy(gEnemyParty + 5, gBlockRecvBuffer[id], sizeof(struct Pokemon));
-                            break;
-                        }
-                    }
-                }
-            }
-            TryCorrectShedinjaLanguage(&gPlayerParty[0]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[1]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[2]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[3]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[4]);
-            TryCorrectShedinjaLanguage(&gPlayerParty[5]);
-
-            TryCorrectShedinjaLanguage(&gEnemyParty[0]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[1]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[2]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[3]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[4]);
-            TryCorrectShedinjaLanguage(&gEnemyParty[5]);
-
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 7:
         InitBattleControllers();
@@ -1519,21 +1147,6 @@ static void CB2_HandleStartMultiBattle(void)
         }
         break;
     case 9:
-        if ((GetBlockReceivedStatus() & 0xF) == 0xF)
-        {
-            ResetBlockReceivedFlags();
-            for (var = 0; var < 4; var++)
-            {
-                u32 blockValue = gBlockRecvBuffer[var][0];
-                if (blockValue & 4)
-                {
-                    memcpy(&gRecordedBattleRngSeed, &gBlockRecvBuffer[var][2], sizeof(gRecordedBattleRngSeed));
-                    break;
-                }
-            }
-
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 10:
         if (BattleInitAllSprites(&gBattleCommunication[SPRITES_INIT_STATE1], &gBattleCommunication[SPRITES_INIT_STATE2]))
@@ -2094,12 +1707,11 @@ static void EndLinkBattleInSteps(void)
         }
         break;
     case 8:
-        if (!gWirelessCommType)
-            SetCloseLinkCallback();
+        SetCloseLinkCallback();
         gBattleCommunication[MULTIUSE_STATE]++;
         break;
     case 9:
-        if (!gMain.anyLinkBattlerHasFrontierPass || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.anyLinkBattlerHasFrontierPass || gReceivedRemoteLinkPlayers != 1)
         {
             gMain.anyLinkBattlerHasFrontierPass = FALSE;
             SetMainCallback2(gMain.savedCallback);
@@ -2276,13 +1888,13 @@ static void AskRecordBattle(void)
     case STATE_WAIT_END:
         if (--gBattleCommunication[1] == 0)
         {
-            if (gMain.anyLinkBattlerHasFrontierPass && !gWirelessCommType)
+            if (gMain.anyLinkBattlerHasFrontierPass)
                 SetCloseLinkCallback();
             gBattleCommunication[MULTIUSE_STATE]++;
         }
         break;
     case STATE_END:
-        if (!gMain.anyLinkBattlerHasFrontierPass || gWirelessCommType || gReceivedRemoteLinkPlayers != 1)
+        if (!gMain.anyLinkBattlerHasFrontierPass || gReceivedRemoteLinkPlayers != 1)
         {
             gMain.anyLinkBattlerHasFrontierPass = FALSE;
             if (!gPaletteFade.active)

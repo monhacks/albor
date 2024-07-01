@@ -5,7 +5,6 @@
 #include "save.h"
 #include "bg.h"
 #include "window.h"
-#include "librfu.h"
 #include "random.h"
 #include "decompress.h"
 #include "string_util.h"
@@ -24,7 +23,6 @@
 #include "trade.h"
 #include "battle.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "constants/rgb.h"
 #include "constants/trade.h"
 
@@ -53,7 +51,6 @@ struct LinkTestBGInfo
 };
 
 static struct BlockTransfer sBlockSend;
-static struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
 static u32 sBlockSendDelayCounter;
 static u32 sPlayerDataExchangeStatus;
 static u8 sNumVBlanksWithoutSerialIntr;
@@ -76,7 +73,6 @@ u32 gLinkStatus;
 bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
 bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
 u8 gSuppressLinkErrorMessage;
-bool8 gWirelessCommType;
 bool8 gSavedLinkPlayerCount;
 u16 gSendCmd[CMD_LENGTH];
 u8 gSavedMultiplayerId;
@@ -91,12 +87,9 @@ struct Link gLink;
 u8 gLastRecvQueueCount;
 u16 gLinkSavedIme;
 
-EWRAM_DATA u32 gBerryBlenderKeySendAttempts = 0;
-EWRAM_DATA u16 gBlockRecvBuffer[MAX_RFU_PLAYERS][BLOCK_BUFFER_SIZE / 2] = {};
 EWRAM_DATA u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE] = {};
 static EWRAM_DATA bool8 sLinkOpen = FALSE;
 EWRAM_DATA u16 gLinkType = 0;
-static EWRAM_DATA u16 sTimeOutCounter = 0;
 EWRAM_DATA struct LinkPlayer gLocalLinkPlayer = {};
 EWRAM_DATA struct LinkPlayer gLinkPlayers[MAX_RFU_PLAYERS] = {};
 static EWRAM_DATA struct LinkPlayer sSavedLinkPlayers[MAX_RFU_PLAYERS] = {};
@@ -106,18 +99,13 @@ static EWRAM_DATA struct {
     u8 lastSendQueueCount;
     bool8 disconnected;
 } sLinkErrorBuffer = {};
-static EWRAM_DATA void *sLinkErrorBgTilemapBuffer = NULL;
 
-static void InitLocalLinkPlayer(void);
-static void VBlankCB_LinkError(void);
-static void ProcessRecvCmds(u8);
 static void LinkCB_SendHeldKeys(void);
 static void ResetBlockSend(void);
 static bool32 InitBlockSend(const void *, size_t);
 static void LinkCB_BlockSendBegin(void);
 static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
-static void SetBlockReceivedFlag(u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 
 static void LinkCB_ReadyCloseLink(void);
@@ -128,7 +116,6 @@ static void LinkCB_Standby(void);
 static void LinkCB_StandbyForAll(void);
 
 static void TrySetLinkErrorBuffer(void);
-static void CB2_PrintErrorMessage(void);
 static void DisableSerial(void);
 static void EnableSerial(void);
 static void CheckMasterOrSlave(void);
@@ -220,28 +207,6 @@ void SetLocalLinkPlayerId(u8 playerId)
     gLocalLinkPlayer.id = playerId;
 }
 
-static void InitLocalLinkPlayer(void)
-{
-    gLocalLinkPlayer.trainerId = gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
-    StringCopy(gLocalLinkPlayer.name, gSaveBlock2Ptr->playerName);
-    gLocalLinkPlayer.gender = gSaveBlock2Ptr->playerGender;
-    gLocalLinkPlayer.linkType = gLinkType;
-    gLocalLinkPlayer.language = gGameLanguage;
-    gLocalLinkPlayer.version = gGameVersion + 0x4000;
-    gLocalLinkPlayer.lp_field_2 = 0x8000;
-    if (FlagGet(FLAG_IS_CHAMPION))
-    {
-        gLocalLinkPlayer.progressFlags |= 0x10;
-    }
-}
-
-static void VBlankCB_LinkError(void)
-{
-    LoadOam();
-    ProcessSpriteCopyRequests();
-    TransferPlttBuffer();
-}
-
 static void InitLink(void)
 {
     int i;
@@ -266,22 +231,14 @@ void OpenLink(void)
 {
     int i;
 
-    if (!gWirelessCommType)
-    {
-        ResetSerial();
-        InitLink();
-        gLinkCallback = LinkCB_RequestPlayerDataExchange;
-        gLinkVSyncDisabled = FALSE;
-        gLinkErrorOccurred = FALSE;
-        gSuppressLinkErrorMessage = FALSE;
-        ResetBlockReceivedFlags();
-        ResetBlockSend();
-        CreateTask(Task_TriggerHandshake, 2);
-    }
-    else
-    {
-        InitRFUAPI();
-    }
+    ResetSerial();
+    InitLink();
+    gLinkCallback = LinkCB_RequestPlayerDataExchange;
+    gLinkVSyncDisabled = FALSE;
+    gLinkErrorOccurred = FALSE;
+    gSuppressLinkErrorMessage = FALSE;
+    ResetBlockSend();
+    CreateTask(Task_TriggerHandshake, 2);
     gReceivedRemoteLinkPlayers = 0;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
     {
@@ -294,8 +251,6 @@ void OpenLink(void)
 void CloseLink(void)
 {
     gReceivedRemoteLinkPlayers = FALSE;
-    if (gWirelessCommType)
-        LinkRfu_Shutdown();
     sLinkOpen = FALSE;
     DisableSerial();
 }
@@ -313,7 +268,6 @@ u16 LinkMain2(const u16 *heldKeys)
     gLinkHeldKeys = *heldKeys;
     if (gLinkStatus & LINK_STAT_CONN_ESTABLISHED)
     {
-        ProcessRecvCmds(SIO_MULTI_CNT->id);
         if (gLinkCallback != NULL)
             gLinkCallback();
         TrySetLinkErrorBuffer();
@@ -321,207 +275,13 @@ u16 LinkMain2(const u16 *heldKeys)
     return gLinkStatus;
 }
 
-static void HandleReceiveRemoteLinkPlayer(u8 who)
-{
-    int i;
-    int count;
-
-    count = 0;
-    gRemoteLinkPlayersNotReceived[who] = FALSE;
-    for (i = 0; i < GetLinkPlayerCount_2(); i++)
-    {
-        count += gRemoteLinkPlayersNotReceived[i];
-    }
-    if (count == 0 && gReceivedRemoteLinkPlayers == 0)
-    {
-        gReceivedRemoteLinkPlayers = 1;
-    }
-}
-
-static void ProcessRecvCmds(u8 unused)
-{
-    u16 i;
-
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        gLinkPartnersHeldKeys[i] = 0;
-        if (gRecvCmds[i][0] == 0)
-        {
-            continue;
-        }
-        switch (gRecvCmds[i][0])
-        {
-            case LINKCMD_SEND_LINK_TYPE:
-            {
-                struct LinkPlayerBlock *block;
-
-                InitLocalLinkPlayer();
-                block = &gLocalLinkPlayerBlock;
-                block->linkPlayer = gLocalLinkPlayer;
-                memcpy(block->magic1, sASCIIGameFreakInc, sizeof(block->magic1) - 1);
-                memcpy(block->magic2, sASCIIGameFreakInc, sizeof(block->magic2) - 1);
-                InitBlockSend(block, sizeof(*block));
-                break;
-            }
-            case LINKCMD_BLENDER_SEND_KEYS:
-                gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
-                break;
-            case LINKCMD_INIT_BLOCK:
-            {
-                struct BlockTransfer *blockRecv;
-
-                blockRecv = &sBlockRecv[i];
-                blockRecv->pos = 0;
-                blockRecv->size = gRecvCmds[i][1];
-                blockRecv->multiplayerId = gRecvCmds[i][2];
-                break;
-            }
-            case LINKCMD_CONT_BLOCK:
-            {
-                if (sBlockRecv[i].size > BLOCK_BUFFER_SIZE)
-                {
-                    u16 *buffer;
-                    u16 j;
-
-                    buffer = (u16 *)gDecompressionBuffer;
-                    for (j = 0; j < CMD_LENGTH - 1; j++)
-                    {
-                        buffer[(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
-                    }
-                }
-                else
-                {
-                    u16 j;
-
-                    for (j = 0; j < CMD_LENGTH - 1; j++)
-                    {
-                        gBlockRecvBuffer[i][(sBlockRecv[i].pos / 2) + j] = gRecvCmds[i][j + 1];
-                    }
-                }
-
-                sBlockRecv[i].pos += (CMD_LENGTH - 1) * 2;
-
-                if (sBlockRecv[i].pos >= sBlockRecv[i].size)
-                {
-                    if (gRemoteLinkPlayersNotReceived[i] == TRUE)
-                    {
-                        struct LinkPlayerBlock *block;
-                        struct LinkPlayer *linkPlayer;
-
-                        block = (struct LinkPlayerBlock *)&gBlockRecvBuffer[i];
-                        linkPlayer = &gLinkPlayers[i];
-                        *linkPlayer = block->linkPlayer;
-                        if ((linkPlayer->version & 0xFF) == VERSION_RUBY || (linkPlayer->version & 0xFF) == VERSION_SAPPHIRE)
-                        {
-                            linkPlayer->progressFlagsCopy = 0;
-                            linkPlayer->progressFlags = 0;
-                        }
-                        ConvertLinkPlayerName(linkPlayer);
-                        if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
-                            || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
-                        {
-                            SetMainCallback2(CB2_LinkError);
-                        }
-                        else
-                        {
-                            HandleReceiveRemoteLinkPlayer(i);
-                        }
-                    }
-                    else
-                    {
-                        SetBlockReceivedFlag(i);
-                    }
-                }
-            }
-                break;
-            case LINKCMD_READY_CLOSE_LINK:
-                gReadyToCloseLink[i] = TRUE;
-                break;
-            case LINKCMD_READY_EXIT_STANDBY:
-                gReadyToExitStandby[i] = TRUE;
-                break;
-            case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
-                SetBerryBlenderLinkCallback();
-                break;
-            case LINKCMD_SEND_BLOCK_REQ:
-                SendBlock(0, sBlockRequests[gRecvCmds[i][1]].address, sBlockRequests[gRecvCmds[i][1]].size);
-                break;
-            case LINKCMD_SEND_HELD_KEYS:
-                gLinkPartnersHeldKeys[i] = gRecvCmds[i][1];
-                break;
-        }
-    }
-}
-
-static void BuildSendCmd(u16 command)
-{
-    switch (command)
-    {
-        case LINKCMD_SEND_LINK_TYPE:
-            gSendCmd[0] = LINKCMD_SEND_LINK_TYPE;
-            gSendCmd[1] = gLinkType;
-            break;
-        case LINKCMD_READY_EXIT_STANDBY:
-            gSendCmd[0] = LINKCMD_READY_EXIT_STANDBY;
-            break;
-        case LINKCMD_BLENDER_SEND_KEYS:
-            gSendCmd[0] = LINKCMD_BLENDER_SEND_KEYS;
-            gSendCmd[1] = gMain.heldKeys;
-            break;
-        case LINKCMD_SEND_EMPTY:
-            gSendCmd[0] = LINKCMD_SEND_EMPTY;
-            gSendCmd[1] = 0;
-            break;
-        case LINKCMD_SEND_0xEE:
-        {
-            u8 i;
-            gSendCmd[0] = LINKCMD_SEND_0xEE;
-            for (i = 0; i < 5; i++)
-                gSendCmd[i + 1] = 0xEE;
-            break;
-        }
-        case LINKCMD_INIT_BLOCK:
-            gSendCmd[0] = LINKCMD_INIT_BLOCK;
-            gSendCmd[1] = sBlockSend.size;
-            gSendCmd[2] = sBlockSend.multiplayerId + 0x80;
-            break;
-        case LINKCMD_BLENDER_NO_PBLOCK_SPACE:
-            gSendCmd[0] = LINKCMD_BLENDER_NO_PBLOCK_SPACE;
-            break;
-        case LINKCMD_SEND_ITEM:
-            gSendCmd[0] = LINKCMD_SEND_ITEM;
-            gSendCmd[1] = gSpecialVar_ItemId;
-            break;
-        case LINKCMD_SEND_BLOCK_REQ:
-            gSendCmd[0] = LINKCMD_SEND_BLOCK_REQ;
-            gSendCmd[1] = gBlockRequestType;
-            break;
-        case LINKCMD_READY_CLOSE_LINK:
-            gSendCmd[0] = LINKCMD_READY_CLOSE_LINK;
-            break;
-        case LINKCMD_SEND_HELD_KEYS:
-            if (gHeldKeyCodeToSend == 0 || gLinkTransferringData)
-                break;
-
-            gSendCmd[0] = LINKCMD_SEND_HELD_KEYS;
-            gSendCmd[1] = gHeldKeyCodeToSend;
-            break;
-    }
-}
-
 void StartSendingKeysToLink(void)
 {
-    if (gWirelessCommType)
-        StartSendingKeysToRfu();
-
     gLinkCallback = LinkCB_SendHeldKeys;
 }
 
 bool32 IsSendingKeysToLink(void)
 {
-    if (gWirelessCommType)
-        return IsSendingKeysToRfu();
-
     if (gLinkCallback == LinkCB_SendHeldKeys)
         return TRUE;
 
@@ -530,31 +290,21 @@ bool32 IsSendingKeysToLink(void)
 
 static void LinkCB_SendHeldKeys(void)
 {
-    if (gReceivedRemoteLinkPlayers == TRUE)
-        BuildSendCmd(LINKCMD_SEND_HELD_KEYS);
+
 }
 
 void ClearLinkCallback(void)
 {
-    if (gWirelessCommType)
-        ClearLinkRfuCallback();
-    else
-        gLinkCallback = NULL;
+    gLinkCallback = NULL;
 }
 
 void ClearLinkCallback_2(void)
 {
-    if (gWirelessCommType)
-        ClearLinkRfuCallback();
-    else
-        gLinkCallback = NULL;
+    gLinkCallback = NULL;
 }
 
 u8 GetLinkPlayerCount(void)
 {
-    if (gWirelessCommType)
-        return Rfu_GetLinkPlayerCount();
-
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
 }
 
@@ -582,22 +332,9 @@ bool32 Link_AnyPartnersPlayingRubyOrSapphire(void)
     return FALSE;
 }
 
-bool32 Link_AnyPartnersPlayingFRLG_JP(void)
-{
-    int i;
-
-    i = AreAnyLinkPlayersUsingVersions(VERSION_FIRE_RED, VERSION_LEAF_GREEN);
-    if (i >= 0 && gLinkPlayers[i].language == LANGUAGE_JAPANESE)
-    {
-        return TRUE;
-    }
-    return FALSE;
-}
-
 void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
-    sTimeOutCounter = 0;
     OpenLink();
 }
 
@@ -670,10 +407,6 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
             }
         }
     }
-    else if (++sTimeOutCounter > 600)
-    {
-        sPlayerDataExchangeStatus = EXCHANGE_TIMED_OUT;
-    }
     return sPlayerDataExchangeStatus;
 }
 
@@ -744,7 +477,6 @@ static bool32 InitBlockSend(const void *src, size_t size)
 
         sBlockSend.src = gBlockSendBuffer;
     }
-    BuildSendCmd(LINKCMD_INIT_BLOCK);
     gLinkCallback = LinkCB_BlockSendBegin;
     sBlockSendDelayCounter = 0;
     return TRUE;
@@ -780,27 +512,8 @@ static void LinkCB_BlockSendEnd(void)
     gLinkCallback = NULL;
 }
 
-static void LinkCB_BerryBlenderSendHeldKeys(void)
-{
-    GetMultiplayerId();
-    BuildSendCmd(LINKCMD_BLENDER_SEND_KEYS);
-    gBerryBlenderKeySendAttempts++;
-}
-
-void SetBerryBlenderLinkCallback(void)
-{
-    gBerryBlenderKeySendAttempts = 0;
-    if (gWirelessCommType)
-        Rfu_SetBerryBlenderLinkCallback();
-    else
-        gLinkCallback = LinkCB_BerryBlenderSendHeldKeys;
-}
-
 u8 GetMultiplayerId(void)
 {
-    if (gWirelessCommType == TRUE)
-        return Rfu_GetMultiplayerId();
-
     return SIO_MULTI_CNT->id;
 }
 
@@ -814,21 +527,14 @@ u8 BitmaskAllOtherLinkPlayers(void)
 
 bool8 SendBlock(u8 unused, const void *src, u16 size)
 {
-    if (gWirelessCommType == TRUE)
-        return Rfu_InitBlockSend(src, size);
-
     return InitBlockSend(src, size);
 }
 
 bool8 SendBlockRequest(u8 blockReqType)
 {
-    if (gWirelessCommType == TRUE)
-        return Rfu_SendBlockRequest(blockReqType);
-
     if (gLinkCallback == NULL)
     {
         gBlockRequestType = blockReqType;
-        BuildSendCmd(LINKCMD_SEND_BLOCK_REQ);
         return TRUE;
     }
     return FALSE;
@@ -836,54 +542,12 @@ bool8 SendBlockRequest(u8 blockReqType)
 
 bool8 IsLinkTaskFinished(void)
 {
-    if (gWirelessCommType == TRUE)
-        return IsLinkRfuTaskFinished();
-
     return gLinkCallback == NULL;
 }
 
 u8 GetBlockReceivedStatus(void)
 {
-    if (gWirelessCommType == TRUE)
-        return Rfu_GetBlockReceivedStatus();
-
     return (gBlockReceivedStatus[3] << 3) | (gBlockReceivedStatus[2] << 2) | (gBlockReceivedStatus[1] << 1) | (gBlockReceivedStatus[0] << 0);
-}
-
-static void SetBlockReceivedFlag(u8 who)
-{
-    if (gWirelessCommType == TRUE)
-        Rfu_SetBlockReceivedFlag(who);
-    else
-        gBlockReceivedStatus[who] = TRUE;
-}
-
-void ResetBlockReceivedFlags(void)
-{
-    int i;
-
-    if (gWirelessCommType == TRUE)
-    {
-        for (i = 0; i < MAX_RFU_PLAYERS; i++)
-            Rfu_ResetBlockReceivedFlag(i);
-    }
-    else
-    {
-        for (i = 0; i < MAX_LINK_PLAYERS; i++)
-            gBlockReceivedStatus[i] = FALSE;
-    }
-}
-
-void ResetBlockReceivedFlag(u8 who)
-{
-    if (gWirelessCommType == TRUE)
-    {
-        Rfu_ResetBlockReceivedFlag(who);
-    }
-    else if (gBlockReceivedStatus[who])
-    {
-        gBlockReceivedStatus[who] = FALSE;
-    }
 }
 
 void CheckShouldAdvanceLinkState(void)
@@ -894,10 +558,6 @@ void CheckShouldAdvanceLinkState(void)
 
 static void LinkCB_RequestPlayerDataExchange(void)
 {
-    if (gLinkStatus & LINK_STAT_MASTER)
-    {
-        BuildSendCmd(LINKCMD_SEND_LINK_TYPE);
-    }
     gLinkCallback = NULL;
 }
 
@@ -1003,7 +663,6 @@ void CheckLinkPlayersMatchSaved(void)
         {
             gLinkErrorOccurred = TRUE;
             CloseLink();
-            SetMainCallback2(CB2_LinkError);
         }
     }
 }
@@ -1021,44 +680,26 @@ u8 GetLinkPlayerCount_2(void)
 
 bool8 IsLinkMaster(void)
 {
-    if (gWirelessCommType)
-        return Rfu_IsMaster();
-
     return EXTRACT_MASTER(gLinkStatus);
 }
 
 void SetCloseLinkCallbackAndType(u16 type)
 {
-    if (gWirelessCommType == TRUE)
+    if (gLinkCallback == NULL)
     {
-        Rfu_SetCloseLinkCallback();
-    }
-    else
-    {
-        if (gLinkCallback == NULL)
-        {
-            gLinkCallback = LinkCB_ReadyCloseLink;
-        }
+        gLinkCallback = LinkCB_ReadyCloseLink;
     }
 }
 
 void SetCloseLinkCallback(void)
 {
-    if (gWirelessCommType == TRUE)
-    {
-        Rfu_SetCloseLinkCallback();
-    }
-    else
-    {
-        gLinkCallback = LinkCB_ReadyCloseLink;
-    }
+    gLinkCallback = LinkCB_ReadyCloseLink;
 }
 
 static void LinkCB_ReadyCloseLink(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_READY_CLOSE_LINK);
         gLinkCallback = LinkCB_WaitCloseLink;
     }
 }
@@ -1090,21 +731,13 @@ static void LinkCB_WaitCloseLink(void)
 // Used instead of SetCloseLinkCallback when disconnecting from an attempt to link with a foreign game
 void SetCloseLinkCallbackHandleJP(void)
 {
-    if (gWirelessCommType == TRUE)
-    {
-        Rfu_SetCloseLinkCallback();
-    }
-    else
-    {
-        gLinkCallback = LinkCB_ReadyCloseLinkWithJP;
-    }
+    gLinkCallback = LinkCB_ReadyCloseLinkWithJP;
 }
 
 static void LinkCB_ReadyCloseLinkWithJP(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_READY_CLOSE_LINK);
         gLinkCallback = LinkCB_WaitCloseLinkWithJP;
     }
 }
@@ -1141,22 +774,14 @@ static void LinkCB_WaitCloseLinkWithJP(void)
 
 void SetLinkStandbyCallback(void)
 {
-    if (gWirelessCommType == TRUE)
-    {
-        Rfu_SetLinkStandbyCallback();
-    }
-    else
-    {
-        if (gLinkCallback == NULL)
-            gLinkCallback = LinkCB_Standby;
-    }
+    if (gLinkCallback == NULL)
+        gLinkCallback = LinkCB_Standby;
 }
 
 static void LinkCB_Standby(void)
 {
     if (gLastRecvQueueCount == 0)
     {
-        BuildSendCmd(LINKCMD_READY_EXIT_STANDBY);
         gLinkCallback = LinkCB_StandbyForAll;
     }
 }
@@ -1193,7 +818,6 @@ static void TrySetLinkErrorBuffer(void)
             sLinkErrorBuffer.status = gLinkStatus;
             sLinkErrorBuffer.lastRecvQueueCount = gLastRecvQueueCount;
             sLinkErrorBuffer.lastSendQueueCount = gLastSendQueueCount;
-            SetMainCallback2(CB2_LinkError);
         }
         gLinkErrorOccurred = TRUE;
         CloseLink();
@@ -1207,148 +831,6 @@ void SetLinkErrorBuffer(u32 status, u8 lastSendQueueCount, u8 lastRecvQueueCount
     sLinkErrorBuffer.lastRecvQueueCount = lastRecvQueueCount;
     sLinkErrorBuffer.disconnected = disconnected;
 }
-
-void CB2_LinkError(void)
-{
-    u8 *tilemapBuffer;
-
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
-    m4aMPlayStop(&gMPlayInfo_SE1);
-    m4aMPlayStop(&gMPlayInfo_SE2);
-    m4aMPlayStop(&gMPlayInfo_SE3);
-    InitHeap(gHeap, HEAP_SIZE);
-    ResetSpriteData();
-    FreeAllSpritePalettes();
-    ResetPaletteFade();
-    SetBackdropFromColor(RGB_BLACK);
-    ResetTasks();
-    ScanlineEffect_Stop();
-    if (gWirelessCommType)
-    {
-        if (!sLinkErrorBuffer.disconnected)
-            gWirelessCommType = 3;
-
-        ResetLinkRfuGFLayer();
-    }
-    SetVBlankCallback(VBlankCB_LinkError);
-    ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sLinkErrorBgTemplates, ARRAY_COUNT(sLinkErrorBgTemplates));
-    sLinkErrorBgTilemapBuffer = tilemapBuffer = Alloc(BG_SCREEN_SIZE);
-    SetBgTilemapBuffer(1, tilemapBuffer);
-    if (InitWindows(sLinkErrorWindowTemplates))
-    {
-        DeactivateAllTextPrinters();
-        ResetTempTileDataBuffers();
-        SetGpuReg(REG_OFFSET_BLDCNT, 0);
-        SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-        SetGpuReg(REG_OFFSET_BG0HOFS, 0);
-        SetGpuReg(REG_OFFSET_BG0VOFS, 0);
-        SetGpuReg(REG_OFFSET_BG1HOFS, 0);
-        SetGpuReg(REG_OFFSET_BG1VOFS, 0);
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
-        LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
-        gSoftResetDisabled = FALSE;
-        CreateTask(Task_DestroySelf, 0);
-        StopMapMusic();
-        gMain.callback1 = NULL;
-        RunTasks();
-        AnimateSprites();
-        BuildOamBuffer();
-        UpdatePaletteFade();
-        SetMainCallback2(CB2_PrintErrorMessage);
-    }
-}
-
-static void ErrorMsg_MoveCloserToPartner(void)
-{
-    LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
-    DecompressAndLoadBgGfxUsingHeap(1, sWirelessLinkDisplayGfx, FALSE, 0, 0);
-    CopyToBgTilemapBuffer(1, sWirelessLinkDisplayTilemap, 0, 0);
-    CopyBgTilemapBufferToVram(1);
-    LoadPalette(sWirelessLinkDisplayPal, BG_PLTT_ID(0), sizeof(sWirelessLinkDisplayPal));
-    FillWindowPixelBuffer(WIN_LINK_ERROR_TOP, PIXEL_FILL(0));
-    FillWindowPixelBuffer(WIN_LINK_ERROR_BOTTOM, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT, 2, 6, sTextColors, 0, gText_CommErrorEllipsis);
-    AddTextPrinterParameterized3(WIN_LINK_ERROR_BOTTOM, FONT_SHORT, 2, 1, sTextColors, 0, gText_MoveCloserToLinkPartner);
-    PutWindowTilemap(WIN_LINK_ERROR_TOP);
-    PutWindowTilemap(WIN_LINK_ERROR_BOTTOM);
-    CopyWindowToVram(WIN_LINK_ERROR_TOP, COPYWIN_NONE); // Does nothing
-    CopyWindowToVram(WIN_LINK_ERROR_BOTTOM, COPYWIN_FULL);
-}
-
-static void ErrorMsg_CheckConnections(void)
-{
-    LoadBgTiles(0, sCommErrorBg_Gfx, 0x20, 0);
-    FillWindowPixelBuffer(WIN_LINK_ERROR_MID, PIXEL_FILL(0));
-    FillWindowPixelBuffer(WIN_LINK_ERROR_BOTTOM, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(WIN_LINK_ERROR_MID, FONT_SHORT, 2, 0, sTextColors, 0, gText_CommErrorCheckConnections);
-    PutWindowTilemap(WIN_LINK_ERROR_MID);
-    PutWindowTilemap(WIN_LINK_ERROR_BOTTOM);
-    CopyWindowToVram(WIN_LINK_ERROR_MID, COPYWIN_NONE); // Does nothing
-    CopyWindowToVram(WIN_LINK_ERROR_BOTTOM, COPYWIN_FULL);
-}
-
-static void CB2_PrintErrorMessage(void)
-{
-    switch (gMain.state)
-    {
-        case  00:
-            // Below is only true for the RFU, so the other error
-            // type is inferred to be from a wired connection
-            if (sLinkErrorBuffer.disconnected)
-                ErrorMsg_MoveCloserToPartner();
-            else
-                ErrorMsg_CheckConnections();
-            break;
-        case  02:
-            ShowBg(0);
-            if (sLinkErrorBuffer.disconnected)
-                ShowBg(1);
-            break;
-        case  30:
-            PlaySE(SE_BOO);
-            break;
-        case  60:
-            PlaySE(SE_BOO);
-            break;
-        case  90:
-            PlaySE(SE_BOO);
-            break;
-        case 130:
-            if (gWirelessCommType == 2)
-                AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT, 2, 20, sTextColors, 0, gText_ABtnTitleScreen);
-            else if (gWirelessCommType == 1)
-                AddTextPrinterParameterized3(WIN_LINK_ERROR_TOP, FONT_SHORT, 2, 20, sTextColors, 0, gText_ABtnRegistrationCounter);
-            break;
-    }
-    if (gMain.state == 160)
-    {
-        if (gWirelessCommType == 1)
-        {
-            if (JOY_NEW(A_BUTTON))
-            {
-                PlaySE(SE_PIN);
-                gWirelessCommType = 0;
-                sLinkErrorBuffer.disconnected = FALSE;
-                ReloadSave();
-            }
-        }
-        else if (gWirelessCommType == 2)
-        {
-            if (JOY_NEW(A_BUTTON))
-            {
-                rfu_REQ_stopMode();
-                rfu_waitREQComplete();
-                DoSoftReset();
-            }
-        }
-    }
-
-    if (gMain.state != 160)
-        gMain.state++;
-}
-
-// TODO: there might be a file boundary here, let's name it
 
 bool8 GetSioMultiSI(void)
 {
@@ -1374,7 +856,6 @@ void LocalLinkPlayerToBlock(void)
 {
     struct LinkPlayerBlock *block;
 
-    InitLocalLinkPlayer();
     block = &gLocalLinkPlayerBlock;
     block->linkPlayer = gLocalLinkPlayer;
     memcpy(block->magic1, sASCIIGameFreakInc, sizeof(block->magic1) - 1);
@@ -1384,64 +865,11 @@ void LocalLinkPlayerToBlock(void)
 
 void LinkPlayerFromBlock(u32 who)
 {
-    u8 who_ = who;
-    struct LinkPlayerBlock *block;
-    struct LinkPlayer *player;
 
-    block = (struct LinkPlayerBlock *)gBlockRecvBuffer[who_];
-    player = &gLinkPlayers[who_];
-    *player = block->linkPlayer;
-    ConvertLinkPlayerName(player);
-
-    if (strcmp(block->magic1, sASCIIGameFreakInc) != 0
-     || strcmp(block->magic2, sASCIIGameFreakInc) != 0)
-        SetMainCallback2(CB2_LinkError);
-}
-
-// When this function returns TRUE the callbacks are skipped
-bool8 HandleLinkConnection(void)
-{
-    bool32 main1Failed, main2Failed;
-
-    if (gWirelessCommType == 0)
-    {
-        gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
-        LinkMain2(&gMain.heldKeys);
-        if ((gLinkStatus & LINK_STAT_RECEIVED_NOTHING) && IsSendingKeysOverCable() == TRUE)
-            return TRUE;
-    }
-    else
-    {
-        main1Failed = RfuMain1(); // Always returns FALSE
-        main2Failed = RfuMain2();
-        if (IsSendingKeysOverCable() == TRUE)
-        {
-            // This will never be reached.
-            // IsSendingKeysOverCable is always FALSE for wireless communication
-            if (main1Failed == TRUE || IsRfuRecvQueueEmpty() || main2Failed)
-                return TRUE;
-        }
-    }
-    return FALSE;
-}
-
-void SetWirelessCommType1(void)
-{
-    if (gReceivedRemoteLinkPlayers == 0)
-        gWirelessCommType = 1;
-}
-
-void SetWirelessCommType0(void)
-{
-    if (gReceivedRemoteLinkPlayers == 0)
-        gWirelessCommType = 0;
 }
 
 u32 GetLinkRecvQueueLength(void)
 {
-    if (gWirelessCommType != 0)
-        return GetRfuRecvQueueLength();
-
     return gLink.recvQueue.count;
 }
 
@@ -1451,12 +879,6 @@ bool32 IsLinkRecvQueueAtOverworldMax(void)
         return TRUE;
 
     return FALSE;
-}
-
-// Unused
-u8 GetWirelessCommType(void)
-{
-    return gWirelessCommType;
 }
 
 void ConvertLinkPlayerName(struct LinkPlayer *player)

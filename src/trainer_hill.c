@@ -47,7 +47,6 @@ static EWRAM_DATA struct {
 } *sHillData = NULL;
 
 static EWRAM_DATA struct FloorTrainers *sFloorTrainers = NULL;
-EWRAM_DATA u32 *gTrainerHillVBlankCounter = NULL;
 
 // This file's functions.
 static void TrainerHillStartChallenge(void);

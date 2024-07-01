@@ -52,7 +52,6 @@ extern const u8 gContestRankNormal[];
 extern const u8 gContestRankSuper[];
 extern const u8 gContestRankHyper[];
 extern const u8 gContestRankMaster[];
-extern const u8 gContestLink[];
 extern const u8 gContestPaintingCool1[];
 extern const u8 gContestPaintingCool2[];
 extern const u8 gContestPaintingCool3[];
@@ -98,7 +97,6 @@ static const u8 *const sContestRankNames[] =
     [CONTEST_RANK_SUPER]  = gContestRankSuper,
     [CONTEST_RANK_HYPER]  = gContestRankHyper,
     [CONTEST_RANK_MASTER] = gContestRankMaster,
-    [CONTEST_RANK_LINK]   = gContestLink,
 };
 
 static const struct BgTemplate sBgTemplates[] =

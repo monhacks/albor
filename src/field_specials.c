@@ -3534,29 +3534,6 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         }
         break;
     case 2:
-        if (GetBlockReceivedStatus() & 2)
-        {
-            if (GetMultiplayerId() == 0)
-            {
-                // Player is leader, read partner's choice
-                // and determine if play should continue
-                gSpecialVar_0x8005 = gBlockRecvBuffer[1][0];
-                ResetBlockReceivedFlag(1);
-
-                if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
-                 && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_BOTH_RETIRE;
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_CONTINUE
-                      && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_RETIRE)
-                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_MEMBER_RETIRE;
-                else if (gSpecialVar_0x8004 == BATTLE_TOWER_LINK_RETIRE
-                      && gSpecialVar_0x8005 == BATTLE_TOWER_LINK_CONTINUE)
-                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_LEADER_RETIRE;
-                else
-                    gSpecialVar_Result = BATTLE_TOWER_LINKSTAT_CONTINUE;
-            }
-            gTasks[taskId].tState++;
-        }
         break;
     case 3:
         if (IsLinkTaskFinished() == TRUE)
@@ -3575,20 +3552,6 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
         }
         break;
     case 4:
-        if (GetBlockReceivedStatus() & 1)
-        {
-            if (GetMultiplayerId() != 0)
-            {
-                // Player is not link leader, read leader's response
-                gSpecialVar_Result = gBlockRecvBuffer[0][0];
-                ResetBlockReceivedFlag(0);
-                gTasks[taskId].tState++;
-            }
-            else
-            {
-                gTasks[taskId].tState++;
-            }
-        }
         break;
     case 5:
         // Print message if partner chose to retire (and player didn't)
@@ -3620,9 +3583,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             gTasks[taskId].tState++;
         break;
     case 9:
-        if (gWirelessCommType == 0)
-            SetCloseLinkCallback();
-
+        SetCloseLinkCallback();
         gBattleTypeFlags = sBattleTowerMultiBattleTypeFlags;
         ScriptContext_Enable();
         DestroyTask(taskId);

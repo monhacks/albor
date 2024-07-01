@@ -1858,8 +1858,6 @@ static void ShowPartnerCandidateMessage(void)
 static void LoadLinkMultiOpponentsData(void)
 {
     s32 challengeNum;
-    s32 i, j;
-    s32 trainerId = 0;
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u32 battleNum = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
@@ -1883,29 +1881,6 @@ static void LoadLinkMultiOpponentsData(void)
         }
         break;
     case 1:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            ResetBlockReceivedFlags();
-            if (gBlockRecvBuffer[0][0] > gBlockRecvBuffer[1][0])
-                challengeNum = gBlockRecvBuffer[0][0];
-            else
-                challengeNum = gBlockRecvBuffer[1][0];
-            for (i = 0; i < FRONTIER_STAGES_PER_CHALLENGE * 2; i++)
-            {
-                do
-                {
-                    trainerId = GetRandomScaledFrontierTrainerId(challengeNum, i / 2);
-                    for (j = 0; j < i; j++)
-                    {
-                        if (gSaveBlock2Ptr->frontier.trainerIds[j] == trainerId)
-                            break;
-                    }
-                } while (i != j);
-                if (i == j) // This condition is always true, because of the loop above.
-                    gSaveBlock2Ptr->frontier.trainerIds[i] = trainerId;
-            }
-            gSpecialVar_Result = 2;
-        }
         break;
     case 2:
         if (IsLinkTaskFinished())
@@ -1917,13 +1892,11 @@ static void LoadLinkMultiOpponentsData(void)
     case 3:
         if ((GetBlockReceivedStatus() & 3) == 3)
         {
-            ResetBlockReceivedFlags();
-            memcpy(&gSaveBlock2Ptr->frontier.trainerIds, gBlockRecvBuffer, sizeof(gSaveBlock2Ptr->frontier.trainerIds));
             gTrainerBattleOpponent_A = gSaveBlock2Ptr->frontier.trainerIds[battleNum * 2];
             gTrainerBattleOpponent_B = gSaveBlock2Ptr->frontier.trainerIds[battleNum * 2 + 1];
             SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
             SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-            if (gReceivedRemoteLinkPlayers && gWirelessCommType == 0)
+            if (gReceivedRemoteLinkPlayers)
                 gSpecialVar_Result = 4;
             else
                 gSpecialVar_Result = 6;
@@ -1946,8 +1919,7 @@ static void LoadLinkMultiOpponentsData(void)
 
 static void TowerTryCloseLink(void)
 {
-    if (gWirelessCommType != 0)
-        SetCloseLinkCallback();
+
 }
 
 static void SetMultiPartnerGfx(void)

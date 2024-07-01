@@ -1032,8 +1032,6 @@ bool8 UpdateRepelCounter(void)
 
     if (InBattlePike() || InBattlePyramid())
         return FALSE;
-    if (InUnionRoom() == TRUE)
-        return FALSE;
 
     if (steps != 0)
     {

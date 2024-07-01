@@ -547,11 +547,6 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 
 static bool8 TryStartStepCountScript(u16 metatileBehavior)
 {
-    if (InUnionRoom() == TRUE)
-    {
-        return FALSE;
-    }
-
     IncrementRematchStepCounter();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
@@ -769,11 +764,6 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
             DoTeleportTileWarp();
             return TRUE;
         }
-        if (MetatileBehavior_IsUnionRoomWarp(metatileBehavior) == TRUE)
-        {
-            DoSpinExitWarp();
-            return TRUE;
-        }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
             ScriptContext_SetupScript(EventScript_FallDownHoleMtPyre);
@@ -800,8 +790,7 @@ static bool8 IsWarpMetatileBehavior(u16 metatileBehavior)
      && MetatileBehavior_IsLavaridge1FWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsAquaHideoutWarp(metatileBehavior) != TRUE
      && MetatileBehavior_IsMtPyreHole(metatileBehavior) != TRUE
-     && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE
-     && MetatileBehavior_IsUnionRoomWarp(metatileBehavior) != TRUE)
+     && MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) != TRUE)
         return FALSE;
     return TRUE;
 }

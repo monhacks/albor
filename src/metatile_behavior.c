@@ -1091,17 +1091,6 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 metatileBehavior)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsUnionRoomWarp(u8 metatileBehavior)
-{
-    // This metatile behavior is re-used for some reason by
-    // the Union Room exit metatile. This function is used to
-    // initiate a teleport-style warp.
-    if (metatileBehavior == MB_BRIDGE_OVER_OCEAN)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 bool8 MetatileBehavior_IsMossdeepGymWarp(u8 metatileBehavior)
 {
     if (metatileBehavior == MB_MOSSDEEP_GYM_WARP)

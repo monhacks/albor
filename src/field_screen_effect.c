@@ -13,7 +13,6 @@
 #include "gpu_regs.h"
 #include "io_reg.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
@@ -115,20 +114,6 @@ static void SetPlayerVisibility(bool8 visible)
     SetPlayerInvisibility(!visible);
 }
 
-static void Task_WaitForUnionRoomFade(u8 taskId)
-{
-    if (WaitForWeatherFadeIn() == TRUE)
-        DestroyTask(taskId);
-}
-
-void FieldCB_ContinueScriptUnionRoom(void)
-{
-    LockPlayerFieldControls();
-    Overworld_PlaySpecialMapMusic();
-    FadeInFromBlack();
-    CreateTask(Task_WaitForUnionRoomFade, 10);
-}
-
 static void Task_WaitForFadeAndEnableScriptCtx(u8 taskID)
 {
     if (WaitForWeatherFadeIn() == TRUE)
@@ -198,16 +183,6 @@ static void Task_ReturnToFieldWirelessLink(u8 taskId)
         task->tState++;
         break;
     case 1:
-        if (!IsLinkTaskFinished())
-        {
-            if (++task->data[1] > 1800)
-                RfuSetErrorParams(F_RFU_ERROR_6 | F_RFU_ERROR_7);
-        }
-        else
-        {
-            WarpFadeInScreen();
-            task->tState++;
-        }
         break;
     case 2:
         if (WaitForWeatherFadeIn() == TRUE)

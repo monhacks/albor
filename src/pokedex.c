@@ -72,6 +72,20 @@ enum {
     COLOR_TITLE
 };
 
+enum {
+    WIN_POKEMON_LIST,
+    WIN_TITLE,
+    WIN_SEEN,
+    WIN_OWN
+};
+
+enum {
+    BG_TEXTO,
+    BG_CURSOR,
+    BG_FONDO,
+    BG_SCROLLING
+};
+
 // static .rodata strings
 
 static const u8 sText_No0000[] = _("0000");
@@ -810,6 +824,7 @@ static const u8 sScrollTimers[] = {8, 4, 2, 1, 1};
 
 static const struct BgTemplate sPokedex_BgTemplate[] =
 {
+    [BG_TEXTO] =
     {
         .bg = 0,
         .charBaseIndex = 0,
@@ -819,6 +834,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .priority = 0,
         .baseTile = 0
     },
+    [BG_CURSOR] =
     {
         .bg = 1,
         .charBaseIndex = 0,
@@ -828,6 +844,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .priority = 1,
         .baseTile = 0
     },
+    [BG_FONDO] =
     {
         .bg = 2,
         .charBaseIndex = 2,
@@ -837,6 +854,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .priority = 2,
         .baseTile = 0
     },
+    [BG_SCROLLING] =
     {
         .bg = 3,
         .charBaseIndex = 0,
@@ -847,11 +865,6 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .baseTile = 0
     }
 };
-
-#define WIN_POKEMON_LIST 0
-#define WIN_TITLE 1
-#define WIN_SEEN 2
-#define WIN_OWN 3
 
 static const struct WindowTemplate sPokemonList_WindowTemplate[] =
 {

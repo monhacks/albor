@@ -7,7 +7,6 @@ void WarpFadeInScreen(void);
 void WarpFadeOutScreen(void);
 void FadeInFromBlack(void);
 void FadeInFromWhite(void);
-void FieldCB_ContinueScriptUnionRoom(void);
 void FieldCB_ContinueScriptHandleMusic(void);
 void FieldCB_ContinueScript(void);
 void FieldCB_ReturnToFieldCableLink(void);

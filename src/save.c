@@ -710,10 +710,8 @@ static void UpdateSaveAddresses(void)
 u8 HandleSavingData(u8 saveType)
 {
     u8 i;
-    u32 *backupVar = gTrainerHillVBlankCounter;
     u8 *tempAddr;
 
-    gTrainerHillVBlankCounter = NULL;
     UpdateSaveAddresses();
     switch (saveType)
     {
@@ -754,7 +752,6 @@ u8 HandleSavingData(u8 saveType)
         WriteSaveSectorOrSlot(FULL_SAVE_SLOT, gRamSaveSectorLocations);
         break;
     }
-    gTrainerHillVBlankCounter = backupVar;
     return 0;
 }
 

@@ -12,9 +12,7 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
-#include "librfu.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "mail.h"
 #include "main.h"
@@ -37,7 +35,6 @@
 #include "text_window.h"
 #include "trainer_card.h"
 #include "trade.h"
-#include "union_room.h"
 #include "util.h"
 #include "window.h"
 #include "constants/contest.h"
@@ -46,7 +43,6 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "constants/union_room.h"
 
 // IDs for RunTradeMenuCallback
 enum {
@@ -66,7 +62,6 @@ enum {
     CB_START_LINK_TRADE,
     CB_INIT_CONFIRM_TRADE_PROMPT,
     CB_UNUSED_CLOSE_MSG,
-    CB_WAIT_TO_START_RFU_TRADE,
     CB_PARTNER_MON_INVALID,
     CB_IDLE = 100,
 };
@@ -263,7 +258,6 @@ static void RedrawPartyWindow(u8);
 static void Task_DrawSelectionSummary(u8);
 static void Task_DrawSelectionTrade(u8);
 static void QueueAction(u16, u8);
-static u32 GetNumQueuedActions(void);
 static void DoQueuedActions(void);
 static void PrintTradeMessage(u8);
 static bool8 LoadUISpriteGfx(void);
@@ -307,15 +301,7 @@ static void CB2_SaveAndEndWirelessTrade(void);
 
 static bool8 SendLinkData(const void *linkData, u32 size)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
-    {
-        rfu_NI_setSendData(lman.acceptSlot_flag, 84, linkData, size);
-        return TRUE;
-    }
-    else
-    {
-        return SendBlock(0, linkData, size);
-    }
+    return SendBlock(0, linkData, size);
 }
 
 static void RequestLinkData(u8 type)
@@ -325,17 +311,7 @@ static void RequestLinkData(u8 type)
 
 static bool32 IsLinkTradeTaskFinished(void)
 {
-    if (gPlayerCurrActivity == ACTIVITY_29)
-    {
-        if (gRfuSlotStatusNI[Rfu_GetIndexOfNewestChild(lman.acceptSlot_flag)]->send.state == 0)
-            return TRUE;
-        else
-            return FALSE;
-    }
-    else
-    {
-        return IsLinkTaskFinished();
-    }
+    return IsLinkTaskFinished();
 }
 
 static u32 _GetBlockReceivedStatus(void)
@@ -343,28 +319,9 @@ static u32 _GetBlockReceivedStatus(void)
     return GetBlockReceivedStatus();
 }
 
-static void TradeResetReceivedFlags(void)
-{
-    if (IsWirelessTrade())
-        rfu_clearSlot(12, lman.acceptSlot_flag);
-    else
-        ResetBlockReceivedFlags();
-}
-
-static void TradeResetReceivedFlag(u32 who)
-{
-    if (IsWirelessTrade())
-        rfu_clearSlot(12, lman.acceptSlot_flag);
-    else
-        ResetBlockReceivedFlag(who);
-}
-
 static bool32 IsWirelessTrade(void)
 {
-    if (gWirelessCommType && gPlayerCurrActivity == ACTIVITY_29)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static void SetTradeLinkStandbyCallback(u8 unused)
@@ -458,18 +415,8 @@ static void CB2_CreateTradeMenu(void)
         {
             gLinkType = LINKTYPE_TRADE_CONNECTING;
             sTradeMenu->timer = 0;
-
-            if (gWirelessCommType)
-            {
-                SetWirelessCommType1();
-                OpenLink();
-                CreateTask_RfuIdle();
-            }
-            else
-            {
-                OpenLink();
-                gMain.state++;
-            }
+            OpenLink();
+            gMain.state++;
         }
         else
         {
@@ -504,31 +451,13 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
-            DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
             sTradeMenu->timer = 0;
-            if (gWirelessCommType)
-            {
-                Rfu_SetLinkRecovery(TRUE);
-                SetLinkStandbyCallback();
-            }
         }
         break;
     case 5:
-        if (gWirelessCommType)
-        {
-            if (IsLinkRfuTaskFinished())
-            {
-                gMain.state++;
-                LoadWirelessStatusIndicatorSpriteGfx();
-                CreateWirelessStatusIndicatorSprite(0, 0);
-            }
-        }
-        else
-        {
-            gMain.state++;
-        }
+        gMain.state++;
         break;
     case 6:
         if (BufferTradeParties())
@@ -715,11 +644,6 @@ static void CB2_ReturnToTradeMenu(void)
         gMain.state++;
         break;
     case 5:
-        if (gWirelessCommType)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
         gMain.state++;
         break;
     case 6:
@@ -888,47 +812,22 @@ static void CB_WaitToStartTrade(void)
     {
         gSelectedTradeMonPositions[TRADE_PLAYER] = sTradeMenu->cursorPosition;
         gSelectedTradeMonPositions[TRADE_PARTNER] = sTradeMenu->partnerCursorPosition;
-
-        if (gWirelessCommType)
-        {
-            sTradeMenu->callbackId = CB_WAIT_TO_START_RFU_TRADE;
-        }
-        else
-        {
-            SetCloseLinkCallbackAndType(32);
-            sTradeMenu->callbackId = CB_START_LINK_TRADE;
-        }
+        SetCloseLinkCallbackAndType(32);
+        sTradeMenu->callbackId = CB_START_LINK_TRADE;
     }
 }
 
 static void CB_StartLinkTrade(void)
 {
     gMain.savedCallback = CB2_StartCreateTradeMenu;
-
-    if (gWirelessCommType)
+    // Cable Link Trade
+    if (!gReceivedRemoteLinkPlayers)
     {
-        // Wireless Link Trade
-        if (IsLinkRfuTaskFinished())
-        {
-            Free(sMenuTextTileBuffer);
-            FreeAllWindowBuffers();
-            Free(sTradeMenu);
-            gMain.callback1 = NULL;
-            DestroyWirelessStatusIndicatorSprite();
-            SetMainCallback2(CB2_LinkTrade);
-        }
-    }
-    else
-    {
-        // Cable Link Trade
-        if (!gReceivedRemoteLinkPlayers)
-        {
-            Free(sMenuTextTileBuffer);
-            FreeAllWindowBuffers();
-            Free(sTradeMenu);
-            gMain.callback1 = NULL;
-            SetMainCallback2(CB2_LinkTrade);
-        }
+        Free(sMenuTextTileBuffer);
+        FreeAllWindowBuffers();
+        Free(sTradeMenu);
+        gMain.callback1 = NULL;
+        SetMainCallback2(CB2_LinkTrade);
     }
 }
 
@@ -1049,7 +948,6 @@ static bool8 BufferTradeParties(void)
             }
             else
             {
-                TradeResetReceivedFlags();
                 sTradeMenu->bufferPartyState++;
             }
         }
@@ -1060,12 +958,6 @@ static bool8 BufferTradeParties(void)
         sTradeMenu->bufferPartyState++;
         break;
     case 4:
-        if (_GetBlockReceivedStatus() == 3)
-        {
-            Trade_Memcpy(&gEnemyParty[0], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
-            TradeResetReceivedFlags();
-            sTradeMenu->bufferPartyState++;
-        }
         break;
     case 5:
         Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[2], 2 * sizeof(struct Pokemon));
@@ -1077,12 +969,6 @@ static bool8 BufferTradeParties(void)
         sTradeMenu->bufferPartyState++;
         break;
     case 8:
-        if (_GetBlockReceivedStatus() == 3)
-        {
-            Trade_Memcpy(&gEnemyParty[2], gBlockRecvBuffer[id ^ 1],  2 * sizeof(struct Pokemon));
-            TradeResetReceivedFlags();
-            sTradeMenu->bufferPartyState++;
-        }
         break;
     case 9:
         Trade_Memcpy(gBlockSendBuffer, &gPlayerParty[4], 2 * sizeof(struct Pokemon));
@@ -1094,12 +980,6 @@ static bool8 BufferTradeParties(void)
         sTradeMenu->bufferPartyState++;
         break;
     case 12:
-        if (_GetBlockReceivedStatus() == 3)
-        {
-            Trade_Memcpy(&gEnemyParty[4], gBlockRecvBuffer[id ^ 1], 2 * sizeof(struct Pokemon));
-            TradeResetReceivedFlags();
-            sTradeMenu->bufferPartyState++;
-        }
         break;
     case 13:
         Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->mail, PARTY_SIZE * sizeof(struct Mail) + 4);
@@ -1111,12 +991,6 @@ static bool8 BufferTradeParties(void)
         sTradeMenu->bufferPartyState++;
         break;
     case 16:
-        if (_GetBlockReceivedStatus() == 3)
-        {
-            Trade_Memcpy(gTradeMail, gBlockRecvBuffer[id ^ 1], PARTY_SIZE * sizeof(struct Mail));
-            TradeResetReceivedFlags();
-            sTradeMenu->bufferPartyState++;
-        }
         break;
     case 17:
         Trade_Memcpy(gBlockSendBuffer, gSaveBlock1Ptr->giftRibbons, sizeof(sTradeMenu->giftRibbons));
@@ -1128,12 +1002,6 @@ static bool8 BufferTradeParties(void)
         sTradeMenu->bufferPartyState++;
         break;
     case 20:
-        if (_GetBlockReceivedStatus() == 3)
-        {
-            Trade_Memcpy(sTradeMenu->giftRibbons, gBlockRecvBuffer[id ^ 1], sizeof(sTradeMenu->giftRibbons));
-            TradeResetReceivedFlags();
-            sTradeMenu->bufferPartyState++;
-        }
         break;
     case 21:
         for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
@@ -1177,83 +1045,12 @@ static void PrintIsThisTradeOkay(void)
 
 static void Leader_ReadLinkBuffer(u8 mpId, u8 status)
 {
-    if (status & 1)
-    {
-        switch (gBlockRecvBuffer[0][0])
-        {
-        case LINKCMD_REQUEST_CANCEL:
-            sTradeMenu->playerSelectStatus = STATUS_CANCEL;
-            break;
-        case LINKCMD_READY_TO_TRADE:
-            sTradeMenu->playerSelectStatus = STATUS_READY;
-            break;
-        case LINKCMD_INIT_BLOCK:
-            sTradeMenu->playerConfirmStatus = STATUS_READY;
-            break;
-        case LINKCMD_READY_CANCEL_TRADE:
-            sTradeMenu->playerConfirmStatus = STATUS_CANCEL;
-            break;
-        }
-        TradeResetReceivedFlag(0);
-    }
 
-    if (status & 2)
-    {
-        switch (gBlockRecvBuffer[1][0])
-        {
-        case LINKCMD_REQUEST_CANCEL:
-            sTradeMenu->partnerSelectStatus = STATUS_CANCEL;
-            break;
-        case LINKCMD_READY_TO_TRADE:
-            sTradeMenu->partnerCursorPosition = gBlockRecvBuffer[1][1] + PARTY_SIZE;
-            sTradeMenu->partnerSelectStatus = STATUS_READY;
-            break;
-        case LINKCMD_INIT_BLOCK:
-            sTradeMenu->partnerConfirmStatus = STATUS_READY;
-            break;
-        case LINKCMD_READY_CANCEL_TRADE:
-            sTradeMenu->partnerConfirmStatus = STATUS_CANCEL;
-            break;
-        }
-        TradeResetReceivedFlag(1);
-    }
 }
 
 static void Follower_ReadLinkBuffer(u8 mpId, u8 status)
 {
-    if (status & 1)
-    {
-        switch (gBlockRecvBuffer[0][0])
-        {
-        case LINKCMD_BOTH_CANCEL_TRADE:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            PrintTradeMessage(MSG_WAITING_FOR_FRIEND);
-            sTradeMenu->callbackId = CB_INIT_EXIT_CANCELED_TRADE;
-            break;
-        case LINKCMD_PARTNER_CANCEL_TRADE:
-            PrintTradeMessage(MSG_FRIEND_WANTS_TO_TRADE);
-            sTradeMenu->callbackId = CB_HANDLE_TRADE_CANCELED;
-            break;
-        case LINKCMD_SET_MONS_TO_TRADE:
-            sTradeMenu->partnerCursorPosition = gBlockRecvBuffer[0][1] + PARTY_SIZE;
-            rbox_fill_rectangle(0);
-            SetSelectedMon(sTradeMenu->cursorPosition);
-            SetSelectedMon(sTradeMenu->partnerCursorPosition);
-            sTradeMenu->callbackId = CB_PRINT_IS_THIS_OKAY;
-            break;
-        case LINKCMD_START_TRADE:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-            sTradeMenu->callbackId = CB_WAIT_TO_START_TRADE;
-            break;
-        case LINKCMD_PLAYER_CANCEL_TRADE:
-            PrintTradeMessage(MSG_CANCELED);
-            sTradeMenu->callbackId = CB_HANDLE_TRADE_CANCELED;
-        }
-        TradeResetReceivedFlag(0);
-    }
 
-    if (status & 2)
-        TradeResetReceivedFlag(1);
 }
 
 static void Leader_HandleCommunication(void)
@@ -1705,21 +1502,8 @@ static void CB_InitExitCanceledTrade(void)
 {
     if (!gPaletteFade.active)
     {
-        if (gWirelessCommType)
-            SetLinkStandbyCallback();
-        else
-            SetCloseLinkCallbackAndType(12);
-
+        SetCloseLinkCallbackAndType(12);
         sTradeMenu->callbackId = CB_EXIT_CANCELED_TRADE;
-    }
-}
-
-static void CB_WaitToStartRfuTrade(void)
-{
-    if (!Rfu_SetLinkRecovery(FALSE) && GetNumQueuedActions() == 0)
-    {
-        SetLinkStandbyCallback();
-        sTradeMenu->callbackId = CB_START_LINK_TRADE;
     }
 }
 
@@ -1779,9 +1563,6 @@ static void RunTradeMenuCallback(void)
         break;
     case CB_UNUSED_CLOSE_MSG:
         CB_ChooseMonAfterButtonPress();
-        break;
-    case CB_WAIT_TO_START_RFU_TRADE:
-        CB_WaitToStartRfuTrade();
         break;
     case CB_PARTNER_MON_INVALID:
         CB_PartnersMonWasInvalid();
@@ -2101,19 +1882,6 @@ static void QueueAction(u16 delay, u8 actionId)
     }
 }
 
-static u32 GetNumQueuedActions(void)
-{
-    u32 numActions = 0;
-    int i;
-
-    for (i = 0; i < (int)ARRAY_COUNT(sTradeMenu->queuedActions); i++)
-    {
-        numActions += sTradeMenu->queuedActions[i].active;
-    }
-
-    return numActions;
-}
-
 static void DoQueuedActions(void)
 {
     int i;
@@ -2419,114 +2187,6 @@ s32 GetGameProgressForLinkTrade(void)
     return TRADE_BOTH_PLAYERS_READY;
 }
 
-int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isModernFatefulEncounter)
-{
-    bool8 playerHasNationalDex = player.hasNationalDex;
-    bool8 playerCanLinkNationally = player.canLinkNationally;
-    bool8 partnerCanLinkNationally = partner.canLinkNationally;
-    u8 partnerVersion = partner.version;
-
-    // If partner is not using Emerald, both players must have progressed the story
-    // to a certain point (becoming champion in RSE, finishing the Sevii islands in FRLG)
-    if (partnerVersion != VERSION_EMERALD)
-    {
-        if (!playerCanLinkNationally)
-            return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1;
-        else if (!partnerCanLinkNationally)
-            return UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2;
-    }
-
-    // Can't trade specific species
-    if (gSpeciesInfo[playerSpecies].cannotBeTraded)
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED;
-
-    if (partnerSpecies == SPECIES_EGG)
-    {
-        // If partner is trading an Egg then the player must also be trading an Egg
-        if (playerSpecies2 != partnerSpecies)
-            return UR_TRADE_MSG_NOT_EGG;
-    }
-    else
-    {
-        // Player's Pokémon must be of the type the partner requested
-        if (gSpeciesInfo[playerSpecies2].types[0] != requestedType
-         && gSpeciesInfo[playerSpecies2].types[1] != requestedType)
-            return UR_TRADE_MSG_NOT_MON_PARTNER_WANTS;
-    }
-
-    // If the player is trading an Egg then the partner must also be trading an Egg
-    // Odd that this wasn't checked earlier, as by this point we know either the partner doesn't have an Egg or that both do.
-    if (playerSpecies2 == SPECIES_EGG && playerSpecies2 != partnerSpecies)
-        return UR_TRADE_MSG_MON_CANT_BE_TRADED_NOW;
-
-    // If the player doesn't have the National Dex then Eggs and non-Hoenn Pokémon can't be traded
-    if (!playerHasNationalDex)
-    {
-        if (playerSpecies2 == SPECIES_EGG)
-            return UR_TRADE_MSG_EGG_CANT_BE_TRADED;
-    }
-
-    // Trade is allowed
-    return UR_TRADE_MSG_NONE;
-}
-
-int CanRegisterMonForTradingBoard(struct RfuGameCompatibilityData player, u16 species2, u16 species, bool8 isModernFatefulEncounter)
-{
-    bool8 hasNationalDex = player.hasNationalDex;
-
-    // Can't trade specific species
-    if (gSpeciesInfo[species].cannotBeTraded)
-        return CANT_REGISTER_MON;
-
-    if (hasNationalDex)
-        return CAN_REGISTER_MON;
-
-    // Eggs can only be traded if the player has the National Dex
-    if (species2 == SPECIES_EGG)
-        return CANT_REGISTER_EGG;
-
-    return CANT_REGISTER_MON_NOW;
-}
-
-// Spin Trade wasnt fully implemented, but this checks if a mon would be valid to Spin Trade
-// Unlike later generations, this version of Spin Trade isnt only for Eggs
-int CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
-{
-    int i, version, versions, numMonsLeft;
-    int speciesArray[PARTY_SIZE];
-
-    // Make Eggs not count for numMonsLeft
-    for (i = 0; i < gPlayerPartyCount; i++)
-    {
-        speciesArray[i] = GetMonData(&mon[i], MON_DATA_SPECIES_OR_EGG);
-        if (speciesArray[i] == SPECIES_EGG)
-            speciesArray[i] = SPECIES_NONE;
-    }
-
-    versions = 0;
-    for (i = 0; i < GetLinkPlayerCount(); i++)
-    {
-        version = gLinkPlayers[i].version & 0xFF;
-        if (version == VERSION_FIRE_RED ||
-            version == VERSION_LEAF_GREEN)
-            versions = 0;
-        else
-            versions |= 1;
-    }
-
-    numMonsLeft = 0;
-    for (i = 0; i < gPlayerPartyCount; i++)
-    {
-        if (monIdx != i)
-            numMonsLeft += speciesArray[i];
-    }
-
-    if (!numMonsLeft)
-        return CANT_TRADE_LAST_MON;
-    else
-        return CAN_TRADE_MON;
-}
-
 static void SpriteCB_LinkMonGlow(struct Sprite *sprite)
 {
     if (++sprite->data[0] == 10)
@@ -2645,7 +2305,6 @@ static void CheckForLinkTimeout(void)
     if (sTradeAnim->linkTimeoutTimer > 300)
     {
         CloseLink();
-        SetMainCallback2(CB2_LinkError);
         sTradeAnim->linkTimeoutTimer = 0;
         sTradeAnim->linkTimeoutZero2 = 0;
         sTradeAnim->linkTimeoutZero1 = 0;
@@ -2814,11 +2473,6 @@ void CB2_LinkTrade(void)
     case 12:
         if (!gPaletteFade.active)
         {
-            if (gWirelessCommType)
-            {
-                LoadWirelessStatusIndicatorSpriteGfx();
-                CreateWirelessStatusIndicatorSprite(0, 0);
-            }
             SetMainCallback2(CB2_UpdateLinkTrade);
         }
         break;
@@ -4291,26 +3945,7 @@ static void CB2_TryLinkTradeEvolution(void)
 
 static void HandleLinkDataReceive(void)
 {
-    u8 recvStatus;
-    TradeGetMultiplayerId(); // no effect call, ret val ignored
-    recvStatus = GetBlockReceivedStatus();
-    if (recvStatus & (1 << 0))
-    {
-        if (gBlockRecvBuffer[0][0] == LINKCMD_CONFIRM_FINISH_TRADE)
-            SetMainCallback2(CB2_TryLinkTradeEvolution);
 
-        if (gBlockRecvBuffer[0][0] == LINKCMD_READY_FINISH_TRADE)
-            sTradeAnim->playerFinishStatus = STATUS_READY;
-
-        ResetBlockReceivedFlag(0);
-    }
-    if (recvStatus & (1 << 1))
-    {
-        if (gBlockRecvBuffer[1][0] == LINKCMD_READY_FINISH_TRADE)
-            sTradeAnim->partnerFinishStatus = STATUS_READY;
-
-        ResetBlockReceivedFlag(1);
-    }
 }
 
 static void SpriteCB_BouncingPokeball(struct Sprite *sprite)
@@ -4565,9 +4200,6 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 50:
-        if (!InUnionRoom())
-            IncrementGameStat(GAME_STAT_POKEMON_TRADES);
-
         SetContinueGameWarpStatusToDynamicWarp();
         LinkFullSave_Init();
         gMain.state++;
@@ -4647,23 +4279,12 @@ static void CB2_SaveAndEndTrade(void)
     case 8:
         if (IsBGMStopped() == TRUE)
         {
-            if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
-                SetTradeLinkStandbyCallback(3);
-            else
-                SetCloseLinkCallback();
+            SetCloseLinkCallback();
             gMain.state++;
         }
         break;
     case 9:
-        if (gWirelessCommType && gMain.savedCallback == CB2_StartCreateTradeMenu)
-        {
-            if (_IsLinkTaskFinished())
-            {
-                gSoftResetDisabled = FALSE;
-                SetMainCallback2(CB2_FreeTradeAnim);
-            }
-        }
-        else if (!gReceivedRemoteLinkPlayers)
+        if (!gReceivedRemoteLinkPlayers)
         {
             gSoftResetDisabled = FALSE;
             SetMainCallback2(CB2_FreeTradeAnim);
@@ -4689,8 +4310,6 @@ static void CB2_FreeTradeAnim(void)
         Free(GetBgTilemapBuffer(0));
         FreeMonSpritesGfx();
         FREE_AND_SET_NULL(sTradeAnim);
-        if (gWirelessCommType)
-            DestroyWirelessStatusIndicatorSprite();
         SetMainCallback2(gMain.savedCallback);
     }
     RunTasks();

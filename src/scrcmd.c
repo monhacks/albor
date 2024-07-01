@@ -5,7 +5,6 @@
 #include "clock.h"
 #include "coins.h"
 #include "contest.h"
-#include "contest_util.h"
 #include "contest_painting.h"
 #include "data.h"
 #include "decompress.h"
@@ -1608,7 +1607,6 @@ bool8 ScrCmd_showcontestpainting(struct ScriptContext *ctx)
     if (contestWinnerId != CONTEST_WINNER_ARTIST)
         SetContestWinnerForPainting(contestWinnerId);
 
-    ShowContestPainting();
     ScriptContext_Stop();
     return TRUE;
 }
@@ -2083,21 +2081,12 @@ bool8 ScrCmd_choosecontestmon(struct ScriptContext *ctx)
 
 bool8 ScrCmd_startcontest(struct ScriptContext *ctx)
 {
-    StartContest();
     ScriptContext_Stop();
     return TRUE;
 }
 
 bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 {
-    ShowContestResults();
-    ScriptContext_Stop();
-    return TRUE;
-}
-
-bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
-{
-    ContestLinkTransfer(gSpecialVar_ContestCategory);
     ScriptContext_Stop();
     return TRUE;
 }
