@@ -348,7 +348,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_RAIN_DISH] =
     {
         .name = _("Rain Dish"),
-        .description = COMPOUND_STRING("Slight HP recovery in rain."),
+        .description = COMPOUND_STRING("Recupera 1/8 PS en lluvia."),
         .aiRating = 3,
     },
 
@@ -866,7 +866,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ICE_BODY] =
     {
         .name = _("Gélido"),
-        .description = COMPOUND_STRING("Recupera 1/16 PS en nieve."),
+        .description = COMPOUND_STRING("Recupera 1/8 PS en nieve."),
         .aiRating = 3,
     },
 
@@ -2947,5 +2947,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Envío express"),
         .description = COMPOUND_STRING("Regalos +1 prioridad."),
         .aiRating = 6,
+    },
+
+    [ABILITY_FOTOSINTESIS] =
+    {
+        .name = _("Fotosíntesis"),
+        .description = COMPOUND_STRING("Recupera 1/8 PS en sol."),
+        .aiRating = 3,
     },
 };

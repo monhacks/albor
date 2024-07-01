@@ -1445,14 +1445,20 @@ static s32 GetSwitchinWeatherImpact(void)
             }
             else if (ability == ABILITY_RAIN_DISH)
             {
-                weatherImpact = -(maxHP / 16);
+                weatherImpact = -(maxHP / 8);
                 if (weatherImpact == 0)
                     weatherImpact = -1;
             }
         }
         if (((gBattleWeather & B_WEATHER_HAIL) || (gBattleWeather & B_WEATHER_SNOW)) && ability == ABILITY_ICE_BODY)
         {
-            weatherImpact = -(maxHP / 16);
+            weatherImpact = -(maxHP / 8);
+            if (weatherImpact == 0)
+                weatherImpact = -1;
+        }
+        if ((gBattleWeather & B_WEATHER_SUN) && ability == ABILITY_FOTOSINTESIS)
+        {
+            weatherImpact = -(maxHP / 8);
             if (weatherImpact == 0)
                 weatherImpact = -1;
         }

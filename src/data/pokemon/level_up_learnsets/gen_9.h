@@ -10698,6 +10698,7 @@ static const struct LevelUpMove sDrifblimLevelUpLearnset[] = {
     LEVEL_UP_MOVE(42, MOVE_BATON_PASS),
     LEVEL_UP_MOVE(48, MOVE_TAILWIND),
     LEVEL_UP_MOVE(54, MOVE_EXPLOSION),
+    //LEVEL_UP_MOVE(, MOVE_HYPNOSIS),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_DRIFLOON
