@@ -240,7 +240,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonShinyPalette_SandshrewAlolan[] = INCBIN_U32("graphics/pokemon/sandshrew/alolan/shiny.gbapal.lz");
     const u32 gObjectEventPic_SandshrewAlolan[] = INCBIN_U32("graphics/pokemon/sandshrew/alolan/follower.4bpp");
 
-    const u32 gMonFrontPic_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/front.4bpp.lz");
+    const u32 gMonFrontPic_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/anim_front.4bpp.lz");
     const u32 gMonPalette_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/normal.gbapal.lz");
     const u32 gMonBackPic_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/back.4bpp.lz");
     const u32 gMonShinyPalette_SandslashAlolan[] = INCBIN_U32("graphics/pokemon/sandslash/alolan/shiny.gbapal.lz");

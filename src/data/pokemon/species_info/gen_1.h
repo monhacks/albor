@@ -1782,10 +1782,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(SandslashAlolan, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_SandslashAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_H_VIBRATE,
         BACK_PIC(SandslashAlolan, 64, 56),
-        .backPicYOffset = 6,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backPicYOffset = 3,
+        .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(SandslashAlolan),
         ICON(SandslashAlolan, 0),
         FOLLOWER(SandslashAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
