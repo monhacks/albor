@@ -165,13 +165,7 @@ void LoadPlayerParty(void)
     gPlayerPartyCount = gSaveBlock1Ptr->playerPartyCount;
 
     for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u32 data;
         gPlayerParty[i] = gSaveBlock1Ptr->playerParty[i];
-
-        data = gPlayerParty[i].status;
-        SetBoxMonData(&gPlayerParty[i].box, MON_DATA_STATUS, &data);
-    }
 }
 
 void SaveObjectEvents(void)
