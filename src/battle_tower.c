@@ -1063,12 +1063,6 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
     dst[i] = EOS;
 }
 
-static bool8 IsFrontierTrainerFemale(u16 trainerId)
-{
-    SetFacilityPtrsGetLevel();
-    return FALSE;
-}
-
 void FillFrontierTrainerParty(u8 monsCount)
 {
     ZeroEnemyPartyMons();
@@ -2228,8 +2222,6 @@ static void FillPartnerParty(u16 trainerId)
 
             StringCopy(trainerName, gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
-            j = gBattlePartners[SanitizeTrainerId(trainerId - TRAINER_PARTNER(PARTNER_NONE))].encounterMusic_gender >> 7;
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_GENDER, &j);
         }
     }
     else if (trainerId == TRAINER_EREADER)
@@ -2249,8 +2241,6 @@ static void FillPartnerParty(u16 trainerId)
             for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
                 trainerName[j] = gFacilityTrainers[trainerId].trainerName[j];
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_NAME, &trainerName);
-            j = IsFrontierTrainerFemale(trainerId);
-            SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_GENDER, &j);
         }
     }
 }

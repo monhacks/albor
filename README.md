@@ -88,6 +88,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *En total, hay 600 Pokémon + 46 formas Alola/Galar/Hisui/Paldea desde la 1ª a la 9ª generación, todos obtenibles.
     *En la guardería, se transmiten 6 IVs al huevo. Por ejemplo, si ambos padres tienen 31 IVs en ataque, es seguro que su cría tenga 31 IVs en ataque.
     *Se pueden transmitir movimientos huevo entre 2 Pokémon de la misma especie si se deja a ambos en la guardería, uno conoce el movimiento huevo y el otro tiene un hueco libre.
+    *Se han expandido las cajas Pokémon hasta 30.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

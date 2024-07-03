@@ -2115,22 +2115,15 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #endif //P_FAMILY_NIDORAN
 
 #if P_FAMILY_CLEFAIRY
-#if P_UPDATED_TYPES >= GEN_6
-    #define CLEFAIRY_FAMILY_TYPES { TYPE_FAIRY, TYPE_FAIRY }
-#else
-    #define CLEFAIRY_FAMILY_TYPES { TYPE_NORMAL, TYPE_NORMAL }
-#endif
-
-#if P_GEN_2_CROSS_EVOS
     [SPECIES_CLEFFA] =
     {
-        .baseHP        = 50,
-        .baseAttack    = 25,
+        .baseHP        = 60,
+        .baseAttack    = 15,
         .baseDefense   = 28,
         .baseSpeed     = 15,
         .baseSpAttack  = 45,
         .baseSpDefense = 55,
-        .types = CLEFAIRY_FAMILY_TYPES,
+        .types = {TYPE_FAIRY, TYPE_FAIRY},
         .catchRate = 150,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 44 : 37,
         .evYield_SpDefense = 1,
@@ -2173,17 +2166,16 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CLEFAIRY}),
         .eggMoveLearnset = sCleffaEggMoveLearnset,
     },
-#endif //P_GEN_2_CROSS_EVOS
 
     [SPECIES_CLEFAIRY] =
     {
-        .baseHP        = 70,
-        .baseAttack    = 45,
+        .baseHP        = 80,
+        .baseAttack    = 35,
         .baseDefense   = 48,
         .baseSpeed     = 35,
         .baseSpAttack  = 60,
         .baseSpDefense = 65,
-        .types = CLEFAIRY_FAMILY_TYPES,
+        .types = {TYPE_FAIRY, TYPE_FAIRY},
         .catchRate = 150,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 113 : 68,
         .evYield_HP = 2,
@@ -2229,13 +2221,13 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_CLEFABLE] =
     {
-        .baseHP        = 95,
-        .baseAttack    = 70,
-        .baseDefense   = 73,
+        .baseHP        = 110,
+        .baseAttack    = 40,
+        .baseDefense   = 75,
         .baseSpeed     = 60,
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_6 ? 95 : 85,
-        .baseSpDefense = 90,
-        .types = CLEFAIRY_FAMILY_TYPES,
+        .baseSpAttack  = 95,
+        .baseSpDefense = 100,
+        .types = {TYPE_FAIRY, TYPE_FAIRY},
         .catchRate = 25,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 242,
@@ -2471,7 +2463,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseDefense   = 20,
         .baseSpeed     = 20,
         .baseSpAttack  = 40,
-        .baseSpDefense = 30,
+        .baseSpDefense = 50,
         .types = JIGGLYPUFF_FAMILY_TYPES,
         .catchRate = 170,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 42 : 39,
@@ -2632,7 +2624,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseAttack    = 45,
         .baseDefense   = 35,
         .baseSpeed     = 55,
-        .baseSpAttack  = 30,
+        .baseSpAttack  = 45,
         .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_POISON, TYPE_FLYING),
         .catchRate = 255,
@@ -2684,7 +2676,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseAttack    = 80,
         .baseDefense   = 70,
         .baseSpeed     = 90,
-        .baseSpAttack  = 65,
+        .baseSpAttack  = 80,
         .baseSpDefense = 75,
         .types = MON_TYPES(TYPE_POISON, TYPE_FLYING),
         .catchRate = 90,
@@ -2733,11 +2725,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_GEN_2_CROSS_EVOS
     [SPECIES_CROBAT] =
     {
-        .baseHP        = 85,
+        .baseHP        = 90,
         .baseAttack    = 90,
         .baseDefense   = 80,
         .baseSpeed     = 130,
-        .baseSpAttack  = 70,
+        .baseSpAttack  = 90,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_POISON, TYPE_FLYING),
         .catchRate = 90,
@@ -3134,7 +3126,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_COMPOUND_EYES, ABILITY_TINTED_LENS, ABILITY_RUN_AWAY },
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_ARTES_OSCURAS },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Venonat"),
         .cryId = CRY_VENONAT,
@@ -3186,7 +3178,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = { ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_NINJA },
+        .abilities = { ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_ARTES_OSCURAS },
         .bodyColor = BODY_COLOR_PURPLE,
         .speciesName = _("Venomoth"),
         .cryId = CRY_VENOMOTH,
@@ -8595,7 +8587,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 105,
         .baseSpAttack  = 55,
         .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_BUG, TYPE_BUG),
+        .types = MON_TYPES(TYPE_BUG, TYPE_FLYING),
         .catchRate = 45,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 100 : 187,
         .evYield_Attack = 1,

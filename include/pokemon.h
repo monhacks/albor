@@ -140,7 +140,7 @@ struct BoxPokemon
     u8 spDefenseEV;
     u8 metLocation;
     u32 metLevel:7;
-    u32 otGender:1;
+    u32 isEgg:1;
 
     u32 move1:11;
     u32 hpIV:5;
@@ -155,18 +155,14 @@ struct BoxPokemon
     u32 pp1:7;
     u32 pp2:7;
     u32 pp3:7;
-    u32 pp4:7;
-    u32 isEgg:1;
-    u32 language:3;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 shinyModifier:1;
 
     u8 otName[PLAYER_NAME_LENGTH];
 
-    u32 spAttackIV:5;
-    u32 spDefenseIV:5;
+    u32 pp4:7;
     u32 abilityNum:2;
-    u32 compressedStatus:4;
-    u32 hpLost:14; // 16383 HP.
-    u32 shinyModifier:1;
 };
 
 struct Pokemon
@@ -174,7 +170,6 @@ struct Pokemon
     struct BoxPokemon box;
     u32 status;
     u8 level;
-    u8 mail;
     u16 hp;
     u16 maxHP;
     u16 attack;
@@ -297,9 +292,6 @@ struct SpeciesInfo /*0xC4*/
  /* 0x64 */ const u32 *shinyPaletteFemale;
  /* 0x68 */ const u32 *iconSprite;
  /* 0x6C */ const u32 *iconSpriteFemale;
-#if P_FOOTPRINTS
- /* 0x70 */ const u8 *footprint;
-#endif
             // All Pokémon pics are 64x64, but this data table defines where in this 64x64 frame the sprite's non-transparent pixels actually are.
  /* 0x74 */ u8 frontPicSize; // The dimensions of this drawn pixel area.
  /* 0x74 */ u8 frontPicSizeFemale; // The dimensions of this drawn pixel area.

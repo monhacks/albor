@@ -928,8 +928,6 @@ static void Trade_Memcpy(void *dest, const void *src, u32 size)
 static bool8 BufferTradeParties(void)
 {
     u8 id = GetMultiplayerId();
-    int i;
-    struct Pokemon *mon;
 
     switch (sTradeMenu->bufferPartyState)
     {
@@ -1004,22 +1002,6 @@ static bool8 BufferTradeParties(void)
     case 20:
         break;
     case 21:
-        for (i = 0, mon = gEnemyParty; i < PARTY_SIZE; mon++, i++)
-        {
-            u8 name[POKEMON_NAME_LENGTH + 1];
-            u16 species = GetMonData(mon, MON_DATA_SPECIES);
-
-            if (species != SPECIES_NONE)
-            {
-                if (species == SPECIES_SHEDINJA && GetMonData(mon, MON_DATA_LANGUAGE) != LANGUAGE_JAPANESE)
-                {
-                    GetMonData(mon, MON_DATA_NICKNAME, name);
-
-                    if (!StringCompareWithoutExtCtrlCodes(name, sText_ShedinjaJP))
-                        SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(SPECIES_SHEDINJA));
-                }
-            }
-        }
         return TRUE;
     // Delay until next state
     case 2:
@@ -2533,8 +2515,6 @@ static void CB2_InitInGameTrade(void)
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
         GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
         StringCopy(gLinkPlayers[1].name, otName);
-        gLinkPlayers[0].language = GAME_LANGUAGE;
-        gLinkPlayers[1].language = GetMonData(&gEnemyParty[0], MON_DATA_LANGUAGE);
         sTradeAnim = AllocZeroed(sizeof(*sTradeAnim));
         AllocateMonSpritesGfx();
         ResetTasks();
@@ -4060,7 +4040,6 @@ static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTr
     SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
     SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->nickname);
     SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
-    SetMonData(pokemon, MON_DATA_OT_GENDER, &inGameTrade->otGender);
     SetMonData(pokemon, MON_DATA_ABILITY_NUM, &inGameTrade->abilityNum);
     SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
     SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->conditions[2]);

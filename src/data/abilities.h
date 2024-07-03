@@ -2880,8 +2880,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_NINJA] =
     {
         .name = _("Ninja"),
-        .description = COMPOUND_STRING("No contacto y Siniestro +25%."),
-        .aiRating = 10,
+        .description = COMPOUND_STRING("No hace contacto."),
+        .aiRating = 3,
     },
 
     [ABILITY_REY_DEL_MAR] =
@@ -2961,5 +2961,12 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Pacificador"),
         .description = COMPOUND_STRING("Hada +1 prioridad."),
         .aiRating = 6,
+    },
+
+    [ABILITY_ARTES_OSCURAS] =
+    {
+        .name = _("Artes oscuras"),
+        .description = COMPOUND_STRING("Ataques siniestros +25%."),
+        .aiRating = 8,
     },
 };
