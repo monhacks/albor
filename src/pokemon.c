@@ -1140,9 +1140,8 @@ void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest)
     dest->status = GetBoxMonData(&dest->box, MON_DATA_STATUS, NULL);
     dest->hp = 0;
     dest->maxHP = 0;
-    value = GetBoxMonData(&dest->box, MON_DATA_HP_LOST);
     CalculateMonStats(dest);
-    value = GetMonData(dest, MON_DATA_MAX_HP) - value;
+    value = GetMonData(dest, MON_DATA_MAX_HP);
     SetMonData(dest, MON_DATA_HP, &value);
 }
 
@@ -1572,21 +1571,6 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     case MON_DATA_SPDEF:
         ret = mon->spDefense;
         break;
-    case MON_DATA_ATK2:
-        ret = mon->attack;
-        break;
-    case MON_DATA_DEF2:
-        ret = mon->defense;
-        break;
-    case MON_DATA_SPEED2:
-        ret = mon->speed;
-        break;
-    case MON_DATA_SPATK2:
-        ret = mon->spAttack;
-        break;
-    case MON_DATA_SPDEF2:
-        ret = mon->spDefense;
-        break;
     case MON_DATA_MAIL:
         ret = 0;
         break;
@@ -1816,9 +1800,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_STATUS:
             retVal = 0;
             break;
-        case MON_DATA_HP_LOST:
-            retVal = 0;
-            break;
         case MON_DATA_PERSONALITY:
             retVal = boxMon->personality;
             break;
@@ -1894,21 +1875,8 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         SET8(mon->level);
         break;
     case MON_DATA_HP:
-    {
-        u32 hpLost;
         SET16(mon->hp);
-        hpLost = mon->maxHP - mon->hp;
-        SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
         break;
-    }
-    case MON_DATA_HP_LOST:
-    {
-        u32 hpLost;
-        SET16(hpLost);
-        mon->hp = mon->maxHP - hpLost;
-        SetBoxMonData(&mon->box, MON_DATA_HP_LOST, &hpLost);
-        break;
-    }
     case MON_DATA_MAX_HP:
         SET16(mon->maxHP);
         break;
@@ -2100,8 +2068,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_STATUS:
             break;
-        case MON_DATA_HP_LOST:
-            break;
         case MON_DATA_PERSONALITY:
             SET32(boxMon->personality);
             break;
@@ -2109,13 +2075,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             SET32(boxMon->otId);
             break;
         case MON_DATA_LANGUAGE:
-            break;
         case MON_DATA_SANITY_IS_BAD_EGG:
-            break;
         case MON_DATA_SANITY_HAS_SPECIES:
-            break;
         case MON_DATA_SANITY_IS_EGG:
-            SET8(boxMon->isEgg);
             break;
         case MON_DATA_OT_NAME:
         {
@@ -5415,9 +5377,6 @@ void HealPokemon(struct Pokemon *mon)
 void HealBoxPokemon(struct BoxPokemon *boxMon)
 {
     u32 data;
-
-    data = 0;
-    SetBoxMonData(boxMon, MON_DATA_HP_LOST, &data);
 
     data = STATUS1_NONE;
     SetBoxMonData(boxMon, MON_DATA_STATUS, &data);

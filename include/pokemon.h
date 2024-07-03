@@ -24,7 +24,6 @@ enum {
     MON_DATA_HP,
     MON_DATA_IS_SHINY,
     MON_DATA_HIDDEN_NATURE,
-    MON_DATA_HP_LOST,
     MON_DATA_NICKNAME,
     MON_DATA_NICKNAME10,
     MON_DATA_SPECIES,
@@ -97,11 +96,6 @@ enum {
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
     MON_DATA_RIBBONS,
-    MON_DATA_ATK2,
-    MON_DATA_DEF2,
-    MON_DATA_SPEED2,
-    MON_DATA_SPATK2,
-    MON_DATA_SPDEF2,
     MON_DATA_HYPER_TRAINED_HP,
     MON_DATA_HYPER_TRAINED_ATK,
     MON_DATA_HYPER_TRAINED_DEF,
@@ -115,7 +109,7 @@ enum {
     MON_DATA_EVOLUTION_TRACKER,
 };
 
-struct BoxPokemon
+struct __attribute__((packed)) BoxPokemon
 {
     u32 personality;
 
