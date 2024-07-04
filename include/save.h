@@ -14,10 +14,10 @@
 #define SECTOR_ID_SAVEBLOCK1_START    1
 #define SECTOR_ID_SAVEBLOCK1_END      3
 #define SECTOR_ID_PKMN_STORAGE_START  4
-#define SECTOR_ID_PKMN_STORAGE_END   17
-#define SECTOR_ID_HOF                18
+#define SECTOR_ID_PKMN_STORAGE_END   16
+#define SECTOR_ID_HOF                17
 
-#define SECTORS_COUNT                19
+#define SECTORS_COUNT                18
 
 #define SAVE_STATUS_EMPTY    0
 #define SAVE_STATUS_OK       1
@@ -40,7 +40,6 @@ enum
 enum
 {
     SAVE_NORMAL,
-    SAVE_LINK, // Link / Battle Frontier
     SAVE_HALL_OF_FAME,
     SAVE_OVERWRITE_DIFFERENT_FILE
 };
@@ -83,15 +82,8 @@ void ClearSaveData(void);
 void Save_ResetSaveCounters(void);
 u8 HandleSavingData(u8 saveType);
 u8 TrySavingData(u8 saveType);
-bool8 LinkFullSave_Init(void);
-bool8 LinkFullSave_WriteSector(void);
-bool8 LinkFullSave_ReplaceLastSector(void);
-bool8 LinkFullSave_SetLastSectorSignature(void);
-bool8 WriteSaveBlock2(void);
-bool8 WriteSaveBlock1Sector(void);
 u8 LoadGameSave(u8 saveType);
 u16 GetSaveBlocksPointersBaseOffset(void);
-void Task_LinkFullSave(u8 taskId);
 
 // save_failed_screen.c
 void DoSaveFailedScreen(u8 saveType);

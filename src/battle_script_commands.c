@@ -1240,6 +1240,15 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
+    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_HAZLO_TRIPLE
+    && gMovesInfo[gCurrentMove].strikeCount == 2
+    && !(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
+    {
+        gMultiHitCounter = 3;
+        PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
+        return;
+    }
+
     // Check Protean activation.
     if (ProteanTryChangeType(gBattlerAttacker, attackerAbility, gCurrentMove, moveType))
     {
@@ -1889,13 +1898,7 @@ static void Cmd_ppreduce(void)
 }
 
 // The chance is 1/N for each stage.
-#if B_CRIT_CHANCE >= GEN_7
-    static const u8 sCriticalHitOdds[] = {24, 8, 2, 1, 1};
-#elif B_CRIT_CHANCE == GEN_6
-    static const u8 sCriticalHitOdds[] = {16, 8, 2, 1, 1};
-#else
-    static const u8 sCriticalHitOdds[] = {16, 8, 4, 3, 2}; // Gens 2,3,4,5
-#endif // B_CRIT_CHANCE
+    static const u8 sCriticalHitOdds[] = {16, 8, 4, 2, 1};
 
 #define BENEFITS_FROM_LEEK(battler, holdEffect)((holdEffect == HOLD_EFFECT_LEEK) && (GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_FARFETCHD || gBattleMons[battler].species == SPECIES_SIRFETCHD))
 s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk)
@@ -8630,7 +8633,7 @@ static bool32 TryTidyUpClear(u32 battlerAtk, bool32 clear)
 
 u32 IsFlowerVeilProtected(u32 battler)
 {
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_GRASS))
+    if (IsBattlerWeatherAffected(battler, B_WEATHER_SUN))
         return IsAbilityOnSide(battler, ABILITY_FLOWER_VEIL);
     else
         return 0;
@@ -10561,6 +10564,20 @@ static void Cmd_various(void)
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
         if (IsLeafGuardProtected(battler))
+        {
+            gBattlerAbility = battler;
+            gBattlescriptCurrInstr = cmd->jumpInstr;
+        }
+        else
+        {
+            gBattlescriptCurrInstr = cmd->nextInstr;
+        }
+        return;
+    }
+    case VARIOUS_JUMP_IF_FLOWER_VEIL_PROTECTED:
+    {
+        VARIOUS_ARGS(const u8 *jumpInstr);
+        if (IsFlowerVeilProtected(battler))
         {
             gBattlerAbility = battler;
             gBattlescriptCurrInstr = cmd->jumpInstr;
@@ -14696,97 +14713,41 @@ static void Cmd_pickup(void)
 {
     CMD_ARGS();
 
-    u32 i, j;
-    u16 species, heldItem, ability;
-    u8 lvlDivBy10;
+    u32 i;
+    u16 species, heldItem;
 
-    if (!InBattlePike()) // No items in Battle Pike.
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        bool32 isInPyramid = InBattlePyramid_();
-        for (i = 0; i < PARTY_SIZE; i++)
+        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES);
+        heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+
+        if ((species == SPECIES_TEDDIURSA || species == SPECIES_COMBEE || species == SPECIES_VESPIQUEN)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
         {
-            species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
-            heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            lvlDivBy10 = (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL)-1) / 10; //Moving this here makes it easier to add in abilities like Honey Gather.
-            if (lvlDivBy10 > 9)
-                lvlDivBy10 = 9;
-
-            ability = gSpeciesInfo[species].abilities[GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM)];
-
-            if (ability == ABILITY_PICKUP
-                && species != SPECIES_NONE
-                && species != SPECIES_EGG
-                && heldItem == ITEM_NONE
-                && (Random() % 10) == 0)
-            {
-                if (isInPyramid)
-                {
-                    heldItem = GetBattlePyramidPickupItemId();
-                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-                }
-                else
-                {
-                    u32 rand = Random() % 100;
-                    u32 percentTotal = 0;
-
-                    for (j = 0; j < ARRAY_COUNT(sPickupTable); j++)
-                    {
-                        percentTotal += sPickupTable[j].percentage[lvlDivBy10];
-                        if (rand < percentTotal)
-                        {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupTable[j].itemId);
-                            break;
-                        }
-                    }
-                }
-            }
-            else if (ability == ABILITY_HONEY_GATHER
-                && species != 0
-                && species != SPECIES_EGG
-                && heldItem == ITEM_NONE)
-            {
-                if ((lvlDivBy10 + 1 ) * 5 > Random() % 100)
-                {
-                    heldItem = ITEM_HONEY;
-                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-                }
-            }
-            else if (P_SHUCKLE_BERRY_JUICE == GEN_2
-                && species == SPECIES_SHUCKLE
-                && heldItem == ITEM_ORAN_BERRY
-                && (Random() % 16) == 0)
-            {
-                heldItem = ITEM_BERRY_JUICE;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
-            else if ((species == SPECIES_TEDDIURSA || SPECIES_COMBEE || SPECIES_VESPIQUEN)
-                && heldItem == ITEM_NONE
-                && (Random() % 16) == 0)
-            {
-                heldItem = ITEM_HONEY;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
-            else if ((species == SPECIES_MUNCHLAX || SPECIES_SNORLAX)
-                && heldItem == ITEM_NONE
-                && (Random() % 16) == 0)
-            {
-                heldItem = ITEM_LEFTOVERS;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
-            else if ((species == SPECIES_GRIMER || SPECIES_MUK || SPECIES_GRIMER_ALOLAN || SPECIES_MUK_ALOLAN)
-                && heldItem == ITEM_NONE
-                && (Random() % 16) == 0)
-            {
-                heldItem = ITEM_BLACK_SLUDGE;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
-            else if ((species == SPECIES_PARAS || SPECIES_PARASECT)
-                && heldItem == ITEM_NONE
-                && (Random() % 16) == 0)
-            {
-                heldItem = ITEM_BIG_MUSHROOM;
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
-            }
+            heldItem = ITEM_HONEY;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_MUNCHLAX || species == SPECIES_SNORLAX)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_LEFTOVERS;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_GRIMER || species == SPECIES_MUK || species == SPECIES_GRIMER_ALOLAN || species == SPECIES_MUK_ALOLAN)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_BLACK_SLUDGE;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_PARAS || species == SPECIES_PARASECT)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_BIG_MUSHROOM;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
     }
 

@@ -64,8 +64,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SAND_VEIL] =
     {
-        .name = _("Sand Veil"),
-        .description = COMPOUND_STRING("Ups evasion in a sandstorm."),
+        .name = _("Velo arena"),
+        .description = COMPOUND_STRING("Sube evasión en Arena."),
         .aiRating = 3,
         .breakable = TRUE,
     },
@@ -152,8 +152,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SHIELD_DUST] =
     {
-        .name = _("Shield Dust"),
-        .description = COMPOUND_STRING("Prevents added effects."),
+        .name = _("Polvo escudo"),
+        .description = COMPOUND_STRING("Previene efectos secundarios."),
         .aiRating = 5,
         .breakable = TRUE,
     },
@@ -263,15 +263,15 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SWIFT_SWIM] =
     {
-        .name = _("Swift Swim"),
-        .description = COMPOUND_STRING("Raises Speed in rain."),
+        .name = _("Nado rápido"),
+        .description = COMPOUND_STRING("+2 velocidad en lluvia."),
         .aiRating = 6,
     },
 
     [ABILITY_CHLOROPHYLL] =
     {
-        .name = _("Chlorophyll"),
-        .description = COMPOUND_STRING("Raises Speed in sunshine."),
+        .name = _("Clorofila"),
+        .description = COMPOUND_STRING("+2 velocidad en Sol."),
         .aiRating = 6,
     },
 
@@ -392,7 +392,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     {
         .name = _("Fuga"),
         .description = COMPOUND_STRING("+1 prioridad cambio."),
-        .aiRating = 1,
+        .aiRating = 6,
     },
 
     [ABILITY_KEEN_EYE] =
@@ -729,7 +729,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_NORMALIZE] =
     {
         .name = _("Normalidad"),
-        .description = COMPOUND_STRING("Ataques normales +25%."),
+        .description = COMPOUND_STRING("Normal +25%."),
         .aiRating = 8,
     },
 
@@ -1168,8 +1168,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_RATTLED] =
     {
-        .name = _("Rattled"),
-        .description = COMPOUND_STRING("Raises Speed when scared."),
+        .name = _("Cobardía"),
+        .description = COMPOUND_STRING("Bicho/Sin./Fant. +1 vel."),
         .aiRating = 3,
     },
 
@@ -1252,9 +1252,9 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_FLOWER_VEIL] =
     {
-        .name = _("Flower Veil"),
-        .description = COMPOUND_STRING("Protects Grass-types."),
-        .aiRating = 0,
+        .name = _("Velo floral"),
+        .description = COMPOUND_STRING("Protege equipo en Sol."),
+        .aiRating = 8,
     },
 
     [ABILITY_CHEEK_POUCH] =
@@ -1395,7 +1395,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_AERILATE] =
     {
         .name = _("Piel celeste"),
-        .description = COMPOUND_STRING("Ataques voladores +25%."),
+        .description = COMPOUND_STRING("Volador +25%."),
         .aiRating = 8,
     },
 
@@ -1716,12 +1716,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_TANGLING_HAIR] =
     {
-    #if B_EXPANDED_ABILITY_NAMES == TRUE
-        .name = _("Tangling Hair"),
-    #else
-        .name = _("TanglingHair"),
-    #endif
-        .description = COMPOUND_STRING("Lowers Speed on contact."),
+        .name = _("Rizos rebeldes"),
+        .description = COMPOUND_STRING("Baja velocidad al contacto."),
         .aiRating = 5,
     },
 
@@ -2687,7 +2683,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SURFERO] =
     {
         .name = _("Surfero"),
-        .description = COMPOUND_STRING("Ataques de Agua +25%."),
+        .description = COMPOUND_STRING("Agua +25%."),
         .aiRating = 8,
     },
 
@@ -2722,7 +2718,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_LUNA_MENGUANTE] =
     {
         .name = _("Luna menguante"),
-        .description = COMPOUND_STRING("Ataques siniestros +25%."),
+        .description = COMPOUND_STRING("Siniestro +25%."),
         .aiRating = 8,
     },
 
@@ -2736,14 +2732,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_VIDAS_PASADAS] =
     {
         .name = _("Vidas pasadas"),
-        .description = COMPOUND_STRING("Ataques fantasmas +25%."),
+        .description = COMPOUND_STRING("Fantasma +25%."),
         .aiRating = 8,
     },
 
     [ABILITY_EXTRASENSORIAL] =
     {
         .name = _("Extrasensorial"),
-        .description = COMPOUND_STRING("Ataques psíquicos +25%."),
+        .description = COMPOUND_STRING("Psíquico +25%."),
         .aiRating = 8,
     },
 
@@ -2966,7 +2962,56 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ARTES_OSCURAS] =
     {
         .name = _("Artes oscuras"),
-        .description = COMPOUND_STRING("Ataques siniestros +25%."),
+        .description = COMPOUND_STRING("Siniestro +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_ESPORA_TOXICA] =
+    {
+        .name = _("Espora tóxica"),
+        .description = COMPOUND_STRING("50% de envenenar si recibe ataque."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_VENENOSO] =
+    {
+        .name = _("Venenoso"),
+        .description = COMPOUND_STRING("Veneno +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_ALERGIA] =
+    {
+        .name = _("Alergia"),
+        .description = COMPOUND_STRING("50% de paralizar si recibe ataque."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_BAILARIN] =
+    {
+        .name = _("Bailarín"),
+        .description = COMPOUND_STRING("+1 prioridad baile."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_HAZLO_TRIPLE] =
+    {
+        .name = _("Hazlo triple"),
+        .description = COMPOUND_STRING("Ataques dobles golpean 3 veces."),
+        .aiRating = 7,
+    },
+
+    [ABILITY_GUACAMOLE] =
+    {
+        .name = _("Guacamole"),
+        .description = COMPOUND_STRING("+1 vel. cada golpe recibido."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_EN_METALICO] =
+    {
+        .name = _("En metálico"),
+        .description = COMPOUND_STRING("Acero +25%."),
         .aiRating = 8,
     },
 };

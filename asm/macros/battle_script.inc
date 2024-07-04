@@ -2398,10 +2398,9 @@
 	manipulatedamage DMG_CURR_ATTACKER_HP
 	.endm
 
-	.macro jumpifflowerveil jumpInstr:req
-	jumpifnottype BS_TARGET, TYPE_GRASS, 1f
-	jumpifability BS_TARGET_SIDE, ABILITY_FLOWER_VEIL, \jumpInstr
-	1:
+	.macro jumpifflowerveil battler:req, jumpInstr:req
+	various \battler, VARIOUS_JUMP_IF_FLOWER_VEIL_PROTECTED
+	.4byte \jumpInstr
 	.endm
 
 	.macro jumpifflowerveilattacker jumpInstr:req

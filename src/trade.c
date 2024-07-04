@@ -4179,32 +4179,14 @@ static void CB2_SaveAndEndTrade(void)
         DrawTextOnTradeWindow(0, gStringVar4, 0);
         break;
     case 50:
-        SetContinueGameWarpStatusToDynamicWarp();
-        LinkFullSave_Init();
-        gMain.state++;
-        sTradeAnim->timer = 0;
         break;
     case 51:
         if (++sTradeAnim->timer == 5)
             gMain.state++;
         break;
     case 52:
-        if (LinkFullSave_WriteSector())
-        {
-            ClearContinueGameWarpStatus2();
-            gMain.state = 4;
-        }
-        else
-        {
-            // Save isn't finished, delay again
-            sTradeAnim->timer = 0;
-            gMain.state = 51;
-        }
         break;
     case 4:
-        LinkFullSave_ReplaceLastSector();
-        gMain.state = 40;
-        sTradeAnim->timer = 0;
         break;
     case 40:
         if (++sTradeAnim->timer > 50)
@@ -4228,11 +4210,6 @@ static void CB2_SaveAndEndTrade(void)
         }
         break;
     case 42:
-        if (_IsLinkTaskFinished())
-        {
-            LinkFullSave_SetLastSectorSignature();
-            gMain.state = 5;
-        }
         break;
     case 5:
         if (++sTradeAnim->timer > 60)
@@ -4458,35 +4435,14 @@ static void CB2_SaveAndEndWirelessTrade(void)
         sTradeAnim->timer = 0;
         break;
     case 2:
-        if (_IsLinkTaskFinished())
-        {
-            gMain.state = 3;
-            StringExpandPlaceholders(gStringVar4, gText_Guardando);
-            DrawTextOnTradeWindow(0, gStringVar4, 0);
-            IncrementGameStat(GAME_STAT_POKEMON_TRADES);
-            LinkFullSave_Init();
-            sTradeAnim->timer = 0;
-        }
         break;
     case 3:
         if (++sTradeAnim->timer == 5)
             gMain.state = 4;
         break;
     case 4:
-        if (LinkFullSave_WriteSector())
-        {
-            gMain.state = 5;
-        }
-        else
-        {
-            sTradeAnim->timer = 0;
-            gMain.state = 3;
-        }
         break;
     case 5:
-        LinkFullSave_ReplaceLastSector();
-        gMain.state = 6;
-        sTradeAnim->timer = 0;
         break;
     case 6:
         if (++sTradeAnim->timer > 10)
@@ -4510,11 +4466,6 @@ static void CB2_SaveAndEndWirelessTrade(void)
         }
         break;
     case 8:
-        if (_IsLinkTaskFinished())
-        {
-            LinkFullSave_SetLastSectorSignature();
-            gMain.state = 9;
-        }
         break;
     case 9:
         if (++sTradeAnim->timer > 60)

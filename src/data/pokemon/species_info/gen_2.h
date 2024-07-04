@@ -1774,10 +1774,10 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
     [SPECIES_HOPPIP] =
     {
         .baseHP        = 35,
-        .baseAttack    = 35,
+        .baseAttack    = 15,
         .baseDefense   = 40,
         .baseSpeed     = 50,
-        .baseSpAttack  = 35,
+        .baseSpAttack  = 55,
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_GRASS, TYPE_FLYING),
         .catchRate = 255,
@@ -1818,16 +1818,16 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Hoppip)
         FOLLOWER(Hoppip, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Hoppip),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_SKIPLOOM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_SKIPLOOM}),
     },
 
     [SPECIES_SKIPLOOM] =
     {
         .baseHP        = 55,
-        .baseAttack    = 45,
+        .baseAttack    = 25,
         .baseDefense   = 50,
         .baseSpeed     = 80,
-        .baseSpAttack  = 45,
+        .baseSpAttack  = 65,
         .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_GRASS, TYPE_FLYING),
         .catchRate = 120,
@@ -1868,17 +1868,17 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOOTPRINT(Skiploom)
         FOLLOWER(Skiploom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Skiploom),
-        .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_JUMPLUFF}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JUMPLUFF}),
     },
 
     [SPECIES_JUMPLUFF] =
     {
         .baseHP        = 75,
-        .baseAttack    = 55,
+        .baseAttack    = 40,
         .baseDefense   = 70,
         .baseSpeed     = 110,
-        .baseSpAttack  = 55,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 95 : 85,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_GRASS, TYPE_FLYING),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8

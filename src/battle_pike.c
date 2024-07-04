@@ -707,11 +707,7 @@ static void ClearInWildMonRoom(void)
 
 static void SavePikeChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
-    VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
-    gSaveBlock2Ptr->frontier.challengePaused = TRUE;
-    SaveMapView();
-    TrySavingData(SAVE_LINK);
+
 }
 
 static void PikeDummy1(void)

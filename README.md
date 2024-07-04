@@ -89,6 +89,9 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *En la guardería, se transmiten 6 IVs al huevo. Por ejemplo, si ambos padres tienen 31 IVs en ataque, es seguro que su cría tenga 31 IVs en ataque.
     *Se pueden transmitir movimientos huevo entre 2 Pokémon de la misma especie si se deja a ambos en la guardería, uno conoce el movimiento huevo y el otro tiene un hueco libre.
     *Se han expandido las cajas Pokémon hasta 30.
+    *Los índices críticos se han modificado: Normal 1/16 (6,25%), +1 1/8 (12,5%), +2 1/4 (25%), +3 1/2 (50%) y +4 1/1 (100%).
+    *Rework de Velo floral: Habilidad exclusivo de Bellossom, que impide cambios de estado y bajadas de stats de equipo si hay Sol (no hace falta que sean tipo Planta).
+    *Habilidad exclusiva de Persian y A-Persian: En metálico, potencia ataques de Acero un 25%, y convierte Día de pago en tipo Acero. Además, este es su ataque exclusivo, y ahora tiene 100 de potencia.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.

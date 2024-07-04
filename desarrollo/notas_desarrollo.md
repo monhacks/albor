@@ -37,7 +37,6 @@
 - Indicar que Rey del mar es una copia de Costar + Oportunista.
 - Indicar y comprobar que Ditto ya no está en el juego, pero que la mayoría de Pokémon que antes no podían criar, ahora sí lo hacen: Los Pokémon legendarios son género neutro y se les ha añadido grupos huevo acordes, para criar solo hay que juntar 2 Pokémon sin género del mismo grupo huevo. 
 - Last Respects como una versión de paliza fantasma.
-- Darle Amoladoras y Carga jabato a Emboar.
 - Darle bunker a Tentacruel.
 - Cambiar animación de Presente.
 - Dentera: ataque custom de Vanilluxe que impide movimientos de mordedura.
@@ -45,6 +44,9 @@
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
 - Destruir icono en batalla al darle a huir contra entrenador.
+- Mirar lo que hace la expansión para mostrar tipos dinámicos en combate (Weather ball, día de pago).
+- Comprobar animaciones (Día de pago, buena baza).
+- Comprobar Hazlo triple.
 
 -Lista de moves hechos:
 *Bomba huevo.
@@ -57,10 +59,11 @@
 *Ojitos tiernos.
 *Bombardeo.
 *Encanto (TM01).
+*Día de pago.
 
 
 
-*limpiar minijuegos y saveblocks, ampliar storage (limpiar estructura de pokemon).
+*limpiar minijuegos y saveblocks
 
 *paletas: 0-12 tileset primario 0-9 (es necesario?) secundario 10-12 (chequear SWAP_PAL)
 *paletas primary: 0/arboles 1/centro_pokemon 2/hierba_y_hierba_alta 3/agua 4/agua_playa

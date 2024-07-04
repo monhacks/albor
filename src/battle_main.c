@@ -3989,13 +3989,13 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     if (WEATHER_HAS_EFFECT)
     {
         if (ability == ABILITY_SWIFT_SWIM       && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_RAIN)
-            speed *= 2;
+            speed = (speed * 150) / 100;
         else if (ability == ABILITY_CHLOROPHYLL && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA && gBattleWeather & B_WEATHER_SUN)
-            speed *= 2;
+            speed = (speed * 150) / 100;
         else if (ability == ABILITY_SAND_RUSH   && gBattleWeather & B_WEATHER_SANDSTORM)
-            speed *= 2;
+            speed = (speed * 150) / 100;
         else if (ability == ABILITY_SLUSH_RUSH  && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)))
-            speed *= 2;
+            speed = (speed * 150) / 100;
     }
 
     // other abilities
@@ -4095,6 +4095,10 @@ s8 GetMovePriority(u32 battler, u16 move)
         priority++;
     }
     else if (ability == ABILITY_ENVIO_EXPRESS && move == MOVE_PRESENT)
+    {
+        priority++;
+    }
+    else if (ability == ABILITY_BAILARIN && gMovesInfo[move].danceMove)
     {
         priority++;
     }
@@ -5009,8 +5013,9 @@ bool32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
 
 void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 {
-    u32 moveType, attackerAbility;
+    u32 moveType;
     u16 holdEffect = GetBattlerHoldEffect(battlerAtk, TRUE);
+    u32 attackerAbility = GetBattlerAbility(battlerAtk);
 
     if (move == MOVE_STRUGGLE)
         return;
@@ -5054,6 +5059,10 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
     else if (gMovesInfo[move].effect == EFFECT_CHANGE_TYPE_ON_ITEM && holdEffect == gMovesInfo[move].argument)
     {
         gBattleStruct->dynamicMoveType = ItemId_GetSecondaryId(gBattleMons[battlerAtk].item) | F_DYNAMIC_TYPE_SET;
+    }
+    else if (move == MOVE_PAY_DAY && attackerAbility == ABILITY_EN_METALICO)
+    {
+        gBattleStruct->dynamicMoveType = TYPE_STEEL | F_DYNAMIC_TYPE_SET;
     }
     else if (gMovesInfo[move].effect == EFFECT_REVELATION_DANCE)
     {
@@ -5110,7 +5119,6 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
         gBattleStruct->dynamicMoveType = TYPE_STELLAR | F_DYNAMIC_TYPE_SET;
     }
 
-    attackerAbility = GetBattlerAbility(battlerAtk);
     if (gMovesInfo[move].type == TYPE_NORMAL
      && TrySetAteType(move, battlerAtk, attackerAbility)
      && GetActiveGimmick(battlerAtk) != GIMMICK_DYNAMAX)

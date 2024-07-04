@@ -2353,6 +2353,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Vulpix, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Vulpix),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES}),
+        .eggMoveLearnset = sVulpixEggMoveLearnset,
     },
 
     [SPECIES_NINETALES] =
@@ -2384,6 +2385,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Ninetales, 3),
         FOLLOWER(Ninetales, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ninetales),
+        .eggMoveLearnset = sVulpixEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
@@ -2412,6 +2414,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(VulpixAlolan),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLAN}),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sVulpixAlolanEggMoveLearnset,
     },
 
     [SPECIES_NINETALES_ALOLAN] =
@@ -2444,6 +2447,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(NinetalesAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(NinetalesAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sVulpixAlolanEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_VULPIX
@@ -2667,7 +2671,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Zubat)
         FOLLOWER(Zubat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Zubat),
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_GOLBAT}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GOLBAT}),
     },
 
     [SPECIES_GOLBAT] =
@@ -2794,12 +2798,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 64 : 78,
         .evYield_SpAttack = 1,
         .itemRare = ITEM_ABSORB_BULB,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_RUN_AWAY },
+        .abilities = { ABILITY_VENENOSO, ABILITY_ALERGIA, ABILITY_ESPORA_TOXICA },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Oddish"),
         .cryId = CRY_ODDISH,
@@ -2828,7 +2832,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Oddish)
         FOLLOWER(Oddish, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Oddish),
-        .evolutions = EVOLUTION({EVO_LEVEL, 21, SPECIES_GLOOM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GLOOM}),
+        .eggMoveLearnset = sOddishEggMoveLearnset,
     },
 
     [SPECIES_GLOOM] =
@@ -2838,18 +2843,18 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseDefense   = 70,
         .baseSpeed     = 40,
         .baseSpAttack  = 85,
-        .baseSpDefense = 75,
+        .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 138 : 132,
         .evYield_SpAttack = 2,
         .itemRare = ITEM_ABSORB_BULB,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_STENCH },
+        .abilities = { ABILITY_VENENOSO, ABILITY_ALERGIA, ABILITY_ESPORA_TOXICA },
         .bodyColor = BODY_COLOR_BLUE,
         .speciesName = _("Gloom"),
         .cryId = CRY_GLOOM,
@@ -2882,17 +2887,18 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Gloom),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VILEPLUME},
                                 {EVO_ITEM, ITEM_SUN_STONE, SPECIES_BELLOSSOM}),
+        .eggMoveLearnset = sOddishEggMoveLearnset,
     },
 
     [SPECIES_VILEPLUME] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 80,
+        .baseHP        = 90,
+        .baseAttack    = 45,
         .baseDefense   = 85,
         .baseSpeed     = 50,
-        .baseSpAttack  = P_UPDATED_STATS >= GEN_6 ? 110 : 100,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
+        .baseSpAttack  = 120,
+        .baseSpDefense = 110,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_DARK),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 245,
@@ -2905,12 +2911,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #endif
         .evYield_SpAttack = 3,
         .itemRare = ITEM_ABSORB_BULB,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_EFFECT_SPORE },
+        .abilities = { ABILITY_VENENOSO, ABILITY_ALERGIA, ABILITY_ESPORA_TOXICA },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Vileplume"),
         .cryId = CRY_VILEPLUME,
@@ -2941,18 +2947,19 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Vileplume)
         FOLLOWER(Vileplume, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Vileplume),
+        .eggMoveLearnset = sOddishEggMoveLearnset,
     },
 
 #if P_GEN_2_CROSS_EVOS
     [SPECIES_BELLOSSOM] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 80,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 95 : 85,
+        .baseHP        = 90,
+        .baseAttack    = 45,
+        .baseDefense   = 85,
         .baseSpeed     = 50,
-        .baseSpAttack  = 90,
-        .baseSpDefense = 100,
-        .types = MON_TYPES(TYPE_GRASS),
+        .baseSpAttack  = 110,
+        .baseSpDefense = 120,
+        .types = MON_TYPES(TYPE_GRASS, TYPE_FAIRY),
         .catchRate = 45,
     #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 245,
@@ -2965,12 +2972,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     #endif
         .evYield_SpDefense = 3,
         .itemRare = ITEM_ABSORB_BULB,
-        .genderRatio = PERCENT_FEMALE(50),
+        .genderRatio = PERCENT_FEMALE(75),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_NONE, ABILITY_HEALER },
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS, EGG_GROUP_FAIRY),
+        .abilities = { ABILITY_CHLOROPHYLL, ABILITY_BAILARIN, ABILITY_FLOWER_VEIL },
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Bellossom"),
         .cryId = CRY_BELLOSSOM,
@@ -2999,6 +3006,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Bellossom)
         FOLLOWER(Bellossom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bellossom),
+        .eggMoveLearnset = sOddishEggMoveLearnset,
     },
 #endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_ODDISH
@@ -3006,7 +3014,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #if P_FAMILY_PARAS
     [SPECIES_PARAS] =
     {
-        .baseHP        = 35,
+        .baseHP        = 50,
         .baseAttack    = 70,
         .baseDefense   = 55,
         .baseSpeed     = 25,
@@ -3054,6 +3062,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Paras, SIZE_32x32, SHADOW_SIZE_M, TRACKS_BUG)
         LEARNSETS(Paras),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PARASECT}),
+        .eggMoveLearnset = sParasEggMoveLearnset,
     },
 
     [SPECIES_PARASECT] =
@@ -3105,6 +3114,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Parasect)
         FOLLOWER(Parasect, SIZE_32x32, SHADOW_SIZE_M, TRACKS_BUG)
         LEARNSETS(Parasect),
+        .eggMoveLearnset = sParasEggMoveLearnset,
     },
 #endif //P_FAMILY_PARAS
 
@@ -3112,10 +3122,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_VENONAT] =
     {
         .baseHP        = 60,
-        .baseAttack    = 55,
+        .baseAttack    = 40,
         .baseDefense   = 50,
         .baseSpeed     = 45,
-        .baseSpAttack  = 40,
+        .baseSpAttack  = 55,
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 190,
@@ -3156,22 +3166,22 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Venonat)
         FOLLOWER(Venonat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Venonat),
-        .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_VENOMOTH}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_VENOMOTH}),
+        .eggMoveLearnset = sVenonatEggMoveLearnset,
     },
 
     [SPECIES_VENOMOTH] =
     {
         .baseHP        = 70,
-        .baseAttack    = 65,
+        .baseAttack    = 40,
         .baseDefense   = 60,
         .baseSpeed     = 90,
-        .baseSpAttack  = 90,
-        .baseSpDefense = 75,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 120,
         .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
         .catchRate = 75,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 158 : 138,
-        .evYield_Speed = 1,
-        .evYield_SpAttack = 1,
+        .evYield_SpDefense = 2,
         .itemRare = ITEM_SHED_SHELL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -3208,6 +3218,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Venomoth)
         FOLLOWER(Venomoth, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Venomoth),
+        .eggMoveLearnset = sVenonatEggMoveLearnset,
     },
 #endif //P_FAMILY_VENONAT
 
@@ -3268,14 +3279,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_DIGLETT] =
     {
         DIGLETT_MISC_INFO,
-        .baseHP        = 10,
+        .baseHP        = 30,
         .baseAttack    = 55,
         .baseDefense   = 25,
         .baseSpeed     = 95,
         .baseSpAttack  = 35,
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_GROUND),
-        .abilities = { ABILITY_SAND_VEIL, ABILITY_ARENA_TRAP, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_ARENA_TRAP, ABILITY_GUACAMOLE, ABILITY_SAND_VEIL },
         .weight = 8,
         .description = COMPOUND_STRING(
             "Diglett are raised in most farms.\n"
@@ -3294,20 +3305,21 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Diglett, 2),
         FOLLOWER(Diglett, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Diglett),
-        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_DUGTRIO}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DUGTRIO}),
+        .eggMoveLearnset = sDiglettEggMoveLearnset,
     },
 
     [SPECIES_DUGTRIO] =
     {
         DUGTRIO_MISC_INFO,
-        .baseHP        = 35,
-        .baseAttack    = DUGTRIO_ATTACK,
-        .baseDefense   = 50,
+        .baseHP        = 60,
+        .baseAttack    = 100,
+        .baseDefense   = 60,
         .baseSpeed     = 120,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 70,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_GROUND),
-        .abilities = { ABILITY_SAND_VEIL, ABILITY_ARENA_TRAP, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_ARENA_TRAP, ABILITY_GUACAMOLE, ABILITY_HAZLO_TRIPLE },
         .weight = 333,
         .description = COMPOUND_STRING(
             "Because the triplets originally split from\n"
@@ -3326,20 +3338,21 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Dugtrio, 2),
         FOLLOWER(Dugtrio, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Dugtrio),
+        .eggMoveLearnset = sDiglettEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
     [SPECIES_DIGLETT_ALOLAN] =
     {
         DIGLETT_MISC_INFO,
-        .baseHP        = 10,
+        .baseHP        = 30,
         .baseAttack    = 55,
         .baseDefense   = 30,
         .baseSpeed     = 90,
         .baseSpAttack  = 35,
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_GROUND, TYPE_STEEL),
-        .abilities = { ABILITY_SAND_VEIL, ABILITY_TANGLING_HAIR, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_ARENA_TRAP, ABILITY_TANGLING_HAIR, ABILITY_SAND_VEIL },
         .weight = 10,
         .description = COMPOUND_STRING(
             "The metal-rich geology of its habitat\n"
@@ -3358,20 +3371,21 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(DiglettAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(DiglettAlolan),
         .isAlolanForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_DUGTRIO_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DUGTRIO_ALOLAN}),
+        .eggMoveLearnset = sDiglettAlolanEggMoveLearnset,
     },
 
     [SPECIES_DUGTRIO_ALOLAN] =
     {
         DUGTRIO_MISC_INFO,
-        .baseHP        = 35,
-        .baseAttack    = DUGTRIO_ATTACK,
-        .baseDefense   = 60,
+        .baseHP        = 60,
+        .baseAttack    = 100,
+        .baseDefense   = 100,
         .baseSpeed     = 110,
-        .baseSpAttack  = 50,
+        .baseSpAttack  = 40,
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_GROUND, TYPE_STEEL),
-        .abilities = { ABILITY_SAND_VEIL, ABILITY_TANGLING_HAIR, ABILITY_SAND_FORCE },
+        .abilities = { ABILITY_ARENA_TRAP, ABILITY_TANGLING_HAIR, ABILITY_HAZLO_TRIPLE },
         .noFlip = TRUE,
         .weight = 666,
         .description = COMPOUND_STRING(
@@ -3391,6 +3405,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(DugtrioAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(DugtrioAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sDiglettAlolanEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_DIGLETT
@@ -3414,7 +3429,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #define PERSIAN_MISC_INFO                                           \
         .catchRate = 90,                                            \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 154 : 148,    \
-        .evYield_Speed = 2,                                         \
         .itemRare = ITEM_QUICK_CLAW,                                \
         .genderRatio = PERCENT_FEMALE(50),                          \
         .eggCycles = 20,                                            \
@@ -3440,7 +3454,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .evYield_Speed = 1,
         .types = MON_TYPES(TYPE_NORMAL),
         .itemRare = ITEM_QUICK_CLAW,
-        .abilities = { ABILITY_PICKUP, ABILITY_TECHNICIAN, ABILITY_UNNERVE },
+        .abilities = { ABILITY_ARTES_OSCURAS, ABILITY_TECHNICIAN, ABILITY_EN_METALICO },
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 4,
         .weight = 42,
@@ -3465,20 +3479,22 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Meowth, 1),
         FOLLOWER(Meowth, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Meowth),
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PERSIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PERSIAN}),
+        .eggMoveLearnset = sMeowthEggMoveLearnset,
     },
 
     [SPECIES_PERSIAN] =
     {
         PERSIAN_MISC_INFO,
-        .baseHP        = 65,
-        .baseAttack    = 70,
-        .baseDefense   = 60,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 65,
-        .baseSpDefense = 65,
+        .baseHP        = 70,
+        .baseAttack    = 100,
+        .baseDefense   = 80,
+        .baseSpeed     = 120,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 70,
+        .evYield_Speed = 2,
         .types = MON_TYPES(TYPE_NORMAL),
-        .abilities = { ABILITY_LIMBER, ABILITY_TECHNICIAN, ABILITY_UNNERVE },
+        .abilities = { ABILITY_ARTES_OSCURAS, ABILITY_TECHNICIAN, ABILITY_EN_METALICO },
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 10,
         .weight = 320,
@@ -3503,6 +3519,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Persian, 1),
         FOLLOWER(Persian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Persian),
+        .eggMoveLearnset = sMeowthEggMoveLearnset,
     },
 
 #if P_ALOLAN_FORMS
@@ -3515,10 +3532,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 90,
         .baseSpAttack  = 50,
         .baseSpDefense = 40,
-        .evYield_Speed = 1,
+        .evYield_Defense = 1,
         .types = MON_TYPES(TYPE_DARK),
         .itemRare = ITEM_QUICK_CLAW,
-        .abilities = { ABILITY_PICKUP, ABILITY_TECHNICIAN, ABILITY_RATTLED },
+        .abilities = { ABILITY_RATTLED, ABILITY_TECHNICIAN, ABILITY_EN_METALICO },
         .bodyColor = BODY_COLOR_GRAY,
         .height = 4,
         .weight = 42,
@@ -3544,19 +3561,21 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(MeowthAlolan),
         .isAlolanForm = TRUE,
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PERSIAN_ALOLAN}),
+        .eggMoveLearnset = sMeowthAlolanEggMoveLearnset,
     },
 
     [SPECIES_PERSIAN_ALOLAN] =
     {
         PERSIAN_MISC_INFO,
-        .baseHP        = 65,
-        .baseAttack    = 60,
-        .baseDefense   = 60,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 75,
-        .baseSpDefense = 65,
+        .baseHP        = 70,
+        .baseAttack    = 100,
+        .baseDefense   = 120,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 70,
+        .evYield_Defense = 2,
         .types = MON_TYPES(TYPE_DARK),
-        .abilities = { ABILITY_FUR_COAT, ABILITY_TECHNICIAN, ABILITY_RATTLED },
+        .abilities = { ABILITY_RATTLED, ABILITY_TECHNICIAN, ABILITY_EN_METALICO },
         .bodyColor = BODY_COLOR_GRAY,
         .height = 11,
         .weight = 330,
@@ -3581,6 +3600,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(PersianAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(PersianAlolan),
         .isAlolanForm = TRUE,
+        .eggMoveLearnset = sMeowthAlolanEggMoveLearnset,
     },
 #endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_MEOWTH
@@ -5857,7 +5877,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
-        .abilities = { ABILITY_RUN_AWAY, ABILITY_EARLY_BIRD, ABILITY_TANGLED_FEET },
+        .abilities = { ABILITY_RUN_AWAY, ABILITY_EARLY_BIRD, ABILITY_HAZLO_TRIPLE },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Dodrio"),
         .cryId = CRY_DODRIO,
@@ -6665,7 +6685,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),
-        .abilities = { ABILITY_HYPER_CUTTER, ABILITY_SHELL_ARMOR, ABILITY_SHEER_FORCE },
+        .abilities = { ABILITY_MARTILLADOR, ABILITY_SHELL_ARMOR, ABILITY_REY_DEL_MAR },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Krabby"),
         .cryId = CRY_KRABBY,
@@ -6694,7 +6714,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Krabby)
         FOLLOWER(Krabby, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Krabby),
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_KINGLER}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KINGLER}),
     },
 
 #define KINGLER_MISC_INFO                                                               \
@@ -6713,7 +6733,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,                                              \
         .growthRate = GROWTH_MEDIUM_FAST,                                               \
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRADO),                                 \
-        .abilities = { ABILITY_HYPER_CUTTER, ABILITY_SHELL_ARMOR, ABILITY_MARTILLADOR },\
+        .abilities = { ABILITY_MARTILLADOR, ABILITY_SHELL_ARMOR, ABILITY_REY_DEL_MAR },\
         .bodyColor = BODY_COLOR_RED,                                                    \
         .noFlip = TRUE,                                                                 \
         .speciesName = _("Kingler"),                                                    \
