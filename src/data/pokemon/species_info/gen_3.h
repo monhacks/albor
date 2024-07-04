@@ -6037,11 +6037,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
 #if P_FAMILY_CASTFORM
 #define CASTFORM_MISC_INFO                                               \
         .baseHP        = 70,                                             \
-        .baseAttack    = 70,                                             \
+        .baseAttack    = 40,                                             \
         .baseDefense   = 70,                                             \
-        .baseSpeed     = 70,                                             \
-        .baseSpAttack  = 70,                                             \
-        .baseSpDefense = 70,                                             \
+        .baseSpeed     = 100,                                             \
+        .baseSpAttack  = 100,                                             \
+        .baseSpDefense = 100,                                             \
         .catchRate = 45,                                                 \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 147 : 145,         \
         .evYield_HP = 1,                                                 \
@@ -6165,11 +6165,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_KECLEON] =
     {
         .baseHP        = 70,
-        .baseAttack    = 40,
+        .baseAttack    = 90,
         .baseDefense   = 70,
         .baseSpeed     = 40,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 160,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 120,
         .types = MON_TYPES(TYPE_NORMAL),
         .catchRate = 200,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 154 : 132,
