@@ -1240,15 +1240,6 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    if (GetBattlerAbility(gBattlerAttacker) == ABILITY_HAZLO_TRIPLE
-    && gMovesInfo[gCurrentMove].strikeCount == 2
-    && !(gAbsentBattlerFlags & gBitTable[gBattlerTarget]))
-    {
-        gMultiHitCounter = 3;
-        PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
-        return;
-    }
-
     // Check Protean activation.
     if (ProteanTryChangeType(gBattlerAttacker, attackerAbility, gCurrentMove, moveType))
     {

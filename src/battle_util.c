@@ -3171,6 +3171,8 @@ void SetAtkCancellerForCalledMove(void)
 u8 AtkCanceller_UnableToUseMove(u32 moveType)
 {
     u8 effect = 0;
+    u32 ability = GetBattlerAbility(gBattlerAttacker);
+
     do
     {
         switch (gBattleStruct->atkCancellerTracker)
@@ -3553,8 +3555,6 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
         case CANCELLER_MULTIHIT_MOVES:
             if (gMovesInfo[gCurrentMove].effect == EFFECT_MULTI_HIT)
             {
-                u32 ability = GetBattlerAbility(gBattlerAttacker);
-
                 if (ability == ABILITY_SKILL_LINK)
                 {
                     gMultiHitCounter = 5;
@@ -3581,6 +3581,11 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 if (gMovesInfo[gCurrentMove].effect == EFFECT_POPULATION_BOMB && GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_LOADED_DICE)
                 {
                     gMultiHitCounter = RandomUniform(RNG_LOADED_DICE, 4, 10);
+                }
+                else if (gMovesInfo[gCurrentMove].strikeCount == 2 && ability == ABILITY_HAZLO_TRIPLE)
+                {
+                    gMultiHitCounter = 3;
+                    PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
                 }
                 else
                 {

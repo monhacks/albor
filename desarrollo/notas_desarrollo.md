@@ -46,7 +46,6 @@
 - Destruir icono en batalla al darle a huir contra entrenador.
 - Mirar lo que hace la expansión para mostrar tipos dinámicos en combate (Weather ball, día de pago).
 - Comprobar animaciones (Día de pago, buena baza).
-- Comprobar Hazlo triple.
 
 -Lista de moves hechos:
 *Bomba huevo.

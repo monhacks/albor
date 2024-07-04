@@ -676,8 +676,16 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
             // Handle other multi-strike moves
             if (gMovesInfo[move].strikeCount > 1 && gMovesInfo[move].effect != EFFECT_TRIPLE_KICK)
             {
-                simDamage.expected *= gMovesInfo[move].strikeCount;
-                simDamage.minimum *= gMovesInfo[move].strikeCount;
+                if (gMovesInfo[move].strikeCount == 2 && aiData->abilities[battlerAtk] == ABILITY_HAZLO_TRIPLE)
+                {
+                    simDamage.expected *= gMovesInfo[move].strikeCount + 1;
+                    simDamage.minimum *= gMovesInfo[move].strikeCount + 1;
+                }
+                else
+                {
+                    simDamage.expected *= gMovesInfo[move].strikeCount;
+                    simDamage.minimum *= gMovesInfo[move].strikeCount;
+                }
             }
 
             if (simDamage.expected == 0)
