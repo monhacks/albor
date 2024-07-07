@@ -383,8 +383,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_FLAME_BODY] =
     {
-        .name = _("Flame Body"),
-        .description = COMPOUND_STRING("Burns the foe on contact."),
+        .name = _("Cuerpo llama"),
+        .description = COMPOUND_STRING("50% de quemar si contacto."),
         .aiRating = 4,
     },
 
@@ -2544,7 +2544,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     #else
         .name = _("SuprswtSyrup"),
     #endif
-        .description = COMPOUND_STRING("Lowers the foe's Speed."),
+        .description = COMPOUND_STRING("Lowers the foe's Evasion."),
         .aiRating = 5,
     },
 

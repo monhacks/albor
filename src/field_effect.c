@@ -1008,7 +1008,7 @@ void MultiplyPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
 
 bool8 FldEff_PokecenterHeal(void)
 {
-    u8 nPokemon;
+    u32 nPokemon;
     struct Task *task;
 
     nPokemon = CountPartyNonEggMons();
