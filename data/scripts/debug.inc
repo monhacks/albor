@@ -171,6 +171,10 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_MANKEY, 1, ITEM_NONE
 	givemon SPECIES_PRIMEAPE, 1, ITEM_NONE
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
+	givemon SPECIES_GROWLITHE, 1, ITEM_NONE
+	givemon SPECIES_ARCANINE, 1, ITEM_NONE
+	givemon SPECIES_GROWLITHE_HISUIAN, 1, ITEM_NONE
+	givemon SPECIES_ARCANINE_HISUIAN, 1, ITEM_NONE
 	givemon SPECIES_SNORUNT, 1, ITEM_NONE
 	givemon SPECIES_GLALIE, 1, ITEM_NONE
 	givemon SPECIES_FROSLASS, 1, ITEM_NONE
@@ -215,6 +219,10 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_MANKEY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PRIMEAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_GROWLITHE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARCANINE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_GROWLITHE_HISUIAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_ARCANINE_HISUIAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SNORUNT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GLALIE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_FROSLASS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE

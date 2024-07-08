@@ -352,28 +352,6 @@ static const u16 sAegislashFormSpeciesIdTable[] = {
 };
 #endif //P_FAMILY_HONEDGE
 
-#if P_FAMILY_GOOMY
-static const u16 sSliggooFormSpeciesIdTable[] = {
-    SPECIES_SLIGGOO,
-    SPECIES_SLIGGOO_HISUIAN,
-    FORM_SPECIES_END,
-};
-
-static const u16 sGoodraFormSpeciesIdTable[] = {
-    SPECIES_GOODRA,
-    SPECIES_GOODRA_HISUIAN,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_GOOMY
-
-#if P_FAMILY_BERGMITE
-static const u16 sAvaluggFormSpeciesIdTable[] = {
-    SPECIES_AVALUGG,
-    SPECIES_AVALUGG_HISUIAN,
-    FORM_SPECIES_END,
-};
-#endif //P_FAMILY_BERGMITE
-
 #if P_FAMILY_ROWLET
 static const u16 sDecidueyeFormSpeciesIdTable[] = {
     SPECIES_DECIDUEYE,

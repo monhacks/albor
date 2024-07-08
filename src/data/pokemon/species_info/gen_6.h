@@ -3263,8 +3263,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .speciesName = _("Sliggoo"),                            \
         .cryId = CRY_SLIGGOO,                                   \
         .natDexNum = NATIONAL_DEX_SLIGGOO,                      \
-        FOOTPRINT(Sliggoo)                                      \
-        .formSpeciesIdTable = sSliggooFormSpeciesIdTable
+        FOOTPRINT(Sliggoo)
 
     [SPECIES_SLIGGOO] =
     {
@@ -3317,8 +3316,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .speciesName = _("Goodra"),                             \
         .cryId = CRY_GOODRA,                                    \
         .natDexNum = NATIONAL_DEX_GOODRA,                       \
-        FOOTPRINT(Goodra)                                       \
-        .formSpeciesIdTable = sGoodraFormSpeciesIdTable
+        FOOTPRINT(Goodra)
 
     [SPECIES_GOODRA] =
     {
@@ -3355,84 +3353,6 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOLLOWER(Goodra, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Goodra),
     },
-
-#if P_HISUIAN_FORMS
-    [SPECIES_SLIGGOO_HISUIAN] =
-    {
-        SLIGGOO_MISC_INFO,
-        .baseHP        = 58,
-        .baseAttack    = 75,
-        .baseDefense   = 83,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 83,
-        .baseSpDefense = 113,
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_STEEL),
-        .abilities = { ABILITY_SAP_SIPPER, ABILITY_SHELL_ARMOR, ABILITY_GOOEY },
-        .categoryName = _("Snail"),
-        .height = 7,
-        .weight = 685,
-        .description = COMPOUND_STRING(
-            "A creature given to melancholy.\n"
-            "Its metallic shell developed as a\n"
-            "result of the mucus on its skin reacting\n"
-            "with the iron in Hisui's water."),
-        .pokemonScale = 366,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(SliggooHisuian, 48, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_SliggooHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SliggooHisuian, 64, 64),
-        .backPicYOffset = 1,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(SliggooHisuian),
-        ICON(SliggooHisuian, 2),
-        FOLLOWER(SliggooHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(SliggooHisuian),
-        .isHisuianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL_RAIN, 50, SPECIES_GOODRA_HISUIAN},
-                                {EVO_LEVEL_FOG, 50, SPECIES_GOODRA_HISUIAN}),
-    },
-
-    [SPECIES_GOODRA_HISUIAN] =
-    {
-        GOODRA_MISC_INFO,
-        .baseHP        = 80,
-        .baseAttack    = 100,
-        .baseDefense   = 100,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 110,
-        .baseSpDefense = 150,
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_STEEL),
-        .abilities = { ABILITY_SAP_SIPPER, ABILITY_SHELL_ARMOR, ABILITY_GOOEY },
-        .categoryName = _("Shell Bunker"),
-        .height = 17,
-        .weight = 3341,
-        .description = COMPOUND_STRING(
-            "It loathes solitude and is\n"
-            "extremely clingy-it will fume and run riot if\n"
-            "those dearest to it ever leave its\n"
-            "side."),
-        .pokemonScale = 261,
-        .pokemonOffset = 1,
-        .trainerScale = 334,
-        .trainerOffset = 4,
-        FRONT_PIC(GoodraHisuian, 56, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_GoodraHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(GoodraHisuian, 64, 64),
-        .backPicYOffset = 0,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GoodraHisuian),
-        ICON(GoodraHisuian, 2),
-        FOLLOWER(GoodraHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(GoodraHisuian),
-        .isHisuianForm = TRUE,
-    },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_GOOMY
 
 #if P_FAMILY_KLEFKI
@@ -3918,8 +3838,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOOTPRINT(Bergmite)
         FOLLOWER(Bergmite, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bergmite),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_AVALUGG},
-                                {EVO_NONE, 0, SPECIES_AVALUGG_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_AVALUGG}),
     },
 
 #define AVALUGG_MISC_INFO                               \
@@ -3936,8 +3855,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .cryId = CRY_AVALUGG,                           \
         .natDexNum = NATIONAL_DEX_AVALUGG,              \
         .categoryName = _("Iceberg"),                   \
-        FOOTPRINT(Avalugg)                              \
-        .formSpeciesIdTable = sAvaluggFormSpeciesIdTable
+        FOOTPRINT(Avalugg)
 
     [SPECIES_AVALUGG] =
     {
@@ -3974,43 +3892,6 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         FOLLOWER(Avalugg, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Avalugg),
     },
-
-#if P_HISUIAN_FORMS
-    [SPECIES_AVALUGG_HISUIAN] =
-    {
-        AVALUGG_MISC_INFO,
-        .baseHP        = 95,
-        .baseAttack    = 127,
-        .baseDefense   = 184,
-        .baseSpeed     = 38,
-        .baseSpAttack  = 34,
-        .baseSpDefense = 36,
-        .types = MON_TYPES(TYPE_ICE, TYPE_ROCK),
-        .abilities = { ABILITY_STRONG_JAW, ABILITY_ICE_BODY, ABILITY_STURDY },
-        .height = 14,
-        .weight = 2624,
-        .description = COMPOUND_STRING(
-            "The armor of ice covering its lower\n"
-            "jaw puts steel to shame and can\n"
-            "shatter rocks with ease."),
-        .pokemonScale = 261,
-        .pokemonOffset = 1,
-        .trainerScale = 334,
-        .trainerOffset = 4,
-        FRONT_PIC(AvaluggHisuian, 64, 48),
-        .frontPicYOffset = 6,
-        .frontAnimFrames = sAnims_AvaluggHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(AvaluggHisuian, 64, 32),
-        .backPicYOffset = 16,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(AvaluggHisuian),
-        ICON(AvaluggHisuian, 5),
-        FOLLOWER(AvaluggHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
-        LEARNSETS(AvaluggHisuian),
-        .isHisuianForm = TRUE,
-    },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_BERGMITE
 
 #if P_FAMILY_NOIBAT

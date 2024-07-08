@@ -532,13 +532,13 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonShinyPalette_Arcanine[] = INCBIN_U32("graphics/pokemon/arcanine/shiny.gbapal.lz");
     const u32 gObjectEventPic_Arcanine[] = INCBIN_U32("graphics/pokemon/arcanine/follower.4bpp");
 
-    const u32 gMonFrontPic_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/front.4bpp.lz");
+    const u32 gMonFrontPic_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/anim_front.4bpp.lz");
     const u32 gMonPalette_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/normal.gbapal.lz");
     const u32 gMonBackPic_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/back.4bpp.lz");
     const u32 gMonShinyPalette_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/follower.4bpp");
+    const u32 gObjectEventPic_GrowlitheHisuian[] = INCBIN_U32("graphics/pokemon/growlithe/hisuian/follower.4bpp");
 
-    const u32 gMonFrontPic_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/front.4bpp.lz");
+    const u32 gMonFrontPic_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/anim_front.4bpp.lz");
     const u32 gMonPalette_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/normal.gbapal.lz");
     const u32 gMonBackPic_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/back.4bpp.lz");
     const u32 gMonShinyPalette_ArcanineHisuian[] = INCBIN_U32("graphics/pokemon/arcanine/hisuian/shiny.gbapal.lz");
@@ -4292,23 +4292,11 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonShinyPalette_Sliggoo[] = INCBIN_U32("graphics/pokemon/sliggoo/shiny.gbapal.lz");
     const u32 gObjectEventPic_Sliggoo[] = INCBIN_U32("graphics/pokemon/sliggoo/follower.4bpp");
 
-    const u32 gMonFrontPic_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/front.4bpp.lz");
-    const u32 gMonPalette_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/normal.gbapal.lz");
-    const u32 gMonBackPic_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/back.4bpp.lz");
-    const u32 gMonShinyPalette_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_SliggooHisuian[] = INCBIN_U32("graphics/pokemon/sliggoo/hisuian/follower.4bpp");
-
     const u32 gMonFrontPic_Goodra[] = INCBIN_U32("graphics/pokemon/goodra/anim_front.4bpp.lz");
     const u32 gMonPalette_Goodra[] = INCBIN_U32("graphics/pokemon/goodra/normal.gbapal.lz");
     const u32 gMonBackPic_Goodra[] = INCBIN_U32("graphics/pokemon/goodra/back.4bpp.lz");
     const u32 gMonShinyPalette_Goodra[] = INCBIN_U32("graphics/pokemon/goodra/shiny.gbapal.lz");
     const u32 gObjectEventPic_Goodra[] = INCBIN_U32("graphics/pokemon/goodra/follower.4bpp");
-
-    const u32 gMonFrontPic_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/front.4bpp.lz");
-    const u32 gMonPalette_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/normal.gbapal.lz");
-    const u32 gMonBackPic_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/back.4bpp.lz");
-    const u32 gMonShinyPalette_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_GoodraHisuian[] = INCBIN_U32("graphics/pokemon/goodra/hisuian/follower.4bpp");
 #endif //P_FAMILY_GOOMY
 
 #if P_FAMILY_PHANTUMP
@@ -4337,12 +4325,6 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonBackPic_Avalugg[] = INCBIN_U32("graphics/pokemon/avalugg/back.4bpp.lz");
     const u32 gMonShinyPalette_Avalugg[] = INCBIN_U32("graphics/pokemon/avalugg/shiny.gbapal.lz");
     const u32 gObjectEventPic_Avalugg[] = INCBIN_U32("graphics/pokemon/avalugg/follower.4bpp");
-
-    const u32 gMonFrontPic_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/front.4bpp.lz");
-    const u32 gMonPalette_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/normal.gbapal.lz");
-    const u32 gMonBackPic_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/back.4bpp.lz");
-    const u32 gMonShinyPalette_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_AvaluggHisuian[] = INCBIN_U32("graphics/pokemon/avalugg/hisuian/follower.4bpp");
 #endif //P_FAMILY_BERGMITE
 
 #if P_FAMILY_VOLCANION
