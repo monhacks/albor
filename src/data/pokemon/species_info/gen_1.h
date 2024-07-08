@@ -3652,7 +3652,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Psyduck)
         FOLLOWER(Psyduck, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Psyduck),
-        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_GOLDUCK}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GOLDUCK}),
+        .eggMoveLearnset = sPsyduckEggMoveLearnset,
     },
 
     [SPECIES_GOLDUCK] =
@@ -3701,6 +3702,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Golduck)
         FOLLOWER(Golduck, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Golduck),
+        .eggMoveLearnset = sPsyduckEggMoveLearnset,
     },
 #endif //P_FAMILY_PSYDUCK
 
@@ -3752,7 +3754,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOOTPRINT(Mankey)
         FOLLOWER(Mankey, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mankey),
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_PRIMEAPE},
+        .eggMoveLearnset = sMankeyEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PRIMEAPE},
                                 {EVO_USE_MOVE_TWENTY_TIMES, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
     },
 
@@ -3802,6 +3805,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Primeape, 2),
         FOLLOWER(Primeape, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Primeape),
+        .eggMoveLearnset = sMankeyEggMoveLearnset,
     },
 
 #if P_GEN_9_CROSS_EVOS
@@ -3851,6 +3855,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Annihilape, 0),
         FOLLOWER(Annihilape, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Annihilape),
+        .eggMoveLearnset = sMankeyEggMoveLearnset,
     },
 #endif //P_GEN_9_CROSS_EVOS
 #endif //P_FAMILY_MANKEY
@@ -3897,7 +3902,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpAttack  = 70,
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_FIRE),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_JUSTIFIED },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_JUSTIFIED, ABILITY_GUARDIAN },
         .categoryName = _("Puppy"),
         .height = 7,
         .weight = 190,
@@ -3923,19 +3928,20 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Growlithe, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Growlithe),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE}),
+        .eggMoveLearnset = sGrowlitheEggMoveLearnset,
     },
 
     [SPECIES_ARCANINE] =
     {
         ARCANINE_MISC_INFO,
         .baseHP        = 90,
-        .baseAttack    = 110,
+        .baseAttack    = 105,
         .baseDefense   = 80,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 100,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 105,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_FIRE),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_JUSTIFIED },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_JUSTIFIED, ABILITY_GUARDIAN },
         .height = 19,
         .weight = 1550,
         .description = COMPOUND_STRING(
@@ -3959,6 +3965,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Arcanine, 3),
         FOLLOWER(Arcanine, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Arcanine),
+        .eggMoveLearnset = sGrowlitheEggMoveLearnset,
     },
 
 #if P_HISUIAN_FORMS
@@ -3972,7 +3979,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpAttack  = 65,
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_FIRE, TYPE_ROCK),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_ROCK_HEAD },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_ROCK_HEAD, ABILITY_GUARDIAN },
         .categoryName = _("Scout"),
         .height = 8,
         .weight = 227,
@@ -3998,19 +4005,20 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(GrowlitheHisuian),
         .isHisuianForm = TRUE,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE_HISUIAN}),
+        .eggMoveLearnset = sGrowlitheHisuianEggMoveLearnset,
     },
 
     [SPECIES_ARCANINE_HISUIAN] =
     {
         ARCANINE_MISC_INFO,
-        .baseHP        = 95,
-        .baseAttack    = 115,
-        .baseDefense   = 80,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 95,
+        .baseHP        = 90,
+        .baseAttack    = 105,
+        .baseDefense   = 100,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 105,
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_FIRE, TYPE_ROCK),
-        .abilities = { ABILITY_INTIMIDATE, ABILITY_FLASH_FIRE, ABILITY_ROCK_HEAD },
+        .abilities = { ABILITY_INTIMIDATE, ABILITY_ROCK_HEAD, ABILITY_GUARDIAN },
         .height = 20,
         .weight = 1680,
         .description = COMPOUND_STRING(
@@ -4034,6 +4042,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(ArcanineHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(ArcanineHisuian),
         .isHisuianForm = TRUE,
+        .eggMoveLearnset = sGrowlitheHisuianEggMoveLearnset,
     },
 #endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_GROWLITHE

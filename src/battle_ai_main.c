@@ -878,7 +878,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     return 0;
                 break;
             case ABILITY_JUSTIFIED:
-                if (moveType == TYPE_DARK && !IS_MOVE_STATUS(move))
+                if (!IS_MOVE_STATUS(move)
+                  && (moveType == TYPE_DARK || moveType == TYPE_GHOST || moveType == TYPE_DRAGON))
                     RETURN_SCORE_MINUS(10);
                 break;
             case ABILITY_RATTLED:
@@ -2906,7 +2907,7 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 }
                 break;
             case ABILITY_JUSTIFIED:
-                if (moveType == TYPE_DARK
+                if ((moveType == TYPE_DARK || moveType == TYPE_GHOST || moveType == TYPE_DRAGON)
                     && !IS_MOVE_STATUS(move)
                     && HasMoveWithCategory(battlerAtkPartner, DAMAGE_CATEGORY_PHYSICAL)
                     && BattlerStatCanRise(battlerAtkPartner, atkPartnerAbility, STAT_ATK)

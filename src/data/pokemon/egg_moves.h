@@ -547,6 +547,10 @@ static const u16 sGrowlitheEggMoveLearnset[] = {
     MOVE_BURN_UP,
     MOVE_UNAVAILABLE,
 };
+
+static const u16 sGrowlitheHisuianEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
 #endif //P_FAMILY_GROWLITHE
 
 #if P_FAMILY_POLIWAG

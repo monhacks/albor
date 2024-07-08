@@ -530,8 +530,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_ROCK_HEAD] =
     {
-        .name = _("Rock Head"),
-        .description = COMPOUND_STRING("Prevents recoil damage."),
+        .name = _("Cabeza roca"),
+        .description = COMPOUND_STRING("No daño de retroceso."),
         .aiRating = 5,
     },
 
@@ -1161,8 +1161,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_JUSTIFIED] =
     {
-        .name = _("Justified"),
-        .description = COMPOUND_STRING("Dark hits raise Attack."),
+        .name = _("Justiciero"),
+        .description = COMPOUND_STRING("Dragón/Sin./Fant. suben ataque."),
         .aiRating = 4,
     },
 
@@ -3013,5 +3013,13 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("En metálico"),
         .description = COMPOUND_STRING("Acero +25%."),
         .aiRating = 8,
+    },
+
+    [ABILITY_GUARDIAN] =
+    {
+        .name = _("Guardián"),
+        .description = COMPOUND_STRING("Resiste sin./fant."),
+        .aiRating = 7,
+        .breakable = TRUE,
     },
 };
