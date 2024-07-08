@@ -2103,7 +2103,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .frontAnimId = ANIM_H_SHAKE,
         .frontAnimDelay = 25,
         BACK_PIC(Nidoking, 64, 64),
-        .backPicYOffset = 3,
+        .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Nidoking),
         ICON(Nidoking, 2),

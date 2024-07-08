@@ -168,6 +168,12 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_SANDSHREW_ALOLAN, 1, ITEM_NONE
 	givemon SPECIES_SANDSLASH, 1, ITEM_NONE
 	givemon SPECIES_SANDSLASH_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_NIDORAN_F, 1, ITEM_NONE
+	givemon SPECIES_NIDORINA, 1, ITEM_NONE
+	givemon SPECIES_NIDOQUEEN, 1, ITEM_NONE
+	givemon SPECIES_NIDORAN_M, 1, ITEM_NONE
+	givemon SPECIES_NIDORINO, 1, ITEM_NONE
+	givemon SPECIES_NIDOKING, 1, ITEM_NONE
 	givemon SPECIES_MANKEY, 1, ITEM_NONE
 	givemon SPECIES_PRIMEAPE, 1, ITEM_NONE
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
@@ -216,6 +222,12 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_SANDSHREW_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SANDSLASH, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SANDSLASH_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDORAN_F, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDORINA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDOQUEEN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDORAN_M, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDORINO, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_NIDOKING, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_MANKEY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PRIMEAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
