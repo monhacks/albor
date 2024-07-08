@@ -852,6 +852,7 @@ extern const u8 Move_MALIGNANT_CHAIN[];
 extern const u8 Move_COLMENA[];
 extern const u8 Move_CARGA_JABATO[];
 extern const u8 Move_AMOLADORAS[];
+extern const u8 Move_CHUPASANGRE[];
 extern const u8 Move_BREAKNECK_BLITZ[];
 extern const u8 Move_ALL_OUT_PUMMELING[];
 extern const u8 Move_SUPERSONIC_SKYSTRIKE[];

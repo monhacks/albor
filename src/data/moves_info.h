@@ -20795,6 +20795,30 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .contestComboMoves = {0},
         .battleAnimScript = Move_AMOLADORAS,
     },
+
+    [MOVE_CHUPASANGRE] =
+    {
+        .name = COMPOUND_STRING("Chupasangre"),
+        .description = COMPOUND_STRING(
+            "Chupa la sangre al rival,\n"
+            "y absorbe 50% de daño."),
+        .effect = EFFECT_ABSORB,
+        .power = 75,
+        .type = TYPE_POISON,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .ignoresKingsRock = (B_UPDATED_MOVE_FLAGS == GEN_3 || B_UPDATED_MOVE_FLAGS == GEN_4),
+        .healingMove = B_HEAL_BLOCKING >= GEN_6,
+        .bitingMove = TRUE,
+        .contestEffect = CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION,
+        .contestCategory = CONTEST_CATEGORY_SMART,
+        .contestComboStarterId = 0,
+        .contestComboMoves = {COMBO_STARTER_GROWTH},
+        .battleAnimScript = Move_CHUPASANGRE,
+    },
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

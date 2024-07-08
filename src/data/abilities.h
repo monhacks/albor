@@ -3022,4 +3022,18 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 7,
         .breakable = TRUE,
     },
+
+    [ABILITY_NOCTURNO] =
+    {
+        .name = _("Nocturno"),
+        .description = COMPOUND_STRING("Siniestro +25%."),
+        .aiRating = 8,
+    },
+
+    [ABILITY_VAMPIRO] =
+    {
+        .name = _("Vampiro"),
+        .description = COMPOUND_STRING("Recupera 1/3 de PS al vencer."),
+        .aiRating = 7,
+    },
 };

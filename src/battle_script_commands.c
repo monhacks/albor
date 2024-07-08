@@ -9549,7 +9549,7 @@ static void Cmd_various(void)
 
         u16 battlerAbility = GetBattlerAbility(battler);
 
-        if ((battlerAbility == ABILITY_CARNIVORO)
+        if ((battlerAbility == ABILITY_CARNIVORO|| battlerAbility == ABILITY_VAMPIRO)
           && HasAttackerFaintedTarget()
           && !NoAliveMonsForEitherParty())
         {

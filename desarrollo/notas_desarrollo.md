@@ -59,7 +59,7 @@
 *Bombardeo.
 *Encanto (TM01).
 *Día de pago.
-
+*Chupasangre.
 
 
 *limpiar minijuegos y saveblocks
