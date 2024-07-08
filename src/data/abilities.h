@@ -339,8 +339,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_SOUNDPROOF] =
     {
-        .name = _("Soundproof"),
-        .description = COMPOUND_STRING("Avoids sound-based moves."),
+        .name = _("Insonorizar"),
+        .description = COMPOUND_STRING("Inmune a sonido."),
         .aiRating = 4,
         .breakable = TRUE,
     },
@@ -435,8 +435,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_CUTE_CHARM] =
     {
-        .name = _("Cute Charm"),
-        .description = COMPOUND_STRING("Infatuates on contact."),
+        .name = _("Gran encanto"),
+        .description = COMPOUND_STRING("50% de enamorar si contacto."),
         .aiRating = 2,
     },
 
@@ -820,8 +820,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_UNAWARE] =
     {
-        .name = _("Unaware"),
-        .description = COMPOUND_STRING("Ignores stat changes."),
+        .name = _("Ignorante"),
+        .description = COMPOUND_STRING("Ignora cambios de estadísticas."),
         .aiRating = 6,
         .breakable = TRUE,
     },
