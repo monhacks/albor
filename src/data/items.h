@@ -102,6 +102,10 @@ static const u8 sOddIncenseDesc[]     = _("A hold item that\n"
                                           "boosts Psychic-\n"
                                           "type moves.");
 
+static const u8 sCucharaTorcidaDesc[] = _("Aumenta potencia\n"
+                                          "de familia de\n"
+                                          "Alakazam un 25%.");
+
 static const u8 sRockIncenseDesc[]    = _("A hold item that\n"
                                           "raises the power of\n"
                                           "Rock-type moves.");
@@ -7724,11 +7728,10 @@ const struct Item gItemsInfo[] =
 
     [ITEM_TWISTED_SPOON] =
     {
-        .name = _("Twisted Spoon"),
-        .price = (I_PRICE >= GEN_9) ? 3000 : ((I_PRICE >= GEN_7) ? 1000 : 100),
-        .holdEffect = HOLD_EFFECT_PSYCHIC_POWER,
-        .holdEffectParam = TYPE_BOOST_PARAM,
-        .description = sOddIncenseDesc,
+        .name = _("Cuchara torcida"),
+        .price = 100,
+        .holdEffect = HOLD_EFFECT_CUCHARA_TORCIDA,
+        .description = sCucharaTorcidaDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

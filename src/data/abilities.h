@@ -3036,4 +3036,26 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Recupera 1/3 de PS al vencer."),
         .aiRating = 7,
     },
+
+    [ABILITY_ADIVINO] =
+    {
+        .name = _("Adivino"),
+        .description = COMPOUND_STRING("Inmune a prioridad."),
+        .aiRating = 5,
+        .breakable = TRUE,
+    },
+
+    [ABILITY_SUPERORDENADOR] =
+    {
+        .name = _("Superordenador"),
+        .description = COMPOUND_STRING("Psíquico +1 prioridad."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_MAGO] =
+    {
+        .name = _("Mago"),
+        .description = COMPOUND_STRING("Intercambia objeto."),
+        .aiRating = 3,
+    },
 };

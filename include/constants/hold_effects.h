@@ -166,6 +166,7 @@
 
 //Custom
 #define HOLD_EFFECT_CHALECO_TACTICO     185
+#define HOLD_EFFECT_CUCHARA_TORCIDA     186
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 

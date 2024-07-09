@@ -4617,6 +4617,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gSpecialStatuses[battler].traced = TRUE;
             }
             break;
+        case ABILITY_MAGO:
+            if (!(gSpecialStatuses[battler].mago))
+            {
+                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_MAGO;
+                gSpecialStatuses[battler].mago = TRUE;
+            }
+            break;
         case ABILITY_CLOUD_NINE:
         case ABILITY_AIR_LOCK:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
@@ -5050,6 +5057,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             case ABILITY_DAZZLING:
             case ABILITY_QUEENLY_MAJESTY:
             case ABILITY_ARMOR_TAIL:
+            case ABILITY_ADIVINO:
                 if (GetChosenMovePriority(gBattlerAttacker) > 0 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
                     effect = 2;
                 break;
@@ -5070,6 +5078,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 case ABILITY_QUEENLY_MAJESTY:
                 case ABILITY_ARMOR_TAIL:
                 case ABILITY_BELLO_PLUMAJE:
+                case ABILITY_ADIVINO:
                     if (GetChosenMovePriority(gBattlerAttacker) > 0 && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(battler))
                         effect = 4;
                     break;
@@ -6285,8 +6294,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
         }
         break;
-    case ABILITYEFFECT_TRACE1:
-    case ABILITYEFFECT_TRACE2:
+    case ABILITYEFFECT_TRACE:
         for (i = 0; i < gBattlersCount; i++)
         {
             if (gBattleMons[i].ability == ABILITY_TRACE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_TRACED))
@@ -6322,6 +6330,44 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
+                    break;
+                }
+            }
+        }
+        break;
+    case ABILITYEFFECT_MAGO:
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (gBattleMons[i].ability == ABILITY_MAGO && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_MAGO))
+            {
+                u32 chosenTarget;
+                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing Pokémon
+                u32 target1 = GetBattlerAtPosition(side);
+                u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
+
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                {
+                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0
+                     && gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
+                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
+                    else if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                    else if (gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
+                        chosenTarget = target2, effect++;
+                }
+                else
+                {
+                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                }
+
+                if (effect != 0)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_MagoActivadoEnd);
+                    gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_MAGO;
+
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff2, gLastUsedItem);
                     break;
                 }
             }
@@ -9702,6 +9748,10 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
     case HOLD_EFFECT_LIGHT_BALL:
         if (atkBaseSpeciesId == SPECIES_PIKACHU && (B_LIGHT_BALL_ATTACK_BOOST >= GEN_4 || IS_MOVE_SPECIAL(move)))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+        break;
+    case HOLD_EFFECT_CUCHARA_TORCIDA:
+        if (atkBaseSpeciesId == SPECIES_ABRA || atkBaseSpeciesId == SPECIES_KADABRA || atkBaseSpeciesId == SPECIES_ALAKAZAM)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_CHOICE_BAND:
         if (IS_MOVE_PHYSICAL(move) && GetActiveGimmick(battlerAtk) != GIMMICK_DYNAMAX)

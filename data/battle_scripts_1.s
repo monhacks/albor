@@ -7775,6 +7775,19 @@ BattleScript_TraceActivatesEnd3::
 	call BattleScript_TraceActivates
 	end3
 
+BattleScript_MagoActivado::
+	call BattleScript_AbilityPopUp
+	tryswapitems BattleScript_ButItFailed
+	printstring STRINGID_PKMNSWITCHEDITEMS
+	waitmessage B_WAIT_TIME_LONG
+	printfromtable gItemSwapStringIds
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_MagoActivadoEnd::
+	call BattleScript_MagoActivado
+	end3
+
 BattleScript_ReceiverActivates::
 	call BattleScript_AbilityPopUp
 	printstring STRINGID_RECEIVERABILITYTAKEOVER

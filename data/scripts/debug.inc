@@ -242,6 +242,8 @@ Debug_EventScript_Script_2::
 	end
 
 Debug_EventScript_Script_3::
+	setwildbattle SPECIES_BULBASAUR, 1, ITEM_SITRUS_BERRY
+	dowildbattle
 	release
 	end
 

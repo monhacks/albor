@@ -4232,7 +4232,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 #endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_POLIWAG
 
-#if P_FAMILY_ABRA
     [SPECIES_ABRA] =
     {
         .baseHP        = 25,
@@ -4243,13 +4242,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_PSYCHIC),
         .catchRate = 200,
-    #if P_UPDATED_EXP_YIELDS >= GEN_5
         .expYield = 62,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_4
-        .expYield = 75,
-    #else
-        .expYield = 73,
-    #endif
         .evYield_SpAttack = 1,
         .itemRare = ITEM_TWISTED_SPOON,
         .genderRatio = PERCENT_FEMALE(25),
@@ -4257,7 +4250,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_INNER_FOCUS, ABILITY_MAGIC_GUARD },
+        .abilities = {ABILITY_MAGO, ABILITY_SUPERORDENADOR, ABILITY_ADIVINO},
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Abra"),
         .cryId = CRY_ABRA,
@@ -4299,7 +4292,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_PSYCHIC),
         .catchRate = 100,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 140 : 145,
+        .expYield = 145,
         .evYield_SpAttack = 2,
         .itemRare = ITEM_TWISTED_SPOON,
         .genderRatio = PERCENT_FEMALE(25),
@@ -4307,7 +4300,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_INNER_FOCUS, ABILITY_MAGIC_GUARD },
+        .abilities = {ABILITY_MAGO, ABILITY_SUPERORDENADOR, ABILITY_ADIVINO},
         .bodyColor = BODY_COLOR_BROWN,
         .noFlip = TRUE,
         .speciesName = _("Kadabra"),
@@ -4342,47 +4335,34 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ALAKAZAM}),
     },
 
-#define ALAKAZAM_SP_DEF (P_UPDATED_STATS >= GEN_6 ? 95 : 85)
-
-#define ALAKAZAM_MISC_INFO                                  \
-        .types = MON_TYPES(TYPE_PSYCHIC),                   \
-        .catchRate = 50,                                    \
-        .evYield_SpAttack = 3,                              \
-        .itemRare = ITEM_TWISTED_SPOON,                     \
-        .genderRatio = PERCENT_FEMALE(25),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_SLOW,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),  \
-        .bodyColor = BODY_COLOR_BROWN,                      \
-        .speciesName = _("Alakazam"),                       \
-        .natDexNum = NATIONAL_DEX_ALAKAZAM,                 \
-        .categoryName = _("Psi"),                           \
-        FOOTPRINT(Alakazam)                                 \
-        LEARNSETS(Alakazam)
-
     [SPECIES_ALAKAZAM] =
     {
-        ALAKAZAM_MISC_INFO,
-        .baseHP        = 55,
+        .baseHP        = 60,
         .baseAttack    = 50,
-        .baseDefense   = 45,
+        .baseDefense   = 60,
         .baseSpeed     = 120,
         .baseSpAttack  = 135,
-        .baseSpDefense = ALAKAZAM_SP_DEF,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
+        .baseSpDefense = 95,
         .expYield = 250,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_7
-        .expYield = 225,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 221,
-    #else
-        .expYield = 186,
-    #endif
-        .abilities = { ABILITY_SYNCHRONIZE, ABILITY_INNER_FOCUS, ABILITY_MAGIC_GUARD },
+        .abilities = {ABILITY_MAGO, ABILITY_SUPERORDENADOR, ABILITY_ADIVINO},
         .cryId = CRY_ALAKAZAM,
         .height = 15,
         .weight = 480,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 50,
+        .evYield_SpAttack = 3,
+        .itemRare = ITEM_TWISTED_SPOON,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Alakazam"),
+        .natDexNum = NATIONAL_DEX_ALAKAZAM,
+        .categoryName = _("Psi"),
+        FOOTPRINT(Alakazam)
+        LEARNSETS(Alakazam),
         .description = COMPOUND_STRING(
             "While it has strong psychic abilities and\n"
             "high intelligence, an Alakazam's muscles\n"
@@ -4405,7 +4385,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Alakazam, 2),
         FOLLOWER(Alakazam, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
-#endif //P_FAMILY_ABRA
 
 #if P_FAMILY_MACHOP
     [SPECIES_MACHOP] =
