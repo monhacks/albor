@@ -2638,7 +2638,6 @@ static void ClearAbilityName(u8 spriteId1, u8 spriteId2)
 static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
 {
     int i;
-    u8 lastChar;
     u8* textPtr;
     u8 monName[POKEMON_NAME_LENGTH + 3] = {0};
     u8* nick = gBattleMons[battlerId].nickname; // This needs to be updated for Illusion support
@@ -2655,19 +2654,6 @@ static void PrintBattlerOnAbilityPopUp(u8 battlerId, u8 spriteId1, u8 spriteId2)
 
     if (*(textPtr - 1) == EOS)
         textPtr--;
-
-    lastChar = *(textPtr - 1);
-
-    // Make the string say "[NAME]'s" instead of "[NAME]"
-    textPtr[0] = CHAR_SGL_QUOTE_RIGHT; // apostraphe
-    textPtr++;
-    if (lastChar != CHAR_S && lastChar != CHAR_s)
-    {
-        textPtr[0] = CHAR_s;
-        textPtr++;
-    }
-
-    textPtr[0] = EOS;
 
     PrintOnAbilityPopUp((const u8 *)monName,
                         (void*)(OBJ_VRAM0) + (gSprites[spriteId1].oam.tileNum * 32),
