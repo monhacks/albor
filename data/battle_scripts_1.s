@@ -7777,14 +7777,14 @@ BattleScript_TraceActivatesEnd3::
 
 BattleScript_MagoActivado::
 	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNSWITCHEDITEMS
-	waitmessage B_WAIT_TIME_LONG
-	printfromtable gItemSwapStringIds
 	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_MagoActivadoEnd::
 	call BattleScript_MagoActivado
+	end3
+
+BattleScript_MagoEnd::
 	end3
 
 BattleScript_ReceiverActivates::
