@@ -5343,7 +5343,6 @@ static void Cmd_playstatchangeanimation(void)
 static bool32 TryKnockOffBattleScript(u32 battlerDef)
 {
     if (gBattleMons[battlerDef].item != 0
-        && CanBattlerGetOrLoseItem(battlerDef, gBattleMons[battlerDef].item)
         && !NoAliveMonsForEitherParty())
     {
         if ((GetBattlerAbility(battlerDef) == ABILITY_STICKY_HOLD || GetBattlerAbility(battlerDef) == ABILITY_TERRITORIAL) && IsBattlerAlive(battlerDef))
@@ -5385,8 +5384,6 @@ static bool32 TryKnockOffBattleScript(u32 battlerDef)
     GetBattlerAbility(ally) == ABILITY_SYMBIOSIS                   \
     && gBattleMons[battler].item == ITEM_NONE                      \
     && gBattleMons[ally].item != ITEM_NONE                         \
-    && CanBattlerGetOrLoseItem(battler, gBattleMons[ally].item)    \
-    && CanBattlerGetOrLoseItem(ally, gBattleMons[ally].item)       \
     && IsBattlerAlive(battler)                                     \
     && IsBattlerAlive(ally)
 
@@ -10055,8 +10052,6 @@ static void Cmd_various(void)
         VARIOUS_ARGS(const u8 *failInstr);
         if (gBattleMons[gBattlerAttacker].item == ITEM_NONE
             || gBattleMons[gBattlerTarget].item != ITEM_NONE
-            || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerAttacker].item)
-            || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerAttacker].item)
             || gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerTarget)] & gBitTable[gBattlerPartyIndexes[gBattlerTarget]])
         {
             gBattlescriptCurrInstr = cmd->failInstr;
@@ -14214,11 +14209,7 @@ static void Cmd_tryswapitems(void)
     }
     // can't swap if two Pokémon don't have an item
     // or if either of them is an enigma berry or a mail
-    else if ((gBattleMons[gBattlerAttacker].item == ITEM_NONE && gBattleMons[gBattlerTarget].item == ITEM_NONE)
-                || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerAttacker].item)
-                || !CanBattlerGetOrLoseItem(gBattlerAttacker, gBattleMons[gBattlerTarget].item)
-                || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerTarget].item)
-                || !CanBattlerGetOrLoseItem(gBattlerTarget, gBattleMons[gBattlerAttacker].item))
+    else if ((gBattleMons[gBattlerAttacker].item == ITEM_NONE && gBattleMons[gBattlerTarget].item == ITEM_NONE))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -16034,7 +16025,7 @@ void BS_JumpIfCantLoseItem(void)
     u8 battler = GetBattlerForBattleScript(cmd->battler);
     u16 item = gBattleMons[battler].item;
 
-    if (item == ITEM_NONE || !CanBattlerGetOrLoseItem(battler, item))
+    if (item == ITEM_NONE)
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;

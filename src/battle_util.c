@@ -9132,12 +9132,6 @@ static inline u32 CalcMoveBasePowerAfterModifiers(u32 move, u32 battlerAtk, u32 
         if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && !(gStatuses3[battlerDef] & STATUS3_SEMI_INVULNERABLE))
             modifier = uq4_12_multiply(modifier, UQ_4_12(0.5));
         break;
-    case EFFECT_KNOCK_OFF:
-        if (B_KNOCK_OFF_DMG >= GEN_6
-            && gBattleMons[battlerDef].item != ITEM_NONE
-            && CanBattlerGetOrLoseItem(battlerDef, gBattleMons[battlerDef].item))
-            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
-        break;
     }
 
     // various effects
@@ -11079,25 +11073,6 @@ bool32 DoBattlersShareType(u32 battler1, u32 battler2)
     return FALSE;
 }
 
-bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
-{
-    u16 species = gBattleMons[battler].species;
-    u16 holdEffect = ItemId_GetHoldEffect(itemId);
-
-    // Mail can be stolen now
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-        return FALSE;
-    else if (DoesSpeciesUseHoldItemToChangeForm(species, itemId))
-        return FALSE;
-    else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-        return FALSE;
-    else if (holdEffect == HOLD_EFFECT_BOOSTER_ENERGY
-         && (gSpeciesInfo[gBattleMons[gBattlerAttacker].species].isParadox || gSpeciesInfo[gBattleMons[gBattlerTarget].species].isParadox))
-        return FALSE;
-    else
-        return TRUE;
-}
-
 struct Pokemon *GetIllusionMonPtr(u32 battler)
 {
     if (gBattleStruct->illusion[battler].broken)
@@ -11280,8 +11255,7 @@ bool32 CanFling(u32 battler)
       || (B_KLUTZ_FLING_INTERACTION >= GEN_5 && GetBattlerAbility(battler) == ABILITY_KLUTZ)
       || gFieldStatuses & STATUS_FIELD_MAGIC_ROOM
       || gDisableStructs[battler].embargoTimer != 0
-      || GetFlingPowerFromItemId(item) == 0
-      || !CanBattlerGetOrLoseItem(battler, item))
+      || GetFlingPowerFromItemId(item) == 0)
         return FALSE;
 
     return TRUE;
@@ -11380,10 +11354,6 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     {
         return FALSE;
     }
-
-    if (!CanBattlerGetOrLoseItem(battlerItem, item)      // Battler with item cannot have it stolen
-      ||!CanBattlerGetOrLoseItem(battlerStealing, item)) // Stealer cannot take the item
-        return FALSE;
 
     return TRUE;
 }

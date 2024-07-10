@@ -203,7 +203,6 @@ bool32 IsBattlerUltraBursted(u32 battler);
 u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method);
 bool32 TryBattleFormChange(u32 battler, u32 method);
 bool32 DoBattlersShareType(u32 battler1, u32 battler2);
-bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId);
 u32 GetIllusionMonSpecies(u32 battler);
 struct Pokemon *GetIllusionMonPtr(u32 battler);
 void ClearIllusionMon(u32 battler);

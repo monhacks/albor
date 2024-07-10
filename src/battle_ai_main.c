@@ -2131,8 +2131,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_BESTOW:
-            if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_NONE
-              || !CanBattlerGetOrLoseItem(battlerAtk, gBattleMons[battlerAtk].item))    // AI knows its own item
+            if (aiData->holdEffects[battlerAtk] == HOLD_EFFECT_NONE)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_ROLE_PLAY:
@@ -4682,8 +4681,6 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
 
                         if (canSteal && aiData->items[battlerAtk] == ITEM_NONE
                         && aiData->items[battlerDef] != ITEM_NONE
-                        && CanBattlerGetOrLoseItem(battlerDef, aiData->items[battlerDef])
-                        && CanBattlerGetOrLoseItem(battlerAtk, aiData->items[battlerDef])
                         && !HasMoveEffect(battlerAtk, EFFECT_ACROBATICS)
                         && aiData->abilities[battlerDef] != ABILITY_STICKY_HOLD
                         && aiData->abilities[battlerDef] != ABILITY_TERRITORIAL)

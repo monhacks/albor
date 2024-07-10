@@ -132,6 +132,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .affineAnims = gDummySpriteAffineAnimTable,
         },
         LEARNSETS(None),
+        .eggMoveLearnset = sNoneEggMoveLearnset,
     },
 
     #include "species_info/gen_1.h"

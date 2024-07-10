@@ -7182,7 +7182,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             "Knocks down the foe's held\n"
             "item to prevent its use."),
         .effect = EFFECT_KNOCK_OFF,
-        .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 65 : 20,
+        .power = 70,
         .type = TYPE_DARK,
         .accuracy = 100,
         .pp = 20,

@@ -2711,19 +2711,7 @@ bool32 CanKnockOffItem(u32 battler, u32 item)
     if (item == ITEM_NONE)
         return FALSE;
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
-      | BATTLE_TYPE_FRONTIER
-      | BATTLE_TYPE_LINK
-      | BATTLE_TYPE_RECORDED_LINK
-      | BATTLE_TYPE_SECRET_BASE
-      | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
-      )) && GetBattlerSide(battler) == B_SIDE_PLAYER)
-        return FALSE;
-
     if (AI_DATA->abilities[battler] == ABILITY_STICKY_HOLD || AI_DATA->abilities[battler] == ABILITY_TERRITORIAL)
-        return FALSE;
-
-    if (!CanBattlerGetOrLoseItem(battler, item))
         return FALSE;
 
     return TRUE;

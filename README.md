@@ -94,6 +94,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Rework de Velo floral: Habilidad exclusivo de Bellossom, que impide cambios de estado y bajadas de stats de equipo si hay Sol (no hace falta que sean tipo Planta).
     *Habilidad exclusiva de Persian y A-Persian: En metálico, potencia ataques de Acero un 25%, y convierte Día de pago en tipo Acero. Además, este es su ataque exclusivo, y ahora tiene 100 de potencia.
     *Objetos exclusivos potenciadores: Objetos como Cuchara torcida potencian un 25% los ataques de una familia concreta (Alakazam).
+    *Desarme ya no aumenta su potencia si quita el objeto, pero se le ha subido la potencia a 70.
 
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.
