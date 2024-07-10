@@ -6393,16 +6393,15 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     // took a while, but all checks passed and items can be safely swapped
                     else
                     {
-                        u16 oldItemAtk, *newItemAtk;
+                        u16 oldItemAtk, newItemAtk;
 
-                        newItemAtk = &gBattleStruct->changedItems[i];
+                        newItemAtk = gBattleMons[chosenTarget].item;
                         oldItemAtk = gBattleMons[i].item;
-                        *newItemAtk = gBattleMons[chosenTarget].item;
 
-                        gBattleMons[i].item = *newItemAtk;
+                        gBattleMons[i].item = newItemAtk;
                         gBattleMons[chosenTarget].item = oldItemAtk;
 
-                        RecordItemEffectBattle(i, ItemId_GetHoldEffect(*newItemAtk));
+                        RecordItemEffectBattle(i, ItemId_GetHoldEffect(newItemAtk));
                         RecordItemEffectBattle(chosenTarget, ItemId_GetHoldEffect(oldItemAtk));
 
                         BtlController_EmitSetMonData(i, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[i].item), &gBattleMons[i].item);
@@ -6414,14 +6413,16 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                         gBattleStruct->choicedMove[chosenTarget] = MOVE_NONE;
                         gBattleStruct->choicedMove[i] = MOVE_NONE;
 
-                        PREPARE_ITEM_BUFFER(gBattleTextBuff1, *newItemAtk)
+                        gBattlerAttacker = i;
+                        gBattlerTarget = chosenTarget;
+                        PREPARE_ITEM_BUFFER(gBattleTextBuff1, newItemAtk)
                         PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
 
-                        if (oldItemAtk != ITEM_NONE && *newItemAtk != ITEM_NONE)
+                        if (oldItemAtk != ITEM_NONE && newItemAtk != ITEM_NONE)
                         {
                             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_BOTH;  // attacker's item -> <- target's item
                         }
-                        else if (oldItemAtk == ITEM_NONE && *newItemAtk != ITEM_NONE)
+                        else if (oldItemAtk == ITEM_NONE && newItemAtk != ITEM_NONE)
                         {
                             if (GetBattlerAbility(i) == ABILITY_UNBURDEN && gBattleResources->flags->flags[i] & RESOURCE_FLAG_UNBURDEN)
                                 gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_UNBURDEN;
