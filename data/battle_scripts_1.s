@@ -7778,6 +7778,10 @@ BattleScript_TraceActivatesEnd3::
 BattleScript_MagoActivado::
 	call BattleScript_AbilityPopUp
 	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_PKMNSWITCHEDITEMS
+	waitmessage B_WAIT_TIME_LONG
+	printfromtable gItemSwapStringIds
+	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_MagoActivadoEnd::
