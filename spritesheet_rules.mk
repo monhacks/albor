@@ -790,7 +790,13 @@ $(POKEMONGFXDIR)/wigglytuff/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/zubat/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(POKEMONGFXDIR)/zubat/followerf.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(POKEMONGFXDIR)/golbat/follower.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(POKEMONGFXDIR)/golbat/followerf.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/oddish/follower.4bpp: %.4bpp: %.png

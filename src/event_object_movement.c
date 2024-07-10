@@ -1775,6 +1775,18 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
       else
         graphicsInfo = &gPokemonFormGraphics[5];
       break;
+    case SPECIES_ZUBAT:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[6];
+      break;
+    case SPECIES_GOLBAT:
+      if(form==0)
+        graphicsInfo = &gSpeciesInfo[species].followerData;
+      else
+        graphicsInfo = &gPokemonFormGraphics[7];
+      break;
     default:
         graphicsInfo = &gSpeciesInfo[species].followerData;
         break;
@@ -1901,6 +1913,8 @@ static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
     case SPECIES_RATICATE:
     case SPECIES_PIKACHU:
     case SPECIES_RAICHU:
+    case SPECIES_ZUBAT:
+    case SPECIES_GOLBAT:
         *form = GetMonGender(mon);
         break;
     }

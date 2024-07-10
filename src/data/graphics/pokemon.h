@@ -359,6 +359,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gObjectEventPic_Zubat[] = INCBIN_U32("graphics/pokemon/zubat/follower.4bpp");
     const u32 gMonFrontPic_ZubatF[] = INCBIN_U32("graphics/pokemon/zubat/anim_frontf.4bpp.lz");
     const u32 gMonBackPic_ZubatF[] = INCBIN_U32("graphics/pokemon/zubat/backf.4bpp.lz");
+    const u32 gObjectEventPic_ZubatF[] = INCBIN_U32("graphics/pokemon/zubat/followerf.4bpp");
 
     const u32 gMonFrontPic_Golbat[] = INCBIN_U32("graphics/pokemon/golbat/anim_front.4bpp.lz");
     const u32 gMonPalette_Golbat[] = INCBIN_U32("graphics/pokemon/golbat/normal.gbapal.lz");
@@ -367,6 +368,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gObjectEventPic_Golbat[] = INCBIN_U32("graphics/pokemon/golbat/follower.4bpp");
     const u32 gMonFrontPic_GolbatF[] = INCBIN_U32("graphics/pokemon/golbat/anim_frontf.4bpp.lz");
     const u32 gMonBackPic_GolbatF[] = INCBIN_U32("graphics/pokemon/golbat/backf.4bpp.lz");
+    const u32 gObjectEventPic_GolbatF[] = INCBIN_U32("graphics/pokemon/golbat/followerf.4bpp");
 
     const u32 gMonFrontPic_Crobat[] = INCBIN_U32("graphics/pokemon/crobat/anim_front.4bpp.lz");
     const u32 gMonPalette_Crobat[] = INCBIN_U32("graphics/pokemon/crobat/normal.gbapal.lz");

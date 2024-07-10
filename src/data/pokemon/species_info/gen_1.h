@@ -2620,6 +2620,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Zubat),
         ICON(Zubat, 2),
+        ICON_FEMALE(Zubat, 2),
         FOOTPRINT(Zubat)
         FOLLOWER(Zubat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Zubat),
@@ -2672,6 +2673,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Golbat),
         ICON(Golbat, 2),
+        ICON_FEMALE(Golbat, 2),
         FOOTPRINT(Golbat)
         FOLLOWER(Golbat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Golbat),

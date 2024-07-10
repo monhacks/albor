@@ -3974,6 +3974,8 @@ extern const struct SpriteFrameImage sPicTable_RattataF[];
 extern const struct SpriteFrameImage sPicTable_RaticateF[];
 extern const struct SpriteFrameImage sPicTable_PikachuF[];
 extern const struct SpriteFrameImage sPicTable_RaichuF[];
+extern const struct SpriteFrameImage sPicTable_ZubatF[];
+extern const struct SpriteFrameImage sPicTable_GolbatF[];
 
 const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] = 
 {
@@ -4084,7 +4086,43 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .anims = sAnimTable_Following,
     .images = sPicTable_RaichuF,
     .affineAnims = gDummySpriteAffineAnimTable,
-}
+},
+  [6] = { //ZUBAT_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_ZubatF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
+  [7] = { //GOLBAT_FEMALE
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = 2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .compressed = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = sOamTables_32x32,
+    .anims = sAnimTable_Following,
+    .images = sPicTable_GolbatF,
+    .affineAnims = gDummySpriteAffineAnimTable,
+},
 };
 
 #if OW_FOLLOWERS_POKEBALLS
