@@ -4618,10 +4618,40 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_MAGO:
-            if (!(gSpecialStatuses[battler].mago))
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_MAGO;
-                gSpecialStatuses[battler].mago = TRUE;
+                u32 chosenTarget;
+                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE; // side of the opposing Pokémon
+                u32 target1 = GetBattlerAtPosition(side);
+                u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                gBattlerAttacker = battler;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                {
+                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0
+                     && gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
+                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
+                    else if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                    else if (gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
+                        chosenTarget = target2, effect++;
+                }
+                else
+                {
+                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                }
+
+                if (effect != 0)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_MagoActivadoEnd);
+
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
+                    PREPARE_ITEM_BUFFER(gBattleTextBuff2, gBattleMons[chosenTarget].item)
+                    effect++;
+                    break;
+                }
             }
             break;
         case ABILITY_CLOUD_NINE:
@@ -6330,44 +6360,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
                     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
                     PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
-                    break;
-                }
-            }
-        }
-        break;
-    case ABILITYEFFECT_MAGO:
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ABILITY_MAGO && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_MAGO))
-            {
-                u32 chosenTarget;
-                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing Pokémon
-                u32 target1 = GetBattlerAtPosition(side);
-                u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
-
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                {
-                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0
-                     && gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
-                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
-                    else if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                    else if (gBattleMons[target2].item != 0 && gBattleMons[target2].hp != 0)
-                        chosenTarget = target2, effect++;
-                }
-                else
-                {
-                    if (gBattleMons[target1].item != 0 && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                }
-
-                if (effect != 0)
-                {
-                    BattleScriptPushCursorAndCallback(BattleScript_MagoActivadoEnd);
-                    gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_MAGO;
-
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
-                    PREPARE_ITEM_BUFFER(gBattleTextBuff2, gLastUsedItem);
                     break;
                 }
             }

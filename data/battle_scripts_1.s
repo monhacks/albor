@@ -7777,7 +7777,6 @@ BattleScript_TraceActivatesEnd3::
 
 BattleScript_MagoActivado::
 	call BattleScript_AbilityPopUp
-	tryswapitems BattleScript_ButItFailed
 	printstring STRINGID_PKMNSWITCHEDITEMS
 	waitmessage B_WAIT_TIME_LONG
 	printfromtable gItemSwapStringIds

@@ -7154,8 +7154,7 @@ bool32 DoSwitchInAbilities(u32 battler)
          || AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0)
          || (gBattleWeather & B_WEATHER_ANY && WEATHER_HAS_EFFECT && AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, battler, 0, 0, 0))
          || (gFieldStatuses & STATUS_FIELD_TERRAIN_ANY && AbilityBattleEffects(ABILITYEFFECT_ON_TERRAIN, battler, 0, 0, 0))
-         || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0)
-         || AbilityBattleEffects(ABILITYEFFECT_MAGO, 0, 0, 0, 0));
+         || AbilityBattleEffects(ABILITYEFFECT_TRACE, 0, 0, 0, 0));
 }
 
 static void UpdateSentMonFlags(u32 battler)
@@ -9490,7 +9489,6 @@ static void Cmd_various(void)
         AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_TRACE, battler, 0, 0, 0);
         AbilityBattleEffects(ABILITYEFFECT_OPPORTUNIST, battler, 0, 0, 0);
-        AbilityBattleEffects(ABILITYEFFECT_MAGO, battler, 0, 0, 0);
         return;
     }
     case VARIOUS_INSTANT_HP_DROP:

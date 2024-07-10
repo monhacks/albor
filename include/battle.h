@@ -88,11 +88,10 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        1
 #define RESOURCE_FLAG_ROOST             2
 #define RESOURCE_FLAG_UNBURDEN          3
-#define RESOURCE_FLAG_MAGO              4
-#define RESOURCE_FLAG_TRACED            5
-#define RESOURCE_FLAG_EMERGENCY_EXIT    6
-#define RESOURCE_FLAG_NEUTRALIZING_GAS  7
-#define RESOURCE_FLAG_ICE_FACE          8
+#define RESOURCE_FLAG_TRACED            4
+#define RESOURCE_FLAG_EMERGENCY_EXIT    5
+#define RESOURCE_FLAG_NEUTRALIZING_GAS  6
+#define RESOURCE_FLAG_ICE_FACE          7
 
 struct DisableStruct
 {
@@ -244,7 +243,6 @@ struct SpecialStatus
     u8 emergencyExited:1;
     u8 afterYou:1;
     u8 preventLifeOrbDamage:1; // So that Life Orb doesn't activate various effects.
-    u8 mago:1;
 };
 
 struct SideTimer
