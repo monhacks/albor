@@ -422,6 +422,7 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice; //eliminar
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT]; //eliminar
     /*0x64C*/ struct BattleFrontier frontier; //eliminar
+             struct Time fakeRTC;
 }; // sizeof=0xF2C
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
