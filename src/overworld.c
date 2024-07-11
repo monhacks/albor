@@ -86,15 +86,12 @@ extern const struct MapHeader *const *const gMapGroups[];
 
 static void Overworld_ResetStateAfterWhiteOut(void);
 static void CB2_ReturnToFieldLocal(void);
-static void CB2_ReturnToFieldLink(void);
 static void CB2_LoadMap2(void);
 static void VBlankCB_Field(void);
-static void SpriteCB_LinkPlayer(struct Sprite *);
 static void ChooseAmbientCrySpecies(void);
 static void DoMapLoadLoop(u8 *);
 static bool32 LoadMapInStepsLocal(u8 *, bool32);
 static bool32 ReturnToFieldLocal(u8 *);
-static bool32 ReturnToFieldLink(u8 *);
 static void InitObjectEventsLocal(void);
 static void InitOverworldGraphicsRegisters(void);
 static void ResetMirageTowerAndSaveBlockPtrs(void);
@@ -103,11 +100,9 @@ static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
-static void CreateLinkPlayerSprites(void);
 static void ResetAllPlayerLinkStates(void);
 static u8 FlipVerticalAndClearForced(u8, u8);
 static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
-static void CreateLinkPlayerSprite(u8, u8);
 static u32 GetLinkSendQueueLength(void);
 static u16 KeyInterCB_DeferToRecvQueue(u32);
 static u16 KeyInterCB_DeferToSendQueue(u32);
@@ -1434,14 +1429,12 @@ void CB1_Overworld(void)
         DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
 }
 
-#define TINT_NIGHT Q_8_8(0.456) | Q_8_8(0.456) << 8 | Q_8_8(0.615) << 16
-
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIME_MORNING] = {.coeff = 4, .blendColor = 0xC3B2F1, .isTint = TRUE}, //to do
+    [TIME_MORNING] = {.coeff = 10, .blendColor = 0xF21180, .isTint = TRUE},
     [TIME_DAY]     = {.coeff = 0, .blendColor = 0},
-    [TIME_EVENING] = {.coeff = 4, .blendColor = 0xA8B0E0, .isTint = TRUE},
-    [TIME_NIGHT]   = {.coeff = 10, .blendColor = TINT_NIGHT, .isTint = TRUE},
+    [TIME_EVENING] = {.coeff = 10, .blendColor = 0x21f211, .isTint = TRUE},
+    [TIME_NIGHT]   = {.coeff = 10, .blendColor = 0x1311f2, .isTint = TRUE},
 };
 
 u8 UpdateTimeOfDay(void) 
@@ -1450,29 +1443,29 @@ u8 UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = gLocalTime.hours;
     minutes = gLocalTime.minutes;
-    if (hours < 4) 
+    if (hours < 6) 
     { // night
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
     } 
-    else if (hours < 7) 
+    else if (hours < 8) 
     { // night->morning
         currentTimeBlend.time0 = TIME_NIGHT;
         currentTimeBlend.time1 = TIME_MORNING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 4) * 60 + minutes) / ((7-4)*60);
+        currentTimeBlend.weight = 256 - 256 * ((hours - 6) * 60 + minutes) / ((8-6)*60);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_DAY;
+        gTimeOfDay = TIME_MORNING;
     } 
     else if (hours < 10) 
     { // morning->day
         currentTimeBlend.time0 = TIME_MORNING;
         currentTimeBlend.time1 = TIME_DAY;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 7) * 60 + minutes) / ((10-7)*60);
+        currentTimeBlend.weight = 256 - 256 * ((hours - 8) * 60 + minutes) / ((10-8)*60);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2 + 128;
-        gTimeOfDay = TIME_DAY;
+        gTimeOfDay = TIME_MORNING;
     } 
-    else if (hours < 18) 
+    else if (hours < 19) 
     { // day
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
@@ -1481,20 +1474,20 @@ u8 UpdateTimeOfDay(void)
     { // day->evening
         currentTimeBlend.time0 = TIME_DAY;
         currentTimeBlend.time1 = TIME_EVENING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 18) * 60 + minutes) / ((20-18)*60);
+        currentTimeBlend.weight = 256 - 256 * ((hours - 19) * 60 + minutes) / ((20-19)*60);
         currentTimeBlend.altWeight = currentTimeBlend.weight / 2 + 128;
         gTimeOfDay = TIME_EVENING;
     } 
-    else if (hours < 22) 
+    else if (hours < 21) 
     { // evening->night
         currentTimeBlend.time0 = TIME_EVENING;
         currentTimeBlend.time1 = TIME_NIGHT;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((22-20)*60);
+        currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((21-20)*60);
         currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
-        gTimeOfDay = TIME_NIGHT;
+        gTimeOfDay = TIME_EVENING;
     } 
     else 
-    { // 22-24, night
+    { // 21-24, night
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
@@ -1502,7 +1495,8 @@ u8 UpdateTimeOfDay(void)
     return gTimeOfDay;
 }
 
-bool8 MapHasNaturalLight(u8 mapType) { // Whether a map type is naturally lit/outside
+bool8 MapHasNaturalLight(u8 mapType) 
+{ // Whether a map type is naturally lit/outside
   return mapType == MAP_TYPE_TOWN || mapType == MAP_TYPE_CITY || mapType == MAP_TYPE_ROUTE
       || mapType == MAP_TYPE_OCEAN_ROUTE;
 }
@@ -1736,15 +1730,8 @@ void CB2_ReturnToFieldContestHall(void)
 
 void CB2_ReturnToField(void)
 {
-    if (IsOverworldLinkActive() == TRUE)
-    {
-        SetMainCallback2(CB2_ReturnToFieldLink);
-    }
-    else
-    {
-        FieldClearVBlankHBlankCallbacks();
-        SetMainCallback2(CB2_ReturnToFieldLocal);
-    }
+    FieldClearVBlankHBlankCallbacks();
+    SetMainCallback2(CB2_ReturnToFieldLocal);
 }
 
 static void CB2_ReturnToFieldLocal(void)
@@ -1754,12 +1741,6 @@ static void CB2_ReturnToFieldLocal(void)
         SetFieldVBlankCallback();
         SetMainCallback2(CB2_Overworld);
     }
-}
-
-static void CB2_ReturnToFieldLink(void)
-{
-    if (!Overworld_IsRecvQueueAtMax() && ReturnToFieldLink(&gMain.state))
-        SetMainCallback2(CB2_Overworld);
 }
 
 void CB2_ReturnToFieldWithOpenMenu(void)
@@ -1994,77 +1975,6 @@ static bool32 ReturnToFieldLocal(u8 *state)
     return FALSE;
 }
 
-static bool32 ReturnToFieldLink(u8 *state)
-{
-    switch (*state)
-    {
-    case 0:
-        FieldClearVBlankHBlankCallbacks();
-        ResetMirageTowerAndSaveBlockPtrs();
-        ResetScreenForMapLoad();
-        (*state)++;
-        break;
-    case 1:
-        ResumeMap(TRUE);
-        (*state)++;
-        break;
-    case 2:
-        CreateLinkPlayerSprites();
-        InitObjectEventsReturnToField();
-        (*state)++;
-        break;
-    case 3:
-        InitCurrentFlashLevelScanlineEffect();
-        InitOverworldGraphicsRegisters();
-        InitTextBoxGfxAndPrinters();
-        (*state)++;
-        break;
-    case 4:
-        ResetFieldCamera();
-        (*state)++;
-        break;
-    case 5:
-        CopyPrimaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 6:
-        CopySecondaryTilesetToVram(gMapHeader.mapLayout);
-        (*state)++;
-        break;
-    case 7:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            LoadMapTilesetPalettes(gMapHeader.mapLayout);
-            (*state)++;
-        }
-        break;
-    case 8:
-        DrawWholeMapView();
-        (*state)++;
-        break;
-    case 9:
-        InitTilesetAnimations();
-        (*state)++;
-        break;
-    case 11:
-        (*state)++;
-        break;
-    case 12:
-        if (RunFieldCallback())
-            (*state)++;
-        break;
-    case 10:
-        (*state)++;
-        break;
-    case 13:
-        SetFieldVBlankCallback();
-        (*state)++;
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
 static void DoMapLoadLoop(u8 *state)
 {
     while (!LoadMapInStepsLocal(state, FALSE));
@@ -2179,13 +2089,6 @@ static void SetCameraToTrackPlayer(void)
 {
     gObjectEvents[gPlayerAvatar.objectEventId].trackedByCamera = TRUE;
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
-}
-
-static void CreateLinkPlayerSprites(void)
-{
-    u16 i;
-    for (i = 0; i < gFieldLinkPlayerCount; i++)
-        CreateLinkPlayerSprite(i, gLinkPlayers[i].version);
 }
 
 void ResetAllMultiplayerState(void)
@@ -2487,57 +2390,4 @@ static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
         }
     }
     return MapGridGetCollisionAt(x, y);
-}
-
-static void CreateLinkPlayerSprite(u8 linkPlayerId, u8 gameVersion)
-{
-    struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[linkPlayerId];
-    u8 objEventId = linkPlayerObjEvent->objEventId;
-    struct ObjectEvent *objEvent = &gObjectEvents[objEventId];
-    struct Sprite *sprite;
-
-    if (linkPlayerObjEvent->active)
-    {
-        switch (gameVersion)
-        {
-        case VERSION_FIRE_RED:
-        case VERSION_LEAF_GREEN:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetFRLGAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
-        case VERSION_RUBY:
-        case VERSION_SAPPHIRE:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetRSAvatarGraphicsIdByGender(linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
-        case VERSION_EMERALD:
-            objEvent->spriteId = CreateObjectGraphicsSprite(GetRivalAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, linkGender(objEvent)), SpriteCB_LinkPlayer, 0, 0, 0);
-            break;
-        }
-
-        sprite = &gSprites[objEvent->spriteId];
-        sprite->coordOffsetEnabled = TRUE;
-        sprite->data[0] = linkPlayerId;
-        objEvent->triggerGroundEffectsOnMove = FALSE;
-    }
-}
-
-static void SpriteCB_LinkPlayer(struct Sprite *sprite)
-{
-    struct LinkPlayerObjectEvent *linkPlayerObjEvent = &gLinkPlayerObjectEvents[sprite->data[0]];
-    struct ObjectEvent *objEvent = &gObjectEvents[linkPlayerObjEvent->objEventId];
-    sprite->x = objEvent->initialCoords.x;
-    sprite->y = objEvent->initialCoords.y;
-    SetObjectSubpriorityByElevation(objEvent->previousElevation, sprite, 1);
-    sprite->oam.priority = ElevationToPriority(objEvent->previousElevation);
-
-    if (linkPlayerObjEvent->movementMode == MOVEMENT_MODE_FREE)
-        StartSpriteAnim(sprite, GetFaceDirectionAnimNum(linkDirection(objEvent)));
-    else
-        StartSpriteAnimIfDifferent(sprite, GetMoveDirectionAnimNum(linkDirection(objEvent)));
-
-    UpdateObjectEventSpriteInvisibility(sprite, FALSE);
-    if (objEvent->triggerGroundEffectsOnMove)
-    {
-        sprite->invisible = ((sprite->data[7] & 4) >> 2);
-        sprite->data[7]++;
-    }
 }

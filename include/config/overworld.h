@@ -80,7 +80,6 @@
 #define OW_POPUP_BW_ALPHA_BLEND    TRUE                    // Enables alpha blending/transparency for the pop-ups. Mainly intended to be used with the black color option.
 
 //Time
-#define OW_TIMES_OF_DAY                 GEN_LATEST // Different generations have the times of day change at different times.
 #define OW_USE_FAKE_RTC                 TRUE      // When TRUE, seconds on the in-clock will only advance once every 60 playTimeVBlanks (every 60 frames).
 
 #endif // GUARD_CONFIG_OVERWORLD_H
