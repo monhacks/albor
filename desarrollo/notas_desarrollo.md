@@ -43,7 +43,6 @@
 - Crear ataque Abducción (animación otra vez).
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
-- Destruir icono en batalla al darle a huir contra entrenador.
 - Mirar lo que hace la expansión para mostrar tipos dinámicos en combate (Weather ball, día de pago).
 - Comprobar animaciones (Día de pago, buena baza).
 - Testear Mago.

@@ -174,6 +174,9 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_NIDORAN_M, 1, ITEM_NONE
 	givemon SPECIES_NIDORINO, 1, ITEM_NONE
 	givemon SPECIES_NIDOKING, 1, ITEM_NONE
+	givemon SPECIES_CLEFFA, 1, ITEM_NONE
+	givemon SPECIES_CLEFAIRY, 1, ITEM_NONE
+	givemon SPECIES_CLEFABLE, 1, ITEM_NONE
 	givemon SPECIES_ZUBAT, 1, ITEM_NONE
 	givemon SPECIES_GOLBAT, 1, ITEM_NONE
 	givemon SPECIES_CROBAT, 1, ITEM_NONE
@@ -231,6 +234,9 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_NIDORAN_M, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_NIDORINO, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_NIDOKING, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_CLEFFA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_CLEFAIRY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_CLEFABLE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ZUBAT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GOLBAT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_CROBAT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
