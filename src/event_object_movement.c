@@ -1829,6 +1829,10 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
+        if (species == SPECIES_KECLEON)
+        {
+            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+        }
     }
 }
 
@@ -2410,7 +2414,7 @@ static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 lightType)
         sprite->centerToCornerVecX = -(32 >> 1);
         sprite->centerToCornerVecY = -(32 >> 1);
         sprite->oam.priority = 1;
-        sprite->oam.objMode = 1; // BLEND
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
         sprite->oam.affineMode = ST_OAM_AFFINE_NORMAL;
         sprite->x += 8;
         sprite->y += 22 + sprite->centerToCornerVecY;
@@ -2420,7 +2424,7 @@ static void SpawnLightSprite(s16 x, s16 y, s16 camX, s16 camY, u32 lightType)
         sprite->centerToCornerVecY = -(16 >> 1);
         sprite->oam.priority = 2;
         sprite->subpriority = 0xFF;
-        sprite->oam.objMode = 1; // BLEND
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     }
 }
 

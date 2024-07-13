@@ -46,7 +46,6 @@
 - Mirar lo que hace la expansión para mostrar tipos dinámicos en combate (Weather ball, día de pago).
 - Comprobar animaciones (Día de pago, buena baza).
 - Testear Mago.
-- Arreglar problema de Storage.
 - Arreglar animación al subir de nivel (incorporar la no usada como indicador de evo).
 - Cambiar animación de Chupasangre usando como referencia Colmillo Veneno.
 
