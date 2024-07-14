@@ -272,7 +272,8 @@ static u32 UpdateTimeOfDayPaletteFade(void)
     { // Sprite palettes, don't blend those with tags
         u32 i;
         u32 j = 1;
-        for (i = 0; i < 16; i++, j <<= 1) { // Mask out palettes that should not be light blended
+        for (i = 0; i < 16; i++, j <<= 1) 
+        { // Mask out palettes that should not be light blended
             if ((selectedPalettes & j) && !(GetSpritePaletteTagByPaletteNum(i) >> 15))
             timePalettes |= j;
         }
@@ -864,52 +865,35 @@ void TimeBlendPalette(u16 palOffset, u32 coeff, u32 blendColor)
 }
 
 // Blends a weighted average of two blend parameters
-// Parameters can be either blended (as in BlendPalettes) or tinted (as in TintPaletteRGB_Copy)
-void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0) {
+void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0) 
+{
     s32 r0, g0, b0, r1, g1, b1, defR, defG, defB, altR, altG, altB;
     u32 color0, coeff0, color1, coeff1;
-    bool8 tint0, tint1;
     u32 defaultColor = DEFAULT_LIGHT_COLOR;
 
     if (!palettes)
     return;
 
     color0 = blend0->blendColor;
-    tint0 = blend0->isTint;
-    coeff0 = tint0 ? 8*2 : blend0->coeff*2;
+    coeff0 = blend0->coeff*2;
     color1 = blend1->blendColor;
-    tint1 = blend1->isTint;
-    coeff1 = tint1 ? 8*2 : blend1->coeff*2;
+    coeff1 = blend1->coeff*2;
 
-    if (tint0) 
-    {
-        r0 = (color0 << 24) >> 24;
-        g0 = (color0 << 16) >> 24;
-        b0 = (color0 << 8) >> 24;
-    } 
-    else 
-    {
-        r0 = (color0 << 27) >> 27;
-        g0 = (color0 << 22) >> 27;
-        b0 = (color0 << 17) >> 27;
-    }
-    if (tint1) 
-    {
-        r1 = (color1 << 24) >> 24;
-        g1 = (color1 << 16) >> 24;
-        b1 = (color1 << 8) >> 24;
-    } 
-    else 
-    {
-        r1 = (color1 << 27) >> 27;
-        g1 = (color1 << 22) >> 27;
-        b1 = (color1 << 17) >> 27;
-    }
+    r0 = (color0 << 27) >> 27;
+    g0 = (color0 << 22) >> 27;
+    b0 = (color0 << 17) >> 27;
+    r1 = (color1 << 24) >> 24;
+    g1 = (color1 << 16) >> 24;
+    b1 = (color1 << 8) >> 24;
+    r1 = (color1 << 27) >> 27;
+    g1 = (color1 << 22) >> 27;
+    b1 = (color1 << 17) >> 27;
     defR = (defaultColor << 27) >> 27;
     defG = (defaultColor << 22) >> 27;
     defB = (defaultColor << 17) >> 27;
 
-    do {
+    do 
+    {
         if (palettes & 1) 
         {
             u16 *srcEnd = src + 16;
@@ -955,42 +939,12 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
                 } 
                 else 
                 { // Use provided blend colors
-                    if (!tint1) 
-                    { // blend-based
-                        r2 = (r + (((r1 - r) * (s32)coeff1) >> 5));
-                        g2 = (g + (((g1 - g) * (s32)coeff1) >> 5));
-                        b2 = (b + (((b1 - b) * (s32)coeff1) >> 5));
-                    } 
-                    else 
-                    { // tint-based
-                        r2 = (u16)((r1 * r)) >> 8;
-                        g2 = (u16)((g1 * g)) >> 8;
-                        b2 = (u16)((b1 * b)) >> 8;
-                        if (r2 > 31)
-                            r2 = 31;
-                        if (g2 > 31)
-                            g2 = 31;
-                        if (b2 > 31)
-                            b2 = 31;
-                    }
-                    if (!tint0) 
-                    { // blend-based
-                        r = (r + (((r0 - r) * (s32)coeff0) >> 5));
-                        g = (g + (((g0 - g) * (s32)coeff0) >> 5));
-                        b = (b + (((b0 - b) * (s32)coeff0) >> 5));
-                    } 
-                    else 
-                    { // tint-based
-                        r = (u16)((r0 * r)) >> 8;
-                        g = (u16)((g0 * g)) >> 8;
-                        b = (u16)((b0 * b)) >> 8;
-                        if (r > 31)
-                            r = 31;
-                        if (g > 31)
-                            g = 31;
-                        if (b > 31)
-                            b = 31;
-                    }   
+                    r2 = (r + (((r1 - r) * (s32)coeff1) >> 5));
+                    g2 = (g + (((g1 - g) * (s32)coeff1) >> 5));
+                    b2 = (b + (((b1 - b) * (s32)coeff1) >> 5));
+                    r = (r + (((r0 - r) * (s32)coeff0) >> 5));
+                    g = (g + (((g0 - g) * (s32)coeff0) >> 5));
+                    b = (b + (((b0 - b) * (s32)coeff0) >> 5));
                 }
                 r  = r2 + (((r - r2) * (s32)weight0) >> 8);
                 g  = g2 + (((g - g2) * (s32)weight0) >> 8);
@@ -1006,7 +960,8 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
             dst += 16;
         }
         palettes >>= 1;
-    } while (palettes);
+    } 
+    while (palettes);
 }
 
 // Apply weighted average to palettes, preserving high bits of dst throughout

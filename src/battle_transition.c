@@ -3851,7 +3851,8 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
         BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
         // Restore BLDCNT
         SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved);
-        if (paletteNum < 16) {
+        if (paletteNum < 16) 
+        {
             u16 index = (paletteNum+16)*16+9; // SHADOW_COLOR_INDEX
             gPlttBufferFaded[index] = task->tShadowColor;
         }

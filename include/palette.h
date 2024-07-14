@@ -26,15 +26,15 @@
 
 enum
 {
-    FAST_FADE_IN_FROM_WHITE,
-    FAST_FADE_OUT_TO_WHITE,
-    FAST_FADE_IN_FROM_BLACK,
-    FAST_FADE_OUT_TO_BLACK,
+  FAST_FADE_IN_FROM_WHITE,
+  FAST_FADE_OUT_TO_WHITE,
+  FAST_FADE_IN_FROM_BLACK,
+  FAST_FADE_OUT_TO_BLACK,
 };
 
-struct BlendSettings {
+struct BlendSettings 
+{
   u32 blendColor:24;
-  u32 isTint:1;
   u32 coeff:5;
 };
 

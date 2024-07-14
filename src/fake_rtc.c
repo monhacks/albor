@@ -73,6 +73,6 @@ void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
 
 u32 FakeRtc_GetSecondsRatio(void)
 {
-    return 20;
+    return 60;
 }
 

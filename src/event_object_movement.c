@@ -1597,7 +1597,8 @@ static u8 LoadDynamicFollowerPaletteFromGraphicsId(u16 graphicsId, bool8 shiny, 
 }
 
 // Like LoadObjectEventPalette, but overwrites the palette tag that is loaded
-static u8 LoadObjectEventPaletteWithTag(u16 paletteTag, u16 overTag) {
+static u8 LoadObjectEventPaletteWithTag(u16 paletteTag, u16 overTag) 
+{
     u32 i = FindObjectEventPaletteIndexByTag(paletteTag);
     struct SpritePalette spritePalette;
     if (i == 0xFF)
@@ -2352,7 +2353,8 @@ void UpdateLightSprite(struct Sprite *sprite)
     switch (sprite->data[5]) 
     { // lightType
     case 0:
-        if (gPaletteFade.active) { // if palette fade is active, don't flicker since the timer won't be updated
+        if (gPaletteFade.active) 
+        { // if palette fade is active, don't flicker since the timer won't be updated
             Weather_SetBlendCoeffs(7, 12);
             sprite->invisible = FALSE;
         } 
@@ -2442,7 +2444,8 @@ void TrySpawnLightSprites(s16 camX, s16 camY)
     else
         objectCount = gMapHeader.events->objectEventCount;
 
-    for (i = 0; i < objectCount; i++) {
+    for (i = 0; i < objectCount; i++) 
+    {
         struct ObjectEventTemplate *template = &gSaveBlock1Ptr->objectEventTemplates[i];
         s16 npcX = template->x + MAP_OFFSET;
         s16 npcY = template->y + MAP_OFFSET;
@@ -2483,10 +2486,13 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
             s16 npcX = template->x + MAP_OFFSET;
             s16 npcY = template->y + MAP_OFFSET;
 
-            if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX && !FlagGet(template->flagId)) {
-                if (template->graphicsId == OBJ_EVENT_GFX_LIGHT_SPRITE) {  // light sprite instead
+            if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX && !FlagGet(template->flagId)) 
+            {
+                if (template->graphicsId == OBJ_EVENT_GFX_LIGHT_SPRITE) 
+                {  // light sprite instead
                     SpawnLightSprite(npcX, npcY, cameraX, cameraY, template->trainerRange_berryTreeId);
-                } else
+                } 
+                else
                     TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
             }
         }

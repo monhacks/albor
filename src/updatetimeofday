@@ -1,0 +1,57 @@
+u8 UpdateTimeOfDay(void) 
+{
+    s32 hours, minutes;
+    RtcCalcLocalTime();
+    hours = gLocalTime.hours;
+    minutes = gLocalTime.minutes;
+    if (hours < 6) 
+    { // night
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
+    } 
+    else if (hours < 8) 
+    { // night->morning
+        currentTimeBlend.time0 = TIME_NIGHT;
+        currentTimeBlend.time1 = TIME_MORNING;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 6) * 60 + minutes) / ((8-6)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_MORNING;
+    } 
+    else if (hours < 10) 
+    { // morning->day
+        currentTimeBlend.time0 = TIME_MORNING;
+        currentTimeBlend.time1 = TIME_DAY;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 8) * 60 + minutes) / ((10-8)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2 + 128;
+        gTimeOfDay = TIME_MORNING;
+    } 
+    else if (hours < 19) 
+    { // day
+        currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
+    } 
+    else if (hours < 20) 
+    { // day->evening
+        currentTimeBlend.time0 = TIME_DAY;
+        currentTimeBlend.time1 = TIME_EVENING;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 19) * 60 + minutes) / ((20-19)*60);
+        currentTimeBlend.altWeight = currentTimeBlend.weight / 2 + 128;
+        gTimeOfDay = TIME_EVENING;
+    } 
+    else if (hours < 21) 
+    { // evening->night
+        currentTimeBlend.time0 = TIME_EVENING;
+        currentTimeBlend.time1 = TIME_NIGHT;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((21-20)*60);
+        currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
+        gTimeOfDay = TIME_EVENING;
+    } 
+    else 
+    { // 21-24, night
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
+    }
+    return gTimeOfDay;
+}

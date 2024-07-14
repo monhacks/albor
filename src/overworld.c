@@ -65,6 +65,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "constants/rgb.h"
 
 #define PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
@@ -1431,10 +1432,10 @@ void CB1_Overworld(void)
 
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIME_MORNING] = {.coeff = 10, .blendColor = 0xF21180, .isTint = TRUE},
+    [TIME_MORNING] = {.coeff = 4, .blendColor = RGB_LIGHT_YELLOW},
     [TIME_DAY]     = {.coeff = 0, .blendColor = 0},
-    [TIME_EVENING] = {.coeff = 10, .blendColor = 0x21f211, .isTint = TRUE},
-    [TIME_NIGHT]   = {.coeff = 10, .blendColor = 0x1311f2, .isTint = TRUE},
+    [TIME_EVENING] = {.coeff = 4, .blendColor = RGB_LIGHT_ORANGE},
+    [TIME_NIGHT]   = {.coeff = 8, .blendColor = RGB_DARK_BLUE},
 };
 
 u8 UpdateTimeOfDay(void) 
@@ -1443,51 +1444,31 @@ u8 UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = gLocalTime.hours;
     minutes = gLocalTime.minutes;
-    if (hours < 6) 
-    { // night
+    if (hours < NIGHT_HOUR_END) 
+    {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
     } 
-    else if (hours < 8) 
-    { // night->morning
-        currentTimeBlend.time0 = TIME_NIGHT;
-        currentTimeBlend.time1 = TIME_MORNING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 6) * 60 + minutes) / ((8-6)*60);
-        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_MORNING;
+    else if (hours > MORNING_HOUR_BEGIN && hours < MORNING_HOUR_END) 
+    {
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_MORNING;
     } 
-    else if (hours < 10) 
-    { // morning->day
-        currentTimeBlend.time0 = TIME_MORNING;
-        currentTimeBlend.time1 = TIME_DAY;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 8) * 60 + minutes) / ((10-8)*60);
-        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2 + 128;
-        gTimeOfDay = TIME_MORNING;
-    } 
-    else if (hours < 19) 
-    { // day
+    else if (hours > DAY_HOUR_BEGIN && hours < DAY_HOUR_END) 
+    {
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
-    } 
-    else if (hours < 20) 
-    { // day->evening
-        currentTimeBlend.time0 = TIME_DAY;
-        currentTimeBlend.time1 = TIME_EVENING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 19) * 60 + minutes) / ((20-19)*60);
-        currentTimeBlend.altWeight = currentTimeBlend.weight / 2 + 128;
-        gTimeOfDay = TIME_EVENING;
-    } 
-    else if (hours < 21) 
-    { // evening->night
-        currentTimeBlend.time0 = TIME_EVENING;
-        currentTimeBlend.time1 = TIME_NIGHT;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 20) * 60 + minutes) / ((21-20)*60);
-        currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
-        gTimeOfDay = TIME_EVENING;
-    } 
-    else 
-    { // 21-24, night
+    }
+    else if (hours > EVENING_HOUR_BEGIN && hours < EVENING_HOUR_END) 
+    {
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_EVENING;
+    }
+    else if (hours > NIGHT_HOUR_BEGIN) 
+    {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
