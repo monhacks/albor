@@ -1434,7 +1434,7 @@ const struct BlendSettings gTimeOfDayBlend[] =
 {
     [TIME_MORNING] = {.coeff = 4, .blendColor = RGB_LIGHT_YELLOW},
     [TIME_DAY]     = {.coeff = 0, .blendColor = 0},
-    [TIME_EVENING] = {.coeff = 4, .blendColor = RGB_LIGHT_ORANGE},
+    [TIME_EVENING] = {.coeff = 4, .blendColor = RGB_ORANGE},
     [TIME_NIGHT]   = {.coeff = 8, .blendColor = RGB_DARK_BLUE},
 };
 
@@ -1444,30 +1444,62 @@ u8 UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = gLocalTime.hours;
     minutes = gLocalTime.minutes;
-    if (hours < NIGHT_HOUR_END) 
+    if (hours < NIGHT_HOUR_END) //antes de las 6
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
     } 
-    else if (hours > MORNING_HOUR_BEGIN && hours < MORNING_HOUR_END) 
+    else if (hours > MORNING_HOUR_BEGIN && hours < 8) //De 6 a 8
+    {
+        currentTimeBlend.time0 = TIME_NIGHT;
+        currentTimeBlend.time1 = TIME_MORNING;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 6) * 60 + minutes) / ((8-6)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_MORNING;
+    }
+    else if (hours > 8 && hours < 9) //De 8 a 9
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_MORNING;
-    } 
-    else if (hours > DAY_HOUR_BEGIN && hours < DAY_HOUR_END) 
+    }
+    else if (hours > 9 && hours < MORNING_HOUR_END) //De 9 a 10
+    {
+        currentTimeBlend.time0 = TIME_MORNING;
+        currentTimeBlend.time1 = TIME_DAY;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 9) * 60 + minutes) / ((10-9)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_MORNING;
+    }
+    else if (hours > DAY_HOUR_BEGIN && hours < DAY_HOUR_END) //De 10 a 19
     {
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
     }
-    else if (hours > EVENING_HOUR_BEGIN && hours < EVENING_HOUR_END) 
+    else if (hours > EVENING_HOUR_BEGIN && hours < 20) //De 19 a 20
+    {
+        currentTimeBlend.time0 = TIME_DAY;
+        currentTimeBlend.time1 = TIME_EVENING;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 19) * 60 + minutes) / ((20-19)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_EVENING;
+    }
+    else if (hours > 20 && hours < 21) //De 20 a 21
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_EVENING;
     }
-    else if (hours > NIGHT_HOUR_BEGIN) 
+    else if (hours > 21 && hours < EVENING_HOUR_END) //De 21 a 22
+    {
+        currentTimeBlend.time0 = TIME_EVENING;
+        currentTimeBlend.time1 = TIME_NIGHT;
+        currentTimeBlend.weight = 256 - 256 * ((hours - 21) * 60 + minutes) / ((22-21)*60);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIME_EVENING;
+    }
+    else if (hours > NIGHT_HOUR_BEGIN) //De 21 a 24
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
@@ -1563,7 +1595,7 @@ static void OverworldBasic(void)
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
     // Every minute if no palette fade is active, update TOD blending as needed
-    if (!gPaletteFade.active && ++gTimeUpdateCounter >= 3600) 
+    if (!gPaletteFade.active && ++gTimeUpdateCounter >= 180) 
     {
         struct TimeBlendSettings cachedBlend = 
         {

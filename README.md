@@ -96,6 +96,10 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Objetos exclusivos potenciadores: Objetos como Cuchara torcida potencian un 25% los ataques de una familia concreta (Alakazam).
     *Desarme ya no aumenta su potencia si quita el objeto, pero se le ha subido la potencia a 70.
 
+## Cambios a mecánicas distintas de batalla:
+    *El juego cuenta con un sistema de avance del tiempo que no es a partir del tiempo del sistema, sino por la cantidad de frames que pasan en el juego: Cada segundo de tiempo real en el juego equivalen a 20 segundos, es decir, 3 minutos son 1 hora. 
+    *El juego tiene un sistema de día y noche que es importante para evoluciones y ciertos eventos. El tiempo está dividido en 4 partes: Mañana, que es de 06:00 a 10:00; Día, que es de 10:00 a 19:00; Tarde, que es de 19:00 a 22:00; y noche, que es de 22:00 a 06:00.
+
 ## Cambios a tabla de tipos:
     * Roca x0,5 a roca.
     * Normal x1 a acero.

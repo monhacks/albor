@@ -77,7 +77,7 @@ void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
 
 u32 FakeRtc_GetSecondsRatio(void)
 {
-    return 60;
+    return 20;
 }
 
 STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustBeTrueToPauseTime);
