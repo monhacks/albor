@@ -3058,4 +3058,11 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("Intercambia objeto."),
         .aiRating = 3,
     },
+
+    [ABILITY_HECHICERO] =
+    {
+        .name = _("Hechicero"),
+        .description = COMPOUND_STRING("Psíquico 25% de quemar."),
+        .aiRating = 4,
+    },
 };
