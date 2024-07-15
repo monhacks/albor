@@ -21850,7 +21850,6 @@ static const u16 sChesnaughtTeachableLearnset[] = {
 };
 #endif //P_FAMILY_CHESPIN
 
-#if P_FAMILY_FENNEKIN
 static const u16 sFennekinTeachableLearnset[] = {
     MOVE_CHARM,
     MOVE_UNAVAILABLE,
@@ -21865,7 +21864,6 @@ static const u16 sDelphoxTeachableLearnset[] = {
     MOVE_CHARM,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_FENNEKIN
 
 #if P_FAMILY_FROAKIE
 static const u16 sFroakieTeachableLearnset[] = {

@@ -382,7 +382,7 @@
 #define P_FAMILY_GENESECT                P_GEN_5_POKEMON
 
 #define P_FAMILY_CHESPIN                 FALSE //TRUE
-#define P_FAMILY_FENNEKIN                FALSE //TRUE
+#define P_FAMILY_FENNEKIN                TRUE
 #define P_FAMILY_FROAKIE                 FALSE //TRUE
 #define P_FAMILY_BUNNELBY                FALSE //TRUE
 #define P_FAMILY_FLETCHLING              FALSE //TRUE

@@ -3993,7 +3993,6 @@ Cry_Chesnaught::
 	.incbin "sound/direct_sound_samples/cries/chesnaught.bin"
 .endif @ P_FAMILY_CHESPIN
 
-.if P_FAMILY_FENNEKIN == TRUE
 	.align 2
 Cry_Fennekin::
 	.incbin "sound/direct_sound_samples/cries/fennekin.bin"
@@ -4005,7 +4004,6 @@ Cry_Braixen::
 	.align 2
 Cry_Delphox::
 	.incbin "sound/direct_sound_samples/cries/delphox.bin"
-.endif @ P_FAMILY_FENNEKIN
 
 .if P_FAMILY_FROAKIE == TRUE
 	.align 2

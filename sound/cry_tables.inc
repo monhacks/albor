@@ -1592,11 +1592,9 @@ gCryTable::
 	cry Cry_Quilladin
 	cry Cry_Chesnaught
 .endif @ P_FAMILY_CHESPIN
-.if P_FAMILY_FENNEKIN == TRUE
 	cry Cry_Fennekin
 	cry Cry_Braixen
 	cry Cry_Delphox
-.endif @ P_FAMILY_FENNEKIN
 .if P_FAMILY_FROAKIE == TRUE
 	cry Cry_Froakie
 	cry Cry_Frogadier
@@ -4003,11 +4001,9 @@ gCryTable_Reverse::
 	cry_reverse Cry_Quilladin
 	cry_reverse Cry_Chesnaught
 .endif @ P_FAMILY_CHESPIN
-.if P_FAMILY_FENNEKIN == TRUE
 	cry_reverse Cry_Fennekin
 	cry_reverse Cry_Braixen
 	cry_reverse Cry_Delphox
-.endif @ P_FAMILY_FENNEKIN
 .if P_FAMILY_FROAKIE == TRUE
 	cry_reverse Cry_Froakie
 	cry_reverse Cry_Frogadier

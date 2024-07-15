@@ -196,7 +196,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         ICON(Fennekin, 0),
         FOLLOWER(Fennekin, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Fennekin),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_BRAIXEN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BRAIXEN}),
     },
 
     [SPECIES_BRAIXEN] =
