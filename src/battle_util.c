@@ -5345,7 +5345,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case ABILITY_MOTOR_DRIVE:
                 if (moveType == TYPE_ELECTRIC && gMovesInfo[move].target != MOVE_TARGET_ALL_BATTLERS)
-                    effect = 2, statId = STAT_SPEED;
+                    effect = 2, statAmount = 2, statId = STAT_SPEED;
                 break;
             case ABILITY_LIGHTNING_ROD:
                 if (B_REDIRECT_ABILITY_IMMUNITY >= GEN_5 && moveType == TYPE_ELECTRIC && gMovesInfo[move].target != MOVE_TARGET_ALL_BATTLERS)
@@ -5558,6 +5558,22 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             {
                 gEffectBattler = battler;
                 SET_STATCHANGER(STAT_SPATK, 1, FALSE);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
+                effect++;
+            }
+            break;
+        case ABILITY_CABLE_PELADO:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && TARGET_TURN_DAMAGED
+             && IsBattlerAlive(battler)
+             && HadMoreThanHalfHpNowDoesnt(battler)
+             && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
+             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+            {
+                gEffectBattler = battler;
+                SET_STATCHANGER(STAT_ATK, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -6184,7 +6200,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker)
              && TARGET_TURN_DAMAGED // Need to actually hit the target
-             && (Random() % 2) == 0)
+             && RandomPercentage(RNG_POISON_TOUCH, 25))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_POISON;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
@@ -6211,6 +6227,23 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_ALTO_VOLTAJE:
+            if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+             && gBattleMons[gBattlerTarget].hp != 0
+             && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
+             && CanBeParalyzed(gBattlerTarget, GetBattlerAbility(gBattlerTarget))
+             && (gMovesInfo[move].type == TYPE_FIGHTING)
+             && TARGET_TURN_DAMAGED // Need to actually hit the target
+             && RandomPercentage(RNG_POISON_TOUCH, 25))
+            {
+                gBattleScripting.moveEffect = MOVE_EFFECT_PARALYSIS;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                BattleScriptPushCursor();
+                gBattlescriptCurrInstr = BattleScript_AbilityStatusEffect;
+                gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
+                effect++;
+            }
+            break;
         case ABILITY_VOZ_DULCE:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && gBattleMons[gBattlerTarget].hp != 0
@@ -6218,7 +6251,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget))
              && (gMovesInfo[move].soundMove)
              && TARGET_TURN_DAMAGED // Need to actually hit the target
-             && (Random() % 2) == 0)
+             && RandomPercentage(RNG_POISON_TOUCH, 25))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_SLEEP;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
@@ -6252,7 +6285,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && CanBeSlept(gBattlerTarget, GetBattlerAbility(gBattlerTarget))
              && (gMovesInfo[move].soundMove)
              && TARGET_TURN_DAMAGED // Need to actually hit the target
-             && (Random() % 2) == 0)
+             && RandomPercentage(RNG_POISON_TOUCH, 25))
             {
                 gBattleScripting.moveEffect = MOVE_EFFECT_CONFUSION;
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
@@ -9876,11 +9909,15 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     case HOLD_EFFECT_LIGHT_BALL:
-        if (atkBaseSpeciesId == SPECIES_PIKACHU && (B_LIGHT_BALL_ATTACK_BOOST >= GEN_4 || IS_MOVE_SPECIAL(move)))
-            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+        if (atkBaseSpeciesId == SPECIES_PICHU || atkBaseSpeciesId == SPECIES_PIKACHU || atkBaseSpeciesId == SPECIES_RAICHU || atkBaseSpeciesId == SPECIES_RAICHU_ALOLAN)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_CUCHARA_TORCIDA:
-        if (atkBaseSpeciesId == SPECIES_ABRA || atkBaseSpeciesId == SPECIES_KADABRA || atkBaseSpeciesId == SPECIES_ALAKAZAM)
+        if (IS_MOVE_SPECIAL(move) && (atkBaseSpeciesId == SPECIES_ABRA || atkBaseSpeciesId == SPECIES_KADABRA || atkBaseSpeciesId == SPECIES_ALAKAZAM))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
+        break;
+    case HOLD_EFFECT_ELECTRIZADOR:
+        if (IS_MOVE_PHYSICAL(move) && (atkBaseSpeciesId == SPECIES_ELEKID || atkBaseSpeciesId == SPECIES_ELECTABUZZ || atkBaseSpeciesId == SPECIES_ELECTIVIRE))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_CHOICE_BAND:

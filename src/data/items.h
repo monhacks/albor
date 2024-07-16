@@ -102,10 +102,6 @@ static const u8 sOddIncenseDesc[]     = _("A hold item that\n"
                                           "boosts Psychic-\n"
                                           "type moves.");
 
-static const u8 sCucharaTorcidaDesc[] = _("Aumenta potencia\n"
-                                          "de familia de\n"
-                                          "Alakazam un 25%.");
-
 static const u8 sRockIncenseDesc[]    = _("A hold item that\n"
                                           "raises the power of\n"
                                           "Rock-type moves.");
@@ -4118,15 +4114,16 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ELECTIRIZER] =
     {
-        .name = _("Electirizer"),
-        .price = (I_PRICE >= GEN_7) ? 2000 * TREASURE_FACTOR : 2100,
+        .name = _("Electrizador"),
+        .price = 2000,
         .description = COMPOUND_STRING(
-            "Loved by a certain\n"
-            "Pokémon. It's full\n"
-            "of electric energy."),
+            "Evoluciona a Electabuzz,\n"
+            "sube a su línea evolutiva\n"
+            "25% de ataque."),
+        .holdEffect = HOLD_EFFECT_CUCHARA_TORCIDA,
         .pocket = POCKET_ITEMS,
-        .type = EVO_HELD_ITEM_TYPE,
-        .fieldUseFunc = EVO_HELD_ITEM_FIELD_FUNC,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
         .effect = gItemEffect_EvoItem,
         .flingPower = 80,
         .iconPic = gItemIcon_Electirizer,
@@ -6966,16 +6963,17 @@ const struct Item gItemsInfo[] =
 
     [ITEM_LIGHT_BALL] =
     {
-        .name = _("Light Ball"),
-        .price = (I_PRICE >= GEN_7) ? 1000 : 100,
+        .name = _("Bola luminosa"),
+        .price = 2000,
         .holdEffect = HOLD_EFFECT_LIGHT_BALL,
         .description = COMPOUND_STRING(
-            "A hold item that\n"
-            "raises the Atk and\n"
-            "Sp. Atk of Pikachu."),
+            "Evoluciona a Pikachu,\n"
+            "sube a su línea evolutiva\n"
+            "25% de ataque/at. esp."),
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .effect = gItemEffect_EvoItem,
         .flingPower = 30,
         .iconPic = gItemIcon_LightBall,
         .iconPalette = gItemIconPalette_LightBall,
@@ -7729,17 +7727,20 @@ const struct Item gItemsInfo[] =
     [ITEM_TWISTED_SPOON] =
     {
         .name = _("Cuchara torcida"),
-        .price = 100,
+        .price = 2000,
         .holdEffect = HOLD_EFFECT_CUCHARA_TORCIDA,
-        .description = sCucharaTorcidaDesc,
+        .description = COMPOUND_STRING(
+            "Evoluciona a Kadabra,\n"
+            "sube a su línea evolutiva\n"
+            "25% de ataque especial."),
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
+        .effect = gItemEffect_EvoItem,
         .flingPower = 30,
         .iconPic = gItemIcon_TwistedSpoon,
         .iconPalette = gItemIconPalette_TwistedSpoon,
     },
-
     [ITEM_SILVER_POWDER] =
     {
         .name = _("Silver Powder"),

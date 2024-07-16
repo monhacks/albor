@@ -14715,6 +14715,27 @@ static void Cmd_pickup(void)
             heldItem = ITEM_BIG_MUSHROOM;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
+        else if ((species == SPECIES_ABRA || species == SPECIES_KADABRA || species == SPECIES_ALAKAZAM)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_TWISTED_SPOON;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_ELEKID || species == SPECIES_ELECTABUZZ || species == SPECIES_ELECTIVIRE)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_ELECTIRIZER;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_PICHU || species == SPECIES_PIKACHU || species == SPECIES_RAICHU || species == SPECIES_RAICHU_ALOLAN)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_LIGHT_BALL;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;

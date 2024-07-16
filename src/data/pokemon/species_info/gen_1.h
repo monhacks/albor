@@ -1340,43 +1340,37 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_FAMILY_EKANS
 
-#if P_FAMILY_PIKACHU
-#if P_GEN_2_CROSS_EVOS
-#define PICHU_MISC_INFO                                                                 \
-        .baseHP        = 20,                                                            \
-        .baseAttack    = 40,                                                            \
-        .baseDefense   = 15,                                                            \
-        .baseSpeed     = 60,                                                            \
-        .baseSpAttack  = 40,                                                            \
-        .baseSpDefense = 55,                                                            \
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),                                  \
-        .catchRate = 190,                                                               \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 41 : 42,                          \
-        .evYield_Speed = 1,                                                             \
-        .genderRatio = PERCENT_FEMALE(50),                                              \
-        .eggCycles = 10,                                                                \
-        .friendship = STANDARD_FRIENDSHIP,                                              \
-        .growthRate = GROWTH_MEDIUM_FAST,                                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                      \
-        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR },           \
-        .bodyColor = BODY_COLOR_YELLOW,                                                 \
-        .speciesName = _("Pichu"),                                                      \
-        .cryId = CRY_PICHU,                                                             \
-        .natDexNum = NATIONAL_DEX_PICHU,                                                \
-        .categoryName = _("Tiny Mouse"),                                                \
-        .height = 3,                                                                    \
-        .weight = 20,                                                                   \
-        .description = gPichuPokedexText,                                               \
-        .pokemonScale = 508,                                                            \
-        .pokemonOffset = 20,                                                            \
-        .trainerScale = 256,                                                            \
-        .trainerOffset = 0,                                                             \
-        FOOTPRINT(Pichu)                                                                \
-        LEARNSETS(Pichu)
-
     [SPECIES_PICHU] =
     {
-        PICHU_MISC_INFO,
+        .baseHP        = 20,
+        .baseAttack    = 40,
+        .baseDefense   = 15,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 40,
+        .baseSpDefense = 55,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
+        .catchRate = 190,
+        .expYield = 41,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 10,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = {ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .speciesName = _("Pichu"),
+        .cryId = CRY_PICHU,
+        .natDexNum = NATIONAL_DEX_PICHU,
+        .categoryName = _("Tiny Mouse"),
+        .height = 3,
+        .weight = 20,
+        .description = gPichuPokedexText,
+        .pokemonScale = 508,
+        .pokemonOffset = 20,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        LEARNSETS(Pichu),
         FRONT_PIC(Pichu, 32, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Pichu,
@@ -1389,53 +1383,38 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPichuEggMoveLearnset,
         FOLLOWER(Pichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PIKACHU}),
+        .itemRare = ITEM_LIGHT_BALL,
     },
-#endif //P_GEN_2_CROSS_EVOS
-
-#if P_UPDATED_EXP_YIELDS >= GEN_6
-    #define PIKACHU_EXP_YIELD 112
-#elif P_UPDATED_EXP_YIELDS >= GEN_5
-    #define PIKACHU_EXP_YIELD 105
-#else
-    #define PIKACHU_EXP_YIELD 82
-#endif
-
-#define PIKACHU_MISC_INFO                                                       \
-        .baseHP        = 45,                                                    \
-        .baseAttack    = 80,                                                    \
-        .baseDefense   = 40,                                                    \
-        .baseSpeed     = 90,                                                    \
-        .baseSpAttack  = 80,                                                    \
-        .baseSpDefense = 60,                                                    \
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),                          \
-        .catchRate = 190,                                                       \
-        .expYield = PIKACHU_EXP_YIELD,                                          \
-        .evYield_Speed = 2,                                                     \
-        .itemRare = ITEM_LIGHT_BALL,                                            \
-        .eggCycles = 10,                                                        \
-        .friendship = STANDARD_FRIENDSHIP,                                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                                       \
-        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR },   \
-        .bodyColor = BODY_COLOR_YELLOW,                                         \
-        .speciesName = _("Pikachu"),                                            \
-        .cryId = CRY_PIKACHU,                                                   \
-        .natDexNum = NATIONAL_DEX_PIKACHU,                                      \
-        .categoryName = _("Mouse"),                                             \
-        FOOTPRINT(Pikachu)                                                      \
-        LEARNSETS(Pikachu)
-
-#define PIKACHU_REGULAR_SIZE_INFO   \
-        .height = 4,                \
-        .weight = 60,               \
-        .pokemonScale = 479,        \
-        .pokemonOffset = 19,        \
-        .trainerScale = 256,        \
-        .trainerOffset = 0
 
     [SPECIES_PIKACHU] =
     {
-        PIKACHU_MISC_INFO,
-        PIKACHU_REGULAR_SIZE_INFO,
+        .baseHP        = 45,
+        .baseAttack    = 80,
+        .baseDefense   = 40,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 60,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
+        .catchRate = 190,
+        .expYield = 112,
+        .evYield_Speed = 2,
+        .itemRare = ITEM_LIGHT_BALL,
+        .eggCycles = 10,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .abilities = {ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR},
+        .bodyColor = BODY_COLOR_YELLOW,
+        .speciesName = _("Pikachu"),
+        .cryId = CRY_PIKACHU,
+        .natDexNum = NATIONAL_DEX_PIKACHU,
+        .categoryName = _("Mouse"),
+        LEARNSETS(Pikachu),
+        .height = 4,
+        .weight = 60,
+        .pokemonScale = 479,
+        .pokemonOffset = 19,
+        .trainerScale = 256,
+        .trainerOffset = 0,
         .genderRatio = PERCENT_FEMALE(50),
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
         .description = gPikachuPokedexText,
@@ -1452,42 +1431,26 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Pikachu),
         ICON(Pikachu, 2),
         .eggMoveLearnset = sPichuEggMoveLearnset,
-    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
         ICON_FEMALE(Pikachu, 2),
-    #endif
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
                                 {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLAN}),
     },
 
-#if P_UPDATED_EXP_YIELDS >= GEN_8
-    #define RAICHU_EXP_YIELD 243
-#elif P_UPDATED_EXP_YIELDS >= GEN_7
-    #define RAICHU_EXP_YIELD 218
-#elif P_UPDATED_EXP_YIELDS >= GEN_5
-    #define RAICHU_EXP_YIELD 214
-#else
-    #define RAICHU_EXP_YIELD 122
-#endif
-
-#define RAICHU_MISC_INFO                                                \
-        .catchRate = 75,                                                \
-        .expYield = RAICHU_EXP_YIELD,                                   \
-        .genderRatio = PERCENT_FEMALE(50),                              \
-        .eggCycles = 10,                                                \
-        .friendship = STANDARD_FRIENDSHIP,                              \
-        .growthRate = GROWTH_MEDIUM_FAST,                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY), \
-        .speciesName = _("Raichu"),                                     \
-        .cryId = CRY_RAICHU,                                            \
-        .natDexNum = NATIONAL_DEX_RAICHU,                               \
-        .categoryName = _("Mouse"),                                     \
-        FOOTPRINT(Raichu)                                               \
-        .formSpeciesIdTable = sRaichuFormSpeciesIdTable
-
     [SPECIES_RAICHU] =
     {
-        RAICHU_MISC_INFO,
+        .catchRate = 75,
+        .expYield = 243,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 10,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
+        .speciesName = _("Raichu"),
+        .cryId = CRY_RAICHU,
+        .natDexNum = NATIONAL_DEX_RAICHU,
+        .categoryName = _("Mouse"),
+        .formSpeciesIdTable = sRaichuFormSpeciesIdTable,
         .baseHP        = 60,
         .baseAttack    = 100,
         .baseDefense   = 60,
@@ -1495,8 +1458,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpAttack  = 100,
         .baseSpDefense = 100,
         .evYield_Speed = 3,
+        .itemRare = ITEM_LIGHT_BALL,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
-        .abilities = { ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR },
+        .abilities = {ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR},
         .bodyColor = BODY_COLOR_YELLOW,
         .height = 8,
         .weight = 300,
@@ -1524,10 +1488,20 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPichuEggMoveLearnset,
     },
 
-#if P_ALOLAN_FORMS
     [SPECIES_RAICHU_ALOLAN] =
     {
-        RAICHU_MISC_INFO,
+        .catchRate = 75,
+        .expYield = 243,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 10,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
+        .speciesName = _("Raichu"),
+        .cryId = CRY_RAICHU,
+        .natDexNum = NATIONAL_DEX_RAICHU,
+        .categoryName = _("Mouse"),
+        .formSpeciesIdTable = sRaichuFormSpeciesIdTable,
         .baseHP        = 60,
         .baseAttack    = 55,
         .baseDefense   = 60,
@@ -1536,7 +1510,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 135,
         .evYield_SpDefense = 3,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_PSYCHIC),
-        .abilities = { ABILITY_LEVITATE, ABILITY_TINTED_LENS, ABILITY_SURFERO },
+        .abilities = {ABILITY_LEVITATE, ABILITY_TINTED_LENS, ABILITY_SURFERO},
         .bodyColor = BODY_COLOR_BROWN,
         .isAlolanForm = TRUE,
         .height = 7,
@@ -1563,9 +1537,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(RaichuAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(RaichuAlolan),
         .eggMoveLearnset = sPichuEggMoveLearnset,
+        .itemRare = ITEM_LIGHT_BALL,
     },
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_PIKACHU
 
 #if P_FAMILY_SANDSHREW
 #define SANDSHREW_FAMILY_MISC_INFO                          \
@@ -3649,7 +3622,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_FAMILY_PSYDUCK
 
-#if P_FAMILY_MANKEY
     [SPECIES_MANKEY] =
     {
         .baseHP        = 40,
@@ -3660,14 +3632,14 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_FIGHTING),
         .catchRate = 190,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 61 : 74,
+        .expYield = 61,
         .evYield_Attack = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE },
+        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE},
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Mankey"),
         .cryId = CRY_MANKEY,
@@ -3694,12 +3666,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Mankey),
         ICON(Mankey, 1),
-        FOOTPRINT(Mankey)
         FOLLOWER(Mankey, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mankey),
         .eggMoveLearnset = sMankeyEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PRIMEAPE},
-                                {EVO_USE_MOVE_TWENTY_TIMES, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
+                                {EVO_MOVE, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
     },
 
     [SPECIES_PRIMEAPE] =
@@ -3712,7 +3683,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_FIGHTING, TYPE_DARK),
         .catchRate = 75,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 159 : 149,
+        .expYield = 159,
         .evYield_Attack = 2,
         .evYield_HP     = 1,
         .genderRatio = PERCENT_FEMALE(50),
@@ -3720,7 +3691,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE },
+        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE},
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Primeape"),
         .cryId = CRY_PRIMEAPE,
@@ -3751,7 +3722,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sMankeyEggMoveLearnset,
     },
 
-#if P_GEN_9_CROSS_EVOS
     [SPECIES_ANNIHILAPE] =
     {
         .baseHP        = 70,
@@ -3770,7 +3740,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = { ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE },
+        .abilities = {ABILITY_DEFIANT, ABILITY_ANGER_POINT, ABILITY_IRA_PRIMATE},
         .bodyColor = BODY_COLOR_GRAY,
         .speciesName = _("Annihilape"),
         .cryId = CRY_ANNIHILAPE,
@@ -3800,8 +3770,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Annihilape),
         .eggMoveLearnset = sMankeyEggMoveLearnset,
     },
-#endif //P_GEN_9_CROSS_EVOS
-#endif //P_FAMILY_MANKEY
 
     [SPECIES_GROWLITHE] =
     {
@@ -3819,7 +3787,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Growlithe"),
         .cryId = CRY_GROWLITHE,
         .natDexNum = NATIONAL_DEX_GROWLITHE,
-        FOOTPRINT(Growlithe)
         .formSpeciesIdTable = sGrowlitheFormSpeciesIdTable,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
@@ -3878,7 +3845,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .cryId = CRY_ARCANINE,
         .natDexNum = NATIONAL_DEX_ARCANINE,
         .categoryName = _("Legendary"),
-        FOOTPRINT(Arcanine)
         .formSpeciesIdTable = sArcanineFormSpeciesIdTable,
         .height = 19,
         .weight = 1550,
@@ -3922,7 +3888,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Growlithe"),
         .cryId = CRY_GROWLITHE,
         .natDexNum = NATIONAL_DEX_GROWLITHE,
-        FOOTPRINT(Growlithe)
         .formSpeciesIdTable = sGrowlitheFormSpeciesIdTable,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
@@ -3974,7 +3939,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .cryId = CRY_ARCANINE,
         .natDexNum = NATIONAL_DEX_ARCANINE,
         .categoryName = _("Legendary"),
-        FOOTPRINT(Arcanine)
         .formSpeciesIdTable = sArcanineFormSpeciesIdTable,
         .abilities = {ABILITY_INTIMIDATE, ABILITY_ROCK_HEAD, ABILITY_GUARDIAN},
         .genderRatio = PERCENT_FEMALE(25),
@@ -4278,7 +4242,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETTES(Abra),
         ICON(Abra, 2),
-        FOOTPRINT(Abra)
         FOLLOWER(Abra, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Abra),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KADABRA}),
@@ -4331,10 +4294,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETTES(Kadabra),
         ICON(Kadabra, 2),
-        FOOTPRINT(Kadabra)
         FOLLOWER(Kadabra, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Kadabra),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ALAKAZAM}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_TWISTED_SPOON, SPECIES_ALAKAZAM}),
     },
 
     [SPECIES_ALAKAZAM] =
@@ -4363,7 +4325,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .speciesName = _("Alakazam"),
         .natDexNum = NATIONAL_DEX_ALAKAZAM,
         .categoryName = _("Psi"),
-        FOOTPRINT(Alakazam)
         LEARNSETS(Alakazam),
         .description = COMPOUND_STRING(
             "While it has strong psychic abilities and\n"
@@ -8810,8 +8771,6 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     },
 #endif //P_FAMILY_JYNX
 
-#if P_FAMILY_ELECTABUZZ
-#if P_GEN_2_CROSS_EVOS
     [SPECIES_ELEKID] =
     {
         .baseHP        = 45,
@@ -8820,9 +8779,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .baseSpeed     = 95,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
         .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 72 : 106,
+        .expYield = 72,
         .evYield_Speed = 1,
         .itemRare = ITEM_ELECTIRIZER,
         .genderRatio = PERCENT_FEMALE(25),
@@ -8830,7 +8789,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
+        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_ALTO_VOLTAJE, ABILITY_CABLE_PELADO},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
         .speciesName = _("Elekid"),
@@ -8857,24 +8816,22 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(Elekid),
         ICON(Elekid, 1),
-        FOOTPRINT(Elekid)
         FOLLOWER(Elekid, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Elekid),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ELECTABUZZ}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_ELECTABUZZ}),
     },
-#endif //P_GEN_2_CROSS_EVOS
 
     [SPECIES_ELECTABUZZ] =
     {
-        .baseHP        = 65,
-        .baseAttack    = 83,
-        .baseDefense   = 57,
+        .baseHP        = 70,
+        .baseAttack    = 95,
+        .baseDefense   = 90,
         .baseSpeed     = 105,
-        .baseSpAttack  = 95,
+        .baseSpAttack  = 45,
         .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
         .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 172 : 156,
+        .expYield = 172,
         .evYield_Speed = 2,
         .itemRare = ITEM_ELECTIRIZER,
         .genderRatio = PERCENT_FEMALE(25),
@@ -8882,7 +8839,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_STATIC, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
+        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_ALTO_VOLTAJE, ABILITY_CABLE_PELADO},
         .bodyColor = BODY_COLOR_YELLOW,
         .noFlip = TRUE,
         .speciesName = _("Electabuzz"),
@@ -8909,31 +8866,22 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Electabuzz),
         ICON(Electabuzz, 1),
-        FOOTPRINT(Electabuzz)
         FOLLOWER(Electabuzz, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Electabuzz),
-        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_ELECTIRIZER, SPECIES_ELECTIVIRE},
-                                {EVO_ITEM, ITEM_ELECTIRIZER, SPECIES_ELECTIVIRE}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ELECTIRIZER, SPECIES_ELECTIVIRE}),
     },
 
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_ELECTIVIRE] =
     {
-        .baseHP        = 75,
-        .baseAttack    = 123,
-        .baseDefense   = 67,
+        .baseHP        = 90,
+        .baseAttack    = 130,
+        .baseDefense   = 100,
         .baseSpeed     = 95,
-        .baseSpAttack  = 95,
-        .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .baseSpAttack  = 55,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FIGHTING),
         .catchRate = 30,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 270,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 243,
-    #else
-        .expYield = 199,
-    #endif
         .evYield_Attack = 3,
         .itemRare = ITEM_ELECTIRIZER,
         .genderRatio = PERCENT_FEMALE(25),
@@ -8941,7 +8889,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = { ABILITY_MOTOR_DRIVE, ABILITY_NONE, ABILITY_VITAL_SPIRIT },
+        .abilities = {ABILITY_MOTOR_DRIVE, ABILITY_ALTO_VOLTAJE, ABILITY_CABLE_PELADO},
         .bodyColor = BODY_COLOR_YELLOW,
         .speciesName = _("Electivire"),
         .cryId = CRY_ELECTIVIRE,
@@ -8967,12 +8915,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Electivire),
         ICON(Electivire, 1),
-        FOOTPRINT(Electivire)
         FOLLOWER(Electivire, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Electivire),
     },
-#endif //P_GEN_4_CROSS_EVOS
-#endif //P_FAMILY_ELECTABUZZ
 
 #if P_FAMILY_MAGMAR
 #if P_GEN_2_CROSS_EVOS

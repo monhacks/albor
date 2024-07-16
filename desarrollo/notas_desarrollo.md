@@ -23,7 +23,7 @@
 - Implementar la opción de rendirse contra entrenadores.
 - Crear bomba ácida.
 - Crear bg basado en moxie boosted.
-- Mankey evoluciona a Primeape o Annihilape (20 veces Puño furia). Darle el movimiento a su learnset para que evolucione en torno al 30.
+- Darle puño furia a Mankey al nivel 31.
 - Hacer glaciación un surf con probabilidad de helar.
 - Crear ataque Agua helada (Escaldar pero que congele). Milotic, Lapras, Dewgong.
 - Falta balancear Parálisis, Dormido, Confuso, Enamorado, Envenenado (y gravemente envenenado), Retroceso.
@@ -48,6 +48,8 @@
 - Testear Mago.
 - Arreglar animación al subir de nivel (incorporar la no usada como indicador de evo).
 - Cambiar animación de Chupasangre usando como referencia Colmillo Veneno.
+- Crear Barrera eléctrica (baneful búnker pero paraliza): Dárselo a Electivire.
+- Check move_target_all_battlers de lightning rod vs storm drain.
 
 -Lista de moves hechos:
 *Bomba huevo.

@@ -597,8 +597,8 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_MOTOR_DRIVE] =
     {
-        .name = _("Motor Drive"),
-        .description = COMPOUND_STRING("Electricity raises Speed."),
+        .name = _("Electromotor"),
+        .description = COMPOUND_STRING("Eléctrico sube +2 vel."),
         .aiRating = 6,
         .breakable = TRUE,
     },
@@ -2662,7 +2662,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PESTE_BUBONICA] =
     {
         .name = _("Peste bubónica"),
-        .description = COMPOUND_STRING("Mordiscos 50% de envenenar."),
+        .description = COMPOUND_STRING("Mordiscos 25% de envenenar."),
         .aiRating = 4,
     },
 
@@ -2704,7 +2704,7 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_VOZ_HELADA] =
     {
         .name = _("Voz helada"),
-        .description = COMPOUND_STRING("Sonido 50% de helar."),
+        .description = COMPOUND_STRING("Sonido 25% de helar."),
         .aiRating = 4,
     },
 
@@ -2799,14 +2799,14 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_VOZ_DULCE] =
     {
         .name = _("Voz dulce"),
-        .description = COMPOUND_STRING("Sonido 50% de adormecer."),
+        .description = COMPOUND_STRING("Sonido 25% de adormecer."),
         .aiRating = 4,
     },
 
     [ABILITY_ULTRASONIDO] =
     {
         .name = _("Ultrasonido"),
-        .description = COMPOUND_STRING("Sonido 50% de confundir."),
+        .description = COMPOUND_STRING("Sonido 25% de confundir."),
         .aiRating = 4,
     },
 
@@ -3064,5 +3064,19 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Hechicero"),
         .description = COMPOUND_STRING("Psíquico 25% de quemar."),
         .aiRating = 4,
+    },
+
+    [ABILITY_ALTO_VOLTAJE] =
+    {
+        .name = _("Alto voltaje"),
+        .description = COMPOUND_STRING("Lucha 25% de paralizar."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_CABLE_PELADO] =
+    {
+        .name = _("Cable pelado"),
+        .description = COMPOUND_STRING("+1 At. si PS -50%."),
+        .aiRating = 6,
     },
 };
