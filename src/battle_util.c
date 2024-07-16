@@ -4295,6 +4295,148 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         gBattleScripting.battler = battler;
         switch (gLastUsedAbility)
         {
+        case ABILITY_TRACE:
+            {
+                u32 chosenTarget;
+                u32 target1;
+                u32 target2;
+
+                if (gSpecialStatuses[battler].switchInAbilityDone)
+                    break;
+                if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_TRACED)
+                    break;
+
+                side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE;
+                target1 = GetBattlerAtPosition(side);
+                target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                {
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
+                        && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
+                    else if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                    else if (!gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
+                        chosenTarget = target2, effect++;
+                }
+                else
+                {
+                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1, effect++;
+                }
+
+                if (effect != 0)
+                {
+                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
+                    gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_TRACED;
+                    gBattleStruct->tracedAbility[battler] = gLastUsedAbility = gBattleMons[chosenTarget].ability;
+                    RecordAbilityBattle(chosenTarget, gLastUsedAbility); // Record the opposing battler has this ability
+                    battler = gBattlerAbility = gBattleScripting.battler = battler;
+
+                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
+                    PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
+                }
+            }
+            break;
+        case ABILITY_MAGO:
+            {
+
+                u32 chosenTarget = 0;
+                u32 target1;
+                u32 target2;
+
+                if (gSpecialStatuses[battler].switchInAbilityDone)
+                    break;
+                if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_MAGO)
+                    break;
+
+                side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE;
+                target1 = GetBattlerAtPosition(side);
+                target2 = GetBattlerAtPosition(side + BIT_FLANK);
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                {
+                    if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0
+                        && gBattleMons[target2].item != ITEM_NONE && gBattleMons[target2].hp != 0)
+                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side);
+                    else if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1;
+                    else if (gBattleMons[target2].item != ITEM_NONE && gBattleMons[target2].hp != 0)
+                        chosenTarget = target2;
+                }
+                else
+                {
+                    if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0)
+                        chosenTarget = target1;
+                }
+
+                if (chosenTarget != 0)
+                {
+                    if (gWishFutureKnock.knockedOffMons[side] & gBitTable[gBattlerPartyIndexes[chosenTarget]])
+                    {
+                        gBattlescriptCurrInstr = BattleScript_MagoEnd;
+                    }
+                    else if ((gBattleMons[battler].item == ITEM_NONE && gBattleMons[chosenTarget].item == ITEM_NONE))
+                    {
+                        gBattlescriptCurrInstr = BattleScript_MagoEnd;
+                    }
+                    else if (GetBattlerAbility(chosenTarget) == ABILITY_STICKY_HOLD || GetBattlerAbility(chosenTarget) == ABILITY_TERRITORIAL)
+                    {
+                        gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
+                        gLastUsedAbility = gBattleMons[chosenTarget].ability;
+                        RecordAbilityBattle(chosenTarget, gLastUsedAbility);
+                    }
+                    else
+                    {
+                        u16 oldItemAtk, newItemAtk;
+
+                        newItemAtk = gBattleMons[chosenTarget].item;
+                        oldItemAtk = gBattleMons[battler].item;
+
+                        gBattleMons[battler].item = newItemAtk;
+                        gBattleMons[chosenTarget].item = oldItemAtk;
+
+                        RecordItemEffectBattle(battler, ItemId_GetHoldEffect(newItemAtk));
+                        RecordItemEffectBattle(chosenTarget, ItemId_GetHoldEffect(oldItemAtk));
+
+                        BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
+                        MarkBattlerForControllerExec(battler);
+
+                        BtlController_EmitSetMonData(chosenTarget, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[chosenTarget].item), &gBattleMons[chosenTarget].item);
+                        MarkBattlerForControllerExec(chosenTarget);
+
+                        gBattleStruct->choicedMove[chosenTarget] = MOVE_NONE;
+                        gBattleStruct->choicedMove[battler] = MOVE_NONE;
+
+                        gBattlerAttacker = battler;
+                        gBattlerTarget = chosenTarget;
+                        PREPARE_ITEM_BUFFER(gBattleTextBuff1, newItemAtk)
+                        PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
+
+                        if (oldItemAtk != ITEM_NONE && newItemAtk != ITEM_NONE)
+                        {
+                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_BOTH;
+                        }
+                        else if (oldItemAtk == ITEM_NONE && newItemAtk != ITEM_NONE)
+                        {
+                            if (GetBattlerAbility(battler) == ABILITY_UNBURDEN && gBattleResources->flags->flags[battler] & RESOURCE_FLAG_UNBURDEN)
+                                gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_UNBURDEN;
+
+                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_TAKEN;
+                        }
+                        else
+                        {
+                            CheckSetUnburden(battler);
+                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN;
+                        }
+                        BattleScriptPushCursorAndCallback(BattleScript_MagoActivadoEnd);
+                        gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_MAGO;
+                        effect++;
+                    }
+                }
+            }
+            break;
         case ABILITY_IMPOSTER:
             if (IsBattlerAlive(BATTLE_OPPOSITE(battler))
                 && !(gBattleMons[BATTLE_OPPOSITE(battler)].status2 & (STATUS2_TRANSFORMED | STATUS2_SUBSTITUTE))
@@ -4677,20 +4819,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gBattleStruct->supersweetSyrup[GetBattlerSide(battler)] |= gBitTable[gBattlerPartyIndexes[battler]];
                 BattleScriptPushCursorAndCallback(BattleScript_SupersweetSyrupActivates);
                 effect++;
-            }
-            break;
-        case ABILITY_TRACE:
-            if (!(gSpecialStatuses[battler].traced))
-            {
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_TRACED;
-                gSpecialStatuses[battler].traced = TRUE;
-            }
-            break;
-        case ABILITY_MAGO:
-            if (!(gSpecialStatuses[battler].mago))
-            {
-                gBattleResources->flags->flags[battler] |= RESOURCE_FLAG_MAGO;
-                gSpecialStatuses[battler].mago = TRUE;
             }
             break;
         case ABILITY_CLOUD_NINE:
@@ -6377,145 +6505,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 gBattlescriptCurrInstr = BattleScript_SynchronizeActivates;
                 gHitMarker |= HITMARKER_STATUS_ABILITY_EFFECT;
                 effect++;
-            }
-        }
-        break;
-    case ABILITYEFFECT_TRACE:
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ABILITY_TRACE && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_TRACED))
-            {
-                u32 chosenTarget;
-                u32 side = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE; // side of the opposing Pokémon
-                u32 target1 = GetBattlerAtPosition(side);
-                u32 target2 = GetBattlerAtPosition(side + BIT_FLANK);
-
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                {
-                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
-                     && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
-                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | side), effect++;
-                    else if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                    else if (!gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
-                        chosenTarget = target2, effect++;
-                }
-                else
-                {
-                    if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1, effect++;
-                }
-
-                if (effect != 0)
-                {
-                    BattleScriptPushCursorAndCallback(BattleScript_TraceActivatesEnd3);
-                    gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_TRACED;
-                    gBattleStruct->tracedAbility[i] = gLastUsedAbility = gBattleMons[chosenTarget].ability;
-                    RecordAbilityBattle(chosenTarget, gLastUsedAbility); // Record the opposing battler has this ability
-                    battler = gBattlerAbility = gBattleScripting.battler = i;
-
-                    PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, chosenTarget, gBattlerPartyIndexes[chosenTarget])
-                    PREPARE_ABILITY_BUFFER(gBattleTextBuff2, gLastUsedAbility)
-                    break;
-                }
-            }
-        }
-        break;
-    case ABILITYEFFECT_MAGO:
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gBattleMons[i].ability == ABILITY_MAGO && (gBattleResources->flags->flags[i] & RESOURCE_FLAG_MAGO))
-            {
-                u32 chosenTarget = 0;
-                u32 sideAttacker = GetBattlerPosition(i) & BIT_SIDE;
-                u32 sideTarget = (BATTLE_OPPOSITE(GetBattlerPosition(i))) & BIT_SIDE;
-                u32 target1 = GetBattlerAtPosition(sideTarget);
-                u32 target2 = GetBattlerAtPosition(sideTarget + BIT_FLANK);
-
-                if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-                {
-                    if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0
-                        && gBattleMons[target2].item != ITEM_NONE && gBattleMons[target2].hp != 0)
-                        chosenTarget = GetBattlerAtPosition((RandomPercentage(RNG_TRACE, 50) * 2) | sideTarget);
-                    else if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1;
-                    else if (gBattleMons[target2].item != ITEM_NONE && gBattleMons[target2].hp != 0)
-                        chosenTarget = target2;
-                }
-                else
-                {
-                    if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0)
-                        chosenTarget = target1;
-                }
-
-                if (chosenTarget != 0)
-                {
-                    // You can't swap items if they were knocked off in regular battles
-                    if (gWishFutureKnock.knockedOffMons[sideAttacker] & gBitTable[gBattlerPartyIndexes[i]]
-                            || gWishFutureKnock.knockedOffMons[sideTarget] & gBitTable[gBattlerPartyIndexes[chosenTarget]])
-                    {
-                        gBattlescriptCurrInstr = BattleScript_MagoEnd;
-                    }
-                    else if ((gBattleMons[i].item == ITEM_NONE && gBattleMons[chosenTarget].item == ITEM_NONE))
-                    {
-                        gBattlescriptCurrInstr = BattleScript_MagoEnd;
-                    }
-                    // check if ability prevents swapping
-                    else if (GetBattlerAbility(chosenTarget) == ABILITY_STICKY_HOLD || GetBattlerAbility(chosenTarget) == ABILITY_TERRITORIAL)
-                    {
-                        gBattlescriptCurrInstr = BattleScript_StickyHoldActivates;
-                        gLastUsedAbility = gBattleMons[chosenTarget].ability;
-                        RecordAbilityBattle(chosenTarget, gLastUsedAbility);
-                    }
-                    // took a while, but all checks passed and items can be safely swapped
-                    else
-                    {
-                        u16 oldItemAtk, newItemAtk;
-
-                        newItemAtk = gBattleMons[chosenTarget].item;
-                        oldItemAtk = gBattleMons[i].item;
-
-                        gBattleMons[i].item = newItemAtk;
-                        gBattleMons[chosenTarget].item = oldItemAtk;
-
-                        RecordItemEffectBattle(i, ItemId_GetHoldEffect(newItemAtk));
-                        RecordItemEffectBattle(chosenTarget, ItemId_GetHoldEffect(oldItemAtk));
-
-                        BtlController_EmitSetMonData(i, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[i].item), &gBattleMons[i].item);
-                        MarkBattlerForControllerExec(i);
-
-                        BtlController_EmitSetMonData(chosenTarget, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[chosenTarget].item), &gBattleMons[chosenTarget].item);
-                        MarkBattlerForControllerExec(chosenTarget);
-
-                        gBattleStruct->choicedMove[chosenTarget] = MOVE_NONE;
-                        gBattleStruct->choicedMove[i] = MOVE_NONE;
-
-                        gBattlerAttacker = i;
-                        gBattlerTarget = chosenTarget;
-                        PREPARE_ITEM_BUFFER(gBattleTextBuff1, newItemAtk)
-                        PREPARE_ITEM_BUFFER(gBattleTextBuff2, oldItemAtk)
-
-                        if (oldItemAtk != ITEM_NONE && newItemAtk != ITEM_NONE)
-                        {
-                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_BOTH;  // attacker's item -> <- target's item
-                        }
-                        else if (oldItemAtk == ITEM_NONE && newItemAtk != ITEM_NONE)
-                        {
-                            if (GetBattlerAbility(i) == ABILITY_UNBURDEN && gBattleResources->flags->flags[i] & RESOURCE_FLAG_UNBURDEN)
-                                gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_UNBURDEN;
-
-                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_TAKEN; // nothing -> <- target's item
-                        }
-                        else
-                        {
-                            CheckSetUnburden(i);
-                            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ITEM_SWAP_GIVEN; // attacker's item -> <- nothing
-                        }
-                        BattleScriptPushCursorAndCallback(BattleScript_MagoActivadoEnd);
-                        gBattleResources->flags->flags[i] &= ~RESOURCE_FLAG_MAGO;
-                        effect++;
-                    }
-                }
             }
         }
         break;
@@ -8666,7 +8655,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 
     if (!gMovesInfo[move].makesContact)
     {
-        if (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
+        if (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
             return TRUE;
         else
             return FALSE;
@@ -8707,7 +8696,8 @@ bool32 IsBattlerProtected(u32 battlerAtk, u32 battlerDef, u32 move)
     // Protective Pads doesn't stop Unseen Fist from bypassing Protect effects, so IsMoveMakingContact() isn't used here.
     // This means extra logic is needed to handle Shell Side Arm.
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_UNSEEN_FIST
-     && (gMovesInfo[move].makesContact || (move == MOVE_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL))
+     && (gMovesInfo[move].makesContact
+     || (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL))
      && !gProtectStructs[battlerDef].maxGuarded) // Max Guard cannot be bypassed by Unseen Fist
         return FALSE;
     else if (gMovesInfo[move].ignoresProtect)
@@ -11317,10 +11307,17 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
     return FALSE;
 }
 
+static u32 SwapMoveDamageCategory(u32 move)
+{
+    if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
+        return DAMAGE_CATEGORY_SPECIAL;
+    return DAMAGE_CATEGORY_PHYSICAL;
+}
+
 u8 GetBattleMoveCategory(u32 moveId)
 {
     if (gBattleStruct != NULL && gBattleStruct->swapDamageCategory) // Photon Geyser, Shell Side Arm, Light That Burns the Sky, Tera Blast
-        return DAMAGE_CATEGORY_PHYSICAL;
+        return SwapMoveDamageCategory(moveId);
     if (gBattleStruct != NULL && (IsZMove(moveId) || IsMaxMove(moveId))) // TODO: Might be buggy depending on when this is called.
         return gBattleStruct->categoryOverride;
     if (B_PHYSICAL_SPECIAL_SPLIT >= GEN_4)

@@ -5425,4 +5425,3 @@ const u8 *GetMoveAnimationScript(u16 moveId)
     }
     return gMovesInfo[moveId].battleAnimScript;
 }
-
