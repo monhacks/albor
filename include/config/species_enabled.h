@@ -84,7 +84,7 @@
 #define P_FAMILY_PONYTA                  P_GEN_1_POKEMON
 #define P_FAMILY_SLOWPOKE                P_GEN_1_POKEMON
 #define P_FAMILY_MAGNEMITE               P_GEN_1_POKEMON
-#define P_FAMILY_FARFETCHD               P_GEN_1_POKEMON
+#define P_FAMILY_FARFETCHD               FALSE
 #define P_FAMILY_DODUO                   P_GEN_1_POKEMON
 #define P_FAMILY_SEEL                    P_GEN_1_POKEMON
 #define P_FAMILY_GRIMER                  P_GEN_1_POKEMON
@@ -315,7 +315,7 @@
 #define P_FAMILY_WOOBAT                  P_GEN_5_POKEMON
 #define P_FAMILY_DRILBUR                 FALSE //TRUE
 #define P_FAMILY_AUDINO                  P_GEN_5_POKEMON
-#define P_FAMILY_TIMBURR                 P_GEN_5_POKEMON
+#define P_FAMILY_TIMBURR                 FALSE //TRUE
 #define P_FAMILY_TYMPOLE                 P_GEN_5_POKEMON
 #define P_FAMILY_THROH                   P_GEN_5_POKEMON
 #define P_FAMILY_SAWK                    P_GEN_5_POKEMON
@@ -400,7 +400,7 @@
 #define P_FAMILY_BINACLE                 P_GEN_6_POKEMON
 #define P_FAMILY_SKRELP                  P_GEN_6_POKEMON
 #define P_FAMILY_CLAUNCHER               P_GEN_6_POKEMON
-#define P_FAMILY_HELIOPTILE              FALSE //TRUE
+#define P_FAMILY_HELIOPTILE              P_GEN_6_POKEMON
 #define P_FAMILY_TYRUNT                  FALSE //TRUE
 #define P_FAMILY_AMAURA                  FALSE //TRUE
 #define P_FAMILY_HAWLUCHA                P_GEN_6_POKEMON

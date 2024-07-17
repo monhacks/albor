@@ -50,6 +50,8 @@
 - Cambiar animación de Chupasangre usando como referencia Colmillo Veneno.
 - Crear Barrera eléctrica (baneful búnker pero paraliza): Dárselo a Electivire.
 - Check move_target_all_battlers de lightning rod vs storm drain.
+- Borrar sprites Helioptile/Heliolisk, Farfetchd, incorporar Conkeldurr.
+- Hueso quemado (objeto raro en Cubone que lo hace evolucionar a Marowak Alolan).
 
 -Lista de moves hechos:
 *Bomba huevo.
