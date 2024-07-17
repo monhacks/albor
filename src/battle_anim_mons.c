@@ -143,46 +143,15 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
 
 u8 GetBattlerYDelta(u8 battlerId, u16 species)
 {
-    u32 personality;
-    struct BattleSpriteInfo *spriteInfo;
     u8 ret;
     species = SanitizeSpeciesId(species);
 
     if (GetBattlerSide(battlerId) == B_SIDE_PLAYER || IsContest())
     {
-        if (species == SPECIES_UNOWN)
-        {
-            if (IsContest())
-            {
-                if (gContestResources->moveAnim->hasTargetAnim)
-                    personality = gContestResources->moveAnim->targetPersonality;
-                else
-                    personality = gContestResources->moveAnim->personality;
-            }
-            else
-            {
-                spriteInfo = gBattleSpritesDataPtr->battlerData;
-                if (!spriteInfo[battlerId].transformSpecies)
-                    personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-                else
-                    personality = gTransformedPersonalities[battlerId];
-            }
-            species = GetUnownSpeciesId(personality);
-        }
         ret = gSpeciesInfo[species].backPicYOffset;
     }
     else
     {
-        if (species == SPECIES_UNOWN)
-        {
-            spriteInfo = gBattleSpritesDataPtr->battlerData;
-            if (!spriteInfo[battlerId].transformSpecies)
-                personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerId]], MON_DATA_PERSONALITY);
-            else
-                personality = gTransformedPersonalities[battlerId];
-
-            species = GetUnownSpeciesId(personality);
-        }
         ret = gSpeciesInfo[species].frontPicYOffset;
     }
     return ret;
