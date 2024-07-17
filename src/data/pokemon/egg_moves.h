@@ -1167,8 +1167,6 @@ static const u16 sGoldeenEggMoveLearnset[] = {
 };
 #endif //P_FAMILY_GOLDEEN
 
-#if P_FAMILY_MR_MIME
-#if P_GEN_4_CROSS_EVOS
 static const u16 sMimeJrEggMoveLearnset[] = {
     MOVE_FUTURE_SIGHT,
     MOVE_HYPNOSIS,
@@ -1187,33 +1185,6 @@ static const u16 sMimeJrEggMoveLearnset[] = {
     MOVE_PSYCHIC_TERRAIN,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
-static const u16 sMrMimeEggMoveLearnset[] = {
-    MOVE_FUTURE_SIGHT,
-    MOVE_HYPNOSIS,
-    MOVE_MIMIC,
-    MOVE_FAKE_OUT,
-    MOVE_TRICK,
-    MOVE_CONFUSE_RAY,
-    MOVE_WAKE_UP_SLAP,
-    MOVE_TEETER_DANCE,
-    MOVE_NASTY_PLOT,
-    MOVE_POWER_SPLIT,
-    MOVE_MAGIC_ROOM,
-    MOVE_ICY_WIND,
-    MOVE_PSYCHIC_TERRAIN,
-    MOVE_UNAVAILABLE,
-};
-#if P_GALARIAN_FORMS
-static const u16 sMrMimeGalarianEggMoveLearnset[] = {
-    MOVE_FAKE_OUT,
-    MOVE_CONFUSE_RAY,
-    MOVE_POWER_SPLIT,
-    MOVE_TICKLE,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_MR_MIME
 
 #if P_FAMILY_SCYTHER
 static const u16 sScytherEggMoveLearnset[] = {
@@ -1420,8 +1391,6 @@ static const u16 sAerodactylEggMoveLearnset[] = {
 };
 #endif //P_FAMILY_AERODACTYL
 
-#if P_FAMILY_SNORLAX
-#if P_GEN_4_CROSS_EVOS
 static const u16 sMunchlaxEggMoveLearnset[] = {
     MOVE_LICK,
     MOVE_CHARM,
@@ -1437,23 +1406,6 @@ static const u16 sMunchlaxEggMoveLearnset[] = {
     MOVE_BELCH,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
-static const u16 sSnorlaxEggMoveLearnset[] = {
-    MOVE_LICK,
-    MOVE_CHARM,
-    MOVE_DOUBLE_EDGE,
-    MOVE_CURSE,
-    MOVE_FISSURE,
-    MOVE_WHIRLWIND,
-    MOVE_PURSUIT,
-    MOVE_COUNTER,
-    MOVE_NATURAL_GIFT,
-    MOVE_AFTER_YOU,
-    MOVE_BELCH,
-    MOVE_POWER_UP_PUNCH,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_FAMILY_SNORLAX
 
 #if P_FAMILY_DRATINI
 static const u16 sDratiniEggMoveLearnset[] = {
@@ -1719,8 +1671,6 @@ static const u16 sMarillEggMoveLearnset[] = {
 };
 #endif //P_FAMILY_MARILL
 
-#if P_FAMILY_SUDOWOODO
-#if P_GEN_4_CROSS_EVOS
 static const u16 sBonslyEggMoveLearnset[] = {
     MOVE_SELF_DESTRUCT,
     MOVE_HEADBUTT,
@@ -1733,20 +1683,6 @@ static const u16 sBonslyEggMoveLearnset[] = {
     MOVE_ENDURE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
-static const u16 sSudowoodoEggMoveLearnset[] = {
-    MOVE_SELF_DESTRUCT,
-    MOVE_HEADBUTT,
-    MOVE_HARDEN,
-    MOVE_DEFENSE_CURL,
-    MOVE_ROLLOUT,
-    MOVE_SAND_TOMB,
-    MOVE_STEALTH_ROCK,
-    MOVE_CURSE,
-    MOVE_ENDURE,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_FAMILY_SUDOWOODO
 
 #if P_FAMILY_HOPPIP
 static const u16 sHoppipEggMoveLearnset[] = {
