@@ -3571,7 +3571,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
             ADJUST_SCORE(GOOD_EFFECT);
         break;
     case EFFECT_AMOLADORAS:
-        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK, &score);
+        IncreaseStatUpScore(battlerAtk, battlerDef, STAT_CHANGE_ATK);
         if (aiData->abilities[battlerAtk] == ABILITY_SUPER_LUCK
           || aiData->abilities[battlerAtk] == ABILITY_SNIPER
           || aiData->abilities[battlerAtk] == ABILITY_PERCUSIONISTA
