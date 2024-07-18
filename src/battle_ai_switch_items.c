@@ -1509,7 +1509,7 @@ static u32 GetSwitchinRecurringDamage(void)
     {
         if (holdEffect == HOLD_EFFECT_BLACK_SLUDGE && AI_DATA->switchinCandidate.battleMon.type1 != TYPE_POISON && AI_DATA->switchinCandidate.battleMon.type2 != TYPE_POISON)
         {
-            passiveDamage = maxHP / 8;
+            passiveDamage = maxHP / 16;
             if (passiveDamage == 0)
                 passiveDamage = 1;
         }

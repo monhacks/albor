@@ -304,10 +304,10 @@
 #define ITEM_DRAGON_SCALE 227
 #define ITEM_UPGRADE 228
 #define ITEM_UP_GRADE ITEM_UPGRADE // Pre-Gen VIII name
-#define ITEM_PROTECTOR 229
-#define ITEM_ELECTIRIZER 230
-#define ITEM_MAGMARIZER 231
-#define ITEM_DUBIOUS_DISC 232
+#define ITEM_PROTECTOR 229 //Obtenible equipado en Rhydon
+#define ITEM_ELECTIRIZER 230 //Obtenible equipado en Electabuzz
+#define ITEM_MAGMARIZER 231 //Obtenible equipado en Magmar
+#define ITEM_DUBIOUS_DISC 232 //Obtenible equipado en Porygon
 #define ITEM_REAPER_CLOTH 233
 #define ITEM_PRISM_SCALE 234
 #define ITEM_WHIPPED_DREAM 235
@@ -543,7 +543,7 @@
 #define ITEM_POISON_BARB 432
 #define ITEM_SOFT_SAND 433
 #define ITEM_SHARP_BEAK 434
-#define ITEM_TWISTED_SPOON 435
+#define ITEM_TWISTED_SPOON 435 //Obtenible equipado en Abra
 #define ITEM_TWISTEDSPOON ITEM_TWISTED_SPOON // Pre-Gen VI name
 #define ITEM_SILVER_POWDER 436
 #define ITEM_SILVERPOWDER ITEM_SILVER_POWDER // Pre-Gen VI name
@@ -597,7 +597,7 @@
 #define ITEM_FOCUS_BAND 469
 #define ITEM_LUCKY_EGG 470
 #define ITEM_SCOPE_LENS 471
-#define ITEM_LEFTOVERS 472
+#define ITEM_LEFTOVERS 472 //Obtenible equipado en Snorlax
 #define ITEM_SHELL_BELL 473
 #define ITEM_WIDE_LENS 474
 #define ITEM_MUSCLE_BAND 475
@@ -612,7 +612,7 @@
 #define ITEM_IRON_BALL 484
 #define ITEM_LAGGING_TAIL 485
 #define ITEM_DESTINY_KNOT 486
-#define ITEM_BLACK_SLUDGE 487
+#define ITEM_BLACK_SLUDGE 487 //Obtenible equipado en Muk
 #define ITEM_GRIP_CLAW 488
 #define ITEM_STICKY_BARB 489
 #define ITEM_SHED_SHELL 490
