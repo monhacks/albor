@@ -14736,6 +14736,27 @@ static void Cmd_pickup(void)
             heldItem = ITEM_LIGHT_BALL;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
+        else if ((species == SPECIES_RHYHORN || species == SPECIES_RHYDON || species == SPECIES_RHYPERIOR)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_PROTECTOR;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_PORYGON || species == SPECIES_PORYGON2 || species == SPECIES_PORYGON_Z)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_DUBIOUS_DISC;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_MAGBY || species == SPECIES_MAGMAR || species == SPECIES_MAGMORTAR)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_MAGMARIZER;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;

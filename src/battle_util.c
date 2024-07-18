@@ -9913,11 +9913,23 @@ static inline u32 CalcAttackStat(u32 move, u32 battlerAtk, u32 battlerDef, u32 m
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_CUCHARA_TORCIDA:
-        if (IS_MOVE_SPECIAL(move) && (atkBaseSpeciesId == SPECIES_ABRA || atkBaseSpeciesId == SPECIES_KADABRA || atkBaseSpeciesId == SPECIES_ALAKAZAM))
+        if (atkBaseSpeciesId == SPECIES_ABRA || atkBaseSpeciesId == SPECIES_KADABRA || atkBaseSpeciesId == SPECIES_ALAKAZAM)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_ELECTRIZADOR:
-        if (IS_MOVE_PHYSICAL(move) && (atkBaseSpeciesId == SPECIES_ELEKID || atkBaseSpeciesId == SPECIES_ELECTABUZZ || atkBaseSpeciesId == SPECIES_ELECTIVIRE))
+        if (atkBaseSpeciesId == SPECIES_ELEKID || atkBaseSpeciesId == SPECIES_ELECTABUZZ || atkBaseSpeciesId == SPECIES_ELECTIVIRE)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
+        break;
+    case HOLD_EFFECT_MAGMATIZADOR:
+        if (atkBaseSpeciesId == SPECIES_MAGBY || atkBaseSpeciesId == SPECIES_MAGMAR || atkBaseSpeciesId == SPECIES_MAGMORTAR)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
+        break;
+    case HOLD_EFFECT_DISCO_EXTRANO:
+        if (atkBaseSpeciesId == SPECIES_MAGBY || atkBaseSpeciesId == SPECIES_MAGMAR || atkBaseSpeciesId == SPECIES_MAGMORTAR)
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
+        break;
+    case HOLD_EFFECT_PROTECTOR:
+        if (atkBaseSpeciesId == SPECIES_RHYHORN || atkBaseSpeciesId == SPECIES_RHYDON || atkBaseSpeciesId == SPECIES_RHYPERIOR)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.25));
         break;
     case HOLD_EFFECT_CHOICE_BAND:
