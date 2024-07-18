@@ -1744,49 +1744,49 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[0];
+        graphicsInfo = &gPokemonFormGraphics[VENUSAUR_FEMALE];
       break;
     case SPECIES_BUTTERFREE:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[1];
+        graphicsInfo = &gPokemonFormGraphics[BUTTERFREE_FEMALE];
       break;
     case SPECIES_RATTATA:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[2];
+        graphicsInfo = &gPokemonFormGraphics[RATTATA_FEMALE];
       break;
     case SPECIES_RATICATE:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[3];
+        graphicsInfo = &gPokemonFormGraphics[RATICATE_FEMALE];
       break;
     case SPECIES_PIKACHU:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[4];
+        graphicsInfo = &gPokemonFormGraphics[PIKACHU_FEMALE];
       break;
     case SPECIES_RAICHU:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[5];
+        graphicsInfo = &gPokemonFormGraphics[RAICHU_FEMALE];
       break;
     case SPECIES_ZUBAT:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[6];
+        graphicsInfo = &gPokemonFormGraphics[ZUBAT_FEMALE];
       break;
     case SPECIES_GOLBAT:
       if(form==0)
         graphicsInfo = &gSpeciesInfo[species].followerData;
       else
-        graphicsInfo = &gPokemonFormGraphics[7];
+        graphicsInfo = &gPokemonFormGraphics[GOLBAT_FEMALE];
       break;
     default:
         graphicsInfo = &gSpeciesInfo[species].followerData;

@@ -3977,9 +3977,20 @@ extern const struct SpriteFrameImage sPicTable_RaichuF[];
 extern const struct SpriteFrameImage sPicTable_ZubatF[];
 extern const struct SpriteFrameImage sPicTable_GolbatF[];
 
+enum {
+    VENUSAUR_FEMALE,
+    BUTTERFREE_FEMALE,
+    RATTATA_FEMALE,
+    RATICATE_FEMALE,
+    PIKACHU_FEMALE,
+    RAICHU_FEMALE,
+    ZUBAT_FEMALE,
+    GOLBAT_FEMALE
+};
+
 const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] = 
 {
-  [0] = { //VENUSAUR_FEMALE
+  [VENUSAUR_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -3997,7 +4008,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_VenusaurF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [1] = { //BUTTERFREE_FEMALE
+  [BUTTERFREE_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4015,7 +4026,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_ButterfreeF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [2] = { //RATTATA_FEMALE
+  [RATTATA_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4033,7 +4044,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_RattataF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [3] = { //RATICATE_FEMALE
+  [RATICATE_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4051,7 +4062,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_RaticateF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [4] = { //PIKACHU_FEMALE
+  [PIKACHU_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4069,7 +4080,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_PikachuF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [5] = { //RAICHU_FEMALE
+  [RAICHU_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4087,7 +4098,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_RaichuF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [6] = { //ZUBAT_FEMALE
+  [ZUBAT_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
@@ -4105,7 +4116,7 @@ const struct ObjectEventGraphicsInfo gPokemonFormGraphics[] =
     .images = sPicTable_ZubatF,
     .affineAnims = gDummySpriteAffineAnimTable,
 },
-  [7] = { //GOLBAT_FEMALE
+  [GOLBAT_FEMALE] = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
