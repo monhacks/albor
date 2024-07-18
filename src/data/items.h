@@ -8527,13 +8527,13 @@ const struct Item gItemsInfo[] =
 
     [ITEM_LIFE_ORB] =
     {
-        .name = _("Life Orb"),
-        .price = (I_PRICE >= GEN_9) ? 50000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+        .name = _("Vidasfera"),
+        .price = 10000,
         .holdEffect = HOLD_EFFECT_LIFE_ORB,
         .description = COMPOUND_STRING(
-            "Boosts the power of\n"
-            "moves at the cost\n"
-            "of some HP per turn."),
+            "Potencia un 25%,\n"
+            "pero daña un 6,25%\n"
+            "de PS cada turno."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

@@ -1515,7 +1515,7 @@ static u32 GetSwitchinRecurringDamage(void)
         }
         else if (holdEffect == HOLD_EFFECT_LIFE_ORB && ability != ABILITY_SHEER_FORCE)
         {
-            passiveDamage = maxHP / 10;
+            passiveDamage = maxHP / 16;
             if (passiveDamage == 0)
                 passiveDamage = 1;
         }

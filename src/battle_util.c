@@ -8270,7 +8270,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 && !gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage
                 && gSpecialStatuses[gBattlerAttacker].damagedMons)
             {
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 10;
+                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 16;
                 if (gBattleMoveDamage == 0)
                     gBattleMoveDamage = 1;
                 effect = ITEM_HP_CHANGE;
@@ -10366,7 +10366,7 @@ static inline uq4_12_t GetAttackerItemsModifier(u32 battlerAtk, uq4_12_t typeEff
             return UQ_4_12(1.2);
         break;
     case HOLD_EFFECT_LIFE_ORB:
-        return UQ_4_12(1.3);
+        return UQ_4_12(1.25);
         break;
     }
     return UQ_4_12(1.0);
