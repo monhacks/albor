@@ -3289,7 +3289,7 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 {
                     gBattleMons[gEffectBattler].status2 |= STATUS2_WRAPPED;
                     if (GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_GRIP_CLAW)
-                        gDisableStructs[gEffectBattler].wrapTurns = B_BINDING_TURNS >= GEN_5 ? 7 : 5;
+                        gDisableStructs[gEffectBattler].wrapTurns = 7;
                     else
                         gDisableStructs[gEffectBattler].wrapTurns = B_BINDING_TURNS >= GEN_5 ? (Random() % 2) + 4 : (Random() % 4) + 2;
 
@@ -14755,6 +14755,27 @@ static void Cmd_pickup(void)
             && (Random() % 16) == 0)
         {
             heldItem = ITEM_MAGMARIZER;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_SHELLDER || species == SPECIES_CLOYSTER || species == SPECIES_CLAMPERL)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_BIG_PEARL;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_BULBASAUR || species == SPECIES_IVYSAUR || species == SPECIES_VENUSAUR)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_ABSORB_BULB;
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
+        }
+        else if ((species == SPECIES_STARYU || species == SPECIES_STARMIE || species == SPECIES_LUNATONE || species == SPECIES_SOLROCK)
+            && heldItem == ITEM_NONE
+            && (Random() % 16) == 0)
+        {
+            heldItem = ITEM_STAR_PIECE;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
     }
