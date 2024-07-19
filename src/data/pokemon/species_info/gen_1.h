@@ -2990,6 +2990,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "for protection. Its large eyes never fail\n"
             "to spot even miniscule prey."),
         .pokemonScale = 360,
+        .itemRare = ITEM_SILVER_POWDER,
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = -1,
@@ -3021,7 +3022,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .catchRate = 75,
         .expYield = 158,
         .evYield_SpDefense = 2,
-        .itemRare = ITEM_SHED_SHELL,
+        .itemRare = ITEM_SILVER_POWDER,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
