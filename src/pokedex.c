@@ -2084,28 +2084,35 @@ static u16 GetPokemonSpriteToDisplay(u16 species)
 {
     if (species >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[species].dexNum == 0xFFFF)
         return 0xFFFF;
-    else if (sPokedexView->pokedexList[species].seen)
-        return sPokedexView->pokedexList[species].dexNum;
     else
-        return 0;
+        return sPokedexView->pokedexList[species].dexNum;
 }
 
 static u32 CreatePokedexMonSprite(u16 num, s16 x, s16 y)
 {
     u8 i;
-
     for (i = 0; i < MAX_MONS_ON_SCREEN; i++)
     {
         if (sPokedexView->monSpriteIds[i] == 0xFFFF)
         {
             u8 spriteId = CreateMonSpriteFromNationalDexNumberHGSS(num, x, y, i);
-
             gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
             gSprites[spriteId].oam.priority = 3;
             gSprites[spriteId].data[0] = 0;
             gSprites[spriteId].data[1] = i;
             gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(num);
             sPokedexView->monSpriteIds[i] = spriteId;
+            if (!GetSetPokedexFlag(num, FLAG_GET_SEEN))
+            {    
+                FillPalette(RGB_BLACK, OBJ_PLTT_ID(i), PLTT_SIZE_4BPP);
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+                SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
+                gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+            }
+            else if (!GetSetPokedexFlag(num, FLAG_GET_CAUGHT))
+            {
+                gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+            }
             return spriteId;
         }
     }
@@ -3069,13 +3076,8 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
         species = NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum);
     }
     //type icon(s)
-    #ifdef TX_RANDOMIZER_AND_CHALLENGES
-        type1 = GetTypeBySpecies(species, 1);
-        type2 = GetTypeBySpecies(species, 2);
-    #else
-        type1 = gSpeciesInfo[species].types[0];
-        type2 = gSpeciesInfo[species].types[1];
-    #endif
+    type1 = gSpeciesInfo[species].types[0];
+    type2 = gSpeciesInfo[species].types[1];
     if (species == SPECIES_NONE)
         type1 = type2 = TYPE_MYSTERY;
 
