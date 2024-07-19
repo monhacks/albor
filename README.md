@@ -95,6 +95,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Habilidad exclusiva de Persian y A-Persian: En metálico, potencia ataques de Acero un 25%, y convierte Día de pago en tipo Acero. Además, este es su ataque exclusivo, y ahora tiene 100 de potencia.
     *Objetos exclusivos potenciadores: Objetos como Cuchara torcida potencian un 25% los ataques de una familia concreta (Alakazam).
     *Desarme ya no aumenta su potencia si quita el objeto, pero se le ha subido la potencia a 70.
+    *Los objetos potenciadores de ataques de un tipo, como Colmillo dragón, potencian un 25% los ataques de ese tipo.
 
 ## Cambios a mecánicas distintas de batalla:
     *El juego cuenta con un sistema de avance del tiempo que no es a partir del tiempo del sistema, sino por la cantidad de frames que pasan en el juego: Cada segundo de tiempo real en el juego equivalen a 20 segundos, es decir, 3 minutos son 1 hora. 

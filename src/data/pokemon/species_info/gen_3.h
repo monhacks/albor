@@ -1393,6 +1393,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
+        .itemRare = ITEM_BLACK_GLASSES,
         FRONT_PIC(Seedot, 32, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Seedot,
@@ -1455,6 +1456,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         PALETTES(Nuzleaf),
         ICON(Nuzleaf, 1),
         FOOTPRINT(Nuzleaf)
+        .itemRare = ITEM_BLACK_GLASSES,
         FOLLOWER(Nuzleaf, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Nuzleaf),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_SHIFTRY}),
@@ -1496,6 +1498,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Wicked"),
         .height = 13,
         .weight = 596,
+        .itemRare = ITEM_BLACK_GLASSES,
         .description = COMPOUND_STRING(
             "It is said to arrive on chilly, wintry winds.\n"
             "Feared from long ago as the guardian of\n"
@@ -4449,6 +4452,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Numb"),
         .height = 7,
         .weight = 240,
+        .itemRare = ITEM_CHARCOAL,
         .description = COMPOUND_STRING(
             "A Numel stores boiling magma in the hump\n"
             "on its back. It is a hardy Pokémon that can\n"
@@ -4523,6 +4527,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         BACK_PIC(Camerupt, 64, 40),
         BACK_PIC_FEMALE(Camerupt, 64, 40),
         .backPicYOffset = 13,
+        .itemRare = ITEM_CHARCOAL,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Camerupt),
         ICON(Camerupt, 0),
@@ -4589,6 +4594,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .abilities = { ABILITY_WHITE_SMOKE, ABILITY_DROUGHT, ABILITY_SHELL_ARMOR },
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Torkoal"),
+        .itemRare = ITEM_CHARCOAL,
         .cryId = CRY_TORKOAL,
         .natDexNum = NATIONAL_DEX_TORKOAL,
         .categoryName = _("Coal"),
@@ -4966,6 +4972,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Cactus"),
         .height = 4,
         .weight = 513,
+        .itemRare = ITEM_BLACK_GLASSES,
         .description = COMPOUND_STRING(
             "Cacnea live in deserts with virtually no\n"
             "rainfall. It battles by swinging its thick,\n"
@@ -5014,6 +5021,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .speciesName = _("Cacturne"),
         .cryId = CRY_CACTURNE,
         .natDexNum = NATIONAL_DEX_CACTURNE,
+        .itemRare = ITEM_BLACK_GLASSES,
         .categoryName = _("Scarecrow"),
         .height = 13,
         .weight = 774,

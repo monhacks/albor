@@ -4015,6 +4015,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .abilities = { ABILITY_MAGMA_ARMOR, ABILITY_FLAME_BODY, ABILITY_FUNDICION },
         .bodyColor = BODY_COLOR_RED,
         .speciesName = _("Slugma"),
+        .itemRare = ITEM_CHARCOAL,
         .cryId = CRY_SLUGMA,
         .natDexNum = NATIONAL_DEX_SLUGMA,
         .categoryName = _("Lava"),
@@ -4094,7 +4095,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Magcargo),
         ICON(Magcargo, 0),
-        FOOTPRINT(Magcargo)
+        .itemRare = ITEM_CHARCOAL,
         FOLLOWER(Magcargo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Magcargo),
     },
