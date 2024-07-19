@@ -194,10 +194,10 @@
 #define ITEM_BALM_MUSHROOM 139
 #define ITEM_BALMMUSHROOM ITEM_BALM_MUSHROOM // Pre-Gen VI name
 #define ITEM_PEARL 140
-#define ITEM_BIG_PEARL 141
+#define ITEM_BIG_PEARL 141 //Obtenible equipado en Pokémon salvajes
 #define ITEM_PEARL_STRING 142
 #define ITEM_STARDUST 143
-#define ITEM_STAR_PIECE 144
+#define ITEM_STAR_PIECE 144 //Obtenible equipado en Pokémon salvajes
 #define ITEM_COMET_SHARD 145
 #define ITEM_SHOAL_SALT 146
 #define ITEM_SHOAL_SHELL 147
@@ -576,10 +576,10 @@
 #define ITEM_GRASSY_SEED 454
 
 // Type-activated Stat Modifiers
-#define ITEM_ABSORB_BULB 455
-#define ITEM_CELL_BATTERY 456
-#define ITEM_LUMINOUS_MOSS 457
-#define ITEM_SNOWBALL 458
+#define ITEM_ABSORB_BULB 455 //Obtenible equipado en Pokémon salvajes
+#define ITEM_CELL_BATTERY 456 //Obtenible equipado en Pokémon salvajes
+#define ITEM_LUMINOUS_MOSS 457 //Obtenible equipado en Pokémon salvajes
+#define ITEM_SNOWBALL 458 //Obtenible equipado en Pokémon salvajes
 
 // Misc. Held Items
 #define ITEM_BRIGHT_POWDER 459
@@ -613,7 +613,7 @@
 #define ITEM_LAGGING_TAIL 485
 #define ITEM_DESTINY_KNOT 486
 #define ITEM_BLACK_SLUDGE 487 //Obtenible equipado en Muk
-#define ITEM_GRIP_CLAW 488
+#define ITEM_GRIP_CLAW 488 //Obtenible en Pokémon salvajes
 #define ITEM_STICKY_BARB 489
 #define ITEM_SHED_SHELL 490
 #define ITEM_BIG_ROOT 491

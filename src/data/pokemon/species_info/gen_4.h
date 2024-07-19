@@ -3448,7 +3448,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 67 : 131,
         .evYield_Attack = 1,
-        .itemRare = ITEM_NEVER_MELT_ICE,
+        .itemRare = ITEM_SNOWBALL,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
@@ -3493,7 +3493,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .catchRate = 60,                                               \
         .evYield_Attack = 1,                                           \
         .evYield_SpAttack = 1,                                         \
-        .itemRare = ITEM_NEVER_MELT_ICE,                               \
         .genderRatio = PERCENT_FEMALE(50),                             \
         .eggCycles = 20,                                               \
         .friendship = STANDARD_FRIENDSHIP,                             \
@@ -3515,6 +3514,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 60,
         .baseSpAttack  = 92,
         .baseSpDefense = 85,
+        .itemRare = ITEM_SNOWBALL,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 173 : 214,
         .abilities = { ABILITY_SNOW_WARNING, ABILITY_NONE, ABILITY_SOUNDPROOF },
         .cryId = CRY_ABOMASNOW,
@@ -3616,6 +3616,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .baseSpeed     = 91,
         .baseSpAttack  = 95,
         .baseSpDefense = 77,
+        .itemRare = ITEM_CELL_BATTERY,
         .types = MON_TYPES(TYPE_ELECTRIC, TYPE_GHOST),
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 154 : 132,
         .description = COMPOUND_STRING(
