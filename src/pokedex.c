@@ -2102,16 +2102,15 @@ static u32 CreatePokedexMonSprite(u16 num, s16 x, s16 y)
             gSprites[spriteId].data[1] = i;
             gSprites[spriteId].data[2] = NationalPokedexNumToSpecies(num);
             sPokedexView->monSpriteIds[i] = spriteId;
-            if (!GetSetPokedexFlag(num, FLAG_GET_SEEN))
-            {    
-                FillPalette(RGB_BLACK, OBJ_PLTT_ID(i), PLTT_SIZE_4BPP);
+            if (!GetSetPokedexFlag(num, FLAG_GET_CAUGHT))
+            {
                 SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
                 SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 11));
                 gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
-            }
-            else if (!GetSetPokedexFlag(num, FLAG_GET_CAUGHT))
-            {
-                gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+                if (!GetSetPokedexFlag(num, FLAG_GET_SEEN))
+                {
+                    FillPalette(RGB_BLACK, OBJ_PLTT_ID(i), PLTT_SIZE_4BPP);
+                }
             }
             return spriteId;
         }
