@@ -3,7 +3,7 @@
 
 // Macros for ease of use.
 
-#define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVOLUTIONS_END }, }
+#define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVOLUTIONS_END}, }
 
 #define FRONT_PIC(sprite, width, height)                    \
         .frontPic = gMonFrontPic_## sprite,                 \
@@ -179,7 +179,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_FAST,
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = { ABILITY_NONE, ABILITY_CURSED_BODY, ABILITY_DAMP },
+        .abilities = {ABILITY_NONE, ABILITY_CURSED_BODY, ABILITY_DAMP},
         .bodyColor = BODY_COLOR_BLACK,
         .speciesName = _("??????????"),
         .cryId = CRY_NONE,

@@ -2161,18 +2161,18 @@ static const u32 sCursor_Gfx[] = INCBIN_U32("graphics/roulette/cursor.4bpp.lz");
 
 static const struct SpritePalette sSpritePalettes[] =
 {
-    { .data = sShadow_Pal,      .tag = PALTAG_SHADOW },
-    { .data = sBall_Pal,        .tag = PALTAG_BALL },
-    { .data = sBallCounter_Pal, .tag = PALTAG_BALL_COUNTER },
-    { .data = sCursor_Pal,      .tag = PALTAG_CURSOR },
-    { .data = sCredit_Pal,      .tag = PALTAG_INTERFACE },
-    { .data = sShroomish_Pal,   .tag = PALTAG_SHROOMISH },
-    { .data = sTaillow_Pal,     .tag = PALTAG_TAILLOW },
-    { .data = sGridIcons_Pal,   .tag = PALTAG_GRID_ICONS },
-    { .data = sWynaut_Pal,      .tag = PALTAG_WYNAUT },
-    { .data = sAzurill_Pal,     .tag = PALTAG_AZURILL },
-    { .data = sSkitty_Pal,      .tag = PALTAG_SKITTY },
-    { .data = sMakuhita_Pal,    .tag = PALTAG_MAKUHITA },
+    { .data = sShadow_Pal,      .tag = PALTAG_SHADOW},
+    { .data = sBall_Pal,        .tag = PALTAG_BALL},
+    { .data = sBallCounter_Pal, .tag = PALTAG_BALL_COUNTER},
+    { .data = sCursor_Pal,      .tag = PALTAG_CURSOR},
+    { .data = sCredit_Pal,      .tag = PALTAG_INTERFACE},
+    { .data = sShroomish_Pal,   .tag = PALTAG_SHROOMISH},
+    { .data = sTaillow_Pal,     .tag = PALTAG_TAILLOW},
+    { .data = sGridIcons_Pal,   .tag = PALTAG_GRID_ICONS},
+    { .data = sWynaut_Pal,      .tag = PALTAG_WYNAUT},
+    { .data = sAzurill_Pal,     .tag = PALTAG_AZURILL},
+    { .data = sSkitty_Pal,      .tag = PALTAG_SKITTY},
+    { .data = sMakuhita_Pal,    .tag = PALTAG_MAKUHITA},
     {}
 };
 

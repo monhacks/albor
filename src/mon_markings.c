@@ -448,14 +448,14 @@ static void CreateMonMarkingsMenuSprites(s16 x, s16 y, u16 baseTileTag, u16 base
 
     struct SpriteSheet sheets[] =
     {
-        { sMenu->windowSpriteTiles, 0x1000, baseTileTag },
+        { sMenu->windowSpriteTiles, 0x1000, baseTileTag},
         { gMonMarkingsMenu_Gfx, 0x320, baseTileTag + 1 },
         {}
     };
 
     struct SpritePalette palettes[] =
     {
-        { sMenu->framePalette, basePaletteTag },
+        { sMenu->framePalette, basePaletteTag},
         { gMonMarkingsMenu_Pal, basePaletteTag + 1},
         {}
     };

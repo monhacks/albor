@@ -38,7 +38,7 @@ static void AnimTask_UpdateSlidingBg(u8);
 static void UpdateMonScrollingBgMask(u8);
 static void AnimTask_WaitAndRestoreVisibility(u8);
 
-static const u16 sCurseLinesPalette[] = { RGB_WHITE };
+static const u16 sCurseLinesPalette[] = { RGB_WHITE};
 
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {

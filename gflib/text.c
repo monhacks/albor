@@ -47,7 +47,7 @@ static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static EWRAM_DATA struct TextPrinter sTempTextPrinter = {0};
 static EWRAM_DATA struct TextPrinter sTextPrinters[WINDOWS_MAX] = {0};
 
-static u16 sFontHalfRowLookupTable[0x51];
+static u16 sFontHalfRowLookupTable[81];
 static u16 sLastTextBgColor;
 static u16 sLastTextFgColor;
 static u16 sLastTextShadowColor;
@@ -59,27 +59,27 @@ TextFlags gTextFlags;
 
 static const u8 sFontHalfRowOffsets[] =
 {
-    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-    0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
-    0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-    0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
-    0x24, 0x25, 0x26, 0x24, 0x27, 0x28, 0x29, 0x27, 0x2A, 0x2B, 0x2C, 0x2A, 0x24, 0x25, 0x26, 0x24,
-    0x2D, 0x2E, 0x2F, 0x2D, 0x30, 0x31, 0x32, 0x30, 0x33, 0x34, 0x35, 0x33, 0x2D, 0x2E, 0x2F, 0x2D,
-    0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
-    0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-    0x3F, 0x40, 0x41, 0x3F, 0x42, 0x43, 0x44, 0x42, 0x45, 0x46, 0x47, 0x45, 0x3F, 0x40, 0x41, 0x3F,
-    0x48, 0x49, 0x4A, 0x48, 0x4B, 0x4C, 0x4D, 0x4B, 0x4E, 0x4F, 0x50, 0x4E, 0x48, 0x49, 0x4A, 0x48,
-    0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-    0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
-    0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
+    0,  1,  2,  0,  3,  4,  5,  3,  6,  7,  8,  6,  0,  1,  2,  0,
+    9,  10, 11, 9,  12, 13, 14, 12, 15, 16, 17, 15, 9,  10, 11, 9,
+    18, 19, 20, 18, 21, 22, 23, 21, 24, 25, 26, 24, 18, 19, 20, 18,
+    0,  1,  2,  0,  3,  4,  5,  3,  6,  7,  8,  6,  0,  1,  2,  0,
+    27, 28, 29, 27, 30, 31, 32, 30, 33, 34, 35, 33, 27, 28, 29, 27,
+    36, 37, 38, 36, 39, 40, 41, 39, 42, 43, 44, 42, 36, 37, 38, 36,
+    45, 46, 47, 45, 48, 49, 50, 48, 51, 52, 53, 51, 45, 46, 47, 45,
+    27, 28, 29, 27, 30, 31, 32, 30, 33, 34, 35, 33, 27, 28, 29, 27,
+    54, 55, 56, 54, 57, 58, 59, 57, 60, 61, 62, 60, 54, 55, 56, 54,
+    63, 64, 65, 63, 66, 67, 68, 66, 69, 70, 71, 69, 63, 64, 65, 63,
+    72, 73, 74, 72, 75, 76, 77, 75, 78, 79, 80, 78, 72, 73, 74, 72,
+    54, 55, 56, 54, 57, 58, 59, 57, 60, 61, 62, 60, 54, 55, 56, 54,
+    0,  1,  2,  0,  3,  4,  5,  3,  6,  7,  8,  6,  0,  1,  2,  0,
+    9,  10, 11, 9,  12, 13, 14, 12, 15, 16, 17, 15, 9,  10, 11, 9,
+    18, 19, 20, 18, 21, 22, 23, 21, 24, 25, 26, 24, 18, 19, 20, 18,
+    0,  1,  2,  0,  3,  4,  5,  3,  6,  7,  8,  6,  0,  1,  2,  0
 };
 
 static const u8 sDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
 static const u8 sDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_alt.4bpp");
-static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
+static const u8 sDownArrowYCoords[] = {0, 1, 2, 1};
 static const u8 sWindowVerticalScrollSpeeds[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = 1,
     [OPTIONS_TEXT_SPEED_MID] = 2,
@@ -88,16 +88,16 @@ static const u8 sWindowVerticalScrollSpeeds[] = {
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
 {
-    { FONT_SMALL,          GetGlyphWidth_Small },
-    { FONT_NORMAL,         GetGlyphWidth_Normal },
-    { FONT_SHORT,          GetGlyphWidth_Short },
-    { FONT_BIG,            GetGlyphWidth_Big },
-    { FONT_BRAILLE,        GetGlyphWidth_Braille },
-    { FONT_NARROW,         GetGlyphWidth_Narrow },
-    { FONT_SMALL_NARROW,   GetGlyphWidth_SmallNarrow },
-    { FONT_NARROWER,       GetGlyphWidth_Narrower },
-    { FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower },
-    { FONT_SHORT_NARROW,   GetGlyphWidth_ShortNarrow },
+    {FONT_SMALL,          GetGlyphWidth_Small},
+    {FONT_NORMAL,         GetGlyphWidth_Normal},
+    {FONT_SHORT,          GetGlyphWidth_Short},
+    {FONT_BIG,            GetGlyphWidth_Big},
+    {FONT_BRAILLE,        GetGlyphWidth_Braille },
+    {FONT_NARROW,         GetGlyphWidth_Narrow},
+    {FONT_SMALL_NARROW,   GetGlyphWidth_SmallNarrow},
+    {FONT_NARROWER,       GetGlyphWidth_Narrower},
+    {FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower},
+    {FONT_SHORT_NARROW,   GetGlyphWidth_ShortNarrow},
 };
 
 struct
@@ -107,19 +107,19 @@ struct
     u8 height;
 } static const sKeypadIcons[] =
 {
-    [CHAR_A_BUTTON]       = { 0x00,  8, 12 },
-    [CHAR_B_BUTTON]       = { 0x01,  8, 12 },
-    [CHAR_L_BUTTON]       = { 0x02, 16, 12 },
-    [CHAR_R_BUTTON]       = { 0x04, 16, 12 },
-    [CHAR_START_BUTTON]   = { 0x06, 24, 12 },
-    [CHAR_SELECT_BUTTON]  = { 0x09, 24, 12 },
-    [CHAR_DPAD_UP]        = { 0x0C,  8, 12 },
-    [CHAR_DPAD_DOWN]      = { 0x0D,  8, 12 },
-    [CHAR_DPAD_LEFT]      = { 0x0E,  8, 12 },
-    [CHAR_DPAD_RIGHT]     = { 0x0F,  8, 12 },
-    [CHAR_DPAD_UPDOWN]    = { 0x20,  8, 12 },
-    [CHAR_DPAD_LEFTRIGHT] = { 0x21,  8, 12 },
-    [CHAR_DPAD_NONE]      = { 0x22,  8, 12 }
+    [CHAR_A_BUTTON]       = {0,  8, 12},
+    [CHAR_B_BUTTON]       = {1,  8, 12},
+    [CHAR_L_BUTTON]       = {2, 16, 12},
+    [CHAR_R_BUTTON]       = {4, 16, 12},
+    [CHAR_START_BUTTON]   = {6, 24, 12},
+    [CHAR_SELECT_BUTTON]  = {9, 24, 12},
+    [CHAR_DPAD_UP]        = {12, 8, 12},
+    [CHAR_DPAD_DOWN]      = {13, 8, 12},
+    [CHAR_DPAD_LEFT]      = {14, 8, 12},
+    [CHAR_DPAD_RIGHT]     = {15, 8, 12},
+    [CHAR_DPAD_UPDOWN]    = {32, 8, 12},
+    [CHAR_DPAD_LEFTRIGHT] = {33, 8, 12},
+    [CHAR_DPAD_NONE]      = {34, 8, 12}
 };
 
 static const u8 sKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
@@ -320,7 +320,7 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
         sTempTextPrinter.textSpeed = 0;
 
         // Render all text (up to limit) at once
-        for (j = 0; j < 0x400; ++j)
+        for (j = 0; j < 640; ++j)
         {
             if (RenderFont(&sTempTextPrinter) == RENDER_FINISH)
                 break;
@@ -549,28 +549,28 @@ void DecompressGlyphTile(const void *src_, void *dest_)
     u32 *dest = dest_;
 
     temp = *(src++);
-    *(dest)++ = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest)++ = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 
     temp = *(src++);
-    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 0xFF]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
+    *(dest++) = ((sFontHalfRowLookupTable[sFontHalfRowOffsets[temp & 255]]) << 16) | (sFontHalfRowLookupTable[sFontHalfRowOffsets[temp >> 8]]);
 }
 
 inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u32 *glyphPixels, s32 width, s32 height)
@@ -586,11 +586,11 @@ inline static void GLYPH_COPY(u8 *windowTiles, u32 widthOffset, u32 j, u32 i, u3
         pixelData = *glyphPixels++;
         for (j = dummyX; j < xAdd; j++)
         {
-            if ((toOrr = pixelData & 0xF))
+            if ((toOrr = pixelData & 15))
             {
                 dst = windowTiles + ((j / 8) * 32) + ((j % 8) / 2) + ((i / 8) * widthOffset) + ((i % 8) * 4);
                 bits = ((j & 1) * 4);
-                *dst = (toOrr << bits) | (*dst & (0xF0 >> bits));
+                *dst = (toOrr << bits) | (*dst & (240 >> bits));
             }
             pixelData >>= 4;
         }
@@ -925,7 +925,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
     }
     else
     {
-        FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 0x8, 0x10);
+        FillWindowPixelRect(windowId, (bgColor << 4) | bgColor, x, y, 8, 16);
         if (drawArrow == 0)
         {
             switch (gTextFlags.useAlternateDownArrow)
@@ -1047,7 +1047,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 PlayBGM(currChar);
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_ESCAPE:
-                currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+                currChar = *textPrinter->printerTemplate.currentChar | 160;
                 textPrinter->printerTemplate.currentChar++;
                 break;
             case EXT_CTRL_CODE_PLAY_SE:
@@ -1124,7 +1124,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             TextPrinterInitDownArrowCounters(textPrinter);
             return RENDER_UPDATE;
         case CHAR_EXTRA_SYMBOL:
-            currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+            currChar = *textPrinter->printerTemplate.currentChar | 160;
             textPrinter->printerTemplate.currentChar++;
             break;
         case CHAR_KEYPAD_ICON:
@@ -1389,7 +1389,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         case CHAR_KEYPAD_ICON:
         case CHAR_EXTRA_SYMBOL:
             if (*str == CHAR_EXTRA_SYMBOL)
-                glyphWidth = func(*++str | 0x100, isJapanese);
+                glyphWidth = func(*++str | 160, isJapanese);
             else
                 glyphWidth = GetKeypadIconWidth(*++str);
 
@@ -1530,9 +1530,9 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
                 DecompressGlyph_Normal(temp, TRUE);
                 break;
             }
-            CpuCopy32(gCurGlyph.gfxBufferTop, pixels, 0x20);
-            CpuCopy32(gCurGlyph.gfxBufferBottom, pixels + 0x20, 0x20);
-            pixels += 0x40;
+            CpuCopy32(gCurGlyph.gfxBufferTop, pixels, 32);
+            CpuCopy32(gCurGlyph.gfxBufferBottom, pixels + 32, 32);
+            pixels += 64;
             break;
         }
     }
@@ -1546,11 +1546,11 @@ u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
 {
     BlitBitmapRectToWindow(
         windowId,
-        sKeypadIconTiles + (sKeypadIcons[keypadIconId].tileOffset * 0x20),
+        sKeypadIconTiles + (sKeypadIcons[keypadIconId].tileOffset * 32),
         0,
         0,
-        0x80,
-        0x80,
+        128,
+        128,
         x,
         y,
         sKeypadIcons[keypadIconId].width,
@@ -1622,28 +1622,28 @@ static void DecompressGlyph_Small(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == 1)
     {
-        glyphs = gFontSmallJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
+        glyphs = gFontSmallJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId & 15));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 12;
     }
     else
     {
-        glyphs = gFontSmallLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontSmallLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontSmallLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 13;
@@ -1664,28 +1664,28 @@ static void DecompressGlyph_Narrow(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontNormalJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId % 0x10));
+        glyphs = gFontNormalJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId % 16));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 15;
     }
     else
     {
-        glyphs = gFontNarrowLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontNarrowLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontNarrowLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 15;
@@ -1706,28 +1706,28 @@ static void DecompressGlyph_SmallNarrow(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontSmallJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId & 0xF));
+        glyphs = gFontSmallJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId & 15));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 12;
     }
     else
     {
-        glyphs = gFontSmallNarrowLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontSmallNarrowLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontSmallNarrowLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 12;
@@ -1748,30 +1748,30 @@ static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+        glyphs = gFontShortJapaneseGlyphs + (160 * (glyphId >> 3)) + (16 * (glyphId & 7));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);    // gCurGlyph + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);    // gCurGlyph + 0x60
+        DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 136, gCurGlyph.gfxBufferBottom + 8);
         gCurGlyph.width = gFontShortJapaneseGlyphWidths[glyphId];
         gCurGlyph.height = 14;
     }
     else
     {
-        glyphs = gFontShortLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontShortLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontShortLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 14;
@@ -1790,20 +1790,20 @@ static void DecompressGlyph_Big(u16 glyphId)
 {
     const u16 *glyphs;
 
-    glyphs = gFontBigLatinGlyphs + (0x20 * glyphId);
+    glyphs = gFontBigLatinGlyphs + (32 * glyphId);
     gCurGlyph.width = gFontBigLatinGlyphWidths[glyphId];
 
     if (gCurGlyph.width <= 8)
     {
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
     }
     else
     {
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-        DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+        DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+        DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
     }
 
     gCurGlyph.height = 15;
@@ -1820,28 +1820,28 @@ static void DecompressGlyph_Normal(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontNormalJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId % 0x10));
+        glyphs = gFontNormalJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId % 16));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 15;
     }
     else
     {
-        glyphs = gFontNormalLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontNormalLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontNormalLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 15;
@@ -1860,9 +1860,9 @@ static void DecompressGlyph_Bold(u16 glyphId)
 {
     const u16 *glyphs;
 
-    glyphs = sFontBoldJapaneseGlyphs + (0x100 * (glyphId >> 4)) + (0x8 * (glyphId & 0xF));
+    glyphs = sFontBoldJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId & 15));
     DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+    DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
     gCurGlyph.width = 8;
     gCurGlyph.height = 12;
 }
@@ -1873,28 +1873,28 @@ static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontNormalJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId % 0x10));
+        glyphs = gFontNormalJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId % 16));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 15;
     }
     else
     {
-        glyphs = gFontNarrowerLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontNarrowerLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontNarrowerLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 15;
@@ -1915,28 +1915,28 @@ static void DecompressGlyph_SmallNarrower(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontSmallJapaneseGlyphs + (0x100 * (glyphId >> 0x4)) + (0x8 * (glyphId % 0x10));
+        glyphs = gFontSmallJapaneseGlyphs + (160 * (glyphId >> 4)) + (8 * (glyphId % 16));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
         gCurGlyph.width = 8;
         gCurGlyph.height = 15;
     }
     else
     {
-        glyphs = gFontSmallNarrowerLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontSmallNarrowerLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontSmallNarrowerLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 15;
@@ -1957,30 +1957,30 @@ static void DecompressGlyph_ShortNarrow(u16 glyphId, bool32 isJapanese)
 
     if (isJapanese == TRUE)
     {
-        glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
+        glyphs = gFontShortJapaneseGlyphs + (160 * (glyphId >> 3)) + (16 * (glyphId & 7));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-        DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);    // gCurGlyph + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);    // gCurGlyph + 0x60
+        DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+        DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
+        DecompressGlyphTile(glyphs + 136, gCurGlyph.gfxBufferBottom + 8);
         gCurGlyph.width = gFontShortJapaneseGlyphWidths[glyphId];
         gCurGlyph.height = 14;
     }
     else
     {
-        glyphs = gFontShortNarrowLatinGlyphs + (0x20 * glyphId);
+        glyphs = gFontShortNarrowLatinGlyphs + (32 * glyphId);
         gCurGlyph.width = gFontShortNarrowLatinGlyphWidths[glyphId];
 
         if (gCurGlyph.width <= 8)
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
         }
         else
         {
             DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-            DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-            DecompressGlyphTile(glyphs + 0x10, gCurGlyph.gfxBufferBottom);
-            DecompressGlyphTile(glyphs + 0x18, gCurGlyph.gfxBufferBottom + 8);
+            DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+            DecompressGlyphTile(glyphs + 16, gCurGlyph.gfxBufferBottom);
+            DecompressGlyphTile(glyphs + 24, gCurGlyph.gfxBufferBottom + 8);
         }
 
         gCurGlyph.height = 14;

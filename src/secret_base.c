@@ -137,11 +137,11 @@ static const struct MenuAction sRegistryMenuActions[] =
 {
     {
         .text = gText_DelRegist,
-        .func = { .void_u8 = ShowRegistryMenuDeleteConfirmation },
+        .func = { .void_u8 = ShowRegistryMenuDeleteConfirmation},
     },
     {
         .text = gText_Cancel,
-        .func = { .void_u8 = ReturnToMainRegistryMenu },
+        .func = { .void_u8 = ReturnToMainRegistryMenu},
     },
 };
 

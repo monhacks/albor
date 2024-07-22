@@ -270,11 +270,11 @@ static const union AnimCmd *const sAnims_Rival[] =
 
 #define MONBG_OFFSET (MON_PIC_SIZE * 3)
 static const struct SpriteSheet sSpriteSheet_MonBg[] = {
-    { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG },
+    { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG},
     {},
 };
 static const struct SpritePalette sSpritePalette_MonBg[] = {
-    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_MON_BG },
+    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_MON_BG},
     {},
 };
 

@@ -7812,13 +7812,13 @@ static const struct SubspriteTable *const sSubspriteTables_DigitalDisplay[NUM_DI
 
 static const struct SpriteSheet sSlotMachineSpriteSheets[22] =
 {
-    { .data = gSlotMachineReelSymbol1Tiles, .size = 0x200, .tag = GFXTAG_7_RED },
-    { .data = gSlotMachineReelSymbol2Tiles, .size = 0x200, .tag = GFXTAG_7_BLUE },
-    { .data = gSlotMachineReelSymbol3Tiles, .size = 0x200, .tag = GFXTAG_AZURILL },
-    { .data = gSlotMachineReelSymbol4Tiles, .size = 0x200, .tag = GFXTAG_LOTAD },
-    { .data = gSlotMachineReelSymbol5Tiles, .size = 0x200, .tag = GFXTAG_CHERRY },
-    { .data = gSlotMachineReelSymbol6Tiles, .size = 0x200, .tag = GFXTAG_POWER },
-    { .data = gSlotMachineReelSymbol7Tiles, .size = 0x200, .tag = GFXTAG_REPLAY },
+    { .data = gSlotMachineReelSymbol1Tiles, .size = 0x200, .tag = GFXTAG_7_RED},
+    { .data = gSlotMachineReelSymbol2Tiles, .size = 0x200, .tag = GFXTAG_7_BLUE},
+    { .data = gSlotMachineReelSymbol3Tiles, .size = 0x200, .tag = GFXTAG_AZURILL},
+    { .data = gSlotMachineReelSymbol4Tiles, .size = 0x200, .tag = GFXTAG_LOTAD},
+    { .data = gSlotMachineReelSymbol5Tiles, .size = 0x200, .tag = GFXTAG_CHERRY},
+    { .data = gSlotMachineReelSymbol6Tiles, .size = 0x200, .tag = GFXTAG_POWER},
+    { .data = gSlotMachineReelSymbol7Tiles, .size = 0x200, .tag = GFXTAG_REPLAY},
     { .data = gSlotMachineNumber0Tiles, .size = 0x40, .tag = GFXTAG_NUM_0 },
     { .data = gSlotMachineNumber1Tiles, .size = 0x40, .tag = GFXTAG_NUM_1 },
     { .data = gSlotMachineNumber2Tiles, .size = 0x40, .tag = GFXTAG_NUM_2 },
@@ -7831,10 +7831,10 @@ static const struct SpriteSheet sSlotMachineSpriteSheets[22] =
     { .data = gSlotMachineNumber9Tiles, .size = 0x40, .tag = GFXTAG_NUM_9 },
     // skips GFXTAG_REEL_BG, which has its own spritesheet
     // the data for these sheets is determined at runtime
-    { .data = NULL, .size = 0x200, .tag = GFXTAG_STOP },
-    { .data = NULL, .size = 0x200, .tag = GFXTAG_BONUS },
-    { .data = NULL, .size = 0x300, .tag = GFXTAG_BIG },
-    { .data = NULL, .size = 0x300, .tag = GFXTAG_REG },
+    { .data = NULL, .size = 0x200, .tag = GFXTAG_STOP},
+    { .data = NULL, .size = 0x200, .tag = GFXTAG_BONUS},
+    { .data = NULL, .size = 0x300, .tag = GFXTAG_BIG},
+    { .data = NULL, .size = 0x300, .tag = GFXTAG_REG},
     {},
 };
 

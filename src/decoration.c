@@ -224,15 +224,15 @@ static const struct MenuAction sDecorationMainMenuActions[] =
     },
     {
         .text = gText_PutAway,
-        .func = { .void_u8 = DecorationMenuAction_PutAway },
+        .func = { .void_u8 = DecorationMenuAction_PutAway},
     },
     {
         .text = gText_Toss2,
-        .func = { .void_u8 = DecorationMenuAction_Toss },
+        .func = { .void_u8 = DecorationMenuAction_Toss},
     },
     {
         .text = gText_Cancel,
-        .func = { .void_u8 = DecorationMenuAction_Cancel },
+        .func = { .void_u8 = DecorationMenuAction_Cancel},
     },
 };
 
@@ -246,9 +246,9 @@ static const u8 *const sSecretBasePCMenuItemDescriptions[] =
 
 static const TaskFunc sSecretBasePC_SelectedDecorationActions[][2] =
 {
-   { DecorationItemsMenuAction_AttemptPlace, DecorationItemsMenuAction_Cancel },
-   { DecorationItemsMenuAction_AttemptToss,  DecorationItemsMenuAction_Cancel },
-   { DecorationItemsMenuAction_Trade,        DecorationItemsMenuAction_Cancel },
+   { DecorationItemsMenuAction_AttemptPlace, DecorationItemsMenuAction_Cancel},
+   { DecorationItemsMenuAction_AttemptToss,  DecorationItemsMenuAction_Cancel},
+   { DecorationItemsMenuAction_Trade,        DecorationItemsMenuAction_Cancel},
 };
 
 static const struct WindowTemplate sDecorationWindowTemplates[WINDOW_COUNT] =

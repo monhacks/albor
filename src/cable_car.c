@@ -134,14 +134,14 @@ static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.
 static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
-    { gCableCarDoor_Gfx,   0x40, TAG_DOOR },
-    { gCableCarCable_Gfx,  0x80, TAG_CABLE },
+    { gCableCar_Gfx,      0x800, TAG_CABLE_CAR},
+    { gCableCarDoor_Gfx,   0x40, TAG_DOOR},
+    { gCableCarCable_Gfx,  0x80, TAG_CABLE},
     { },
 };
 
 static const struct SpritePalette sSpritePalettes[] = {
-    { gCableCar_Pal, TAG_CABLE_CAR },
+    { gCableCar_Pal, TAG_CABLE_CAR},
     { }
 };
 

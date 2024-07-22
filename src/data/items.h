@@ -58,9 +58,9 @@ static const u8 sSwiftFeatherDesc[]   = _("An item that raises\n"
                                           "the base Speed of\n"
                                           "a Pokémon.");
 
-static const u8 sBigMushroomDesc[]    = _("A rare mushroom\n"
-                                          "that would sell at a\n"
-                                          "high price.");
+static const u8 sBigMushroomDesc[]    = _("Seta que por su\n"
+                                          "valor culinario se\n"
+                                          "vende a alto precio.");
 
 static const u8 sShardsDesc[]         = _("A shard from an\n"
                                           "ancient item. Can\n"
@@ -2586,8 +2586,8 @@ const struct Item gItemsInfo[] =
 
     [ITEM_BIG_MUSHROOM] =
     {
-        .name = _("Big Mushroom"),
-        .price = 5000 * TREASURE_FACTOR,
+        .name = _("Seta"),
+        .price = 5000,
         .description = sBigMushroomDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,

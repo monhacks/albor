@@ -127,7 +127,7 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
         .type = TYPE_MYSTERY, // no type limitation
         .moves = sParalyzingMoves,
         .nMoves = NELEMS(sParalyzingMoves),
-        .abilities = { ABILITY_STATIC },
+        .abilities = {ABILITY_STATIC},
         .nAbilities = 1,
     },
     [1] = /* pokemon with moves that poison */
@@ -135,14 +135,14 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
         .type = TYPE_MYSTERY,
         .moves = sPoisoningMoves,
         .nMoves = NELEMS(sPoisoningMoves),
-        .abilities = { ABILITY_POISON_POINT },
+        .abilities = {ABILITY_POISON_POINT},
     },
     [2] = /* Pokemon with moves that burn */
     {
         .type = TYPE_MYSTERY,
         .moves = sBurningMoves,
         .nMoves = NELEMS(sBurningMoves),
-        .abilities = { ABILITY_FLAME_BODY },
+        .abilities = {ABILITY_FLAME_BODY},
         .nAbilities = 1,
     },
     [3] = /* pokemon with moves that waste PP */
@@ -150,19 +150,19 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
         .type = TYPE_MYSTERY,
         .moves = sPPReducingMoves,
         .nMoves = NELEMS(sPPReducingMoves),
-        .abilities = { ABILITY_PRESSURE },
+        .abilities = {ABILITY_PRESSURE},
         .nAbilities = 1,
     },
     [4] = /* pokemon with Levitate */
     {
         .type = TYPE_MYSTERY,
-        .abilities = { ABILITY_LEVITATE },
+        .abilities = {ABILITY_LEVITATE},
         .nAbilities = 1,
     },
     [5] = /* pokemon with trapping abilities */
     {
         .type = TYPE_MYSTERY,
-        .abilities = { ABILITY_SHADOW_TAG, ABILITY_ARENA_TRAP }, // TODO magnet pull?
+        .abilities = {ABILITY_SHADOW_TAG, ABILITY_ARENA_TRAP}, // TODO magnet pull?
         .nAbilities = 2,
     },
     [6] = /* ice types */
@@ -193,7 +193,7 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
         .type = TYPE_MYSTERY,
         .moves = sWeatherChangingMoves,
         .nMoves = NELEMS(sWeatherChangingMoves),
-        .abilities = { ABILITY_SAND_SPIT, ABILITY_DRIZZLE, ABILITY_SNOW_WARNING, ABILITY_DROUGHT, ABILITY_SAND_STREAM },
+        .abilities = {ABILITY_SAND_SPIT, ABILITY_DRIZZLE, ABILITY_SNOW_WARNING, ABILITY_DROUGHT, ABILITY_SAND_STREAM},
         .nAbilities = 5,
     },
     [12] = /* bug types */
