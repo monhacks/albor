@@ -295,6 +295,30 @@ const u8 gTrainerBackPic_Steven[] = INCBIN_U8("graphics/trainers/back_pics/steve
 const u32 gTrainerBackPicPalette_Red[] = INCBIN_U32("graphics/trainers/back_pics/red.gbapal.lz");
 const u32 gTrainerBackPicPalette_Leaf[] = INCBIN_U32("graphics/trainers/back_pics/leaf.gbapal.lz");
 
+static const union AnimCmd sAnim_Trainer_0[] =
+{
+    ANIMCMD_FRAME(0, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Trainer_1[] =
+{
+    ANIMCMD_FRAME(1, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sAnim_Trainer_2[] =
+{
+    ANIMCMD_FRAME(2, 0),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const gFrontAnims_Animacion[] ={
+    sAnim_Trainer_0,
+    sAnim_Trainer_1,
+    sAnim_Trainer_2
+};
+
 // The first two parameters invoke a front pic and palette by
 // calling a "TRAINER_PIC" constant (e.g. TRAINER_PIC_HIKER), and
 // gTrainerFrontPic/gTrainerPalette pointers, (e.g "gTrainerFrontPic_Hiker" and "gTrainerPalette_Hiker").
@@ -306,7 +330,8 @@ const u32 gTrainerBackPicPalette_Leaf[] = INCBIN_U32("graphics/trainers/back_pic
         .frontPic = {gTrainerFrontPic_##file, TRAINER_PIC_SIZE, TRAINER_PIC_##trainerPic},\
         .palette = {gTrainerPalette_##file, TRAINER_PIC_##trainerPic},                    \
         .mugshotCoords = {DEFAULT(0, __VA_ARGS__), DEFAULT_2(0, __VA_ARGS__)},            \
-        .mugshotRotation = DEFAULT_3(0x200, __VA_ARGS__),                                 \
+        .mugshotRotation = DEFAULT_3(512, __VA_ARGS__),                                   \
+        .animation = DEFAULT_4(NULL, __VA_ARGS__),                                        \
     }
 
 const struct TrainerSprite gTrainerSprites[] =
@@ -404,7 +429,7 @@ const struct TrainerSprite gTrainerSprites[] =
     TRAINER_SPRITE(LEAF, Leaf),
     TRAINER_SPRITE(RS_BRENDAN, RubySapphireBrendan),
     TRAINER_SPRITE(RS_MAY, RubySapphireMay),
-    TRAINER_SPRITE(CYNTHIA, Cynthia),
+    TRAINER_SPRITE(CYNTHIA, Cynthia, 0, 0, 0, gFrontAnims_Animacion),
 };
 
 static const union AnimCmd sAnimCmd_Hoenn[] =

@@ -201,7 +201,6 @@ const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[] =
     sAffineAnim_Battler_Spin,
 };
 
-
 static const union AnimCmd sAnim_MonPic_0[] =
 {
     ANIMCMD_FRAME(0, 0),

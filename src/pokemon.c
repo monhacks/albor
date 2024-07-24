@@ -1480,7 +1480,7 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     }
 }
 
-void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition)
+void SetMultiuseSpriteTemplateToTrainer(u16 trainerPicId, u8 battlerPosition)
 {
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
@@ -1491,22 +1491,15 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition
     else
     {
         if (gMonSpritesGfxPtr != NULL)
+        {
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
+        }
         else
+        {
             gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
+        }
         gMultiuseSpriteTemplate.anims = sAnims_Trainer;
     }
-}
-
-void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPosition)
-{
-    if (gMonSpritesGfxPtr != NULL)
-        gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
-    else
-        gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
-
-    gMultiuseSpriteTemplate.paletteTag = trainerPicId;
-    gMultiuseSpriteTemplate.anims = sAnims_Trainer;
 }
 
 /* GameFreak called GetMonData with either 2 or 3 arguments, for type
