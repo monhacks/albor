@@ -49,7 +49,7 @@ struct TrainerBacksprite
 
 #define MON_COORDS_SIZE(width, height)(DIV_ROUND_UP(width, 8) << 4 | DIV_ROUND_UP(height, 8))
 #define GET_MON_COORDS_WIDTH(size)((size >> 4) * 8)
-#define GET_MON_COORDS_HEIGHT(size)((size & 0xF) * 8)
+#define GET_MON_COORDS_HEIGHT(size)((size & 15) * 8)
 #define TRAINER_PARTY_IVS(hp, atk, def, spatk, spdef, speed) (hp | (atk << 5) | (def << 10) | (spatk << 15) | (spdef << 20) | (speed << 25))
 #define TRAINER_PARTY_EVS(hp, atk, def, spatk, spdef, speed) ((const u8[6]){hp,atk,def,spatk,spdef,speed})
 
@@ -103,7 +103,7 @@ struct TrainerClass
     u16 ball;
 };
 
-#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
+#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 127))
 
 struct FollowerMsgInfo {
     const u8 *text;

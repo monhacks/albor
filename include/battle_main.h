@@ -20,8 +20,8 @@ struct MultiPartnerMenuPokemon
 };
 
 // defines for the 'DoBounceEffect' function
-#define BOUNCE_MON          0x0
-#define BOUNCE_HEALTHBOX    0x1
+#define BOUNCE_MON          0
+#define BOUNCE_HEALTHBOX    1
 
 enum {
     FIRST_TURN_EVENTS_START,

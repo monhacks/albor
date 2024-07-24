@@ -1428,7 +1428,7 @@ u8 GetBoxMonGender(struct BoxPokemon *boxMon)
         return gSpeciesInfo[species].genderRatio;
     }
 
-    if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
+    if (gSpeciesInfo[species].genderRatio > (personality & 255))
         return MON_FEMALE;
     else
         return MON_MALE;
@@ -1444,7 +1444,7 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
         return gSpeciesInfo[species].genderRatio;
     }
 
-    if (gSpeciesInfo[species].genderRatio > (personality & 0xFF))
+    if (gSpeciesInfo[species].genderRatio > (personality & 255))
         return MON_FEMALE;
     else
         return MON_MALE;
