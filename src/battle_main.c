@@ -2002,15 +2002,9 @@ static void SpriteCB_WildMonAnimate(struct Sprite *sprite)
     }
 }
 
-void SpriteCallbackDummy_2(struct Sprite *sprite)
-{
-
-}
-
 void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
 {
     u8 battler = sprite->sBattler;
-    u32 personality = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
     u16 species;
     u8 yOffset;
 
@@ -2020,8 +2014,6 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
         species = sprite->sSpeciesId;
 
     species = SanitizeSpeciesId(species);
-    if (species == SPECIES_UNOWN)
-        species = GetUnownSpeciesId(personality);
     yOffset = gSpeciesInfo[species].frontPicYOffset;
 
     sprite->data[3] = 8 - yOffset / 8;
@@ -2075,7 +2067,7 @@ void SpriteCB_HideAsMoveTarget(struct Sprite *sprite)
 {
     sprite->invisible = sprite->data[4];
     sprite->data[4] = FALSE;
-    sprite->callback = SpriteCallbackDummy_2;
+    sprite->callback = SpriteCallbackDummy;
 }
 
 void SpriteCB_OpponentMonFromBall(struct Sprite *sprite)

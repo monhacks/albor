@@ -310,8 +310,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
-        if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy
-            || gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy_2)
+        if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
         {
             m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
             RecordedOpponentBufferExecCompleted(battler);

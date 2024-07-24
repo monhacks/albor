@@ -2005,8 +2005,6 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             personality = gContestResources->moveAnim->personality;
         }
         species = SanitizeSpeciesId(species);
-        if (species == SPECIES_UNOWN)
-            species = GetUnownSpeciesId(personality);
         size = gSpeciesInfo[species].backPicSize;
         y_offset = gSpeciesInfo[species].backPicYOffset;
     }
@@ -2027,8 +2025,6 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             }
 
             species = SanitizeSpeciesId(species);
-            if (species == SPECIES_UNOWN)
-                species = GetUnownSpeciesId(personality);
             if (gSpeciesInfo[species].backPicFemale != NULL && IsPersonalityFemale(species, personality))
                 size = gSpeciesInfo[species].backPicSizeFemale;
             else
@@ -2050,8 +2046,6 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
             }
 
             species = SanitizeSpeciesId(species);
-            if (species == SPECIES_UNOWN)
-                species = GetUnownSpeciesId(personality);
             if (gSpeciesInfo[species].frontPicFemale != NULL && IsPersonalityFemale(species, personality))
                 size = gSpeciesInfo[species].frontPicSizeFemale;
             else

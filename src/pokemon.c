@@ -680,32 +680,16 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
 
-void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
+void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature)
 {
     u32 personality;
 
-    if ((u8)(unownLetter - 1) < NUM_UNOWN_FORMS)
+    do
     {
-        u16 actualLetter;
-
-        do
-        {
-            personality = Random32();
-            actualLetter = GET_UNOWN_LETTER(personality);
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality)
-            || actualLetter != unownLetter - 1);
+        personality = Random32();
     }
-    else
-    {
-        do
-        {
-            personality = Random32();
-        }
-        while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
-    }
+    while (nature != GetNatureFromPersonality(personality)
+        || gender != GetGenderFromSpeciesAndPersonality(species, personality));
 
     CreateMon(mon, species, level, fixedIV, TRUE, personality, OT_ID_PLAYER_ID, 0);
 }
@@ -1469,15 +1453,6 @@ u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 bool32 IsPersonalityFemale(u16 species, u32 personality)
 {
     return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
-}
-
-u32 GetUnownSpeciesId(u32 personality)
-{
-    u16 unownLetter = GetUnownLetterByPersonality(personality);
-
-    if (unownLetter == 0)
-        return SPECIES_UNOWN;
-    return unownLetter + SPECIES_UNOWN_B - 1;
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
@@ -4798,7 +4773,7 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, 
             // No delay, start animation
             LaunchAnimationTaskForFrontSprite(sprite, gSpeciesInfo[species].frontAnimId);
         }
-        sprite->callback = SpriteCallbackDummy_2;
+        sprite->callback = SpriteCallbackDummy;
     }
 }
 
@@ -4839,7 +4814,7 @@ void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
     else
     {
         LaunchAnimationTaskForBackSprite(sprite, GetSpeciesBackAnimSet(species));
-        sprite->callback = SpriteCallbackDummy_2;
+        sprite->callback = SpriteCallbackDummy;
     }
 }
 

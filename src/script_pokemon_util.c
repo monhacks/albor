@@ -338,7 +338,7 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
      || (gender == MON_FEMALE && genderRatio != MON_MALE && genderRatio != MON_GENDERLESS)
      || (gender == MON_GENDERLESS && genderRatio == MON_GENDERLESS))
-        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature, 0);
+        CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature);
     else
         CreateMonWithNature(&mon, species, level, 32, nature);
 
