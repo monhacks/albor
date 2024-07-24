@@ -2290,10 +2290,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FRONT_PIC(VulpixAlolan, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_VulpixAlolan,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .frontAnimId = ANIM_SHAKE_GLOW_WHITE_SLOW,
         BACK_PIC(VulpixAlolan, 64, 56),
         .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(VulpixAlolan),
         ICON(VulpixAlolan, 2),
         FOLLOWER(VulpixAlolan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
