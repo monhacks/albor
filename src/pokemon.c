@@ -1498,7 +1498,7 @@ void SetMultiuseSpriteTemplateToTrainer(u16 trainerPicId, u8 battlerPosition)
         {
             gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
         }
-        gMultiuseSpriteTemplate.anims = sAnims_Trainer;
+        gMultiuseSpriteTemplate.anims = gAnims_Trainer;
     }
 }
 
