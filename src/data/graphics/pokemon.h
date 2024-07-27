@@ -324,7 +324,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonShinyPalette_VulpixAlolan[] = INCBIN_U32("graphics/pokemon/vulpix/alolan/shiny.gbapal.lz");
     const u32 gObjectEventPic_VulpixAlolan[] = INCBIN_U32("graphics/pokemon/vulpix/alolan/follower.4bpp");
 
-    const u32 gMonFrontPic_NinetalesAlolan[] = INCBIN_U32("graphics/pokemon/ninetales/alolan/front.4bpp.lz");
+    const u32 gMonFrontPic_NinetalesAlolan[] = INCBIN_U32("graphics/pokemon/ninetales/alolan/anim_front.4bpp.lz");
     const u32 gMonPalette_NinetalesAlolan[] = INCBIN_U32("graphics/pokemon/ninetales/alolan/normal.gbapal.lz");
     const u32 gMonBackPic_NinetalesAlolan[] = INCBIN_U32("graphics/pokemon/ninetales/alolan/back.4bpp.lz");
     const u32 gMonShinyPalette_NinetalesAlolan[] = INCBIN_U32("graphics/pokemon/ninetales/alolan/shiny.gbapal.lz");
