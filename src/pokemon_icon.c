@@ -280,14 +280,6 @@ void FreeMonIconPalettes(void)
         FreeSpritePaletteByTag(gMonIconPaletteTable[i].tag);
 }
 
-// unused
-void SafeFreeMonIconPalette(u16 species)
-{
-    u8 palIndex;
-    palIndex = gSpeciesInfo[SanitizeSpeciesId(species)].iconPalIndex;
-    FreeSpritePaletteByTag(gMonIconPaletteTable[palIndex].tag);
-}
-
 void FreeMonIconPalette(u16 species)
 {
     u8 palIndex;
