@@ -2935,8 +2935,8 @@ const struct SpriteTemplate gWoodHammerHammerSpriteTemplate =
 
 const struct SpriteTemplate gIvyCudgelSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
-    .paletteTag = ANIM_TAG_IVY_CUDGEL_GRASS,
+    .tileTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2946,8 +2946,8 @@ const struct SpriteTemplate gIvyCudgelSpriteTemplate =
 
 const struct SpriteTemplate gIvyCudgelFireSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
-    .paletteTag = ANIM_TAG_IVY_CUDGEL_FIRE,
+    .tileTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2957,8 +2957,8 @@ const struct SpriteTemplate gIvyCudgelFireSpriteTemplate =
 
 const struct SpriteTemplate gIvyCudgelRockSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
-    .paletteTag = ANIM_TAG_IVY_CUDGEL_ROCK,
+    .tileTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -2968,8 +2968,8 @@ const struct SpriteTemplate gIvyCudgelRockSpriteTemplate =
 
 const struct SpriteTemplate gIvyCudgelWaterSpriteTemplate =
 {
-    .tileTag = ANIM_TAG_IVY_CUDGEL_GRASS,
-    .paletteTag = ANIM_TAG_IVY_CUDGEL_WATER,
+    .tileTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
+    .paletteTag = ANIM_TAG_WOOD_HAMMER_HAMMER,
     .oam = &gOamData_AffineDouble_ObjNormal_64x64,
     .anims = gDummySpriteAnimTable,
     .images = NULL,

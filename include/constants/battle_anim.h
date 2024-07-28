@@ -348,7 +348,7 @@
 #define ANIM_TAG_STEAM_ERUPTION             (ANIM_SPRITES_START + 334)
 #define ANIM_TAG_CONFIDE                    (ANIM_SPRITES_START + 335)
 #define ANIM_TAG_VERTICAL_HEX               (ANIM_SPRITES_START + 336)
-#define ANIM_TAG_UNAVAILABLE_1              (ANIM_SPRITES_START + 337)  //0x2862.. supposedly used elsewhere?
+#define ANIM_TAG_ASCUAS                     (ANIM_SPRITES_START + 337)
 #define ANIM_TAG_UNAVAILABLE_2              (ANIM_SPRITES_START + 338)
 #define ANIM_TAG_POWER_TRICK                (ANIM_SPRITES_START + 339)
 #define ANIM_TAG_CHAIN_LINK                 (ANIM_SPRITES_START + 340)
@@ -405,14 +405,10 @@
 #define ANIM_TAG_SYRUP_SHELL_YELLOW         (ANIM_SPRITES_START + 391)
 #define ANIM_TAG_SYRUP_SPLAT_RED            (ANIM_SPRITES_START + 392)
 #define ANIM_TAG_SYRUP_SPLAT_YELLOW         (ANIM_SPRITES_START + 393)
-#define ANIM_TAG_IVY_CUDGEL_GRASS           (ANIM_SPRITES_START + 394)
-#define ANIM_TAG_IVY_CUDGEL_FIRE            (ANIM_SPRITES_START + 395)
-#define ANIM_TAG_IVY_CUDGEL_ROCK            (ANIM_SPRITES_START + 396)
-#define ANIM_TAG_IVY_CUDGEL_WATER           (ANIM_SPRITES_START + 397)
-#define ANIM_TAG_TERA_CRYSTAL               (ANIM_SPRITES_START + 398)
-#define ANIM_TAG_TERA_SHATTER               (ANIM_SPRITES_START + 399)
-#define ANIM_TAG_DREEPY_SHINY               (ANIM_SPRITES_START + 400)
-#define ANIM_TAG_EMBOAR                     (ANIM_SPRITES_START + 401)
+#define ANIM_TAG_TERA_CRYSTAL               (ANIM_SPRITES_START + 394)
+#define ANIM_TAG_TERA_SHATTER               (ANIM_SPRITES_START + 395)
+#define ANIM_TAG_DREEPY_SHINY               (ANIM_SPRITES_START + 396)
+#define ANIM_TAG_EMBOAR                     (ANIM_SPRITES_START + 397)
 
 // battlers
 #define ANIM_ATTACKER         0
