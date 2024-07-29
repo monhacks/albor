@@ -17037,8 +17037,22 @@ Move_SPICY_EXTRACT::
 	waitforvisualfinish
 	end
 
-Move_TERA_BLAST::
 Move_AXE_KICK::
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET
+	loadspritegfx ANIM_TAG_IMPACT
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_ATTACKER
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, 0, 20, 0, 0, 4
+	delay 7
+	createsprite gAxeKickSpriteTemplate, ANIM_TARGET, 3
+	delay 2
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 1, 0, 0, ANIM_TARGET, 1
+	createvisualtask AnimTask_SquishTargetShort, 2
+	waitforvisualfinish
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 4
+	end
+
+Move_TERA_BLAST::
 Move_ORDER_UP::
 Move_SPIN_OUT::
 Move_POPULATION_BOMB::
