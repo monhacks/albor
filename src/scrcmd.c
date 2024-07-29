@@ -1235,46 +1235,32 @@ bool8 ScrCmd_turnvobject(struct ScriptContext *ctx)
 // The player is frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lockall(struct ScriptContext *ctx)
 {
-    if (IsOverworldLinkActive())
-    {
-        return FALSE;
-    }
-    else
-    {
-        FreezeObjects_WaitForPlayer();
-        SetupNativeScript(ctx, IsFreezePlayerFinished);
-        return TRUE;
-    }
+    FreezeObjects_WaitForPlayer();
+    SetupNativeScript(ctx, IsFreezePlayerFinished);
+    return TRUE;
 }
 
 // lock freezes all object events except the player, follower, and the selected object immediately.
 // The player and selected object are frozen after waiting for their current movement to finish.
 bool8 ScrCmd_lock(struct ScriptContext *ctx)
 {
-    if (IsOverworldLinkActive())
+    struct ObjectEvent *followerObj = GetFollowerObject();
+    if (gObjectEvents[gSelectedObjectEvent].active)
     {
-        return FALSE;
+        FreezeObjects_WaitForPlayerAndSelected();
+        SetupNativeScript(ctx, IsFreezeSelectedObjectAndPlayerFinished);
+        // follower is being talked to; keep it frozen
+        if (gObjectEvents[gSelectedObjectEvent].localId == OBJ_EVENT_ID_FOLLOWER)
+            followerObj = NULL;
     }
     else
     {
-        struct ObjectEvent *followerObj = GetFollowerObject();
-        if (gObjectEvents[gSelectedObjectEvent].active)
-        {
-            FreezeObjects_WaitForPlayerAndSelected();
-            SetupNativeScript(ctx, IsFreezeSelectedObjectAndPlayerFinished);
-            // follower is being talked to; keep it frozen
-            if (gObjectEvents[gSelectedObjectEvent].localId == OBJ_EVENT_ID_FOLLOWER)
-                followerObj = NULL;
-        }
-        else
-        {
-            FreezeObjects_WaitForPlayer();
-            SetupNativeScript(ctx, IsFreezePlayerFinished);
-        }
-        if (followerObj) // Unfreeze follower object
-            UnfreezeObjectEvent(followerObj);
-        return TRUE;
+        FreezeObjects_WaitForPlayer();
+        SetupNativeScript(ctx, IsFreezePlayerFinished);
     }
+    if (followerObj) // Unfreeze follower object
+        UnfreezeObjectEvent(followerObj);
+    return TRUE;
 }
 
 bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
@@ -2312,19 +2298,12 @@ bool8 ScrCmd_selectapproachingtrainer(struct ScriptContext *ctx)
 
 bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
 {
-    if (IsOverworldLinkActive())
+    if (gObjectEvents[gSelectedObjectEvent].active)
     {
-        return FALSE;
+        FreezeForApproachingTrainers();
+        SetupNativeScript(ctx, IsFreezeObjectAndPlayerFinished);
     }
-    else
-    {
-        if (gObjectEvents[gSelectedObjectEvent].active)
-        {
-            FreezeForApproachingTrainers();
-            SetupNativeScript(ctx, IsFreezeObjectAndPlayerFinished);
-        }
-        return TRUE;
-    }
+    return TRUE;
 }
 
 // This command will set a Pokémon's modernFatefulEncounter bit; there is no similar command to clear it.

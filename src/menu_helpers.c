@@ -287,10 +287,7 @@ bool8 IsWritingMailAllowed(u16 itemId)
 
 bool8 MenuHelpers_IsLinkActive(void)
 {
-    if (IsOverworldLinkActive() == TRUE || gReceivedRemoteLinkPlayers == 1)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 static bool8 IsActiveOverworldLinkBusy(void)

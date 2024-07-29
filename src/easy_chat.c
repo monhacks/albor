@@ -1315,15 +1315,7 @@ static void StartEasyChatScreen(u8 taskId, TaskFunc taskFunc)
 
 static void Task_InitEasyChatScreen(u8 taskId)
 {
-    if (!IsOverworldLinkActive())
-    {
-        while (InitEasyChatScreen(taskId));
-    }
-    else
-    {
-        if (InitEasyChatScreen(taskId) == TRUE)
-            return;
-    }
+    while (InitEasyChatScreen(taskId));
     StartEasyChatScreen(taskId, Task_EasyChatScreen);
 }
 

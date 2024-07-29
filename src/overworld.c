@@ -101,14 +101,8 @@ static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
-static void ResetAllPlayerLinkStates(void);
 static u8 FlipVerticalAndClearForced(u8, u8);
 static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
-static u32 GetLinkSendQueueLength(void);
-static u16 KeyInterCB_DeferToRecvQueue(u32);
-static u16 KeyInterCB_DeferToSendQueue(u32);
-static u16 KeyInterCB_SelfIdle(u32);
-static u16 KeyInterCB_DeferToEventScript(u32);
 static void SetKeyInterceptCallback(u16 (*func)(u32));
 static void SetFieldVBlankCallback(void);
 static void FieldClearVBlankHBlankCallbacks(void);
@@ -117,12 +111,10 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
 
-static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
 // This callback is called with a player's key code. It then returns an
 // adjusted key code, effectively intercepting the input before anything
 // can process it.
 static u16 (*sPlayerKeyInterceptCallback)(u32);
-static bool8 sReceivingFromLink;
 
 u16 *gOverworldTilemapBuffer_Bg2;
 u16 *gOverworldTilemapBuffer_Bg1;
@@ -1399,11 +1391,6 @@ static void ResetSafariZoneFlag_(void)
     ResetSafariZoneFlag();
 }
 
-bool32 IsOverworldLinkActive(void)
-{
-    return FALSE;
-}
-
 static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)
 {
     struct FieldInput inputStruct;
@@ -2105,181 +2092,18 @@ static void SetCameraToTrackPlayer(void)
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
 }
 
-void ResetAllMultiplayerState(void)
-{
-    ResetAllPlayerLinkStates();
-    SetKeyInterceptCallback(KeyInterCB_SelfIdle);
-}
-
-static void SetKeyInterceptCallback(u16 (*func)(u32))
-{
-    sPlayerKeyInterceptCallback = func;
-}
-
-static void ResetAllPlayerLinkStates(void)
-{
-    s32 i;
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-        sPlayerLinkStates[i] = PLAYER_LINK_STATE_IDLE;
-}
-
-static u16 KeyInterCB_ReadButtons(u32 key)
-{
-    if (JOY_HELD(DPAD_UP))
-        return LINK_KEY_CODE_DPAD_UP;
-    if (JOY_HELD(DPAD_DOWN))
-        return LINK_KEY_CODE_DPAD_DOWN;
-    if (JOY_HELD(DPAD_LEFT))
-        return LINK_KEY_CODE_DPAD_LEFT;
-    if (JOY_HELD(DPAD_RIGHT))
-        return LINK_KEY_CODE_DPAD_RIGHT;
-    if (JOY_NEW(START_BUTTON))
-        return LINK_KEY_CODE_START_BUTTON;
-    if (JOY_NEW(A_BUTTON))
-        return LINK_KEY_CODE_A_BUTTON;
-    return LINK_KEY_CODE_EMPTY;
-}
-
-static u16 KeyInterCB_SelfIdle(u32 key)
-{
-    if (ArePlayerFieldControlsLocked() == TRUE)
-        return LINK_KEY_CODE_EMPTY;
-    if (GetLinkRecvQueueLength() > 4)
-        return LINK_KEY_CODE_HANDLE_RECV_QUEUE;
-    if (GetLinkSendQueueLength() <= 4)
-        return KeyInterCB_ReadButtons(key);
-    return LINK_KEY_CODE_HANDLE_SEND_QUEUE;
-}
-
-static u16 KeyInterCB_Idle(u32 key)
-{
-    return LINK_KEY_CODE_EMPTY;
-}
-
-// Ignore the player's inputs as long as there is an event script being executed.
-static u16 KeyInterCB_DeferToEventScript(u32 key)
-{
-    u16 retVal;
-    if (ArePlayerFieldControlsLocked() == TRUE)
-    {
-        retVal = LINK_KEY_CODE_EMPTY;
-    }
-    else
-    {
-        retVal = LINK_KEY_CODE_IDLE;
-        SetKeyInterceptCallback(KeyInterCB_Idle);
-    }
-    return retVal;
-}
-
-// Ignore the player's inputs as long as there are events being recived.
-static u16 KeyInterCB_DeferToRecvQueue(u32 key)
-{
-    u16 retVal;
-    if (GetLinkRecvQueueLength() >= OVERWORLD_RECV_QUEUE_MAX)
-    {
-        retVal = LINK_KEY_CODE_EMPTY;
-    }
-    else
-    {
-        retVal = LINK_KEY_CODE_IDLE;
-        UnlockPlayerFieldControls();
-        SetKeyInterceptCallback(KeyInterCB_Idle);
-    }
-    return retVal;
-}
-
-// Ignore the player's inputs as long as there are events being sent.
-static u16 KeyInterCB_DeferToSendQueue(u32 key)
-{
-    u16 retVal;
-    if (GetLinkSendQueueLength() > 2)
-    {
-        retVal = LINK_KEY_CODE_EMPTY;
-    }
-    else
-    {
-        retVal = LINK_KEY_CODE_IDLE;
-        UnlockPlayerFieldControls();
-        SetKeyInterceptCallback(KeyInterCB_Idle);
-    }
-    return retVal;
-}
-
-static u16 KeyInterCB_SendExitRoomKey(u32 key)
-{
-    return LINK_KEY_CODE_EXIT_ROOM;
-}
-
-u16 SetLinkWaitingForScript(void)
-{
-    SetKeyInterceptCallback(KeyInterCB_DeferToEventScript);
-    return 0;
-}
-
-// The exit room key will be sent at the next opportunity.
-// The return value is meaningless.
-u16 QueueExitLinkRoomKey(void)
-{
-    SetKeyInterceptCallback(KeyInterCB_SendExitRoomKey);
-    return 0;
-}
-
 bool32 Overworld_IsRecvQueueAtMax(void)
 {
-    if (!IsOverworldLinkActive())
         return FALSE;
-    if (GetLinkRecvQueueLength() >= OVERWORLD_RECV_QUEUE_MAX)
-        sReceivingFromLink = TRUE;
+        return FALSE;
     else
-        sReceivingFromLink = FALSE;
-    return sReceivingFromLink;
+        return TRUE;
 }
 
-bool32 Overworld_RecvKeysFromLinkIsRunning(void)
+static u32 GetLinkSendQueueLength(void)
 {
-    u8 temp;
-
-    if (GetLinkRecvQueueLength() < OVERWORLD_RECV_QUEUE_MAX - 1)
-        return FALSE;
-    else if (IsOverworldLinkActive() != TRUE)
-        return FALSE;
-    else if (IsSendingKeysToLink() != TRUE)
-        return FALSE;
-    else if (sPlayerKeyInterceptCallback == KeyInterCB_DeferToRecvQueue)
-        return TRUE;
-    else if (sPlayerKeyInterceptCallback != KeyInterCB_DeferToEventScript)
-        return FALSE;
-
-    temp = sReceivingFromLink;
-    sReceivingFromLink = FALSE;
-
-    if (temp == TRUE)
-        return TRUE;
-    else if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool32 Overworld_SendKeysToLinkIsRunning(void)
-{
-    if (GetLinkSendQueueLength() < 2)
-        return FALSE;
-    else if (IsOverworldLinkActive() != TRUE)
-        return FALSE;
-    else if (IsSendingKeysToLink() != TRUE)
-        return FALSE;
-    else if (sPlayerKeyInterceptCallback == KeyInterCB_DeferToSendQueue)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-bool32 IsSendingKeysOverCable(void)
-{
-    if (!IsSendingKeysToLink())
-        return FALSE;
+    return gLink.sendQueue.count;
+    return FALSE;
     else
         return TRUE;
 }
@@ -2294,10 +2118,6 @@ void ClearLinkPlayerObjectEvents(void)
     memset(gLinkPlayerObjectEvents, 0, sizeof(gLinkPlayerObjectEvents));
 }
 
-// Note: Emerald reuses the direction and range variables during Link mode
-// as special gender and direction values. The types and placement
-// conflict with the usual Event Object struct, thus the definitions.
-#define linkGender(obj) obj->singleMovementActive
 // not even one can reference *byte* aligned bitfield members...
 #define linkDirection(obj) ((u8 *)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
 

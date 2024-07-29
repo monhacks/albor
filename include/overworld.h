@@ -137,7 +137,6 @@ u8 GetSavedWarpRegionMapSectionId(void);
 u8 GetCurrentRegionMapSectionId(void);
 u8 GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
-bool32 IsOverworldLinkActive(void);
 void CB1_Overworld(void);
 void CB2_OverworldBasic(void);
 u8 UpdateTimeOfDay(void);
@@ -157,13 +156,7 @@ void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
-void ResetAllMultiplayerState(void);
-u16 SetLinkWaitingForScript(void);
-u16 QueueExitLinkRoomKey(void);
 bool32 Overworld_IsRecvQueueAtMax(void);
-bool32 Overworld_RecvKeysFromLinkIsRunning(void);
-bool32 Overworld_SendKeysToLinkIsRunning(void);
-bool32 IsSendingKeysOverCable(void);
 void ClearLinkPlayerObjectEvents(void);
 
 #endif // GUARD_OVERWORLD_H

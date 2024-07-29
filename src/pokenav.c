@@ -211,10 +211,7 @@ u32 CreateLoopedTask(LoopedTask loopedTask, u32 priority)
 {
     u16 taskId;
 
-    if (!IsOverworldLinkActive())
-        taskId = CreateTask(Task_RunLoopedTask, priority);
-    else
-        taskId = CreateTask(Task_RunLoopedTask_LinkMode, priority);
+    taskId = CreateTask(Task_RunLoopedTask, priority);
 
     SetWordTaskArg(taskId, 1, (u32)loopedTask);
 
