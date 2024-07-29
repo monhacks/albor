@@ -55,11 +55,8 @@ extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 extern u16 *gOverworldTilemapBuffer_Bg2;
 extern u16 *gOverworldTilemapBuffer_Bg1;
 extern u16 *gOverworldTilemapBuffer_Bg3;
-extern u16 gHeldKeyCodeToSend;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gLocalLinkPlayerId;
-extern u8 gFieldLinkPlayerCount;
 extern u8 gTimeOfDay;
 extern u16 gTimeUpdateCounter;
 

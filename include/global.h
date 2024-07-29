@@ -155,12 +155,6 @@ struct UCoords16
     u16 y;
 };
 
-struct Coords32
-{
-    s32 x;
-    s32 y;
-};
-
 struct UCoords32
 {
     u32 x;
@@ -381,34 +375,16 @@ struct PlayersApprentice
     /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
 };
 
-struct RankingHall1P
-{
-    u8 id[TRAINER_ID_LENGTH];
-    u16 winStreak;
-    u8 name[PLAYER_NAME_LENGTH + 1];
-    u8 language;
-};
-
-struct RankingHall2P
-{
-    u8 id1[TRAINER_ID_LENGTH];
-    u8 id2[TRAINER_ID_LENGTH];
-    u16 winStreak;
-    u8 name1[PLAYER_NAME_LENGTH + 1];
-    u8 name2[PLAYER_NAME_LENGTH + 1];
-    u8 language;
-};
-
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 specialSaveWarpFlags; //???
+    /*0x09*/ u8 specialSaveWarpFlags;
     /*0x0A*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
-    /*0x12*/ u8 playTimeVBlanks; //???
+    /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A] //modificar
     /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
@@ -423,7 +399,7 @@ struct SaveBlock2
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT]; //eliminar
     /*0x64C*/ struct BattleFrontier frontier; //eliminar
              struct Time fakeRTC;
-}; // sizeof=0xF2C
+};
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
@@ -686,31 +662,6 @@ struct TrainerHillSave
                u16 maybeECardScanDuringChallenge:1;
                u16 field_3D6E_0f:1;
                u16 mode:2; // HILL_MODE_*
-};
-
-struct WonderCard
-{
-    u16 flagId; // Event flag (sReceivedGiftFlags) + WONDER_CARD_FLAG_OFFSET
-    u16 iconSpecies;
-    u32 idNumber;
-    u8 type:2; // CARD_TYPE_*
-    u8 bgType:4;
-    u8 sendType:2; // SEND_TYPE_*
-    u8 maxStamps;
-    u8 titleText[WONDER_CARD_TEXT_LENGTH];
-    u8 subtitleText[WONDER_CARD_TEXT_LENGTH];
-    u8 bodyText[WONDER_CARD_BODY_TEXT_LINES][WONDER_CARD_TEXT_LENGTH];
-    u8 footerLine1Text[WONDER_CARD_TEXT_LENGTH];
-    u8 footerLine2Text[WONDER_CARD_TEXT_LENGTH];
-};
-
-struct WonderCardMetadata
-{
-    u16 battlesWon;
-    u16 battlesLost;
-    u16 numTrades;
-    u16 iconSpecies;
-    u16 stampData[2][MAX_STAMP_CARD_STAMPS]; // First element is STAMP_SPECIES, second is STAMP_ID
 };
 
 struct SaveBlock1

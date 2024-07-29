@@ -67,11 +67,6 @@
 #include "constants/weather.h"
 #include "constants/rgb.h"
 
-#define PLAYER_LINK_STATE_IDLE 0x80
-#define PLAYER_LINK_STATE_BUSY 0x81
-#define PLAYER_LINK_STATE_READY 0x82
-#define PLAYER_LINK_STATE_EXITING_ROOM 0x83
-
 #define FACING_NONE 0
 #define FACING_UP 1
 #define FACING_DOWN 2
@@ -103,7 +98,6 @@ static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
 static u8 FlipVerticalAndClearForced(u8, u8);
 static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
-static void SetKeyInterceptCallback(u16 (*func)(u32));
 static void SetFieldVBlankCallback(void);
 static void FieldClearVBlankHBlankCallbacks(void);
 static void TransitionMapMusic(void);
@@ -111,19 +105,11 @@ static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
 
-// This callback is called with a player's key code. It then returns an
-// adjusted key code, effectively intercepting the input before anything
-// can process it.
-static u16 (*sPlayerKeyInterceptCallback)(u32);
-
 u16 *gOverworldTilemapBuffer_Bg2;
 u16 *gOverworldTilemapBuffer_Bg1;
 u16 *gOverworldTilemapBuffer_Bg3;
-u16 gHeldKeyCodeToSend;
 void (*gFieldCallback)(void);
 bool8 (*gFieldCallback2)(void);
-u8 gLocalLinkPlayerId; // This is our player id in a multiplayer mode.
-u8 gFieldLinkPlayerCount;
 
 u8 gTimeOfDay;
 struct TimeBlendSettings currentTimeBlend;
@@ -2094,23 +2080,7 @@ static void SetCameraToTrackPlayer(void)
 
 bool32 Overworld_IsRecvQueueAtMax(void)
 {
-        return FALSE;
-        return FALSE;
-    else
-        return TRUE;
-}
-
-static u32 GetLinkSendQueueLength(void)
-{
-    return gLink.sendQueue.count;
     return FALSE;
-    else
-        return TRUE;
-}
-
-static u32 GetLinkSendQueueLength(void)
-{
-    return gLink.sendQueue.count;
 }
 
 void ClearLinkPlayerObjectEvents(void)
