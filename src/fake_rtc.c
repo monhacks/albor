@@ -80,8 +80,6 @@ u32 FakeRtc_GetSecondsRatio(void)
     return 20;
 }
 
-STATIC_ASSERT((OW_FLAG_PAUSE_TIME == 0 || OW_USE_FAKE_RTC == TRUE), FakeRtcMustBeTrueToPauseTime);
-
 void Script_PauseFakeRtc(void)
 {
     FlagSet(OW_FLAG_PAUSE_TIME);

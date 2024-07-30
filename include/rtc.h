@@ -18,16 +18,14 @@
 #define RTC_ERR_FLAG_MASK      0x0FF0
 
 #define HORA_INICIO_MANANA          6
-#define HORA_INICIO_MEDIA_MANANA    7
-#define HORA_FINAL_MEDIA_MANANA     9
+#define HORA_MEDIA_MANANA           8
 #define HORA_FINAL_MANANA           10
 
 #define HORA_INICIO_DIA             10
-#define HORA_FINAL_DIA              19
+#define HORA_FINAL_DIA              18
 
-#define HORA_INICIO_TARDE           19
-#define HORA_INICIO_MEDIA_TARDE     20
-#define HORA_FINAL_MEDIA_TARDE      21
+#define HORA_INICIO_TARDE           18
+#define HORA_MEDIA_TARDE            20
 #define HORA_FINAL_TARDE            22
 
 #define HORA_INICIO_NOCHE           22

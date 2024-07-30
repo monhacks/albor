@@ -11,9 +11,9 @@
 #define PALETTE_FADE_STATUS_DELAY 2
 #define PALETTE_FADE_STATUS_ACTIVE 1
 #define PALETTE_FADE_STATUS_DONE 0
-#define PALETTE_FADE_STATUS_LOADING 0xFF
+#define PALETTE_FADE_STATUS_LOADING 255
 
-#define PALETTES_BG      0x0000FFFF
+#define PALETTES_BG      65535
 #define PALETTES_OBJECTS 0xFFFF0000
 #define PALETTES_ALL     (PALETTES_BG | PALETTES_OBJECTS)
 
@@ -40,26 +40,26 @@ struct BlendSettings
 
 struct PaletteFadeControl
 {
-    u32 multipurpose1; // This field needs to exist or errors will occur
-    // These three are only used for TOD blending
-    struct BlendSettings *bld0;
-    struct BlendSettings *bld1;
-    u16 weight:9; // [0, 256], so must be 9 bits
-    u8 delayCounter:6;
-    u16 y:5; // blend coefficient
-    u16 targetY:5; // target blend coefficient
-    u16 blendColor:15;
-    bool16 active:1;
-    u16 multipurpose2:6;
-    bool16 yDec:1; // whether blend coefficient is decreasing
-    bool16 bufferTransferDisabled:1;
-    u16 mode:2;
-    bool16 shouldResetBlendRegisters:1;
-    bool16 hardwareFadeFinishing:1;
-    u16 softwareFadeFinishingCounter:5;
-    bool16 softwareFadeFinishing:1;
-    bool16 objPaletteToggle:1;
-    u8 deltaY:4; // rate of change of blend coefficient
+  u32 multipurpose1; // This field needs to exist or errors will occur
+  // These three are only used for TOD blending
+  struct BlendSettings *bld0;
+  struct BlendSettings *bld1;
+  u16 weight:9; // [0, 256], so must be 9 bits
+  u8 delayCounter:6;
+  u16 y:5; // blend coefficient
+  u16 targetY:5; // target blend coefficient
+  u16 blendColor:15;
+  bool16 active:1;
+  u16 multipurpose2:6;
+  bool16 yDec:1; // whether blend coefficient is decreasing
+  bool16 bufferTransferDisabled:1;
+  u16 mode:2;
+  bool16 shouldResetBlendRegisters:1;
+  bool16 hardwareFadeFinishing:1;
+  u16 softwareFadeFinishingCounter:5;
+  bool16 softwareFadeFinishing:1;
+  bool16 objPaletteToggle:1;
+  u8 deltaY:4; // rate of change of blend coefficient
 };
 
 extern const struct BlendSettings gTimeOfDayBlend[];

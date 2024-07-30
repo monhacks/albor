@@ -1408,10 +1408,10 @@ void CB1_Overworld(void)
 
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIEMPO_MANANA]     = {.coeff = 4, .blendColor = RGB_LIGHT_YELLOW},
+    [TIEMPO_MANANA]     = {.coeff = 5, .blendColor = RGB_LIGHT_YELLOW},
     [TIEMPO_DIA]        = {.coeff = 0, .blendColor = 0},
-    [TIEMPO_TARDE]      = {.coeff = 4, .blendColor = RGB_ORANGE},
-    [TIEMPO_NOCHE]      = {.coeff = 8, .blendColor = RGB_DARK_BLUE},
+    [TIEMPO_TARDE]      = {.coeff = 5, .blendColor = RGB_ORANGE},
+    [TIEMPO_NOCHE]      = {.coeff = 10, .blendColor = RGB_DARK_BLUE},
 };
 
 u8 UpdateTimeOfDay(void) 
@@ -1426,25 +1426,19 @@ u8 UpdateTimeOfDay(void)
         currentTimeBlend.altWeight = 0;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_NOCHE;
     }
-    else if (hours < HORA_INICIO_MEDIA_MANANA)
+    else if (hours < HORA_MEDIA_MANANA)
     {
         currentTimeBlend.time0 = TIEMPO_NOCHE;
         currentTimeBlend.time1 = TIEMPO_MANANA;
-        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_INICIO_MANANA) * MINUTOS_POR_HORA + minutes) / ((HORA_MEDIA_MANANA - HORA_INICIO_MANANA) * MINUTOS_POR_HORA);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIEMPO_MANANA;
-    }
-    else if (hours < HORA_FINAL_MEDIA_MANANA)
-    {
-        currentTimeBlend.weight = 256;
-        currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_MANANA;
     }
     else if (hours < HORA_FINAL_MANANA)
     {
         currentTimeBlend.time0 = TIEMPO_MANANA;
         currentTimeBlend.time1 = TIEMPO_DIA;
-        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_MEDIA_MANANA) * MINUTOS_POR_HORA + minutes) / ((HORA_FINAL_MANANA - HORA_MEDIA_MANANA) * MINUTOS_POR_HORA);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIEMPO_MANANA;
     }
@@ -1453,25 +1447,19 @@ u8 UpdateTimeOfDay(void)
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
         gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_DIA;
     }
-    else if (hours < HORA_INICIO_MEDIA_TARDE)
+    else if (hours < HORA_MEDIA_TARDE)
     {
         currentTimeBlend.time0 = TIEMPO_DIA;
         currentTimeBlend.time1 = TIEMPO_TARDE;
-        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
-        currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
+        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_FINAL_DIA) * MINUTOS_POR_HORA + minutes) / ((HORA_MEDIA_TARDE - HORA_FINAL_DIA) * MINUTOS_POR_HORA);
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIEMPO_TARDE;
-    }
-    else if (hours < HORA_FINAL_MEDIA_TARDE)
-    {
-        currentTimeBlend.weight = 256;
-        currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_TARDE;
     }
     else if (hours < HORA_FINAL_TARDE)
     {
         currentTimeBlend.time0 = TIEMPO_TARDE;
         currentTimeBlend.time1 = TIEMPO_NOCHE;
-        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_MEDIA_TARDE) * MINUTOS_POR_HORA + minutes) / ((HORA_FINAL_TARDE - HORA_MEDIA_TARDE) * MINUTOS_POR_HORA);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIEMPO_TARDE;
     }
@@ -1485,7 +1473,7 @@ u8 UpdateTimeOfDay(void)
 }
 
 bool8 MapHasNaturalLight(u8 mapType) 
-{ // Whether a map type is naturally lit/outside
+{
   return mapType == MAP_TYPE_TOWN || mapType == MAP_TYPE_CITY || mapType == MAP_TYPE_ROUTE
       || mapType == MAP_TYPE_OCEAN_ROUTE;
 }
@@ -1500,7 +1488,7 @@ void UpdateAltBgPalettes(u16 palettes)
         return;
     palettes &= ~((1 << NUM_PALS_IN_PRIMARY) - 1) | primary->swapPalettes;
     palettes &= ((1 << NUM_PALS_IN_PRIMARY) - 1) | (secondary->swapPalettes << NUM_PALS_IN_PRIMARY);
-    palettes &= 0x1FFE; // don't blend palette 0, [13,15]
+    palettes &= 8190; // don't blend palette 0, [13,15]
     palettes >>= 1; // start at palette 1
     if (!palettes)
         return;
