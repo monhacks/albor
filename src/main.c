@@ -199,7 +199,7 @@ static void SeedRngWithRtc(void)
     RtcGetInfo(&rtc);
     seconds =
         ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
-        * MINUTES_PER_HOUR + BCD8(rtc.minute))
+        * MINUTOS_POR_HORA + BCD8(rtc.minute))
         * SECONDS_PER_MINUTE + BCD8(rtc.second);
     SeedRng(seconds);
     #undef BCD8

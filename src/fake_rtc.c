@@ -44,10 +44,10 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
         seconds -= SECONDS_PER_MINUTE;
     }
 
-    while(minutes >= MINUTES_PER_HOUR)
+    while(minutes >= MINUTOS_POR_HORA)
     {
         hours++;
-        minutes -= MINUTES_PER_HOUR;
+        minutes -= MINUTOS_POR_HORA;
     }
 
     while(hours >= HOURS_PER_DAY)

@@ -10,7 +10,7 @@
 #define SIIRTCINFO_POWER  0x80 // power on or power failure occurred
 
 #define HOURS_PER_DAY       24
-#define MINUTES_PER_HOUR    60
+#define MINUTOS_POR_HORA    60
 #define SECONDS_PER_MINUTE  60
 
 enum

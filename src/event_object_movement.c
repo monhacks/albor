@@ -2110,7 +2110,9 @@ bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u
     case MSG_COND_MUSIC:
         return (cond->data.raw == GetCurrentMapMusic());
     case MSG_COND_TIME_OF_DAY:
-        return (cond->data.raw == gTimeOfDay);
+        // Must match time of day, have natural light on the map,
+        // and not have weather that obscures the sky
+        return (cond->data.raw == gTimeOfDay && MapHasNaturalLight(gMapHeader.mapType) && GetCurrentWeather() < WEATHER_RAIN);
     case MSG_COND_NEAR_MB:
         multi = FindMetatileBehaviorWithinRange(obj->currentCoords.x,
                                                 obj->currentCoords.y,
@@ -2354,7 +2356,7 @@ void UpdateLightSprite(struct Sprite *sprite)
         return;
     }
 
-    if (gTimeOfDay != TIME_NIGHT) 
+    if (gTimeOfDay != TIEMPO_NOCHE) 
     {
         sprite->invisible = TRUE;
         return;
@@ -10291,6 +10293,7 @@ static void DoShadowFieldEffect(struct ObjectEvent *objectEvent)
 {
     if (objectEvent->noShadow)
     {
+        objectEvent->noShadow = FALSE;
         StartFieldEffectForObjectEvent(FLDEFF_SHADOW, objectEvent);
     }
 }

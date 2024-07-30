@@ -11,6 +11,7 @@
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -59,6 +60,7 @@
 #include "vs_seeker.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/event_objects.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/region_map_sections.h"
@@ -1406,10 +1408,10 @@ void CB1_Overworld(void)
 
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIME_MORNING] = {.coeff = 4, .blendColor = RGB_LIGHT_YELLOW},
-    [TIME_DAY]     = {.coeff = 0, .blendColor = 0},
-    [TIME_EVENING] = {.coeff = 4, .blendColor = RGB_ORANGE},
-    [TIME_NIGHT]   = {.coeff = 8, .blendColor = RGB_DARK_BLUE},
+    [TIEMPO_MANANA]     = {.coeff = 4, .blendColor = RGB_LIGHT_YELLOW},
+    [TIEMPO_DIA]        = {.coeff = 0, .blendColor = 0},
+    [TIEMPO_TARDE]      = {.coeff = 4, .blendColor = RGB_ORANGE},
+    [TIEMPO_NOCHE]      = {.coeff = 8, .blendColor = RGB_DARK_BLUE},
 };
 
 u8 UpdateTimeOfDay(void) 
@@ -1418,66 +1420,66 @@ u8 UpdateTimeOfDay(void)
     RtcCalcLocalTime();
     hours = gLocalTime.hours;
     minutes = gLocalTime.minutes;
-    if (hours < NIGHT_HOUR_END) //antes de las 6
+    if (hours < HORA_INICIO_MANANA)
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
-    } 
-    else if (hours > MORNING_HOUR_BEGIN && hours < 8) //De 6 a 8
-    {
-        currentTimeBlend.time0 = TIME_NIGHT;
-        currentTimeBlend.time1 = TIME_MORNING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 6) * 60 + minutes) / ((8-6)*60);
-        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_MORNING;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_NOCHE;
     }
-    else if (hours > 8 && hours < 9) //De 8 a 9
+    else if (hours < HORA_INICIO_MEDIA_MANANA)
+    {
+        currentTimeBlend.time0 = TIEMPO_NOCHE;
+        currentTimeBlend.time1 = TIEMPO_MANANA;
+        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIEMPO_MANANA;
+    }
+    else if (hours < HORA_FINAL_MEDIA_MANANA)
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_MORNING;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_MANANA;
     }
-    else if (hours > 9 && hours < MORNING_HOUR_END) //De 9 a 10
+    else if (hours < HORA_FINAL_MANANA)
     {
-        currentTimeBlend.time0 = TIME_MORNING;
-        currentTimeBlend.time1 = TIME_DAY;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 9) * 60 + minutes) / ((10-9)*60);
+        currentTimeBlend.time0 = TIEMPO_MANANA;
+        currentTimeBlend.time1 = TIEMPO_DIA;
+        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_MORNING;
+        gTimeOfDay = TIEMPO_MANANA;
     }
-    else if (hours > DAY_HOUR_BEGIN && hours < DAY_HOUR_END) //De 10 a 19
+    else if (hours < HORA_FINAL_DIA)
     {
         currentTimeBlend.weight = currentTimeBlend.altWeight = 256;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_DAY;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_DIA;
     }
-    else if (hours > EVENING_HOUR_BEGIN && hours < 20) //De 19 a 20
+    else if (hours < HORA_INICIO_MEDIA_TARDE)
     {
-        currentTimeBlend.time0 = TIME_DAY;
-        currentTimeBlend.time1 = TIME_EVENING;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 19) * 60 + minutes) / ((20-19)*60);
-        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_EVENING;
+        currentTimeBlend.time0 = TIEMPO_DIA;
+        currentTimeBlend.time1 = TIEMPO_TARDE;
+        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.altWeight = currentTimeBlend.weight / 2;
+        gTimeOfDay = TIEMPO_TARDE;
     }
-    else if (hours > 20 && hours < 21) //De 20 a 21
-    {
-        currentTimeBlend.weight = 256;
-        currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_EVENING;
-    }
-    else if (hours > 21 && hours < EVENING_HOUR_END) //De 21 a 22
-    {
-        currentTimeBlend.time0 = TIME_EVENING;
-        currentTimeBlend.time1 = TIME_NIGHT;
-        currentTimeBlend.weight = 256 - 256 * ((hours - 21) * 60 + minutes) / ((22-21)*60);
-        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
-        gTimeOfDay = TIME_EVENING;
-    }
-    else if (hours > NIGHT_HOUR_BEGIN) //De 21 a 24
+    else if (hours < HORA_FINAL_MEDIA_TARDE)
     {
         currentTimeBlend.weight = 256;
         currentTimeBlend.altWeight = 0;
-        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIME_NIGHT;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_TARDE;
+    }
+    else if (hours < HORA_FINAL_TARDE)
+    {
+        currentTimeBlend.time0 = TIEMPO_TARDE;
+        currentTimeBlend.time1 = TIEMPO_NOCHE;
+        currentTimeBlend.weight = 256 - 256 * (MINUTOS_POR_HORA + minutes) / MINUTOS_POR_HORA;
+        currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
+        gTimeOfDay = TIEMPO_TARDE;
+    }
+    else 
+    {
+        currentTimeBlend.weight = 256;
+        currentTimeBlend.altWeight = 0;
+        gTimeOfDay = currentTimeBlend.time0 = currentTimeBlend.time1 = TIEMPO_NOCHE;
     }
     return gTimeOfDay;
 }

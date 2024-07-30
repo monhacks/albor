@@ -215,7 +215,7 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
     value = ConvertBcdToBinary(rtc->minute);
 
-    if (value > MINUTES_PER_HOUR)
+    if (value > MINUTOS_POR_HORA)
         errorFlags |= RTC_ERR_INVALID_MINUTE;
 
     value = ConvertBcdToBinary(rtc->second);
@@ -300,7 +300,7 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 
     if (result->minutes < 0)
     {
-        result->minutes += MINUTES_PER_HOUR;
+        result->minutes += MINUTOS_POR_HORA;
         --result->hours;
     }
 
@@ -328,13 +328,13 @@ bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
 u8 GetTimeOfDay(void)
 {
     RtcCalcLocalTime();
-    if (IsBetweenHours(gLocalTime.hours, MORNING_HOUR_BEGIN, MORNING_HOUR_END))
-        return TIME_MORNING;
-    else if (IsBetweenHours(gLocalTime.hours, EVENING_HOUR_BEGIN, EVENING_HOUR_END))
-        return TIME_EVENING;
-    else if (IsBetweenHours(gLocalTime.hours, NIGHT_HOUR_BEGIN, NIGHT_HOUR_END))
-        return TIME_NIGHT;
-    return TIME_DAY;
+    if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_MANANA, HORA_FINAL_MANANA))
+        return TIEMPO_MANANA;
+    else if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_TARDE, HORA_FINAL_TARDE))
+        return TIEMPO_TARDE;
+    else if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_NOCHE, HORA_FINAL_NOCHE))
+        return TIEMPO_NOCHE;
+    return TIEMPO_DIA;
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
@@ -367,7 +367,7 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 
     if (result->minutes < 0)
     {
-        result->minutes += MINUTES_PER_HOUR;
+        result->minutes += MINUTOS_POR_HORA;
         --result->hours;
     }
 
@@ -381,7 +381,7 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 u32 RtcGetMinuteCount(void)
 {
     RtcGetInfo(&sRtc);
-    return (HOURS_PER_DAY * MINUTES_PER_HOUR) * RtcGetDayCount(&sRtc) + MINUTES_PER_HOUR * sRtc.hour + sRtc.minute;
+    return (HOURS_PER_DAY * MINUTOS_POR_HORA) * RtcGetDayCount(&sRtc) + MINUTOS_POR_HORA * sRtc.hour + sRtc.minute;
 }
 
 u32 RtcGetLocalDayCount(void)

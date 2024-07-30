@@ -17,22 +17,26 @@
 
 #define RTC_ERR_FLAG_MASK      0x0FF0
 
-#define MORNING_HOUR_BEGIN 6
-#define MORNING_HOUR_END   10
+#define HORA_INICIO_MANANA          6
+#define HORA_INICIO_MEDIA_MANANA    7
+#define HORA_FINAL_MEDIA_MANANA     9
+#define HORA_FINAL_MANANA           10
 
-#define DAY_HOUR_BEGIN     10
-#define DAY_HOUR_END       19
+#define HORA_INICIO_DIA             10
+#define HORA_FINAL_DIA              19
 
-#define EVENING_HOUR_BEGIN 19
-#define EVENING_HOUR_END   22
+#define HORA_INICIO_TARDE           19
+#define HORA_INICIO_MEDIA_TARDE     20
+#define HORA_FINAL_MEDIA_TARDE      21
+#define HORA_FINAL_TARDE            22
 
-#define NIGHT_HOUR_BEGIN   22
-#define NIGHT_HOUR_END     6
+#define HORA_INICIO_NOCHE           22
+#define HORA_FINAL_NOCHE            6
 
-#define TIME_MORNING           0
-#define TIME_DAY               1
-#define TIME_EVENING           2
-#define TIME_NIGHT             3
+#define TIEMPO_MANANA               0
+#define TIEMPO_DIA                  1
+#define TIEMPO_TARDE                2
+#define TIEMPO_NOCHE                3
 
 extern struct Time gLocalTime;
 
