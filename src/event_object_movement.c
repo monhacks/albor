@@ -1152,7 +1152,6 @@ static void ClearAllObjectEvents(void)
 
 void ResetObjectEvents(void)
 {
-    ClearLinkPlayerObjectEvents();
     ClearAllObjectEvents();
     ClearPlayerAvatarInfo();
     CreateReflectionEffectSprites();
@@ -2513,25 +2512,16 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 
 void RemoveObjectEventsOutsideView(void)
 {
-    u8 i, j;
-    bool8 isActiveLinkPlayer;
+    u8 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
-        for (j = 0, isActiveLinkPlayer = FALSE; j < ARRAY_COUNT(gLinkPlayerObjectEvents); j++)
-        {
-            if (gLinkPlayerObjectEvents[j].active && i == gLinkPlayerObjectEvents[j].objEventId)
-                isActiveLinkPlayer = TRUE;
-        }
-        if (!isActiveLinkPlayer)
-        {
-            struct ObjectEvent *objectEvent = &gObjectEvents[i];
+        struct ObjectEvent *objectEvent = &gObjectEvents[i];
 
-            // Followers should not go OOB, or their sprites may be freed early during a cross-map scripting event,
-            // such as Wally's Ralts catch sequence
-            if (objectEvent->active && !objectEvent->isPlayer && objectEvent->localId != OBJ_EVENT_ID_FOLLOWER)
-                RemoveObjectEventIfOutsideView(objectEvent);
-        }
+        // Followers should not go OOB, or their sprites may be freed early during a cross-map scripting event,
+        // such as Wally's Ralts catch sequence
+        if (objectEvent->active && !objectEvent->isPlayer && objectEvent->localId != OBJ_EVENT_ID_FOLLOWER)
+            RemoveObjectEventIfOutsideView(objectEvent);
     }
 }
 
@@ -2574,12 +2564,6 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
     struct SpriteFrameImage spriteFrameImage;
     const struct SubspriteTable *subspriteTables;
     const struct ObjectEventGraphicsInfo *graphicsInfo;
-
-    for (i = 0; i < ARRAY_COUNT(gLinkPlayerObjectEvents); i++)
-    {
-        if (gLinkPlayerObjectEvents[i].active && objectEventId == gLinkPlayerObjectEvents[i].objEventId)
-            return;
-    }
 
     objectEvent = &gObjectEvents[objectEventId];
     subspriteTables = NULL;

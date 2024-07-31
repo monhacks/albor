@@ -1,43 +1,12 @@
 #ifndef GUARD_OVERWORLD_H
 #define GUARD_OVERWORLD_H
 
-#define LINK_KEY_CODE_NULL 0x00
-#define LINK_KEY_CODE_EMPTY 0x11
-#define LINK_KEY_CODE_DPAD_DOWN 0x12
-#define LINK_KEY_CODE_DPAD_UP 0x13
-#define LINK_KEY_CODE_DPAD_LEFT 0x14
-#define LINK_KEY_CODE_DPAD_RIGHT 0x15
-#define LINK_KEY_CODE_READY 0x16
-#define LINK_KEY_CODE_EXIT_ROOM 0x17
-#define LINK_KEY_CODE_START_BUTTON 0x18
-#define LINK_KEY_CODE_A_BUTTON 0x19
-#define LINK_KEY_CODE_IDLE 0x1A
-
-// These two are a hack to stop user input until link stuff can be
-// resolved.
-#define LINK_KEY_CODE_HANDLE_RECV_QUEUE 0x1B
-#define LINK_KEY_CODE_HANDLE_SEND_QUEUE 0x1C
-#define LINK_KEY_CODE_EXIT_SEAT 0x1D
-#define LINK_KEY_CODE_UNK_8 0x1E
-
-#define MOVEMENT_MODE_FREE 0
-#define MOVEMENT_MODE_FROZEN 1
-#define MOVEMENT_MODE_SCRIPTED 2
-
 #define SKIP_OBJECT_EVENT_LOAD  1
 
 struct InitialPlayerAvatarState
 {
     u8 transitionFlags;
     u8 direction;
-};
-
-struct LinkPlayerObjectEvent
-{
-    u8 active;
-    u8 linkPlayerId;
-    u8 objEventId;
-    u8 movementMode;
 };
 
 struct __attribute__((packed)) TimeBlendSettings {
@@ -50,7 +19,6 @@ struct __attribute__((packed)) TimeBlendSettings {
 
 // Exported RAM declarations
 extern struct WarpData gLastUsedWarp;
-extern struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4];
 
 extern u16 *gOverworldTilemapBuffer_Bg2;
 extern u16 *gOverworldTilemapBuffer_Bg1;
@@ -153,7 +121,5 @@ void CB2_ReturnToFieldContinueScript(void);
 void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
-bool32 Overworld_IsRecvQueueAtMax(void);
-void ClearLinkPlayerObjectEvents(void);
 
 #endif // GUARD_OVERWORLD_H

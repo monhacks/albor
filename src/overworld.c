@@ -24,7 +24,6 @@
 #include "gpu_regs.h"
 #include "heal_location.h"
 #include "io_reg.h"
-#include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -98,8 +97,6 @@ static void ResumeMap(bool32);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
-static u8 FlipVerticalAndClearForced(u8, u8);
-static u8 LinkPlayerGetCollision(u8, u8, s16, s16);
 static void SetFieldVBlankCallback(void);
 static void FieldClearVBlankHBlankCallbacks(void);
 static void TransitionMapMusic(void);
@@ -127,7 +124,6 @@ EWRAM_DATA static u16 sLastMapSectionId = 0;
 EWRAM_DATA static struct InitialPlayerAvatarState sInitialPlayerAvatarState = {0};
 EWRAM_DATA static u16 sAmbientCrySpecies = 0;
 EWRAM_DATA static bool8 sIsAmbientCryWaterMon = FALSE;
-EWRAM_DATA struct LinkPlayerObjectEvent gLinkPlayerObjectEvents[4] = {0};
 
 static const struct WarpData sDummyWarpData =
 {
@@ -233,49 +229,6 @@ static const struct ScanlineEffectParams sFlashEffectParams =
     ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
     1,
     0,
-};
-
-static u8 MovementEventModeCB_Normal(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 MovementEventModeCB_Ignored(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 MovementEventModeCB_Scripted(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-
-static u8 (*const sLinkPlayerMovementModes[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) =
-{
-    [MOVEMENT_MODE_FREE]     = MovementEventModeCB_Normal,
-    [MOVEMENT_MODE_FROZEN]   = MovementEventModeCB_Ignored,
-    [MOVEMENT_MODE_SCRIPTED] = MovementEventModeCB_Scripted,
-};
-
-static u8 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-static u8 FacingHandler_ForcedFacingChange(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8);
-
-// These handlers return TRUE if the movement was scripted and successful, and FALSE otherwise.
-static bool8 (*const sLinkPlayerFacingHandlers[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *, u8) =
-{
-    FacingHandler_DoNothing,
-    FacingHandler_DpadMovement,
-    FacingHandler_DpadMovement,
-    FacingHandler_DpadMovement,
-    FacingHandler_DpadMovement,
-    FacingHandler_DoNothing,
-    FacingHandler_DoNothing,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
-    FacingHandler_ForcedFacingChange,
-};
-
-static void MovementStatusHandler_EnterFreeMode(struct LinkPlayerObjectEvent *, struct ObjectEvent *);
-static void MovementStatusHandler_TryAdvanceScript(struct LinkPlayerObjectEvent *, struct ObjectEvent *);
-
-// These handlers are run after an attempted movement.
-static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, struct ObjectEvent *) =
-{
-    // FALSE:
-    MovementStatusHandler_EnterFreeMode,
-    // TRUE:
-    MovementStatusHandler_TryAdvanceScript,
 };
 
 // code
@@ -1408,10 +1361,10 @@ void CB1_Overworld(void)
 
 const struct BlendSettings gTimeOfDayBlend[] =
 {
-    [TIEMPO_MANANA]     = {.coeff = 5, .blendColor = RGB_LIGHT_YELLOW},
-    [TIEMPO_DIA]        = {.coeff = 0, .blendColor = 0},
-    [TIEMPO_TARDE]      = {.coeff = 5, .blendColor = RGB_ORANGE},
-    [TIEMPO_NOCHE]      = {.coeff = 10, .blendColor = RGB_DARK_BLUE},
+    [TIEMPO_MANANA]     = {.coeff = 5,  .blendColor = RGB_AMARILLO_CLARO},
+    [TIEMPO_DIA]        = {.coeff = 0,  .blendColor = 0},
+    [TIEMPO_TARDE]      = {.coeff = 5,  .blendColor = RGB_NARANJA},
+    [TIEMPO_NOCHE]      = {.coeff = 10, .blendColor = RGB_AZUL_MARINO},
 };
 
 u8 UpdateTimeOfDay(void) 
@@ -1430,7 +1383,7 @@ u8 UpdateTimeOfDay(void)
     {
         currentTimeBlend.time0 = TIEMPO_NOCHE;
         currentTimeBlend.time1 = TIEMPO_MANANA;
-        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_INICIO_MANANA) * MINUTOS_POR_HORA + minutes) / ((HORA_MEDIA_MANANA - HORA_INICIO_MANANA) * MINUTOS_POR_HORA);
+        currentTimeBlend.weight = 256 - 256 * ((hours - HORA_INICIO_MANANA) * MINUTOS_POR_HORA + (minutes / 2)) / ((HORA_MEDIA_MANANA - HORA_INICIO_MANANA) * MINUTOS_POR_HORA);
         currentTimeBlend.altWeight = (256 - currentTimeBlend.weight) / 2;
         gTimeOfDay = TIEMPO_MANANA;
     }
@@ -1512,37 +1465,27 @@ void UpdatePalettesWithTime(u32 palettes)
     {
     u32 i;
     u32 mask = 1 << 16;
-    if (palettes >= 0x10000)
-      for (i = 0; i < 16; i++, mask <<= 1)
-        if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
-          palettes &= ~(mask);
+    if (palettes >= 65536)
+        for (i = 0; i < 16; i++, mask <<= 1)
+            if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
+                palettes &= ~(mask);
 
-    palettes &= 0xFFFF1FFF; // Don't blend UI BG palettes [13,15]
+    palettes &= 4294909951; // Don't blend UI BG palettes [13,15]
     if (!palettes)
-      return;
-    TimeMixPalettes(palettes,
-      gPlttBufferUnfaded,
-      gPlttBufferFaded,
-      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0],
-      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1],
-      currentTimeBlend.weight);
+        return;
+    TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0], (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1], currentTimeBlend.weight);
     }
 }
 
 u8 UpdateSpritePaletteWithTime(u8 paletteNum) 
 {
-  if (MapHasNaturalLight(gMapHeader.mapType)) 
-  {
-    u16 offset;
-    if (GetSpritePaletteTagByPaletteNum(paletteNum) >> 15)
-      return paletteNum;
-    offset = (paletteNum + 16) << 4;
-    TimeMixPalettes(1,
-      gPlttBufferUnfaded + offset,
-      gPlttBufferFaded + offset,
-      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0],
-      (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1],
-      currentTimeBlend.weight);
+    if (MapHasNaturalLight(gMapHeader.mapType)) 
+    {
+        u16 offset;
+        if (GetSpritePaletteTagByPaletteNum(paletteNum) >> 15)
+            return paletteNum;
+        offset = (paletteNum + 16) << 4;
+        TimeMixPalettes(1, gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time0], (struct BlendSettings *)&gTimeOfDayBlend[currentTimeBlend.time1], currentTimeBlend.weight);
     }
   return paletteNum;
 }
@@ -1806,8 +1749,6 @@ void CB2_ContinueSavedGame(void)
 
 static void FieldClearVBlankHBlankCallbacks(void)
 {
-    if (UsedPokemonCenterWarp() == TRUE)
-        CloseLink();
     u16 savedIme = REG_IME;
     REG_IME = 0;
     REG_IE &= ~INTR_FLAG_HBLANK;
@@ -2066,122 +2007,4 @@ static void SetCameraToTrackPlayer(void)
 {
     gObjectEvents[gPlayerAvatar.objectEventId].trackedByCamera = TRUE;
     InitCameraUpdateCallback(gPlayerAvatar.spriteId);
-}
-
-bool32 Overworld_IsRecvQueueAtMax(void)
-{
-    return FALSE;
-}
-
-void ClearLinkPlayerObjectEvents(void)
-{
-    memset(gLinkPlayerObjectEvents, 0, sizeof(gLinkPlayerObjectEvents));
-}
-
-// not even one can reference *byte* aligned bitfield members...
-#define linkDirection(obj) ((u8 *)obj)[offsetof(typeof(*obj), fieldEffectSpriteId) - 1] // -> rangeX
-
-static u8 MovementEventModeCB_Normal(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    return sLinkPlayerFacingHandlers[dir](linkPlayerObjEvent, objEvent, dir);
-}
-
-static u8 MovementEventModeCB_Ignored(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    return FACING_UP;
-}
-
-// Identical to MovementEventModeCB_Normal
-static u8 MovementEventModeCB_Scripted(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    return sLinkPlayerFacingHandlers[dir](linkPlayerObjEvent, objEvent, dir);
-}
-
-static bool8 FacingHandler_DoNothing(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    return FALSE;
-}
-
-static bool8 FacingHandler_DpadMovement(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    s16 x, y;
-
-    linkDirection(objEvent) = FlipVerticalAndClearForced(dir, linkDirection(objEvent));
-    ObjectEventMoveDestCoords(objEvent, linkDirection(objEvent), &x, &y);
-
-    if (LinkPlayerGetCollision(linkPlayerObjEvent->objEventId, linkDirection(objEvent), x, y))
-    {
-        return FALSE;
-    }
-    else
-    {
-        objEvent->directionSequenceIndex = 16;
-        ShiftObjectEventCoords(objEvent, x, y);
-        ObjectEventUpdateElevation(objEvent, NULL);
-        return TRUE;
-    }
-}
-
-static bool8 FacingHandler_ForcedFacingChange(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent, u8 dir)
-{
-    linkDirection(objEvent) = FlipVerticalAndClearForced(dir, linkDirection(objEvent));
-    return FALSE;
-}
-
-// This is called every time a free movement happens. Most of the time it's a No-Op.
-static void MovementStatusHandler_EnterFreeMode(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent)
-{
-    linkPlayerObjEvent->movementMode = MOVEMENT_MODE_FREE;
-}
-
-static void MovementStatusHandler_TryAdvanceScript(struct LinkPlayerObjectEvent *linkPlayerObjEvent, struct ObjectEvent *objEvent)
-{
-    objEvent->directionSequenceIndex--;
-    linkPlayerObjEvent->movementMode = MOVEMENT_MODE_FROZEN;
-    MoveCoords(linkDirection(objEvent), &objEvent->initialCoords.x, &objEvent->initialCoords.y);
-    if (!objEvent->directionSequenceIndex)
-    {
-        ShiftStillObjectEventCoords(objEvent);
-        linkPlayerObjEvent->movementMode = MOVEMENT_MODE_SCRIPTED;
-    }
-}
-
-// Flip Up/Down facing codes. If newFacing doesn't specify a direction, default
-// to oldFacing. Note that this clears also the "FORCED" part of the facing code,
-// even for Left/Right codes.
-static u8 FlipVerticalAndClearForced(u8 newFacing, u8 oldFacing)
-{
-    switch (newFacing)
-    {
-    case FACING_UP:
-    case FACING_FORCED_UP:
-        return DIR_NORTH;
-    case FACING_DOWN:
-    case FACING_FORCED_DOWN:
-        return DIR_SOUTH;
-    case FACING_LEFT:
-    case FACING_FORCED_LEFT:
-        return DIR_WEST;
-    case FACING_RIGHT:
-    case FACING_FORCED_RIGHT:
-        return DIR_EAST;
-    }
-    return oldFacing;
-}
-
-static u8 LinkPlayerGetCollision(u8 selfObjEventId, u8 direction, s16 x, s16 y)
-{
-    u8 i;
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-    {
-        if (i != selfObjEventId)
-        {
-            if ((gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
-             || (gObjectEvents[i].previousCoords.x == x && gObjectEvents[i].previousCoords.y == y))
-            {
-                return 1;
-            }
-        }
-    }
-    return MapGridGetCollisionAt(x, y);
 }

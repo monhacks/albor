@@ -292,10 +292,7 @@ bool8 MenuHelpers_IsLinkActive(void)
 
 static bool8 IsActiveOverworldLinkBusy(void)
 {
-    if (!MenuHelpers_IsLinkActive())
-        return FALSE;
-    else
-        return Overworld_IsRecvQueueAtMax();
+    return FALSE;
 }
 
 bool8 MenuHelpers_ShouldWaitForLinkRecv(void)

@@ -69,7 +69,7 @@ static const u8 *sPaletteColorMapTypes;
 
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.
-static const u16 sDroughtWeatherColors[][0x1000] = {
+static const u16 sDroughtWeatherColors[][4096] = {
     INCBIN_U16("graphics/weather/drought/colors_0.bin"),
     INCBIN_U16("graphics/weather/drought/colors_1.bin"),
     INCBIN_U16("graphics/weather/drought/colors_2.bin"),
@@ -481,9 +481,9 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
         UpdateAltBgPalettes(palettes & PALETTES_BG);
         // Thunder gamma-shift looks bad on night-blended palettes, so ignore time blending in some situations
         if (!(colorMapIndex > 3) && MapHasNaturalLight(gMapHeader.mapType))
-          UpdatePalettesWithTime(palettes);
+            UpdatePalettesWithTime(palettes);
         else
-          CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, PLTT_SIZE_4BPP * numPalettes);
+            CpuFastCopy(gPlttBufferUnfaded + palOffset, gPlttBufferFaded + palOffset, PLTT_SIZE_4BPP * numPalettes);
         numPalettes += startPalIndex;
         curPalIndex = startPalIndex;
 
@@ -684,7 +684,7 @@ static void ApplyFogBlend(u8 blendCoeff, u32 blendColor)
     CpuFastCopy(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_BUFFER_SIZE * 2);
     UpdatePalettesWithTime(PALETTES_ALL);
     // Then blend tile palettes [0, 12] faded->faded with fadeIn color
-    BlendPalettesFine(0x1FFF, gPlttBufferFaded, gPlttBufferFaded, blendCoeff, blendColor);
+    BlendPalettesFine(8191, gPlttBufferFaded, gPlttBufferFaded, blendCoeff, blendColor);
 
     // Do fog blending on marked sprite palettes
     for (curPalIndex = 16; curPalIndex < 32; curPalIndex++) 
@@ -885,11 +885,6 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
         {
             CpuFastCopy(gPlttBufferUnfaded + OBJ_PLTT_ID(spritePaletteIndex), gPlttBufferFaded + 2 * OBJ_PLTT_ID(spritePaletteIndex), PLTT_SIZE_4BPP);
         }
-}
-
-void ApplyWeatherColorMapToPal(u8 paletteIndex) // now unused / obselete
-{
-    ApplyColorMap(paletteIndex, 1, gWeatherPtr->colorMapIndex);
 }
 
 void ApplyWeatherColorMapToPals(u8 startPalIndex, u8 numPalettes) 

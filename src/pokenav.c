@@ -284,9 +284,6 @@ static void Task_RunLoopedTask_LinkMode(u8 taskId)
     s16 *state;
     u32 action;
 
-    if (Overworld_IsRecvQueueAtMax())
-        return;
-
     task = (LoopedTask)GetWordTaskArg(taskId, 1);
     state = &gTasks[taskId].data[0];
     action = task(*state);

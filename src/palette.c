@@ -279,7 +279,7 @@ static u32 UpdateTimeOfDayPaletteFade(void)
     } 
     else 
     { // tile palettes, don't blend [13, 15]
-        timePalettes = selectedPalettes & 0x1FFF;
+        timePalettes = selectedPalettes & 8191;
     }
     TimeMixPalettes(timePalettes, src, dst, gPaletteFade.bld0, gPaletteFade.bld1, gPaletteFade.weight);
 
@@ -808,16 +808,13 @@ void BlendPalettes(u32 palettes, u8 coeff, u32 color)
     BlendPalettesFine(palettes, gPlttBufferUnfaded, gPlttBufferFaded, coeff, color);
 }
 
-#define DEFAULT_LIGHT_COLOR 16287
-
-// Like BlendPalette, but ignores blendColor if the transparency high bit is set
-// Optimization help by lucktyphlosion
+//Mezcla un blendColor con el palOffset SALVO que el high bit esté activado (0 en .pla)
 void TimeBlendPalette(u16 palOffset, u32 coeff, u32 blendColor)
 {
     s32 newR, newG, newB, defR, defG, defB;
     u16 * src = gPlttBufferUnfaded + palOffset;
     u16 * dst = gPlttBufferFaded + palOffset;
-    u32 defaultBlendColor = DEFAULT_LIGHT_COLOR;
+    u32 defaultBlendColor = RGB_AMARILLO_CLARO;
     u16 *srcEnd = src + 16;
     u32 altBlendColor = *dst++ = *src++; // color 0 is copied through unchanged
 
@@ -863,12 +860,12 @@ void TimeBlendPalette(u16 palOffset, u32 coeff, u32 blendColor)
     }
 }
 
-// Blends a weighted average of two blend parameters
-void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0) 
+// Mezcla colores del DNS según hora del día, si el high bit está activado (0 en .pla), se mezcla con ese color y no con el default.
+void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *blend0, struct BlendSettings *blend1, u16 weight0)
 {
     s32 r0, g0, b0, r1, g1, b1, defR, defG, defB, altR, altG, altB;
     u32 color0, coeff0, color1, coeff1;
-    u32 defaultColor = DEFAULT_LIGHT_COLOR;
+    u32 defaultColor = RGB_AMARILLO_CLARO;
 
     if (!palettes)
     return;

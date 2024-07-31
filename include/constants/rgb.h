@@ -24,9 +24,10 @@
 #define RGB_CYAN       RGB(0, 31, 31)
 #define RGB_WHITEALPHA (RGB_WHITE | RGB_ALPHA)
 
-#define RGB_LIME_GREEN      RGB2GBA(222, 230, 49)
-#define RGB_DARK_BLUE       RGB2GBA(46, 68, 130)
-#define RGB_ORANGE          RGB2GBA(250, 144, 98)
-#define RGB_LIGHT_YELLOW    RGB2GBA(255, 242, 204)
+#define RGB_LIME_GREEN          RGB2GBA(222, 230, 49)
+#define RGB_AZUL_MARINO         RGB2GBA(46, 68, 130)
+#define RGB_NARANJA             RGB2GBA(250, 144, 98)
+#define RGB_AMARILLO_CLARO      RGB2GBA(255, 242, 204)
+#define RGB_AZUL_PALIDO         RGB2GBA(193, 235, 218)
 
 #endif // GUARD_RGB_H

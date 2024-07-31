@@ -102,7 +102,6 @@ static void DrawCardFrontOrBack(u16 *);
 static void DrawStarsAndBadgesOnCard(void);
 static void PrintTimeOnCard(void);
 static void FlipTrainerCard(void);
-static bool8 IsCardFlipTaskActive(void);
 static bool8 LoadCardGfx(void);
 static void CB2_InitTrainerCard(void);
 static u32 GetCappedGameStat(u8 statId, u32 maxValue);
@@ -440,11 +439,6 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case STATE_WAIT_FLIP_TO_BACK:
-        if (IsCardFlipTaskActive() && Overworld_IsRecvQueueAtMax() != TRUE)
-        {
-            PlaySE(SE_RG_CARD_OPEN);
-            sData->mainState = STATE_HANDLE_INPUT_BACK;
-        }
         break;
     case STATE_HANDLE_INPUT_BACK:
         if (JOY_NEW(B_BUTTON))
@@ -486,11 +480,6 @@ static void Task_TrainerCard(u8 taskId)
             CloseTrainerCard(taskId);
         break;
     case STATE_WAIT_FLIP_TO_FRONT:
-        if (IsCardFlipTaskActive() && Overworld_IsRecvQueueAtMax() != TRUE)
-        {
-            sData->mainState = STATE_HANDLE_INPUT_FRONT;
-            PlaySE(SE_RG_CARD_OPEN);
-        }
         break;
    }
 }
@@ -1498,14 +1487,6 @@ static void FlipTrainerCard(void)
     SetHBlankCallback(HblankCb_TrainerCard);
 }
 
-static bool8 IsCardFlipTaskActive(void)
-{
-    if (FindTaskIdByFunc(Task_DoCardFlipTask) == TASK_NONE)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 static void Task_DoCardFlipTask(u8 taskId)
 {
     while(sTrainerCardFlipTasks[gTasks[taskId].tFlipState](&gTasks[taskId]))
@@ -1577,9 +1558,6 @@ static bool8 Task_AnimateCardFlipDown(struct Task *task)
 static bool8 Task_DrawFlippedCardSide(struct Task *task)
 {
     sData->allowDMACopy = FALSE;
-    if (Overworld_IsRecvQueueAtMax() == TRUE)
-        return FALSE;
-
     do
     {
         switch (sData->flipDrawState)
