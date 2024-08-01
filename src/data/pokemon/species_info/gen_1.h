@@ -201,6 +201,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Charmander),
         ICON(Charmander, 0),
         LEARNSETS(Charmander),
+        .brilla = TRUE,
         .eggMoveLearnset = sCharmanderEggMoveLearnset,
         FOLLOWER(Charmander, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARMELEON}),
@@ -252,6 +253,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Charmeleon, 0),
         LEARNSETS(Charmeleon),
         .eggMoveLearnset = sCharmanderEggMoveLearnset,
+        .brilla = TRUE,
         FOLLOWER(Charmeleon, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CHARIZARD}),
     },
@@ -302,6 +304,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Charizard),
         ICON(Charizard, 0),
         .eggMoveLearnset = sCharmanderEggMoveLearnset,
+        .brilla = TRUE,
         FOLLOWER(Charizard, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
@@ -6257,6 +6260,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
 
     [SPECIES_GENGAR] =
     {
+        .brilla = TRUE,
         .types = MON_TYPES(TYPE_GHOST, TYPE_POISON),
         .catchRate = 45,
         .evYield_SpAttack = 3,

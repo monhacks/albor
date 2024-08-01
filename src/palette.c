@@ -885,7 +885,8 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct BlendSettings *ble
     defG = (defaultColor << 22) >> 27;
     defB = (defaultColor << 17) >> 27;
 
-    do {
+    do
+    {
         if (palettes & 1)
         {
             u16 *srcEnd = src + 16;

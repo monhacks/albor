@@ -1831,6 +1831,7 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         if (species == SPECIES_KECLEON)
         {
             sprite->oam.objMode = ST_OAM_OBJ_BLEND;
+            //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
         }
     }
 }
