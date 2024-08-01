@@ -50,8 +50,7 @@
 #define SIZE_32x32 1
 #define SIZE_64x64 0
 
-// Set .compressed = OW_GFX_COMPRESS
-#define COMP OW_GFX_COMPRESS
+#define COMP FALSE
 
 #define FOLLOWER(name, _size, shadow, _tracks)                                              \
 .followerData = {                                                                           \

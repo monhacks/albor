@@ -23,6 +23,7 @@
 #include "battle_setup.h"
 #include "data.h"
 #include "constants/field_effects.h"
+#include "constants/field_weather.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
@@ -3811,7 +3812,7 @@ void Task_BattleTransition_Intro(u8 taskId)
 static bool8 TransitionIntro_FadeToGray(struct Task *task)
 {
     u8 paletteNum = IndexOfSpritePaletteTag(TAG_WEATHER_START);
-    u16 index = (paletteNum+16)*16+9; // SHADOW_COLOR_INDEX
+    u16 index = OBJ_PLTT_ID2(paletteNum) + SHADOW_COLOR_INDEX;
     if (task->tDelayTimer == 0 || --task->tDelayTimer == 0)
     {
 
@@ -3853,7 +3854,7 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
         SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved);
         if (paletteNum < 16) 
         {
-            u16 index = (paletteNum+16)*16+9; // SHADOW_COLOR_INDEX
+            u16 index = OBJ_PLTT_ID2(paletteNum) + SHADOW_COLOR_INDEX;
             gPlttBufferFaded[index] = task->tShadowColor;
         }
     }

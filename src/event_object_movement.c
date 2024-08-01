@@ -1374,13 +1374,8 @@ static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
     else
     {
         u32 paletteNum = gSprites[objectEvent->spriteId].oam.paletteNum;
-        u16 tileStart;
-        if (OW_GFX_COMPRESS)
-            tileStart = gSprites[objectEvent->spriteId].sheetTileStart;
         DestroySprite(&gSprites[objectEvent->spriteId]);
         FieldEffectFreePaletteIfUnused(paletteNum);
-        if (OW_GFX_COMPRESS && tileStart)
-            FieldEffectFreeTilesIfUnused(tileStart);
     }
 }
 
@@ -1462,8 +1457,6 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     // Use palette from species palette table
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_FORM(objectEvent), objectEvent->shiny);
-    if (OW_GFX_COMPRESS && sprite->usingSheet)
-        sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
@@ -1652,10 +1645,6 @@ u8 CreateObjectGraphicsSpriteWithTag(u16 graphicsId, void (*callback)(struct Spr
     if (spriteId != MAX_SPRITES && subspriteTables != NULL)
     {
         sprite = &gSprites[spriteId];
-        #if OW_GFX_COMPRESS
-        if (graphicsInfo->compressed)
-            sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
-        #endif
         SetSubspriteTables(sprite, subspriteTables);
         sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
     }
@@ -1807,15 +1796,14 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
     u32 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
-    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //TODO
+    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //¿Qué pasa si es hembra?
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         // Load compressed palette
         LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
+        UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     }
-
-    UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     return paletteNum;
 }
 
@@ -1855,7 +1843,7 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
 
     if (graphicsInfo->oam->size != sprite->oam.size)
     {
-        if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS)
+        if (OW_LARGE_OW_SUPPORT)
             ReallocSpriteTiles(sprite, graphicsInfo->images->size);
         // Add difference in Y vectors
         sprite->y += -(graphicsInfo->height >> 1) - sprite->centerToCornerVecY;
@@ -2581,8 +2569,6 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
         // Use palette from species palette table
         if (spriteTemplate.paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
             sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_FORM(objectEvent), objectEvent->shiny);
-        if (OW_GFX_COMPRESS && sprite->usingSheet)
-            sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
         GetMapCoordsFromSpritePos(x + objectEvent->currentCoords.x, y + objectEvent->currentCoords.y, &sprite->x, &sprite->y);
         sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
@@ -2667,7 +2653,7 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
 
     // If gfx size changes, we need to reallocate tiles
-    if (OW_LARGE_OW_SUPPORT && !OW_GFX_COMPRESS && graphicsInfo->oam->size != sprite->oam.size)
+    if (OW_LARGE_OW_SUPPORT && graphicsInfo->oam->size != sprite->oam.size)
         ReallocSpriteTiles(sprite, graphicsInfo->images->size);
 
     sprite->oam.shape = graphicsInfo->oam->shape;

@@ -22,4 +22,7 @@
 #define FADE_FROM_WHITE  2
 #define FADE_TO_WHITE    3
 
+// Within the weather palette, shadow sprites' color index
+#define SHADOW_COLOR_INDEX 9
+
 #endif // GUARD_CONSTANTS_FIELD_WEATHER_H

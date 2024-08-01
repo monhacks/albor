@@ -1450,9 +1450,9 @@ void UpdateAltBgPalettes(u16 palettes)
         if (palettes & 1) 
         {
             if (i < NUM_PALS_IN_PRIMARY)
-                AvgPaletteWeighted(&((u16*)primary->palettes)[i*16], &((u16*)primary->palettes)[((i+9)%16)*16], gPlttBufferUnfaded + i * 16, currentTimeBlend.altWeight);
+                AvgPaletteWeighted(&((u16*)primary->palettes)[PLTT_ID(i)], &((u16*)primary->palettes)[PLTT_ID((i+9)%16)], gPlttBufferUnfaded + PLTT_ID(i), currentTimeBlend.altWeight);
             else
-                AvgPaletteWeighted(&((u16*)secondary->palettes)[i*16], &((u16*)secondary->palettes)[((i+9)%16)*16], gPlttBufferUnfaded + i * 16, currentTimeBlend.altWeight);
+                AvgPaletteWeighted(&((u16*)secondary->palettes)[PLTT_ID(i)], &((u16*)secondary->palettes)[PLTT_ID((i+9)%16)], gPlttBufferUnfaded + PLTT_ID(i), currentTimeBlend.altWeight);
         }
         i++;
         palettes >>= 1;

@@ -417,11 +417,4 @@
 #define OBJ_EVENT_PAL_TAG_WHITE                   (OBJ_EVENT_PAL_TAG_NONE - 1)
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
-#if OW_GFX_COMPRESS
-// This + localId is used as the tileTag
-// for compressed graphicsInfos
-// '(C)ompressed (E)vent'
-#define COMP_OW_TILE_TAG_BASE 0xCE00
-#endif
-
 #endif  // GUARD_CONSTANTS_EVENT_OBJECTS_H

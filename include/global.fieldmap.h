@@ -37,16 +37,14 @@ typedef void (*TilesetCB)(void);
 
 struct Tileset
 {
-    /*0x00*/ u8 isCompressed:1;
-    /*0x00*/ u8 swapPalettes:7; // bitmask determining whether palette has an alternate, night-time palette
-    /*0x01*/ bool8 isSecondary;
-    /*0x02*/ u8 lightPalettes; // Bitmask determining whether a palette should be time-blended as a light
-    /*0x03*/ u8 customLightColor; // Bitmask determining which light palettes have custom light colors (color 15)
-    /*0x04*/ const u32 *tiles;
-    /*0x08*/ const u16 (*palettes)[16];
-    /*0x0C*/ const u16 *metatiles;
-    /*0x10*/ const u16 *metatileAttributes;
-    /*0x14*/ TilesetCB callback;
+    u8 isCompressed:1;
+    u8 swapPalettes:7; // bitmask determining whether palette has an alternate, night-time palette
+    bool8 isSecondary;
+    const u32 *tiles;
+    const u16 (*palettes)[16];
+    const u16 *metatiles;
+    const u16 *metatileAttributes;
+    TilesetCB callback;
 };
 
 struct MapLayout

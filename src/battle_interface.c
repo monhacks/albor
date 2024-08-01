@@ -3248,12 +3248,12 @@ void ArrowsChangeColorLastBallCycle(bool32 showArrows)
     struct PlttData *pltOutline;
     if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES)
         return;
-    paletteNum *= 16;
-    pltArrow = (struct PlttData *)&gPlttBufferFaded[paletteNum + 9];  // Arrow color is in idx 9
-    pltOutline = (struct PlttData *)&gPlttBufferFaded[paletteNum + 8];  // Arrow outline is in idx 8
+    u16 paletteOffset = PLTT_ID(paletteNum);
+    pltArrow = (struct PlttData *)&gPlttBufferFaded[paletteOffset + 9];  // Arrow color is in idx 9
+    pltOutline = (struct PlttData *)&gPlttBufferFaded[paletteOffset + 8];  // Arrow outline is in idx 8
     if (!showArrows) //Make invisible
     {
-        defaultPlttArrow = (struct PlttData *)&gPlttBufferFaded[paletteNum + 13];  // Background color is idx 13
+        defaultPlttArrow = (struct PlttData *)&gPlttBufferFaded[paletteOffset + 13];  // Background color is idx 13
         pltArrow->r = defaultPlttArrow->r;
         pltArrow->g = defaultPlttArrow->g;
         pltArrow->b = defaultPlttArrow->b;
@@ -3263,8 +3263,8 @@ void ArrowsChangeColorLastBallCycle(bool32 showArrows)
     }
     else // Make gray
     {
-        defaultPlttArrow = (struct PlttData *)&gPlttBufferFaded[paletteNum + 11];  // Grey color is idx 11
-        defaultPlttOutline = (struct PlttData *)&gPlttBufferFaded[paletteNum + 10];  //Light grey color for outline is idx 10
+        defaultPlttArrow = (struct PlttData *)&gPlttBufferFaded[paletteOffset + 11];  // Grey color is idx 11
+        defaultPlttOutline = (struct PlttData *)&gPlttBufferFaded[paletteOffset + 10];  //Light grey color for outline is idx 10
         pltArrow->r = defaultPlttArrow->r;
         pltArrow->g = defaultPlttArrow->g;
         pltArrow->b = defaultPlttArrow->b;

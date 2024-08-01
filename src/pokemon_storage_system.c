@@ -1845,12 +1845,12 @@ static void HBlankCB_PokeStorage(void)
     {
         if (vCount == 28-8+24*i) 
         { // -8 is to keep the right palette when being switched
-            u32 position = IN_BOX_COLUMNS*16*i;
-            u16* dst = (u16*) (OBJ_PLTT + (i & 1 ? 7 : 1)*16*2); // Points into Palette RAM directly
+            u32 position = IN_BOX_COLUMNS * PLTT_ID(i);
+            u16* dst = (u16*) (OBJ_PLTT + PLTT_ID(i & 1 ? 7 : 1) * 2); // Points into Palette RAM directly
             u32 j;
             for (j = 0; j < IN_BOX_COLUMNS; j++, position += 16, dst += 16) 
             { // If palette color is empty, skip
-                if (!(sPaletteSwapBuffer[position] & 0x7FFF))
+                if (!(sPaletteSwapBuffer[position] & 32767))
                 continue;
                 CpuFastCopy(&sPaletteSwapBuffer[position], dst, PLTT_SIZE_4BPP);
             }
@@ -1859,7 +1859,7 @@ static void HBlankCB_PokeStorage(void)
     }
     if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0]) 
     { // copy choose box palette
-        u16 *dst = (u16*) (OBJ_PLTT + (0)*16*2);
+        u16 *dst = (u16*) (OBJ_PLTT + PLTT_ID(0) * 2);
         CpuFastCopy(sStorage->chooseBoxSwapPal, dst, PLTT_SIZE_4BPP);
     }
 }

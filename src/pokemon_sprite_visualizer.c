@@ -1057,7 +1057,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             SetVBlankCallback(NULL);
             FreeMonSpritesGfx();
             ResetBGs_PokemonSpriteVisualizer(0);
-            DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 0x1000)
+            DmaFillLarge16(3, 0, (u8 *)VRAM, VRAM_SIZE, 4096)
             DmaClear32(3, OAM, OAM_SIZE);
             DmaClear16(3, PLTT, PLTT_SIZE);
             gMain.state = 1;
@@ -1071,7 +1071,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
             BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-            LoadPalette(GetTextWindowPalette(0), 15*16, 0x40);
+            LoadPalette(GetTextWindowPalette(0), PLTT_ID(15), 64);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
             InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));

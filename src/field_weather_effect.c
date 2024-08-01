@@ -1338,9 +1338,6 @@ void FogHorizontal_Main(void);
 static void CreateFogHorizontalSprites(void);
 static void DestroyFogHorizontalSprites(void);
 
-// Within the weather palette, shadow sprites' color index
-#define SHADOW_COLOR_INDEX 9
-
 // Updates just the color of shadows to match special weather blending
 u8 UpdateShadowColor(u16 color) 
 {
@@ -1349,7 +1346,7 @@ u8 UpdateShadowColor(u16 color)
     u16 blendedColor;
     if (paletteNum != 0xFF) 
     {
-        u16 index = (paletteNum+16)*16+SHADOW_COLOR_INDEX;
+        u16 index = OBJ_PLTT_ID2(paletteNum) + SHADOW_COLOR_INDEX;
         gPlttBufferUnfaded[index] = gPlttBufferFaded[index] = color;
         // Copy to temporary buffer, blend, and keep just the shadow color index
         CpuFastCopy(&gPlttBufferFaded[index-SHADOW_COLOR_INDEX], tempBuffer, 32);
