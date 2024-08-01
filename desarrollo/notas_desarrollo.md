@@ -53,6 +53,7 @@
 - Borrar sprites Helioptile/Heliolisk, Farfetchd, incorporar Conkeldurr.
 - Hueso quemado (objeto raro en Cubone que lo hace evolucionar a Marowak Alolan).
 - Usar viejas partículas: ANIM_TAG_ASCUAS
+- Crear habilidad exclusiva de Beedrill (Empalador o algo así).
 
 -Lista de moves hechos:
 *Bomba huevo.
