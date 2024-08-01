@@ -1454,7 +1454,6 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     }
 
     sprite = &gSprites[spriteId];
-    // Use palette from species palette table
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_FORM(objectEvent), objectEvent->shiny);
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
@@ -1792,15 +1791,21 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
 // Find, or load, the palette for the specified pokemon info
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
-    struct Pokemon *mon = GetFirstLiveMon();
     u32 paletteNum;
     // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
     // so that palette tags do not overlap
     const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //¿Qué pasa si es hembra?
+    struct Pokemon *mon = GetFirstLiveMon();
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
-        // Load compressed palette
-        LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
+        if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
+        {
+            LoadCompressedSpritePaletteWithTag(palette, species);
+        }
+        else
+        {
+            LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
+        }
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     }

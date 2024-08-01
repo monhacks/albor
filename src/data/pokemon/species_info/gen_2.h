@@ -1260,6 +1260,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .frontAnimDelay = 50,
         BACK_PIC(Mareep, 56, 40),
         .backPicYOffset = 15,
+        .brilla = TRUE,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Mareep),
         ICON(Mareep, 0),
@@ -1310,6 +1311,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Flaaffy),
+        .brilla = TRUE,
         ICON(Flaaffy, 0),
         FOLLOWER(Flaaffy, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Flaaffy),
@@ -1360,6 +1362,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Ampharos),
+        .brilla = TRUE,
         ICON(Ampharos, 0),
         FOLLOWER(Ampharos, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
