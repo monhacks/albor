@@ -1828,7 +1828,7 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-        if (gSpeciesInfo[species].transparente)
+        if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
         {
             sprite->oam.objMode = ST_OAM_OBJ_BLEND;
             SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
