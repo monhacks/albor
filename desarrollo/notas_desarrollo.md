@@ -54,6 +54,8 @@
 - Hueso quemado (objeto raro en Cubone que lo hace evolucionar a Marowak Alolan).
 - Usar viejas partículas: ANIM_TAG_ASCUAS
 - Crear habilidad exclusiva de Beedrill (Empalador o algo así).
+- Arreglar tiendas.
+- Arreglar icono de guardado que cambia con el día.
 
 -Lista de moves hechos:
 *Bomba huevo.
