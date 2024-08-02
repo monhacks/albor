@@ -2857,4 +2857,8 @@ extern const u8 gText_DownArrow[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+// FRLG whiteout
+extern const u8 gText_PlayerScurriedToCenter[];
+extern const u8 gText_PlayerScurriedBackHome[];
+
 #endif // GUARD_STRINGS_H
