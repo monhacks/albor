@@ -1820,7 +1820,7 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
     objEvent->graphicsId = (OBJ_EVENT_GFX_MON_BASE + species) & OBJ_EVENT_GFX_SPECIES_MASK;
     objEvent->graphicsId |= form << OBJ_EVENT_GFX_SPECIES_BITS;
     objEvent->shiny = shiny;
-    if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC) // Use palette from species palette table
+    if (graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
         struct Sprite *sprite = &gSprites[objEvent->spriteId];
         // Free palette if otherwise unused
@@ -1831,7 +1831,6 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
         {
             sprite->oam.objMode = ST_OAM_OBJ_BLEND;
-            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
         }
     }
 }
