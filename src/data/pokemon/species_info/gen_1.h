@@ -6182,6 +6182,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .categoryName = _("Gas"),
         .height = 13,
         .weight = 1,
+        .brilla = TRUE,
+        .transparente = TRUE,
         .description = COMPOUND_STRING(
             "When exposed to a strong wind, a Gastly's\n"
             "gaseous body quickly dwindles away.\n"
@@ -6240,6 +6242,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .pokemonScale = 256,
         .pokemonOffset = 2,
         .trainerScale = 293,
+        .brilla = TRUE,
+        .transparente = TRUE,
         .trainerOffset = 2,
         FRONT_PIC(Haunter, 64, 48),
         .frontPicYOffset = 13,
@@ -6261,6 +6265,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
     [SPECIES_GENGAR] =
     {
         .brilla = TRUE,
+        .transparente = TRUE,
         .types = MON_TYPES(TYPE_GHOST, TYPE_POISON),
         .catchRate = 45,
         .evYield_SpAttack = 3,
@@ -6303,7 +6308,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Gengar),
         ICON(Gengar, 2),
         .eggMoveLearnset = sGastlyEggMoveLearnset,
-        FOLLOWER(Gengar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER(Gengar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
 
     [SPECIES_ONIX] =

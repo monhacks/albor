@@ -6083,6 +6083,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     [SPECIES_GLALIE] =
     {
         GLALIE_MISC_INFO,
+        .brilla = TRUE,
         .baseHP        = 60,
         .baseAttack    = 110,
         .baseDefense   = 110,

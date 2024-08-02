@@ -1828,10 +1828,10 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-        if (species == SPECIES_KECLEON)
+        if (gSpeciesInfo[species].transparente)
         {
             sprite->oam.objMode = ST_OAM_OBJ_BLEND;
-            //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
+            SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
         }
     }
 }

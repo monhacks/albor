@@ -1453,7 +1453,7 @@ static void NamingScreen_CreateMonIcon(void)
         u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
         const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
         LoadCompressedPalette(palette, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
+        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), sNamingScreen->monSpecies, sNamingScreen->monPersonality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = index;
     }

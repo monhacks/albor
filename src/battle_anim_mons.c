@@ -1944,7 +1944,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, isShiny, personality);
+        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(palette)], &gPlttBufferUnfaded[OBJ_PLTT_ID(palette)], PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
@@ -1954,7 +1954,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, isShiny, personality);
+        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(palette)], &gPlttBufferUnfaded[OBJ_PLTT_ID(palette)], PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,

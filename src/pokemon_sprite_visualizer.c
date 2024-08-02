@@ -1669,7 +1669,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
     gSprites[data->frontspriteId].oam.paletteNum = 1;
     personality = Random32();
-    UniquePaletteByPersonality(OBJ_PLTT_ID(1), species, data->isShiny, personality);
+    UniquePaletteByPersonality(OBJ_PLTT_ID(1), species, personality);
     CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;

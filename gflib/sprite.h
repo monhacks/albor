@@ -335,7 +335,7 @@ void ResetAffineAnimData(void);
 u32 GetSpanPerImage(u32 shape, u32 size);
 struct BoxPokemon;
 u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, struct BoxPokemon *boxMon);
-u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, u16 species, bool8 isShiny, u32 personality);
+u8 LoadUniqueSpritePaletteByPersonality(const struct SpritePalette *palette, u16 species, u32 personality);
 u8 GetSpriteIndexByTileTag(u16 tag);
 
 #endif //GUARD_SPRITE_H
