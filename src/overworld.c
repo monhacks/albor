@@ -87,13 +87,13 @@ static void CB2_LoadMap2(void);
 static void VBlankCB_Field(void);
 static void ChooseAmbientCrySpecies(void);
 static void DoMapLoadLoop(u8 *);
-static bool32 LoadMapInStepsLocal(u8 *, bool32);
+static bool32 LoadMapInStepsLocal(u8 *);
 static bool32 ReturnToFieldLocal(u8 *);
 static void InitObjectEventsLocal(void);
 static void InitOverworldGraphicsRegisters(void);
 static void ResetMirageTowerAndSaveBlockPtrs(void);
 static void ResetScreenForMapLoad(void);
-static void ResumeMap(bool32);
+static void ResumeMap(void);
 static void SetCameraToTrackPlayer(void);
 static void InitObjectEventsReturnToField(void);
 static void InitViewGraphics(void);
@@ -739,39 +739,27 @@ if (I_VS_SEEKER_CHARGING != 0)
     }
 }
 
-static void LoadMapFromWarp(bool32 a1)
+static void LoadMapFromWarp(void)
 {
     bool8 isOutdoors;
-    bool8 isIndoors;
 
     LoadCurrentMapData();
     if (!(sObjectEventLoadFlag & SKIP_OBJECT_EVENT_LOAD))
     {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-            LoadBattlePyramidObjectEventTemplates();
-        else if (InTrainerHill())
-            LoadTrainerHillObjectEventTemplates();
-        else
-            LoadObjEventTemplatesFromHeader();
+        LoadObjEventTemplatesFromHeader();
     }
 
     isOutdoors = IsMapTypeOutdoors(gMapHeader.mapType);
-    isIndoors = IsMapTypeIndoors(gMapHeader.mapType);
 
-    CheckLeftFriendsSecretBase();
     TrySetMapSaveWarpStatus();
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
-#endif //FREE_MATCH_CALL
 
-if (I_VS_SEEKER_CHARGING != 0)
-     MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    if (I_VS_SEEKER_CHARGING != 0)
+        MapResetTrainerRematches(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
 
-    if (a1 != TRUE)
-        DoTimeBasedEvents();
+    DoTimeBasedEvents();
     SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (isOutdoors)
@@ -779,20 +767,8 @@ if (I_VS_SEEKER_CHARGING != 0)
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
     RunOnTransitionMapScript();
-    UpdateLocationHistoryForRoamer();
-    MoveAllRoamersToOtherLocationSets();
     gChainFishingDexNavStreak = 0;
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        InitBattlePyramidMap(FALSE);
-    else if (InTrainerHill())
-        InitTrainerHillMap();
-    else
-        InitMap();
-
-    if (a1 != TRUE && isIndoors)
-    {
-        InitSecretBaseAppearance(TRUE);
-    }
+    InitMap();
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -1653,12 +1629,6 @@ void CB2_ReturnToFieldContestHall(void)
         UnlockPlayerFieldControls();
         SetMainCallback1(NULL);
     }
-    if (LoadMapInStepsLocal(&gMain.state, TRUE))
-    {
-        SetFieldVBlankCallback();
-        SetMainCallback1(CB1_Overworld);
-        SetMainCallback2(CB2_Overworld);
-    }
 }
 
 void CB2_ReturnToField(void)
@@ -1802,13 +1772,13 @@ static void InitCurrentFlashLevelScanlineEffect(void)
     }
 }
 
-static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
+static bool32 LoadMapInStepsLocal(u8 *state)
 {
     switch (*state)
     {
     case 0:
         FieldClearVBlankHBlankCallbacks();
-        LoadMapFromWarp(a2);
+        LoadMapFromWarp();
         (*state)++;
         break;
     case 1:
@@ -1817,7 +1787,7 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 a2)
         (*state)++;
         break;
     case 2:
-        ResumeMap(a2);
+        ResumeMap();
         (*state)++;
         break;
     case 3:
@@ -1881,7 +1851,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
     case 0:
         ResetMirageTowerAndSaveBlockPtrs();
         ResetScreenForMapLoad();
-        ResumeMap(FALSE);
+        ResumeMap();
         InitObjectEventsReturnToField();
         if (gFieldCallback == FieldCallback_UseFly)
             RemoveFollowingPokemon();
@@ -1892,7 +1862,6 @@ static bool32 ReturnToFieldLocal(u8 *state)
         break;
     case 1:
         InitViewGraphics();
-        TryLoadTrainerHillEReaderPalette();
         (*state)++;
         break;
     case 2:
@@ -1908,7 +1877,7 @@ static bool32 ReturnToFieldLocal(u8 *state)
 
 static void DoMapLoadLoop(u8 *state)
 {
-    while (!LoadMapInStepsLocal(state, FALSE));
+    while (!LoadMapInStepsLocal(state));
 }
 
 static void ResetMirageTowerAndSaveBlockPtrs(void)
@@ -1971,7 +1940,7 @@ static void InitOverworldGraphicsRegisters(void)
     InitFieldMessageBox();
 }
 
-static void ResumeMap(bool32 a1)
+static void ResumeMap(void)
 {
     ResetTasks();
     ResetSpriteData();
@@ -1981,12 +1950,10 @@ static void ResumeMap(bool32 a1)
     ResetCameraUpdateInfo();
     InstallCameraPanAheadCallback();
     FreeAllSpritePalettes();
-
     FieldEffectActiveListClear();
     StartWeather();
     ResumePausedWeather();
-    if (!a1)
-        SetUpFieldTasks();
+    SetUpFieldTasks();
     RunOnResumeMapScript();
     TryStartMirageTowerPulseBlendEffect();
 }

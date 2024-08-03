@@ -946,13 +946,6 @@ static void SetAllTrainerFlags(void)
     gSaveBlock2Ptr->frontier.trainerFlags = 0xFF;
 }
 
-// Palette never loaded, OnTrainerHillEReaderChallengeFloor always FALSE
-void TryLoadTrainerHillEReaderPalette(void)
-{
-    if (OnTrainerHillEReaderChallengeFloor() == TRUE)
-        LoadPalette(sEReader_Pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-}
-
 static void GetGameSaved(void)
 {
     gSpecialVar_Result = gSaveBlock2Ptr->frontier.savedGame;
