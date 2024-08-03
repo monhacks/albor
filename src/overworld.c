@@ -1,6 +1,5 @@
 #include "global.h"
 #include "overworld.h"
-#include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "berry.h"
 #include "bg.h"
@@ -46,13 +45,11 @@
 #include "save_location.h"
 #include "script.h"
 #include "script_pokemon_util.h"
-#include "secret_base.h"
 #include "sound.h"
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anims.h"
 #include "time_events.h"
-#include "trainer_hill.h"
 #include "trainer_pokemon_sprites.h"
 #include "scanline_effect.h"
 #include "wild_encounter.h"
@@ -64,7 +61,6 @@
 #include "constants/map_types.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
-#include "constants/trainer_hill.h"
 #include "constants/weather.h"
 #include "constants/rgb.h"
 
@@ -700,9 +696,6 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
-#if FREE_MATCH_CALL == FALSE
-    TryUpdateRandomTrainerRematches(mapGroup, mapNum);
-#endif //FREE_MATCH_CALL
 
 if (I_VS_SEEKER_CHARGING != 0)
     MapResetTrainerRematches(mapGroup, mapNum);
@@ -1267,8 +1260,7 @@ bool8 Overworld_MapTypeAllowsTeleportAndFly(u8 mapType)
 
 bool8 IsMapTypeIndoors(u8 mapType)
 {
-    if (mapType == MAP_TYPE_INDOOR
-     || mapType == MAP_TYPE_SECRET_BASE)
+    if (mapType == MAP_TYPE_INDOOR)
         return TRUE;
     else
         return FALSE;
@@ -1496,14 +1488,15 @@ static void OverworldBasic(void)
             .time1 = currentTimeBlend.time1,
             .weight = currentTimeBlend.weight,
         };
-      gTimeUpdateCounter = 0;
-      UpdateTimeOfDay();
-      if (cachedBlend.time0 != currentTimeBlend.time0
-       || cachedBlend.time1 != currentTimeBlend.time1
-       || cachedBlend.weight != currentTimeBlend.weight) 
+        gTimeUpdateCounter = 0;
+        UpdateTimeOfDay();
+        //UpdateFollowingPokemon();
+        if (cachedBlend.time0 != currentTimeBlend.time0
+        || cachedBlend.time1 != currentTimeBlend.time1
+        || cachedBlend.weight != currentTimeBlend.weight) 
         {
-           UpdateAltBgPalettes(PALETTES_BG);
-           UpdatePalettesWithTime(PALETTES_ALL);
+            UpdateAltBgPalettes(PALETTES_BG);
+            UpdatePalettesWithTime(PALETTES_ALL);
         }
     }
 }
@@ -1676,41 +1669,23 @@ void CB2_ReturnToFieldFadeFromBlack(void)
 
 static void FieldCB_FadeTryShowMapPopup(void)
 {
-    if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+    if (gMapHeader.showMapName == TRUE)
         ShowMapNamePopup();
     FieldCB_WarpExitFadeFromBlack();
 }
 
 void CB2_ContinueSavedGame(void)
 {
-    u8 trainerHillMapId;
-
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
-    if (gSaveFileStatus == SAVE_STATUS_ERROR)
-        ResetWinStreaks();
-
     LoadSaveblockMapHeader();
     ClearDiveAndHoleWarps();
-    trainerHillMapId = GetCurrentTrainerHillMapId();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        LoadBattlePyramidFloorObjectEventScripts();
-    else if (trainerHillMapId != 0 && trainerHillMapId != TRAINER_HILL_ENTRANCE)
-        LoadTrainerHillFloorObjectEventScripts();
-    else
-        LoadSaveblockObjEventScripts();
-
+    LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
     DoTimeBasedEvents();
     UpdateMiscOverworldStates();
-    if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR)
-        InitBattlePyramidMap(TRUE);
-    else if (trainerHillMapId != 0)
-        InitTrainerHillMap();
-    else
-        InitMapFromSavedGame();
-
+    InitMapFromSavedGame();
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
@@ -1760,12 +1735,7 @@ static void InitCurrentFlashLevelScanlineEffect(void)
 {
     u8 flashLevel;
 
-    if (InBattlePyramid_())
-    {
-        WriteBattlePyramidViewScanlineEffectBuffer();
-        ScanlineEffect_SetParams(sFlashEffectParams);
-    }
-    else if ((flashLevel = GetFlashLevel()))
+    if ((flashLevel = GetFlashLevel()))
     {
         WriteFlashScanlineEffectBuffer(flashLevel);
         ScanlineEffect_SetParams(sFlashEffectParams);
@@ -1829,7 +1799,7 @@ static bool32 LoadMapInStepsLocal(u8 *state)
         (*state)++;
         break;
     case 11:
-        if (gMapHeader.showMapName == TRUE && SecretBaseMapPopupEnabled() == TRUE)
+        if (gMapHeader.showMapName == TRUE)
             ShowMapNamePopup();
         (*state)++;
         break;

@@ -1828,10 +1828,6 @@ static void FollowerSetGraphics(struct ObjectEvent *objEvent, u16 species, u8 fo
         FieldEffectFreePaletteIfUnused(sprite->oam.paletteNum);
         sprite->inUse = TRUE;
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(species, form, shiny);
-        if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
-        {
-            sprite->oam.objMode = ST_OAM_OBJ_BLEND;
-        }
     }
 }
 
@@ -1982,6 +1978,7 @@ void UpdateFollowingPokemon(void)
                 objEvent->invisible = TRUE;
             }
         }
+        FollowerSetGraphics(objEvent, species, form, shiny);
         sprite->data[6] = 0; // set animation data
     }
     else
@@ -5186,6 +5183,8 @@ static bool32 EndFollowerTransformEffect(struct ObjectEvent *objectEvent, struct
 static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
     u32 multi;
+    u32 species = OW_SPECIES(objectEvent);
+
     if (GET_BASE_SPECIES_ID(OW_SPECIES(objectEvent)) == SPECIES_CASTFORM
         && OW_SPECIES(objectEvent) != (multi = GetOverworldCastformForm()))
     {
@@ -5198,6 +5197,14 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
         sprite->data[7] = TRANSFORM_TYPE_RANDOM_WILD << 8;
         PlaySE(SE_M_MINIMIZE);
         return TRUE;
+    }
+    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() == TIEMPO_NOCHE)
+    {
+        sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
+    }
+    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
+    {
+        sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     }
     return FALSE;
 }

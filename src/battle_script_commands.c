@@ -4218,36 +4218,12 @@ static void Cmd_jumpbasedontype(void)
 
 FEATURE_FLAG_ASSERT(I_EXP_SHARE_FLAG, YouNeedToSetTheExpShareFlagToAnUnusedFlag);
 
-static bool32 BattleTypeAllowsExp(void)
-{
-    if (RECORDED_WILD_BATTLE)
-        return TRUE;
-    else if (gBattleTypeFlags &
-              ( BATTLE_TYPE_LINK
-              | BATTLE_TYPE_RECORDED_LINK
-              | BATTLE_TYPE_TRAINER_HILL
-              | BATTLE_TYPE_FRONTIER
-              | BATTLE_TYPE_SAFARI
-              | BATTLE_TYPE_BATTLE_TOWER
-              | BATTLE_TYPE_EREADER_TRAINER))
-        return FALSE;
-    else
-        return TRUE;
-}
-
 static u32 GetMonHoldEffect(struct Pokemon *mon)
 {
     u32 holdEffect;
     u32 item = GetMonData(mon, MON_DATA_HELD_ITEM);
 
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-    #if FREE_ENIGMA_BERRY == FALSE
-        holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-    #else
-        holdEffect = 0;
-    #endif //FREE_ENIGMA_BERRY
-    else
-        holdEffect = ItemId_GetHoldEffect(item);
+    holdEffect = ItemId_GetHoldEffect(item);
 
     return holdEffect;
 }
@@ -4266,8 +4242,7 @@ static void Cmd_getexp(void)
     {
     case 0: // check if should receive exp at all
         if (GetBattlerSide(gBattlerFainted) != B_SIDE_OPPONENT
-            || IsAiVsAiBattle()
-            || !BattleTypeAllowsExp())
+            || IsAiVsAiBattle())
         {
             gBattleScripting.getexpState = 6; // goto last case
         }

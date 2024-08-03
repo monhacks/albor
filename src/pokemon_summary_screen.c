@@ -942,7 +942,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
 const struct CompressedSpriteSheet gSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
-    .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100,
+    .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 256,
     .tag = TAG_MOVE_TYPES
 };
 const struct SpriteTemplate gSpriteTemplate_MoveTypes =
@@ -1035,7 +1035,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveSelector[] = {
 static const struct CompressedSpriteSheet sMoveSelectorSpriteSheet =
 {
     .data = gSummaryMoveSelect_Gfx,
-    .size = 0x400,
+    .size = 1024,
     .tag = TAG_MOVE_SELECTOR
 };
 static const struct CompressedSpritePalette sMoveSelectorSpritePal =
@@ -1114,7 +1114,7 @@ static const union AnimCmd *const sSpriteAnimTable_StatusCondition[] = {
 static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 {
     .data = gStatusGfx_Icons,
-    .size = 0x400,
+    .size = 1024,
     .tag = TAG_MON_STATUS
 };
 static const struct CompressedSpritePalette sStatusIconsSpritePalette =
