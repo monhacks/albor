@@ -50,8 +50,6 @@
 #define SIZE_32x32 1
 #define SIZE_64x64 0
 
-#define COMP FALSE
-
 #define FOLLOWER(name, _size, shadow, _tracks)                                              \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
@@ -63,7 +61,7 @@
     .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = shadow,                                                                   \
     .inanimate = FALSE,                                                                     \
-    .compressed = COMP,                                                                     \
+    .compressed = FALSE,                                                                    \
     .tracks = _tracks,                                                                      \
     .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64), \
     .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),         \
@@ -71,6 +69,26 @@
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
+
+#define FOLLOWER_FEMALE(name, _size, shadow, _tracks)                                       \
+.followerDataFemale = {                                                                     \
+    .tileTag = TAG_NONE,                                                                    \
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
+    .size = (_size == SIZE_32x32 ? 512 : 2048),                                             \
+    .width = (_size == SIZE_32x32 ? 32 : 64),                                               \
+    .height = (_size == SIZE_32x32 ? 32 : 64),                                              \
+    .paletteSlot = PALSLOT_NPC_1,                                                           \
+    .shadowSize = shadow,                                                                   \
+    .inanimate = FALSE,                                                                     \
+    .compressed = FALSE,                                                                    \
+    .tracks = _tracks,                                                                      \
+    .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64), \
+    .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),         \
+    .anims = sAnimTable_Following,                                                          \
+    .images = sPicTable_##name##F,                                                          \
+    .affineAnims = gDummySpriteAffineAnimTable,                                             \
+},     
 
 // Maximum value for a female Pokémon is 254 (MON_FEMALE) which is 100% female.
 // 255 (MON_GENDERLESS) is reserved for genderless Pokémon.
@@ -122,7 +140,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .paletteSlot = PALSLOT_NPC_1,
             .shadowSize = SHADOW_SIZE_M,
             .inanimate = FALSE,
-            .compressed = COMP,
+            .compressed = FALSE,
             .tracks = TRACKS_FOOT,
             .oam = &gObjectEventBaseOam_32x32,
             .subspriteTables = sOamTables_32x32,

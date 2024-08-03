@@ -155,6 +155,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON_FEMALE(Venusaur, 4),
         .eggMoveLearnset = sBulbasaurEggMoveLearnset,
         FOLLOWER(Venusaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Venusaur, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
     [SPECIES_CHARMANDER] =
@@ -603,6 +604,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Butterfree, 0),
         ICON_FEMALE(Butterfree, 4),
         FOLLOWER(Butterfree, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
+        FOLLOWER_FEMALE(Butterfree, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
     },
 
     [SPECIES_WEEDLE] =
@@ -949,6 +951,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Rattata, 2),
         ICON_FEMALE(Rattata, 2),
         FOLLOWER(Rattata, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Rattata, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Rattata),
         .eggMoveLearnset = sRattataEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RATICATE}),
@@ -1002,6 +1005,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Raticate, 2),
         ICON_FEMALE(Raticate, 2),
         FOLLOWER(Raticate, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Raticate, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raticate),
         .eggMoveLearnset = sRattataEggMoveLearnset,
     },
@@ -1399,6 +1403,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPichuEggMoveLearnset,
         ICON_FEMALE(Pikachu, 2),
         FOLLOWER(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Pikachu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
                                 {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLAN}),
     },
@@ -1450,6 +1455,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         PALETTES(Raichu),
         ICON(Raichu, 0),
         FOLLOWER(Raichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Raichu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raichu),
         .eggMoveLearnset = sPichuEggMoveLearnset,
     },
@@ -2553,6 +2559,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Zubat, 2),
         ICON_FEMALE(Zubat, 2),
         FOLLOWER(Zubat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
+        FOLLOWER_FEMALE(Zubat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Zubat),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GOLBAT}),
     },
@@ -2605,6 +2612,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(Golbat, 2),
         ICON_FEMALE(Golbat, 2),
         FOLLOWER(Golbat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
+        FOLLOWER_FEMALE(Golbat, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Golbat),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CROBAT}),
     },

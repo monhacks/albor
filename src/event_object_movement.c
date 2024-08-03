@@ -1731,59 +1731,21 @@ struct ObjectEvent *GetFollowerObject(void)
 static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, u8 form)
 {
     const struct ObjectEventGraphicsInfo *graphicsInfo = NULL;
-    switch (species)
+
+    if (gSpeciesInfo[species].iconSpriteFemale != NULL)
     {
-    case SPECIES_VENUSAUR:
-      if(form==0)
+        if(form==0)
+        {
+            graphicsInfo = &gSpeciesInfo[species].followerData;
+        }
+        else
+        {
+            graphicsInfo = &gSpeciesInfo[species].followerDataFemale;
+        }
+    }
+    else
+    {
         graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[VENUSAUR_FEMALE];
-      break;
-    case SPECIES_BUTTERFREE:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[BUTTERFREE_FEMALE];
-      break;
-    case SPECIES_RATTATA:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[RATTATA_FEMALE];
-      break;
-    case SPECIES_RATICATE:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[RATICATE_FEMALE];
-      break;
-    case SPECIES_PIKACHU:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[PIKACHU_FEMALE];
-      break;
-    case SPECIES_RAICHU:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[RAICHU_FEMALE];
-      break;
-    case SPECIES_ZUBAT:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[ZUBAT_FEMALE];
-      break;
-    case SPECIES_GOLBAT:
-      if(form==0)
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-      else
-        graphicsInfo = &gPokemonFormGraphics[GOLBAT_FEMALE];
-      break;
-    default:
-        graphicsInfo = &gSpeciesInfo[species].followerData;
-        break;
     }
     return graphicsInfo->tileTag == TAG_NONE ? graphicsInfo : &gSpeciesInfo[SPECIES_NONE].followerData;
 }
@@ -1901,21 +1863,27 @@ static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
     }
     *species = GetMonData(mon, MON_DATA_SPECIES);
     *shiny = IsMonShiny(mon);
+    if (gSpeciesInfo[*species].iconSpriteFemale != NULL)
+    {
+        *form = GetMonGender(mon);
+    }
     switch (*species)
     {
-    case SPECIES_CASTFORM: // form is based on overworld weather
-        *species = GetOverworldCastformForm();
-        break;
-    case SPECIES_VENUSAUR:
-    case SPECIES_BUTTERFREE:
-    case SPECIES_RATTATA:
-    case SPECIES_RATICATE:
-    case SPECIES_PIKACHU:
-    case SPECIES_RAICHU:
-    case SPECIES_ZUBAT:
-    case SPECIES_GOLBAT:
-        *form = GetMonGender(mon);
-        break;
+        case SPECIES_CASTFORM:
+            *species = GetOverworldCastformForm();
+            break;
+        //case SPECIES_CHERRIM:
+        //    *species = GetOverworldCherrimForm();
+        //    break;
+        //case SPECIES_DARMANITAN:
+        //    *species = GetOverworldDarmanitanForm();
+        //    break;
+        //case SPECIES_MIMIKYU:
+        //    *species = GetOverworldMimikyuForm();
+        //    break;
+        //case SPECIES_AEGISLASH:
+        //    *species = GetOverworldAegislashForm();
+        //    break;
     }
     return TRUE;
 }

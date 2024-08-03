@@ -328,6 +328,7 @@ struct SpeciesInfo /*0xC4*/
  /* 0x84 */ const u16 *formSpeciesIdTable;
  /* 0x84 */ const struct FormChange *formChangeTable;
             struct ObjectEventGraphicsInfo followerData;
+            struct ObjectEventGraphicsInfo followerDataFemale;
 };
 
 struct MoveInfo
