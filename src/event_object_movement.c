@@ -7178,6 +7178,7 @@ bool8 MovementAction_EnterPokeball_Step1(struct ObjectEvent *objectEvent, struct
         objectEvent->graphicsId = graphicsId;
         objectEvent->inanimate = FALSE;
     }
+    sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
     return FALSE;
 }
 

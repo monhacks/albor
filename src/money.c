@@ -14,7 +14,7 @@
 EWRAM_DATA static u8 sMoneyBoxWindowId = 0;
 EWRAM_DATA static u8 sMoneyLabelSpriteId = 0;
 
-#define MONEY_LABEL_TAG 0x2722
+#define MONEY_LABEL_TAG 10018
 
 static const struct OamData sOamData_MoneyLabel =
 {
