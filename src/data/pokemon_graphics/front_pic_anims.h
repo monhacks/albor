@@ -486,7 +486,9 @@ static const union AnimCmd sAnim_VulpixAlolan_1[] =
 static const union AnimCmd sAnim_NinetalesAlolan_1[] =
 {
     ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 45),
+    ANIMCMD_FRAME(1, 20),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 20),
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };

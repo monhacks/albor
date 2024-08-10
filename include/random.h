@@ -165,6 +165,7 @@ enum RandomTag
     RNG_NUEVE_COLAS,
     RNG_PARASITO,
     RNG_AI_ABILITY,
+    RNG_AI_HASBADODDS,
     RNG_SHELL_SIDE_ARM,
 };
 
