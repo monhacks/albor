@@ -44,6 +44,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokemon_icon.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
@@ -2236,7 +2237,6 @@ static void HandleChooseActionAfterDma3(u32 battler)
     }
 }
 
-#define POKE_ICON_BASE_PAL_TAG 56000 
 #define sMonIconStill data[3]
 
 static void SpriteCb_MonIcon(struct Sprite *sprite)

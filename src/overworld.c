@@ -221,10 +221,9 @@ static const struct BgTemplate sOverworldBgTemplates[] =
 
 static const struct ScanlineEffectParams sFlashEffectParams =
 {
-    &REG_WIN0H,
-    ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    1,
-    0,
+    .dmaDest = &REG_WIN0H,
+    .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
+    .initState = 1,
 };
 
 // code

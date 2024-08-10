@@ -6875,51 +6875,6 @@ static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Insert[] =
 
 /*      v-- Origin on 3
 [0_____][1_____]
-[2     ][3     ]   64x16
-*/
-static const struct Subsprite sSubsprites_DigitalDisplay_Unused1[] =
-{
-    {
-        .x = -32,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 0,
-        .priority = 3,
-    },
-    {
-        .x = 0,
-        .y = -8,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 4,
-        .priority = 3,
-    },
-    {
-        .x = -32,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 8,
-        .priority = 3,
-    },
-    {
-        .x = 0,
-        .y = 0,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
-        .tileOffset = 12,
-        .priority = 3,
-    }
-};
-
-static const struct SubspriteTable sSubspriteTable_DigitalDisplay_Unused1[] =
-{
-    {ARRAY_COUNT(sSubsprites_DigitalDisplay_Unused1), sSubsprites_DigitalDisplay_Unused1}
-};
-
-/*      v-- Origin on 3
-[0_____][1_____]
 [2_____][3_____]
 [4     ][5     ]   64x24
 */

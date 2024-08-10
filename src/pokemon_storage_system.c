@@ -4498,17 +4498,17 @@ static void CreatePartyMonsSprites(bool8 visible) //iconos de Pokémon de equipo
         pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[0], MON_DATA_SPECIES)].types[0]];
         pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[0], MON_DATA_SPECIES)].types[1]];
         LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
-        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
-        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
         LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
-        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
-        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
+        CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(1) + 8], PLTT_SIZE_4BPP);
     }
     else
     {
-        LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_OFFSET + PLTT_ID(1), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(1), species, personality);
-        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(1)], PLTT_SIZE_4BPP);
+        LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
+        UniquePaletteByPersonality(OBJ_PLTT_ID(1), species, personality);
+        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
     }
     sStorage->partySprites[0]->oam.paletteNum = 1;
     count = 1;
@@ -4524,11 +4524,11 @@ static void CreatePartyMonsSprites(bool8 visible) //iconos de Pokémon de equipo
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
             LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
             sStorage->partySprites[i]->oam.paletteNum = paletteNum;
             count++;            
         }
@@ -4538,9 +4538,9 @@ static void CreatePartyMonsSprites(bool8 visible) //iconos de Pokémon de equipo
             {
                 personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
                 sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
-                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), species, personality);
-                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                UniquePaletteByPersonality(OBJ_PLTT_ID(paletteNum), species, personality);
+                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
                 sStorage->partySprites[i]->oam.paletteNum = paletteNum;
                 count++;
             }
@@ -4772,11 +4772,11 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
             pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[position], MON_DATA_SPECIES)].types[0]];
             pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(&gPlayerParty[position], MON_DATA_SPECIES)].types[1]];
             LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
             sStorage->partySprites[position]->oam.paletteNum = paletteNum;
         }
         else // If currently using displayed mon palette, load party sprite palette into free party palette slot
@@ -4784,9 +4784,9 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
             if (sStorage->partySprites[position]->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)) 
             {
                 paletteNum = FindFreePartyPaletteSlot();
-                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-                UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_SPECIES), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
-                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                UniquePaletteByPersonality(OBJ_PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_SPECIES), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
+                CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
                 sStorage->partySprites[position]->oam.paletteNum = paletteNum;
             }
         }
@@ -5904,8 +5904,8 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     { // party
         u32 paletteNum = FindFreePartyPaletteSlot();
         // Copy display palette into party palette slot
-        CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
-        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+        CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_ID(displayIndex)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+        CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(displayIndex)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
         sStorage->partySprites[position]->oam.paletteNum = paletteNum;
     } 
     else 
@@ -5914,7 +5914,7 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
         u8 j = position % 6;
         // Copy display palette into swap buffer (at next vblank)
         // This is necessary because copying it while the screen is being drawn will cause flickering
-        SwapInPalNextVBlank(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(displayIndex)], &sPaletteSwapBuffer[PLTT_ID(position)]);
+        SwapInPalNextVBlank(&gPlttBufferFaded[OBJ_PLTT_ID(displayIndex)], &sPaletteSwapBuffer[PLTT_ID(position)]);
         sStorage->boxMonsSprites[position]->oam.paletteNum = (i & 1 ? 6 : 0) + j + 1;
     }
     SetDisplayMonData(&sStorage->movingMon, MODE_PARTY);
@@ -7400,7 +7400,7 @@ static void ToggleCursorAutoAction(void)
     if (index == 0xFF)
       return;
     sAutoActionOn = !sAutoActionOn;
-    LoadPalette(sAutoActionOn ? sHandCursor_Pal : sWaveform_Pal, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
+    LoadPalette(sAutoActionOn ? sHandCursor_Pal : sWaveform_Pal, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
 }
 
 static u8 GetCursorPosition(void)
@@ -8634,7 +8634,7 @@ static void LoadItemIconGfx(u8 id, const u32 *itemTiles, const u32 *itemPal)
         }
     }
     sStorage->itemIcons[id].sprite->oam.paletteNum = paletteNum;
-    LoadPalette(sStorage->itemIconBuffer, OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+    LoadPalette(sStorage->itemIconBuffer, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
 }
 
 static void SetItemIconAffineAnim(u8 id, u8 animNum)

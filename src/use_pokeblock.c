@@ -55,7 +55,6 @@ struct UsePokeblockSession
     struct Pokemon *mon;
     u8 stringBuffer[64];
     u8 mainState;
-    u8 unused1;
     u8 timer;
     u8 condition;
     u8 numEnhancements;

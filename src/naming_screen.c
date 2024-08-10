@@ -28,6 +28,7 @@
 #include "util.h"
 #include "main.h"
 #include "constants/event_objects.h"
+#include "constants/pokemon_icon.h"
 #include "constants/rgb.h"
 
 enum {
@@ -1447,14 +1448,14 @@ static void NamingScreen_CreateMonIcon(void)
 
     LoadMonIconPalettes();
     spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality);
-    index = IndexOfSpritePaletteTag(56000); // POKE_ICON_BASE_PAL_TAG
+    index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
     if (index < 16) 
     {
         u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
         const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
-        LoadCompressedPalette(palette, OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_OFFSET + PLTT_ID(index), sNamingScreen->monSpecies, sNamingScreen->monPersonality);
-        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(index)], PLTT_SIZE_4BPP);
+        LoadCompressedPalette(palette, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        UniquePaletteByPersonality(OBJ_PLTT_ID(index), sNamingScreen->monSpecies, sNamingScreen->monPersonality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = index;
     }
     gSprites[spriteId].oam.priority = 3;

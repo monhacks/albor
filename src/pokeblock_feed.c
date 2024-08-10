@@ -48,7 +48,6 @@ struct PokeblockFeed
     struct Sprite *monSpritePtr;
     struct Sprite savedMonSprite;
     u8 tilemapBuffer[BG_SCREEN_SIZE];
-    u8 unused1[8];
     s16 monAnimX[0x200];
     s16 monAnimY[0x200];
     u8 animRunState;

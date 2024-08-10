@@ -29,6 +29,7 @@
 #include "text.h"
 #include "tm_case.h"
 #include "constants/items.h"
+#include "constants/pokemon_icon.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
@@ -918,7 +919,6 @@ static void SpriteCb_MonIcon(struct Sprite *sprite)
 #define MON_ICON_START_X  8
 #define MON_ICON_START_Y  30
 #define MON_ICON_PADDING  16
-#define POKE_ICON_BASE_PAL_TAG 56000 
 
 static void DrawPartyMonIcons(void)
 {

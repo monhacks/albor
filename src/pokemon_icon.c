@@ -175,20 +175,20 @@ u8 SetMonIconPalette(struct Pokemon *mon, struct Sprite *sprite, u8 paletteNum)
     {
         if (!GetMonData(mon, MON_DATA_IS_EGG))
         {
-            LoadCompressedPalette(GetMonFrontSpritePal(mon), OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
-            UniquePalette(OBJ_PLTT_OFFSET + PLTT_ID(paletteNum), &mon->box);
-            CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            LoadCompressedPalette(GetMonFrontSpritePal(mon), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+            UniquePalette(OBJ_PLTT_ID(paletteNum), &mon->box);
+            CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             if (sprite)
-            sprite->oam.paletteNum = paletteNum;
+                sprite->oam.paletteNum = paletteNum;
         }
         else
         {
             LZ77UnCompWram(pal1->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
             LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
-            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_OFFSET + PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
+            CpuCopy16(gEggDecompressionBuffer, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum) + 8], PLTT_SIZE_4BPP);
             if (sprite)
             sprite->oam.paletteNum = paletteNum;
         }
@@ -213,7 +213,7 @@ u8 CreateMonIconNoPersonality(u16 species, void (*callback)(struct Sprite *), s1
     };
 
     if (index < 16)
-      LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, 0xFFFF), OBJ_PLTT_OFFSET + PLTT_ID(index), PLTT_SIZE_4BPP);
+      LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, 0, 0xFFFF), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
     iconTemplate.image = GetMonIconTiles(species, 0);
     spriteId = CreateMonIconSprite(&iconTemplate, x, y, subpriority);
 

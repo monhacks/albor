@@ -357,10 +357,9 @@ static const struct SpriteTemplate sMatchCallBlueLightSpriteTemplate =
 
 static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 {
-    &REG_WIN0H,
-    ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    1,
-    0
+    .dmaDest = &REG_WIN0H,
+    .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
+    .initState = 1,
 };
 
 static bool32 AreAnyTrainerRematchesNearby(void)
