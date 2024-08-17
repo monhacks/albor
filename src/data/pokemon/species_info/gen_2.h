@@ -45,7 +45,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Chikorita),
-        ICON(Chikorita, 1),
+        ICON(Chikorita),
         FOLLOWER(Chikorita, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Chikorita),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BAYLEEF}),
@@ -94,7 +94,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Bayleef),
-        ICON(Bayleef, 1),
+        ICON(Bayleef),
         FOLLOWER(Bayleef, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bayleef),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MEGANIUM}),
@@ -145,7 +145,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Meganium),
-        ICON(Meganium, 1),
+        ICON(Meganium),
         FOLLOWER(Meganium, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Meganium),
     },
@@ -192,7 +192,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Cyndaquil),
-        ICON(Cyndaquil, 3),
+        ICON(Cyndaquil),
         FOLLOWER(Cyndaquil, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Cyndaquil),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_QUILAVA}),
@@ -241,7 +241,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Quilava),
-        ICON(Quilava, 3),
+        ICON(Quilava),
         FOLLOWER(Quilava, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Quilava),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION},
@@ -292,7 +292,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Typhlosion),
-        ICON(Typhlosion, 3),
+        ICON(Typhlosion),
         FOLLOWER(Typhlosion, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Typhlosion),
     },
@@ -340,7 +340,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(TyphlosionHisuian),
-        ICON(TyphlosionHisuian, 1),
+        ICON(TyphlosionHisuian),
         FOLLOWER(TyphlosionHisuian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(TyphlosionHisuian),
         .isHisuianForm = TRUE,
@@ -388,7 +388,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Totodile),
-        ICON(Totodile, 0),
+        ICON(Totodile),
         FOLLOWER(Totodile, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Totodile),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CROCONAW}),
@@ -438,7 +438,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Croconaw),
-        ICON(Croconaw, 0),
+        ICON(Croconaw),
         FOLLOWER(Croconaw, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Croconaw),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_FERALIGATR}),
@@ -488,7 +488,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Feraligatr),
-        ICON(Feraligatr, 0),
+        ICON(Feraligatr),
         FOLLOWER(Feraligatr, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Feraligatr),
     },
@@ -535,7 +535,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Sentret),
-        ICON(Sentret, 2),
+        ICON(Sentret),
         FOLLOWER(Sentret, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sentret),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FURRET}),
@@ -583,7 +583,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Furret),
-        ICON(Furret, 2),
+        ICON(Furret),
         FOLLOWER(Furret, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Furret),
     },
@@ -630,7 +630,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Hoothoot),
-        ICON(Hoothoot, 2),
+        ICON(Hoothoot),
         FOLLOWER(Hoothoot, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Hoothoot),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NOCTOWL}),
@@ -678,7 +678,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
         PALETTES(Noctowl),
-        ICON(Noctowl, 2),
+        ICON(Noctowl),
         FOLLOWER(Noctowl, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Noctowl),
     },
@@ -727,7 +727,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Ledyba),
-        ICON(Ledyba, 0),
+        ICON(Ledyba),
         FOLLOWER(Ledyba, SIZE_32x32, SHADOW_SIZE_M, TRACKS_BUG)
         LEARNSETS(Ledyba),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_LEDIAN}),
@@ -778,7 +778,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Ledian),
-        ICON(Ledian, 0),
+        ICON(Ledian),
         FOLLOWER(Ledian, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ledian),
     },
@@ -825,7 +825,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 16,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Spinarak),
-        ICON(Spinarak, 1),
+        ICON(Spinarak),
         FOLLOWER(Spinarak, SIZE_32x32, SHADOW_SIZE_M, TRACKS_BUG)
         LEARNSETS(Spinarak),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_ARIADOS}),
@@ -873,7 +873,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Ariados),
-        ICON(Ariados, 0),
+        ICON(Ariados),
         FOLLOWER(Ariados, SIZE_32x32, SHADOW_SIZE_M, TRACKS_BUG)
         LEARNSETS(Ariados),
     },
@@ -921,7 +921,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(Chinchou),
-        ICON(Chinchou, 2),
+        ICON(Chinchou),
         FOLLOWER(Chinchou, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Chinchou),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_LANTURN}),
@@ -970,7 +970,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Lanturn),
-        ICON(Lanturn, 0),
+        ICON(Lanturn),
         FOLLOWER(Lanturn, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Lanturn),
     },
@@ -1017,7 +1017,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Togepi),
-        ICON(Togepi, 0),
+        ICON(Togepi),
         FOLLOWER(Togepi, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Togepi),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_TOGETIC}),
@@ -1065,7 +1065,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Togetic),
-        ICON(Togetic, 0),
+        ICON(Togetic),
         FOLLOWER(Togetic, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Togetic),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SHINY_STONE, SPECIES_TOGEKISS}),
@@ -1116,7 +1116,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Togekiss),
-        ICON(Togekiss, 2),
+        ICON(Togekiss),
         FOLLOWER(Togekiss, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Togekiss),
     },
@@ -1164,7 +1164,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Natu),
-        ICON(Natu, 1),
+        ICON(Natu),
         FOLLOWER(Natu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Natu),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_XATU}),
@@ -1214,7 +1214,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETTES(Xatu),
-        ICON(Xatu, 1),
+        ICON(Xatu),
         FOLLOWER(Xatu, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Xatu),
     },
@@ -1263,7 +1263,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .brilla = TRUE,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Mareep),
-        ICON(Mareep, 0),
+        ICON(Mareep),
         FOLLOWER(Mareep, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mareep),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FLAAFFY}),
@@ -1312,7 +1312,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Flaaffy),
         .brilla = TRUE,
-        ICON(Flaaffy, 0),
+        ICON(Flaaffy),
         FOLLOWER(Flaaffy, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Flaaffy),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_AMPHAROS}),
@@ -1363,7 +1363,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Ampharos),
         .brilla = TRUE,
-        ICON(Ampharos, 0),
+        ICON(Ampharos),
         FOLLOWER(Ampharos, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
@@ -1409,7 +1409,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Azurill),
-        ICON(Azurill, 0),
+        ICON(Azurill),
         FOLLOWER(Azurill, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Azurill),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_MARILL}),
@@ -1457,7 +1457,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Marill),
-        ICON(Marill, 0),
+        ICON(Marill),
         FOLLOWER(Marill, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Marill),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_AZUMARILL}),
@@ -1505,7 +1505,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Azumarill),
-        ICON(Azumarill, 0),
+        ICON(Azumarill),
         FOLLOWER(Azumarill, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Azumarill),
     },
@@ -1552,7 +1552,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
         PALETTES(Bonsly),
-        ICON(Bonsly, 1),
+        ICON(Bonsly),
         FOLLOWER(Bonsly, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Bonsly),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_MIMIC, SPECIES_SUDOWOODO}),
@@ -1602,7 +1602,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Sudowoodo),
-        ICON(Sudowoodo, 1),
+        ICON(Sudowoodo),
         FOLLOWER(Sudowoodo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sudowoodo),
     },
@@ -1650,7 +1650,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Hoppip),
-        ICON(Hoppip, 1),
+        ICON(Hoppip),
         FOLLOWER(Hoppip, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Hoppip),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_SKIPLOOM}),
@@ -1699,7 +1699,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Skiploom),
-        ICON(Skiploom, 1),
+        ICON(Skiploom),
         FOLLOWER(Skiploom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Skiploom),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JUMPLUFF}),
@@ -1748,7 +1748,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Jumpluff),
-        ICON(Jumpluff, 2),
+        ICON(Jumpluff),
         FOLLOWER(Jumpluff, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Jumpluff),
     },
@@ -1797,7 +1797,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Aipom),
-        ICON(Aipom, 2),
+        ICON(Aipom),
         FOLLOWER(Aipom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Aipom),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_DOUBLE_HIT, SPECIES_AMBIPOM}),
@@ -1847,7 +1847,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Ambipom),
-        ICON(Ambipom, 2),
+        ICON(Ambipom),
         FOLLOWER(Ambipom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ambipom),
     },
@@ -1894,7 +1894,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Sunkern),
-        ICON(Sunkern, 1),
+        ICON(Sunkern),
         FOLLOWER(Sunkern, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Sunkern),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_SUNFLORA}),
@@ -1942,7 +1942,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Sunflora),
-        ICON(Sunflora, 1),
+        ICON(Sunflora),
         FOLLOWER(Sunflora, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sunflora),
     },
@@ -1991,7 +1991,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Yanma),
-        ICON(Yanma, 1),
+        ICON(Yanma),
         FOLLOWER(Yanma, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Yanma),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_YANMEGA}),
@@ -2041,7 +2041,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
         PALETTES(Yanmega),
-        ICON(Yanmega, 1),
+        ICON(Yanmega),
         FOLLOWER(Yanmega, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Yanmega),
     },
@@ -2091,7 +2091,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(Wooper),
-        ICON(Wooper, 0),
+        ICON(Wooper),
         FOLLOWER(Wooper, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Wooper),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_QUAGSIRE}),
@@ -2141,7 +2141,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Quagsire),
-        ICON(Quagsire, 0),
+        ICON(Quagsire),
         FOLLOWER(Quagsire, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Quagsire),
     },
@@ -2190,7 +2190,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(WooperPaldean),
-        ICON(WooperPaldean, 2),
+        ICON(WooperPaldean),
         LEARNSETS(WooperPaldean),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CLODSIRE}),
     },
@@ -2237,7 +2237,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 15,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Clodsire),
-        ICON(Clodsire, 2),
+        ICON(Clodsire),
         LEARNSETS(Clodsire),
     },
 
@@ -2286,7 +2286,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Murkrow),
-        ICON(Murkrow, 2),
+        ICON(Murkrow),
         FOLLOWER(Murkrow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Murkrow),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_HONCHKROW}),
@@ -2334,7 +2334,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_STRETCH,
         PALETTES(Honchkrow),
-        ICON(Honchkrow, 2),
+        ICON(Honchkrow),
         FOLLOWER(Honchkrow, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Honchkrow),
     },
@@ -2382,7 +2382,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_VIBRATE,
         PALETTES(Misdreavus),
-        ICON(Misdreavus, 0),
+        ICON(Misdreavus),
         FOLLOWER(Misdreavus, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Misdreavus),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MISMAGIUS}),
@@ -2432,7 +2432,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Mismagius),
-        ICON(Mismagius, 2),
+        ICON(Mismagius),
         FOLLOWER(Mismagius, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mismagius),
     },
@@ -2481,7 +2481,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETTES(Girafarig),
-        ICON(Girafarig, 1),
+        ICON(Girafarig),
         FOLLOWER(Girafarig, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Girafarig),
     },
@@ -2528,7 +2528,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(Pineco),
-        ICON(Pineco, 0),
+        ICON(Pineco),
         FOLLOWER(Pineco, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Pineco),
         .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_FORRETRESS}),
@@ -2576,7 +2576,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 16,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Forretress),
-        ICON(Forretress, 2),
+        ICON(Forretress),
         FOLLOWER(Forretress, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Forretress),
     },
@@ -2626,7 +2626,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         PALETTES(Gligar),
-        ICON(Gligar, 0),
+        ICON(Gligar),
         FOLLOWER(Gligar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Gligar),
         .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_FANG, SPECIES_GLISCOR},
@@ -2676,7 +2676,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
         PALETTES(Gliscor),
-        ICON(Gliscor, 2),
+        ICON(Gliscor),
         FOLLOWER(Gliscor, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Gliscor),
     },
@@ -2723,7 +2723,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Snubbull),
-        ICON(Snubbull, 0),
+        ICON(Snubbull),
         FOLLOWER(Snubbull, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Snubbull),
         .evolutions = EVOLUTION({EVO_LEVEL, 23, SPECIES_GRANBULL}),
@@ -2771,7 +2771,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Granbull),
-        ICON(Granbull, 2),
+        ICON(Granbull),
         FOLLOWER(Granbull, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Granbull),
     },
@@ -2821,7 +2821,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Heracross),
-        ICON(Heracross, 0),
+        ICON(Heracross),
         FOLLOWER(Heracross, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
@@ -2871,7 +2871,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
         PALETTES(Sneasel),
-        ICON(Sneasel, 0),
+        ICON(Sneasel),
         FOLLOWER(Sneasel, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sneasel),
         .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE},
@@ -2924,7 +2924,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Weavile),
-        ICON(Weavile, 0),
+        ICON(Weavile),
         FOLLOWER(Weavile, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Weavile),
     },
@@ -2971,7 +2971,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Sneasler),
-        ICON(Sneasler, 2),
+        ICON(Sneasler),
         FOLLOWER(Sneasler, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Sneasler),
     },
@@ -3020,7 +3020,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Teddiursa),
-        ICON(Teddiursa, 0),
+        ICON(Teddiursa),
         FOLLOWER(Teddiursa, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Teddiursa),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_URSARING}),
@@ -3070,7 +3070,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Ursaring),
-        ICON(Ursaring, 2),
+        ICON(Ursaring),
         FOLLOWER(Ursaring, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Ursaring)
     },
@@ -3118,7 +3118,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Slugma),
-        ICON(Slugma, 0),
+        ICON(Slugma),
         FOLLOWER(Slugma, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Slugma),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGCARGO}),
@@ -3167,7 +3167,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Magcargo),
-        ICON(Magcargo, 0),
+        ICON(Magcargo),
         .itemRare = ITEM_CHARCOAL,
         FOLLOWER(Magcargo, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Magcargo),
@@ -3215,7 +3215,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETTES(Swinub),
-        ICON(Swinub, 2),
+        ICON(Swinub),
         FOLLOWER(Swinub, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Swinub),
         .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_PILOSWINE}),
@@ -3266,7 +3266,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SHAKE,
         PALETTES(Piloswine),
-        ICON(Piloswine, 2),
+        ICON(Piloswine),
         FOLLOWER(Piloswine, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Piloswine),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_MAMOSWINE}),
@@ -3315,7 +3315,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
         PALETTES(Mamoswine),
-        ICON(Mamoswine, 2),
+        ICON(Mamoswine),
         FOLLOWER(Mamoswine, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mamoswine),
     },
@@ -3364,7 +3364,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Corsola),
-        ICON(Corsola, 0),
+        ICON(Corsola),
         FOLLOWER(Corsola, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Corsola),
     },
@@ -3411,7 +3411,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Remoraid),
-        ICON(Remoraid, 0),
+        ICON(Remoraid),
         FOLLOWER(Remoraid, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Remoraid),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_OCTILLERY}),
@@ -3463,7 +3463,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
         PALETTES(Octillery),
-        ICON(Octillery, 0),
+        ICON(Octillery),
         FOLLOWER(Octillery, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SLITHER)
         LEARNSETS(Octillery),
     },
@@ -3510,7 +3510,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
         PALETTES(Delibird),
-        ICON(Delibird, 1),
+        ICON(Delibird),
         FOLLOWER(Delibird, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Delibird),
     },
@@ -3557,7 +3557,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
         PALETTES(Mantyke),
-        ICON(Mantyke, 0),
+        ICON(Mantyke),
         FOLLOWER(Mantyke, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Mantyke),
         .evolutions = EVOLUTION({EVO_SPECIFIC_MON_IN_PARTY, SPECIES_REMORAID, SPECIES_MANTINE}),
@@ -3606,7 +3606,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Mantine),
-        ICON(Mantine, 2),
+        ICON(Mantine),
         FOLLOWER(Mantine, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Mantine),
     },
@@ -3654,7 +3654,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Skarmory),
-        ICON(Skarmory, 0),
+        ICON(Skarmory),
         FOLLOWER(Skarmory, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Skarmory),
     },
@@ -3701,7 +3701,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Houndour),
-        ICON(Houndour, 0),
+        ICON(Houndour),
         FOLLOWER(Houndour, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Houndour),
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HOUNDOOM}),
@@ -3752,7 +3752,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Houndoom),
-        ICON(Houndoom, 0),
+        ICON(Houndoom),
         FOLLOWER(Houndoom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
@@ -3798,7 +3798,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Phanpy),
-        ICON(Phanpy, 0),
+        ICON(Phanpy),
         FOLLOWER(Phanpy, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Phanpy),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_DONPHAN}),
@@ -3849,7 +3849,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
         PALETTES(Donphan),
-        ICON(Donphan, 0),
+        ICON(Donphan),
         FOLLOWER(Donphan, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Donphan),
     },
@@ -3896,7 +3896,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
         PALETTES(Stantler),
-        ICON(Stantler, 2),
+        ICON(Stantler),
         FOLLOWER(Stantler, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Stantler),
         .evolutions = EVOLUTION({EVO_USE_MOVE_TWENTY_TIMES, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}),
@@ -3945,7 +3945,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Wyrdeer),
-        ICON(Wyrdeer, 2),
+        ICON(Wyrdeer),
         FOLLOWER(Wyrdeer, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Wyrdeer),
     },
@@ -3994,7 +3994,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Miltank),
-        ICON(Miltank, 0),
+        ICON(Miltank),
         FOLLOWER(Miltank, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Miltank),
     },
@@ -4043,7 +4043,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
         PALETTES(Raikou),
-        ICON(Raikou, 2),
+        ICON(Raikou),
         FOLLOWER(Raikou, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Raikou),
     },
@@ -4092,7 +4092,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(Entei),
-        ICON(Entei, 2),
+        ICON(Entei),
         FOLLOWER(Entei, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Entei),
     },
@@ -4141,7 +4141,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         PALETTES(Suicune),
-        ICON(Suicune, 2),
+        ICON(Suicune),
         FOLLOWER(Suicune, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Suicune),
     },
@@ -4188,7 +4188,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
         PALETTES(Larvitar),
-        ICON(Larvitar, 1),
+        ICON(Larvitar),
         FOLLOWER(Larvitar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Larvitar),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PUPITAR}),
@@ -4236,7 +4236,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Pupitar),
-        ICON(Pupitar, 2),
+        ICON(Pupitar),
         FOLLOWER(Pupitar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_SPOT)
         LEARNSETS(Pupitar),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_TYRANITAR}),
@@ -4286,7 +4286,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
         PALETTES(Tyranitar),
-        ICON(Tyranitar, 4),
+        ICON(Tyranitar),
         FOLLOWER(Tyranitar, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
     },
 
@@ -4335,7 +4335,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
         PALETTES(Lugia),
-        ICON(Lugia, 0),
+        ICON(Lugia),
         FOLLOWER(Lugia, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Lugia),
     },
@@ -4386,7 +4386,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
         PALETTES(HoOh),
-        ICON(HoOh, 1),
+        ICON(HoOh),
         FOLLOWER(HoOh, SIZE_64x64, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(HoOh),
     },
@@ -4435,7 +4435,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
         PALETTES(Celebi),
-        ICON(Celebi, 1),
+        ICON(Celebi),
         FOLLOWER(Celebi, SIZE_32x32, SHADOW_SIZE_M, TRACKS_NONE)
         LEARNSETS(Celebi),
     },

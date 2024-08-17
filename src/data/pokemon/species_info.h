@@ -29,13 +29,11 @@
         .paletteFemale = gMonPalette_## pal##F,             \
         .shinyPaletteFemale = gMonShinyPalette_## pal##F
 
-#define ICON(sprite, palId)                                 \
-        .iconSprite = gObjectEventPic_## sprite,            \
-        .iconPalIndex = palId
+#define ICON(sprite)                                 \
+        .iconSprite = gObjectEventPic_## sprite
 
-#define ICON_FEMALE(sprite, palId)                          \
-        .iconSpriteFemale = gObjectEventPic_## sprite##F,   \
-        .iconPalIndexFemale = palId
+#define ICON_FEMALE(sprite)                          \
+        .iconSpriteFemale = gObjectEventPic_## sprite##F
 
 #define LEARNSETS(learn)                                    \
         .levelUpLearnset = s ## learn##LevelUpLearnset,     \
@@ -129,7 +127,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(CircledQuestionMark),
-        ICON(Bulbasaur, 0),
+        ICON(Bulbasaur),
         .followerData = {
             .tileTag = TAG_NONE,
             .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
@@ -171,7 +169,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 20,
         .palette = gMonPalette_Egg,
         .shinyPalette = gMonPalette_Egg,
-        ICON(Egg, 1),
+        ICON(Egg),
     },
 
     /* You may add any custom species below this point based on the following structure: */
@@ -225,7 +223,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_NONE,
         PALETTES(CircledQuestionMark),
         //PALETTE_FEMALE(CircledQuestionMark),
-        ICON(QuestionMark, 0),
+        ICON(QuestionMark),
         //ICON_FEMALE(QuestionMark, 1),
         //FOOTPRINT(None)
         LEARNSETS(None),

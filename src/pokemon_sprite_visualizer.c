@@ -38,7 +38,6 @@
 #include "text_window.h"
 #include "trainer_pokemon_sprites.h"
 #include "util.h"
-
 #include "constants/items.h"
 #include "constants/event_objects.h"
 
@@ -138,7 +137,7 @@ static const struct WindowTemplate sPokemonSpriteVisualizerWindowTemplate[] =
         .tilemapTop = 12,
         .width = 15,
         .height = 2,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1
     },
     [WIN_INSTRUCTIONS] = {
@@ -147,7 +146,7 @@ static const struct WindowTemplate sPokemonSpriteVisualizerWindowTemplate[] =
         .tilemapTop = 0,
         .width = 15,
         .height = 4,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1 + 30
     },
     [WIN_BOTTOM_LEFT] = {
@@ -156,7 +155,7 @@ static const struct WindowTemplate sPokemonSpriteVisualizerWindowTemplate[] =
         .tilemapTop = 14,
         .width = 6,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1 + 30 + 60
     },
     [WIN_BOTTOM_RIGHT] = {
@@ -165,7 +164,7 @@ static const struct WindowTemplate sPokemonSpriteVisualizerWindowTemplate[] =
         .tilemapTop = 14,
         .width = 24,
         .height = 6,
-        .paletteNum = 0xF,
+        .paletteNum = 15,
         .baseBlock = 1 + 30 + 60 + 36
     },
     DUMMY_WIN_TEMPLATE,
@@ -421,7 +420,7 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
     u8 textR[] = _("{R_BUTTON}");
 
     //Instruction window
-    FillWindowPixelBuffer(WIN_INSTRUCTIONS, 0x11);
+    FillWindowPixelBuffer(WIN_INSTRUCTIONS, 17);
     if (data->currentSubmenu == 0)
     {
         if (SpeciesHasGenderDifferences(species))
@@ -695,7 +694,6 @@ static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bo
 
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
 }
 
 static void SetConstSpriteValues(struct PokemonSpriteVisualizer *data)
@@ -1037,8 +1035,8 @@ static void ResetPokemonSpriteVisualizerWindows(void)
     }
 }
 
-#define MALE_PERSONALITY 0xFE
-#define FEMALE_PERSONALITY 0X0
+#define MALE_PERSONALITY 254
+#define FEMALE_PERSONALITY 0
 
 void CB2_Pokemon_Sprite_Visualizer(void)
 {
@@ -1087,7 +1085,6 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             AllocateMonSpritesGfx();
 
             LoadPalette(sBgColor, 0, 2);
-            LoadMonIconPalette(SPECIES_BULBASAUR);
 
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
             ShowBg(0);
@@ -1110,6 +1107,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             //Palettes
             palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
             LoadCompressedSpritePaletteWithTag(palette, species);
+            LoadCompressedPalette(palette, OBJ_PLTT_ID(5), PLTT_SIZE_4BPP);
             //Front
             HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             data->isShiny = FALSE;
@@ -1119,7 +1117,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gMultiuseSpriteTemplate.paletteTag = species;
             front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
             data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
-            gSprites[data->frontspriteId].oam.paletteNum = 1;
+            gSprites[data->frontspriteId].oam.paletteNum = 5;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
             //Front Shadow
@@ -1131,11 +1129,11 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             offset_y = gSpeciesInfo[species].backPicYOffset;
             data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
-            gSprites[data->backspriteId].oam.paletteNum = 1;
+            gSprites[data->backspriteId].oam.paletteNum = 4;
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
-            //Follower Sprite
+            //Icon & Follower Sprite
             data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, VISUALIZER_ICON_X, VISUALIZER_ICON_Y, 0);
             gSprites[data->followerspriteId].oam.priority = 0;
             gSprites[data->followerspriteId].anims = sAnims_Follower;
@@ -1164,7 +1162,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             EnableInterrupts(1);
             SetVBlankCallback(VBlankCB);
             SetMainCallback2(CB2_PokemonSpriteVisualizerRunner);
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 0x80);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
             break;
     }
 }
@@ -1649,10 +1647,8 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     ResetPaletteFade();
     FreeAllSpritePalettes();
     ResetAllPicSprites();
-    FreeMonIconPalettes();
 
     AllocateMonSpritesGfx();
-    LoadMonIconPalettePersonality(species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
 
     //Update instructions
     PrintInstructionsOnWindow(data);
@@ -1660,6 +1656,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     //Palettes
     palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
     LoadCompressedSpritePaletteWithTag(palette, species);
+    LoadCompressedPalette(palette, OBJ_PLTT_ID(5), PLTT_SIZE_4BPP);
     //Front
     HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
@@ -1667,7 +1664,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     gMultiuseSpriteTemplate.paletteTag = species;
     front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
     data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
-    gSprites[data->frontspriteId].oam.paletteNum = 1;
+    gSprites[data->frontspriteId].oam.paletteNum = 5;
     personality = Random32();
     UniquePaletteByPersonality(OBJ_PLTT_ID(1), species, personality);
     CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
@@ -1682,12 +1679,16 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gSpeciesInfo[species].backPicYOffset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
-    gSprites[data->backspriteId].oam.paletteNum = 1;
+    gSprites[data->backspriteId].oam.paletteNum = 5;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
-    //Follower Sprite
-    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species, SpriteCB_Follower, VISUALIZER_ICON_X, VISUALIZER_ICON_Y, 0);
+    //Icon & Follower Sprite
+    data->followerspriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MON_BASE + species,
+                                                        SpriteCB_Follower,
+                                                        VISUALIZER_ICON_X,
+                                                        VISUALIZER_ICON_Y,
+                                                        0);
     gSprites[data->followerspriteId].oam.priority = 0;
     gSprites[data->followerspriteId].anims = sAnims_Follower;
 
@@ -1720,7 +1721,7 @@ static void Exit_PokemonSpriteVisualizer(u8 taskId)
         FreeMonSpritesGfx();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
     }
 }
 

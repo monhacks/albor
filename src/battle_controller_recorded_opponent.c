@@ -226,7 +226,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
             }
             else
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
             }
         }
         gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
@@ -312,7 +312,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     {
         if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
         {
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
             RecordedOpponentBufferExecCompleted(battler);
         }
     }

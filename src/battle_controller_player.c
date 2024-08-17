@@ -1102,7 +1102,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
                 m4aMPlayContinue(&gMPlayInfo_BGM);
             else
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         }
         gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
         bgmRestored = TRUE;
@@ -1170,7 +1170,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         PlayerBufferExecCompleted(battler);
     }
@@ -1199,7 +1199,7 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId)
 {
     if (!IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         DestroyTask(taskId);
     }
 }
@@ -2257,7 +2257,6 @@ static void PlayerHandleChooseAction(u32 battler)
     LoadMonIconPalettes();
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
-    LoadMonIconPalettePersonality(species, personality);
     monIconData = CreateMonIcon(species, SpriteCb_MonIcon, 20, 132, 1, personality);
     u8 index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
     SetMonIconPalette(&gPlayerParty[gBattlerPartyIndexes[battler]], &gSprites[monIconData], index);

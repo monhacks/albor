@@ -9407,7 +9407,7 @@ static void Cmd_various(void)
     case VARIOUS_VOLUME_UP:
     {
         VARIOUS_ARGS();
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
         break;
     }
     case VARIOUS_SET_ALREADY_STATUS_MOVE_ATTEMPT:

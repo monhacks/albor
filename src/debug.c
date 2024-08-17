@@ -3129,10 +3129,10 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     gTasks[taskId].tDigit = 0;
     gTasks[taskId].tIsComplex = FALSE;
 
-    FreeMonIconPalettes();
-    LoadMonIconPalette(gTasks[taskId].tInput);
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gTasks[taskId].tInput, 0, 0xFFFF), OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
     gTasks[taskId].tSpriteId = CreateMonIconNoPersonality(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum = 15;
 }
 
 static void DebugAction_Give_PokemonComplex(u8 taskId)
@@ -3168,10 +3168,10 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     gTasks[taskId].tDigit = 0;
     gTasks[taskId].tIsComplex = TRUE;
 
-    FreeMonIconPalettes();
-    LoadMonIconPalette(gTasks[taskId].tInput);
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gTasks[taskId].tInput, 0, 0xFFFF), OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
     gTasks[taskId].tSpriteId = CreateMonIconNoPersonality(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4);
     gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+    gSprites[gTasks[taskId].tSpriteId].oam.paletteNum = 15;
     gTasks[taskId].tIterator = 0;
 }
 
@@ -3212,10 +3212,10 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         AddTextPrinterParameterized(gTasks[taskId].tSubWindowId, DEBUG_MENU_FONT, gStringVar4, 1, 1, 0, NULL);
 
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].tSpriteId]);
-        FreeMonIconPalettes();
-        LoadMonIconPalette(gTasks[taskId].tInput);
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gTasks[taskId].tInput, 0, 0xFFFF), OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
         gTasks[taskId].tSpriteId = CreateMonIconNoPersonality(gTasks[taskId].tInput, SpriteCB_MonIcon, DEBUG_NUMBER_ICON_X, DEBUG_NUMBER_ICON_Y, 4);
         gSprites[gTasks[taskId].tSpriteId].oam.priority = 0;
+        gSprites[gTasks[taskId].tSpriteId].oam.paletteNum = 15;
     }
 
     if (JOY_NEW(A_BUTTON))
