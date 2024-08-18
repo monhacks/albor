@@ -805,7 +805,13 @@ $(POKEMONGFXDIR)/oddish/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/gloom/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+$(POKEMONGFXDIR)/gloom/followerf.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 $(POKEMONGFXDIR)/vileplume/follower.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(POKEMONGFXDIR)/vileplume/followerf.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
 $(POKEMONGFXDIR)/paras/follower.4bpp: %.4bpp: %.png

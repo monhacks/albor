@@ -1390,36 +1390,6 @@ void RemoveAllObjectEventsExceptPlayer(void)
     }
 }
 
-// Free a sprite's current tiles and reallocate with a new size
-// Used when changing to a gfx info with a larger size
-static s16 ReallocSpriteTiles(struct Sprite *sprite, u32 byteSize)
-{
-    s16 i;
-    bool32 wasVisible = sprite->invisible;
-    sprite->invisible = TRUE;
-
-    i = CopySprite(sprite, sprite->x, sprite->y, 0xFF);
-    if (i < MAX_SPRITES)
-    {
-        DestroySprite(&gSprites[i]);
-        i = AllocSpriteTiles(byteSize / TILE_SIZE_4BPP);
-        if (i >= 0)
-        {
-            // Fill the allocated area with zeroes
-            // To avoid visual glitches if the frame hasn't been copied yet
-            CpuFastFill16(0, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * i, byteSize);
-            sprite->oam.tileNum = i;
-        }
-    }
-    else
-    {
-        i = -1;
-    }
-    
-    sprite->invisible = wasVisible;
-    return i;
-}
-
 static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;

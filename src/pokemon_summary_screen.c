@@ -2807,12 +2807,12 @@ static void PrintPageNamesAndStats(void)
     PrintTextOnWindow(PSS_LABEL_WINDOW_BATTLE_MOVES_TITLE, gText_BattleMoves, 2, 1, 0, 1);
     PrintTextOnWindow(PSS_LABEL_WINDOW_CONTEST_MOVES_TITLE, gText_ContestMoves, 2, 1, 0, 1);
 
-    stringXPos = GetStringRightAlignXOffset(FONT_NORMAL, gText_Cancel2, 62);
+    stringXPos = GetStringRightAlignXOffset(FONT_NORMAL, gText_Salir, 62);
     iconXPos = stringXPos - 16;
     if (iconXPos < 0)
         iconXPos = 0;
     PrintAOrBButtonIcon(PSS_LABEL_WINDOW_PROMPT_CANCEL, FALSE, iconXPos);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_PROMPT_CANCEL, gText_Cancel2, stringXPos, 1, 0, 0);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_PROMPT_CANCEL, gText_Salir, stringXPos, 1, 0, 0);
 
     stringXPos = GetStringRightAlignXOffset(FONT_NORMAL, gText_Info, 62);
     iconXPos = stringXPos - 16;
@@ -3677,7 +3677,7 @@ static void PrintNewMoveDetailsOrCancelText(void)
 
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
-        PrintTextOnWindow(windowId1, gText_Cancel, 0, 65, 0, 1);
+        PrintTextOnWindow(windowId1, gText_Salir, 0, 65, 0, 1);
     }
     else
     {

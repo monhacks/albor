@@ -115,7 +115,6 @@ extern const u8 gText_NoDecorations[];
 extern const u8 gText_NoDecorationsInUse[];
 
 extern const u8 gText_Salir[];
-extern const u8 gText_Cancel[];
 
 extern const u8 gText_ThrowAwayVar1[];
 extern const u8 gText_Var1ThrownAway[];
@@ -174,8 +173,7 @@ extern const u8 gText_CommErrorCheckConnections[];
 extern const u8 gText_ABtnTitleScreen[];
 extern const u8 gText_ABtnRegistrationCounter[];
 extern const u8 gText_EmptyString2[];
-extern const u8 gText_Confirm3[];
-extern const u8 gText_Cancel4[];
+extern const u8 gText_Confirmar[];
 extern const u8 gText_IsThisTheCorrectTime[];
 extern const u8 gText_PkmnFainted_FldPsn[];
 extern const u8 gText_Coins[];
@@ -231,7 +229,6 @@ extern const u8 gText_InGameClockUsable[];
 // reset rtc screen texts
 extern const u8 gText_Day[];
 extern const u8 gText_Colon3[];
-extern const u8 gText_Confirm2[];
 extern const u8 gText_PresentTime[];
 extern const u8 gText_PreviousTime[];
 extern const u8 gText_ResetRTCConfirmCancel[];
@@ -508,12 +505,10 @@ extern const u8 gText_TurnOff[];
 extern const u8 gText_WithdrawItem[];
 extern const u8 gText_DepositItem[];
 extern const u8 gText_TossItem[];
-extern const u8 gText_Cancel[];
 
 extern const u8 gText_Read[];
 extern const u8 gText_MoveToBag[];
 extern const u8 gText_Give2[];
-extern const u8 gText_Cancel2[];
 
 extern const u8 gText_NoItems[];
 extern const u8 gText_WhatToDoWithVar1sMail[];
@@ -2022,7 +2017,6 @@ extern const u8 gText_Take[];
 extern const u8 gText_Mail[];
 extern const u8 gText_Take2[];
 extern const u8 gText_Read2[];
-extern const u8 gText_Cancel2[];
 extern const u8 gText_Shift[];
 extern const u8 gText_SendOut[];
 extern const u8 gText_Enter[];
@@ -2501,7 +2495,6 @@ extern const u8 gText_TheImage[];
 extern const u8 gText_Questionnaire[];
 extern const u8 gText_AndFillOutTheQuestionnaire[];
 extern const u8 gText_DelAll[];
-extern const u8 gText_Cancel5[];
 extern const u8 gText_Ok2[];
 extern const u8 gText_Quiz[];
 extern const u8 gText_Answer[];
@@ -2654,7 +2647,6 @@ extern const u8 gText_BlenderMaxSpeedRecord[];
 extern const u8 gText_234Players[];
 
 // Battle Factory Screen
-extern const u8 gText_RentalPkmn2[];
 extern const u8 gText_SelectFirstPkmn[];
 extern const u8 gText_SelectSecondPkmn[];
 extern const u8 gText_SelectThirdPkmn[];

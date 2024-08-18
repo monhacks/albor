@@ -18,7 +18,7 @@ static const struct MenuAction MultichoiceList_ContestInfo[] =
     {gText_WhatsAContest},
     {gText_TypesOfContests},
     {gText_Ranks},
-    {gText_Cancel2},
+    {gText_Salir},
 };
 
 static const struct MenuAction MultichoiceList_ContestType[] =
@@ -51,7 +51,7 @@ static const struct MenuAction MultichoiceList_RegisterMenu[] =
     {gMenuText_Register},
     {gText_Registry},
     {gText_Information},
-    {gText_Cancel2},
+    {gText_Salir},
 };
 
 static const struct MenuAction MultichoiceList_Bike[] =
@@ -254,7 +254,7 @@ static const struct MenuAction MultichoiceList_UnusedAshVendor[] =
     {gText_BlackFlute2},
     {gText_GlassChair},
     {gText_GlassDesk},
-    {gText_Cancel2},
+    {gText_Salir},
 };
 
 static const struct MenuAction MultichoiceList_GameCornerDolls[] =

@@ -2761,7 +2761,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_H_SLIDE,
         PALETTES(Gloom),
         ICON(Gloom),
+        ICON_FEMALE(Gloom),
         FOLLOWER(Gloom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Gloom, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Gloom),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VILEPLUME},
                                 {EVO_ITEM, ITEM_SUN_STONE, SPECIES_BELLOSSOM}),
@@ -2814,7 +2816,9 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETTES(Vileplume),
         ICON(Vileplume),
+        ICON_FEMALE(Vileplume),
         FOLLOWER(Vileplume, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Vileplume, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT)
         LEARNSETS(Vileplume),
         .eggMoveLearnset = sOddishEggMoveLearnset,
     },

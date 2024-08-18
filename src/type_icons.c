@@ -27,12 +27,6 @@ static void CreateSpriteAndSetTypeSpriteAttributes(u32, u32 x, u32 y, u32, u32, 
 static bool32 ShouldFlipTypeIcon(bool32, u32, u32);
 
 static void SpriteCB_TypeIcon(struct Sprite*);
-static void DestroyTypeIcon(struct Sprite*);
-static void FreeAllTypeIconResources(void);
-static bool32 ShouldHideTypeIcon(u32);
-static s32 GetTypeIconHideMovement(bool32, u32);
-static s32 GetTypeIconSlideMovement(bool32, u32, s32);
-static s32 GetTypeIconBounceMovement(s32, u32);
 
 const struct Coords16 sTypeIconPositions[][2] =
 {
@@ -409,25 +403,7 @@ static bool32 ShouldFlipTypeIcon(bool32 useDoubleBattleCoords, u32 position, u32
 
 static void SpriteCB_TypeIcon(struct Sprite* sprite)
 {
-    u32 position = sprite->tMonPosition;
-    u32 battlerId = sprite->tBattlerId;
-    bool32 useDoubleBattleCoords = UseDoubleBattleCoords(GetBattlerAtPosition(position));
-
-    if (sprite->tHideIconTimer == NUM_FRAMES_HIDE_TYPE_ICON)
-    {
-        DestroyTypeIcon(sprite);
-        return;
-    }
-
-    if (ShouldHideTypeIcon(battlerId))
-    {
-        sprite->x += GetTypeIconHideMovement(useDoubleBattleCoords, position);
-        ++sprite->tHideIconTimer;
-        return;
-    }
-
-    sprite->x += GetTypeIconSlideMovement(useDoubleBattleCoords,position, sprite->x);
-    sprite->y = GetTypeIconBounceMovement(sprite->tVerticalPosition,position);
+    return;
 }
 
 static const u32 typeIconTags[] =
@@ -435,106 +411,3 @@ static const u32 typeIconTags[] =
     TYPE_ICON_TAG,
     TYPE_ICON_TAG_2
 };
-
-static void DestroyTypeIcon(struct Sprite* sprite)
-{
-    u32 spriteId, tag;
-
-    DestroySpriteAndFreeResources(sprite);
-
-    for (spriteId = 0; spriteId < MAX_SPRITES; ++spriteId)
-    {
-        if (!gSprites[spriteId].inUse)
-            continue;
-
-        for (tag = 0; tag < 2; tag++)
-        {
-            if (gSprites[spriteId].template->paletteTag == typeIconTags[tag])
-                return;
-
-            if (gSprites[spriteId].template->tileTag == typeIconTags[tag])
-                return;
-        }
-    }
-
-    FreeAllTypeIconResources();
-}
-
-static void FreeAllTypeIconResources(void)
-{
-    u32 tag;
-
-    for (tag = 0; tag < 2; tag++)
-    {
-        FreeSpriteTilesByTag(typeIconTags[tag]);
-        FreeSpritePaletteByTag(typeIconTags[tag]);
-    }
-}
-
-static bool32 ShouldHideTypeIcon(u32 battlerId)
-{
-    return gBattlerControllerFuncs[battlerId] != PlayerHandleChooseMove
-        && gBattlerControllerFuncs[battlerId] != HandleInputChooseMove
-        && gBattlerControllerFuncs[battlerId] != HandleChooseMoveAfterDma3
-        && gBattlerControllerFuncs[battlerId] != HandleInputChooseMove
-        && gBattlerControllerFuncs[battlerId] != HandleInputChooseTarget
-        && gBattlerControllerFuncs[battlerId] != HandleMoveSwitching
-        && gBattlerControllerFuncs[battlerId] != HandleInputChooseMove;
-}
-
-static s32 GetTypeIconHideMovement(bool32 useDoubleBattleCoords, u32 position)
-{
-    if (useDoubleBattleCoords)
-    {
-        if (position == B_POSITION_PLAYER_LEFT || position == B_POSITION_PLAYER_RIGHT)
-            return 1;
-        else
-            return -1;
-    }
-
-    if (position == B_POSITION_PLAYER_LEFT)
-        return -1;
-    else
-        return 1;
-}
-
-static s32 GetTypeIconSlideMovement(bool32 useDoubleBattleCoords, u32 position, s32 xPos)
-{
-    if (useDoubleBattleCoords)
-    {
-        switch (position)
-        {
-            case B_POSITION_PLAYER_LEFT:
-            case B_POSITION_PLAYER_RIGHT:
-                if (xPos > sTypeIconPositions[position][useDoubleBattleCoords].x - 10)
-                    return -1;
-                break;
-            default:
-            case B_POSITION_OPPONENT_LEFT:
-            case B_POSITION_OPPONENT_RIGHT:
-                if (xPos < sTypeIconPositions[position][useDoubleBattleCoords].x + 10)
-                    return 1;
-                break;
-        }
-        return 0;
-    }
-
-    if (position == B_POSITION_PLAYER_LEFT)
-    {
-        if (xPos < sTypeIconPositions[position][useDoubleBattleCoords].x + 10)
-            return 1;
-    }
-    else
-    {
-        if (xPos > sTypeIconPositions[position][useDoubleBattleCoords].x - 10)
-            return -1;
-    }
-    return 0;
-}
-
-static s32 GetTypeIconBounceMovement(s32 originalY, u32 position)
-{
-    struct Sprite* healthbox = &gSprites[gHealthboxSpriteIds[GetBattlerAtPosition(position)]];
-    return originalY + healthbox->y2;
-}
-

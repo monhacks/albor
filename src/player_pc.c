@@ -219,7 +219,7 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_WITHDRAW] = { gText_WithdrawItem, {ItemStorage_Withdraw} },
     [MENU_DEPOSIT]  = { gText_DepositItem,  {ItemStorage_Deposit} },
     [MENU_TOSS]     = { gText_TossItem,     {ItemStorage_Toss} },
-    [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
+    [MENU_EXIT]     = { gText_Salir,       {ItemStorage_Exit} }
 };
 
 static const u16 sNewGamePCItems[][2] =
@@ -233,7 +233,7 @@ const struct MenuAction gMailboxMailOptions[] =
     { gText_Read,      {Mailbox_DoMailRead} },
     { gText_MoveToBag, {Mailbox_MoveToBag} },
     { gText_Give2,     {Mailbox_Give} },
-    { gText_Cancel2,   {Mailbox_Cancel} }
+    { gText_Salir,   {Mailbox_Cancel} }
 };
 
 static const struct WindowTemplate sWindowTemplates_MainMenus[] =
@@ -994,7 +994,7 @@ void ItemStorage_RefreshListMenu(void)
     }
 
     // Set up Cancel entry
-    StringCopy(&sItemStorageMenu->itemNames[i][0], gText_Cancel2);
+    StringCopy(&sItemStorageMenu->itemNames[i][0], gText_Salir);
     sItemStorageMenu->listItems[i].name = &sItemStorageMenu->itemNames[i][0];
     sItemStorageMenu->listItems[i].id = LIST_CANCEL;
 

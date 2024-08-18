@@ -558,7 +558,7 @@ static void BuyMenuBuildListMenuTemplate(void)
     for (i = 0; i < sMartInfo.itemCount; i++)
         BuyMenuSetListEntry(&sListMenuItems[i], sMartInfo.itemList[i], sItemNames[i]);
 
-    StringCopy(sItemNames[i], gText_Cancel2);
+    StringCopy(sItemNames[i], gText_Salir);
     sListMenuItems[i].name = sItemNames[i];
     sListMenuItems[i].id = LIST_CANCEL;
 

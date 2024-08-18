@@ -140,7 +140,7 @@ static const struct MenuAction sRegistryMenuActions[] =
         .func = { .void_u8 = ShowRegistryMenuDeleteConfirmation},
     },
     {
-        .text = gText_Cancel,
+        .text = gText_Salir,
         .func = { .void_u8 = ReturnToMainRegistryMenu},
     },
 };
@@ -946,7 +946,7 @@ static void BuildRegistryMenuItems(u8 taskId)
         }
     }
 
-    sRegistryMenu->items[count].name = gText_Cancel;
+    sRegistryMenu->items[count].name = gText_Salir;
     sRegistryMenu->items[count].id = LIST_CANCEL;
     tNumBases = count + 1;
     if (tNumBases < 8)

@@ -231,7 +231,7 @@ static const struct MenuAction sDecorationMainMenuActions[] =
         .func = { .void_u8 = DecorationMenuAction_Toss},
     },
     {
-        .text = gText_Cancel,
+        .text = gText_Salir,
         .func = { .void_u8 = DecorationMenuAction_Cancel},
     },
 };
@@ -734,7 +734,7 @@ static void PrintDecorationCategoryMenuItems(u8 taskId)
             PrintDecorationCategoryMenuItem(windowId, i, 8, i * 16, FALSE, TEXT_SKIP_DRAW);
     }
 
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gTasks[taskId].tDecorationMenuCommand == DECOR_MENU_TRADE ? gText_Salir : gText_Cancel, 8, i * 16 + 1, 0, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_Salir, 8, i * 16 + 1, 0, NULL);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -894,7 +894,7 @@ static void PrintDecorationItemMenuItems(u8 taskId)
         sDecorationItemsMenu->items[i].id = i;
     }
 
-    StringCopy(sDecorationItemsMenu->names[i], gText_Cancel);
+    StringCopy(sDecorationItemsMenu->names[i], gText_Salir);
     sDecorationItemsMenu->items[i].name = sDecorationItemsMenu->names[i];
     sDecorationItemsMenu->items[i].id = LIST_CANCEL;
     gMultiuseListMenuTemplate = sDecorationItemsListMenuTemplate;

@@ -389,6 +389,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonBackPic_Gloom[] = INCBIN_U32("graphics/pokemon/gloom/back.4bpp.lz");
     const u32 gMonShinyPalette_Gloom[] = INCBIN_U32("graphics/pokemon/gloom/shiny.gbapal.lz");
     const u32 gObjectEventPic_Gloom[] = INCBIN_U32("graphics/pokemon/gloom/follower.4bpp");
+    const u32 gObjectEventPic_GloomF[] = INCBIN_U32("graphics/pokemon/gloom/followerf.4bpp");
     const u32 gMonFrontPic_GloomF[] = INCBIN_U32("graphics/pokemon/gloom/anim_frontf.4bpp.lz");
     const u32 gMonBackPic_GloomF[] = INCBIN_U32("graphics/pokemon/gloom/backf.4bpp.lz");
 
@@ -397,6 +398,7 @@ const u32 gObjectEventPic_None[] = INCBIN_U32("graphics/pokemon/porygon/follower
     const u32 gMonBackPic_Vileplume[] = INCBIN_U32("graphics/pokemon/vileplume/back.4bpp.lz");
     const u32 gMonShinyPalette_Vileplume[] = INCBIN_U32("graphics/pokemon/vileplume/shiny.gbapal.lz");
     const u32 gObjectEventPic_Vileplume[] = INCBIN_U32("graphics/pokemon/vileplume/follower.4bpp");
+    const u32 gObjectEventPic_VileplumeF[] = INCBIN_U32("graphics/pokemon/vileplume/followerf.4bpp");
     const u32 gMonFrontPic_VileplumeF[] = INCBIN_U32("graphics/pokemon/vileplume/anim_frontf.4bpp.lz");
     const u32 gMonBackPic_VileplumeF[] = INCBIN_U32("graphics/pokemon/vileplume/backf.4bpp.lz");
 
