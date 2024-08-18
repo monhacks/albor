@@ -17,8 +17,6 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 
-#define IS_DOUBLE_BATTLE() ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-
 extern const struct OamData gOamData_AffineNormal_ObjNormal_64x64;
 
 static void AnimFastTranslateLinearWaitEnd(struct Sprite *sprite);
@@ -780,11 +778,6 @@ bool8 IsBattlerSpritePresent(u8 battlerId)
         }
         return TRUE;
     }
-}
-
-bool8 IsDoubleBattle(void)
-{
-    return IS_DOUBLE_BATTLE();
 }
 
 #define BG_ANIM_PAL_1        8

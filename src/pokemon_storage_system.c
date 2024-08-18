@@ -1720,11 +1720,11 @@ static void VBlankCB_PokeStorage(void)
 
 static s8 SwapInPalNextVBlank(void *palette, void *dst) 
 {
-  if (!sStorage || gMain.vblankCallback != VBlankCB_PokeStorage)
-    return -1;
-  CpuFastCopy(palette, &sStorage->swapInPal[0], PLTT_SIZE_4BPP);
-  sStorage->swapInPalDst = dst;
-  return 0;
+    if (!sStorage || gMain.vblankCallback != VBlankCB_PokeStorage)
+        return -1;
+    CpuFastCopy(palette, &sStorage->swapInPal[0], PLTT_SIZE_4BPP);
+    sStorage->swapInPalDst = dst;
+    return 0;
 }
 
 static void CB2_PokeStorage(void)
@@ -3902,11 +3902,14 @@ static void StopFlashingCloseBoxButton(void)
 
 static void UpdateCloseBoxButtonFlash(void)
 {
-    if (sStorage->closeBoxFlashing && ++sStorage->closeBoxFlashTimer > 30)
+    if (sStorage != NULL)
     {
-        sStorage->closeBoxFlashTimer = 0;
-        sStorage->closeBoxFlashState = (sStorage->closeBoxFlashState == FALSE);
-        UpdateCloseBoxButtonTilemap(sStorage->closeBoxFlashState);
+        if (sStorage->closeBoxFlashing && ++sStorage->closeBoxFlashTimer > 30)
+        {
+            sStorage->closeBoxFlashTimer = 0;
+            sStorage->closeBoxFlashState = (sStorage->closeBoxFlashState == FALSE);
+            UpdateCloseBoxButtonTilemap(sStorage->closeBoxFlashState);
+        }
     }
 }
 

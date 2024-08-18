@@ -116,7 +116,7 @@ void SetControllerToRecordedOpponent(u32 battler)
 
 static void RecordedOpponentBufferRunCommand(u32 battler)
 {
-    if (gBattleControllerExecFlags & gBitTable[battler])
+    if (gBattleControllerExecFlags & (1u << battler))
     {
         if (gBattleResources->bufferA[battler][0] < ARRAY_COUNT(sRecordedOpponentBufferCommands))
             sRecordedOpponentBufferCommands[gBattleResources->bufferA[battler][0]](battler);
@@ -128,7 +128,7 @@ static void RecordedOpponentBufferRunCommand(u32 battler)
 static void RecordedOpponentBufferExecCompleted(u32 battler)
 {
     gBattlerControllerFuncs[battler] = RecordedOpponentBufferRunCommand;
-    gBattleControllerExecFlags &= ~gBitTable[battler];
+    gBattleControllerExecFlags &= ~(1u << battler);
 }
 
 static void Intro_DelayAndEnd(u32 battler)
