@@ -488,8 +488,6 @@ void ReadMail(struct Mail *mail, void (*exitCallback)(void), bool8 hasText)
 
 static bool8 MailReadBuildGraphics(void)
 {
-    u16 icon;
-
     switch (gMain.state)
     {
         case 0:
@@ -581,16 +579,6 @@ static bool8 MailReadBuildGraphics(void)
             gPaletteFade.bufferTransferDisabled = TRUE;
             break;
         case 17:
-            icon = GetIconSpeciesNoPersonality(sMailRead->mail->species);
-            switch (sMailRead->iconType)
-            {
-            case ICON_TYPE_BEAD:
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 96, 128, 0);
-                break;
-            case ICON_TYPE_DREAM:
-                sMailRead->monIconSpriteId = CreateMonIconNoPersonality(icon, SpriteCallbackDummy, 40, 128, 0);
-                break;
-            }
             break;
         case 18:
             SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);

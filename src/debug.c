@@ -2295,7 +2295,7 @@ static void DebugAction_Util_WatchCredits(u8 taskId)
 
 static void DebugAction_Util_Player_Name(u8 taskId)
 {
-    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
+    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript, 0);
 }
 
 static void DebugAction_Util_Player_Gender(u8 taskId)

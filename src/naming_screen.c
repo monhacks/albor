@@ -154,11 +154,11 @@ struct NamingScreenTemplate
 
 struct NamingScreenData
 {
-    u8 tilemapBuffer1[0x800];
-    u8 tilemapBuffer2[0x800];
-    u8 tilemapBuffer3[0x800];
+    u8 tilemapBuffer1[2048];
+    u8 tilemapBuffer2[2048];
+    u8 tilemapBuffer3[2048];
     u8 textBuffer[16];
-    u8 tileBuffer[0x600];
+    u8 tileBuffer[1536];
     u8 state;
     u8 windows[WIN_COUNT];
     u16 inputCharBaseXPos;
@@ -178,6 +178,7 @@ struct NamingScreenData
     u16 monSpecies;
     u16 monGender;
     u32 monPersonality;
+    bool32 isShiny;
     MainCallback returnCallback;
 };
 
@@ -393,7 +394,7 @@ static void VBlankCB_NamingScreen(void);
 static void NamingScreen_ShowBgs(void);
 static bool8 IsWideLetter(u8);
 
-void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback)
+void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback, bool32 isShiny)
 {
     sNamingScreen = Alloc(sizeof(struct NamingScreenData));
     if (!sNamingScreen)
@@ -408,6 +409,7 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
         sNamingScreen->monPersonality = monPersonality;
         sNamingScreen->destBuffer = destBuffer;
         sNamingScreen->returnCallback = returnCallback;
+        sNamingScreen->isShiny = isShiny;
 
         if (templateNum == NAMING_SCREEN_PLAYER)
             StartTimer1();
@@ -422,7 +424,7 @@ void ChangePokemonNickname(void)
 
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY, NULL), ChangePokemonNickname_CB);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY), ChangePokemonNickname_CB, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_SHINY));
 }
 
 void ChangePokemonNickname_CB(void)
@@ -444,7 +446,7 @@ void ChangeBoxPokemonNickname(void)
     boxMon = GetBoxedMonPtr(gSpecialVar_MonBoxId, gSpecialVar_MonBoxPos);
     GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar3);
     GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL), ChangeBoxPokemonNickname_CB);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetBoxMonData(boxMon, MON_DATA_SPECIES), GetBoxMonGender(boxMon), GetBoxMonData(boxMon, MON_DATA_PERSONALITY), ChangeBoxPokemonNickname_CB, GetBoxMonData(boxMon, MON_DATA_IS_SHINY));
 }
 
 static void CB2_LoadNamingScreen(void)
@@ -1444,20 +1446,10 @@ static void NamingScreen_CreatePCIcon(void)
 static void NamingScreen_CreateMonIcon(void)
 {
     u8 spriteId;
-    u8 index;
 
-    LoadMonIconPalettes();
     spriteId = CreateMonIcon(sNamingScreen->monSpecies, SpriteCallbackDummy, 56, 40, 0, sNamingScreen->monPersonality);
-    index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
-    if (index < 16) 
-    {
-        u32 otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
-        const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, otId, sNamingScreen->monPersonality);
-        LoadCompressedPalette(palette, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_ID(index), sNamingScreen->monSpecies, sNamingScreen->monPersonality);
-        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
-        gSprites[spriteId].oam.paletteNum = index;
-    }
+    LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(sNamingScreen->monSpecies, sNamingScreen->isShiny, sNamingScreen->monPersonality), OBJ_PLTT_ID(15), PLTT_SIZE_4BPP);
+    gSprites[spriteId].oam.paletteNum = 15;
     gSprites[spriteId].oam.priority = 3;
 }
 

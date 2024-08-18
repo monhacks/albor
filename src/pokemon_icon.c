@@ -199,15 +199,6 @@ u16 GetIconSpecies(u16 species, u32 personality)
     return species;
 }
 
-u16 GetIconSpeciesNoPersonality(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-
-    if (MailSpeciesToSpecies(species, &species) == SPECIES_UNOWN)
-        return species += SPECIES_UNOWN_B; // TODO
-    return GetIconSpecies(species, 0);
-}
-
 const u32 *GetMonIconPtr(u16 species, u32 personality)
 {
     return GetMonIconTiles(GetIconSpecies(species, personality), personality);
@@ -257,15 +248,18 @@ const u32 *GetMonIconTiles(u16 species, u32 personality)
 void TryLoadAllMonIconPalettesAtOffset(u16 offset)
 {
     s32 i;
+    const struct SpritePalette* monIconPalettePtr;
     if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
     {
         u16 whitePalette[16];
         for (i = 0; i < 16; i++)
           whitePalette[i] = 0xFFFF;
-        for (i = 0; i < (int)ARRAY_COUNT(gMonIconPaletteTable); i++)
+        monIconPalettePtr = gMonIconPaletteTable;
+        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
         {
             LoadPalette(&whitePalette[0], offset, PLTT_SIZE_4BPP);
             offset += 16;
+            monIconPalettePtr++;
         }
     }
 }
