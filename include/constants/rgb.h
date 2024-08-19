@@ -29,5 +29,12 @@
 #define RGB_NARANJA             RGB2GBA(250, 144, 98)
 #define RGB_AMARILLO_CLARO      RGB2GBA(255, 242, 204)
 #define RGB_AZUL_PALIDO         RGB2GBA(193, 235, 218)
+#define RGB_AZUL_OSCURO         RGB2GBA(23, 69, 125)
+#define RGB_VERDE_AMARILLENTO   RGB2GBA(124, 125, 23)
+#define RGB_ROSA_CLARO          RGB2GBA(230, 130, 223)
+#define RGB_ROJO_VIVO           RGB2GBA(230, 58, 42)
+#define RGB_MARRON              RGB2GBA(100, 63, 8)
+#define RGB_GRIS_CLARO          RGB2GBA(192, 192, 192)
+#define RGB_GRIS_OSCURO         RGB2GBA(71, 71, 71)
 
 #endif // GUARD_RGB_H

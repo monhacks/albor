@@ -750,7 +750,6 @@ const u8 gText_MtPyre[] = _("MT. PYRE");
 const u8 gText_SkyPillar[] = _("SKY PILLAR");
 const u8 gText_DontRemember[] = _("Don't remember");
 const u8 gText_Salir[] = _("Salir");
-const u8 gText_ExitFromBox[] = _("¿Quieres salir de la caja?");
 const u8 gText_WhatDoYouWantToDo[] = _("¿Qué quieres hacer?");
 const u8 gText_PleasePickATheme[] = _("Please pick a theme.");
 const u8 gText_PkmnIsSelected[] = _("Has elegido a {DYNAMIC 0}.");

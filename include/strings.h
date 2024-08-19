@@ -1883,7 +1883,6 @@ extern const u8 BattlePyramid_Text_SixTrainersRemaining6[];
 extern const u8 BattlePyramid_Text_SevenTrainersRemaining6[];
 
 // PC strings
-extern const u8 gText_ExitFromBox[];
 extern const u8 gText_WhatDoYouWantToDo[];
 extern const u8 gText_PleasePickATheme[];
 extern const u8 gText_PkmnIsSelected[];

@@ -1489,7 +1489,6 @@ static void OverworldBasic(void)
         };
         gTimeUpdateCounter = 0;
         UpdateTimeOfDay();
-        //UpdateFollowingPokemon();
         if (cachedBlend.time0 != currentTimeBlend.time0
         || cachedBlend.time1 != currentTimeBlend.time1
         || cachedBlend.weight != currentTimeBlend.weight) 
