@@ -194,36 +194,18 @@ enum {
     PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
     PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
-    PALTAG_MISC_1,
+    PALTAG_MISC,
     PALTAG_BOX_TITLE,
-    PALTAG_MISC_2,
     PALTAG_ITEM_ICON_0,
     PALTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     PALTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
 };
 
-#define PALTAG_SWAP_BASE PALTAG_ITEM_ICON_2 + 2
-#define PALTAG_SWAP_0 PALTAG_SWAP_BASE
-#define PALTAG_SWAP_1 PALTAG_SWAP_0 + 1
-#define PALTAG_SWAP_2 PALTAG_SWAP_1 + 1
-#define PALTAG_SWAP_3 PALTAG_SWAP_2 + 1
-#define PALTAG_SWAP_4 PALTAG_SWAP_3 + 1
-#define PALTAG_SWAP_5 PALTAG_SWAP_4 + 1
-#define PALTAG_SWAP_6 PALTAG_SWAP_5 + 1
-#define PALTAG_SWAP_7 PALTAG_SWAP_6 + 1
-#define PALTAG_SWAP_8 PALTAG_SWAP_7 + 1
-#define PALTAG_SWAP_9 PALTAG_SWAP_8 + 1
-#define PALTAG_SWAP_10 PALTAG_SWAP_9 + 1
-#define PALTAG_SWAP_11 PALTAG_SWAP_10 + 1
-#define PALTAG_SWAP_12 PALTAG_SWAP_11 + 1
-
 enum {
     GFXTAG_CURSOR,
-    GFXTAG_CURSOR_SHADOW,
     GFXTAG_DISPLAY_MON,
     GFXTAG_BOX_TITLE,
     GFXTAG_BOX_TITLE_ALT,
-    GFXTAG_WAVEFORM,
     GFXTAG_ITEM_ICON_0,
     GFXTAG_ITEM_ICON_1, // Used implicitly in CreateItemIconSprites
     GFXTAG_ITEM_ICON_2, // Used implicitly in CreateItemIconSprites
@@ -657,7 +639,6 @@ static void UpdateCloseBoxButtonFlash(void);
 static void GiveChosenBagItem(void);
 static void SetUpHidePartyMenu(void);
 static void LoadPokeStorageMenuGfx(void);
-static void LoadWaveformSpritePalette(void);
 static void InitPokeStorageBg0(void);
 static void SetScrollingBackground(void);
 static void UpdateBoxToSendMons(void);
@@ -665,11 +646,9 @@ static void InitCursorItemIcon(void);
 static void InitPalettesAndSprites(void);
 static void RefreshDisplayMonData(void);
 static void CreateDisplayMonSprite(void);
-static void CreateWaveformSprites(void);
 static void ClearBottomWindow(void);
 static void InitSupplementalTilemaps(void);
 static void PrintDisplayMonInfo(void);
-static void UpdateWaveformAnimation(void);
 static void SetPartySlotTilemaps(void);
 static void StopFlashingCloseBoxButton(void);
 static void FreePokeStorageData(void);
@@ -782,8 +761,6 @@ static const u16 sScrollingBg_Pal[]          = INCBIN_U16("graphics/pokemon_stor
 static const u16 sCloseBoxButton_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/close_box_button.bin");
 static const u16 sPartySlotFilled_Tilemap[]  = INCBIN_U16("graphics/pokemon_storage/party_slot_filled.bin");
 static const u16 sPartySlotEmpty_Tilemap[]   = INCBIN_U16("graphics/pokemon_storage/party_slot_empty.bin");
-static const u16 sWaveform_Pal[]             = INCBIN_U16("graphics/pokemon_storage/waveform.gbapal");
-static const u32 sWaveform_Gfx[]             = INCBIN_U32("graphics/pokemon_storage/waveform.4bpp");
 static const u16 sTextWindows_Pal[]          = INCBIN_U16("graphics/pokemon_storage/text_windows.gbapal");
 
 static const struct WindowTemplate sWindowTemplates[] =
@@ -859,16 +836,6 @@ static const struct BgTemplate sBgTemplates[] =
     },
 };
 
-static const struct SpritePalette sWaveformSpritePalette =
-{
-    sWaveform_Pal, PALTAG_MISC_2
-};
-
-static const struct SpriteSheet sSpriteSheet_Waveform =
-{
-    sWaveform_Gfx, sizeof(sWaveform_Gfx), GFXTAG_WAVEFORM
-};
-
 static const struct OamData sOamData_DisplayMon;
 static const struct SpriteTemplate sSpriteTemplate_DisplayMon =
 {
@@ -938,70 +905,6 @@ static const struct OamData sOamData_DisplayMon =
     .priority = 0,
     .paletteNum = 0,
     .affineParam = 0
-};
-
-static const struct OamData sOamData_Waveform =
-{
-    .y = 0,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(16x8),
-    .x = 0,
-    .matrixNum = 0,
-    .size = SPRITE_SIZE(16x8),
-    .tileNum = 0,
-    .priority = 0,
-    .paletteNum = 0,
-    .affineParam = 0
-};
-
-static const union AnimCmd sAnim_Waveform_LeftOff[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_Waveform_LeftOn[] =
-{
-    ANIMCMD_FRAME(2, 8),
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(6, 8),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd sAnim_Waveform_RightOff[] =
-{
-    ANIMCMD_FRAME(8, 5),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_Waveform_RightOn[] =
-{
-    ANIMCMD_FRAME(10, 8),
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(12, 8),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd *const sAnims_Waveform[] =
-{
-    sAnim_Waveform_LeftOff,
-    sAnim_Waveform_LeftOn,
-    sAnim_Waveform_RightOff,
-    sAnim_Waveform_RightOn
-};
-
-static const struct SpriteTemplate sSpriteTemplate_Waveform =
-{
-    .tileTag = GFXTAG_WAVEFORM,
-    .paletteTag = PALTAG_MISC_2,
-    .oam = &sOamData_Waveform,
-    .anims = sAnims_Waveform,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
 };
 
 static const struct OamData sOamData_MonIcon;
@@ -1080,7 +983,7 @@ static const union AnimCmd *const sAnims_BoxTitle[] =
 static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
 {
     .tileTag = GFXTAG_BOX_TITLE,
-    .paletteTag = PALTAG_MISC_2,
+    .paletteTag = PALTAG_MISC,
     .oam = &sOamData_BoxTitle,
     .anims = sAnims_BoxTitle,
     .images = NULL,
@@ -1090,7 +993,6 @@ static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
 
 static const u16 ALIGNED(4) sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
 static const u8 sHandCursor_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor.4bpp");
-static const u8 sHandCursorShadow_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor_shadow.4bpp");
 
 
 //------------------------------------------------------------------------------
@@ -1853,7 +1755,6 @@ static void Task_InitPokeStorage(u8 taskId)
             }
         }
         LoadPokeStorageMenuGfx();
-        LoadWaveformSpritePalette();
         break;
     case 1:
         if (!InitPokeStorageWindows())
@@ -2519,7 +2420,7 @@ static void Task_DepositMenu(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_DEPOSIT_IN_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC, 3, FALSE);
         CreateChooseBoxMenuSprites(sDepositBoxId);
         sStorage->state++;
         break;
@@ -3054,7 +2955,7 @@ static void Task_JumpBox(u8 taskId)
     {
     case 0:
         PrintMessage(MSG_JUMP_TO_WHICH_BOX);
-        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC_1, 3, FALSE);
+        LoadChooseBoxMenuGfx(&sStorage->chooseBoxMenu, GFXTAG_CHOOSE_BOX_MENU, PALTAG_MISC, 3, FALSE);
         CreateChooseBoxMenuSprites(StorageGetCurrentBox());
         sStorage->state++;
         break;
@@ -3425,11 +3326,6 @@ static bool8 InitPokeStorageWindows(void)
     }
 }
 
-static void LoadWaveformSpritePalette(void)
-{
-    LoadSpritePalette(&sWaveformSpritePalette);
-}
-
 static void InitPalettesAndSprites(void)
 {
     LoadPalette(sInterface_Pal, BG_PLTT_ID(0), sizeof(sInterface_Pal));
@@ -3439,28 +3335,13 @@ static void InitPalettesAndSprites(void)
 
     SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(1) | BGCNT_CHARBASE(1) | BGCNT_16COLOR | BGCNT_SCREENBASE(30));
     CreateDisplayMonSprite();
-    CreateWaveformSprites();
     RefreshDisplayMonData();
-}
-
-static void CreateWaveformSprites(void)
-{
-    u16 i;
-    struct SpriteSheet sheet = sSpriteSheet_Waveform;
-
-    LoadSpriteSheet(&sheet);
-    for (i = 0; i < ARRAY_COUNT(sStorage->waveformSprites); i++)
-    {
-        u8 spriteId = CreateSprite(&sSpriteTemplate_Waveform, i * 63 + 8, 9, 2);
-        sStorage->waveformSprites[i] = &gSprites[spriteId];
-    }
 }
 
 static void RefreshDisplayMonData(void)
 {
     LoadDisplayMonGfx(sStorage->displayMonSpecies, sStorage->displayMonPersonality);
     PrintDisplayMonInfo();
-    UpdateWaveformAnimation();
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -3590,30 +3471,6 @@ static void PrintDisplayMonInfo(void)
     }
 
     CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
-}
-
-// Turn the wave animation on the sides of "Pkmn Data" on/off
-static void UpdateWaveformAnimation(void)
-{
-    u16 i;
-
-    if (sStorage->displayMonSpecies != SPECIES_NONE)
-    {
-        // Start waveform animation and color "Pkmn Data"
-        TilemapUtil_SetRect(TILEMAPID_PKMN_DATA, 0, 0, 8, 2);
-        for (i = 0; i < ARRAY_COUNT(sStorage->waveformSprites); i++)
-            StartSpriteAnimIfDifferent(sStorage->waveformSprites[i], i * 2 + 1);
-    }
-    else
-    {
-        // Stop waveform animation and gray out "Pkmn Data"
-        TilemapUtil_SetRect(TILEMAPID_PKMN_DATA, 0, 2, 8, 2);
-        for (i = 0; i < ARRAY_COUNT(sStorage->waveformSprites); i++)
-            StartSpriteAnim(sStorage->waveformSprites[i], i * 2);
-    }
-
-    TilemapUtil_Update(TILEMAPID_PKMN_DATA);
-    ScheduleBgCopyTilemapToVram(1);
 }
 
 static void InitSupplementalTilemaps(void)
@@ -3963,24 +3820,7 @@ static void InitCursorItemIcon(void)
 
 static void InitMonIconFields(void)
 {
-    u16 i, index;
-    // Load the 12 dynamic palettes
-    for (i = 0; i < 12; i++)
-    {
-      if (i == 11)
-      { // load MISC_2 palette in this slot, replacing its initial load in slot 0
-        FreeSpritePaletteByTag(PALTAG_MISC_2);
-        index = AllocSpritePalette(PALTAG_SWAP_BASE + i); // temporarily allocate in the freed slot
-        if (index < 11)
-          index = LoadSpritePalette(&sWaveformSpritePalette); // load MISC_2 palette in slot 7
-      }
-      else
-      {
-        AllocSpritePalette(PALTAG_SWAP_BASE + i);
-      }
-    }
-    if (index < 0xFF)
-      FreeSpritePaletteByTag(PALTAG_SWAP_BASE + 11); // free slot 0 again
+    u16 i;
 
     for (i = 0; i < MAX_MON_ICONS; i++)
         sStorage->numIconsPerSpecies[i] = 0;
@@ -5193,7 +5033,6 @@ static void SetCursorPosition(u8 newCursorArea, u8 newCursorPosition)
     if (newCursorArea == CURSOR_AREA_IN_PARTY && sCursorArea != CURSOR_AREA_IN_PARTY)
     {
         sStorage->cursorPrevHorizPos = 1;
-        sStorage->cursorShadowSprite->invisible = TRUE;
     }
 
     switch (newCursorArea)
@@ -5202,8 +5041,6 @@ static void SetCursorPosition(u8 newCursorArea, u8 newCursorPosition)
     case CURSOR_AREA_BOX_TITLE:
     case CURSOR_AREA_BUTTONS:
         sStorage->cursorSprite->oam.priority = 1;
-        sStorage->cursorShadowSprite->invisible = TRUE;
-        sStorage->cursorShadowSprite->oam.priority = 1;
         break;
     case CURSOR_AREA_IN_BOX:
         sStorage->cursorSprite->oam.priority = 2;
@@ -5235,14 +5072,10 @@ static void DoCursorNewPosUpdate(void)
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_PARTY:
-        sStorage->cursorShadowSprite->subpriority = 13;
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_BOX:
         sStorage->cursorSprite->oam.priority = 1;
-        sStorage->cursorShadowSprite->oam.priority = 2;
-        sStorage->cursorShadowSprite->subpriority = 21;
-        sStorage->cursorShadowSprite->invisible = FALSE;
         SetMovingMonPriority(2);
         break;
     }
@@ -6706,28 +6539,13 @@ static bool8 SetMenuTexts_Item(void)
 //  The functions below handle a few of the generic cursor features.
 //------------------------------------------------------------------------------
 
-
-static void SpriteCB_CursorShadow(struct Sprite *sprite)
-{
-    sprite->x = sStorage->cursorSprite->x;
-    sprite->y = sStorage->cursorSprite->y + 20;
-}
-
 static void CreateCursorSprites(void)
 {
     u16 x, y;
     u8 spriteId;
-    u8 priority, subpriority;
     struct SpriteSheet spriteSheets[] =
     {
         {sHandCursor_Gfx, 2048, GFXTAG_CURSOR},
-        {sHandCursorShadow_Gfx, 128, GFXTAG_CURSOR_SHADOW},
-        {}
-    };
-
-    struct SpritePalette spritePalettes[] =
-    {
-        {sWaveform_Pal, PALTAG_MISC_1},
         {}
     };
 
@@ -6735,12 +6553,6 @@ static void CreateCursorSprites(void)
     {
         .shape = SPRITE_SHAPE(32x32),
         .size = SPRITE_SIZE(32x32),
-        .priority = 1,
-    };
-    static const struct OamData sOamData_CursorShadow =
-    {
-        .shape = SPRITE_SHAPE(16x16),
-        .size = SPRITE_SIZE(16x16),
         .priority = 1,
     };
 
@@ -6777,7 +6589,7 @@ static void CreateCursorSprites(void)
     static const struct SpriteTemplate sSpriteTemplate_Cursor =
     {
         .tileTag = GFXTAG_CURSOR,
-        .paletteTag = PALTAG_MISC_2,
+        .paletteTag = PALTAG_MISC,
         .oam = &sOamData_Cursor,
         .anims = sAnims_Cursor,
         .images = NULL,
@@ -6785,26 +6597,14 @@ static void CreateCursorSprites(void)
         .callback = SpriteCallbackDummy,
     };
 
-    static const struct SpriteTemplate sSpriteTemplate_CursorShadow =
-    {
-        .tileTag = GFXTAG_CURSOR_SHADOW,
-        .paletteTag = PALTAG_MISC_1,
-        .oam = &sOamData_CursorShadow,
-        .anims = gDummySpriteAnimTable,
-        .images = NULL,
-        .affineAnims = gDummySpriteAffineAnimTable,
-        .callback = SpriteCB_CursorShadow,
-    };
-
     LoadSpriteSheets(spriteSheets);
-    LoadSpritePalettes(spritePalettes);
 
     GetCursorCoordsByPos(sCursorArea, sCursorPosition, &x, &y);
     spriteId = CreateSprite(&sSpriteTemplate_Cursor, x, y, 6);
     if (spriteId != MAX_SPRITES)
     {
         sStorage->cursorSprite = &gSprites[spriteId];
-        sStorage->cursorSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_MISC_1);
+        sStorage->cursorSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_MISC);
         sStorage->cursorSprite->oam.priority = 1;
         if (sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_FIST);
@@ -6812,30 +6612,6 @@ static void CreateCursorSprites(void)
     else
     {
         sStorage->cursorSprite = NULL;
-    }
-
-    if (sCursorArea == CURSOR_AREA_IN_PARTY)
-    {
-        subpriority = 13;
-        priority = 1;
-    }
-    else
-    {
-        subpriority = 21;
-        priority = 2;
-    }
-
-    spriteId = CreateSprite(&sSpriteTemplate_CursorShadow, 0, 0, subpriority);
-    if (spriteId != MAX_SPRITES)
-    {
-        sStorage->cursorShadowSprite = &gSprites[spriteId];
-        sStorage->cursorShadowSprite->oam.priority = priority;
-        if (sCursorArea)
-            sStorage->cursorShadowSprite->invisible = TRUE;
-    }
-    else
-    {
-        sStorage->cursorShadowSprite = NULL;
     }
 }
 
