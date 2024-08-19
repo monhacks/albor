@@ -7179,26 +7179,6 @@ static u8 TrySetMicleBerry(u32 battler, u32 itemId, bool32 end2)
     return 0;
 }
 
-static u8 TrySetEnigmaBerry(u32 battler)
-{
-    if (IsBattlerAlive(battler)
-     && !DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
-     && ((TARGET_TURN_DAMAGED && gMoveResultFlags & MOVE_RESULT_SUPER_EFFECTIVE) || gBattleScripting.overrideBerryRequirements)
-     && !(gBattleScripting.overrideBerryRequirements && gBattleMons[battler].hp == gBattleMons[battler].maxHP)
-     && (B_HEAL_BLOCKING < GEN_5 || !(gStatuses3[battler] & STATUS3_HEAL_BLOCK)))
-    {
-        gBattleScripting.battler = battler;
-        gBattleMoveDamage = (gBattleMons[battler].maxHP * 25 / 100) * -1;
-        if (GetBattlerAbility(battler) == ABILITY_RIPEN)
-            gBattleMoveDamage *= 2;
-
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
-        return ITEM_HP_CHANGE;
-    }
-    return 0;
-}
-
 static u8 DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 category)
 {
     if (IsBattlerAlive(battler)
@@ -7503,9 +7483,7 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         if (B_BERRIES_INSTANT >= GEN_4)
             effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, FALSE);
         break;
-    case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
-        if (B_BERRIES_INSTANT >= GEN_4)
-            effect = TrySetEnigmaBerry(battler);
+    case HOLD_EFFECT_ENIGMA_BERRY:
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
         if (B_BERRIES_INSTANT >= GEN_4)
@@ -8444,8 +8422,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     SET_STATCHANGER(STAT_SPATK, 2, FALSE);
                 }
                 break;
-            case HOLD_EFFECT_ENIGMA_BERRY: // consume and heal if hit by super effective move
-                effect = TrySetEnigmaBerry(battler);
+            case HOLD_EFFECT_ENIGMA_BERRY:
                 break;
             case HOLD_EFFECT_JABOCA_BERRY:  // consume and damage attacker if used physical move
                 if (IsBattlerAlive(battler)

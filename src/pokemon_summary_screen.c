@@ -3318,13 +3318,7 @@ static void PrintHeldItemName(void)
     u32 fontId;
     int x;
 
-    if (sMonSummaryScreen->summary.item == ITEM_ENIGMA_BERRY_E_READER
-        && IsMultiBattle() == TRUE
-        && (sMonSummaryScreen->curMonIndex == 1 || sMonSummaryScreen->curMonIndex == 4 || sMonSummaryScreen->curMonIndex == 5))
-    {
-        text = ItemId_GetName(ITEM_ENIGMA_BERRY_E_READER);
-    }
-    else if (sMonSummaryScreen->summary.item == ITEM_NONE)
+    if (sMonSummaryScreen->summary.item == ITEM_NONE)
     {
         text = gText_None;
     }

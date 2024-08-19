@@ -1593,29 +1593,6 @@ const struct Berry gBerries[] =
         .weedsBonus = 0,
         .pestsBonus = 2,
     },
-
-    [ITEM_ENIGMA_BERRY_E_READER - FIRST_BERRY_INDEX] =
-    {
-        .name = _("Enigma"),
-        .firmness = BERRY_FIRMNESS_UNKNOWN,
-        .color = BERRY_COLOR_PURPLE,
-        .size = 0,
-        .maxYield = YIELD_RATE(2, 5, 5, 13),
-        .minYield = YIELD_RATE(1, 1, 1, 1),
-        .description1 = COMPOUND_STRING("A completely enigmatic Berry."),
-        .description2 = COMPOUND_STRING("Appears to have the power of stars."),
-        .growthDuration = GROWTH_DURATION(96, 96, 144, 72, 48, 72),
-        .spicy = 40,
-        .dry = 40,
-        .sweet = 40,
-        .bitter = 40,
-        .sour = 40,
-        .smoothness = 40,
-        .drainRate = 7,
-        .waterBonus = 2,
-        .weedsBonus = 0,
-        .pestsBonus = 0,
-    },
 };
 
 const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
@@ -1660,68 +1637,16 @@ const struct BerryCrushBerryData gBerryCrush_BerryData[] = {
     [ITEM_PETAYA_BERRY - FIRST_BERRY_INDEX]          = {.difficulty = 180, .powder = 500},
     [ITEM_APICOT_BERRY - FIRST_BERRY_INDEX]          = {.difficulty = 180, .powder = 500},
     [ITEM_LANSAT_BERRY - FIRST_BERRY_INDEX]          = {.difficulty = 200, .powder = 750},
-    [ITEM_STARF_BERRY - FIRST_BERRY_INDEX]           = {.difficulty = 200, .powder = 750},
-    [ITEM_ENIGMA_BERRY_E_READER - FIRST_BERRY_INDEX] = {.difficulty = 150, .powder = 200}
+    [ITEM_STARF_BERRY - FIRST_BERRY_INDEX]           = {.difficulty = 200, .powder = 750}
 };
 
 const struct BerryTree gBlankBerryTree = {};
 
-void SetEnigmaBerry(u8 *src)
-{
-#if FREE_ENIGMA_BERRY == FALSE
-    u32 i;
-    u8 *dest = (u8 *)&gSaveBlock1Ptr->enigmaBerry;
-
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry); i++)
-        dest[i] = src[i];
-#endif //FREE_ENIGMA_BERRY
-}
-
-#if FREE_ENIGMA_BERRY == FALSE
-static u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
-{
-    u32 i;
-    u32 checksum;
-    u8 *dest;
-
-    dest = (u8 *)enigmaBerry;
-    checksum = 0;
-    for (i = 0; i < sizeof(gSaveBlock1Ptr->enigmaBerry) - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
-        checksum += dest[i];
-
-    return checksum;
-}
-#endif //FREE_ENIGMA_BERRY
-
-bool32 IsEnigmaBerryValid(void)
-{
-#if FREE_ENIGMA_BERRY == FALSE
-    if (!gSaveBlock1Ptr->enigmaBerry.berry.growthDuration)
-        return FALSE;
-    if (!gSaveBlock1Ptr->enigmaBerry.berry.maxYield)
-        return FALSE;
-    if (GetEnigmaBerryChecksum(&gSaveBlock1Ptr->enigmaBerry) != gSaveBlock1Ptr->enigmaBerry.checksum)
-        return FALSE;
-    return TRUE;
-#else
-    return FALSE;
-#endif //FREE_ENIGMA_BERRY
-}
-
 const struct Berry *GetBerryInfo(u8 berry)
 {
-    if (berry == ITEM_TO_BERRY(ITEM_ENIGMA_BERRY_E_READER) && IsEnigmaBerryValid())
-    #if FREE_ENIGMA_BERRY == FALSE
-        return (struct Berry *)(&gSaveBlock1Ptr->enigmaBerry.berry);
-    #else
-        return &gBerries[0];    //never reached, but will appease the compiler gods
-    #endif //FREE_ENIGMA_BERRY
-    else
-    {
-        if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))
-            berry = ITEM_TO_BERRY(FIRST_BERRY_INDEX);
-        return &gBerries[berry - 1];
-    }
+    if (berry == BERRY_NONE || berry > ITEM_TO_BERRY(LAST_BERRY_INDEX))
+        berry = ITEM_TO_BERRY(FIRST_BERRY_INDEX);
+    return &gBerries[berry - 1];
 }
 
 struct BerryTree *GetBerryTreeInfo(u8 id)

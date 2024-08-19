@@ -10394,24 +10394,6 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_MarangaBerry,
     },
 
-    [ITEM_ENIGMA_BERRY_E_READER] =
-    {
-        .name = _("Enigma Berry"),
-        .pluralName = _("Enigma Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
-        .description = COMPOUND_STRING(
-            "{POKEBLOCK} ingredient.\n"
-            "Plant in loamy soil\n"
-            "to grow a mystery."),
-        .pocket = POCKET_BERRIES,
-        .type = ITEM_USE_BAG_MENU, // Type handled by ItemUseOutOfBattle_EnigmaBerry
-        .fieldUseFunc = ItemUseOutOfBattle_EnigmaBerry,
-        .battleUsage = EFFECT_ITEM_ENIGMA_BERRY_EREADER,
-        .flingPower = 10,
-        .iconPic = gItemIcon_EnigmaBerry,
-        .iconPalette = gItemIconPalette_EnigmaBerry,
-    },
-
 // TMs/HMs. They don't have a set flingPower, as that's handled by GetFlingPowerFromItemId.
 
     [ITEM_TM_CHARM] =

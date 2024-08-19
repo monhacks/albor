@@ -743,14 +743,7 @@ static const u8 *ItemId_GetPluralName(u16 itemId)
 
 const u8 *ItemId_GetEffect(u32 itemId)
 {
-    if (itemId == ITEM_ENIGMA_BERRY_E_READER)
-    #if FREE_ENIGMA_BERRY == FALSE
-        return gSaveBlock1Ptr->enigmaBerry.itemEffect;
-    #else
-        return 0;
-    #endif //FREE_ENIGMA_BERRY
-    else
-        return gItemsInfo[SanitizeItemId(itemId)].effect;
+    return gItemsInfo[SanitizeItemId(itemId)].effect;
 }
 
 u32 ItemId_GetHoldEffect(u32 itemId)
@@ -792,32 +785,7 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 u8 ItemId_GetBattleUsage(u16 itemId)
 {
     u16 item = SanitizeItemId(itemId);
-    // Handle E-Reader berries.
-    if (item == ITEM_ENIGMA_BERRY_E_READER)
-    {
-        switch (GetItemEffectType(gSpecialVar_ItemId))
-        {
-            case ITEM_EFFECT_X_ITEM:
-                return EFFECT_ITEM_INCREASE_STAT;
-            case ITEM_EFFECT_HEAL_HP:
-                return EFFECT_ITEM_RESTORE_HP;
-            case ITEM_EFFECT_CURE_POISON:
-            case ITEM_EFFECT_CURE_SLEEP:
-            case ITEM_EFFECT_CURE_BURN:
-            case ITEM_EFFECT_CURE_FREEZE_FROSTBITE:
-            case ITEM_EFFECT_CURE_PARALYSIS:
-            case ITEM_EFFECT_CURE_ALL_STATUS:
-            case ITEM_EFFECT_CURE_CONFUSION:
-            case ITEM_EFFECT_CURE_INFATUATION:
-                return EFFECT_ITEM_CURE_STATUS;
-            case ITEM_EFFECT_HEAL_PP:
-                return EFFECT_ITEM_RESTORE_PP;
-            default:
-                return 0;
-        }
-    }
-    else
-        return gItemsInfo[item].battleUsage;
+    return gItemsInfo[item].battleUsage;
 }
 
 u8 ItemId_GetSecondaryId(u16 itemId)

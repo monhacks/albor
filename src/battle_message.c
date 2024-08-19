@@ -483,8 +483,7 @@ static const u8 sText_Lanettes[] = _("LANETTE's");
 static const u8 sText_PkmnDataAddedToDex[] = _("Los datos de {B_DEF_NAME}\nse añadieron a la Pokédex.\p");
 static const u8 sText_ItIsRaining[] = _("It is raining.");
 static const u8 sText_SandstormIsRaging[] = _("A sandstorm is raging.");
-static const u8 sText_BoxIsFull[] = _("The BOX is full!\nYou can't catch any more!\p");
-static const u8 sText_EnigmaBerry[] = _("ENIGMA BERRY");
+static const u8 sText_BoxIsFull[] = _("La caja está llena.\n¡No puedes capturar más!\p");
 static const u8 sText_BerrySuffix[] = _(" BERRY");
 static const u8 sText_PkmnsItemCuredParalysis[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured paralysis!");
 static const u8 sText_PkmnsItemCuredPoison[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured poison!");
@@ -3116,10 +3115,6 @@ static const u8 *BattleStringGetOpponentClassByTrainerId(u16 trainerId)
 
     return toCpy;
 }
-
-// Ensure the defined length for an item name can contain the full defined length of a berry name.
-// This ensures that custom Enigma Berry names will fit in the text buffer at the top of BattleStringExpandPlaceholders.
-STATIC_ASSERT(BERRY_NAME_LENGTH + ARRAY_COUNT(sText_BerrySuffix) <= ITEM_NAME_LENGTH, BerryNameTooLong);
 
 u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst)
 {
