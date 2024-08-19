@@ -245,25 +245,6 @@ const u32 *GetMonIconTiles(u16 species, u32 personality)
     return iconSprite;
 }
 
-void TryLoadAllMonIconPalettesAtOffset(u16 offset)
-{
-    s32 i;
-    const struct SpritePalette* monIconPalettePtr;
-    if (offset <= BG_PLTT_ID(16 - ARRAY_COUNT(gMonIconPaletteTable)))
-    {
-        u16 whitePalette[16];
-        for (i = 0; i < 16; i++)
-          whitePalette[i] = 0xFFFF;
-        monIconPalettePtr = gMonIconPaletteTable;
-        for(i = ARRAY_COUNT(gMonIconPaletteTable) - 1; i >= 0; i--)
-        {
-            LoadPalette(&whitePalette[0], offset, PLTT_SIZE_4BPP);
-            offset += 16;
-            monIconPalettePtr++;
-        }
-    }
-}
-
 u8 UpdateMonIconFrame(struct Sprite *sprite)
 {
     u8 result = 0;

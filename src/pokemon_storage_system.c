@@ -51,6 +51,17 @@
           types of functions are likely located.
 */
 
+#define CURSOR_MOVE_BASE_STEPS_WRAP 3
+#define CURSOR_MOVE_BASE_STEPS_NO_WRAP 3
+
+#define BOX_SCROLL_SPEED_FACTOR 4
+
+#define BOX_SCROLL_SPEED(input) ((input) * 6 * BOX_SCROLL_SPEED_FACTOR)
+
+#define COMPACT_PARTY_SPRITES_DELTA 2
+
+#define MON_HAND_DELTA 2
+
 // PC main menu options
 enum {
     OPTION_MOVE_MONS,
@@ -141,13 +152,6 @@ enum {
     INPUT_GIVE_ITEM,
     INPUT_SWITCH_ITEMS,
     INPUT_PRESSED_B,
-    INPUT_MULTIMOVE_START,
-    INPUT_MULTIMOVE_CHANGE_SELECTION,
-    INPUT_MULTIMOVE_SINGLE,
-    INPUT_MULTIMOVE_GRAB_SELECTION,
-    INPUT_MULTIMOVE_UNABLE,
-    INPUT_MULTIMOVE_MOVE_MONS,
-    INPUT_MULTIMOVE_PLACE_MONS,
 };
 
 enum {
@@ -270,31 +274,6 @@ enum {
     CHANGE_SHIFT,
 };
 
-// Modes for selecting and moving Pokémon in the box.
-// "MULTIPLE" mode allows up to an entire box to be
-// picked up at once by pressing Select then holding
-// down the A button. While holding A down, the player
-// may move the cursor around to select multiple Pokémon.
-// This is MOVE_MODE_MULTIPLE_SELECTING. After releasing A
-// those Pokémon will be picked up and can be moved around
-// as a single unit. This is MOVE_MODE_MULTIPLE_MOVING
-enum {
-    MOVE_MODE_NORMAL,
-    MOVE_MODE_MULTIPLE_SELECTING,
-    MOVE_MODE_MULTIPLE_MOVING,
-};
-
-// IDs for the main functions for moving multiple Pokémon.
-// Given as arguments to MultiMove_SetFunction
-enum {
-    MULTIMOVE_START,
-    MULTIMOVE_CANCEL, // If only 1 Pokémon is grabbed
-    MULTIMOVE_CHANGE_SELECTION,
-    MULTIMOVE_GRAB_SELECTION,
-    MULTIMOVE_MOVE_MONS,
-    MULTIMOVE_PLACE_MONS,
-};
-
 // IDs for TilemapUtil
 enum {
     TILEMAPID_PKMN_DATA, // The "Pkmn Data" text at the top of the display
@@ -385,7 +364,7 @@ struct PokemonStorageSystemData
     u8 incomingBoxId;
     u8 shiftTimer;
     u8 numPartyToCompact;
-    u16 iconScrollDistance;
+    s16 iconScrollDistance;
     s16 iconScrollPos;
     s16 iconScrollSpeed;
     u16 iconScrollNumIncoming;
@@ -452,8 +431,6 @@ struct PokemonStorageSystemData
     u8 boxTitleText[40];
     u8 releaseMonName[POKEMON_NAME_LENGTH + 1];
     u8 itemName[20];
-    u8 inBoxMovingMode;
-    u16 multiMoveWindowId;
     struct ItemIcon itemIcons[MAX_ITEM_ICONS];
     u16 movingItemId;
     u16 itemInfoWindowOffset;
@@ -521,9 +498,7 @@ static void Task_PrintCantStoreMail(u8);
 static void Task_HandleMovingMonFromParty(u8);
 
 // Input handlers
-static u8 InBoxInput_Normal(void);
-static u8 InBoxInput_MovingMultiple(void);
-static u8 InBoxInput_SelectingMultiple(void);
+static u8 InBoxInput(void);
 static u8 HandleInput(void);
 static void AddBoxOptionsMenu(void);
 static u8 SetSelectionMenuTexts(void);
@@ -593,35 +568,6 @@ static void TryRefreshDisplayMon(void);
 static void ReshowDisplayMon(void);
 static void SetDisplayMonData(void *, u8);
 
-// Moving multiple Pokémon at once
-static void MultiMove_Free(void);
-static bool8 MultiMove_Init(void);
-static bool8 MultiMove_RunFunction(void);
-static bool8 MultiMove_TryMoveGroup(u8);
-static bool8 MultiMove_CanPlaceSelection(void);
-static void MultiMove_SetFunction(u8);
-static u8 MultiMove_GetOrigin(void);
-static bool8 MultiMove_Start(void);
-static bool8 MultiMove_Cancel(void);
-static bool8 MultiMove_ChangeSelection(void);
-static bool8 MultiMove_GrabSelection(void);
-static bool8 MultiMove_MoveMons(void);
-static bool8 MultiMove_PlaceMons(void);
-static void MultiMove_SetIconToBg(u8, u8);
-static void MultiMove_ClearIconFromBg(u8, u8);
-static void MultiMove_ResetBg(void);
-static void MultiMove_UpdateSelectedIcons(void);
-static void MultiMove_InitMove(u16, u16, u16);
-static void MultiMove_GetMonsFromSelection(void);
-static void MultiMove_RemoveMonsFromBox(void);
-static void MultiMove_CreatePlacedMonIcons(void);
-static void MultiMove_SetPlacedMonData(void);
-static u8 MultiMove_UpdateMove(void);
-static void MultiMove_DeselectRow(u8, u8, u8);
-static void MultiMove_SelectRow(u8, u8, u8);
-static void MultiMove_SelectColumn(u8, u8, u8);
-static void MultiMove_DeselectColumn(u8, u8, u8);
-
 // Move Items mode
 static bool32 IsItemIconAtPosition(u8, u8);
 static u8 GetNewItemIconIdx(void);
@@ -679,8 +625,6 @@ static bool8 DoMonPlaceChange(void);
 static bool8 MonPlaceChange_Shift(void);
 static bool8 MonPlaceChange_Grab(void);
 static bool8 MonPlaceChange_Place(void);
-static bool8 MultiMonPlaceChange_Up(void);
-static bool8 MultiMonPlaceChange_Down(void);
 static bool8 MonPlaceChange_CursorDown(void);
 static bool8 MonPlaceChange_CursorUp(void);
 static void TrySetCursorFistAnim(void);
@@ -690,7 +634,7 @@ static bool8 IsCursorInBox(void);
 
 // Box title
 static void InitBoxTitle(u8);
-static void CreateIncomingBoxTitle(u8, s8);
+static void CreateIncomingBoxTitle(u8 boxId, s8 direction);
 static void CycleBoxTitleSprites(void);
 static void SpriteCB_IncomingBoxTitle(struct Sprite *);
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *);
@@ -1937,16 +1881,8 @@ static void Task_InitPokeStorage(u8 taskId)
             InitCursorOnReopen();
         break;
     case 5:
-        if (!MultiMove_Init())
-        {
-            SetPokeStorageTask(Task_ChangeScreen);
-            return;
-        }
-        else
-        {
-            SetScrollingBackground();
-            InitPokeStorageBg0();
-        }
+        SetScrollingBackground();
+        InitPokeStorageBg0();
         break;
     case 6:
         InitPalettesAndSprites();
@@ -2051,9 +1987,6 @@ enum {
     MSTATE_ERROR_LAST_PARTY_MON,
     MSTATE_ERROR_HAS_MAIL,
     MSTATE_WAIT_ERROR_MSG,
-    MSTATE_MULTIMOVE_RUN,
-    MSTATE_MULTIMOVE_RUN_CANCEL,
-    MSTATE_MULTIMOVE_RUN_MOVED,
     MSTATE_SCROLL_BOX_ITEM,
     MSTATE_WAIT_ITEM_ANIM,
 };
@@ -2199,39 +2132,6 @@ static void Task_PokeStorageMain(u8 taskId)
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_SwitchSelectedItem);
             break;
-        case INPUT_MULTIMOVE_START:
-            PlaySE(SE_SELECT);
-            MultiMove_SetFunction(MULTIMOVE_START);
-            sStorage->state = MSTATE_MULTIMOVE_RUN;
-            break;
-        case INPUT_MULTIMOVE_SINGLE:
-            MultiMove_SetFunction(MULTIMOVE_CANCEL);
-            sStorage->state = MSTATE_MULTIMOVE_RUN_CANCEL;
-            break;
-        case INPUT_MULTIMOVE_CHANGE_SELECTION:
-            PlaySE(SE_SELECT);
-            MultiMove_SetFunction(MULTIMOVE_CHANGE_SELECTION);
-            sStorage->state = MSTATE_MULTIMOVE_RUN_MOVED;
-            break;
-        case INPUT_MULTIMOVE_GRAB_SELECTION:
-            MultiMove_SetFunction(MULTIMOVE_GRAB_SELECTION);
-            sStorage->state = MSTATE_MULTIMOVE_RUN;
-            break;
-        case INPUT_MULTIMOVE_MOVE_MONS:
-            PlaySE(SE_SELECT);
-            MultiMove_SetFunction(MULTIMOVE_MOVE_MONS);
-            sStorage->state = MSTATE_MULTIMOVE_RUN_MOVED;
-            break;
-        case INPUT_MULTIMOVE_PLACE_MONS:
-            PlaySE(SE_SELECT);
-            MultiMove_SetFunction(MULTIMOVE_PLACE_MONS);
-            sStorage->state = MSTATE_MULTIMOVE_RUN;
-            break;
-        case INPUT_MULTIMOVE_UNABLE:
-            // When selecting/moving multiple Pokémon the
-            // cursor may not wrap around the edges.
-            PlaySE(SE_FAILURE);
-            break;
         }
         break;
     case MSTATE_MOVE_CURSOR:
@@ -2290,26 +2190,6 @@ static void Task_PokeStorageMain(u8 taskId)
         {
             ClearBottomWindow();
             SetPokeStorageTask(Task_PokeStorageMain);
-        }
-        break;
-    case MSTATE_MULTIMOVE_RUN:
-        if (!MultiMove_RunFunction())
-            sStorage->state = MSTATE_HANDLE_INPUT;
-        break;
-    case MSTATE_MULTIMOVE_RUN_CANCEL:
-        // Began a multiple Pokémon selection but
-        // ended up selecting a single Pokémon.
-        // Wait for multi move to cancel, then
-        // do a normal move.
-        if (!MultiMove_RunFunction())
-            SetPokeStorageTask(Task_MoveMon);
-        break;
-    case MSTATE_MULTIMOVE_RUN_MOVED:
-        if (!MultiMove_RunFunction())
-        {
-            if (sStorage->setMosaic)
-                StartDisplayMonMosaicEffect();
-            sStorage->state = MSTATE_HANDLE_INPUT;
         }
         break;
     case MSTATE_SCROLL_BOX_ITEM:
@@ -3493,7 +3373,6 @@ static void GiveChosenBagItem(void)
 static void FreePokeStorageData(void)
 {
     TilemapUtil_Free();
-    MultiMove_Free();
     FREE_AND_SET_NULL(sStorage);
     FREE_AND_SET_NULL(sPaletteSwapBuffer);
     allocCount--;
@@ -3509,7 +3388,6 @@ static void FreePokeStorageData(void)
 //  showing/hiding the party menu, updating the Close Box button, printing
 //  messages, doing the mosaic effect when transitioning between Pokémon, etc.
 //------------------------------------------------------------------------------
-
 
 static void SetScrollingBackground(void)
 {
@@ -4151,8 +4029,8 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
         CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
         CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
         LZ77UnCompWram(pal2->data, gEggDecompressionBuffer);
-        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
-        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP/2);
+        CpuCopy16(gEggDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP/2);
     }
     else
     {
@@ -4168,7 +4046,7 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
             UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], species, GetMonData(mon, MON_DATA_PERSONALITY));
         }
     }
-    sStorage->boxMonsSprites[position]->oam.paletteNum = ((position / 6) & 1 ? 6 : 0) + (position % 6) + 1;
+    sStorage->boxMonsSprites[position]->oam.paletteNum = ((position/6) & 1 ? 6 : 0) + (position % 6) + 1;
 }
 
 static void InitBoxMonSprites(u8 boxId)
@@ -4222,7 +4100,7 @@ static void CreateBoxMonIconAtPos(u8 boxPosition)
     if (species != SPECIES_NONE)
     {
         s16 x = 8 * (3 * (boxPosition % IN_BOX_COLUMNS)) + 100;
-        s16 y = 8 * (3 * (boxPosition / IN_BOX_COLUMNS)) + 44;
+        s16 y = 8 * (3 * (boxPosition/IN_BOX_COLUMNS)) + 44;
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS));
@@ -4256,23 +4134,6 @@ static void StartBoxMonIconsScrollOut(s16 speed)
     }
 }
 
-static void SpriteCB_BoxMonIconScrollIn(struct Sprite *sprite)
-{
-    if (sprite->sDistance != 0)
-    {
-        // Icon moving
-        sprite->sDistance--;
-        sprite->x += sprite->sSpeed;
-    }
-    else
-    {
-        // Icon arrived
-        sStorage->iconScrollNumIncoming--;
-        sprite->x = sprite->sScrollInDestX;
-        sprite->callback = SpriteCallbackDummy;
-    }
-}
-
 static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
 {
     if (sprite->sDelay != 0)
@@ -4291,89 +4152,17 @@ static void SpriteCB_BoxMonIconScrollOut(struct Sprite *sprite)
     }
 }
 
-// Sprites for Pokémon icons are destroyed during
-// the box scroll once they've gone offscreen
-static void DestroyBoxMonIconsInColumn(u8 column)
+static void DestroyAllBoxMonIcons(void)
 {
-    u16 row;
-    u8 boxPosition = column;
-
-    for (row = 0; row < IN_BOX_ROWS; row++)
+    u32 boxPosition;
+    for (boxPosition = 0; boxPosition < IN_BOX_ROWS * IN_BOX_COLUMNS; boxPosition++)
     {
         if (sStorage->boxMonsSprites[boxPosition] != NULL)
         {
             DestroyBoxMonIcon(sStorage->boxMonsSprites[boxPosition]);
             sStorage->boxMonsSprites[boxPosition] = NULL;
-            // Blank palette for sprite
-            DisableBoxMonDynamicPalette(boxPosition, 1);
-        }
-        boxPosition += IN_BOX_COLUMNS;
-    }
-}
-
-// Create the appearing icons for the incoming scrolling box
-static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
-{
-    s32 i;
-    u16 y = 44;
-    s16 xDest = 8 * (3 * column) + 100;
-    u16 x = xDest - ((distance + 1) * speed);
-    u8 subpriority = 19 - column;
-    u8 iconsCreated = 0;
-    u8 boxPosition = column;
-
-    if (sStorage->boxOption != OPTION_MOVE_ITEMS)
-    {
-        for (i = 0; i < IN_BOX_ROWS; i++)
-        {
-            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
-            {
-                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
-                                                                                        sStorage->boxPersonalities[boxPosition],
-                                                                                        x, y, 2, subpriority);
-                if (sStorage->boxMonsSprites[boxPosition] != NULL)
-                {
-                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
-                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
-                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
-                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                    SetBoxMonDynamicPalette(sStorage->scrollToBoxId, boxPosition);
-                    iconsCreated++;
-                }
-            }
-            boxPosition += IN_BOX_COLUMNS;
-            y += 24;
         }
     }
-    else
-    {
-        // Separate case for Move Items mode is used
-        // to create the icons with the proper blend
-        for (i = 0; i < IN_BOX_ROWS; i++)
-        {
-            if (sStorage->boxSpecies[boxPosition] != SPECIES_NONE)
-            {
-                sStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(sStorage->boxSpecies[boxPosition],
-                                                                                        sStorage->boxPersonalities[boxPosition],
-                                                                                        x, y, 2, subpriority);
-                if (sStorage->boxMonsSprites[boxPosition] != NULL)
-                {
-                    sStorage->boxMonsSprites[boxPosition]->sDistance = distance;
-                    sStorage->boxMonsSprites[boxPosition]->sSpeed = speed;
-                    sStorage->boxMonsSprites[boxPosition]->sScrollInDestX = xDest;
-                    sStorage->boxMonsSprites[boxPosition]->callback = SpriteCB_BoxMonIconScrollIn;
-                    if (GetBoxMonDataAt(sStorage->incomingBoxId, boxPosition, MON_DATA_HELD_ITEM) == ITEM_NONE)
-                        sStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
-                    SetBoxMonDynamicPalette(sStorage->incomingBoxId, boxPosition);
-                    iconsCreated++;
-                }
-            }
-            boxPosition += IN_BOX_COLUMNS;
-            y += 24;
-        }
-    }
-
-    return iconsCreated;
 }
 
 #undef sDistance
@@ -4387,7 +4176,7 @@ static void InitBoxMonIconScroll(u8 boxId, s8 direction)
     sStorage->iconScrollState = 0;
     sStorage->scrollDirection = direction;
     sStorage->iconScrollDistance = 32;
-    sStorage->iconScrollSpeed = -(6 * direction);
+    sStorage->iconScrollSpeed = -BOX_SCROLL_SPEED(direction);
     sStorage->iconScrollNumIncoming = 0;
     GetIncomingBoxMonData(boxId);
     if (direction > 0)
@@ -4399,50 +4188,20 @@ static void InitBoxMonIconScroll(u8 boxId, s8 direction)
     StartBoxMonIconsScrollOut(sStorage->iconScrollSpeed);
 }
 
-static bool8 UpdateBoxMonIconScroll(void)
+static bool32 UpdateBoxMonIconScroll(u32 boxId)
 {
-    if (sStorage->iconScrollDistance != 0)
-        sStorage->iconScrollDistance--;
-
     switch (sStorage->iconScrollState)
     {
     case 0:
-        sStorage->iconScrollPos += sStorage->iconScrollSpeed;
-        if (sStorage->iconScrollPos <= 64 || sStorage->iconScrollPos >= 252)
-        {
-            // A column of icons has gone offscreen, destroy them
-            DestroyBoxMonIconsInColumn(sStorage->iconScrollCurColumn);
-            sStorage->iconScrollPos += sStorage->scrollDirection * 24;
-            sStorage->iconScrollState++;
-        }
+        DestroyAllBoxMonIcons();
+        sStorage->iconScrollState++;
         break;
     case 1:
-        // Create the new incoming column of icons
-        sStorage->iconScrollPos += sStorage->iconScrollSpeed;
-        sStorage->iconScrollNumIncoming += CreateBoxMonIconsInColumn(sStorage->iconScrollCurColumn, sStorage->iconScrollDistance, sStorage->iconScrollSpeed);
-
-        if ((sStorage->scrollDirection > 0 && sStorage->iconScrollCurColumn == IN_BOX_COLUMNS - 1)
-         || (sStorage->scrollDirection < 0 && sStorage->iconScrollCurColumn == 0))
-        {
-            // Scroll has reached final column
-            sStorage->iconScrollState++;
-        }
-        else
-        {
-            // Continue scrolling
-            sStorage->iconScrollCurColumn += sStorage->scrollDirection;
-            sStorage->iconScrollState = 0;
-        }
+        InitBoxMonSprites(boxId);
+        sStorage->iconScrollState++;
         break;
     case 2:
-        // Wait to make sure all icons have arrived
-        if (sStorage->iconScrollNumIncoming == 0)
-        {
-            sStorage->iconScrollDistance++;
-            return FALSE;
-        }
-        break;
-    default:
+        sStorage->iconScrollDistance = 0;
         return FALSE;
     }
 
@@ -4466,16 +4225,6 @@ static void GetIncomingBoxMonData(u8 boxId)
     }
 
     sStorage->incomingBoxId = boxId;
-}
-
-static void DestroyBoxMonIconAtPosition(u8 boxPosition)
-{
-    if (sStorage->boxMonsSprites[boxPosition] != NULL)
-    {
-        DestroyBoxMonIcon(sStorage->boxMonsSprites[boxPosition]);
-        DisableBoxMonDynamicPalette(boxPosition, 1); // blank dynamic palette
-        sStorage->boxMonsSprites[boxPosition] = NULL;
-    }
 }
 
 static void SetBoxMonIconObjMode(u8 boxPosition, u8 objMode)
@@ -4614,9 +4363,9 @@ static void MovePartySpriteToNextSlot(struct Sprite *sprite, u16 partyId)
 
     sprite->sMonX = (u16)(sprite->x) * 8;
     sprite->sMonY = (u16)(sprite->y) * 8;
-    sprite->sSpeedX = ((x * 8) - sprite->sMonX) / 8;
-    sprite->sSpeedY = ((y * 8) - sprite->sMonY) / 8;
-    sprite->data[6] = 8;
+    sprite->sSpeedX = ((x * 8) - sprite->sMonX) / (8 / COMPACT_PARTY_SPRITES_DELTA);
+    sprite->sSpeedY = ((y * 8) - sprite->sMonY) / (8 / COMPACT_PARTY_SPRITES_DELTA);
+    sprite->sMoveSteps = (8 / COMPACT_PARTY_SPRITES_DELTA);
     sprite->callback = SpriteCB_MovePartyMonToNextSlot;
 }
 
@@ -4626,8 +4375,8 @@ static void SpriteCB_MovePartyMonToNextSlot(struct Sprite *sprite)
     {
         s16 x = sprite->sMonX += sprite->sSpeedX;
         s16 y = sprite->sMonY += sprite->sSpeedY;
-        sprite->x = x / 8u;
-        sprite->y = y / 8u;
+        sprite->x = x/8u;
+        sprite->y = y/8u;
         sprite->sMoveSteps--;
     }
     else
@@ -4818,15 +4567,15 @@ static bool8 MoveShiftingMons(void)
     if (sStorage->shiftTimer == 16)
         return FALSE;
 
-    sStorage->shiftTimer++;
-    if (sStorage->shiftTimer & 1)
+    sStorage->shiftTimer += MON_HAND_DELTA;
+    if (MON_HAND_DELTA >= 2 || sStorage->shiftTimer & 1)
     {
         (*sStorage->shiftMonSpritePtr)->y--;
         sStorage->movingMonSprite->y++;
     }
 
-    (*sStorage->shiftMonSpritePtr)->x2 = gSineTable[sStorage->shiftTimer * 8] / 16;
-    sStorage->movingMonSprite->x2 = -(gSineTable[sStorage->shiftTimer * 8] / 16);
+    (*sStorage->shiftMonSpritePtr)->x2 = gSineTable[sStorage->shiftTimer * 8]/16;
+    sStorage->movingMonSprite->x2 = -(gSineTable[sStorage->shiftTimer * 8]/16);
     if (sStorage->shiftTimer == 8)
     {
         sStorage->movingMonSprite->oam.priority = (*sStorage->shiftMonSpritePtr)->oam.priority;
@@ -5078,8 +4827,8 @@ static void SetUpScrollToBox(u8 boxId)
 {
     s8 direction = DetermineBoxScrollDirection(boxId);
 
-    sStorage->scrollSpeed = (direction > 0) ? 6 : -6;
-    sStorage->scrollTimer = 32;
+    sStorage->scrollSpeed = BOX_SCROLL_SPEED((direction > 0) ? 1 : -1);
+    sStorage->scrollTimer = 32 / BOX_SCROLL_SPEED_FACTOR;
     sStorage->scrollToBoxId = boxId;
     sStorage->scrollDirection = direction;
     sStorage->scrollState = 0;
@@ -5087,8 +4836,6 @@ static void SetUpScrollToBox(u8 boxId)
 
 static bool8 ScrollToBox(void)
 {
-    bool8 iconsScrolling;
-
     switch (sStorage->scrollState)
     {
     case 0:
@@ -5096,16 +4843,14 @@ static bool8 ScrollToBox(void)
         CreateIncomingBoxTitle(sStorage->scrollToBoxId, sStorage->scrollDirection);
         break;
     case 1:
-        iconsScrolling = UpdateBoxMonIconScroll();
-        if (sStorage->scrollTimer != 0)
+        if (!UpdateBoxMonIconScroll(sStorage->scrollToBoxId))
         {
-            if (--sStorage->scrollTimer != 0)
-                return TRUE;
+            sStorage->scrollTimer = 0;
             CycleBoxTitleSprites();
+            return FALSE;
         }
-        return iconsScrolling;
+        return TRUE;
     }
-
     sStorage->scrollState++;
     return TRUE;
 }
@@ -5122,7 +4867,7 @@ static s8 DetermineBoxScrollDirection(u8 boxId)
             currentBox = 0;
     }
 
-    return (i < TOTAL_BOXES_COUNT / 2) ? 1 : -1;
+    return (i < TOTAL_BOXES_COUNT/2) ? 1 : -1;
 }
 
 //------------------------------------------------------------------------------
@@ -5192,16 +4937,14 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
     // Title is split across two sprites
     for (i = 0; i < 2; i++)
     {
-        u8 spriteId = CreateSprite(&template, i * 32 + adjustedX, 28, 24);
+        u8 spriteId = CreateSprite(&template, i * 32 + x, 28, 24);
 
         sStorage->nextBoxTitleSprites[i] = &gSprites[spriteId];
-        sStorage->nextBoxTitleSprites[i]->sSpeed = (-direction) * 6;
-        sStorage->nextBoxTitleSprites[i]->sIncomingX = i * 32 + x;
-        sStorage->nextBoxTitleSprites[i]->sIncomingDelay = 0;
+        sStorage->nextBoxTitleSprites[i]->sIncomingDelay = 1;
         sStorage->nextBoxTitleSprites[i]->callback = SpriteCB_IncomingBoxTitle;
+        sStorage->nextBoxTitleSprites[i]->invisible = TRUE;
         StartSpriteAnim(sStorage->nextBoxTitleSprites[i], i);
 
-        sStorage->curBoxTitleSprites[i]->sSpeed = (-direction) * 6;
         sStorage->curBoxTitleSprites[i]->sOutgoingDelay = 1;
         sStorage->curBoxTitleSprites[i]->callback = SpriteCB_OutgoingBoxTitle;
     }
@@ -5222,8 +4965,10 @@ static void SpriteCB_IncomingBoxTitle(struct Sprite *sprite)
 {
     if (sprite->sIncomingDelay != 0)
         sprite->sIncomingDelay--;
-    else if ((sprite->x += sprite->sSpeed) == sprite->sIncomingX)
+    else {
+        sprite->invisible = FALSE;
         sprite->callback = SpriteCallbackDummy;
+    }
 }
 
 static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
@@ -5234,10 +4979,7 @@ static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
     }
     else
     {
-        sprite->x += sprite->sSpeed;
-        sprite->sOutgoingX = sprite->x + sprite->x2;
-        if (sprite->sOutgoingX < 64 || sprite->sOutgoingX > DISPLAY_WIDTH + 16)
-            DestroySprite(sprite);
+        DestroySprite(sprite);
     }
 }
 
@@ -5249,7 +4991,7 @@ static void SpriteCB_OutgoingBoxTitle(struct Sprite *sprite)
 
 static s16 GetBoxTitleBaseX(const u8 *string)
 {
-    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL, string, 0) / 2;
+    return DISPLAY_WIDTH - 64 - GetStringWidth(FONT_NORMAL, string, 0)/2;
 }
 
 //------------------------------------------------------------------------------
@@ -5274,7 +5016,6 @@ static void InitCursor(void)
     ClearSavedCursorPos();
     CreateCursorSprites();
     sStorage->cursorPrevHorizPos = 1;
-    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
     TryRefreshDisplayMon();
 }
 
@@ -5283,7 +5024,6 @@ static void InitCursorOnReopen(void)
     CreateCursorSprites();
     ReshowDisplayMon();
     sStorage->cursorPrevHorizPos = 1;
-    sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
     if (sIsMonBeingMoved)
     {
         sStorage->movingMon = sSavedMovingMon;
@@ -5297,7 +5037,7 @@ static void GetCursorCoordsByPos(u8 cursorArea, u8 cursorPosition, u16 *x, u16 *
     {
     case CURSOR_AREA_IN_BOX:
         *x = (cursorPosition % IN_BOX_COLUMNS) * 24 + 100;
-        *y = (cursorPosition / IN_BOX_COLUMNS) * 24 +  32;
+        *y = (cursorPosition/IN_BOX_COLUMNS) * 24 +  32;
         break;
     case CURSOR_AREA_IN_PARTY:
         if (cursorPosition == 0)
@@ -5346,8 +5086,6 @@ static u16 GetSpeciesAtCursorPosition(void)
 
 static bool8 UpdateCursorPos(void)
 {
-    s16 tmp;
-
     if (sStorage->cursorMoveSteps == 0)
     {
         if (sStorage->boxOption != OPTION_MOVE_ITEMS)
@@ -5355,48 +5093,9 @@ static bool8 UpdateCursorPos(void)
         else
             return IsItemIconAnimActive();
     }
-    else if (--sStorage->cursorMoveSteps != 0)
-    {
-        // Update position toward target
-        sStorage->cursorNewX += sStorage->cursorSpeedX;
-        sStorage->cursorNewY += sStorage->cursorSpeedY;
-        sStorage->cursorSprite->x = sStorage->cursorNewX >> 8;
-        sStorage->cursorSprite->y = sStorage->cursorNewY >> 8;
-
-        // Limit cursor on right
-        if (sStorage->cursorSprite->x > DISPLAY_WIDTH + 16)
-        {
-            tmp = sStorage->cursorSprite->x - (DISPLAY_WIDTH + 16);
-            sStorage->cursorSprite->x = tmp + 64;
-        }
-
-        // Limit cursor on left
-        if (sStorage->cursorSprite->x < 64)
-        {
-            tmp = 64 - sStorage->cursorSprite->x;
-            sStorage->cursorSprite->x = DISPLAY_WIDTH + 16 - tmp;
-        }
-
-        // Limit cursor on bottom
-        if (sStorage->cursorSprite->y > DISPLAY_HEIGHT + 16)
-        {
-            tmp = sStorage->cursorSprite->y - (DISPLAY_HEIGHT + 16);
-            sStorage->cursorSprite->y = tmp - 16;
-        }
-
-        // Limit cursor on top
-        if (sStorage->cursorSprite->y < -16)
-        {
-            tmp = -16 - sStorage->cursorSprite->y;
-            sStorage->cursorSprite->y = DISPLAY_HEIGHT + 16 - tmp;
-        }
-
-        // Cursor flips vertically when moving on/off the top buttons
-        if (sStorage->cursorFlipTimer && --sStorage->cursorFlipTimer == 0)
-            sStorage->cursorSprite->vFlip = (sStorage->cursorSprite->vFlip == FALSE);
-    }
     else
     {
+        sStorage->cursorMoveSteps = 0;
         // Time is up for cursor movement, make sure it's exactly at target
         sStorage->cursorSprite->x = sStorage->cursorTargetX;
         sStorage->cursorSprite->y = sStorage->cursorTargetY;
@@ -5422,9 +5121,9 @@ static void InitCursorMove(void)
     int yDistance, xDistance;
 
     if (sStorage->cursorVerticalWrap != 0 || sStorage->cursorHorizontalWrap != 0)
-        sStorage->cursorMoveSteps = 12;
+        sStorage->cursorMoveSteps = CURSOR_MOVE_BASE_STEPS_WRAP;
     else
-        sStorage->cursorMoveSteps = 6;
+        sStorage->cursorMoveSteps = CURSOR_MOVE_BASE_STEPS_NO_WRAP;
 
     if (sStorage->cursorFlipTimer)
         sStorage->cursorFlipTimer = sStorage->cursorMoveSteps >> 1;
@@ -5457,8 +5156,8 @@ static void InitCursorMove(void)
 
     yDistance <<= 8;
     xDistance <<= 8;
-    sStorage->cursorSpeedX = xDistance / sStorage->cursorMoveSteps;
-    sStorage->cursorSpeedY = yDistance / sStorage->cursorMoveSteps;
+    sStorage->cursorSpeedX = xDistance/sStorage->cursorMoveSteps;
+    sStorage->cursorSpeedY = yDistance/sStorage->cursorMoveSteps;
     sStorage->cursorNewX = sStorage->cursorSprite->x << 8;
     sStorage->cursorNewY = sStorage->cursorSprite->y << 8;
 }
@@ -5469,7 +5168,7 @@ static void SetCursorPosition(u8 newCursorArea, u8 newCursorPosition)
     InitCursorMove();
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
+        if (!sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_STILL);
     }
     else
@@ -5507,17 +5206,9 @@ static void SetCursorPosition(u8 newCursorArea, u8 newCursorPosition)
         sStorage->cursorShadowSprite->oam.priority = 1;
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode != MOVE_MODE_NORMAL)
-        {
-            sStorage->cursorSprite->oam.priority = 0;
-            sStorage->cursorShadowSprite->invisible = TRUE;
-        }
-        else
-        {
-            sStorage->cursorSprite->oam.priority = 2;
-            if (sCursorArea == CURSOR_AREA_IN_BOX && sIsMonBeingMoved)
-                SetMovingMonPriority(2);
-        }
+        sStorage->cursorSprite->oam.priority = 2;
+        if (sCursorArea == CURSOR_AREA_IN_BOX && sIsMonBeingMoved)
+            SetMovingMonPriority(2);
         break;
     }
 }
@@ -5528,7 +5219,7 @@ static void DoCursorNewPosUpdate(void)
     sCursorPosition = sStorage->newCursorPosition;
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
-        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL && !sIsMonBeingMoved)
+        if (!sIsMonBeingMoved)
             StartSpriteAnim(sStorage->cursorSprite, CURSOR_ANIM_BOUNCE);
     }
     else
@@ -5548,14 +5239,11 @@ static void DoCursorNewPosUpdate(void)
         SetMovingMonPriority(1);
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
-        {
-            sStorage->cursorSprite->oam.priority = 1;
-            sStorage->cursorShadowSprite->oam.priority = 2;
-            sStorage->cursorShadowSprite->subpriority = 21;
-            sStorage->cursorShadowSprite->invisible = FALSE;
-            SetMovingMonPriority(2);
-        }
+        sStorage->cursorSprite->oam.priority = 1;
+        sStorage->cursorShadowSprite->oam.priority = 2;
+        sStorage->cursorShadowSprite->subpriority = 21;
+        sStorage->cursorShadowSprite->invisible = FALSE;
+        SetMovingMonPriority(2);
         break;
     }
 }
@@ -5611,18 +5299,6 @@ static void InitMonPlaceChange(u8 type)
     };
 
     sStorage->monPlaceChangeFunc = placeChangeFuncs[type];
-    sStorage->monPlaceChangeState = 0;
-}
-
-// No Shift while moving multiple Pokémon, only grab and place
-// For both grab/place, the cursor moves down, then up
-static void InitMultiMonPlaceChange(bool8 up)
-{
-    if (!up)
-        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Down;
-    else
-        sStorage->monPlaceChangeFunc = MultiMonPlaceChange_Up;
-
     sStorage->monPlaceChangeState = 0;
 }
 
@@ -5725,25 +5401,13 @@ static bool8 MonPlaceChange_Shift(void)
     return TRUE;
 }
 
-static bool8 MultiMonPlaceChange_Down(void)
-{
-    return MonPlaceChange_CursorDown();
-}
-
-static bool8 MultiMonPlaceChange_Up(void)
-{
-    return MonPlaceChange_CursorUp();
-}
-
 static bool8 MonPlaceChange_CursorDown(void)
 {
     switch (sStorage->cursorSprite->y2)
     {
     default:
-        sStorage->cursorSprite->y2++;
-        break;
     case 0:
-        sStorage->cursorSprite->y2++;
+        sStorage->cursorSprite->y2 += MON_HAND_DELTA;
         break;
     case 8: // Cursor has reached bottom
         return FALSE;
@@ -5759,13 +5423,12 @@ static bool8 MonPlaceChange_CursorUp(void)
     case 0: // Cursor has reached top
         return FALSE;
     default:
-        sStorage->cursorSprite->y2--;
+        sStorage->cursorSprite->y2 -= MON_HAND_DELTA;;
         break;
     }
 
     return TRUE;
 }
-
 
 //------------------------------------------------------------------------------
 //  SECTION: Pokémon data
@@ -5774,7 +5437,6 @@ static bool8 MonPlaceChange_CursorUp(void)
 //  including changing the positions of Pokémon, releasing Pokémon, viewing the
 //  summary screen, and updating the display of the currently selected Pokémon.
 //------------------------------------------------------------------------------
-
 
 // When a single pokemon is picked up
 static void MoveMon(void)
@@ -5787,18 +5449,15 @@ static void MoveMon(void)
         // party pokemon will have their palette updated elsewhere when leaving the party menu
         break;
     case CURSOR_AREA_IN_BOX:
-        if (sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
-        {
-            u16 palette[16] = {0};
-            SetMovingMonData(StorageGetCurrentBox(), sCursorPosition);
-            SetMovingMonSprite(MODE_BOX, sCursorPosition);
+        u16 palette[16] = {0};
+        SetMovingMonData(StorageGetCurrentBox(), sCursorPosition);
+        SetMovingMonSprite(MODE_BOX, sCursorPosition);
 
-            // Set moving sprite palette to currently displayed pokemon
+        // Set moving sprite palette to currently displayed pokemon
 
-            sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON);
-            palette[0] = 0x8000;
-            SwapInPalNextVBlank(&palette[0], &sPaletteSwapBuffer[PLTT_ID(sCursorPosition)]);
-        }
+        sStorage->movingMonSprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON);
+        palette[0] = 0x8000;
+        SwapInPalNextVBlank(&palette[0], &sPaletteSwapBuffer[PLTT_ID(sCursorPosition)]);
         break;
     default:
         return;
@@ -5901,7 +5560,7 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     }
     else
     {
-        u8 i = position / 6;
+        u8 i = position/6;
         u8 j = position % 6;
         // Copy display palette into swap buffer (at next vblank)
         // This is necessary because copying it while the screen is being drawn will cause flickering
@@ -6529,22 +6188,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
 //  The functions below process context-dependent input
 //------------------------------------------------------------------------------
 
-
-static u8 HandleInput_InBox(void)
-{
-    switch (sStorage->inBoxMovingMode)
-    {
-    case MOVE_MODE_NORMAL:
-    default:
-        return InBoxInput_Normal();
-    case MOVE_MODE_MULTIPLE_SELECTING:
-        return InBoxInput_SelectingMultiple();
-    case MOVE_MODE_MULTIPLE_MOVING:
-        return InBoxInput_MovingMultiple();
-    }
-}
-
-static u8 InBoxInput_Normal(void)
+static u8 InBoxInput(void)
 {
     u8 retVal;
     s8 cursorArea;
@@ -6652,11 +6296,6 @@ static u8 InBoxInput_Normal(void)
                     return INPUT_SWITCH_ITEMS;
                 }
             }
-            else
-            {
-                sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_SELECTING;
-                return INPUT_MULTIMOVE_START;
-            }
         }
 
         if (JOY_NEW(B_BUTTON))
@@ -6678,163 +6317,6 @@ static u8 InBoxInput_Normal(void)
         SetCursorPosition(cursorArea, cursorPosition);
 
     return retVal;
-}
-
-static u8 InBoxInput_SelectingMultiple(void)
-{
-    if (JOY_HELD(A_BUTTON))
-    {
-        if (JOY_REPEAT(DPAD_UP))
-        {
-            if (sCursorPosition / IN_BOX_COLUMNS != 0)
-            {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition - IN_BOX_COLUMNS);
-                return INPUT_MULTIMOVE_CHANGE_SELECTION;
-            }
-            else
-            {
-                return INPUT_MULTIMOVE_UNABLE;
-            }
-        }
-        else if (JOY_REPEAT(DPAD_DOWN))
-        {
-            if (sCursorPosition + IN_BOX_COLUMNS < IN_BOX_COUNT)
-            {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition + IN_BOX_COLUMNS);
-                return INPUT_MULTIMOVE_CHANGE_SELECTION;
-            }
-            else
-            {
-                return INPUT_MULTIMOVE_UNABLE;
-            }
-        }
-        else if (JOY_REPEAT(DPAD_LEFT))
-        {
-            if (sCursorPosition % IN_BOX_COLUMNS != 0)
-            {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition - 1);
-                return INPUT_MULTIMOVE_CHANGE_SELECTION;
-            }
-            else
-            {
-                return INPUT_MULTIMOVE_UNABLE;
-            }
-        }
-        else if (JOY_REPEAT(DPAD_RIGHT))
-        {
-            if ((sCursorPosition + 1) % IN_BOX_COLUMNS != 0)
-            {
-                SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition + 1);
-                return INPUT_MULTIMOVE_CHANGE_SELECTION;
-            }
-            else
-            {
-                return INPUT_MULTIMOVE_UNABLE;
-            }
-        }
-        else
-        {
-            return INPUT_NONE;
-        }
-    }
-    else
-    {
-        if (MultiMove_GetOrigin() == sCursorPosition)
-        {
-            // Doing a multiple mon selection but only chose 1 mon
-            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
-            sStorage->cursorShadowSprite->invisible = FALSE;
-            return INPUT_MULTIMOVE_SINGLE;
-        }
-        else
-        {
-            sIsMonBeingMoved = (sStorage->displayMonSpecies != SPECIES_NONE);
-            sStorage->inBoxMovingMode = MOVE_MODE_MULTIPLE_MOVING;
-            sMovingMonOrigBoxId = StorageGetCurrentBox();
-            return INPUT_MULTIMOVE_GRAB_SELECTION;
-        }
-    }
-}
-
-static u8 InBoxInput_MovingMultiple(void)
-{
-    if (JOY_REPEAT(DPAD_UP))
-    {
-        if (MultiMove_TryMoveGroup(0))
-        {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition - IN_BOX_COLUMNS);
-            return INPUT_MULTIMOVE_MOVE_MONS;
-        }
-        else
-        {
-            return INPUT_MULTIMOVE_UNABLE;
-        }
-    }
-    else if (JOY_REPEAT(DPAD_DOWN))
-    {
-        if (MultiMove_TryMoveGroup(1))
-        {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition + IN_BOX_COLUMNS);
-            return INPUT_MULTIMOVE_MOVE_MONS;
-        }
-        else
-        {
-            return INPUT_MULTIMOVE_UNABLE;
-        }
-    }
-    else if (JOY_REPEAT(DPAD_LEFT))
-    {
-        if (MultiMove_TryMoveGroup(2))
-        {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition - 1);
-            return INPUT_MULTIMOVE_MOVE_MONS;
-        }
-        else
-        {
-            return INPUT_SCROLL_LEFT;
-        }
-    }
-    else if (JOY_REPEAT(DPAD_RIGHT))
-    {
-        if (MultiMove_TryMoveGroup(3))
-        {
-            SetCursorPosition(CURSOR_AREA_IN_BOX, sCursorPosition + 1);
-            return INPUT_MULTIMOVE_MOVE_MONS;
-        }
-        else
-        {
-            return INPUT_SCROLL_RIGHT;
-        }
-    }
-    else if (JOY_NEW(A_BUTTON))
-    {
-        if (MultiMove_CanPlaceSelection())
-        {
-            sIsMonBeingMoved = FALSE;
-            sStorage->inBoxMovingMode = MOVE_MODE_NORMAL;
-            return INPUT_MULTIMOVE_PLACE_MONS;
-        }
-        else
-        {
-            return INPUT_MULTIMOVE_UNABLE;
-        }
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        return INPUT_MULTIMOVE_UNABLE;
-    }
-    else
-    {
-        if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR)
-        {
-            if (JOY_HELD(L_BUTTON))
-                return INPUT_SCROLL_LEFT;
-            if (JOY_HELD(R_BUTTON))
-                return INPUT_SCROLL_RIGHT;
-        }
-
-        return INPUT_NONE;
-    }
 }
 
 static u8 HandleInput_InParty(void)
@@ -7083,7 +6565,7 @@ static u8 HandleInput(void)
         s8 area;
     } static const inputFuncs[] =
     {
-        {HandleInput_InBox,     CURSOR_AREA_IN_BOX},
+        {InBoxInput,            CURSOR_AREA_IN_BOX},
         {HandleInput_InParty,   CURSOR_AREA_IN_PARTY},
         {HandleInput_OnBox,     CURSOR_AREA_BOX_TITLE},
         {HandleInput_OnButtons, CURSOR_AREA_BUTTONS},
@@ -7362,28 +6844,9 @@ static u8 GetCursorPosition(void)
     return sCursorPosition;
 }
 
-static void GetCursorBoxColumnAndRow(u8 *column, u8 *row)
-{
-    if (sCursorArea == CURSOR_AREA_IN_BOX)
-    {
-        *column = sCursorPosition % IN_BOX_COLUMNS;
-        *row = sCursorPosition / IN_BOX_COLUMNS;
-    }
-    else
-    {
-        *column = 0;
-        *row = 0;
-    }
-}
-
 static void StartCursorAnim(u8 animNum)
 {
     StartSpriteAnim(sStorage->cursorSprite, animNum);
-}
-
-static void SetCursorPriorityTo1(void)
-{
-    sStorage->cursorSprite->oam.priority = 1;
 }
 
 static void TryHideItemAtCursor(void)
@@ -7526,571 +6989,6 @@ static void RemoveMenu(void)
     ClearStdWindowAndFrameToTransparent(sStorage->menuWindowId, TRUE);
     RemoveWindow(sStorage->menuWindowId);
 }
-
-
-//------------------------------------------------------------------------------
-//  SECTION: MultiMove
-//
-//  The functions below handle moving and selecting multiple Pokémon at once.
-//  The icon sprites are moved to bg 0, and this bg is manipulated to move
-//  them as a group.
-//------------------------------------------------------------------------------
-
-
-static const struct WindowTemplate sWindowTemplate_MultiMove =
-{
-    .bg = 0,
-    .tilemapLeft = 10,
-    .tilemapTop = 3,
-    .width = 20,
-    .height = 18,
-    .paletteNum = 9,
-    .baseBlock = 10,
-};
-
-EWRAM_DATA static struct
-{
-    u8 funcId;
-    u8 state;
-    u8 fromColumn;
-    u8 fromRow;
-    u8 toColumn;
-    u8 toRow;
-    u8 cursorColumn;
-    u8 cursorRow;
-    u8 minColumn;
-    u8 minRow;
-    u8 columnsTotal;
-    u8 rowsTotal;
-    u16 bgX;
-    u16 bgY;
-    u16 bgMoveSteps;
-    struct BoxPokemon boxMons[IN_BOX_COUNT];
-} *sMultiMove = NULL;
-
-static bool8 MultiMove_Init(void)
-{
-    sMultiMove = Alloc(sizeof(*sMultiMove));
-    if (sMultiMove != NULL)
-    {
-        sStorage->multiMoveWindowId = AddWindow8Bit(&sWindowTemplate_MultiMove);
-        if (sStorage->multiMoveWindowId != WINDOW_NONE)
-        {
-            FillWindowPixelBuffer(sStorage->multiMoveWindowId, PIXEL_FILL(0));
-            return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-
-static void MultiMove_Free(void)
-{
-    if (sMultiMove != NULL)
-        Free(sMultiMove);
-}
-
-static void MultiMove_SetFunction(u8 id)
-{
-    sMultiMove->funcId = id;
-    sMultiMove->state = 0;
-}
-
-// Returns TRUE if the called function has more to do, FALSE otherwise
-static bool8 MultiMove_RunFunction(void)
-{
-    switch (sMultiMove->funcId)
-    {
-    case MULTIMOVE_START:
-        return MultiMove_Start();
-    case MULTIMOVE_CANCEL:
-        return MultiMove_Cancel();
-    case MULTIMOVE_CHANGE_SELECTION:
-        return MultiMove_ChangeSelection();
-    case MULTIMOVE_GRAB_SELECTION:
-        return MultiMove_GrabSelection();
-    case MULTIMOVE_MOVE_MONS:
-        return MultiMove_MoveMons();
-    case MULTIMOVE_PLACE_MONS:
-        return MultiMove_PlaceMons();
-    }
-    return FALSE;
-}
-
-static bool8 MultiMove_Start(void)
-{
-    switch (sMultiMove->state)
-    {
-    case 0:
-        HideBg(0);
-        // Loads icon palettes into BG
-        TryLoadAllMonIconPalettesAtOffset(BG_PLTT_ID(8));
-        sMultiMove->state++;
-        break;
-    case 1:
-        GetCursorBoxColumnAndRow(&sMultiMove->fromColumn, &sMultiMove->fromRow);
-        sMultiMove->toColumn = sMultiMove->fromColumn;
-        sMultiMove->toRow = sMultiMove->fromRow;
-        ChangeBgX(0, -1024, BG_COORD_SET);
-        ChangeBgY(0, -1024, BG_COORD_SET);
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
-        FillWindowPixelBuffer8Bit(sStorage->multiMoveWindowId, PIXEL_FILL(0));
-        // Sets bg icon palette
-        MultiMove_SetIconToBg(sMultiMove->fromColumn, sMultiMove->fromRow);
-        SetBgAttribute(0, BG_ATTR_PALETTEMODE, 1);
-        PutWindowTilemap(sStorage->multiMoveWindowId);
-        CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_FULL);
-        BlendPalettes(0x3F00, 8, RGB_WHITE);
-        StartCursorAnim(CURSOR_ANIM_OPEN);
-        SetGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
-        sMultiMove->state++;
-        break;
-    case 2:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            ShowBg(0);
-            return FALSE;
-        }
-        break;
-    }
-
-    return TRUE;
-}
-
-static bool8 MultiMove_Cancel(void)
-{
-    switch (sMultiMove->state)
-    {
-    case 0:
-        HideBg(0);
-        sMultiMove->state++;
-        break;
-    case 1:
-        MultiMove_ResetBg();
-        StartCursorAnim(CURSOR_ANIM_BOUNCE);
-        sMultiMove->state++;
-        break;
-    case 2:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            SetCursorPriorityTo1();
-            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
-            ShowBg(0);
-            return FALSE;
-        }
-        break;
-    }
-
-    return TRUE;
-}
-
-static bool8 MultiMove_ChangeSelection(void)
-{
-    switch (sMultiMove->state)
-    {
-    case 0:
-        if (!UpdateCursorPos())
-        {
-            GetCursorBoxColumnAndRow(&sMultiMove->cursorColumn, &sMultiMove->cursorRow);
-            MultiMove_UpdateSelectedIcons();
-            sMultiMove->toColumn = sMultiMove->cursorColumn;
-            sMultiMove->toRow = sMultiMove->cursorRow;
-            CopyWindowToVram8Bit(sStorage->multiMoveWindowId, COPYWIN_GFX);
-            sMultiMove->state++;
-        }
-        break;
-    case 1:
-        return IsDma3ManagerBusyWithBgCopy();
-    }
-
-    return TRUE;
-}
-
-static bool8 MultiMove_GrabSelection(void)
-{
-    bool8 movingBg, movingMon;
-
-    switch (sMultiMove->state)
-    {
-    case 0:
-        MultiMove_GetMonsFromSelection();
-        MultiMove_RemoveMonsFromBox();
-        InitMultiMonPlaceChange(FALSE);
-        sMultiMove->state++;
-        break;
-    case 1:
-        if (!DoMonPlaceChange())
-        {
-            StartCursorAnim(CURSOR_ANIM_FIST);
-            MultiMove_InitMove(0, 256, 8);
-            InitMultiMonPlaceChange(TRUE);
-            sMultiMove->state++;
-        }
-        break;
-    case 2:
-        movingBg = MultiMove_UpdateMove();
-        movingMon = DoMonPlaceChange();
-        if (!movingBg && !movingMon)
-            return FALSE; // Finished
-        break;
-    }
-
-    return TRUE;
-}
-
-static bool8 MultiMove_MoveMons(void)
-{
-    bool8 movingCursor = UpdateCursorPos();
-    bool8 movingBg = MultiMove_UpdateMove();
-
-    if (!movingCursor && !movingBg)
-        return FALSE;
-    else
-        return TRUE;
-}
-
-static bool8 MultiMove_PlaceMons(void)
-{
-    switch (sMultiMove->state)
-    {
-    case 0:
-        MultiMove_SetPlacedMonData();
-        MultiMove_InitMove(0, -256, 8);
-        InitMultiMonPlaceChange(FALSE);
-        sMultiMove->state++;
-        break;
-    case 1:
-        if (!DoMonPlaceChange() && !MultiMove_UpdateMove())
-        {
-            MultiMove_CreatePlacedMonIcons();
-            StartCursorAnim(CURSOR_ANIM_OPEN);
-            InitMultiMonPlaceChange(TRUE);
-            HideBg(0);
-            sMultiMove->state++;
-        }
-        break;
-    case 2:
-        if (!DoMonPlaceChange())
-        {
-            StartCursorAnim(CURSOR_ANIM_BOUNCE);
-            MultiMove_ResetBg();
-            sMultiMove->state++;
-        }
-        break;
-    case 3:
-        if (!IsDma3ManagerBusyWithBgCopy())
-        {
-            LoadPalette(GetTextWindowPalette(3), BG_PLTT_ID(13), PLTT_SIZE_4BPP);
-            SetCursorPriorityTo1();
-            ShowBg(0);
-            return FALSE;
-        }
-        break;
-    }
-    return TRUE;
-}
-
-// Returns TRUE if the movement was successful, FALSE otherwise
-static bool8 MultiMove_TryMoveGroup(u8 dir)
-{
-    switch (dir)
-    {
-    case 0: // Up
-        if (sMultiMove->minRow == 0)
-            return FALSE;
-        sMultiMove->minRow--;
-        MultiMove_InitMove(0, 1024, 6);
-        break;
-    case 1: // Down
-        if (sMultiMove->minRow + sMultiMove->rowsTotal >= IN_BOX_ROWS)
-            return FALSE;
-        sMultiMove->minRow++;
-        MultiMove_InitMove(0, -1024, 6);
-        break;
-    case 2: // Left
-        if (sMultiMove->minColumn == 0)
-            return FALSE;
-        sMultiMove->minColumn--;
-        MultiMove_InitMove(1024, 0, 6);
-        break;
-    case 3: // Right
-        if (sMultiMove->minColumn + sMultiMove->columnsTotal >= IN_BOX_COLUMNS)
-            return FALSE;
-        sMultiMove->minColumn++;
-        MultiMove_InitMove(-1024, 0, 6);
-        break;
-    }
-    return TRUE;
-}
-
-static void MultiMove_UpdateSelectedIcons(void)
-{
-    s16 columnChange = (abs(sMultiMove->fromColumn - sMultiMove->cursorColumn)) - (abs(sMultiMove->fromColumn - sMultiMove->toColumn));
-    s16 rowChange = (abs(sMultiMove->fromRow - sMultiMove->cursorRow)) - (abs(sMultiMove->fromRow - sMultiMove->toRow));
-
-    if (columnChange > 0)
-        MultiMove_SelectColumn(sMultiMove->cursorColumn, sMultiMove->fromRow, sMultiMove->toRow);
-
-    if (columnChange < 0)
-    {
-        MultiMove_DeselectColumn(sMultiMove->toColumn, sMultiMove->fromRow, sMultiMove->toRow);
-        MultiMove_SelectColumn(sMultiMove->cursorColumn, sMultiMove->fromRow, sMultiMove->toRow);
-    }
-
-    if (rowChange > 0)
-        MultiMove_SelectRow(sMultiMove->cursorRow, sMultiMove->fromColumn, sMultiMove->toColumn);
-
-    if (rowChange < 0)
-    {
-        MultiMove_DeselectRow(sMultiMove->toRow, sMultiMove->fromColumn, sMultiMove->toColumn);
-        MultiMove_SelectRow(sMultiMove->cursorRow, sMultiMove->fromColumn, sMultiMove->toColumn);
-    }
-}
-
-static void MultiMove_SelectColumn(u8 column, u8 minRow, u8 maxRow)
-{
-    if (minRow > maxRow)
-    {
-        u8 temp;
-        SWAP(minRow, maxRow, temp);
-    }
-
-    while (minRow <= maxRow)
-        MultiMove_SetIconToBg(column, minRow++);
-}
-
-static void MultiMove_SelectRow(u8 row, u8 minColumn, u8 maxColumn)
-{
-    if (minColumn > maxColumn)
-    {
-        u8 temp;
-        SWAP(minColumn, maxColumn, temp);
-    }
-
-    while (minColumn <= maxColumn)
-        MultiMove_SetIconToBg(minColumn++, row);
-}
-
-static void MultiMove_DeselectColumn(u8 column, u8 minRow, u8 maxRow)
-{
-    if (minRow > maxRow)
-    {
-        u8 temp;
-        SWAP(minRow, maxRow, temp);
-    }
-
-    while (minRow <= maxRow)
-        MultiMove_ClearIconFromBg(column, minRow++);
-}
-
-static void MultiMove_DeselectRow(u8 row, u8 minColumn, u8 maxColumn)
-{
-    if (minColumn > maxColumn)
-    {
-        u8 temp;
-        SWAP(minColumn, maxColumn, temp);
-    }
-
-    while (minColumn <= maxColumn)
-        MultiMove_ClearIconFromBg(minColumn++, row);
-}
-
-static void MultiMove_SetIconToBg(u8 x, u8 y)
-{
-    u8 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
-    u32 personality = GetCurrentBoxMonData(position, MON_DATA_PERSONALITY);
-
-    if (species != SPECIES_NONE)
-    {
-        const u32 *iconGfx = GetMonIconPtr(species, personality);
-        u8 index = 0 + 8;
-
-        BlitBitmapRectToWindow4BitTo8Bit(sStorage->multiMoveWindowId,
-                                         iconGfx,
-                                         0,
-                                         0,
-                                         32,
-                                         32,
-                                         24 * x,
-                                         24 * y,
-                                         32,
-                                         32,
-                                         index);
-    }
-}
-
-static void MultiMove_ClearIconFromBg(u8 x, u8 y)
-{
-    u8 position = x + (IN_BOX_COLUMNS * y);
-    u16 species = GetCurrentBoxMonData(position, MON_DATA_SPECIES_OR_EGG);
-
-    if (species != SPECIES_NONE)
-    {
-        FillWindowPixelRect8Bit(sStorage->multiMoveWindowId,
-                                PIXEL_FILL(0),
-                                24 * x,
-                                24 * y,
-                                32,
-                                32);
-    }
-}
-
-static void MultiMove_InitMove(u16 x, u16 y, u16 moveSteps)
-{
-    sMultiMove->bgX = x;
-    sMultiMove->bgY = y;
-    sMultiMove->bgMoveSteps = moveSteps;
-}
-
-static u8 MultiMove_UpdateMove(void)
-{
-    if (sMultiMove->bgMoveSteps != 0)
-    {
-        ChangeBgX(0, sMultiMove->bgX, BG_COORD_ADD);
-        ChangeBgY(0, sMultiMove->bgY, BG_COORD_ADD);
-        sMultiMove->bgMoveSteps--;
-    }
-
-    return sMultiMove->bgMoveSteps;
-}
-
-// Store the Pokémon that the player is picking up
-static void MultiMove_GetMonsFromSelection(void)
-{
-    s32 i, j;
-    s32 columnCount, rowCount;
-    u8 boxId;
-    u8 monArrayId;
-
-    sMultiMove->minColumn = min(sMultiMove->fromColumn, sMultiMove->toColumn);
-    sMultiMove->minRow = min(sMultiMove->fromRow, sMultiMove->toRow);
-    sMultiMove->columnsTotal = abs(sMultiMove->fromColumn - sMultiMove->toColumn) + 1;
-    sMultiMove->rowsTotal = abs(sMultiMove->fromRow - sMultiMove->toRow) + 1;
-    boxId = StorageGetCurrentBox();
-    monArrayId = 0;
-    columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
-    for (i = sMultiMove->minRow; i < rowCount; i++)
-    {
-        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
-        for (j = sMultiMove->minColumn; j < columnCount; j++)
-        {
-            struct BoxPokemon *boxMon = GetBoxedMonPtr(boxId, boxPosition);
-            // UB: possible null dereference
-#ifdef UBFIX
-            if (boxMon != NULL)
-#endif
-                sMultiMove->boxMons[monArrayId] = *boxMon;
-
-            monArrayId++;
-            boxPosition++;
-        }
-    }
-}
-
-// The Pokémon the player has picked up have been stored, now delete
-// them from their original positions
-static void MultiMove_RemoveMonsFromBox(void)
-{
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
-    u8 boxId = StorageGetCurrentBox();
-
-    for (i = sMultiMove->minRow; i < rowCount; i++)
-    {
-        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
-        for (j = sMultiMove->minColumn; j < columnCount; j++)
-        {
-            DestroyBoxMonIconAtPosition(boxPosition);
-            ZeroBoxMonAt(boxId, boxPosition);
-            boxPosition++;
-        }
-    }
-}
-
-static void MultiMove_CreatePlacedMonIcons(void)
-{
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
-    u8 monArrayId = 0;
-
-    for (i = sMultiMove->minRow; i < rowCount; i++)
-    {
-        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
-        for (j = sMultiMove->minColumn; j < columnCount; j++)
-        {
-            if (GetBoxMonData(&sMultiMove->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
-                CreateBoxMonIconAtPos(boxPosition);
-            monArrayId++;
-            boxPosition++;
-        }
-    }
-}
-
-static void MultiMove_SetPlacedMonData(void)
-{
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
-    u8 boxId = StorageGetCurrentBox();
-    u8 monArrayId = 0;
-
-    for (i = sMultiMove->minRow; i < rowCount; i++)
-    {
-        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
-        for (j = sMultiMove->minColumn; j < columnCount; j++)
-        {
-            if (OW_PC_HEAL <= GEN_7)
-                HealBoxPokemon(&sMultiMove->boxMons[monArrayId]);
-            if (GetBoxMonData(&sMultiMove->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES))
-                SetBoxMonAt(boxId, boxPosition, &sMultiMove->boxMons[monArrayId]);
-            boxPosition++;
-            monArrayId++;
-        }
-    }
-}
-
-static void MultiMove_ResetBg(void)
-{
-    ChangeBgX(0, 0, BG_COORD_SET);
-    ChangeBgY(0, 0, BG_COORD_SET);
-    SetBgAttribute(0, BG_ATTR_PALETTEMODE, 0);
-    ClearGpuRegBits(REG_OFFSET_BG0CNT, BGCNT_256COLOR);
-    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
-    CopyBgTilemapBufferToVram(0);
-}
-
-static u8 MultiMove_GetOrigin(void)
-{
-    return (IN_BOX_COLUMNS * sMultiMove->fromRow) + sMultiMove->fromColumn;
-}
-
-static bool8 MultiMove_CanPlaceSelection(void)
-{
-    s32 i, j;
-    s32 columnCount = sMultiMove->minColumn + sMultiMove->columnsTotal;
-    s32 rowCount = sMultiMove->minRow + sMultiMove->rowsTotal;
-    u8 monArrayId = 0;
-
-    for (i = sMultiMove->minRow; i < rowCount; i++)
-    {
-        u8 boxPosition = (IN_BOX_COLUMNS * i) + sMultiMove->minColumn;
-        for (j = sMultiMove->minColumn; j < columnCount; j++)
-        {
-            if (GetBoxMonData(&sMultiMove->boxMons[monArrayId], MON_DATA_SANITY_HAS_SPECIES)
-                && GetCurrentBoxMonData(boxPosition, MON_DATA_SANITY_HAS_SPECIES))
-                return FALSE;
-
-            monArrayId++;
-            boxPosition++;
-        }
-    }
-    return TRUE;
-}
-
 
 //------------------------------------------------------------------------------
 //  SECTION: Item mode
@@ -8539,7 +7437,7 @@ static void SetItemIconPosition(u8 id, u8 cursorArea, u8 cursorPos)
     {
     case CURSOR_AREA_IN_BOX:
         x = cursorPos % IN_BOX_COLUMNS;
-        y = cursorPos / IN_BOX_COLUMNS;
+        y = cursorPos/IN_BOX_COLUMNS;
         sStorage->itemIcons[id].sprite->x = (24 * x) + 112;
         sStorage->itemIcons[id].sprite->y = (24 * y) + 56;
         sStorage->itemIcons[id].sprite->oam.priority = 2;

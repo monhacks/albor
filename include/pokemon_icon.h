@@ -4,7 +4,6 @@
 extern const struct SpritePalette gMonIconPaletteTable[];
 
 const u32 *GetMonIconTiles(u16 species, u32 personality);
-void TryLoadAllMonIconPalettesAtOffset(u16 offset);
 const u32 *GetMonIconPtr(u16 speciesId, u32 personality);
 u16 GetIconSpecies(u16 species, u32 personality);
 void LoadMonIconPalettes(void);
