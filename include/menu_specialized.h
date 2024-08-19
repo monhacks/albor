@@ -2,18 +2,9 @@
 #define GUARD_MENU_SPECIALIZED_H
 
 #include "sprite.h"
-#include "player_pc.h"
 #include "list_menu.h"
 #include "pokemon.h"
 #include "constants/berry.h"
-
-// Window IDs for the Player PC Mailbox
-enum {
-    MAILBOXWIN_TITLE,
-    MAILBOXWIN_LIST,
-    MAILBOXWIN_OPTIONS,
-    MAILBOXWIN_COUNT
-};
 
 // Window IDs for the move relearner
 enum {
@@ -86,14 +77,6 @@ struct ConditionGraph
     /*0x354*/ bool8 needsDraw;
     /*0x355*/ u8 scanlineResetState;
 };
-
-// Mailbox menu
-bool8 MailboxMenu_Alloc(u8 count);
-u8 MailboxMenu_AddWindow(u8 windowIdx);
-u8 MailboxMenu_CreateList(struct PlayerPCItemPageStruct *page);
-void MailboxMenu_AddScrollArrows(struct PlayerPCItemPageStruct *page);
-void MailboxMenu_Free(void);
-void MailboxMenu_RemoveWindow(u8 windowIdx);
 
 // Condition graph
 void ConditionGraph_Init(struct ConditionGraph *graph);

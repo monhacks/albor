@@ -41,19 +41,6 @@ struct GFRomHeader
     u8 trainerNameLength;
     u8 pokemonNameLength1;
     u8 pokemonNameLength2;
-    u8 unk5;
-    u8 unk6;
-    u8 unk7;
-    u8 unk8;
-    u8 unk9;
-    u8 unk10;
-    u8 unk11;
-    u8 unk12;
-    u8 unk13;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
     u32 saveBlock2Size;
     u32 saveBlock1Size;
     u32 partyCountOffset;
@@ -64,7 +51,6 @@ struct GFRomHeader
     u32 playerGenderOffset;
     u32 frontierStatusOffset;
     u32 frontierStatusOffset2;
-    u32 unk18;
     const struct SpeciesInfo * speciesInfo;
     const u8 (* abilityNames)[];
     const u8 *const * abilityDescriptions;
@@ -79,11 +65,8 @@ struct GFRomHeader
     u8 bagCountPokeballs;
     u8 bagCountTMHMs;
     u8 bagCountBerries;
-    u8 pcItemsCount;
-    u32 pcItemsOffset;
     u32 giftRibbonsOffset;
     const u8 *moveDescriptions;
-    u32 unk20;
 };
 
 // This seems to need to be in the text section for some reason.
@@ -106,20 +89,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .trainerNameLength = TRAINER_NAME_LENGTH,
     .pokemonNameLength1 = POKEMON_NAME_LENGTH,
     .pokemonNameLength2 = POKEMON_NAME_LENGTH,
-    // Two of the below 12s are likely move/ability name length, given their presence in this header
-    .unk5 = 12,
-    .unk6 = 12,
-    .unk7 = 6,
-    .unk8 = 12,
-    .unk9 = 6,
-    .unk10 = 16,
-    .unk11 = 18,
-    .unk12 = 12,
-    .unk13 = 15,
-    .unk14 = 11,
-    .unk15 = 1,
-    .unk16 = 8,
-    .unk17 = 12,
     .saveBlock2Size = sizeof(struct SaveBlock2),
     .saveBlock1Size = sizeof(struct SaveBlock1),
     .partyCountOffset = offsetof(struct SaveBlock1, playerPartyCount),
@@ -130,7 +99,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .playerGenderOffset = offsetof(struct SaveBlock2, playerGender),
     .frontierStatusOffset = offsetof(struct SaveBlock2, frontier.challengeStatus),
     .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .unk18 = 0x00000000,
     .speciesInfo = gSpeciesInfo,
     .items = gItemsInfo,
     .moves = gMovesInfo,
@@ -143,9 +111,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .bagCountPokeballs = BAG_POKEBALLS_COUNT,
     .bagCountTMHMs = BAG_TMHM_COUNT,
     .bagCountBerries = BAG_BERRIES_COUNT,
-    .pcItemsCount = PC_ITEMS_COUNT,
-    .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),
     .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
     .moveDescriptions = NULL,
-    .unk20 = 0x00000000, // 0xFFFFFFFF in FRLG
 };

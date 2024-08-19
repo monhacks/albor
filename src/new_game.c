@@ -36,7 +36,6 @@
 #include "pokemon_storage_system.h"
 #include "decoration_inventory.h"
 #include "secret_base.h"
-#include "player_pc.h"
 #include "field_specials.h"
 #include "constants/items.h"
 
@@ -169,7 +168,6 @@ void NewGameInitData(void)
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
-    NewGameInitPCItems();
     ClearPokeblocks();
     ClearDecorationInventories();
     InitEasyChatPhrases();

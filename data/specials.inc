@@ -198,8 +198,6 @@ gSpecials::
 	def_special ValidateEReaderTrainer
 	def_special GetBattleTowerSinglesStreak
 	def_special ReducePlayerPartyToSelectedMons
-	def_special BedroomPC
-	def_special PlayerPC
 	def_special FieldShowRegionMap
 	def_special GetInGameTradeSpeciesInfo
 	def_special CreateInGameTradePokemon
@@ -210,7 +208,6 @@ gSpecials::
 	def_special PickLotteryCornerTicket
 	def_special ResetTrickHouseNuggetFlag
 	def_special SetTrickHouseNuggetFlag
-	def_special ScriptMenu_CreatePCMultichoice
 	def_special AccessHallOfFamePC
 	def_special Special_ShowDiploma
 	def_special CheckLeadMonCool

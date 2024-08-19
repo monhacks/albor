@@ -32,7 +32,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
-#include "player_pc.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "scanline_effect.h"
@@ -173,9 +172,6 @@ static void RemoveMoneyWindow(void);
 static void Task_ChooseHowManyToSell(u8);
 static void SellItem(u8);
 static void WaitAfterItemSell(u8);
-static void TryDepositItem(u8);
-static void Task_ChooseHowManyToDeposit(u8 taskId);
-static void WaitDepositErrorMessage(u8);
 static void CB2_ApprenticeExitBagMenu(void);
 static void CB2_FavorLadyExitBagMenu(void);
 static void CB2_QuizLadyExitBagMenu(void);
@@ -199,7 +195,6 @@ static void ItemMenu_ConfirmQuizLady(u8);
 static void Task_ItemContext_Normal(u8);
 static void Task_ItemContext_GiveToParty(u8);
 static void Task_ItemContext_Sell(u8);
-static void Task_ItemContext_Deposit(u8);
 static void Task_ItemContext_GiveToPC(u8);
 static void ConfirmToss(u8);
 static void CancelToss(u8);
@@ -337,7 +332,6 @@ static const TaskFunc sContextMenuFuncs[] = {
     [ITEMMENULOCATION_SHOP] =                   Task_ItemContext_Sell,
     [ITEMMENULOCATION_BERRY_TREE] =             Task_FadeAndCloseBagMenu,
     [ITEMMENULOCATION_BERRY_BLENDER_CRUSH] =    Task_ItemContext_Normal,
-    [ITEMMENULOCATION_ITEMPC] =                 Task_ItemContext_Deposit,
     [ITEMMENULOCATION_FAVOR_LADY] =             Task_ItemContext_Normal,
     [ITEMMENULOCATION_QUIZ_LADY] =              Task_ItemContext_Normal,
     [ITEMMENULOCATION_APPRENTICE] =             Task_ItemContext_Normal,
@@ -562,11 +556,6 @@ void ChooseBerryForMachine(void (*exitCallback)(void))
 void CB2_GoToSellMenu(void)
 {
     GoToBagMenu(ITEMMENULOCATION_SHOP, POCKETS_COUNT, CB2_ExitSellMenu);
-}
-
-void CB2_GoToItemDepositMenu(void)
-{
-    GoToBagMenu(ITEMMENULOCATION_ITEMPC, POCKETS_COUNT, CB2_PlayerPCExitBagMenu);
 }
 
 void ApprenticeOpenBagMenu(void)
@@ -1554,7 +1543,6 @@ static void OpenContextMenu(u8 taskId)
     case ITEMMENULOCATION_PARTY:
     case ITEMMENULOCATION_SHOP:
     case ITEMMENULOCATION_BERRY_TREE:
-    case ITEMMENULOCATION_ITEMPC:
     case ITEMMENULOCATION_BERRY_TREE_MULCH:
     default:
         switch (gBagPosition.pocket)
@@ -2134,93 +2122,6 @@ static void WaitAfterItemSell(u8 taskId)
         PlaySE(SE_SELECT);
         RemoveMoneyWindow();
         CloseItemMessage(taskId);
-    }
-}
-
-static void Task_ItemContext_Deposit(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    tItemCount = 1;
-    if (tQuantity == 1)
-    {
-        TryDepositItem(taskId);
-    }
-    else
-    {
-        u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, 2);
-        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
-        StringExpandPlaceholders(gStringVar4, gText_DepositHowManyVar1);
-        FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
-        AddItemQuantityWindow(ITEMWIN_QUANTITY);
-        gTasks[taskId].func = Task_ChooseHowManyToDeposit;
-    }
-}
-
-static void Task_ChooseHowManyToDeposit(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (AdjustQuantityAccordingToDPadInput(&tItemCount, tQuantity) == TRUE)
-    {
-        PrintItemQuantity(gBagMenu->windowIds[ITEMWIN_QUANTITY], tItemCount);
-    }
-    else if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
-        TryDepositItem(taskId);
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        PrintItemDescription(tListPosition);
-        BagMenu_PrintCursor(tListTaskId, COLORID_NORMAL);
-        BagMenu_RemoveWindow(ITEMWIN_QUANTITY);
-        ReturnToItemList(taskId);
-    }
-}
-
-static void TryDepositItem(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-    if (ItemId_GetImportance(gSpecialVar_ItemId))
-    {
-        // Can't deposit important items
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gText_CantStoreImportantItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
-        gTasks[taskId].func = WaitDepositErrorMessage;
-    }
-    else if (AddPCItem(gSpecialVar_ItemId, tItemCount) == TRUE)
-    {
-        // Successfully deposited
-        u8 *end = CopyItemNameHandlePlural(gSpecialVar_ItemId, gStringVar1, tItemCount);
-        WrapFontIdToFit(gStringVar1, end, FONT_NORMAL, WindowWidthPx(WIN_DESCRIPTION) - 10 - 6);
-        ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-        StringExpandPlaceholders(gStringVar4, gText_DepositedVar2Var1s);
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar4, 3, 1, 0, 0, 0, COLORID_NORMAL);
-        gTasks[taskId].func = Task_RemoveItemFromBag;
-    }
-    else
-    {
-        // No room to deposit
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gText_NoRoomForItems, 3, 1, 0, 0, 0, COLORID_NORMAL);
-        gTasks[taskId].func = WaitDepositErrorMessage;
-    }
-}
-
-static void WaitDepositErrorMessage(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    if (JOY_NEW(A_BUTTON | B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        PrintItemDescription(tListPosition);
-        BagMenu_PrintCursor(tListTaskId, COLORID_NORMAL);
-        ReturnToItemList(taskId);
     }
 }
 

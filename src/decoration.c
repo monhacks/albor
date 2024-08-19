@@ -22,7 +22,6 @@
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "palette.h"
-#include "player_pc.h"
 #include "script.h"
 #include "secret_base.h"
 #include "sound.h"
@@ -673,16 +672,7 @@ static void DecorationMenuAction_Toss(u8 taskId)
 
 static void DecorationMenuAction_Cancel(u8 taskId)
 {
-    RemoveDecorationWindow(WINDOW_MAIN_MENU);
-    if (!sDecorationContext.isPlayerRoom)
-    {
-        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
-        DestroyTask(taskId);
-    }
-    else
-    {
-        ReshowPlayerPC(taskId);
-    }
+
 }
 
 static void ReturnToDecorationActionsAfterInvalidSelection(u8 taskId)

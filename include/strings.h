@@ -385,9 +385,6 @@ extern const u8 gText_PkmnCantParticipate[];
 extern const u8 gText_PkmnNotHolding[];
 extern const u8 gText_ThrowAwayItem[];
 extern const u8 gText_ItemThrownAway[];
-extern const u8 gText_SendMailToPC[];
-extern const u8 gText_MailSentToPC[];
-extern const u8 gText_PCMailboxFull[];
 extern const u8 gText_MailMessageWillBeLost[];
 extern const u8 gText_MailTakenFromPkmn[];
 extern const u8 gText_NoMoreThanVar1Pkmn[];
@@ -428,7 +425,6 @@ extern const u8 gText_PkmnGainedExp[];
 extern const u8 gText_PkmnGainedExpAndElevatedToLvVar3[];
 extern const u8 gText_RemoveMailBeforeItem[];
 extern const u8 gText_PkmnHoldingItemCantHoldMail[];
-extern const u8 gText_MailTransferredFromMailbox[];
 extern const u8 gText_CancelBattle[];
 extern const u8 gText_ReturnToWaitingRoom[];
 extern const u8 gText_CancelChallenge[];
@@ -489,18 +485,10 @@ extern const u8 gBirchDexRatingText_LessThan200[];
 extern const u8 gBirchDexRatingText_DexCompleted[];
 
 // player pc text
-extern const u8 gText_WhatWouldYouLike[];
-extern const u8 gText_NoMailHere[];
-
 extern const u8 gText_TakeOutItemsFromPC[];
 extern const u8 gText_StoreItemsInPC[];
 extern const u8 gText_ThrowAwayItemsInPC[];
 extern const u8 gText_GoBackPrevMenu[];
-
-extern const u8 gText_ItemStorage[];
-extern const u8 gText_Mailbox[];
-extern const u8 gText_Decoration[];
-extern const u8 gText_TurnOff[];
 
 extern const u8 gText_WithdrawItem[];
 extern const u8 gText_DepositItem[];
@@ -951,11 +939,8 @@ extern const u8 gText_NotEvenANibble[];
 extern const u8 gText_ItGotAway[];
 
 extern const u8 gText_HallOfFame[];
-extern const u8 gText_LogOff[];
-extern const u8 gText_LanettesPC[];
-extern const u8 gText_SomeonesPC[];
-extern const u8 gText_PlayersPC[];
-extern const u8 gText_WhichPCShouldBeAccessed[];
+extern const u8 gText_PkmnFueTransferidoAlPC[];
+extern const u8 gText_CajasLlenas[];
 
 extern const u8 gText_Petalburg[];
 extern const u8 gText_Slateport[];
@@ -1939,12 +1924,6 @@ extern const u8 gText_Ice[];
 extern const u8 gText_Confusion[];
 extern const u8 gText_Love[];
 
-// battle message
-extern const u8 gText_PkmnTransferredSomeonesPCBoxFull[];
-extern const u8 gText_PkmnTransferredLanettesPCBoxFull[];
-extern const u8 gText_PkmnTransferredSomeonesPC[];
-extern const u8 gText_PkmnTransferredLanettesPC[];
-
 // hall of fame
 extern const u8 gText_LeagueChamp[];
 extern const u8 gText_HOFNumber[];
@@ -2014,7 +1993,6 @@ extern const u8 gText_Have[];
 extern const u8 gText_DontHave[];
 extern const u8 gText_Take[];
 extern const u8 gText_Mail[];
-extern const u8 gText_Take2[];
 extern const u8 gText_Read2[];
 extern const u8 gText_Shift[];
 extern const u8 gText_SendOut[];

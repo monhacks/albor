@@ -3597,7 +3597,6 @@ static void UpdateBoxToSendMons(void)
 {
     if (sLastUsedBox != StorageGetCurrentBox())
     {
-        FlagClear(FLAG_SHOWN_BOX_WAS_FULL_MESSAGE);
         VarSet(VAR_PC_BOX_TO_SEND_MON, StorageGetCurrentBox());
     }
 }

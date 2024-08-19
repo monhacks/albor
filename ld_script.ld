@@ -252,7 +252,6 @@ SECTIONS {
         src/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
         src/battle_controller_wally.o(.text);
-        src/player_pc.o(.text);
         src/intro.o(.text);
         src/reload_save.o(.text);
         src/field_region_map.o(.text);
@@ -582,7 +581,6 @@ SECTIONS {
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
         src/battle_controller_wally.o(.rodata);
-        src/player_pc.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
         src/battle_anim_throw.o(.rodata);

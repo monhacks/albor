@@ -374,9 +374,9 @@
 #define STRINGID_QUESTIONFORFEITMATCH                 373
 #define STRINGID_FORFEITEDMATCH                       374
 #define STRINGID_PKMNTRANSFERREDSOMEONESPC            375
-#define STRINGID_PKMNTRANSFERREDLANETTESPC            376
-#define STRINGID_PKMNBOXSOMEONESPCFULL                377
-#define STRINGID_PKMNBOXLANETTESPCFULL                378
+#define STRINGID_UNUSED_376            376
+#define STRINGID_UNUSED_377                377
+#define STRINGID_UNUSED_378                378
 #define STRINGID_TRAINER1WINTEXT                      379
 #define STRINGID_TRAINER2WINTEXT                      380
 
@@ -874,9 +874,6 @@
 
 // gCaughtMonStringIds
 #define B_MSG_SENT_SOMEONES_PC  0
-#define B_MSG_SENT_LANETTES_PC  1
-#define B_MSG_SOMEONES_BOX_FULL 2
-#define B_MSG_LANETTES_BOX_FULL 3
 
 // gPrimalWeatherBlocksStringIds
 #define B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN    0

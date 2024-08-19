@@ -73,8 +73,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkitemspace                    @ 0x46
 	.4byte ScrCmd_checkitem                         @ 0x47
 	.4byte ScrCmd_checkitemtype                     @ 0x48
-	.4byte ScrCmd_addpcitem                         @ 0x49
-	.4byte ScrCmd_checkpcitem                       @ 0x4a
+	.4byte ScrCmd_nop                               @ 0x49
+	.4byte ScrCmd_nop                               @ 0x4a
 	.4byte ScrCmd_adddecoration                     @ 0x4b
 	.4byte ScrCmd_removedecoration                  @ 0x4c
 	.4byte ScrCmd_checkdecor                        @ 0x4d

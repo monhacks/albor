@@ -12358,7 +12358,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_PokemonBoxLink,
+        .fieldUseFunc = 0,
         .iconPic = gItemIcon_PokemonBoxLink,
         .iconPalette = gItemIconPalette_PokemonBoxLink,
     },

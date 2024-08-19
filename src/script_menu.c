@@ -56,7 +56,6 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos);
 static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId);
 static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId);
-static void CreatePCMultichoice(void);
 static void CreateLilycoveSSTidalMultichoice(void);
 static bool8 IsPicboxClosed(void);
 static void CreateStartMenuForPokenavTutorial(void);
@@ -668,77 +667,6 @@ static void Task_HandleMultichoiceGridInput(u8 taskId)
 }
 
 #undef tWindowId
-
-bool16 ScriptMenu_CreatePCMultichoice(void)
-{
-    if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
-    {
-        return FALSE;
-    }
-    else
-    {
-        gSpecialVar_Result = 0xFF;
-        CreatePCMultichoice();
-        return TRUE;
-    }
-}
-
-static void CreatePCMultichoice(void)
-{
-    u8 x = 8;
-    u32 pixelWidth = 0;
-    u8 width;
-    u8 numChoices;
-    u8 windowId;
-    int i;
-
-    for (i = 0; i < ARRAY_COUNT(sPCNameStrings); i++)
-    {
-        pixelWidth = DisplayTextAndGetWidth(sPCNameStrings[i], pixelWidth);
-    }
-
-    if (FlagGet(FLAG_SYS_GAME_CLEAR))
-    {
-        pixelWidth = DisplayTextAndGetWidth(gText_HallOfFame, pixelWidth);
-    }
-
-    width = ConvertPixelWidthToTileWidth(pixelWidth);
-
-    // Include Hall of Fame option if player is champion
-    if (FlagGet(FLAG_SYS_GAME_CLEAR))
-    {
-        numChoices = 4;
-        windowId = CreateWindowFromRect(0, 0, width, 8);
-        SetStandardWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_HallOfFame, x, 33, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, x, 49, TEXT_SKIP_DRAW, NULL);
-    }
-    else
-    {
-        numChoices = 3;
-        windowId = CreateWindowFromRect(0, 0, width, 6);
-        SetStandardWindowBorderStyle(windowId, FALSE);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LogOff, x, 33, TEXT_SKIP_DRAW, NULL);
-    }
-
-    // Change PC name if player has met Lanette
-    if (FlagGet(FLAG_SYS_PC_LANETTE))
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_LanettesPC, x, 1, TEXT_SKIP_DRAW, NULL);
-    else
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, x, 1, TEXT_SKIP_DRAW, NULL);
-
-    StringExpandPlaceholders(gStringVar4, gText_PlayersPC);
-    PrintPlayerNameOnWindow(windowId, gStringVar4, x, 17);
-    InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
-    InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);
-}
-
-void ScriptMenu_DisplayPCStartupPrompt(void)
-{
-    LoadMessageBoxAndFrameGfx(0, TRUE);
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gText_WhichPCShouldBeAccessed, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-}
 
 bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
 {
