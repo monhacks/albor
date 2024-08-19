@@ -48,7 +48,9 @@
 #define SIZE_32x32 1
 #define SIZE_64x64 0
 
-#define FOLLOWER(name, _size, shadow, _tracks)                                              \
+//Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
+//añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
+#define FOLLOWER(name, _size, shadow, _tracks, ...)                                         \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
@@ -63,7 +65,7 @@
     .tracks = _tracks,                                                                      \
     .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64), \
     .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),         \
-    .anims = sAnimTable_Following,                                                          \
+    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
