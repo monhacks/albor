@@ -649,7 +649,7 @@ static void SetPartySlotTilemap(u8, bool8);
 
 // Tilemap utility
 static void TilemapUtil_SetRect(u8, u16, u16, u16, u16);
-static void TilemapUtil_Move(u8, u8, s8);
+static void TilemapUtil_Move(s8 val);
 static void TilemapUtil_SetMap(u8, u8, const void *, u16, u16);
 static void TilemapUtil_SetPos(u8, u16, u16);
 static void TilemapUtil_Init(u8);
@@ -3432,24 +3432,24 @@ static bool8 ShowPartyMenu(void)
         return FALSE;
 
     sStorage->partyMenuY++;
-    TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, 1);
+    TilemapUtil_Move(1);
     TilemapUtil_Update(TILEMAPID_PARTY_MENU);
     ScheduleBgCopyTilemapToVram(1);
     MovePartySprites(8);
     // Disable dynamic palettes for the first 3 slots of each row
     if (sStorage->partyMenuMoveTimer == 10) 
     {
-      DisableBoxMonDynamicPalette(0*6, 3);
-      DisableBoxMonDynamicPalette(1*6, 3);
+        DisableBoxMonDynamicPalette(0 * 6, 3);
+        DisableBoxMonDynamicPalette(1 * 6, 3);
     }
     else if (sStorage->partyMenuMoveTimer == 16)
     {
-      DisableBoxMonDynamicPalette(2*6, 3);
-      DisableBoxMonDynamicPalette(3*6, 3);
+        DisableBoxMonDynamicPalette(2 * 6, 3);
+        DisableBoxMonDynamicPalette(3 * 6, 3);
     }
     if (++sStorage->partyMenuMoveTimer == 20)
     {
-        DisableBoxMonDynamicPalette(4*6, 3);
+        DisableBoxMonDynamicPalette(4 * 6, 3);
         sInPartyMenu = TRUE;
         return FALSE;
     }
@@ -3475,7 +3475,7 @@ static bool8 HidePartyMenu(void)
     if (sStorage->partyMenuMoveTimer != 20)
     {
         sStorage->partyMenuY--;
-        TilemapUtil_Move(TILEMAPID_PARTY_MENU, 3, -1);
+        TilemapUtil_Move(-1);
         TilemapUtil_Update(TILEMAPID_PARTY_MENU);
         FillBgTilemapBufferRect_Palette0(1, 256, 10, sStorage->partyMenuY, 12, 1);
         MovePartySprites(-8);
@@ -7741,38 +7741,11 @@ static void TilemapUtil_SetRect(u8 id, u16 x, u16 y, u16 width, u16 height)
     sTilemapUtil[id].active = TRUE;
 }
 
-static void TilemapUtil_Move(u8 id, u8 mode, s8 val)
+static void TilemapUtil_Move(s8 val)
 {
-    if (id >= sNumTilemapUtilIds)
-        return;
-
-    switch (mode)
-    {
-    case 0:
-        sTilemapUtil[id].cur.destX += val;
-        sTilemapUtil[id].cur.width -= val;
-        break;
-    case 1:
-        sTilemapUtil[id].cur.x += val;
-        sTilemapUtil[id].cur.width += val;
-        break;
-    case 2:
-        sTilemapUtil[id].cur.destY += val;
-        sTilemapUtil[id].cur.height -= val;
-        break;
-    case 3:
-        sTilemapUtil[id].cur.y -= val;
-        sTilemapUtil[id].cur.height += val;
-        break;
-    case 4:
-        sTilemapUtil[id].cur.destX += val;
-        break;
-    case 5:
-        sTilemapUtil[id].cur.destY += val;
-        break;
-    }
-
-    sTilemapUtil[id].active = TRUE;
+    sTilemapUtil[TILEMAPID_PARTY_MENU].cur.y -= val;
+    sTilemapUtil[TILEMAPID_PARTY_MENU].cur.height += val;
+    sTilemapUtil[TILEMAPID_PARTY_MENU].active = TRUE;
 }
 
 static void TilemapUtil_Update(u8 id)
