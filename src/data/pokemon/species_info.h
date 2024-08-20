@@ -45,46 +45,43 @@
 #define FOOTPRINT(sprite)
 #endif
 
-#define SIZE_32x32 1
-#define SIZE_64x64 0
-
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
 //añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
-#define FOLLOWER(name, _size, shadow, _tracks, ...)                                         \
+#define FOLLOWER(name, shadow, _tracks, ...)                                                \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
-    .size = (_size == SIZE_32x32 ? 512 : 2048),                                             \
-    .width = (_size == SIZE_32x32 ? 32 : 64),                                               \
-    .height = (_size == SIZE_32x32 ? 32 : 64),                                              \
+    .size = 512,                                                                            \
+    .width = 32,                                                                            \
+    .height = 32,                                                                           \
     .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = shadow,                                                                   \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
     .tracks = _tracks,                                                                      \
-    .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64), \
-    .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),         \
+    .oam = &gObjectEventBaseOam_32x32,                                                      \
+    .subspriteTables = sOamTables_32x32,                                                    \
     .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
     .images = sPicTable_##name,                                                             \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
 
-#define FOLLOWER_FEMALE(name, _size, shadow, _tracks)                                       \
+#define FOLLOWER_FEMALE(name, shadow, _tracks)                                              \
 .followerDataFemale = {                                                                     \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
-    .size = (_size == SIZE_32x32 ? 512 : 2048),                                             \
-    .width = (_size == SIZE_32x32 ? 32 : 64),                                               \
-    .height = (_size == SIZE_32x32 ? 32 : 64),                                              \
+    .size = 512,                                                                            \
+    .width = 32,                                                                            \
+    .height = 32,                                                                           \
     .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = shadow,                                                                   \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
     .tracks = _tracks,                                                                      \
-    .oam = (_size == SIZE_32x32 ? &gObjectEventBaseOam_32x32 : &gObjectEventBaseOam_64x64), \
-    .subspriteTables = (_size == SIZE_32x32 ? sOamTables_32x32 : sOamTables_64x64),         \
+    .oam = &gObjectEventBaseOam_32x32,                                                      \
+    .subspriteTables = sOamTables_32x32,                                                    \
     .anims = sAnimTable_Following,                                                          \
     .images = sPicTable_##name##F,                                                          \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \

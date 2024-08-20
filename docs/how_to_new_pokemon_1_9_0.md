@@ -1101,8 +1101,7 @@ And finally, in `gSpeciesInfo`:
         ...
         FOOTPRINT(Mewthree)
 +       OVERWORLD(
-+           sPicTable_Mewthree,
-+           SIZE_32x32,
++           sPicTable_Mewthree,         
 +           SHADOW_SIZE_M,
 +           TRACKS_FOOT,
 +           gOverworldPalette_Mewthree,
