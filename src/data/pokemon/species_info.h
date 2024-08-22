@@ -47,16 +47,15 @@
 
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
 //añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
-#define FOLLOWER(name, shadow, _tracks, ...)                                                \
+#define FOLLOWER(name, _tracks, ...)                                                        \
 .followerData = {                                                                           \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
     .paletteSlot = PALSLOT_NPC_1,                                                           \
-    .shadowSize = shadow,                                                                   \
+    .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
     .tracks = _tracks,                                                                      \
@@ -67,22 +66,21 @@
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
 
-#define FOLLOWER_FEMALE(name, shadow, _tracks)                                              \
+#define FOLLOWER_FEMALE(name, _tracks, ...)                                                 \
 .followerDataFemale = {                                                                     \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
-    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,                                         \
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
     .paletteSlot = PALSLOT_NPC_1,                                                           \
-    .shadowSize = shadow,                                                                   \
+    .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
     .tracks = _tracks,                                                                      \
     .oam = &gObjectEventBaseOam_32x32,                                                      \
     .subspriteTables = sOamTables_32x32,                                                    \
-    .anims = sAnimTable_Following,                                                          \
+    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
     .images = sPicTable_##name##F,                                                          \
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },     
@@ -130,7 +128,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .followerData = {
             .tileTag = TAG_NONE,
             .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
-            .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
             .size = 512,
             .width = 32,
             .height = 32,

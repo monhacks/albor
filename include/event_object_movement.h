@@ -3,12 +3,11 @@
 
 #include "constants/event_object_movement.h"
 
-// Palette slots for overworld NPCs.
 // The same standard set of palettes for overworld objects are normally always loaded at the same
 // time while walking around the overworld. The only exceptions are the palettes for the player and
 // the "special" NPC, which can be swapped out. This also means that e.g. two "special" NPCs
 // with competing palettes cannot be properly loaded at the same time.
-enum {
+enum PaletteSlotsOWNPCs{
     PALSLOT_PLAYER,
     PALSLOT_PLAYER_REFLECTION,
     PALSLOT_NPC_1,
