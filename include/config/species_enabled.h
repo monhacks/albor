@@ -535,11 +535,11 @@
 #define P_FAMILY_SMOLIV                  P_GEN_9_POKEMON
 #define P_FAMILY_SQUAWKABILLY            P_GEN_9_POKEMON
 #define P_FAMILY_NACLI                   P_GEN_9_POKEMON
-#define P_FAMILY_CHARCADET               FALSE //TRUE
+#define P_FAMILY_CHARCADET               P_GEN_9_POKEMON
 #define P_FAMILY_TADBULB                 P_GEN_9_POKEMON
 #define P_FAMILY_WATTREL                 P_GEN_9_POKEMON
 #define P_FAMILY_MASCHIFF                P_GEN_9_POKEMON
-#define P_FAMILY_SHROODLE                FALSE //TRUE
+#define P_FAMILY_SHROODLE                P_GEN_9_POKEMON
 #define P_FAMILY_BRAMBLIN                P_GEN_9_POKEMON
 #define P_FAMILY_TOEDSCOOL               P_GEN_9_POKEMON
 #define P_FAMILY_KLAWF                   P_GEN_9_POKEMON
@@ -550,11 +550,11 @@
 #define P_FAMILY_WIGLETT                 P_GEN_9_POKEMON
 #define P_FAMILY_BOMBIRDIER              P_GEN_9_POKEMON
 #define P_FAMILY_FINIZEN                 P_GEN_9_POKEMON
-#define P_FAMILY_VAROOM                  FALSE //TRUE
+#define P_FAMILY_VAROOM                  P_GEN_9_POKEMON
 #define P_FAMILY_CYCLIZAR                P_GEN_9_POKEMON
 #define P_FAMILY_ORTHWORM                P_GEN_9_POKEMON
-#define P_FAMILY_GLIMMET                 FALSE //TRUE
-#define P_FAMILY_GREAVARD                FALSE //TRUE
+#define P_FAMILY_GLIMMET                 TRUE
+#define P_FAMILY_GREAVARD                TRUE
 #define P_FAMILY_FLAMIGO                 P_GEN_9_POKEMON
 #define P_FAMILY_CETODDLE                P_GEN_9_POKEMON
 #define P_FAMILY_VELUZA                  P_GEN_9_POKEMON

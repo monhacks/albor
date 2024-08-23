@@ -54,7 +54,6 @@
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
-    .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
@@ -73,7 +72,6 @@
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
-    .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
@@ -131,7 +129,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .size = 512,
             .width = 32,
             .height = 32,
-            .paletteSlot = PALSLOT_NPC_1,
             .shadowSize = SHADOW_SIZE_M,
             .inanimate = FALSE,
             .compressed = FALSE,

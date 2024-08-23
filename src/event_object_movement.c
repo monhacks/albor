@@ -2612,12 +2612,6 @@ void SetObjectEventSpritePosByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, 
     }
 }
 
-void FreeAndReserveObjectSpritePalettes(void)
-{
-    FreeAllSpritePalettes();
-    gReservedSpritePaletteCount = OBJ_PALSLOT_COUNT;
-}
-
 u8 LoadObjectEventPalette(u16 paletteTag)
 {
     u16 i = FindObjectEventPaletteIndexByTag(paletteTag);

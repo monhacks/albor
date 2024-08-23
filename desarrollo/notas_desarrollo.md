@@ -50,7 +50,6 @@
 - Cambiar animación de Chupasangre usando como referencia Colmillo Veneno.
 - Crear Barrera eléctrica (baneful búnker pero paraliza): Dárselo a Electivire.
 - Check move_target_all_battlers de lightning rod vs storm drain.
-- Borrar sprites Helioptile/Heliolisk, Farfetchd, incorporar Conkeldurr.
 - Hueso quemado (objeto raro en Cubone que lo hace evolucionar a Marowak Alolan).
 - Usar viejas partículas: ANIM_TAG_ASCUAS
 - Crear habilidad exclusiva de Beedrill (Empalador o algo así).
@@ -79,8 +78,9 @@
 
 porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/desarrollo/graficos /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h
 
-*Eliminar Obstagoon y formas galar. Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
+*Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
 *Hacer limpieza final: objetivo unos 500 Pokémon. NO son necesarias todas las combinaciones de tipos, especialmente Normal-LoQueSea
-*Meter a Pachirisu como Elect-Normal
-*Spoink & Grumpig como Psychic-Poison en vez de G-Slow
+
+*Spoink & Grumpig como Psychic-Poison
+*Lycanroc tipo Roca-Lucha
 *Limpiar paletteSlot de ObjectEvent

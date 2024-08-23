@@ -316,7 +316,7 @@ struct FromScreenData
 
 struct PokedexView
 {
-    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT + 1];
+    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT];
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 selectedPokemonBackup;
@@ -1765,7 +1765,7 @@ bool16 HasAllMons(void)
 {
     u32 i, j;
 
-    for (i = 1; i < NATIONAL_DEX_COUNT + 1; i++)
+    for (i = 1; i < NATIONAL_DEX_COUNT; i++)
     {
         j = NationalPokedexNumToSpecies(i);
         if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
