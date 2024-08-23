@@ -15,7 +15,7 @@ SINGLE_BATTLE_TEST("Revival Blessing revives a chosen fainted party member for t
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET) { HP(0); }
-        PLAYER(SPECIES_WYNAUT) { HP(0); }
+        PLAYER(SPECIES_MEW) { HP(0); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_REVIVAL_BLESSING); SEND_OUT(player, 2); }
@@ -69,9 +69,9 @@ TO_DO_BATTLE_TEST("Revival Blessing cannot revive a partner's party member");
 //         OPPONENT(SPECIES_WOBBUFFET);
 //         OPPONENT(SPECIES_WOBBUFFET);
 //         OPPONENT(SPECIES_WOBBUFFET);
-//         OPPONENT(SPECIES_WYNAUT);
-//         OPPONENT(SPECIES_WYNAUT) { HP(0); }
-//         OPPONENT(SPECIES_WYNAUT);
+//         OPPONENT(SPECIES_MEW);
+//         OPPONENT(SPECIES_MEW) { HP(0); }
+//         OPPONENT(SPECIES_MEW);
 //     } WHEN {
 //         TURN { MOVE(user, MOVE_REVIVAL_BLESSING); }
 //     } SCENE {
@@ -92,9 +92,9 @@ TO_DO_BATTLE_TEST("Revived battlers still lose their turn");
 // {
 //     GIVEN {
 //         PLAYER(SPECIES_WOBBUFFET);
-//         PLAYER(SPECIES_WYNAUT);
+//         PLAYER(SPECIES_MEW);
 //         OPPONENT(SPECIES_WOBBUFFET);
-//         OPPONENT(SPECIES_WYNAUT) { HP(1); }
+//         OPPONENT(SPECIES_MEW) { HP(1); }
 //     } WHEN {
 //         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentRight);
 //                MOVE(opponentLeft, MOVE_REVIVAL_BLESSING);

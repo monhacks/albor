@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
         TURN { SWITCH(opponent, 1); }
@@ -30,7 +30,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts bad poison on switch in")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
@@ -52,7 +52,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes fails after 2 layers")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
@@ -77,7 +77,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on subsequent switch ins")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC_SPIKES); }
         TURN { SWITCH(opponent, 1); }
@@ -215,7 +215,7 @@ SINGLE_BATTLE_TEST("Toxic Spikes inflicts poison on switch in after Primal Rever
         ASSUME(gMovesInfo[MOVE_MEMENTO].effect == EFFECT_MEMENTO); // Faints the user.
         PLAYER(SPECIES_WOBBUFFET) {Speed(5); }
         PLAYER(SPECIES_GROUDON) { Item(ITEM_RED_ORB); Speed(1); }
-        PLAYER(SPECIES_WYNAUT) {Speed(5); }
+        PLAYER(SPECIES_MEW) {Speed(5); }
         OPPONENT(SPECIES_WOBBUFFET) {Speed(15); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_TOXIC_SPIKES); }

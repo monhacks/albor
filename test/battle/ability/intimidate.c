@@ -68,7 +68,7 @@ DOUBLE_BATTLE_TEST("Intimidate doesn't activate on an empty field in a double ba
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(playerRight, 3); SEND_OUT(opponentRight, 3); }
         TURN { MOVE(playerLeft, MOVE_CELEBRATE); }
@@ -136,7 +136,7 @@ DOUBLE_BATTLE_TEST("Intimidate activates on an empty slot")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_CROAGUNK);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         PLAYER(SPECIES_HITMONTOP) { Ability(ABILITY_INTIMIDATE); }
         OPPONENT(SPECIES_RALTS);
         OPPONENT(SPECIES_AZURILL);
@@ -174,8 +174,8 @@ DOUBLE_BATTLE_TEST("Intimidate activates immediately after the mon was switched 
         PLAYER(SPECIES_TAPU_KOKO) { Ability(ABILITY_ELECTRIC_SURGE); };
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); Item(ITEM_ELECTRIC_SEED); }
-        OPPONENT(SPECIES_WYNAUT) { HP(1); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW) { HP(1); }
+        OPPONENT(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_U_TURN, target: opponentLeft); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); }
@@ -220,10 +220,10 @@ SINGLE_BATTLE_TEST("Intimidate can not further lower opponents Atk stat if it is
 DOUBLE_BATTLE_TEST("Intimidate is not going to trigger if a mon switches out through u-turn and the opposing field is empty")
 {
     GIVEN {
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_EKANS) { Ability(ABILITY_INTIMIDATE); }
-        OPPONENT(SPECIES_WYNAUT) { HP(1); }
+        OPPONENT(SPECIES_MEW) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_TREECKO);
         OPPONENT(SPECIES_TORCHIC);

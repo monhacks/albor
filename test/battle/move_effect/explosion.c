@@ -72,7 +72,7 @@ DOUBLE_BATTLE_TEST("Explosion causes everyone to faint in a double battle")
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT) { HP(1); }
+        PLAYER(SPECIES_MEW) { HP(1); }
         OPPONENT(SPECIES_ABRA) { HP(1); }
         OPPONENT(SPECIES_KADABRA) { HP(1); }
         OPPONENT(SPECIES_KADABRA);
@@ -128,7 +128,7 @@ DOUBLE_BATTLE_TEST("Explosion boosted by Galvanize is correctly blocked by Volt 
 {
     GIVEN {
         PLAYER(SPECIES_GEODUDE_ALOLAN) { Ability(ABILITY_GALVANIZE); }
-        PLAYER(SPECIES_WYNAUT) { HP(1); }
+        PLAYER(SPECIES_MEW) { HP(1); }
         OPPONENT(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); }
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
     } WHEN {

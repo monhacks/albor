@@ -3748,7 +3748,7 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     else
     {
         // Decompress species palette into swap buffer
-        if (species == SPECIES_CASTFORM) //???
+        if (species == SPECIES_CASTFORM_NORMAL) //???
         { // needs more than 32 bytes of space; so decompress and copy
             LZ77UnCompWram(palette, gDecompressionBuffer);
             CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);

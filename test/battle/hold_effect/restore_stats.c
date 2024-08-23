@@ -46,7 +46,7 @@ DOUBLE_BATTLE_TEST("White Herb restores stats after Attack was lowered by Intimi
 {
     GIVEN {
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_WHITE_HERB); }
-        OPPONENT(SPECIES_WYNAUT) { Item(ITEM_WHITE_HERB); }
+        OPPONENT(SPECIES_MEW) { Item(ITEM_WHITE_HERB); }
         PLAYER(SPECIES_ARBOK) { Ability(ABILITY_INTIMIDATE); }
         PLAYER(SPECIES_WOBBUFFET);
     } WHEN {

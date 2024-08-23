@@ -111,7 +111,7 @@ DOUBLE_BATTLE_TEST("Mega Evolution happens after switching, but before Focus Pun
         ASSUME(gMovesInfo[MOVE_FOCUS_PUNCH].effect == EFFECT_FOCUS_PUNCH);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_VENUSAUR) { Item(ITEM_VENUSAURITE); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -91,9 +91,9 @@ DOUBLE_BATTLE_TEST("Turn order is determined randomly if priority and Speed tie 
     ASSUME(gMovesInfo[MOVE_SUPER_FANG].effect == EFFECT_SUPER_FANG);
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { MaxHP(480); HP(360); Defense(100); Speed(1); }
-        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        PLAYER(SPECIES_MEW) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Attack(100); Speed(1); }
-        OPPONENT(SPECIES_WYNAUT) { Speed(1); }
+        OPPONENT(SPECIES_MEW) { Speed(1); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_ENDEAVOR, target: opponentLeft); MOVE(playerRight, MOVE_LIFE_DEW); MOVE(opponentLeft, MOVE_CRUSH_GRIP, target: playerLeft, WITH_RNG(RNG_DAMAGE_MODIFIER, 0)); MOVE(opponentRight, MOVE_SUPER_FANG, target: playerLeft); }
     } THEN {

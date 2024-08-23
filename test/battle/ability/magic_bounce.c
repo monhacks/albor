@@ -6,7 +6,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back status moves")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TOXIC].effect == EFFECT_TOXIC);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
     } WHEN {
         TURN { MOVE(player, MOVE_TOXIC); }
@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Magic Bounce bounces back powder moves")
     GIVEN {
         ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
         ASSUME(gMovesInfo[MOVE_STUN_SPORE].effect == EFFECT_PARALYZE);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
     } WHEN {
         TURN { MOVE(player, MOVE_STUN_SPORE); }
@@ -64,7 +64,7 @@ DOUBLE_BATTLE_TEST("Magic Bounce bounces back moves hitting both foes at two foe
         PLAYER(SPECIES_ABRA);
         PLAYER(SPECIES_KADABRA);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_LEER); }
     } SCENE {

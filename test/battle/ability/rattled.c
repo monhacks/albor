@@ -76,7 +76,7 @@ SINGLE_BATTLE_TEST("Rattled triggers correctly when hit by U-Turn") // Specific 
         ASSUME(gMovesInfo[MOVE_U_TURN].effect == EFFECT_HIT_ESCAPE);
         ASSUME(gMovesInfo[MOVE_U_TURN].type == TYPE_BUG);
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_SUDOWOODO) {Ability(ABILITY_RATTLED); }
         OPPONENT(SPECIES_SUDOWOODO);
     } WHEN {

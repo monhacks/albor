@@ -7,10 +7,9 @@
 // time while walking around the overworld. The only exceptions are the palettes for the player and
 // the "special" NPC, which can be swapped out. This also means that e.g. two "special" NPCs
 // with competing palettes cannot be properly loaded at the same time.
-enum PaletteSlotsOWNPCs
+enum PaletteSlotsNPCs
 {
     PALSLOT_PLAYER,
-    PALSLOT_PLAYER_REFLECTION,
     PALSLOT_NPC_1,
     PALSLOT_NPC_2,
     PALSLOT_NPC_3,

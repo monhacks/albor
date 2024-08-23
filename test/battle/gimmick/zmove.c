@@ -139,9 +139,9 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user")
         ASSUME(gMovesInfo[MOVE_DESTINY_BOND].type == TYPE_GHOST);
         ASSUME(gMovesInfo[MOVE_DESTINY_BOND].zMove.effect == Z_EFFECT_FOLLOW_ME);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GHOSTIUM_Z); }
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_DESTINY_BOND, gimmick: GIMMICK_Z_MOVE);
                MOVE(opponentLeft, MOVE_TACKLE, target: playerRight); }
@@ -160,7 +160,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESTORE_REPLACEMENT_HP fully heals the rep
         ASSUME(gMovesInfo[MOVE_PARTING_SHOT].type == TYPE_DARK);
         ASSUME(gMovesInfo[MOVE_PARTING_SHOT].zMove.effect == Z_EFFECT_RESTORE_REPLACEMENT_HP);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_DARKINIUM_Z); }
-        PLAYER(SPECIES_WYNAUT) { HP(1); }
+        PLAYER(SPECIES_MEW) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_PARTING_SHOT, gimmick: GIMMICK_Z_MOVE); SEND_OUT(player, 1); }
@@ -169,7 +169,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESTORE_REPLACEMENT_HP fully heals the rep
         ANIMATION(ANIM_TYPE_MOVE, MOVE_PARTING_SHOT, player);
         HP_BAR(player);
     } THEN {
-        EXPECT_EQ(player->species, SPECIES_WYNAUT);
+        EXPECT_EQ(player->species, SPECIES_MEW);
         EXPECT_EQ(player->hp, player->maxHP);
     }
 }
@@ -403,9 +403,9 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Instruct fails if the target last used a Z-Move")
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, gimmick: GIMMICK_Z_MOVE);
                MOVE(playerRight, MOVE_INSTRUCT, target: playerLeft); }
@@ -422,9 +422,9 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Dancer does not use a Z-Move if the battler has use
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Ability(ABILITY_DANCER); Item(ITEM_NORMALIUM_Z); }
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_TACKLE, target: opponentLeft, gimmick: GIMMICK_Z_MOVE);
                MOVE(playerRight, MOVE_FIERY_DANCE, target: opponentRight); }

@@ -5,7 +5,7 @@ SINGLE_BATTLE_TEST("Revive restores a fainted battler's HP to half")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
+        PLAYER(SPECIES_MEW) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("Max Revive restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_MAX_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
+        PLAYER(SPECIES_MEW) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Revival Herb restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_REVIVAL_HERB].battleUsage == EFFECT_ITEM_REVIVE);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
+        PLAYER(SPECIES_MEW) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -59,7 +59,7 @@ SINGLE_BATTLE_TEST("Max Honey restores a fainted battler's HP fully")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_MAX_HONEY].battleUsage == EFFECT_ITEM_REVIVE);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); }
+        PLAYER(SPECIES_MEW) { HP(1); MaxHP(200); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -78,7 +78,7 @@ DOUBLE_BATTLE_TEST("Revive works for a partner in a double battle")
 {
     GIVEN {
         ASSUME(gItemsInfo[ITEM_REVIVE].battleUsage == EFFECT_ITEM_REVIVE);
-        PLAYER(SPECIES_WYNAUT) { HP(1); MaxHP(200); Moves(MOVE_IRON_DEFENSE, MOVE_CELEBRATE); Speed(5); }
+        PLAYER(SPECIES_MEW) { HP(1); MaxHP(200); Moves(MOVE_IRON_DEFENSE, MOVE_CELEBRATE); Speed(5); }
         PLAYER(SPECIES_WOBBUFFET) { HP(1); Speed(4); }
         OPPONENT(SPECIES_ABRA) { Speed(3); Moves(MOVE_TACKLE, MOVE_PSYCHIC, MOVE_CELEBRATE); }
         OPPONENT(SPECIES_KADABRA) { Speed(2); Moves(MOVE_TACKLE, MOVE_PSYCHIC, MOVE_CELEBRATE, MOVE_EXPLOSION); }

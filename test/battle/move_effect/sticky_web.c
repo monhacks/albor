@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Sticky Web lowers Speed by 1 on switch-in")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_STICKY_WEB); }
         TURN { SWITCH(opponent, 1); }
@@ -55,7 +55,7 @@ DOUBLE_BATTLE_TEST("Sticky Web lowers Speed by 1 in a double battle after Explos
         PLAYER(SPECIES_WOBBUFFET) {Speed(10);}
         OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
         OPPONENT(SPECIES_WOBBUFFET) {HP(1); Speed(1);}
-        OPPONENT(SPECIES_WYNAUT) {Speed(10);}
+        OPPONENT(SPECIES_MEW) {Speed(10);}
         OPPONENT(SPECIES_ALAKAZAM) {Speed(100);}
     } WHEN {
         TURN { MOVE(playerRight, MOVE_STICKY_WEB); MOVE(playerLeft, MOVE_EXPLOSION); SEND_OUT(playerLeft, 2); SEND_OUT(opponentLeft, 2); SEND_OUT(opponentRight, 3); }

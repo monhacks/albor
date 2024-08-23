@@ -21,8 +21,8 @@ DOUBLE_BATTLE_TEST("Heal Bell cures the entire party")
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
-        OPPONENT(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, move, target: playerLeft); }
         TURN { SWITCH(playerLeft, 2); SWITCH(playerRight, 3); }
@@ -48,8 +48,8 @@ DOUBLE_BATTLE_TEST("Heal Bell does not cure soundproof partners")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_EXPLOUD) { Ability(ability); Status1(STATUS1_POISON); }
-        OPPONENT(SPECIES_WYNAUT);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_HEAL_BELL, target: playerLeft); }
     } SCENE {
@@ -74,7 +74,7 @@ SINGLE_BATTLE_TEST("Heal Bell cures inactive soundproof Pokemon")
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_POISON); }
         PLAYER(SPECIES_EXPLOUD) { Ability(ability); Status1(STATUS1_POISON); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_HEAL_BELL, target: player); }
         TURN { SWITCH(player, 1); }
@@ -92,7 +92,7 @@ SINGLE_BATTLE_TEST("Heal Bell cures a soundproof user")
 
     GIVEN {
         PLAYER(SPECIES_EXPLOUD) { Ability(ABILITY_SOUNDPROOF); Status1(STATUS1_POISON); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_HEAL_BELL, target: player); }
     } SCENE {

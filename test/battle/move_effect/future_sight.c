@@ -118,7 +118,7 @@ SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints before it is 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_FUTURE_SIGHT); }
         TURN { MOVE(player, MOVE_CELEBRATE); }
@@ -140,7 +140,7 @@ SINGLE_BATTLE_TEST("Future Sight will miss timing if target faints by residual d
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { HP(10); }
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(player, MOVE_FUTURE_SIGHT); }
         TURN { MOVE(player, MOVE_CELEBRATE); }

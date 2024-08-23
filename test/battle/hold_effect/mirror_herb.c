@@ -53,7 +53,7 @@ DOUBLE_BATTLE_TEST("Mirror Herb does not trigger for Ally's Soul Heart's stat ra
 {
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_MIRROR_HERB); }
-        PLAYER(SPECIES_WYNAUT) { Ability(ABILITY_SOUL_HEART); } // Raises Sp. Atk after fainting am on
+        PLAYER(SPECIES_MEW) { Ability(ABILITY_SOUL_HEART); } // Raises Sp. Atk after fainting am on
         OPPONENT(SPECIES_WOBBUFFET) { HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

@@ -1162,14 +1162,6 @@ bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
 
 bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef)
 {
-    if (!(gBattleStruct->distortedTypeMatchups & (1u << battlerDef))
-     && GetBattlerAbility(battlerDef) == ABILITY_TERA_SHELL
-     && gBattleMons[battlerDef].species == SPECIES_TERAPAGOS_TERASTAL
-     && !IS_MOVE_STATUS(move)
-     && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-     && gBattleMons[battlerDef].hp == gBattleMons[battlerDef].maxHP)
-        return TRUE;
-
     return FALSE;
 }
 
@@ -1889,7 +1881,6 @@ static void Cmd_ppreduce(void)
 // The chance is 1/N for each stage.
     static const u8 sCriticalHitOdds[] = {16, 8, 4, 2, 1};
 
-#define BENEFITS_FROM_LEEK(battler, holdEffect)((holdEffect == HOLD_EFFECT_LEEK) && (GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_FARFETCHD || gBattleMons[battler].species == SPECIES_SIRFETCHD))
 s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordAbility, u32 abilityAtk, u32 abilityDef, u32 holdEffectAtk)
 {
     s32 critChance = 0;
@@ -1910,8 +1901,6 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
                     + 1 * ((gBattleMons[battlerAtk].status2 & STATUS2_DRAGON_CHEER) != 0)
                     + gMovesInfo[move].criticalHitStage
                     + (holdEffectAtk == HOLD_EFFECT_SCOPE_LENS)
-                    + 2 * (holdEffectAtk == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[battlerAtk].species == SPECIES_CHANSEY)
-                    + 2 * BENEFITS_FROM_LEEK(battlerAtk, holdEffectAtk)
                     + 2 * (B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(battlerAtk) == AFFECTION_FIVE_HEARTS)
                     + 2 * (abilityAtk == ABILITY_SUPER_LUCK)               
                     + gBattleStruct->bonusCritStages[gBattlerAttacker];
@@ -1946,7 +1935,6 @@ s32 CalcCritChanceStage(u32 battlerAtk, u32 battlerDef, u32 move, bool32 recordA
     u32 holdEffectAtk = GetBattlerHoldEffect(battlerAtk, TRUE);
     return CalcCritChanceStageArgs(battlerAtk, battlerDef, move, recordAbility, abilityAtk, abilityDef, holdEffectAtk);
 }
-#undef BENEFITS_FROM_LEEK
 
 s32 GetCritHitOdds(s32 critChanceIndex)
 {
@@ -2017,16 +2005,6 @@ static void Cmd_adjustdamage(void)
     if (DoesDisguiseBlockMove(gBattlerTarget, gCurrentMove))
     {
         gBattleStruct->enduredDamage |= 1u << gBattlerTarget;
-        goto END;
-    }
-    if (GetBattlerAbility(gBattlerTarget) == ABILITY_ICE_FACE && IS_MOVE_PHYSICAL(gCurrentMove) && gBattleMons[gBattlerTarget].species == SPECIES_EISCUE)
-    {
-        // Damage deals typeless 0 HP.
-        gMoveResultFlags &= ~(MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE);
-        gBattleMoveDamage = 0;
-        RecordAbilityBattle(gBattlerTarget, ABILITY_ICE_FACE);
-        gBattleResources->flags->flags[gBattlerTarget] |= RESOURCE_FLAG_ICE_FACE;
-        // Form change will be done after attack animation in Cmd_resultmessage.
         goto END;
     }
     if (gBattleMons[gBattlerTarget].hp > gBattleMoveDamage)
@@ -8653,17 +8631,10 @@ u32 IsLeafGuardProtected(u32 battler)
         return 0;
 }
 
-bool32 IsShieldsDownProtected(u32 battler)
-{
-    return (GetBattlerAbility(battler) == ABILITY_SHIELDS_DOWN
-            && GetFormIdFromFormSpeciesId(gBattleMons[battler].species) < GetFormIdFromFormSpeciesId(SPECIES_MINIOR_CORE_RED)); // Minior is not in core form
-}
-
 u32 IsAbilityStatusProtected(u32 battler)
 {
     return IsFlowerVeilProtected(battler)
-        || IsLeafGuardProtected(battler)
-        || IsShieldsDownProtected(battler);
+        || IsLeafGuardProtected(battler);
 }
 
 u32 GetHighestStatId(u32 battler)
@@ -8905,15 +8876,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_SHIELDS_DOWN_PROTECTED:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
-        if (IsShieldsDownProtected(battler))
-        {
-            gBattlerAbility = battler;
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        }
-        else
-        {
-            gBattlescriptCurrInstr = cmd->nextInstr;
-        }
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_JUMP_IF_HOLD_EFFECT:
@@ -14643,7 +14606,7 @@ static void Cmd_pickup(void)
             heldItem = ITEM_LEFTOVERS;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
-        else if ((species == SPECIES_GRIMER || species == SPECIES_MUK || species == SPECIES_GRIMER_ALOLAN || species == SPECIES_MUK_ALOLAN)
+        else if ((species == SPECIES_GRIMER || species == SPECIES_MUK)
             && heldItem == ITEM_NONE
             && (Random() % 16) == 0)
         {
@@ -15578,11 +15541,8 @@ static const u16 sTelekinesisBanList[] =
 {
     SPECIES_DIGLETT,
     SPECIES_DUGTRIO,
-    SPECIES_DIGLETT_ALOLAN,
-    SPECIES_DUGTRIO_ALOLAN,
     SPECIES_SANDYGAST,
     SPECIES_PALOSSAND,
-    SPECIES_GENGAR_MEGA,
 };
 
 bool32 IsTelekinesisBannedSpecies(u16 species)
@@ -16467,52 +16427,7 @@ void BS_JumpIfTerrainAffected(void)
 
 void BS_TryReflectType(void)
 {
-    NATIVE_ARGS(const u8 *failInstr);
-    u16 targetBaseSpecies = GET_BASE_SPECIES_ID(gBattleMons[gBattlerTarget].species);
-    u8 targetType1 = GetBattlerType(gBattlerTarget, 0, FALSE);
-    u8 targetType2 = GetBattlerType(gBattlerTarget, 1, FALSE);
-    u8 targetType3 = GetBattlerType(gBattlerTarget, 2, FALSE);
 
-    if (targetBaseSpecies == SPECIES_ARCEUS || targetBaseSpecies == SPECIES_SILVALLY)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_TERA)
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else if (IS_BATTLER_TYPELESS(gBattlerTarget))
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-    else if (targetType1 == TYPE_MYSTERY && targetType2 == TYPE_MYSTERY && targetType3 != TYPE_MYSTERY)
-    {
-        gBattleMons[gBattlerAttacker].types[0] = TYPE_NORMAL;
-        gBattleMons[gBattlerAttacker].types[1] = TYPE_NORMAL;
-        gBattleMons[gBattlerAttacker].types[2] = targetType3;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else if (targetType1 == TYPE_MYSTERY && targetType2 != TYPE_MYSTERY)
-    {
-        gBattleMons[gBattlerAttacker].types[0] = targetType2;
-        gBattleMons[gBattlerAttacker].types[1] = targetType2;
-        gBattleMons[gBattlerAttacker].types[2] = targetType3;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else if (targetType1 != TYPE_MYSTERY && targetType2 == TYPE_MYSTERY)
-    {
-        gBattleMons[gBattlerAttacker].types[0] = targetType1;
-        gBattleMons[gBattlerAttacker].types[1] = targetType1;
-        gBattleMons[gBattlerAttacker].types[2] = targetType3;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattleMons[gBattlerAttacker].types[0] = targetType1;
-        gBattleMons[gBattlerAttacker].types[1] = targetType2;
-        gBattleMons[gBattlerAttacker].types[2] = targetType3;
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
 }
 
 void BS_TrySetOctolock(void)
@@ -16540,26 +16455,10 @@ void BS_SetGlaiveRush(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-// TODO: Convert this to a proper FORM_CHANGE type.
 void BS_TryRelicSong(void)
 {
     NATIVE_ARGS();
-
-    if (GetBattlerAbility(gBattlerAttacker) != ABILITY_SHEER_FORCE && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_TRANSFORMED)
-        && (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA || gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE))
-    {
-        if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_ARIA)
-            gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_PIROUETTE;
-        else if (gBattleMons[gBattlerAttacker].species == SPECIES_MELOETTA_PIROUETTE)
-            gBattleMons[gBattlerAttacker].species = SPECIES_MELOETTA_ARIA;
-
-        BattleScriptPush(cmd->nextInstr);
-        gBattlescriptCurrInstr = BattleScript_AttackerFormChangeMoveEffect;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_SetPledge(void)
@@ -16960,47 +16859,12 @@ void BS_TryTidyUp(void)
 void BS_TryGulpMissile(void)
 {
     NATIVE_ARGS();
-
-    if ((gBattleMons[gBattlerAttacker].species == SPECIES_CRAMORANT)
-     && (gCurrentMove == MOVE_DIVE)
-     && (GetBattlerAbility(gBattlerAttacker) == ABILITY_GULP_MISSILE)
-     && TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_HP_PERCENT))
-        gBattlescriptCurrInstr = BattleScript_GulpMissileFormChange;
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
+    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryActivateGulpMissile(void)
 {
     NATIVE_ARGS();
-
-    if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-        && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
-        && TARGET_TURN_DAMAGED
-        && gBattleMons[gBattlerTarget].species != SPECIES_CRAMORANT
-        && GetBattlerAbility(gBattlerTarget) == ABILITY_GULP_MISSILE)
-    {
-        if (GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
-        {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
-            if (gBattleMoveDamage == 0)
-                gBattleMoveDamage = 1;
-        }
-
-        switch(gBattleMons[gBattlerTarget].species)
-        {
-            case SPECIES_CRAMORANT_GORGING:
-                BattleScriptPushCursor();
-                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_HIT_BY_MOVE);
-                gBattlescriptCurrInstr = BattleScript_GulpMissileGorging;
-                return;
-            case SPECIES_CRAMORANT_GULPING:
-                BattleScriptPushCursor();
-                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_HIT_BY_MOVE);
-                gBattlescriptCurrInstr = BattleScript_GulpMissileGulping;
-                return;
-        }
-    }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

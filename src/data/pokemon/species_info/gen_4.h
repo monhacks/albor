@@ -4282,65 +4282,6 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
     },
 #endif //P_FAMILY_MANAPHY
 
-#if P_FAMILY_DARKRAI
-    [SPECIES_DARKRAI] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 90,
-        .baseDefense   = 90,
-        .baseSpeed     = 125,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_DARK),
-        .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 210,
-    #endif
-        .evYield_Speed = 1,
-        .evYield_SpAttack = 2,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 120,
-        .friendship = 0,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_BAD_DREAMS, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_BLACK,
-        .isMythical = TRUE,
-        .speciesName = _("Darkrai"),
-        .cryId = CRY_DARKRAI,
-        .natDexNum = NATIONAL_DEX_DARKRAI,
-        .categoryName = _("Pitch-Black"),
-        .height = 15,
-        .weight = 505,
-        .description = COMPOUND_STRING(
-            "It chases people and Pokémon from its\n"
-            "territory by causing them to experience\n"
-            "deep, nightmarish slumbers. However,\n"
-            "it means no harm."),
-        .pokemonScale = 268,
-        .pokemonOffset = 2,
-        .trainerScale = 271,
-        .trainerOffset = 0,
-        FRONT_PIC(Darkrai, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_Darkrai,
-        .frontAnimId = ANIM_GLOW_BLACK,
-        .enemyMonElevation = 4,
-        BACK_PIC(Darkrai, 64, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Darkrai),
-        ICON(Darkrai),
-        FOOTPRINT(Darkrai)
-        FOLLOWER(Darkrai, TRACKS_FOOT)
-        LEARNSETS(Darkrai),
-    },
-#endif //P_FAMILY_DARKRAI
-
 #if P_FAMILY_SHAYMIN
 #if P_UPDATED_EXP_YIELDS >= GEN_8
     #define SHAYMIN_EXP_YIELD 300

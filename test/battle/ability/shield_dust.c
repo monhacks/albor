@@ -128,7 +128,7 @@ DOUBLE_BATTLE_TEST("Shield Dust does or does not block Sparkling Aria depending 
     PARAMETRIZE { moveToUse = MOVE_FINAL_GAMBIT; }
     PARAMETRIZE { moveToUse = MOVE_TACKLE; }
     GIVEN {
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_VIVILLON) { Ability(ABILITY_SHIELD_DUST); Status1(STATUS1_BURN); }
         OPPONENT(SPECIES_WOBBUFFET);

@@ -1659,7 +1659,7 @@ static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
     }
     switch (*species)
     {
-        case SPECIES_CASTFORM:
+        case SPECIES_CASTFORM_NORMAL:
             *species = GetOverworldCastformForm();
             break;
         //case SPECIES_CHERRIM:
@@ -1692,10 +1692,8 @@ void UpdateFollowingPokemon(void)
     u16 species;
     bool8 shiny;
     u8 form;
-    // Avoid spawning large (>32x32) follower pokemon inside buildings
+
     if (GetFollowerInfo(&species, &form, &shiny)
-        && !(gMapHeader.mapType == MAP_TYPE_INDOOR
-        && SpeciesToGraphicsInfo(species, 0)->height > 32)
         && !FlagGet(FLAG_TEMP_HIDE_FOLLOWER))
     {
         if (objEvent == NULL)
@@ -4859,14 +4857,14 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
     u32 multi;
     u32 species = OW_SPECIES(objectEvent);
 
-    if (GET_BASE_SPECIES_ID(OW_SPECIES(objectEvent)) == SPECIES_CASTFORM
+    if (GET_BASE_SPECIES_ID(OW_SPECIES(objectEvent)) == SPECIES_CASTFORM_NORMAL
         && OW_SPECIES(objectEvent) != (multi = GetOverworldCastformForm()))
     {
         sprite->data[7] = TRANSFORM_TYPE_WEATHER << 8;
         return TRUE;
     }
     else if ((Random() & 0xFFFF) < 18 && GetLocalWildMon(FALSE)
-            && (OW_SPECIES(objectEvent) == SPECIES_MEW)
+            && (OW_SPECIES(objectEvent) == SPECIES_MEW))
     {
         sprite->data[7] = TRANSFORM_TYPE_RANDOM_WILD << 8;
         PlaySE(SE_M_MINIMIZE);

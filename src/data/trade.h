@@ -965,7 +965,7 @@ static const struct InGameTrade sIngameTrades[] =
     [INGAME_TRADE_PLUSLE] =
     {
         .nickname = _("PLUSES"),
-        .species = SPECIES_PLUSLE,
+        .species = SPECIES_MEW,
         .ivs = {4, 4, 4, 5, 5, 4},
         .abilityNum = 0,
         .otId = 73996,
@@ -976,7 +976,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("ROMAN"),
         .otGender = MALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_VOLBEAT
+        .requestedSpecies = SPECIES_MEW
     },
     [INGAME_TRADE_HORSEA] =
     {
@@ -1008,7 +1008,7 @@ static const struct InGameTrade sIngameTrades[] =
         .otName = _("ISIS"),
         .otGender = FEMALE,
         .sheen = 10,
-        .requestedSpecies = SPECIES_SKITTY
+        .requestedSpecies = SPECIES_MEW
     }
 };
 
@@ -1018,9 +1018,9 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
         EC_WORD_BE,
         EC_WORD_NICE,
         EC_WORD_TO,
-        EC_POKEMON(PLUSLE),
+        EC_POKEMON(MEWTWO),
         EC_WORD_EXCL,
-        EC_POKEMON(VOLBEAT),
+        EC_POKEMON(MEW),
         EC_WORD_WILL,
         EC_WORD_BE,
         EC_WORD_FANTASTIC
@@ -1037,7 +1037,7 @@ static const u16 sIngameTradeMail[][MAIL_WORDS_COUNT + 1] =
     }, {
         EC_WORD_THANK_YOU,
         EC_WORD_FOR,
-        EC_POKEMON(SKITTY),
+        EC_POKEMON(MEW),
         EC_POKEMON_NATIONAL(MEOWTH),
         EC_WORD_CRIES,
         EC_WORD_IN,

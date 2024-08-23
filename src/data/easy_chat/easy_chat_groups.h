@@ -1,6 +1,5 @@
 #include "easy_chat.h"
 
-#include "easy_chat_group_pokemon.h"
 #include "easy_chat_group_trainer.h"
 #include "easy_chat_group_status.h"
 #include "easy_chat_group_battle.h"
@@ -21,14 +20,13 @@
 #include "easy_chat_group_move_1.h"
 #include "easy_chat_group_move_2.h"
 #include "easy_chat_group_trendy_saying.h"
-#include "easy_chat_group_pokemon2.h"
 
 const struct EasyChatGroup gEasyChatGroups[] = {
     [EC_GROUP_POKEMON] =
     {
-        .wordData = {.valueList = gEasyChatGroup_Pokemon},
-        .numWords = ARRAY_COUNT(gEasyChatGroup_Pokemon),
-        .numEnabledWords = ARRAY_COUNT(gEasyChatGroup_Pokemon),
+        .wordData = {.valueList = 0},
+        .numWords = 0,
+        .numEnabledWords = 0,
     },
     [EC_GROUP_TRAINER] =
     {
@@ -152,8 +150,8 @@ const struct EasyChatGroup gEasyChatGroups[] = {
     },
     [EC_GROUP_POKEMON_NATIONAL] =
     {
-        .wordData = {.valueList = gEasyChatGroup_Pokemon2},
-        .numWords = ARRAY_COUNT(gEasyChatGroup_Pokemon2),
-        .numEnabledWords = ARRAY_COUNT(gEasyChatGroup_Pokemon2),
+        .wordData = {.valueList = 0},
+        .numWords = 0,
+        .numEnabledWords = 0,
     },
 };

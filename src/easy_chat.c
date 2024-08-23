@@ -1199,7 +1199,6 @@ static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
 };
 
 #include "data/easy_chat/easy_chat_groups.h"
-#include "data/easy_chat/easy_chat_words_by_letter.h"
 
 static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {
     [EC_GROUP_POKEMON]          = gEasyChatGroupName_Pokemon,
@@ -5113,7 +5112,7 @@ bool8 IsBardWordInvalid(u16 easyChatWord)
     {
     case EC_GROUP_POKEMON:
     case EC_GROUP_POKEMON_NATIONAL:
-        numWordsInGroup = gNumBardWords_Species;
+        numWordsInGroup = 0;
         break;
     case EC_GROUP_MOVE_1:
     case EC_GROUP_MOVE_2:
@@ -5530,8 +5529,8 @@ static void SetUnlockedWordsByAlphabet(void)
 
     for (i = 0; i < EC_NUM_ALPHABET_GROUPS; i++)
     {
-        numWords = gEasyChatWordsByLetterPointers[i].numWords;
-        words = gEasyChatWordsByLetterPointers[i].words;
+        numWords = 0;
+        words = 0;
         sWordData->numUnlockedAlphabetWords[i] = 0;
         index = 0;
         for (j = 0; j < numWords; j++)

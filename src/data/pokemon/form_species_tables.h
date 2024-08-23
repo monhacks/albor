@@ -272,4 +272,3 @@ static const u16 sToxtricityFormSpeciesIdTable[] = {
     SPECIES_TOXTRICITY_LOW_KEY,
     FORM_SPECIES_END,
 };
-#endif //P_FAMILY_EISCUE

@@ -44,7 +44,7 @@ SINGLE_BATTLE_TEST("Jump Kick has no recoil if no target")
         ASSUME(B_HEALING_WISH_SWITCH >= GEN_5);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_MEW);
     } WHEN {
         TURN { MOVE(opponent, MOVE_HEALING_WISH); MOVE(player, MOVE_JUMP_KICK, hit: FALSE); SEND_OUT(opponent, 1); }
     } SCENE {
@@ -66,7 +66,7 @@ SINGLE_BATTLE_TEST("Jump Kick's recoil happens after Spiky Shield damage and Pok
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SPIKY_SHIELD].effect == EFFECT_PROTECT);
         PLAYER(SPECIES_WOBBUFFET) { HP(hp); MaxHP(maxHp); }
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         if (!faintOnJumpKick && !faintOnSpiky) {

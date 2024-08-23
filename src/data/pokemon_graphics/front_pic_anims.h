@@ -722,7 +722,6 @@ static const union AnimCmd sAnim_Venomoth_1[] =
 };
 #endif //P_FAMILY_VENONAT
 
-#if P_FAMILY_DIGLETT
 static const union AnimCmd sAnim_Diglett_1[] =
 {
     ANIMCMD_FRAME(0, 25),
@@ -1243,7 +1242,6 @@ static const union AnimCmd sAnim_Dewgong_1[] =
 };
 #endif //P_FAMILY_SEEL
 
-#if P_FAMILY_GRIMER
 static const union AnimCmd sAnim_Grimer_1[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -10154,10 +10152,8 @@ SINGLE_ANIMATION(Parasect);
 SINGLE_ANIMATION(Venonat);
 SINGLE_ANIMATION(Venomoth);
 #endif //P_FAMILY_VENONAT
-#if P_FAMILY_DIGLETT
 SINGLE_ANIMATION(Diglett);
 SINGLE_ANIMATION(Dugtrio);
-#endif //P_FAMILY_DIGLETT
 #if P_FAMILY_MEOWTH
 SINGLE_ANIMATION(Meowth);
 SINGLE_ANIMATION(Persian);

@@ -58,9 +58,9 @@ DOUBLE_BATTLE_TEST("Hail deals damage based on turn order")
 {
     GIVEN {
         PLAYER(SPECIES_GLALIE);
-        PLAYER(SPECIES_WYNAUT) { Speed(1); }
+        PLAYER(SPECIES_MEW) { Speed(1); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(2); }
-        OPPONENT(SPECIES_WYNAUT) { Speed(3); }
+        OPPONENT(SPECIES_MEW) { Speed(3); }
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_HAIL); }
     } SCENE {

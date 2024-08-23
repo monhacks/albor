@@ -117,27 +117,27 @@ TEST("ModifyPersonalityForNature can set any nature")
 static const struct TrainerMon sTestParty2[] =
 {
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
     {
-        .species = SPECIES_WYNAUT,
+        .species = SPECIES_MEW,
         .lvl = 5,
     },
 };

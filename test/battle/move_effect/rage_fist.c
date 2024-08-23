@@ -90,7 +90,7 @@ DOUBLE_BATTLE_TEST("Rage Fist maximum base power is 350")
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_REGIROCK);
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -157,7 +157,7 @@ SINGLE_BATTLE_TEST("Rage Fist base power is not lost if user switches out")
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_REGIROCK);
     } WHEN {
         TURN { MOVE(player, MOVE_RAGE_FIST); MOVE(opponent, MOVE_TACKLE); }

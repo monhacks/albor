@@ -73,7 +73,6 @@ static void TrainerHillDummy(void);
 static void SetTimerValue(u32 *dst, u32 val);
 static u32 GetTimerValue(u32 *src);
 #endif //FREE_TRAINER_HILL
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level);
 #if FREE_TRAINER_HILL == FALSE
 static u16 GetPrizeItemId(void);
 #endif //FREE_TRAINER_HILL
@@ -595,7 +594,7 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
 
 static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
-    return;
+    return 0;
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -781,17 +780,7 @@ void FillHillTrainersParties(void)
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 {
-
-}
-
-static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level)
-{
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u32 exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
-
-    SetMonData(mon, MON_DATA_EXP, &exp);
-    SetMonData(mon, MON_DATA_LEVEL, &level);
-    CalculateMonStats(mon);
+    return 0;
 }
 
 u8 GetNumFloorsInTrainerHillChallenge(void)

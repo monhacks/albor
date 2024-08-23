@@ -45,7 +45,7 @@ SINGLE_BATTLE_TEST("Jaboca Berry tirggers before Bug Bite can steal it")
     KNOWN_FAILING;
     GIVEN {
         ASSUME(gMovesInfo[MOVE_BUG_BITE].category == DAMAGE_CATEGORY_PHYSICAL);
-        PLAYER(SPECIES_WYNAUT);
+        PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_WOBBUFFET) { Item(ITEM_JABOCA_BERRY); }
     } WHEN {
         TURN { MOVE(player, MOVE_BUG_BITE); }
