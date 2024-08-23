@@ -1864,7 +1864,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_DracoMeteor, ANIM_TAG_FAIRY_LOCK_CHAINS},
     {gBattleAnimSpritePal_LightningRain, ANIM_TAG_IONS},
     {gBattleAnimSpritePal_Chop, ANIM_TAG_CHOP},
-    [ANIM_TAG_HEART_STAMP - ANIM_SPRITES_START] = {gBattleAnimSpritePal_HeartStamp, ANIM_TAG_HEART_STAMP},
+    {gBattleAnimSpritePal_HeartStamp, ANIM_TAG_HEART_STAMP},
     {gBattleAnimSpritePal_HornLeech, ANIM_TAG_HORN_LEECH},
     {gBattleAnimSpritePal_Steamroller, ANIM_TAG_STEAMROLLER},
     {gBattleAnimSpritePal_HoopaHand, ANIM_TAG_HOOPA_HAND},

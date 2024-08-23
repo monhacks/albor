@@ -644,7 +644,7 @@ struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u
                 simDamage.expected = simDamage.minimum = gMovesInfo[move].argument * (aiData->abilities[battlerAtk] == ABILITY_PARENTAL_BOND ? 2 : 1);
                 break;
             case EFFECT_MULTI_HIT:
-                if (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA_ASH)
+                if (move == MOVE_WATER_SHURIKEN && gBattleMons[battlerAtk].species == SPECIES_GRENINJA)
                 {
                     simDamage.expected *= 3;
                     simDamage.minimum *= 3;
@@ -3822,40 +3822,6 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move)
 //TODO - this could use some more sophisticated logic
 bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
 {
-    // simple logic. just upgrades chosen move to z move if possible, unless regular move would kill opponent
-    if ((IsDoubleBattle()) && battlerDef == BATTLE_PARTNER(battlerAtk))
-        return FALSE;   // don't use z move on partner
-    if (HasTrainerUsedGimmick(battlerAtk, GIMMICK_Z_MOVE))
-        return FALSE;   // can't use z move twice
-
-    if (IsViableZMove(battlerAtk, chosenMove))
-    {
-        u8 effectiveness;
-        u32 zMove = GetUsableZMove(battlerAtk, chosenMove);
-        struct SimulatedDamage dmg;
-
-        if (gBattleMons[battlerDef].ability == ABILITY_DISGUISE
-            && !gMovesInfo[zMove].ignoresTargetAbility
-            && (gBattleMons[battlerDef].species == SPECIES_MIMIKYU_DISGUISED || gBattleMons[battlerDef].species == SPECIES_MIMIKYU_TOTEM_DISGUISED))
-            return FALSE; // Don't waste a Z-Move busting disguise
-        if (gBattleMons[battlerDef].ability == ABILITY_ICE_FACE
-            && !gMovesInfo[zMove].ignoresTargetAbility
-            && gBattleMons[battlerDef].species == SPECIES_EISCUE_ICE_FACE && IS_MOVE_PHYSICAL(chosenMove))
-            return FALSE; // Don't waste a Z-Move busting Ice Face
-
-        if (IS_MOVE_STATUS(chosenMove) && !IS_MOVE_STATUS(zMove))
-            return FALSE;
-        else if (!IS_MOVE_STATUS(chosenMove) && IS_MOVE_STATUS(zMove))
-            return FALSE;
-
-        dmg = AI_CalcDamageSaveBattlers(chosenMove, battlerAtk, battlerDef, &effectiveness, FALSE, DMG_ROLL_DEFAULT);
-
-        if (!IS_MOVE_STATUS(chosenMove) && dmg.minimum >= gBattleMons[battlerDef].hp)
-            return FALSE;   // don't waste damaging z move if can otherwise faint target
-
-        return TRUE;
-    }
-
     return FALSE;
 }
 

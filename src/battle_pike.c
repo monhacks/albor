@@ -89,181 +89,6 @@ static u8 GetPikeQueenFightType(u8);
 static bool8 StatusInflictionFadeOut(struct Task *task);
 static bool8 StatusInflictionFadeIn(struct Task *task);
 
-// Const rom data.
-static const struct PikeWildMon sLvl50_Mons1[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
-    },
-    {
-        .species = SPECIES_DUSCLOPS,
-        .levelDelta = 5,
-        .moves = {MOVE_WILL_O_WISP, MOVE_MEAN_LOOK, MOVE_TOXIC, MOVE_SHADOW_PUNCH}
-    }
-};
-
-static const struct PikeWildMon sLvl50_Mons2[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
-    },
-    {
-        .species = SPECIES_ELECTRODE,
-        .levelDelta = 5,
-        .moves = {MOVE_EXPLOSION, MOVE_SELF_DESTRUCT, MOVE_THUNDER, MOVE_TOXIC}
-    }
-};
-
-static const struct PikeWildMon sLvl50_Mons3[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
-    },
-    {
-        .species = SPECIES_BRELOOM,
-        .levelDelta = 5,
-        .moves = {MOVE_SPORE, MOVE_STUN_SPORE, MOVE_POISON_POWDER, MOVE_HIDDEN_POWER}
-    }
-};
-
-static const struct PikeWildMon sLvl50_Mons4[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_BODY_SLAM, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_SURF}
-    },
-    {
-        .species = SPECIES_WOBBUFFET,
-        .levelDelta = 5,
-        .moves = {MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_DESTINY_BOND}
-    }
-};
-
-static const struct PikeWildMon *const sLvl50Mons[] =
-{
-    sLvl50_Mons1,
-    sLvl50_Mons2,
-    sLvl50_Mons3,
-    sLvl50_Mons4
-};
-
-static const struct PikeWildMon sLvlOpen_Mons1[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
-    },
-    {
-        .species = SPECIES_DUSCLOPS,
-        .levelDelta = 5,
-        .moves = {MOVE_WILL_O_WISP, MOVE_MEAN_LOOK, MOVE_TOXIC, MOVE_ICE_BEAM}
-    }
-};
-
-static const struct PikeWildMon sLvlOpen_Mons2[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
-    },
-    {
-        .species = SPECIES_ELECTRODE,
-        .levelDelta = 5,
-        .moves = {MOVE_EXPLOSION, MOVE_SELF_DESTRUCT, MOVE_THUNDER, MOVE_TOXIC}
-    }
-};
-
-static const struct PikeWildMon sLvlOpen_Mons3[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
-    },
-    {
-        .species = SPECIES_BRELOOM,
-        .levelDelta = 5,
-        .moves = {MOVE_SPORE, MOVE_STUN_SPORE, MOVE_POISON_POWDER, MOVE_HIDDEN_POWER}
-    }
-};
-
-static const struct PikeWildMon sLvlOpen_Mons4[] =
-{
-    {
-        .species = SPECIES_SEVIPER,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_GLARE, MOVE_POISON_FANG, MOVE_SLUDGE_BOMB}
-    },
-    {
-        .species = SPECIES_MILOTIC,
-        .levelDelta = 4,
-        .moves = {MOVE_TOXIC, MOVE_HYPNOSIS, MOVE_BODY_SLAM, MOVE_ICE_BEAM}
-    },
-    {
-        .species = SPECIES_WOBBUFFET,
-        .levelDelta = 5,
-        .moves = {MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_ENCORE}
-    }
-};
-
-static const struct PikeWildMon *const sLvlOpenMons[] =
-{
-    sLvlOpen_Mons1,
-    sLvlOpen_Mons2,
-    sLvlOpen_Mons3,
-    sLvlOpen_Mons4
-};
-
-static const struct PikeWildMon *const *const sWildMons[2] =
-{
-    [FRONTIER_LVL_50]   = sLvl50Mons,
-    [FRONTIER_LVL_OPEN] = sLvlOpenMons
-};
-
 static const struct PikeRoomNPC sNPCTable[] =
 {
     {
@@ -617,7 +442,7 @@ static void SetupRoomObjectEvents(void)
 
 static void GetBattlePikeData(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    
 
     switch (gSpecialVar_0x8005)
     {
@@ -634,17 +459,13 @@ static void GetBattlePikeData(void)
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode];
         break;
     case PIKE_DATA_WIN_STREAK_ACTIVE:
-        if (lvlMode != FRONTIER_LVL_50)
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_OPEN;
-        else
-            gSpecialVar_Result = gSaveBlock2Ptr->frontier.winStreakActiveFlags & STREAK_PIKE_50;
         break;
     }
 }
 
 static void SetBattlePikeData(void)
 {
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    
 
     switch (gSpecialVar_0x8005)
     {
@@ -664,20 +485,6 @@ static void SetBattlePikeData(void)
             gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
         break;
     case PIKE_DATA_WIN_STREAK_ACTIVE:
-        if (lvlMode != FRONTIER_LVL_50)
-        {
-            if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_PIKE_OPEN;
-            else
-                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_PIKE_OPEN);
-        }
-        else
-        {
-            if (gSpecialVar_0x8006)
-                gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_PIKE_50;
-            else
-                gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_PIKE_50);
-        }
         break;
     }
 }
@@ -1097,9 +904,6 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 {
     s32 i;
     s32 monLevel;
-    u8 headerId = GetBattlePikeWildMonHeaderId();
-    u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    const struct PikeWildMon *const *const wildMons = sWildMons[lvlMode];
     u32 abilityNum;
     s32 pikeMonId = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL);
     pikeMonId = SpeciesToPikeMonId(pikeMonId);
@@ -1113,14 +917,14 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
         }
         else
         {
-            monLevel -= wildMons[headerId][pikeMonId].levelDelta;
+            monLevel -= 0;
             if (monLevel < FRONTIER_MIN_LEVEL_OPEN)
                 monLevel = FRONTIER_MIN_LEVEL_OPEN;
         }
     }
     else
     {
-        monLevel = FRONTIER_MAX_LEVEL_50 - wildMons[headerId][pikeMonId].levelDelta;
+        monLevel = 0;
     }
 
     if (checkKeenEyeIntimidate == TRUE && !CanEncounterWildMon(monLevel))
@@ -1128,15 +932,12 @@ bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 
     SetMonData(&gEnemyParty[0],
                MON_DATA_EXP,
-               &gExperienceTables[gSpeciesInfo[wildMons[headerId][pikeMonId].species].growthRate][monLevel]);
+               0);
 
-    if (gSpeciesInfo[wildMons[headerId][pikeMonId].species].abilities[1])
-        abilityNum = Random() % 2;
-    else
-        abilityNum = 0;
+    abilityNum = 0;
     SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
     for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gEnemyParty[0], wildMons[headerId][pikeMonId].moves[i], i);
+        SetMonMoveSlot(&gEnemyParty[0], 0, i);
 
     CalculateMonStats(&gEnemyParty[0]);
     return TRUE;
@@ -1625,14 +1426,5 @@ static bool8 CanEncounterWildMon(u8 enemyMonLevel)
 
 static u8 SpeciesToPikeMonId(u16 species)
 {
-    u8 ret;
-
-    if (species == SPECIES_SEVIPER)
-        ret = 0;
-    else if (species == SPECIES_MILOTIC)
-        ret = 1;
-    else
-        ret = 2;
-
-    return ret;
+    return 0;
 }

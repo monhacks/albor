@@ -3746,8 +3746,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BallLight = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-#if OW_FOLLOWERS_POKEBALLS
-
 #define POKEBALL_GFX_INFO(NAME)                                     \
     [BALL_##NAME] = {                                               \
         .tileTag = TAG_NONE,                                        \
@@ -3808,4 +3806,3 @@ const struct ObjectEventGraphicsInfo gPokeballGraphics[POKEBALL_COUNT] = {
     POKEBALL_GFX_INFO(BEAST),
     #endif
 };
-#endif

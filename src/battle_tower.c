@@ -1025,7 +1025,7 @@ u8 GetFrontierOpponentClass(u16 trainerId)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
         {
-            trainerClass = gFacilityClassToTrainerClass[gApprentices[GetRecordedBattleApprenticeId()].facilityClass];
+            trainerClass = gFacilityClassToTrainerClass[0];
         }
     }
 

@@ -3776,10 +3776,6 @@ static bool8 CalculateMoves(void)
     u16 movesTotal = 0;
     u8 i,j;
 
-    // Mega pokemon don't have distinct learnsets from their base form; so use base species for calculation
-    if (species >= SPECIES_VENUSAUR_MEGA && species <= SPECIES_GROUDON_PRIMAL)
-        species = GetFormSpeciesId(species, 0);
-
     //Calculate amount of Egg and LevelUp moves
     numEggMoves = GetEggMovesBySpecies(species, statsMovesEgg);
     numLevelUpMoves = GetLevelUpMovesBySpecies(species, statsMovesLevelUp);
@@ -5558,13 +5554,6 @@ static void PrintForms(u8 taskId, u16 species)
     u8 base_y = 52;
     u8 base_y_offset = 9;
     u8 times = 0;
-    u8 y_offset_icons = 0; //For unown only
-
-    if (species == SPECIES_UNOWN)
-        y_offset_icons = 8;
-
-    if (GetFormSpeciesId(species, 0) == SPECIES_UNOWN)
-        y_offset_icons = 8;
 
     StringCopy(gStringVar1, GetSpeciesName(species));
 
@@ -5581,9 +5570,9 @@ static void PrintForms(u8 taskId, u16 species)
             times += 1;
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(speciesForm, 0, 0), OBJ_PLTT_ID(5 + times), PLTT_SIZE_4BPP);
             if (times < 7)
-                gTasks[taskId].data[5 + times] = CreateMonIconNoPersonality(speciesForm, SpriteCB_MonIcon, 52 + 34*(times-1), 31, 4); //Create pokemon sprite
+                gTasks[taskId].data[5 + times] = CreateMonIconNoPersonality(speciesForm, SpriteCB_MonIcon, 52 + 34 * (times - 1), 31, 4); //Create pokemon sprite
             else if (times < 14)
-                gTasks[taskId].data[5 + times] = CreateMonIconNoPersonality(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70 - y_offset_icons, 4); //Create pokemon sprite
+                gTasks[taskId].data[5 + times] = CreateMonIconNoPersonality(speciesForm, SpriteCB_MonIcon, 18 + 34 * (times - 7), 70, 4); //Create pokemon sprite
             gSprites[gTasks[taskId].data[5 + times]].oam.priority   = 0;
             gSprites[gTasks[taskId].data[5 + times]].oam.paletteNum = 5 + times;
         }

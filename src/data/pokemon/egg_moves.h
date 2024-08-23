@@ -424,22 +424,6 @@ static const u16 sDiglettEggMoveLearnset[] = {
     MOVE_MEMENTO,
     MOVE_UNAVAILABLE,
 };
-#if P_ALOLAN_FORMS
-static const u16 sDiglettAlolanEggMoveLearnset[] = {
-    MOVE_ANCIENT_POWER,
-    MOVE_BEAT_UP,
-    MOVE_ENDURE,
-    MOVE_FEINT_ATTACK,
-    MOVE_FINAL_GAMBIT,
-    MOVE_HEADBUTT,
-    MOVE_MEMENTO,
-    MOVE_METAL_SOUND,
-    MOVE_PURSUIT,
-    MOVE_REVERSAL,
-    MOVE_THRASH,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_DIGLETT
 
 #if P_FAMILY_MEOWTH
@@ -926,23 +910,11 @@ static const u16 sArticunoEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sArticunoGalarianEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sZapdosEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sZapdosGalarianEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sMoltresEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sMoltresGalarianEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

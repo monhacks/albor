@@ -10747,7 +10747,7 @@ F_TRAINER_FEMALE |
         {
             {
 #line 4335
-            .species = SPECIES_WOBBUFFET,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4337
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
@@ -11457,7 +11457,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 4622
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 4624
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
@@ -12599,7 +12599,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 5111
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 5113
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
@@ -21600,7 +21600,7 @@ F_TRAINER_FEMALE |
         {
             {
 #line 8657
-            .species = SPECIES_WOBBUFFET,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 8659
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
@@ -26964,7 +26964,7 @@ F_TRAINER_FEMALE |
         {
             {
 #line 10759
-            .species = SPECIES_WOBBUFFET,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 10761
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
@@ -39037,7 +39037,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 15638
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 15638
             .heldItem = ITEM_CHESTO_BERRY,
@@ -39154,7 +39154,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 15688
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 15688
             .heldItem = ITEM_CHESTO_BERRY,
@@ -39289,7 +39289,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 15746
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 15746
             .heldItem = ITEM_CHESTO_BERRY,
@@ -39424,7 +39424,7 @@ F_TRAINER_FEMALE |
             },
             {
 #line 15804
-            .species = SPECIES_CRAWDAUNT,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 15804
             .heldItem = ITEM_CHESTO_BERRY,
@@ -42048,7 +42048,7 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16825
-            .species = SPECIES_WOBBUFFET,
+            .species = SPECIES_MEW,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16827
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),

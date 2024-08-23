@@ -746,12 +746,6 @@ static const union AnimCmd sAnim_Dugtrio_1[] =
     ANIMCMD_END,
 };
 
-#if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(DiglettAlolan);
-PLACEHOLDER_ANIM_SINGLE_FRAME(DugtrioAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_DIGLETT
-
 #if P_FAMILY_MEOWTH
 static const union AnimCmd sAnim_Meowth_1[] =
 {
@@ -1269,12 +1263,6 @@ static const union AnimCmd sAnim_Muk_1[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-
-#if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(GrimerAlolan);
-PLACEHOLDER_ANIM_SINGLE_FRAME(MukAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_GRIMER
 
 #if P_FAMILY_SHELLDER
 static const union AnimCmd sAnim_Shellder_1[] =
@@ -2156,7 +2144,6 @@ static const union AnimCmd sAnim_Kabutops_1[] =
 };
 #endif //P_FAMILY_KABUTO
 
-#if P_FAMILY_AERODACTYL
 static const union AnimCmd sAnim_Aerodactyl_1[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -2166,13 +2153,6 @@ static const union AnimCmd sAnim_Aerodactyl_1[] =
     ANIMCMD_END,
 };
 
-#if P_MEGA_EVOLUTIONS
-PLACEHOLDER_ANIM_SINGLE_FRAME(AerodactylMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_FAMILY_AERODACTYL
-
-#if P_FAMILY_SNORLAX
-#if P_GEN_4_CROSS_EVOS
 static const union AnimCmd sAnim_Munchlax_1[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -2180,7 +2160,6 @@ static const union AnimCmd sAnim_Munchlax_1[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_GEN_4_CROSS_EVOS
 
 static const union AnimCmd sAnim_Snorlax_1[] =
 {
@@ -2190,12 +2169,6 @@ static const union AnimCmd sAnim_Snorlax_1[] =
     ANIMCMD_END,
 };
 
-#if P_GIGANTAMAX_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(SnorlaxGigantamax);
-#endif //P_GIGANTAMAX_FORMS
-#endif //P_FAMILY_SNORLAX
-
-#if P_FAMILY_ARTICUNO
 static const union AnimCmd sAnim_Articuno_1[] =
 {
     ANIMCMD_FRAME(1, 25),
@@ -2205,12 +2178,6 @@ static const union AnimCmd sAnim_Articuno_1[] =
     ANIMCMD_END,
 };
 
-#if P_GALARIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(ArticunoGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_ARTICUNO
-
-#if P_FAMILY_ZAPDOS
 static const union AnimCmd sAnim_Zapdos_1[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -2220,12 +2187,6 @@ static const union AnimCmd sAnim_Zapdos_1[] =
     ANIMCMD_END,
 };
 
-#if P_GALARIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(ZapdosGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_ZAPDOS
-
-#if P_FAMILY_MOLTRES
 static const union AnimCmd sAnim_Moltres_1[] =
 {
     ANIMCMD_FRAME(1, 3),
@@ -2262,11 +2223,6 @@ static const union AnimCmd sAnim_Moltres_1[] =
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
-
-#if P_GALARIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(MoltresGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_MOLTRES
 
 #if P_FAMILY_DRATINI
 static const union AnimCmd sAnim_Dratini_1[] =
@@ -10201,10 +10157,6 @@ SINGLE_ANIMATION(Venomoth);
 #if P_FAMILY_DIGLETT
 SINGLE_ANIMATION(Diglett);
 SINGLE_ANIMATION(Dugtrio);
-#if P_ALOLAN_FORMS
-SINGLE_ANIMATION(DiglettAlolan);
-SINGLE_ANIMATION(DugtrioAlolan);
-#endif //P_ALOLAN_FORMS
 #endif //P_FAMILY_DIGLETT
 #if P_FAMILY_MEOWTH
 SINGLE_ANIMATION(Meowth);
@@ -10322,46 +10274,19 @@ SINGLE_ANIMATION(FarfetchdGalarian);
 SINGLE_ANIMATION(Sirfetchd);
 #endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_FARFETCHD
-#if P_FAMILY_DODUO
 SINGLE_ANIMATION(Doduo);
 SINGLE_ANIMATION(Dodrio);
-#endif //P_FAMILY_DODUO
-#if P_FAMILY_SEEL
 SINGLE_ANIMATION(Seel);
 SINGLE_ANIMATION(Dewgong);
-#endif //P_FAMILY_SEEL
-#if P_FAMILY_GRIMER
 SINGLE_ANIMATION(Grimer);
 SINGLE_ANIMATION(Muk);
-#if P_ALOLAN_FORMS
-SINGLE_ANIMATION(GrimerAlolan);
-SINGLE_ANIMATION(MukAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_GRIMER
-#if P_FAMILY_SHELLDER
 SINGLE_ANIMATION(Shellder);
 SINGLE_ANIMATION(Cloyster);
-#endif //P_FAMILY_SHELLDER
-#if P_FAMILY_GASTLY
 SINGLE_ANIMATION(Gastly);
 SINGLE_ANIMATION(Haunter);
 SINGLE_ANIMATION(Gengar);
-#if P_MEGA_EVOLUTIONS
-SINGLE_ANIMATION(GengarMega);
-#endif //P_MEGA_EVOLUTIONS
-#if P_GIGANTAMAX_FORMS
-SINGLE_ANIMATION(GengarGigantamax);
-#endif //P_GIGANTAMAX_FORMS
-#endif //P_FAMILY_GASTLY
-#if P_FAMILY_ONIX
 SINGLE_ANIMATION(Onix);
-#if P_GEN_2_CROSS_EVOS
 SINGLE_ANIMATION(Steelix);
-#if P_MEGA_EVOLUTIONS
-SINGLE_ANIMATION(SteelixMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_ONIX
 #if P_FAMILY_DROWZEE
 SINGLE_ANIMATION(Drowzee);
 SINGLE_ANIMATION(Hypno);
@@ -10529,79 +10454,28 @@ SINGLE_ANIMATION(Lapras);
 SINGLE_ANIMATION(LaprasGigantamax);
 #endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_LAPRAS
-#if P_FAMILY_DITTO
-SINGLE_ANIMATION(Ditto);
-#endif //P_FAMILY_DITTO
-#if P_FAMILY_EEVEE
 SINGLE_ANIMATION(Eevee);
-#if P_GIGANTAMAX_FORMS
-SINGLE_ANIMATION(EeveeGigantamax);
-#endif //P_GIGANTAMAX_FORMS
 SINGLE_ANIMATION(Vaporeon);
 SINGLE_ANIMATION(Jolteon);
 SINGLE_ANIMATION(Flareon);
-#if P_GEN_2_CROSS_EVOS
 SINGLE_ANIMATION(Espeon);
 SINGLE_ANIMATION(Umbreon);
-#endif //P_GEN_2_CROSS_EVOS
-#if P_GEN_4_CROSS_EVOS
 SINGLE_ANIMATION(Leafeon);
 SINGLE_ANIMATION(Glaceon);
-#endif //P_GEN_4_CROSS_EVOS
-#if P_GEN_6_CROSS_EVOS
 SINGLE_ANIMATION(Sylveon);
-#endif //P_GEN_6_CROSS_EVOS
-#endif //P_FAMILY_EEVEE
-#if P_FAMILY_PORYGON
 SINGLE_ANIMATION(Porygon);
-#if P_GEN_2_CROSS_EVOS
 SINGLE_ANIMATION(Porygon2);
-#if P_GEN_4_CROSS_EVOS
 SINGLE_ANIMATION(Porygon_Z);
-#endif //P_GEN_4_CROSS_EVOS
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_PORYGON
-#if P_FAMILY_OMANYTE
 SINGLE_ANIMATION(Omanyte);
 SINGLE_ANIMATION(Omastar);
-#endif //P_FAMILY_OMANYTE
-#if P_FAMILY_KABUTO
 SINGLE_ANIMATION(Kabuto);
 SINGLE_ANIMATION(Kabutops);
-#endif //P_FAMILY_KABUTO
-#if P_FAMILY_AERODACTYL
 SINGLE_ANIMATION(Aerodactyl);
-#if P_MEGA_EVOLUTIONS
-SINGLE_ANIMATION(AerodactylMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_FAMILY_AERODACTYL
-#if P_FAMILY_SNORLAX
-#if P_GEN_4_CROSS_EVOS
 SINGLE_ANIMATION(Munchlax);
-#endif //P_GEN_4_CROSS_EVOS
 SINGLE_ANIMATION(Snorlax);
-#if P_GIGANTAMAX_FORMS
-SINGLE_ANIMATION(SnorlaxGigantamax);
-#endif //P_GIGANTAMAX_FORMS
-#endif //P_FAMILY_SNORLAX
-#if P_FAMILY_ARTICUNO
 SINGLE_ANIMATION(Articuno);
-#if P_GALARIAN_FORMS
-SINGLE_ANIMATION(ArticunoGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_ARTICUNO
-#if P_FAMILY_ZAPDOS
 SINGLE_ANIMATION(Zapdos);
-#if P_GALARIAN_FORMS
-SINGLE_ANIMATION(ZapdosGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_ZAPDOS
-#if P_FAMILY_MOLTRES
 SINGLE_ANIMATION(Moltres);
-#if P_GALARIAN_FORMS
-SINGLE_ANIMATION(MoltresGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_MOLTRES
 #if P_FAMILY_DRATINI
 SINGLE_ANIMATION(Dratini);
 SINGLE_ANIMATION(Dragonair);

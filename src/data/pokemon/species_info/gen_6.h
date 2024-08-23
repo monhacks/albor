@@ -445,48 +445,6 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .frontAnimId = ANIM_V_STRETCH,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
     },
-
-    [SPECIES_GRENINJA_BATTLE_BOND] =
-    {
-        GRENINJA_MISC_INFO,
-        GRENINJA_NORMAL_MISC_INFO
-        .genderRatio = MON_MALE,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_BATTLE_BOND, ABILITY_NONE, ABILITY_NONE},
-        .frontAnimId = ANIM_V_STRETCH,
-        .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        .formChangeTable = sGreninjaBattleBondFormChangeTable,
-    },
-
-    [SPECIES_GRENINJA_ASH] =
-    {
-        GRENINJA_MISC_INFO,
-        .baseHP        = 72,
-        .baseAttack    = 145,
-        .baseDefense   = 67,
-        .baseSpeed     = 132,
-        .baseSpAttack  = 153,
-        .baseSpDefense = 71,
-        .expYield = 288,
-        .genderRatio = MON_MALE,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_BATTLE_BOND, ABILITY_NONE, ABILITY_NONE},
-        .description = COMPOUND_STRING(
-            "It appears and vanishes with a ninja's\n"
-            "grace. It toys with its enemies using swift\n"
-            "movements, while slicing them with throwing\n"
-            "stars made of compressed water."),
-        FRONT_PIC(GreninjaAsh, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_GreninjaAsh,
-        BACK_PIC(GreninjaAsh, 64, 48),
-        .backPicYOffset = 11,
-        PALETTES(GreninjaAsh),
-        ICON(GreninjaAsh),
-        .frontAnimId = ANIM_V_STRETCH,
-        .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        .formChangeTable = sGreninjaBattleBondFormChangeTable,
-    },
 #endif //P_FAMILY_FROAKIE
 
 #if P_FAMILY_BUNNELBY

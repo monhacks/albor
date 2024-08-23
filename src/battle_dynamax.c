@@ -32,92 +32,10 @@ struct GMaxMove
     u16 gmaxMove;
 };
 
-static const struct GMaxMove sGMaxMoveTable[] =
-{
-    {SPECIES_VENUSAUR_GIGANTAMAX,                   TYPE_GRASS,      MOVE_G_MAX_VINE_LASH},
-    {SPECIES_BLASTOISE_GIGANTAMAX,                  TYPE_WATER,      MOVE_G_MAX_CANNONADE},
-    {SPECIES_CHARIZARD_GIGANTAMAX,                  TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
-    {SPECIES_BUTTERFREE_GIGANTAMAX,                 TYPE_BUG,        MOVE_G_MAX_BEFUDDLE},
-    {SPECIES_PIKACHU_GIGANTAMAX,                    TYPE_ELECTRIC,   MOVE_G_MAX_VOLT_CRASH},
-    {SPECIES_MEOWTH_GIGANTAMAX,                     TYPE_NORMAL,     MOVE_G_MAX_GOLD_RUSH},
-    {SPECIES_MACHAMP_GIGANTAMAX,                    TYPE_FIGHTING,   MOVE_G_MAX_CHI_STRIKE},
-    {SPECIES_GENGAR_GIGANTAMAX,                     TYPE_GHOST,      MOVE_G_MAX_TERROR},
-    {SPECIES_KINGLER_GIGANTAMAX,                    TYPE_WATER,      MOVE_G_MAX_FOAM_BURST},
-    {SPECIES_LAPRAS_GIGANTAMAX,                     TYPE_ICE,        MOVE_G_MAX_RESONANCE},
-    {SPECIES_EEVEE_GIGANTAMAX,                      TYPE_NORMAL,     MOVE_G_MAX_CUDDLE},
-    {SPECIES_SNORLAX_GIGANTAMAX,                    TYPE_NORMAL,     MOVE_G_MAX_REPLENISH},
-    {SPECIES_GARBODOR_GIGANTAMAX,                   TYPE_POISON,     MOVE_G_MAX_MALODOR},
-    {SPECIES_MELMETAL_GIGANTAMAX,                   TYPE_STEEL,      MOVE_G_MAX_MELTDOWN},
-    {SPECIES_RILLABOOM_GIGANTAMAX,                  TYPE_GRASS,      MOVE_G_MAX_DRUM_SOLO},
-    {SPECIES_CINDERACE_GIGANTAMAX,                  TYPE_FIRE,       MOVE_G_MAX_FIREBALL},
-    {SPECIES_INTELEON_GIGANTAMAX,                   TYPE_WATER,      MOVE_G_MAX_HYDROSNIPE},
-    {SPECIES_CORVIKNIGHT_GIGANTAMAX,                TYPE_FLYING,     MOVE_G_MAX_WIND_RAGE},
-    {SPECIES_ORBEETLE_GIGANTAMAX,                   TYPE_PSYCHIC,    MOVE_G_MAX_GRAVITAS},
-    {SPECIES_DREDNAW_GIGANTAMAX,                    TYPE_WATER,      MOVE_G_MAX_STONESURGE},
-    {SPECIES_COALOSSAL_GIGANTAMAX,                  TYPE_ROCK,       MOVE_G_MAX_VOLCALITH},
-    {SPECIES_FLAPPLE_GIGANTAMAX,                    TYPE_GRASS,      MOVE_G_MAX_TARTNESS},
-    {SPECIES_APPLETUN_GIGANTAMAX,                   TYPE_GRASS,      MOVE_G_MAX_SWEETNESS},
-    {SPECIES_SANDACONDA_GIGANTAMAX,                 TYPE_GROUND,     MOVE_G_MAX_SANDBLAST},
-    {SPECIES_TOXTRICITY_AMPED_GIGANTAMAX,           TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
-    {SPECIES_TOXTRICITY_LOW_KEY_GIGANTAMAX,         TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
-    {SPECIES_CENTISKORCH_GIGANTAMAX,                TYPE_FIRE,       MOVE_G_MAX_CENTIFERNO},
-    {SPECIES_HATTERENE_GIGANTAMAX,                  TYPE_FAIRY,      MOVE_G_MAX_SMITE},
-    {SPECIES_GRIMMSNARL_GIGANTAMAX,                 TYPE_DARK,       MOVE_G_MAX_SNOOZE},
-    {SPECIES_ALCREMIE_GIGANTAMAX,                   TYPE_FAIRY,      MOVE_G_MAX_FINALE},
-    {SPECIES_COPPERAJAH_GIGANTAMAX,                 TYPE_STEEL,      MOVE_G_MAX_STEELSURGE},
-    {SPECIES_DURALUDON_GIGANTAMAX,                  TYPE_DRAGON,     MOVE_G_MAX_DEPLETION},
-    {SPECIES_URSHIFU_SINGLE_STRIKE_STYLE_GIGANTAMAX,TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
-    {SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX, TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
-};
-
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(u32 battler)
 {
-    u16 species = gBattleMons[battler].species;
-    u16 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Prevents Zigzagoon from dynamaxing in vanilla.
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        return FALSE;
-
-    // Check if Player has a Dynamax Band.
-    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
-    {
-        if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
-            return FALSE;
-        if (B_FLAG_DYNAMAX_BATTLE == 0 || (B_FLAG_DYNAMAX_BATTLE != 0 && !FlagGet(B_FLAG_DYNAMAX_BATTLE)))
-            return FALSE;
-    }
-
-    // Check if species isn't allowed to Dynamax.
-    if (GET_BASE_SPECIES_ID(species) == SPECIES_ZACIAN
-        || GET_BASE_SPECIES_ID(species) == SPECIES_ZAMAZENTA
-        || GET_BASE_SPECIES_ID(species) == SPECIES_ETERNATUS)
-        return FALSE;
-
-    // Check if Trainer has already Dynamaxed.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_DYNAMAX))
-        return FALSE;
-
-    // Check if AI battler is intended to Dynamaxed.
-    if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_DYNAMAX))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE)
-        return FALSE;
-
-    // Check if battler is holding a Z-Crystal or Mega Stone.
-    if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE))  // tests make this check already
-        return FALSE;
-
-    // TODO: Cannot Dynamax in a Max Raid if you don't have Dynamax Energy.
-    // if (gBattleTypeFlags & BATTLE_TYPE_RAID && gBattleStruct->raid.dynamaxEnergy != battler)
-    //    return FALSE;
-
-    // No checks failed, all set!
-    return TRUE;
+    return FALSE;
 }
 
 // Returns whether a battler is transformed into a Gigantamax form.
@@ -251,30 +169,7 @@ bool32 IsMoveBlockedByDynamax(u32 move)
 
 static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
 {
-    // Gigantamax check
-    u32 i;
-    u32 species = gBattleMons[battler].species;
-    u32 targetSpecies = SPECIES_NONE;
-
-    if (!gSpeciesInfo[species].isGigantamax)
-        targetSpecies = GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
-
-    if (targetSpecies != SPECIES_NONE)
-        species = targetSpecies;
-
-    if (gSpeciesInfo[species].isGigantamax)
-    {
-        for (i = 0; i < ARRAY_COUNT(sGMaxMoveTable); i++)
-        {
-            if (sGMaxMoveTable[i].species == species && sGMaxMoveTable[i].moveType == type)
-                return sGMaxMoveTable[i].gmaxMove;
-        }
-    }
-
-    // Regular Max Move
-    if (gTypesInfo[type].maxMove == MOVE_NONE) // failsafe
-        return gTypesInfo[0].maxMove;
-    return gTypesInfo[type].maxMove;
+    return 0;
 }
 
 // Returns the appropriate Max Move or G-Max Move for a battler to use.

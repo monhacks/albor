@@ -43,7 +43,6 @@ struct FloorTrainers
 static EWRAM_DATA struct {
     u8 floorId;
     struct TrainerHillChallenge challenge;
-    struct TrainerHillFloor floors[NUM_TRAINER_HILL_FLOORS];
 } *sHillData = NULL;
 
 static EWRAM_DATA struct FloorTrainers *sFloorTrainers = NULL;
@@ -316,34 +315,12 @@ void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)
 
 u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
 {
-    u8 id, facilityClass;
-
-    SetUpDataStruct();
-    id = trainerId - 1;
-    facilityClass = sHillData->floors[sHillData->floorId].trainers[id].facilityClass;
-    FreeDataStruct();
-
-    return gFacilityClassToPicIndex[facilityClass];
+    return 0;
 }
 
 void InitTrainerHillBattleStruct(void)
 {
-    s32 i, j;
 
-    SetUpDataStruct();
-    sFloorTrainers = AllocZeroed(sizeof(*sFloorTrainers));
-
-    for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
-    {
-        for (j = 0; j < TRAINER_NAME_LENGTH + 1; j++)
-            sFloorTrainers->name[i][j] = sHillData->floors[sHillData->floorId].trainers[i].name[j];
-
-        sFloorTrainers->facilityClass[i] = sHillData->floors[sHillData->floorId].trainers[i].facilityClass;
-    }
-#if FREE_TRAINER_HILL == FALSE
-    SetTrainerHillVBlankCounter(&gSaveBlock1Ptr->trainerHill.timer);
-#endif //FREE_TRAINER_HILL
-    FreeDataStruct();
 }
 
 void FreeTrainerHillBattleStruct(void)
@@ -353,21 +330,7 @@ void FreeTrainerHillBattleStruct(void)
 
 static void SetUpDataStruct(void)
 {
-#if FREE_TRAINER_HILL == FALSE
-    if (sHillData == NULL)
-    {
-        sHillData = AllocZeroed(sizeof(*sHillData));
-        sHillData->floorId = gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;
 
-        // This copy depends on the floor data for each challenge being directly after the
-        // challenge header data, and for the field 'floors' in sHillData to come directly
-        // after the field 'challenge'.
-        // e.g. for HILL_MODE_NORMAL, it will copy sChallenge_Normal to sHillData->challenge and
-        // it will copy sFloors_Normal to sHillData->floors
-        CpuCopy32(sChallengeData[gSaveBlock1Ptr->trainerHill.mode], &sHillData->challenge, sizeof(sHillData->challenge) + sizeof(sHillData->floors));
-        TrainerHillDummy();
-    }
-#endif //FREE_TRAINER_HILL
 }
 
 static void FreeDataStruct(void)
@@ -377,29 +340,7 @@ static void FreeDataStruct(void)
 
 void CopyTrainerHillTrainerText(u8 which, u16 trainerId)
 {
-    u8 id, floorId;
 
-    SetUpDataStruct();
-    floorId = GetFloorId();
-    id = trainerId - 1;
-
-    switch (which)
-    {
-    case TRAINER_HILL_TEXT_INTRO:
-        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechBefore);
-        break;
-    case TRAINER_HILL_TEXT_PLAYER_LOST:
-        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechWin);
-        break;
-    case TRAINER_HILL_TEXT_PLAYER_WON:
-        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechLose);
-        break;
-    case TRAINER_HILL_TEXT_AFTER:
-        FrontierSpeechToString(sHillData->floors[floorId].trainers[id].speechAfter);
-        break;
-    }
-
-    FreeDataStruct();
 }
 
 static void TrainerHillStartChallenge(void)
@@ -641,35 +582,7 @@ static void SetTimerValue(u32 *dst, u32 val)
 
 void LoadTrainerHillObjectEventTemplates(void)
 {
-    u8 i, floorId;
-    struct ObjectEventTemplate *eventTemplates = gSaveBlock1Ptr->objectEventTemplates;
 
-    if (!LoadTrainerHillFloorObjectEventScripts())
-        return;
-
-    SetUpDataStruct();
-    for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
-        gSaveBlock2Ptr->frontier.trainerIds[i] = 0xFFFF;
-    CpuFill32(0, gSaveBlock1Ptr->objectEventTemplates, sizeof(gSaveBlock1Ptr->objectEventTemplates));
-
-    floorId = GetFloorId();
-    for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
-    {
-        u8 bits;
-
-        eventTemplates[i] = sTrainerObjectEventTemplate;
-        eventTemplates[i].localId = i + 1;
-        eventTemplates[i].graphicsId = FacilityClassToGraphicsId(sHillData->floors[floorId].trainers[i].facilityClass);
-        eventTemplates[i].x = sHillData->floors[floorId].map.trainerCoords[i] & 0xF;
-        eventTemplates[i].y = ((sHillData->floors[floorId].map.trainerCoords[i] >> 4) & 0xF) + HILL_FLOOR_HEIGHT_MARGIN;
-        bits = i << 2;
-        eventTemplates[i].movementType = ((sHillData->floors[floorId].map.trainerDirections >> bits) & 0xF) + MOVEMENT_TYPE_FACE_UP;
-        eventTemplates[i].trainerRange_berryTreeId = (sHillData->floors[floorId].map.trainerRanges >> bits) & 0xF;
-        eventTemplates[i].script = TrainerHill_EventScript_TrainerBattle;
-        gSaveBlock2Ptr->frontier.trainerIds[i] = i + 1;
-    }
-
-    FreeDataStruct();
 }
 
 bool32 LoadTrainerHillFloorObjectEventScripts(void)
@@ -682,15 +595,7 @@ bool32 LoadTrainerHillFloorObjectEventScripts(void)
 
 static u16 GetMetatileForFloor(u8 floorId, u32 x, u32 y, u32 floorWidth) // floorWidth is always 16
 {
-    bool8 impassable;
-    u16 metatile;
-    u16 elevation;
-
-    impassable = (sHillData->floors[floorId].map.collisionData[y] >> (15 - x) & 1);
-    metatile = sHillData->floors[floorId].map.metatileData[floorWidth * y + x] + NUM_METATILES_IN_PRIMARY;
-    elevation = 3 << MAPGRID_ELEVATION_SHIFT;
-
-    return ((impassable << MAPGRID_COLLISION_SHIFT) & MAPGRID_COLLISION_MASK) | elevation | (metatile & MAPGRID_METATILE_ID_MASK);
+    return;
 }
 
 void GenerateTrainerHillFloorLayout(u16 *mapArg)
@@ -858,26 +763,7 @@ static void ShowTrainerHillPostBattleText(void)
 
 static void CreateNPCTrainerHillParty(u16 trainerId, u8 firstMonId)
 {
-    u8 trId, level;
-    s32 i, floorId, partySlot;
 
-    if (trainerId == 0 || trainerId > HILL_TRAINERS_PER_FLOOR)
-        return;
-
-    trId = trainerId - 1;
-    SetUpDataStruct();
-    level = GetHighestLevelInPlayerParty();
-    floorId = GetFloorId();
-    for (i = firstMonId, partySlot = 0; i < firstMonId + PARTY_SIZE / 2; i++, partySlot++)
-    {
-        u8 id = sTrainerPartySlots[trId][partySlot];
-        struct Pokemon *mon = &gEnemyParty[i];
-
-        CreateBattleTowerMon(mon, &sHillData->floors[floorId].trainers[trId].mons[id]);
-        SetTrainerHillMonLevel(mon, level);
-    }
-
-    FreeDataStruct();
 }
 
 void FillHillTrainerParty(void)
@@ -893,31 +779,9 @@ void FillHillTrainersParties(void)
     CreateNPCTrainerHillParty(gTrainerBattleOpponent_B, PARTY_SIZE / 2);
 }
 
-// This function is unused, but my best guess is
-// it was supposed to return AI scripts for trainer
-// hill trainers.
-u32 GetTrainerHillAIFlags(void)
-{
-    return (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY);
-}
-
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)
 {
-    s32 i;
-    u8 trId, facilityClass;
 
-    SetUpDataStruct();
-    trId = trainerId - 1;
-    facilityClass = sHillData->floors[sHillData->floorId].trainers[trId].facilityClass;
-    FreeDataStruct();
-
-    for (i = 0; i < ARRAY_COUNT(sTrainerClassesAndMusic); i++)
-    {
-        if (sTrainerClassesAndMusic[i].trainerClass == gFacilityClassToTrainerClass[facilityClass])
-            return sTrainerClassesAndMusic[i].musicId;
-    }
-
-    return 0;
 }
 
 static void SetTrainerHillMonLevel(struct Pokemon *mon, u8 level)
@@ -976,113 +840,10 @@ bool32 OnTrainerHillEReaderChallengeFloor(void)
 
 static void GetChallengeWon(void)
 {
-#if FREE_TRAINER_HILL == FALSE
-    if (gSaveBlock1Ptr->trainerHill.hasLost)
-        gSpecialVar_Result = FALSE;
-    else
-        gSpecialVar_Result = TRUE;
-#endif //FREE_TRAINER_HILL
+
 }
 
 static void TrainerHillSetMode(void)
 {
-#if FREE_TRAINER_HILL == FALSE
-    gSaveBlock1Ptr->trainerHill.mode = gSpecialVar_0x8005;
-    gSaveBlock1Ptr->trainerHill.bestTime = gSaveBlock1Ptr->trainerHillTimes[gSpecialVar_0x8005];
-#endif //FREE_TRAINER_HILL
+
 }
-
-// Determines which prize list to use from the set of prize lists.
-#if FREE_TRAINER_HILL == FALSE
-static u8 GetPrizeListId(bool8 allowTMs)
-{
-    u8 prizeListId, i, modBy;
-
-    // The initial selection depends on the trainer numbers for the completed challenge.
-    // These don't change with the available challenge modes, so Normal/Unique will always
-    // have a prizeListId of 8, and Variety/Expert will have a prizeListId of 24.
-    prizeListId = 0;
-    for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
-    {
-        prizeListId ^= sHillData->floors[i].trainerNum1 & 0x1F;
-        prizeListId ^= sHillData->floors[i].trainerNum2 & 0x1F;
-    }
-
-    // In practice, the conditional below is always true.
-    // The 2nd half of the lists in both sets of lists all have a TM as the "grand prize", while the 1st half do not,
-    // so taking the mod of the (total / 2) ensures that a prize list without a TM will be used.
-    if (allowTMs)
-        modBy = NUM_TRAINER_HILL_PRIZE_LISTS;
-    else
-        modBy = NUM_TRAINER_HILL_PRIZE_LISTS / 2;
-
-    prizeListId %= modBy;
-    return prizeListId;
-}
-
-static u16 GetPrizeItemId(void)
-{
-    u8 i;
-    const u16 *prizeList;
-    s32 trainerNumSum = 0, prizeListSetId, minutes, id;
-
-    // First determine which set of prize lists to use. The sets of lists only differ in
-    // what TMs they can offer as the "grand prize" for a time under 12 minutes.
-    // Which set of lists gets used is based on the sum of all the trainer numbers for that
-    // challenge. These don't change with the available challenge modes, so Normal will always
-    // have a prizeListSetId of 0, and Unique/Variety/Expert will have a prizeListSetId of 1.
-    for (i = 0; i < NUM_TRAINER_HILL_FLOORS; i++)
-    {
-        trainerNumSum += sHillData->floors[i].trainerNum1;
-        trainerNumSum += sHillData->floors[i].trainerNum2;
-    }
-    prizeListSetId = trainerNumSum / 256;
-    prizeListSetId %= (int)ARRAY_COUNT(sPrizeListSets);
-
-    // Now get which prize list to use from the set. See GetPrizeListId for details.
-    // The below conditional will always be true, because a Trainer Hill challenge can't be entered
-    // until the player has entered the Hall of Fame (FLAG_SYS_GAME_CLEAR is set) and because all
-    // of the available challenge modes have the full 8 trainers (NUM_TRAINER_HILL_TRAINERS).
-    if (FlagGet(FLAG_SYS_GAME_CLEAR) && sHillData->challenge.numTrainers == NUM_TRAINER_HILL_TRAINERS)
-        i = GetPrizeListId(TRUE);
-    else
-        i = GetPrizeListId(FALSE);
-
-    // 1 is added to Expert mode's prize list selection because otherwise it has the same prizes as Variety
-    if (gSaveBlock1Ptr->trainerHill.mode == HILL_MODE_EXPERT)
-        i = (i + 1) % NUM_TRAINER_HILL_PRIZE_LISTS;
-
-    // After the above (non-random) calculations, the following are the possible prize list selections:
-    // sPrizeListSets[0][8] (Normal)
-    // sPrizeListSets[1][4] (Variety)
-    // sPrizeListSets[1][8] (Unique)
-    // sPrizeListSets[1][5] (Expert)
-    prizeList = sPrizeListSets[prizeListSetId][i];
-
-    // Which prize is given from the list depends on the time scored.
-    // The prize for any time after 12 minutes is the same in every list.
-    // The prizes for a time under 12 minutes are:
-    // - ITEM_TM_SUNNY_DAY     (Normal)
-    // - ITEM_ELIXIR           (Variety)
-    // - ITEM_TM_GIGA_DRAIN    (Unique)
-    // - ITEM_TM_BRICK_BREAK   (Expert)
-    // As an additional note, if players were allowed to enter a Trainer Hill challenge before
-    // entering the Hall of Fame, there would be 1 additional prize possibility (ITEM_MAX_ETHER)
-    // as Normal / Unique modes would use sPrizeListSets[0][3] / sPrizeListSets[1][3] respectively.
-    minutes = (signed)(gSaveBlock1Ptr->trainerHill.timer) / (60 * 60);
-    if (minutes < 12)
-        id = 0; // Depends on list
-    else if (minutes < 13)
-        id = 1; // ITEM_ETHER
-    else if (minutes < 14)
-        id = 2; // ITEM_MAX_POTION
-    else if (minutes < 16)
-        id = 3; // ITEM_REVIVE
-    else if (minutes < 18)
-        id = 4; // ITEM_FLUFFY_TAIL
-    else
-        id = 5; // ITEM_GREAT_BALL
-
-    return prizeList[id];
-}
-#endif //FREE_TRAINER_HILL

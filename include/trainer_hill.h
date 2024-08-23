@@ -24,20 +24,11 @@ struct TrainerHillFloorMap
     u8 trainerRanges; // 4 bits per trainer
 };
 
-struct TrainerHillFloor
-{
-    u8 trainerNum1;
-    u8 trainerNum2;
-    struct TrainerHillTrainer trainers[HILL_TRAINERS_PER_FLOOR];
-    struct TrainerHillFloorMap map;
-};
-
 struct TrainerHillChallenge
 {
     u8 numTrainers;
     u8 numFloors;
     u32 checksum; // A byte array sum of the floor data
-    struct TrainerHillFloor floors[0]; // Floor data is assumed to follow, so this will be intentionally read out of bounds
 };
 
 extern u32 *gTrainerHillVBlankCounter;

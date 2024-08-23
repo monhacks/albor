@@ -451,7 +451,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
         // Silver Symbol.
         {
             {
-                .species = SPECIES_SEVIPER,
+                .species = SPECIES_MEW,
                 .heldItem = ITEM_QUICK_CLAW,
                 .fixedIV = 16,
                 .nature = NATURE_OFENSIVA,
@@ -459,7 +459,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
                 .moves = {MOVE_SWAGGER, MOVE_CRUNCH, MOVE_POISON_FANG, MOVE_GIGA_DRAIN},
             },
             {
-                .species = SPECIES_SHUCKLE,
+                .species = SPECIES_MEW,
                 .heldItem = ITEM_CHESTO_BERRY,
                 .fixedIV = 16,
                 .nature = NATURE_DEFENSIVA,
@@ -478,7 +478,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
         // Gold Symbol.
         {
             {
-                .species = SPECIES_SEVIPER,
+                .species = SPECIES_MEW,
                 .heldItem = ITEM_FOCUS_BAND,
                 .fixedIV = MAX_PER_STAT_IVS,
                 .nature = NATURE_DEFENSIVA,
@@ -1480,11 +1480,11 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
             if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
             {
                 trainerId = GetRecordedBattleApprenticeId();
-                FrontierSpeechToString(gApprentices[trainerId].speechLost);
+                FrontierSpeechToString(0);
             }
             else
             {
-                FrontierSpeechToString(gApprentices[trainerId].speechLost);
+                FrontierSpeechToString(0);
             }
         }
         break;

@@ -319,7 +319,7 @@ static u16 GetRandomAlternateMove(u8 monId)
     u8 level;
 
     id = APPRENTICE_SPECIES_ID(monId);
-    species = gApprentices[PLAYER_APPRENTICE.id].species[id];
+    species = 0;
     learnset = GetSpeciesLevelUpLearnset(species);
     j = 0;
 
@@ -473,7 +473,7 @@ static u16 GetDefaultMove(u8 monId, u8 speciesArrayId, u8 moveSlot)
     for (i = 0; i < APPRENTICE_MAX_QUESTIONS && PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WIN_SPEECH; i++)
         numQuestions++;
 
-    GetLatestLearnedMoves(gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId], moves);
+    GetLatestLearnedMoves(0, 0);
     for (i = 0; i < numQuestions && i < CURRENT_QUESTION_NUM; i++)
     {
         if (PLAYER_APPRENTICE.questions[i].questionId == QUESTION_ID_WHICH_MOVE
@@ -491,7 +491,6 @@ static void SaveApprenticeParty(u8 numQuestions)
 {
     struct ApprenticeMon *apprenticeMons[MULTI_PARTY_SIZE];
     u8 i, j;
-    u32 speciesTableId;
 
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
@@ -512,8 +511,7 @@ static void SaveApprenticeParty(u8 numQuestions)
     // Save party species
     for (i = 0; i < MULTI_PARTY_SIZE; i++)
     {
-        speciesTableId = APPRENTICE_SPECIES_ID(i);
-        apprenticeMons[i]->species = gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
+        apprenticeMons[i]->species = 0;
         GetLatestLearnedMoves(apprenticeMons[i]->species, apprenticeMons[i]->moves);
     }
 
@@ -563,12 +561,7 @@ static void CreateApprenticeMenu(u8 menu)
         top = 6;
         for (i = 0; i < MULTI_PARTY_SIZE; i++)
         {
-            u16 species;
-            u32 speciesTableId;
-
-            speciesTableId = APPRENTICE_SPECIES_ID(i);
-            species =  gApprentices[PLAYER_APPRENTICE.id].species[speciesTableId];
-            strings[i] = GetSpeciesName(species);
+            strings[i] = GetSpeciesName(0);
         }
         break;
     case APPRENTICE_ASK_2SPECIES:
@@ -967,10 +960,10 @@ static void InitQuestionData(void)
         {
             // For the first MULTI_PARTY_SIZE (3) questions, a mon is asked to be selected for the Apprentice's party
             id1 = PLAYER_APPRENTICE.speciesIds[PLAYER_APPRENTICE.questionsAnswered] >> 4;
-            gApprenticeQuestionData->altSpeciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
+            gApprenticeQuestionData->altSpeciesId = 0;
 
             id2 = PLAYER_APPRENTICE.speciesIds[PLAYER_APPRENTICE.questionsAnswered] & 0xF;
-            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
+            gApprenticeQuestionData->speciesId = 0;
         }
     }
     else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MOVE)
@@ -982,7 +975,7 @@ static void InitQuestionData(void)
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
             APPRENTICE_SPECIES_ID_NO_COND(id1, count);
-            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id1];
+            gApprenticeQuestionData->speciesId = 0;
             gApprenticeQuestionData->moveId1 = GetDefaultMove(count, id1, PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].moveSlot);
             gApprenticeQuestionData->moveId2 = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data;
         }
@@ -996,7 +989,7 @@ static void InitQuestionData(void)
             // count re-used as monId
             count = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].monId;
             APPRENTICE_SPECIES_ID_NO_COND(id2, count);
-            gApprenticeQuestionData->speciesId = gApprentices[PLAYER_APPRENTICE.id].species[id2];
+            gApprenticeQuestionData->speciesId = 0;
         }
     }
 }
@@ -1009,7 +1002,6 @@ static void FreeQuestionData(void)
 static void ApprenticeBufferString(void)
 {
     u8 *stringDst;
-    u32 speciesArrayId;
 
     switch (gSpecialVar_0x8005)
     {
@@ -1059,8 +1051,7 @@ static void ApprenticeBufferString(void)
         StringCopy(stringDst, gStringVar4);
         break;
     case APPRENTICE_BUFF_LEAD_MON_SPECIES:
-        speciesArrayId = APPRENTICE_SPECIES_ID(PLAYER_APPRENTICE.leadMonId);
-        StringCopy(stringDst, GetSpeciesName(gApprentices[PLAYER_APPRENTICE.id].species[speciesArrayId]));
+        StringCopy(stringDst, 0);
         break;
     }
 }
@@ -1186,24 +1177,7 @@ static void GetShouldApprenticeLeave(void)
 
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)
 {
-    const struct ApprenticeTrainer *apprentice = &gApprentices[apprenticeId];
-
-    switch (language)
-    {
-    case LANGUAGE_JAPANESE:
-        return apprentice->name[0];
-    case LANGUAGE_ENGLISH:
-        return apprentice->name[1];
-    case LANGUAGE_FRENCH:
-        return apprentice->name[2];
-    case LANGUAGE_ITALIAN:
-        return apprentice->name[3];
-    case LANGUAGE_GERMAN:
-        return apprentice->name[4];
-    case LANGUAGE_SPANISH:
-    default:
-        return apprentice->name[5];
-    }
+    return 0;
 }
 
 static void Task_ExecuteFuncAfterButtonPress(u8 taskId)

@@ -102,12 +102,7 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u
 // Const rom data.
 #define ABILITY_RANDOM 2 // For wild mons data.
 
-#if BATTLE_PYRAMID_RANDOM_ENCOUNTERS == TRUE
-    #include "data/battle_frontier/battle_pyramid_wild_requirements.h"
-#else
-    #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
-    #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
-#endif
+#include "data/battle_frontier/battle_pyramid_wild_requirements.h"
 
 
 static const struct PyramidFloorTemplate sPyramidFloorTemplates[] =
@@ -1565,10 +1560,7 @@ void GenerateBattlePyramidWildMon(void)
     if (round >= TOTAL_PYRAMID_ROUNDS)
         round = TOTAL_PYRAMID_ROUNDS - 1;
 
-    if (lvl != FRONTIER_LVL_50)
-        wildMons = sOpenLevelWildMonPointers[round];
-    else
-        wildMons = sLevel50WildMonPointers[round];
+    wildMons = 0;
 
     id = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) - 1;
     SetMonData(&gEnemyParty[0], MON_DATA_SPECIES, &wildMons[id].species);

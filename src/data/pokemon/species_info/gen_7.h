@@ -1245,10 +1245,9 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .frontAnimId = ANIM_V_STRETCH,                          \
         .backPicYOffset = 7,                                    \
         PALETTES(Rockruff),                                     \
-        ICON(Rockruff),                                      \
+        ICON(Rockruff),                                         \
         FOOTPRINT(Rockruff)                                     \
-        LEARNSETS(Rockruff),                                    \
-        .formSpeciesIdTable = sRockruffFormSpeciesIdTable
+        LEARNSETS(Rockruff)
 
     [SPECIES_ROCKRUFF] =
     {

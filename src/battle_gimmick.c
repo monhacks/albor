@@ -243,38 +243,12 @@ static inline u32 GetIndicatorSpriteId(u32 healthboxId)
 
 u32 GetIndicatorTileTag(u32 battler)
 {
-    u32 gimmick = GetActiveGimmick(battler);
-
-    if (IsBattlerPrimalReverted(battler))
-    {
-        if (gBattleMons[battler].species == SPECIES_GROUDON_PRIMAL)
-            return TAG_OMEGA_INDICATOR_TILE;
-        else
-            return TAG_ALPHA_INDICATOR_TILE;
-    }
-    else if (gimmick == GIMMICK_TERA) // special case
-    {
-        return sTeraIndicatorSpriteSheets[GetBattlerTeraType(battler)].tag;
-    }
-    else if (gGimmicksInfo[gimmick].indicatorSheet != NULL)
-    {
-        return gGimmicksInfo[gimmick].indicatorSheet->tag;
-    }
-    else
-    {
-        return TAG_NONE;
-    }
+    return TAG_NONE;
 }
 
 u32 GetIndicatorPalTag(u32 battler)
 {
-    u32 gimmick = GetActiveGimmick(battler);
-    if (IsBattlerPrimalReverted(battler))
-        return TAG_MISC_INDICATOR_PAL;
-    else if (gGimmicksInfo[gimmick].indicatorPal != NULL)
-        return gGimmicksInfo[gimmick].indicatorPal->tag;
-    else
-        return TAG_NONE;
+    return TAG_NONE;
 }
 
 void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)

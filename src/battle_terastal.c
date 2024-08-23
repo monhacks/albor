@@ -113,8 +113,7 @@ u32 GetBattlerTeraType(u32 battler)
 // Uses up a type's Stellar boost.
 void ExpendTypeStellarBoost(u32 battler, u32 type)
 {
-    if (type < 32 && gBattleMons[battler].species != SPECIES_TERAPAGOS_STELLAR) // avoid OOB access
-        gBattleStruct->stellarBoostFlags[GetBattlerSide(battler)] |= 1u << type;
+
 }
 
 // Checks whether a type's Stellar boost has been expended.

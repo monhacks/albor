@@ -39,8 +39,11 @@
 // i.e. selecting a Pokémon or selecting the Cancel button
 // The "Options menu" will refer to the popup menu that shows when some actions have been selected
 
-#define SWAP_PLAYER_SCREEN 0  // The screen where the player selects which of their Pokémon to swap away
-#define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new Pokémon from the defeated party to swap for
+enum SwapScreen
+{
+    SWAP_PLAYER_SCREEN, // The screen where the player selects which of their Pokémon to swap away
+    SWAP_ENEMY_SCREEN   // The screen where the player selects which new Pokémon from the defeated party to swap for
+};
 
 #define SELECTABLE_MONS_COUNT 6
 
