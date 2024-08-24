@@ -22,54 +22,30 @@ gCryTable::
 	cry Cry_Raticate
 	cry Cry_Spearow
 	cry Cry_Fearow
-.if P_FAMILY_EKANS == TRUE
 	cry Cry_Ekans
 	cry Cry_Arbok
-.endif @ P_FAMILY_EKANS
-.if P_FAMILY_PIKACHU == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Pichu
-.endif @ P_GEN_2_CROSS_EVOS
 	cry Cry_Pikachu
 	cry Cry_Raichu
-.endif @ P_FAMILY_PIKACHU
-.if P_FAMILY_SANDSHREW == TRUE
 	cry Cry_Sandshrew
 	cry Cry_Sandslash
-.endif @ P_FAMILY_SANDSHREW
-.if P_FAMILY_NIDORAN == TRUE
 	cry Cry_NidoranF
 	cry Cry_Nidorina
 	cry Cry_Nidoqueen
 	cry Cry_NidoranM
 	cry Cry_Nidorino
 	cry Cry_Nidoking
-.endif @ P_FAMILY_NIDORAN
-.if P_FAMILY_CLEFAIRY == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Cleffa
-.endif @ P_GEN_2_CROSS_EVOS
 	cry Cry_Clefairy
 	cry Cry_Clefable
-.endif @ P_FAMILY_CLEFAIRY
-.if P_FAMILY_VULPIX == TRUE
 	cry Cry_Vulpix
 	cry Cry_Ninetales
-.endif @ P_FAMILY_VULPIX
-.if P_FAMILY_JIGGLYPUFF == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Igglybuff
-.endif @ P_GEN_2_CROSS_EVOS
 	cry Cry_Jigglypuff
 	cry Cry_Wigglytuff
-.endif @ P_FAMILY_JIGGLYPUFF
-.if P_FAMILY_ZUBAT == TRUE
 	cry Cry_Zubat
 	cry Cry_Golbat
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Crobat
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ZUBAT
 .if P_FAMILY_ODDISH == TRUE
 	cry Cry_Oddish
 	cry Cry_Gloom

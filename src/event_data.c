@@ -50,21 +50,6 @@ void ClearDailyFlags(void)
     memset(&gSaveBlock1Ptr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
 }
 
-void DisableMysteryEvent(void)
-{
-    FlagClear(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-void EnableMysteryEvent(void)
-{
-    FlagSet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-bool32 IsMysteryEventEnabled(void)
-{
-    return FlagGet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
 void DisableResetRTC(void)
 {
     VarSet(VAR_RESET_RTC_ENABLE, 0);

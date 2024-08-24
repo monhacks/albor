@@ -43,14 +43,6 @@
 #define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
-#define P_FAMILY_EKANS                   P_GEN_1_POKEMON
-#define P_FAMILY_PIKACHU                 P_GEN_1_POKEMON
-#define P_FAMILY_SANDSHREW               P_GEN_1_POKEMON
-#define P_FAMILY_NIDORAN                 P_GEN_1_POKEMON
-#define P_FAMILY_CLEFAIRY                P_GEN_1_POKEMON
-#define P_FAMILY_VULPIX                  P_GEN_1_POKEMON
-#define P_FAMILY_JIGGLYPUFF              P_GEN_1_POKEMON
-#define P_FAMILY_ZUBAT                   P_GEN_1_POKEMON
 #define P_FAMILY_ODDISH                  P_GEN_1_POKEMON
 #define P_FAMILY_PARAS                   P_GEN_1_POKEMON
 #define P_FAMILY_VENONAT                 P_GEN_1_POKEMON

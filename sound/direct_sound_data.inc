@@ -474,7 +474,6 @@ Cry_Spearow::
 Cry_Fearow::
 	.incbin "sound/direct_sound_samples/cries/fearow.bin"
 
-.if P_FAMILY_EKANS == TRUE
 	.align 2
 Cry_Ekans::
 	.incbin "sound/direct_sound_samples/cries/ekans.bin"
@@ -482,14 +481,10 @@ Cry_Ekans::
 	.align 2
 Cry_Arbok::
 	.incbin "sound/direct_sound_samples/cries/arbok.bin"
-.endif @ P_FAMILY_EKANS
 
-.if P_FAMILY_PIKACHU == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Pichu::
 	.incbin "sound/direct_sound_samples/cries/pichu.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Pikachu::
@@ -498,9 +493,7 @@ Cry_Pikachu::
 	.align 2
 Cry_Raichu::
 	.incbin "sound/direct_sound_samples/cries/raichu.bin"
-.endif @ P_FAMILY_PIKACHU
 
-.if P_FAMILY_SANDSHREW == TRUE
 	.align 2
 Cry_Sandshrew::
 	.incbin "sound/direct_sound_samples/cries/sandshrew.bin"
@@ -508,9 +501,7 @@ Cry_Sandshrew::
 	.align 2
 Cry_Sandslash::
 	.incbin "sound/direct_sound_samples/cries/sandslash.bin"
-.endif @ P_FAMILY_SANDSHREW
 
-.if P_FAMILY_NIDORAN == TRUE
 	.align 2
 Cry_NidoranF::
 	.incbin "sound/direct_sound_samples/cries/nidoran_f.bin"
@@ -534,14 +525,10 @@ Cry_Nidorino::
 	.align 2
 Cry_Nidoking::
 	.incbin "sound/direct_sound_samples/cries/nidoking.bin"
-.endif @ P_FAMILY_NIDORAN
 
-.if P_FAMILY_CLEFAIRY == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Cleffa::
 	.incbin "sound/direct_sound_samples/cries/cleffa.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Clefairy::
@@ -550,9 +537,7 @@ Cry_Clefairy::
 	.align 2
 Cry_Clefable::
 	.incbin "sound/direct_sound_samples/cries/clefable.bin"
-.endif @ P_FAMILY_CLEFAIRY
 
-.if P_FAMILY_VULPIX == TRUE
 	.align 2
 Cry_Vulpix::
 	.incbin "sound/direct_sound_samples/cries/vulpix.bin"
@@ -560,14 +545,10 @@ Cry_Vulpix::
 	.align 2
 Cry_Ninetales::
 	.incbin "sound/direct_sound_samples/cries/ninetales.bin"
-.endif @ P_FAMILY_VULPIX
 
-.if P_FAMILY_JIGGLYPUFF == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Igglybuff::
 	.incbin "sound/direct_sound_samples/cries/igglybuff.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Jigglypuff::
@@ -576,9 +557,7 @@ Cry_Jigglypuff::
 	.align 2
 Cry_Wigglytuff::
 	.incbin "sound/direct_sound_samples/cries/wigglytuff.bin"
-.endif @ P_FAMILY_JIGGLYPUFF
 
-.if P_FAMILY_ZUBAT == TRUE
 	.align 2
 Cry_Zubat::
 	.incbin "sound/direct_sound_samples/cries/zubat.bin"
@@ -587,12 +566,9 @@ Cry_Zubat::
 Cry_Golbat::
 	.incbin "sound/direct_sound_samples/cries/golbat.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Crobat::
 	.incbin "sound/direct_sound_samples/cries/crobat.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ZUBAT
 
 .if P_FAMILY_ODDISH == TRUE
 	.align 2

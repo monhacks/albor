@@ -4,9 +4,6 @@
 void InitEventData(void);
 void ClearTempFieldEventData(void);
 void ClearDailyFlags(void);
-void DisableMysteryEvent(void);
-void EnableMysteryEvent(void);
-bool32 IsMysteryEventEnabled(void);
 void DisableResetRTC(void);
 void EnableResetRTC(void);
 bool32 CanResetRTC(void);
