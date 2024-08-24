@@ -83,4 +83,3 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 
 *Spoink & Grumpig como Psychic-Poison
 *Lycanroc tipo Roca-Lucha
-*Limpiar paletteSlot de ObjectEvent

@@ -1,44 +1,20 @@
 	.align 2
 gCryTable::
-.if P_CRIES_ENABLED == TRUE
-.if P_FAMILY_BULBASAUR == TRUE
 	cry Cry_Bulbasaur
 	cry Cry_Ivysaur
 	cry Cry_Venusaur
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_VenusaurMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_BULBASAUR
-.if P_FAMILY_CHARMANDER == TRUE
 	cry Cry_Charmander
 	cry Cry_Charmeleon
 	cry Cry_Charizard
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_CharizardMegaX
-	cry Cry_CharizardMegaY
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_CHARMANDER
-.if P_FAMILY_SQUIRTLE == TRUE
 	cry Cry_Squirtle
 	cry Cry_Wartortle
 	cry Cry_Blastoise
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_BlastoiseMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_SQUIRTLE
-.if P_FAMILY_CATERPIE == TRUE
 	cry Cry_Caterpie
 	cry Cry_Metapod
 	cry Cry_Butterfree
-.endif @ P_FAMILY_CATERPIE
-.if P_FAMILY_WEEDLE == TRUE
 	cry Cry_Weedle
 	cry Cry_Kakuna
 	cry Cry_Beedrill
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_BeedrillMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_WEEDLE
 .if P_FAMILY_PIDGEY == TRUE
 	cry Cry_Pidgey
 	cry Cry_Pidgeotto
@@ -2409,45 +2385,21 @@ gCryTable::
 
 	.align 2
 gCryTable_Reverse::
-.if P_CRIES_ENABLED == TRUE
-.if P_FAMILY_BULBASAUR == TRUE
 	cry_reverse Cry_Bulbasaur
 	cry_reverse Cry_Ivysaur
 	cry_reverse Cry_Venusaur
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry_reverse Cry_VenusaurMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_BULBASAUR
-.if P_FAMILY_CHARMANDER == TRUE
 	cry_reverse Cry_Charmander
 	cry_reverse Cry_Charmeleon
 	cry_reverse Cry_Charizard
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry_reverse Cry_CharizardMegaX
-	cry_reverse Cry_CharizardMegaY
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_CHARMANDER
-.if P_FAMILY_SQUIRTLE == TRUE
 	cry_reverse Cry_Squirtle
 	cry_reverse Cry_Wartortle
 	cry_reverse Cry_Blastoise
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry_reverse Cry_BlastoiseMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_SQUIRTLE
-.if P_FAMILY_CATERPIE == TRUE
 	cry_reverse Cry_Caterpie
 	cry_reverse Cry_Metapod
 	cry_reverse Cry_Butterfree
-.endif @ P_FAMILY_CATERPIE
-.if P_FAMILY_WEEDLE == TRUE
 	cry_reverse Cry_Weedle
 	cry_reverse Cry_Kakuna
 	cry_reverse Cry_Beedrill
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry_reverse Cry_BeedrillMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_WEEDLE
 .if P_FAMILY_PIDGEY == TRUE
 	cry_reverse Cry_Pidgey
 	cry_reverse Cry_Pidgeotto

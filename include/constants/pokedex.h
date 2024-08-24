@@ -1,8 +1,8 @@
 #ifndef GUARD_CONSTANTS_POKEDEX_H
 #define GUARD_CONSTANTS_POKEDEX_H
 
-// National Pokédex order
-enum {
+enum NationalDexOrder
+{
     NATIONAL_DEX_NONE,
     NATIONAL_DEX_BULBASAUR,
     NATIONAL_DEX_IVYSAUR,
@@ -626,8 +626,6 @@ enum {
     NATIONAL_DEX_REGIGIGAS,
     NATIONAL_DEX_COUNT
 };
-
-#define POKEMON_SLOTS_NUMBER NATIONAL_DEX_COUNT
 
 #define DECAGRAMS_IN_POUND             4536
 #define CM_PER_INCH                    2.54

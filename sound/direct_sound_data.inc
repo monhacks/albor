@@ -386,8 +386,6 @@ DirectSoundWaveData_unknown_16::
 DirectSoundWaveData_unknown_17::
 	.incbin "sound/direct_sound_samples/unknown_17.bin"
 
-.if P_CRIES_ENABLED == TRUE
-.if P_FAMILY_BULBASAUR == TRUE
 	.align 2
 Cry_Bulbasaur::
 	.incbin "sound/direct_sound_samples/cries/bulbasaur.bin"
@@ -399,9 +397,7 @@ Cry_Ivysaur::
 	.align 2
 Cry_Venusaur::
 	.incbin "sound/direct_sound_samples/cries/venusaur.bin"
-.endif @ P_FAMILY_BULBASAUR
 
-.if P_FAMILY_CHARMANDER == TRUE
 	.align 2
 Cry_Charmander::
 	.incbin "sound/direct_sound_samples/cries/charmander.bin"
@@ -413,9 +409,7 @@ Cry_Charmeleon::
 	.align 2
 Cry_Charizard::
 	.incbin "sound/direct_sound_samples/cries/charizard.bin"
-.endif @ P_FAMILY_CHARMANDER
 
-.if P_FAMILY_SQUIRTLE == TRUE
 	.align 2
 Cry_Squirtle::
 	.incbin "sound/direct_sound_samples/cries/squirtle.bin"
@@ -427,9 +421,7 @@ Cry_Wartortle::
 	.align 2
 Cry_Blastoise::
 	.incbin "sound/direct_sound_samples/cries/blastoise.bin"
-.endif @ P_FAMILY_SQUIRTLE
 
-.if P_FAMILY_CATERPIE == TRUE
 	.align 2
 Cry_Caterpie::
 	.incbin "sound/direct_sound_samples/cries/caterpie.bin"
@@ -441,9 +433,7 @@ Cry_Metapod::
 	.align 2
 Cry_Butterfree::
 	.incbin "sound/direct_sound_samples/cries/butterfree.bin"
-.endif @ P_FAMILY_CATERPIE
 
-.if P_FAMILY_WEEDLE == TRUE
 	.align 2
 Cry_Weedle::
 	.incbin "sound/direct_sound_samples/cries/weedle.bin"
@@ -455,7 +445,6 @@ Cry_Kakuna::
 	.align 2
 Cry_Beedrill::
 	.incbin "sound/direct_sound_samples/cries/beedrill.bin"
-.endif @ P_FAMILY_WEEDLE
 
 .if P_FAMILY_PIDGEY == TRUE
 	.align 2
