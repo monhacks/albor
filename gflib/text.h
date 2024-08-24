@@ -14,8 +14,7 @@ enum {
     FONT_BIG,
     FONT_BRAILLE,
     FONT_NARROW,
-    FONT_SMALL_NARROW, // Very similar to FONT_SMALL, some glyphs are narrower
-    FONT_BOLD, // JP glyph set only
+    FONT_SMALL_NARROW,
     FONT_NARROWER,
     FONT_SMALL_NARROWER,
     FONT_SHORT_NARROW,
@@ -45,7 +44,6 @@ enum {
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
     FONTATTR_LINE_SPACING,
-    FONTATTR_UNKNOWN,   // dunno what this is yet
     FONTATTR_COLOR_FOREGROUND,
     FONTATTR_COLOR_BACKGROUND,
     FONTATTR_COLOR_SHADOW
@@ -53,9 +51,8 @@ enum {
 
 struct TextPrinterSubStruct
 {
-    u8 fontId:4;  // 0x14
+    u8 fontId:4;
     bool8 hasPrintBeenSpedUp:1;
-    u8 unk:3;
     u8 downArrowDelay:5;
     u8 downArrowYPosIdx:2;
     bool8 hasFontIdBeenSet:1;
@@ -69,11 +66,10 @@ struct TextPrinterTemplate
     u8 fontId;
     u8 x;
     u8 y;
-    u8 currentX;        // 0x8
+    u8 currentX;
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;   // 0xC
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -102,7 +98,6 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;

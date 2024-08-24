@@ -800,7 +800,7 @@ static void DoSoftReset_(void)
 
 static void SetFrontierTrainers(void)
 {
-    gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainers = 0;
 }
 
 static void SaveSelectedParty(void)

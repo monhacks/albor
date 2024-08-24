@@ -46,15 +46,6 @@ static u16 sSavedTm3Cnt;
 static u16 sSavedSioCnt;
 static u16 sSavedRCnt;
 
-static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)
-{
-    int checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
-    if (checksum != hillTrainer->checksum)
-        return FALSE;
-
-    return TRUE;
-}
-
 bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
 {
     u32 i;
@@ -65,15 +56,8 @@ bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
     if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
         return FALSE;
 
-    // Validate trainers
-    for (i = 0; i < numTrainers; i++)
-    {
-        if (!ValidateTrainerChecksum(&hillSet->trainers[i]))
-            return FALSE;
-    }
-
     // Validate checksum
-    checksum = CalcByteArraySum((u8 *)hillSet->trainers, numTrainers * sizeof(struct EReaderTrainerHillTrainer));
+    checksum = 0;
     if (checksum != hillSet->checksum)
         return FALSE;
 

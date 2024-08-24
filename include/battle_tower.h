@@ -5,8 +5,6 @@
 
 struct BattleFrontierTrainer
 {
-    u8 facilityClass;
-    u8 filler1[3];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];
     u16 speechWin[EASY_CHAT_BATTLE_WORDS_COUNT];
@@ -14,14 +12,10 @@ struct BattleFrontierTrainer
     const u16 *monSet;
 };
 
-extern const u8 gTowerMaleFacilityClasses[30];
 extern const u16 gTowerMaleTrainerGfxIds[30];
-extern const u8 gTowerFemaleFacilityClasses[20];
 extern const u16 gTowerFemaleTrainerGfxIds[20];
 extern const struct TrainerMon gBattleFrontierMons[];
-extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const struct TrainerMon gSlateportBattleTentMons[];
-extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
 
 // Temporary storage for monIds of the opponent team
 // during team generation in battle factory and similar facilities.
@@ -48,14 +42,12 @@ u8 GetEreaderTrainerFrontSpriteId(void);
 u8 GetEreaderTrainerClassId(void);
 void GetEreaderTrainerName(u8 *dst);
 void ValidateEReaderTrainer(void);
-void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer);
 void CopyEReaderTrainerGreeting(void);
 void CalcApprenticeChecksum(struct Apprentice *apprentice);
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
 s32 GetHighestLevelInPlayerParty(void);
-u16 FacilityClassToGraphicsId(u8 facilityClass);
 void TrySetLinkBattleTowerEnemyPartyLevel(void);
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst);
 

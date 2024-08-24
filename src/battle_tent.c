@@ -297,7 +297,7 @@ static void GenerateInitialRentalMons(void)
     u16 heldItems[PARTY_SIZE];
 
     firstMonId = 0;
-    gFacilityTrainers = gSlateportBattleTentTrainers;
+    gFacilityTrainers = 0;
     for (i = 0; i < PARTY_SIZE; i++)
     {
         species[i] = 0;
@@ -356,7 +356,7 @@ static void GenerateOpponentMons(void)
     u16 heldItems[FRONTIER_PARTY_SIZE];
     s32 numMons = 0;
 
-    gFacilityTrainers = gSlateportBattleTentTrainers;
+    gFacilityTrainers = 0;
     gFacilityTrainerMons = gSlateportBattleTentMons;
 
     while (1)

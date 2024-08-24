@@ -446,7 +446,6 @@ Cry_Kakuna::
 Cry_Beedrill::
 	.incbin "sound/direct_sound_samples/cries/beedrill.bin"
 
-.if P_FAMILY_PIDGEY == TRUE
 	.align 2
 Cry_Pidgey::
 	.incbin "sound/direct_sound_samples/cries/pidgey.bin"
@@ -458,9 +457,7 @@ Cry_Pidgeotto::
 	.align 2
 Cry_Pidgeot::
 	.incbin "sound/direct_sound_samples/cries/pidgeot.bin"
-.endif @ P_FAMILY_PIDGEY
 
-.if P_FAMILY_RATTATA == TRUE
 	.align 2
 Cry_Rattata::
 	.incbin "sound/direct_sound_samples/cries/rattata.bin"
@@ -468,9 +465,7 @@ Cry_Rattata::
 	.align 2
 Cry_Raticate::
 	.incbin "sound/direct_sound_samples/cries/raticate.bin"
-.endif @ P_FAMILY_RATTATA
 
-.if P_FAMILY_SPEAROW == TRUE
 	.align 2
 Cry_Spearow::
 	.incbin "sound/direct_sound_samples/cries/spearow.bin"
@@ -478,7 +473,6 @@ Cry_Spearow::
 	.align 2
 Cry_Fearow::
 	.incbin "sound/direct_sound_samples/cries/fearow.bin"
-.endif @ P_FAMILY_SPEAROW
 
 .if P_FAMILY_EKANS == TRUE
 	.align 2

@@ -1193,7 +1193,7 @@ static void PrepareOneTrainer(bool8 difficult)
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1);
 
     gTrainerBattleOpponent_A = trainerId;
-    gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainers = 0;
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
@@ -1206,7 +1206,7 @@ static void PrepareTwoTrainers(void)
     u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u16 challengeNum = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
 
-    gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainers = 0;
     do
     {
         // Pick the 1st trainer, making sure it's not one that's been encountered yet in this challenge.

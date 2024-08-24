@@ -31,24 +31,6 @@ enum {
 #define EREADER_CHECKSUM_OK_MASK (EREADER_CHECKSUM_OK << EREADER_CHECKSUM_SHIFT)
 #define EREADER_CHECKSUM_MASK    ((EREADER_CHECKSUM_OK | EREADER_CHECKSUM_ERR) << EREADER_CHECKSUM_SHIFT)
 
-struct EReaderTrainerHillTrainer
-{
-    u8 trainerNum;
-    struct TrainerHillTrainer trainer;
-    struct TrainerHillFloorMap map;
-    u32 checksum;
-}; // size=0x274
-
-struct EReaderTrainerHillSet
-{
-    u8 numTrainers;
-    u8 id;
-    u16 dummy; // Only read in an assert.
-    u32 checksum;
-    struct EReaderTrainerHillTrainer trainers[6];
-    u8 unk_ec0[40];
-}; // size = 0xf00
-
 bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet *);
 int EReaderHandleTransfer(u8, size_t, const void *, void *);
 void EReaderHelper_Timer3Callback(void);

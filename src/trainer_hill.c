@@ -37,7 +37,6 @@
 struct FloorTrainers
 {
     u8 name[HILL_TRAINERS_PER_FLOOR][TRAINER_NAME_LENGTH + 1];
-    u8 facilityClass[HILL_TRAINERS_PER_FLOOR];
 };
 
 static EWRAM_DATA struct {
@@ -298,9 +297,7 @@ static u8 GetFloorId(void)
 
 u8 GetTrainerHillOpponentClass(u16 trainerId)
 {
-    u8 id = trainerId - 1;
-
-    return gFacilityClassToTrainerClass[sFloorTrainers->facilityClass[id]];
+    return 0;
 }
 
 void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)

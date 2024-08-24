@@ -16,71 +16,21 @@ static const u16 sSquirtleEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_PIDGEY
 static const u16 sPidgeyEggMoveLearnset[] = {
-    MOVE_PURSUIT,
-    MOVE_FEINT_ATTACK,
-    MOVE_FORESIGHT,
-    MOVE_STEEL_WING,
-    MOVE_AIR_CUTTER,
-    MOVE_AIR_SLASH,
-    MOVE_BRAVE_BIRD,
-    MOVE_UPROAR,
-    MOVE_DEFOG,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_PIDGEY
 
-#if P_FAMILY_RATTATA
 static const u16 sRattataEggMoveLearnset[] = {
-    MOVE_SCREECH,
-    MOVE_FLAME_WHEEL,
-    MOVE_FURY_SWIPES,
-    MOVE_BITE,
-    MOVE_COUNTER,
-    MOVE_REVERSAL,
-    MOVE_UPROAR,
-    MOVE_LAST_RESORT,
-    MOVE_ME_FIRST,
-    MOVE_REVENGE,
-    MOVE_FINAL_GAMBIT,
     MOVE_UNAVAILABLE,
 };
 
-#if P_ALOLAN_FORMS
 static const u16 sRattataAlolanEggMoveLearnset[] = {
-    MOVE_COUNTER,
-    MOVE_FINAL_GAMBIT,
-    MOVE_FURY_SWIPES,
-    MOVE_ME_FIRST,
-    MOVE_REVENGE,
-    MOVE_REVERSAL,
-    MOVE_SNATCH,
-    MOVE_STOCKPILE,
-    MOVE_SWALLOW,
-    MOVE_SWITCHEROO,
-    MOVE_UPROAR,
     MOVE_UNAVAILABLE,
 };
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_RATTATA
 
-#if P_FAMILY_SPEAROW
 static const u16 sSpearowEggMoveLearnset[] = {
-    MOVE_FEINT_ATTACK,
-    MOVE_SCARY_FACE,
-    MOVE_QUICK_ATTACK,
-    MOVE_TRI_ATTACK,
-    MOVE_ASTONISH,
-    MOVE_SKY_ATTACK,
-    MOVE_WHIRLWIND,
-    MOVE_UPROAR,
-    MOVE_FEATHER_DANCE,
-    MOVE_STEEL_WING,
-    MOVE_RAZOR_WIND,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_SPEAROW
 
 #if P_FAMILY_EKANS
 static const u16 sEkansEggMoveLearnset[] = {

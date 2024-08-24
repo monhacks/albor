@@ -328,8 +328,8 @@ int GetMatchCallTrainerPic(int index)
         return GetTrainerPicFromId(index);
     }
 
-    index = MatchCall_GetOverrideFacilityClass(headerId);
-    return gFacilityClassToPicIndex[index];
+    index = 0;
+    return 0;
 }
 
 const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)

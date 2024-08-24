@@ -469,60 +469,6 @@ static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54]
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const u8 sTrainerTextGroups[50][2] =
-{
-    {FACILITY_CLASS_AROMA_LADY, 3},
-    {FACILITY_CLASS_RUIN_MANIAC, 4},
-    {FACILITY_CLASS_TUBER_F, 1},
-    {FACILITY_CLASS_TUBER_M, 0},
-    {FACILITY_CLASS_COOLTRAINER_M, 2},
-    {FACILITY_CLASS_COOLTRAINER_F, 3},
-    {FACILITY_CLASS_HEX_MANIAC, 3},
-    {FACILITY_CLASS_LADY, 3},
-    {FACILITY_CLASS_BEAUTY, 3},
-    {FACILITY_CLASS_RICH_BOY, 2},
-    {FACILITY_CLASS_POKEMANIAC, 2},
-    {FACILITY_CLASS_SWIMMER_M, 2},
-    {FACILITY_CLASS_BLACK_BELT, 4},
-    {FACILITY_CLASS_GUITARIST, 2},
-    {FACILITY_CLASS_KINDLER, 2},
-    {FACILITY_CLASS_CAMPER, 0},
-    {FACILITY_CLASS_BUG_MANIAC, 2},
-    {FACILITY_CLASS_PSYCHIC_M, 2},
-    {FACILITY_CLASS_PSYCHIC_F, 3},
-    {FACILITY_CLASS_GENTLEMAN, 4},
-    {FACILITY_CLASS_SCHOOL_KID_M, 0},
-    {FACILITY_CLASS_SCHOOL_KID_F, 1},
-    {FACILITY_CLASS_POKEFAN_M, 4},
-    {FACILITY_CLASS_POKEFAN_F, 5},
-    {FACILITY_CLASS_EXPERT_M, 4},
-    {FACILITY_CLASS_EXPERT_F, 5},
-    {FACILITY_CLASS_YOUNGSTER, 0},
-    {FACILITY_CLASS_FISHERMAN, 4},
-    {FACILITY_CLASS_CYCLING_TRIATHLETE_M, 2},
-    {FACILITY_CLASS_RUNNING_TRIATHLETE_M, 2},
-    {FACILITY_CLASS_SWIMMING_TRIATHLETE_M, 2},
-    {FACILITY_CLASS_RUNNING_TRIATHLETE_F, 3},
-    {FACILITY_CLASS_CYCLING_TRIATHLETE_F, 3},
-    {FACILITY_CLASS_SWIMMING_TRIATHLETE_F, 3},
-    {FACILITY_CLASS_DRAGON_TAMER, 2},
-    {FACILITY_CLASS_BIRD_KEEPER, 2},
-    {FACILITY_CLASS_NINJA_BOY, 0},
-    {FACILITY_CLASS_BATTLE_GIRL, 3},
-    {FACILITY_CLASS_PARASOL_LADY, 3},
-    {FACILITY_CLASS_SWIMMER_F, 3},
-    {FACILITY_CLASS_PICNICKER, 1},
-    {FACILITY_CLASS_SAILOR, 2},
-    {FACILITY_CLASS_COLLECTOR, 2},
-    {FACILITY_CLASS_PKMN_BREEDER_M, 2},
-    {FACILITY_CLASS_PKMN_BREEDER_F, 3},
-    {FACILITY_CLASS_PKMN_RANGER_M, 2},
-    {FACILITY_CLASS_PKMN_RANGER_F, 3},
-    {FACILITY_CLASS_LASS, 3},
-    {FACILITY_CLASS_BUG_CATCHER, 0},
-    {FACILITY_CLASS_HIKER, 4},
-};
-
 static const u8 *const sExitDirectionHintTexts1[] =
 {
     BattlePyramid_Text_ExitHintUp1,
@@ -1027,77 +973,12 @@ static void HidePyramidItem(void)
 
 static void SetPyramidFacilityTrainers(void)
 {
-    gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainers = 0;
 }
 
 static void ShowPostBattleHintText(void)
 {
-    int i;
-    int hintType;
-    u8 id;
-    int textGroup = 0;
-    int textIndex = 0;
-    struct ObjectEventTemplate *events = gSaveBlock1Ptr->objectEventTemplates;
-    u16 trainerId = LocalIdToPyramidTrainerId(gObjectEvents[gSelectedObjectEvent].localId);
 
-    for (i = 0; i < ARRAY_COUNT(sTrainerTextGroups); i++)
-    {
-        if (sTrainerTextGroups[i][0] == gFacilityTrainers[trainerId].facilityClass)
-        {
-            textGroup = sTrainerTextGroups[i][1];
-            break;
-        }
-    }
-
-    hintType = sHintTextTypes[gObjectEvents[gSelectedObjectEvent].localId - 1];
-    i = 0;
-    while (!i)
-    {
-        switch (hintType)
-        {
-        case HINT_EXIT_DIRECTION:
-            textIndex = GetPostBattleDirectionHintTextIndex(&hintType, 8, HINT_EXIT_DIRECTION);
-            i = 1;
-            break;
-        case HINT_REMAINING_ITEMS:
-            for (i = 0; i < GetNumBattlePyramidObjectEvents(); i++)
-            {
-                if (events[i].graphicsId == OBJ_EVENT_GFX_ITEM_BALL && events[i].x != SHRT_MAX && events[i].y != SHRT_MAX)
-                    textIndex++;
-            }
-            i = 1;
-            break;
-        case HINT_REMAINING_TRAINERS:
-            id = GetPyramidFloorTemplateId();
-            textIndex = sPyramidFloorTemplates[id].numTrainers;
-            for (i = 0; i < MAX_PYRAMID_TRAINERS; i++)
-            {
-                if ((1u << i) & gSaveBlock2Ptr->frontier.pyramidTrainerFlags)
-                    textIndex--;
-            }
-            i = 1;
-            break;
-        case HINT_EXIT_SHORT_REMAINING_TRAINERS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 8, HINT_REMAINING_TRAINERS);
-            break;
-        case HINT_EXIT_SHORT_REMAINING_ITEMS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 8, HINT_REMAINING_ITEMS);
-            break;
-        case HINT_EXIT_MEDIUM_REMAINING_TRAINERS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 16, HINT_REMAINING_TRAINERS);
-            break;
-        case HINT_EXIT_MEDIUM_REMAINING_ITEMS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 16, HINT_REMAINING_ITEMS);
-            break;
-        case HINT_EXIT_FAR_REMAINING_TRAINERS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 24, HINT_REMAINING_TRAINERS);
-            break;
-        case HINT_EXIT_FAR_REMAINING_ITEMS:
-            GetPostBattleDirectionHintTextIndex(&hintType, 24, HINT_REMAINING_ITEMS);
-            break;
-        }
-    }
-    ShowFieldMessage(sPostBattleTexts[textGroup][hintType][textIndex]);
 }
 
 static void UpdatePyramidWinStreak(void)
@@ -1675,13 +1556,6 @@ void CopyPyramidTrainerLoseSpeech(u16 trainerId)
 
 u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 {
-    int i;
-
-    for (i = 0; i < ARRAY_COUNT(sTrainerClassEncounterMusic); i++)
-    {
-        if (sTrainerClassEncounterMusic[i].trainerClass == gFacilityClassToTrainerClass[gFacilityTrainers[trainerId].facilityClass])
-            return sTrainerClassEncounterMusic[i].trainerEncounterMusic;
-    }
     return TRAINER_ENCOUNTER_MUSIC_MALE;
 }
 

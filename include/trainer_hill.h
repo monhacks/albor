@@ -3,18 +3,6 @@
 
 #define DUMMY_HILL_MON { .nickname = __("$$$$$$$$$$$") }
 
-struct TrainerHillTrainer
-{
-    u8 name[TRAINER_NAME_LENGTH + 1];
-    u8 facilityClass;
-    bool32 unused; // Set to TRUE on JP trainers
-    u16 speechBefore[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u16 speechWin[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u16 speechLose[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u16 speechAfter[EASY_CHAT_BATTLE_WORDS_COUNT];
-    struct BattleTowerPokemon mons[PARTY_SIZE];
-};
-
 struct TrainerHillFloorMap
 {
     u8 metatileData[HILL_FLOOR_WIDTH * HILL_FLOOR_HEIGHT_MAIN]; // Add NUM_METATILES_IN_PRIMARY to the values in this array to get metatile ids.

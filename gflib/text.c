@@ -30,7 +30,6 @@ static void DecompressGlyph_Short(u16, bool32);
 static void DecompressGlyph_Big(u16);
 static void DecompressGlyph_Narrow(u16, bool32);
 static void DecompressGlyph_SmallNarrow(u16, bool32);
-static void DecompressGlyph_Bold(u16);
 static void DecompressGlyph_Narrower(u16, bool32);
 static void DecompressGlyph_SmallNarrower(u16, bool32);
 static void DecompressGlyph_ShortNarrow(u16, bool32);
@@ -196,16 +195,6 @@ static const struct FontInfo sFontInfos[] =
         .bgColor = 1,
         .shadowColor = 3,
     },
-    [FONT_BOLD] = {
-        .fontFunction = NULL,
-        .maxLetterWidth = 8,
-        .maxLetterHeight = 8,
-        .letterSpacing = 0,
-        .lineSpacing = 0,
-        .fgColor = 1,
-        .bgColor = 2,
-        .shadowColor = 15,
-    },
     [FONT_NARROWER] = {
         .fontFunction = FontFunc_Narrower,
         .maxLetterWidth = 5,
@@ -247,13 +236,10 @@ static const u8 sMenuCursorDimensions[][2] =
     [FONT_BRAILLE]        = {8, 16},
     [FONT_NARROW]         = {8, 15},
     [FONT_SMALL_NARROW]   = {8,  8},
-    [FONT_BOLD]           = {},
     [FONT_NARROWER]       = {8, 15},
     [FONT_SMALL_NARROWER] = {8,  8},
     [FONT_SHORT_NARROW]   = {8, 14},
 };
-
-static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
 
 static void SetFontsPointer(const struct FontInfo *fonts)
 {
@@ -280,7 +266,6 @@ u16 AddTextPrinterParameterized(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 
     printerTemplate.currentY = y;
     printerTemplate.letterSpacing = gFonts[fontId].letterSpacing;
     printerTemplate.lineSpacing = gFonts[fontId].lineSpacing;
-    printerTemplate.unk = gFonts[fontId].unk;
     printerTemplate.fgColor = gFonts[fontId].fgColor;
     printerTemplate.bgColor = gFonts[fontId].bgColor;
     printerTemplate.shadowColor = gFonts[fontId].shadowColor;
@@ -1522,9 +1507,6 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
         default:
             switch (fontId)
             {
-            case FONT_BOLD:
-                DecompressGlyph_Bold(temp);
-                break;
             case FONT_NORMAL:
             default:
                 DecompressGlyph_Normal(temp, TRUE);
@@ -1594,9 +1576,6 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
             break;
         case FONTATTR_LINE_SPACING:
             result = sFontInfos[fontId].lineSpacing;
-            break;
-        case FONTATTR_UNKNOWN:
-            result = sFontInfos[fontId].unk;
             break;
         case FONTATTR_COLOR_FOREGROUND:
             result = sFontInfos[fontId].fgColor;
@@ -1784,17 +1763,6 @@ static u32 GetGlyphWidth_Normal(u16 glyphId, bool32 isJapanese)
     return gFontNormalLatinGlyphWidths[glyphId];
 }
 
-static void DecompressGlyph_Bold(u16 glyphId)
-{
-    const u16 *glyphs;
-
-    glyphs = sFontBoldJapaneseGlyphs + (256 * (glyphId >> 4)) + (8 * (glyphId & 15));
-    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
-    DecompressGlyphTile(glyphs + 128, gCurGlyph.gfxBufferBottom);
-    gCurGlyph.width = 8;
-    gCurGlyph.height = 12;
-}
-
 static void DecompressGlyph_Narrower(u16 glyphId, bool32 isJapanese)
 {
     const u16 *glyphs;
@@ -1887,7 +1855,6 @@ static const s8 sNarrowerFontIds[] =
     [FONT_BRAILLE] = -1,
     [FONT_NARROW] = FONT_NARROWER,
     [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
-    [FONT_BOLD] = -1,
     [FONT_NARROWER] = -1,
     [FONT_SMALL_NARROWER] = -1,
     [FONT_SHORT_NARROW] = -1,
