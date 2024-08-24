@@ -20,8 +20,6 @@ gCryTable::
 	cry Cry_Pidgeot
 	cry Cry_Rattata
 	cry Cry_Raticate
-	/*cry Cry_Rattata*/
-	/*cry Cry_Raticate*/
 	cry Cry_Spearow
 	cry Cry_Fearow
 .if P_FAMILY_EKANS == TRUE
