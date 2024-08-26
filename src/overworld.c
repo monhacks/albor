@@ -332,7 +332,7 @@ void ResetGameStats(void)
 
 void IncrementGameStat(u8 index)
 {
-    if (index < NUM_USED_GAME_STATS)
+    if (index < NUM_GAME_STATS)
     {
         u32 statVal = GetGameStat(index);
         if (statVal < 0xFFFFFF)
@@ -346,7 +346,7 @@ void IncrementGameStat(u8 index)
 
 u32 GetGameStat(u8 index)
 {
-    if (index >= NUM_USED_GAME_STATS)
+    if (index >= NUM_GAME_STATS)
         return 0;
 
     return gSaveBlock1Ptr->gameStats[index];
@@ -354,7 +354,7 @@ u32 GetGameStat(u8 index)
 
 void SetGameStat(u8 index, u32 value)
 {
-    if (index < NUM_USED_GAME_STATS)
+    if (index < NUM_GAME_STATS)
         gSaveBlock1Ptr->gameStats[index] = value;
 }
 
