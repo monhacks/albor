@@ -28,7 +28,7 @@ RusturfTunnel_EventScript_Wanda::
 	faceplayer
 	msgbox RusturfTunnel_Text_BoyfriendOnOtherSideOfRock, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -40,7 +40,7 @@ RusturfTunnel_EventScript_WandasBoyfriend::
 	setflag FLAG_TEMP_1
 	msgbox RusturfTunnel_Text_WhyCantTheyKeepDigging, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -48,7 +48,7 @@ RusturfTunnel_EventScript_WandasBoyfriend::
 RusturfTunnel_EventScript_AlreadySpokenTo::
 	msgbox RusturfTunnel_Text_ToGetToVerdanturf, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

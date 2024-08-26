@@ -39,9 +39,9 @@ LilycoveCity_EventScript_BerryGentleman::
 	goto_if_set FLAG_DAILY_LILYCOVE_RECEIVED_BERRY, LilycoveCity_EventScript_ReceivedBerry
 	msgbox LilycoveCity_Text_BerrySuitsYou, MSGBOX_DEFAULT
 	random 10
-	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	addvar SPECIAL_VAR_RESULT, FIRST_BERRY_INDEX
+	giveitem SPECIAL_VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_LILYCOVE_RECEIVED_BERRY
 	msgbox LilycoveCity_Text_BecauseYoureTrainer, MSGBOX_DEFAULT
 	release
@@ -192,10 +192,10 @@ LilycoveCity_EventScript_WailmerTrainerGrunt::
 	lockall
 	goto_if_set FLAG_MET_WAILMER_TRAINER, LilycoveCity_EventScript_MetWailmerTrainer
 	msgbox LilycoveCity_Text_WailmerLeapOutOfWater, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_Text_GetLostMessingUpTraining, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	setflag FLAG_MET_WAILMER_TRAINER
 	releaseall
@@ -226,15 +226,15 @@ LilycoveCity_EventScript_Rival::
 	lock
 	faceplayer
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LilycoveCity_EventScript_May
-	goto_if_eq VAR_RESULT, FEMALE, LilycoveCity_EventScript_Brendan
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, LilycoveCity_EventScript_May
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, LilycoveCity_EventScript_Brendan
 	end
 
 LilycoveCity_EventScript_May::
 	playbgm MUS_ENCOUNTER_MAY, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
+	goto_if_eq SPECIAL_VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
 	msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_BattleMayTreecko
@@ -262,7 +262,7 @@ LilycoveCity_EventScript_Brendan::
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattleAgain
 	call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
+	goto_if_eq SPECIAL_VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
 	msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, LilycoveCity_EventScript_BattleBrendanTreecko
@@ -318,10 +318,10 @@ LilycoveCity_EventScript_BattleBrendanMudkip::
 
 LilycoveCity_EventScript_DefeatedMay::
 	msgbox LilycoveCity_Text_MayGoingBackToLittleroot, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
+	setvar SPECIAL_VAR_RESULT, FALSE
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_CheckFinalBadge
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_MayCollectBadges
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_EventScript_MayPokemonLeague
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, LilycoveCity_EventScript_MayCollectBadges
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_EventScript_MayPokemonLeague
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
 	goto LilycoveCity_EventScript_RivalFlyAway
@@ -332,7 +332,7 @@ LilycoveCity_EventScript_CheckFinalBadge::
 	return
 
 LilycoveCity_EventScript_HasFinalBadge::
-	setvar VAR_RESULT, TRUE
+	setvar SPECIAL_VAR_RESULT, TRUE
 	return
 
 LilycoveCity_EventScript_MayCollectBadges::
@@ -350,10 +350,10 @@ LilycoveCity_EventScript_MayBattleFrontier::
 
 LilycoveCity_EventScript_DefeatedBrendan::
 	msgbox LilycoveCity_Text_BrendanGoingBackToLittleroot, MSGBOX_DEFAULT
-	setvar VAR_RESULT, FALSE
+	setvar SPECIAL_VAR_RESULT, FALSE
 	call_if_set FLAG_BADGE06_GET, LilycoveCity_EventScript_CheckFinalBadge
-	call_if_eq VAR_RESULT, FALSE, LilycoveCity_EventScript_BrendanCollectBadges
-	call_if_eq VAR_RESULT, TRUE, LilycoveCity_EventScript_BrendanPokemonLeague
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, LilycoveCity_EventScript_BrendanCollectBadges
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_EventScript_BrendanPokemonLeague
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
 	goto LilycoveCity_EventScript_RivalFlyAway
@@ -374,13 +374,13 @@ LilycoveCity_EventScript_BrendanBattleFrontier::
 
 LilycoveCity_EventScript_RivalFlyAway::
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
 	setfieldeffectargument 0, 1
 	dofieldeffect FLDEFF_NPCFLY_OUT
 	delay 15
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	waitfieldeffect FLDEFF_NPCFLY_OUT
 	savebgm MUS_DUMMY
 	fadedefaultbgm
@@ -392,8 +392,8 @@ LilycoveCity_EventScript_SchoolKidM::
 	lock
 	faceplayer
 	msgbox LilycoveCity_Text_DoYouKnowAboutBerryBlender, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, LilycoveCity_EventScript_KnowAboutBerryBlender
-	call_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DontKnowAboutBerryBlender
+	call_if_eq SPECIAL_VAR_RESULT, YES, LilycoveCity_EventScript_KnowAboutBerryBlender
+	call_if_eq SPECIAL_VAR_RESULT, NO, LilycoveCity_EventScript_DontKnowAboutBerryBlender
 	release
 	end
 

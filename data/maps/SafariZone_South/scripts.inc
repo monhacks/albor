@@ -54,7 +54,7 @@ SafariZone_South_EventScript_ExitAttendant::
 	faceplayer
 	goto_if_unset FLAG_GOOD_LUCK_SAFARI_ZONE, SafariZone_South_EventScript_GoodLuck
 	msgbox SafariZone_South_Text_StillHaveTimeExit, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, SafariZone_South_EventScript_ExitEarly
+	goto_if_eq SPECIAL_VAR_RESULT, YES, SafariZone_South_EventScript_ExitEarly
 	msgbox SafariZone_South_Text_EnjoyTheRestOfYourAdventure, MSGBOX_DEFAULT
 	release
 	end
@@ -68,7 +68,7 @@ SafariZone_South_EventScript_GoodLuck::
 SafariZone_South_EventScript_ExitEarly::
 	msgbox SafariZone_South_Text_ExitEarlyThankYouForPlaying, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_NORTH, SafariZone_South_EventScript_ExitEarlyNorth
 	case DIR_EAST, SafariZone_South_EventScript_ExitEarlyEast
 	end

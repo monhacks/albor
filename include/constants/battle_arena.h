@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_BATTLE_ARENA_H
 #define GUARD_CONSTANTS_BATTLE_ARENA_H
 
+//Eliminar todo
 #define BATTLE_ARENA_FUNC_INIT              0
 #define BATTLE_ARENA_FUNC_GET_DATA          1
 #define BATTLE_ARENA_FUNC_SET_DATA          2

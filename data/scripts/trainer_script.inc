@@ -1,6 +1,6 @@
 Std_RegisteredInMatchCall::
-	buffertrainerclassname STR_VAR_1, VAR_0x8000
-	buffertrainername STR_VAR_2, VAR_0x8000
+	buffertrainerclassname STR_VAR_1, SPECIAL_VAR_0
+	buffertrainername STR_VAR_2, SPECIAL_VAR_0
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -12,7 +12,7 @@ Std_RegisteredInMatchCall::
 
 EventScript_TryGetTrainerScript::
 	special ShouldTryGetTrainerScript
-	goto_if_eq VAR_RESULT, TRUE, EventScript_GotoTrainerScript
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, EventScript_GotoTrainerScript
 	releaseall
 	end
 

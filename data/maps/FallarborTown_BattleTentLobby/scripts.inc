@@ -50,7 +50,7 @@ FallarborTown_BattleTentLobby_EventScript_WonChallenge::
 FallarborTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox FallarborTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
 	fallarbortent_giveprize
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FALSE, FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message FallarborTown_BattleTentLobby_Text_ReceivedPrize
@@ -106,14 +106,14 @@ FallarborTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	fallarbortent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, FallarborTown_BattleTentLobby_EventScript_PrizeWaiting
+	goto_if_ne SPECIAL_VAR_RESULT, ITEM_NONE, FallarborTown_BattleTentLobby_EventScript_PrizeWaiting
 	special SavePlayerParty
 	msgbox FallarborTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
 FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message FallarborTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, FallarborTown_BattleTentLobby_EventScript_ExplainChallenge
 	case 2, FallarborTown_BattleTentLobby_EventScript_CancelChallenge
@@ -122,19 +122,19 @@ FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge::
 FallarborTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_ARENA
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	setvar VAR_RESULT, 2
+	setvar SPECIAL_VAR_RESULT, 2
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons
+	goto_if_eq SPECIAL_VAR_4, TRUE, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox FallarborTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8004, 2
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	setvar SPECIAL_VAR_4, 2
+	setvar SPECIAL_VAR_5, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	goto_if_eq VAR_RESULT, 0, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	msgbox FallarborTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	case YES, FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
@@ -150,7 +150,7 @@ FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, 0, FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
 FallarborTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
@@ -167,7 +167,7 @@ FallarborTown_BattleTentLobby_EventScript_ExplainChallenge::
 	goto FallarborTown_BattleTentLobby_EventScript_AskEnterChallenge
 
 FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_50, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
 FallarborTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50::
@@ -263,7 +263,7 @@ FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, FallarborTown_BattleTentLobby_EventScript_RulesLevel
 	case 1, FallarborTown_BattleTentLobby_EventScript_RulesBattle
 	case 2, FallarborTown_BattleTentLobby_EventScript_RulesMind

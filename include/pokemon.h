@@ -10,6 +10,7 @@
 #define GET_BASE_SPECIES_ID(speciesId) (GetFormSpeciesId(speciesId, 0))
 #define FORM_SPECIES_END (0xffff)
 
+//Buscar los que no se usan y fuera
 // Property labels for Get(Box)MonData / Set(Box)MonData
 enum {
     MON_DATA_PERSONALITY,
@@ -236,7 +237,6 @@ struct SpeciesInfo /*0xC4*/
  /* 0x05 */ u8 baseSpDefense;
  /* 0x06 */ u8 types[2];
  /* 0x08 */ u8 catchRate;
- /* 0x09 */ u8 forceTeraType;
  /* 0x0A */ u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
  /* 0x0C */ u16 evYield_HP:2;
             u16 evYield_Attack:2;
@@ -253,21 +253,21 @@ struct SpeciesInfo /*0xC4*/
  /* 0x15 */ u8 growthRate;
  /* 0x16 */ u8 eggGroups[2];
  /* 0x18 */ u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
- /* 0x1E */ u8 safariZoneFleeRate;
+ /* 0x1E */ u8 safariZoneFleeRate; //fuera
 
             // Pokédex data
  /* 0x1F */ u8 categoryName[13];
  /* 0x1F */ u8 speciesName[POKEMON_NAME_LENGTH + 1];
  /* 0x2C */ u16 cryId;
  /* 0x2E */ u16 natDexNum;
- /* 0x30 */ u16 height; //in decimeters
- /* 0x32 */ u16 weight; //in hectograms
- /* 0x34 */ u16 pokemonScale;
- /* 0x36 */ u16 pokemonOffset;
- /* 0x38 */ u16 trainerScale;
- /* 0x3A */ u16 trainerOffset;
- /* 0x3C */ const u8 *description;
- /* 0x40 */ u8 bodyColor:7;
+ /* 0x30 */ u16 height; //fuera
+ /* 0x32 */ u16 weight; //fuera
+ /* 0x34 */ u16 pokemonScale; //fuera
+ /* 0x36 */ u16 pokemonOffset; //fuera
+ /* 0x38 */ u16 trainerScale; //fuera
+ /* 0x3A */ u16 trainerOffset; //fuera
+ /* 0x3C */ const u8 *description; //fuera
+ /* 0x40 */ u8 bodyColor:7; //fuera
             // Graphical Data
             u8 noFlip:1;
  /* 0x41 */ u8 frontAnimDelay;
@@ -292,7 +292,7 @@ struct SpeciesInfo /*0xC4*/
  /* 0x76 */ u8 backPicSizeFemale; // The dimensions of this drawn pixel area.
  /* 0x77 */ u8 backPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
  /* 0x79 */ u8 enemyMonElevation; // This determines how much higher above the usual position the enemy Pokémon is during battle. Species that float or fly have nonzero values.
-            // Flags
+            // Flags, la mayoría se pueden ir fuera
  /* 0x7A */ u32 isLegendary:1;
             u32 isMythical:1;
             u32 isUltraBeast:1;

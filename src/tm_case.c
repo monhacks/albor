@@ -294,11 +294,7 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
 {
     while (1)
     {
-        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE)
-            break;
         if (DoSetUpTMCaseUI() == TRUE)
-            break;
-        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }

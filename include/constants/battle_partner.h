@@ -2,6 +2,7 @@
 #ifndef GUARD_CONSTANTS_BATTLE_PARTNERS_H
 #define GUARD_CONSTANTS_BATTLE_PARTNERS_H
 
+//Eliminar todo
 #define PARTNER_NONE                0
 #define PARTNER_STEVEN              1
 

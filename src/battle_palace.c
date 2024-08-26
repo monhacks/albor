@@ -78,7 +78,7 @@ static const u32 sWinStreakMasks[][2] =
 // code
 void CallBattlePalaceFunction(void)
 {
-    sBattlePalaceFunctions[gSpecialVar_0x8004]();
+    sBattlePalaceFunctions[gSpecialVar_4]();
 }
 
 static void InitPalaceChallenge(void)
@@ -102,7 +102,7 @@ static void GetPalaceData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case PALACE_DATA_PRIZE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.palacePrize;
@@ -121,16 +121,16 @@ static void SetPalaceData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case PALACE_DATA_PRIZE:
-        gSaveBlock2Ptr->frontier.palacePrize = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.palacePrize = gSpecialVar_6;
         break;
     case PALACE_DATA_WIN_STREAK:
-        gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.palaceWinStreaks[battleMode][lvlMode] = gSpecialVar_6;
         break;
     case PALACE_DATA_WIN_STREAK_ACTIVE:
-        if (gSpecialVar_0x8006)
+        if (gSpecialVar_6)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
@@ -180,7 +180,7 @@ static void IncrementPalaceStreak(void)
 
 static void SavePalaceChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();

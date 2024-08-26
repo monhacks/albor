@@ -685,9 +685,9 @@ bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
     RtcCalcLocalTime();
-    gSpecialVar_0x8000 = gLocalTime.hours;
-    gSpecialVar_0x8001 = gLocalTime.minutes;
-    gSpecialVar_0x8002 = gLocalTime.seconds;
+    gSpecialVar_0 = gLocalTime.hours;
+    gSpecialVar_1 = gLocalTime.minutes;
+    gSpecialVar_2 = gLocalTime.seconds;
     return FALSE;
 }
 
@@ -1819,7 +1819,7 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && CanLearnTeachableMove(species, moveId))
         {
             gSpecialVar_Result = i;
-            gSpecialVar_0x8004 = species;
+            gSpecialVar_4 = species;
             break;
         }
     }

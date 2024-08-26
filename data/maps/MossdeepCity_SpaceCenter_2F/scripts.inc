@@ -46,7 +46,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_ThreeMagmaGrunts::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay48
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_BattleThreeMagmaGrunts
 	msgbox MossdeepCity_SpaceCenter_2F_Text_GoodAnswer, MSGBOX_DEFAULT
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, MossdeepCity_SpaceCenter_2F_Movement_PlayerExit
@@ -176,7 +176,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Tabitha::
 	lock
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_2F_Text_WellTakeCareOfYou, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -196,7 +196,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_Steven::
 	closemessage
 	delay 30
 	playse SE_NOT_EFFECTIVE
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFightMovementSouth
 	applymovement LOCALID_STEVEN, MossdeepCity_SpaceCenter_2F_Movement_StevenFight
 	waitmovement 0
@@ -234,31 +234,31 @@ MossdeepCity_SpaceCenter_2F_Movement_StevenFightSouth:
 	step_end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	releaseall
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle::
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special SavePlayerParty
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
-	goto_if_ne VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
+	goto_if_ne SPECIAL_VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
 	special LoadPlayerParty
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle::
 	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, PARTNER_STEVEN
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
@@ -319,7 +319,7 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha::
 	end
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayer::
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_SOUTH, MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerSouth
 	case DIR_WEST, MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest
 	return
@@ -335,8 +335,8 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest::
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall::
 	lockall
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
-	call_if_eq VAR_RESULT, FEMALE, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
+	call_if_eq SPECIAL_VAR_RESULT, MALE, MossdeepCity_SpaceCenter_2F_EventScript_MayRayquazaCall
+	call_if_eq SPECIAL_VAR_RESULT, FEMALE, MossdeepCity_SpaceCenter_2F_EventScript_BrendanRayquazaCall
 	closemessage
 	clearflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
 	releaseall

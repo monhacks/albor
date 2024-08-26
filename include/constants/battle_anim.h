@@ -9,6 +9,8 @@
 // Particle ids.
 #define ANIM_SPRITES_START 10000
 
+//Ir uno a uno limpiando
+
 #define ANIM_TAG_BONE                       (ANIM_SPRITES_START + 0)
 #define ANIM_TAG_SPARK                      (ANIM_SPRITES_START + 1)
 #define ANIM_TAG_PENCIL                     (ANIM_SPRITES_START + 2)

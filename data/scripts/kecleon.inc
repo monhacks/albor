@@ -1,71 +1,71 @@
 Route120_EventScript_Kecleon1::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 1
+	setvar SPECIAL_VAR_9, 1
 	goto EventScript_Kecleon
 	end
 
 Route120_EventScript_Kecleon2::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 2
+	setvar SPECIAL_VAR_9, 2
 	goto EventScript_Kecleon
 	end
 
 Route120_EventScript_Kecleon3::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 3
+	setvar SPECIAL_VAR_9, 3
 	goto EventScript_Kecleon
 	end
 
 Route120_EventScript_Kecleon4::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 4
+	setvar SPECIAL_VAR_9, 4
 	goto EventScript_Kecleon
 	end
 
 Route120_EventScript_Kecleon5::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 5
+	setvar SPECIAL_VAR_9, 5
 	goto EventScript_Kecleon
 	end
 
 Route119_EventScript_Kecleon1::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 6
+	setvar SPECIAL_VAR_9, 6
 	goto EventScript_Kecleon
 	end
 
 Route119_EventScript_Kecleon2::
 	lock
 	faceplayer
-	setvar VAR_0x8009, 7
+	setvar SPECIAL_VAR_9, 7
 	goto EventScript_Kecleon
 	end
 
 EventScript_Kecleon::
 	checkitem ITEM_DEVON_SCOPE
-	goto_if_eq VAR_RESULT, TRUE, EventScript_AskUseDevonScope
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, EventScript_AskUseDevonScope
 	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_DEFAULT
 	release
 	end
 
 EventScript_AskUseDevonScope::
 	msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, EventScript_BattleKecleon
+	goto_if_eq SPECIAL_VAR_RESULT, YES, EventScript_BattleKecleon
 	release
 	end
 
 EventScript_BattleKecleon::
 	msgbox Kecleon_Text_UseDevonScopeMonAttacked, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
-	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
+	applymovement SPECIAL_VAR_LAST_TALKED, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
@@ -75,10 +75,10 @@ EventScript_BattleKecleon::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, EventScript_RemoveKecleon
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EventScript_RemoveKecleon
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EventScript_RemoveKecleon
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, EventScript_RemoveKecleon
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, EventScript_RemoveKecleon
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EventScript_RemoveKecleon
 	release
 	end
 

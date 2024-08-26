@@ -48,7 +48,7 @@ SlateportCity_BattleTentLobby_EventScript_WonChallenge::
 SlateportCity_BattleTentLobby_EventScript_GivePrize::
 	msgbox SlateportCity_BattleTentLobby_Text_AwardYouThisPrize, MSGBOX_DEFAULT
 	slateporttent_giveprize
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FALSE, SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize  @ Odd that it uses Tower's instead of Factory's or its own
@@ -86,21 +86,21 @@ SlateportCity_BattleTentLobby_EventScript_ResumeChallenge::
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	setvar VAR_0x8006, 2
+	setvar SPECIAL_VAR_6, 2
 	goto SlateportCity_BattleTentLobby_EventScript_EnterChallenge
 
 SlateportCity_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	slateporttent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize
+	goto_if_ne SPECIAL_VAR_RESULT, ITEM_NONE, SlateportCity_BattleTentLobby_EventScript_GivePrize
 	special SavePlayerParty
 	msgbox SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
 SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge::
 	message SlateportCity_BattleTentLobby_Text_TakeChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, SlateportCity_BattleTentLobby_EventScript_ExplainChallenge
 	case 2, SlateportCity_BattleTentLobby_EventScript_CancelChallenge
@@ -111,7 +111,7 @@ SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	case YES, SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge
@@ -126,8 +126,8 @@ SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
-	setvar VAR_0x8006, 0
+	goto_if_eq SPECIAL_VAR_RESULT, 0, SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	setvar SPECIAL_VAR_6, 0
 SlateportCity_BattleTentLobby_EventScript_EnterChallenge::
 	msgbox SlateportCity_BattleTentLobby_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
@@ -194,7 +194,7 @@ SlateportCity_BattleTentLobby_EventScript_TormentGiver::
 	goto_if_set FLAG_RECEIVED_TM_TORMENT, SlateportCity_BattleTentLobby_EventScript_ReceivedTorment
 	msgbox SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe, MSGBOX_DEFAULT
 	giveitem ITEM_TM_TORMENT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_TORMENT
 	msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
 	release
@@ -227,7 +227,7 @@ SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SlateportCity_BattleTentLobby_EventScript_RulesBasics
 	case 1, SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner
 	case 2, SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber

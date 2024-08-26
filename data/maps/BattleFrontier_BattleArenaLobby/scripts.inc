@@ -40,7 +40,7 @@ BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving::
 BattleFrontier_BattleArenaLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_DefeatedTycoon
 	msgbox BattleFrontier_BattleArenaLobby_Text_CongratsOnSevenWins, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleArenaLobby_EventScript_GiveBattlePoints
 
@@ -80,11 +80,11 @@ BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_RecordMatch
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
@@ -116,7 +116,7 @@ BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge::
 	message BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
@@ -126,23 +126,23 @@ BattleFrontier_BattleArenaLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattleArenaLobby_Text_WhichLevelMode
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_CancelChallenge
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons
-	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	goto_if_eq SPECIAL_VAR_4, TRUE, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons
+	frontier_set FRONTIER_DATA_LVL_MODE, SPECIAL_VAR_RESULT
 	msgbox BattleFrontier_BattleArenaLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	callnative RemoveFollowingPokemon
 	call BattleFrontier_EventScript_GetLvlMode
-	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_RESULT
+	setvar SPECIAL_VAR_5, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattleArenaLobby_Text_OkayToSave, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
 	case YES, BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleArenaLobby_EventScript_LoadPartyAndCancelChallenge
@@ -159,15 +159,15 @@ BattleFrontier_BattleArenaLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleArenaLobby_EventScript_CancelChallengeSaveFailed
 BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattleArenaLobby_Text_GuideYouToArena, MSGBOX_DEFAULT
 	closemessage
 	frontier_get FRONTIER_DATA_LVL_MODE
-	call_if_eq VAR_RESULT, FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
-	call_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
+	call_if_eq SPECIAL_VAR_RESULT, FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
+	call_if_eq SPECIAL_VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
 	waitstate
@@ -178,7 +178,7 @@ BattleFrontier_BattleArenaLobby_EventScript_ExplainChallenge::
 	goto BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge
 
 BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_NotEnoughValidMonsLvOpen
 
@@ -322,7 +322,7 @@ BattleFrontier_BattleArenaLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 2, MULTI_BATTLE_ARENA_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleArenaLobby_EventScript_BattleRules
 	case 1, BattleFrontier_BattleArenaLobby_EventScript_MindRules
 	case 2, BattleFrontier_BattleArenaLobby_EventScript_SkillRules

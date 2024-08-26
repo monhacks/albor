@@ -15,11 +15,11 @@ AquaHideout_B2F_EventScript_PreventMattNoticing::
 
 AquaHideout_B2F_EventScript_MattNoticePlayer::
 	lockall
-	setvar VAR_0x8008, LOCALID_MATT
+	setvar SPECIAL_VAR_8, LOCALID_MATT
 	playse SE_PIN
-	applymovement VAR_0x8008, Common_Movement_ExclamationMark
+	applymovement SPECIAL_VAR_8, Common_Movement_ExclamationMark
 	waitmovement 0
-	applymovement VAR_0x8008, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_8, Common_Movement_FacePlayer
 	waitmovement 0
 	setvar VAR_TEMP_1, 1
 	releaseall
@@ -32,21 +32,21 @@ AquaHideout_B2F_EventScript_Matt::
 	end
 
 AquaHideout_B2F_EventScript_SubmarineEscape::
-	setvar VAR_0x8008, LOCALID_MATT
-	setvar VAR_0x8009, LOCALID_SUBMARINE
-	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFasterLeft
+	setvar SPECIAL_VAR_8, LOCALID_MATT
+	setvar SPECIAL_VAR_9, LOCALID_SUBMARINE
+	applymovement SPECIAL_VAR_8, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
-	applymovement VAR_0x8008, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_8, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_OurBossGotThroughHisPreparations, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_0x8008, Common_Movement_WalkInPlaceFasterLeft
-	applymovement VAR_0x8009, AquaHideout_B2F_Movement_SumbarineDepartLeft
+	applymovement SPECIAL_VAR_8, Common_Movement_WalkInPlaceFasterLeft
+	applymovement SPECIAL_VAR_9, AquaHideout_B2F_Movement_SumbarineDepartLeft
 	waitmovement 0
-	removeobject VAR_0x8009
+	removeobject SPECIAL_VAR_9
 	delay 20
-	applymovement VAR_0x8008, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_8, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox AquaHideout_B2F_Text_MattPostBattle, MSGBOX_DEFAULT
 	setflag FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE

@@ -2510,7 +2510,7 @@ static void CB2_InitInGameTrade(void)
     switch (gMain.state)
     {
     case 0:
-        gSelectedTradeMonPositions[TRADE_PLAYER] = gSpecialVar_0x8005;
+        gSelectedTradeMonPositions[TRADE_PLAYER] = gSpecialVar_5;
         gSelectedTradeMonPositions[TRADE_PARTNER] = PARTY_SIZE;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
         GetMonData(&gEnemyParty[0], MON_DATA_OT_NAME, otName);
@@ -2837,10 +2837,10 @@ static void BufferTradeSceneStrings(void)
     }
     else
     {
-        ingameTrade = &sIngameTrades[gSpecialVar_0x8004];
+        ingameTrade = &sIngameTrades[gSpecialVar_4];
         StringCopy(gStringVar1, ingameTrade->otName);
         StringCopy_Nickname(gStringVar3, ingameTrade->nickname);
-        GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, name);
+        GetMonData(&gPlayerParty[gSpecialVar_5], MON_DATA_NICKNAME, name);
         StringCopy_Nickname(gStringVar2, name);
     }
 }
@@ -3364,7 +3364,7 @@ static bool8 DoTradeAnim_Cable(void)
             sTradeAnim->state++;
         break;
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
-        TradeMons(gSpecialVar_0x8005, 0);
+        TradeMons(gSpecialVar_5, 0);
         gCB2_AfterEvolution = CB2_InGameTrade;
         evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
@@ -3861,7 +3861,7 @@ static bool8 DoTradeAnim_Wireless(void)
             sTradeAnim->state++;
         break;
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
-        TradeMons(gSpecialVar_0x8005, 0);
+        TradeMons(gSpecialVar_5, 0);
         gCB2_AfterEvolution = CB2_InGameTrade;
         evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, &gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]]);
         if (evoTarget != SPECIES_NONE)
@@ -4005,7 +4005,7 @@ static void SpriteCB_BouncingPokeballArrive(struct Sprite *sprite)
 
 u16 GetInGameTradeSpeciesInfo(void)
 {
-    const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
+    const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_4];
     StringCopy(gStringVar1, GetSpeciesName(inGameTrade->requestedSpecies));
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
     return inGameTrade->requestedSpecies;
@@ -4014,8 +4014,8 @@ u16 GetInGameTradeSpeciesInfo(void)
 static void BufferInGameTradeMonName(void)
 {
     u8 nickname[max(32, POKEMON_NAME_BUFFER_SIZE)];
-    const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_0x8004];
-    GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_NICKNAME, nickname);
+    const struct InGameTrade *inGameTrade = &sIngameTrades[gSpecialVar_4];
+    GetMonData(&gPlayerParty[gSpecialVar_5], MON_DATA_NICKNAME, nickname);
     StringCopy_Nickname(gStringVar1, nickname);
     StringCopy(gStringVar2, GetSpeciesName(inGameTrade->species));
 }
@@ -4087,14 +4087,14 @@ static void GetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trad
 
 u16 GetTradeSpecies(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG))
+    if (GetMonData(&gPlayerParty[gSpecialVar_5], MON_DATA_IS_EGG))
         return SPECIES_NONE;
-    return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);
+    return GetMonData(&gPlayerParty[gSpecialVar_5], MON_DATA_SPECIES);
 }
 
 void CreateInGameTradePokemon(void)
 {
-    CreateInGameTradePokemonInternal(gSpecialVar_0x8005, gSpecialVar_0x8004);
+    CreateInGameTradePokemonInternal(gSpecialVar_5, gSpecialVar_4);
 }
 
 static void CB2_UpdateLinkTrade(void)

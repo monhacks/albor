@@ -43,7 +43,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_QuitWithoutSaving::
 BattleFrontier_BattleFactoryLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleFactoryLobby_EventScript_DefeatedFactoryHead
 	msgbox BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleFactoryLobby_EventScript_GiveBattlePoints
@@ -80,11 +80,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_LostChallenge::
 
 BattleFrontier_BattleFactoryLobby_EventScript_AskRecordBattle::
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
 	message BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_RecordBattle
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_EndRecordBattle
@@ -107,7 +107,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_ResumeChallenge::
 	waitse
 	frontier_set FRONTIER_DATA_PAUSED, FALSE
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	setvar VAR_0x8006, 2
+	setvar SPECIAL_VAR_6, 2
 	goto BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge
 
 BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant::
@@ -133,7 +133,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_AskTakeChallenge::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
@@ -143,12 +143,12 @@ BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
-	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	frontier_set FRONTIER_DATA_LVL_MODE, SPECIAL_VAR_RESULT
 	msgbox BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge
 	case YES, BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_LoadPartyAndCancelChallenge
@@ -163,15 +163,15 @@ BattleFrontier_BattleFactoryLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed
-	setvar VAR_0x8006, 0
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallengeSaveFailed
+	setvar SPECIAL_VAR_6, 0
 BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleFactoryLobby_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant
-	applymovement VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor
+	applymovement SPECIAL_VAR_LAST_TALKED, BattleFrontier_BattleFactoryLobby_Movement_AttendantEnterDoor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleFactoryLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 8, 13
@@ -180,11 +180,11 @@ BattleFrontier_BattleFactoryLobby_EventScript_EnterChallenge::
 	end
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToSinglesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_TalkedToDoublesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge::
@@ -286,7 +286,7 @@ BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 0, MULTI_BATTLE_FACTORY_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics
 	case 1, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner
 	case 2, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber

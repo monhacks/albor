@@ -192,7 +192,7 @@ static const u16 sInitialRentalMonRanges[][2] =
 // code
 void CallBattleFactoryFunction(void)
 {
-    sBattleFactoryFunctions[gSpecialVar_0x8004]();
+    sBattleFactoryFunctions[gSpecialVar_4]();
 }
 
 static void InitFactoryChallenge(void)
@@ -226,7 +226,7 @@ static void GetBattleFactoryData(void)
     int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case FACTORY_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
@@ -245,13 +245,13 @@ static void SetBattleFactoryData(void)
     int lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case FACTORY_DATA_WIN_STREAK:
-        gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] = gSpecialVar_6;
         break;
     case FACTORY_DATA_WIN_STREAK_ACTIVE:
-        if (gSpecialVar_0x8006)
+        if (gSpecialVar_6)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
@@ -259,7 +259,7 @@ static void SetBattleFactoryData(void)
     case FACTORY_DATA_WIN_STREAK_SWAPS:
         if (sPerformedRentalSwap == TRUE)
         {
-            gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode] = gSpecialVar_0x8006;
+            gSaveBlock2Ptr->frontier.factoryRentsCount[battleMode][lvlMode] = gSpecialVar_6;
             sPerformedRentalSwap = FALSE;
         }
         break;
@@ -268,7 +268,7 @@ static void SetBattleFactoryData(void)
 
 static void SaveFactoryChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
@@ -417,7 +417,7 @@ static void SetPlayerAndOpponentParties(void)
             monLevel = FRONTIER_MAX_LEVEL_50;
     }
 
-    if (gSpecialVar_0x8005 < 2)
+    if (gSpecialVar_5 < 2)
     {
         ZeroPlayerPartyMons();
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
@@ -432,7 +432,7 @@ static void SetPlayerAndOpponentParties(void)
         }
     }
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case 0:
     case 2:

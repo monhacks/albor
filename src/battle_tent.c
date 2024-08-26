@@ -104,7 +104,7 @@ static const u16 sSlateportTentRewards[] = {ITEM_FULL_HEAL};
 // code
 void CallVerdanturfTentFunction(void)
 {
-    sVerdanturfTentFuncs[gSpecialVar_0x8004]();
+    sVerdanturfTentFuncs[gSpecialVar_4]();
 }
 
 static void InitVerdanturfTentChallenge(void)
@@ -122,7 +122,7 @@ static void GetVerdanturfTentPrize(void)
 
 static void SetVerdanturfTentPrize(void)
 {
-    gSaveBlock2Ptr->frontier.verdanturfTentPrize = gSpecialVar_0x8006;
+    gSaveBlock2Ptr->frontier.verdanturfTentPrize = gSpecialVar_6;
 }
 
 static void SetVerdanturfTentTrainerGfx(void)
@@ -139,7 +139,7 @@ static void BufferVerdanturfTentTrainerIntro(void)
 
 static void SaveVerdanturfTentChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
@@ -166,7 +166,7 @@ static void GiveVerdanturfTentPrize(void)
 
 void CallFallarborTentFunction(void)
 {
-    sFallarborTentFuncs[gSpecialVar_0x8004]();
+    sFallarborTentFuncs[gSpecialVar_4]();
 }
 
 static void InitFallarborTentChallenge(void)
@@ -184,12 +184,12 @@ static void GetFallarborTentPrize(void)
 
 static void SetFallarborTentPrize(void)
 {
-    gSaveBlock2Ptr->frontier.fallarborTentPrize = gSpecialVar_0x8006;
+    gSaveBlock2Ptr->frontier.fallarborTentPrize = gSpecialVar_6;
 }
 
 static void SaveFallarborTentChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
@@ -221,7 +221,7 @@ static void BufferFallarborTentTrainerName(void)
 
 void CallSlateportTentFunction(void)
 {
-    sSlateportTentFuncs[gSpecialVar_0x8004]();
+    sSlateportTentFuncs[gSpecialVar_4]();
 }
 
 static void InitSlateportTentChallenge(void)
@@ -239,12 +239,12 @@ static void GetSlateportTentPrize(void)
 
 static void SetSlateportTentPrize(void)
 {
-    gSaveBlock2Ptr->frontier.slateportTentPrize = gSpecialVar_0x8006;
+    gSaveBlock2Ptr->frontier.slateportTentPrize = gSpecialVar_6;
 }
 
 static void SaveSlateportTentChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();

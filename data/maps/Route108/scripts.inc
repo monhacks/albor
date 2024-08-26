@@ -28,8 +28,8 @@ Route108_EventScript_Carolina::
 
 Route108_EventScript_Cory::
 	trainerbattle_single TRAINER_CORY_1, Route108_Text_CoryIntro, Route108_Text_CoryDefeated, Route108_EventScript_CoryRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route108_EventScript_CoryRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route108_EventScript_CoryRematch
 	msgbox Route108_Text_CoryPostBattle, MSGBOX_DEFAULT
 	release
 	end

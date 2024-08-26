@@ -50,7 +50,7 @@ void PickLotteryCornerTicket(void)
     u32 box;
     u32 slot;
 
-    gSpecialVar_0x8004 = 0;
+    gSpecialVar_4 = 0;
     slot = 0;
     box = 0;
     for (i = 0; i < PARTY_SIZE; i++)
@@ -65,9 +65,9 @@ void PickLotteryCornerTicket(void)
                 u32 otId = GetMonData(mon, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
-                if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
+                if (numMatchingDigits > gSpecialVar_4 && numMatchingDigits > 1)
                 {
-                    gSpecialVar_0x8004 = numMatchingDigits - 1;
+                    gSpecialVar_4 = numMatchingDigits - 1;
                     box = TOTAL_BOXES_COUNT;
                     slot = i;
                 }
@@ -87,9 +87,9 @@ void PickLotteryCornerTicket(void)
                 u32 otId = GetBoxMonData(&gPokemonStoragePtr->boxes[i][j], MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gSpecialVar_Result, otId);
 
-                if (numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
+                if (numMatchingDigits > gSpecialVar_4 && numMatchingDigits > 1)
                 {
-                    gSpecialVar_0x8004 = numMatchingDigits - 1;
+                    gSpecialVar_4 = numMatchingDigits - 1;
                     box = i;
                     slot = j;
                 }
@@ -97,18 +97,18 @@ void PickLotteryCornerTicket(void)
         }
     }
 
-    if (gSpecialVar_0x8004 != 0)
+    if (gSpecialVar_4 != 0)
     {
-        gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
+        gSpecialVar_5 = sLotteryPrizes[gSpecialVar_4 - 1];
 
         if (box == TOTAL_BOXES_COUNT)
         {
-            gSpecialVar_0x8006 = 0;
+            gSpecialVar_6 = 0;
             GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
         }
         else
         {
-            gSpecialVar_0x8006 = 1;
+            gSpecialVar_6 = 1;
             GetBoxMonData(&gPokemonStoragePtr->boxes[box][slot], MON_DATA_NICKNAME, gStringVar1);
         }
         StringGet_Nickname(gStringVar1);

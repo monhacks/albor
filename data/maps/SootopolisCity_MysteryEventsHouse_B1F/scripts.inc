@@ -18,13 +18,13 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	special CopyEReaderTrainerGreeting
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, SPECIAL_BATTLE_EREADER
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_4, SPECIAL_BATTLE_EREADER
+	setvar SPECIAL_VAR_5, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	call_if_eq VAR_RESULT, B_OUTCOME_DREW, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
-	call_if_eq VAR_RESULT, B_OUTCOME_WON, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
-	call_if_eq VAR_RESULT, B_OUTCOME_LOST, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
+	call_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_DREW, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie
+	call_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon
+	call_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_LOST, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost
 	closemessage
 	special HealPlayerParty
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement

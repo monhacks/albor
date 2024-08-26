@@ -26,10 +26,10 @@ Route114_EventScript_Man::
 	goto_if_set FLAG_DAILY_ROUTE_114_RECEIVED_BERRY, Route114_EventScript_ReceivedBerry
 	msgbox Route114_Text_LoveUsingBerryCrushShareBerry, MSGBOX_DEFAULT
 	random NUM_ROUTE_114_MAN_BERRIES
-	addvar VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED
-	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	addvar SPECIAL_VAR_RESULT, NUM_ROUTE_114_MAN_BERRIES_SKIPPED
+	addvar SPECIAL_VAR_RESULT, FIRST_BERRY_INDEX
+	giveitem SPECIAL_VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_114_RECEIVED_BERRY
 	msgbox Route114_Text_TryBerryCrushWithFriends, MSGBOX_DEFAULT
 	release
@@ -46,7 +46,7 @@ Route114_EventScript_RoarGentleman::
 	goto_if_set FLAG_RECEIVED_TM_ROAR, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM_ROAR
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_ROAR
 	msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
 	release
@@ -101,8 +101,8 @@ Route114_EventScript_Nancy::
 
 Route114_EventScript_Steve::
 	trainerbattle_single TRAINER_STEVE_1, Route114_Text_SteveIntro, Route114_Text_SteveDefeat, Route114_EventScript_RegisterSteve
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route114_EventScript_RematchSteve
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route114_EventScript_RematchSteve
 	msgbox Route114_Text_StevePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -122,8 +122,8 @@ Route114_EventScript_RematchSteve::
 
 Route114_EventScript_Bernie::
 	trainerbattle_single TRAINER_BERNIE_1, Route114_Text_BernieIntro, Route114_Text_BernieDefeat, Route114_EventScript_RegisterBernie
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route114_EventScript_RematchBernie
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route114_EventScript_RematchBernie
 	msgbox Route114_Text_BerniePostBattle, MSGBOX_DEFAULT
 	release
 	end

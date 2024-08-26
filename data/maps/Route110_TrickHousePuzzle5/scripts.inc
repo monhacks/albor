@@ -226,7 +226,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate::
 	call_if_eq VAR_TEMP_9, 4, Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Intro, MSGBOX_DEFAULT
 	random 3
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1
 	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2
 	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3
@@ -247,7 +247,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate::
 	call_if_eq VAR_TEMP_9, 5, Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Intro, MSGBOX_DEFAULT
 	random 3
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1
 	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2
 	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3
@@ -267,7 +267,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate::
 	call_if_eq VAR_TEMP_9, 4, Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Intro, MSGBOX_DEFAULT
 	random 3
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1
 	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2
 	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3
@@ -287,7 +287,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate::
 	call_if_eq VAR_TEMP_9, 4, Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Intro, MSGBOX_DEFAULT
 	random 3
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1
 	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2
 	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3
@@ -303,7 +303,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate::
 	waitmovement 0
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Intro, MSGBOX_DEFAULT
 	random 3
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1
 	case 1, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2
 	case 2, Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3
@@ -312,7 +312,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL1_Q1, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -320,7 +320,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL1_Q2, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -328,7 +328,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL1_Q3, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -336,7 +336,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL2_Q1, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -344,7 +344,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL2_Q2, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -352,7 +352,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL2_Q3, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -360,7 +360,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL3_Q1, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -368,7 +368,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL3_Q2, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -376,7 +376,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL3_Q3, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -384,7 +384,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL4_Q1, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -392,7 +392,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL4_Q2, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -400,7 +400,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL4_Q3, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -408,7 +408,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL5_Q1, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -416,7 +416,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL5_Q2, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end
@@ -424,7 +424,7 @@ Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2::
 Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3::
 	msgbox Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_MECHADOLL5_Q3, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 2, Route110_TrickHousePuzzle5_EventScript_CorrectAnswer
 	goto Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer
 	end

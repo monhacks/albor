@@ -53,7 +53,7 @@ EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech::
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_Defeated::
-	setvar VAR_0x8004, FANCOUNTER_DEFEATED_DRAKE
+	setvar SPECIAL_VAR_4, FANCOUNTER_DEFEATED_DRAKE
 	special Script_TryGainNewFanFromCounter
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles

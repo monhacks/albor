@@ -1,7 +1,7 @@
-.set LOCAL_VAR_SPRAY, VAR_0x8004
-.set LOCAL_VAR_NUM_SPRAY_STRENGTH, VAR_0x8005
-.set LOCAL_VAR_SPRAY_TYPE, VAR_0x8009
-.set LOCAL_VAR_NEW_SPRAY, VAR_0x8007
+.set LOCAL_VAR_SPRAY, SPECIAL_VAR_4
+.set LOCAL_VAR_NUM_SPRAY_STRENGTH, SPECIAL_VAR_5
+.set LOCAL_VAR_SPRAY_TYPE, SPECIAL_VAR_9
+.set LOCAL_VAR_NEW_SPRAY, SPECIAL_VAR_7
 
 EventScript_BufferSprayName::
 .if VAR_LAST_REPEL_LURE_USED != 0
@@ -50,7 +50,7 @@ EventScript_UseSingleSpray::
 	call EventScript_UseDifferentSpray
 .else
 	checkitem VAR_LAST_REPEL_LURE_USED, 1
-	compare VAR_RESULT, TRUE
+	compare SPECIAL_VAR_RESULT, TRUE
 	goto_if_eq EventScript_UseSingleSpray_2
 	call EventScript_UseDifferentSpray
 .endif
@@ -67,7 +67,7 @@ EventScript_UseSingleSpray_2:
 
 
 EventScript_SetSingleSprayAndUse::
-	setvar VAR_RESULT, 0
+	setvar SPECIAL_VAR_RESULT, 0
 	call EventScript_UseSpray
 	return
 
@@ -76,7 +76,7 @@ EventScript_UseDifferentSpray::
 	specialvar LOCAL_VAR_NEW_SPRAY, GetSprayId
 	bufferitemname STR_VAR_2, LOCAL_VAR_NEW_SPRAY
 	msgbox Text_SprayWoreOffAskUseX, MSGBOX_YESNO
-	compare VAR_RESULT, YES
+	compare SPECIAL_VAR_RESULT, YES
 	goto_if_eq EventScript_UseDifferentSpray_2
 EventScript_UseDifferentSpray_1:
 	return
@@ -90,7 +90,7 @@ EventScript_UseDifferentSpray_2:
 .if VAR_LAST_REPEL_LURE_USED != 0
 EventScript_UseLastUsedSpray::
 	msgbox Text_SprayWoreOffAskUseAnother, MSGBOX_YESNO
-	compare VAR_RESULT, YES
+	compare SPECIAL_VAR_RESULT, YES
 	goto_if_eq EventScript_UseLastUsedSpray_2
 EventScript_UseLastUsedSpray_1:
 	return
@@ -108,7 +108,7 @@ EventScript_ChooseWhichSpray::
 	waitmessage
 	callnative DrawSprayMenu
 	waitstate
-	compare VAR_RESULT, MULTI_B_PRESSED
+	compare SPECIAL_VAR_RESULT, MULTI_B_PRESSED
 	goto_if_ne EventScript_ChooseWhichSpray_3
 EventScript_ChooseWhichSpray_1:
 	closemessage
@@ -120,7 +120,7 @@ EventScript_ChooseWhichSpray_2:
 	goto EventScript_ChooseWhichSpray_1
 
 EventScript_ChooseWhichSpray_3:
-	compare VAR_RESULT, VAR_0x8003
+	compare SPECIAL_VAR_RESULT, SPECIAL_VAR_3
 	goto_if_ne EventScript_ChooseWhichSpray_2
 	goto EventScript_ChooseWhichSpray_1
 .endif

@@ -374,7 +374,7 @@ void SetMewAboveGrass(void)
     struct ObjectEvent *mew = &gObjectEvents[GetMewObjectEventId()];
 
     mew->invisible = FALSE;
-    if (gSpecialVar_0x8004 == 1)
+    if (gSpecialVar_4 == 1)
     {
         // For after battle where Mew should still be present (e.g. if ran from battle)
         mew->fixedPriority = 1;

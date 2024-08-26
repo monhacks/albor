@@ -45,7 +45,7 @@ OldaleTown_EventScript_MartEmployee::
 	playbgm MUS_FOLLOW_ME, FALSE
 	msgbox OldaleTown_Text_IWorkAtPokemonMart, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_SOUTH, OldaleTown_EventScript_GoToMartSouth
 	case DIR_NORTH, OldaleTown_EventScript_GoToMartNorth
 	case DIR_EAST, OldaleTown_EventScript_GoToMartEast
@@ -75,7 +75,7 @@ OldaleTown_EventScript_GoToMartEast::
 OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_ThisIsAPokemonMart, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
-	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, OldaleTown_EventScript_BagIsFull
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
 	fadedefaultbgm
@@ -222,7 +222,7 @@ OldaleTown_EventScript_Rival::
 	lockall
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
-	setvar VAR_0x8009, 0
+	setvar SPECIAL_VAR_9, 0
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
 
@@ -232,7 +232,7 @@ OldaleTown_EventScript_RivalTrigger1::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	setvar VAR_0x8009, 1
+	setvar SPECIAL_VAR_9, 1
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
 
@@ -242,7 +242,7 @@ OldaleTown_EventScript_RivalTrigger2::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	setvar VAR_0x8009, 1
+	setvar SPECIAL_VAR_9, 1
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
 
@@ -252,14 +252,14 @@ OldaleTown_EventScript_RivalTrigger3::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	setvar VAR_0x8009, 1
+	setvar SPECIAL_VAR_9, 1
 	goto OldaleTown_EventScript_ShowRivalMessage
 	end
 
 OldaleTown_EventScript_ShowRivalMessage::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, OldaleTown_EventScript_ShowMayMessage
-	goto_if_eq VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, OldaleTown_EventScript_ShowMayMessage
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, OldaleTown_EventScript_ShowBrendanMessage
 	end
 
 OldaleTown_EventScript_ShowMayMessage::
@@ -274,8 +274,8 @@ OldaleTown_EventScript_ShowBrendanMessage::
 
 OldaleTown_EventScript_RivalFinish::
 	closemessage
-	call_if_eq VAR_0x8009, 0, OldaleTown_EventScript_DoExitMovement1
-	call_if_eq VAR_0x8009, 1, OldaleTown_EventScript_DoExitMovement2
+	call_if_eq SPECIAL_VAR_9, 0, OldaleTown_EventScript_DoExitMovement1
+	call_if_eq SPECIAL_VAR_9, 1, OldaleTown_EventScript_DoExitMovement2
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
 	waitmovement 0
 	removeobject LOCALID_RIVAL
@@ -285,7 +285,7 @@ OldaleTown_EventScript_RivalFinish::
 	end
 
 OldaleTown_EventScript_DoExitMovement1::
-	goto_if_ne VAR_FACING, DIR_SOUTH, OldaleTown_EventScript_DoExitMovement2
+	goto_if_ne SPECIAL_VAR_FACING, DIR_SOUTH, OldaleTown_EventScript_DoExitMovement2
 	applymovement LOCALID_RIVAL, OldaleTown_Movement_RivalExit
 	waitmovement 0
 	return

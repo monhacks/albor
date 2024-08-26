@@ -1766,7 +1766,7 @@ static const u8 sTourneyTreeLineSectionArrayCounts[DOME_TOURNAMENT_TRAINERS_COUN
 
 void CallBattleDomeFunction(void)
 {
-    sBattleDomeFunctions[gSpecialVar_0x8004]();
+    sBattleDomeFunctions[gSpecialVar_4]();
 }
 
 static void InitDomeChallenge(void)
@@ -1790,7 +1790,7 @@ static void GetDomeData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case DOME_DATA_WIN_STREAK:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode];
@@ -1858,59 +1858,59 @@ static void SetDomeData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case DOME_DATA_WIN_STREAK:
-        gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.domeWinStreaks[battleMode][lvlMode] = gSpecialVar_6;
         break;
     case DOME_DATA_WIN_STREAK_ACTIVE:
-        if (gSpecialVar_0x8006)
+        if (gSpecialVar_6)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
         break;
     case DOME_DATA_ATTEMPTED_SINGLES_50:
-        gSaveBlock2Ptr->frontier.domeAttemptedSingles50 = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.domeAttemptedSingles50 = gSpecialVar_6;
         break;
     case DOME_DATA_ATTEMPTED_SINGLES_OPEN:
-        gSaveBlock2Ptr->frontier.domeAttemptedSinglesOpen = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.domeAttemptedSinglesOpen = gSpecialVar_6;
         break;
     case DOME_DATA_HAS_WON_SINGLES_50:
-        gSaveBlock2Ptr->frontier.domeHasWonSingles50 = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.domeHasWonSingles50 = gSpecialVar_6;
         break;
     case DOME_DATA_HAS_WON_SINGLES_OPEN:
-        gSaveBlock2Ptr->frontier.domeHasWonSinglesOpen = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.domeHasWonSinglesOpen = gSpecialVar_6;
         break;
     case DOME_DATA_ATTEMPTED_CHALLENGE:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode != FRONTIER_LVL_50)
-                gSaveBlock2Ptr->frontier.domeAttemptedDoublesOpen = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeAttemptedDoublesOpen = gSpecialVar_6;
             else
-                gSaveBlock2Ptr->frontier.domeAttemptedDoubles50 = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeAttemptedDoubles50 = gSpecialVar_6;
         }
         else
         {
             if (lvlMode != FRONTIER_LVL_50)
-                gSaveBlock2Ptr->frontier.domeAttemptedSinglesOpen = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeAttemptedSinglesOpen = gSpecialVar_6;
             else
-                gSaveBlock2Ptr->frontier.domeAttemptedSingles50 = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeAttemptedSingles50 = gSpecialVar_6;
         }
         break;
     case DOME_DATA_HAS_WON_CHALLENGE:
         if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
         {
             if (lvlMode != FRONTIER_LVL_50)
-                gSaveBlock2Ptr->frontier.domeHasWonDoublesOpen = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeHasWonDoublesOpen = gSpecialVar_6;
             else
-                gSaveBlock2Ptr->frontier.domeHasWonDoubles50 = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeHasWonDoubles50 = gSpecialVar_6;
         }
         else
         {
             if (lvlMode != FRONTIER_LVL_50)
-                gSaveBlock2Ptr->frontier.domeHasWonSinglesOpen = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeHasWonSinglesOpen = gSpecialVar_6;
             else
-                gSaveBlock2Ptr->frontier.domeHasWonSingles50 = gSpecialVar_0x8006;
+                gSaveBlock2Ptr->frontier.domeHasWonSingles50 = gSpecialVar_6;
         }
         break;
     case DOME_DATA_SELECTED_MONS:
@@ -2593,7 +2593,7 @@ static void SetDomeOpponentGraphicsId(void)
 
 static void SaveDomeChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
@@ -4615,7 +4615,7 @@ static void ResolveDomeRoundWinners(void)
 {
     int i;
 
-    if (gSpecialVar_0x8005 == DOME_PLAYER_WON_MATCH)
+    if (gSpecialVar_5 == DOME_PLAYER_WON_MATCH)
     {
         DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].isEliminated = TRUE;
         DOME_TRAINERS[TrainerIdToTournamentId(gTrainerBattleOpponent_A)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
@@ -4631,7 +4631,7 @@ static void ResolveDomeRoundWinners(void)
         DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_PLAYER)].eliminatedAt = gSaveBlock2Ptr->frontier.curChallengeBattleNum;
         gSaveBlock2Ptr->frontier.domeWinningMoves[TrainerIdToTournamentId(TRAINER_PLAYER)] = gBattleResults.lastUsedMoveOpponent;
 
-        if (gBattleOutcome == B_OUTCOME_FORFEITED || gSpecialVar_0x8005 == DOME_PLAYER_RETIRED)
+        if (gBattleOutcome == B_OUTCOME_FORFEITED || gSpecialVar_5 == DOME_PLAYER_RETIRED)
             DOME_TRAINERS[TrainerIdToTournamentId(TRAINER_PLAYER)].forfeited = TRUE;
 
         // Player lost, decide remaining outcome of tournament

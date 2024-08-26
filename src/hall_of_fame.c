@@ -1437,12 +1437,12 @@ void DoDomeConfetti(void)
 {
     u8 taskId;
 
-    gSpecialVar_0x8004 = 180;
+    gSpecialVar_4 = 180;
     taskId = CreateTask(Task_DoDomeConfetti, 0);
     if (taskId != TASK_NONE)
     {
-        gTasks[taskId].tTimer = gSpecialVar_0x8004;
-        gSpecialVar_0x8005 = taskId;
+        gTasks[taskId].tTimer = gSpecialVar_4;
+        gSpecialVar_5 = taskId;
     }
 }
 
@@ -1497,8 +1497,8 @@ static void Task_DoDomeConfetti(u8 taskId)
         {
             // Init failed
             DestroyTask(taskId);
-            gSpecialVar_0x8004 = 0;
-            gSpecialVar_0x8005 = 0xFFFF;
+            gSpecialVar_4 = 0;
+            gSpecialVar_5 = 0xFFFF;
         }
         LoadCompressedSpriteSheet(sSpriteSheet_Confetti);
         LoadCompressedSpritePalette(sSpritePalette_Confetti);
@@ -1536,8 +1536,8 @@ static void Task_DoDomeConfetti(u8 taskId)
         break;
     case 0xFF:
         StopDomeConfetti();
-        gSpecialVar_0x8004 = 0;
-        gSpecialVar_0x8005 = 0xFFFF;
+        gSpecialVar_4 = 0;
+        gSpecialVar_5 = 0xFFFF;
         break;
     }
 }

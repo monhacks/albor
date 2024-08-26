@@ -12,9 +12,9 @@ Route119_OnResume:
 	end
 
 Route119_EventScript_TryRemoveKecleon::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 Route119_OnTransition:
@@ -44,8 +44,8 @@ Route119_EventScript_RivalEncounter::
 	lockall
 	addobject LOCALID_RIVAL_ON_BIKE
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, Route119_EventScript_PlayMayMusic
-	call_if_eq VAR_RESULT, FEMALE, Route119_EventScript_PlayBrendanMusic
+	call_if_eq SPECIAL_VAR_RESULT, MALE, Route119_EventScript_PlayMayMusic
+	call_if_eq SPECIAL_VAR_RESULT, FEMALE, Route119_EventScript_PlayBrendanMusic
 	delay 65
 	call_if_eq VAR_TEMP_1, 1, Route119_EventScript_RivalEnter1
 	call_if_eq VAR_TEMP_1, 2, Route119_EventScript_RivalEnter2
@@ -58,8 +58,8 @@ Route119_EventScript_RivalEncounter::
 	addobject LOCALID_RIVAL
 	delay 30
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route119_EventScript_BattleMay
-	goto_if_eq VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, Route119_EventScript_BattleMay
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, Route119_EventScript_BattleBrendan
 	releaseall
 	end
 
@@ -353,8 +353,8 @@ Route119_EventScript_Kent::
 
 Route119_EventScript_Jackson::
 	trainerbattle_single TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, Route119_EventScript_RegisterJackson
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
 	msgbox Route119_Text_JacksonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -374,8 +374,8 @@ Route119_EventScript_RematchJackson::
 
 Route119_EventScript_Catherine::
 	trainerbattle_single TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, Route119_EventScript_RegisterCatherine
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
 	msgbox Route119_Text_CatherinePostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -443,7 +443,7 @@ Route119_EventScript_BridgeAquaGrunt1::
 	faceplayer
 	msgbox Route119_Text_StayAwayFromWeatherInstitute, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -453,7 +453,7 @@ Route119_EventScript_BridgeAquaGrunt2::
 	faceplayer
 	msgbox Route119_Text_DontGoNearWeatherInstitute, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

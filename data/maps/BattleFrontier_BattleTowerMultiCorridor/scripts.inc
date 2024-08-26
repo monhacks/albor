@@ -21,7 +21,7 @@ BattleFrontier_BattleTowerMultiCorridor_OnTransition:
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
 	tower_setpartnergfx
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
 	return
 
@@ -51,8 +51,8 @@ BattleFrontier_BattleTowerMultiCorridor_OnFrame:
 BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	lockall
 	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
-	setvar VAR_0x8004, 14  @ x coord of far door, used by DrawDoor
-	setvar VAR_0x8005, 1   @ y coord of far door, used by DrawDoor
+	setvar SPECIAL_VAR_4, 14  @ x coord of far door, used by DrawDoor
+	setvar SPECIAL_VAR_5, 1   @ y coord of far door, used by DrawDoor
 	opendoor 1, 1
 	waitdooranim
 	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
@@ -62,8 +62,8 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	applymovement LOCALID_PARTNER, BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator
 	waitmovement 0
 	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
-	setvar VAR_0x8004, 14  @ x coord of far door, used by DrawDoor
-	setvar VAR_0x8005, 1   @ y coord of far door, used by DrawDoor
+	setvar SPECIAL_VAR_4, 14  @ x coord of far door, used by DrawDoor
+	setvar SPECIAL_VAR_5, 1   @ y coord of far door, used by DrawDoor
 	closedoor 1, 1
 	waitdooranim
 	clearflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR

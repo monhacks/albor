@@ -50,8 +50,8 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers::
 
 LavaridgeTown_Gym_1F_EventScript_Flannery::
 	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
 	goto_if_unset FLAG_RECEIVED_TM_OVERHEAT, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
 	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
 	release
@@ -67,7 +67,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setflag FLAG_BADGE04_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
-	setvar VAR_0x8008, 4
+	setvar SPECIAL_VAR_8, 4
 	call Common_EventScript_SetGymTrainers
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
@@ -85,7 +85,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 	giveitem ITEM_TM_OVERHEAT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_OVERHEAT
 	release
@@ -93,7 +93,7 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
 	giveitem ITEM_TM_OVERHEAT
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_OVERHEAT
 	return
@@ -112,7 +112,7 @@ LavaridgeTown_Gym_EventScript_CheckTrainerScript::
 	call LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars
 	release
 	special ShouldTryGetTrainerScript
-	goto_if_eq VAR_RESULT, 1, EventScript_GotoTrainerScript
+	goto_if_eq SPECIAL_VAR_RESULT, 1, EventScript_GotoTrainerScript
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Axle::

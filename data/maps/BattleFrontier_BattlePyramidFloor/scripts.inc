@@ -13,15 +13,15 @@ BattleFrontier_BattlePyramidFloor_OnFrame:
 BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight::
 	lockall
 	@ pyramid_updatelight, cant use macro because it straddles the loop
-	setvar VAR_0x8004, BATTLE_PYRAMID_FUNC_UPDATE_LIGHT
-	setvar VAR_0x8005, 4
-	setvar VAR_0x8006, PYRAMID_LIGHT_INCR_RADIUS
-	setvar VAR_0x8007, SE_SAVE
-	setvar VAR_RESULT, 0
+	setvar SPECIAL_VAR_4, BATTLE_PYRAMID_FUNC_UPDATE_LIGHT
+	setvar SPECIAL_VAR_5, 4
+	setvar SPECIAL_VAR_6, PYRAMID_LIGHT_INCR_RADIUS
+	setvar SPECIAL_VAR_7, SE_SAVE
+	setvar SPECIAL_VAR_RESULT, 0
 BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop::
 	special CallBattlePyramidFunction
 	delay 2
-	goto_if_ne VAR_RESULT, 2, BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop
+	goto_if_ne SPECIAL_VAR_RESULT, 2, BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop
 	setvar VAR_TEMP_D, 0
 	releaseall
 	end
@@ -44,13 +44,13 @@ BattleFrontier_BattlePyramidFloor_OnResume:
 	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby
 	case CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge
 	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
-	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	goto_if_eq VAR_RESULT, B_OUTCOME_FORFEITED, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	frontier_isbattletype BATTLE_TYPE_TRAINER  @ VAR_RESULT seems to be ignored here
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_FORFEITED, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	frontier_isbattletype BATTLE_TYPE_TRAINER  @ SPECIAL_VAR_RESULT seems to be ignored here
 	setvar VAR_TEMP_D, 1
 BattleFrontier_BattlePyramidFloor_EventScript_ResetParty::
 	pyramid_resetparty
@@ -88,12 +88,12 @@ BattleFrontier_BattlePyramidFloor_EventScript_SetLightRadius::
 BattlePyramid_WarpToNextFloor::
 	call BattleFrontier_EventScript_IncrementWinStreak
 	frontier_get FRONTIER_DATA_BATTLE_NUM  @ Floor number
-	addvar VAR_RESULT, 1
-	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	goto_if_eq VAR_RESULT, 7, BattlePyramid_WarpToTop
+	addvar SPECIAL_VAR_RESULT, 1
+	frontier_set FRONTIER_DATA_BATTLE_NUM, SPECIAL_VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, 7, BattlePyramid_WarpToTop
 	pyramid_seedfloor
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
-	setvar VAR_RESULT, 0
+	setvar SPECIAL_VAR_RESULT, 0
 	warp MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR, 1, 1
 	waitstate
 	end
@@ -116,7 +116,7 @@ BattlePyramid_TrainerBattle::
 BattlePyramid_FindItemBall::
 	pyramid_setitem
 	callstd STD_FIND_ITEM
-	goto_if_eq VAR_0x8007, 0, BattlePyramid_FindItemBallEnd
+	goto_if_eq SPECIAL_VAR_7, 0, BattlePyramid_FindItemBallEnd
 	pyramid_hideitem
 BattlePyramid_FindItemBallEnd::
 	end

@@ -63,14 +63,14 @@ MtChimney_EventScript_Maxie::
 	fadescreenswapbuffers FADE_FROM_BLACK
 	setobjectxyperm LOCALID_ARCHIE, 10, 12
 	addobject LOCALID_ARCHIE
-	call_if_eq VAR_FACING, DIR_EAST, MtChimney_EventScript_ArchieApproachPlayerEast
-	call_if_eq VAR_FACING, DIR_NORTH, MtChimney_EventScript_ArchieApproachPlayerNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, MtChimney_EventScript_ArchieApproachPlayerEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, MtChimney_EventScript_ArchieApproachPlayerNorth
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	msgbox MtChimney_Text_ArchieThankYou, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_FACING, DIR_EAST, MtChimney_EventScript_ArchieExitEast
-	call_if_eq VAR_FACING, DIR_NORTH, MtChimney_EventScript_ArchieExitNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, MtChimney_EventScript_ArchieExitEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, MtChimney_EventScript_ArchieExitNorth
 	removeobject LOCALID_ARCHIE
 	setflag FLAG_HIDE_MT_CHIMNEY_TEAM_AQUA
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
@@ -105,14 +105,14 @@ MtChimney_EventScript_LavaCookieLady::
 	faceplayer
 	showmoneybox 0, 0
 	msgbox MtChimney_Text_LavaCookiesJust200, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MtChimney_EventScript_DeclineLavaCookie
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MtChimney_EventScript_DeclineLavaCookie
 	checkmoney 200
-	goto_if_eq VAR_RESULT, FALSE, MtChimney_EventScript_NotEnoughMoney
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, MtChimney_EventScript_NotEnoughMoney
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE
-	call_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_RemoveMoney
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, MtChimney_EventScript_RemoveMoney
 	giveitem ITEM_LAVA_COOKIE
-	goto_if_eq VAR_RESULT, FALSE, MtChimney_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, MtChimney_EventScript_BagIsFull
 	hidemoneybox
 	release
 	end
@@ -242,10 +242,10 @@ MtChimney_EventScript_MeteoriteMachine::
 	goto_if_unset FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY, MtChimney_EventScript_MachineOn
 	goto_if_set FLAG_RECEIVED_METEORITE, MtChimney_EventScript_MachineOff
 	msgbox MtChimney_Text_RemoveTheMeteorite, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MtChimney_EventScript_LeaveMeteoriteAlone
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MtChimney_EventScript_LeaveMeteoriteAlone
 	msgbox MtChimney_Text_PlayerRemovedMeteorite, MSGBOX_DEFAULT
 	giveitem ITEM_METEORITE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_METEORITE
 	releaseall
 	end
@@ -271,8 +271,8 @@ MtChimney_EventScript_RouteSign::
 
 MtChimney_EventScript_Shelby::
 	trainerbattle_single TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, MtChimney_EventScript_DefeatedShelby
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_RematchShelby
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, MtChimney_EventScript_RematchShelby
 	msgbox MtChimney_Text_ShelbyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -312,8 +312,8 @@ MtChimney_EventScript_Grunt1::
 
 MtChimney_EventScript_Sawyer::
 	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch
 	msgbox MtChimney_Text_SawyerPostBattle, MSGBOX_DEFAULT
 	release
 	end

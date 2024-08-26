@@ -18,7 +18,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor::
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -93,11 +93,11 @@ EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges::
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GoForth::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_GoForth, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	releaseall
 	end

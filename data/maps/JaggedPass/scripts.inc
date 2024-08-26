@@ -13,7 +13,7 @@ JaggedPass_OnResume:
 
 JaggedPass_EventScript_CheckHasMagmaEmblem::
 	checkitem ITEM_MAGMA_EMBLEM
-	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_SetReadyToOpenHideout
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, JaggedPass_EventScript_SetReadyToOpenHideout
 	return
 
 JaggedPass_EventScript_SetReadyToOpenHideout::
@@ -40,18 +40,18 @@ JaggedPass_EventScript_ConcealHideoutEntrance::
 
 JaggedPass_EventScript_OpenMagmaHideout::
 	lockall
-	setvar VAR_0x8004, 1  @ vertical pan
-	setvar VAR_0x8005, 1  @ horizontal pan
-	setvar VAR_0x8006, 8  @ num shakes
-	setvar VAR_0x8007, 5  @ shake delay
+	setvar SPECIAL_VAR_4, 1  @ vertical pan
+	setvar SPECIAL_VAR_5, 1  @ horizontal pan
+	setvar SPECIAL_VAR_6, 8  @ num shakes
+	setvar SPECIAL_VAR_7, 5  @ shake delay
 	special ShakeCamera
 	waitstate
 	msgbox JaggedPass_Text_BoulderShakingInResponseToEmblem, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, 1   @ vertical pan
-	setvar VAR_0x8005, 1   @ horizontal pan
-	setvar VAR_0x8006, 16  @ num shakes
-	setvar VAR_0x8007, 3   @ shake delay
+	setvar SPECIAL_VAR_4, 1   @ vertical pan
+	setvar SPECIAL_VAR_5, 1   @ horizontal pan
+	setvar SPECIAL_VAR_6, 16  @ num shakes
+	setvar SPECIAL_VAR_7, 3   @ shake delay
 	special ShakeCamera
 	waitstate
 	playse SE_EFFECTIVE
@@ -101,8 +101,8 @@ JaggedPass_EventScript_Eric::
 
 JaggedPass_EventScript_Diana::
 	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_DianaRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, JaggedPass_EventScript_DianaRematch
 	msgbox JaggedPass_Text_DianaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -121,8 +121,8 @@ JaggedPass_EventScript_DianaRematch::
 
 JaggedPass_EventScript_Ethan::
 	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_EthanRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, JaggedPass_EventScript_EthanRematch
 	msgbox JaggedPass_Text_EthanPostBattle, MSGBOX_DEFAULT
 	release
 	end

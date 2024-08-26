@@ -27,8 +27,8 @@ NavelRock_Top_OnResume:
 	end
 
 NavelRock_Top_EventScript_TryRemoveHoOh::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject LOCALID_HO_OH
 	return
 
@@ -36,8 +36,8 @@ NavelRock_Top_EventScript_HoOh::
 	lockall
 	setvar VAR_TEMP_1, 1
 	special SpawnCameraObject
-	setvar VAR_0x8004, 3  @ num loops
-	setvar VAR_0x8005, 35 @ delay
+	setvar SPECIAL_VAR_4, 3  @ num loops
+	setvar SPECIAL_VAR_5, 35 @ delay
 	special LoopWingFlapSE
 	applymovement LOCALID_HO_OH, NavelRock_Top_Movement_HoOhAppear
 	applymovement OBJ_EVENT_ID_CAMERA, NavelRock_Top_Movement_CameraPanUp
@@ -50,8 +50,8 @@ NavelRock_Top_EventScript_HoOh::
 	delay 30
 	waitmoncry
 	delay 60
-	setvar VAR_0x8004, 3  @ num loops
-	setvar VAR_0x8005, 35 @ delay
+	setvar SPECIAL_VAR_4, 3  @ num loops
+	setvar SPECIAL_VAR_5, 35 @ delay
 	special LoopWingFlapSE
 	applymovement OBJ_EVENT_ID_CAMERA, NavelRock_Top_Movement_CameraPanDown
 	applymovement LOCALID_HO_OH, NavelRock_Top_Movement_HoOhApproach
@@ -62,23 +62,23 @@ NavelRock_Top_EventScript_HoOh::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	setvar VAR_LAST_TALKED, LOCALID_HO_OH
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Top_EventScript_RanFromHoOh
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Top_EventScript_RanFromHoOh
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_HO_OH
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, NavelRock_Top_EventScript_RanFromHoOh
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Top_EventScript_RanFromHoOh
 	setflag FLAG_CAUGHT_HO_OH
 	releaseall
 	end
 
 NavelRock_Top_EventScript_DefeatedHoOh::
 	setflag FLAG_DEFEATED_HO_OH
-	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar SPECIAL_VAR_4, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
 NavelRock_Top_EventScript_RanFromHoOh::
-	setvar VAR_0x8004, SPECIES_HO_OH
+	setvar SPECIAL_VAR_4, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

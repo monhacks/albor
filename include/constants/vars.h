@@ -277,33 +277,34 @@
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)
 
-#define SPECIAL_VARS_START            0x8000
-// special vars
+#define SPECIAL_VARS_START 32768
 // They are commonly used as parameters to commands, or return values from commands.
-#define VAR_0x8000                    0x8000
-#define VAR_0x8001                    0x8001
-#define VAR_0x8002                    0x8002
-#define VAR_0x8003                    0x8003
-#define VAR_0x8004                    0x8004
-#define VAR_0x8005                    0x8005
-#define VAR_0x8006                    0x8006
-#define VAR_0x8007                    0x8007
-#define VAR_0x8008                    0x8008
-#define VAR_0x8009                    0x8009
-#define VAR_0x800A                    0x800A
-#define VAR_0x800B                    0x800B
-#define VAR_FACING                    0x800C
-#define VAR_RESULT                    0x800D
-#define VAR_ITEM_ID                   0x800E
-#define VAR_LAST_TALKED               0x800F
-#define VAR_CONTEST_RANK              0x8010
-#define VAR_CONTEST_CATEGORY          0x8011
-#define VAR_MON_BOX_ID                0x8012
-#define VAR_MON_BOX_POS               0x8013
-#define VAR_UNUSED_0x8014             0x8014
-#define VAR_TRAINER_BATTLE_OPPONENT_A 0x8015 // Alias of gTrainerBattleOpponent_A
+enum SpecialVars
+{
+    SPECIAL_VAR_0 = SPECIAL_VARS_START,
+    SPECIAL_VAR_1,
+    SPECIAL_VAR_2,
+    SPECIAL_VAR_3,
+    SPECIAL_VAR_4,
+    SPECIAL_VAR_5,
+    SPECIAL_VAR_6,
+    SPECIAL_VAR_7,
+    SPECIAL_VAR_8,
+    SPECIAL_VAR_9,
+    SPECIAL_VAR_10,
+    SPECIAL_VAR_11,
+    SPECIAL_VAR_FACING,
+    SPECIAL_VAR_RESULT,
+    SPECIAL_VAR_ITEM_ID,
+    SPECIAL_VAR_LAST_TALKED,
+    SPECIAL_VAR_CONTEST_RANK,
+    SPECIAL_VAR_CONTEST_CATEGORY,
+    SPECIAL_VAR_MON_BOX_ID,
+    SPECIAL_VAR_MON_BOX_POS,
+    SPECIAL_VAR_TRAINER_BATTLE_OPPONENT_A, // Alias of gTrainerBattleOpponent_A
 
-#define SPECIAL_VARS_END              0x8015
+    SPECIAL_VARS_END
+};
 
 // If an overworld trigger uses this pseudo-variable as the trigger check,
 // then the script will be run using RunScriptImmediately instead of in the

@@ -19,8 +19,8 @@ FortreeCity_Gym_EventScript_InitRotatingGates::
 
 FortreeCity_Gym_EventScript_Winona::
 	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
 	goto_if_unset FLAG_RECEIVED_TM_AERIAL_ACE, FortreeCity_Gym_EventScript_GiveAerialAce2
 	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
 	release
@@ -33,7 +33,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_BADGE06_GET
-	setvar VAR_0x8008, 6
+	setvar SPECIAL_VAR_8, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce
 	closemessage
@@ -51,7 +51,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 
 FortreeCity_Gym_EventScript_GiveAerialAce2::
 	giveitem ITEM_TM_AERIAL_ACE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_AERIAL_ACE
 	release
@@ -59,7 +59,7 @@ FortreeCity_Gym_EventScript_GiveAerialAce2::
 
 FortreeCity_Gym_EventScript_GiveAerialAce::
 	giveitem ITEM_TM_AERIAL_ACE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_AERIAL_ACE
 	return

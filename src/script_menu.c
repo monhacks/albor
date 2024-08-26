@@ -682,8 +682,8 @@ bool8 ScriptMenu_CreateLilycoveSSTidalMultichoice(void)
     }
 }
 
-// gSpecialVar_0x8004 is 1 if the Sailor was shown multiple event tickets at the same time
-// otherwise gSpecialVar_0x8004 is 0
+// gSpecialVar_4 is 1 if the Sailor was shown multiple event tickets at the same time
+// otherwise gSpecialVar_4 is 0
 static void CreateLilycoveSSTidalMultichoice(void)
 {
     u8 selectionCount = 0;
@@ -701,7 +701,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
     GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_WIDTH);
 
-    if (gSpecialVar_0x8004 == 0)
+    if (gSpecialVar_4 == 0)
     {
         sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SLATEPORT;
         selectionCount++;
@@ -715,13 +715,13 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
     if (CheckBagHasItem(ITEM_EON_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_SOUTHERN_ISLAND) == TRUE)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_4 == 0)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
             selectionCount++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_EON_TICKET) == FALSE)
+        if (gSpecialVar_4 == 1 && FlagGet(FLAG_SHOWN_EON_TICKET) == FALSE)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_SOUTHERN_ISLAND;
             selectionCount++;
@@ -731,13 +731,13 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
     if (CheckBagHasItem(ITEM_MYSTIC_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_NAVEL_ROCK) == TRUE)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_4 == 0)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
             selectionCount++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_MYSTIC_TICKET) == FALSE)
+        if (gSpecialVar_4 == 1 && FlagGet(FLAG_SHOWN_MYSTIC_TICKET) == FALSE)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_NAVEL_ROCK;
             selectionCount++;
@@ -747,13 +747,13 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
     if (CheckBagHasItem(ITEM_AURORA_TICKET, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_BIRTH_ISLAND) == TRUE)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_4 == 0)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
             selectionCount++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_AURORA_TICKET) == FALSE)
+        if (gSpecialVar_4 == 1 && FlagGet(FLAG_SHOWN_AURORA_TICKET) == FALSE)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_BIRTH_ISLAND;
             selectionCount++;
@@ -763,13 +763,13 @@ static void CreateLilycoveSSTidalMultichoice(void)
 
     if (CheckBagHasItem(ITEM_OLD_SEA_MAP, 1) == TRUE && FlagGet(FLAG_ENABLE_SHIP_FARAWAY_ISLAND) == TRUE)
     {
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_4 == 0)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
             selectionCount++;
         }
 
-        if (gSpecialVar_0x8004 == 1 && FlagGet(FLAG_SHOWN_OLD_SEA_MAP) == FALSE)
+        if (gSpecialVar_4 == 1 && FlagGet(FLAG_SHOWN_OLD_SEA_MAP) == FALSE)
         {
             sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_FARAWAY_ISLAND;
             selectionCount++;
@@ -780,7 +780,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
     sLilycoveSSTidalSelections[selectionCount] = SSTIDAL_SELECTION_EXIT;
     selectionCount++;
 
-    if (gSpecialVar_0x8004 == 0 && FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
+    if (gSpecialVar_4 == 0 && FlagGet(FLAG_MET_SCOTT_ON_SS_TIDAL) == TRUE)
     {
         count = selectionCount;
     }
@@ -788,7 +788,7 @@ static void CreateLilycoveSSTidalMultichoice(void)
     count = selectionCount;
     if (count == SSTIDAL_SELECTION_COUNT)
     {
-        gSpecialVar_0x8004 = SCROLL_MULTI_SS_TIDAL_DESTINATION;
+        gSpecialVar_4 = SCROLL_MULTI_SS_TIDAL_DESTINATION;
         ShowScrollableMultichoice();
     }
     else

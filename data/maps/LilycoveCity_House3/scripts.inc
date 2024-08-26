@@ -4,17 +4,17 @@ LilycoveCity_House3_MapScripts::
 
 LilycoveCity_House3_OnTransition:
 	random 4
-	copyvar VAR_TEMP_1, VAR_RESULT
+	copyvar VAR_TEMP_1, SPECIAL_VAR_RESULT
 	end
 
 LilycoveCity_House3_EventScript_PokefanF::
 	lock
 	faceplayer
 	msgbox LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_House3_EventScript_DeclinePokeblockLearn
+	goto_if_eq SPECIAL_VAR_RESULT, NO, LilycoveCity_House3_EventScript_DeclinePokeblockLearn
 	msgbox LilycoveCity_House3_Text_ExplainPokeblocks, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -22,7 +22,7 @@ LilycoveCity_House3_EventScript_PokefanF::
 LilycoveCity_House3_EventScript_DeclinePokeblockLearn::
 	msgbox LilycoveCity_House3_Text_OhAreYouSure, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -32,7 +32,7 @@ LilycoveCity_House3_EventScript_Man::
 	faceplayer
 	msgbox LilycoveCity_House3_Text_HappyToHaveQuadruplets, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

@@ -9,9 +9,9 @@ AncientTomb_OnResume:
 	end
 
 AncientTomb_EventScript_TryRemoveRegisteel::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 AncientTomb_OnTransition:
@@ -66,10 +66,10 @@ AncientTomb_EventScript_Registeel::
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, AncientTomb_EventScript_DefeatedRegisteel
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, AncientTomb_EventScript_RanFromRegisteel
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AncientTomb_EventScript_RanFromRegisteel
 	setflag FLAG_DEFEATED_REGISTEEL
 	release
 	end
@@ -80,7 +80,7 @@ AncientTomb_EventScript_DefeatedRegisteel::
 	end
 
 AncientTomb_EventScript_RanFromRegisteel::
-	setvar VAR_0x8004, SPECIES_REGISTEEL
+	setvar SPECIAL_VAR_4, SPECIES_REGISTEEL
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

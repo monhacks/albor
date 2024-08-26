@@ -33,8 +33,8 @@ MtChimney_CableCarStation_EventScript_Attendant::
 	lock
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_CableCarReadyGetOn, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MtChimney_CableCarStation_EventScript_RideCableCar
-	goto_if_eq VAR_RESULT, NO, MtChimney_CableCarStation_EventScript_DeclineRide
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MtChimney_CableCarStation_EventScript_RideCableCar
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MtChimney_CableCarStation_EventScript_DeclineRide
 	end
 
 MtChimney_CableCarStation_EventScript_RideCableCar::
@@ -43,7 +43,7 @@ MtChimney_CableCarStation_EventScript_RideCableCar::
 	applymovement LOCALID_ATTENDANT, MtChimney_CableCarStation_Movement_LeadPlayerToCableCar
 	applymovement OBJ_EVENT_ID_PLAYER, MtChimney_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
-	setvar VAR_0x8004, TRUE  @ Going down
+	setvar SPECIAL_VAR_4, TRUE  @ Going down
 	setvar VAR_CABLE_CAR_STATION_STATE, 2
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

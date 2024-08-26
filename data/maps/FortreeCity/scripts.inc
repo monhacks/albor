@@ -55,29 +55,29 @@ FortreeCity_EventScript_Kecleon::
 	lock
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE
-	goto_if_eq VAR_RESULT, TRUE, FortreeCity_EventScript_AskUseDevonScope
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, FortreeCity_EventScript_AskUseDevonScope
 	msgbox FortreeCity_Text_SomethingUnseeable, MSGBOX_DEFAULT
 	release
 	end
 
 FortreeCity_EventScript_AskUseDevonScope::
 	msgbox FortreeCity_Text_UnseeableUseDevonScope, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, FortreeCity_EventScript_UseDevonScope
+	goto_if_eq SPECIAL_VAR_RESULT, YES, FortreeCity_EventScript_UseDevonScope
 	release
 	end
 
 FortreeCity_EventScript_UseDevonScope::
 	msgbox FortreeCity_Text_UsedDevonScopePokemonFled, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Movement_KecleonAppears
+	applymovement SPECIAL_VAR_LAST_TALKED, Movement_KecleonAppears
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	applymovement VAR_LAST_TALKED, FortreeCity_Movement_KecleonFlee
+	applymovement SPECIAL_VAR_LAST_TALKED, FortreeCity_Movement_KecleonFlee
 	waitmovement 0
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	setflag FLAG_KECLEON_FLED_FORTREE
 	release
 	end

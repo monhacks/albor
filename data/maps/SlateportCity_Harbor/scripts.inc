@@ -28,25 +28,25 @@ SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene::
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger0::
 	lockall
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
 	end
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger3::
 	lockall
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Harbor_Movement_PlayerWalkUp
 	waitmovement 0
 	goto SlateportCity_Harbor_EventScript_AquaEscapeScene
@@ -70,10 +70,10 @@ SlateportCity_Harbor_EventScript_AquaEscapeScene::
 	setvar VAR_SLATEPORT_HARBOR_STATE, 2
 	setflag FLAG_MET_TEAM_AQUA_HARBOR
 	setflag FLAG_HIDE_LILYCOVE_MOTEL_SCOTT
-	call_if_eq VAR_0x8008, 0, SlateportCity_Harbor_EventScript_SternApproachPlayer0
-	call_if_eq VAR_0x8008, 1, SlateportCity_Harbor_EventScript_SternApproachPlayer1
-	call_if_eq VAR_0x8008, 2, SlateportCity_Harbor_EventScript_SternApproachPlayer
-	call_if_eq VAR_0x8008, 3, SlateportCity_Harbor_EventScript_SternApproachPlayer
+	call_if_eq SPECIAL_VAR_8, 0, SlateportCity_Harbor_EventScript_SternApproachPlayer0
+	call_if_eq SPECIAL_VAR_8, 1, SlateportCity_Harbor_EventScript_SternApproachPlayer1
+	call_if_eq SPECIAL_VAR_8, 2, SlateportCity_Harbor_EventScript_SternApproachPlayer
+	call_if_eq SPECIAL_VAR_8, 3, SlateportCity_Harbor_EventScript_SternApproachPlayer
 	msgbox SlateportCity_Harbor_Text_CaptSternWhyStealMySubmarine, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HIDE_AQUA_HIDEOUT_1F_GRUNT_1_BLOCKING_ENTRANCE
@@ -178,7 +178,7 @@ SlateportCity_Harbor_EventScript_AskForTicket::
 SlateportCity_Harbor_EventScript_ChooseDestination::
 	goto_if_set FLAG_MET_SCOTT_ON_SS_TIDAL, SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
 	multichoicedefault 18, 8, MULTI_SSTIDAL_SLATEPORT_NO_BF, 2, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
 	case 1, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect
@@ -186,7 +186,7 @@ SlateportCity_Harbor_EventScript_ChooseDestination::
 
 SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier::
 	multichoicedefault 17, 6, MULTI_SSTIDAL_SLATEPORT_WITH_BF, 2, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_Lilycove
 	case 1, SlateportCity_Harbor_EventScript_BattleFrontier
 	case 2, SlateportCity_Harbor_EventScript_CancelDestinationSelect
@@ -201,7 +201,7 @@ SlateportCity_Harbor_EventScript_NoTicket::
 
 SlateportCity_Harbor_EventScript_Lilycove::
 	msgbox SlateportCity_Harbor_Text_LilycoveItIs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseNewDestination
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseNewDestination
 	setvar VAR_SS_TIDAL_STATE, SS_TIDAL_BOARD_SLATEPORT
 	call SlateportCity_Harbor_EventScript_BoardFerry
 	warp MAP_SS_TIDAL_CORRIDOR, 1, 10
@@ -211,7 +211,7 @@ SlateportCity_Harbor_EventScript_Lilycove::
 
 SlateportCity_Harbor_EventScript_BattleFrontier::
 	msgbox SlateportCity_Harbor_Text_BattleFrontierItIs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseNewDestination
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseNewDestination
 	call SlateportCity_Harbor_EventScript_BoardFerry
 	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67
 	waitstate
@@ -227,15 +227,15 @@ SlateportCity_Harbor_EventScript_ChooseNewDestination::
 SlateportCity_Harbor_EventScript_BoardFerry::
 	msgbox SlateportCity_Harbor_Text_PleaseBoardFerry, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 30
-	hideobjectat VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
-	call_if_eq VAR_FACING, DIR_NORTH, SlateportCity_Harbor_EventScript_BoardFerryNorth
-	call_if_eq VAR_FACING, DIR_EAST, SlateportCity_Harbor_EventScript_BoardFerryEast
+	hideobjectat SPECIAL_VAR_LAST_TALKED, MAP_SLATEPORT_CITY_HARBOR
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, SlateportCity_Harbor_EventScript_BoardFerryNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, SlateportCity_Harbor_EventScript_BoardFerryEast
 	delay 30
 	hideobjectat OBJ_EVENT_ID_PLAYER, 0
-	setvar VAR_0x8004, LOCALID_SS_TIDAL
+	setvar SPECIAL_VAR_4, LOCALID_SS_TIDAL
 	call Common_EventScript_FerryDepart
 	return
 
@@ -267,10 +267,10 @@ SlateportCity_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
 	call_if_set FLAG_DEFEATED_GROUDON, SlateportCity_Harbor_EventScript_CountDefeatedLegendary
-	goto_if_eq VAR_0x8004, 2, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather  @ Defeated both
+	goto_if_eq SPECIAL_VAR_4, 2, SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather  @ Defeated both
 	msgbox SlateportCity_Harbor_Text_AbnormalWeather, MSGBOX_DEFAULT
 	release
 	end
@@ -281,7 +281,7 @@ SlateportCity_Harbor_EventScript_SailorNoAbnormalWeather::
 	end
 
 SlateportCity_Harbor_EventScript_CountDefeatedLegendary::
-	addvar VAR_0x8004, 1
+	addvar SPECIAL_VAR_4, 1
 	return
 
 SlateportCity_Harbor_EventScript_FatMan::
@@ -297,7 +297,7 @@ SlateportCity_Harbor_EventScript_CaptStern::
 	goto_if_eq VAR_SLATEPORT_HARBOR_STATE, 2, SlateportCity_Harbor_EventScript_WhyStealSubmarine
 	msgbox SlateportCity_Harbor_Text_SameThugsTriedToRobAtMuseum, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -321,7 +321,7 @@ SlateportCity_Harbor_EventScript_NeedDive::
 SlateportCity_Harbor_EventScript_CaptSternFerryOrScannerComment::
 	goto_if_eq VAR_TEMP_1, 1, SlateportCity_Harbor_EventScript_TradedScanner
 	checkitem ITEM_SCANNER
-	goto_if_eq VAR_RESULT, TRUE, SlateportCity_Harbor_EventScript_AskToTradeScanner
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, SlateportCity_Harbor_EventScript_AskToTradeScanner
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_FerryFinished
 	msgbox SlateportCity_Harbor_Text_WontBeLongBeforeWeFinishFerry, MSGBOX_DEFAULT
 	release
@@ -340,7 +340,7 @@ SlateportCity_Harbor_EventScript_AskToTradeScanner::
 
 SlateportCity_Harbor_EventScript_ChooseScannerTrade::
 	multichoice 0, 0, MULTI_STERN_DEEPSEA, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SlateportCity_Harbor_EventScript_DeepSeaTooth
 	case 1, SlateportCity_Harbor_EventScript_DeepSeaScale
 	case 2, SlateportCity_Harbor_EventScript_DeclineTrade
@@ -349,9 +349,9 @@ SlateportCity_Harbor_EventScript_ChooseScannerTrade::
 
 SlateportCity_Harbor_EventScript_DeepSeaTooth::
 	msgbox SlateportCity_Harbor_Text_TradeForDeepSeaTooth, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
 	giveitem ITEM_DEEP_SEA_TOOTH
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	removeitem ITEM_SCANNER
 	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER
@@ -360,9 +360,9 @@ SlateportCity_Harbor_EventScript_DeepSeaTooth::
 
 SlateportCity_Harbor_EventScript_DeepSeaScale::
 	msgbox SlateportCity_Harbor_Text_TradeForDeepSeaScale, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SlateportCity_Harbor_EventScript_ChooseDifferentTrade
 	giveitem ITEM_DEEP_SEA_SCALE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	removeitem ITEM_SCANNER
 	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
 	setflag FLAG_EXCHANGED_SCANNER

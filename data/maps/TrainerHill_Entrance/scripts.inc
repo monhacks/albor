@@ -13,7 +13,7 @@ TrainerHill_Entrance_MapScripts::
 
 TrainerHill_Entrance_OnTransition:
 	setflag FLAG_LANDMARK_TRAINER_HILL
-	getplayerxy VAR_TEMP_D, VAR_RESULT
+	getplayerxy VAR_TEMP_D, SPECIAL_VAR_RESULT
 	end
 
 @ Unused
@@ -24,14 +24,14 @@ TrainerHill_Entrance_OnResume:
 	trainerhill_resumetimer
 	setvar VAR_TEMP_0, 0
 	trainerhill_getusingereader
-	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_TryFaceAttendant  @ VAR_RESULT always FALSE here
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_TryFaceAttendant  @ SPECIAL_VAR_RESULT always FALSE here
 	setobjectxy OBJ_EVENT_ID_PLAYER, 9, 6
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	end
 
 TrainerHill_Entrance_EventScript_TryFaceAttendant::
 	trainerhill_getwon
-	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_PlayerDontFaceAttendant
 	applymovement OBJ_EVENT_ID_PLAYER, TrainerHill_Entrance_Movement_PlayerFaceAttendant
 	end
 
@@ -75,7 +75,7 @@ TrainerHill_Entrance_EventScript_ExitElevator::
 TrainerHill_Entrance_EventScript_ExitChallenge::
 	setvar VAR_TEMP_0, 1
 	trainerhill_getstatus
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case TRAINER_HILL_PLAYER_STATUS_LOST, TrainerHill_Entrance_EventScript_ExitChallengeLost
 	case TRAINER_HILL_PLAYER_STATUS_ECARD_SCANNED, TrainerHill_Entrance_EventScript_ExitChallengeECard
 	case TRAINER_HILL_PLAYER_STATUS_NORMAL, TrainerHill_Entrance_EventScript_EndExitChallenge
@@ -102,7 +102,7 @@ TrainerHill_Entrance_EventScript_EndExitChallenge::
 	end
 
 TrainerHill_Entrance_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -113,7 +113,7 @@ TrainerHill_Entrance_EventScript_Attendant::
 	lock
 	faceplayer
 	trainerhill_inchallenge
-	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_ThanksForPlaying
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_ThanksForPlaying
 	msgbox TrainerHill_Entrance_Text_HopeYouGiveItYourBest, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_AttendantEnd
 
@@ -129,9 +129,9 @@ TrainerHill_Entrance_EventScript_EntryTrigger::
 	goto_if_unset FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_Closed
 	msgbox TrainerHill_Entrance_Text_WelcomeToTrainerHill, MSGBOX_DEFAULT
 	trainerhill_getsaved
-	call_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveGame
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveGame
 	trainerhill_allfloorsused
-	goto_if_eq VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_AllFloorsUsed
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, TrainerHill_Entrance_EventScript_AllFloorsUsed
 	msgbox TrainerHill_Entrance_Text_TrainersUpToFloorX, MSGBOX_DEFAULT
 	goto TrainerHill_Entrance_EventScript_AskChallengeTrainers
 
@@ -141,7 +141,7 @@ TrainerHill_Entrance_EventScript_AskChallengeTrainers::
 	message TrainerHill_Entrance_Text_LikeToChallengeTrainers
 	waitmessage
 	multichoice 15, 6, MULTI_YESNOINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, TrainerHill_Entrance_EventScript_ChooseChallenge
 	case 1, TrainerHill_Entrance_EventScript_CancelEntry
 	case 2, TrainerHill_Entrance_EventScript_Info
@@ -155,10 +155,10 @@ TrainerHill_Entrance_EventScript_Info::
 
 TrainerHill_Entrance_EventScript_ChooseChallenge::
 	multichoice 13, 2, MULTI_TAG_MATCH_TYPE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 4, TrainerHill_Entrance_EventScript_CancelEntry
 	case MULTI_B_PRESSED, TrainerHill_Entrance_EventScript_CancelEntry
-	trainerhill_setmode VAR_RESULT
+	trainerhill_setmode SPECIAL_VAR_RESULT
 	setvar VAR_TRAINER_HILL_IS_ACTIVE, 1
 	setvar VAR_TEMP_5, 0
 	special HealPlayerParty
@@ -182,7 +182,7 @@ TrainerHill_Entrance_EventScript_SaveGame::
 	trainerhill_setsaved
 	setvar VAR_TEMP_5, 1
 	call Common_EventScript_SaveGame
-	goto_if_eq VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, TrainerHill_Entrance_EventScript_SaveFailed
 	trainerhill_setsaved
 	return
 

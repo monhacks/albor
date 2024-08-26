@@ -1,6 +1,6 @@
 BerryTreeScript::
 	special ObjectEventInteractionGetBerryTreeData
-	switch VAR_0x8004
+	switch SPECIAL_VAR_4
 	case BERRY_STAGE_SPARKLING, BerryTree_EventScript_Sparkling
 	case BERRY_STAGE_NO_BERRY, BerryTree_EventScript_CheckSoil
 	case BERRY_STAGE_PLANTED, BerryTree_EventScript_CheckBerryStage1
@@ -23,10 +23,10 @@ BerryTree_EventScript_Sparkling::
 BerryTree_EventScript_CheckSoil::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, PlayerHasBerries
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
-	specialvar VAR_RESULT, PlayerHasMulch
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
+	specialvar SPECIAL_VAR_RESULT, PlayerHasBerries
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
+	specialvar SPECIAL_VAR_RESULT, PlayerHasMulch
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_WantToMulch
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	waitbuttonpress
@@ -34,18 +34,18 @@ BerryTree_EventScript_CheckSoil::
 	end
 
 BerryTree_EventScript_WantToPlant::
-	specialvar VAR_RESULT, PlayerHasMulch
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlantMulch
+	specialvar SPECIAL_VAR_RESULT, PlayerHasMulch
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlantMulch
 	msgbox BerryTree_Text_WantToPlant, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_ChooseBerryToPlant
+	goto_if_eq SPECIAL_VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
 	end
 
 BerryTree_EventScript_WantToMulch::
 .if OW_BERRY_MULCH_USAGE == TRUE
 	msgbox BerryTree_Text_WantToMulch, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToUse
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_ChooseMulchToUse
+	goto_if_eq SPECIAL_VAR_RESULT, NO, BerryTree_EventScript_CancelPlanting
 .endif
 	end
 
@@ -54,7 +54,7 @@ BerryTree_EventScript_WantToPlantMulch::
 	message BerryTree_Text_ItsSoftLoamySoil
 	waitmessage
 	multichoice 0, 0, MULTI_BERRY_PLOT, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BerryTree_EventScript_ChooseMulchToUse
 	case 1, BerryTree_EventScript_ChooseBerryToPlant
 	case 2, BerryTree_EventScript_CancelPlanting
@@ -65,8 +65,8 @@ BerryTree_EventScript_ChooseMulchToUse::
 	closemessage
 	special Bag_ChooseMulch
 	waitstate
-	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
-	removeitem VAR_ITEM_ID
+	goto_if_eq SPECIAL_VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
+	removeitem SPECIAL_VAR_ITEM_ID
 	call BerryTree_EventScript_UseMulch
 .endif
 
@@ -75,8 +75,8 @@ BerryTree_EventScript_ChooseBerryToPlant::
 	closemessage
 	special Bag_ChooseBerry
 	waitstate
-	goto_if_eq VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
-	removeitem VAR_ITEM_ID
+	goto_if_eq SPECIAL_VAR_ITEM_ID, 0, BerryTree_EventScript_CancelPlanting
+	removeitem SPECIAL_VAR_ITEM_ID
 	call BerryTree_EventScript_PlantBerry
 
 BerryTree_EventScript_CancelPlanting::
@@ -132,11 +132,11 @@ BerryTree_EventScript_CheckBerryStage4::
 	waitbuttonpress
 	goto BerryTree_EventScript_WantToWater
 
-@ VAR_0x8005 here is the number of times watered
+@ SPECIAL_VAR_5 here is the number of times watered
 @ Buffered by ObjectEventInteractionGetBerryTreeData
 BerryTree_EventScript_GetCareAdverb::
-	goto_if_eq VAR_0x8005, 0, BerryTree_EventScript_SetAdverbPoor
-	goto_if_eq VAR_0x8005, 4, BerryTree_EventScript_SetAdverbGreat
+	goto_if_eq SPECIAL_VAR_5, 0, BerryTree_EventScript_SetAdverbPoor
+	goto_if_eq SPECIAL_VAR_5, 4, BerryTree_EventScript_SetAdverbGreat
 	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbGood
 	return
 
@@ -148,18 +148,18 @@ BerryTree_EventScript_SetAdverbPoor::
 	bufferstring STR_VAR_2, BerryTree_Text_CareAdverbPoor
 	return
 
-@ VAR_0x8006 here is the number of berries
+@ SPECIAL_VAR_6 here is the number of berries
 BerryTree_EventScript_CheckBerryFullyGrown::
-	buffernumberstring STR_VAR_2, VAR_0x8006
+	buffernumberstring STR_VAR_2, SPECIAL_VAR_6
 	lock
 	faceplayer
 	special ObjectEventInteractionGetBerryCountString
 .if OW_BERRY_MUTATIONS == TRUE
-	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_CheckBerryFullyGrown_Mutation
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_CheckBerryFullyGrown_Mutation
 .endif
 	msgbox BerryTree_Text_WantToPick, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_PickBerry
+	goto_if_eq SPECIAL_VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry
 
 .set BERRY_NORMAL_BAG_FULL, 0
 .set BERRY_NORMAL_SPACE_IN_BAG, 1
@@ -168,10 +168,10 @@ BerryTree_EventScript_CheckBerryFullyGrown::
 
 BerryTree_EventScript_PickBerry::
 	special ObjectEventInteractionPickBerryTree
-	goto_if_eq VAR_0x8004, BERRY_NORMAL_BAG_FULL, BerryTree_EventScript_BerryPocketFull
+	goto_if_eq SPECIAL_VAR_4, BERRY_NORMAL_BAG_FULL, BerryTree_EventScript_BerryPocketFull
 .if OW_BERRY_MUTATIONS == TRUE
-	goto_if_eq VAR_0x8004, BERRY_MUTATION_BAG_FULL, BerryTree_EventScript_BerryPocketFull_Mutation
-	goto_if_eq VAR_0x8004, BERRY_MUTATION_SPACE_IN_BAG, BerryTree_EventScript_PickBerry_Mutation
+	goto_if_eq SPECIAL_VAR_4, BERRY_MUTATION_BAG_FULL, BerryTree_EventScript_BerryPocketFull_Mutation
+	goto_if_eq SPECIAL_VAR_4, BERRY_MUTATION_SPACE_IN_BAG, BerryTree_EventScript_PickBerry_Mutation
 .endif
 	special ObjectEventInteractionRemoveBerryTree
 	message BerryTree_Text_PickedTheBerry
@@ -214,13 +214,13 @@ BerryTree_EventScript_WantToWater::
 	call BerryTree_EventScript_CheckForWeed
 .endif
 	checkitem ITEM_WAILMER_PAIL
-	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
-	specialvar VAR_RESULT, CanWaterBerryPlot
-	goto_if_eq VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
+	specialvar SPECIAL_VAR_RESULT, CanWaterBerryPlot
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, BerryTree_EventScript_DontWater
 	special ObjectEventInteractionGetBerryName
 	msgbox BerryTree_Text_WantToWater, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_WaterBerry
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_DontWater
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_WaterBerry
+	goto_if_eq SPECIAL_VAR_RESULT, NO, BerryTree_EventScript_DontWater
 
 BerryTree_EventScript_DontWater::
 	releaseall
@@ -344,8 +344,8 @@ BerryTree_Text_ExclamationPoint:
 .if OW_BERRY_MUTATIONS == TRUE
 BerryTree_EventScript_CheckBerryFullyGrown_Mutation:
 	msgbox BerryTree_Text_WantToPick_Mutation, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PickBerry
-	goto_if_eq VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry_Mutation
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_PickBerry
+	goto_if_eq SPECIAL_VAR_RESULT, NO, BerryTree_EventScript_CancelPickingBerry_Mutation
 
 BerryTree_EventScript_CancelPickingBerry_Mutation::
 	message BerryTree_Text_BerryLeftUnpicked_Mutation
@@ -419,13 +419,13 @@ BerryTree_Text_ScatteredMulch:
 
 .if OW_BERRY_WEEDS == TRUE
 BerryTree_EventScript_CheckForWeed::
-	specialvar VAR_RESULT, ObjectEventInteractionBerryHasWeed
-	call_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WeedIsGrowing
+	specialvar SPECIAL_VAR_RESULT, ObjectEventInteractionBerryHasWeed
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_WeedIsGrowing
 	return
 
 BerryTree_EventScript_WeedIsGrowing::
 	msgbox BerryTree_Text_WeedIsGrowing, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, BerryTree_EventScript_PullOutWeed
+	goto_if_eq SPECIAL_VAR_RESULT, YES, BerryTree_EventScript_PullOutWeed
 	return
 
 BerryTree_EventScript_PullOutWeed::
@@ -445,8 +445,8 @@ BerryTree_Text_PulledOutTheWeed:
 
 .if OW_BERRY_PESTS == TRUE
 BerryTree_EventScript_CheckForPests::
-	specialvar VAR_RESULT, ObjectEventInteractionBerryHasPests
-	call_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_EncounterPests
+	specialvar SPECIAL_VAR_RESULT, ObjectEventInteractionBerryHasPests
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, BerryTree_EventScript_EncounterPests
 	return
 
 BerryTree_EventScript_EncounterPests::

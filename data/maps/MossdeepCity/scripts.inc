@@ -218,7 +218,7 @@ MossdeepCity_EventScript_Man::
 	lock
 	faceplayer
 	msgbox MossdeepCity_Text_SurfExhilarating, MSGBOX_DEFAULT
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
@@ -228,10 +228,10 @@ MossdeepCity_EventScript_KingsRockBoy::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_KINGS_ROCK, MossdeepCity_EventScript_ReceivedKingsRock
 	msgbox MossdeepCity_Text_WantKingsRockStevenGaveMe, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_DeclineKingsRock
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MossdeepCity_EventScript_DeclineKingsRock
 	msgbox MossdeepCity_Text_YouCanKeepIt, MSGBOX_DEFAULT
 	giveitem ITEM_KINGS_ROCK
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_KINGS_ROCK
 	release
 	end
@@ -255,8 +255,8 @@ MossdeepCity_EventScript_Scott::
 	faceplayer
 	msgbox MossdeepCity_Text_ScottSomethingWrongWithTown, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, MossdeepCity_EventScript_ScottExitNorth
-	call_if_eq VAR_FACING, DIR_EAST, MossdeepCity_EventScript_ScottExitEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, MossdeepCity_EventScript_ScottExitNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, MossdeepCity_EventScript_ScottExitEast
 	addvar VAR_SCOTT_STATE, 1
 	removeobject LOCALID_SCOTT
 	release

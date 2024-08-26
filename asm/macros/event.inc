@@ -319,7 +319,7 @@
 	.byte 0x2d
 	.endm
 
-	@ Sets the values of variables VAR_0x8000, VAR_0x8001, and VAR_0x8002 to the current hour, minute, and second.
+	@ Sets the values of variables SPECIAL_VAR_0, SPECIAL_VAR_1, and SPECIAL_VAR_2 to the current hour, minute, and second.
 	.macro gettime
 	.byte 0x2e
 	.endm
@@ -505,13 +505,13 @@
 	.2byte \y
 	.endm
 
-	@ Retrieves the number of Pokemon in the player's party, and stores that number in VAR_RESULT.
+	@ Retrieves the number of Pokemon in the player's party, and stores that number in SPECIAL_VAR_RESULT.
 	.macro getpartysize
 	.byte 0x43
 	.endm
 
 	@ Attempts to add quantity of the specified item to the player's Bag. If the player has enough room, the item will
-	@ be added and VAR_RESULT will be set to TRUE; otherwise, VAR_RESULT is set to FALSE.
+	@ be added and SPECIAL_VAR_RESULT will be set to TRUE; otherwise, SPECIAL_VAR_RESULT is set to FALSE.
 	.macro additem itemId:req, quantity=1
 	.byte 0x44
 	.2byte \itemId
@@ -519,14 +519,14 @@
 	.endm
 
 	@ Removes quantity of the specified item from the player's Bag. If the player has fewer than 'quantity' in their bag
-	@ then none will be removed and VAR_RESULT will be set to FALSE. Otherwise it will be set to TRUE.
+	@ then none will be removed and SPECIAL_VAR_RESULT will be set to FALSE. Otherwise it will be set to TRUE.
 	.macro removeitem itemId:req, quantity=1
 	.byte 0x45
 	.2byte \itemId
 	.2byte \quantity
 	.endm
 
-	@ Checks if the player has enough space in their Bag to hold quantity more of the specified item. Sets VAR_RESULT to
+	@ Checks if the player has enough space in their Bag to hold quantity more of the specified item. Sets SPECIAL_VAR_RESULT to
 	@ TRUE if there is room, or FALSE is there is no room.
 	.macro checkitemspace itemId:req, quantity=1
 	.byte 0x46
@@ -534,7 +534,7 @@
 	.2byte \quantity
 	.endm
 
-	@ Checks if the player has quantity or more of the specified item in their Bag. Sets VAR_RESULT to TRUE if the player has
+	@ Checks if the player has quantity or more of the specified item in their Bag. Sets SPECIAL_VAR_RESULT to TRUE if the player has
 	@ enough of the item, or FALSE if they have fewer than quantity of the item.
 	.macro checkitem itemId:req, quantity=1
 	.byte 0x47
@@ -542,7 +542,7 @@
 	.2byte \quantity
 	.endm
 
-	@ Checks which Bag pocket the specified item belongs in, and writes the pocket value (POCKET_*) to VAR_RESULT.
+	@ Checks which Bag pocket the specified item belongs in, and writes the pocket value (POCKET_*) to SPECIAL_VAR_RESULT.
 	@ This is used to show the name of the proper Bag pocket when the player receives an item via callstd.
 	.macro checkitemtype itemId:req
 	.byte 0x48
@@ -582,7 +582,7 @@
 	.endm
 
 	@ Checks if the player has enough space in their PC to hold the decoration.
-	@ Sets VAR_RESULT to TRUE if there is room, or FALSE is there is no room.
+	@ Sets SPECIAL_VAR_RESULT to TRUE if there is room, or FALSE is there is no room.
 	.macro checkdecorspace decoration:req
 	.byte 0x4e
 	.2byte \decoration
@@ -889,7 +889,7 @@
 	.endm
 
 	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection.
-	@ Their selection is stored in VAR_RESULT as NO (0) or YES (1). Pressing B is equivalent to answering NO
+	@ Their selection is stored in SPECIAL_VAR_RESULT as NO (0) or YES (1). Pressing B is equivalent to answering NO
 	.macro yesnobox x:req, y:req
 	.byte 0x6e
 	.byte \x
@@ -995,7 +995,7 @@
 	.endm
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
+	@ SPECIAL_VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
 	callnative ScrCmd_createmon
 	.byte 0
@@ -1115,7 +1115,7 @@
 	.endm
 
 	@ Gives the player an Egg of the specified species.
-	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
+	@ SPECIAL_VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro giveegg species:req
 	.byte 0x7a
 	.2byte \species
@@ -1131,9 +1131,9 @@
 	.2byte \move
 	.endm
 
-	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
-	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
-	@ VAR_0x8004 is also set to this Pokemon's species.
+	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, SPECIAL_VAR_RESULT is set to the
+	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, SPECIAL_VAR_RESULT is set to PARTY_SIZE.
+	@ SPECIAL_VAR_4 is also set to this Pokemon's species.
 	.macro checkpartymove move:req
 	.byte 0x7c
 	.2byte \move
@@ -1273,7 +1273,7 @@
 	.byte 0x8e
 	.endm
 
-	@ Stores a random integer between 0 and limit (exclusive of limit) in VAR_RESULT.
+	@ Stores a random integer between 0 and limit (exclusive of limit) in SPECIAL_VAR_RESULT.
 	.macro random limit:req
 	.byte 0x8f
 	.2byte \limit
@@ -1295,7 +1295,7 @@
 	.byte \disable
 	.endm
 
-	@ Checks if the player has money >= value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
+	@ Checks if the player has money >= value. SPECIAL_VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
 	@ If 'disable' is set to anything but 0 then this command does nothing.
 	.macro checkmoney value:req, disable=0
 	.byte 0x92
@@ -1386,7 +1386,7 @@
 	.2byte \heallocation
 	.endm
 
-	@ Checks the player's gender. Stores the result (MALE (0) or FEMALE (1)) in VAR_RESULT.
+	@ Checks the player's gender. Stores the result (MALE (0) or FEMALE (1)) in SPECIAL_VAR_RESULT.
 	.macro checkplayergender
 	.byte 0xa0
 	.endm
@@ -1527,15 +1527,15 @@
 	.endm
 
 	@ Gives 'count' coins to the player, up to a total of MAX_COINS.
-	@ If the player already has MAX_COINS then VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
+	@ If the player already has MAX_COINS then SPECIAL_VAR_RESULT is set to TRUE, otherwise it is set to FALSE.
 	.macro addcoins count:req
 	.byte 0xb4
 	.2byte \count
 	.endm
 
 	@ Takes 'count' coins from the player.
-	@ If the player has fewer than 'count' coins then no coins are taken and VAR_RESULT is set to TRUE.
-	@ Otherwise VAR_RESULT is set to FALSE.
+	@ If the player has fewer than 'count' coins then no coins are taken and SPECIAL_VAR_RESULT is set to TRUE.
+	@ Otherwise SPECIAL_VAR_RESULT is set to FALSE.
 	.macro removecoins count:req
 	.byte 0xb5
 	.2byte \count
@@ -1700,7 +1700,7 @@
 	.endm
 
 	@ Checks if the modernFatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
-	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
+	@ SPECIAL_VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), SPECIAL_VAR_RESULT is FALSE.
 	.macro checkmodernfatefulencounter slot:req
 	.byte 0xce
 	.2byte \slot
@@ -1894,10 +1894,10 @@
 
 	@ Allows 'compare' followed by a conditional goto/call to be combined into a single statement.
 	@ The following are examples of the two acceptable formats this facilitates:
-	@ compare VAR_RESULT, TRUE
+	@ compare SPECIAL_VAR_RESULT, TRUE
 	@ goto_if_eq MyScript
 	@ - or -
-	@ goto_if_eq VAR_RESULT, TRUE, MyScript
+	@ goto_if_eq SPECIAL_VAR_RESULT, TRUE, MyScript
 	@
 	@ The first two arguments to this macro are the base command, e.g. 'goto_if 1' for goto_if_eq.
 	@ The remaining arguments 'a, b, c' depend on the format:
@@ -2009,11 +2009,11 @@
 	.endm
 
 	.macro switch var:req
-	copyvar VAR_0x8000, \var
+	copyvar SPECIAL_VAR_0, \var
 	.endm
 
 	.macro case condition:req, dest:req
-	compare VAR_0x8000, \condition
+	compare SPECIAL_VAR_0, \condition
 	goto_if_eq \dest
 	.endm
 
@@ -2037,33 +2037,33 @@
 
 	@ Gives 'amount' of the specified 'item' to the player and prints a message with fanfare.
 	@ If the player doesn't have space for all the items then as many are added as possible, the
-	@ message indicates there is no room, and VAR_RESULT is set to FALSE.
-	@ Otherwise VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
+	@ message indicates there is no room, and SPECIAL_VAR_RESULT is set to FALSE.
+	@ Otherwise SPECIAL_VAR_RESULT is set to TRUE, and the message indicates they have received the item(s).
 	.macro giveitem item:req, amount=1
-	setorcopyvar VAR_0x8000, \item
-	setorcopyvar VAR_0x8001, \amount
+	setorcopyvar SPECIAL_VAR_0, \item
+	setorcopyvar SPECIAL_VAR_1, \amount
 	callstd STD_OBTAIN_ITEM
 	.endm
 
 	@ For picking up items in the overworld. Similar to giveitem, but with different language and
 	@ sets the flag of the last-talked to object (the item the player picked up).
 	.macro finditem item:req, amount=1
-	setorcopyvar VAR_0x8000, \item
-	setorcopyvar VAR_0x8001, \amount
+	setorcopyvar SPECIAL_VAR_0, \item
+	setorcopyvar SPECIAL_VAR_1, \amount
 	callstd STD_FIND_ITEM
 	.endm
 
 	@ Equivalent to giveitem but for a single decoration.
 	.macro givedecoration decoration:req
-	setorcopyvar VAR_0x8000, \decoration
+	setorcopyvar SPECIAL_VAR_0, \decoration
 	callstd STD_OBTAIN_DECORATION
 	.endm
 
 	@ Registers the specified trainer in Match Call and plays a fanfare with a notification message.
 	.macro register_matchcall trainer:req
-	setvar VAR_0x8004, \trainer
+	setvar SPECIAL_VAR_4, \trainer
 	special SetMatchCallRegisteredFlag
-	setorcopyvar VAR_0x8000, \trainer
+	setorcopyvar SPECIAL_VAR_0, \trainer
 	callstd STD_REGISTER_MATCH_CALL
 	.endm
 
@@ -2084,9 +2084,9 @@
 
 	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
 	.macro seteventmon species:req, level:req, item=ITEM_NONE
-	setvar VAR_0x8004, \species
-	setvar VAR_0x8005, \level
-	setvar VAR_0x8006, \item
+	setvar SPECIAL_VAR_4, \species
+	setvar SPECIAL_VAR_5, \level
+	setvar SPECIAL_VAR_6, \item
 	special CreateEnemyEventMon
 	.endm
 
@@ -2100,14 +2100,14 @@
 	@ The rest of the arguments are the stat change values to each stat.
 	@ For example, giving the first opponent +1 to atk and -2 to speed would be: settotemboost B_POSITION_OPPONENT_LEFT, 1, 0, -2
 	.macro settotemboost battler:req, atk=0,def=0,speed=0,spatk=0,spdef=0,acc=0,evas=0
-	setvar VAR_0x8000, \battler
-	setvar VAR_0x8001, \atk
-	setvar VAR_0x8002, \def
-	setvar VAR_0x8003, \speed
-	setvar VAR_0x8004, \spatk
-	setvar VAR_0x8005, \spdef
-	setvar VAR_0x8006, \acc
-	setvar VAR_0x8007, \evas
+	setvar SPECIAL_VAR_0, \battler
+	setvar SPECIAL_VAR_1, \atk
+	setvar SPECIAL_VAR_2, \def
+	setvar SPECIAL_VAR_3, \speed
+	setvar SPECIAL_VAR_4, \spatk
+	setvar SPECIAL_VAR_5, \spdef
+	setvar SPECIAL_VAR_6, \acc
+	setvar SPECIAL_VAR_7, \evas
 	special SetTotemBoost
 	.endm
 
@@ -2162,20 +2162,20 @@
 	@ 	  method, cannot be cancelled in the evolution scene, and will only evolve one Kubfu if there
 	@	  are multiple in the player's party.
 	.macro tryspecialevo evoMethod:req, canStopEvo=TRUE, tryMultiple=TRUE
-	setvar VAR_0x8000, \evoMethod
-	setvar VAR_0x8001, \canStopEvo
-	setvar VAR_0x8002, \tryMultiple
+	setvar SPECIAL_VAR_0, \evoMethod
+	setvar SPECIAL_VAR_1, \canStopEvo
+	setvar SPECIAL_VAR_2, \tryMultiple
 	special TrySpecialOverworldEvo
 	.endm
 
 	.macro ai_vs_ai_battle trainer1:req, trainer2:req
 	setflag B_FLAG_AI_VS_AI_BATTLE
-	setvar VAR_0x8004, \trainer1
+	setvar SPECIAL_VAR_4, \trainer1
 	callnative CreateTrainerPartyForPlayer
 	trainerbattle_no_intro \trainer2, NULL
 	.endm
 
-	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
+	@ Sets SPECIAL_VAR_RESULT to TRUE if stat can be hyper trained, or to
 	@ FALSE otherwise.
 	.macro canhypertrain stat:req, slot:req
 	callnative CanHyperTrain
@@ -2190,7 +2190,7 @@
 	.2byte \slot
 	.endm
 
-	@ Sets VAR_RESULT to TRUE if the Pokemon has the Gigantamax Factor,
+	@ Sets SPECIAL_VAR_RESULT to TRUE if the Pokemon has the Gigantamax Factor,
 	@ or to FALSE otherwise.
 	.macro hasgigantamaxfactor slot:req
 	callnative HasGigantamaxFactor
@@ -2199,13 +2199,13 @@
 
 	@ Toggles the Gigantamax Factor for a Pokemon.
 	@ Fails for Melmetal (vanilla behavior).
-	@ Sets VAR_RESULT to TRUE if it succeeds, and FALSE otherwise.
+	@ Sets SPECIAL_VAR_RESULT to TRUE if it succeeds, and FALSE otherwise.
 	.macro togglegigantamaxfactor slot:req
 	callnative ToggleGigantamaxFactor
 	.2byte \slot
 	.endm
 
-	@ Sets VAR_RESULT to one of the arguments (via setorcopyvar).
+	@ Sets SPECIAL_VAR_RESULT to one of the arguments (via setorcopyvar).
 	.macro randomelement element:req, elements:vararg
 	.set _randomelement_n, 0
 	.irp el, \element, \elements
@@ -2215,8 +2215,8 @@
 
 	.set _randomelement_n, 0
 	.irp el, \element, \elements
-		goto_if_ne VAR_RESULT, _randomelement_n, 1f
-		setorcopyvar VAR_RESULT, \el
+		goto_if_ne SPECIAL_VAR_RESULT, _randomelement_n, 1f
+		setorcopyvar SPECIAL_VAR_RESULT, \el
 		goto 2f
 	1:
 	.set _randomelement_n, _randomelement_n + 1
@@ -2224,15 +2224,15 @@
 	2:
 	.endm
 
-	@ Sets VAR_RESULT to TRUE with probability 'percent', and FALSE
+	@ Sets SPECIAL_VAR_RESULT to TRUE with probability 'percent', and FALSE
 	@ with probability '100% - percent'.
 	.macro randompercentage percent:req
 		random 100
-		goto_if_lt VAR_RESULT, \percent, 1f
-		setvar VAR_RESULT, FALSE
+		goto_if_lt SPECIAL_VAR_RESULT, \percent, 1f
+		setvar SPECIAL_VAR_RESULT, FALSE
 		goto 2f
 	1:
-		setvar VAR_RESULT, TRUE
+		setvar SPECIAL_VAR_RESULT, TRUE
 	2:
 	.endm
 
@@ -2244,7 +2244,7 @@
 	.2byte \slot
 	.endm
 
-	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
+	@ Sets SPECIAL_VAR_RESULT to the Pokémon in \slot's Tera Type
 	.macro checkteratype slot:req
 	callnative CheckTeraType
 	.2byte \slot
@@ -2257,7 +2257,7 @@
 	.2byte \slot
 	.endm
 
-	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to VAR_RESULT.
+	@ Saves species and forms of Daycare Pokémon to specific vars. Saves the amount of Daycare mon to SPECIAL_VAR_RESULT.
 	.macro getdaycaregfx varSpecies1:req varSpecies2:req varForm1:req varForm2:req
 	callnative GetDaycareGraphics
 	.2byte \varSpecies1

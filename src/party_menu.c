@@ -596,8 +596,7 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 5:
-        if (!MenuHelpers_IsLinkActive())
-            ResetTasks();
+        ResetTasks();
         gMain.state++;
         break;
     case 6:
@@ -991,7 +990,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
     if (gPartyMenu.action == PARTY_ACTION_MOVE_TUTOR)
     {
         gSpecialVar_Result = FALSE;
-        DisplayPartyPokemonDataToTeachMove(slot, gSpecialVar_0x8005);
+        DisplayPartyPokemonDataToTeachMove(slot, gSpecialVar_5);
     }
     else
     {
@@ -1430,7 +1429,7 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
         if (DisplayCancelChooseMonYesNo(taskId) != TRUE)
         {
             if (!MenuHelpers_IsLinkActive())
-                gSpecialVar_0x8004 = PARTY_SIZE + 1;
+                gSpecialVar_4 = PARTY_SIZE + 1;
             gPartyMenuUseExitCallback = FALSE;
             *slotPtr = PARTY_SIZE + 1;
             Task_ClosePartyMenu(taskId);
@@ -2007,7 +2006,7 @@ static void TryEnterMonForMinigame(u8 taskId, u8 slot)
     if (IsMonAllowedInMinigame(slot) == TRUE)
     {
         PlaySE(SE_SELECT);
-        gSpecialVar_0x8004 = slot;
+        gSpecialVar_4 = slot;
         Task_ClosePartyMenu(taskId);
     }
     else
@@ -2040,7 +2039,7 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        gSpecialVar_0x8004 = PARTY_SIZE + 1;
+        gSpecialVar_4 = PARTY_SIZE + 1;
         Task_ClosePartyMenu(taskId);
         break;
     case MENU_B_PRESSED:
@@ -5790,13 +5789,13 @@ static void Task_TryItemUseFormChange(u8 taskId)
                 for (i = 0; i < ARRAY_COUNT(sRotomFormChangeMoves); i++)
                     DeleteMove(mon, sRotomFormChangeMoves[i]);
 
-                if (I_ROTOM_CATALOG_THUNDER_SHOCK < GEN_9 && gSpecialVar_0x8000 == ROTOM_BASE_MOVE)
+                if (I_ROTOM_CATALOG_THUNDER_SHOCK < GEN_9 && gSpecialVar_0 == ROTOM_BASE_MOVE)
                 {
                     if (!DoesMonHaveAnyMoves(mon))
-                        FormChangeTeachMove(taskId, gSpecialVar_0x8000, gPartyMenu.slotId);
+                        FormChangeTeachMove(taskId, gSpecialVar_0, gPartyMenu.slotId);
                 }
                 else
-                    FormChangeTeachMove(taskId, gSpecialVar_0x8000, gPartyMenu.slotId);
+                    FormChangeTeachMove(taskId, gSpecialVar_0, gPartyMenu.slotId);
             }
 
             gTasks[taskId].tState++;
@@ -5888,42 +5887,42 @@ bool32 TryMultichoiceFormChange(u8 taskId)
 static void CursorCb_CatalogBulb(u8 taskId)
 {
     gSpecialVar_Result = 0;
-    gSpecialVar_0x8000 = ROTOM_BASE_MOVE;
+    gSpecialVar_0 = ROTOM_BASE_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
 static void CursorCb_CatalogOven(u8 taskId)
 {
     gSpecialVar_Result = 1;
-    gSpecialVar_0x8000 = ROTOM_HEAT_MOVE;
+    gSpecialVar_0 = ROTOM_HEAT_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
 static void CursorCb_CatalogWashing(u8 taskId)
 {
     gSpecialVar_Result = 2;
-    gSpecialVar_0x8000 = ROTOM_WASH_MOVE;
+    gSpecialVar_0 = ROTOM_WASH_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
 static void CursorCb_CatalogFridge(u8 taskId)
 {
     gSpecialVar_Result = 3;
-    gSpecialVar_0x8000 = ROTOM_FROST_MOVE;
+    gSpecialVar_0 = ROTOM_FROST_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
 static void CursorCb_CatalogFan(u8 taskId)
 {
     gSpecialVar_Result = 4;
-    gSpecialVar_0x8000 = ROTOM_FAN_MOVE;
+    gSpecialVar_0 = ROTOM_FAN_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
 static void CursorCb_CatalogMower(u8 taskId)
 {
     gSpecialVar_Result = 5;
-    gSpecialVar_0x8000 = ROTOM_MOW_MOVE;
+    gSpecialVar_0 = ROTOM_MOW_MOVE;
     TryMultichoiceFormChange(taskId);
 }
 
@@ -6040,7 +6039,7 @@ static void TryTutorSelectedMon(u8 taskId)
         mon = &gPlayerParty[gPartyMenu.slotId];
         move = &gPartyMenu.data1;
         GetMonNickname(mon, gStringVar1);
-        gPartyMenu.data1 = gSpecialVar_0x8005;
+        gPartyMenu.data1 = gSpecialVar_5;
         StringCopy(gStringVar2, GetMoveName(gPartyMenu.data1));
         move[1] = 2;
         switch (CanTeachMove(mon, gPartyMenu.data1))
@@ -6373,7 +6372,7 @@ static u8 GetMaxBattleEntries(void)
     case FACILITY_MULTI_OR_EREADER:
         return MULTI_PARTY_SIZE;
     default: // Battle Frontier
-        return gSpecialVar_0x8005;
+        return gSpecialVar_5;
     }
 }
 
@@ -6384,7 +6383,7 @@ static u8 GetMinBattleEntries(void)
     case FACILITY_MULTI_OR_EREADER:
         return 1;
     default: // Battle Frontier
-        return gSpecialVar_0x8005;
+        return gSpecialVar_5;
     }
 }
 
@@ -6395,7 +6394,7 @@ static u8 GetBattleEntryLevelCap(void)
     case FACILITY_MULTI_OR_EREADER:
         return MAX_LEVEL;
     default: // Battle Frontier
-        if (gSpecialVar_0x8004 == FRONTIER_LVL_50)
+        if (gSpecialVar_4 == FRONTIER_LVL_50)
             return FRONTIER_MAX_LEVEL_50;
         return FRONTIER_MAX_LEVEL_OPEN;
     }
@@ -6407,7 +6406,7 @@ static const u8 *GetFacilityCancelString(void)
 
     if (!(facilityNum != FACILITY_UNION_ROOM && facilityNum != FACILITY_MULTI_OR_EREADER))
         return gText_CancelBattle;
-    else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
+    else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_5 == 2)
         return gText_ReturnToWaitingRoom;
     else
         return gText_CancelChallenge;
@@ -6848,9 +6847,9 @@ void ChooseMonForDaycare(void)
 
 static void BufferMonSelection(void)
 {
-    gSpecialVar_0x8004 = GetCursorSelectionMonId();
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+    gSpecialVar_4 = GetCursorSelectionMonId();
+    if (gSpecialVar_4 >= PARTY_SIZE)
+        gSpecialVar_4 = PARTY_NOTHING_CHOSEN;
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
@@ -6894,7 +6893,7 @@ static void CB2_ChooseContestMon(void)
     gContestMonPartyIndex = GetCursorSelectionMonId();
     if (gContestMonPartyIndex >= PARTY_SIZE)
         gContestMonPartyIndex = PARTY_NOTHING_CHOSEN;
-    gSpecialVar_0x8004 = gContestMonPartyIndex;
+    gSpecialVar_4 = gContestMonPartyIndex;
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
@@ -6936,11 +6935,11 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
 
 static void CB2_ChooseMonForMoveRelearner(void)
 {
-    gSpecialVar_0x8004 = GetCursorSelectionMonId();
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+    gSpecialVar_4 = GetCursorSelectionMonId();
+    if (gSpecialVar_4 >= PARTY_SIZE)
+        gSpecialVar_4 = PARTY_NOTHING_CHOSEN;
     else
-        gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
+        gSpecialVar_5 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_4]);
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     SetMainCallback2(CB2_ReturnToField);
 }
@@ -6981,7 +6980,7 @@ static void Task_BattlePyramidChooseMonHeldItems(u8 taskId)
 
 void MoveDeleterChooseMoveToForget(void)
 {
-    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_4, gPlayerPartyCount - 1, CB2_ReturnToField);
     gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 }
 
@@ -6992,15 +6991,15 @@ void GetNumMovesSelectedMonHas(void)
     gSpecialVar_Result = 0;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + i) != MOVE_NONE)
+        if (GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_MOVE1 + i) != MOVE_NONE)
             gSpecialVar_Result++;
     }
 }
 
 void BufferMoveDeleterNicknameAndMove(void)
 {
-    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
-    u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_4];
+    u16 move = GetMonData(mon, MON_DATA_MOVE1 + gSpecialVar_5);
 
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, GetMoveName(move));
@@ -7010,10 +7009,10 @@ void MoveDeleterForgetMove(void)
 {
     u16 i;
 
-    SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], MOVE_NONE, gSpecialVar_0x8005);
-    RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
-    for (i = gSpecialVar_0x8005; i < MAX_MON_MOVES - 1; i++)
-        ShiftMoveSlot(&gPlayerParty[gSpecialVar_0x8004], i, i + 1);
+    SetMonMoveSlot(&gPlayerParty[gSpecialVar_4], MOVE_NONE, gSpecialVar_5);
+    RemoveMonPPBonus(&gPlayerParty[gSpecialVar_4], gSpecialVar_5);
+    for (i = gSpecialVar_5; i < MAX_MON_MOVES - 1; i++)
+        ShiftMoveSlot(&gPlayerParty[gSpecialVar_4], i, i + 1);
 }
 
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
@@ -7039,7 +7038,7 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
 
 void IsSelectedMonEgg(void)
 {
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_EGG))
+    if (GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_IS_EGG))
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
@@ -7051,12 +7050,12 @@ void IsLastMonThatKnowsSurf(void)
     u32 i, j;
 
     gSpecialVar_Result = FALSE;
-    move = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    move = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_MOVE1 + gSpecialVar_5);
     if (move == MOVE_SURF)
     {
         for (i = 0; i < CalculatePlayerPartyCount(); i++)
         {
-            if (i != gSpecialVar_0x8004)
+            if (i != gSpecialVar_4)
             {
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {

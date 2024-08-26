@@ -1262,12 +1262,12 @@ void SetDecoration(void)
                 VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[j].graphicsId - OBJ_EVENT_GFX_VAR_0),
                 sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
 
-            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[j].localId;
-            gSpecialVar_0x8006 = sCurDecorMapX;
-            gSpecialVar_0x8007 = sCurDecorMapY;
-            TrySpawnObjectEvent(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-            TryMoveObjectEventToMapCoords(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-            TryOverrideObjectEventTemplateCoords(gSpecialVar_0x8005, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            gSpecialVar_5 = gMapHeader.events->objectEvents[j].localId;
+            gSpecialVar_6 = sCurDecorMapX;
+            gSpecialVar_7 = sCurDecorMapY;
+            TrySpawnObjectEvent(gSpecialVar_5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            TryMoveObjectEventToMapCoords(gSpecialVar_5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_6, gSpecialVar_7);
+            TryOverrideObjectEventTemplateCoords(gSpecialVar_5, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
             break;
         }
     }
@@ -2144,31 +2144,31 @@ static void ClearDecorationContextIndex(u8 idx)
 }
 
 // Input
-// gSpecialVar_0x8004: Current iteration.
+// gSpecialVar_4: Current iteration.
 //
 // Output
 // gSpecialVar_Result: TRUE if all iterations complete.
-// gSpecialVar_0x8005: flagId of decoration (if any).
-// gSpecialVar_0x8006: localId of decoration object event (if any).
+// gSpecialVar_5: flagId of decoration (if any).
+// gSpecialVar_6: localId of decoration object event (if any).
 void PutAwayDecorationIteration(void)
 {
     u16 i;
 
-    gSpecialVar_0x8005 = 0;
+    gSpecialVar_5 = 0;
     gSpecialVar_Result = FALSE;
-    if (gSpecialVar_0x8004 == sCurDecorSelectedInRearrangement)
+    if (gSpecialVar_4 == sCurDecorSelectedInRearrangement)
     {
         gSpecialVar_Result = TRUE;
     }
-    else if (gDecorations[sDecorationContext.items[sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx]].permission == DECORPERM_SPRITE)
+    else if (gDecorations[sDecorationContext.items[sDecorRearrangementDataBuffer[gSpecialVar_4].idx]].permission == DECORPERM_SPRITE)
     {
-        gSpecialVar_0x8005 = sDecorRearrangementDataBuffer[gSpecialVar_0x8004].flagId;
-        ClearDecorationContextIndex(sDecorRearrangementDataBuffer[gSpecialVar_0x8004].idx);
+        gSpecialVar_5 = sDecorRearrangementDataBuffer[gSpecialVar_4].flagId;
+        ClearDecorationContextIndex(sDecorRearrangementDataBuffer[gSpecialVar_4].idx);
         for (i = 0; i < gMapHeader.events->objectEventCount; i++)
         {
-            if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8005)
+            if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_5)
             {
-                gSpecialVar_0x8006 = gMapHeader.events->objectEvents[i].localId;
+                gSpecialVar_6 = gMapHeader.events->objectEvents[i].localId;
                 break;
             }
         }
@@ -2182,9 +2182,9 @@ void GetObjectEventLocalIdByFlag(void)
 
     for (i = 0; i < gMapHeader.events->objectEventCount; i++)
     {
-        if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8004)
+        if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_4)
         {
-            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[i].localId;
+            gSpecialVar_5 = gMapHeader.events->objectEvents[i].localId;
             break;
         }
     }

@@ -228,7 +228,7 @@ void ClearSecretBases(void)
 
 static void SetCurSecretBaseId(void)
 {
-    sCurSecretBaseId = gSpecialVar_0x8004;
+    sCurSecretBaseId = gSpecialVar_4;
 }
 
 void TrySetCurSecretBaseIndex(void)
@@ -287,7 +287,7 @@ static u8 GetSecretBaseTypeInFrontOfPlayer_(void)
 
 void GetSecretBaseTypeInFrontOfPlayer(void)
 {
-    gSpecialVar_0x8007 = GetSecretBaseTypeInFrontOfPlayer_();
+    gSpecialVar_7 = GetSecretBaseTypeInFrontOfPlayer_();
 }
 
 static void FindMetatileIdMapCoords(s16 *x, s16 *y, u16 metatileId)
@@ -578,25 +578,25 @@ void InitSecretBaseDecorationSprites(void)
         {
             for (objectEventId = 0; objectEventId < gMapHeader.events->objectEventCount; objectEventId++)
             {
-                if (gMapHeader.events->objectEvents[objectEventId].flagId == FLAG_DECORATION_1 + gSpecialVar_0x8004)
+                if (gMapHeader.events->objectEvents[objectEventId].flagId == FLAG_DECORATION_1 + gSpecialVar_4)
                     break;
             }
 
             if (objectEventId == gMapHeader.events->objectEventCount)
                 continue;
 
-            gSpecialVar_0x8006 = decorationPositions[i] >> 4;
-            gSpecialVar_0x8007 = decorationPositions[i] & 0xF;
-            metatileBehavior = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + MAP_OFFSET, gSpecialVar_0x8007 + MAP_OFFSET);
+            gSpecialVar_6 = decorationPositions[i] >> 4;
+            gSpecialVar_7 = decorationPositions[i] & 0xF;
+            metatileBehavior = MapGridGetMetatileBehaviorAt(gSpecialVar_6 + MAP_OFFSET, gSpecialVar_7 + MAP_OFFSET);
             if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE
              || MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
             {
                 gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[objectEventId].graphicsId - OBJ_EVENT_GFX_VAR_0);
                 VarSet(gSpecialVar_Result, gDecorations[decorations[i]].tiles[0]);
                 gSpecialVar_Result = gMapHeader.events->objectEvents[objectEventId].localId;
-                FlagClear(FLAG_DECORATION_1 + gSpecialVar_0x8004);
+                FlagClear(FLAG_DECORATION_1 + gSpecialVar_4);
                 TrySpawnObjectEvent(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-                TryMoveObjectEventToMapCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
+                TryMoveObjectEventToMapCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, gSpecialVar_6, gSpecialVar_7);
                 TryOverrideObjectEventTemplateCoords(gSpecialVar_Result, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
                 if (CurMapIsSecretBase() == TRUE && VarGet(VAR_CURRENT_SECRET_BASE) != 0)
                 {
@@ -618,7 +618,7 @@ void InitSecretBaseDecorationSprites(void)
                     }
                 }
 
-                gSpecialVar_0x8004++;
+                gSpecialVar_4++;
             }
         }
     }
@@ -1177,7 +1177,7 @@ void GetSecretBaseOwnerAndState(void)
 
         FlagSet(FLAG_DAILY_SECRET_BASE);
     }
-    gSpecialVar_0x8004 = GetSecretBaseOwnerType(secretBaseIdx);
+    gSpecialVar_4 = GetSecretBaseOwnerType(secretBaseIdx);
     gSpecialVar_Result = gSaveBlock1Ptr->secretBases[secretBaseIdx].battledOwnerToday;
 }
 

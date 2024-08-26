@@ -452,7 +452,7 @@ bool8 IsQuizAnswerCorrect(void)
 void BufferQuizPrizeItem(void)
 {
     sQuizLadyPtr = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gSpecialVar_0x8005 = sQuizLadyPtr->prize;
+    gSpecialVar_5 = sQuizLadyPtr->prize;
 }
 
 void SetQuizLadyState_Complete(void)
@@ -500,7 +500,7 @@ void ClearQuizLadyQuestionAndAnswer(void)
 
 void QuizLadySetCustomQuestion(void)
 {
-    gSpecialVar_0x8004 = EASY_CHAT_TYPE_QUIZ_SET_QUESTION;
+    gSpecialVar_4 = EASY_CHAT_TYPE_QUIZ_SET_QUESTION;
     ShowEasyChatScreen();
 }
 
@@ -696,7 +696,7 @@ void SetContestLadyGivenPokeblock(void)
 void GetContestLadyMonSpecies(void)
 {
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    gSpecialVar_0x8005 = sContestLadyValues[sContestLadyPtr->category].monSpecies;
+    gSpecialVar_5 = sContestLadyValues[sContestLadyPtr->category].monSpecies;
 }
 
 u8 GetContestLadyCategory(void)

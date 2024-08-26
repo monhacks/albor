@@ -691,7 +691,7 @@ static void CreateChooseAnswerTask(bool8 noBButton, u8 answers, u8 windowId)
 
 void CallApprenticeFunction(void)
 {
-    sApprenticeFunctions[gSpecialVar_0x8004]();
+    sApprenticeFunctions[gSpecialVar_4]();
 }
 
 static void Script_ResetPlayerApprentice(void)
@@ -725,11 +725,11 @@ static void Script_GivenApprenticeLvlMode(void)
         gSpecialVar_Result = TRUE;
 }
 
-// VAR_0x8005 is 1 + the selection value from the multichoice APPRENTICE_ASK_WHICH_LEVEL
+// SPECIAL_VAR_5 is 1 + the selection value from the multichoice APPRENTICE_ASK_WHICH_LEVEL
 // i.e. APPRENTICE_LVL_MODE_50 or APPRENTICE_LVL_MODE_OPEN
 static void Script_SetApprenticeLvlMode(void)
 {
-    SetPlayersApprenticeLvlMode(gSpecialVar_0x8005);
+    SetPlayersApprenticeLvlMode(gSpecialVar_5);
 }
 
 // Never called, APPRENTICE_FUNC_SET_ID is unused
@@ -779,7 +779,7 @@ static void IsFinalQuestion(void)
 
 static void Script_CreateApprenticeMenu(void)
 {
-    CreateApprenticeMenu(gSpecialVar_0x8005);
+    CreateApprenticeMenu(gSpecialVar_5);
 }
 
 static void Task_WaitForPrintingMessage(u8 taskId)
@@ -787,7 +787,7 @@ static void Task_WaitForPrintingMessage(u8 taskId)
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         DestroyTask(taskId);
-        if (gSpecialVar_0x8005)
+        if (gSpecialVar_5)
             ExecuteFuncAfterButtonPress(ScriptContext_Enable);
         else
             ScriptContext_Enable();
@@ -798,71 +798,71 @@ static void PrintApprenticeMessage(void)
 {
     const u8 *string;
 
-    if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON)
+    if (gSpecialVar_6 == APPRENTICE_MSG_WHICH_MON)
     {
         string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_MON)
     {
         string = sApprenticeWhichMonTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MOVE)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_WHICH_MOVE)
     {
         string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MOVE)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_MOVE)
     {
         string = sApprenticeWhichMoveTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_MON_FIRST)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_WHICH_MON_FIRST)
     {
         string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_MON_FIRST)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_MON_FIRST)
     {
         string = sApprenticeWhichMonFirstTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHAT_HELD_ITEM)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_WHAT_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PICK_WIN_SPEECH)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_PICK_WIN_SPEECH)
     {
         string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_HELD_ITEM)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][3];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_HOLD_NOTHING)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_HOLD_NOTHING)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_ITEM_ALREADY_SUGGESTED)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_ITEM_ALREADY_SUGGESTED)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][4];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_NO_HELD_ITEM)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_NO_HELD_ITEM)
     {
         string = sApprenticeHeldItemTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_WIN_SPEECH)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_WIN_SPEECH)
     {
         string = sApprenticePickWinSpeechTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_PLEASE_TEACH)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_PLEASE_TEACH)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][0];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_REJECT)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_REJECT)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][1];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_WHICH_LVL_MODE)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_WHICH_LVL_MODE)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][2];
     }
-    else if (gSpecialVar_0x8006 == APPRENTICE_MSG_THANKS_LVL_MODE)
+    else if (gSpecialVar_6 == APPRENTICE_MSG_THANKS_LVL_MODE)
     {
         string = sApprenticeFirstMeetingTexts[PLAYER_APPRENTICE.id][3];
     }
@@ -919,25 +919,25 @@ static void ApprenticeGetQuestion(void)
     }
 }
 
-// gSpecialVar_0x8005 is 0 or 1 for the mon selection (0 is already on the team)
-// gSpecialVar_0x8006 is 0-2 for the number of party mons selected so far
+// gSpecialVar_5 is 0 or 1 for the mon selection (0 is already on the team)
+// gSpecialVar_6 is 0-2 for the number of party mons selected so far
 static void SetApprenticePartyMon(void)
 {
-    if (gSpecialVar_0x8005)
+    if (gSpecialVar_5)
     {
-        u8 partySlot = gSpecialVar_0x8006;
+        u8 partySlot = gSpecialVar_6;
         PLAYER_APPRENTICE.party |= 1 << partySlot;
     }
 }
 
-// gSpecialVar_0x8005 is 0 or 1 for the move selection
+// gSpecialVar_5 is 0 or 1 for the move selection
 // Selection 0 is implicitly the default move assigned
 static void SetApprenticeMonMove(void)
 {
     if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS)
     {
         u8 id = CURRENT_QUESTION_NUM;
-        if (gSpecialVar_0x8005)
+        if (gSpecialVar_5)
             PLAYER_APPRENTICE.questions[id].suggestedChange = TRUE;
         else
             PLAYER_APPRENTICE.questions[id].suggestedChange = FALSE;
@@ -954,7 +954,7 @@ static void InitQuestionData(void)
         ;
 
     gApprenticeQuestionData = AllocZeroed(sizeof(*gApprenticeQuestionData));
-    if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MON)
+    if (gSpecialVar_5 == APPRENTICE_QUESTION_WHICH_MON)
     {
         if (PLAYER_APPRENTICE.questionsAnswered < NUM_WHICH_MON_QUESTIONS)
         {
@@ -966,7 +966,7 @@ static void InitQuestionData(void)
             gApprenticeQuestionData->speciesId = 0;
         }
     }
-    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHICH_MOVE)
+    else if (gSpecialVar_5 == APPRENTICE_QUESTION_WHICH_MOVE)
     {
         if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS
             && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
@@ -980,7 +980,7 @@ static void InitQuestionData(void)
             gApprenticeQuestionData->moveId2 = PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data;
         }
     }
-    else if (gSpecialVar_0x8005 == APPRENTICE_QUESTION_WHAT_ITEM)
+    else if (gSpecialVar_5 == APPRENTICE_QUESTION_WHAT_ITEM)
     {
         if (PLAYER_APPRENTICE.questionsAnswered >= NUM_WHICH_MON_QUESTIONS
             && PLAYER_APPRENTICE.questionsAnswered < count + NUM_WHICH_MON_QUESTIONS
@@ -1003,7 +1003,7 @@ static void ApprenticeBufferString(void)
 {
     u8 *stringDst;
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case 0:
         stringDst = gStringVar1;
@@ -1018,7 +1018,7 @@ static void ApprenticeBufferString(void)
         return;
     }
 
-    switch (gSpecialVar_0x8006)
+    switch (gSpecialVar_6)
     {
     case APPRENTICE_BUFF_SPECIES1:
         StringCopy(stringDst, GetSpeciesName(gApprenticeQuestionData->speciesId));
@@ -1058,7 +1058,7 @@ static void ApprenticeBufferString(void)
 
 static void SetLeadApprenticeMon(void)
 {
-    PLAYER_APPRENTICE.leadMonId = gSpecialVar_0x8005;
+    PLAYER_APPRENTICE.leadMonId = gSpecialVar_5;
 }
 
 static void Script_ApprenticeOpenBagMenu(void)
@@ -1090,17 +1090,17 @@ static void TrySetApprenticeHeldItem(void)
         if (PLAYER_APPRENTICE.questions[i].questionId != QUESTION_ID_WHAT_ITEM ||
             PLAYER_APPRENTICE.questions[i].suggestedChange == 0)
             continue;
-        if (PLAYER_APPRENTICE.questions[i].data == gSpecialVar_0x8005)
+        if (PLAYER_APPRENTICE.questions[i].data == gSpecialVar_5)
         {
             PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = FALSE;
-            PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;
+            PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_5;
             gSpecialVar_Result = FALSE;
             return;
         }
     }
 
     PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].suggestedChange = TRUE;
-    PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_0x8005;
+    PLAYER_APPRENTICE.questions[CURRENT_QUESTION_NUM].data = gSpecialVar_5;
     gSpecialVar_Result = TRUE;
 }
 
@@ -1164,15 +1164,15 @@ static void SaveApprentice(void)
 }
 
 // Both of the below functions may have been dummied / used for debug
-// In all cases theres a conditional for VAR_0x8004 right after the call to these functions
+// In all cases theres a conditional for SPECIAL_VAR_4 right after the call to these functions
 static void GetShouldCheckApprenticeGone(void)
 {
-    gSpecialVar_0x8004 = TRUE;
+    gSpecialVar_4 = TRUE;
 }
 
 static void GetShouldApprenticeLeave(void)
 {
-    gSpecialVar_0x8004 = TRUE;
+    gSpecialVar_4 = TRUE;
 }
 
 const u8 *GetApprenticeNameInLanguage(u32 apprenticeId, s32 language)

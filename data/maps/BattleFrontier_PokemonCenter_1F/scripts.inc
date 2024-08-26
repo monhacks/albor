@@ -9,7 +9,7 @@ BattleFrontier_PokemonCenter_1F_OnTransition:
 	end
 
 BattleFrontier_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

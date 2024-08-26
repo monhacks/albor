@@ -172,7 +172,7 @@ void SaveBardSongLyrics(void)
 static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-    u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
+    u16 * lyrics = gSpecialVar_4 == 0 ? bard->songLyrics : bard->temporaryLyrics;
     u8 *wordEnd = gStringVar4;
     u8 *str = wordEnd;
     u16 lineNum;
@@ -220,7 +220,7 @@ static void PrepareSongText(void)
 
 void PlayBardSong(void)
 {
-    StartBardSong(gSpecialVar_0x8004);
+    StartBardSong(gSpecialVar_4);
     ScriptContext_Stop();
 }
 
@@ -458,7 +458,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
         s32 i;
 
         // Copy lyrics
-        if (gSpecialVar_0x8004 == 0)
+        if (gSpecialVar_4 == 0)
             lyrics = bard->songLyrics;
         else
             lyrics = bard->temporaryLyrics;

@@ -961,9 +961,9 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
 
 void CreateEnemyEventMon(void)
 {
-    s32 species = gSpecialVar_0x8004;
-    s32 level = gSpecialVar_0x8005;
-    s32 itemId = gSpecialVar_0x8006;
+    s32 species = gSpecialVar_4;
+    s32 level = gSpecialVar_5;
+    s32 itemId = gSpecialVar_6;
 
     ZeroEnemyPartyMons();
     CreateEventMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, FALSE, 0, OT_ID_PLAYER_ID, 0);
@@ -5015,9 +5015,9 @@ static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv)
 void TrySpecialOverworldEvo(void)
 {
     u8 i;
-    u8 evoMethod = gSpecialVar_0x8000;
-    u16 canStopEvo = gSpecialVar_0x8001;
-    u16 tryMultiple = gSpecialVar_0x8002;
+    u8 evoMethod = gSpecialVar_0;
+    u16 canStopEvo = gSpecialVar_1;
+    u16 tryMultiple = gSpecialVar_2;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {

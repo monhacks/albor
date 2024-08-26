@@ -7,18 +7,15 @@
 #define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
 #define TEMP_VARS_SIZE      (NUM_TEMP_VARS * 2)      // 1/2 var per byte
 
-EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8001 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8002 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8003 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8004 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8005 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8006 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8007 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8008 = 0;
-EWRAM_DATA u16 gSpecialVar_0x8009 = 0;
-EWRAM_DATA u16 gSpecialVar_0x800A = 0;
-EWRAM_DATA u16 gSpecialVar_0x800B = 0;
+EWRAM_DATA u16 gSpecialVar_0 = 0;
+EWRAM_DATA u16 gSpecialVar_1 = 0;
+EWRAM_DATA u16 gSpecialVar_2 = 0;
+EWRAM_DATA u16 gSpecialVar_3 = 0;
+EWRAM_DATA u16 gSpecialVar_4 = 0;
+EWRAM_DATA u16 gSpecialVar_5 = 0;
+EWRAM_DATA u16 gSpecialVar_6 = 0;
+EWRAM_DATA u16 gSpecialVar_7 = 0;
+
 EWRAM_DATA u16 gSpecialVar_Result = 0;
 EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
 EWRAM_DATA u16 gSpecialVar_Facing = 0;

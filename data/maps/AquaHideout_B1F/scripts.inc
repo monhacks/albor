@@ -8,9 +8,9 @@ AquaHideout_B1F_OnResume:
 	end
 
 AquaHideout_B1F_EventScript_TryRemoveElectrode::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 AquaHideout_B1F_OnTransition:
@@ -37,10 +37,10 @@ AquaHideout_B1F_EventScript_Electrode1::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode1
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode1
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode1
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode1
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode1
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode1
 	setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
 	release
 	end
@@ -61,10 +61,10 @@ AquaHideout_B1F_EventScript_Electrode2::
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode2
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode2
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode2
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, AquaHideout_B1F_EventScript_DefeatedElectrode2
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, AquaHideout_B1F_EventScript_DefeatedElectrode2
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, AquaHideout_B1F_EventScript_DefeatedElectrode2
 	setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
 	release
 	end

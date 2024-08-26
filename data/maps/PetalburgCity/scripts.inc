@@ -66,16 +66,16 @@ PetalburgCity_EventScript_WalkToWallyHouse::
 	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WalkToWallyHouseWallysDad
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WalkToWallyHousePlayer
 	waitmovement 0
-	setvar VAR_0x8004, 7
-	setvar VAR_0x8005, 5
-	opendoor VAR_0x8004, VAR_0x8005
+	setvar SPECIAL_VAR_4, 7
+	setvar SPECIAL_VAR_5, 5
+	opendoor SPECIAL_VAR_4, SPECIAL_VAR_5
 	waitdooranim
 	applymovement LOCALID_WALLYS_DAD, PetalburgCity_Movement_WalkInsideHouseWallysDad
 	applymovement OBJ_EVENT_ID_PLAYER, PetalburgCity_Movement_WalkInsideHousePlayer
 	waitmovement 0
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_PETALBURG_CITY
-	closedoor VAR_0x8004, VAR_0x8005
+	closedoor SPECIAL_VAR_4, SPECIAL_VAR_5
 	waitdooranim
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	fadedefaultbgm
@@ -241,25 +241,25 @@ PetalburgCity_EventScript_WallyHouseSign::
 
 PetalburgCity_EventScript_ShowGymToPlayer0::
 	lockall
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto PetalburgCity_EventScript_ShowGymToPlayer
 	end
 
 PetalburgCity_EventScript_ShowGymToPlayer1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto PetalburgCity_EventScript_ShowGymToPlayer
 	end
 
 PetalburgCity_EventScript_ShowGymToPlayer2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto PetalburgCity_EventScript_ShowGymToPlayer
 	end
 
 PetalburgCity_EventScript_ShowGymToPlayer3::
 	lockall
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	goto PetalburgCity_EventScript_ShowGymToPlayer
 	end
 
@@ -272,16 +272,16 @@ PetalburgCity_EventScript_ShowGymToPlayer::
 	waitmovement 0
 	applymovement LOCALID_GYM_BOY, Common_Movement_Delay48
 	waitmovement 0
-	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_BoyApproachPlayer0
-	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_BoyApproachPlayer1
-	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_BoyApproachPlayer2
-	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_BoyApproachPlayer3
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_EventScript_BoyApproachPlayer0
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_EventScript_BoyApproachPlayer1
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_EventScript_BoyApproachPlayer2
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_EventScript_BoyApproachPlayer3
 	msgbox PetalburgCity_Text_AreYouRookieTrainer, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_LeadPlayerToGym0
-	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_LeadPlayerToGym1
-	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_LeadPlayerToGym2
-	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_LeadPlayerToGym3
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_EventScript_LeadPlayerToGym0
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_EventScript_LeadPlayerToGym1
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_EventScript_LeadPlayerToGym2
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_EventScript_LeadPlayerToGym3
 	msgbox PetalburgCity_Text_ThisIsPetalburgGym, MSGBOX_DEFAULT
 	applymovement LOCALID_GYM_BOY, Common_Movement_WalkInPlaceFasterRight
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
@@ -504,7 +504,7 @@ PetalburgCity_Movement_PlayerWalkToGym3:
 PetalburgCity_EventScript_Scott0::
 	lockall
 	addobject LOCALID_SCOTT
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	setobjectxy LOCALID_SCOTT, 13, 10
 	goto PetalburgCity_EventScript_Scott
 	end
@@ -512,7 +512,7 @@ PetalburgCity_EventScript_Scott0::
 PetalburgCity_EventScript_Scott1::
 	lockall
 	addobject LOCALID_SCOTT
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	setobjectxy LOCALID_SCOTT, 13, 11
 	goto PetalburgCity_EventScript_Scott
 	end
@@ -520,7 +520,7 @@ PetalburgCity_EventScript_Scott1::
 PetalburgCity_EventScript_Scott2::
 	lockall
 	addobject LOCALID_SCOTT
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	setobjectxy LOCALID_SCOTT, 13, 12
 	goto PetalburgCity_EventScript_Scott
 	end
@@ -528,7 +528,7 @@ PetalburgCity_EventScript_Scott2::
 PetalburgCity_EventScript_Scott3::
 	lockall
 	addobject LOCALID_SCOTT
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	setobjectxy LOCALID_SCOTT, 13, 13
 	goto PetalburgCity_EventScript_Scott
 	end
@@ -558,10 +558,10 @@ PetalburgCity_EventScript_Scott::
 	delay 30
 	msgbox PetalburgCity_Text_ImLookingForTalentedTrainers, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8008, 0, PetalburgCity_EventScript_ScottExit0
-	call_if_eq VAR_0x8008, 1, PetalburgCity_EventScript_ScottExit1
-	call_if_eq VAR_0x8008, 2, PetalburgCity_EventScript_ScottExit2
-	call_if_eq VAR_0x8008, 3, PetalburgCity_EventScript_ScottExit3
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_EventScript_ScottExit0
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_EventScript_ScottExit1
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_EventScript_ScottExit2
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_EventScript_ScottExit3
 	setvar VAR_SCOTT_PETALBURG_ENCOUNTER, 1
 	removeobject LOCALID_SCOTT
 	releaseall

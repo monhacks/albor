@@ -21,19 +21,19 @@ MtPyre_Summit_EventScript_SetArchieMaxiePositions::
 
 MtPyre_Summit_EventScript_TeamAquaTrigger0::
 	lockall
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
 MtPyre_Summit_EventScript_TeamAquaTrigger1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
 MtPyre_Summit_EventScript_TeamAquaTrigger2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto MtPyre_Summit_EventScript_TeamAquaExits
 	end
 
@@ -44,9 +44,9 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	applymovement LOCALID_ARCHIE, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	delay 50
-	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_ArchieFacePlayer0
-	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_ArchieFacePlayer1
-	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_ArchieFacePlayer2
+	call_if_eq SPECIAL_VAR_8, 0, MtPyre_Summit_EventScript_ArchieFacePlayer0
+	call_if_eq SPECIAL_VAR_8, 1, MtPyre_Summit_EventScript_ArchieFacePlayer1
+	call_if_eq SPECIAL_VAR_8, 2, MtPyre_Summit_EventScript_ArchieFacePlayer2
 	msgbox MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo, MSGBOX_DEFAULT
 	closemessage
 	fadescreenswapbuffers FADE_TO_BLACK
@@ -61,9 +61,9 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	fadescreenswapbuffers FADE_FROM_BLACK
 	delay 20
 	setvar VAR_MT_PYRE_STATE, 1
-	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_OldLadyApproachPlayer0
-	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_OldLadyApproachPlayer1
-	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_OldLadyApproachPlayer2
+	call_if_eq SPECIAL_VAR_8, 0, MtPyre_Summit_EventScript_OldLadyApproachPlayer0
+	call_if_eq SPECIAL_VAR_8, 1, MtPyre_Summit_EventScript_OldLadyApproachPlayer1
+	call_if_eq SPECIAL_VAR_8, 2, MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
 	giveitem ITEM_MAGMA_EMBLEM
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
@@ -135,15 +135,15 @@ MtPyre_Summit_EventScript_OldMan::
 	faceplayer
 	goto_if_set FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE, MtPyre_Summit_EventScript_OldManAfterRayquaza
 	msgbox MtPyre_Summit_Text_WillYouHearOutMyTale, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManTale
-	call_if_eq VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
+	call_if_eq SPECIAL_VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManTale
+	call_if_eq SPECIAL_VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
 	release
 	end
 
 MtPyre_Summit_EventScript_OldManAfterRayquaza::
 	msgbox MtPyre_Summit_Text_HearTheNewLegendOfHoenn, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManNewTale
-	call_if_eq VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
+	call_if_eq SPECIAL_VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManNewTale
+	call_if_eq SPECIAL_VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
 	release
 	end
 
@@ -187,19 +187,19 @@ MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned::
 
 MtPyre_Summit_EventScript_ArchieMaxieTrigger0::
 	lockall
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
 MtPyre_Summit_EventScript_ArchieMaxieTrigger1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
 MtPyre_Summit_EventScript_ArchieMaxieTrigger2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs
 	end
 
@@ -207,23 +207,23 @@ MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
 	delay 60
-	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_ArchieMaxieBeginExit0
-	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_ArchieMaxieBeginExit1
-	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_ArchieMaxieBeginExit2
+	call_if_eq SPECIAL_VAR_8, 0, MtPyre_Summit_EventScript_ArchieMaxieBeginExit0
+	call_if_eq SPECIAL_VAR_8, 1, MtPyre_Summit_EventScript_ArchieMaxieBeginExit1
+	call_if_eq SPECIAL_VAR_8, 2, MtPyre_Summit_EventScript_ArchieMaxieBeginExit2
 	playse SE_PIN
 	applymovement LOCALID_MAXIE, Common_Movement_ExclamationMark
 	waitmovement 0
 	applymovement LOCALID_MAXIE, Common_Movement_Delay48
 	waitmovement 0
 	delay 30
-	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_MaxieApproachPlayer0
-	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_MaxieApproachPlayer1
-	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_MaxieApproachPlayer2
+	call_if_eq SPECIAL_VAR_8, 0, MtPyre_Summit_EventScript_MaxieApproachPlayer0
+	call_if_eq SPECIAL_VAR_8, 1, MtPyre_Summit_EventScript_MaxieApproachPlayer1
+	call_if_eq SPECIAL_VAR_8, 2, MtPyre_Summit_EventScript_MaxieApproachPlayer2
 	msgbox MtPyre_Summit_Text_MaxieSilence, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8008, 0, MtPyre_Summit_EventScript_MaxieApproachArchie0
-	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_MaxieApproachArchie1
-	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_MaxieApproachArchie2
+	call_if_eq SPECIAL_VAR_8, 0, MtPyre_Summit_EventScript_MaxieApproachArchie0
+	call_if_eq SPECIAL_VAR_8, 1, MtPyre_Summit_EventScript_MaxieApproachArchie1
+	call_if_eq SPECIAL_VAR_8, 2, MtPyre_Summit_EventScript_MaxieApproachArchie2
 	delay 30
 	applymovement LOCALID_ARCHIE, MtPyre_Summit_Movement_ArchieExit
 	applymovement LOCALID_MAXIE, MtPyre_Summit_Movement_MaxieExit

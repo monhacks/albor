@@ -335,56 +335,56 @@ Route110_TrickHouseEntrance_EventScript_GiveReward::
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle1Reward::
 	giveitem ITEM_RARE_CANDY
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle2Reward::
 	giveitem ITEM_TIMER_BALL
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle3Reward::
 	giveitem ITEM_HARD_STONE
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle4Reward::
 	giveitem ITEM_SMOKE_BALL
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle5Reward::
 	giveitem ITEM_TM_TAUNT
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle6Reward::
 	giveitem ITEM_MAGNET
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_GivePuzzle7Reward::
 	giveitem ITEM_PP_MAX
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_GotReward
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -402,15 +402,15 @@ Route110_TrickHouseEntrance_EventScript_MechadollReward::
 	waitmovement 0
 	msgbox Route110_TrickHouseEntrance_Text_MechadollWhichTent, MSGBOX_DEFAULT
 	call Route110_TrickHouseEntrance_EventScript_ChooseTent
-	goto_if_eq VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent
-	call_if_eq VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route110_TrickHouseEntrance_EventScript_ReceivedTent
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_NoRoomForDecor
 	msgbox Route110_TrickHouseEntrance_Text_PCFullAgain, MSGBOX_DEFAULT
 	releaseall
 	end
 
 Route110_TrickHouseEntrance_EventScript_ChooseTent::
 	multichoice 0, 0, MULTI_TENT, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHouseEntrance_EventScript_GiveRedTent
 	goto Route110_TrickHouseEntrance_EventScript_GiveBlueTent
 
@@ -455,7 +455,7 @@ Route110_TrickHouseEntrance_EventScript_ItsAScroll::
 Route110_TrickHouseEntrance_EventScript_GoInHolePrompt::
 	msgbox Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll, MSGBOX_YESNO
 	closemessage
-	goto_if_eq VAR_RESULT, YES, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route110_TrickHouseEntrance_EventScript_EnterPuzzleRoom
 	releaseall
 	end
 
@@ -668,26 +668,26 @@ Route110_TrickHouseEntrance_EventScript_TrickMasterHiding::
 	end
 
 Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle1::
-	setvar VAR_0x8004, 6  @ x
-	setvar VAR_0x8005, 3  @ y
+	setvar SPECIAL_VAR_4, 6  @ x
+	setvar SPECIAL_VAR_5, 3  @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
 Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle2::
-	setvar VAR_0x8004, 11  @ x
-	setvar VAR_0x8005, 5   @ y
+	setvar SPECIAL_VAR_4, 11  @ x
+	setvar SPECIAL_VAR_5, 5   @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
 Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle3::
-	setvar VAR_0x8004, 9  @ x
-	setvar VAR_0x8005, 2  @ y
+	setvar SPECIAL_VAR_4, 9  @ x
+	setvar SPECIAL_VAR_5, 2  @ y
 	call Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle
 	return
 
 Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
-	setvar VAR_0x8006, 0
-	dofieldeffectsparkle VAR_0x8004, VAR_0x8005, VAR_0x8006
+	setvar SPECIAL_VAR_6, 0
+	dofieldeffectsparkle SPECIAL_VAR_4, SPECIAL_VAR_5, SPECIAL_VAR_6
 	waitfieldeffect FLDEFF_SPARKLE
 	delay 10
 	return

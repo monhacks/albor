@@ -16,7 +16,7 @@ EverGrandeCity_PokemonCenter_1F_EventScript_TryShowScott::
 	return
 
 EverGrandeCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -36,9 +36,9 @@ EverGrandeCity_PokemonCenter_1F_EventScript_Scott::
 	faceplayer
 	msgbox EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_FACING, DIR_NORTH, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth
-	call_if_eq VAR_FACING, DIR_EAST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
-	call_if_eq VAR_FACING, DIR_WEST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
+	call_if_eq SPECIAL_VAR_FACING, DIR_WEST, EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit
 	addvar VAR_SCOTT_STATE, 1
 	setflag FLAG_MET_SCOTT_IN_EVERGRANDE
 	playse SE_EXIT

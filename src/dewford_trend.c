@@ -284,7 +284,7 @@ void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 
 
 void BufferTrendyPhraseString(void)
 {
-    struct DewfordTrend *trend = &gSaveBlock1Ptr->dewfordTrends[gSpecialVar_0x8004];
+    struct DewfordTrend *trend = &gSaveBlock1Ptr->dewfordTrends[gSpecialVar_4];
     ConvertEasyChatWordsToString(gStringVar1, trend->words, 2, 1);
 }
 

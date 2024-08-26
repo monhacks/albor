@@ -14,8 +14,8 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_Curator::
 	message LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings
 	waitmessage
 	multichoice 20, 8, MULTI_VIEWED_PAINTINGS, TRUE
-	goto_if_eq VAR_RESULT, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet
+	goto_if_eq SPECIAL_VAR_RESULT, 0, LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet::
@@ -24,8 +24,8 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet::
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested
-	goto_if_eq VAR_RESULT, YES, LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings
+	goto_if_eq SPECIAL_VAR_RESULT, NO, LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested
+	goto_if_eq SPECIAL_VAR_RESULT, YES, LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested::
@@ -38,7 +38,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings::
 	applymovement LOCALID_CURATOR, LilycoveCity_LilycoveMuseum_1F_Movement_CuratorEnterStairs
 	waitmovement 0
 	removeobject LOCALID_CURATOR
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_NORTH, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth
 	case DIR_WEST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest
 	case DIR_EAST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast

@@ -412,14 +412,14 @@ void ChangePokemonNickname(void)
 {
     void ChangePokemonNickname_CB(void);
 
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
-    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES), GetMonGender(&gPlayerParty[gSpecialVar_0x8004]), GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PERSONALITY), ChangePokemonNickname_CB, GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_IS_SHINY));
+    GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_NICKNAME, gStringVar3);
+    GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_NICKNAME, gStringVar2);
+    DoNamingScreen(NAMING_SCREEN_NICKNAME, gStringVar2, GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPECIES), GetMonGender(&gPlayerParty[gSpecialVar_4]), GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_PERSONALITY), ChangePokemonNickname_CB, GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_IS_SHINY));
 }
 
 void ChangePokemonNickname_CB(void)
 {
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar2);
+    SetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_NICKNAME, gStringVar2);
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 

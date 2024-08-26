@@ -8,7 +8,7 @@ TrainerHill_Roof_EventScript_Owner::
 	lock
 	faceplayer
 	trainerhill_getownerstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_Arrived
 	case 1, TrainerHill_Roof_EventScript_GivePrize
 	case 2, TrainerHill_Roof_EventScript_AlreadyReceivedPrize
@@ -16,7 +16,7 @@ TrainerHill_Roof_EventScript_Arrived::
 	msgbox TrainerHill_Roof_Text_YouFinallyCameBravo, MSGBOX_DEFAULT
 TrainerHill_Roof_EventScript_GivePrize::
 	trainerhill_giveprize
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_ReceivePrize
 	case 1, TrainerHill_Roof_EventScript_NoRoomForPrize
 	case 2, TrainerHill_Roof_EventScript_CheckFinalTime
@@ -36,7 +36,7 @@ TrainerHill_Roof_EventScript_NoRoomForPrize::
 
 TrainerHill_Roof_EventScript_CheckFinalTime::
 	trainerhill_finaltime
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, TrainerHill_Roof_EventScript_NewRecord
 	case 1, TrainerHill_Roof_EventScript_NoNewRecord
 	case 2, TrainerHill_Roof_EventScript_EndSpeakToOwner

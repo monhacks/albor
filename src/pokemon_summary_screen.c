@@ -2275,7 +2275,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 StopPokemonAnimations();
                 PlaySE(SE_SELECT);
                 sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
-                gSpecialVar_0x8005 = sMoveSlotToReplace;
+                gSpecialVar_5 = sMoveSlotToReplace;
                 BeginCloseSummaryScreen(taskId);
             }
             else if (JOY_NEW(B_BUTTON))
@@ -2283,7 +2283,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 StopPokemonAnimations();
                 PlaySE(SE_SELECT);
                 sMoveSlotToReplace = MAX_MON_MOVES;
-                gSpecialVar_0x8005 = MAX_MON_MOVES;
+                gSpecialVar_5 = MAX_MON_MOVES;
                 BeginCloseSummaryScreen(taskId);
             }
         }

@@ -685,7 +685,7 @@ static const u8 *const sHallFacilityToRecordsText[] =
 // code
 void CallFrontierUtilFunc(void)
 {
-    sFrontierUtilFuncs[gSpecialVar_0x8004]();
+    sFrontierUtilFuncs[gSpecialVar_4]();
 }
 
 // VAR_TEMP_CHALLENGE_STATUS is used to react to the status in OnFrame map scripts
@@ -721,7 +721,7 @@ static void GetFrontierData(void)
     if (hasSymbol == 2)
         hasSymbol = 1;
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case FRONTIER_DATA_CHALLENGE_STATUS:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.challengeStatus;
@@ -756,26 +756,26 @@ static void SetFrontierData(void)
     if (hasSymbol == 2)
         hasSymbol = 1;
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case FRONTIER_DATA_CHALLENGE_STATUS:
-        gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_6;
         break;
     case FRONTIER_DATA_LVL_MODE:
-        gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_6;
         break;
     case FRONTIER_DATA_BATTLE_NUM:
-        gSaveBlock2Ptr->frontier.curChallengeBattleNum = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.curChallengeBattleNum = gSpecialVar_6;
         break;
     case FRONTIER_DATA_PAUSED:
-        gSaveBlock2Ptr->frontier.challengePaused = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.challengePaused = gSpecialVar_6;
         break;
     case FRONTIER_DATA_SELECTED_MON_ORDER:
         for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
             gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
         break;
     case FRONTIER_DATA_RECORD_DISABLED:
-        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.disableRecordBattle = gSpecialVar_6;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSaveBlock2Ptr->frontier.battledBrainFlags |= gFrontierBrainInfo[facility].battledBit[hasSymbol];
@@ -788,7 +788,7 @@ static void SetSelectedPartyOrder(void)
     s32 i;
 
     ClearSelectedPartyOrder();
-    for (i = 0; i < gSpecialVar_0x8005; i++)
+    for (i = 0; i < gSpecialVar_5; i++)
         gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
     ReducePlayerPartyToSelectedMons();
 }
@@ -817,24 +817,24 @@ static void SaveSelectedParty(void)
 
 static void ShowFacilityResultsWindow(void)
 {
-    if (gSpecialVar_0x8006 >= FRONTIER_MODE_COUNT)
-        gSpecialVar_0x8006 = 0;
-    switch (gSpecialVar_0x8005)
+    if (gSpecialVar_6 >= FRONTIER_MODE_COUNT)
+        gSpecialVar_6 = 0;
+    switch (gSpecialVar_5)
     {
     case FRONTIER_FACILITY_TOWER:
-        ShowTowerResultsWindow(gSpecialVar_0x8006);
+        ShowTowerResultsWindow(gSpecialVar_6);
         break;
     case FRONTIER_FACILITY_DOME:
-        ShowDomeResultsWindow(gSpecialVar_0x8006);
+        ShowDomeResultsWindow(gSpecialVar_6);
         break;
     case FRONTIER_FACILITY_PALACE:
-        ShowPalaceResultsWindow(gSpecialVar_0x8006);
+        ShowPalaceResultsWindow(gSpecialVar_6);
         break;
     case FRONTIER_FACILITY_PIKE:
         ShowPikeResultsWindow();
         break;
     case FRONTIER_FACILITY_FACTORY:
-        ShowFactoryResultsWindow(gSpecialVar_0x8006);
+        ShowFactoryResultsWindow(gSpecialVar_6);
         break;
     case FRONTIER_FACILITY_ARENA:
         ShowArenaResultsWindow();
@@ -1642,7 +1642,7 @@ static void GiveFacilitySymbol(void)
 
 static void CheckBattleTypeFlag(void)
 {
-    if (gBattleTypeFlags & gSpecialVar_0x8005)
+    if (gBattleTypeFlags & gSpecialVar_5)
         gSpecialVar_Result = TRUE;
     else
         gSpecialVar_Result = FALSE;
@@ -1696,7 +1696,7 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 }
 
 // gSpecialVar_Result is the level mode before and after calls to this function
-// gSpecialVar_0x8004 is used to store the return value instead (TRUE if there are insufficient eligible mons)
+// gSpecialVar_4 is used to store the return value instead (TRUE if there are insufficient eligible mons)
 // The names of ineligible Pokémon that have been caught are also buffered to print
 static void CheckPartyIneligibility(void)
 {
@@ -1781,7 +1781,7 @@ static void CheckPartyIneligibility(void)
             }
         }
         gStringVar1[0] = EOS;
-        gSpecialVar_0x8004 = TRUE;
+        gSpecialVar_4 = TRUE;
         for (i = 0; i < totalCaughtBanned; i++)
             AppendCaughtBannedMonSpeciesName(caughtBanned[i], i+1, totalCaughtBanned);
 
@@ -1801,7 +1801,7 @@ static void CheckPartyIneligibility(void)
     }
     else
     {
-        gSpecialVar_0x8004 = FALSE;
+        gSpecialVar_4 = FALSE;
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_Result;
     }
     #undef numEligibleMons
@@ -1877,7 +1877,7 @@ static void RestoreHeldItems(void)
 
 static void BufferFrontierTrainerName(void)
 {
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case 0:
         GetFrontierTrainerName(gStringVar1, gTrainerBattleOpponent_A);

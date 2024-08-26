@@ -17,8 +17,8 @@ Route106_EventScript_Kyla::
 
 Route106_EventScript_Elliot::
 	trainerbattle_single TRAINER_ELLIOT_1, Route106_Text_ElliotIntro, Route106_Text_ElliotDefeated, Route106_EventScript_ElliotRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route106_EventScript_ElliotRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route106_EventScript_ElliotRematch
 	msgbox Route106_Text_ElliotPostBattle, MSGBOX_DEFAULT
 	release
 	end

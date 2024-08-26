@@ -41,7 +41,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_QuitWithoutSaving::
 BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge::
 	lockall
 	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_DefeatedMaven
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak, MSGBOX_DEFAULT
 	goto BattleFrontier_BattlePalaceLobby_EventScript_GiveBattlePoints
 
@@ -81,11 +81,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveAfterChallenge::
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RecordMatch
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_EndSaveAfterChallenge
@@ -125,7 +125,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_DoublesAttendant::
 
 BattleFrontier_BattlePalaceLobby_EventScript_Attendant::
 	palace_get PALACE_DATA_PRIZE
-	goto_if_ne VAR_RESULT, ITEM_NONE, BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge
+	goto_if_ne SPECIAL_VAR_RESULT, ITEM_NONE, BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge
 	special SavePlayerParty
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForSingleBattle
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattlePalaceLobby_EventScript_WelcomeForDoubleBattle
@@ -134,7 +134,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
@@ -144,23 +144,23 @@ BattleFrontier_BattlePalaceLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattlePalaceLobby_Text_WhichChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallenge
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons
-	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	goto_if_eq SPECIAL_VAR_4, TRUE, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons
+	frontier_set FRONTIER_DATA_LVL_MODE, SPECIAL_VAR_RESULT
 	msgbox BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	callnative RemoveFollowingPokemon
 	call BattleFrontier_EventScript_GetLvlMode
-	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_RESULT
+	setvar SPECIAL_VAR_5, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
 	msgbox BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
 	case YES, BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattlePalaceLobby_EventScript_LoadPartyAndCancelChallenge
@@ -177,7 +177,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed
 BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
@@ -199,7 +199,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_ExplainDoublesChallenge::
 	goto BattleFrontier_BattlePalaceLobby_EventScript_AskTakeChallenge
 
 BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_50, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, BattleFrontier_BattlePalaceLobby_EventScript_NotEnoughValidMonsLvOpen
 
@@ -243,13 +243,13 @@ BattleFrontier_BattlePalaceLobby_EventScript_AskTakeDoubleBattleChallenge::
 BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant
-	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
+	applymovement SPECIAL_VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_WalkToDoor
 	waitmovement 0
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattlePalaceLobby_EventScript_OpenDoublesHallDoor
 	waitdooranim
-	applymovement VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor
+	applymovement SPECIAL_VAR_LAST_TALKED, BattleFrontier_BattlePalaceLobby_Movement_AttendantEnterDoor
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePalaceLobby_Movement_PlayerEnterDoor
 	waitmovement 0
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattlePalaceLobby_EventScript_CloseSinglesHallDoor
@@ -258,11 +258,11 @@ BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor::
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToSinglesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_ATTENDANT_SINGLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_TalkedToDoublesAttendant::
-	setvar VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_ATTENDANT_DOUBLES
 	return
 
 BattleFrontier_BattlePalaceLobby_EventScript_OpenSinglesHallDoor::
@@ -338,7 +338,7 @@ BattleFrontier_BattlePalaceLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 16, 0, MULTI_BATTLE_PALACE_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattlePalaceLobby_EventScript_RulesBasics
 	case 1, BattleFrontier_BattlePalaceLobby_EventScript_RulesNature
 	case 2, BattleFrontier_BattlePalaceLobby_EventScript_RulesMoves

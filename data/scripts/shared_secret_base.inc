@@ -49,7 +49,7 @@ SecretBase_EventScript_PCCancel::
 
 SecretBase_EventScript_PCMainMenuWithRegister::
 	multichoice 0, 0, MULTI_BASE_PC_WITH_REGISTRY, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SecretBase_EventScript_PCDecorationMenu
 	case 1, SecretBase_EventScript_PCPackUp
 	case 2, SecretBase_EventScript_PCRegistryMenu
@@ -59,7 +59,7 @@ SecretBase_EventScript_PCMainMenuWithRegister::
 
 SecretBase_EventScript_PCMainMenuWithoutRegister::
 	multichoice 0, 0, MULTI_BASE_PC_NO_REGISTRY, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SecretBase_EventScript_PCDecorationMenu
 	case 1, SecretBase_EventScript_PCPackUp
 	case 2, SecretBase_EventScript_PCTurnOff
@@ -68,7 +68,7 @@ SecretBase_EventScript_PCMainMenuWithoutRegister::
 
 SecretBase_EventScript_PCPackUp::
 	msgbox SecretBase_Text_AllDecorationsWillBeReturned, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCShowMainMenu
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SecretBase_EventScript_PCShowMainMenu
 	closemessage
 	special MoveOutOfSecretBase
 	releaseall
@@ -86,7 +86,7 @@ SecretBase_EventScript_PCRegisterMenu::
 	message SecretBase_Text_WhatWouldYouLikeToDo
 	waitmessage
 	multichoice 0, 0, MULTI_REGISTER_MENU, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, SecretBase_EventScript_PCRegister
 	case 1, SecretBase_EventScript_PCRegistryMenu
 	case 2, SecretBase_EventScript_PCRegistryInfo
@@ -101,11 +101,11 @@ SecretBase_EventScript_ShowRegisterMenu::
 
 SecretBase_EventScript_PCRegister::
 	special GetCurSecretBaseRegistrationValidity
-	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_AlreadyRegistered
-	goto_if_eq VAR_RESULT, 2, SecretBase_EventScript_CantRegisterTooManyBases
+	goto_if_eq SPECIAL_VAR_RESULT, 1, SecretBase_EventScript_AlreadyRegistered
+	goto_if_eq SPECIAL_VAR_RESULT, 2, SecretBase_EventScript_CantRegisterTooManyBases
 	special CopyCurSecretBaseOwnerName_StrVar1
 	msgbox SecretBase_Text_WantToRegisterSecretBase, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
 	msgbox SecretBase_Text_RegistrationCompleted, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -114,7 +114,7 @@ SecretBase_EventScript_PCRegister::
 
 SecretBase_EventScript_AlreadyRegistered::
 	msgbox SecretBase_Text_AlreadyRegisteredDelete, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
+	goto_if_eq SPECIAL_VAR_RESULT, NO, SecretBase_EventScript_PCRegisterMenu
 	msgbox SecretBase_Text_DataUnregistered, MSGBOX_SIGN
 	special ToggleCurSecretBaseRegistry
 	special DoSecretBasePCTurnOffEffect
@@ -167,10 +167,10 @@ SecretBase_EventScript_SandOrnament::
 
 SecretBase_EventScript_ShieldOrToyTV::
 	special InteractWithShieldOrTVDecoration
-	goto_if_eq VAR_RESULT, 0, SecretBase_EventScript_BattleTowerShield
-	goto_if_eq VAR_RESULT, 1, SecretBase_EventScript_ToyTV
-	goto_if_eq VAR_RESULT, 2, SecretBase_EventScript_SeedotTV
-	goto_if_eq VAR_RESULT, 3, SecretBase_EventScript_SkittyTV
+	goto_if_eq SPECIAL_VAR_RESULT, 0, SecretBase_EventScript_BattleTowerShield
+	goto_if_eq SPECIAL_VAR_RESULT, 1, SecretBase_EventScript_ToyTV
+	goto_if_eq SPECIAL_VAR_RESULT, 2, SecretBase_EventScript_SeedotTV
+	goto_if_eq SPECIAL_VAR_RESULT, 3, SecretBase_EventScript_SkittyTV
 	end
 
 SecretBase_EventScript_BattleTowerShield::

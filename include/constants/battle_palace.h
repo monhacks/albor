@@ -1,6 +1,8 @@
 #ifndef GUARD_CONSTANTS_BATTLE_PALACE_H
 #define GUARD_CONSTANTS_BATTLE_PALACE_H
 
+//Eliminar todo
+
 #define BATTLE_PALACE_FUNC_INIT                 0
 #define BATTLE_PALACE_FUNC_GET_DATA             1
 #define BATTLE_PALACE_FUNC_SET_DATA             2

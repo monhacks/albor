@@ -23,24 +23,24 @@ FortreeCity_House4_EventScript_Boy::
 	end
 
 FortreeCity_House4_EventScript_WingullOnErrand::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_WingullReturned::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
 	giveitem ITEM_MENTAL_HERB
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 
 FortreeCity_House4_EventScript_ReceivedMentalHerb::
-	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
 	releaseall

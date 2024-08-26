@@ -21,7 +21,7 @@ VictoryRoad_1F_EventScript_SetEntranceWallyPos2::
 
 VictoryRoad_1F_EventScript_WallyBattleTrigger1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	addobject LOCALID_WALLY_ENTRANCE
 	applymovement LOCALID_WALLY_ENTRANCE, VictoryRoad_1F_Movement_WallyApproachPlayer1
 	waitmovement 0
@@ -30,7 +30,7 @@ VictoryRoad_1F_EventScript_WallyBattleTrigger1::
 
 VictoryRoad_1F_EventScript_WallyBattleTrigger2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	addobject LOCALID_WALLY_ENTRANCE
 	applymovement LOCALID_WALLY_ENTRANCE, VictoryRoad_1F_Movement_WallyApproachPlayer2
 	waitmovement 0
@@ -46,7 +46,7 @@ VictoryRoad_1F_EventScript_WallyEntranceBattle::
 	clearflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	copyobjectxytoperm LOCALID_WALLY_ENTRANCE
 	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
-	copyvar VAR_VICTORY_ROAD_1F_STATE, VAR_0x8008
+	copyvar VAR_VICTORY_ROAD_1F_STATE, SPECIAL_VAR_8
 	releaseall
 	end
 
@@ -85,8 +85,8 @@ VictoryRoad_1F_EventScript_EntranceWally::
 @ This Wally appears and remains at the exit after the Hall of Fame is entered
 VictoryRoad_1F_EventScript_ExitWally::
 	trainerbattle_single TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, VictoryRoad_1F_EventScript_RematchWally
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, VictoryRoad_1F_EventScript_RematchWally
 	msgbox VictoryRoad_1F_Text_WallyPostBattle, MSGBOX_AUTOCLOSE
 	end
 

@@ -2048,12 +2048,12 @@ void ObjectEventInteractionGetBerryTreeData(void)
     num = gSaveBlock1Ptr->location.mapNum;
     group = gSaveBlock1Ptr->location.mapGroup;
     if (IsBerryTreeSparkling(localId, num, group))
-        gSpecialVar_0x8004 = BERRY_STAGE_SPARKLING;
+        gSpecialVar_4 = BERRY_STAGE_SPARKLING;
     else
-        gSpecialVar_0x8004 = GetStageByBerryTreeId(id);
-    gSpecialVar_0x8005 = GetNumStagesWateredByBerryTreeId(id);
-    gSpecialVar_0x8006 = GetBerryCountByBerryTreeId(id);
-    CopyItemNameHandlePlural(BerryTypeToItemId(berry), gStringVar1, gSpecialVar_0x8006);
+        gSpecialVar_4 = GetStageByBerryTreeId(id);
+    gSpecialVar_5 = GetNumStagesWateredByBerryTreeId(id);
+    gSpecialVar_6 = GetBerryCountByBerryTreeId(id);
+    CopyItemNameHandlePlural(BerryTypeToItemId(berry), gStringVar1, gSpecialVar_6);
 }
 
 void ObjectEventInteractionGetBerryName(void)
@@ -2113,11 +2113,11 @@ void ObjectEventInteractionPickBerryTree(void)
 
     if (!OW_BERRY_MUTATIONS || mutation == 0)
     {
-        gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+        gSpecialVar_4 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
         return;
     }
-    gSpecialVar_0x8004 = (CheckBagHasSpace(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id)) && CheckBagHasSpace(BerryTypeToItemId(mutation), 1)) + 2;
-    if (gSpecialVar_0x8004 == 3)
+    gSpecialVar_4 = (CheckBagHasSpace(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id)) && CheckBagHasSpace(BerryTypeToItemId(mutation), 1)) + 2;
+    if (gSpecialVar_4 == 3)
     {
         AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
         AddBagItem(BerryTypeToItemId(mutation), 1);

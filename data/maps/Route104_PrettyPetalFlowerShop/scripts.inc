@@ -23,15 +23,15 @@ Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	goto_if_set FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet
 	setflag FLAG_MET_PRETTY_PETAL_SHOP_OWNER
 	msgbox Route104_PrettyPetalFlowerShop_Text_IntroLearnAboutBerries, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+	call_if_eq SPECIAL_VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
+	call_if_eq SPECIAL_VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet::
 	msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
-	call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
-	call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+	call_if_eq SPECIAL_VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
+	call_if_eq SPECIAL_VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
 	release
 	end
 
@@ -74,7 +74,7 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl::
 Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail::
 	msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_WAILMER_PAIL
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
@@ -87,9 +87,9 @@ Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl::
 	goto_if_set FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY, Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry
 	msgbox Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers, MSGBOX_DEFAULT
 	random 8
-	addvar VAR_RESULT, FIRST_BERRY_INDEX
-	giveitem VAR_RESULT
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+	addvar SPECIAL_VAR_RESULT, FIRST_BERRY_INDEX
+	giveitem SPECIAL_VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release

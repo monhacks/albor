@@ -5991,37 +5991,6 @@ static void Cmd_moveend(void)
             gBattleScripting.moveendState++;
             break;
         }
-        // The order of abilities/items activating after moves hitting multiple targets is
-        // 1. Magician
-        // 2. The fastest mon gets switched out using Eject Button / Eject Pack
-        // 3. White Herb activates
-        // 4. Red Card activates
-        // 5. Life Orb / Shell Bell
-        // 6. Pickpocket
-        case MOVEEND_MAGICIAN:
-            if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MAGICIAN
-              && gCurrentMove != MOVE_FLING && gCurrentMove != MOVE_NATURAL_GIFT
-              && gBattleMons[gBattlerAttacker].item == ITEM_NONE
-              && gBattleMons[gBattlerTarget].item != ITEM_NONE
-              && IsBattlerAlive(gBattlerAttacker)
-              && TARGET_TURN_DAMAGED
-              && CanStealItem(gBattlerAttacker, gBattlerTarget, gBattleMons[gBattlerTarget].item)
-              && !gSpecialStatuses[gBattlerAttacker].gemBoost   // In base game, gems are consumed after magician would activate.
-              && !(gWishFutureKnock.knockedOffMons[GetBattlerSide(gBattlerTarget)] & (1u << gBattlerPartyIndexes[gBattlerTarget]))
-              && !DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)
-              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-              && (GetBattlerAbility(gBattlerTarget) != ABILITY_STICKY_HOLD || GetBattlerAbility(gBattlerTarget) != ABILITY_TERRITORIAL || !IsBattlerAlive(gBattlerTarget)))
-            {
-                StealTargetItem(gBattlerAttacker, gBattlerTarget);
-                gBattleScripting.battler = gBattlerAbility = gBattlerAttacker;
-                gEffectBattler = gBattlerTarget;
-                BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_MagicianActivates;
-                gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage = TRUE;
-                effect = TRUE;
-            }
-            gBattleScripting.moveendState++;
-            break;
         case MOVEEND_EJECT_ITEMS:
             {
                 // Because sorting the battlers by speed takes lots of cycles, it's better to just check if any of the battlers has the Eject items.

@@ -100,9 +100,9 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
 {
     s16 * data = gTasks[taskId].data;
     if (decorationId > NUM_DECORATIONS)
-        gSpecialVar_0x8004 = 0xFFFF;
+        gSpecialVar_4 = 0xFFFF;
     else
-        gSpecialVar_0x8004 = decorationId;
+        gSpecialVar_4 = decorationId;
 
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     ClearWindowTilemap(tWindowId);
@@ -128,7 +128,7 @@ void Task_HandleGetDecorationMenuInput(u8 taskId)
             break;
         default:
             PlaySE(SE_SELECT);
-            gSpecialVar_0x8005 = input;
+            gSpecialVar_5 = input;
             StringCopy(gStringVar1, trader->playerNames[input]);
             ConvertInternationalString(gStringVar1, trader->language[input]);
             Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorations[input]);
@@ -160,10 +160,10 @@ void DoesPlayerHaveNoDecorations(void)
 void IsDecorationCategoryFull(void)
 {
     gSpecialVar_Result = FALSE;
-    if (gDecorations[gSpecialVar_0x8004].category != gDecorations[gSpecialVar_0x8006].category
-        && GetFirstEmptyDecorSlot(gDecorations[gSpecialVar_0x8004].category) == -1)
+    if (gDecorations[gSpecialVar_4].category != gDecorations[gSpecialVar_6].category
+        && GetFirstEmptyDecorSlot(gDecorations[gSpecialVar_4].category) == -1)
     {
-        CopyDecorationCategoryName(gStringVar2, gDecorations[gSpecialVar_0x8004].category);
+        CopyDecorationCategoryName(gStringVar2, gDecorations[gSpecialVar_4].category);
         gSpecialVar_Result = TRUE;
     }
 }
@@ -177,13 +177,13 @@ void DecorationItemsMenuAction_Trade(u8 taskId)
 {
     if (IsSelectedDecorInThePC() == TRUE)
     {
-        gSpecialVar_0x8006 = gCurDecorationItems[gCurDecorationIndex];
-        StringCopy(gStringVar3, gDecorations[gSpecialVar_0x8004].name);
-        StringCopy(gStringVar2, gDecorations[gSpecialVar_0x8006].name);
+        gSpecialVar_6 = gCurDecorationItems[gCurDecorationIndex];
+        StringCopy(gStringVar3, gDecorations[gSpecialVar_4].name);
+        StringCopy(gStringVar2, gDecorations[gSpecialVar_6].name);
     }
     else
     {
-        gSpecialVar_0x8006 = 0xFFFF;
+        gSpecialVar_6 = 0xFFFF;
     }
     DestroyTask(taskId);
     ScriptContext_Enable();
@@ -191,7 +191,7 @@ void DecorationItemsMenuAction_Trade(u8 taskId)
 
 void ExitTraderMenu(u8 taskId)
 {
-    gSpecialVar_0x8006 = 0;
+    gSpecialVar_6 = 0;
     DestroyTask(taskId);
     ScriptContext_Enable();
 }
@@ -200,11 +200,11 @@ void TraderDoDecorationTrade(void)
 {
     struct MauvilleOldManTrader *trader = &gSaveBlock1Ptr->oldMan.trader;
 
-    DecorationRemove(gSpecialVar_0x8006);
-    DecorationAdd(gSpecialVar_0x8004);
-    StringCopy(trader->playerNames[gSpecialVar_0x8005], gSaveBlock2Ptr->playerName);
-    trader->decorations[gSpecialVar_0x8005] = gSpecialVar_0x8006;
-    trader->language[gSpecialVar_0x8005] = GAME_LANGUAGE;
+    DecorationRemove(gSpecialVar_6);
+    DecorationAdd(gSpecialVar_4);
+    StringCopy(trader->playerNames[gSpecialVar_5], gSaveBlock2Ptr->playerName);
+    trader->decorations[gSpecialVar_5] = gSpecialVar_6;
+    trader->language[gSpecialVar_5] = GAME_LANGUAGE;
     trader->alreadyTraded = TRUE;
 }
 

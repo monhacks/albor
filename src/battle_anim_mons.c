@@ -144,7 +144,7 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
     u8 ret;
     species = SanitizeSpeciesId(species);
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER || IsContest())
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
     {
         ret = gSpeciesInfo[species].backPicYOffset;
     }

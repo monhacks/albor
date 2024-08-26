@@ -376,7 +376,7 @@ static void AddHatchedMonToParty(u8 id)
 
 void ScriptHatchMon(void)
 {
-    AddHatchedMonToParty(gSpecialVar_0x8004);
+    AddHatchedMonToParty(gSpecialVar_4);
 }
 
 static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
@@ -386,7 +386,7 @@ static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
 
 bool8 CheckDaycareMonReceivedMail(void)
 {
-    return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_4);
 }
 
 static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesLoc)
@@ -468,11 +468,11 @@ static void CB2_LoadEggHatch(void)
 
         sEggHatchData = Alloc(sizeof(*sEggHatchData));
         AllocateMonSpritesGfx();
-        sEggHatchData->eggPartyId = gSpecialVar_0x8004;
+        sEggHatchData->eggPartyId = gSpecialVar_4;
         sEggHatchData->eggShardVelocityId = 0;
 
         SetVBlankCallback(VBlankCB_EggHatch);
-        gSpecialVar_0x8005 = GetCurrentMapMusic();
+        gSpecialVar_5 = GetCurrentMapMusic();
 
         ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags(0);
@@ -550,7 +550,7 @@ static void CB2_LoadEggHatch(void)
 
 static void EggHatchSetMonNickname(void)
 {
-    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar3);
+    SetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_NICKNAME, gStringVar3);
     FreeMonSpritesGfx();
     Free(sEggHatchData);
     SetMainCallback2(CB2_ReturnToField);

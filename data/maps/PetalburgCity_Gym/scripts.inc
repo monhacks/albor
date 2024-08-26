@@ -16,7 +16,7 @@ PetalburgCity_Gym_OnLoad:
 
 @ NOTE: Strength and OHKO rooms are misleading. Both are more accurately Critical-Hit
 PetalburgCity_Gym_EventScript_OpenUnlockedDoors::
-	setvar VAR_0x8005, 1
+	setvar SPECIAL_VAR_5, 1
 	call PetalburgCity_Gym_EventScript_OpenGymEntranceDoors
 	call_if_defeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors
 	call_if_defeated TRAINER_MARY, PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors
@@ -28,7 +28,7 @@ PetalburgCity_Gym_EventScript_OpenUnlockedDoors::
 	end
 
 PetalburgCity_Gym_EventScript_UnlockAllDoors::
-	setvar VAR_0x8005, 1
+	setvar SPECIAL_VAR_5, 1
 	call PetalburgCity_Gym_EventScript_OpenGymEntranceDoors
 	call PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors
 	call PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors
@@ -54,11 +54,7 @@ PetalburgCity_Gym_EventScript_MoveNormanToEntrance::
 	return
 
 PetalburgCity_Gym_EventScript_CheckNormanForRematch::
-	setorcopyvar VAR_TRAINER_BATTLE_OPPONENT_A, TRAINER_NORMAN_1
-	specialvar VAR_RESULT, IsTrainerReadyForRematch
-	goto_if_eq VAR_RESULT, TRUE, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
-	goto_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_Gym_EventScript_DontMoveNormanToFront
-	setobjectxyperm LOCALID_NORMAN, 4, 107
+
 	return
 
 PetalburgCity_Gym_EventScript_DontMoveNormanToFront::
@@ -116,7 +112,7 @@ PetalburgCity_Gym_EventScript_Norman::
 	case 8, PetalburgCity_Gym_EventScript_NormanRematch
 	msgbox PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_SOUTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth
 	case DIR_NORTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth
 	case DIR_WEST, PetalburgCity_Gym_EventScript_BeginWallyTutorialWest
@@ -124,64 +120,64 @@ PetalburgCity_Gym_EventScript_Norman::
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth::
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto PetalburgCity_Gym_EventScript_BeginWallyTutorial
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth::
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto PetalburgCity_Gym_EventScript_BeginWallyTutorial
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorialWest::
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto PetalburgCity_Gym_EventScript_BeginWallyTutorial
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorialEast::
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	goto PetalburgCity_Gym_EventScript_BeginWallyTutorial
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorial::
 	addobject LOCALID_WALLY
 	playse SE_DOOR
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_WallyArriveSouth
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_WallyArriveNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_WallyArriveWestEast
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_WallyArriveWestEast
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_WallyArriveSouth
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_WallyArriveNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_WallyArriveWestEast
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_WallyArriveWestEast
 	msgbox PetalburgCity_Gym_Text_WallyIdLikeAPokemon, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_DadOhYoureWallyRight, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_DadHmISee, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_NormanAddressPlayerWest
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_NormanAddressPlayerEast
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_NormanAddressPlayerWest
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_NormanAddressPlayerEast
 	msgbox PetalburgCity_Gym_Text_DadPlayerGoWithWally, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanAddressWallySouth
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_NormanAddressWallyNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_NormanAddressWallyWest
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_NormanAddressWallyEast
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_NormanAddressWallySouth
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_NormanAddressWallyNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_NormanAddressWallyWest
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_NormanAddressWallyEast
 	msgbox PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall, MSGBOX_DEFAULT
 	msgbox PetalburgCity_Gym_Text_WallyOhWowThankYou, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_NormanFaceDoorSouth
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_NormanFaceDoorNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_NormanFaceDoorWest
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_NormanFaceDoorEast
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_WallyFacePlayer
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_WallyFaceDown
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_WallyFacePlayer
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_WallyFacePlayer
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_NormanFaceDoorSouth
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_NormanFaceDoorNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_NormanFaceDoorWest
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_NormanFaceDoorEast
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_WallyFacePlayer
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_WallyFaceDown
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_WallyFacePlayer
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_WallyFacePlayer
 	msgbox PetalburgCity_Gym_Text_WouldYouReallyComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_FOLLOW_ME, FALSE
-	call_if_eq VAR_0x8008, 0, PetalburgCity_Gym_EventScript_ExitGymWithWallySouth
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_ExitGymWithWallyNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_ExitGymWithWallyWest
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_ExitGymWithWallyEast
+	call_if_eq SPECIAL_VAR_8, 0, PetalburgCity_Gym_EventScript_ExitGymWithWallySouth
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_ExitGymWithWallyNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_ExitGymWithWallyWest
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_ExitGymWithWallyEast
 	removeobject LOCALID_WALLY
 	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM
 	setvar VAR_PETALBURG_GYM_STATE, 1
@@ -365,7 +361,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
 	clearflag FLAG_HIDE_MAUVILLE_CITY_WATTSON
-	setvar VAR_0x8008, 5
+	setvar SPECIAL_VAR_8, 5
 	call Common_EventScript_SetGymTrainers
 	clearflag FLAG_HIDE_DEWFORD_HALL_SLUDGE_BOMB_MAN
 	call PetalburgCity_Gym_EventScript_UnlockAllDoors
@@ -378,7 +374,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	playse SE_DOOR
 	delay 10
 	addobject LOCALID_WALLYS_DAD
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_NORTH, PetalburgCity_Gym_EventScript_WallysDadArrivesNorth
 	case DIR_WEST, PetalburgCity_Gym_EventScript_WallysDadArrivesWest
 	case DIR_EAST, PetalburgCity_Gym_EventScript_WallysDadArrivesEast
@@ -386,21 +382,21 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 
 PetalburgCity_Gym_EventScript_GiveFacade::
 	giveitem ITEM_TM_FACADE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	setflag FLAG_RECEIVED_TM_FACADE
 	msgbox PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT
 	return
 
 PetalburgCity_Gym_EventScript_WallysDadArrivesNorth::
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto PetalburgCity_Gym_EventScript_WallysDadArrives
 
 PetalburgCity_Gym_EventScript_WallysDadArrivesEast::
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto PetalburgCity_Gym_EventScript_WallysDadArrives
 
 PetalburgCity_Gym_EventScript_WallysDadArrivesWest::
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	goto PetalburgCity_Gym_EventScript_WallysDadArrives
 
 PetalburgCity_Gym_EventScript_WallysDadArrives::
@@ -412,22 +408,22 @@ PetalburgCity_Gym_EventScript_WallysDadArrives::
 	applymovement LOCALID_WALLYS_DAD, Common_Movement_Delay48
 	waitmovement 0
 	delay 10
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest
 	msgbox PetalburgCity_Gym_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_WallysDadFaceNormanNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_WallysDadFaceNormanEast
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_WallysDadFaceNormanWest
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_WallysDadFaceNormanNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_WallysDadFaceNormanEast
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_WallysDadFaceNormanWest
 	msgbox PetalburgCity_Gym_Text_LetMeBorrowPlayer, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_FOLLOW_ME, FALSE
-	call_if_eq VAR_0x8008, 1, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth
-	call_if_eq VAR_0x8008, 2, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadEast
-	call_if_eq VAR_0x8008, 3, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadWest
+	call_if_eq SPECIAL_VAR_8, 1, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth
+	call_if_eq SPECIAL_VAR_8, 2, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadEast
+	call_if_eq SPECIAL_VAR_8, 3, PetalburgCity_Gym_EventScript_ExitGymWithWallysDadWest
 	removeobject LOCALID_WALLYS_DAD
 	setvar VAR_PETALBURG_CITY_STATE, 4
 	clearflag FLAG_HIDE_PETALBURG_CITY_WALLYS_DAD
@@ -717,17 +713,17 @@ PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough::
 PetalburgCity_Gym_EventScript_SpeedRoomDoor::
 	lockall
 	goto_if_lt VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 85
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 85
 	msgbox PetalburgCity_Gym_Text_EnterSpeedRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_EnterRoom::
 	closemessage
 	delay 30
-	warpdoor MAP_PETALBURG_CITY_GYM, VAR_0x8008, VAR_0x8009
+	warpdoor MAP_PETALBURG_CITY_GYM, SPECIAL_VAR_8, SPECIAL_VAR_9
 	waitstate
 	releaseall
 	end
@@ -741,115 +737,115 @@ PetalburgCity_Gym_EventScript_DoorLocked::
 	releaseall
 	end
 
-@ VAR_0x8008 and VAR_0x8009 below are the x and y coordinates of the warp
+@ SPECIAL_VAR_8 and SPECIAL_VAR_9 below are the x and y coordinates of the warp
 PetalburgCity_Gym_EventScript_AccuracyRoomDoor::
 	lockall
 	goto_if_lt VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 98
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 98
 	msgbox PetalburgCity_Gym_Text_EnterAccuracyRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_ConfusionRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 46
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 46
 	msgbox PetalburgCity_Gym_Text_EnterConfusionRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_LeftDefenseRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_RANDALL, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 59
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_RightDefenseRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 59
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 59
 	msgbox PetalburgCity_Gym_Text_EnterDefenseRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_RecoveryRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_MARY, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 72
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 72
 	msgbox PetalburgCity_Gym_Text_EnterRecoveryRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_LeftStrengthRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_PARKER, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 20
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_RightStrengthRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 20
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 20
 	msgbox PetalburgCity_Gym_Text_EnterStrengthRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_LeftOHKORoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_ALEXIA, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 33
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_RightOHKORoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_GEORGE, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 33
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 33
 	msgbox PetalburgCity_Gym_Text_EnterOHKORoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_LeftGymLeadersRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_JODY, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 1
-	setvar VAR_0x8009, 7
+	setvar SPECIAL_VAR_8, 1
+	setvar SPECIAL_VAR_9, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_RightGymLeadersRoomDoor::
 	lockall
 	goto_if_not_defeated TRAINER_BERKE, PetalburgCity_Gym_EventScript_DoorLocked
-	setvar VAR_0x8008, 7
-	setvar VAR_0x8009, 7
+	setvar SPECIAL_VAR_8, 7
+	setvar SPECIAL_VAR_9, 7
 	msgbox PetalburgCity_Gym_Text_EnterGymLeadersRoom, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
-	goto_if_eq VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, YES, PetalburgCity_Gym_EventScript_EnterRoom
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PetalburgCity_Gym_EventScript_DontEnterRoom
 	end
 
 PetalburgCity_Gym_EventScript_Randall::
@@ -859,7 +855,7 @@ PetalburgCity_Gym_EventScript_Randall::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenSpeedRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors
 	special DrawWholeMapView
 	release
@@ -876,7 +872,7 @@ PetalburgCity_Gym_EventScript_Parker::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenConfusionRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors
 	special DrawWholeMapView
 	release
@@ -893,7 +889,7 @@ PetalburgCity_Gym_EventScript_George::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenRecoveryRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors
 	special DrawWholeMapView
 	release
@@ -910,7 +906,7 @@ PetalburgCity_Gym_EventScript_Berke::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenOHKORoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenOHKORoomDoors
 	special DrawWholeMapView
 	release
@@ -927,7 +923,7 @@ PetalburgCity_Gym_EventScript_Mary::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenAccuracyRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors
 	special DrawWholeMapView
 	release
@@ -944,7 +940,7 @@ PetalburgCity_Gym_EventScript_Alexia::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenDefenseRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors
 	special DrawWholeMapView
 	release
@@ -961,7 +957,7 @@ PetalburgCity_Gym_EventScript_Jody::
 	end
 
 PetalburgCity_Gym_EventScript_SlideOpenStrengthRoomDoors::
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_5, 0
 	call PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors
 	special DrawWholeMapView
 	release
@@ -971,61 +967,61 @@ PetalburgCity_Gym_EventScript_JodyPostBadge::
 	msgbox PetalburgCity_Gym_Text_JodyPostBadge, MSGBOX_NPC
 	end
 
-@ VAR_0x8004 below is the room number
-@ VAR_0x8005 below is 0 when the door should be slid open and 1 when it should be unlocked immediately
+@ SPECIAL_VAR_4 below is the room number
+@ SPECIAL_VAR_5 below is 0 when the door should be slid open and 1 when it should be unlocked immediately
 PetalburgCity_Gym_EventScript_OpenGymEntranceDoors::
-	setvar VAR_0x8004, 1
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 1
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetEntranceRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors::
-	setvar VAR_0x8004, 2
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 2
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetSpeedRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors::
-	setvar VAR_0x8004, 3
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 3
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetAccuracyRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors::
-	setvar VAR_0x8004, 4
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 4
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetConfusionRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors::
-	setvar VAR_0x8004, 5
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 5
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetDefenseRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors::
-	setvar VAR_0x8004, 6
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 6
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetRecoveryRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors::
-	setvar VAR_0x8004, 7
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 7
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetStrengthRoomDoorMetatiles
 	return
 
 PetalburgCity_Gym_EventScript_OpenOHKORoomDoors::
-	setvar VAR_0x8004, 8
-	call_if_eq VAR_0x8005, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
-	call_if_eq VAR_0x8005, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
+	setvar SPECIAL_VAR_4, 8
+	call_if_eq SPECIAL_VAR_5, 0, PetalburgCity_Gym_EventScript_SlideOpenRoomDoors
+	call_if_eq SPECIAL_VAR_5, 1, PetalburgCity_Gym_EventScript_UnlockRoomDoors
 	call PetalburgCity_Gym_EventScript_SetOHKORoomDoorMetatiles
 	return
 

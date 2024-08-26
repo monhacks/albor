@@ -1283,13 +1283,6 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_MAGICIAN] =
-    {
-        .name = _("Magician"),
-        .description = COMPOUND_STRING("Steals the foe's held item."),
-        .aiRating = 3,
-    },
-
     [ABILITY_BULLETPROOF] =
     {
         .name = _("Bulletproof"),

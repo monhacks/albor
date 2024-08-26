@@ -1263,7 +1263,7 @@ static void PokeblockAction_UseOnPokeblockFeeder(u8 taskId)
 
 static void PokeblockAction_GiveToContestLady(u8 taskId)
 {
-    gSpecialVar_0x8004 = GivePokeblockToContestLady(&gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
+    gSpecialVar_4 = GivePokeblockToContestLady(&gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
     gSpecialVar_Result = gSpecialVar_ItemId;
     TryClearPokeblock(gSpecialVar_ItemId);
     gSpecialVar_ItemId = 0;

@@ -9,9 +9,9 @@ DesertRuins_OnResume:
 	end
 
 DesertRuins_EventScript_TryRemoveRegirock::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 DesertRuins_OnLoad:
@@ -66,10 +66,10 @@ DesertRuins_EventScript_Regirock::
 	special StartRegiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, DesertRuins_EventScript_RanFromRegirock
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DesertRuins_EventScript_RanFromRegirock
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, DesertRuins_EventScript_DefeatedRegirock
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, DesertRuins_EventScript_RanFromRegirock
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, DesertRuins_EventScript_RanFromRegirock
 	setflag FLAG_DEFEATED_REGIROCK
 	release
 	end
@@ -80,7 +80,7 @@ DesertRuins_EventScript_DefeatedRegirock::
 	end
 
 DesertRuins_EventScript_RanFromRegirock::
-	setvar VAR_0x8004, SPECIES_REGIROCK
+	setvar SPECIAL_VAR_4, SPECIES_REGIROCK
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

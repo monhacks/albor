@@ -529,7 +529,7 @@ void SpawnLinkPartnerObjectEvent(void)
         x = gSaveBlock1Ptr->pos.x;
         y = gSaveBlock1Ptr->pos.y + 1;
     }
-    for (i = 0; i < gSpecialVar_0x8004; i++)
+    for (i = 0; i < gSpecialVar_4; i++)
     {
         if (myLinkPlayerNumber != i)
         {
@@ -614,7 +614,7 @@ void MauvilleGymPressSwitch(void)
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sMauvilleGymSwitchCoords); i++)
     {
-        if (i == gSpecialVar_0x8004)
+        if (i == gSpecialVar_4)
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_MauvilleGym_PressedSwitch);
         else
             MapGridSetMetatileIdAt(sMauvilleGymSwitchCoords[i].x, sMauvilleGymSwitchCoords[i].y, METATILE_MauvilleGym_RaisedSwitch);
@@ -795,7 +795,7 @@ static void Task_PetalburgGymSlideOpenRoomDoors(u8 taskId)
 {
     if (sSlidingDoorNextFrameDelay[sSlidingDoorFrame] == sSlidingDoorNextFrameCounter)
     {
-        PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[sSlidingDoorFrame]);
+        PetalburgGymSetDoorMetatiles(gSpecialVar_4, sPetalburgGymSlidingDoorMetatiles[sSlidingDoorFrame]);
         sSlidingDoorNextFrameCounter = 0;
         if ((++sSlidingDoorFrame) == ARRAY_COUNT(sPetalburgGymSlidingDoorMetatiles))
         {
@@ -876,7 +876,7 @@ static void PetalburgGymSetDoorMetatiles(u8 roomNumber, u16 metatileId)
 
 void PetalburgGymUnlockRoomDoors(void)
 {
-    PetalburgGymSetDoorMetatiles(gSpecialVar_0x8004, sPetalburgGymSlidingDoorMetatiles[4]);
+    PetalburgGymSetDoorMetatiles(gSpecialVar_4, sPetalburgGymSlidingDoorMetatiles[4]);
 }
 
 void ShowFieldMessageStringVar4(void)
@@ -886,8 +886,8 @@ void ShowFieldMessageStringVar4(void)
 
 void StorePlayerCoordsInVars(void)
 {
-    gSpecialVar_0x8004 = gSaveBlock1Ptr->pos.x;
-    gSpecialVar_0x8005 = gSaveBlock1Ptr->pos.y;
+    gSpecialVar_4 = gSaveBlock1Ptr->pos.x;
+    gSpecialVar_5 = gSaveBlock1Ptr->pos.y;
 }
 
 u8 GetPlayerTrainerIdOnesDigit(void)
@@ -918,7 +918,7 @@ u8 GetBattleOutcome(void)
 
 void CableCarWarp(void)
 {
-    if (gSpecialVar_0x8004 != 0)
+    if (gSpecialVar_4 != 0)
         SetWarpDestination(MAP_GROUP(ROUTE112_CABLE_CAR_STATION), MAP_NUM(ROUTE112_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
     else
         SetWarpDestination(MAP_GROUP(MT_CHIMNEY_CABLE_CAR_STATION), MAP_NUM(MT_CHIMNEY_CABLE_CAR_STATION), WARP_ID_NONE, 6, 4);
@@ -926,7 +926,7 @@ void CableCarWarp(void)
 
 void SetHiddenItemFlag(void)
 {
-    FlagSet(gSpecialVar_0x8004);
+    FlagSet(gSpecialVar_4);
 }
 
 u16 GetWeekCount(void)
@@ -985,7 +985,7 @@ static bool8 IsPlayerInFrontOfPC(void)
 #define tTimer        data[3]
 #define tIsScreenOn   data[4]
 
-// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
+// For this special, gSpecialVar_4 is expected to be some PC_LOCATION_* value.
 void DoPCTurnOnEffect(void)
 {
     if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
@@ -1052,27 +1052,27 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
     if (isScreenOn)
     {
         // Screen is on, set it off
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+        if (gSpecialVar_4 == PC_LOCATION_OTHER)
             metatileId = METATILE_Building_PC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+        else if (gSpecialVar_4 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+        else if (gSpecialVar_4 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
     }
     else
     {
         // Screen is off, set it on
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+        if (gSpecialVar_4 == PC_LOCATION_OTHER)
             metatileId = METATILE_Building_PC_On;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+        else if (gSpecialVar_4 == PC_LOCATION_BRENDANS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_BrendanPC_On;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+        else if (gSpecialVar_4 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_On;
     }
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
 }
 
-// For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
+// For this special, gSpecialVar_4 is expected to be some PC_LOCATION_* value.
 void DoPCTurnOffEffect(void)
 {
     PCTurnOffEffect();
@@ -1105,11 +1105,11 @@ static void PCTurnOffEffect(void)
         break;
     }
 
-    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+    if (gSpecialVar_4 == PC_LOCATION_OTHER)
         metatileId = METATILE_Building_PC_Off;
-    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+    else if (gSpecialVar_4 == PC_LOCATION_BRENDANS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+    else if (gSpecialVar_4 == PC_LOCATION_MAYS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
 
     MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
@@ -1179,7 +1179,7 @@ void EndLotteryCornerComputerEffect(void)
 
 void SetTrickHouseNuggetFlag(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagSet(flag);
@@ -1187,7 +1187,7 @@ void SetTrickHouseNuggetFlag(void)
 
 void ResetTrickHouseNuggetFlag(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_TRICK_HOUSE_NUGGET;
     *specVar = flag;
     FlagClear(flag);
@@ -1310,14 +1310,14 @@ u16 GetSlotMachineId(void)
         SLOT_MACHINE_LUCKIEST
     };
 
-    u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
+    u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_4];
 
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
 
 bool8 FoundAbandonedShipRoom1Key(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_1_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
@@ -1328,7 +1328,7 @@ bool8 FoundAbandonedShipRoom1Key(void)
 
 bool8 FoundAbandonedShipRoom2Key(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_2_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
@@ -1339,7 +1339,7 @@ bool8 FoundAbandonedShipRoom2Key(void)
 
 bool8 FoundAbandonedShipRoom4Key(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_4_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
@@ -1350,7 +1350,7 @@ bool8 FoundAbandonedShipRoom4Key(void)
 
 bool8 FoundAbandonedShipRoom6Key(void)
 {
-    u16 *specVar = &gSpecialVar_0x8004;
+    u16 *specVar = &gSpecialVar_4;
     u16 flag = FLAG_HIDDEN_ITEM_ABANDONED_SHIP_RM_6_KEY;
     *specVar = flag;
     if (!FlagGet(flag))
@@ -1458,11 +1458,11 @@ bool8 IsPokerusInParty(void)
 void ShakeCamera(void)
 {
     u8 taskId = CreateTask(Task_ShakeCamera, 9);
-    gTasks[taskId].tHorizontalPan = gSpecialVar_0x8005;
+    gTasks[taskId].tHorizontalPan = gSpecialVar_5;
     gTasks[taskId].tDelayCounter = 0;
-    gTasks[taskId].tNumShakes = gSpecialVar_0x8006;
-    gTasks[taskId].tDelay = gSpecialVar_0x8007;
-    gTasks[taskId].tVerticalPan = gSpecialVar_0x8004;
+    gTasks[taskId].tNumShakes = gSpecialVar_6;
+    gTasks[taskId].tDelay = gSpecialVar_7;
+    gTasks[taskId].tVerticalPan = gSpecialVar_4;
     SetCameraPanningCallback(NULL);
     PlaySE(SE_M_STRENGTH);
 }
@@ -1531,7 +1531,7 @@ u8 GetLeadMonIndex(void)
 
 u16 ScriptGetPartyMonSpecies(void)
 {
-    return GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES_OR_EGG, NULL);
+    return GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPECIES_OR_EGG, NULL);
 }
 
 u16 GetDaysUntilPacifidlogTMAvailable(void)
@@ -1553,7 +1553,7 @@ u16 SetPacifidlogTMReceivedDay(void)
 
 bool8 MonOTNameNotPlayer(void)
 {
-    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
+    GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_OT_NAME, gStringVar1);
 
     if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
         return FALSE;
@@ -1597,9 +1597,9 @@ void BufferLottoTicketNumber(void)
 
 bool8 BufferTMHMMoveName(void)
 {
-    if (gSpecialVar_0x8004 >= ITEM_TM01 && gSpecialVar_0x8004 <= ITEM_HM08)
+    if (gSpecialVar_4 >= ITEM_TM01 && gSpecialVar_4 <= ITEM_HM08)
     {
-        StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_0x8004)));
+        StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(gSpecialVar_4)));
         return TRUE;
     }
 
@@ -1775,8 +1775,8 @@ u16 GetDeptStoreDefaultFloorChoice(void)
 // (i.e. traveling 9 floors and 200 floors would take the same amount of time).
 #define MAX_ELEVATOR_TRIP 9
 
-// gSpecialVar_0x8005 here is expected to be the current floor number, and
-// gSpecialVar_0x8006 is expected to be the destination floor number.
+// gSpecialVar_5 here is expected to be the current floor number, and
+// gSpecialVar_6 is expected to be the destination floor number.
 void MoveElevator(void)
 {
     static const u8 sElevatorTripLength[MAX_ELEVATOR_TRIP] = { 8, 16, 24, 32, 38, 46, 52, 56, 57 };
@@ -1788,14 +1788,14 @@ void MoveElevator(void)
     tMoveCounter = 0;
     tVerticalPan = 1;
 
-    if (gSpecialVar_0x8005 > gSpecialVar_0x8006)
+    if (gSpecialVar_5 > gSpecialVar_6)
     {
-        floorDelta = gSpecialVar_0x8005 - gSpecialVar_0x8006;
+        floorDelta = gSpecialVar_5 - gSpecialVar_6;
         tDescending = TRUE;
     }
     else
     {
-        floorDelta = gSpecialVar_0x8006 - gSpecialVar_0x8005;
+        floorDelta = gSpecialVar_6 - gSpecialVar_5;
         tDescending = FALSE;
     }
 
@@ -1847,8 +1847,8 @@ void ShowDeptStoreElevatorFloorSelect(void)
     xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gText_ElevatorNowOn, 64);
     AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, gText_ElevatorNowOn, xPos, 1, TEXT_SKIP_DRAW, NULL);
 
-    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], 64);
-    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
+    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_5], 64);
+    AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_5], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
     CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
@@ -1925,35 +1925,35 @@ void BufferVarsForIVRater(void)
     u8 i;
     u32 ivStorage[NUM_STATS];
 
-    ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
-    ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
-    ivStorage[STAT_DEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
-    ivStorage[STAT_SPEED] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
-    ivStorage[STAT_SPATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
-    ivStorage[STAT_SPDEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+    ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_HP_IV);
+    ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_ATK_IV);
+    ivStorage[STAT_DEF] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_DEF_IV);
+    ivStorage[STAT_SPEED] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPEED_IV);
+    ivStorage[STAT_SPATK] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPATK_IV);
+    ivStorage[STAT_SPDEF] = GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPDEF_IV);
 
-    gSpecialVar_0x8005 = 0;
+    gSpecialVar_5 = 0;
 
     for (i = 0; i < NUM_STATS; i++)
-        gSpecialVar_0x8005 += ivStorage[i];
+        gSpecialVar_5 += ivStorage[i];
 
-    gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP];
+    gSpecialVar_6 = 0;
+    gSpecialVar_7 = ivStorage[STAT_HP];
 
     for (i = 1; i < NUM_STATS; i++)
     {
-        if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
+        if (ivStorage[gSpecialVar_6] < ivStorage[i])
         {
-            gSpecialVar_0x8006 = i;
-            gSpecialVar_0x8007 = ivStorage[i];
+            gSpecialVar_6 = i;
+            gSpecialVar_7 = ivStorage[i];
         }
-        else if (ivStorage[gSpecialVar_0x8006] == ivStorage[i])
+        else if (ivStorage[gSpecialVar_6] == ivStorage[i])
         {
             u16 randomNumber = Random();
             if (randomNumber & 1)
             {
-                gSpecialVar_0x8006 = i;
-                gSpecialVar_0x8007 = ivStorage[i];
+                gSpecialVar_6 = i;
+                gSpecialVar_7 = ivStorage[i];
             }
         }
     }
@@ -2158,7 +2158,7 @@ void ShowFrontierManiacMessage(void)
     ShowFieldMessage(sFrontierManiacMessages[facility][i]);
 }
 
-// gSpecialVar_0x8005 and 0x8006 here are used by MoveElevator
+// gSpecialVar_5 and 0x8006 here are used by MoveElevator
 void BufferBattleTowerElevatorFloors(void)
 {
     static const u16 sBattleTowerStreakThresholds[] = {
@@ -2171,8 +2171,8 @@ void BufferBattleTowerElevatorFloors(void)
 
     if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {
-        gSpecialVar_0x8005 = 5;
-        gSpecialVar_0x8006 = 4;
+        gSpecialVar_5 = 5;
+        gSpecialVar_6 = 4;
         return;
     }
 
@@ -2180,14 +2180,14 @@ void BufferBattleTowerElevatorFloors(void)
     {
         if (sBattleTowerStreakThresholds[i] > gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode])
         {
-            gSpecialVar_0x8005 = 4;
-            gSpecialVar_0x8006 = i + 5;
+            gSpecialVar_5 = 4;
+            gSpecialVar_6 = i + 5;
             return;
         }
     }
 
-    gSpecialVar_0x8005 = 4;
-    gSpecialVar_0x8006 = 12;
+    gSpecialVar_5 = 4;
+    gSpecialVar_6 = 12;
 }
 
 // Scrollable Multichoice task data defines
@@ -2211,9 +2211,9 @@ void ShowScrollableMultichoice(void)
 {
     u8 taskId = CreateTask(Task_ShowScrollableMultichoice, 8);
     struct Task *task = &gTasks[taskId];
-    task->tScrollMultiId = gSpecialVar_0x8004;
+    task->tScrollMultiId = gSpecialVar_4;
 
-    switch (gSpecialVar_0x8004)
+    switch (gSpecialVar_4)
     {
     case SCROLL_MULTI_NONE:
         task->tMaxItemsOnScreen = 1;
@@ -2516,7 +2516,7 @@ static void Task_ShowScrollableMultichoice(u8 taskId)
 
     for (width = 0, i = 0; i < task->tNumItems; i++)
     {
-        const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_0x8004][i];
+        const u8 *text = sScrollableMultichoiceOptions[gSpecialVar_4][i];
         sScrollableMultichoice_ListMenuItem[i].name = text;
         sScrollableMultichoice_ListMenuItem[i].id = i;
         width = DisplayTextAndGetWidth(text, width);
@@ -2733,10 +2733,10 @@ void ShowNatureGirlMessage(void)
 {
     u8 nature;
 
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = 0;
+    if (gSpecialVar_4 >= PARTY_SIZE)
+        gSpecialVar_4 = 0;
 
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
+    nature = GetNature(&gPlayerParty[gSpecialVar_4]);
     ShowFieldMessage(gNaturesInfo[nature].natureGirlMessage);
 }
 
@@ -2861,18 +2861,18 @@ void CloseBattlePointsWindow(void)
 
 void TakeFrontierBattlePoints(void)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_0x8004)
+    if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_4)
         gSaveBlock2Ptr->frontier.battlePoints = 0;
     else
-        gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_0x8004;
+        gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_4;
 }
 
 void GiveFrontierBattlePoints(void)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
+    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_4 > MAX_BATTLE_FRONTIER_POINTS)
         gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     else
-        gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
+        gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_4;
 }
 
 u16 GetFrontierBattlePoints(void)
@@ -2985,7 +2985,7 @@ static void HideFrontierExchangeCornerItemIcon(u16 menu, u16 unused)
 
 void BufferBattleFrontierTutorMoveName(void)
 {
-    StringCopy(gStringVar1, GetMoveName(gSpecialVar_0x8005));
+    StringCopy(gStringVar1, GetMoveName(gSpecialVar_5));
 }
 
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
@@ -3003,7 +3003,7 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
-        if (gSpecialVar_0x8006 == 0)
+        if (gSpecialVar_6 == 0)
         {
             sTutorMoveAndElevatorWindowId = AddWindow(&sBattleFrontierTutor_WindowTemplate);
             SetStandardWindowBorderStyle(sTutorMoveAndElevatorWindowId, FALSE);
@@ -3073,7 +3073,7 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
         SetStandardWindowBorderStyle(task->tWindowId, FALSE);
 
         for (i = 0; i < MAX_SCROLL_MULTI_ON_SCREEN; i++)
-            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_0x8004][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
+            AddTextPrinterParameterized5(task->tWindowId, FONT_NORMAL, sScrollableMultichoiceOptions[gSpecialVar_4][scrollOffset + i], 10, i * 16, TEXT_SKIP_DRAW, NULL, 0, 0);
 
         AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
@@ -3462,7 +3462,7 @@ u32 GetMartEmployeeObjectEventId(void)
 
 bool32 IsTrainerRegistered(void)
 {
-    int index = GetRematchIdxByTrainerIdx(gSpecialVar_0x8004);
+    int index = GetRematchIdxByTrainerIdx(gSpecialVar_4);
     if (index >= 0)
     {
         if (FlagGet(TRAINER_REGISTERED_FLAGS_START + index) == TRUE)
@@ -3498,8 +3498,8 @@ void LinkRetireStatusWithBattleTowerPartner(void)
 // Communicate with a Battle Tower link partner to tell them
 // whether or not the player chose to continue or retire,
 // and determine what the partner chose to do
-// gSpecialVar_0x8004: Player's choice
-// gSpecialVar_0x8005: Partner's choice (read from gBlockRecvBuffer[1][0])
+// gSpecialVar_4: Player's choice
+// gSpecialVar_5: Partner's choice (read from gBlockRecvBuffer[1][0])
 static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 {
     switch (gTasks[taskId].tState)
@@ -3517,9 +3517,9 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
             }
             else
             {
-                // Send value of gSpecialVar_0x8004 to leader
+                // Send value of gSpecialVar_4 to leader
                 // Will either be BATTLE_TOWER_LINK_CONTINUE or BATTLE_TOWER_LINK_RETIRE
-                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_0x8004, sizeof(gSpecialVar_0x8004));
+                SendBlock(BitmaskAllOtherLinkPlayers(), &gSpecialVar_4, sizeof(gSpecialVar_4));
                 gTasks[taskId].tState++;
             }
         }
@@ -3586,7 +3586,7 @@ static void Task_LinkRetireStatusWithBattleTowerPartner(u8 taskId)
 
 void Script_DoRayquazaScene(void)
 {
-    if (!gSpecialVar_0x8004)
+    if (!gSpecialVar_4)
     {
         // Groudon/Kyogre fight scene
         DoRayquazaScene(0, TRUE, CB2_ReturnToFieldContinueScriptPlayMapMusic);
@@ -3612,14 +3612,14 @@ static void Task_LoopWingFlapSE(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     delay++;
-    if (delay == gSpecialVar_0x8005)
+    if (delay == gSpecialVar_5)
     {
         playCount++;
         delay = 0;
         PlaySE(SE_M_WING_ATTACK);
     }
 
-    if (playCount == gSpecialVar_0x8004 - 1)
+    if (playCount == gSpecialVar_4 - 1)
         DestroyTask(taskId);
 }
 
@@ -3674,8 +3674,8 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
 
 void GetBattlePyramidHint(void)
 {
-    // gSpecialVar_0x8004 here is expected to be the current Battle Pyramid win streak.
-    gSpecialVar_Result = gSpecialVar_0x8004 / FRONTIER_STAGES_PER_CHALLENGE;
+    // gSpecialVar_4 here is expected to be the current Battle Pyramid win streak.
+    gSpecialVar_Result = gSpecialVar_4 / FRONTIER_STAGES_PER_CHALLENGE;
     gSpecialVar_Result -= (gSpecialVar_Result / TOTAL_PYRAMID_ROUNDS) * TOTAL_PYRAMID_ROUNDS;
 }
 
@@ -3959,7 +3959,7 @@ void TryLoseFansFromPlayTime(void)
 
 bool8 IsFanClubMemberFanOfPlayer(void)
 {
-    return GET_TRAINER_FAN_CLUB_FLAG(gSpecialVar_0x8004);
+    return GET_TRAINER_FAN_CLUB_FLAG(gSpecialVar_4);
 }
 
 static void SetInitialFansOfPlayer(void)
@@ -3973,7 +3973,7 @@ void BufferFanClubTrainerName(void)
 {
     u8 whichLinkTrainer = 0;
     u8 whichNPCTrainer = 0;
-    switch (gSpecialVar_0x8004)
+    switch (gSpecialVar_4)
     {
     case FANCLUB_MEMBER1:
         break;
@@ -4102,7 +4102,7 @@ void SetPlayerGotFirstFans(void)
 // return value is always ignored
 u8 Script_TryGainNewFanFromCounter(void)
 {
-    return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+    return TryGainNewFanFromCounter(gSpecialVar_4);
 }
 
 void TrySkyBattle(void)

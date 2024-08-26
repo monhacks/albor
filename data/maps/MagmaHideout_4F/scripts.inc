@@ -15,11 +15,11 @@ MagmaHideout_4F_EventScript_Maxie::
 	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
 	closemessage
 	delay 20
-	setvar VAR_RESULT, 1
+	setvar SPECIAL_VAR_RESULT, 1
 	playse SE_M_DETECT
 	dofieldeffectsparkle 18, 42, 0
 	waitfieldeffect FLDEFF_SPARKLE
-	setvar VAR_RESULT, 1
+	setvar SPECIAL_VAR_RESULT, 1
 	playfanfare MUS_AWAKEN_LEGEND
 	playse SE_ORB
 	special DoOrbEffect
@@ -34,20 +34,20 @@ MagmaHideout_4F_EventScript_Maxie::
 	waitmovement 0
 	special FadeOutOrbEffect
 	waitstate
-	setvar VAR_0x8004, 1  @ vertical pan
-	setvar VAR_0x8005, 1  @ horizontal pan
-	setvar VAR_0x8006, 8  @ num shakes
-	setvar VAR_0x8007, 5  @ shake delay
+	setvar SPECIAL_VAR_4, 1  @ vertical pan
+	setvar SPECIAL_VAR_5, 1  @ horizontal pan
+	setvar SPECIAL_VAR_6, 8  @ num shakes
+	setvar SPECIAL_VAR_7, 5  @ shake delay
 	special ShakeCamera
 	waitstate
 	applymovement LOCALID_GROUDON, MagmaHideout_4F_Movement_GroudonExit
 	waitmovement 0
 	removeobject LOCALID_GROUDON
 	delay 4
-	setvar VAR_0x8004, 2  @ vertical pan
-	setvar VAR_0x8005, 2  @ horizontal pan
-	setvar VAR_0x8006, 8  @ num shakes
-	setvar VAR_0x8007, 5  @ shake delay
+	setvar SPECIAL_VAR_4, 2  @ vertical pan
+	setvar SPECIAL_VAR_5, 2  @ horizontal pan
+	setvar SPECIAL_VAR_6, 8  @ num shakes
+	setvar SPECIAL_VAR_7, 5  @ shake delay
 	special ShakeCamera
 	waitstate
 	delay 30

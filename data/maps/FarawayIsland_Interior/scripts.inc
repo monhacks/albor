@@ -12,15 +12,15 @@ FarawayIsland_Interior_OnReturnToField:
 	end
 
 FarawayIsland_Interior_EventScript_TrySetMewAboveGrass::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, FarawayIsland_Interior_EventScript_SetMewAboveGrass
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, FarawayIsland_Interior_EventScript_SetMewAboveGrass
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, FarawayIsland_Interior_EventScript_SetMewAboveGrass
-	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, FarawayIsland_Interior_EventScript_SetMewAboveGrass
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_MON_TELEPORTED, FarawayIsland_Interior_EventScript_SetMewAboveGrass
 	return
 
 FarawayIsland_Interior_EventScript_SetMewAboveGrass::
-	setvar VAR_0x8004, 1
+	setvar SPECIAL_VAR_4, 1
 	special SetMewAboveGrass
 	return
 
@@ -29,9 +29,9 @@ FarawayIsland_Interior_OnResume:
 	end
 
 FarawayIsland_Interior_EventScript_TryRemoveMew::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 FarawayIsland_Interior_OnTransition:
@@ -117,15 +117,15 @@ FarawayIsland_Interior_EventScript_Mew::
 	faceplayer
 	applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewAppear
 	waitmovement 0
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	special SetMewAboveGrass
 	message FarawayIsland_Interior_Text_Mew
 	waitse
 	playmoncry SPECIES_MEW, CRY_MODE_ENCOUNTER
-	call_if_eq VAR_FACING, DIR_NORTH, FarawayIsland_Interior_EventScript_FoundMewNorth
-	call_if_eq VAR_FACING, DIR_SOUTH, FarawayIsland_Interior_EventScript_FoundMewSouth
-	call_if_eq VAR_FACING, DIR_WEST, FarawayIsland_Interior_EventScript_FoundMewWest
-	call_if_eq VAR_FACING, DIR_EAST, FarawayIsland_Interior_EventScript_FoundMewEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, FarawayIsland_Interior_EventScript_FoundMewNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_SOUTH, FarawayIsland_Interior_EventScript_FoundMewSouth
+	call_if_eq SPECIAL_VAR_FACING, DIR_WEST, FarawayIsland_Interior_EventScript_FoundMewWest
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, FarawayIsland_Interior_EventScript_FoundMewEast
 	special DestroyMewEmergingGrassSprite
 	delay 40
 	waitmoncry
@@ -134,23 +134,23 @@ FarawayIsland_Interior_EventScript_Mew::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, FarawayIsland_Interior_EventScript_MewDefeated
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, FarawayIsland_Interior_EventScript_PlayerOrMewRan
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
-	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, FarawayIsland_Interior_EventScript_MewDefeated
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_MON_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
 	setflag FLAG_CAUGHT_MEW
 	release
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
 	setflag FLAG_DEFEATED_MEW
-	setvar VAR_0x8004, SPECIES_MEW
+	setvar SPECIAL_VAR_4, SPECIES_MEW
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
 FarawayIsland_Interior_EventScript_PlayerOrMewRan::
-	setvar VAR_0x8004, SPECIES_MEW
+	setvar SPECIAL_VAR_4, SPECIES_MEW
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

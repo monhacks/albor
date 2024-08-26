@@ -311,14 +311,14 @@ static void DrawDoor(const struct DoorGraphics *gfx, const struct DoorAnimFrame 
     {
         DrawClosedDoorTiles(gfx, x, y);
         if (ShouldUseMultiCorridorDoor())
-            DrawClosedDoorTiles(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET);
+            DrawClosedDoorTiles(gfx, gSpecialVar_4 + MAP_OFFSET, gSpecialVar_5 + MAP_OFFSET);
     }
     else
     {
         CopyDoorTilesToVram(gfx, frame);
         DrawCurrentDoorAnimFrame(gfx, x, y, gfx->palettes);
         if (ShouldUseMultiCorridorDoor())
-            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_0x8004 + MAP_OFFSET, gSpecialVar_0x8005 + MAP_OFFSET, gfx->palettes);
+            DrawCurrentDoorAnimFrame(gfx, gSpecialVar_4 + MAP_OFFSET, gSpecialVar_5 + MAP_OFFSET, gfx->palettes);
     }
 }
 

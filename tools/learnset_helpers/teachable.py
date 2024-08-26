@@ -28,7 +28,7 @@ for file in incs_to_check:
     with open(file, 'r') as f2:
         raw = f2.read()
     if 'special ChooseMonForMoveTutor' in raw:
-        for x in re.findall(r'setvar VAR_0x8005, (MOVE_.*)', raw):
+        for x in re.findall(r'setvar SPECIAL_VAR_5, (MOVE_.*)', raw):
             if not x in tutor_moves:
                 tutor_moves.append(x)
 

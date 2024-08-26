@@ -12,10 +12,10 @@ Route123_EventScript_GigaDrainGirl::
 	goto_if_set FLAG_RECEIVED_TM_GIGA_DRAIN, Route123_EventScript_ReceivedGigaDrain
 	msgbox Route123_Text_LoveGrassMonsHaveAny, MSGBOX_DEFAULT
 	special IsGrassTypeInParty
-	goto_if_eq VAR_RESULT, FALSE, Route123_EventScript_NoGrassMons
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Route123_EventScript_NoGrassMons
 	msgbox Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM_GIGA_DRAIN
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_GIGA_DRAIN
 	msgbox Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT
 	release
@@ -59,8 +59,8 @@ Route123_EventScript_Violet::
 
 Route123_EventScript_Cameron::
 	trainerbattle_single TRAINER_CAMERON_1, Route123_Text_CameronIntro, Route123_Text_CameronDefeat, Route123_EventScript_RegisterCameron
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchCameron
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route123_EventScript_RematchCameron
 	msgbox Route123_Text_CameronPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -80,8 +80,8 @@ Route123_EventScript_RematchCameron::
 
 Route123_EventScript_Jacki::
 	trainerbattle_single TRAINER_JACKI_1, Route123_Text_JackiIntro, Route123_Text_JackiDefeat, Route123_EventScript_RegisterJacki
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchJacki
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route123_EventScript_RematchJacki
 	msgbox Route123_Text_JackiPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -151,8 +151,8 @@ Route123_EventScript_Davis::
 
 Route123_EventScript_Fernando::
 	trainerbattle_single TRAINER_FERNANDO_1, Route123_Text_FernandoIntro, Route123_Text_FernandoDefeat, Route123_EventScript_RegisterFernando
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route123_EventScript_RematchFernando
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route123_EventScript_RematchFernando
 	msgbox Route123_Text_FernandoPostBattle, MSGBOX_DEFAULT
 	release
 	end

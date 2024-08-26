@@ -147,7 +147,7 @@ TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate s
     RUN_OVERWORLD_SCRIPT(
         canhypertrain STAT_ATK, 0;
     );
-    EXPECT(VarGet(VAR_RESULT));
+    EXPECT(VarGet(SPECIAL_VAR_RESULT));
 
     RUN_OVERWORLD_SCRIPT(
         hypertrain STAT_ATK, 0;
@@ -155,7 +155,7 @@ TEST("canhypertrain/hypertrain affect MON_DATA_HYPER_TRAINED_* and recalculate s
     );
     EXPECT(GetMonData(&gPlayerParty[0], MON_DATA_HYPER_TRAINED_ATK));
     EXPECT_EQ(atk + 31, GetMonData(&gPlayerParty[0], MON_DATA_ATK));
-    EXPECT(!VarGet(VAR_RESULT));
+    EXPECT(!VarGet(SPECIAL_VAR_RESULT));
 }
 
 TEST("hasgigantamaxfactor/togglegigantamaxfactor affect MON_DATA_GIGANTAMAX_FACTOR")
@@ -165,20 +165,20 @@ TEST("hasgigantamaxfactor/togglegigantamaxfactor affect MON_DATA_GIGANTAMAX_FACT
     RUN_OVERWORLD_SCRIPT(
         hasgigantamaxfactor 0;
     );
-    EXPECT(!VarGet(VAR_RESULT));
+    EXPECT(!VarGet(SPECIAL_VAR_RESULT));
 
     RUN_OVERWORLD_SCRIPT(
         togglegigantamaxfactor 0;
         hasgigantamaxfactor 0;
     );
-    EXPECT(VarGet(VAR_RESULT));
+    EXPECT(VarGet(SPECIAL_VAR_RESULT));
     EXPECT(GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR));
 
     RUN_OVERWORLD_SCRIPT(
         togglegigantamaxfactor 0;
         hasgigantamaxfactor 0;
     );
-    EXPECT(!VarGet(VAR_RESULT));
+    EXPECT(!VarGet(SPECIAL_VAR_RESULT));
     EXPECT(!GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR));
 }
 
@@ -189,12 +189,12 @@ TEST("togglegigantamaxfactor fails for Melmetal")
     RUN_OVERWORLD_SCRIPT(
         hasgigantamaxfactor 0;
     );
-    EXPECT(!VarGet(VAR_RESULT));
+    EXPECT(!VarGet(SPECIAL_VAR_RESULT));
 
     RUN_OVERWORLD_SCRIPT(
         togglegigantamaxfactor 0;
     );
-    EXPECT(!VarGet(VAR_RESULT));
+    EXPECT(!VarGet(SPECIAL_VAR_RESULT));
     EXPECT(!GetMonData(&gPlayerParty[0], MON_DATA_GIGANTAMAX_FACTOR));
 }
 
@@ -268,18 +268,18 @@ TEST("givemon [vars]")
 
     VarSet(VAR_TEMP_C, SPECIES_WOBBUFFET);
     VarSet(VAR_TEMP_D, 100);
-    VarSet(VAR_0x8000, ITEM_LEFTOVERS);
-    VarSet(VAR_0x8001, ITEM_MASTER_BALL);
-    VarSet(VAR_0x8002, NATURE_DEFENSIVA);
-    VarSet(VAR_0x8003, 2);
-    VarSet(VAR_0x8004, MON_MALE);
-    VarSet(VAR_0x8005, 1);
-    VarSet(VAR_0x8006, 2);
-    VarSet(VAR_0x8007, 3);
-    VarSet(VAR_0x8008, 4);
-    VarSet(VAR_0x8009, 5);
-    VarSet(VAR_0x800A, 6);
-    VarSet(VAR_0x800B, 7);
+    VarSet(SPECIAL_VAR_0, ITEM_LEFTOVERS);
+    VarSet(SPECIAL_VAR_1, ITEM_MASTER_BALL);
+    VarSet(SPECIAL_VAR_2, NATURE_DEFENSIVA);
+    VarSet(SPECIAL_VAR_3, 2);
+    VarSet(SPECIAL_VAR_4, MON_MALE);
+    VarSet(SPECIAL_VAR_5, 1);
+    VarSet(SPECIAL_VAR_6, 2);
+    VarSet(SPECIAL_VAR_7, 3);
+    VarSet(SPECIAL_VAR_8, 4);
+    VarSet(SPECIAL_VAR_9, 5);
+    VarSet(SPECIAL_VAR_10, 6);
+    VarSet(SPECIAL_VAR_11, 7);
     VarSet(VAR_TEMP_0, 8);
     VarSet(VAR_TEMP_1, 9);
     VarSet(VAR_TEMP_2, 10);
@@ -294,7 +294,7 @@ TEST("givemon [vars]")
     VarSet(VAR_TEMP_B, TYPE_FIRE);
 
     RUN_OVERWORLD_SCRIPT(
-        givemon VAR_TEMP_C, VAR_TEMP_D, item=VAR_0x8000, ball=VAR_0x8001, nature=VAR_0x8002, abilityNum=VAR_0x8003, gender=VAR_0x8004, hpEv=VAR_0x8005, atkEv=VAR_0x8006, defEv=VAR_0x8007, speedEv=VAR_0x8008, spAtkEv=VAR_0x8009, spDefEv=VAR_0x800A, hpIv=VAR_0x800B, atkIv=VAR_TEMP_0, defIv=VAR_TEMP_1, speedIv=VAR_TEMP_2, spAtkIv=VAR_TEMP_3, spDefIv=VAR_TEMP_4, move1=VAR_TEMP_5, move2=VAR_TEMP_6, move3=VAR_TEMP_7, move4=VAR_TEMP_8, isShiny=VAR_TEMP_9, ggMaxFactor=VAR_TEMP_A, teraType=VAR_TEMP_B;
+        givemon VAR_TEMP_C, VAR_TEMP_D, item=SPECIAL_VAR_0, ball=SPECIAL_VAR_1, nature=SPECIAL_VAR_2, abilityNum=SPECIAL_VAR_3, gender=SPECIAL_VAR_4, hpEv=SPECIAL_VAR_5, atkEv=SPECIAL_VAR_6, defEv=SPECIAL_VAR_7, speedEv=SPECIAL_VAR_8, spAtkEv=SPECIAL_VAR_9, spDefEv=SPECIAL_VAR_10, hpIv=SPECIAL_VAR_11, atkIv=VAR_TEMP_0, defIv=VAR_TEMP_1, speedIv=VAR_TEMP_2, spAtkIv=VAR_TEMP_3, spDefIv=VAR_TEMP_4, move1=VAR_TEMP_5, move2=VAR_TEMP_6, move3=VAR_TEMP_7, move4=VAR_TEMP_8, isShiny=VAR_TEMP_9, ggMaxFactor=VAR_TEMP_A, teraType=VAR_TEMP_B;
     );
 
     EXPECT_EQ(GetMonData(&gPlayerParty[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
@@ -332,13 +332,13 @@ TEST("checkteratype/setteratype work")
     RUN_OVERWORLD_SCRIPT(
         checkteratype 0;
     );
-    EXPECT(VarGet(VAR_RESULT) == TYPE_PSYCHIC);
+    EXPECT(VarGet(SPECIAL_VAR_RESULT) == TYPE_PSYCHIC);
 
     RUN_OVERWORLD_SCRIPT(
         setteratype TYPE_FIRE, 0;
         checkteratype 0;
     );
-    EXPECT(VarGet(VAR_RESULT) == TYPE_FIRE);
+    EXPECT(VarGet(SPECIAL_VAR_RESULT) == TYPE_FIRE);
 }
 
 TEST("createmon [simple]")

@@ -152,7 +152,7 @@ static const u16 sLongStreakPrizeItems[] =
 
 void CallBattleArenaFunction(void)
 {
-    sArenaFunctions[gSpecialVar_0x8004]();
+    sArenaFunctions[gSpecialVar_4]();
 }
 
 u8 BattleArena_ShowJudgmentWindow(u8 *state)
@@ -470,7 +470,7 @@ static void GetArenaData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case ARENA_DATA_PRIZE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.arenaPrize;
@@ -491,25 +491,25 @@ static void SetArenaData(void)
 {
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case ARENA_DATA_PRIZE:
-        gSaveBlock2Ptr->frontier.arenaPrize = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.arenaPrize = gSpecialVar_6;
         break;
     case ARENA_DATA_WIN_STREAK:
-        gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.arenaWinStreaks[lvlMode] = gSpecialVar_6;
         break;
     case ARENA_DATA_WIN_STREAK_ACTIVE:
         if (lvlMode != FRONTIER_LVL_50)
         {
-            if (gSpecialVar_0x8006)
+            if (gSpecialVar_6)
                 gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_ARENA_OPEN;
             else
                 gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_ARENA_OPEN);
         }
         else
         {
-            if (gSpecialVar_0x8006)
+            if (gSpecialVar_6)
                 gSaveBlock2Ptr->frontier.winStreakActiveFlags |= STREAK_ARENA_50;
             else
                 gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~(STREAK_ARENA_50);
@@ -520,7 +520,7 @@ static void SetArenaData(void)
 
 static void SaveArenaChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();

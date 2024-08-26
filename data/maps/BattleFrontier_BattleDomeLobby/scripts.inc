@@ -48,7 +48,7 @@ BattleFrontier_BattleDomeLobby_EventScript_WonChallenge::
 	call BattleFrontier_EventScript_IncrementWinStreak
 	lockall
 	frontier_isbrain
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleDomeLobby_EventScript_DefeatedAce
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleDomeLobby_EventScript_DefeatedAce
 	msgbox BattleFrontier_BattleDomeLobby_Text_CongratsForWinningTourney, MSGBOX_DEFAULT
 	goto BattleFrontier_BattleDomeLobby_EventScript_GiveBattlePoints
 
@@ -89,11 +89,11 @@ BattleFrontier_BattleDomeLobby_EventScript_AskRecordBattle::
 	playse SE_SAVE
 	waitse
 	call BattleFrontier_EventScript_GetCantRecordBattle
-	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge
 	message BattleFrontier_BattleDomeLobby_Text_RecordLastMatch
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_RecordBattle
 	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_EndChallenge
@@ -144,7 +144,7 @@ BattleFrontier_BattleDomeLobby_EventScript_AskTakeChallenge::
 	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_ExplainChallenge
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge
@@ -154,23 +154,23 @@ BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge::
 	message BattleFrontier_BattleDomeLobby_Text_WhichLevelMode
 	waitmessage
 	multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_TENT, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMons
-	frontier_set FRONTIER_DATA_LVL_MODE, VAR_RESULT
+	goto_if_eq SPECIAL_VAR_4, TRUE, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMons
+	frontier_set FRONTIER_DATA_LVL_MODE, SPECIAL_VAR_RESULT
 	msgbox BattleFrontier_BattleDomeLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	callnative RemoveFollowingPokemon
 	call BattleFrontier_EventScript_GetLvlMode
-	copyvar VAR_0x8004, VAR_RESULT
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_RESULT
+	setvar SPECIAL_VAR_5, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge
 	msgbox BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge
 	case YES, BattleFrontier_BattleDomeLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_LoadPartyCancelChallenge
@@ -186,7 +186,7 @@ BattleFrontier_BattleDomeLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_CancelChallengeSaveFailed
 	dome_inittrainers
 BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
@@ -207,7 +207,7 @@ BattleFrontier_BattleDomeLobby_EventScript_ExplainChallenge::
 	goto BattleFrontier_BattleDomeLobby_EventScript_AskTakeChallenge
 
 BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_50, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, BattleFrontier_BattleDomeLobby_EventScript_NotEnoughValidMonsLvOpen
 
@@ -342,10 +342,10 @@ BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults::
 
 BattleFrontier_BattleDomeLobby_EventScript_ShowPrevTourneyTree::
 	dome_get DOME_DATA_PREV_TOURNEY_TYPE
-	call_if_eq VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50
-	call_if_eq VAR_RESULT, 1, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50
-	call_if_eq VAR_RESULT, 2, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen
-	call_if_eq VAR_RESULT, 3, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen
+	call_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50
+	call_if_eq SPECIAL_VAR_RESULT, 1, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50
+	call_if_eq SPECIAL_VAR_RESULT, 2, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen
+	call_if_eq SPECIAL_VAR_RESULT, 3, BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen
 	fadescreen FADE_TO_BLACK
 	dome_showprevtourneytree
 	waitstate
@@ -409,7 +409,7 @@ BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattleDomeLobby_Text_ReadWhichHeading
 	waitmessage
 	multichoice 17, 4, MULTI_BATTLE_DOME_RULES, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, BattleFrontier_BattleDomeLobby_EventScript_RulesMatchup
 	case 1, BattleFrontier_BattleDomeLobby_EventScript_RulesTourneyTree
 	case 2, BattleFrontier_BattleDomeLobby_EventScript_RulesDoubleKO

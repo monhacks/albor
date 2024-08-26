@@ -402,7 +402,7 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
                 {
                     // 3 below indicates partner made different level mode selection
                     // See BattleFrontier_BattleTowerLobby_EventScript_AbortLinkDifferentSelections
-                    gSpecialVar_0x8005 = 3;
+                    gSpecialVar_5 = 3;
                 }
             }
         }

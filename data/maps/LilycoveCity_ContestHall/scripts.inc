@@ -1,4 +1,4 @@
-@ VAR_LAST_TALKED would have made all these direct references unnecessary
+@ SPECIAL_VAR_LAST_TALKED would have made all these direct references unnecessary
 .set LOCALID_SMART_MC, 4
 .set LOCALID_SMART_JUDGE, 5
 .set LOCALID_SMART_CONTESTANT_1, 6

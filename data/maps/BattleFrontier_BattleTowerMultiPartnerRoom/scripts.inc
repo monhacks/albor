@@ -87,7 +87,7 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant::
 	message BattleFrontier_BattleTowerMultiPartnerRoom_Text_QuitLookingForPartner
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge
 	msgbox BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner2, MSGBOX_DEFAULT
 	release
 	end
@@ -175,16 +175,16 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner::
 	tower_dopartnermsg PARTNER_MSGID_MON2_ASK
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner
 	case MULTI_B_PRESSED, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner
 	tower_dopartnermsg PARTNER_MSGID_ACCEPT
 	waitmessage
 	waitbuttonpress
 	closemessage
-	call_if_ne VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit
-	call_if_eq VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth
-	removeobject VAR_LAST_TALKED
+	call_if_ne SPECIAL_VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit
+	call_if_eq SPECIAL_VAR_FACING, DIR_SOUTH, BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth
+	removeobject SPECIAL_VAR_LAST_TALKED
 	setflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM, 10, 3
 	waitstate
@@ -199,12 +199,12 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_RejectPartner::
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExit::
-	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PartnerExit
+	applymovement SPECIAL_VAR_LAST_TALKED, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PartnerExit
 	waitmovement 0
 	return
 
 BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_PartnerExitSouth::
-	applymovement VAR_LAST_TALKED, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PartnerExitSouth
+	applymovement SPECIAL_VAR_LAST_TALKED, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PartnerExitSouth
 	waitmovement 0
 	return
 

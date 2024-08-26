@@ -62,18 +62,18 @@
 	.include "data/script_cmd_table.inc"
 
 gSpecialVars::
-	.4byte gSpecialVar_0x8000
-	.4byte gSpecialVar_0x8001
-	.4byte gSpecialVar_0x8002
-	.4byte gSpecialVar_0x8003
-	.4byte gSpecialVar_0x8004
-	.4byte gSpecialVar_0x8005
-	.4byte gSpecialVar_0x8006
-	.4byte gSpecialVar_0x8007
-	.4byte gSpecialVar_0x8008
-	.4byte gSpecialVar_0x8009
-	.4byte gSpecialVar_0x800A
-	.4byte gSpecialVar_0x800B
+	.4byte gSpecialVar_0
+	.4byte gSpecialVar_1
+	.4byte gSpecialVar_2
+	.4byte gSpecialVar_3
+	.4byte gSpecialVar_4
+	.4byte gSpecialVar_5
+	.4byte gSpecialVar_6
+	.4byte gSpecialVar_7
+	.4byte gSpecialVar_8
+	.4byte gSpecialVar_9
+	.4byte gSpecialVar_10
+	.4byte gSpecialVar_11
 	.4byte gSpecialVar_Facing
 	.4byte gSpecialVar_Result
 	.4byte gSpecialVar_ItemId
@@ -696,12 +696,12 @@ Common_EventScript_ReadyPetalburgGymForBattle::
 
 Common_EventScript_BufferTrendyPhrase::
 	dotimebasedevents
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	special BufferTrendyPhraseString
 	return
 
 EventScript_BackupMrBrineyLocation::
-	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
+	copyvar SPECIAL_VAR_8, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
@@ -769,7 +769,7 @@ Common_EventScript_StopBrineysBoatMusic::
 @ Below could be split as ferry.inc aside from the Rusturf tunnel script
 Common_EventScript_FerryDepart::
 	delay 60
-	applymovement VAR_0x8004, Movement_FerryDepart
+	applymovement SPECIAL_VAR_4, Movement_FerryDepart
 	waitmovement 0
 	return
 
@@ -805,8 +805,8 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 	return
 
 Common_EventScript_FerryDepartIsland::
-	call_if_eq VAR_FACING, DIR_SOUTH, Ferry_EventScript_DepartIslandSouth
-	call_if_eq VAR_FACING, DIR_WEST, Ferry_EventScript_DepartIslandWest
+	call_if_eq SPECIAL_VAR_FACING, DIR_SOUTH, Ferry_EventScript_DepartIslandSouth
+	call_if_eq SPECIAL_VAR_FACING, DIR_WEST, Ferry_EventScript_DepartIslandWest
 	delay 30
 	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	call Common_EventScript_FerryDepart
@@ -822,12 +822,12 @@ Common_EventScript_NameReceivedPartyMon::
 	return
 
 Common_EventScript_PlayerHandedOverTheItem::
-	bufferitemname STR_VAR_1, VAR_0x8004
+	bufferitemname STR_VAR_1, SPECIAL_VAR_4
 	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
 	waitmessage
 	waitfanfare
-	removeitem VAR_0x8004
+	removeitem SPECIAL_VAR_4
 	return
 
 	.include "data/scripts/elite_four.inc"
@@ -1018,16 +1018,16 @@ Common_EventScript_DirectCornerAttendant::
 
 Common_EventScript_RemoveStaticPokemon::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
 Common_EventScript_LegendaryFlewAway::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
-	bufferspeciesname STR_VAR_1, VAR_0x8004
+	bufferspeciesname STR_VAR_1, SPECIAL_VAR_4
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end

@@ -83,7 +83,7 @@ RustboroCity_EventScript_MatchCallTutorial::
 	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
 	special ScriptMenu_CreateStartMenuForPokenavTutorial
 	waitstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, RustboroCity_EventScript_PleaseSelectPokenav
 	case 1, RustboroCity_EventScript_PleaseSelectPokenav
 	case 2, RustboroCity_EventScript_PleaseSelectPokenav
@@ -251,7 +251,7 @@ RustboroCity_EventScript_StolenGoodsTrigger0::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
 	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
@@ -259,7 +259,7 @@ RustboroCity_EventScript_StolenGoodsTrigger1::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
 	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 1
+	setvar SPECIAL_VAR_4, 1
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
@@ -267,7 +267,7 @@ RustboroCity_EventScript_StolenGoodsTrigger2::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
 	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 2
+	setvar SPECIAL_VAR_4, 2
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
@@ -275,7 +275,7 @@ RustboroCity_EventScript_StolenGoodsTrigger3::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
 	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 3
+	setvar SPECIAL_VAR_4, 3
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
@@ -283,7 +283,7 @@ RustboroCity_EventScript_StolenGoodsTrigger4::
 	lockall
 	setobjectxyperm LOCALID_DEVON_EMPLOYEE, 14, 21
 	setobjectmovementtype LOCALID_DEVON_EMPLOYEE, MOVEMENT_TYPE_FACE_RIGHT
-	setvar VAR_0x8004, 4
+	setvar SPECIAL_VAR_4, 4
 	goto RustboroCity_EventScript_StolenGoodsScene
 	end
 
@@ -600,7 +600,7 @@ RustboroCity_EventScript_ReturnGoods::
 	call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
 	giveitem ITEM_GREAT_BALL
-	call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_RETURNED_DEVON_GOODS
@@ -685,8 +685,8 @@ RustboroCity_EventScript_Rival::
 
 RustboroCity_EventScript_PlayRivalMusic::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_PlayMayMusic
-	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_PlayBrendanMusic
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, RustboroCity_EventScript_PlayMayMusic
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, RustboroCity_EventScript_PlayBrendanMusic
 	return
 
 RustboroCity_EventScript_PlayMayMusic::
@@ -827,8 +827,8 @@ RustboroCity_EventScript_RivalTrigger7::
 
 RustboroCity_EventScript_RivalEncounter::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
-	goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
 	end
 
 RustboroCity_EventScript_MayEncounter::
@@ -846,18 +846,18 @@ RustboroCity_EventScript_MayEncounter::
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
+	goto_if_eq SPECIAL_VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
 	msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
 RustboroCity_EventScript_MayAskToBattle::
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
+	goto_if_eq SPECIAL_VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
 	msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -872,7 +872,7 @@ RustboroCity_EventScript_BattleMay::
 
 RustboroCity_EventScript_MayBrineyHint::
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
+	call_if_eq SPECIAL_VAR_8, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 
@@ -915,7 +915,7 @@ RustboroCity_EventScript_BrendanEncounter::
 	setvar VAR_RUSTBORO_CITY_STATE, 8
 	setvar VAR_ROUTE104_STATE, 2
 	msgbox RustboroCity_Text_BrendanPassedBrineyWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
 	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
 	call RustboroCity_EventScript_RestoreBgm
 	releaseall
@@ -923,7 +923,7 @@ RustboroCity_EventScript_BrendanEncounter::
 
 RustboroCity_EventScript_BrendanAskToBattle::
 	msgbox RustboroCity_Text_BrendanWantToBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
 	msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -938,7 +938,7 @@ RustboroCity_EventScript_BattleBrendan::
 
 RustboroCity_EventScript_BrendanBrineyHint::
 	msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
+	call_if_eq SPECIAL_VAR_8, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
 

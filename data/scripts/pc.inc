@@ -1,6 +1,6 @@
 EventScript_PC::
 	lockall
-	setvar VAR_0x8004, PC_LOCATION_OTHER
+	setvar SPECIAL_VAR_4, PC_LOCATION_OTHER
 	special DoPCTurnOnEffect
 	playse SE_PC_ON
 	goto EventScript_AccessPokemonStorage
@@ -17,7 +17,7 @@ EventScript_AccessPokemonStorage::
 	end
 
 EventScript_TurnOffPC::
-	setvar VAR_0x8004, PC_LOCATION_OTHER
+	setvar SPECIAL_VAR_4, PC_LOCATION_OTHER
 	playse SE_PC_OFF
 	special DoPCTurnOffEffect
 	releaseall

@@ -11,7 +11,7 @@ RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic::
 	message RustboroCity_PokemonSchool_Text_ReadWhichTopic
 	waitmessage
 	multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, RustboroCity_PokemonSchool_EventScript_Poison
 	case 1, RustboroCity_PokemonSchool_EventScript_Paralysis
 	case 2, RustboroCity_PokemonSchool_EventScript_Sleep
@@ -78,32 +78,32 @@ RustboroCity_PokemonSchool_EventScript_Teacher::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_QUICK_CLAW, RustboroCity_PokemonSchool_EventScript_GaveQuickClaw
-	call_if_eq VAR_FACING, DIR_EAST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
-	call_if_eq VAR_FACING, DIR_WEST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_WEST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
 	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
 	giveitem ITEM_QUICK_CLAW
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	setflag FLAG_RECEIVED_QUICK_CLAW
 	release
 	end
 
 RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast::
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast
+	applymovement SPECIAL_VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast
 	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest::
-	applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsWest
+	applymovement SPECIAL_VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsWest
 	waitmovement 0
 	return
 
 RustboroCity_PokemonSchool_EventScript_GaveQuickClaw::
 	msgbox RustboroCity_PokemonSchool_Text_ExplainQuickClaw, MSGBOX_DEFAULT
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	release
 	end

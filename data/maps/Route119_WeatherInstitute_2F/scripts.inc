@@ -90,8 +90,8 @@ Route119_WeatherInstitute_2F_EventScript_ReceiveCastform::
 	msgbox Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon, MSGBOX_DEFAULT
 	setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CASTFORM_NORMAL
 	givemon SPECIES_CASTFORM_NORMAL, 25, ITEM_MYSTIC_WATER
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
-	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
+	goto_if_eq SPECIAL_VAR_RESULT, MON_GIVEN_TO_PARTY, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformParty
+	goto_if_eq SPECIAL_VAR_RESULT, MON_GIVEN_TO_PC, Route119_WeatherInstitute_2F_EventScript_ReceiveCastformPC
 	goto Common_EventScript_NoMoreRoomForPokemon
 	end
 
@@ -127,13 +127,13 @@ Route119_WeatherInstitute_2F_EventScript_ScientistMentionWeather::
 	end
 
 Route119_WeatherInstitute_2F_EventScript_TryStartAbnormalWeather::
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	call_if_set FLAG_DEFEATED_KYOGRE, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
 	call_if_set FLAG_DEFEATED_GROUDON, Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated
-	goto_if_eq VAR_0x8004, 2, Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather  @ Both defeated
+	goto_if_eq SPECIAL_VAR_4, 2, Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather  @ Both defeated
 	call_if_unset FLAG_TEMP_2, Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather
-	specialvar VAR_RESULT, GetAbnormalWeatherMapNameAndType
-	goto_if_eq VAR_RESULT, 1, Route119_WeatherInstitute_2F_EventScript_KyogreWeather
+	specialvar SPECIAL_VAR_RESULT, GetAbnormalWeatherMapNameAndType
+	goto_if_eq SPECIAL_VAR_RESULT, 1, Route119_WeatherInstitute_2F_EventScript_KyogreWeather
 	msgbox Route119_WeatherInstitute_2F_Text_GroudonWeather, MSGBOX_DEFAULT
 	release
 	end
@@ -149,7 +149,7 @@ Route119_WeatherInstitute_2F_EventScript_CreateAbnormalWeather::
 	return
 
 Route119_WeatherInstitute_2F_EventScript_LegendaryDefeated::
-	addvar VAR_0x8004, 1
+	addvar SPECIAL_VAR_4, 1
 	return
 
 Route119_WeatherInstitute_2F_EventScript_NoAbnormalWeather::

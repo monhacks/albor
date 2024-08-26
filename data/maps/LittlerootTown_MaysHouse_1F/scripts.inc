@@ -20,7 +20,7 @@ LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes::
 
 LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual::
@@ -75,15 +75,15 @@ LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs:
 
 LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn::
 	lockall
-	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE
+	setvar SPECIAL_VAR_4, LOCALID_MOM
+	setvar SPECIAL_VAR_5, FEMALE
 	goto PlayersHouse_1F_EventScript_EnterHouseMovingIn
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_PetalburgGymReport::
 	lockall
-	setvar VAR_0x8004, FEMALE
-	setvar VAR_0x8005, LOCALID_MOM
+	setvar SPECIAL_VAR_4, FEMALE
+	setvar SPECIAL_VAR_5, LOCALID_MOM
 	goto PlayersHouse_1F_EventScript_PetalburgGymReportFemale
 	end
 
@@ -149,28 +149,28 @@ RivalsHouse_1F_EventScript_RivalSibling::
 
 LittlerootTown_MaysHouse_1F_EventScript_GoSeeRoom::
 	lockall
-	setvar VAR_0x8004, LOCALID_MOM
-	setvar VAR_0x8005, FEMALE
-	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterRight
+	setvar SPECIAL_VAR_4, LOCALID_MOM
+	setvar SPECIAL_VAR_5, FEMALE
+	applymovement SPECIAL_VAR_4, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_MomGoSeeRoom
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival0::
 	lockall
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	goto LittlerootTown_MaysHouse_1F_EventScript_MeetRival
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival1::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	goto LittlerootTown_MaysHouse_1F_EventScript_MeetRival
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_MeetRival2::
 	lockall
-	setvar VAR_0x8008, 2
+	setvar SPECIAL_VAR_8, 2
 	goto LittlerootTown_MaysHouse_1F_EventScript_MeetRival
 	end
 
@@ -184,16 +184,16 @@ LittlerootTown_MaysHouse_1F_EventScript_MeetRival::
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
-	call_if_ne VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
+	call_if_ne SPECIAL_VAR_8, 1, LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay
 	playbgm MUS_ENCOUNTER_MAY, TRUE
-	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
+	call_if_eq SPECIAL_VAR_8, 0, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0
+	call_if_eq SPECIAL_VAR_8, 1, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1
+	call_if_eq SPECIAL_VAR_8, 2, LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2
 	msgbox RivalsHouse_1F_Text_MayWhoAreYou, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8008, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
-	call_if_eq VAR_0x8008, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
-	call_if_eq VAR_0x8008, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
+	call_if_eq SPECIAL_VAR_8, 0, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0
+	call_if_eq SPECIAL_VAR_8, 1, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1
+	call_if_eq SPECIAL_VAR_8, 2, LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2
 	playse SE_EXIT
 	removeobject LOCALID_RIVAL
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY

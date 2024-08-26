@@ -83,3 +83,5 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 
 *Spoink & Grumpig como Psychic-Poison
 *Lycanroc tipo Roca-Lucha
+
+*Investigar MenuHelpers_ShouldWaitForLinkRecv() y MenuHelpers_IsLinkActive() (CB2_InitSummaryScreen??)

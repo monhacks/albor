@@ -18,8 +18,8 @@ FallarborTown_BattleTentBattleRoom_OnTransition:
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 FallarborTown_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
@@ -42,7 +42,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_EnterRoom::
 	applymovement LOCALID_PLAYER, FallarborTown_BattleTentBattleRoom_Movement_PlayerEnter
 	waitmovement 0
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	goto_if_ne VAR_RESULT, 0, FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge
+	goto_if_ne SPECIAL_VAR_RESULT, 0, FallarborTown_BattleTentBattleRoom_EventScript_ResumeChallenge
 FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 	tower_setopponent
 	addobject LOCALID_OPPONENT
@@ -57,7 +57,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_NextOpponentEnter::
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent
 	applymovement LOCALID_ATTENDANT, FallarborTown_BattleTentBattleRoom_Movement_AttendantJump
 	playse SE_M_SNORE
@@ -80,9 +80,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	closemessage
 FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	addvar VAR_RESULT, 1
-	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	switch VAR_RESULT
+	addvar SPECIAL_VAR_RESULT, 1
+	frontier_set FRONTIER_DATA_BATTLE_NUM, SPECIAL_VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 3, FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon
 	applymovement LOCALID_OPPONENT, FallarborTown_BattleTentBattleRoom_Movement_OpponentExit
 	waitmovement 0
@@ -100,17 +100,17 @@ FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum::
 	special HealPlayerParty
 FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	call_if_eq VAR_RESULT, 1, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
-	call_if_eq VAR_RESULT, 2, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
+	call_if_eq SPECIAL_VAR_RESULT, 1, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent
+	call_if_eq SPECIAL_VAR_RESULT, 2, FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor3rdOpponent
 	multichoice 20, 6, MULTI_GO_ON_REST_RETIRE, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_ContinueChallenge
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge
 	case 2, FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge
 
 FallarborTown_BattleTentBattleRoom_EventScript_AskPauseChallenge::
 	msgbox BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 	case YES, FallarborTown_BattleTentBattleRoom_EventScript_PauseChallenge
 	case MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
@@ -119,7 +119,7 @@ FallarborTown_BattleTentBattleRoom_EventScript_AskRetireChallenge::
 	message BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge
 	waitmessage
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
 	case 0, FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyLost
 	case MULTI_B_PRESSED, FallarborTown_BattleTentBattleRoom_EventScript_AskContinueChallenge
@@ -142,9 +142,9 @@ FallarborTown_BattleTentBattleRoom_EventScript_WarpToLobbyWon::
 
 @ Unreachable code block? The flow into the next block also doesnt make sense
 	arena_get ARENA_DATA_WIN_STREAK
-	goto_if_eq VAR_RESULT, MAX_STREAK, FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum
-	addvar VAR_RESULT, 1
-	arena_set ARENA_DATA_WIN_STREAK, VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, MAX_STREAK, FallarborTown_BattleTentBattleRoom_EventScript_IncrementBattleNum
+	addvar SPECIAL_VAR_RESULT, 1
+	arena_set ARENA_DATA_WIN_STREAK, SPECIAL_VAR_RESULT
 @ See above
 
 FallarborTown_BattleTentBattleRoom_EventScript_ReadyFor2ndOpponent::

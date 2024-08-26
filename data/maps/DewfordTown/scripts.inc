@@ -24,7 +24,7 @@ DewfordTown_EventScript_Briney::
 	message DewfordTown_Text_WhereAreWeBound
 	waitmessage
 	multichoicedefault 21, 6, MULTI_BRINEY_ON_DEWFORD, 2, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, DewfordTown_EventScript_ChoosePetalburg
 	case 1, DewfordTown_EventScript_ChooseSlateport
 	case 2, DewfordTown_EventScript_CancelSailSelect
@@ -53,7 +53,7 @@ DewfordTown_EventScript_CancelSailSelect::
 
 DewfordTown_EventScript_ReturnToPetalburgPrompt::
 	msgbox DewfordTown_Text_SetSailBackToPetalburg, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_SailBackToPetalburg
+	goto_if_eq SPECIAL_VAR_RESULT, YES, DewfordTown_EventScript_SailBackToPetalburg
 	msgbox DewfordTown_Text_GoDeliverIllBeWaiting, MSGBOX_DEFAULT
 	release
 	end
@@ -85,14 +85,14 @@ DewfordTown_EventScript_OldRodFisherman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_HowsFishing
 	msgbox DewfordTown_Text_GettingItchToFish, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_GiveOldRod
-	goto_if_eq VAR_RESULT, NO, DewfordTown_EventScript_NotGettingItchToFish
+	goto_if_eq SPECIAL_VAR_RESULT, YES, DewfordTown_EventScript_GiveOldRod
+	goto_if_eq SPECIAL_VAR_RESULT, NO, DewfordTown_EventScript_NotGettingItchToFish
 	end
 
 DewfordTown_EventScript_GiveOldRod::
 	msgbox DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT
 	giveitem ITEM_OLD_ROD
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_ThrowInFishingAdvice, MSGBOX_DEFAULT
 	release
@@ -107,8 +107,8 @@ DewfordTown_EventScript_HowsFishing::
 	message DewfordTown_Text_HowsYourFishing
 	waitmessage
 	multichoice 20, 8, MULTI_HOWS_FISHING, TRUE
-	goto_if_eq VAR_RESULT, 0, DewfordTown_EventScript_FishingExcellent
-	goto_if_eq VAR_RESULT, 1, DewfordTown_EventScript_FishingNotSoGood
+	goto_if_eq SPECIAL_VAR_RESULT, 0, DewfordTown_EventScript_FishingExcellent
+	goto_if_eq SPECIAL_VAR_RESULT, 1, DewfordTown_EventScript_FishingNotSoGood
 	end
 
 DewfordTown_EventScript_FishingExcellent::
@@ -148,7 +148,7 @@ DewfordTown_EventScript_SailToPetalburg::
 	setvar VAR_BOARD_BRINEY_BOAT_STATE, 2
 	resetobjectsubpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	warp MAP_ROUTE104_MR_BRINEYS_HOUSE, 5, 4
-	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
+	copyvar VAR_BRINEY_LOCATION, SPECIAL_VAR_8
 	waitstate
 	release
 	end
@@ -184,7 +184,7 @@ DewfordTown_EventScript_SailToSlateport::
 	call_if_unset FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateportDeliverGoods
 	call_if_set FLAG_DELIVERED_DEVON_GOODS, DewfordTown_EventScript_LandedSlateport
 	closemessage
-	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
+	copyvar VAR_BRINEY_LOCATION, SPECIAL_VAR_8
 	resetobjectsubpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN
 	resetobjectsubpriority LOCALID_BRINEY_R109, MAP_ROUTE109
 	copyobjectxytoperm LOCALID_BRINEY_R109
@@ -602,8 +602,8 @@ DewfordTown_EventScript_TrendyPhraseBoy::
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
 	msgbox DewfordTown_Text_XIsTheBiggestHappeningThingRight, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, DewfordTown_EventScript_ConfirmTrendyPhrase
-	goto_if_eq VAR_RESULT, NO, DewfordTown_EventScript_RejectTrendyPhrase
+	goto_if_eq SPECIAL_VAR_RESULT, YES, DewfordTown_EventScript_ConfirmTrendyPhrase
+	goto_if_eq SPECIAL_VAR_RESULT, NO, DewfordTown_EventScript_RejectTrendyPhrase
 	end
 
 DewfordTown_EventScript_ConfirmTrendyPhrase::
@@ -613,17 +613,17 @@ DewfordTown_EventScript_ConfirmTrendyPhrase::
 
 DewfordTown_EventScript_RejectTrendyPhrase::
 	msgbox DewfordTown_Text_TellMeWhatsNewAndIn, MSGBOX_DEFAULT
-	setvar VAR_0x8004, EASY_CHAT_TYPE_TRENDY_PHRASE
+	setvar SPECIAL_VAR_4, EASY_CHAT_TYPE_TRENDY_PHRASE
 	call Common_ShowEasyChatScreen
 	lock
 	faceplayer
-	goto_if_eq VAR_RESULT, TRUE, DewfordTown_EventScript_GiveNewTrendyPhrase
-	goto_if_eq VAR_RESULT, FALSE, DewfordTown_EventScript_CancelNewTrendyPhrase
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, DewfordTown_EventScript_GiveNewTrendyPhrase
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, DewfordTown_EventScript_CancelNewTrendyPhrase
 	end
 
 DewfordTown_EventScript_GiveNewTrendyPhrase::
 	incrementgamestat GAME_STAT_STARTED_TRENDS
-	goto_if_eq VAR_0x8004, FALSE, DewfordTown_EventScript_PhraseNotTrendyEnough
+	goto_if_eq SPECIAL_VAR_4, FALSE, DewfordTown_EventScript_PhraseNotTrendyEnough
 	msgbox DewfordTown_Text_OfCourseIKnowAboutThat, MSGBOX_DEFAULT
 	release
 	end

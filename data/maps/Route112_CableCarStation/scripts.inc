@@ -34,8 +34,8 @@ Route112_CableCarStation_EventScript_Attendant::
 	lock
 	faceplayer
 	msgbox Route112_CableCarStation_Text_CableCarReadyGetOn, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route112_CableCarStation_EventScript_RideCableCar
-	goto_if_eq VAR_RESULT, NO, Route112_CableCarStation_EventScript_DeclineRide
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route112_CableCarStation_EventScript_RideCableCar
+	goto_if_eq SPECIAL_VAR_RESULT, NO, Route112_CableCarStation_EventScript_DeclineRide
 	end
 
 Route112_CableCarStation_EventScript_RideCableCar::
@@ -44,7 +44,7 @@ Route112_CableCarStation_EventScript_RideCableCar::
 	applymovement LOCALID_ATTENDANT, Route112_CableCarStation_Movement_LeadPlayerToCableCar
 	applymovement OBJ_EVENT_ID_PLAYER, Route112_CableCarStation_Movement_BoardCableCar
 	waitmovement 0
-	setvar VAR_0x8004, FALSE  @ Going up
+	setvar SPECIAL_VAR_4, FALSE  @ Going up
 	setvar VAR_CABLE_CAR_STATION_STATE, 1
 	incrementgamestat GAME_STAT_RODE_CABLE_CAR
 	special CableCarWarp

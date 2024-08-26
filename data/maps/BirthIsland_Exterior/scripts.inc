@@ -37,8 +37,8 @@ BirthIsland_Exterior_OnResume:
 	end
 
 BirthIsland_Exterior_EventScript_TryRemoveDeoxys::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject LOCALID_DEOXYS
 	return
 
@@ -47,7 +47,7 @@ BirthIsland_Exterior_EventScript_Triangle::
 	faceplayer
 	special DoDeoxysRockInteraction
 	waitstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case DEOXYS_ROCK_FAILED,     BirthIsland_Exterior_EventScript_Failed
 	case DEOXYS_ROCK_PROGRESSED, BirthIsland_Exterior_EventScript_Progressed
 	case DEOXYS_ROCK_SOLVED,     BirthIsland_Exterior_EventScript_Deoxys
@@ -84,28 +84,28 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	playmoncry SPECIES_DEOXYS_NORMAL, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
-	setvar VAR_LAST_TALKED, LOCALID_DEOXYS
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_DEOXYS
 	seteventmon SPECIES_DEOXYS_NORMAL, 30
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	setflag FLAG_BATTLED_DEOXYS
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
 	setflag FLAG_DEFEATED_DEOXYS
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+	setvar SPECIAL_VAR_4, SPECIES_DEOXYS_NORMAL
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
 BirthIsland_Exterior_EventScript_RanFromDeoxys::
-	setvar VAR_0x8004, SPECIES_DEOXYS_NORMAL
+	setvar SPECIAL_VAR_4, SPECIES_DEOXYS_NORMAL
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

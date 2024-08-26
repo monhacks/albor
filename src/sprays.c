@@ -13,8 +13,8 @@
 #define NUM_SPRAY_STRENGTH 3
 #define SPRAY_MENU_Y_COORD 8
 
-#define LOCAL_VAR_SPRAY gSpecialVar_0x8004
-#define LOCAL_VAR_SPRAY_CONST VAR_0x8004
+#define LOCAL_VAR_SPRAY gSpecialVar_4
+#define LOCAL_VAR_SPRAY_CONST SPECIAL_VAR_4
 
 u32 CountOrGetSprays(u32);
 u32 GetNumberSprayStrength(void);
@@ -96,7 +96,7 @@ void DrawSprayMenu(void)
         count++;
     }
 
-    gSpecialVar_0x8003 = count;
+    gSpecialVar_3 = count;
     menuItems[count].text = gText_Salir;
 
     DrawMultichoiceMenuInternal(18, yCoord, 0, FALSE, menuPos, menuItems, count+1);

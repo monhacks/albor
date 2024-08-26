@@ -594,7 +594,7 @@ static const u16 sRecordTrainerSpeechLost[] =
 // code
 void CallBattleTowerFunc(void)
 {
-    sBattleTowerFuncs[gSpecialVar_0x8004]();
+    sBattleTowerFuncs[gSpecialVar_4]();
 }
 
 static void InitTowerChallenge(void)
@@ -619,7 +619,7 @@ static void GetTowerData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case 0:
         break;
@@ -640,15 +640,15 @@ static void SetTowerData(void)
     u32 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case 0:
         break;
     case TOWER_DATA_WIN_STREAK:
-        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = gSpecialVar_6;
         break;
     case TOWER_DATA_WIN_STREAK_ACTIVE:
-        if (gSpecialVar_0x8006)
+        if (gSpecialVar_6)
             gSaveBlock2Ptr->frontier.winStreakActiveFlags |= sWinStreakFlags[battleMode][lvlMode];
         else
             gSaveBlock2Ptr->frontier.winStreakActiveFlags &= sWinStreakMasks[battleMode][lvlMode];
@@ -1134,7 +1134,7 @@ static void GetOpponentIntroSpeech(void)
     u16 trainerId;
     SetFacilityPtrsGetLevel();
 
-    if (gSpecialVar_0x8005)
+    if (gSpecialVar_5)
         trainerId = gTrainerBattleOpponent_B;
     else
         trainerId = gTrainerBattleOpponent_A;
@@ -1213,8 +1213,8 @@ void DoSpecialTrainerBattle(void)
 {
     s32 i;
 
-    gBattleScripting.specialTrainerBattleType = gSpecialVar_0x8004;
-    switch (gSpecialVar_0x8004)
+    gBattleScripting.specialTrainerBattleType = gSpecialVar_4;
+    switch (gSpecialVar_4)
     {
     case SPECIAL_BATTLE_TOWER:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
@@ -1327,11 +1327,11 @@ void DoSpecialTrainerBattle(void)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
         break;
     case SPECIAL_BATTLE_MULTI:
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
+        if (gSpecialVar_5 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
         {
             gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
-        else if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
+        else if (gSpecialVar_5 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
         {
             gTrainerBattleOpponent_B = 0xFFFF;
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
@@ -1341,16 +1341,16 @@ void DoSpecialTrainerBattle(void)
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
 
-        gPartnerTrainerId = VarGet(gSpecialVar_0x8006) + TRAINER_PARTNER(PARTNER_NONE);
+        gPartnerTrainerId = VarGet(gSpecialVar_6) + TRAINER_PARTNER(PARTNER_NONE);
         FillPartnerParty(gPartnerTrainerId);
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD)
+        if (gSpecialVar_5 & MULTI_BATTLE_2_VS_WILD)
             BattleTransition_StartOnField(GetWildBattleTransition());
         else
             BattleTransition_StartOnField(GetTrainerBattleTransition());
 
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
+        if (gSpecialVar_5 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
             gBattleScripting.specialTrainerBattleType = 0xFF;
         break;
     }
@@ -1368,7 +1368,7 @@ static void SaveCurrentWinStreak(void)
 
 static void SaveTowerChallenge(void)
 {
-    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.challengeStatus = gSpecialVar_5;
     VarSet(VAR_TEMP_CHALLENGE_STATUS, 0);
     gSaveBlock2Ptr->frontier.challengePaused = TRUE;
     SaveGameFrontier();
@@ -1542,7 +1542,7 @@ static void ShowPartnerCandidateMessage(void)
     s32 k = gSpecialVar_LastTalked - 2;
     s32 trainerId = gSaveBlock2Ptr->frontier.trainerIds[k];
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case PARTNER_MSGID_INTRO:
         if (trainerId == TRAINER_EREADER)

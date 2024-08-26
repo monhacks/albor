@@ -6,8 +6,8 @@
 
 bool16 ScriptGetPokedexInfo(void)
 {
-    gSpecialVar_0x8005 = GetNationalPokedexCount(FLAG_GET_SEEN);
-    gSpecialVar_0x8006 = GetNationalPokedexCount(FLAG_GET_CAUGHT);
+    gSpecialVar_5 = GetNationalPokedexCount(FLAG_GET_SEEN);
+    gSpecialVar_6 = GetNationalPokedexCount(FLAG_GET_CAUGHT);
 
     return TRUE;
 }
@@ -48,5 +48,5 @@ const u8 *GetPokedexRatingText(u32 count)
 
 void ShowPokedexRatingMessage(void)
 {
-    ShowFieldMessage(GetPokedexRatingText(gSpecialVar_0x8004));
+    ShowFieldMessage(GetPokedexRatingText(gSpecialVar_4));
 }

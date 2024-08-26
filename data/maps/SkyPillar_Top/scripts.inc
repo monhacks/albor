@@ -11,9 +11,9 @@ SkyPillar_Top_OnResume:
 	end
 
 SkyPillar_Top_EventScript_TryRemoveRayquaza::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
-	removeobject VAR_LAST_TALKED
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	removeobject SPECIAL_VAR_LAST_TALKED
 	return
 
 SkyPillar_Top_OnTransition:
@@ -53,10 +53,10 @@ SkyPillar_Top_EventScript_Rayquaza::
 	special BattleSetup_StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SkyPillar_Top_EventScript_DefeatedRayquaza
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SkyPillar_Top_EventScript_RanFromRayquaza
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SkyPillar_Top_EventScript_RanFromRayquaza
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, SkyPillar_Top_EventScript_DefeatedRayquaza
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, SkyPillar_Top_EventScript_RanFromRayquaza
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SkyPillar_Top_EventScript_RanFromRayquaza
 	setflag FLAG_DEFEATED_RAYQUAZA
 	releaseall
 	end
@@ -67,22 +67,22 @@ SkyPillar_Top_EventScript_DefeatedRayquaza::
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza::
-	setvar VAR_0x8004, SPECIES_RAYQUAZA
+	setvar SPECIAL_VAR_4, SPECIES_RAYQUAZA
 	goto SkyPillar_Top_EventScript_RanFromRayquaza2
 	end
 
 SkyPillar_Top_EventScript_DefeatedRayquaza2::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
 	releaseall
 	end
 
 SkyPillar_Top_EventScript_RanFromRayquaza2::
 	fadescreenswapbuffers FADE_TO_BLACK
-	removeobject VAR_LAST_TALKED
+	removeobject SPECIAL_VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
-	bufferspeciesname STR_VAR_1, VAR_0x8004
+	bufferspeciesname STR_VAR_1, SPECIAL_VAR_4
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -100,18 +100,18 @@ SkyPillar_Top_EventScript_AwakenRayquaza::
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
-	setvar VAR_0x8004, 1  @ vertical pan
-	setvar VAR_0x8005, 1  @ horizontal pan
-	setvar VAR_0x8006, 8  @ num shakes
-	setvar VAR_0x8007, 3  @ shake delay
+	setvar SPECIAL_VAR_4, 1  @ vertical pan
+	setvar SPECIAL_VAR_5, 1  @ horizontal pan
+	setvar SPECIAL_VAR_6, 8  @ num shakes
+	setvar SPECIAL_VAR_7, 3  @ shake delay
 	special ShakeCamera
 	waitstate
 	waitse
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
-	setvar VAR_0x8004, 1  @ vertical pan
-	setvar VAR_0x8005, 2  @ horizontal pan
-	setvar VAR_0x8006, 8  @ num shakes
-	setvar VAR_0x8007, 5  @ shake delay
+	setvar SPECIAL_VAR_4, 1  @ vertical pan
+	setvar SPECIAL_VAR_5, 2  @ horizontal pan
+	setvar SPECIAL_VAR_6, 8  @ num shakes
+	setvar SPECIAL_VAR_7, 5  @ shake delay
 	special ShakeCamera
 	waitstate
 	waitmoncry

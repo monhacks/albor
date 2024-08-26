@@ -19,11 +19,11 @@ BattleFrontier_BattleFactoryBattleRoom_MapScripts::
 BattleFrontier_BattleFactoryBattleRoom_OnTransition:
 	frontier_settrainers
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale
-	call_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale
+	call_if_eq SPECIAL_VAR_RESULT, MALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxMale
+	call_if_eq SPECIAL_VAR_RESULT, FEMALE, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetPlayerGfxFemale
 	frontier_getbrainstatus
-	copyvar VAR_TEMP_F, VAR_RESULT
-	goto_if_ne VAR_RESULT, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj
+	copyvar VAR_TEMP_F, SPECIAL_VAR_RESULT
+	goto_if_ne SPECIAL_VAR_RESULT, FRONTIER_BRAIN_NOT_READY, BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj
 	end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_SetUpFactoryHeadObj::
@@ -87,11 +87,11 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent::
 	closemessage
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
-	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_4, SPECIAL_BATTLE_FACTORY
+	setvar SPECIAL_VAR_5, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedOpponent
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
@@ -99,19 +99,19 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost::
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedOpponent::
 	factory_get FACTORY_DATA_WIN_STREAK_SWAPS
-	goto_if_eq VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak
-	addvar VAR_RESULT, 1
-	setorcopyvar VAR_0x8006, VAR_RESULT
-	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses VAR_0x8006 above
+	goto_if_eq SPECIAL_VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak
+	addvar SPECIAL_VAR_RESULT, 1
+	setorcopyvar SPECIAL_VAR_6, SPECIAL_VAR_RESULT
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses SPECIAL_VAR_6 above
 BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak::
 	call BattleFrontier_EventScript_IncrementWinStreak
 BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	addvar VAR_RESULT, 1
-	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	switch VAR_RESULT
+	addvar SPECIAL_VAR_RESULT, 1
+	frontier_set FRONTIER_DATA_BATTLE_NUM, SPECIAL_VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 7, BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyWon
-	setvar VAR_0x8006, 1
+	setvar SPECIAL_VAR_6, 1
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM, 8, 8
 	waitstate
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyWon::
@@ -124,18 +124,18 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland::
 	case FRONTIER_BRAIN_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver
 	case FRONTIER_BRAIN_STREAK_LONG, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver
+	goto_if_ne SPECIAL_VAR_RESULT, FALSE, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandSilver::
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn, MSGBOX_DEFAULT
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle
-	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver
+	goto_if_eq SPECIAL_VAR_RESULT, 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver::
 	frontier_getsymbols
-	goto_if_ne VAR_RESULT, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
+	goto_if_ne SPECIAL_VAR_RESULT, 0, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
@@ -150,18 +150,18 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandSilver::
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_IntroNolandGold::
 	frontier_get FRONTIER_DATA_HEARD_BRAIN_SPEECH
-	goto_if_ne VAR_RESULT, FALSE, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold
+	goto_if_ne SPECIAL_VAR_RESULT, FALSE, BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime, MSGBOX_DEFAULT
 	frontier_set FRONTIER_DATA_HEARD_BRAIN_SPEECH
 BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNolandGold::
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn, MSGBOX_DEFAULT
 	call BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle
-	goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold
+	goto_if_eq SPECIAL_VAR_RESULT, 1, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyLost
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNolandGold::
 	frontier_getsymbols
-	goto_if_eq VAR_RESULT, 2, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
+	goto_if_eq SPECIAL_VAR_RESULT, 2, BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland
 	msgbox BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass, MSGBOX_DEFAULT
 	waitmessage
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleFactoryBattleRoom_Movement_PlayerApproachNoland
@@ -178,24 +178,24 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_DoNolandBattle::
 	closemessage
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE
 	special HealPlayerParty
-	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_4, SPECIAL_BATTLE_FACTORY
+	setvar SPECIAL_VAR_5, 0
 	special DoSpecialTrainerBattle
 	waitstate
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_DefeatedNoland::
 	factory_get FACTORY_DATA_WIN_STREAK_SWAPS
-	goto_if_eq VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak
-	addvar VAR_RESULT, 1
-	setorcopyvar VAR_0x8006, VAR_RESULT
-	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses VAR_0x8006 above
+	goto_if_eq SPECIAL_VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementWinStreak
+	addvar SPECIAL_VAR_RESULT, 1
+	setorcopyvar SPECIAL_VAR_6, SPECIAL_VAR_RESULT
+	factory_set FACTORY_DATA_WIN_STREAK_SWAPS  @ uses SPECIAL_VAR_6 above
 	factory_get FACTORY_DATA_WIN_STREAK
-	goto_if_eq VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum
-	addvar VAR_RESULT, 1
-	factory_set FACTORY_DATA_WIN_STREAK, VAR_RESULT
+	goto_if_eq SPECIAL_VAR_RESULT, MAX_STREAK, BattleFrontier_BattleFactoryBattleRoom_EventScript_IncrementBattleNum
+	addvar SPECIAL_VAR_RESULT, 1
+	factory_set FACTORY_DATA_WIN_STREAK, SPECIAL_VAR_RESULT
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	addvar VAR_RESULT, 1
+	addvar SPECIAL_VAR_RESULT, 1
 	goto BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyWon
 	end
 
@@ -229,8 +229,8 @@ BattleFrontier_BattleFactoryBattleRoom_Movement_NolandMoveToBattle:
 	step_end
 
 BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobby::
-	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
-	goto_if_eq VAR_RESULT, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles
+	copyvar SPECIAL_VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
+	goto_if_eq SPECIAL_VAR_RESULT, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryBattleRoom_EventScript_WarpToLobbyDoubles
 	warp MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 4, 8
 	waitstate
 	end

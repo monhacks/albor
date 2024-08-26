@@ -20,8 +20,8 @@ LavaridgeTown_EventScript_ClearLavaridgeWhiteOut::
 	return
 
 LavaridgeTown_EventScript_CheckSetRivalPos::
-	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_eq VAR_0x8004, 9, LavaridgeTown_EventScript_SetRivalPos
+	getplayerxy SPECIAL_VAR_4, SPECIAL_VAR_5
+	goto_if_eq SPECIAL_VAR_4, 9, LavaridgeTown_EventScript_SetRivalPos
 	return
 
 LavaridgeTown_EventScript_SetRivalPos::
@@ -45,18 +45,18 @@ LavaridgeTown_OnFrame:
 
 LavaridgeTown_EventScript_RivalGiveGoGoggles::
 	lockall
-	getplayerxy VAR_0x8008, VAR_0x8009
-	call_if_eq VAR_0x8008, 9, LavaridgeTown_EventScript_RivalNoticePlayer
-	call_if_ne VAR_0x8008, 9, LavaridgeTown_EventScript_RivalExitHerbShop
+	getplayerxy SPECIAL_VAR_8, SPECIAL_VAR_9
+	call_if_eq SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalNoticePlayer
+	call_if_ne SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalExitHerbShop
 	delay 20
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LavaridgeTown_EventScript_PlayMayMusic
-	call_if_eq VAR_RESULT, FEMALE, LavaridgeTown_EventScript_PlayBrendanMusic
-	call_if_eq VAR_0x8008, 9, LavaridgeTown_EventScript_RivalApproachPlayer1
-	call_if_ne VAR_0x8008, 9, LavaridgeTown_EventScript_RivalApproachPlayer2
+	call_if_eq SPECIAL_VAR_RESULT, MALE, LavaridgeTown_EventScript_PlayMayMusic
+	call_if_eq SPECIAL_VAR_RESULT, FEMALE, LavaridgeTown_EventScript_PlayBrendanMusic
+	call_if_eq SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalApproachPlayer1
+	call_if_ne SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalApproachPlayer2
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LavaridgeTown_EventScript_MayGiveGoGoggles
-	goto_if_eq VAR_RESULT, FEMALE, LavaridgeTown_EventScript_BrendanGiveGoGoggles
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, LavaridgeTown_EventScript_MayGiveGoGoggles
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, LavaridgeTown_EventScript_BrendanGiveGoGoggles
 	end
 
 LavaridgeTown_EventScript_MayGiveGoGoggles::
@@ -80,8 +80,8 @@ LavaridgeTown_EventScript_RivalExit::
 	removeobject LOCALID_RIVAL
 	addobject LOCALID_RIVAL_ON_BIKE
 	delay 30
-	call_if_eq VAR_0x8008, 9, LavaridgeTown_EventScript_RivalExit1
-	call_if_ne VAR_0x8008, 9, LavaridgeTown_EventScript_RivalExit2
+	call_if_eq SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalExit1
+	call_if_ne SPECIAL_VAR_8, 9, LavaridgeTown_EventScript_RivalExit2
 	removeobject LOCALID_RIVAL_ON_BIKE
 	setvar VAR_LAVARIDGE_TOWN_STATE, 2
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
@@ -199,8 +199,8 @@ LavaridgeTown_Movement_RivalExitHerbShop:
 	step_end
 
 LavaridgeTown_EventScript_HotSpringsTrigger::
-	specialvar VAR_RESULT, GetPlayerFacingDirection
-	goto_if_eq VAR_RESULT, DIR_SOUTH, LavaridgeTown_EventScript_EnteredHotSprings
+	specialvar SPECIAL_VAR_RESULT, GetPlayerFacingDirection
+	goto_if_eq SPECIAL_VAR_RESULT, DIR_SOUTH, LavaridgeTown_EventScript_EnteredHotSprings
 	end
 
 LavaridgeTown_EventScript_EnteredHotSprings::
@@ -236,9 +236,9 @@ LavaridgeTown_EventScript_EggWoman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_LAVARIDGE_EGG, LavaridgeTown_EventScript_ReceivedEgg
 	msgbox LavaridgeTown_Text_HaveEggWillYouTakeIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, LavaridgeTown_EventScript_DeclineEgg
+	goto_if_eq SPECIAL_VAR_RESULT, NO, LavaridgeTown_EventScript_DeclineEgg
 	getpartysize
-	goto_if_eq VAR_RESULT, PARTY_SIZE, LavaridgeTown_EventScript_NoRoomForEgg
+	goto_if_eq SPECIAL_VAR_RESULT, PARTY_SIZE, LavaridgeTown_EventScript_NoRoomForEgg
 	msgbox LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_LAVARIDGE_EGG
 	playfanfare MUS_OBTAIN_ITEM

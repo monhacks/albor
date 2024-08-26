@@ -46,25 +46,25 @@ MauvilleCity_Gym_EventScript_SetAltBarriers::
 	end
 
 MauvilleCity_Gym_EventScript_Switch1Pressed::
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
 MauvilleCity_Gym_EventScript_Switch2Pressed::
-	setvar VAR_0x8004, 1
+	setvar SPECIAL_VAR_4, 1
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
 MauvilleCity_Gym_EventScript_Switch3Pressed::
-	setvar VAR_0x8004, 2
+	setvar SPECIAL_VAR_4, 2
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
 
 MauvilleCity_Gym_EventScript_Switch4Pressed::
-	setvar VAR_0x8004, 3
+	setvar SPECIAL_VAR_4, 3
 	special MauvilleGymPressSwitch
 	goto MauvilleCity_Gym_EventScript_UpdateBarriers
 	end
@@ -75,8 +75,8 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle::
 
 MauvilleCity_Gym_EventScript_Wattson::
 	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
 	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave2
 	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
 	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
@@ -94,7 +94,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
-	setvar VAR_0x8008, 3
+	setvar SPECIAL_VAR_8, 3
 	call Common_EventScript_SetGymTrainers
 	special MauvilleGymDeactivatePuzzle
 	special DrawWholeMapView
@@ -113,7 +113,7 @@ MauvilleCity_Gym_EventScript_WattsonDefeated::
 
 MauvilleCity_Gym_EventScript_GiveShockWave2::
 	giveitem ITEM_TM_SHOCK_WAVE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
 	release
@@ -121,7 +121,7 @@ MauvilleCity_Gym_EventScript_GiveShockWave2::
 
 MauvilleCity_Gym_EventScript_GiveShockWave::
 	giveitem ITEM_TM_SHOCK_WAVE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_BagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
 	return
@@ -141,7 +141,7 @@ MauvilleCity_Gym_EventScript_Switch1::
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	goto_if_eq VAR_MAUVILLE_GYM_STATE, 1, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 1
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
@@ -150,7 +150,7 @@ MauvilleCity_Gym_EventScript_Switch2::
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	goto_if_eq VAR_MAUVILLE_GYM_STATE, 2, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 2
-	setvar VAR_0x8004, 1
+	setvar SPECIAL_VAR_4, 1
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
@@ -159,7 +159,7 @@ MauvilleCity_Gym_EventScript_Switch3::
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	goto_if_eq VAR_MAUVILLE_GYM_STATE, 3, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 3
-	setvar VAR_0x8004, 2
+	setvar SPECIAL_VAR_4, 2
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 
@@ -168,7 +168,7 @@ MauvilleCity_Gym_EventScript_Switch4::
 	goto_if_set FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	goto_if_eq VAR_MAUVILLE_GYM_STATE, 4, MauvilleCity_Gym_EventScript_SwitchDoNothing
 	setvar VAR_MAUVILLE_GYM_STATE, 4
-	setvar VAR_0x8004, 3
+	setvar SPECIAL_VAR_4, 3
 	goto MauvilleCity_Gym_EventScript_PressFloorSwitch
 	end
 

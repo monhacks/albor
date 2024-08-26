@@ -50,8 +50,8 @@ Route111_OnTransition:
 
 Route111_EventScript_SetFallingPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route111_EventScript_SetFallingPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, Route111_EventScript_SetFallingPlayerGfxFemale
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, Route111_EventScript_SetFallingPlayerGfxMale
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, Route111_EventScript_SetFallingPlayerGfxFemale
 	return
 
 Route111_EventScript_SetFallingPlayerGfxMale::
@@ -152,7 +152,7 @@ Route111_EventScript_Girl::
 	goto_if_set FLAG_DAILY_ROUTE_111_RECEIVED_BERRY, Route111_EventScript_ReceivedBerry
 	msgbox Route111_Text_WateredPlantsEveryDayTakeBerry, MSGBOX_DEFAULT
 	giveitem ITEM_RAZZ_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_DAILY_ROUTE_111_RECEIVED_BERRY
 	special GetPlayerBigGuyGirlString
 	msgbox Route111_Text_GoingToTryToMakeDifferentColorBerries, MSGBOX_DEFAULT
@@ -167,32 +167,32 @@ Route111_EventScript_ReceivedBerry::
 @ Unused
 Route111_EventScript_ViciousSandstormTriggerUp::
 	lockall
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
 Route111_EventScript_ViciousSandstormTriggerDown::
 	lockall
-	setvar VAR_0x8004, 1
+	setvar SPECIAL_VAR_4, 1
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
 Route111_EventScript_ViciousSandstormTriggerLeft::
 	lockall
-	setvar VAR_0x8004, 2
+	setvar SPECIAL_VAR_4, 2
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
 @ Unused
 Route111_EventScript_ViciousSandstormTriggerRight::
 	lockall
-	setvar VAR_0x8004, 3
+	setvar SPECIAL_VAR_4, 3
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
 Route111_EventScript_ViciousSandstormTrigger::
 	checkitem ITEM_GO_GOGGLES
-	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_PreventRouteAccess
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Route111_EventScript_PreventRouteAccess
 	setvar VAR_TEMP_3, 1
 	releaseall
 	end
@@ -200,10 +200,10 @@ Route111_EventScript_ViciousSandstormTrigger::
 Route111_EventScript_PreventRouteAccess::
 	msgbox gText_SandstormIsVicious, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_0x8004, 0, Route111_EventScript_PushUpFromRoute
-	call_if_eq VAR_0x8004, 1, Route111_EventScript_PushDownFromRoute
-	call_if_eq VAR_0x8004, 2, Route111_EventScript_PushLeftFromRoute
-	call_if_eq VAR_0x8004, 3, Route111_EventScript_PushRightFromRoute
+	call_if_eq SPECIAL_VAR_4, 0, Route111_EventScript_PushUpFromRoute
+	call_if_eq SPECIAL_VAR_4, 1, Route111_EventScript_PushDownFromRoute
+	call_if_eq SPECIAL_VAR_4, 2, Route111_EventScript_PushLeftFromRoute
+	call_if_eq SPECIAL_VAR_4, 3, Route111_EventScript_PushRightFromRoute
 	releaseall
 	end
 
@@ -261,7 +261,7 @@ Route111_EventScript_Victor::
 	faceplayer
 	setflag FLAG_LANDMARK_WINSTRATE_FAMILY
 	msgbox Route111_Text_BattleOurFamily, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route111_EventScript_BattleWinstrates
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route111_EventScript_BattleWinstrates
 	msgbox Route111_Text_IsThatSo, MSGBOX_DEFAULT
 	release
 	end
@@ -450,8 +450,8 @@ Route111_EventScript_Becky::
 
 Route111_EventScript_Dusty::
 	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, Route111_EventScript_RegisterDusty
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchDusty
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route111_EventScript_RematchDusty
 	msgbox Route111_Text_DustyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -486,8 +486,8 @@ Route111_EventScript_Daisuke::
 
 Route111_EventScript_Wilton::
 	trainerbattle_single TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, Route111_EventScript_RegisterWilton
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchWilton
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route111_EventScript_RematchWilton
 	msgbox Route111_Text_WiltonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -507,8 +507,8 @@ Route111_EventScript_RematchWilton::
 
 Route111_EventScript_Brooke::
 	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, Route111_EventScript_RegisterBrooke
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchBrooke
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route111_EventScript_RematchBrooke
 	msgbox Route111_Text_BrookePostBattle, MSGBOX_DEFAULT
 	release
 	end

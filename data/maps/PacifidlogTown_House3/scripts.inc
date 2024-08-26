@@ -5,26 +5,26 @@ PacifidlogTown_House3_EventScript_Trader::
 	lock
 	faceplayer
 	goto_if_set FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED, PacifidlogTown_House3_EventScript_TradeCompleted
-	setvar VAR_0x8008, INGAME_TRADE_HORSEA
-	copyvar VAR_0x8004, VAR_0x8008
-	specialvar VAR_RESULT, GetInGameTradeSpeciesInfo
-	copyvar VAR_0x8009, VAR_RESULT
+	setvar SPECIAL_VAR_8, INGAME_TRADE_HORSEA
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_8
+	specialvar SPECIAL_VAR_RESULT, GetInGameTradeSpeciesInfo
+	copyvar SPECIAL_VAR_9, SPECIAL_VAR_RESULT
 	msgbox PacifidlogTown_House3_Text_WillingToTradeIt, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, PacifidlogTown_House3_EventScript_DeclineTrade
+	goto_if_eq SPECIAL_VAR_RESULT, NO, PacifidlogTown_House3_EventScript_DeclineTrade
 	special ChoosePartyMon
 	waitstate
-	copyvar VAR_0x800A, VAR_0x8004
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, PacifidlogTown_House3_EventScript_DeclineTrade
-	copyvar VAR_0x8005, VAR_0x800A
-	specialvar VAR_RESULT, GetTradeSpecies
-	copyvar VAR_0x800B, VAR_RESULT
-	goto_if_ne VAR_RESULT, VAR_0x8009, PacifidlogTown_House3_EventScript_NotRequestedMon
-	copyvar VAR_0x8004, VAR_0x8008
-	copyvar VAR_0x8005, VAR_0x800A
+	copyvar SPECIAL_VAR_10, SPECIAL_VAR_4
+	goto_if_eq SPECIAL_VAR_4, PARTY_NOTHING_CHOSEN, PacifidlogTown_House3_EventScript_DeclineTrade
+	copyvar SPECIAL_VAR_5, SPECIAL_VAR_10
+	specialvar SPECIAL_VAR_RESULT, GetTradeSpecies
+	copyvar SPECIAL_VAR_11, SPECIAL_VAR_RESULT
+	goto_if_ne SPECIAL_VAR_RESULT, SPECIAL_VAR_9, PacifidlogTown_House3_EventScript_NotRequestedMon
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_8
+	copyvar SPECIAL_VAR_5, SPECIAL_VAR_10
 	special CreateInGameTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	bufferspeciesname STR_VAR_1, VAR_0x8009
+	bufferspeciesname STR_VAR_1, SPECIAL_VAR_9
 	msgbox PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou, MSGBOX_DEFAULT
 	setflag FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED
 	release
@@ -36,7 +36,7 @@ PacifidlogTown_House3_EventScript_DeclineTrade::
 	end
 
 PacifidlogTown_House3_EventScript_NotRequestedMon::
-	bufferspeciesname STR_VAR_1, VAR_0x8009
+	bufferspeciesname STR_VAR_1, SPECIAL_VAR_9
 	msgbox PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon, MSGBOX_DEFAULT
 	release
 	end

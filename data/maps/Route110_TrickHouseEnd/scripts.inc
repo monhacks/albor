@@ -62,7 +62,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle1::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_RARE_CANDY
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -74,7 +74,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle2::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_TIMER_BALL
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -86,7 +86,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle3::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_HARD_STONE
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -98,7 +98,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle4::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_SMOKE_BALL
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -110,7 +110,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle5::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_TM_TAUNT
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -122,7 +122,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle6::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_MAGNET
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -134,7 +134,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle7::
 	msgbox Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	giveitem ITEM_PP_MAX
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_BagFull
 	msgbox Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou, MSGBOX_DEFAULT
 	closemessage
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
@@ -144,10 +144,10 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle7::
 Route110_TrickHouseEnd_EventScript_CompletedPuzzle8::
 	msgbox Route110_TrickHouseEnd_Text_AllNightPolishingFloors, MSGBOX_DEFAULT
 	closemessage
-	call_if_eq VAR_FACING, DIR_SOUTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth
-	call_if_eq VAR_FACING, DIR_NORTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth
-	call_if_eq VAR_FACING, DIR_WEST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest
-	call_if_eq VAR_FACING, DIR_EAST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast
+	call_if_eq SPECIAL_VAR_FACING, DIR_SOUTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth
+	call_if_eq SPECIAL_VAR_FACING, DIR_NORTH, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth
+	call_if_eq SPECIAL_VAR_FACING, DIR_WEST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest
+	call_if_eq SPECIAL_VAR_FACING, DIR_EAST, Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast
 	delay 30
 	msgbox Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry, MSGBOX_DEFAULT
 	closemessage
@@ -157,7 +157,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8::
 	msgbox Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent, MSGBOX_DEFAULT
 	setvar VAR_TRICK_HOUSE_PRIZE_PICKUP, 0
 	call Route110_TrickHouseEnd_EventScript_ChooseTent
-	call_if_eq VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
+	call_if_eq SPECIAL_VAR_RESULT, FALSE, Route110_TrickHouseEnd_EventScript_NoRoomForTent
 	msgbox Route110_TrickHouseEnd_Text_LeavingOnJourney, MSGBOX_DEFAULT
 	call Route110_TrickHouseEnd_EventScript_TrickMasterExit
 	special ResetTrickHouseNuggetFlag
@@ -166,7 +166,7 @@ Route110_TrickHouseEnd_EventScript_CompletedPuzzle8::
 
 Route110_TrickHouseEnd_EventScript_ChooseTent::
 	multichoice 0, 0, MULTI_TENT, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route110_TrickHouseEnd_EventScript_GiveRedTent
 	goto Route110_TrickHouseEnd_EventScript_GiveBlueTent
 

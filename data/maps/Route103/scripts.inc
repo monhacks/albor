@@ -22,8 +22,8 @@ Route103_EventScript_OpenAlteringCave::
 Route103_EventScript_Rival::
 	lockall
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route103_EventScript_RivalMay
-	goto_if_eq VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, Route103_EventScript_RivalMay
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, Route103_EventScript_RivalBrendan
 	end
 
 Route103_EventScript_RivalMay::
@@ -102,7 +102,7 @@ Route103_EventScript_AfterBrendanBattle::
 
 Route103_EventScript_RivalExit::
 	closemessage
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_SOUTH, Route103_EventScript_RivalExitFacingSouth
 	case DIR_NORTH, Route103_EventScript_RivalExitFacingNorth
 	case DIR_WEST, Route103_EventScript_RivalExitFacingEastOrWest
@@ -208,8 +208,8 @@ Route103_EventScript_Daisy::
 
 Route103_EventScript_Amy::
 	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_AmyIntro, Route103_Text_AmyDefeated, Route103_Text_AmyNotEnoughPokemon, Route102_EventScript_AmyRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route102_EventScript_AmyRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route102_EventScript_AmyRematch
 	msgbox Route103_Text_AmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -226,8 +226,8 @@ Route102_EventScript_AmyRematch::
 
 Route103_EventScript_Liv::
 	trainerbattle_double TRAINER_AMY_AND_LIV_1, Route103_Text_LivIntro, Route103_Text_LivDefeated, Route103_Text_LivNotEnoughPokemon, Route102_EventScript_LivRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route102_EventScript_LivRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route102_EventScript_LivRematch
 	msgbox Route103_Text_LivPostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -249,8 +249,8 @@ Route103_EventScript_Andrew::
 
 Route103_EventScript_Miguel::
 	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_MiguelRematch
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route103_EventScript_MiguelRematch
 	msgbox Route103_Text_MiguelPostBattle, MSGBOX_DEFAULT
 	release
 	end

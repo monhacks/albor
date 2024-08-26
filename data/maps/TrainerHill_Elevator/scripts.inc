@@ -26,7 +26,7 @@ TrainerHill_Elevator_EventScript_EnterElevator::
 	waitmovement 0
 	lockall
 	msgbox TrainerHill_Elevator_Text_ReturnToReception, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, TrainerHill_Elevator_EventScript_ExitToRoof
+	goto_if_eq SPECIAL_VAR_RESULT, NO, TrainerHill_Elevator_EventScript_ExitToRoof
 	releaseall
 	applymovement LOCALID_ATTENDANT, TrainerHill_Elevator_Movement_AttendantFaceDown
 	waitmovement 0

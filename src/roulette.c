@@ -1020,9 +1020,9 @@ static void InitRouletteTableData(void)
     u8 i;
     u16 bgColors[3] = {RGB(24, 4, 10), RGB(10, 19, 6), RGB(24, 4, 10)}; // 3rd is never used, same as 1st
 
-    sRoulette->tableId = (gSpecialVar_0x8004 & 1);
+    sRoulette->tableId = (gSpecialVar_4 & 1);
 
-    if (gSpecialVar_0x8004 & ROULETTE_SPECIAL_RATE)
+    if (gSpecialVar_4 & ROULETTE_SPECIAL_RATE)
         sRoulette->isSpecialRate = TRUE;
 
     sRoulette->wheelSpeed = sRouletteTables[sRoulette->tableId].wheelSpeed;
@@ -1780,9 +1780,9 @@ static void ExitRoulette(u8 taskId)
     RouletteFlash_Reset(&sRoulette->flashUtil);
     SetCoins(gTasks[taskId].tCoins);
     if (GetCoins() < sRoulette->minBet)
-        gSpecialVar_0x8004 = TRUE;
+        gSpecialVar_4 = TRUE;
     else
-        gSpecialVar_0x8004 = FALSE;
+        gSpecialVar_4 = FALSE;
     BeginHardwarePaletteFade(0xFF, 0, 0, 16, 0);
     gTasks[taskId].func = Task_ExitRoulette;
 }
@@ -3197,7 +3197,7 @@ static void Task_NotEnoughForMinBet(u8 taskId)
     gTasks[taskId].data[0]++;
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        gSpecialVar_0x8004 = 1;
+        gSpecialVar_4 = 1;
         HideCoinsWindow();
         ClearStdWindowAndFrame(0, TRUE);
         UnlockPlayerFieldControls();
@@ -3209,7 +3209,7 @@ static void Task_PrintMinBet(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        u32 minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
+        u32 minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_4)];
         ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
         StringExpandPlaceholders(gStringVar4, Roulette_Text_PlayMinimumWagerIsX);
         DrawStdWindowFrame(0, FALSE);
@@ -3223,12 +3223,12 @@ static void Task_PrintRouletteEntryMsg(u8 taskId)
 {
     s32 minBet;
     PrintCoinsString(gTasks[taskId].tCoins);
-    minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_0x8004)];
+    minBet = sTableMinBets[GET_MIN_BET_ID(gSpecialVar_4)];
     ConvertIntToDecimalStringN(gStringVar1, minBet, STR_CONV_MODE_LEADING_ZEROS, 1);
 
     if (gTasks[taskId].tCoins >= minBet)
     {
-        if ((gSpecialVar_0x8004 & ROULETTE_SPECIAL_RATE) && (gSpecialVar_0x8004 & 1))
+        if ((gSpecialVar_4 & ROULETTE_SPECIAL_RATE) && (gSpecialVar_4 & 1))
         {
             // Special rate for Game Corner service day (only at second table)
             DrawStdWindowFrame(0, FALSE);

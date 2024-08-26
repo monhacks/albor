@@ -12,8 +12,8 @@ LilycoveCity_PokemonCenter_1F_OnTransition:
 @ SetLilycoveLadyGfx returns TRUE if its the Contest Lady
 LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx::
 	special SetLilycoveLadyGfx
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon::
@@ -25,7 +25,7 @@ LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon::
 	end
 
 LilycoveCity_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress

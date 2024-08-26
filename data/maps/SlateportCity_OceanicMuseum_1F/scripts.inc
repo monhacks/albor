@@ -24,7 +24,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFeeRight::
 SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
 	showmoneybox 0, 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
+	goto_if_eq SPECIAL_VAR_RESULT, YES, SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee
 	closemessage
 	hidemoneybox
 	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PushPlayerBackFromCounter
@@ -34,7 +34,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_PayEntranceFee::
 
 SlateportCity_OceanicMuseum_1F_EventScript_CheckMoneyForFee::
 	checkmoney 50
-	goto_if_eq VAR_RESULT, FALSE, SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, SlateportCity_OceanicMuseum_1F_EventScript_NotEnoughMoney
 	playse SE_SHOP
 	removemoney 50
 	updatemoneybox
@@ -152,14 +152,14 @@ SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGrunt::
 	waitmovement 0
 	msgbox SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM_THIEF
-	goto_if_eq VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
+	goto_if_eq SPECIAL_VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief
 	setflag FLAG_RECEIVED_TM_THIEF
 	msgbox SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain, MSGBOX_DEFAULT
 	closemessage
-	goto_if_eq VAR_FACING, DIR_NORTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth
-	goto_if_eq VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth
-	goto_if_eq VAR_FACING, DIR_WEST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
-	goto_if_eq VAR_FACING, DIR_EAST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
+	goto_if_eq SPECIAL_VAR_FACING, DIR_NORTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth
+	goto_if_eq SPECIAL_VAR_FACING, DIR_SOUTH, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth
+	goto_if_eq SPECIAL_VAR_FACING, DIR_WEST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
+	goto_if_eq SPECIAL_VAR_FACING, DIR_EAST, SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth::

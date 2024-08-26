@@ -4,15 +4,15 @@ LilycoveCity_DepartmentStoreElevator_MapScripts::
 LilycoveCity_DepartmentStoreElevator_EventScript_Attendant::
 	lock
 	faceplayer
-	setvar VAR_0x8004, 0
+	setvar SPECIAL_VAR_4, 0
 	call_if_unset FLAG_TEMP_2, LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor
-	copyvar VAR_0x8005, VAR_DEPT_STORE_FLOOR
+	copyvar SPECIAL_VAR_5, VAR_DEPT_STORE_FLOOR
 	special ShowDeptStoreElevatorFloorSelect
 	message gText_WhichFloorWouldYouLike
 	waitmessage
-	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, GetDeptStoreDefaultFloorChoice
-	switch VAR_RESULT
+	setvar SPECIAL_VAR_4, 0
+	specialvar SPECIAL_VAR_RESULT, GetDeptStoreDefaultFloorChoice
+	switch SPECIAL_VAR_RESULT
 	case 0, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th
 	case 1, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th
 	case 2, LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd
@@ -47,7 +47,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, LilycoveCity_DepartmentStoreElevator_EventScript_5thFloor
 	case 1, LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor
 	case 2, LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor
@@ -58,7 +58,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_1stFloor::
-	setvar VAR_0x8006, DEPT_STORE_FLOORNUM_1F
+	setvar SPECIAL_VAR_6, DEPT_STORE_FLOORNUM_1F
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_1F, 2, 1
 	goto_if_eq VAR_DEPT_STORE_FLOOR, DEPT_STORE_FLOORNUM_1F, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect
 	call LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator
@@ -67,7 +67,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_1stFloor::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_2ndFloor::
-	setvar VAR_0x8006, DEPT_STORE_FLOORNUM_2F
+	setvar SPECIAL_VAR_6, DEPT_STORE_FLOORNUM_2F
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_2F, 2, 1
 	goto_if_eq VAR_DEPT_STORE_FLOOR, DEPT_STORE_FLOORNUM_2F, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect
 	call LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator
@@ -76,7 +76,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_2ndFloor::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor::
-	setvar VAR_0x8006, DEPT_STORE_FLOORNUM_3F
+	setvar SPECIAL_VAR_6, DEPT_STORE_FLOORNUM_3F
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_3F, 2, 1
 	goto_if_eq VAR_DEPT_STORE_FLOOR, DEPT_STORE_FLOORNUM_3F, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect
 	call LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator
@@ -85,7 +85,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor::
-	setvar VAR_0x8006, DEPT_STORE_FLOORNUM_4F
+	setvar SPECIAL_VAR_6, DEPT_STORE_FLOORNUM_4F
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_4F, 2, 1
 	goto_if_eq VAR_DEPT_STORE_FLOOR, DEPT_STORE_FLOORNUM_4F, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect
 	call LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator
@@ -94,7 +94,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor::
 	end
 
 LilycoveCity_DepartmentStoreElevator_EventScript_5thFloor::
-	setvar VAR_0x8006, DEPT_STORE_FLOORNUM_5F
+	setvar SPECIAL_VAR_6, DEPT_STORE_FLOORNUM_5F
 	setdynamicwarp MAP_LILYCOVE_CITY_DEPARTMENT_STORE_5F, 2, 1
 	goto_if_eq VAR_DEPT_STORE_FLOOR, DEPT_STORE_FLOORNUM_5F, LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect
 	call LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator
@@ -110,7 +110,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect::
 LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator::
 	special CloseDeptStoreElevatorWindow
 	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+	applymovement SPECIAL_VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	waitse
 	special MoveElevator

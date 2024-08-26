@@ -1437,7 +1437,7 @@ void ShowEasyChatScreen(void)
     int i;
     u16 *words;
     struct MauvilleManBard *bard;
-    switch (gSpecialVar_0x8004)
+    switch (gSpecialVar_4)
     {
     case EASY_CHAT_TYPE_PROFILE:
         words = gSaveBlock1Ptr->easyChatProfile;
@@ -1452,7 +1452,7 @@ void ShowEasyChatScreen(void)
         words = gSaveBlock1Ptr->easyChatBattleLost;
         break;
     case EASY_CHAT_TYPE_MAIL:
-        words = gSaveBlock1Ptr->mail[gSpecialVar_0x8005].words;
+        words = gSaveBlock1Ptr->mail[gSpecialVar_5].words;
         break;
     case EASY_CHAT_TYPE_BARD_SONG:
         bard = &gSaveBlock1Ptr->oldMan.bard;
@@ -2917,14 +2917,14 @@ static void SetSpecialEasyChatResult(void)
         FlagSet(FLAG_SYS_CHAT_USED);
         break;
     case EASY_CHAT_TYPE_QUESTIONNAIRE:
-        gSpecialVar_0x8004 = 0;
+        gSpecialVar_4 = 0;
         break;
     case EASY_CHAT_TYPE_TRENDY_PHRASE:
         BufferCurrentPhraseToStringVar2();
-        gSpecialVar_0x8004 = TrySetTrendyPhrase(sEasyChatScreen->currentPhrase);
+        gSpecialVar_4 = TrySetTrendyPhrase(sEasyChatScreen->currentPhrase);
         break;
     case EASY_CHAT_TYPE_GOOD_SAYING:
-        gSpecialVar_0x8004 = DidPlayerInputABerryMasterWifePhrase();
+        gSpecialVar_4 = DidPlayerInputABerryMasterWifePhrase();
         break;
     }
 }
@@ -5258,7 +5258,7 @@ void ShowEasyChatProfile(void)
 {
     u16 *easyChatWords;
     int columns, rows;
-    switch (gSpecialVar_0x8004)
+    switch (gSpecialVar_4)
     {
     case 0:
         easyChatWords = gSaveBlock1Ptr->easyChatProfile;

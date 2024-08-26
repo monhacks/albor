@@ -1,8 +1,8 @@
-@ VAR_0x8004 here is used by ChangePokemonNickname
+@ SPECIAL_VAR_4 here is used by ChangePokemonNickname
 Common_EventScript_GetGiftMonPartySlot::
 	getpartysize
-	subvar VAR_RESULT, 1
-	copyvar VAR_0x8004, VAR_RESULT
+	subvar SPECIAL_VAR_RESULT, 1
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_RESULT
 	return
 
 Common_EventScript_NameReceivedBoxMon::
@@ -21,26 +21,26 @@ Common_EventScript_TransferredToPC::
 	return
 
 EventScript_TransferredSomeonesPC::
-	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	goto_if_eq VAR_RESULT, TRUE, EventScript_SomeonesPCBoxFull
+	specialvar SPECIAL_VAR_RESULT, ShouldShowBoxWasFullMessage
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, EventScript_SomeonesPCBoxFull
 	msgbox gText_PkmnFueTransferidoAlPC, MSGBOX_DEFAULT
 	return
 
 EventScript_SomeonesPCBoxFull::
-	specialvar VAR_RESULT, GetPCBoxToSendMon
-	bufferboxname STR_VAR_3, VAR_RESULT
+	specialvar SPECIAL_VAR_RESULT, GetPCBoxToSendMon
+	bufferboxname STR_VAR_3, SPECIAL_VAR_RESULT
 	msgbox gText_PkmnFueTransferidoAlPC, MSGBOX_DEFAULT
 	return
 
 EventScript_TransferredLanettesPC::
-	specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
-	goto_if_eq VAR_RESULT, TRUE, EventScript_LanettesPCBoxFull
+	specialvar SPECIAL_VAR_RESULT, ShouldShowBoxWasFullMessage
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, EventScript_LanettesPCBoxFull
 	msgbox gText_PkmnFueTransferidoAlPC, MSGBOX_DEFAULT
 	return
 
 EventScript_LanettesPCBoxFull::
-	specialvar VAR_RESULT, GetPCBoxToSendMon
-	bufferboxname STR_VAR_3, VAR_RESULT
+	specialvar SPECIAL_VAR_RESULT, GetPCBoxToSendMon
+	bufferboxname STR_VAR_3, SPECIAL_VAR_RESULT
 	msgbox gText_PkmnFueTransferidoAlPC, MSGBOX_DEFAULT
 	return
 

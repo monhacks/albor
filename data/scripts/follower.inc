@@ -16,11 +16,11 @@ EventScript_Follower::
 	playfirstmoncry
 	getfolloweraction
 	checkpartymove MOVE_FLY
-	compare VAR_RESULT 6
+	compare SPECIAL_VAR_RESULT 6
 	goto_if_eq EventScript_FollowerEnd
 	bufferlivemonnickname 0
 	msgbox gText_WantsToFly, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, EventScript_FollowerEnd
 	case YES, EventScript_FollowerFly
 	case MULTI_B_PRESSED, EventScript_FollowerEnd
@@ -379,13 +379,13 @@ FollowerDance:
 
 EventScript_FollowerIsShivering::
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq ShiverVertical
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq ShiverVertical
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq ShiverHorizontal
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq ShiverHorizontal
 	goto EventScript_FollowerGeneric
 
@@ -432,13 +432,13 @@ JumpOnW:
 
 EventScript_FollowerJumpOnPlayer::
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq JumpOnS
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq JumpOnN
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq JumpOnE
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq JumpOnW
 	goto EventScript_FollowerGeneric
 
@@ -464,13 +464,13 @@ CuddleW:
 
 EventScript_FollowerCuddling:: @ similar to Std_MsgboxDefault
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq CuddleS
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq CuddleN
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq CuddleE
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq CuddleW
 	goto EventScript_FollowerGeneric
 
@@ -504,13 +504,13 @@ ShCuddleW:
 
 EventScript_FollowerShiverCuddling::
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq ShCuddleS
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq ShCuddleN
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq ShCuddleE
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq ShCuddleW
 	goto EventScript_FollowerGeneric
 
@@ -536,13 +536,13 @@ CreepCloserW:
 
 EventScript_FollowerGetCloser::
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq CreepCloserS
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq CreepCloserN
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq CreepCloserE
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq CreepCloserW
 	goto EventScript_FollowerGeneric
 
@@ -568,13 +568,13 @@ PokePlayerW:
 
 EventScript_FollowerPokingPlayer::
 	faceplayer
-	compare VAR_FACING, DIR_NORTH
+	compare SPECIAL_VAR_FACING, DIR_NORTH
 	call_if_eq PokePlayerS
-	compare VAR_FACING, DIR_SOUTH
+	compare SPECIAL_VAR_FACING, DIR_SOUTH
 	call_if_eq PokePlayerN
-	compare VAR_FACING, DIR_WEST
+	compare SPECIAL_VAR_FACING, DIR_WEST
 	call_if_eq PokePlayerE
-	compare VAR_FACING, DIR_EAST
+	compare SPECIAL_VAR_FACING, DIR_EAST
 	call_if_eq PokePlayerW
 	goto EventScript_FollowerGeneric
 
@@ -635,8 +635,8 @@ EventScript_FollowerFaceUp::
 	waitmovement OBJ_EVENT_ID_FOLLOWER
 	goto EventScript_FollowerGenericSkipFace
 
-EventScript_FollowerFaceResult:: @ Face towards direction in VAR_RESULT
-	switch VAR_RESULT
+EventScript_FollowerFaceResult:: @ Face towards direction in SPECIAL_VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case DIR_SOUTH, EventScript_FollowerFaceDown
 	case DIR_NORTH, EventScript_FollowerFaceUp
 	case DIR_WEST, EventScript_FollowerFaceLeft

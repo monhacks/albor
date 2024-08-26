@@ -31,7 +31,7 @@ LilycoveCity_ContestLobby_EventScript_ReceptionWelcome::
 LilycoveCity_ContestLobby_EventScript_GivePokeblockCase::
 	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
 	giveitem ITEM_POKEBLOCK_CASE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return
@@ -44,7 +44,7 @@ LilycoveCity_ContestLobby_EventScript_PickUpPrize::
 
 LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter::
 	giveitem ITEM_LUXURY_BALL
-	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter
 	setvar VAR_CONTEST_PRIZE_PICKUP, 0
 	closemessage
 	release
@@ -60,7 +60,7 @@ LilycoveCity_ContestLobby_EventScript_AskEnterContest::
 	message LilycoveCity_ContestLobby_Text_EnterContest1
 	waitmessage
 	multichoice 0, 0, MULTI_ENTERINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
 	case 1, LilycoveCity_ContestLobby_EventScript_ContestInfo
 	case 2, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
@@ -71,7 +71,7 @@ LilycoveCity_ContestLobby_EventScript_ContestInfo::
 	message LilycoveCity_ContestLobby_Text_WhichTopic1
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_INFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_ExplainContests
 	case 1, LilycoveCity_ContestLobby_EventScript_ExplainContestTypes
 	case 2, LilycoveCity_ContestLobby_EventScript_ExplainContestRanks
@@ -106,7 +106,7 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
 	message LilycoveCity_ContestLobby_Text_EnterWhichRank
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_RANK, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, LilycoveCity_ContestLobby_EventScript_EnterNormalRank
 	case 1, LilycoveCity_ContestLobby_EventScript_EnterSuperRank
 	case 2, LilycoveCity_ContestLobby_EventScript_EnterHyperRank
@@ -116,35 +116,35 @@ LilycoveCity_ContestLobby_EventScript_ChooseContestRank::
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterNormalRank::
-	setvar VAR_CONTEST_RANK, CONTEST_RANK_NORMAL
+	setvar SPECIAL_VAR_CONTEST_RANK, CONTEST_RANK_NORMAL
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterSuperRank::
-	setvar VAR_CONTEST_RANK, CONTEST_RANK_SUPER
+	setvar SPECIAL_VAR_CONTEST_RANK, CONTEST_RANK_SUPER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterHyperRank::
-	setvar VAR_CONTEST_RANK, CONTEST_RANK_HYPER
+	setvar SPECIAL_VAR_CONTEST_RANK, CONTEST_RANK_HYPER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
 LilycoveCity_ContestLobby_EventScript_EnterMasterRank::
-	setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
+	setvar SPECIAL_VAR_CONTEST_RANK, CONTEST_RANK_MASTER
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestType
 	end
 
 @ The multichoice selection IDs are equal to the CATEGORY values
-@ So rather than list the cases they just copy VAR_RESULT for a valid selection into VAR_CONTEST_CATEGORY
+@ So rather than list the cases they just copy SPECIAL_VAR_RESULT for a valid selection into SPECIAL_VAR_CONTEST_CATEGORY
 LilycoveCity_ContestLobby_EventScript_ChooseContestType::
 	message LilycoveCity_ContestLobby_Text_EnterWhichContest1
 	waitmessage
 	multichoice 0, 0, MULTI_CONTEST_TYPE, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 5, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
 	case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
-	copyvar VAR_CONTEST_CATEGORY, VAR_RESULT
+	copyvar SPECIAL_VAR_CONTEST_CATEGORY, SPECIAL_VAR_RESULT
 	goto LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	end
 
@@ -157,14 +157,14 @@ LilycoveCity_ContestLobby_EventScript_CantEnterLowRank::
 @ Unused
 LilycoveCity_ContestLobby_EventScript_ConfirmEntry::
 	msgbox LilycoveCity_ContestLobby_Text_ConfirmContestMon, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
 
 LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon::
 	msgbox LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, LilycoveCity_ContestLobby_EventScript_ChooseContestMon
 	case YES, LilycoveCity_ContestLobby_EventScript_EnterMon
 	end
@@ -193,7 +193,7 @@ ContestHall_EventScript_DoContest::
 	return
 
 ContestHall_EventScript_GetContestRankStringId::
-	switch VAR_CONTEST_RANK
+	switch SPECIAL_VAR_CONTEST_RANK
 	case CONTEST_RANK_NORMAL, ContestHall_EventScript_GetNormalStringId
 	case CONTEST_RANK_SUPER, ContestHall_EventScript_GetSuperStringId
 	case CONTEST_RANK_HYPER, ContestHall_EventScript_GetHyperStringId
@@ -201,24 +201,24 @@ ContestHall_EventScript_GetContestRankStringId::
 	return
 
 ContestHall_EventScript_GetNormalStringId::
-	setvar VAR_0x8009, STDSTRING_NORMAL
+	setvar SPECIAL_VAR_9, STDSTRING_NORMAL
 	return
 
 ContestHall_EventScript_GetSuperStringId::
-	setvar VAR_0x8009, STDSTRING_SUPER
+	setvar SPECIAL_VAR_9, STDSTRING_SUPER
 	return
 
 ContestHall_EventScript_GetHyperStringId::
-	setvar VAR_0x8009, STDSTRING_HYPER
+	setvar SPECIAL_VAR_9, STDSTRING_HYPER
 	return
 
 ContestHall_EventScript_GetMasterStringId::
-	setvar VAR_0x8009, STDSTRING_MASTER
+	setvar SPECIAL_VAR_9, STDSTRING_MASTER
 	return
 
-@ This whole switch is equivalent to copyvar VAR_0x8008, VAR_CONTEST_CATEGORY
+@ This whole switch is equivalent to copyvar SPECIAL_VAR_8, SPECIAL_VAR_CONTEST_CATEGORY
 ContestHall_EventScript_GetContestCategory::
-	switch VAR_CONTEST_CATEGORY
+	switch SPECIAL_VAR_CONTEST_CATEGORY
 	case CONTEST_CATEGORY_COOL, ContestHall_EventScript_GetCategoryCool
 	case CONTEST_CATEGORY_BEAUTY, ContestHall_EventScript_GetCategoryBeauty
 	case CONTEST_CATEGORY_CUTE, ContestHall_EventScript_GetCategoryCute
@@ -227,28 +227,28 @@ ContestHall_EventScript_GetContestCategory::
 	return
 
 ContestHall_EventScript_GetCategoryCool::
-	setvar VAR_0x8008, CONTEST_CATEGORY_COOL
+	setvar SPECIAL_VAR_8, CONTEST_CATEGORY_COOL
 	return
 
 ContestHall_EventScript_GetCategoryBeauty::
-	setvar VAR_0x8008, CONTEST_CATEGORY_BEAUTY
+	setvar SPECIAL_VAR_8, CONTEST_CATEGORY_BEAUTY
 	return
 
 ContestHall_EventScript_GetCategoryCute::
-	setvar VAR_0x8008, CONTEST_CATEGORY_CUTE
+	setvar SPECIAL_VAR_8, CONTEST_CATEGORY_CUTE
 	return
 
 ContestHall_EventScript_GetCategorySmart::
-	setvar VAR_0x8008, CONTEST_CATEGORY_SMART
+	setvar SPECIAL_VAR_8, CONTEST_CATEGORY_SMART
 	return
 
 ContestHall_EventScript_GetCategoryTough::
-	setvar VAR_0x8008, CONTEST_CATEGORY_TOUGH
+	setvar SPECIAL_VAR_8, CONTEST_CATEGORY_TOUGH
 	return
 
 ContestHall_EventScript_ContestGettingStarted::
-	buffercontestname STR_VAR_2, VAR_0x8008
-	bufferstdstring STR_VAR_3, VAR_0x8009
+	buffercontestname STR_VAR_2, SPECIAL_VAR_8
+	bufferstdstring STR_VAR_3, SPECIAL_VAR_9
 	call ContestHall_EventScript_GettingStarted
 	lockall
 	applymovement LOCALID_MC, ContestHall_Movement_MCBackUp
@@ -283,8 +283,8 @@ ContestHall_EventScript_ShowContestMons::
 	call ContestHall_EventScript_ContestantReturn
 	call ContestHall_EventScript_TryWaitForLink
 	call ContestHall_EventScript_TryWaitForLink
-	addvar VAR_0x8006, 1
-	goto_if_ne VAR_0x8006, CONTESTANT_COUNT, ContestHall_EventScript_ShowContestMons
+	addvar SPECIAL_VAR_6, 1
+	goto_if_ne SPECIAL_VAR_6, CONTESTANT_COUNT, ContestHall_EventScript_ShowContestMons
 	call ContestHall_EventScript_AudienceVote
 	setvar VAR_TEMP_1, 6
 	return
@@ -296,10 +296,10 @@ ContestHall_EventScript_WaitForLink::
 	return
 
 ContestHall_EventScript_ContestantWalkToCenter::
-	goto_if_eq VAR_0x8006, 0, ContestHall_EventScript_Player1WalkToCenter
-	goto_if_eq VAR_0x8006, 1, ContestHall_EventScript_Player2WalkToCenter
-	goto_if_eq VAR_0x8006, 2, ContestHall_EventScript_Player3WalkToCenter
-	goto_if_eq VAR_0x8006, 3, ContestHall_EventScript_Player4WalkToCenter
+	goto_if_eq SPECIAL_VAR_6, 0, ContestHall_EventScript_Player1WalkToCenter
+	goto_if_eq SPECIAL_VAR_6, 1, ContestHall_EventScript_Player2WalkToCenter
+	goto_if_eq SPECIAL_VAR_6, 2, ContestHall_EventScript_Player3WalkToCenter
+	goto_if_eq SPECIAL_VAR_6, 3, ContestHall_EventScript_Player4WalkToCenter
 	return
 
 ContestHall_EventScript_Player1WalkToCenter::
@@ -308,7 +308,7 @@ ContestHall_EventScript_Player1WalkToCenter::
 	applymovement LOCALID_CONTESTANT_1, ContestHall_Movement_Player1WalkToCenter
 	waitmovement 0
 	releaseall
-	setvar VAR_0x800B, LOCALID_CONTESTANT_1
+	setvar SPECIAL_VAR_11, LOCALID_CONTESTANT_1
 	return
 
 ContestHall_EventScript_Player2WalkToCenter::
@@ -317,7 +317,7 @@ ContestHall_EventScript_Player2WalkToCenter::
 	applymovement LOCALID_CONTESTANT_2, ContestHall_Movement_Player2WalkToCenter
 	waitmovement 0
 	releaseall
-	setvar VAR_0x800B, LOCALID_CONTESTANT_2
+	setvar SPECIAL_VAR_11, LOCALID_CONTESTANT_2
 	return
 
 ContestHall_EventScript_Player3WalkToCenter::
@@ -326,7 +326,7 @@ ContestHall_EventScript_Player3WalkToCenter::
 	applymovement LOCALID_CONTESTANT_3, ContestHall_Movement_Player3WalkToCenter
 	waitmovement 0
 	releaseall
-	setvar VAR_0x800B, LOCALID_CONTESTANT_3
+	setvar SPECIAL_VAR_11, LOCALID_CONTESTANT_3
 	return
 
 ContestHall_EventScript_Player4WalkToCenter::
@@ -335,7 +335,7 @@ ContestHall_EventScript_Player4WalkToCenter::
 	applymovement LOCALID_CONTESTANT_4, ContestHall_Movement_Player4WalkToCenter
 	waitmovement 0
 	releaseall
-	setvar VAR_0x800B, LOCALID_CONTESTANT_4
+	setvar SPECIAL_VAR_11, LOCALID_CONTESTANT_4
 	return
 
 ContestHall_EventScript_ShowContestMonPic::
@@ -436,62 +436,62 @@ ContestHall_EventScript_DisplayHearts::
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsNormal::
-	goto_if_gt VAR_0x8004, 80, ContestHall_EventScript_Set8Hearts
-	goto_if_gt VAR_0x8004, 70, ContestHall_EventScript_Set7Hearts
-	goto_if_gt VAR_0x8004, 60, ContestHall_EventScript_Set6Hearts
-	goto_if_gt VAR_0x8004, 50, ContestHall_EventScript_Set5Hearts
-	goto_if_gt VAR_0x8004, 40, ContestHall_EventScript_Set4Hearts
-	goto_if_gt VAR_0x8004, 30, ContestHall_EventScript_Set3Hearts
-	goto_if_gt VAR_0x8004, 20, ContestHall_EventScript_Set2Hearts
-	goto_if_gt VAR_0x8004, 10, ContestHall_EventScript_Set1Heart
+	goto_if_gt SPECIAL_VAR_4, 80, ContestHall_EventScript_Set8Hearts
+	goto_if_gt SPECIAL_VAR_4, 70, ContestHall_EventScript_Set7Hearts
+	goto_if_gt SPECIAL_VAR_4, 60, ContestHall_EventScript_Set6Hearts
+	goto_if_gt SPECIAL_VAR_4, 50, ContestHall_EventScript_Set5Hearts
+	goto_if_gt SPECIAL_VAR_4, 40, ContestHall_EventScript_Set4Hearts
+	goto_if_gt SPECIAL_VAR_4, 30, ContestHall_EventScript_Set3Hearts
+	goto_if_gt SPECIAL_VAR_4, 20, ContestHall_EventScript_Set2Hearts
+	goto_if_gt SPECIAL_VAR_4, 10, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsSuper::
-	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set8Hearts
-	goto_if_gt VAR_0x8004, 210, ContestHall_EventScript_Set7Hearts
-	goto_if_gt VAR_0x8004, 190, ContestHall_EventScript_Set6Hearts
-	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set5Hearts
-	goto_if_gt VAR_0x8004, 150, ContestHall_EventScript_Set4Hearts
-	goto_if_gt VAR_0x8004, 130, ContestHall_EventScript_Set3Hearts
-	goto_if_gt VAR_0x8004, 110, ContestHall_EventScript_Set2Hearts
-	goto_if_gt VAR_0x8004, 90, ContestHall_EventScript_Set1Heart
+	goto_if_gt SPECIAL_VAR_4, 230, ContestHall_EventScript_Set8Hearts
+	goto_if_gt SPECIAL_VAR_4, 210, ContestHall_EventScript_Set7Hearts
+	goto_if_gt SPECIAL_VAR_4, 190, ContestHall_EventScript_Set6Hearts
+	goto_if_gt SPECIAL_VAR_4, 170, ContestHall_EventScript_Set5Hearts
+	goto_if_gt SPECIAL_VAR_4, 150, ContestHall_EventScript_Set4Hearts
+	goto_if_gt SPECIAL_VAR_4, 130, ContestHall_EventScript_Set3Hearts
+	goto_if_gt SPECIAL_VAR_4, 110, ContestHall_EventScript_Set2Hearts
+	goto_if_gt SPECIAL_VAR_4, 90, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsHyper::
-	goto_if_gt VAR_0x8004, 380, ContestHall_EventScript_Set8Hearts
-	goto_if_gt VAR_0x8004, 350, ContestHall_EventScript_Set7Hearts
-	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set6Hearts
-	goto_if_gt VAR_0x8004, 290, ContestHall_EventScript_Set5Hearts
-	goto_if_gt VAR_0x8004, 260, ContestHall_EventScript_Set4Hearts
-	goto_if_gt VAR_0x8004, 230, ContestHall_EventScript_Set3Hearts
-	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
-	goto_if_gt VAR_0x8004, 170, ContestHall_EventScript_Set1Heart
+	goto_if_gt SPECIAL_VAR_4, 380, ContestHall_EventScript_Set8Hearts
+	goto_if_gt SPECIAL_VAR_4, 350, ContestHall_EventScript_Set7Hearts
+	goto_if_gt SPECIAL_VAR_4, 320, ContestHall_EventScript_Set6Hearts
+	goto_if_gt SPECIAL_VAR_4, 290, ContestHall_EventScript_Set5Hearts
+	goto_if_gt SPECIAL_VAR_4, 260, ContestHall_EventScript_Set4Hearts
+	goto_if_gt SPECIAL_VAR_4, 230, ContestHall_EventScript_Set3Hearts
+	goto_if_gt SPECIAL_VAR_4, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt SPECIAL_VAR_4, 170, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsMaster::
-	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
-	goto_if_gt VAR_0x8004, 560, ContestHall_EventScript_Set7Hearts
-	goto_if_gt VAR_0x8004, 520, ContestHall_EventScript_Set6Hearts
-	goto_if_gt VAR_0x8004, 480, ContestHall_EventScript_Set5Hearts
-	goto_if_gt VAR_0x8004, 440, ContestHall_EventScript_Set4Hearts
-	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set3Hearts
-	goto_if_gt VAR_0x8004, 360, ContestHall_EventScript_Set2Hearts
-	goto_if_gt VAR_0x8004, 320, ContestHall_EventScript_Set1Heart
+	goto_if_gt SPECIAL_VAR_4, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt SPECIAL_VAR_4, 560, ContestHall_EventScript_Set7Hearts
+	goto_if_gt SPECIAL_VAR_4, 520, ContestHall_EventScript_Set6Hearts
+	goto_if_gt SPECIAL_VAR_4, 480, ContestHall_EventScript_Set5Hearts
+	goto_if_gt SPECIAL_VAR_4, 440, ContestHall_EventScript_Set4Hearts
+	goto_if_gt SPECIAL_VAR_4, 400, ContestHall_EventScript_Set3Hearts
+	goto_if_gt SPECIAL_VAR_4, 360, ContestHall_EventScript_Set2Hearts
+	goto_if_gt SPECIAL_VAR_4, 320, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
 ContestHall_EventScript_GetNumberOfHeartsLink::
-	goto_if_gt VAR_0x8004, 600, ContestHall_EventScript_Set8Hearts
-	goto_if_gt VAR_0x8004, 550, ContestHall_EventScript_Set7Hearts
-	goto_if_gt VAR_0x8004, 500, ContestHall_EventScript_Set6Hearts
-	goto_if_gt VAR_0x8004, 450, ContestHall_EventScript_Set5Hearts
-	goto_if_gt VAR_0x8004, 400, ContestHall_EventScript_Set4Hearts
-	goto_if_gt VAR_0x8004, 300, ContestHall_EventScript_Set3Hearts
-	goto_if_gt VAR_0x8004, 200, ContestHall_EventScript_Set2Hearts
-	goto_if_gt VAR_0x8004, 100, ContestHall_EventScript_Set1Heart
+	goto_if_gt SPECIAL_VAR_4, 600, ContestHall_EventScript_Set8Hearts
+	goto_if_gt SPECIAL_VAR_4, 550, ContestHall_EventScript_Set7Hearts
+	goto_if_gt SPECIAL_VAR_4, 500, ContestHall_EventScript_Set6Hearts
+	goto_if_gt SPECIAL_VAR_4, 450, ContestHall_EventScript_Set5Hearts
+	goto_if_gt SPECIAL_VAR_4, 400, ContestHall_EventScript_Set4Hearts
+	goto_if_gt SPECIAL_VAR_4, 300, ContestHall_EventScript_Set3Hearts
+	goto_if_gt SPECIAL_VAR_4, 200, ContestHall_EventScript_Set2Hearts
+	goto_if_gt SPECIAL_VAR_4, 100, ContestHall_EventScript_Set1Heart
 	setvar VAR_TEMP_0, 0
 	return
 
@@ -629,7 +629,7 @@ ContestHall_EventScript_ContestantReturn::
 ContestHall_EventScript_Player1WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player1WalkBack
+	applymovement SPECIAL_VAR_11, ContestHall_Movement_Player1WalkBack
 	waitmovement 0
 	releaseall
 	return
@@ -637,7 +637,7 @@ ContestHall_EventScript_Player1WalkBack::
 ContestHall_EventScript_Player2WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player2WalkBack
+	applymovement SPECIAL_VAR_11, ContestHall_Movement_Player2WalkBack
 	waitmovement 0
 	releaseall
 	return
@@ -645,7 +645,7 @@ ContestHall_EventScript_Player2WalkBack::
 ContestHall_EventScript_Player3WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player3WalkBack
+	applymovement SPECIAL_VAR_11, ContestHall_Movement_Player3WalkBack
 	waitmovement 0
 	releaseall
 	return
@@ -653,7 +653,7 @@ ContestHall_EventScript_Player3WalkBack::
 ContestHall_EventScript_Player4WalkBack::
 	call ContestHall_EventScript_TryWaitForLink
 	lockall
-	applymovement VAR_0x800B, ContestHall_Movement_Player4WalkBack
+	applymovement SPECIAL_VAR_11, ContestHall_Movement_Player4WalkBack
 	waitmovement 0
 	releaseall
 	return
@@ -863,7 +863,7 @@ ContestHall_EventScript_CheckPlayerWon::
 	return
 
 ContestHall_EventScript_CheckRankIsMaster::
-	goto_if_eq VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_DontSkipPrize
+	goto_if_eq SPECIAL_VAR_CONTEST_RANK, CONTEST_RANK_MASTER, ContestHall_EventScript_DontSkipPrize
 	setflag FLAG_TEMP_2
 	return
 
@@ -890,7 +890,7 @@ ContestHall_EventScript_Ret::
 	return
 
 ContestHall_EventScript_WinnerApproachForPrize::
-	switch VAR_0x8005
+	switch SPECIAL_VAR_5
 	case 0, ContestHall_EventScript_Player1ApproachForPrize
 	case 1, ContestHall_EventScript_Player2ApproachForPrize
 	case 2, ContestHall_EventScript_Player3ApproachForPrize
@@ -942,7 +942,7 @@ ContestHall_EventScript_NoRoomForLuxuryBall::
 
 ContestHall_EventScript_GiveLuxuryBall::
 	giveitem ITEM_LUXURY_BALL
-	goto_if_eq VAR_RESULT, FALSE, ContestHall_EventScript_NoRoomForLuxuryBall
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, ContestHall_EventScript_NoRoomForLuxuryBall
 	lockall
 	msgbox ContestHall_Text_CongratsPleaseCompeteAgain, MSGBOX_DEFAULT
 	releaseall

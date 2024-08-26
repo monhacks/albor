@@ -23,7 +23,7 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
-#define GOING_DOWN gSpecialVar_0x8004
+#define GOING_DOWN gSpecialVar_4
 
 #define STATE_END 0xFF
 

@@ -3,9 +3,9 @@ Underwater_SealedChamber_MapScripts::
 	.byte 0
 
 Underwater_SealedChamber_OnDive:
-	getplayerxy VAR_0x8004, VAR_0x8005
-	goto_if_ne VAR_0x8004, 12, Underwater_SealedChamber_EventScript_SurfaceRoute134
-	goto_if_ne VAR_0x8005, 44, Underwater_SealedChamber_EventScript_SurfaceRoute134
+	getplayerxy SPECIAL_VAR_4, SPECIAL_VAR_5
+	goto_if_ne SPECIAL_VAR_4, 12, Underwater_SealedChamber_EventScript_SurfaceRoute134
+	goto_if_ne SPECIAL_VAR_5, 44, Underwater_SealedChamber_EventScript_SurfaceRoute134
 	goto Underwater_SealedChamber_EventScript_SurfaceSealedChamber
 
 Underwater_SealedChamber_EventScript_SurfaceRoute134::

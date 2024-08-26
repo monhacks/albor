@@ -44,7 +44,7 @@ Route104_EventScript_DontSetRivalPos::
 
 Route104_EventScript_Rival::
 	lockall
-	setvar VAR_0x8008, 1
+	setvar SPECIAL_VAR_8, 1
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_RivalEncounter
@@ -64,7 +64,7 @@ Route104_EventScript_RivalTrigger::
 	applymovement LOCALID_RIVAL, Route104_Movement_RivalExitBrineysCottage
 	waitmovement 0
 	delay 20
-	setvar VAR_0x8008, 0
+	setvar SPECIAL_VAR_8, 0
 	call RustboroCity_EventScript_PlayRivalMusic
 	playse SE_PIN
 	applymovement LOCALID_RIVAL, Common_Movement_ExclamationMark
@@ -76,8 +76,8 @@ Route104_EventScript_RivalTrigger::
 @ Unused, shares script with Rustboro encounter instead
 Route104_EventScript_PlayRivalMusic::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route104_EventScript_PlayMayMusic
-	goto_if_eq VAR_RESULT, FEMALE, Route104_EventScript_PlayBrendanMusic
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, Route104_EventScript_PlayMayMusic
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, Route104_EventScript_PlayBrendanMusic
 	return
 
 Route104_EventScript_PlayMayMusic::
@@ -90,8 +90,8 @@ Route104_EventScript_PlayBrendanMusic::
 
 Route104_EventScript_RivalEncounter::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, Route104_EventScript_MayEncounter
-	goto_if_eq VAR_RESULT, FEMALE, Route104_EventScript_BrendanEncounter
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, Route104_EventScript_MayEncounter
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, Route104_EventScript_BrendanEncounter
 	end
 
 Route104_EventScript_MayEncounter::
@@ -116,7 +116,7 @@ Route104_EventScript_MayEncounter::
 	waitmovement 0
 	copyobjectxytoperm LOCALID_RIVAL
 	msgbox Route104_Text_MayMinesDecentLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleMay
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route104_EventScript_BattleMay
 	msgbox Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT
 	call Route104_EventScript_RestoreMusic
 	releaseall
@@ -138,7 +138,7 @@ Route104_Movement_PlayerFaceRival:
 
 Route104_EventScript_MayAskToBattle::
 	msgbox Route104_Text_MayLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleMay
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route104_EventScript_BattleMay
 	msgbox Route104_Text_MayHaventRaisedPokemon, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -153,7 +153,7 @@ Route104_EventScript_BattleMay::
 
 Route104_EventScript_MayDefeated::
 	msgbox Route104_Text_MayPostBattle, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
+	call_if_eq SPECIAL_VAR_8, 0, Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
@@ -202,7 +202,7 @@ Route104_EventScript_BrendanEncounter::
 	waitmovement 0
 	copyobjectxytoperm LOCALID_RIVAL
 	msgbox Route104_Text_BrendanDoingGreatLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route104_EventScript_BattleBrendan
 	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
 	call Route104_EventScript_RestoreMusic
 	releaseall
@@ -210,7 +210,7 @@ Route104_EventScript_BrendanEncounter::
 
 Route104_EventScript_BrendanAskToBattle::
 	msgbox Route104_Text_BrendanLetsBattle, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, Route104_EventScript_BattleBrendan
+	goto_if_eq SPECIAL_VAR_RESULT, YES, Route104_EventScript_BattleBrendan
 	msgbox Route104_Text_BrendanNoConfidence, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -225,7 +225,7 @@ Route104_EventScript_BattleBrendan::
 
 Route104_EventScript_BrendanDefeated::
 	msgbox Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT
-	call_if_eq VAR_0x8008, 0, Route104_EventScript_RestoreMusic
+	call_if_eq SPECIAL_VAR_8, 0, Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
@@ -263,7 +263,7 @@ Route104_EventScript_ExpertF::
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_ReceivedBerry
 	msgbox Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_CHESTO_BERRY
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT
 	release
@@ -280,7 +280,7 @@ Route104_EventScript_WhiteHerbFlorist::
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
 	msgbox Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT
 	giveitem ITEM_WHITE_HERB
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
@@ -332,7 +332,7 @@ Route104_EventScript_Boy2::
 	goto_if_set FLAG_RECEIVED_TM_BULLET_SEED, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
 	giveitem ITEM_TM_BULLET_SEED
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_BULLET_SEED
 	release
 	end
@@ -404,7 +404,7 @@ Route104_EventScript_ArriveInDewford::
 	call Common_EventScript_StopBrineysBoatMusic
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	hideobjectat LOCALID_BOAT_R104, MAP_ROUTE104
-	copyvar VAR_BRINEY_LOCATION, VAR_0x8008
+	copyvar VAR_BRINEY_LOCATION, SPECIAL_VAR_8
 	resetobjectsubpriority OBJ_EVENT_ID_PLAYER, MAP_ROUTE104
 	resetobjectsubpriority LOCALID_BRINEY_DEWFORD, MAP_DEWFORD_TOWN
 	copyobjectxytoperm LOCALID_BRINEY_DEWFORD
@@ -858,11 +858,11 @@ Route104_EventScript_Billy::
 
 Route104_EventScript_Haley::
 	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchHaley
-	setvar VAR_0x8004, TRAINER_HALEY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterHaley
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route104_EventScript_RematchHaley
+	setvar SPECIAL_VAR_4, TRAINER_HALEY_1
+	specialvar SPECIAL_VAR_RESULT, IsTrainerRegistered
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Route104_EventScript_TryRegisterHaley
 	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -899,11 +899,11 @@ Route104_EventScript_RematchHaley::
 
 Route104_EventScript_Winston::
 	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchWinston
-	setvar VAR_0x8004, TRAINER_WINSTON_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterWinston
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route104_EventScript_RematchWinston
+	setvar SPECIAL_VAR_4, TRAINER_WINSTON_1
+	specialvar SPECIAL_VAR_RESULT, IsTrainerRegistered
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Route104_EventScript_TryRegisterWinston
 	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -940,11 +940,11 @@ Route104_EventScript_RematchWinston::
 
 Route104_EventScript_Cindy::
 	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
-	setvar VAR_0x8004, TRAINER_CINDY_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route104_EventScript_TryRegisterCindy
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route104_EventScript_RematchCindy
+	setvar SPECIAL_VAR_4, TRAINER_CINDY_1
+	specialvar SPECIAL_VAR_RESULT, IsTrainerRegistered
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Route104_EventScript_TryRegisterCindy
 	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
 	release
 	end

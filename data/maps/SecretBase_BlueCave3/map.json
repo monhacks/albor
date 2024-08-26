@@ -146,7 +146,7 @@
       "flag": "FLAG_DECORATION_10"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_VAR_A",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_10",
       "x": 1,
       "y": 3,
       "elevation": 3,
@@ -159,7 +159,7 @@
       "flag": "FLAG_DECORATION_11"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_VAR_B",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_11",
       "x": 1,
       "y": 4,
       "elevation": 3,
@@ -172,7 +172,7 @@
       "flag": "FLAG_DECORATION_12"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_VAR_C",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_12",
       "x": 1,
       "y": 5,
       "elevation": 3,
@@ -185,7 +185,7 @@
       "flag": "FLAG_DECORATION_13"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_VAR_D",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_13",
       "x": 1,
       "y": 6,
       "elevation": 3,

@@ -3,6 +3,8 @@
 
 #include "constants/pokemon.h"
 
+//Eliminar todo
+
 #define FRONTIER_CHALLENGE(facility, mode) ((facility << 8) + mode)
 
 // Battle Frontier facility ids.

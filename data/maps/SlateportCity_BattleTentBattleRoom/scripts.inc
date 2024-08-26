@@ -16,8 +16,8 @@ SlateportCity_BattleTentBattleRoom_OnTransition:
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale::
@@ -58,11 +58,11 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom::
 	waitmessage
 	closemessage
 	special HealPlayerParty
-	setvar VAR_0x8004, SPECIAL_BATTLE_FACTORY
-	setvar VAR_0x8005, 0
+	setvar SPECIAL_VAR_4, SPECIAL_BATTLE_FACTORY
+	setvar SPECIAL_VAR_5, 0
 	special DoSpecialTrainerBattle
 	waitstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 1, SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent
 SlateportCity_BattleTent_EventScript_WarpToLobbyLost::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
@@ -73,11 +73,11 @@ SlateportCity_BattleTent_EventScript_WarpToLobbyLost::
 
 SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent::
 	frontier_get FRONTIER_DATA_BATTLE_NUM
-	addvar VAR_RESULT, 1
-	frontier_set FRONTIER_DATA_BATTLE_NUM, VAR_RESULT
-	switch VAR_RESULT
+	addvar SPECIAL_VAR_RESULT, 1
+	frontier_set FRONTIER_DATA_BATTLE_NUM, SPECIAL_VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 3, SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon
-	setvar VAR_0x8006, 1
+	setvar SPECIAL_VAR_6, 1
 	warp MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR, 2, 3
 	waitstate
 @ forced stop

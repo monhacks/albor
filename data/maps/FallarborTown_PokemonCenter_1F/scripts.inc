@@ -11,7 +11,7 @@ FallarborTown_PokemonCenter_1F_OnTransition:
 	end
 
 FallarborTown_PokemonCenter_1F_EventScript_Nurse::
-	setvar VAR_0x800B, LOCALID_NURSE
+	setvar SPECIAL_VAR_11, LOCALID_NURSE
 	call Common_EventScript_PkmnCenterNurse
 	waitmessage
 	waitbuttonpress
@@ -31,7 +31,7 @@ FallarborTown_PokemonCenter_1F_EventScript_Lanette::
 	faceplayer
 	msgbox FallarborTown_PokemonCenter_1F_Text_LanetteGreeting, MSGBOX_DEFAULT
 	closemessage
-	switch VAR_FACING
+	switch SPECIAL_VAR_FACING
 	case DIR_NORTH, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth
 	case DIR_WEST, FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest
 	end

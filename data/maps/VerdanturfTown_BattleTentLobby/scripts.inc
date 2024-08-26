@@ -50,7 +50,7 @@ VerdanturfTown_BattleTentLobby_EventScript_WonChallenge::
 VerdanturfTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
 	verdanturftent_giveprize
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FALSE, VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	message BattleFrontier_BattleDomeLobby_Text_ReceivedPrize  @ Odd that it used Dome's copy instead of Palace's
@@ -107,14 +107,14 @@ VerdanturfTown_BattleTentLobby_EventScript_Attendant::
 	lock
 	faceplayer
 	verdanturftent_getprize
-	goto_if_ne VAR_RESULT, ITEM_NONE, VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
+	goto_if_ne SPECIAL_VAR_RESULT, ITEM_NONE, VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting
 	special SavePlayerParty
 	msgbox VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent, MSGBOX_DEFAULT
 VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
 	message VerdanturfTown_BattleTentLobby_Text_TakeChallenge
 	waitmessage
 	multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge
 	case 2, VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge
@@ -123,19 +123,19 @@ VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge::
 VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_PALACE
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
-	setvar VAR_RESULT, 2
+	setvar SPECIAL_VAR_RESULT, 2
 	frontier_checkineligible
-	goto_if_eq VAR_0x8004, TRUE, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons
+	goto_if_eq SPECIAL_VAR_4, TRUE, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_TENT
 	msgbox VerdanturfTown_BattleTentLobby_Text_SelectThreeMons, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
-	setvar VAR_0x8004, 1
-	setvar VAR_0x8005, FRONTIER_PARTY_SIZE
+	setvar SPECIAL_VAR_4, 1
+	setvar SPECIAL_VAR_5, FRONTIER_PARTY_SIZE
 	special ChoosePartyForBattleFrontier
 	waitstate
-	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
+	goto_if_eq SPECIAL_VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	msgbox VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case NO, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
 	case YES, VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge
 	case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge
@@ -151,7 +151,7 @@ VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	delay 2
 	call Common_EventScript_SaveGame
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	goto_if_eq VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
+	goto_if_eq SPECIAL_VAR_RESULT, 0, VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
 VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
@@ -168,7 +168,7 @@ VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge::
 	goto VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge
 
 VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons::
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case FRONTIER_LVL_50, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50
 	case FRONTIER_LVL_OPEN, VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen
 
@@ -228,7 +228,7 @@ VerdanturfTown_BattleTentLobby_EventScript_AttractGiver::
 	goto_if_set FLAG_RECEIVED_TM_ATTRACT, VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep, MSGBOX_DEFAULT
 	giveitem ITEM_TM_ATTRACT
-	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM_ATTRACT
 	msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
 	release
@@ -279,10 +279,10 @@ VerdanturfTown_BattleTentLobby_EventScript_RulesBoard::
 VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard::
 	message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
 	waitmessage
-	setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
+	setvar SPECIAL_VAR_4, SCROLL_MULTI_BATTLE_TENT_RULES
 	special ShowScrollableMultichoice
 	waitstate
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, VerdanturfTown_BattleTentLobby_EventScript_RulesLevel
 	case 1, VerdanturfTown_BattleTentLobby_EventScript_RulesBasics
 	case 2, VerdanturfTown_BattleTentLobby_EventScript_RulesNature

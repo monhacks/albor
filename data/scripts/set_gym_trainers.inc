@@ -1,5 +1,5 @@
 Common_EventScript_SetGymTrainers::
-	switch VAR_0x8008
+	switch SPECIAL_VAR_8
 	case 1, RustboroCity_Gym_SetGymTrainers
 	case 2, DewfordTown_Gym_SetGymTrainers
 	case 3, MauvilleCity_Gym_SetGymTrainers

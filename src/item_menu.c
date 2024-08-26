@@ -561,7 +561,7 @@ void CB2_GoToSellMenu(void)
 void ApprenticeOpenBagMenu(void)
 {
     GoToBagMenu(ITEMMENULOCATION_APPRENTICE, POCKETS_COUNT, CB2_ApprenticeExitBagMenu);
-    gSpecialVar_0x8005 = ITEM_NONE;
+    gSpecialVar_5 = ITEM_NONE;
     gSpecialVar_Result = FALSE;
 }
 
@@ -2216,7 +2216,7 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
 // they ask what item they should make their Pokémon hold
 static void ItemMenu_Show(u8 taskId)
 {
-    gSpecialVar_0x8005 = gSpecialVar_ItemId;
+    gSpecialVar_5 = gSpecialVar_ItemId;
     gSpecialVar_Result = TRUE;
     RemoveContextWindow();
     Task_FadeAndCloseBagMenu(taskId);

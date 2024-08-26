@@ -12,7 +12,7 @@ Route117_OnTransition:
 	setflag FLAG_TEMP_1
 	setflag FLAG_TEMP_2
 	getdaycaregfx VAR_OBJ_GFX_ID_0, VAR_OBJ_GFX_ID_1, VAR_TEMP_0, VAR_TEMP_1
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 2, Route117_EventScript_ShowDaycareMon1
 	case 1, Route117_EventScript_ShowDaycareMon0
 	end
@@ -20,10 +20,10 @@ Route117_OnTransition:
 Route117_EventScript_ShowDaycareMon1:
 	@ set pokemon movement type based on compatibility
 	special SetDaycareCompatibilityString
-	call_if_eq VAR_RESULT, PARENTS_INCOMPATIBLE, Route117_EventScript_DaycareMonIncompatible
+	call_if_eq SPECIAL_VAR_RESULT, PARENTS_INCOMPATIBLE, Route117_EventScript_DaycareMonIncompatible
 	@ Don't do anything if PARENTS_LOW_COMPATIBILITY
-	call_if_eq VAR_RESULT, PARENTS_MED_COMPATIBILITY, Route117_EventScript_DaycareMonMedCompatibility
-	call_if_eq VAR_RESULT, PARENTS_MAX_COMPATIBILITY, Route117_EventScript_DaycareMonMaxCompatibility
+	call_if_eq SPECIAL_VAR_RESULT, PARENTS_MED_COMPATIBILITY, Route117_EventScript_DaycareMonMedCompatibility
+	call_if_eq SPECIAL_VAR_RESULT, PARENTS_MAX_COMPATIBILITY, Route117_EventScript_DaycareMonMaxCompatibility
 	clearflag FLAG_TEMP_2
 Route117_EventScript_ShowDaycareMon0:
 	clearflag FLAG_TEMP_1
@@ -76,8 +76,8 @@ Route117_EventScript_DayCareSign::
 
 Route117_EventScript_Isaac::
 	trainerbattle_single TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, Route117_EventScript_RegisterIsaac
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchIsaac
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchIsaac
 	msgbox Route117_Text_IsaacPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -97,8 +97,8 @@ Route117_EventScript_RematchIsaac::
 
 Route117_EventScript_Lydia::
 	trainerbattle_single TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, Route117_EventScript_RegisterLydia
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchLydia
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchLydia
 	msgbox Route117_Text_LydiaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -118,8 +118,8 @@ Route117_EventScript_RematchLydia::
 
 Route117_EventScript_Dylan::
 	trainerbattle_single TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, Route117_EventScript_RegisterDylan
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchDylan
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchDylan
 	msgbox Route117_Text_DylanPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -139,8 +139,8 @@ Route117_EventScript_RematchDylan::
 
 Route117_EventScript_Maria::
 	trainerbattle_single TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, Route117_EventScript_RegisterMaria
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchMaria
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchMaria
 	msgbox Route117_Text_MariaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -165,8 +165,8 @@ Route117_EventScript_Derek::
 
 Route117_EventScript_Anna::
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_AnnaIntro, Route117_Text_AnnaDefeat, Route117_Text_AnnaNotEnoughMons, Route117_EventScript_RegisterAnna
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchAnna
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchAnna
 	msgbox Route117_Text_AnnaPostBattle, MSGBOX_DEFAULT
 	release
 	end
@@ -184,8 +184,8 @@ Route117_EventScript_RematchAnna::
 
 Route117_EventScript_Meg::
 	trainerbattle_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegIntro, Route117_Text_MegDefeat, Route117_Text_MegNotEnoughMons, Route117_EventScript_RegisterMeg
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchMeg
+	specialvar SPECIAL_VAR_RESULT, ShouldTryRematchBattle
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route117_EventScript_RematchMeg
 	msgbox Route117_Text_MegPostBattle, MSGBOX_DEFAULT
 	release
 	end

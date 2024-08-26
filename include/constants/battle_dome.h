@@ -7,6 +7,8 @@
 #define DOME_FINAL         3
 #define DOME_ROUNDS_COUNT  4
 
+//Eliminar todo
+
 //#define DOME_TOURNAMENT_TRAINERS_COUNT 16 -- defined in global
 #define DOME_TOURNAMENT_MATCHES_COUNT  DOME_TOURNAMENT_TRAINERS_COUNT - 1
 

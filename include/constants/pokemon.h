@@ -210,6 +210,7 @@
 #define GROWTH_FAST         4
 #define GROWTH_SLOW         5
 
+//Fuera
 // Body colors for Pokédex search
 #define BODY_COLOR_RED      0
 #define BODY_COLOR_BLUE     1
@@ -227,7 +228,9 @@
 #define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
 #define EVO_NONE                          0xFFFE // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
 
-enum EvolutionMethods {
+//Chequear, y los que no se usen, fuera
+enum EvolutionMethods
+{
     EVO_FRIENDSHIP,                      // Pokémon levels up with friendship ≥ 220
     EVO_FRIENDSHIP_DAY,                  // Pokémon levels up during the day with friendship ≥ 220
     EVO_FRIENDSHIP_NIGHT,                // Pokémon levels up at night with friendship ≥ 220
@@ -282,7 +285,8 @@ enum EvolutionMethods {
     EVO_OVERWORLD_STEPS,                 // Pokémon levels up after having taken a specific amount of steps in the overworld
 };
 
-enum EvolutionMode {
+enum EvolutionMode
+{
     EVO_MODE_NORMAL,
     EVO_MODE_CANT_STOP,
     EVO_MODE_TRADE,

@@ -40,7 +40,7 @@ ProfBirch_EventScript_RatePokedexOrRegister::
 
 ProfBirch_EventScript_AskRatePokedex::
 	msgbox gBirchDexRatingText_AreYouCurious, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ProfBirch_EventScript_DeclineRating
+	goto_if_eq SPECIAL_VAR_RESULT, NO, ProfBirch_EventScript_DeclineRating
 	call ProfBirch_EventScript_RatePokedex
 	release
 	end
@@ -51,28 +51,28 @@ ProfBirch_EventScript_DeclineRating::
 	end
 
 ProfBirch_EventScript_ShowRatingMessage::
-	copyvar VAR_0x8004, VAR_0x8009
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_9
 	special ShowPokedexRatingMessage
 	waitmessage
 	waitbuttonpress
 	return
 
 ProfBirch_EventScript_RatePokedex::
-	setvar VAR_0x8004, 0
-	specialvar VAR_RESULT, ScriptGetPokedexInfo
-	copyvar VAR_0x8008, VAR_0x8005
-	copyvar VAR_0x8009, VAR_0x8006
-	copyvar VAR_0x800A, VAR_RESULT
-	buffernumberstring STR_VAR_1, VAR_0x8008  @ Num Hoenn seen
-	buffernumberstring STR_VAR_2, VAR_0x8009  @ Num Hoenn caught
+	setvar SPECIAL_VAR_4, 0
+	specialvar SPECIAL_VAR_RESULT, ScriptGetPokedexInfo
+	copyvar SPECIAL_VAR_8, SPECIAL_VAR_5
+	copyvar SPECIAL_VAR_9, SPECIAL_VAR_6
+	copyvar SPECIAL_VAR_10, SPECIAL_VAR_RESULT
+	buffernumberstring STR_VAR_1, SPECIAL_VAR_8  @ Num Hoenn seen
+	buffernumberstring STR_VAR_2, SPECIAL_VAR_9  @ Num Hoenn caught
 	msgbox gBirchDexRatingText_SoYouveSeenAndCaught, MSGBOX_DEFAULT
 	call ProfBirch_EventScript_ShowRatingMessage
-	goto_if_eq VAR_0x800A, 0, Common_EventScript_NopReturn  @ National dex not enabled
-	setvar VAR_0x8004, 1
-	specialvar VAR_RESULT, ScriptGetPokedexInfo
-	copyvar VAR_0x8008, VAR_0x8005
-	copyvar VAR_0x8009, VAR_0x8006
-	buffernumberstring STR_VAR_1, VAR_0x8008  @ Num National seen
-	buffernumberstring STR_VAR_2, VAR_0x8009  @ Num National caught
+	goto_if_eq SPECIAL_VAR_10, 0, Common_EventScript_NopReturn  @ National dex not enabled
+	setvar SPECIAL_VAR_4, 1
+	specialvar SPECIAL_VAR_RESULT, ScriptGetPokedexInfo
+	copyvar SPECIAL_VAR_8, SPECIAL_VAR_5
+	copyvar SPECIAL_VAR_9, SPECIAL_VAR_6
+	buffernumberstring STR_VAR_1, SPECIAL_VAR_8  @ Num National seen
+	buffernumberstring STR_VAR_2, SPECIAL_VAR_9  @ Num National caught
 	msgbox gBirchDexRatingText_OnANationwideBasis, MSGBOX_DEFAULT
 	return

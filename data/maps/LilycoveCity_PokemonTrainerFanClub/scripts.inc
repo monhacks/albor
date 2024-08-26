@@ -88,7 +88,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer::
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan::
-	subvar VAR_0x8005, 1
+	subvar SPECIAL_VAR_5, 1
 	return
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
@@ -129,20 +129,20 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanM
 LilycoveCity_PokemonTrainerFanClub_EventScript_Man::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER6
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER6
 	special BufferFanClubTrainerName
 	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin, MSGBOX_DEFAULT
 	release
 	end
@@ -165,20 +165,20 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_Lass::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER1
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER1
 	special BufferFanClubTrainerName
 	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou, MSGBOX_DEFAULT
 	release
 	end
@@ -201,20 +201,20 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanM::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER2
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER2
 	special BufferFanClubTrainerName
 	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather, MSGBOX_DEFAULT
 	release
 	end
@@ -237,20 +237,20 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirl::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER3
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER3
 	special BufferFanClubTrainerName
 	goto_if_eq VAR_LILYCOVE_FAN_CLUB_STATE, 0, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer, MSGBOX_DEFAULT
 	release
 	end
@@ -273,19 +273,19 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion::
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoy::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER4
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER4
 	special BufferFanClubTrainerName
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou, MSGBOX_DEFAULT
 	release
 	end
@@ -303,19 +303,19 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan::
 LilycoveCity_PokemonTrainerFanClub_EventScript_Boy::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER5
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER5
 	special BufferFanClubTrainerName
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll, MSGBOX_DEFAULT
 	release
 	end
@@ -333,19 +333,19 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan::
 LilycoveCity_PokemonTrainerFanClub_EventScript_Woman::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER7
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER7
 	special BufferFanClubTrainerName
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind, MSGBOX_DEFAULT
 	release
 	end
@@ -363,19 +363,19 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan::
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertF::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER8
+	setvar SPECIAL_VAR_4, FANCLUB_MEMBER8
 	special BufferFanClubTrainerName
-	specialvar VAR_RESULT, IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan
+	specialvar SPECIAL_VAR_RESULT, IsFanClubMemberFanOfPlayer
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential, MSGBOX_DEFAULT
 	release
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan::
-	specialvar VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan
+	specialvar SPECIAL_VAR_RESULT, GetNumFansOfPlayerInTrainerFanClub
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive, MSGBOX_DEFAULT
 	release
 	end

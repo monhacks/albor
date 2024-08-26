@@ -8,12 +8,12 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SeedotBrother::
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
-	copyvar VAR_RESULT, VAR_0x8004
-	goto_if_eq VAR_RESULT, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot
+	copyvar SPECIAL_VAR_RESULT, SPECIAL_VAR_4
+	goto_if_eq SPECIAL_VAR_RESULT, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot
 	special CompareSeedotSize
-	goto_if_eq VAR_RESULT, 1, SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot
-	goto_if_eq VAR_RESULT, 2, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot
-	goto_if_eq VAR_RESULT, 3, SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot
+	goto_if_eq SPECIAL_VAR_RESULT, 1, SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot
+	goto_if_eq SPECIAL_VAR_RESULT, 2, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot
+	goto_if_eq SPECIAL_VAR_RESULT, 3, SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot
 	release
 	end
 
@@ -35,7 +35,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot::
 SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot::
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
-	goto_if_eq VAR_RESULT, FALSE, SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1
 	closemessage
 	release
 	end
@@ -52,12 +52,12 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadBrother::
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
-	copyvar VAR_RESULT, VAR_0x8004
-	goto_if_eq VAR_RESULT, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad
+	copyvar SPECIAL_VAR_RESULT, SPECIAL_VAR_4
+	goto_if_eq SPECIAL_VAR_RESULT, PARTY_NOTHING_CHOSEN, SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad
 	special CompareLotadSize
-	goto_if_eq VAR_RESULT, 1, SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad
-	goto_if_eq VAR_RESULT, 2, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad
-	goto_if_eq VAR_RESULT, 3, SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad
+	goto_if_eq SPECIAL_VAR_RESULT, 1, SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad
+	goto_if_eq SPECIAL_VAR_RESULT, 2, SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad
+	goto_if_eq SPECIAL_VAR_RESULT, 3, SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad
 	release
 	end
 
@@ -79,7 +79,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad::
 SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad::
 	msgbox SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot, MSGBOX_DEFAULT
 	giveitem ITEM_ELIXIR
-	goto_if_eq VAR_RESULT, FALSE, SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2
 	closemessage
 	release
 	end

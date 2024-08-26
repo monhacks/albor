@@ -1081,7 +1081,7 @@ u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
 
 u16 CountPartyAliveNonEggMons_IgnoreVar0x8004Slot(void)
 {
-    return CountPartyAliveNonEggMonsExcept(gSpecialVar_0x8004);
+    return CountPartyAliveNonEggMonsExcept(gSpecialVar_4);
 }
 
 u8 CountPartyMons(void)

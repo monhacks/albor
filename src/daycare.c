@@ -54,8 +54,8 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
     .baseBlock = 8
 };
 
-// Indices here are assigned by Task_HandleDaycareLevelMenuInput to VAR_RESULT,
-// which is copied to VAR_0x8004 and used as an index for GetDaycareCost
+// Indices here are assigned by Task_HandleDaycareLevelMenuInput to SPECIAL_VAR_RESULT,
+// which is copied to SPECIAL_VAR_4 and used as an index for GetDaycareCost
 static const struct ListMenuItem sLevelMenuItems[] =
 {
     {gText_ExpandedPlaceholder_Empty, 0},
@@ -304,7 +304,7 @@ static u16 TakeSelectedPokemonMonFromDaycareShiftSlots(struct DayCare *daycare, 
 
 u16 TakePokemonFromDaycare(void)
 {
-    return TakeSelectedPokemonMonFromDaycareShiftSlots(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return TakeSelectedPokemonMonFromDaycareShiftSlots(&gSaveBlock1Ptr->daycare, gSpecialVar_4);
 }
 
 static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
@@ -354,13 +354,13 @@ static u16 GetDaycareCostForMon(struct DayCare *daycare, u8 slotId)
 
 void GetDaycareCost(void)
 {
-    gSpecialVar_0x8005 = GetDaycareCostForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    gSpecialVar_5 = GetDaycareCostForMon(&gSaveBlock1Ptr->daycare, gSpecialVar_4);
 }
 
 u8 GetNumLevelsGainedFromDaycare(void)
 {
-    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004].mon, MON_DATA_SPECIES) != 0)
-        return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_0x8004]);
+    if (GetBoxMonData(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_4].mon, MON_DATA_SPECIES) != 0)
+        return GetNumLevelsGainedForDaycareMon(&gSaveBlock1Ptr->daycare.mons[gSpecialVar_4]);
 
     return 0;
 }
@@ -964,7 +964,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
             }
             else
             {
-                gSpecialVar_0x8004 = i;
+                gSpecialVar_4 = i;
                 return TRUE;
             }
         }

@@ -55,8 +55,8 @@ LilycoveCity_DepartmentStore_1F_EventScript_FullMatch::
 	return
 
 LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom::
-	copyvar VAR_POKELOT_PRIZE_PLACE, VAR_0x8004
-	copyvar VAR_POKELOT_PRIZE_ITEM, VAR_0x8005
+	copyvar VAR_POKELOT_PRIZE_PLACE, SPECIAL_VAR_4
+	copyvar VAR_POKELOT_PRIZE_ITEM, SPECIAL_VAR_5
 	goto LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
 	end
 

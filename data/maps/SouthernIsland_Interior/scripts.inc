@@ -10,8 +10,8 @@ SouthernIsland_Interior_OnResume:
 	end
 
 SouthernIsland_Interior_EventScript_TryRemoveLati::
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_ne VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_ne SPECIAL_VAR_RESULT, B_OUTCOME_CAUGHT, Common_EventScript_NopReturn
 	removeobject LOCALID_LATI
 	return
 
@@ -33,8 +33,8 @@ SouthernIsland_Interior_EventScript_SetUpLatias::
 
 SouthernIsland_Interior_EventScript_SetUpPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, SouthernIsland_Interior_EventScript_SetBrendanGfx
-	goto_if_eq VAR_RESULT, FEMALE, SouthernIsland_Interior_EventScript_SetMayGfx
+	goto_if_eq SPECIAL_VAR_RESULT, MALE, SouthernIsland_Interior_EventScript_SetBrendanGfx
+	goto_if_eq SPECIAL_VAR_RESULT, FEMALE, SouthernIsland_Interior_EventScript_SetMayGfx
 	end
 
 SouthernIsland_Interior_EventScript_SetBrendanGfx::
@@ -47,7 +47,7 @@ SouthernIsland_Interior_EventScript_SetMayGfx::
 
 SouthernIsland_Interior_EventScript_TryLatiEncounter::
 	lockall
-	setvar VAR_0x8008, 12  @ Player's Y coordinate. Not read
+	setvar SPECIAL_VAR_8, 12  @ Player's Y coordinate. Not read
 	goto SouthernIsland_Interior_EventScript_Lati
 	end
 
@@ -73,29 +73,29 @@ SouthernIsland_Interior_EventScript_Lati::
 	waitmovement 0
 	delay 50
 	special RemoveCameraObject
-	setvar VAR_LAST_TALKED, LOCALID_LATI
+	setvar SPECIAL_VAR_LAST_TALKED, LOCALID_LATI
 	call_if_eq VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiosBattleVars
 	call_if_ne VAR_ROAMER_POKEMON, 0, SouthernIsland_Interior_EventScript_SetLatiasBattleVars
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLatiBattle
 	waitstate
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE
-	specialvar VAR_RESULT, GetBattleOutcome
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
-	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
-	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
+	specialvar SPECIAL_VAR_RESULT, GetBattleOutcome
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
+	goto_if_eq SPECIAL_VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
 	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
 	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
-	copyvar VAR_0x8004, VAR_TEMP_4
+	copyvar SPECIAL_VAR_4, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end
 
 SouthernIsland_Interior_EventScript_RanFromLati::
-	copyvar VAR_0x8004, VAR_TEMP_4
+	copyvar SPECIAL_VAR_4, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end
 

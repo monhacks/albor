@@ -35,7 +35,7 @@ Route104_MrBrineysHouse_EventScript_SailingIntro::
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	msgbox Route104_MrBrineysHouse_Text_WaitUpPeeko, MSGBOX_DEFAULT
 	msgbox Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq SPECIAL_VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 
@@ -43,7 +43,7 @@ Route104_MrBrineysHouse_EventScript_WhereAreWeBound::
 	message Route104_MrBrineysHouse_Text_WhereAreWeBound
 	waitmessage
 	multichoicedefault 20, 8, MULTI_BRINEY_OFF_DEWFORD, 1, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Route104_MrBrineysHouse_EventScript_SailToDewford
 	case 1, Route104_MrBrineysHouse_EventScript_DeclineSailing
 	case MULTI_B_PRESSED, Route104_MrBrineysHouse_EventScript_DeclineSailing
@@ -51,13 +51,13 @@ Route104_MrBrineysHouse_EventScript_WhereAreWeBound::
 
 Route104_MrBrineysHouse_EventScript_SailBothDeliveries::
 	msgbox Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq SPECIAL_VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 
 Route104_MrBrineysHouse_EventScript_SailDeliverPackage::
 	msgbox Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
+	goto_if_eq SPECIAL_VAR_RESULT, NO, Route104_MrBrineysHouse_EventScript_DeclineDeliverySailing
 	goto Route104_MrBrineysHouse_EventScript_SailToDewford
 	end
 

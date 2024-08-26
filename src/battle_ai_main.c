@@ -51,9 +51,6 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_PreferStrongestMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_PreferBatonPass(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Roaming(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Safari(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_PowerfulStatus(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
@@ -89,10 +86,10 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [25] = NULL,                     // Unused
     [26] = NULL,                     // Unused
     [27] = NULL,                     // Unused
-    [28] = AI_DynamicFunc,          // AI_FLAG_DYNAMIC_FUNC
-    [29] = AI_Roaming,              // AI_FLAG_ROAMING
-    [30] = AI_Safari,               // AI_FLAG_SAFARI
-    [31] = AI_FirstBattle,          // AI_FLAG_FIRST_BATTLE
+    [28] = AI_DynamicFunc,           // AI_FLAG_DYNAMIC_FUNC
+    [29] = NULL,                     // AI_FLAG_ROAMING
+    [30] = NULL,                     // AI_FLAG_SAFARI
+    [31] = NULL,                     // Unused
 };
 
 // Functions
@@ -158,20 +155,7 @@ static u32 GetAiFlags(u16 trainerId)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-            flags = GetAiScriptsInRecordedBattle();
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            flags = AI_FLAG_SAFARI;
-        else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
-            flags = AI_FLAG_ROAMING;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-            flags = AI_FLAG_FIRST_BATTLE;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
-            flags = GetAiScriptsInBattleFactory();
-        else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
-            flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
-        else
-            flags = GetTrainerAIFlagsFromId(trainerId);
+        flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
     if (IsDoubleBattle())
@@ -5357,39 +5341,6 @@ static void AI_Watch(void)
 {
     AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK);
 }
-
-// Roaming pokemon logic
-static s32 AI_Roaming(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
-{
-    if (IsBattlerTrapped(battlerAtk, FALSE))
-        return score;
-
-    AI_Flee();
-    return score;
-}
-
-// Safari pokemon logic
-static s32 AI_Safari(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
-{
-    u32 safariFleeRate = gBattleStruct->safariEscapeFactor * 5; // Safari flee rate, from 0-20.
-
-    if ((Random() % 100) < safariFleeRate)
-        AI_Flee();
-    else
-        AI_Watch();
-
-    return score;
-}
-
-// First battle logic
-static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
-{
-    if (AI_DATA->hpPercents[battlerDef] <= 20)
-        AI_Flee();
-
-    return score;
-}
-
 
 // Dynamic AI Functions
 // For specific battle scenarios

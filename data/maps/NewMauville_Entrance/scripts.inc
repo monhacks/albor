@@ -26,9 +26,9 @@ NewMauville_Entrance_EventScript_Door::
 	waitmovement 0
 	msgbox NewMauville_Entrance_Text_DoorIsLocked, MSGBOX_DEFAULT
 	checkitem ITEM_BASEMENT_KEY
-	goto_if_eq VAR_RESULT, FALSE, NewMauville_Entrance_EventScript_DontOpenDoor
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, NewMauville_Entrance_EventScript_DontOpenDoor
 	msgbox NewMauville_Entrance_Text_UseBasementKey, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, NewMauville_Entrance_EventScript_DontOpenDoor
+	goto_if_eq SPECIAL_VAR_RESULT, NO, NewMauville_Entrance_EventScript_DontOpenDoor
 	msgbox NewMauville_Entrance_Text_UsedBasementKey, MSGBOX_DEFAULT
 	setmetatile 3, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile0, FALSE
 	setmetatile 4, 0, METATILE_Facility_NewMauvilleDoor_Open_Tile1, FALSE

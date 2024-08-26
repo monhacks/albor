@@ -8,21 +8,21 @@ MauvilleCity_BikeShop_EventScript_Rydel::
 	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
 	end
 
 MauvilleCity_BikeShop_EventScript_SkipGreeting::
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
 	end
 
 MauvilleCity_BikeShop_EventScript_ChooseBike::
 	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
 	waitmessage
 	multichoice 21, 8, MULTI_BIKE, TRUE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_GetMachBike
 	case 1, MauvilleCity_BikeShop_EventScript_GetAcroBike
 	end
@@ -41,14 +41,14 @@ MauvilleCity_BikeShop_EventScript_YesFar::
 MauvilleCity_BikeShop_EventScript_GetMachBike::
 	msgbox MauvilleCity_BikeShop_Text_ChoseMachBike, MSGBOX_DEFAULT
 	giveitem ITEM_MACH_BIKE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
 
 MauvilleCity_BikeShop_EventScript_GetAcroBike::
 	msgbox MauvilleCity_BikeShop_Text_ChoseAcroBike, MSGBOX_DEFAULT
 	giveitem ITEM_ACRO_BIKE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	goto MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes
 	end
 
@@ -60,17 +60,17 @@ MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes::
 
 MauvilleCity_BikeShop_EventScript_AskSwitchBikes::
 	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_SwitchBikes
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_KeepBike
+	goto_if_eq SPECIAL_VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_SwitchBikes
+	goto_if_eq SPECIAL_VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_KeepBike
 	end
 
 @ If the player does not have a bike on them Rydel assumes its stored in the PC
 MauvilleCity_BikeShop_EventScript_SwitchBikes::
 	msgbox MauvilleCity_BikeShop_Text_IllSwitchBikes, MSGBOX_DEFAULT
 	checkitem ITEM_ACRO_BIKE
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchAcroForMach
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchAcroForMach
 	checkitem ITEM_MACH_BIKE
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchMachForAcro
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, MauvilleCity_BikeShop_EventScript_SwitchMachForAcro
 	msgbox MauvilleCity_BikeShop_Text_OhYourBikeIsInPC, MSGBOX_DEFAULT
 	release
 	end
@@ -108,7 +108,7 @@ MauvilleCity_BikeShop_EventScript_MachBikeHandbook::
 
 MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage::
 	multichoice 0, 0, MULTI_MACH_BIKE_INFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_HowToRide
 	case 1, MauvilleCity_BikeShop_EventScript_HowToTurn
 	case 2, MauvilleCity_BikeShop_EventScript_SandySlopes
@@ -146,7 +146,7 @@ MauvilleCity_BikeShop_EventScript_AcroBikeHandbook::
 
 MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage::
 	multichoice 0, 0, MULTI_ACRO_BIKE_INFO, FALSE
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_Wheelies
 	case 1, MauvilleCity_BikeShop_EventScript_BunnyHops
 	case 2, MauvilleCity_BikeShop_EventScript_Jumps

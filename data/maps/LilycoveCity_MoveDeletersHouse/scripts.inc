@@ -8,7 +8,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_MoveDeleter::
 	applymovement LOCALID_MOVE_DELETER, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
 	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	releaseall
@@ -18,19 +18,19 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget, MSGBOX_DEFAULT
 	special ChoosePartyMon
 	waitstate
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
+	goto_if_eq SPECIAL_VAR_4, PARTY_NOTHING_CHOSEN, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_EggCantForgetMoves
 	special GetNumMovesSelectedMonHas
-	goto_if_eq VAR_RESULT, 1, LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
+	goto_if_eq SPECIAL_VAR_RESULT, 1, LilycoveCity_MoveDeletersHouse_EventScript_MonOnlyKnowsOneMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
 	special MoveDeleterChooseMoveToForget
 	fadescreen FADE_FROM_BLACK
-	goto_if_eq VAR_0x8005, MAX_MON_MOVES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
+	goto_if_eq SPECIAL_VAR_5, MAX_MON_MOVES, LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget
 	special BufferMoveDeleterNicknameAndMove
 	msgbox LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten, MSGBOX_YESNO
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case YES, LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove
 	case NO, LilycoveCity_MoveDeletersHouse_EventScript_ComeAgain
 	releaseall
@@ -38,7 +38,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_ChooseMonAndMoveToForget::
 
 LilycoveCity_MoveDeletersHouse_EventScript_TryForgetMove::
 	special IsLastMonThatKnowsSurf
-	goto_if_eq VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
+	goto_if_eq SPECIAL_VAR_RESULT, TRUE, LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf
 	special MoveDeleterForgetMove
 	playfanfare MUS_MOVE_DELETED
 	waitfanfare

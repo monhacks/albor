@@ -366,7 +366,7 @@ static const u32 sWinStreakFlags[] = {STREAK_PIKE_50, STREAK_PIKE_OPEN};
 // code
 void CallBattlePikeFunction(void)
 {
-    sBattlePikeFunctions[gSpecialVar_0x8004]();
+    sBattlePikeFunctions[gSpecialVar_4]();
 }
 
 static void SetRoomType(void)
@@ -444,7 +444,7 @@ static void GetBattlePikeData(void)
 {
     
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case PIKE_DATA_PRIZE:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.pikePrize;
@@ -467,22 +467,22 @@ static void SetBattlePikeData(void)
 {
     
 
-    switch (gSpecialVar_0x8005)
+    switch (gSpecialVar_5)
     {
     case PIKE_DATA_PRIZE:
-        gSaveBlock2Ptr->frontier.pikePrize = gSpecialVar_0x8006;
+        gSaveBlock2Ptr->frontier.pikePrize = gSpecialVar_6;
         break;
     case PIKE_DATA_WIN_STREAK:
-        if (gSpecialVar_0x8006 <= MAX_STREAK)
-            gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
+        if (gSpecialVar_6 <= MAX_STREAK)
+            gSaveBlock2Ptr->frontier.pikeWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_6;
         break;
     case PIKE_DATA_RECORD_STREAK:
-        if (gSpecialVar_0x8006 <= MAX_STREAK && gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] < gSpecialVar_0x8006)
-            gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
+        if (gSpecialVar_6 <= MAX_STREAK && gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] < gSpecialVar_6)
+            gSaveBlock2Ptr->frontier.pikeRecordStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_6;
         break;
     case PIKE_DATA_TOTAL_STREAKS:
-        if (gSpecialVar_0x8006 <= MAX_STREAK)
-            gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_0x8006;
+        if (gSpecialVar_6 <= MAX_STREAK)
+            gSaveBlock2Ptr->frontier.pikeTotalStreaks[gSaveBlock2Ptr->frontier.lvlMode] = gSpecialVar_6;
         break;
     case PIKE_DATA_WIN_STREAK_ACTIVE:
         break;
@@ -828,7 +828,7 @@ static u8 GetNextRoomType(void)
         return gSaveBlock2Ptr->frontier.pikeHintedRoomType;
 
     // Check if the player walked into the same room that the lady gave a hint about.
-    if (gSpecialVar_0x8007 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
+    if (gSpecialVar_7 == gSaveBlock2Ptr->frontier.pikeHintedRoomIndex)
     {
         if (gSaveBlock2Ptr->frontier.pikeHintedRoomType == PIKE_ROOM_STATUS)
             TryInflictRandomStatus();
@@ -1250,12 +1250,12 @@ static void ClearPikeTrainerIds(void)
 
 static void BufferTrainerIntro(void)
 {
-    if (gSpecialVar_0x8005 == 0)
+    if (gSpecialVar_5 == 0)
     {
         if (gTrainerBattleOpponent_A < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
     }
-    else if (gSpecialVar_0x8005 == 1)
+    else if (gSpecialVar_5 == 1)
     {
         if (gTrainerBattleOpponent_B < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_B].speechBefore);
@@ -1320,7 +1320,7 @@ static void GetCurrentRoomPikeQueenFightType(void)
 
 static void HealSomeMonsBeforePikeQueen(void)
 {
-    u8 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_0x8007];
+    u8 toHealCount = sNumMonsToHealBeforePikeQueen[gSaveBlock2Ptr->frontier.pikeHintedRoomIndex][gSpecialVar_7];
 
     TryHealMons(toHealCount);
     gSpecialVar_Result = toHealCount;
@@ -1328,7 +1328,7 @@ static void HealSomeMonsBeforePikeQueen(void)
 
 static void SetHealingroomTypesDisabled(void)
 {
-    gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = gSpecialVar_0x8005;
+    gSaveBlock2Ptr->frontier.pikeHealingRoomsDisabled = gSpecialVar_5;
 }
 
 static void IsPartyFullHealed(void)

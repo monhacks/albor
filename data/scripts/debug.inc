@@ -76,10 +76,10 @@ Debug_BoxFilledMessage_Text:
 Debug_EventScript_CheckEVs::
 	lockall
 	getpartysize
-	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Debug_NoPokemon
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckEVs_End
+	goto_if_ge SPECIAL_VAR_4, PARTY_SIZE, Debug_EventScript_CheckEVs_End
 	callnative Script_GetChosenMonOffensiveEVs
 	msgbox Debug_EventScript_Text_OffensiveEVs, MSGBOX_DEFAULT
 	callnative Script_GetChosenMonDefensiveEVs
@@ -97,10 +97,10 @@ Debug_EventScript_Text_DefensiveEVs:
 Debug_EventScript_CheckIVs::
 	lockall
 	getpartysize
-	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Debug_NoPokemon
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_CheckIVs_End
+	goto_if_ge SPECIAL_VAR_4, PARTY_SIZE, Debug_EventScript_CheckIVs_End
 	callnative Script_GetChosenMonOffensiveIVs
 	msgbox Debug_EventScript_Text_OffensiveIVs, MSGBOX_DEFAULT
 	callnative Script_GetChosenMonDefensiveIVs
@@ -301,12 +301,12 @@ Debug_ROMSize::
 Debug_HatchAnEgg::
 	lockall
 	getpartysize
-	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Debug_NoPokemon
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_HatchAnEgg_End
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	goto_if_ne VAR_RESULT, SPECIES_EGG, DebugScript_HatchAnEgg_CantForceHatch
+	goto_if_ge SPECIAL_VAR_4, PARTY_SIZE, Debug_HatchAnEgg_End
+	specialvar SPECIAL_VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_ne SPECIAL_VAR_RESULT, SPECIES_EGG, DebugScript_HatchAnEgg_CantForceHatch
 	special EggHatch
 	waitstate
 Debug_HatchAnEgg_End::
@@ -383,12 +383,12 @@ DebugText_BerryWeedsDisabled:
 Debug_EventScript_InflictStatus1::
 	lockall
 	getpartysize
-	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
+	goto_if_eq SPECIAL_VAR_RESULT, 0, Debug_NoPokemon
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Single, 0
 	dynmultipush Debug_EventScript_InflictStatus1_Text_PartyWide, 1
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 2
 	dynmultistack 0, 0, FALSE, 3 FALSE, 0, NULL
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Debug_EventScript_InflictStatus1_Single
 	case 1, Debug_EventScript_InflictStatus1_Party
 	case 2, Debug_EventScript_InflictStatus1_Close
@@ -399,9 +399,9 @@ Debug_EventScript_InflictStatus1_Close:
 Debug_EventScript_InflictStatus1_Single:
 	special ChoosePartyMon
 	waitstate
-	goto_if_ge VAR_0x8004, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
-	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
-	goto_if_eq VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
+	goto_if_ge SPECIAL_VAR_4, PARTY_SIZE, Debug_EventScript_InflictStatus1_Close
+	specialvar SPECIAL_VAR_RESULT, ScriptGetPartyMonSpecies
+	goto_if_eq SPECIAL_VAR_RESULT, SPECIES_EGG, Debug_EventScript_InflictStatus1_Close
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
@@ -410,7 +410,7 @@ Debug_EventScript_InflictStatus1_Single:
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
 	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Debug_EventScript_InflictStatus1_Single_Poison
 	case 1, Debug_EventScript_InflictStatus1_Single_Paralysis
 	case 2, Debug_EventScript_InflictStatus1_Single_Sleep
@@ -423,32 +423,32 @@ Debug_EventScript_InflictStatus1_Single:
 	end
 
 Debug_EventScript_InflictStatus1_Single_Poison:
-	setstatus1 STATUS1_POISON, VAR_0x8004
+	setstatus1 STATUS1_POISON, SPECIAL_VAR_4
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_Paralysis:
-	setstatus1 STATUS1_PARALYSIS, VAR_0x8004
+	setstatus1 STATUS1_PARALYSIS, SPECIAL_VAR_4
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_Sleep:
-	setstatus1 STATUS1_SLEEP, VAR_0x8004
+	setstatus1 STATUS1_SLEEP, SPECIAL_VAR_4
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_Burn:
-	setstatus1 STATUS1_BURN, VAR_0x8004
+	setstatus1 STATUS1_BURN, SPECIAL_VAR_4
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_Freeze:
-	setstatus1 STATUS1_FREEZE, VAR_0x8004
+	setstatus1 STATUS1_FREEZE, SPECIAL_VAR_4
 	releaseall
 	end
 
 Debug_EventScript_InflictStatus1_Single_Frostbite:
-	setstatus1 STATUS1_FROSTBITE, VAR_0x8004
+	setstatus1 STATUS1_FROSTBITE, SPECIAL_VAR_4
 	releaseall
 	end
 
@@ -461,7 +461,7 @@ Debug_EventScript_InflictStatus1_Party:
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
 	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
 	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-	switch VAR_RESULT
+	switch SPECIAL_VAR_RESULT
 	case 0, Debug_EventScript_InflictStatus1_Party_Poison
 	case 1, Debug_EventScript_InflictStatus1_Party_Paralysis
 	case 2, Debug_EventScript_InflictStatus1_Party_Sleep

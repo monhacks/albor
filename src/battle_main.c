@@ -1421,8 +1421,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 void CreateTrainerPartyForPlayer(void)
 {
     ZeroPlayerPartyMons();
-    gPartnerTrainerId = gSpecialVar_0x8004;
-    CreateNPCTrainerPartyFromTrainer(gPlayerParty, GetTrainerStructFromId(gSpecialVar_0x8004), TRUE, BATTLE_TYPE_TRAINER);
+    gPartnerTrainerId = gSpecialVar_4;
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, GetTrainerStructFromId(gSpecialVar_4), TRUE, BATTLE_TYPE_TRAINER);
 }
 
 void VBlankCB_Battle(void)
@@ -5087,15 +5087,15 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
 //  var8001 - var8007: stat changes
 void SetTotemBoost(void)
 {
-    u32 battler = gSpecialVar_0x8000;
+    u32 battler = gSpecialVar_0;
     u32 i;
 
     for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
     {
-        if (*(&gSpecialVar_0x8001 + i))
+        if (*(&gSpecialVar_1 + i))
         {
             gQueuedStatBoosts[battler].stats |= (1 << i);
-            gQueuedStatBoosts[battler].statChanges[i] = *(&gSpecialVar_0x8001 + i);
+            gQueuedStatBoosts[battler].statChanges[i] = *(&gSpecialVar_1 + i);
             gQueuedStatBoosts[battler].stats |= 128;  // used as a flag for the "totem flared to life" script
         }
     }

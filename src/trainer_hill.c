@@ -273,7 +273,7 @@ static const u8 sTrainerPartySlots[HILL_TRAINERS_PER_FLOOR][PARTY_SIZE / 2] =
 void CallTrainerHillFunction(void)
 {
     SetUpDataStruct();
-    sHillFunctions[gSpecialVar_0x8004]();
+    sHillFunctions[gSpecialVar_4]();
     FreeDataStruct();
 }
 
