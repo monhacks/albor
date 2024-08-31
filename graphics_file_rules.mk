@@ -18,7 +18,7 @@ POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
 
-types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
+types := ninguno normal lucha volador veneno tierra roca bicho fantasma acero misterio fuego agua planta electrico psiquico hielo dragon siniestro hada
 contest_types := cool beauty cute smart tough
 
 ### Tilesets ###
@@ -273,8 +273,11 @@ graphics/party_menu/bg.4bpp: %.4bpp: %.png
 $(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
 	@cat $^ >$@
 
-$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal \
-                                  $(TYPESGFXDIR)/move_types_2.gbapal
+$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/iconos_tipos_1.gbapal \
+                                  $(TYPESGFXDIR)/iconos_tipos_2.gbapal \
+                                  $(TYPESGFXDIR)/iconos_tipos_3.gbapal \
+                                  $(TYPESGFXDIR)/iconos_tipos_4.gbapal \
+                                  $(TYPESGFXDIR)/iconos_tipos_5.gbapal
 	@cat $^ >$@
 
 $(BATTYPESGFXDIR)/icon_types.4bpp: $(types:%=$(BATTYPESGFXDIR)/%.4bpp)

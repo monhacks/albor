@@ -23,7 +23,6 @@
 #include "malloc.h"
 #include "menu.h"
 #include "menu_helpers.h"
-#include "mon_markings.h"
 #include "party_menu.h"
 #include "palette.h"
 #include "pokeball.h"
@@ -134,7 +133,6 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         struct BoxPokemon *boxMons;
     } monList;
     /*0x04*/ MainCallback callback;
-    /*0x08*/ struct Sprite *markingsSprite;
     /*0x0C*/ struct Pokemon currentMon;
     /*0x70*/ struct PokeSummary
     {
@@ -304,8 +302,6 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *, s16 *);
 static u8 CreateMonSprite(struct Pokemon *);
 static void SpriteCB_Pokemon(struct Sprite *);
 static void StopPokemonAnimations(void);
-static void CreateMonMarkingsSprite(struct Pokemon *);
-static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *);
 static void CreateCaughtBallSprite(struct Pokemon *);
 static void CreateSetStatusSprite(void);
 static void CreateMoveSelectorSprites(u8);
@@ -728,11 +724,13 @@ static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 
-#define TAG_MOVE_SELECTOR 30000
-#define TAG_MON_STATUS 30001
-#define TAG_MOVE_TYPES 30002
-#define TAG_MON_MARKINGS 30003
-#define TAG_CATEGORY_ICONS 30004
+enum TagsSummary
+{
+    TAG_MOVE_SELECTOR = 30000,
+    TAG_MON_STATUS,
+    TAG_MOVE_TYPES,
+    TAG_CATEGORY_ICONS,
+};
 
 const struct OamData gOamData_CategoryIcons =
 {
@@ -1132,7 +1130,6 @@ static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-static const u16 sMarkings_Pal[] = INCBIN_U16("graphics/summary_screen/markings.gbapal");
 
 // code
 static u8 ShowCategoryIcon(u32 category)
@@ -1316,7 +1313,6 @@ static bool8 LoadGraphics(void)
         }
         break;
     case 18:
-        CreateMonMarkingsSprite(&sMonSummaryScreen->currentMon);
         gMain.state++;
         break;
     case 19:
@@ -1431,7 +1427,7 @@ static bool8 DecompressGraphics(void)
         sMonSummaryScreen->switchCounter++;
         break;
     case 12:
-        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(11), 5 * PLTT_SIZE_4BPP);
         LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
         LoadSpritePalette(&gSpritePal_CategoryIcons);
         sMonSummaryScreen->switchCounter = 0;
@@ -1703,7 +1699,6 @@ static void Task_ChangeSummaryMon(u8 taskId)
             return;
         break;
     case 5:
-        RemoveAndCreateMonMarkingsSprite(&sMonSummaryScreen->currentMon);
         break;
     case 6:
         CreateCaughtBallSprite(&sMonSummaryScreen->currentMon);
@@ -3248,7 +3243,7 @@ static void PrintEggMemo(void)
     const u8 *text;
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
 
-    if (sMonSummaryScreen->summary.sanity != 1)
+    if (sMonSummaryScreen->summary.sanity != TRUE)
     {
         if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
             text = gText_PeculiarEggNicePlace;
@@ -4025,27 +4020,6 @@ static void StopPokemonAnimations(void)  // A subtle effect, this function stops
         u16 id = i + paletteIndex;
         gPlttBufferUnfaded[id] = gPlttBufferFaded[id];
     }
-}
-
-static void CreateMonMarkingsSprite(struct Pokemon *mon)
-{
-    struct Sprite *sprite = CreateMonMarkingAllCombosSprite(TAG_MON_MARKINGS, TAG_MON_MARKINGS, sMarkings_Pal);
-
-    sMonSummaryScreen->markingsSprite = sprite;
-    if (sprite != NULL)
-    {
-        StartSpriteAnim(sprite, GetMonData(mon, MON_DATA_MARKINGS));
-        sMonSummaryScreen->markingsSprite->x = 60;
-        sMonSummaryScreen->markingsSprite->y = 26;
-        sMonSummaryScreen->markingsSprite->oam.priority = 1;
-    }
-}
-
-static void RemoveAndCreateMonMarkingsSprite(struct Pokemon *mon)
-{
-    DestroySprite(sMonSummaryScreen->markingsSprite);
-    FreeSpriteTilesByTag(TAG_MON_MARKINGS);
-    CreateMonMarkingsSprite(mon);
 }
 
 static void CreateCaughtBallSprite(struct Pokemon *mon)

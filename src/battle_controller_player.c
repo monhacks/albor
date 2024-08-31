@@ -51,7 +51,6 @@
 #include "level_caps.h"
 #include "menu.h"
 #include "pokemon_summary_screen.h"
-#include "type_icons.h"
 
 static void PlayerBufferExecCompleted(u32 battler);
 static void PlayerHandleLoadMonSprite(u32 battler);
@@ -2298,7 +2297,6 @@ void PlayerHandleChooseMove(u32 battler)
 void InitMoveSelectionsVarsAndStrings(u32 battler)
 {
     DestroySpriteAndFreeResources(&gSprites[monIconData]);
-    LoadTypeIcons(battler);
     MoveSelectionDisplayMoveNames(battler);
     gMultiUsePlayerCursor = 0xFF;
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);

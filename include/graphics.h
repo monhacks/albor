@@ -3352,9 +3352,4 @@ extern const u32 gTMCaseMenu_Tilemap[];
 extern const u32 gTMCaseMenu_Pal[];
 extern const u32 gTMCaseText_Pal[];
 
-extern const u32 gBattleIcons_Gfx1[];
-extern const u32 gBattleIcons_Gfx2[];
-extern const u32 gBattleIcons_Pal1[];
-extern const u32 gBattleIcons_Pal2[];
-
 #endif //GUARD_GRAPHICS_H

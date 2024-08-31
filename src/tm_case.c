@@ -551,7 +551,7 @@ static void PrintMoveInfo(u16 itemId)
     {
         // Draw type icon
         LoadCompressedSpriteSheet(&gSpriteSheet_MoveTypes);
-        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(14), 2 * PLTT_SIZE_4BPP);
+        LoadCompressedPalette(gMoveTypes_Pal, OBJ_PLTT_ID(11), 5 * PLTT_SIZE_4BPP);
         move = ItemIdToBattleMoveId(itemId);
         if (sTMCaseDynamicResources->typeIconSpriteId == 0xFF)
         {
