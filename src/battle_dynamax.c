@@ -103,10 +103,6 @@ void ActivateDynamax(u32 battler)
     // Choiced Moves are reset upon Dynamaxing.
     gBattleStruct->choicedMove[battler] = MOVE_NONE;
 
-    // Try Gigantamax form change.
-    if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)) // Ditto cannot Gigantamax.
-        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
-
     BattleScriptExecute(BattleScript_DynamaxBegins);
 }
 
@@ -167,36 +163,10 @@ bool32 IsMoveBlockedByDynamax(u32 move)
     return FALSE;
 }
 
-static u16 GetTypeBasedMaxMove(u32 battler, u32 type)
-{
-    return 0;
-}
-
 // Returns the appropriate Max Move or G-Max Move for a battler to use.
 u16 GetMaxMove(u32 battler, u32 baseMove)
 {
     u32 move = baseMove;
-    if (baseMove == MOVE_NONE) // for move display
-    {
-        return MOVE_NONE;
-    }
-    else if (baseMove == MOVE_STRUGGLE)
-    {
-        return MOVE_STRUGGLE;
-    }
-    else if (gMovesInfo[baseMove].category == DAMAGE_CATEGORY_STATUS)
-    {
-        move = MOVE_MAX_GUARD;
-    }
-    else if (gBattleStruct->dynamicMoveType)
-    {
-        move = GetTypeBasedMaxMove(battler, gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK);
-    }
-    else
-    {
-        move = GetTypeBasedMaxMove(battler, gMovesInfo[baseMove].type);
-    }
-
     return move;
 }
 
@@ -340,10 +310,9 @@ static u8 GetMaxPowerTier(u32 move)
     }
 }
 
-// Returns whether a move is a Max Move or not.
 bool32 IsMaxMove(u32 move)
 {
-    return move >= FIRST_MAX_MOVE && move <= LAST_MAX_MOVE;
+    return FALSE;
 }
 
 // Assigns the multistring to use for the "Damage Non- Types" G-Max effect.

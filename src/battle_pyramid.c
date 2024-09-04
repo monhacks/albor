@@ -88,7 +88,6 @@ static void BattlePyramidStartMenu(void);
 static void RestorePyramidPlayerParty(void);
 static void InitPyramidBagItems(u8);
 static u8 GetPyramidFloorTemplateId(void);
-static u8 GetPostBattleDirectionHintTextIndex(int *, u8, u8);
 static void Task_SetPyramidFloorPalette(u8);
 static void MarkPyramidTrainerAsBattled(u16);
 static void GetPyramidFloorLayoutOffsets(u8 *);
@@ -1106,80 +1105,6 @@ static void RestorePyramidPlayerParty(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         gSaveBlock2Ptr->frontier.selectedPartyMons[i] = gSelectedOrderFromParty[i];
-}
-
-static u8 GetPostBattleDirectionHintTextIndex(int *hintType, u8 minDistanceForExitHint, u8 defaultHintType)
-{
-    int x, y;
-    u8 textIndex = 0;
-    u16 *map = gBackupMapLayout.map;
-    map += gBackupMapLayout.width * 7 + MAP_OFFSET;
-
-    for (y = 0; y < 32; map += 47, y++)
-    {
-        for (x = 0; x < 32; x++)
-        {
-            if ((map[x] & MAPGRID_METATILE_ID_MASK) == METATILE_BattlePyramid_Exit)
-            {
-                x += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.x;
-                y += MAP_OFFSET - gObjectEvents[gSelectedObjectEvent].initialCoords.y;
-                if (x >= minDistanceForExitHint
-                 || x <= -minDistanceForExitHint
-                 || y >= minDistanceForExitHint
-                 || y <= -minDistanceForExitHint
-                 || defaultHintType == HINT_EXIT_DIRECTION)
-                {
-                    if (x > 0 && y > 0)
-                    {
-                        if (x >= y)
-                            textIndex = 2;
-                        else
-                            textIndex = 3;
-                    }
-                    else if (x < 0 && y < 0)
-                    {
-                        if (x > y)
-                            textIndex = 0;
-                        else
-                            textIndex = 1;
-                    }
-                    else if (x == 0)
-                    {
-                        if (y > 0)
-                            textIndex = 3;
-                        else
-                            textIndex = 0;
-                    }
-                    else if (y == 0)
-                    {
-                        if (x > 0)
-                            textIndex = 2;
-                        else
-                            textIndex = 1;
-                    }
-                    else if (x < 0)
-                    {
-                        if (x + y > 0)
-                            textIndex = 3;
-                        else
-                            textIndex = 1;
-                    }
-                    else
-                    {
-                        textIndex = (~(x + y) >= 0) ? 0 : 2;
-                    }
-                    *hintType = HINT_EXIT_DIRECTION;
-                }
-                else
-                {
-                    *hintType = defaultHintType;
-                }
-                return textIndex;
-            }
-        }
-    }
-
-    return textIndex;
 }
 
 u16 LocalIdToPyramidTrainerId(u8 localId)

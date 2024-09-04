@@ -736,31 +736,6 @@ s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
     return retVal;
 }
 
-void ConvertInternationalString(u8 *s, u8 language)
-{
-    if (language == LANGUAGE_JAPANESE)
-    {
-        u32 i;
-
-        StripExtCtrlCodes(s);
-        i = StringLength(s);
-        s[i++] = EXT_CTRL_CODE_BEGIN;
-        s[i++] = EXT_CTRL_CODE_ENG;
-        s[i++] = EOS;
-
-        i--;
-
-        while (i != -1)
-        {
-            s[i + 2] = s[i];
-            i--;
-        }
-
-        s[0] = EXT_CTRL_CODE_BEGIN;
-        s[1] = EXT_CTRL_CODE_JPN;
-    }
-}
-
 void StripExtCtrlCodes(u8 *str)
 {
     u16 srcIndex = 0;

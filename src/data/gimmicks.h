@@ -13,7 +13,7 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .indicatorSheet = &sSpriteSheet_MegaIndicator,
         .indicatorPal = &sSpritePalette_MegaIndicator,
         .CanActivate = CanMegaEvolve,
-        .ActivateGimmick = ActivateMegaEvolution,
+        .ActivateGimmick = 0,
     },
     [GIMMICK_Z_MOVE] = 
     {
@@ -49,6 +49,6 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .indicatorSheet = NULL, // handled separately
         .indicatorPal = &sSpritePalette_TeraIndicator,
         .CanActivate = CanTerastallize,
-        .ActivateGimmick = ActivateTera,
+        .ActivateGimmick = 0,
     }
 };

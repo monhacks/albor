@@ -375,12 +375,9 @@ static void Task_BattleStart(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!FldEffPoison_IsActive()) // is poison not active?
-        {
-            BattleTransition_StartOnField(tTransition);
-            ClearMirageTowerPulseBlendEffect();
-            tState++; // go to case 1.
-        }
+        BattleTransition_StartOnField(tTransition);
+        ClearMirageTowerPulseBlendEffect();
+        tState++;
         break;
     case 1:
         if (IsBattleTransitionDone() == TRUE)
@@ -410,12 +407,9 @@ static void Task_BattleStart_Debug(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!FldEffPoison_IsActive()) // is poison not active?
-        {
-            BattleTransition_StartOnField(tTransition);
-            ClearMirageTowerPulseBlendEffect();
-            tState++; // go to case 1.
-        }
+        BattleTransition_StartOnField(tTransition);
+        ClearMirageTowerPulseBlendEffect();
+        tState++; // go to case 1.
         break;
     case 1:
         if (IsBattleTransitionDone() == TRUE)
@@ -603,13 +597,13 @@ void BattleSetup_StartLegendaryBattle(void)
     {
     default:
     case SPECIES_GROUDON:
-        CreateBattleStartTask(B_TRANSITION_GROUDON, MUS_VS_KYOGRE_GROUDON);
+        CreateBattleStartTask(B_TRANSITION_GROUDON, MUS_VS_KYOGRE_GROUDON_RAYQUAZA);
         break;
     case SPECIES_KYOGRE:
-        CreateBattleStartTask(B_TRANSITION_KYOGRE, MUS_VS_KYOGRE_GROUDON);
+        CreateBattleStartTask(B_TRANSITION_KYOGRE, MUS_VS_KYOGRE_GROUDON_RAYQUAZA);
         break;
     case SPECIES_RAYQUAZA:
-        CreateBattleStartTask(B_TRANSITION_RAYQUAZA, MUS_VS_RAYQUAZA);
+        CreateBattleStartTask(B_TRANSITION_RAYQUAZA, MUS_VS_KYOGRE_GROUDON_RAYQUAZA);
         break;
     case SPECIES_DEOXYS_NORMAL:
     case SPECIES_DEOXYS_ATTACK:
@@ -638,9 +632,9 @@ void StartGroudonKyogreBattle(void)
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
 
     if (gGameVersion == VERSION_RUBY)
-        CreateBattleStartTask(B_TRANSITION_ANGLED_WIPES, MUS_VS_KYOGRE_GROUDON); // GROUDON
+        CreateBattleStartTask(B_TRANSITION_ANGLED_WIPES, MUS_VS_KYOGRE_GROUDON_RAYQUAZA); // GROUDON
     else
-        CreateBattleStartTask(B_TRANSITION_RIPPLE, MUS_VS_KYOGRE_GROUDON); // KYOGRE
+        CreateBattleStartTask(B_TRANSITION_RIPPLE, MUS_VS_KYOGRE_GROUDON_RAYQUAZA); // KYOGRE
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
@@ -1033,12 +1027,12 @@ static u8 TrainerBattleLoadArg8(const u8 *ptr)
 
 static u16 GetTrainerAFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_A;
+    return gTrainerBattleOpponent_A;
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_B;
+    return gTrainerBattleOpponent_B;
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1273,7 +1267,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    return FlagGet(TRAINER_FLAGS_START + flag);
+    return FlagGet(flag);
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1309,17 +1303,17 @@ static void SetBattledTrainersFlags(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(trainerId);
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(trainerId);
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(trainerId);
 }
 
 void BattleSetup_StartTrainerBattle(void)
@@ -1695,7 +1689,7 @@ static inline bool32 DoesCurrentMapMatchRematchTrainerMap(s32 i, const struct Re
 
 bool32 TrainerIsMatchCallRegistered(s32 i)
 {
-    return FlagGet(TRAINER_REGISTERED_FLAGS_START + i);
+    return 0;
 }
 
 void UpdateRematchIfDefeated(s32 rematchTableId)
@@ -1800,14 +1794,6 @@ static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16
 
 static u32 GetTrainerMatchCallFlag(u32 trainerId)
 {
-    s32 i;
-
-    for (i = 0; i < REMATCH_TABLE_ENTRIES; i++)
-    {
-        if (gRematchTable[i].trainerIds[0] == trainerId)
-            return TRAINER_REGISTERED_FLAGS_START + i;
-    }
-
     return 0xFFFF;
 }
 

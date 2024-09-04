@@ -1296,16 +1296,16 @@ static void SpriteCB_Ball_Bounce_Step(struct Sprite *sprite)
             switch (bounceCount)
             {
             case 1:
-                PlaySE(SE_BALL_BOUNCE_1);
+                PlaySE(SE_BALL_BOUNCE_A);
                 break;
             case 2:
-                PlaySE(SE_BALL_BOUNCE_2);
+                PlaySE(SE_BALL_BOUNCE_B);
                 break;
             case 3:
-                PlaySE(SE_BALL_BOUNCE_3);
+                PlaySE(SE_BALL_BOUNCE_C);
                 break;
             default:
-                PlaySE(SE_BALL_BOUNCE_4);
+                PlaySE(SE_BALL_BOUNCE_D);
                 break;
             }
         }

@@ -1,6 +1,10 @@
 #ifndef GUARD_REGIONMAPSEC_H
 #define GUARD_REGIONMAPSEC_H
 
+//enum MapSecs
+//{
+//
+//};
 #define MAPSEC_LITTLEROOT_TOWN              0x00
 #define MAPSEC_OLDALE_TOWN                  0x01
 #define MAPSEC_DEWFORD_TOWN                 0x02
@@ -216,9 +220,9 @@
 #define MAPSEC_TRAINER_HILL                 0xD4
 #define MAPSEC_NONE                         0xD5
 
-#define METLOC_SPECIAL_EGG                  0xFD
-#define METLOC_IN_GAME_TRADE                0xFE
-#define METLOC_FATEFUL_ENCOUNTER            0xFF
+#define METLOC_SPECIAL_EGG                  253
+#define METLOC_IN_GAME_TRADE                254
+#define METLOC_FATEFUL_ENCOUNTER            255
 
 #define KANTO_MAPSEC_START  MAPSEC_PALLET_TOWN
 #define KANTO_MAPSEC_END    MAPSEC_SPECIAL_AREA

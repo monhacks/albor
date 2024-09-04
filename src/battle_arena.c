@@ -213,7 +213,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         }
         break;
     case 4:
-        PlaySE(SE_ARENA_TIMEUP1);
+        PlaySE(SE_ARENA_TIMEUP);
         ShowJudgmentSprite(80, 40, ARENA_CATEGORY_MIND, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 40, ARENA_CATEGORY_MIND, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
@@ -222,7 +222,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         result = ARENA_RESULT_STEP_DONE;
         break;
     case 5:
-        PlaySE(SE_ARENA_TIMEUP1);
+        PlaySE(SE_ARENA_TIMEUP);
         ShowJudgmentSprite(80, 56, ARENA_CATEGORY_SKILL, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 56, ARENA_CATEGORY_SKILL, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
@@ -231,7 +231,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         result = ARENA_RESULT_STEP_DONE;
         break;
     case 6:
-        PlaySE(SE_ARENA_TIMEUP1);
+        PlaySE(SE_ARENA_TIMEUP);
         ShowJudgmentSprite(80, 72, ARENA_CATEGORY_BODY, B_POSITION_PLAYER_LEFT);
         ShowJudgmentSprite(160, 72, ARENA_CATEGORY_BODY, B_POSITION_OPPONENT_LEFT);
         BattleStringExpandPlaceholdersToDisplayedString(gText_Judgment);
@@ -240,7 +240,7 @@ u8 BattleArena_ShowJudgmentWindow(u8 *state)
         result = ARENA_RESULT_STEP_DONE;
         break;
     case 7:
-        PlaySE(SE_ARENA_TIMEUP2);
+        PlaySE(SE_ARENA_TIMEUP_2);
         if (gBattleTextBuff1[0] > gBattleTextBuff2[0])
         {
             result = ARENA_RESULT_PLAYER_WON;

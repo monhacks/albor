@@ -417,9 +417,6 @@ static void Task_EReader(u8 taskId)
         }
         break;
     case ER_STATE_VALIDATE_CARD:
-        data->status = ValidateTrainerHillData((struct EReaderTrainerHillSet *)gDecompressionBuffer);
-        SetCloseLinkCallbackAndType(data->status);
-        data->state = ER_STATE_WAIT_DISCONNECT;
         break;
     case ER_STATE_WAIT_DISCONNECT:
         if (!gReceivedRemoteLinkPlayers)

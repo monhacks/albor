@@ -169,7 +169,6 @@ SECTIONS {
         src/contest_effect.o(.text);
         src/secret_base.o(.text);
         src/script_pokemon_util.o(.text);
-        src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         src/fldeff_misc.o(.text);
         src/field_special_scene.o(.text);
@@ -326,7 +325,6 @@ SECTIONS {
         src/international_string_util.o(.text);
         src/pokemon_sprite_visualizer.o(.text);
         src/expansion_intro.o(.text);
-        src/sound_check_menu.o(.text);
         src/tm_case.o(.text);
     } > ROM =0
 
@@ -656,7 +654,6 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/pokemon_sprite_visualizer.o(.rodata);
         src/expansion_intro.o(.rodata);
-        src/sound_check_menu.o(.rodata);
         src/tm_case.o(.text);
     } > ROM =0
 

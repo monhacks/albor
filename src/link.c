@@ -514,7 +514,7 @@ static void LinkCB_BlockSendEnd(void)
 
 u8 GetMultiplayerId(void)
 {
-    return SIO_MULTI_CNT->id;
+    return 0;
 }
 
 u8 BitmaskAllOtherLinkPlayers(void)
@@ -744,23 +744,11 @@ static void LinkCB_ReadyCloseLinkWithJP(void)
 
 static void LinkCB_WaitCloseLinkWithJP(void)
 {
-    int i;
     unsigned count;
     u8 linkPlayerCount;
 
     linkPlayerCount = GetLinkPlayerCount();
     count = 0;
-
-    // Wait for all non-foreign players to be ready
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        // Rather than communicate with the foreign game
-        // just assume they're ready to disconnect
-        if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
-            count++;
-        else if (gReadyToCloseLink[i])
-            count++;
-    }
 
     if (count == linkPlayerCount)
     {
@@ -884,7 +872,6 @@ bool32 IsLinkRecvQueueAtOverworldMax(void)
 void ConvertLinkPlayerName(struct LinkPlayer *player)
 {
     player->progressFlagsCopy = player->progressFlags; // ? Perhaps relocating for a longer name field
-    ConvertInternationalString(player->name, player->language);
 }
 
 static void DisableSerial(void)
@@ -1174,36 +1161,7 @@ void Timer3Intr(void)
 
 void SerialCB(void)
 {
-    gLink.localId = SIO_MULTI_CNT->id;
-    switch (gLink.state)
-    {
-        case LINK_STATE_CONN_ESTABLISHED:
-            gLink.hardwareError = SIO_MULTI_CNT->error;
-            DoRecv();
-            DoSend();
-            SendRecvDone();
-            break;
-        case LINK_STATE_HANDSHAKE:
-            if (DoHandshake())
-            {
-                if (gLink.isMaster)
-                {
-                    gLink.state = LINK_STATE_INIT_TIMER;
-                    gLink.serialIntrCounter = 8;
-                }
-                else
-                {
-                    gLink.state = LINK_STATE_CONN_ESTABLISHED;
-                }
-            }
-            break;
-    }
-    gLink.serialIntrCounter++;
-    sNumVBlanksWithoutSerialIntr = 0;
-    if (gLink.serialIntrCounter == 8)
-    {
-        gLastRecvQueueCount = gLink.recvQueue.count;
-    }
+
 }
 
 static void StartTransfer(void)

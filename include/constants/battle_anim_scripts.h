@@ -8,12 +8,12 @@
 #define SHELL_SMASH_PAUSE_DURATION          48
 
 // thunder cage
-#define THUNDER_CAGE_BALL_TIME  0x64
+#define THUNDER_CAGE_BALL_TIME  100
 
 // power shift
 #define POWER_SHIFT_LEFT_X      -20
 #define POWER_SHIFT_RIGHT_X     20
-#define POWER_SHIFT_DELAY       0x30
+#define POWER_SHIFT_DELAY       48
 #define POWER_SHIFT_ARC         -50
 
 // mysitcal power

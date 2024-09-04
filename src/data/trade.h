@@ -27,7 +27,6 @@ static const u8 sText_Slash[] = _("/");
 static const u8 sText_Lv[] = _("Nv. ");
 static const u8 sText_ThreeDashes[] = _("---");
 static const u8 sText_FourQuestionMarks[] = _("????");
-static const u8 sText_UnusedEmpty[] = _("");
 static const u8 sText_IsThisTradeOkay[] = _("Is this trade okay?");
 static const u8 sText_Cancel[] = _("Salir");
 static const u8 sText_ChooseAPkmn[] = _("Choose a POKéMON.");

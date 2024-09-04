@@ -48,24 +48,6 @@
 static void ZMoveSelectionDisplayPpNumber(u32 battler);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
 
-// Const Data
-static const struct SignatureZMove sSignatureZMoves[] =
-{
-    {SPECIES_RAICHU_ALOLAN,           ITEM_ALORAICHIUM_Z,        MOVE_THUNDERBOLT,         MOVE_STOKED_SPARKSURFER},
-    {SPECIES_DECIDUEYE,               ITEM_DECIDIUM_Z,           MOVE_SPIRIT_SHACKLE,      MOVE_SINISTER_ARROW_RAID},
-    {SPECIES_INCINEROAR,              ITEM_INCINIUM_Z,           MOVE_DARKEST_LARIAT,      MOVE_MALICIOUS_MOONSAULT},
-    {SPECIES_LYCANROC_MIDDAY,         ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_LYCANROC_MIDNIGHT,       ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_LYCANROC_DUSK,           ITEM_LYCANIUM_Z,           MOVE_STONE_EDGE,          MOVE_SPLINTERED_STORMSHARDS},
-    {SPECIES_MIMIKYU_DISGUISED,       ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
-    {SPECIES_MIMIKYU_BUSTED,          ITEM_MIMIKIUM_Z,           MOVE_PLAY_ROUGH,          MOVE_LETS_SNUGGLE_FOREVER},
-    {SPECIES_PRIMARINA,               ITEM_PRIMARIUM_Z,          MOVE_SPARKLING_ARIA,      MOVE_OCEANIC_OPERETTA},
-    {SPECIES_MEW,                     ITEM_MEWNIUM_Z,            MOVE_PSYCHIC,             MOVE_GENESIS_SUPERNOVA},
-    {SPECIES_PIKACHU,                 ITEM_PIKANIUM_Z,           MOVE_VOLT_TACKLE,         MOVE_CATASTROPIKA},
-    {SPECIES_EEVEE,                   ITEM_EEVIUM_Z,             MOVE_LAST_RESORT,         MOVE_EXTREME_EVOBOOST},
-    {SPECIES_SNORLAX,                 ITEM_SNORLIUM_Z,           MOVE_GIGA_IMPACT,         MOVE_PULVERIZING_PANCAKE},
-};
-
 static const u8 sText_ResetStats[] = _("Reset Lowered Stats");
 static const u8 sText_StatsPlus[] = _("+ All Stats");
 static const u8 sText_StatsPlus2[] = _("++ All Stats");
@@ -78,7 +60,7 @@ static const u8 sText_PowerColon[] = _("Power: ");
 // Functions
 bool32 IsZMove(u32 move)
 {
-    return move >= FIRST_Z_MOVE && move <= LAST_Z_MOVE;
+    return FALSE;
 }
 
 bool32 CanUseZMove(u32 battler)
@@ -198,15 +180,6 @@ bool32 TryChangeZTrigger(u32 battler, u32 moveIndex)
 
 u32 GetSignatureZMove(u32 move, u32 species, u32 item)
 {
-    u32 i;
-
-    // Check signature z move
-    for (i = 0; i < ARRAY_COUNT(sSignatureZMoves); ++i)
-    {
-        if (sSignatureZMoves[i].item == item && sSignatureZMoves[i].species == species &&  sSignatureZMoves[i].move == move)
-            return sSignatureZMoves[i].zmove;
-    }
-
     return MOVE_NONE;
 }
 
@@ -220,11 +193,7 @@ u32 GetTypeBasedZMove(u32 move)
     // Z-Weather Ball changes types, however Revelation Dance, -ate ability affected moves, and Hidden Power do not
     if (gBattleStruct->dynamicMoveType && gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
         moveType = gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
-
-    // Get Z-Move from type
-    if (gTypesInfo[moveType].zMove == MOVE_NONE) // failsafe
-        return gTypesInfo[0].zMove;
-    return gTypesInfo[moveType].zMove;
+    return 0;
 }
 
 bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
@@ -328,13 +297,6 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
             gDisplayedStringBattle[1] = CHAR_HYPHEN;
             StringCopy(gDisplayedStringBattle + 2, GetMoveName(move));
         }
-        else if (zmove == MOVE_EXTREME_EVOBOOST)
-        {
-            // Damaging move -> status z move
-            StringCopy(gDisplayedStringBattle, sText_StatsPlus2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
-            StringCopy(gDisplayedStringBattle, GetMoveName(zmove));
-        }
         else
         {
             ZMoveSelectionDisplayPower(move, zmove);
@@ -352,18 +314,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove)
 {
-    u8 *txtPtr;
-    u16 power = GetZMovePower(move);
 
-    if (zMove >= MOVE_CATASTROPIKA)
-        power = gMovesInfo[zMove].power;
-
-    if (gMovesInfo[move].category != DAMAGE_CATEGORY_STATUS)
-    {
-        txtPtr = StringCopy(gDisplayedStringBattle, sText_PowerColon);
-        ConvertIntToDecimalStringN(txtPtr, power, STR_CONV_MODE_LEFT_ALIGN, 3);
-        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
-    }
 }
 
 static void ZMoveSelectionDisplayPpNumber(u32 battler)

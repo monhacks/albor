@@ -28,7 +28,7 @@ const struct BardSound *GetWordSounds(u16 word)
     {
         case EC_GROUP_MOVE_1:
         case EC_GROUP_MOVE_2:
-            ptr = gBardSounds_Moves;
+            ptr = 0;
             break;
         default:
             ptr = gBardSoundsTable[category];

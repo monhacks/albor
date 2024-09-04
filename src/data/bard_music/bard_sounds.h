@@ -4,7 +4,6 @@
 #define NULL_BARD_SOUND { .songLengthId = 0xff }
 
 #include "pokemon.h"
-#include "moves.h"
 #include "trainer.h"
 #include "status.h"
 #include "battle.h"
@@ -43,8 +42,8 @@ const struct BardSound (*const gBardSoundsTable[EC_NUM_GROUPS])[6] = {
     [EC_GROUP_MISC]             = gBardSounds_Misc,
     [EC_GROUP_ADJECTIVES]       = gBardSounds_Adjectives,
     [EC_GROUP_EVENTS]           = gBardSounds_Events,
-    [EC_GROUP_MOVE_1]           = NULL, // Handled by gBardSounds_Moves
-    [EC_GROUP_MOVE_2]           = NULL, // Handled by gBardSounds_Moves
+    [EC_GROUP_MOVE_1]           = NULL,
+    [EC_GROUP_MOVE_2]           = NULL,
     [EC_GROUP_TRENDY_SAYING]    = gBardSounds_TrendySaying,
     [EC_GROUP_POKEMON_NATIONAL] = NULL
 };

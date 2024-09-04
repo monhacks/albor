@@ -1,67 +1,77 @@
 #ifndef GUARD_CONSTANTS_POKEMON_H
 #define GUARD_CONSTANTS_POKEMON_H
 
-// Pokémon types
-#define TYPE_NONE             0
-#define TYPE_NORMAL           1
-#define TYPE_FIGHTING         2
-#define TYPE_FLYING           3
-#define TYPE_POISON           4
-#define TYPE_GROUND           5
-#define TYPE_ROCK             6
-#define TYPE_BUG              7
-#define TYPE_GHOST            8
-#define TYPE_STEEL            9
-#define TYPE_MYSTERY          10
-#define TYPE_FIRE             11
-#define TYPE_WATER            12
-#define TYPE_GRASS            13
-#define TYPE_ELECTRIC         14
-#define TYPE_PSYCHIC          15
-#define TYPE_ICE              16
-#define TYPE_DRAGON           17
-#define TYPE_DARK             18
-#define TYPE_FAIRY            19
-#define TYPE_STELLAR          20
-#define NUMBER_OF_MON_TYPES   21
+enum PokemonTypes
+{
+    TYPE_NONE,
+    TYPE_NORMAL,
+    TYPE_FIGHTING,
+    TYPE_FLYING,
+    TYPE_POISON,
+    TYPE_GROUND,
+    TYPE_ROCK,
+    TYPE_BUG,
+    TYPE_GHOST,
+    TYPE_STEEL,
+    TYPE_MYSTERY,
+    TYPE_FIRE,
+    TYPE_WATER,
+    TYPE_GRASS,
+    TYPE_ELECTRIC,
+    TYPE_PSYCHIC,
+    TYPE_ICE,
+    TYPE_DRAGON,
+    TYPE_DARK,
+    TYPE_FAIRY,
+    TYPE_STELLAR,
 
-// Pokémon egg groups
-#define EGG_GROUP_NONE                0
-#define EGG_GROUP_MONSTER             1
-#define EGG_GROUP_ANFIBIO             2
-#define EGG_GROUP_BUG                 3
-#define EGG_GROUP_FLYING              4
-#define EGG_GROUP_FIELD               5
-#define EGG_GROUP_FAIRY               6
-#define EGG_GROUP_GRASS               7
-#define EGG_GROUP_HUMAN_LIKE          8
-#define EGG_GROUP_INVERTEBRADO        9
-#define EGG_GROUP_MINERAL             10
-#define EGG_GROUP_AMORPHOUS           11
-#define EGG_GROUP_PEZ                 12
-#define EGG_GROUP_DITTO               13
-#define EGG_GROUP_DRAGON              14
-#define EGG_GROUP_BABY                15
+    NUMBER_OF_MON_TYPES,
+};
+
+enum PokemonEggGroups
+{
+    EGG_GROUP_NONE,
+    EGG_GROUP_MONSTER,
+    EGG_GROUP_AMPHIBIOUS,
+    EGG_GROUP_BUG,
+    EGG_GROUP_FLYING,
+    EGG_GROUP_FIELD,
+    EGG_GROUP_FAIRY,
+    EGG_GROUP_GRASS,
+    EGG_GROUP_HUMAN_LIKE,
+    EGG_GROUP_INVERTEBRATE,
+    EGG_GROUP_MINERAL,
+    EGG_GROUP_AMORPHOUS,
+    EGG_GROUP_FISH,
+    EGG_GROUP_UNIVERSAL,
+    EGG_GROUP_DRAGON,
+    EGG_GROUP_BABY,
+};
 
 #define EGG_GROUPS_PER_MON            2
 
-// Pokémon natures
-#define NATURE_OFENSIVA             0
-#define NATURE_DEFENSIVA            1
-#define NATURE_OFENSIVA_ESPECIAL    2
-#define NATURE_DEFENSIVA_ESPECIAL   3
-#define NATURE_RAPIDA               4
+enum PokemonNatures
+{
+    NATURE_ATK,
+    NATURE_DEF,
+    NATURE_SP_ATK,
+    NATURE_SP_DEF,
+    NATURE_SPEED,
 
-#define NUM_NATURES                 5
+    NUM_NATURES
+};
 
-// Pokémon Stats
-#define STAT_HP      0
-#define STAT_ATK     1
-#define STAT_DEF     2
-#define STAT_SPEED   3
-#define STAT_SPATK   4
-#define STAT_SPDEF   5
-#define NUM_STATS    6
+enum PokemonStats
+{
+    STAT_HP,
+    STAT_ATK,
+    STAT_DEF,
+    STAT_SPEED,
+    STAT_SPATK,
+    STAT_SPDEF,
+
+    NUM_STATS
+};
 
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
@@ -76,6 +86,7 @@
 // Shiny odds
 #define SHINY_ODDS 128 //Probabilidad de 1/4096
 
+//Limpiar
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
 #define COOL_RIBBON_NORMAL    1
@@ -130,17 +141,26 @@
 
 #define MAX_DYNAMAX_LEVEL 10
 
-#define OT_ID_PLAYER_ID       0
-#define OT_ID_PRESET          1
-#define OT_ID_RANDOM_NO_SHINY 2
+enum OtIds
+{
+    OT_ID_PLAYER_ID,
+    OT_ID_PRESET,
+    OT_ID_RANDOM_NO_SHINY,
+};
 
-#define MON_GIVEN_TO_PARTY      0
-#define MON_GIVEN_TO_PC         1
-#define MON_CANT_GIVE           2
+enum MonReceivedWhereToGo
+{
+    MON_GIVEN_TO_PARTY,
+    MON_GIVEN_TO_PC,
+    MON_CANT_GIVE,
+};
 
-#define PLAYER_HAS_TWO_USABLE_MONS     0
-#define PLAYER_HAS_ONE_MON             1
-#define PLAYER_HAS_ONE_USABLE_MON      2
+enum PlayerHasHowManyMons
+{
+    PLAYER_HAS_TWO_USABLE_MONS,
+    PLAYER_HAS_ONE_MON,
+    PLAYER_HAS_ONE_USABLE_MON,
+};
 
 #define MON_ALREADY_KNOWS_MOVE  0xFFFE
 #define MON_HAS_MAX_MOVES       0xFFFF
@@ -155,26 +175,30 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
-// Constants for AdjustFriendship
-#define FRIENDSHIP_EVENT_GROW_LEVEL       0
-#define FRIENDSHIP_EVENT_VITAMIN          1 // unused, handled by PokemonUseItemEffects
-#define FRIENDSHIP_EVENT_BATTLE_ITEM      2 // unused, handled by PokemonUseItemEffects
-#define FRIENDSHIP_EVENT_LEAGUE_BATTLE    3
-#define FRIENDSHIP_EVENT_LEARN_TMHM       4
-#define FRIENDSHIP_EVENT_WALKING          5
-#define FRIENDSHIP_EVENT_FAINT_SMALL      6
-#define FRIENDSHIP_EVENT_FAINT_FIELD_PSN  7
-#define FRIENDSHIP_EVENT_FAINT_LARGE      8 // If opponent was >= 30 levels higher. See AdjustFriendshipOnBattleFaint
+enum FriendshipEvents
+{
+    FRIENDSHIP_EVENT_GROW_LEVEL,
+    FRIENDSHIP_EVENT_LEAGUE_BATTLE,
+    FRIENDSHIP_EVENT_LEARN_TMHM,
+    FRIENDSHIP_EVENT_WALKING,
+    FRIENDSHIP_EVENT_FAINT_SMALL,
+    FRIENDSHIP_EVENT_FAINT_FIELD_PSN,
+    FRIENDSHIP_EVENT_FAINT_LARGE,
+};
 
 // Constants for GetLeadMonFriendshipScore
-#define FRIENDSHIP_NONE        0
-#define FRIENDSHIP_1_TO_49     1
-#define FRIENDSHIP_50_TO_99    2
-#define FRIENDSHIP_100_TO_149  3
-#define FRIENDSHIP_150_TO_199  4
-#define FRIENDSHIP_200_TO_254  5
-#define FRIENDSHIP_MAX         6
+enum Friendship
+{
+    FRIENDSHIP_NONE,
+    FRIENDSHIP_1_TO_49,
+    FRIENDSHIP_50_TO_99,
+    FRIENDSHIP_100_TO_149,
+    FRIENDSHIP_150_TO_199,
+    FRIENDSHIP_200_TO_254,
+    FRIENDSHIP_MAX,
+};
 
+//Fuera
 // Constants for GetBattlerAffectionHearts (based on friendship value)
 #define AFFECTION_NO_HEARTS     0 // 0-79 friendship
 #define AFFECTION_ONE_HEART     1 // 80-129 friendship
@@ -184,7 +208,7 @@
 #define AFFECTION_FIVE_HEARTS   5 // Max friendship
 
 // Friendship value that the majority of species use.
-#define STANDARD_FRIENDSHIP ((P_UPDATED_FRIENDSHIP >= GEN_8) ? 50 : 70)
+#define STANDARD_FRIENDSHIP 50
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
@@ -193,22 +217,26 @@
 #define MAX_PER_STAT_IVS 31
 #define MAX_IV_MASK 31
 #define USE_RANDOM_IVS (MAX_PER_STAT_IVS + 1)
-#define MAX_PER_STAT_EVS ((P_EV_CAP >= GEN_6) ? 252 : 255)
+#define MAX_PER_STAT_EVS 252
 #define MAX_TOTAL_EVS 504
-#define EV_ITEM_RAISE_LIMIT ((I_VITAMIN_EV_CAP >= GEN_8) ? MAX_PER_STAT_EVS : 100)
+#define EV_ITEM_RAISE_LIMIT MAX_PER_STAT_EVS
 
-// Move category defines.
-#define DAMAGE_CATEGORY_PHYSICAL    0
-#define DAMAGE_CATEGORY_SPECIAL     1
-#define DAMAGE_CATEGORY_STATUS      2
+enum DamageCategories
+{
+    DAMAGE_CATEGORY_PHYSICAL,
+    DAMAGE_CATEGORY_SPECIAL,
+    DAMAGE_CATEGORY_STATUS,
+};
 
-// Growth rates
-#define GROWTH_MEDIUM_FAST  0
-#define GROWTH_ERRATIC      1
-#define GROWTH_FLUCTUATING  2
-#define GROWTH_MEDIUM_SLOW  3
-#define GROWTH_FAST         4
-#define GROWTH_SLOW         5
+enum GrowthRates
+{
+    GROWTH_MEDIUM_FAST,
+    GROWTH_ERRATIC,
+    GROWTH_FLUCTUATING,
+    GROWTH_MEDIUM_SLOW,
+    GROWTH_FAST,
+    GROWTH_SLOW,
+};
 
 //Fuera
 // Body colors for Pokédex search
@@ -223,7 +251,7 @@
 #define BODY_COLOR_WHITE    8
 #define BODY_COLOR_PINK     9
 
-#define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
+#define F_SUMMARY_SCREEN_FLIP_SPRITE 128
 
 #define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
 #define EVO_NONE                          0xFFFE // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
@@ -300,12 +328,6 @@ enum EvolutionMode
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
-
-// Most Pokémon have 2 frames (a default and an alternate for their animation).
-// There are 4 exceptions:
-// - Deoxys has 2 frames, 1 for each form
-// - Spinda has 1 frame, presumably to avoid the work of animating its spots
-// - Unown has 1 frame, presumably to avoid the work of animating all 28 of its forms
 #define MAX_MON_PIC_FRAMES 2
 
 #define BATTLE_ALIVE_EXCEPT_BATTLER  0
@@ -319,11 +341,5 @@ enum EvolutionMode
 
 // Used as a signal for givemon to generate a default ability by personality.
 #define NUM_ABILITY_PERSONALITY 0xFF
-
-#if P_LEGENDARY_PERFECT_IVS >= GEN_6
-#define LEGENDARY_PERFECT_IV_COUNT 3
-#else
-#define LEGENDARY_PERFECT_IV_COUNT 0
-#endif
 
 #endif // GUARD_CONSTANTS_POKEMON_H

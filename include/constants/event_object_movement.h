@@ -255,7 +255,7 @@ enum EventObjectsMovementActions
     MOVEMENT_ACTION_ENTER_POKEBALL,
 
     MOVEMENT_ACTION_STEP_END = 254,
-    MOVEMENT_ACTION_NONE = 255
+    MOVEMENT_ACTION_NONE = 255,
 };
 
 enum EventObjectAnim
@@ -363,10 +363,10 @@ enum EventObjectsCopyMove
     COPY_MOVE_JUMP2,
     COPY_MOVE_EMPTY_1,
     COPY_MOVE_EMPTY_2,
-}
+};
 
 #define ANIM_FIELD_MOVE 0
-
+#define ANIM_NURSE_BOW ANIM_STD_COUNT
 #define ANIM_STAY_STILL      0
 #define ANIM_REMOVE_OBSTACLE 1
 

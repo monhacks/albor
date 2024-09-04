@@ -39,7 +39,7 @@
 #include "window.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_move_effects.h"
-#include "constants/battle_partner.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"

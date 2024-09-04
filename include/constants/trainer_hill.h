@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_TRAINER_HILL_H
 #define GUARD_CONSTANTS_TRAINER_HILL_H
-
+//eliminar todo
 #define TRAINER_HILL_1F        1
 #define TRAINER_HILL_2F        2
 #define TRAINER_HILL_3F        3

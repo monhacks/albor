@@ -294,7 +294,7 @@ const struct FollowerMsgInfo gFollowerMusicMessages[] = {
 };
 
 
-static const u8 sPoisonedMsg00[] = _("{STR_VAR_1} está temblando por los\nefectos del veneno.");
+static const u8 sPoisonedMsg00[] = _("{STR_VAR_1} sufre por los\nefectos del veneno.");
 
 const struct FollowerMsgInfo gFollowerPoisonedMessages[] = {
     {sPoisonedMsg00, EventScript_FollowerIsShivering},

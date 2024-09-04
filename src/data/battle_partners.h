@@ -12,7 +12,7 @@
     [PARTNER_NONE] =
     {
 #line 3
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
+        .trainerClass = TRAINER_CLASS_NONE,
 #line 4
         .trainerPic = TRAINER_BACK_PIC_BRENDAN,
         .encounterMusic_gender = 

@@ -696,16 +696,6 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 
     switch (oldMan->common.id)
     {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        for (i = 0; i < NUM_TRADER_ITEMS; i++)
-        {
-            if (trader->language[i] == LANGUAGE_JAPANESE)
-                ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
-        }
-        break;
-    }
     case MAUVILLE_MAN_STORYTELLER:
     {
         struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
@@ -731,25 +721,7 @@ void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
-    s32 i;
-    if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
-    {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
 
-        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
-        {
-            if (storyteller->gameStatIDs[i] != 0)
-            {
-                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                playerName[PLAYER_NAME_LENGTH] = EOS;
-                if (IsStringJapanese(playerName))
-                    storyteller->language[i] = LANGUAGE_JAPANESE;
-                else
-                    storyteller->language[i] = GAME_LANGUAGE;
-            }
-        }
-    }
 }
 
 void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language)
@@ -758,37 +730,6 @@ void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language
 
     switch (oldMan->common.id)
     {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        s32 i;
-
-        if (isRuby)
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                u8 *str = trader->playerNames[i];
-                if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
-                {
-                    StripExtCtrlCodes(str);
-                    trader->language[i] = LANGUAGE_JAPANESE;
-                }
-                else
-                    trader->language[i] = language;
-            }
-        }
-        else
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                if (trader->language[i] == LANGUAGE_JAPANESE)
-                {
-                    StripExtCtrlCodes(trader->playerNames[i]);
-                }
-            }
-        }
-    }
-    break;
     case MAUVILLE_MAN_STORYTELLER:
     {
 
@@ -1224,7 +1165,6 @@ static void StorytellerDisplayStory(u32 player)
     ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), STR_CONV_MODE_LEFT_ALIGN, 10);
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
     GetStoryByStattellerPlayerName(player, gStringVar3);
-    ConvertInternationalString(gStringVar3, sStorytellerPtr->language[player]);
     ShowFieldMessage(GetStoryTextByStat(stat));
 }
 

@@ -16,8 +16,9 @@ enum {
     WINDOW_TILE_DATA
 };
 
-// Mode for CopyWindowToVram, CopyWindowRectToVram and CopyWindowToVram8Bit
-enum {
+// Mode for CopyWindowToVram & CopyWindowRectToVram
+enum CopyWinModes
+{
     COPYWIN_NONE,
     COPYWIN_MAP,
     COPYWIN_GFX,
@@ -68,11 +69,6 @@ void ScrollWindow(u32 windowId, u8 direction, u8 distance, u8 fillValue);
 void CallWindowFunction(u32 windowId, void ( *func)(u8, u8, u8, u8, u8, u8));
 bool32 SetWindowAttribute(u32 windowId, u32 attributeId, u32 value);
 u32 GetWindowAttribute(u32 windowId, u32 attributeId);
-u32 AddWindow8Bit(const struct WindowTemplate *template);
-void FillWindowPixelBuffer8Bit(u32 windowId, u8 fillValue);
-void FillWindowPixelRect8Bit(u32 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
-void BlitBitmapRectToWindow4BitTo8Bit(u32 windowId, const u32 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteNum);
-void CopyWindowToVram8Bit(u32 windowId, u8 mode);
 u32 WindowWidthPx(u32 windowId);
 u32 WindowTemplateWidthPx(const struct WindowTemplate *template);
 

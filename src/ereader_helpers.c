@@ -46,24 +46,6 @@ static u16 sSavedTm3Cnt;
 static u16 sSavedSioCnt;
 static u16 sSavedRCnt;
 
-bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet * hillSet)
-{
-    u32 i;
-    u32 checksum;
-    int numTrainers = hillSet->numTrainers;
-
-    // Validate number of trainers
-    if (numTrainers < 1 || numTrainers > NUM_TRAINER_HILL_TRAINERS)
-        return FALSE;
-
-    // Validate checksum
-    checksum = 0;
-    if (checksum != hillSet->checksum)
-        return FALSE;
-
-    return TRUE;
-}
-
 int EReader_Send(int size, const void * src)
 {
     int result;

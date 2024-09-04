@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_TRADE_H
 #define GUARD_CONSTANTS_TRADE_H
-
+//eliminar todo
 #define TRADE_PLAYER  0
 #define TRADE_PARTNER 1
 

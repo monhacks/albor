@@ -122,14 +122,15 @@
 #define ROUND_BITS_TO_BYTES(numBits) DIV_ROUND_UP(numBits, 8)
 
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(NATIONAL_DEX_COUNT)
-#define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
+#define NUM_TEMP_FLAG_BYTES ROUND_BITS_TO_BYTES(TEMP_FLAGS_COUNT)
+#define NUM_NORMAL_FLAG_BYTES ROUND_BITS_TO_BYTES(NORMAL_FLAGS_COUNT)
+#define NUM_DAILY_FLAG_BYTES ROUND_BITS_TO_BYTES(DAILY_FLAGS_COUNT)
+#define NUM_TRAINER_FLAG_BYTES ROUND_BITS_TO_BYTES(TRAINERS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
 
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
-
-#define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
 
 struct Coords8
 {
@@ -163,15 +164,10 @@ struct UCoords32
 
 struct Time
 {
-    /*0x00*/ s16 days;
-    /*0x02*/ s8 hours;
-    /*0x03*/ s8 minutes;
-    /*0x04*/ s8 seconds;
-};
-
-struct Pokedex
-{
-    /*0x00*/ u32 order;
+    s16 days;
+    s8 hours;
+    s8 minutes;
+    s8 seconds;
 };
 
 struct PyramidBag
@@ -241,7 +237,7 @@ struct BattleTowerInterview
     u8 opponentName[PLAYER_NAME_LENGTH + 1];
     u8 opponentMonNickname[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 opponentLanguage;
-}
+};
 
 // For displaying party information on the player's Battle Dome tourney page
 struct DomeMonData
@@ -363,28 +359,27 @@ struct PlayersApprentice
 
 struct SaveBlock2
 {
-    /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 specialSaveWarpFlags;
-    /*0x0A*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
-    /*0x0E*/ u16 playTimeHours;
-    /*0x10*/ u8 playTimeMinutes;
-    /*0x11*/ u8 playTimeSeconds;
-    /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A] //modificar
-    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-             u16 regionMapZoom:1; // whether the map is zoomed in
-    /*0x18*/ struct Pokedex pokedex;
-    /*0x98*/ struct Time localTimeOffset;
-    /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xB0*/ struct PlayersApprentice playerApprentice; //eliminar
-    /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT]; //eliminar
-    /*0x64C*/ struct BattleFrontier frontier; //eliminar
-             struct Time fakeRTC;
+    u8 playerName[PLAYER_NAME_LENGTH + 1];
+    u8 playerGender; // MALE, FEMALE
+    u8 specialSaveWarpFlags;
+    u8 playerTrainerId[TRAINER_ID_LENGTH];
+    u16 playTimeHours;
+    u8 playTimeMinutes;
+    u8 playTimeSeconds;
+    u8 playTimeVBlanks;
+    u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A] //modificar
+    u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+    u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+    u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+    u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+    u16 regionMapZoom:1; // whether the map is zoomed in
+    struct Time localTimeOffset;
+    struct Time lastBerryTreeUpdate;
+    struct PlayersApprentice playerApprentice; //eliminar
+    struct Apprentice apprentices[APPRENTICE_COUNT]; //eliminar
+    struct BattleFrontier frontier; //eliminar
+    struct Time fakeRTC;
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -623,7 +618,7 @@ struct LilycoveLadyContest
     /*0x00E*/ u8 language;
 };
 
-typedef union // 3b58
+typedef union
 {
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavor favor;
@@ -631,91 +626,73 @@ typedef union // 3b58
     u8 id;
 } LilycoveLady;
 
-struct TrainerNameRecord
-{
-    u32 trainerId;
-    u8 ALIGNED(2) trainerName[PLAYER_NAME_LENGTH + 1];
-};
-
-struct TrainerHillSave
-{
-    /*0x3D64*/ u32 timer;
-    /*0x3D68*/ u32 bestTime;
-    /*0x3D6E*/ u16 receivedPrize:1;
-               u16 checkedFinalTime:1;
-               u16 spokeToOwner:1;
-               u16 hasLost:1;
-               u16 maybeECardScanDuringChallenge:1;
-               u16 field_3D6E_0f:1;
-               u16 mode:2; // HILL_MODE_*
-};
-
 struct SaveBlock1
 {
-    /*0x00*/ struct Coords16 pos;
-    /*0x04*/ struct WarpData location;
-    /*0x0C*/ struct WarpData continueGameWarp;
-    /*0x14*/ struct WarpData dynamicWarp;
-    /*0x1C*/ struct WarpData lastHealLocation; // used by white-out and teleport
-    /*0x24*/ struct WarpData escapeWarp; // used by Dig and Escape Rope
-    /*0x2C*/ u16 savedMusic;
-    /*0x2E*/ u8 weather;
-    /*0x2F*/ u8 weatherCycleStage;
-    /*0x30*/ u8 flashLevel;
-    /*0x32*/ u16 mapLayoutId;
-    /*0x34*/ u16 mapView[0x100];
-    /*0x234*/ u8 playerPartyCount;
-    /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
-    /*0x490*/ u32 money;
-    /*0x494*/ u16 coins; //eliminar?
-    /*0x496*/ u16 registeredItem; // registered for use with SELECT button //eliminar?
-    /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
-    /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT]; //modificar
-    /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT]; //modificar
-    /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
-    /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT]; //eliminar
-    /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
-    /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
-    /*0x1270*/ u8 flags[NUM_FLAG_BYTES];
-    /*0x139C*/ u16 vars[VARS_COUNT];
-    /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT]; //eliminar
-    /*0x271C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
-    /*0x2728*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
-    /*0x2734*/ u8 decorationDesks[10]; //eliminar
-    /*0x273E*/ u8 decorationChairs[10]; //eliminar
-    /*0x2748*/ u8 decorationPlants[10]; //eliminar
-    /*0x2752*/ u8 decorationOrnaments[30]; //eliminar
-    /*0x2770*/ u8 decorationMats[30]; //eliminar
-    /*0x278E*/ u8 decorationPosters[10]; //eliminar
-    /*0x2798*/ u8 decorationDolls[40]; //eliminar
-    /*0x27C0*/ u8 decorationCushions[10]; //eliminar
-    /*0x2B90*/ u16 outbreakPokemonSpecies;
-    /*0x2B92*/ u8 outbreakLocationMapNum;
-    /*0x2B93*/ u8 outbreakLocationMapGroup;
-    /*0x2B94*/ u8 outbreakPokemonLevel;
-    /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES]; //???
-    /*0x2BA1*/ u8 outbreakPokemonProbability; //???
-    /*0x2BA2*/ u16 outbreakDaysLeft; //???
-    /*0x2BB0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
-    /*0x2BBC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
-    /*0x2BC8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
-    /*0x2BD4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
-    /*0x2BE0*/ struct Mail mail[MAIL_COUNT]; //eliminar
-    /*0x2E20*/ u8 unlockedTrendySayings[NUM_TRENDY_SAYING_BYTES]; //eliminar
-    /*0x2E28*/ OldMan oldMan; //eliminar
-    /*0x2e64*/ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT]; //eliminar
-    /*0x2e90*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS];  //eliminar
-    /*0x3030*/ struct DayCare daycare;
-    /*0x31A8*/ u8 giftRibbons[GIFT_RIBBONS_COUNT]; //eliminar
-    /*0x31DC*/ struct Roamer roamer[ROAMER_COUNT]; //eliminar
-    /*0x3???*/ u8 dexSeen[NUM_DEX_FLAG_BYTES];
-    /*0x3???*/ u8 dexCaught[NUM_DEX_FLAG_BYTES];
-    /*0x3???*/ LilycoveLady lilycoveLady; //eliminar
-    /*0x3???*/ struct TrainerNameRecord trainerNameRecords[20]; //eliminar
-    // sizeof: 0x3???
+    struct Coords16 pos;
+    struct WarpData location;
+    struct WarpData continueGameWarp;
+    struct WarpData dynamicWarp;
+    struct WarpData lastHealLocation; // used by white-out and teleport
+    struct WarpData escapeWarp; // used by Dig and Escape Rope
+    u16 savedMusic;
+    u8 weather;
+    u8 weatherCycleStage;
+    u8 flashLevel;
+    u16 mapLayoutId;
+    u16 mapView[256];
+    u8 playerPartyCount;
+    struct Pokemon playerParty[PARTY_SIZE];
+    u32 money;
+    u16 coins; //eliminar?
+    u16 registeredItem; // registered for use with SELECT button //eliminar?
+    struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
+    struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT]; //modificar
+    struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    u8 bagPocket_TMHMOwnedFlags[14]; //sitio para 112 MTs/MOs
+    struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    struct Pokeblock pokeblocks[POKEBLOCKS_COUNT]; //eliminar
+    struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
+    struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
+    u8 tempFlags[NUM_TEMP_FLAG_BYTES];
+    u8 normalFlags[NUM_NORMAL_FLAG_BYTES];
+    u8 dailyFlags[NUM_DAILY_FLAG_BYTES];
+    u8 trainerFlags[NUM_TRAINER_FLAG_BYTES];
+    u16 vars[VARS_COUNT];
+    u32 gameStats[NUM_GAME_STATS];
+    struct BerryTree berryTrees[BERRY_TREES_COUNT];
+    struct SecretBase secretBases[SECRET_BASES_COUNT]; //eliminar
+    u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
+    u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
+    u8 decorationDesks[10]; //eliminar
+    u8 decorationChairs[10]; //eliminar
+    u8 decorationPlants[10]; //eliminar
+    u8 decorationOrnaments[30]; //eliminar
+    u8 decorationMats[30]; //eliminar
+    u8 decorationPosters[10]; //eliminar
+    u8 decorationDolls[40]; //eliminar
+    u8 decorationCushions[10]; //eliminar
+    u16 outbreakPokemonSpecies;
+    u8 outbreakLocationMapNum;
+    u8 outbreakLocationMapGroup;
+    u8 outbreakPokemonLevel;
+    u16 outbreakPokemonMoves[MAX_MON_MOVES]; //???
+    u8 outbreakPokemonProbability; //???
+    u16 outbreakDaysLeft; //???
+    u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
+    u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
+    u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
+    u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT]; //eliminar
+    struct Mail mail[MAIL_COUNT]; //eliminar
+    u8 unlockedTrendySayings[NUM_TRENDY_SAYING_BYTES]; //eliminar
+    OldMan oldMan; //eliminar
+    struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT]; //eliminar
+    struct ContestWinner contestWinners[NUM_CONTEST_WINNERS];  //eliminar
+    struct DayCare daycare;
+    u8 giftRibbons[GIFT_RIBBONS_COUNT]; //eliminar
+    struct Roamer roamer[ROAMER_COUNT]; //eliminar
+    u8 dexSeen[NUM_DEX_FLAG_BYTES];
+    u8 dexCaught[NUM_DEX_FLAG_BYTES];
+    LilycoveLady lilycoveLady; //eliminar
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

@@ -120,8 +120,6 @@ struct TypeInfo
     u8 name[TYPE_NAME_LENGTH + 1];
     u8 generic[21];
     u8 palette;
-    u16 zMove;
-    u16 maxMove;
     u16 teraTypeRGBValue;    // Most values pulled from the Tera type icon palette.
     const u32 *const paletteTMHM;
     //u16 enhanceItem;

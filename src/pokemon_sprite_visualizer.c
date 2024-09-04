@@ -40,6 +40,7 @@
 #include "util.h"
 #include "constants/items.h"
 #include "constants/event_objects.h"
+#include "constants/map_types.h"
 
 #if DEBUG_POKEMON_SPRITE_VISUALIZER == TRUE
 extern const struct BattleBackground sBattleTerrainTable[];

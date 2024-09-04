@@ -31,7 +31,6 @@ enum {
 #define EREADER_CHECKSUM_OK_MASK (EREADER_CHECKSUM_OK << EREADER_CHECKSUM_SHIFT)
 #define EREADER_CHECKSUM_MASK    ((EREADER_CHECKSUM_OK | EREADER_CHECKSUM_ERR) << EREADER_CHECKSUM_SHIFT)
 
-bool8 ValidateTrainerHillData(struct EReaderTrainerHillSet *);
 int EReaderHandleTransfer(u8, size_t, const void *, void *);
 void EReaderHelper_Timer3Callback(void);
 void EReaderHelper_SerialCallback(void);

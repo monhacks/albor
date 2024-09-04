@@ -2182,7 +2182,7 @@ static void SpriteCB_LinkMonGlowWireless(struct Sprite *sprite)
 {
     if (!sprite->invisible && ++sprite->data[0] == 10)
     {
-        PlaySE(SE_M_SWAGGER2);
+        PlaySE(SE_M_SWAGGER_2);
         sprite->data[0] = 0;
     }
 }
@@ -3953,7 +3953,7 @@ static void SpriteCB_BouncingPokeballDepart(struct Sprite *sprite)
 {
     sprite->y2 += sTradeBallVerticalVelocityTable[sprite->data[0]];
     if (sprite->data[0] == 22)
-        PlaySE(SE_BALL_BOUNCE_1);
+        PlaySE(SE_BALL_BOUNCE_A);
     if (++ sprite->data[0] == 44)
     {
         PlaySE(SE_M_MEGA_KICK);
@@ -3986,17 +3986,17 @@ static void SpriteCB_BouncingPokeballArrive(struct Sprite *sprite)
         {
             sprite->data[2] ++;
             sprite->data[0] = 0x16;
-            PlaySE(SE_BALL_BOUNCE_1);
+            PlaySE(SE_BALL_BOUNCE_A);
         }
     }
     else
     {
         if (sprite->data[0] == 0x42)
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_BALL_BOUNCE_B);
         if (sprite->data[0] == 0x5c)
-            PlaySE(SE_BALL_BOUNCE_3);
+            PlaySE(SE_BALL_BOUNCE_C);
         if (sprite->data[0] == 0x6b)
-            PlaySE(SE_BALL_BOUNCE_4);
+            PlaySE(SE_BALL_BOUNCE_D);
         sprite->y2 += sTradeBallVerticalVelocityTable[sprite->data[0]];
         if (++sprite->data[0] == 0x6c)
             sprite->callback = SpriteCallbackDummy;

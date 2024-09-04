@@ -632,7 +632,6 @@ static void BufferMailText(void)
     }
     else
     {
-        ConvertInternationalPlayerName(sMailRead->playerName);
         sMailRead->signatureWidth = sMailRead->layout->signatureWidth;
     }
 }

@@ -3315,29 +3315,30 @@ void CreateAbnormalWeatherEvent(void)
     }
 }
 
+static const u8 sAbnormalWeatherMapNumbers[] =
+{
+    MAP_NUM(ROUTE114),
+    MAP_NUM(ROUTE114),
+    MAP_NUM(ROUTE115),
+    MAP_NUM(ROUTE115),
+    MAP_NUM(ROUTE116),
+    MAP_NUM(ROUTE116),
+    MAP_NUM(ROUTE118),
+    MAP_NUM(ROUTE118),
+    MAP_NUM(ROUTE105),
+    MAP_NUM(ROUTE105),
+    MAP_NUM(ROUTE125),
+    MAP_NUM(ROUTE125),
+    MAP_NUM(ROUTE127),
+    MAP_NUM(ROUTE127),
+    MAP_NUM(ROUTE129),
+    MAP_NUM(ROUTE129)
+};
+
 // Saves the map name for the current abnormal weather location in gStringVar1, then
 // returns TRUE if the weather is for Kyogre, and FALSE if it's for Groudon.
 bool32 GetAbnormalWeatherMapNameAndType(void)
 {
-    static const u8 sAbnormalWeatherMapNumbers[] = {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
-    };
-
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
     GetMapName(gStringVar1, sAbnormalWeatherMapNumbers[abnormalWeather - 1], 0);
@@ -3350,27 +3351,6 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
 
 bool8 AbnormalWeatherHasExpired(void)
 {
-    // Duplicate array.
-    static const u8 sAbnormalWeatherMapNumbers[] =
-    {
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE114),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE115),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE116),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE118),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE105),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE125),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE127),
-        MAP_NUM(ROUTE129),
-        MAP_NUM(ROUTE129)
-    };
-
     u16 steps = VarGet(VAR_ABNORMAL_WEATHER_STEP_COUNTER);
     u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
 
@@ -3462,12 +3442,6 @@ u32 GetMartEmployeeObjectEventId(void)
 
 bool32 IsTrainerRegistered(void)
 {
-    int index = GetRematchIdxByTrainerIdx(gSpecialVar_4);
-    if (index >= 0)
-    {
-        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + index) == TRUE)
-            return TRUE;
-    }
     return FALSE;
 }
 
@@ -4044,7 +4018,6 @@ static void BufferFanClubTrainerName_(struct LinkBattleRecords *linkRecords, u8 
     {
         StringCopyN(gStringVar1, record->name, PLAYER_NAME_LENGTH);
         gStringVar1[PLAYER_NAME_LENGTH] = EOS;
-        ConvertInternationalString(gStringVar1, linkRecords->languages[whichLinkTrainer]);
     }
 }
 #else

@@ -3724,7 +3724,7 @@ static void Task_DestroyDeoxysRock(u8 taskId)
 static void DestroyDeoxysRockEffect_CameraShake(s16 *data, u8 taskId)
 {
     u8 newTaskId = CreateTask(Task_DeoxysRockCameraShake, 90);
-    PlaySE(SE_THUNDER2);
+    PlaySE(SE_THUNDER_2);
     tCameraTaskId = newTaskId;
     tState++;
 }

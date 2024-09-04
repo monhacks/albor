@@ -138,6 +138,7 @@ gSongTable::
 	song se_m_double_slap, 1, 1
 	song se_m_double_team, 1, 1
 	song se_m_razor_wind, 1, 1
+	song se_m_razor_wind2, 1, 1
 	song se_m_icy_wind, 1, 1
 	song se_m_thunder_wave, 1, 1
 	song se_m_comet_punch, 1, 1
@@ -161,7 +162,6 @@ gSongTable::
 	song se_m_wing_attack, 1, 1
 	song se_m_fly, 1, 1
 	song se_m_sand_attack, 1, 1
-	song se_m_razor_wind2, 1, 1
 	song se_m_bite, 1, 1
 	song se_m_headbutt, 1, 1
 	song se_m_surf, 1, 1
@@ -180,8 +180,8 @@ gSongTable::
 	song se_m_dizzy_punch, 1, 1
 	song se_m_self_destruct, 1, 1
 	song se_m_explosion, 1, 1
-	song se_m_absorb_2, 1, 1
 	song se_m_absorb, 1, 1
+	song se_m_absorb_2, 1, 1
 	song se_m_screech, 1, 1
 	song se_m_bubble_beam, 1, 1
 	song se_m_bubble_beam2, 1, 1
@@ -191,6 +191,7 @@ gSongTable::
 	song se_m_bonemerang, 1, 1
 	song se_m_lick, 1, 1
 	song se_m_psybeam, 1, 1
+	song se_m_psybeam2, 1, 1
 	song se_m_faint_attack, 1, 1
 	song se_m_swords_dance, 1, 1
 	song se_m_leer, 1, 1
@@ -201,7 +202,6 @@ gSongTable::
 	song se_m_snore, 1, 1
 	song se_m_brick_break, 1, 1
 	song se_m_giga_drain, 1, 1
-	song se_m_psybeam2, 1, 1
 	song se_m_solar_beam, 2, 2
 	song se_m_petal_dance, 1, 1
 	song se_m_teleport, 1, 1
@@ -217,6 +217,7 @@ gSongTable::
 	song se_m_charge, 1, 1
 	song se_m_strength, 1, 1
 	song se_m_hyper_beam, 1, 1
+	song se_m_hyper_beam2, 1, 1
 	song se_m_waterfall, 1, 1
 	song se_m_reversal, 1, 1
 	song se_m_acid_armor, 1, 1
@@ -248,7 +249,6 @@ gSongTable::
 	song se_m_teeter_dance, 1, 1
 	song se_m_stat_decrease, 1, 1
 	song se_m_haze, 1, 1
-	song se_m_hyper_beam2, 1, 1
 	song se_rg_door, 1, 1
 	song se_rg_card_flip, 1, 1
 	song se_rg_card_flipping, 1, 1
@@ -271,7 +271,6 @@ gSongTable::
 	song se_pike_curtain_close, 1, 1
 	song se_pike_curtain_open, 1, 1
 	song se_sudowoodo_shake, 1, 1
-	song mus_dummy, 0, 0
 	song ph_trap_blend, 2, 2
 	song ph_trap_held, 2, 2
 	song ph_trap_solo, 2, 2
@@ -478,9 +477,6 @@ gSongTable::
 	song mus_rg_silph, 0, 0
 	song mus_rg_fuchsia, 0, 0
 	song mus_rg_celadon, 0, 0
-	song mus_victory_trainer, 0, 0
-	song mus_victory_wild, 0, 0
-	song mus_victory_gym_leader, 0, 0
 	song mus_rg_vermillion, 0, 0
 	song mus_rg_pewter, 0, 0
 	song mus_rg_encounter_rival, 0, 0
@@ -499,10 +495,7 @@ gSongTable::
 	song mus_rg_net_center, 0, 0
 	song mus_rg_mystery_gift, 0, 0
 	song mus_rg_berry_pick, 0, 0
-	song mus_rg_mt_moon, 0, 0
-	song mus_rg_follow_me, 0, 0
 	song mus_rg_sevii_route, 0, 0
-	song mus_rg_viridian_forest, 0, 0
 	song mus_rg_pewter, 0, 0
 	song mus_rg_sevii_45, 0, 0
 	song mus_rg_sevii_67, 0, 0
@@ -529,60 +522,59 @@ gSongTable::
 	song mus_b_dome, 0, 0
 	song mus_b_pike, 0, 0
 	song mus_b_factory, 0, 0
-	song mus_vs_kyogre_groudon, 0, 0
 	song mus_vs_frontier_brain, 0, 0
 	song mus_vs_mew, 0, 0
 	song mus_b_dome_lobby, 0, 0
 	song mus_dp_twinleaf_day, 0, 0
+	song mus_dp_twinleaf_night, 0, 0
 	song mus_dp_sandgem_day, 0, 0
+	song mus_dp_sandgem_night, 0, 0
 	song mus_dp_floaroma_day, 0, 0
+	song mus_dp_floaroma_night, 0, 0
 	song mus_dp_solaceon_day, 0, 0
+	song mus_dp_solaceon_night, 0, 0
 	song mus_dp_route225_day, 0, 0
+	song mus_dp_route225_night, 0, 0
 	song mus_dp_valor_lakefront_day, 0, 0
+	song mus_dp_valor_lakefront_night, 0, 0
 	song mus_dp_jubilife_day, 0, 0
+	song mus_dp_jubilife_night, 0, 0
 	song mus_dp_canalave_day, 0, 0
+	song mus_dp_canalave_night, 0, 0
 	song mus_dp_oreburgh_day, 0, 0
+	song mus_dp_oreburgh_night, 0, 0
 	song mus_dp_eterna_day, 0, 0
+	song mus_dp_eterna_night, 0, 0
 	song mus_dp_hearthome_day, 0, 0
+	song mus_dp_hearthome_night, 0, 0
 	song mus_dp_veilstone_day, 0, 0
+	song mus_dp_veilstone_night, 0, 0
 	song mus_dp_sunyshore_day, 0, 0
+	song mus_dp_sunyshore_night, 0, 0
 	song mus_dp_snowpoint_day, 0, 0
+	song mus_dp_snowpoint_night, 0, 0
 	song mus_dp_pokemon_league_day, 0, 0
+	song mus_dp_pokemon_league_night, 0, 0
 	song mus_dp_fight_area_day, 0, 0
+	song mus_dp_fight_area_night, 0, 0
 	song mus_dp_route201_day, 0, 0
+	song mus_dp_route201_night, 0, 0
 	song mus_dp_route203_day, 0, 0
+	song mus_dp_route203_night, 0, 0
 	song mus_dp_route205_day, 0, 0
+	song mus_dp_route205_night, 0, 0
 	song mus_dp_route206_day, 0, 0
+	song mus_dp_route206_night, 0, 0
 	song mus_dp_route209_day, 0, 0
+	song mus_dp_route209_night, 0, 0
 	song mus_dp_route210_day, 0, 0
+	song mus_dp_route210_night, 0, 0
 	song mus_dp_route216_day, 0, 0
+	song mus_dp_route216_night, 0, 0
 	song mus_dp_route228_day, 0, 0
+	song mus_dp_route228_night, 0, 0
 	song mus_dp_rowan, 0, 0
 	song mus_dp_tv_broadcast, 0, 0
-	song mus_dp_twinleaf_night, 0, 0
-	song mus_dp_sandgem_night, 0, 0
-	song mus_dp_floaroma_night, 0, 0
-	song mus_dp_solaceon_night, 0, 0
-	song mus_dp_route225_night, 0, 0
-	song mus_dp_valor_lakefront_night, 0, 0
-	song mus_dp_jubilife_night, 0, 0
-	song mus_dp_canalave_night, 0, 0
-	song mus_dp_oreburgh_night, 0, 0
-	song mus_dp_eterna_night, 0, 0
-	song mus_dp_hearthome_night, 0, 0
-	song mus_dp_veilstone_night, 0, 0
-	song mus_dp_sunyshore_night, 0, 0
-	song mus_dp_snowpoint_night, 0, 0
-	song mus_dp_pokemon_league_night, 0, 0
-	song mus_dp_fight_area_night, 0, 0
-	song mus_dp_route201_night, 0, 0
-	song mus_dp_route203_night, 0, 0
-	song mus_dp_route205_night, 0, 0
-	song mus_dp_route206_night, 0, 0
-	song mus_dp_route209_night, 0, 0
-	song mus_dp_route210_night, 0, 0
-	song mus_dp_route216_night, 0, 0
-	song mus_dp_route228_night, 0, 0
 	song mus_dp_underground, 0, 0
 	song mus_dp_flag_captured, 0, 0
 	song mus_dp_victory_road, 0, 0
@@ -802,14 +794,14 @@ gSongTable::
 	song mus_hg_eusine, 0, 0
 	song mus_hg_clair, 0, 0
 	song mus_hg_encounter_girl_1, 0, 0
+	song mus_hg_encounter_girl_2, 0, 0
 	song mus_hg_encounter_boy_1, 0, 0
+	song mus_hg_encounter_boy_2, 0, 0
 	song mus_hg_encounter_suspicious_1, 0, 0
+	song mus_hg_encounter_suspicious_2, 0, 0
 	song mus_hg_encounter_sage, 0, 0
 	song mus_hg_encounter_kimono_girl, 0, 0
 	song mus_hg_encounter_rocket, 0, 0
-	song mus_hg_encounter_girl_2, 0, 0
-	song mus_hg_encounter_boy_2, 0, 0
-	song mus_hg_encounter_suspicious_2, 0, 0
 	song mus_hg_vs_wild, 0, 0
 	song mus_hg_vs_trainer, 0, 0
 	song mus_hg_vs_gym_leader, 0, 0

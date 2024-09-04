@@ -8,6 +8,12 @@ Route130_OnTransition:
 	goto_if_eq SPECIAL_VAR_RESULT, TRUE, Route130_EventScript_SetMirageIslandLayout
 @ Mirage Island isn't currently visible, hide any objects on the island. Only the first flag is actually associated with anything.
 	setflag FLAG_TEMP_HIDE_MIRAGE_ISLAND_BERRY_TREE
+	setflag FLAG_TEMP_6
+	setflag FLAG_TEMP_7
+	setflag FLAG_TEMP_8
+	setflag FLAG_TEMP_9
+	setflag FLAG_TEMP_10
+	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12
 	setflag FLAG_TEMP_13
 	setflag FLAG_TEMP_14
@@ -16,12 +22,6 @@ Route130_OnTransition:
 	setflag FLAG_TEMP_17
 	setflag FLAG_TEMP_18
 	setflag FLAG_TEMP_19
-	setflag FLAG_TEMP_1A
-	setflag FLAG_TEMP_1B
-	setflag FLAG_TEMP_1C
-	setflag FLAG_TEMP_1D
-	setflag FLAG_TEMP_1E
-	setflag FLAG_TEMP_1F
 	setmaplayoutindex LAYOUT_ROUTE130
 	end
 

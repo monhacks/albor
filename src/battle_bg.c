@@ -26,7 +26,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
-#include "constants/battle_partner.h"
+#include "constants/flags.h"
 
 static const struct OamData sVsLetter_V_OamData =
 {

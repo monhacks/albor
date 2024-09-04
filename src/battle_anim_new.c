@@ -9163,7 +9163,7 @@ static void SpriteCB_MaxFlutterbyStep2(struct Sprite* sprite)
 	if (TranslateAnimHorizontalArc(sprite))
 	{
 		if (gAnimMoveIndex == MOVE_INFERNAL_PARADE)
-			PlaySE(SE_M_FLAME_WHEEL2);
+			PlaySE(SE_M_FLAME_WHEEL_2);
 
 		DestroySpriteAndMatrix(sprite);
 	}

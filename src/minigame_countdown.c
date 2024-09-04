@@ -218,7 +218,7 @@ static void SpriteCB_StaticCountdown(struct Sprite *sprite)
     case ANIM_TWO:
     case ANIM_ONE:
         // Set sprite to a number
-        PlaySE(SE_BALL_BOUNCE_1);
+        PlaySE(SE_BALL_BOUNCE_A);
         StartSpriteAnim(sprite, sprite->sAnimNum);
         break;
     case ANIM_START_LEFT:
@@ -242,7 +242,7 @@ static void SpriteCB_StaticCountdown(struct Sprite *sprite)
 static void Task_StaticCountdown_Start(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    PlaySE(SE_BALL_BOUNCE_1);
+    PlaySE(SE_BALL_BOUNCE_A);
     gSprites[tSpriteIds(0)].callback = SpriteCB_StaticCountdown;
     gSprites[tSpriteIds(0)].invisible = FALSE;
     gTasks[taskId].tState = STATE_RUN;
@@ -361,7 +361,7 @@ static bool32 RunMinigameCountdownDigitsAnim(u8 spriteId)
         // fallthrough
     case 1:
         if (sprite->sTimer == 0)
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_BALL_BOUNCE_B);
 
         if (++sprite->sTimer >= 20)
         {
@@ -472,7 +472,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         sprite->y2 = sY >> 4;
         if (sprite->y2 >= 0)
         {
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_BALL_BOUNCE_B);
             sprite->y2 = 0;
             sState++;
         }
@@ -481,7 +481,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         sTimer += 12;
         if (sTimer >= 128)
         {
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_BALL_BOUNCE_B);
             sTimer = 0;
             sState++;
         }
@@ -492,7 +492,7 @@ static void SpriteCB_Start(struct Sprite *sprite)
         sTimer += 16;
         if (sTimer >= 128)
         {
-            PlaySE(SE_BALL_BOUNCE_2);
+            PlaySE(SE_BALL_BOUNCE_B);
             sTimer = 0;
             sState++;
         }

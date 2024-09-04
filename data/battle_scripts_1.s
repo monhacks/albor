@@ -6992,19 +6992,6 @@ BattleScript_FocusPunchSetUp::
 	end3
 
 BattleScript_MegaEvolution::
-	flushtextbox
-	trytrainerslidemegaevolutionmsg
-	printstring STRINGID_MEGAEVOREACTING
-BattleScript_MegaEvolutionAfterString:
-	waitmessage B_WAIT_TIME_LONG
-	setbyte gIsCriticalHit, 0
-	handlemegaevo BS_SCRIPTING, 0
-	playanimation BS_SCRIPTING, B_ANIM_MEGA_EVOLUTION
-	waitanimation
-	handlemegaevo BS_SCRIPTING, 1
-	printstring STRINGID_MEGAEVOEVOLVED
-	waitmessage B_WAIT_TIME_LONG
-	switchinabilities BS_SCRIPTING
 	end3
 
 BattleScript_WishMegaEvolution::
@@ -7023,31 +7010,9 @@ BattleScript_PrimalReversionRestoreAttacker::
 	end2
 
 BattleScript_PrimalReversionRet::
-	flushtextbox
-	setbyte gIsCriticalHit, 0
-	handleprimalreversion BS_ATTACKER, 0
-	handleprimalreversion BS_ATTACKER, 1
-	playanimation BS_ATTACKER, B_ANIM_PRIMAL_REVERSION
-	waitanimation
-	handleprimalreversion BS_ATTACKER, 2
-	printstring STRINGID_PKMNREVERTEDTOPRIMAL
-	waitmessage B_WAIT_TIME_LONG
-	switchinabilities BS_ATTACKER
 	return
 
 BattleScript_UltraBurst::
-	flushtextbox
-	trytrainerslidezmovemsg
-	printstring STRINGID_ULTRABURSTREACTING
-	waitmessage B_WAIT_TIME_LONG
-	setbyte gIsCriticalHit, 0
-	handleultraburst BS_SCRIPTING, 0
-	playanimation BS_SCRIPTING, B_ANIM_ULTRA_BURST
-	waitanimation
-	handleultraburst BS_SCRIPTING, 1
-	printstring STRINGID_ULTRABURSTCOMPLETED
-	waitmessage B_WAIT_TIME_LONG
-	switchinabilities BS_SCRIPTING
 	end3
 
 BattleScript_GulpMissileFormChange::
@@ -7506,7 +7471,6 @@ BattleScript_MoveEffectSleep::
 BattleScript_UpdateEffectStatusIconRet::
 	updatestatusicon BS_EFFECT_BATTLER
 	waitstate
-	trytriggerstatusform
 	flushtextbox
 	return
 
@@ -9197,9 +9161,9 @@ BattleScript_PalaceEndFlavorText::
 BattleScript_ArenaTurnBeginning::
 	waitcry BS_ATTACKER
 	volumedown
-	playse SE_ARENA_TIMEUP1
+	playse SE_ARENA_TIMEUP
 	pause 8
-	playse SE_ARENA_TIMEUP1
+	playse SE_ARENA_TIMEUP
 	arenadrawreftextbox
 	arenajudgmentstring B_MSG_REF_COMMENCE_BATTLE
 	arenawaitmessage B_MSG_REF_COMMENCE_BATTLE
@@ -9214,9 +9178,9 @@ BattleScript_ArenaDoJudgment::
 	makevisible BS_OPPONENT1
 	waitstate
 	volumedown
-	playse SE_ARENA_TIMEUP1
+	playse SE_ARENA_TIMEUP
 	pause 8
-	playse SE_ARENA_TIMEUP1
+	playse SE_ARENA_TIMEUP
 	pause B_WAIT_TIME_LONG
 	arenadrawreftextbox
 	arenajudgmentstring B_MSG_REF_THATS_IT

@@ -2419,8 +2419,8 @@ static void DebugAction_FlagsVars_FlagsSelect(u8 taskId)
     {
         PlaySE(SE_SELECT);
         gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-        if (gTasks[taskId].tInput >= FLAGS_COUNT)
-            gTasks[taskId].tInput = FLAGS_COUNT - 1;
+        if (gTasks[taskId].tInput >= NORMAL_FLAGS_COUNT)
+            gTasks[taskId].tInput = NORMAL_FLAGS_COUNT - 1;
     }
     if (JOY_NEW(DPAD_DOWN))
     {
@@ -4169,8 +4169,8 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
         if (JOY_NEW(DPAD_UP))
         {
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > END_SE)
-                gTasks[taskId].tInput = END_SE;
+            if (gTasks[taskId].tInput > END_SOUND_EFFECTS)
+                gTasks[taskId].tInput = END_SOUND_EFFECTS;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -4306,7 +4306,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
 
 #define SOUND_LIST_BGM \
     X(MUS_LITTLEROOT_TEST) \
-    X(MUS_GSC_ROUTE38) \
+    X(MUS_GSC_ROUTE_38) \
     X(MUS_CAUGHT) \
     X(MUS_VICTORY_WILD) \
     X(MUS_VICTORY_GYM_LEADER) \
@@ -4314,9 +4314,9 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_C_COMM_CENTER) \
     X(MUS_GSC_PEWTER) \
     X(MUS_C_VS_LEGEND_BEAST) \
-    X(MUS_ROUTE101) \
-    X(MUS_ROUTE110) \
-    X(MUS_ROUTE120) \
+    X(MUS_ROUTE_101) \
+    X(MUS_ROUTE_110) \
+    X(MUS_ROUTE_120) \
     X(MUS_PETALBURG) \
     X(MUS_OLDALE) \
     X(MUS_GYM) \
@@ -4329,7 +4329,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_EVOLVED) \
     X(MUS_OBTAIN_TMHM) \
     X(MUS_LILYCOVE_MUSEUM) \
-    X(MUS_ROUTE122) \
+    X(MUS_ROUTE_122) \
     X(MUS_OCEANIC_MUSEUM) \
     X(MUS_EVOLUTION_INTRO) \
     X(MUS_EVOLUTION) \
@@ -4356,15 +4356,15 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_VERDANTURF) \
     X(MUS_RUSTBORO) \
     X(MUS_POKE_CENTER) \
-    X(MUS_ROUTE104) \
-    X(MUS_ROUTE119) \
+    X(MUS_ROUTE_104) \
+    X(MUS_ROUTE_119) \
     X(MUS_CYCLING) \
     X(MUS_POKE_MART) \
     X(MUS_LITTLEROOT) \
     X(MUS_MT_CHIMNEY) \
     X(MUS_ENCOUNTER_FEMALE) \
     X(MUS_LILYCOVE) \
-    X(MUS_ROUTE111) \
+    X(MUS_ROUTE_111) \
     X(MUS_HELP) \
     X(MUS_UNDERWATER) \
     X(MUS_VICTORY_TRAINER) \
@@ -4373,7 +4373,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_ENCOUNTER_MAY) \
     X(MUS_ENCOUNTER_INTENSE) \
     X(MUS_ENCOUNTER_COOL) \
-    X(MUS_ROUTE113) \
+    X(MUS_ROUTE_113) \
     X(MUS_ENCOUNTER_AQUA) \
     X(MUS_FOLLOW_ME) \
     X(MUS_ENCOUNTER_BRENDAN) \
@@ -4418,7 +4418,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_VS_GYM_LEADER) \
     X(MUS_VS_CHAMPION) \
     X(MUS_VS_REGI) \
-    X(MUS_VS_KYOGRE_GROUDON) \
+    X(MUS_VS_KYOGRE_GROUDON_RAYQUAZA) \
     X(MUS_VS_RIVAL) \
     X(MUS_VS_ELITE_FOUR) \
     X(MUS_VS_AQUA_MAGMA_LEADER) \
@@ -4441,10 +4441,10 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_RG_MT_MOON) \
     X(MUS_RG_POKE_MANSION) \
     X(MUS_RG_CREDITS) \
-    X(MUS_RG_ROUTE1) \
-    X(MUS_RG_ROUTE24) \
+    X(MUS_RG_ROUTE_1) \
+    X(MUS_RG_ROUTE_24) \
     X(MUS_RG_ROUTE3) \
-    X(MUS_RG_ROUTE11) \
+    X(MUS_RG_ROUTE_11) \
     X(MUS_RG_VICTORY_ROAD) \
     X(MUS_RG_VS_GYM_LEADER) \
     X(MUS_RG_VS_TRAINER) \
@@ -4460,9 +4460,6 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_RG_SILPH) \
     X(MUS_RG_FUCHSIA) \
     X(MUS_RG_CELADON) \
-    X(MUS_RG_VICTORY_TRAINER) \
-    X(MUS_RG_VICTORY_WILD) \
-    X(MUS_RG_VICTORY_GYM_LEADER) \
     X(MUS_RG_VERMILLION) \
     X(MUS_RG_PEWTER) \
     X(MUS_RG_ENCOUNTER_RIVAL) \
@@ -4481,10 +4478,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_RG_NET_CENTER) \
     X(MUS_RG_MYSTERY_GIFT) \
     X(MUS_RG_BERRY_PICK) \
-    X(MUS_RG_SEVII_CAVE) \
-    X(MUS_RG_TEACHY_TV_SHOW) \
     X(MUS_RG_SEVII_ROUTE) \
-    X(MUS_RG_SEVII_DUNGEON) \
     X(MUS_RG_SEVII_123) \
     X(MUS_RG_SEVII_45) \
     X(MUS_RG_SEVII_67) \
@@ -4511,7 +4505,6 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_B_DOME) \
     X(MUS_B_PIKE) \
     X(MUS_B_FACTORY) \
-    X(MUS_VS_RAYQUAZA) \
     X(MUS_VS_FRONTIER_BRAIN) \
     X(MUS_VS_MEW) \
     X(MUS_B_DOME_LOBBY) \
@@ -4519,7 +4512,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_DP_SANDGEM_DAY) \
     X(MUS_DP_FLOAROMA_DAY) \
     X(MUS_DP_SOLACEON_DAY) \
-    X(MUS_DP_ROUTE225_DAY) \
+    X(MUS_DP_ROUTE_225_DAY) \
     X(MUS_DP_VALOR_LAKEFRONT_DAY) \
     X(MUS_DP_JUBILIFE_DAY) \
     X(MUS_DP_CANALAVE_DAY) \
@@ -4531,21 +4524,21 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_DP_SNOWPOINT_DAY) \
     X(MUS_DP_POKEMON_LEAGUE_DAY) \
     X(MUS_DP_FIGHT_AREA_DAY) \
-    X(MUS_DP_ROUTE201_DAY) \
-    X(MUS_DP_ROUTE203_DAY) \
-    X(MUS_DP_ROUTE205_DAY) \
-    X(MUS_DP_ROUTE206_DAY) \
-    X(MUS_DP_ROUTE209_DAY) \
-    X(MUS_DP_ROUTE210_DAY) \
-    X(MUS_DP_ROUTE216_DAY) \
-    X(MUS_DP_ROUTE228_DAY) \
+    X(MUS_DP_ROUTE_201_DAY) \
+    X(MUS_DP_ROUTE_203_DAY) \
+    X(MUS_DP_ROUTE_205_DAY) \
+    X(MUS_DP_ROUTE_206_DAY) \
+    X(MUS_DP_ROUTE_209_DAY) \
+    X(MUS_DP_ROUTE_210_DAY) \
+    X(MUS_DP_ROUTE_216_DAY) \
+    X(MUS_DP_ROUTE_228_DAY) \
     X(MUS_DP_ROWAN) \
     X(MUS_DP_TV_BROADCAST) \
     X(MUS_DP_TWINLEAF_NIGHT) \
     X(MUS_DP_SANDGEM_NIGHT) \
     X(MUS_DP_FLOAROMA_NIGHT) \
     X(MUS_DP_SOLACEON_NIGHT) \
-    X(MUS_DP_ROUTE225_NIGHT) \
+    X(MUS_DP_ROUTE_225_NIGHT) \
     X(MUS_DP_VALOR_LAKEFRONT_NIGHT) \
     X(MUS_DP_JUBILIFE_NIGHT) \
     X(MUS_DP_CANALAVE_NIGHT) \
@@ -4557,14 +4550,14 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_DP_SNOWPOINT_NIGHT) \
     X(MUS_DP_POKEMON_LEAGUE_NIGHT) \
     X(MUS_DP_FIGHT_AREA_NIGHT) \
-    X(MUS_DP_ROUTE201_NIGHT) \
-    X(MUS_DP_ROUTE203_NIGHT) \
-    X(MUS_DP_ROUTE205_NIGHT) \
-    X(MUS_DP_ROUTE206_NIGHT) \
-    X(MUS_DP_ROUTE209_NIGHT) \
-    X(MUS_DP_ROUTE210_NIGHT) \
-    X(MUS_DP_ROUTE216_NIGHT) \
-    X(MUS_DP_ROUTE228_NIGHT) \
+    X(MUS_DP_ROUTE_201_NIGHT) \
+    X(MUS_DP_ROUTE_203_NIGHT) \
+    X(MUS_DP_ROUTE_205_NIGHT) \
+    X(MUS_DP_ROUTE_206_NIGHT) \
+    X(MUS_DP_ROUTE_209_NIGHT) \
+    X(MUS_DP_ROUTE_210_NIGHT) \
+    X(MUS_DP_ROUTE_216_NIGHT) \
+    X(MUS_DP_ROUTE_228_NIGHT) \
     X(MUS_DP_UNDERGROUND) \
     X(MUS_DP_FLAG_CAPTURED) \
     X(MUS_DP_VICTORY_ROAD) \
@@ -4698,7 +4691,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_PL_WIFI_MINIGAMES) \
     X(MUS_PL_WIFI_PLAZA) \
     X(MUS_PL_WIFI_PARADE) \
-    X(MUS_PL_GIRATINA_APPEARS_1) \
+    X(MUS_PL_GIRATINA_APPEARS) \
     X(MUS_PL_GIRATINA_APPEARS_2) \
     X(MUS_PL_MYSTERY_GIFT) \
     X(MUS_PL_TWINLEAF_MUSIC_BOX) \
@@ -4723,11 +4716,11 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_GOLDENROD) \
     X(MUS_HG_ECRUTEAK) \
     X(MUS_HG_CIANWOOD) \
-    X(MUS_HG_ROUTE29) \
-    X(MUS_HG_ROUTE30) \
-    X(MUS_HG_ROUTE34) \
-    X(MUS_HG_ROUTE38) \
-    X(MUS_HG_ROUTE42) \
+    X(MUS_HG_ROUTE_29) \
+    X(MUS_HG_ROUTE_30) \
+    X(MUS_HG_ROUTE_34) \
+    X(MUS_HG_ROUTE_38) \
+    X(MUS_HG_ROUTE_42) \
     X(MUS_HG_VERMILION) \
     X(MUS_HG_PEWTER) \
     X(MUS_HG_CERULEAN) \
@@ -4735,11 +4728,11 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_CELADON) \
     X(MUS_HG_PALLET) \
     X(MUS_HG_CINNABAR) \
-    X(MUS_HG_ROUTE1) \
-    X(MUS_HG_ROUTE3) \
-    X(MUS_HG_ROUTE11) \
-    X(MUS_HG_ROUTE24) \
-    X(MUS_HG_ROUTE26) \
+    X(MUS_HG_ROUTE_1) \
+    X(MUS_HG_ROUTE_3) \
+    X(MUS_HG_ROUTE_11) \
+    X(MUS_HG_ROUTE_24) \
+    X(MUS_HG_ROUTE_26) \
     X(MUS_HG_POKE_CENTER) \
     X(MUS_HG_POKE_MART) \
     X(MUS_HG_GYM) \
@@ -4763,7 +4756,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_VIRIDIAN_FOREST) \
     X(MUS_HG_VICTORY_ROAD) \
     X(MUS_HG_POKEMON_LEAGUE) \
-    X(MUS_HG_FOLLOW_ME_1) \
+    X(MUS_HG_FOLLOW_ME) \
     X(MUS_HG_FOLLOW_ME_2) \
     X(MUS_HG_ENCOUNTER_RIVAL) \
     X(MUS_HG_RIVAL_EXIT) \
@@ -4783,9 +4776,9 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_RADIO_BUENA) \
     X(MUS_HG_EUSINE) \
     X(MUS_HG_CLAIR) \
-    X(MUS_HG_ENCOUNTER_GIRL_1) \
-    X(MUS_HG_ENCOUNTER_BOY_1) \
-    X(MUS_HG_ENCOUNTER_SUSPICIOUS_1) \
+    X(MUS_HG_ENCOUNTER_GIRL) \
+    X(MUS_HG_ENCOUNTER_BOY) \
+    X(MUS_HG_ENCOUNTER_SUSPICIOUS) \
     X(MUS_HG_ENCOUNTER_SAGE) \
     X(MUS_HG_ENCOUNTER_KIMONO_GIRL) \
     X(MUS_HG_ENCOUNTER_ROCKET) \
@@ -4832,7 +4825,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_GLOBAL_TERMINAL) \
     X(MUS_HG_SPIN_TRADE) \
     X(MUS_HG_GTS) \
-    X(MUS_HG_ROUTE47) \
+    X(MUS_HG_ROUTE_47) \
     X(MUS_HG_SAFARI_ZONE_GATE) \
     X(MUS_HG_SAFARI_ZONE) \
     X(MUS_HG_ETHAN) \
@@ -4844,8 +4837,8 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_LUGIA_APPEARS) \
     X(MUS_HG_SPIKY_EARED_PICHU) \
     X(MUS_HG_SINJOU_RUINS) \
-    X(MUS_HG_RADIO_ROUTE101) \
-    X(MUS_HG_RADIO_ROUTE201) \
+    X(MUS_HG_RADIO_ROUTE_101) \
+    X(MUS_HG_RADIO_ROUTE_201) \
     X(MUS_HG_RADIO_TRAINER) \
     X(MUS_HG_RADIO_VARIETY) \
     X(MUS_HG_VS_KYOGRE_GROUDON) \
@@ -4861,22 +4854,22 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(MUS_HG_OBTAIN_ACCESSORY) \
     X(MUS_HG_MOVE_DELETED) \
     X(MUS_HG_OBTAIN_BERRY) \
-    X(MUS_HG_DEX_RATING_1) \
-    X(MUS_HG_DEX_RATING_2) \
-    X(MUS_HG_DEX_RATING_3) \
-    X(MUS_HG_DEX_RATING_4) \
-    X(MUS_HG_DEX_RATING_5) \
-    X(MUS_HG_DEX_RATING_6) \
+    X(MUS_HG_DEX_RATING_NO_GOOD) \
+    X(MUS_HG_DEX_RATING_ON_YOUR_WAY) \
+    X(MUS_HG_DEX_RATING_KEEP_AT_IT) \
+    X(MUS_HG_DEX_RATING_NOT_BAD) \
+    X(MUS_HG_DEX_RATING_JUST_A_LITTLE_MORE) \
+    X(MUS_HG_DEX_RATING_COMPLETE) \
     X(MUS_HG_OBTAIN_EGG) \
-    X(MUS_HG_BUG_CONTEST_1ST_PLACE) \
-    X(MUS_HG_BUG_CONTEST_2ND_PLACE) \
-    X(MUS_HG_BUG_CONTEST_3RD_PLACE) \
+    X(MUS_HG_BUG_CONTEST_FIRST_PLACE) \
+    X(MUS_HG_BUG_CONTEST_SECOND_PLACE) \
+    X(MUS_HG_BUG_CONTEST_THIRD_PLACE) \
     X(MUS_HG_CARD_FLIP) \
     X(MUS_HG_CARD_FLIP_GAME_OVER) \
     X(MUS_HG_POKEGEAR_REGISTERED) \
     X(MUS_HG_LETS_GO_TOGETHER) \
     X(MUS_HG_POKEATHLON_READY) \
-    X(MUS_HG_POKEATHLON_1ST_PLACE) \
+    X(MUS_HG_POKEATHLON_FIRST_PLACE) \
     X(MUS_HG_RECEIVE_POKEMON) \
     X(MUS_HG_OBTAIN_ARCADE_POINTS) \
     X(MUS_HG_OBTAIN_CASTLE_POINTS) \
@@ -4939,10 +4932,10 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_BERRY_BLENDER) \
     X(SE_CARD) \
     X(SE_SAVE) \
-    X(SE_BALL_BOUNCE_1) \
-    X(SE_BALL_BOUNCE_2) \
-    X(SE_BALL_BOUNCE_3) \
-    X(SE_BALL_BOUNCE_4) \
+    X(SE_BALL_BOUNCE_A) \
+    X(SE_BALL_BOUNCE_B) \
+    X(SE_BALL_BOUNCE_C) \
+    X(SE_BALL_BOUNCE_D) \
     X(SE_BALL_TRADE) \
     X(SE_BALL_THROW) \
     X(SE_NOTE_C) \
@@ -4971,12 +4964,12 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_RAIN) \
     X(SE_RAIN_STOP) \
     X(SE_THUNDER) \
-    X(SE_THUNDER2) \
+    X(SE_THUNDER_2) \
     X(SE_ELEVATOR) \
     X(SE_LOW_HEALTH) \
     X(SE_EXP_MAX) \
     X(SE_ROULETTE_BALL) \
-    X(SE_ROULETTE_BALL2) \
+    X(SE_ROULETTE_BALL_2) \
     X(SE_TAILLOW_WING_FLAP) \
     X(SE_SHOP) \
     X(SE_CONTEST_HEART) \
@@ -5002,21 +4995,21 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_BALL_TRAY_EXIT) \
     X(SE_GLASS_FLUTE) \
     X(SE_M_THUNDERBOLT) \
-    X(SE_M_THUNDERBOLT2) \
+    X(SE_M_THUNDERBOLT_2) \
     X(SE_M_HARDEN) \
     X(SE_M_NIGHTMARE) \
     X(SE_M_VITAL_THROW) \
-    X(SE_M_VITAL_THROW2) \
+    X(SE_M_VITAL_THROW_2) \
     X(SE_M_BUBBLE) \
-    X(SE_M_BUBBLE2) \
-    X(SE_M_BUBBLE3) \
+    X(SE_M_BUBBLE_2) \
+    X(SE_M_BUBBLE_3) \
     X(SE_M_RAIN_DANCE) \
     X(SE_M_CUT) \
     X(SE_M_STRING_SHOT) \
-    X(SE_M_STRING_SHOT2) \
+    X(SE_M_STRING_SHOT_2) \
     X(SE_M_ROCK_THROW) \
     X(SE_M_GUST) \
-    X(SE_M_GUST2) \
+    X(SE_M_GUST_B) \
     X(SE_M_DOUBLE_SLAP) \
     X(SE_M_DOUBLE_TEAM) \
     X(SE_M_RAZOR_WIND) \
@@ -5024,26 +5017,26 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_M_THUNDER_WAVE) \
     X(SE_M_COMET_PUNCH) \
     X(SE_M_MEGA_KICK) \
-    X(SE_M_MEGA_KICK2) \
+    X(SE_M_MEGA_KICK_2) \
     X(SE_M_CRABHAMMER) \
     X(SE_M_JUMP_KICK) \
     X(SE_M_FLAME_WHEEL) \
-    X(SE_M_FLAME_WHEEL2) \
+    X(SE_M_FLAME_WHEEL_2) \
     X(SE_M_FLAMETHROWER) \
     X(SE_M_FIRE_PUNCH) \
     X(SE_M_TOXIC) \
     X(SE_M_SACRED_FIRE) \
-    X(SE_M_SACRED_FIRE2) \
+    X(SE_M_SACRED_FIRE_2) \
     X(SE_M_EMBER) \
     X(SE_M_TAKE_DOWN) \
     X(SE_M_BLIZZARD) \
-    X(SE_M_BLIZZARD2) \
+    X(SE_M_BLIZZARD_2) \
     X(SE_M_SCRATCH) \
     X(SE_M_VICEGRIP) \
     X(SE_M_WING_ATTACK) \
     X(SE_M_FLY) \
     X(SE_M_SAND_ATTACK) \
-    X(SE_M_RAZOR_WIND2) \
+    X(SE_M_RAZOR_WIND_2) \
     X(SE_M_BITE) \
     X(SE_M_HEADBUTT) \
     X(SE_M_SURF) \
@@ -5066,7 +5059,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_M_ABSORB) \
     X(SE_M_SCREECH) \
     X(SE_M_BUBBLE_BEAM) \
-    X(SE_M_BUBBLE_BEAM2) \
+    X(SE_M_BUBBLE_BEAM_2) \
     X(SE_M_SUPERSONIC) \
     X(SE_M_BELLY_DRUM) \
     X(SE_M_METRONOME) \
@@ -5077,7 +5070,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_M_SWORDS_DANCE) \
     X(SE_M_LEER) \
     X(SE_M_SWAGGER) \
-    X(SE_M_SWAGGER2) \
+    X(SE_M_SWAGGER_2) \
     X(SE_M_HEAL_BELL) \
     X(SE_M_CONFUSE_RAY) \
     X(SE_M_SNORE) \
@@ -5104,13 +5097,13 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_M_ACID_ARMOR) \
     X(SE_M_SANDSTORM) \
     X(SE_M_TRI_ATTACK) \
-    X(SE_M_TRI_ATTACK2) \
+    X(SE_M_TRI_ATTACK_2) \
     X(SE_M_ENCORE) \
-    X(SE_M_ENCORE2) \
+    X(SE_M_ENCORE_2) \
     X(SE_M_BATON_PASS) \
     X(SE_M_MILK_DRINK) \
     X(SE_M_ATTRACT) \
-    X(SE_M_ATTRACT2) \
+    X(SE_M_ATTRACT_2) \
     X(SE_M_MORNING_SUN) \
     X(SE_M_FLATTER) \
     X(SE_M_SAND_TOMB) \
@@ -5130,7 +5123,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_M_TEETER_DANCE) \
     X(SE_M_STAT_DECREASE) \
     X(SE_M_HAZE) \
-    X(SE_M_HYPER_BEAM2) \
+    X(SE_M_HYPER_BEAM_2) \
     X(SE_RG_DOOR) \
     X(SE_RG_CARD_FLIP) \
     X(SE_RG_CARD_FLIPPING) \
@@ -5148,12 +5141,11 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     X(SE_RG_POKE_JUMP_FAILURE) \
     X(SE_POKENAV_CALL) \
     X(SE_POKENAV_HANG_UP) \
-    X(SE_ARENA_TIMEUP1) \
-    X(SE_ARENA_TIMEUP2) \
+    X(SE_ARENA_TIMEUP) \
+    X(SE_ARENA_TIMEUP_2) \
     X(SE_PIKE_CURTAIN_CLOSE) \
     X(SE_PIKE_CURTAIN_OPEN) \
     X(SE_SUDOWOODO_SHAKE) \
-    X(SE_DUMMY_1) \
     X(PH_TRAP_BLEND) \
     X(PH_TRAP_HELD) \
     X(PH_TRAP_SOLO) \

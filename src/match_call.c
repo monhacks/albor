@@ -1052,31 +1052,12 @@ static bool32 SelectMatchCallTrainer(void)
 // Ignores registrable non-trainer NPCs, and special trainers like Wally and the gym leaders.
 static u32 GetNumRegisteredTrainers(void)
 {
-    u32 i, count;
-    for (i = 0, count = 0; i < REMATCH_SPECIAL_TRAINER_START; i++)
-    {
-        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + i))
-            count++;
-    }
-
-    return count;
+    return 0;
 }
 
 static u32 GetActiveMatchCallTrainerId(u32 activeMatchCallId)
 {
-    u32 i;
-    for (i = 0; i < REMATCH_SPECIAL_TRAINER_START; i++)
-    {
-        if (FlagGet(TRAINER_REGISTERED_FLAGS_START + i))
-        {
-            if (!activeMatchCallId)
-                return gRematchTable[i].trainerIds[0];
-
-            activeMatchCallId--;
-        }
-    }
-
-    return REMATCH_TABLE_ENTRIES;
+    return 0;
 }
 
 /*

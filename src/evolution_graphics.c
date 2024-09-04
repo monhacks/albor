@@ -320,7 +320,7 @@ static void Task_Sparkles_ArcDown_Init(u8 taskId)
     SetEvoSparklesMatrices();
     gTasks[taskId].tTimer = 0;
     gTasks[taskId].func = Task_Sparkles_ArcDown;
-    PlaySE(SE_M_BUBBLE_BEAM2);
+    PlaySE(SE_M_BUBBLE_BEAM_2);
 }
 
 static void Task_Sparkles_ArcDown(u8 taskId)

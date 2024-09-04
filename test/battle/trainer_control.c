@@ -83,8 +83,8 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(StringCompare(nickBuffer, COMPOUND_STRING("Wobbuffet")) == 0);
 
     EXPECT(GetMonGender(&testParty[0]) == MON_FEMALE);
-    EXPECT(GetNature(&testParty[0]) == NATURE_RAPIDA);
-    EXPECT(GetNature(&testParty[1]) == NATURE_OFENSIVA);
+    EXPECT(GetNature(&testParty[0]) == NATURE_SPEED);
+    EXPECT(GetNature(&testParty[1]) == NATURE_ATK);
 
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_DYNAMAX_LEVEL), 5);
     EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 10);

@@ -1490,24 +1490,6 @@
 	.4byte \ptr
 	.endm
 
-	.macro handlemegaevo battler:req, case:req
-	callnative BS_HandleMegaEvolution
-	.byte \battler
-	.byte \case
-	.endm
-
-	.macro handleprimalreversion battler:req, case:req
-	callnative BS_HandlePrimalReversion
-	.byte \battler
-	.byte \case
-	.endm
-
-	.macro handleultraburst battler:req, case:req
-	callnative BS_HandleUltraBurst
-	.byte \battler
-	.byte \case
-	.endm
-
 	.macro jumpifshelltrap battler:req, jumpInstr:req
 	callnative BS_JumpIfShellTrap
 	.byte \battler
@@ -1610,10 +1592,6 @@
 	callnative BS_TryDefog
 	.byte \clear
 	.4byte \failInstr
-	.endm
-
-	.macro trytriggerstatusform
-	callnative BS_TryTriggerStatusForm
 	.endm
 
 	.macro setphotongeysercategory

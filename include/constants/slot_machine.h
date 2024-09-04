@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_SLOT_MACHINE_H
 #define GUARD_CONSTANTS_SLOT_MACHINE_H
-
+//eliminar todo
 #define SLOT_MACHINE_COUNT 12
 
 // Slot machine IDs

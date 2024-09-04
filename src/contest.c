@@ -2151,7 +2151,7 @@ static void Task_DoAppeals(u8 taskId)
             if (!eContest.waitForAudienceBlend)
             {
                 AnimateAudience();
-                PlaySE(SE_M_ENCORE2);
+                PlaySE(SE_M_ENCORE_2);
                 ShowAndUpdateApplauseMeter(1);
                 gTasks[taskId].tCounter++;
             }

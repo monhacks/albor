@@ -28,6 +28,7 @@ extern u8 gSelectedOrderFromParty[MAX_FRONTIER_PARTY_SIZE];
 extern u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2];
 
 extern void (*gItemUseCB)(u8, TaskFunc);
+extern const u16 gTMHMMoves[NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES];
 extern const struct SpriteTemplate gSpriteTemplate_StatusIcons;
 
 void AnimatePartySlot(u8 slot, u8 animNum);

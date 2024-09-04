@@ -1,7 +1,7 @@
 #ifndef GUARD_TRAINERS_H
 #define GUARD_TRAINERS_H
 
-#include "constants/opponents.h"
+#include "constants/flags.h"
 #include "constants/battle_frontier_trainers.h"
 
 // Special Trainer Ids.
@@ -128,7 +128,7 @@ enum TrainerBackPics
     TRAINER_BACK_PIC_STEVEN,
 };
 
-enum TrainerClass
+enum TrainerClasses
 {
     TRAINER_CLASS_NONE,
     TRAINER_CLASS_HIKER,

@@ -4511,14 +4511,14 @@ static void AnimItemSteal_Step3(struct Sprite *sprite)
 
     sprite->y2 = Sin(sprite->data[0] + 0x80, 30 - sprite->data[1] * 8);
     if (sprite->y2 == 0)
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
+        PlaySE12WithPanning(SE_M_BUBBLE_2, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
 
     if (moveAlongLinearPath(sprite))
     {
         sprite->y2 = 0;
         sprite->data[0] = 0;
         sprite->callback = AnimItemSteal_Step2;
-        PlaySE12WithPanning(SE_M_BUBBLE2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
+        PlaySE12WithPanning(SE_M_BUBBLE_2, BattleAnimAdjustPanning(SOUND_PAN_ATTACKER));
     }
 }
 
@@ -6116,7 +6116,7 @@ static void AnimSharpenSphere_Step(struct Sprite *sprite)
         {
             sprite->data[4]++;
             if (!(sprite->data[4] & 1))
-                PlaySE12WithPanning(SE_M_SWAGGER2, sprite->data[5]);
+                PlaySE12WithPanning(SE_M_SWAGGER_2, sprite->data[5]);
         }
 
         sprite->data[0] = 0;

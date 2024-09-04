@@ -57,7 +57,7 @@
 #include "constants/battle_ai.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
-#include "constants/battle_partner.h"
+#include "constants/flags.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -283,8 +283,7 @@ static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
 const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
 {
-    TRAINER_CLASS(PKMN_TRAINER_1, "Entrenador", 6, ITEM_POKE_BALL),
-    TRAINER_CLASS(PKMN_TRAINER_2, "Entrenador", 6, ITEM_POKE_BALL),
+    TRAINER_CLASS(NONE, "No", 10, ITEM_MASTER_BALL),
     TRAINER_CLASS(HIKER, "Montañero", 10, ITEM_ULTRA_BALL),
     TRAINER_CLASS(TEAM_AQUA, "Equipo Aqua", 8, ITEM_DIVE_BALL),
     TRAINER_CLASS(PKMN_BREEDER, "Criador {PKMN}", 10, ITEM_HEAL_BALL),
@@ -331,7 +330,6 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     TRAINER_CLASS(SWIMMER_F, "Nadadora", 2, ITEM_DIVE_BALL),
     TRAINER_CLASS(TWINS, "Gemelas", 3, ITEM_FRIEND_BALL),
     TRAINER_CLASS(SAILOR, "Marinero", 8, ITEM_DIVE_BALL),
-    TRAINER_CLASS(COOLTRAINER_2, "Molón", 10, ITEM_ULTRA_BALL),
     TRAINER_CLASS(MAGMA_ADMIN, "Admin. Magma", 10, ITEM_DUSK_BALL),
     TRAINER_CLASS(RIVAL, "Entrenador", 15, ITEM_ULTRA_BALL),
     TRAINER_CLASS(BUG_CATCHER, "Cazabichos", 4, ITEM_NET_BALL),
@@ -535,10 +533,6 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
-
-        // Apply party-wide start-of-battle form changes for both sides.
-        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BEGIN_BATTLE);
-        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BEGIN_BATTLE);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -3174,8 +3168,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         {
             gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->switchInBattlerCounter++];
 
-            if (TryPrimalReversion(gBattlerAttacker))
-                return;
             if (AbilityBattleEffects(ABILITYEFFECT_ON_SWITCHIN, gBattlerAttacker, 0, 0, 0) != 0)
                 return;
         }
@@ -4099,10 +4091,6 @@ s8 GetMovePriority(u32 battler, u16 move)
 
     priority = gMovesInfo[move].priority;
 
-    // Max Guard check
-    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
-        return gMovesInfo[MOVE_MAX_GUARD].priority;
-
     if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TYPE_FLYING)
     {
         priority++;
@@ -4680,15 +4668,7 @@ static void HandleEndTurn_BattleWon(void)
 {
     gCurrentActionFuncId = 0;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
-    {
-        gSpecialVar_Result = gBattleOutcome;
-        gBattleTextBuff1[0] = gBattleOutcome;
-        gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER))
     {
         BattleStopLowHpSound();
@@ -4736,36 +4716,7 @@ static void HandleEndTurn_BattleWon(void)
 
 static void HandleEndTurn_BattleLost(void)
 {
-    gCurrentActionFuncId = 0;
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-        {
-            if (gBattleOutcome & B_OUTCOME_LINK_BATTLE_RAN)
-            {
-                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
-                gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-                gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
-            }
-            else
-            {
-                gBattlescriptCurrInstr = BattleScript_FrontierLinkBattleLost;
-                gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-            }
-        }
-        else
-        {
-            gBattleTextBuff1[0] = gBattleOutcome;
-            gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-        }
-    }
-    else
-    {
-        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
-    }
+    gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
@@ -4874,10 +4825,6 @@ static void HandleEndTurn_FinishBattle(void)
         for (i = 0; i < PARTY_SIZE; i++)
         {
             bool8 changedForm = FALSE;
-
-            // Appeared in battle and didn't faint
-            if ((gBattleStruct->appearedInBattle & (1u << i)) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
-                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_TERRAIN);
 
             if (!changedForm)
                 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);

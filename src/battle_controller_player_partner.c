@@ -27,7 +27,7 @@
 #include "util.h"
 #include "window.h"
 #include "constants/battle_anim.h"
-#include "constants/battle_partner.h"
+#include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/party_menu.h"
 #include "constants/trainers.h"

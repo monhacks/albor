@@ -17,32 +17,6 @@
 #include "constants/hold_effects.h"
 #include "constants/rgb.h"
 
-// Sets flags and variables upon a battler's Terastallization.
-void ActivateTera(u32 battler)
-{
-    u32 side = GetBattlerSide(battler);
-
-    // Set appropriate flags.
-    SetActiveGimmick(battler, GIMMICK_TERA);
-    SetGimmickAsActivated(battler, GIMMICK_TERA);
-
-    // Remove Tera Orb charge.
-    if (B_FLAG_TERA_ORB_CHARGED != 0
-        && (B_FLAG_TERA_ORB_NO_COST == 0 || !FlagGet(B_FLAG_TERA_ORB_NO_COST))
-        && side == B_SIDE_PLAYER
-        && !(IsDoubleBattle() && !IsPartnerMonFromSameTrainer(battler)))
-    {
-        FlagClear(B_FLAG_TERA_ORB_CHARGED);
-    }
-
-    // Execute battle script.
-    PREPARE_TYPE_BUFFER(gBattleTextBuff1, GetBattlerTeraType(battler));
-    if (TryBattleFormChange(gBattlerAttacker, FORM_CHANGE_BATTLE_TERASTALLIZATION))
-        BattleScriptExecute(BattleScript_TeraFormChange);
-    else
-        BattleScriptExecute(BattleScript_Terastallization);
-}
-
 // Applies palette blend and enables UI indicator after animation has played
 void ApplyBattlerVisualsForTeraAnim(u32 battler)
 {

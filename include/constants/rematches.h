@@ -1,7 +1,8 @@
 #ifndef GUARD_REMATCHES_H
 #define GUARD_REMATCHES_H
-
-enum {
+//Eliminar
+enum Rematches
+{
     REMATCH_ROSE,
     REMATCH_ANDRES,
     REMATCH_DUSTY,

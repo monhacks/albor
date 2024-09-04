@@ -24,27 +24,13 @@
 //Sprite offset
 #define MAX_Y_OFFSET 20
 
-//Windows
-#define WIN_NAME_NUMBERS 0
-#define WIN_INSTRUCTIONS 1
-#define WIN_BOTTOM_LEFT 2
-#define WIN_BOTTOM_RIGHT 3
-#define WIN_END 4
-
-//Battle backgrounds
-#define MAP_BATTLE_SCENE_NORMAL       0
-#define MAP_BATTLE_SCENE_GYM          1
-#define MAP_BATTLE_SCENE_MAGMA        2
-#define MAP_BATTLE_SCENE_AQUA         3
-#define MAP_BATTLE_SCENE_SIDNEY       4
-#define MAP_BATTLE_SCENE_PHOEBE       5
-#define MAP_BATTLE_SCENE_GLACIA       6
-#define MAP_BATTLE_SCENE_DRAKE        7
-#define MAP_BATTLE_SCENE_FRONTIER     8
-#define MAP_BATTLE_SCENE_LEADER       9
-#define MAP_BATTLE_SCENE_WALLACE      10
-#define MAP_BATTLE_SCENE_GROUDON      11
-#define MAP_BATTLE_SCENE_KYOGRE       12
-#define MAP_BATTLE_SCENE_RAYQUAZA     13
+enum SpriteVisualizerWindows
+{
+    WIN_NAME_NUMBERS,
+    WIN_INSTRUCTIONS,
+    WIN_BOTTOM_LEFT,
+    WIN_BOTTOM_RIGHT,
+    WIN_END,
+};
 
 #endif // GUARD_CONSTANTS_POKEMON_SPRITE_VISUALIZER_H

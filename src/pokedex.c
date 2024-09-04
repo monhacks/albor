@@ -265,7 +265,7 @@ struct PokedexListItem
     u16 owned:1;
 };
 
-struct PokemonStats
+struct PokemonStatsTotal
 {
     u16 species;
     u8  genderRatio;
@@ -302,7 +302,6 @@ struct EvoScreenData
     bool8 seen[10];
     u8 menuPos;
     u8 arrowSpriteId;
-    bool8 isMega;
 };
 
 struct FromScreenData
@@ -316,7 +315,7 @@ struct FromScreenData
 
 struct PokedexView
 {
-    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT];
+    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT + 1];
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 selectedPokemonBackup;
@@ -335,7 +334,7 @@ struct PokedexView
     u8 numTMHMMoves;
     u8 numTutorMoves;
     u8 numPreEvolutions;
-    struct PokemonStats sPokemonStats;
+    struct PokemonStatsTotal sPokemonStats;
     struct EvoScreenData sEvoScreenData;
     struct FromScreenData sFormScreenData;
     u16 formSpecies;
@@ -1673,7 +1672,6 @@ void ResetPokedex(void)
 
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
-    gSaveBlock2Ptr->pokedex.order = 0;
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         gSaveBlock1Ptr->dexCaught[i] = 0;
@@ -3471,7 +3469,7 @@ static void StatsPage_PrintNavigationButtons(void)
         AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons_Decapped);
 
     PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
-    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
+    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, COPYWIN_FULL);
 }
 
 static void ResetStatsWindows(void)
@@ -4391,7 +4389,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_MONSTER     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_MONSTER);
             break;
-        case EGG_GROUP_ANFIBIO     :
+        case EGG_GROUP_AMPHIBIOUS     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_1);
             break;
         case EGG_GROUP_BUG         :
@@ -4412,7 +4410,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_HUMAN_LIKE  :
             StringCopy(gStringVar1, sText_Stats_eggGroup_HUMAN_LIKE);
             break;
-        case EGG_GROUP_INVERTEBRADO     :
+        case EGG_GROUP_INVERTEBRATE     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_3);
             break;
         case EGG_GROUP_MINERAL     :
@@ -4421,10 +4419,10 @@ static void PrintStatsScreen_Left(u8 taskId)
         case EGG_GROUP_AMORPHOUS   :
             StringCopy(gStringVar1, sText_Stats_eggGroup_AMORPHOUS);
             break;
-        case EGG_GROUP_PEZ     :
+        case EGG_GROUP_FISH     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_2);
             break;
-        case EGG_GROUP_DITTO       :
+        case EGG_GROUP_UNIVERSAL       :
             StringCopy(gStringVar1, sText_Stats_eggGroup_DITTO);
             break;
         case EGG_GROUP_DRAGON      :
@@ -4442,7 +4440,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_MONSTER     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MONSTER);
                 break;
-            case EGG_GROUP_ANFIBIO     :
+            case EGG_GROUP_AMPHIBIOUS     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_1);
                 break;
             case EGG_GROUP_BUG         :
@@ -4463,7 +4461,7 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_HUMAN_LIKE  :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_HUMAN_LIKE);
                 break;
-            case EGG_GROUP_INVERTEBRADO     :
+            case EGG_GROUP_INVERTEBRATE     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_3);
                 break;
             case EGG_GROUP_MINERAL     :
@@ -4472,10 +4470,10 @@ static void PrintStatsScreen_Left(u8 taskId)
             case EGG_GROUP_AMORPHOUS   :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_AMORPHOUS);
                 break;
-            case EGG_GROUP_PEZ     :
+            case EGG_GROUP_FISH     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_2);
                 break;
-            case EGG_GROUP_DITTO       :
+            case EGG_GROUP_UNIVERSAL       :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DITTO);
                 break;
             case EGG_GROUP_DRAGON      :
@@ -4897,19 +4895,12 @@ static void HandlePreEvolutionSpeciesPrint(u8 taskId, u16 preSpecies, u16 specie
 
     StringCopy(gStringVar1, GetSpeciesName(species)); //evolution mon name
 
-    if (sPokedexView->sEvoScreenData.isMega)
-        StringExpandPlaceholders(gStringVar3, sText_EVO_PreEvo_PE_Mega);
+    if (seen || !HGSS_HIDE_UNSEEN_EVOLUTION_NAMES)
+        StringCopy(gStringVar2, GetSpeciesName(preSpecies)); //evolution mon name
     else
-    {
+        StringCopy(gStringVar2, gText_ThreeQuestionMarks); //show questionmarks instead of name
 
-        if (seen || !HGSS_HIDE_UNSEEN_EVOLUTION_NAMES)
-            StringCopy(gStringVar2, GetSpeciesName(preSpecies)); //evolution mon name
-        else
-            StringCopy(gStringVar2, gText_ThreeQuestionMarks); //show questionmarks instead of name
-
-        StringExpandPlaceholders(gStringVar3, sText_EVO_PreEvo); //evolution mon name
-
-    }
+    StringExpandPlaceholders(gStringVar3, sText_EVO_PreEvo); //evolution mon name
 
     PrintInfoScreenTextSmall(gStringVar3, base_x, base_y + base_y_offset*base_i); //evolution mon name
 
@@ -4934,34 +4925,6 @@ static u8 PrintPreEvolutions(u8 taskId, u16 species)
     u16 preEvolutionOne = 0;
     u16 preEvolutionTwo = 0;
     u8 numPreEvolutions = 0;
-
-    u16 baseFormSpecies;
-    sPokedexView->sEvoScreenData.isMega = FALSE;
-
-    //Check if it's a mega
-    baseFormSpecies = GetFormSpeciesId(species, 0);
-    if (baseFormSpecies != species)
-    {
-        const struct FormChange *formChanges = GetSpeciesFormChanges(baseFormSpecies);
-        for (i = 0; formChanges != NULL && formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
-        {
-            if (formChanges[i].method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM
-                && formChanges[i].targetSpecies == species)
-            {
-                preEvolutionOne = baseFormSpecies;
-                numPreEvolutions += 1;
-                sPokedexView->numPreEvolutions = numPreEvolutions;
-                sPokedexView->sEvoScreenData.numAllEvolutions += numPreEvolutions;
-                sPokedexView->sEvoScreenData.isMega = TRUE;
-
-                CopyItemName(GetSpeciesFormChanges(species)->param1, gStringVar2); //item
-                CreateCaughtBallEvolutionScreen(preEvolutionOne, base_x - 9 - 8, base_y + base_y_offset*(numPreEvolutions - 1));
-                HandlePreEvolutionSpeciesPrint(taskId, preEvolutionOne, species, base_x - 8, base_y, base_y_offset, numPreEvolutions - 1);
-                return numPreEvolutions;
-            }
-        }
-    }
-
     //Calculate previous evolution
     for (i = 0; i < NUM_SPECIES; i++)
     {
@@ -5053,8 +5016,6 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
     bool8 isEevee = FALSE;
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
 
-    if (sPokedexView->sEvoScreenData.isMega)
-        return 0;
     if (evolutions == NULL)
         return 0;
 

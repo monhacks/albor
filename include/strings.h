@@ -42,12 +42,6 @@ extern const u8 gText_Super[];
 extern const u8 gText_Hyper[];
 extern const u8 gText_Master[];
 
-extern const u8 gText_Cool2[];
-extern const u8 gText_Beauty2[];
-extern const u8 gText_Cute2[];
-extern const u8 gText_Smart2[];
-extern const u8 gText_Tough2[];
-
 extern const u8 gText_Items[];
 extern const u8 gText_Key_Items[];
 extern const u8 gText_Poke_Balls[];
@@ -1075,13 +1069,6 @@ extern const u8 gText_Satisfied[];
 extern const u8 gText_Dissatisfied[];
 extern const u8 gText_DeepSeaTooth[];
 extern const u8 gText_DeepSeaScale[];
-extern const u8 gText_BlueFlute2[];
-extern const u8 gText_YellowFlute2[];
-extern const u8 gText_RedFlute2[];
-extern const u8 gText_WhiteFlute2[];
-extern const u8 gText_BlackFlute2[];
-extern const u8 gText_GlassChair[];
-extern const u8 gText_GlassDesk[];
 extern const u8 gText_TreeckoDollAndPrice[];
 extern const u8 gText_TorchicDollAndPrice[];
 extern const u8 gText_MudkipDollAndPrice[];

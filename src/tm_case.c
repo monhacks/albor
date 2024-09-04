@@ -64,7 +64,8 @@ enum {
 // The "static" resources are preserved even if the TM case is exited. This is
 // useful for when its left temporarily (e.g. going to the party menu to teach a TM)
 // but also to preserve the selected item when the TM case is fully closed.
-static EWRAM_DATA struct {
+static EWRAM_DATA struct
+{
     void (* exitCallback)(void);
     u8 menuType;
     bool8 allowSelectClose;
@@ -73,7 +74,8 @@ static EWRAM_DATA struct {
 } sTMCaseStaticResources = {};
 
 // The "dynamic" resources will be reset any time the TM case is exited, even temporarily.
-static EWRAM_DATA struct {
+static EWRAM_DATA struct
+{
     void (* nextScreenCallback)(void);
     u8 maxTMsShown;
     u8 numTMs;

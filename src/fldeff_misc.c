@@ -1177,46 +1177,6 @@ bool8 IsLargeBreakableDecoration(u16 metatileId, bool8 checkBase)
     return FALSE;
 }
 
-#define tState  data[0]
-#define tMosaic data[1]
-
-static void Task_FieldPoisonEffect(u8 taskId)
-{
-    s16 *data = gTasks[taskId].data;
-
-    switch (tState)
-    {
-    case 0:
-        tMosaic += 2;
-        if (tMosaic > 8)
-            tState++;
-        break;
-    case 1:
-        tMosaic -= 2;
-        if (tMosaic == 0)
-            tState++;
-        break;
-    case 2:
-        DestroyTask(taskId);
-        return;
-    }
-    SetGpuReg(REG_OFFSET_MOSAIC, (tMosaic << 4) | tMosaic);
-}
-
-#undef tState
-#undef tMosaic
-
-void FldEffPoison_Start(void)
-{
-    PlaySE(SE_FIELD_POISON);
-    CreateTask(Task_FieldPoisonEffect, 80);
-}
-
-bool32 FldEffPoison_IsActive(void)
-{
-    return FuncIsActiveTask(Task_FieldPoisonEffect);
-}
-
 static void Task_WateringBerryTreeAnim(u8 taskId)
 {
     gTasks[taskId].func = Task_WateringBerryTreeAnim_Start;

@@ -355,7 +355,7 @@ ContestHall_EventScript_EntryXTrainersMonLink::
 ContestHall_EventScript_AudienceVote::
 	call ContestHall_EventScript_AudienceWillVote
 	call ContestHall_EventScript_VotingUnderWay
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	waitmessage
 	call ContestHall_EventScript_AudienceLookAround
 	applymovement LOCALID_MC, ContestHall_Movement_MCFaceJudge2
@@ -402,7 +402,7 @@ ContestHall_EventScript_AudienceReactToContestant::
 	call ContestHall_EventScript_TryWaitForLink
 	applymovement LOCALID_MC, ContestHall_Movement_AudienceMemberLookLeft
 	waitmovement 0
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call ContestHall_EventScript_VObjectAudienceLookAround
 	applymovement LOCALID_AUDIENCE_5, ContestHall_Movement_AudienceMemberLookRight
 	applymovement LOCALID_AUDIENCE_2, ContestHall_Movement_AudienceMemberLookDown

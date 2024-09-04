@@ -23,20 +23,27 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
+enum BattlePositions
+{
+    B_POSITION_PLAYER_LEFT,
+    B_POSITION_OPPONENT_LEFT,
+    B_POSITION_PLAYER_RIGHT,
+    B_POSITION_OPPONENT_RIGHT,
 
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT       2
-#define B_POSITION_OPPONENT_RIGHT     3
+    MAX_BATTLERS_COUNT
+};
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
 #define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
 #define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
-#define B_SIDE_PLAYER     0
-#define B_SIDE_OPPONENT   1
-#define NUM_BATTLE_SIDES  2
+enum BattleSides
+{
+    B_SIDE_PLAYER,
+    B_SIDE_OPPONENT,
+
+    NUM_BATTLE_SIDES
+};
 
 #define B_FLANK_LEFT  0
 #define B_FLANK_RIGHT 1
@@ -89,18 +96,19 @@
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
 #define BATTLE_TYPE_HAS_AI          (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FIRST_BATTLE | BATTLE_TYPE_SAFARI | BATTLE_TYPE_ROAMER | BATTLE_TYPE_INGAME_PARTNER)
 
-// Battle Outcome defines
-#define B_OUTCOME_WON                  1
-#define B_OUTCOME_LOST                 2
-#define B_OUTCOME_DREW                 3
-#define B_OUTCOME_RAN                  4
-#define B_OUTCOME_PLAYER_TELEPORTED    5
-#define B_OUTCOME_MON_FLED             6
-#define B_OUTCOME_CAUGHT               7
-#define B_OUTCOME_NO_SAFARI_BALLS      8
-#define B_OUTCOME_FORFEITED            9
-#define B_OUTCOME_MON_TELEPORTED       10
-#define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
+enum BattleOutcomes
+{
+    B_OUTCOME_WON = 1,
+    B_OUTCOME_LOST,
+    B_OUTCOME_DREW,
+    B_OUTCOME_RAN,
+    B_OUTCOME_PLAYER_TELEPORTED,
+    B_OUTCOME_MON_FLED,
+    B_OUTCOME_CAUGHT,
+    B_OUTCOME_NO_SAFARI_BALLS,
+    B_OUTCOME_FORFEITED,
+    B_OUTCOME_MON_TELEPORTED,
+};
 
 // Non-volatile status conditions
 // These remain outside of battle and after switching out.
@@ -306,17 +314,19 @@
 #define B_WEATHER_FOG_PERMANENT       (1 << 15)
 #define B_WEATHER_FOG                 (B_WEATHER_FOG_TEMPORARY | B_WEATHER_FOG_PERMANENT)
 
-// Battle Weather as enum
-#define ENUM_WEATHER_NONE                 0
-#define ENUM_WEATHER_RAIN                 1
-#define ENUM_WEATHER_SUN                  2
-#define ENUM_WEATHER_SANDSTORM            3
-#define ENUM_WEATHER_HAIL                 4
-#define ENUM_WEATHER_SUN_PRIMAL           5
-#define ENUM_WEATHER_RAIN_PRIMAL          6
-#define ENUM_WEATHER_STRONG_WINDS         7
-#define ENUM_WEATHER_SNOW                 8
-#define ENUM_WEATHER_FOG                  9
+enum BattleWeather
+{
+    ENUM_WEATHER_NONE,
+    ENUM_WEATHER_RAIN,
+    ENUM_WEATHER_SUN,
+    ENUM_WEATHER_SANDSTORM,
+    ENUM_WEATHER_HAIL,
+    ENUM_WEATHER_SUN_PRIMAL,
+    ENUM_WEATHER_RAIN_PRIMAL,
+    ENUM_WEATHER_STRONG_WINDS,
+    ENUM_WEATHER_SNOW,
+    ENUM_WEATHER_FOG,
+};
 
 // Move Effects
 #define MOVE_EFFECT_SLEEP               1
@@ -403,9 +413,9 @@
 
 #define NUM_MOVE_EFFECTS                80
 
-#define MOVE_EFFECT_AFFECTS_USER        0x2000
-#define MOVE_EFFECT_CERTAIN             0x4000
-#define MOVE_EFFECT_CONTINUE            0x8000
+#define MOVE_EFFECT_AFFECTS_USER        8192
+#define MOVE_EFFECT_CERTAIN             16384
+#define MOVE_EFFECT_CONTINUE            32768
 
 // Battle terrain defines for gBattleTerrain.
 #define BATTLE_TERRAIN_GRASS            0
@@ -504,15 +514,12 @@
 // For the second argument of GetMoveTarget, when no target override is needed
 #define NO_TARGET_OVERRIDE 0
 
-// Constants for Parental Bond
-#define PARENTAL_BOND_1ST_HIT 2
-#define PARENTAL_BOND_2ND_HIT 1
-#define PARENTAL_BOND_OFF     0
-
-// Constants for if HandleScriptMegaPrimalBurst should handle Mega Evolution, Primal Reversion, or Ultra Burst.
-#define HANDLE_TYPE_MEGA_EVOLUTION 0
-#define HANDLE_TYPE_PRIMAL_REVERSION 1
-#define HANDLE_TYPE_ULTRA_BURST 2
+enum ParentalBondHits
+{
+    PARENTAL_BOND_OFF,
+    PARENTAL_BOND_2ND_HIT,
+    PARENTAL_BOND_1ST_HIT,
+};
 
 // Constants for Torment
 #define PERMANENT_TORMENT   0xF

@@ -2,9 +2,9 @@
 #include "event_data.h"
 #include "pokedex.h"
 
-#define SPECIAL_FLAGS_SIZE  (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
-#define TEMP_FLAGS_SIZE     (NUM_TEMP_FLAGS / 8)
-#define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
+#define TEMP_FLAGS_SIZE     (TEMP_FLAGS_COUNT / 8)
+#define DAILY_FLAGS_SIZE    (DAILY_FLAGS_COUNT / 8)
+#define TRAINER_FLAGS_SIZE  (TRAINERS_COUNT / 8)
 #define TEMP_VARS_SIZE      (NUM_TEMP_VARS * 2)      // 1/2 var per byte
 
 EWRAM_DATA u16 gSpecialVar_0 = 0;
@@ -21,20 +21,21 @@ EWRAM_DATA u16 gSpecialVar_LastTalked = 0;
 EWRAM_DATA u16 gSpecialVar_Facing = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxId = 0;
 EWRAM_DATA u16 gSpecialVar_MonBoxPos = 0;
-EWRAM_DATA static u8 sSpecialFlags[SPECIAL_FLAGS_SIZE] = {0};
 
 extern u16 *const gSpecialVars[];
 
 void InitEventData(void)
 {
-    memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
+    memset(gSaveBlock1Ptr->tempFlags, 0, sizeof(gSaveBlock1Ptr->tempFlags));
+    memset(gSaveBlock1Ptr->normalFlags, 0, sizeof(gSaveBlock1Ptr->normalFlags));
+    memset(gSaveBlock1Ptr->dailyFlags, 0, sizeof(gSaveBlock1Ptr->dailyFlags));
+    memset(gSaveBlock1Ptr->trainerFlags, 0, sizeof(gSaveBlock1Ptr->trainerFlags));
     memset(gSaveBlock1Ptr->vars, 0, sizeof(gSaveBlock1Ptr->vars));
-    memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
 }
 
 void ClearTempFieldEventData(void)
 {
-    memset(&gSaveBlock1Ptr->flags[TEMP_FLAGS_START / 8], 0, TEMP_FLAGS_SIZE);
+    memset(gSaveBlock1Ptr->tempFlags, 0, sizeof(gSaveBlock1Ptr->tempFlags));
     memset(&gSaveBlock1Ptr->vars[TEMP_VARS_START - VARS_START], 0, TEMP_VARS_SIZE);
     FlagClear(FLAG_SYS_ENC_UP_ITEM);
     FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
@@ -44,7 +45,8 @@ void ClearTempFieldEventData(void)
 
 void ClearDailyFlags(void)
 {
-    memset(&gSaveBlock1Ptr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
+    memset(gSaveBlock1Ptr->dailyFlags, 0, sizeof(gSaveBlock1Ptr->dailyFlags));
+    memset(gSaveBlock1Ptr->trainerFlags, 0, sizeof(gSaveBlock1Ptr->trainerFlags));
 }
 
 void DisableResetRTC(void)
@@ -55,13 +57,13 @@ void DisableResetRTC(void)
 
 void EnableResetRTC(void)
 {
-    VarSet(VAR_RESET_RTC_ENABLE, 0x920);
+    VarSet(VAR_RESET_RTC_ENABLE, 2336);
     FlagSet(FLAG_SYS_RESET_RTC_ENABLE);
 }
 
 bool32 CanResetRTC(void)
 {
-    if (FlagGet(FLAG_SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 0x920)
+    if (FlagGet(FLAG_SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 2336)
         return TRUE;
     else
         return FALSE;
@@ -111,10 +113,8 @@ u8 *GetFlagPointer(u16 id)
 {
     if (id == 0)
         return NULL;
-    else if (id < SPECIAL_FLAGS_START)
-        return &gSaveBlock1Ptr->flags[id / 8];
     else
-        return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
+        return &gSaveBlock1Ptr->normalFlags[id / 8];
 }
 
 u8 FlagSet(u16 id)

@@ -158,7 +158,6 @@ bool8 HasAnotherPlayerGivenFavorLadyItem(void)
     if (sFavorLadyPtr->playerName[0] != EOS)
     {
         StringCopy_PlayerName(gStringVar3, sFavorLadyPtr->playerName);
-        ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
         return TRUE;
     }
     return FALSE;
@@ -185,7 +184,6 @@ void BufferFavorLadyPlayerName(void)
 {
     sFavorLadyPtr = &gSaveBlock1Ptr->lilycoveLady.favor;
     SetFavorLadyPlayerName(sFavorLadyPtr->playerName, gStringVar3);
-    ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
 }
 
 // Only used to determine if a record-mixed player had given her an item she liked
@@ -367,7 +365,6 @@ static u8 BufferQuizAuthorName(void)
     else
     {
         StringCopy_PlayerName(gStringVar1, sQuizLadyPtr->playerName);
-        ConvertInternationalString(gStringVar1, sQuizLadyPtr->language);
         nameLen = GetPlayerNameLength(sQuizLadyPtr->playerName);
         if (nameLen == GetPlayerNameLength(gSaveBlock2Ptr->playerName))
         {

@@ -23,7 +23,6 @@
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
-#include "constants/field_poison.h"
 #include "constants/field_specials.h"
 #include "constants/field_tasks.h"
 #include "constants/field_weather.h"
@@ -1001,8 +1000,6 @@ gText_LegendaryFlewAway::
 EventScript_SelectWithoutRegisteredItem::
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
-
-	.include "data/scripts/field_poison.inc"
 
 Common_EventScript_NopReturn::
 	return

@@ -1233,7 +1233,7 @@ static void UpdateThunderSound(void)
             if (Random() & 1)
                 PlaySE(SE_THUNDER);
             else
-                PlaySE(SE_THUNDER2);
+                PlaySE(SE_THUNDER_2);
 
             gWeatherPtr->thunderEnqueued = FALSE;
         }

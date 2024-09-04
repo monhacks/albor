@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_MAUVILLE_OLD_MAN_H
 #define GUARD_CONSTANTS_MAUVILLE_OLD_MAN_H
-
+//eliminar todo
 #define MAUVILLE_MAN_BARD           0
 #define MAUVILLE_MAN_HIPSTER        1
 #define MAUVILLE_MAN_TRADER         2

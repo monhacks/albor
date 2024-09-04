@@ -62,7 +62,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnter::
 BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerEnterForTucker::
 	applymovement LOCALID_PLAYER, BattleFrontier_BattleDomeBattleRoom_Movement_PlayerEnterForTucker
 BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceReactToPlayer::
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitmovement 0
 	goto_if_ne VAR_TEMP_F, DOME_FINAL, BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent
@@ -88,7 +88,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent::
 BattleFrontier_BattleDomeBattleRoom_EventScript_Draw::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_RefereeDecisionPleaseWait, MSGBOX_DEFAULT
 	closemessage
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 	applymovement LOCALID_REFEREE, BattleFrontier_BattleDomeBattleRoom_Movement_RefereeEnter
@@ -109,7 +109,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_LostToOpponent::
 	call_if_eq VAR_TEMP_2, NO_DRAW, BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWon
 	call_if_eq VAR_TEMP_2, DRAW_TRAINER, BattleFrontier_BattleDomeBattleRoom_EventScript_OpponentWonDraw
 	call_if_eq VAR_TEMP_2, DRAW_TUCKER, BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerWonDraw
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney::
@@ -140,7 +140,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DefeatedOpponent::
 	waitmovement 0
 	call_if_eq VAR_TEMP_2, NO_DRAW, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWon
 	call_if_eq VAR_TEMP_2, DRAW_TRAINER, BattleFrontier_BattleDomeBattleRoom_EventScript_PlayerWonDraw
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 	dome_getroundtext
@@ -167,7 +167,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_WonLvOpenTourney::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_PlayerIsLvOpenChamp, MSGBOX_DEFAULT
 BattleFrontier_BattleDomeBattleRoom_EventScript_CelebrateWin::
 	special DoDomeConfetti
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	delay 60
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_WON
@@ -344,25 +344,25 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_TuckerEnter::
 	applymovement LOCALID_AUDIENCE_TWIN, BattleFrontier_BattleDomeBattleRoom_Movement_AudienceTwinJump
 	applymovement LOCALID_ANNOUNCER, BattleFrontier_BattleDomeBattleRoom_Movement_AnnouncerMoveForTuckerEntrance
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_TuckerEnterAndDance
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	waitmovement 0
 	message BattleFrontier_BattleDomeBattleRoom_Text_SpectatorTuckerChant
 	waitmessage
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	switch VAR_TEMP_E
@@ -435,7 +435,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_DoTuckerBattle::
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_LostToTucker::
 	msgbox BattleFrontier_BattleDomeBattleRoom_Text_WinnerIsTucker, MSGBOX_DEFAULT
-	playse SE_M_ENCORE2
+	playse SE_M_ENCORE_2
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_AudienceLookAround
 	waitse
 	goto BattleFrontier_BattleDomeBattleRoom_EventScript_LostTourney

@@ -1,6 +1,6 @@
 #ifndef GUARD_CONSTANTS_DECORATIONS_H
 #define GUARD_CONSTANTS_DECORATIONS_H
-
+//eliminar todo
 #define DECOR_NONE             0
 #define DECOR_SMALL_DESK       1
 #define DECOR_POKEMON_DESK     2

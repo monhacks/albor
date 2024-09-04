@@ -27,7 +27,7 @@
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 
-#define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_DITTO || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_DITTO)
+#define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_UNIVERSAL || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_UNIVERSAL)
 
 static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
@@ -271,7 +271,6 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
     species = GetBoxMonData(&daycareMon->mon, MON_DATA_SPECIES);
     BoxMonToMon(&daycareMon->mon, &pokemon);
 
-    newSpecies = GetFormChangeTargetSpecies(&pokemon, FORM_CHANGE_WITHDRAW, 0);
     if (newSpecies != SPECIES_NONE)
     {
         SetMonData(&pokemon, MON_DATA_SPECIES, &newSpecies);
@@ -1072,11 +1071,11 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     if (eggGroups[0][0] == EGG_GROUP_BABY || eggGroups[1][0] == EGG_GROUP_BABY)
         return PARENTS_INCOMPATIBLE;
     // two Ditto can't breed
-    if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
+    if (eggGroups[0][0] == EGG_GROUP_UNIVERSAL && eggGroups[1][0] == EGG_GROUP_UNIVERSAL)
         return PARENTS_INCOMPATIBLE;
 
     // one parent is Ditto
-    if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
+    if (eggGroups[0][0] == EGG_GROUP_UNIVERSAL || eggGroups[1][0] == EGG_GROUP_UNIVERSAL)
     {
         if (trainerIds[0] == trainerIds[1])
             return PARENTS_LOW_COMPATIBILITY;

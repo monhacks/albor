@@ -1,6 +1,7 @@
 #ifndef GUARD_Z_MOVE_EFFECTS_H
 #define GUARD_Z_MOVE_EFFECTS_H
 
+//eliminar todo
 #define Z_EFFECT_NONE 0
 #define Z_EFFECT_RESET_STATS 1
 #define Z_EFFECT_ALL_STATS_UP_1 2

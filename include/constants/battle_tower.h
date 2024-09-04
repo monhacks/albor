@@ -1,6 +1,7 @@
 #ifndef GUARD_CONSTANTS_BATTLE_TOWER_H
 #define GUARD_CONSTANTS_BATTLE_TOWER_H
 
+//eliminar todo
 #define BATTLE_TOWER_FUNC_INIT                  0
 #define BATTLE_TOWER_FUNC_GET_DATA              1
 #define BATTLE_TOWER_FUNC_SET_DATA              2

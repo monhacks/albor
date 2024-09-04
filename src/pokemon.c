@@ -46,7 +46,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
-#include "constants/battle_partner.h"
+#include "constants/flags.h"
 #include "constants/cries.h"
 #include "constants/event_objects.h"
 #include "constants/form_change_types.h"
@@ -97,7 +97,7 @@ EWRAM_DATA u16 gFollowerSteps = 0;
 
 const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 {
-    [NATURE_OFENSIVA] =
+    [NATURE_ATK] =
     {
         .name = COMPOUND_STRING("Ofensiva"),
         .statUp = STAT_ATK,
@@ -108,7 +108,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_EAGER_FOR_MORE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_DEFENSIVA] =
+    [NATURE_DEF] =
     {
         .name = COMPOUND_STRING("Defensiva"),
         .statUp = STAT_DEF,
@@ -119,7 +119,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_OFENSIVA_ESPECIAL] =
+    [NATURE_SP_ATK] =
     {
         .name = COMPOUND_STRING("Ofensiva esp."),
         .statUp = STAT_SPATK,
@@ -130,7 +130,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GETTING_IN_POS,
         .battlePalaceSmokescreen = PALACE_TARGET_WEAKER,
     },
-    [NATURE_DEFENSIVA_ESPECIAL] =
+    [NATURE_SP_DEF] =
     {
         .name = COMPOUND_STRING("Defensiva esp."),
         .statUp = STAT_SPDEF,
@@ -141,7 +141,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_RAPIDA] =
+    [NATURE_SPEED] =
     {
         .name = COMPOUND_STRING("Rápida"),
         .statUp = STAT_SPEED,
@@ -337,8 +337,6 @@ static const u8 sStatsToRaise[] =
 static const s8 sFriendshipEventModifiers[][3] =
 {
     [FRIENDSHIP_EVENT_GROW_LEVEL]      = { 5,  3,  2},
-    [FRIENDSHIP_EVENT_VITAMIN]         = { 5,  3,  2},
-    [FRIENDSHIP_EVENT_BATTLE_ITEM]     = { 1,  1,  0},
     [FRIENDSHIP_EVENT_LEAGUE_BATTLE]   = { 3,  2,  1},
     [FRIENDSHIP_EVENT_LEARN_TMHM]      = { 1,  1,  0},
     [FRIENDSHIP_EVENT_WALKING]         = { 1,  1,  1},
@@ -3065,13 +3063,6 @@ u8 GetNatureFromPersonality(u32 personality)
 
 static u32 GetGMaxTargetSpecies(u32 species)
 {
-    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
-    u32 i;
-    for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
-    {
-        if (formChanges[i].method == FORM_CHANGE_BATTLE_GIGANTAMAX)
-            return formChanges[i].targetSpecies;
-    }
     return SPECIES_NONE;
 }
 
@@ -3296,9 +3287,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_OFENSIVA:
-                    case NATURE_OFENSIVA_ESPECIAL:
-                    case NATURE_RAPIDA:
+                    case NATURE_ATK:
+                    case NATURE_SP_ATK:
+                    case NATURE_SPEED:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }
@@ -3310,8 +3301,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_DEFENSIVA:
-                    case NATURE_DEFENSIVA_ESPECIAL:
+                    case NATURE_DEF:
+                    case NATURE_SP_DEF:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }
@@ -4133,10 +4124,9 @@ u16 GetBattleBGM(void)
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
         case SPECIES_RAYQUAZA:
-            return MUS_VS_RAYQUAZA;
         case SPECIES_KYOGRE:
         case SPECIES_GROUDON:
-            return MUS_VS_KYOGRE_GROUDON;
+            return MUS_VS_KYOGRE_GROUDON_RAYQUAZA;
         case SPECIES_REGIROCK:
         case SPECIES_REGICE:
         case SPECIES_REGISTEEL:
@@ -4232,7 +4222,7 @@ u16 GetBattleBGM(void)
         case SPECIES_GROUDON:
         case SPECIES_KYOGRE:
         case SPECIES_RAYQUAZA:
-            return MUS_VS_KYOGRE_GROUDON;
+            return MUS_VS_KYOGRE_GROUDON_RAYQUAZA;
         case SPECIES_JIRACHI:
             return MUS_VS_WILD;
         case SPECIES_DEOXYS_NORMAL:
@@ -4871,27 +4861,10 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
             {
                 switch (method)
                 {
-                case FORM_CHANGE_ITEM_HOLD:
-                    if ((heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
-                     && (ability == formChanges[i].param2 || formChanges[i].param2 == ABILITY_NONE))
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
                 case FORM_CHANGE_ITEM_USE:
                     if (arg == formChanges[i].param1)
                     {
                         bool32 pass = TRUE;
-                        switch (formChanges[i].param2)
-                        {
-                        case DAY:
-                            if (GetTimeOfDay() == TIEMPO_NOCHE)
-                                pass = FALSE;
-                            break;
-                        case NIGHT:
-                            if (GetTimeOfDay() != TIEMPO_NOCHE)
-                                pass = FALSE;
-                            break;
-                        }
-
                         if (formChanges[i].param3 != STATUS1_NONE && GetBoxMonData(boxMon, MON_DATA_STATUS, NULL) & formChanges[i].param3)
                             pass = FALSE;
 
@@ -4906,37 +4879,13 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                             targetSpecies = formChanges[i].targetSpecies;
                     }
                     break;
-                case FORM_CHANGE_MOVE:
-                    if (BoxMonKnowsMove(boxMon, formChanges[i].param1) != formChanges[i].param2)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_BEGIN_BATTLE:
                 case FORM_CHANGE_END_BATTLE:
                     if (heldItem == formChanges[i].param1 || formChanges[i].param1 == ITEM_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
                     break;
-                case FORM_CHANGE_END_BATTLE_TERRAIN:
-                    if (gBattleTerrain == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_WITHDRAW:
                 case FORM_CHANGE_FAINT:
-                case FORM_CHANGE_STATUS:
                     if (GetBoxMonData(boxMon, MON_DATA_STATUS, NULL) & formChanges[i].param1)
                         targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_TIME_OF_DAY:
-                    switch (formChanges[i].param1)
-                    {
-                    case DAY:
-                        if (GetTimeOfDay() != TIEMPO_NOCHE)
-                            targetSpecies = formChanges[i].targetSpecies;
-                        break;
-                    case NIGHT:
-                        if (GetTimeOfDay() == TIEMPO_NOCHE)
-                            targetSpecies = formChanges[i].targetSpecies;
-                        break;
-                    }
                     break;
                 }
             }
@@ -5096,7 +5045,7 @@ void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method)
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
 
     if (formChanges == NULL
-        || (method != FORM_CHANGE_BEGIN_BATTLE && method != FORM_CHANGE_END_BATTLE))
+        || (method != FORM_CHANGE_END_BATTLE))
         return;
 
     for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)

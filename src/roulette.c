@@ -3981,7 +3981,7 @@ static void SpriteCB_RollBall_TryLandAdjacent(struct Sprite *sprite)
         {
             // Ball is stuck, need Shroomish/Taillow to clear ball
             sprite->animPaused = TRUE;
-            m4aSongNumStart(SE_BALL_BOUNCE_1);
+            m4aSongNumStart(SE_BALL_BOUNCE_A);
             SetBallStuck(sprite);
         }
     }
@@ -4002,7 +4002,7 @@ static void SpriteCB_RollBall_TryLand(struct Sprite *sprite)
         // Space has already been landed on, try to fall into adjacent space
         u8 slotId;
         u32 fallRight;
-        m4aSongNumStart(SE_BALL_BOUNCE_1);
+        m4aSongNumStart(SE_BALL_BOUNCE_A);
         fallRight = Random() & 1;
         if (fallRight)
         {
@@ -4097,7 +4097,7 @@ static void SpriteCB_RollBall_Fast(struct Sprite *sprite)
     if (sRoulette->ballDistToCenter > 60.0f)
         return;
 
-    m4aSongNumStartOrChange(SE_ROULETTE_BALL2);
+    m4aSongNumStartOrChange(SE_ROULETTE_BALL_2);
     sRoulette->ballFallSpeed = -(20.0f / (f32)(sRoulette->ballTravelDistMed));
     sRoulette->ballAngleAccel = ((1.0f - sRoulette->ballAngleSpeed) / (f32)(sRoulette->ballTravelDistMed));
     sprite->animNum = 1;

@@ -81,10 +81,6 @@ enum BattleScriptBattler
     BS_ATTACKER_PARTNER,
 };
 
-// Cmd_accuracycheck
-#define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
-#define ACC_CURR_MOVE 0
-
 enum CompareOpperands
 {
     CMP_EQUAL,
@@ -174,7 +170,7 @@ enum Various
     VARIOUS_TRACE_ABILITY,
     VARIOUS_UPDATE_NICK,
     VARIOUS_TRY_ILLUSION_OFF,
-    VARIOUS_SET_SPRITEIGNORE,HP,
+    VARIOUS_SET_SPRITEIGNORE0HP,
     VARIOUS_HANDLE_FORM_CHANGE,
     VARIOUS_GET_STAT_VALUE,
     VARIOUS_JUMP_IF_FULL_HP,
@@ -257,34 +253,7 @@ enum DmgManipulated
     DMG_CURR_ATTACKER_HP,
     DMG_BIG_ROOT,
     DMG_RECOIL_FROM_IMMUNE,
-}
-
-// Cmd_jumpifcantswitch
-#define SWITCH_IGNORE_ESCAPE_PREVENTION   (1 << 7)
-
-// Cmd_statbuffchange
-#define STAT_CHANGE_ALLOW_PTR               (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
-#define STAT_CHANGE_MIRROR_ARMOR            (1 << 1)   // Stat change redirection caused by Mirror Armor ability.
-#define STAT_CHANGE_NOT_PROTECT_AFFECTED    (1 << 5)
-#define STAT_CHANGE_UPDATE_MOVE_EFFECT      (1 << 6)
-
-// stat change flags for Cmd_playstatchangeanimation
-#define STAT_CHANGE_NEGATIVE             (1 << 0)
-#define STAT_CHANGE_BY_TWO               (1 << 1)
-#define STAT_CHANGE_MULTIPLE_STATS       (1 << 2)
-#define STAT_CHANGE_CANT_PREVENT         (1 << 3)
-
-// stat flags for Cmd_playstatchangeanimation
-#define BIT_HP                      (1 << 0)
-#define BIT_ATK                     (1 << 1)
-#define BIT_DEF                     (1 << 2)
-#define BIT_SPEED                   (1 << 3)
-#define BIT_SPATK                   (1 << 4)
-#define BIT_SPDEF                   (1 << 5)
-#define BIT_ACC                     (1 << 6)
-#define BIT_EVASION                 (1 << 7)
-
-#define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
+};
 
 enum MoveEnd
 {
@@ -336,6 +305,37 @@ enum SwitchCases
     B_SWITCH_HIT,
     B_SWITCH_RED_CARD,
 };
+
+// Cmd_accuracycheck
+#define NO_ACC_CALC_CHECK_LOCK_ON 0xFFFF
+#define ACC_CURR_MOVE 0
+
+// Cmd_jumpifcantswitch
+#define SWITCH_IGNORE_ESCAPE_PREVENTION   (1 << 7)
+
+// Cmd_statbuffchange
+#define STAT_CHANGE_ALLOW_PTR               (1 << 0)   // If set, allow use of jumpptr. Set in every use of statbuffchange
+#define STAT_CHANGE_MIRROR_ARMOR            (1 << 1)   // Stat change redirection caused by Mirror Armor ability.
+#define STAT_CHANGE_NOT_PROTECT_AFFECTED    (1 << 5)
+#define STAT_CHANGE_UPDATE_MOVE_EFFECT      (1 << 6)
+
+// stat change flags for Cmd_playstatchangeanimation
+#define STAT_CHANGE_NEGATIVE             (1 << 0)
+#define STAT_CHANGE_BY_TWO               (1 << 1)
+#define STAT_CHANGE_MULTIPLE_STATS       (1 << 2)
+#define STAT_CHANGE_CANT_PREVENT         (1 << 3)
+
+// stat flags for Cmd_playstatchangeanimation
+#define BIT_HP                      (1 << 0)
+#define BIT_ATK                     (1 << 1)
+#define BIT_DEF                     (1 << 2)
+#define BIT_SPEED                   (1 << 3)
+#define BIT_SPATK                   (1 << 4)
+#define BIT_SPDEF                   (1 << 5)
+#define BIT_ACC                     (1 << 6)
+#define BIT_EVASION                 (1 << 7)
+
+#define PARTY_SCREEN_OPTIONAL (1 << 7) // Flag for first argument to openpartyscreen
 
 // Eliminar
 #define ARG_SET_PSYCHIC_TERRAIN        0

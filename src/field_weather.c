@@ -21,7 +21,7 @@
 
 #define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
-enum
+enum ColorsMap
 {
     COLOR_MAP_NONE,
     COLOR_MAP_DARK_CONTRAST,
@@ -204,8 +204,6 @@ void StartWeather(void)
     {
         u8 index = AllocSpritePalette(PALTAG_WEATHER);
         CpuCopy32(gFogPalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
-        for (i = 0; i < NUM_PALS_TOTAL; i++)
-            sBasePaletteColorMapTypes[i] = COLOR_MAP_DARK_CONTRAST;
         sPaletteColorMapTypes = sBasePaletteColorMapTypes;
         gWeatherPtr->contrastColorMapSpritePalIndex = index;
         gWeatherPtr->weatherPicSpritePalIndex = 0xFF; // defer allocation until needed
@@ -435,7 +433,7 @@ static void ApplyColorMap(u8 startPalIndex, u8 numPalettes, s8 colorMapIndex)
 {
     u16 curPalIndex;
     u16 palOffset;
-    const u8 *colorMap
+    const u8 *colorMap;
     u32 i;
 
     if (colorMapIndex > 0)
@@ -561,7 +559,7 @@ static void ApplyColorMapWithBlend(u8 startPalIndex, u8 numPalettes, s8 colorMap
         }
         else
         {
-            u8 *colorMap;
+            const u8 *colorMap;
 
             if (sPaletteColorMapTypes[curPalIndex] == COLOR_MAP_DARK_CONTRAST)
                 colorMap = sDarkenedContrastColorMaps[colorMapIndex];
