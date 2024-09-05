@@ -37,7 +37,6 @@ EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
-EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;

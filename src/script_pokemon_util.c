@@ -300,7 +300,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     struct Pokemon mon;
     u32 i;
     u8 genderRatio = gSpeciesInfo[species].genderRatio;
-    u16 targetSpecies;
 
     // check whether to use a specific nature or a random one
     if (nature >= NUM_NATURES)
