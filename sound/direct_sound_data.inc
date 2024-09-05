@@ -570,7 +570,6 @@ Cry_Golbat::
 Cry_Crobat::
 	.incbin "sound/direct_sound_samples/cries/crobat.bin"
 
-.if P_FAMILY_ODDISH == TRUE
 	.align 2
 Cry_Oddish::
 	.incbin "sound/direct_sound_samples/cries/oddish.bin"
@@ -583,14 +582,10 @@ Cry_Gloom::
 Cry_Vileplume::
 	.incbin "sound/direct_sound_samples/cries/vileplume.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Bellossom::
 	.incbin "sound/direct_sound_samples/cries/bellossom.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ODDISH
 
-.if P_FAMILY_PARAS == TRUE
 	.align 2
 Cry_Paras::
 	.incbin "sound/direct_sound_samples/cries/paras.bin"
@@ -598,19 +593,7 @@ Cry_Paras::
 	.align 2
 Cry_Parasect::
 	.incbin "sound/direct_sound_samples/cries/parasect.bin"
-.endif @ P_FAMILY_PARAS
 
-.if P_FAMILY_VENONAT == TRUE
-	.align 2
-Cry_Venonat::
-	.incbin "sound/direct_sound_samples/cries/venonat.bin"
-
-	.align 2
-Cry_Venomoth::
-	.incbin "sound/direct_sound_samples/cries/venomoth.bin"
-.endif @ P_FAMILY_VENONAT
-
-.if P_FAMILY_DIGLETT == TRUE
 	.align 2
 Cry_Diglett::
 	.incbin "sound/direct_sound_samples/cries/diglett.bin"
@@ -618,9 +601,7 @@ Cry_Diglett::
 	.align 2
 Cry_Dugtrio::
 	.incbin "sound/direct_sound_samples/cries/dugtrio.bin"
-.endif @ P_FAMILY_DIGLETT
 
-.if P_FAMILY_MEOWTH == TRUE
 	.align 2
 Cry_Meowth::
 	.incbin "sound/direct_sound_samples/cries/meowth.bin"
@@ -629,15 +610,6 @@ Cry_Meowth::
 Cry_Persian::
 	.incbin "sound/direct_sound_samples/cries/persian.bin"
 
-.if P_GALARIAN_FORMS == TRUE
-	.align 2
-Cry_Perrserker::
-	.incbin "sound/direct_sound_samples/cries/perrserker.bin"
-
-.endif @ P_GALARIAN_FORMS
-.endif @ P_FAMILY_MEOWTH
-
-.if P_FAMILY_PSYDUCK == TRUE
 	.align 2
 Cry_Psyduck::
 	.incbin "sound/direct_sound_samples/cries/psyduck.bin"
@@ -645,9 +617,7 @@ Cry_Psyduck::
 	.align 2
 Cry_Golduck::
 	.incbin "sound/direct_sound_samples/cries/golduck.bin"
-.endif @ P_FAMILY_PSYDUCK
 
-.if P_FAMILY_MANKEY == TRUE
 	.align 2
 Cry_Mankey::
 	.incbin "sound/direct_sound_samples/cries/mankey.bin"
@@ -656,14 +626,10 @@ Cry_Mankey::
 Cry_Primeape::
 	.incbin "sound/direct_sound_samples/cries/primeape.bin"
 
-.if P_GEN_9_CROSS_EVOS == TRUE
 	.align 2
 Cry_Annihilape::
 	.incbin "sound/direct_sound_samples/cries/annihilape.bin"
-.endif @ P_GEN_9_CROSS_EVOS
-.endif @ P_FAMILY_MANKEY
 
-.if P_FAMILY_GROWLITHE == TRUE
 	.align 2
 Cry_Growlithe::
 	.incbin "sound/direct_sound_samples/cries/growlithe.bin"
@@ -671,7 +637,6 @@ Cry_Growlithe::
 	.align 2
 Cry_Arcanine::
 	.incbin "sound/direct_sound_samples/cries/arcanine.bin"
-.endif @ P_FAMILY_GROWLITHE
 
 .if P_FAMILY_POLIWAG == TRUE
 	.align 2

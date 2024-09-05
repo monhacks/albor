@@ -662,44 +662,6 @@ static const union AnimCmd sAnim_Parasect_1[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_Venonat_1[] =
-{
-    ANIMCMD_FRAME(1, 5),
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_FRAME(1, 5),
-    ANIMCMD_FRAME(0, 35),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Venomoth_1[] =
-{
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_FRAME(1, 4),
-    ANIMCMD_FRAME(0, 4),
-    ANIMCMD_END,
-};
-
 static const union AnimCmd sAnim_Diglett_1[] =
 {
     ANIMCMD_FRAME(0, 25),
@@ -9893,8 +9855,6 @@ SINGLE_ANIMATION(Vileplume);
 SINGLE_ANIMATION(Bellossom);
 SINGLE_ANIMATION(Paras);
 SINGLE_ANIMATION(Parasect);
-SINGLE_ANIMATION(Venonat);
-SINGLE_ANIMATION(Venomoth);
 SINGLE_ANIMATION(Diglett);
 SINGLE_ANIMATION(Dugtrio);
 SINGLE_ANIMATION(Meowth);

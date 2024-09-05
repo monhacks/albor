@@ -46,48 +46,23 @@ gCryTable::
 	cry Cry_Zubat
 	cry Cry_Golbat
 	cry Cry_Crobat
-.if P_FAMILY_ODDISH == TRUE
 	cry Cry_Oddish
 	cry Cry_Gloom
 	cry Cry_Vileplume
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Bellossom
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ODDISH
-.if P_FAMILY_PARAS == TRUE
 	cry Cry_Paras
 	cry Cry_Parasect
-.endif @ P_FAMILY_PARAS
-.if P_FAMILY_VENONAT == TRUE
-	cry Cry_Venonat
-	cry Cry_Venomoth
-.endif @ P_FAMILY_VENONAT
-.if P_FAMILY_DIGLETT == TRUE
 	cry Cry_Diglett
 	cry Cry_Dugtrio
-.endif @ P_FAMILY_DIGLETT
-.if P_FAMILY_MEOWTH == TRUE
 	cry Cry_Meowth
 	cry Cry_Persian
-.if P_GALARIAN_FORMS == TRUE
-	cry Cry_Perrserker
-.endif @ P_GALARIAN_FORMS
-.endif @ P_FAMILY_MEOWTH
-.if P_FAMILY_PSYDUCK == TRUE
 	cry Cry_Psyduck
 	cry Cry_Golduck
-.endif @ P_FAMILY_PSYDUCK
-.if P_FAMILY_MANKEY == TRUE
 	cry Cry_Mankey
 	cry Cry_Primeape
-.if P_GEN_9_CROSS_EVOS == TRUE
 	cry Cry_Annihilape
-.endif @ P_GEN_9_CROSS_EVOS
-.endif @ P_FAMILY_MANKEY
-.if P_FAMILY_GROWLITHE == TRUE
 	cry Cry_Growlithe
 	cry Cry_Arcanine
-.endif @ P_FAMILY_GROWLITHE
 .if P_FAMILY_POLIWAG == TRUE
 	cry Cry_Poliwag
 	cry Cry_Poliwhirl

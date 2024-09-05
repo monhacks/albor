@@ -10,10 +10,8 @@ void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 extern u32 gWindowTileAutoAllocEnabled;
 
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
-EWRAM_DATA static struct Window* sWindowPtr = NULL;
 
 static u32 GetNumActiveWindowsOnBg(u32 bgId);
-
 static const struct WindowTemplate sDummyWindowTemplate = DUMMY_WIN_TEMPLATE;
 
 static void DummyWindowBgTilemap(void)

@@ -224,13 +224,6 @@ static const struct SpriteFrameImage sPicTable_Parasect[] = {
     overworld_ascending_frames(gObjectEventPic_Parasect, 4, 4),
 };
 
-static const struct SpriteFrameImage sPicTable_Venonat[] = {
-    overworld_ascending_frames(gObjectEventPic_Venonat, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Venomoth[] = {
-    overworld_ascending_frames(gObjectEventPic_Venomoth, 4, 4),
-};
-
 static const struct SpriteFrameImage sPicTable_Diglett[] = {
     overworld_ascending_frames(gObjectEventPic_Diglett, 4, 4),
 };
@@ -258,36 +251,28 @@ static const struct SpriteFrameImage sPicTable_Golduck[] = {
     overworld_ascending_frames(gObjectEventPic_Golduck, 4, 4),
 };
 
-#if P_FAMILY_MANKEY
 static const struct SpriteFrameImage sPicTable_Mankey[] = {
     overworld_ascending_frames(gObjectEventPic_Mankey, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Primeape[] = {
     overworld_ascending_frames(gObjectEventPic_Primeape, 4, 4),
 };
-#if P_GEN_9_CROSS_EVOS
 static const struct SpriteFrameImage sPicTable_Annihilape[] = {
     overworld_ascending_frames(gObjectEventPic_Annihilape, 4, 4),
 };
-#endif //P_GEN_9_CROSS_EVOS
-#endif //P_FAMILY_MANKEY
 
-#if P_FAMILY_GROWLITHE
 static const struct SpriteFrameImage sPicTable_Growlithe[] = {
     overworld_ascending_frames(gObjectEventPic_Growlithe, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Arcanine[] = {
     overworld_ascending_frames(gObjectEventPic_Arcanine, 4, 4),
 };
-#if P_HISUIAN_FORMS
 static const struct SpriteFrameImage sPicTable_GrowlitheHisuian[] = {
     overworld_ascending_frames(gObjectEventPic_GrowlitheHisuian, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_ArcanineHisuian[] = {
     overworld_ascending_frames(gObjectEventPic_ArcanineHisuian, 4, 4),
 };
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_GROWLITHE
 
 #if P_FAMILY_POLIWAG
 static const struct SpriteFrameImage sPicTable_Poliwag[] = {

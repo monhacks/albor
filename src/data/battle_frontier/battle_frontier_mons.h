@@ -561,7 +561,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_SPEED
     },
     [FRONTIER_MON_VENONAT] = {
-        .species = SPECIES_VENONAT,
+        .species = SPECIES_MEW,
         .moves = {MOVE_PSYBEAM, MOVE_SUPERSONIC, MOVE_STUN_SPORE, MOVE_SKILL_SWAP},
         .heldItem = ITEM_SITRUS_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
@@ -1583,7 +1583,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_VENOMOTH_1] = {
-        .species = SPECIES_VENOMOTH,
+        .species = SPECIES_PARASECT,
         .moves = {MOVE_SILVER_WIND, MOVE_PSYBEAM, MOVE_SLEEP_POWDER, MOVE_SKILL_SWAP},
         .heldItem = ITEM_PERSIM_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 0, 0),
@@ -2318,7 +2318,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_VENOMOTH_2] = {
-        .species = SPECIES_VENOMOTH,
+        .species = SPECIES_PARASECT,
         .moves = {MOVE_SIGNAL_BEAM, MOVE_PSYCHIC, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN},
         .heldItem = ITEM_LUM_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 0, 0),

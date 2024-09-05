@@ -3093,107 +3093,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggMoveLearnset = sParasEggMoveLearnset,
     },
 
-    [SPECIES_VENONAT] =
-    {
-        .baseHP        = 60,
-        .baseAttack    = 40,
-        .baseDefense   = 50,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 55,
-        .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
-        .catchRate = 190,
-        .expYield = 61,
-        .evYield_SpDefense = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_ARTES_OSCURAS},
-        .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Venonat"),
-        .cryId = CRY_VENONAT,
-        .natDexNum = NATIONAL_DEX_VENONAT,
-        .categoryName = _("Insect"),
-        .height = 10,
-        .weight = 300,
-        .description = COMPOUND_STRING(
-            "Its coat of thin, stiff hair that covers\n"
-            "its entire body is said to have evolved\n"
-            "for protection. Its large eyes never fail\n"
-            "to spot even miniscule prey."),
-        .pokemonScale = 360,
-        .itemRare = ITEM_SILVER_POWDER,
-        .pokemonOffset = 0,
-        .trainerScale = 256,
-        .trainerOffset = -1,
-        FRONT_PIC(Venonat, 40, 56),
-        .frontPicYOffset = 8,
-        .frontAnimFrames = sAnims_Venonat,
-        .frontAnimId = ANIM_V_JUMPS_H_JUMPS,
-        .frontAnimDelay = 20,
-        BACK_PIC(Venonat, 64, 56),
-        .backPicYOffset = 5,
-        .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Venonat),
-        ICON(Venonat),
-        FOLLOWER(Venonat, TRACKS_FOOT)
-        LEARNSETS(Venonat),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_VENOMOTH}),
-        .eggMoveLearnset = sVenonatEggMoveLearnset,
-    },
-
-    [SPECIES_VENOMOTH] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 40,
-        .baseDefense   = 60,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 120,
-        .types = MON_TYPES(TYPE_BUG, TYPE_POISON),
-        .catchRate = 75,
-        .expYield = 158,
-        .evYield_SpDefense = 2,
-        .itemRare = ITEM_SILVER_POWDER,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_SHIELD_DUST, ABILITY_TINTED_LENS, ABILITY_ARTES_OSCURAS},
-        .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Venomoth"),
-        .cryId = CRY_VENOMOTH,
-        .natDexNum = NATIONAL_DEX_VENOMOTH,
-        .categoryName = _("Poison Moth"),
-        .height = 15,
-        .weight = 125,
-        .description = COMPOUND_STRING(
-            "Venomoth are nocturnal--they are only\n"
-            "active at night. Their favorite prey are\n"
-            "insects that gather around streetlights,\n"
-            "attracted by the light in the darkness."),
-        .pokemonScale = 285,
-        .pokemonOffset = 2,
-        .trainerScale = 256,
-        .trainerOffset = 1,
-        FRONT_PIC(Venomoth, 64, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_Venomoth,
-        .frontAnimId = ANIM_ZIGZAG_SLOW,
-        .enemyMonElevation = 16,
-        BACK_PIC(Venomoth, 64, 56),
-        .backPicYOffset = 4,
-        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Venomoth),
-        ICON(Venomoth),
-        FOLLOWER(Venomoth, TRACKS_FOOT)
-        LEARNSETS(Venomoth),
-        .eggMoveLearnset = sVenonatEggMoveLearnset,
-    },
-
     [SPECIES_DIGLETT] =
     {
         .catchRate = 255,
@@ -14377,7 +14276,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Treecko),
         ICON(Treecko),
-        FOOTPRINT(Treecko)
         FOLLOWER(Treecko, TRACKS_FOOT)
         LEARNSETS(Treecko),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_GROVYLE}),
@@ -14426,7 +14324,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
         PALETTES(Grovyle),
         ICON(Grovyle),
-        FOOTPRINT(Grovyle)
         FOLLOWER(Grovyle, TRACKS_FOOT)
         LEARNSETS(Grovyle),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SCEPTILE}),
@@ -14444,7 +14341,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Sceptile"),                                   \
         .natDexNum = NATIONAL_DEX_SCEPTILE,                             \
         .categoryName = _("Forest"),                                    \
-        FOOTPRINT(Sceptile)                                             \
         LEARNSETS(Sceptile)
 
     [SPECIES_SCEPTILE] =
@@ -14535,7 +14431,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
         PALETTES(Torchic),
         ICON(Torchic),
-        FOOTPRINT(Torchic)
         FOLLOWER(Torchic, TRACKS_FOOT)
         LEARNSETS(Torchic),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_COMBUSKEN}),
@@ -44493,7 +44388,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Dragapult),
         ICON(Dragapult),
-        FOOTPRINT(Dragapult)
         FOLLOWER(Dragapult, TRACKS_FOOT)
         LEARNSETS(Dragapult),
     },
@@ -44544,7 +44438,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Regieleki),
         ICON(Regieleki),
-        FOOTPRINT(Regieleki)
         FOLLOWER(Regieleki, TRACKS_FOOT)
         LEARNSETS(Regieleki),
         .isLegendary = TRUE,
@@ -44597,7 +44490,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Regidrago),
         ICON(Regidrago),
-        FOOTPRINT(Regidrago)
         FOLLOWER(Regidrago, TRACKS_FOOT)
         LEARNSETS(Regidrago),
     },
@@ -44648,7 +44540,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Glimmet),
         ICON(Glimmet),
-        //FOOTPRINT(Glimmet)
         LEARNSETS(Glimmet),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_GLIMMORA}),
     },
@@ -44697,7 +44588,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Glimmora),
         ICON(Glimmora),
-        //FOOTPRINT(Glimmora)
         LEARNSETS(Glimmora),
     },
 #endif //P_FAMILY_GLIMMET
@@ -44746,7 +44636,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Greavard),
         ICON(Greavard),
-        //FOOTPRINT(Greavard)
         LEARNSETS(Greavard),
         .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_HOUNDSTONE}),
     },
@@ -44794,7 +44683,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(Houndstone),
         ICON(Houndstone),
-        //FOOTPRINT(Houndstone)
         LEARNSETS(Houndstone),
     },
 #endif //P_FAMILY_GREAVARD
