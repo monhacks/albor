@@ -3868,23 +3868,6 @@ Cry_LandorusTherian::
 	.incbin "sound/direct_sound_samples/cries/landorus_therian.bin"
 .endif @ P_FAMILY_LANDORUS
 
-.if P_FAMILY_KYUREM == TRUE
-	.align 2
-Cry_Kyurem::
-	.incbin "sound/direct_sound_samples/cries/kyurem.bin"
-
-.if P_FUSION_FORMS == TRUE
-	.align 2
-Cry_KyuremWhite::
-	.incbin "sound/direct_sound_samples/cries/kyurem_white.bin"
-
-	.align 2
-Cry_KyuremBlack::
-	.incbin "sound/direct_sound_samples/cries/kyurem_black.bin"
-
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_KYUREM
-
 .if P_FAMILY_KELDEO == TRUE
 	.align 2
 Cry_Keldeo::
@@ -4701,29 +4684,6 @@ Cry_Guzzlord::
 	.incbin "sound/direct_sound_samples/cries/guzzlord.bin"
 .endif @ P_FAMILY_GUZZLORD
 
-.if P_FAMILY_NECROZMA == TRUE
-	.align 2
-Cry_Necrozma::
-	.incbin "sound/direct_sound_samples/cries/necrozma.bin"
-
-.if P_FUSION_FORMS == TRUE
-	.align 2
-Cry_NecrozmaDuskMane::
-	.incbin "sound/direct_sound_samples/cries/necrozma_dusk_mane.bin"
-
-	.align 2
-Cry_NecrozmaDawnWings::
-	.incbin "sound/direct_sound_samples/cries/necrozma_dawn_wings.bin"
-
-.if P_ULTRA_BURST_FORMS == TRUE
-	.align 2
-Cry_NecrozmaUltra::
-	.incbin "sound/direct_sound_samples/cries/necrozma_ultra.bin"
-
-.endif @ P_ULTRA_BURST_FORMS
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_NECROZMA
-
 .if P_FAMILY_MAGEARNA == TRUE
 	.align 2
 Cry_Magearna::
@@ -5239,23 +5199,6 @@ Cry_Glastrier::
 Cry_Spectrier::
 	.incbin "sound/direct_sound_samples/cries/spectrier.bin"
 .endif @ P_FAMILY_SPECTRIER
-
-.if P_FAMILY_CALYREX == TRUE
-	.align 2
-Cry_Calyrex::
-	.incbin "sound/direct_sound_samples/cries/calyrex.bin"
-
-.if P_FUSION_FORMS == TRUE
-	.align 2
-Cry_CalyrexIceRider::
-	.incbin "sound/direct_sound_samples/cries/calyrex_ice_rider.bin"
-
-	.align 2
-Cry_CalyrexShadowRider::
-	.incbin "sound/direct_sound_samples/cries/calyrex_shadow_rider.bin"
-
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_CALYREX
 
 .if P_FAMILY_ENAMORUS == TRUE
 	.align 2

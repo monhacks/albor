@@ -622,15 +622,9 @@ enum NationalDexOrder
     NATIONAL_DEX_REGIELEKI,
     NATIONAL_DEX_REGIDRAGO,
     NATIONAL_DEX_REGIGIGAS,
+
     NATIONAL_DEX_COUNT
 };
-
-#define DECAGRAMS_IN_POUND             4536
-#define CM_PER_INCH                    2.54
-#define CM_PER_INCH_FACTOR             (CM_PER_INCH * 100)
-#define INCHES_IN_FOOT                 12
-#define INCHES_IN_ONE_AND_HALF_FOOT    (INCHES_IN_FOOT * 1.5)
-#define INCHES_IN_FOOT_FACTOR          (INCHES_IN_FOOT * 10)
 
 #define WEIGHT_HEIGHT_STR_LEN          16
 #define WEIGHT_HEIGHT_STR_MEM          (WEIGHT_HEIGHT_STR_LEN * sizeof(u8))

@@ -7738,35 +7738,6 @@ static const union AnimCmd sAnim_LandorusTherian_1[] =
 };
 #endif //P_FAMILY_LANDORUS
 
-#if P_FAMILY_KYUREM
-static const union AnimCmd sAnim_Kyurem_1[] =
-{
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-#if P_FUSION_FORMS
-static const union AnimCmd sAnim_KyuremWhite_1[] =
-{
-    ANIMCMD_FRAME(1, 40),
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END,
-};
-#endif //P_FUSION_FORMS
-
-#if P_FUSION_FORMS
-static const union AnimCmd sAnim_KyuremBlack_1[] =
-{
-    ANIMCMD_FRAME(1, 40),
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END,
-};
-#endif //P_FUSION_FORMS
-#endif //P_FAMILY_KYUREM
-
 #if P_FAMILY_KELDEO
 static const union AnimCmd sAnim_KeldeoOrdinary_1[] =
 {
@@ -11258,13 +11229,6 @@ SINGLE_ANIMATION(Zekrom);
 SINGLE_ANIMATION(LandorusIncarnate);
 SINGLE_ANIMATION(LandorusTherian);
 #endif //P_FAMILY_LANDORUS
-#if P_FAMILY_KYUREM
-SINGLE_ANIMATION(Kyurem);
-#if P_FUSION_FORMS
-SINGLE_ANIMATION(KyuremWhite);
-SINGLE_ANIMATION(KyuremBlack);
-#endif //P_FUSION_FORMS
-#endif //P_FAMILY_KYUREM
 #if P_FAMILY_KELDEO
 SINGLE_ANIMATION(KeldeoOrdinary);
 SINGLE_ANIMATION(KeldeoResolute);

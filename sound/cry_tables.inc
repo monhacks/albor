@@ -1489,13 +1489,6 @@ gCryTable::
 	cry Cry_LandorusIncarnate
 	cry Cry_LandorusTherian
 .endif @ P_FAMILY_LANDORUS
-.if P_FAMILY_KYUREM == TRUE
-	cry Cry_Kyurem
-.if P_FUSION_FORMS == TRUE
-	cry Cry_KyuremWhite
-	cry Cry_KyuremBlack
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_KYUREM
 .if P_FAMILY_KELDEO == TRUE
 	cry Cry_Keldeo
 .endif @ P_FAMILY_KELDEO
@@ -1829,16 +1822,6 @@ gCryTable::
 .if P_FAMILY_GUZZLORD == TRUE
 	cry Cry_Guzzlord
 .endif @ P_FAMILY_GUZZLORD
-.if P_FAMILY_NECROZMA == TRUE
-	cry Cry_Necrozma
-.if P_FUSION_FORMS == TRUE
-	cry Cry_NecrozmaDuskMane
-	cry Cry_NecrozmaDawnWings
-.if P_ULTRA_BURST_FORMS == TRUE
-	cry Cry_NecrozmaUltra
-.endif @ P_ULTRA_BURST_FORMS
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_NECROZMA
 .if P_FAMILY_MAGEARNA == TRUE
 	cry Cry_Magearna
 .endif @ P_FAMILY_MAGEARNA
@@ -2051,13 +2034,6 @@ gCryTable::
 .if P_FAMILY_SPECTRIER == TRUE
 	cry Cry_Spectrier
 .endif @ P_FAMILY_SPECTRIER
-.if P_FAMILY_CALYREX == TRUE
-	cry Cry_Calyrex
-.if P_FUSION_FORMS == TRUE
-	cry Cry_CalyrexIceRider
-	cry Cry_CalyrexShadowRider
-.endif @ P_FUSION_FORMS
-.endif @ P_FAMILY_CALYREX
 .if P_FAMILY_ENAMORUS == TRUE
 	cry Cry_EnamorusIncarnate
 	cry Cry_EnamorusTherian

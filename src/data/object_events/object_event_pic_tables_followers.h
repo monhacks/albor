@@ -3218,67 +3218,6 @@ static const struct SpriteFrameImage sPicTable_Zekrom[] = {
 };
 #endif //P_FAMILY_ZEKROM
 
-#if P_FAMILY_LANDORUS
-
-static const struct SpriteFrameImage sPicTable_LandorusIncarnate[] = {
-    overworld_ascending_frames(gObjectEventPic_LandorusIncarnate, 4, 4),
-};
-/*static const struct SpriteFrameImage sPicTable_LandorusTherian[] = {
-    overworld_ascending_frames(gObjectEventPic_LandorusTherian, 4, 4),
-};*/
-#endif //P_FAMILY_LANDORUS
-
-#if P_FAMILY_ENAMORUS
-static const struct SpriteFrameImage sPicTable_EnamorusIncarnate[] = {
-    overworld_ascending_frames(gObjectEventPic_EnamorusIncarnate, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_EnamorusTherian[] = {
-    overworld_ascending_frames(gObjectEventPic_EnamorusTherian, 4, 4),
-};
-#endif //P_FAMILY_ENAMORUS
-
-#if P_FAMILY_KYUREM
-static const struct SpriteFrameImage sPicTable_Kyurem[] = {
-    overworld_ascending_frames(gObjectEventPic_Kyurem, 4, 4),
-};
-#if P_FUSION_FORMS
-/*static const struct SpriteFrameImage sPicTable_KyuremWhite[] = {
-    overworld_ascending_frames(gObjectEventPic_KyuremWhite, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_KyuremBlack[] = {
-    overworld_ascending_frames(gObjectEventPic_KyuremBlack, 4, 4),
-};*/
-#endif //P_FUSION_FORMS
-#endif //P_FAMILY_KYUREM
-
-#if P_FAMILY_KELDEO
-static const struct SpriteFrameImage sPicTable_KeldeoOrdinary[] = {
-    overworld_ascending_frames(gObjectEventPic_KeldeoOrdinary, 4, 4),
-};
-/*static const struct SpriteFrameImage sPicTable_KeldeoResolute[] = {
-    overworld_ascending_frames(gObjectEventPic_KeldeoResolute, 4, 4),
-};*/
-#endif //P_FAMILY_KELDEO
-
-#if P_FAMILY_MELOETTA
-static const struct SpriteFrameImage sPicTable_MeloettaAria[] = {
-    overworld_ascending_frames(gObjectEventPic_MeloettaAria, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_MeloettaPirouette[] = {
-    overworld_ascending_frames(gObjectEventPic_MeloettaPirouette, 4, 4),
-};
-#endif //P_FAMILY_MELOETTA
-
-#if P_FAMILY_GENESECT
-static const struct SpriteFrameImage sPicTable_Genesect[] = {
-    overworld_ascending_frames(gObjectEventPic_Genesect, 4, 4),
-};
-
-
-
-
-#endif //P_FAMILY_GENESECT
-
 #if P_FAMILY_CHESPIN
 static const struct SpriteFrameImage sPicTable_Chespin[] = {
     overworld_ascending_frames(gObjectEventPic_Chespin, 4, 4),
@@ -4190,26 +4129,6 @@ static const struct SpriteFrameImage sPicTable_Guzzlord[] = {
     overworld_ascending_frames(gObjectEventPic_Guzzlord, 4, 4),
 };
 #endif //P_FAMILY_GUZZLORD
-
-#if P_FAMILY_NECROZMA
-static const struct SpriteFrameImage sPicTable_Necrozma[] = {
-    overworld_ascending_frames(gObjectEventPic_Necrozma, 4, 4),
-};
-#if P_FUSION_FORMS
-
-static const struct SpriteFrameImage sPicTable_NecrozmaDuskMane[] = {
-    overworld_ascending_frames(gObjectEventPic_NecrozmaDuskMane, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_NecrozmaDawnWings[] = {
-    overworld_ascending_frames(gObjectEventPic_NecrozmaDawnWings, 4, 4),
-};
-#if P_ULTRA_BURST_FORMS
-/*static const struct SpriteFrameImage sPicTable_NecrozmaUltra[] = {
-    overworld_ascending_frames(gObjectEventPic_NecrozmaUltra, 4, 4),
-};*/
-#endif //P_ULTRA_BURST_FORMS
-#endif //P_FUSION_FORMS
-#endif //P_FAMILY_NECROZMA
 
 #if P_FAMILY_MAGEARNA
 static const struct SpriteFrameImage sPicTable_Magearna[] = {
