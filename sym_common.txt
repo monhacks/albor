@@ -6,9 +6,6 @@ gWindowTileAutoAllocEnabled:
 	.space 4
     @ ../gflib/window.o
 	.align 4
-gTransparentTileNumber:
-	.space 1
-	.align 4
 gWindowBgTilemapBuffers:
 	.space 16
     @ ../gflib/text.o

@@ -4,8 +4,6 @@
 #include "bg.h"
 #include "blit.h"
 
-// This global is set to 0 and never changed.
-u8 gTransparentTileNumber;
 void *gWindowBgTilemapBuffers[NUM_BACKGROUNDS];
 extern u32 gWindowTileAutoAllocEnabled;
 
@@ -98,7 +96,6 @@ bool32 InitWindows(const struct WindowTemplate *templates)
         }
     }
 
-    gTransparentTileNumber = 0;
     return TRUE;
 }
 
@@ -356,7 +353,7 @@ void ClearWindowTilemap(u32 windowId)
 
     FillBgTilemapBufferRect(
         windowLocal.window.bg,
-        gTransparentTileNumber,
+        0,
         windowLocal.window.tilemapLeft,
         windowLocal.window.tilemapTop,
         windowLocal.window.width,
