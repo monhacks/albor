@@ -298,7 +298,7 @@ static void SetContestMoveTypeIcons(void);
 static void SetNewMoveTypeIcon(void);
 static void SwapMovesTypeSprites(u8, u8);
 static u8 LoadMonGfxAndSprite(struct Pokemon *, s16 *);
-static u8 CreateMonSprite(struct Pokemon *);
+static u8 CreateMonSprite(void);
 static void SpriteCB_Pokemon(struct Sprite *);
 static void StopPokemonAnimations(void);
 static void CreateCaughtBallSprite(struct Pokemon *);
@@ -3889,7 +3889,7 @@ static u8 LoadMonGfxAndSprite(struct Pokemon *mon, s16 *state)
     switch (*state)
     {
     default:
-        return CreateMonSprite(mon);
+        return CreateMonSprite();
     case 0:
         if (gMain.inBattle)
         {
@@ -3947,7 +3947,7 @@ static void PlayMonCry(void)
     }
 }
 
-static u8 CreateMonSprite(struct Pokemon *unused)
+static u8 CreateMonSprite(void)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     u8 spriteId = CreateSprite(&gMultiuseSpriteTemplate, 40, 64, 5);

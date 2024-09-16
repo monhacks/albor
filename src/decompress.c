@@ -94,16 +94,6 @@ void LoadCompressedSpritePalette(const struct CompressedSpritePalette *src)
     LoadSpritePalette(&dest);
 }
 
-void LoadCompressedSpritePaletteHueShifted(const struct CompressedSpritePalette *src, struct BoxPokemon *boxMon)
-{
-    struct SpritePalette dest;
-
-    LZ77UnCompWram(src->data, gDecompressionBuffer);
-    dest.data = (void *) gDecompressionBuffer;
-    dest.tag = src->tag;
-    LoadUniqueSpritePalette(&dest, boxMon);
-}
-
 void LoadCompressedSpritePaletteWithTag(const u32 *pal, u16 tag)
 {
     struct SpritePalette dest;

@@ -1546,8 +1546,6 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
-    // Note that the shiny palette tag is `species + SPECIES_SHINY_TAG`, which must be increased with more pokemon
-    // so that palette tags do not overlap
     const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //¿Qué pasa si es hembra?
     struct Pokemon *mon = GetFirstLiveMon();
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
@@ -1560,7 +1558,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         {
             LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
         }
-        paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
+        paletteNum = IndexOfSpritePaletteTag(species);
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     }
     return paletteNum;
@@ -2468,7 +2466,12 @@ static void SetBerryTreeGraphicsById(struct ObjectEvent *objectEvent, u8 berryId
     const u16 graphicsId = gBerryTreeObjectEventGraphicsIdTable[berryStage];
     const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
-    UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteSlotTablePointers[berryId][berryStage]-2], sprite);
+    if (berryStage == 0) //Arena
+        UpdateSpritePalette(&sObjectEventSpritePalettes[1], sprite); //OBJ_EVENT_PAL_TAG_NPC_2
+     else if (berryStage == 1) //Ha florecido
+        UpdateSpritePalette(&sObjectEventSpritePalettes[2], sprite); //OBJ_EVENT_PAL_TAG_NPC_3
+     else
+        UpdateSpritePalette(&sObjectEventSpritePalettes[gBerryTreePaletteTagTable[berryId]], sprite);
     sprite->oam.shape = graphicsInfo->oam->shape;
     sprite->oam.size = graphicsInfo->oam->size;
     sprite->images = gBerryTreePicTablePointers[berryId];

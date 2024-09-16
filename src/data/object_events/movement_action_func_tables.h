@@ -197,10 +197,6 @@ u8 MovementAction_AcroEndWheelieFaceDown_Step0(struct ObjectEvent *, struct Spri
 u8 MovementAction_AcroEndWheelieFaceUp_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_AcroEndWheelieFaceLeft_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_AcroEndWheelieFaceRight_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_UnusedAcroActionDown_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_UnusedAcroActionUp_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_UnusedAcroActionLeft_Step0(struct ObjectEvent *, struct Sprite *);
-u8 MovementAction_UnusedAcroActionRight_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_Figure8_Step0(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_Figure8_Step1(struct ObjectEvent *, struct Sprite *);
 u8 MovementAction_AcroWheelieHopFaceDown_Step0(struct ObjectEvent *, struct Sprite *);
