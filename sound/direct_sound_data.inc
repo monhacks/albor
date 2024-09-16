@@ -638,7 +638,6 @@ Cry_Growlithe::
 Cry_Arcanine::
 	.incbin "sound/direct_sound_samples/cries/arcanine.bin"
 
-.if P_FAMILY_POLIWAG == TRUE
 	.align 2
 Cry_Poliwag::
 	.incbin "sound/direct_sound_samples/cries/poliwag.bin"
@@ -651,12 +650,9 @@ Cry_Poliwhirl::
 Cry_Poliwrath::
 	.incbin "sound/direct_sound_samples/cries/poliwrath.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Politoed::
 	.incbin "sound/direct_sound_samples/cries/politoed.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_POLIWAG
 
 .if P_FAMILY_ABRA == TRUE
 	.align 2

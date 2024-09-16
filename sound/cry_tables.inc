@@ -63,14 +63,10 @@ gCryTable::
 	cry Cry_Annihilape
 	cry Cry_Growlithe
 	cry Cry_Arcanine
-.if P_FAMILY_POLIWAG == TRUE
 	cry Cry_Poliwag
 	cry Cry_Poliwhirl
 	cry Cry_Poliwrath
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Politoed
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_POLIWAG
 .if P_FAMILY_ABRA == TRUE
 	cry Cry_Abra
 	cry Cry_Kadabra

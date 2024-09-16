@@ -274,7 +274,6 @@ static const struct SpriteFrameImage sPicTable_ArcanineHisuian[] = {
     overworld_ascending_frames(gObjectEventPic_ArcanineHisuian, 4, 4),
 };
 
-#if P_FAMILY_POLIWAG
 static const struct SpriteFrameImage sPicTable_Poliwag[] = {
     overworld_ascending_frames(gObjectEventPic_Poliwag, 4, 4),
 };
@@ -284,13 +283,9 @@ static const struct SpriteFrameImage sPicTable_Poliwhirl[] = {
 static const struct SpriteFrameImage sPicTable_Poliwrath[] = {
     overworld_ascending_frames(gObjectEventPic_Poliwrath, 4, 4),
 };
-#if P_GEN_2_CROSS_EVOS
 static const struct SpriteFrameImage sPicTable_Politoed[] = {
     overworld_ascending_frames(gObjectEventPic_Politoed, 4, 4),
 };
-
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_POLIWAG
 
 static const struct SpriteFrameImage sPicTable_Abra[] = {
     overworld_ascending_frames(gObjectEventPic_Abra, 4, 4),

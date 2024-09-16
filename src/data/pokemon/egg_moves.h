@@ -112,24 +112,9 @@ static const u16 sGrowlitheHisuianEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_POLIWAG
 static const u16 sPoliwagEggMoveLearnset[] = {
-    MOVE_MIST,
-    MOVE_SPLASH,
-    MOVE_BUBBLE_BEAM,
-    MOVE_HAZE,
-    MOVE_MIND_READER,
-    MOVE_WATER_SPORT,
-    MOVE_ICE_BALL,
-    MOVE_MUD_SHOT,
-    MOVE_REFRESH,
-    MOVE_ENDEAVOR,
-    MOVE_ENCORE,
-    MOVE_ENDURE,
-    MOVE_WATER_PULSE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_POLIWAG
 
 #if P_FAMILY_ABRA
 static const u16 sAbraEggMoveLearnset[] = {
