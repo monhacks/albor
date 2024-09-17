@@ -4478,13 +4478,11 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
     DestroySprite(sprite);
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: General box
 //
 //  Some basic box functions, including initializing the box and scrolling.
 //------------------------------------------------------------------------------
-
 
 #define tState  data[0]
 #define tBoxId  data[2]
