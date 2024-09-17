@@ -10909,7 +10909,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETTES(Togekiss),
         ICON(Togekiss),
-        FOLLOWER(Togekiss, TRACKS_FOOT, sAnimTable_Following_Asym)
+        FOLLOWER(Togekiss, TRACKS_NONE, sAnimTable_Following_Asym)
         LEARNSETS(Togekiss),
     },
 

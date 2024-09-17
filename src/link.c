@@ -54,7 +54,6 @@ static struct BlockTransfer sBlockSend;
 static u32 sBlockSendDelayCounter;
 static u32 sPlayerDataExchangeStatus;
 static u8 sNumVBlanksWithoutSerialIntr;
-static bool8 sSendBufferEmpty;
 static u16 sSendNonzeroCheck;
 static u16 sRecvNonzeroCheck;
 static u8 sChecksumAvailable;

@@ -12,6 +12,7 @@
 #include "main_menu.h"
 #include "palette.h"
 #include "reset_rtc_screen.h"
+#include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "scanline_effect.h"

@@ -182,12 +182,6 @@ enum {
 #define BOXID_CANCELED    201
 
 enum {
-    PALTAG_MON_ICON_0 = POKE_ICON_BASE_PAL_TAG,
-    PALTAG_MON_ICON_1, // Used implicitly in CreateMonIconSprite
-    PALTAG_MON_ICON_2, // Used implicitly in CreateMonIconSprite
-    PALTAG_MON_ICON_3, // Used implicitly in CreateMonIconSprite
-    PALTAG_MON_ICON_4, // Used implicitly in CreateMonIconSprite
-    PALTAG_MON_ICON_5, // Used implicitly in CreateMonIconSprite
     PALTAG_DISPLAY_MON,
     PALTAG_MISC,
     PALTAG_BOX_TITLE,
@@ -308,7 +302,7 @@ struct PokemonStorageSystemData
     s16 newCurrBoxId;
     s16 scrollSpeed;
     u16 scrollTimer;
-    u8 ALIGNED(4) boxTitleTiles[1024];
+    u8 ALIGNED(2) boxTitleTiles[1024];
     u8 boxTitleCycleId;
     u16 boxTitlePal[16];
     u16 boxTitlePalOffset;
@@ -885,7 +879,7 @@ static const struct OamData sOamData_MonIcon;
 static const struct SpriteTemplate sSpriteTemplate_MonIcon =
 {
     .tileTag = GFXTAG_MON_ICON,
-    .paletteTag = PALTAG_MON_ICON_0,
+    .paletteTag = POKE_ICON_BASE_PAL_TAG,
     .oam = &sOamData_MonIcon,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
@@ -968,13 +962,10 @@ static const struct SpriteTemplate sSpriteTemplate_BoxTitle =
 static const u16 ALIGNED(4) sHandCursor_Pal[] = INCBIN_U16("graphics/pokemon_storage/hand_cursor.gbapal");
 static const u8 sHandCursor_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cursor.4bpp");
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Misc utility
 //------------------------------------------------------------------------------
-
-
-void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer)
+void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, s32 bytesToBuffer)
 {
     s32 i, tileBytesToBuffer;
     u16 windowId;
@@ -985,14 +976,11 @@ void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero
     winTemplate.width = 24;
     winTemplate.height = 2;
     windowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(windowId, PIXEL_FILL(zero2));
+    FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     tileData1 = (u8 *) GetWindowAttribute(windowId, WINDOW_TILE_DATA);
     tileData2 = (winTemplate.width * TILE_SIZE_4BPP) + tileData1;
 
-    if (!zero1)
-        txtColor[0] = TEXT_COLOR_TRANSPARENT;
-    else
-        txtColor[0] = zero2;
+    txtColor[0] = TEXT_COLOR_TRANSPARENT;
     txtColor[1] = TEXT_DYNAMIC_COLOR_6;
     txtColor[2] = TEXT_DYNAMIC_COLOR_5;
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 1, 0, 0, txtColor, TEXT_SKIP_DRAW, string);
@@ -1106,7 +1094,6 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
     return str;
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Main menu
 //
@@ -1114,7 +1101,6 @@ u8 *StringCopyAndFillWithSpaces(u8 *dst, const u8 *src, u16 n)
 //  options can be selected (Withdraw, Deposit, etc.), as well as exiting
 //  Pokémon Storage back to this menu.
 //------------------------------------------------------------------------------
-
 
 enum {
     STATE_LOAD,
@@ -1306,7 +1292,6 @@ void ResetPokemonStorageSystem(void)
     }
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Choose Box menu
 //
@@ -1314,7 +1299,6 @@ void ResetPokemonStorageSystem(void)
 //  through the boxes and select one. Used when storing Pokémon in Deposit mode
 //  and for the Jump feature.
 //------------------------------------------------------------------------------
-
 
 static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu)
 {
@@ -1492,7 +1476,6 @@ static void ChooseBoxMenu_PrintInfo(void)
 //  primary one, Task_PokeStorageMain. Also included are some basic
 //  initialization functions.
 //------------------------------------------------------------------------------
-
 
 static void VBlankCB_PokeStorage(void)
 {
@@ -3166,7 +3149,6 @@ static void FreePokeStorageData(void)
     FreeAllWindowBuffers();
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Misc
 //
@@ -3174,7 +3156,6 @@ static void FreePokeStorageData(void)
 //  showing/hiding the party menu, updating the Close Box button, printing
 //  messages, doing the mosaic effect when transitioning between Pokémon, etc.
 //------------------------------------------------------------------------------
-
 static void SetScrollingBackground(void)
 {
     SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(3) | BGCNT_16COLOR | BGCNT_SCREENBASE(31));
@@ -3674,7 +3655,6 @@ static void InitCursorItemIcon(void)
     }
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Pokémon sprites
 //
@@ -3682,7 +3662,6 @@ static void InitCursorItemIcon(void)
 //  moving them with a scrolling box, shifting the party sprites, and
 //  animating released Pokémon.
 //------------------------------------------------------------------------------
-
 
 static void InitMonIconFields(void)
 {
@@ -4454,7 +4433,6 @@ static struct Sprite *CreateMonIconSprite(u16 species, u32 personality, s16 x, s
     struct SpriteTemplate template = sSpriteTemplate_MonIcon;
 
     species = GetIconSpecies(species, personality);
-    template.paletteTag = PALTAG_MON_ICON_0;
     tileNum = TryLoadMonIconTiles(species, personality);
     if (tileNum == 0xFFFF)
         return NULL;
@@ -4483,7 +4461,6 @@ static void DestroyBoxMonIcon(struct Sprite *sprite)
 //
 //  Some basic box functions, including initializing the box and scrolling.
 //------------------------------------------------------------------------------
-
 #define tState  data[0]
 #define tBoxId  data[2]
 
@@ -4578,7 +4555,6 @@ static s8 DetermineBoxScrollDirection(u8 boxId)
 //  SECTION: Box Title
 //------------------------------------------------------------------------------
 
-
 static void InitBoxTitle(u8 boxId)
 {
     u8 tagIndex;
@@ -4591,7 +4567,7 @@ static void InitBoxTitle(u8 boxId)
     sStorage->boxTitlePalOffset = OBJ_PLTT_ID(tagIndex) + 14;
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
-    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
+    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 2);
     LoadSpriteSheet(&spriteSheet);
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
 
@@ -4632,7 +4608,7 @@ static void CreateIncomingBoxTitle(u8 boxId, s8 direction)
     }
 
     StringCopyPadded(sStorage->boxTitleText, GetBoxNamePtr(boxId), 0, BOX_NAME_LENGTH);
-    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 0, 0, 2);
+    DrawTextWindowAndBufferTiles(sStorage->boxTitleText, sStorage->boxTitleTiles, 2);
     LoadSpriteSheet(&spriteSheet);
     x = GetBoxTitleBaseX(GetBoxNamePtr(boxId));
     adjustedX = x;
@@ -4704,7 +4680,6 @@ static s16 GetBoxTitleBaseX(const u8 *string)
 //  The functions below generally handle the cursor's movement, including
 //  moving around the box and picking up/putting down Pokémon.
 //------------------------------------------------------------------------------
-
 
 static void InitCursor(void)
 {
@@ -5137,7 +5112,6 @@ static bool8 MonPlaceChange_CursorUp(void)
 //  including changing the positions of Pokémon, releasing Pokémon, viewing the
 //  summary screen, and updating the display of the currently selected Pokémon.
 //------------------------------------------------------------------------------
-
 // When a single pokemon is picked up
 static void MoveMon(void)
 {
@@ -5872,7 +5846,6 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
 //
 //  The functions below process context-dependent input
 //------------------------------------------------------------------------------
-
 static u8 HandleInput_InBox(void)
 {
     u8 retVal;
@@ -6349,13 +6322,11 @@ static bool8 SetMenuTexts_Item(void)
     return TRUE;
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Cursor
 //
 //  The functions below handle a few of the generic cursor features.
 //------------------------------------------------------------------------------
-
 static void CreateCursorSprites(void)
 {
     u16 x, y;
@@ -6454,14 +6425,12 @@ static void TryShowItemAtCursor(void)
         TryLoadItemIconAtPos(CURSOR_AREA_IN_BOX, sCursorPosition);
 }
 
-
 //------------------------------------------------------------------------------
 //  SECTION: Menu
 //
 //  The functions below handle the generic options menu that comes up whenever
 //  something in the PC is selected.
 //------------------------------------------------------------------------------
-
 
 static void InitMenu(void)
 {
@@ -6588,7 +6557,6 @@ static void RemoveMenu(void)
 //
 //  The functions below handle the Move Items mode
 //------------------------------------------------------------------------------
-
 
 static const u32 sItemInfoFrame_Gfx[] = INCBIN_U32("graphics/pokemon_storage/item_info_frame.4bpp");
 
@@ -7343,12 +7311,11 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 #undef sCursorArea
 #undef sCursorPos
 
-
 //------------------------------------------------------------------------------
 //  SECTION: General utility
 //------------------------------------------------------------------------------
-
 // Functions here are general utility functions.
+
 u8 StorageGetCurrentBox(void)
 {
     return gPokemonStoragePtr->currentBox;
@@ -7597,7 +7564,6 @@ bool32 AnyStorageMonWithMove(u16 moveId)
 //  reveals one at a time.
 //  Each tilemap is tracked with a TILEMAPID that can be used to reference it.
 //------------------------------------------------------------------------------
-
 
 struct TilemapUtil_RectData
 {
