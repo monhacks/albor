@@ -654,7 +654,6 @@ Cry_Poliwrath::
 Cry_Politoed::
 	.incbin "sound/direct_sound_samples/cries/politoed.bin"
 
-.if P_FAMILY_ABRA == TRUE
 	.align 2
 Cry_Abra::
 	.incbin "sound/direct_sound_samples/cries/abra.bin"
@@ -666,9 +665,7 @@ Cry_Kadabra::
 	.align 2
 Cry_Alakazam::
 	.incbin "sound/direct_sound_samples/cries/alakazam.bin"
-.endif @ P_FAMILY_ABRA
 
-.if P_FAMILY_MACHOP == TRUE
 	.align 2
 Cry_Machop::
 	.incbin "sound/direct_sound_samples/cries/machop.bin"
@@ -680,9 +677,7 @@ Cry_Machoke::
 	.align 2
 Cry_Machamp::
 	.incbin "sound/direct_sound_samples/cries/machamp.bin"
-.endif @ P_FAMILY_MACHOP
 
-.if P_FAMILY_BELLSPROUT == TRUE
 	.align 2
 Cry_Bellsprout::
 	.incbin "sound/direct_sound_samples/cries/bellsprout.bin"
@@ -694,9 +689,7 @@ Cry_Weepinbell::
 	.align 2
 Cry_Victreebel::
 	.incbin "sound/direct_sound_samples/cries/victreebel.bin"
-.endif @ P_FAMILY_BELLSPROUT
 
-.if P_FAMILY_TENTACOOL == TRUE
 	.align 2
 Cry_Tentacool::
 	.incbin "sound/direct_sound_samples/cries/tentacool.bin"
@@ -704,9 +697,7 @@ Cry_Tentacool::
 	.align 2
 Cry_Tentacruel::
 	.incbin "sound/direct_sound_samples/cries/tentacruel.bin"
-.endif @ P_FAMILY_TENTACOOL
 
-.if P_FAMILY_GEODUDE == TRUE
 	.align 2
 Cry_Geodude::
 	.incbin "sound/direct_sound_samples/cries/geodude.bin"
@@ -718,9 +709,7 @@ Cry_Graveler::
 	.align 2
 Cry_Golem::
 	.incbin "sound/direct_sound_samples/cries/golem.bin"
-.endif @ P_FAMILY_GEODUDE
 
-.if P_FAMILY_PONYTA == TRUE
 	.align 2
 Cry_Ponyta::
 	.incbin "sound/direct_sound_samples/cries/ponyta.bin"
@@ -728,9 +717,7 @@ Cry_Ponyta::
 	.align 2
 Cry_Rapidash::
 	.incbin "sound/direct_sound_samples/cries/rapidash.bin"
-.endif @ P_FAMILY_PONYTA
 
-.if P_FAMILY_SLOWPOKE == TRUE
 	.align 2
 Cry_Slowpoke::
 	.incbin "sound/direct_sound_samples/cries/slowpoke.bin"
@@ -739,23 +726,9 @@ Cry_Slowpoke::
 Cry_Slowbro::
 	.incbin "sound/direct_sound_samples/cries/slowbro.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Slowking::
 	.incbin "sound/direct_sound_samples/cries/slowking.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.if P_MEGA_EVOLUTIONS == TRUE
-	.align 2
-Cry_SlowbroMega::
-	.incbin "sound/direct_sound_samples/cries/slowbro_mega.bin"
-.endif @ P_MEGA_EVOLUTIONS
-.if P_GALARIAN_FORMS == TRUE
-	.align 2
-Cry_SlowpokeGalarian::
-	.incbin "sound/direct_sound_samples/cries/slowpoke_galarian.bin"
-
-.endif @ P_GALARIAN_FORMS
-.endif @ P_FAMILY_SLOWPOKE
 
 .if P_FAMILY_MAGNEMITE == TRUE
 	.align 2

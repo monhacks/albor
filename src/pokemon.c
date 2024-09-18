@@ -3522,7 +3522,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
         species++;
 
     if (species == NUM_SPECIES)
-        return NATIONAL_DEX_NONE;
+        return DEX_NONE;
 
     return GET_BASE_SPECIES_ID(species);
 }
@@ -3531,7 +3531,7 @@ u16 SpeciesToNationalPokedexNum(u16 species)
 {
     species = SanitizeSpeciesId(species);
     if (!species)
-        return NATIONAL_DEX_NONE;
+        return DEX_NONE;
 
     return gSpeciesInfo[species].natDexNum;
 }

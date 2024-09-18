@@ -503,149 +503,135 @@ const u32 gObjectEventPic_Politoed[] = INCBIN_U32("graphics/pokemon/politoed/fol
 const u32 gMonFrontPic_PolitoedF[] = INCBIN_U32("graphics/pokemon/politoed/anim_frontf.4bpp.lz");
 const u32 gMonBackPic_PolitoedF[] = INCBIN_U32("graphics/pokemon/politoed/backf.4bpp.lz");
 
-#if P_FAMILY_ABRA
-    const u32 gMonFrontPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/anim_front.4bpp.lz");
-    const u32 gMonPalette_Abra[] = INCBIN_U32("graphics/pokemon/abra/normal.gbapal.lz");
-    const u32 gMonBackPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/back.4bpp.lz");
-    const u32 gMonShinyPalette_Abra[] = INCBIN_U32("graphics/pokemon/abra/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/follower.4bpp");
+const u32 gMonFrontPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/anim_front.4bpp.lz");
+const u32 gMonPalette_Abra[] = INCBIN_U32("graphics/pokemon/abra/normal.gbapal.lz");
+const u32 gMonBackPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/back.4bpp.lz");
+const u32 gMonShinyPalette_Abra[] = INCBIN_U32("graphics/pokemon/abra/shiny.gbapal.lz");
+const u32 gObjectEventPic_Abra[] = INCBIN_U32("graphics/pokemon/abra/follower.4bpp");
 
-    const u32 gMonFrontPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/anim_front.4bpp.lz");
-    const u32 gMonPalette_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/normal.gbapal.lz");
-    const u32 gMonBackPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/back.4bpp.lz");
-    const u32 gMonShinyPalette_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/follower.4bpp");
-    const u32 gMonFrontPic_KadabraF[] = INCBIN_U32("graphics/pokemon/kadabra/anim_frontf.4bpp.lz");
-    const u32 gMonBackPic_KadabraF[] = INCBIN_U32("graphics/pokemon/kadabra/backf.4bpp.lz");
+const u32 gMonFrontPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/anim_front.4bpp.lz");
+const u32 gMonPalette_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/normal.gbapal.lz");
+const u32 gMonBackPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/back.4bpp.lz");
+const u32 gMonShinyPalette_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/shiny.gbapal.lz");
+const u32 gObjectEventPic_Kadabra[] = INCBIN_U32("graphics/pokemon/kadabra/follower.4bpp");
+const u32 gMonFrontPic_KadabraF[] = INCBIN_U32("graphics/pokemon/kadabra/anim_frontf.4bpp.lz");
+const u32 gMonBackPic_KadabraF[] = INCBIN_U32("graphics/pokemon/kadabra/backf.4bpp.lz");
 
-    const u32 gMonFrontPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/anim_front.4bpp.lz");
-    const u32 gMonPalette_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/normal.gbapal.lz");
-    const u32 gMonBackPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/back.4bpp.lz");
-    const u32 gMonShinyPalette_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/follower.4bpp");
-    const u32 gMonFrontPic_AlakazamF[] = INCBIN_U32("graphics/pokemon/alakazam/anim_frontf.4bpp.lz");
-    const u32 gMonBackPic_AlakazamF[] = INCBIN_U32("graphics/pokemon/alakazam/backf.4bpp.lz");
-#endif //P_FAMILY_ABRA
+const u32 gMonFrontPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/anim_front.4bpp.lz");
+const u32 gMonPalette_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/normal.gbapal.lz");
+const u32 gMonBackPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/back.4bpp.lz");
+const u32 gMonShinyPalette_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/shiny.gbapal.lz");
+const u32 gObjectEventPic_Alakazam[] = INCBIN_U32("graphics/pokemon/alakazam/follower.4bpp");
+const u32 gMonFrontPic_AlakazamF[] = INCBIN_U32("graphics/pokemon/alakazam/anim_frontf.4bpp.lz");
+const u32 gMonBackPic_AlakazamF[] = INCBIN_U32("graphics/pokemon/alakazam/backf.4bpp.lz");
 
-#if P_FAMILY_MACHOP
-    const u32 gMonFrontPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/anim_front.4bpp.lz");
-    const u32 gMonPalette_Machop[] = INCBIN_U32("graphics/pokemon/machop/normal.gbapal.lz");
-    const u32 gMonBackPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/back.4bpp.lz");
-    const u32 gMonShinyPalette_Machop[] = INCBIN_U32("graphics/pokemon/machop/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/follower.4bpp");
+const u32 gMonFrontPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/anim_front.4bpp.lz");
+const u32 gMonPalette_Machop[] = INCBIN_U32("graphics/pokemon/machop/normal.gbapal.lz");
+const u32 gMonBackPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/back.4bpp.lz");
+const u32 gMonShinyPalette_Machop[] = INCBIN_U32("graphics/pokemon/machop/shiny.gbapal.lz");
+const u32 gObjectEventPic_Machop[] = INCBIN_U32("graphics/pokemon/machop/follower.4bpp");
 
-    const u32 gMonFrontPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/anim_front.4bpp.lz");
-    const u32 gMonPalette_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/normal.gbapal.lz");
-    const u32 gMonBackPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/back.4bpp.lz");
-    const u32 gMonShinyPalette_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/follower.4bpp");
+const u32 gMonFrontPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/anim_front.4bpp.lz");
+const u32 gMonPalette_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/normal.gbapal.lz");
+const u32 gMonBackPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/back.4bpp.lz");
+const u32 gMonShinyPalette_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/shiny.gbapal.lz");
+const u32 gObjectEventPic_Machoke[] = INCBIN_U32("graphics/pokemon/machoke/follower.4bpp");
 
-    const u32 gMonFrontPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/anim_front.4bpp.lz");
-    const u32 gMonPalette_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/normal.gbapal.lz");
-    const u32 gMonBackPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/back.4bpp.lz");
-    const u32 gMonShinyPalette_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/follower.4bpp");
-#endif //P_FAMILY_MACHOP
+const u32 gMonFrontPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/anim_front.4bpp.lz");
+const u32 gMonPalette_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/normal.gbapal.lz");
+const u32 gMonBackPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/back.4bpp.lz");
+const u32 gMonShinyPalette_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/shiny.gbapal.lz");
+const u32 gObjectEventPic_Machamp[] = INCBIN_U32("graphics/pokemon/machamp/follower.4bpp");
 
-#if P_FAMILY_BELLSPROUT
-    const u32 gMonFrontPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/anim_front.4bpp.lz");
-    const u32 gMonPalette_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/normal.gbapal.lz");
-    const u32 gMonBackPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/back.4bpp.lz");
-    const u32 gMonShinyPalette_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/follower.4bpp");
+const u32 gMonFrontPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/anim_front.4bpp.lz");
+const u32 gMonPalette_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/normal.gbapal.lz");
+const u32 gMonBackPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/back.4bpp.lz");
+const u32 gMonShinyPalette_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/shiny.gbapal.lz");
+const u32 gObjectEventPic_Bellsprout[] = INCBIN_U32("graphics/pokemon/bellsprout/follower.4bpp");
 
-    const u32 gMonFrontPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/anim_front.4bpp.lz");
-    const u32 gMonPalette_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/normal.gbapal.lz");
-    const u32 gMonBackPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/back.4bpp.lz");
-    const u32 gMonShinyPalette_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/follower.4bpp");
+const u32 gMonFrontPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/anim_front.4bpp.lz");
+const u32 gMonPalette_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/normal.gbapal.lz");
+const u32 gMonBackPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/back.4bpp.lz");
+const u32 gMonShinyPalette_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/shiny.gbapal.lz");
+const u32 gObjectEventPic_Weepinbell[] = INCBIN_U32("graphics/pokemon/weepinbell/follower.4bpp");
 
-    const u32 gMonFrontPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/anim_front.4bpp.lz");
-    const u32 gMonPalette_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/normal.gbapal.lz");
-    const u32 gMonBackPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/back.4bpp.lz");
-    const u32 gMonShinyPalette_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/follower.4bpp");
-#endif //P_FAMILY_BELLSPROUT
+const u32 gMonFrontPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/anim_front.4bpp.lz");
+const u32 gMonPalette_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/normal.gbapal.lz");
+const u32 gMonBackPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/back.4bpp.lz");
+const u32 gMonShinyPalette_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/shiny.gbapal.lz");
+const u32 gObjectEventPic_Victreebel[] = INCBIN_U32("graphics/pokemon/victreebel/follower.4bpp");
 
-#if P_FAMILY_TENTACOOL
-    const u32 gMonFrontPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/anim_front.4bpp.lz");
-    const u32 gMonPalette_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/normal.gbapal.lz");
-    const u32 gMonBackPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/back.4bpp.lz");
-    const u32 gMonShinyPalette_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/follower.4bpp");
+const u32 gMonFrontPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/anim_front.4bpp.lz");
+const u32 gMonPalette_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/normal.gbapal.lz");
+const u32 gMonBackPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/back.4bpp.lz");
+const u32 gMonShinyPalette_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/shiny.gbapal.lz");
+const u32 gObjectEventPic_Tentacool[] = INCBIN_U32("graphics/pokemon/tentacool/follower.4bpp");
 
-    const u32 gMonFrontPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/anim_front.4bpp.lz");
-    const u32 gMonPalette_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/normal.gbapal.lz");
-    const u32 gMonBackPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/back.4bpp.lz");
-    const u32 gMonShinyPalette_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/follower.4bpp");
-#endif //P_FAMILY_TENTACOOL
+const u32 gMonFrontPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/anim_front.4bpp.lz");
+const u32 gMonPalette_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/normal.gbapal.lz");
+const u32 gMonBackPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/back.4bpp.lz");
+const u32 gMonShinyPalette_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/shiny.gbapal.lz");
+const u32 gObjectEventPic_Tentacruel[] = INCBIN_U32("graphics/pokemon/tentacruel/follower.4bpp");
 
-#if P_FAMILY_GEODUDE
-    const u32 gMonFrontPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/anim_front.4bpp.lz");
-    const u32 gMonPalette_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/normal.gbapal.lz");
-    const u32 gMonBackPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/back.4bpp.lz");
-    const u32 gMonShinyPalette_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/follower.4bpp");
+const u32 gMonFrontPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/anim_front.4bpp.lz");
+const u32 gMonPalette_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/normal.gbapal.lz");
+const u32 gMonBackPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/back.4bpp.lz");
+const u32 gMonShinyPalette_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/shiny.gbapal.lz");
+const u32 gObjectEventPic_Geodude[] = INCBIN_U32("graphics/pokemon/geodude/follower.4bpp");
 
-    const u32 gMonFrontPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/anim_front.4bpp.lz");
-    const u32 gMonPalette_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/normal.gbapal.lz");
-    const u32 gMonBackPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/back.4bpp.lz");
-    const u32 gMonShinyPalette_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/follower.4bpp");
+const u32 gMonFrontPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/anim_front.4bpp.lz");
+const u32 gMonPalette_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/normal.gbapal.lz");
+const u32 gMonBackPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/back.4bpp.lz");
+const u32 gMonShinyPalette_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/shiny.gbapal.lz");
+const u32 gObjectEventPic_Graveler[] = INCBIN_U32("graphics/pokemon/graveler/follower.4bpp");
 
-    const u32 gMonFrontPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/anim_front.4bpp.lz");
-    const u32 gMonPalette_Golem[] = INCBIN_U32("graphics/pokemon/golem/normal.gbapal.lz");
-    const u32 gMonBackPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/back.4bpp.lz");
-    const u32 gMonShinyPalette_Golem[] = INCBIN_U32("graphics/pokemon/golem/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/follower.4bpp");
-#endif //P_FAMILY_GEODUDE
+const u32 gMonFrontPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/anim_front.4bpp.lz");
+const u32 gMonPalette_Golem[] = INCBIN_U32("graphics/pokemon/golem/normal.gbapal.lz");
+const u32 gMonBackPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/back.4bpp.lz");
+const u32 gMonShinyPalette_Golem[] = INCBIN_U32("graphics/pokemon/golem/shiny.gbapal.lz");
+const u32 gObjectEventPic_Golem[] = INCBIN_U32("graphics/pokemon/golem/follower.4bpp");
 
-#if P_FAMILY_PONYTA
-    const u32 gMonFrontPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/anim_front.4bpp.lz");
-    const u32 gMonPalette_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/normal.gbapal.lz");
-    const u32 gMonBackPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/back.4bpp.lz");
-    const u32 gMonShinyPalette_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/follower.4bpp");
+const u32 gMonFrontPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/anim_front.4bpp.lz");
+const u32 gMonPalette_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/normal.gbapal.lz");
+const u32 gMonBackPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/back.4bpp.lz");
+const u32 gMonShinyPalette_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/shiny.gbapal.lz");
+const u32 gObjectEventPic_Ponyta[] = INCBIN_U32("graphics/pokemon/ponyta/follower.4bpp");
 
-    const u32 gMonFrontPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/anim_front.4bpp.lz");
-    const u32 gMonPalette_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/normal.gbapal.lz");
-    const u32 gMonBackPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/back.4bpp.lz");
-    const u32 gMonShinyPalette_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/follower.4bpp");
+const u32 gMonFrontPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/anim_front.4bpp.lz");
+const u32 gMonPalette_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/normal.gbapal.lz");
+const u32 gMonBackPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/back.4bpp.lz");
+const u32 gMonShinyPalette_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/shiny.gbapal.lz");
+const u32 gObjectEventPic_Rapidash[] = INCBIN_U32("graphics/pokemon/rapidash/follower.4bpp");
 
-    const u32 gMonFrontPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/front.4bpp.lz");
-    const u32 gMonPalette_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/normal.gbapal.lz");
-    const u32 gMonBackPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/back.4bpp.lz");
-    const u32 gMonShinyPalette_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/follower.4bpp");
+const u32 gMonFrontPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/front.4bpp.lz");
+const u32 gMonPalette_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/normal.gbapal.lz");
+const u32 gMonBackPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/back.4bpp.lz");
+const u32 gMonShinyPalette_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/shiny.gbapal.lz");
+const u32 gObjectEventPic_PonytaGalarian[] = INCBIN_U32("graphics/pokemon/ponyta/galarian/follower.4bpp");
 
-    const u32 gMonFrontPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/front.4bpp.lz");
-    const u32 gMonPalette_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/normal.gbapal.lz");
-    const u32 gMonBackPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/back.4bpp.lz");
-    const u32 gMonShinyPalette_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/follower.4bpp");
-#endif //P_FAMILY_PONYTA
+const u32 gMonFrontPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/front.4bpp.lz");
+const u32 gMonPalette_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/normal.gbapal.lz");
+const u32 gMonBackPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/back.4bpp.lz");
+const u32 gMonShinyPalette_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/shiny.gbapal.lz");
+const u32 gObjectEventPic_RapidashGalarian[] = INCBIN_U32("graphics/pokemon/rapidash/galarian/follower.4bpp");
 
-#if P_FAMILY_SLOWPOKE
-    const u32 gMonFrontPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/anim_front.4bpp.lz");
-    const u32 gMonPalette_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/normal.gbapal.lz");
-    const u32 gMonBackPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/back.4bpp.lz");
-    const u32 gMonShinyPalette_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/follower.4bpp");
+const u32 gMonFrontPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/anim_front.4bpp.lz");
+const u32 gMonPalette_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/normal.gbapal.lz");
+const u32 gMonBackPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/back.4bpp.lz");
+const u32 gMonShinyPalette_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/shiny.gbapal.lz");
+const u32 gObjectEventPic_Slowpoke[] = INCBIN_U32("graphics/pokemon/slowpoke/follower.4bpp");
 
-    const u32 gMonFrontPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/anim_front.4bpp.lz");
-    const u32 gMonPalette_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/normal.gbapal.lz");
-    const u32 gMonBackPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/back.4bpp.lz");
-    const u32 gMonShinyPalette_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/follower.4bpp");
+const u32 gMonFrontPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/anim_front.4bpp.lz");
+const u32 gMonPalette_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/normal.gbapal.lz");
+const u32 gMonBackPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/back.4bpp.lz");
+const u32 gMonShinyPalette_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/shiny.gbapal.lz");
+const u32 gObjectEventPic_Slowbro[] = INCBIN_U32("graphics/pokemon/slowbro/follower.4bpp");
 
-    const u32 gMonFrontPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/anim_front.4bpp.lz");
-    const u32 gMonPalette_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/normal.gbapal.lz");
-    const u32 gMonBackPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/back.4bpp.lz");
-    const u32 gMonShinyPalette_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/follower.4bpp");
-#endif //P_FAMILY_SLOWPOKE
+const u32 gMonFrontPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/anim_front.4bpp.lz");
+const u32 gMonPalette_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/normal.gbapal.lz");
+const u32 gMonBackPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/back.4bpp.lz");
+const u32 gMonShinyPalette_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/shiny.gbapal.lz");
+const u32 gObjectEventPic_Slowking[] = INCBIN_U32("graphics/pokemon/slowking/follower.4bpp");
 
 #if P_FAMILY_MAGNEMITE
     const u32 gMonFrontPic_Magnemite[] = INCBIN_U32("graphics/pokemon/magnemite/anim_front.4bpp.lz");

@@ -67,50 +67,25 @@ gCryTable::
 	cry Cry_Poliwhirl
 	cry Cry_Poliwrath
 	cry Cry_Politoed
-.if P_FAMILY_ABRA == TRUE
 	cry Cry_Abra
 	cry Cry_Kadabra
 	cry Cry_Alakazam
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AlakazamMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_ABRA
-.if P_FAMILY_MACHOP == TRUE
 	cry Cry_Machop
 	cry Cry_Machoke
 	cry Cry_Machamp
-.endif @ P_FAMILY_MACHOP
-.if P_FAMILY_BELLSPROUT == TRUE
 	cry Cry_Bellsprout
 	cry Cry_Weepinbell
 	cry Cry_Victreebel
-.endif @ P_FAMILY_BELLSPROUT
-.if P_FAMILY_TENTACOOL == TRUE
 	cry Cry_Tentacool
 	cry Cry_Tentacruel
-.endif @ P_FAMILY_TENTACOOL
-.if P_FAMILY_GEODUDE == TRUE
 	cry Cry_Geodude
 	cry Cry_Graveler
 	cry Cry_Golem
-.endif @ P_FAMILY_GEODUDE
-.if P_FAMILY_PONYTA == TRUE
 	cry Cry_Ponyta
 	cry Cry_Rapidash
-.endif @ P_FAMILY_PONYTA
-.if P_FAMILY_SLOWPOKE == TRUE
 	cry Cry_Slowpoke
 	cry Cry_Slowbro
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Slowking
-.endif @ P_GEN_2_CROSS_EVOS
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SlowbroMega
-.endif @ P_MEGA_EVOLUTIONS
-.if P_GALARIAN_FORMS == TRUE
-	cry Cry_SlowpokeGalarian
-.endif @ P_GALARIAN_FORMS
-.endif @ P_FAMILY_SLOWPOKE
 .if P_FAMILY_MAGNEMITE == TRUE
 	cry Cry_Magnemite
 	cry Cry_Magneton
