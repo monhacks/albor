@@ -86,16 +86,9 @@ gCryTable::
 	cry Cry_Slowpoke
 	cry Cry_Slowbro
 	cry Cry_Slowking
-.if P_FAMILY_MAGNEMITE == TRUE
 	cry Cry_Magnemite
 	cry Cry_Magneton
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Magnezone
-.endif @ P_GEN_4_CROSS_EVOS
-.endif @ P_FAMILY_MAGNEMITE
-.if P_FAMILY_FARFETCHD == TRUE
-	cry Cry_Farfetchd
-.endif @ P_FAMILY_FARFETCHD
 .if P_FAMILY_DODUO == TRUE
 	cry Cry_Doduo
 	cry Cry_Dodrio
@@ -276,23 +269,15 @@ gCryTable::
 .if P_FAMILY_DITTO == TRUE
 	cry Cry_Ditto
 .endif @ P_FAMILY_DITTO
-.if P_FAMILY_EEVEE == TRUE
 	cry Cry_Eevee
 	cry Cry_Vaporeon
 	cry Cry_Jolteon
 	cry Cry_Flareon
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Espeon
 	cry Cry_Umbreon
-.endif @ P_GEN_2_CROSS_EVOS
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Leafeon
 	cry Cry_Glaceon
-.endif @ P_GEN_4_CROSS_EVOS
-.if P_GEN_6_CROSS_EVOS == TRUE
 	cry Cry_Sylveon
-.endif @ P_GEN_6_CROSS_EVOS
-.endif @ P_FAMILY_EEVEE
 .if P_FAMILY_PORYGON == TRUE
 	cry Cry_Porygon
 .if P_GEN_2_CROSS_EVOS == TRUE
@@ -2267,10 +2252,6 @@ gCryTable::
 .if P_FAMILY_TERAPAGOS == TRUE
 	cry Cry_Terapagos
 .endif @ P_FAMILY_TERAPAGOS
-.if P_FAMILY_PECHARUNT == TRUE
-	cry Cry_Pecharunt
-.endif @ P_FAMILY_PECHARUNT
-.endif @ P_CRIES_ENABLED
 
 	.align 2
 gCryTable_Reverse::

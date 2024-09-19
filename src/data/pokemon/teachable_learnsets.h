@@ -419,169 +419,17 @@ static const u16 sSlowkingTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_MAGNEMITE
 static const u16 sMagnemiteTeachableLearnset[] = {
-    MOVE_DOUBLE_TEAM,
-    MOVE_FACADE,
-    MOVE_FLASH,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_SANDSTORM,
-    MOVE_SHOCK_WAVE,
-    MOVE_SUNNY_DAY,
-    MOVE_THUNDER,
-    MOVE_THUNDERBOLT,
-    MOVE_TOXIC,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_EXPLOSION,
-    MOVE_PSYCH_UP,
-    MOVE_ROLLOUT,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_THUNDER_WAVE,
     MOVE_UNAVAILABLE,
 };
 
 static const u16 sMagnetonTeachableLearnset[] = {
-    MOVE_DOUBLE_TEAM,
-    MOVE_FACADE,
-    MOVE_FLASH,
-    MOVE_HYPER_BEAM,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_SANDSTORM,
-    MOVE_SHOCK_WAVE,
-    MOVE_SUNNY_DAY,
-    MOVE_THUNDER,
-    MOVE_THUNDERBOLT,
-    MOVE_TOXIC,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_EXPLOSION,
-    MOVE_PSYCH_UP,
-    MOVE_ROLLOUT,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_THUNDER_WAVE,
     MOVE_UNAVAILABLE,
 };
 
-#if P_GEN_4_CROSS_EVOS
 static const u16 sMagnezoneTeachableLearnset[] = {
-    MOVE_DOUBLE_TEAM,
-    MOVE_FACADE,
-    MOVE_FLASH,
-    MOVE_HYPER_BEAM,
-    MOVE_LIGHT_SCREEN,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_SANDSTORM,
-    MOVE_SHOCK_WAVE,
-    MOVE_SUNNY_DAY,
-    MOVE_THUNDER,
-    MOVE_THUNDERBOLT,
-    MOVE_TOXIC,
-    MOVE_BODY_SLAM,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_EXPLOSION,
-    MOVE_PSYCH_UP,
-    MOVE_ROLLOUT,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_THUNDER_WAVE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
-#endif //P_FAMILY_MAGNEMITE
-
-#if P_FAMILY_FARFETCHD
-static const u16 sFarfetchdTeachableLearnset[] = {
-    MOVE_AERIAL_ACE,
-    MOVE_ATTRACT,
-    MOVE_CUT,
-    MOVE_DOUBLE_TEAM,
-    MOVE_FACADE,
-    MOVE_FLY,
-    MOVE_IRON_TAIL,
-    MOVE_PROTECT,
-    MOVE_REFLECT,
-    MOVE_REST,
-    MOVE_STEEL_WING,
-    MOVE_SUNNY_DAY,
-    MOVE_THIEF,
-    MOVE_TOXIC,
-    MOVE_BODY_SLAM,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_FURY_CUTTER,
-    MOVE_MUD_SLAP,
-    MOVE_PSYCH_UP,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWAGGER,
-    MOVE_SWIFT,
-    MOVE_SWORDS_DANCE,
-    MOVE_UNAVAILABLE,
-};
-
-#if P_GALARIAN_FORMS
-static const u16 sFarfetchdGalarianTeachableLearnset[] = {
-    MOVE_ATTRACT,
-    MOVE_BRICK_BREAK,
-    MOVE_FACADE,
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_ROCK_SMASH,
-    MOVE_STEEL_WING,
-    MOVE_SUNNY_DAY,
-    MOVE_BODY_SLAM,
-    MOVE_COUNTER,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_FURY_CUTTER,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWORDS_DANCE,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sSirfetchdTeachableLearnset[] = {
-    MOVE_ATTRACT,
-    MOVE_BRICK_BREAK,
-    MOVE_FACADE,
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_ROCK_SMASH,
-    MOVE_STEEL_WING,
-    MOVE_SUNNY_DAY,
-    MOVE_BODY_SLAM,
-    MOVE_COUNTER,
-    MOVE_DOUBLE_EDGE,
-    MOVE_ENDURE,
-    MOVE_FURY_CUTTER,
-    MOVE_SLEEP_TALK,
-    MOVE_SNORE,
-    MOVE_SWORDS_DANCE,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_FARFETCHD
 
 #if P_FAMILY_DODUO
 static const u16 sDoduoTeachableLearnset[] = {
@@ -3003,7 +2851,6 @@ static const u16 sLaprasTeachableLearnset[] = {
 };
 #endif //P_FAMILY_LAPRAS
 
-#if P_FAMILY_EEVEE
 static const u16 sEeveeTeachableLearnset[] = {
     MOVE_CHARM,
     MOVE_UNAVAILABLE,
@@ -3048,7 +2895,6 @@ static const u16 sSylveonTeachableLearnset[] = {
     MOVE_CHARM,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_EEVEE
 
 #if P_FAMILY_PORYGON
 static const u16 sPorygonTeachableLearnset[] = {
@@ -25228,18 +25074,3 @@ static const u16 sTerapagosTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 #endif //P_FAMILY_TERAPAGOS
-
-#if P_FAMILY_PECHARUNT
-static const u16 sPecharuntTeachableLearnset[] = {
-    MOVE_PROTECT,
-    MOVE_REST,
-    MOVE_SHADOW_BALL,
-    MOVE_SLUDGE_BOMB,
-    MOVE_TOXIC,
-    MOVE_DEFENSE_CURL,
-    MOVE_ENDURE,
-    MOVE_ROLLOUT,
-    MOVE_SLEEP_TALK,
-    MOVE_UNAVAILABLE,
-};
-#endif //P_FAMILY_PECHARUNT

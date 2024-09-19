@@ -28784,34 +28784,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Garbodor),
         FOLLOWER(Garbodor, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_GARBODOR_GIGANTAMAX] =
-    {
-        GARBODOR_MISC_INFO,
-        .height = 210,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "It sprays toxic gas from its mouth\n"
-            "and fingers. If the gas engulfs you,\n"
-            "the toxins will seep in all the way\n"
-            "down to your bones."),
-        .pokemonScale = 256,
-        .pokemonOffset = 1,
-        .trainerScale = 326,
-        .trainerOffset = 4,
-        FRONT_PIC(GarbodorGigantamax, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_GarbodorGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(GarbodorGigantamax, 64, 64),
-        .backPicYOffset = 2,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GarbodorGigantamax),
-        ICON(GarbodorGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_TRUBBISH
 
 #if P_FAMILY_ZORUA
@@ -38262,30 +38234,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Melmetal),
         FOLLOWER(Melmetal, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_MELMETAL_GIGANTAMAX] =
-    {
-        MELMETAL_MISC_INFO,
-        .isGigantamax = TRUE,
-        .height = 250,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "In a distant land, there are\n"
-            "legends about a cyclopean giant. In fact,\n"
-            "the giant was a Melmetal that was\n"
-            "flooded with Gigantamax energy."),
-        FRONT_PIC(MelmetalGigantamax, 64, 64),
-        .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_MelmetalGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(MelmetalGigantamax, 64, 64),
-        .backPicYOffset = 14,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MelmetalGigantamax),
-        ICON(MelmetalGigantamax),
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_MELTAN
 
 #if P_FAMILY_GROOKEY
@@ -38437,33 +38385,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Rillaboom),
         FOLLOWER(Rillaboom, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_RILLABOOM_GIGANTAMAX] =
-    {
-        RILLABOOM_MISC_INFO,
-        .height = 280,
-        .weight = 0,
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 365,
-        .trainerOffset = 7,
-        .description = COMPOUND_STRING(
-            "Rillaboom has become one with its\n"
-            "forest of drums and continues to lay\n"
-            "down beats that shake all of Galar."),
-        FRONT_PIC(RillaboomGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_RillaboomGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(RillaboomGigantamax, 64, 64),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(RillaboomGigantamax),
-        ICON(RillaboomGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_GROOKEY
 
 #if P_FAMILY_SCORBUNNY
@@ -38616,34 +38537,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Cinderace),
         FOLLOWER(Cinderace, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_CINDERACE_GIGANTAMAX] =
-    {
-        CINDERACE_MISC_INFO,
-        .height = 270,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Infused with Cinderace's fighting\n"
-            "spirit, the gigantic Pyro Ball never\n"
-            "misses its targets and completely\n"
-            "roasts opponents."),
-        .pokemonScale = 265,
-        .pokemonOffset = 2,
-        .trainerScale = 262,
-        .trainerOffset = 0,
-        FRONT_PIC(CinderaceGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CinderaceGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CinderaceGigantamax, 64, 64),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(CinderaceGigantamax),
-        ICON(CinderaceGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_SCORBUNNY
 
 #if P_FAMILY_SOBBLE
@@ -38797,34 +38690,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Inteleon),
         FOLLOWER(Inteleon, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_INTELEON_GIGANTAMAX] =
-    {
-        INTELEON_MISC_INFO,
-        .height = 400,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Gigantamax Inteleon's Water Gun\n"
-            "move fires at Mach 7. As the Pokémon\n"
-            "takes aim, it uses the crest on its\n"
-            "head to gauge wind and temperature."),
-        .pokemonScale = 256,
-        .pokemonOffset = 1,
-        .trainerScale = 326,
-        .trainerOffset = 4,
-        FRONT_PIC(InteleonGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_InteleonGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(InteleonGigantamax, 64, 64),
-        .backPicYOffset = 4,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(InteleonGigantamax),
-        ICON(InteleonGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_SOBBLE
 
 #if P_FAMILY_SKWOVET
@@ -39079,34 +38944,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Corviknight),
         FOLLOWER(Corviknight, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_CORVIKNIGHT_GIGANTAMAX] =
-    {
-        CORVIKNIGHT_MISC_INFO,
-        .height = 140,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Imbued with Gigantamax energy, its\n"
-            "wings can whip up winds more\n"
-            "forceful than any a hurricane could\n"
-            "muster. The gusts blow everything away."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 348,
-        .trainerOffset = 6,
-        FRONT_PIC(CorviknightGigantamax, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_CorviknightGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CorviknightGigantamax, 64, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(CorviknightGigantamax),
-        ICON(CorviknightGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_ROOKIDEE
 
 #if P_FAMILY_BLIPBUG
@@ -39263,34 +39100,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Orbeetle),
         FOLLOWER(Orbeetle, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_ORBEETLE_GIGANTAMAX] =
-    {
-        ORBEETLE_MISC_INFO,
-        .height = 140,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Its brain has grown to a\n"
-            "gargantuan size, as has the rest of its body.\n"
-            "This Pokémon's intellect and\n"
-            "psychic abilities are overpowering."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(OrbeetleGigantamax, 64, 64),
-        .frontPicYOffset = 2,
-        .frontAnimFrames = sAnims_OrbeetleGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(OrbeetleGigantamax, 64, 64),
-        .backPicYOffset = 6,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(OrbeetleGigantamax),
-        ICON(OrbeetleGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_BLIPBUG
 
 #if P_FAMILY_NICKIT
@@ -39690,34 +39499,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Drednaw),
         FOLLOWER(Drednaw, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_DREDNAW_GIGANTAMAX] =
-    {
-        DREDNAW_MISC_INFO,
-        .height = 240,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "In the Galar region, there's a tale\n"
-            "about this Pokémon chewing up a\n"
-            "mountain and using the rubble to stop a\n"
-            "flood."),
-        .pokemonScale = 305,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(DrednawGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_DrednawGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(DrednawGigantamax, 64, 64),
-        .backPicYOffset = 12,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(DrednawGigantamax),
-        ICON(DrednawGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_CHEWTLE
 
 #if P_FAMILY_YAMPER
@@ -39969,34 +39750,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Coalossal),
         FOLLOWER(Coalossal, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_COALOSSAL_GIGANTAMAX] =
-    {
-        COALOSSAL_MISC_INFO,
-        .height = 420,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Its body is a colossal stove. With\n"
-            "Gigantamax energy stoking the fire,\n"
-            "this Pokémon's flame burns hotter\n"
-            "than 3,600 degrees Fahrenheit."),
-        .pokemonScale = 275,
-        .pokemonOffset = 7,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(CoalossalGigantamax, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_CoalossalGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(CoalossalGigantamax, 64, 64),
-        .backPicYOffset = 8,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(CoalossalGigantamax),
-        ICON(CoalossalGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_ROLYCOLY
 
 #if P_FAMILY_APPLIN
@@ -40105,34 +39858,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Flapple, TRACKS_FOOT)
     },
 
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_FLAPPLE_GIGANTAMAX] =
-    {
-        FLAPPLE_MISC_INFO,
-        .height = 240,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Under the influence of Gigantamax\n"
-            "energy, it produces much more sweet\n"
-            "nectar, and its shape has changed\n"
-            "to resemble a giant apple."),
-        .pokemonScale = 530,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(FlappleGigantamax, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_FlappleGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(FlappleGigantamax, 64, 64),
-        .backPicYOffset = 2,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(FlappleGigantamax),
-        ICON(FlappleGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
-
 #define APPLETUN_MISC_INFO                                                      \
         .baseHP        = 110,                                                   \
         .baseAttack    = 85,                                                    \
@@ -40184,34 +39909,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Appletun),
         FOLLOWER(Appletun, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_APPLETUN_GIGANTAMAX] =
-    {
-        APPLETUN_MISC_INFO,
-        .height = 240,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Due to Gigantamax energy, this\n"
-            "Pokémon's nectar has thickened. The\n"
-            "increased viscosity lets the nectar\n"
-            "absorb more damage than before."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(AppletunGigantamax, 64, 64),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_AppletunGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(AppletunGigantamax, 64, 64),
-        .backPicYOffset = 2,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(AppletunGigantamax),
-        ICON(AppletunGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 
 #if P_GEN_9_CROSS_EVOS
     [SPECIES_DIPPLIN] =
@@ -40411,34 +40108,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Sandaconda),
         FOLLOWER(Sandaconda, TRACKS_FOOT)
     },
-
-#if P_GIGANTAMAX_FORMS
-    [SPECIES_SANDACONDA_GIGANTAMAX] =
-    {
-        SANDACONDA_MISC_INFO,
-        .height = 220,
-        .weight = 0,
-        .description = COMPOUND_STRING(
-            "Its sand pouch has grown to tremendous\n"
-            "proportions. More than 1,000,000 tons of\n"
-            "sand now swirl around its body with enough\n"
-            "speed and power to pulverize a skyscraper."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 610,
-        .trainerOffset = 17,
-        FRONT_PIC(SandacondaGigantamax, 64, 64),
-        .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_SandacondaGigantamax,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(SandacondaGigantamax, 64, 64),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(SandacondaGigantamax),
-        ICON(SandacondaGigantamax),
-        .isGigantamax = TRUE,
-    },
-#endif //P_GIGANTAMAX_FORMS
 #endif //P_FAMILY_SILICOBRA
 
 #if P_FAMILY_ARROKUDA

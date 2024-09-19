@@ -730,7 +730,6 @@ Cry_Slowbro::
 Cry_Slowking::
 	.incbin "sound/direct_sound_samples/cries/slowking.bin"
 
-.if P_FAMILY_MAGNEMITE == TRUE
 	.align 2
 Cry_Magnemite::
 	.incbin "sound/direct_sound_samples/cries/magnemite.bin"
@@ -739,18 +738,9 @@ Cry_Magnemite::
 Cry_Magneton::
 	.incbin "sound/direct_sound_samples/cries/magneton.bin"
 
-.if P_GEN_4_CROSS_EVOS == TRUE
 	.align 2
 Cry_Magnezone::
 	.incbin "sound/direct_sound_samples/cries/magnezone.bin"
-.endif @ P_GEN_4_CROSS_EVOS
-.endif @ P_FAMILY_MAGNEMITE
-
-.if P_FAMILY_FARFETCHD == TRUE
-	.align 2
-Cry_Farfetchd::
-	.incbin "sound/direct_sound_samples/cries/farfetchd.bin"
-.endif @ P_FAMILY_FARFETCHD
 
 .if P_FAMILY_DODUO == TRUE
 	.align 2
@@ -1099,7 +1089,6 @@ Cry_Lapras::
 	.incbin "sound/direct_sound_samples/cries/lapras.bin"
 .endif @ P_FAMILY_LAPRAS
 
-.if P_FAMILY_EEVEE == TRUE
 	.align 2
 Cry_Eevee::
 	.incbin "sound/direct_sound_samples/cries/eevee.bin"
@@ -1116,7 +1105,6 @@ Cry_Jolteon::
 Cry_Flareon::
 	.incbin "sound/direct_sound_samples/cries/flareon.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Espeon::
 	.incbin "sound/direct_sound_samples/cries/espeon.bin"
@@ -1124,8 +1112,7 @@ Cry_Espeon::
 	.align 2
 Cry_Umbreon::
 	.incbin "sound/direct_sound_samples/cries/umbreon.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.if P_GEN_4_CROSS_EVOS == TRUE
+
 	.align 2
 Cry_Leafeon::
 	.incbin "sound/direct_sound_samples/cries/leafeon.bin"
@@ -1133,13 +1120,10 @@ Cry_Leafeon::
 	.align 2
 Cry_Glaceon::
 	.incbin "sound/direct_sound_samples/cries/glaceon.bin"
-.endif @ P_GEN_4_CROSS_EVOS
-.if P_GEN_6_CROSS_EVOS == TRUE
+
 	.align 2
 Cry_Sylveon::
 	.incbin "sound/direct_sound_samples/cries/sylveon.bin"
-.endif @ P_GEN_6_CROSS_EVOS
-.endif @ P_FAMILY_EEVEE
 
 .if P_FAMILY_PORYGON == TRUE
 	.align 2
@@ -5784,13 +5768,6 @@ Cry_IronCrown::
 Cry_Terapagos::
 	.incbin "sound/direct_sound_samples/cries/terapagos.bin"
 .endif @ P_FAMILY_TERAPAGOS
-
-.if P_FAMILY_PECHARUNT == TRUE
-	.align 2
-Cry_Pecharunt::
-	.incbin "sound/direct_sound_samples/cries/pecharunt.bin"
-.endif @ P_FAMILY_PECHARUNT
-.endif @ P_CRIES_ENABLED
 
 	.align 2
 DirectSoundWaveData_register_noise::

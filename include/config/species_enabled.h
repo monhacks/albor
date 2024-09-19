@@ -21,7 +21,6 @@
 
 // Battle gimmick specific Forms.
 #define P_PRIMAL_REVERSIONS              FALSE // Groudon and Kyogre only.
-#define P_GIGANTAMAX_FORMS               FALSE
 
 // Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
 #define P_REGIONAL_FORMS                 TRUE
@@ -35,12 +34,9 @@
 #define P_GEN_2_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_3_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_4_CROSS_EVOS               P_CROSS_GENERATION_EVOS
-#define P_GEN_6_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Just Sylveon.
 #define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
-#define P_FAMILY_MAGNEMITE               P_GEN_1_POKEMON
-#define P_FAMILY_FARFETCHD               FALSE
 #define P_FAMILY_DODUO                   P_GEN_1_POKEMON
 #define P_FAMILY_SEEL                    P_GEN_1_POKEMON
 #define P_FAMILY_GRIMER                  P_GEN_1_POKEMON
@@ -72,7 +68,6 @@
 #define P_FAMILY_MAGIKARP                P_GEN_1_POKEMON
 #define P_FAMILY_LAPRAS                  P_GEN_1_POKEMON
 #define P_FAMILY_DITTO                   FALSE
-#define P_FAMILY_EEVEE                   P_GEN_1_POKEMON
 #define P_FAMILY_PORYGON                 P_GEN_1_POKEMON
 #define P_FAMILY_OMANYTE                 P_GEN_1_POKEMON
 #define P_FAMILY_KABUTO                  P_GEN_1_POKEMON
@@ -551,6 +546,5 @@
 #define P_FAMILY_IRON_BOULDER            P_GEN_9_POKEMON
 #define P_FAMILY_IRON_CROWN              P_GEN_9_POKEMON
 #define P_FAMILY_TERAPAGOS               P_GEN_9_POKEMON
-#define P_FAMILY_PECHARUNT               P_GEN_9_POKEMON
 
 #endif // GUARD_CONFIG_SPECIES_ENABLED_H
