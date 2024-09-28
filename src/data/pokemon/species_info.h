@@ -29,10 +29,10 @@
         .paletteFemale = gMonPalette_## pal##F,             \
         .shinyPaletteFemale = gMonShinyPalette_## pal##F
 
-#define ICON(sprite)                                 \
+#define ICON(sprite)                                        \
         .iconSprite = gObjectEventPic_## sprite
 
-#define ICON_FEMALE(sprite)                          \
+#define ICON_FEMALE(sprite)                                 \
         .iconSpriteFemale = gObjectEventPic_## sprite##F
 
 #define LEARNSETS(learn)                                    \
