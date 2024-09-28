@@ -89,18 +89,12 @@ gCryTable::
 	cry Cry_Magnemite
 	cry Cry_Magneton
 	cry Cry_Magnezone
-.if P_FAMILY_DODUO == TRUE
 	cry Cry_Doduo
 	cry Cry_Dodrio
-.endif @ P_FAMILY_DODUO
-.if P_FAMILY_SEEL == TRUE
 	cry Cry_Seel
 	cry Cry_Dewgong
-.endif @ P_FAMILY_SEEL
-.if P_FAMILY_GRIMER == TRUE
 	cry Cry_Grimer
 	cry Cry_Muk
-.endif @ P_FAMILY_GRIMER
 .if P_FAMILY_SHELLDER == TRUE
 	cry Cry_Shellder
 	cry Cry_Cloyster
@@ -169,27 +163,13 @@ gCryTable::
 	cry Cry_Rhyperior
 .endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_RHYHORN
-.if P_FAMILY_CHANSEY == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
-	cry Cry_Happiny
-.endif @ P_GEN_4_CROSS_EVOS
-	cry Cry_Chansey
-.if P_GEN_2_CROSS_EVOS == TRUE
-	cry Cry_Blissey
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_CHANSEY
 .if P_FAMILY_TANGELA == TRUE
 	cry Cry_Tangela
 .if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Tangrowth
 .endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_TANGELA
-.if P_FAMILY_KANGASKHAN == TRUE
 	cry Cry_Kangaskhan
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_KangaskhanMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_KANGASKHAN
 .if P_FAMILY_HORSEA == TRUE
 	cry Cry_Horsea
 	cry Cry_Seadra
@@ -2249,9 +2229,6 @@ gCryTable::
 .if P_FAMILY_IRON_CROWN == TRUE
 	cry Cry_IronCrown
 .endif @ P_FAMILY_IRON_CROWN
-.if P_FAMILY_TERAPAGOS == TRUE
-	cry Cry_Terapagos
-.endif @ P_FAMILY_TERAPAGOS
 
 	.align 2
 gCryTable_Reverse::

@@ -742,7 +742,6 @@ Cry_Magneton::
 Cry_Magnezone::
 	.incbin "sound/direct_sound_samples/cries/magnezone.bin"
 
-.if P_FAMILY_DODUO == TRUE
 	.align 2
 Cry_Doduo::
 	.incbin "sound/direct_sound_samples/cries/doduo.bin"
@@ -750,9 +749,7 @@ Cry_Doduo::
 	.align 2
 Cry_Dodrio::
 	.incbin "sound/direct_sound_samples/cries/dodrio.bin"
-.endif @ P_FAMILY_DODUO
 
-.if P_FAMILY_SEEL == TRUE
 	.align 2
 Cry_Seel::
 	.incbin "sound/direct_sound_samples/cries/seel.bin"
@@ -760,9 +757,7 @@ Cry_Seel::
 	.align 2
 Cry_Dewgong::
 	.incbin "sound/direct_sound_samples/cries/dewgong.bin"
-.endif @ P_FAMILY_SEEL
 
-.if P_FAMILY_GRIMER == TRUE
 	.align 2
 Cry_Grimer::
 	.incbin "sound/direct_sound_samples/cries/grimer.bin"
@@ -770,7 +765,6 @@ Cry_Grimer::
 	.align 2
 Cry_Muk::
 	.incbin "sound/direct_sound_samples/cries/muk.bin"
-.endif @ P_FAMILY_GRIMER
 
 .if P_FAMILY_SHELLDER == TRUE
 	.align 2
@@ -942,11 +936,9 @@ Cry_Tangrowth::
 .endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_TANGELA
 
-.if P_FAMILY_KANGASKHAN == TRUE
 	.align 2
 Cry_Kangaskhan::
 	.incbin "sound/direct_sound_samples/cries/kangaskhan.bin"
-.endif @ P_FAMILY_KANGASKHAN
 
 .if P_FAMILY_HORSEA == TRUE
 	.align 2
@@ -5762,12 +5754,6 @@ Cry_IronBoulder::
 Cry_IronCrown::
 	.incbin "sound/direct_sound_samples/cries/iron_crown.bin"
 .endif @ P_FAMILY_IRON_CROWN
-
-.if P_FAMILY_TERAPAGOS == TRUE
-	.align 2
-Cry_Terapagos::
-	.incbin "sound/direct_sound_samples/cries/terapagos.bin"
-.endif @ P_FAMILY_TERAPAGOS
 
 	.align 2
 DirectSoundWaveData_register_noise::

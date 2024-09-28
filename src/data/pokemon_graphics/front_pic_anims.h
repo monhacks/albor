@@ -969,6 +969,10 @@ static const union AnimCmd sAnim_Golem_1[] =
     ANIMCMD_END,
 };
 
+PLACEHOLDER_ANIM_SINGLE_FRAME(GeodudeAlolan);
+PLACEHOLDER_ANIM_SINGLE_FRAME(GravelerAlolan);
+PLACEHOLDER_ANIM_SINGLE_FRAME(GolemAlolan);
+
 static const union AnimCmd sAnim_Ponyta_1[] =
 {
     ANIMCMD_FRAME(1, 30),
@@ -1042,7 +1046,6 @@ static const union AnimCmd sAnim_Magnezone_1[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_DODUO
 static const union AnimCmd sAnim_Doduo_1[] =
 {
     ANIMCMD_FRAME(0, 18),
@@ -1064,9 +1067,7 @@ static const union AnimCmd sAnim_Dodrio_1[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DODUO
 
-#if P_FAMILY_SEEL
 static const union AnimCmd sAnim_Seel_1[] =
 {
     ANIMCMD_FRAME(1, 30),
@@ -1083,7 +1084,6 @@ static const union AnimCmd sAnim_Dewgong_1[] =
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SEEL
 
 static const union AnimCmd sAnim_Grimer_1[] =
 {
@@ -1441,36 +1441,6 @@ static const union AnimCmd sAnim_Rhyperior_1[] =
 #endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_RHYHORN
 
-#if P_FAMILY_CHANSEY
-#if P_GEN_4_CROSS_EVOS
-static const union AnimCmd sAnim_Happiny_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
-#endif //P_GEN_4_CROSS_EVOS
-
-static const union AnimCmd sAnim_Chansey_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_END,
-};
-
-#if P_GEN_2_CROSS_EVOS
-static const union AnimCmd sAnim_Blissey_1[] =
-{
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 30),
-    ANIMCMD_END,
-};
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_CHANSEY
-
 #if P_FAMILY_TANGELA
 static const union AnimCmd sAnim_Tangela_1[] =
 {
@@ -1495,7 +1465,6 @@ static const union AnimCmd sAnim_Tangrowth_1[] =
 #endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_TANGELA
 
-#if P_FAMILY_KANGASKHAN
 static const union AnimCmd sAnim_Kangaskhan_1[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -1504,11 +1473,6 @@ static const union AnimCmd sAnim_Kangaskhan_1[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-
-#if P_MEGA_EVOLUTIONS
-PLACEHOLDER_ANIM_SINGLE_FRAME(KangaskhanMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_FAMILY_KANGASKHAN
 
 #if P_FAMILY_HORSEA
 static const union AnimCmd sAnim_Horsea_1[] =
@@ -9753,6 +9717,9 @@ SINGLE_ANIMATION(Tentacruel);
 SINGLE_ANIMATION(Geodude);
 SINGLE_ANIMATION(Graveler);
 SINGLE_ANIMATION(Golem);
+SINGLE_ANIMATION(GeodudeAlolan);
+SINGLE_ANIMATION(GravelerAlolan);
+SINGLE_ANIMATION(GolemAlolan);
 SINGLE_ANIMATION(Ponyta);
 SINGLE_ANIMATION(Rapidash);
 SINGLE_ANIMATION(PonytaGalarian);
@@ -9820,27 +9787,13 @@ SINGLE_ANIMATION(Rhydon);
 SINGLE_ANIMATION(Rhyperior);
 #endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_RHYHORN
-#if P_FAMILY_CHANSEY
-#if P_GEN_4_CROSS_EVOS
-SINGLE_ANIMATION(Happiny);
-#endif //P_GEN_4_CROSS_EVOS
-SINGLE_ANIMATION(Chansey);
-#if P_GEN_2_CROSS_EVOS
-SINGLE_ANIMATION(Blissey);
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_CHANSEY
 #if P_FAMILY_TANGELA
 SINGLE_ANIMATION(Tangela);
 #if P_GEN_4_CROSS_EVOS
 SINGLE_ANIMATION(Tangrowth);
 #endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_TANGELA
-#if P_FAMILY_KANGASKHAN
 SINGLE_ANIMATION(Kangaskhan);
-#if P_MEGA_EVOLUTIONS
-SINGLE_ANIMATION(KangaskhanMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_FAMILY_KANGASKHAN
 #if P_FAMILY_HORSEA
 SINGLE_ANIMATION(Horsea);
 SINGLE_ANIMATION(Seadra);

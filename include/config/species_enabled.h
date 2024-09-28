@@ -37,9 +37,6 @@
 #define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
-#define P_FAMILY_DODUO                   P_GEN_1_POKEMON
-#define P_FAMILY_SEEL                    P_GEN_1_POKEMON
-#define P_FAMILY_GRIMER                  P_GEN_1_POKEMON
 #define P_FAMILY_SHELLDER                P_GEN_1_POKEMON
 #define P_FAMILY_GASTLY                  P_GEN_1_POKEMON
 #define P_FAMILY_ONIX                    P_GEN_1_POKEMON
@@ -52,9 +49,7 @@
 #define P_FAMILY_LICKITUNG               P_GEN_1_POKEMON
 #define P_FAMILY_KOFFING                 P_GEN_1_POKEMON
 #define P_FAMILY_RHYHORN                 P_GEN_1_POKEMON
-#define P_FAMILY_CHANSEY                 FALSE
 #define P_FAMILY_TANGELA                 P_GEN_1_POKEMON
-#define P_FAMILY_KANGASKHAN              P_GEN_1_POKEMON
 #define P_FAMILY_HORSEA                  P_GEN_1_POKEMON
 #define P_FAMILY_GOLDEEN                 P_GEN_1_POKEMON
 #define P_FAMILY_STARYU                  P_GEN_1_POKEMON
@@ -545,6 +540,5 @@
 #define P_FAMILY_RAGING_BOLT             P_GEN_9_POKEMON
 #define P_FAMILY_IRON_BOULDER            P_GEN_9_POKEMON
 #define P_FAMILY_IRON_CROWN              P_GEN_9_POKEMON
-#define P_FAMILY_TERAPAGOS               P_GEN_9_POKEMON
 
 #endif // GUARD_CONFIG_SPECIES_ENABLED_H

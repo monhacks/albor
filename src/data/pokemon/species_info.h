@@ -4742,6 +4742,159 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Golem),
     },
 
+    [SPECIES_GEODUDE_ALOLAN] =
+    {
+        .baseHP        = 40,
+        .baseAttack    = 80,
+        .baseDefense   = 100,
+        .baseSpeed     = 20,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 30,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
+        .catchRate = 255,
+        .expYield = 60,
+        .evYield_Defense = 1,
+        .itemRare = ITEM_CELL_BATTERY,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("A-Geodude"),
+        .cryId = CRY_GEODUDE,
+        .natDexNum = DEX_GEODUDE_ALOLAN,
+        .categoryName = _("Rock"),
+        .height = 4,
+        .weight = 203,
+        .description = COMPOUND_STRING(
+            "Its body is a magnetic stone. Iron sand\n"
+            "attach to parts of its body with stronger\n"
+            "magnetism. If you carelessly step on one,\n"
+            "it will headbutt and shock you in anger."),
+        .pokemonScale = 347,
+        .pokemonOffset = 18,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FRONT_PIC(GeodudeAlolan, 48, 32),
+        .frontPicYOffset = 17,
+        .frontAnimFrames = sAnims_GeodudeAlolan,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        .enemyMonElevation = 16,
+        BACK_PIC(GeodudeAlolan, 64, 56),
+        .backPicYOffset = 13,
+        //.backAnimId = BACK_ANIM_NONE,
+        PALETTES(GeodudeAlolan),
+        ICON(GeodudeAlolan),
+        FOLLOWER(GeodudeAlolan, TRACKS_FOOT)
+        .isAlolanForm = TRUE,
+        LEARNSETS(GeodudeAlolan),
+        .eggMoveLearnset = sGeodudeAlolanEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER_ALOLAN}),
+    },
+
+    [SPECIES_GRAVELER_ALOLAN] =
+    {
+        .baseHP        = 55,
+        .baseAttack    = 95,
+        .baseDefense   = 115,
+        .baseSpeed     = 35,
+        .baseSpAttack  = 45,
+        .baseSpDefense = 45,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
+        .catchRate = 120,
+        .expYield = 137,
+        .evYield_Defense = 2,
+        .itemRare = ITEM_CELL_BATTERY,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("A-Graveler"),
+        .cryId = CRY_GRAVELER,
+        .natDexNum = DEX_GRAVELER_ALOLAN,
+        .categoryName = _("Rock"),
+        .height = 10,
+        .weight = 1100,
+        .description = COMPOUND_STRING(
+            "When two Graveler smash each other over\n"
+            "dravite, their favorite food, they cause\n"
+            "flashes of light and booming noises.\n"
+            "People call them “fireworks of the earth.”"),
+        .pokemonScale = 256,
+        .pokemonOffset = 2,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FRONT_PIC(GravelerAlolan, 64, 56),
+        .frontPicYOffset = 8,
+        .frontAnimFrames = sAnims_GravelerAlolan,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        BACK_PIC(GravelerAlolan, 64, 48),
+        .backPicYOffset = 10,
+        //.backAnimId = BACK_ANIM_NONE,
+        PALETTES(GravelerAlolan),
+        ICON(GravelerAlolan),
+        FOLLOWER(GravelerAlolan, TRACKS_FOOT)
+        .isAlolanForm = TRUE,
+        LEARNSETS(GravelerAlolan),
+        .eggMoveLearnset = sGeodudeAlolanEggMoveLearnset,
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_GOLEM_ALOLAN}),
+    },
+
+    [SPECIES_GOLEM_ALOLAN] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 120,
+        .baseDefense   = 130,
+        .baseSpeed     = 45,
+        .baseSpAttack  = 55,
+        .baseSpDefense = 65,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
+        .catchRate = 45,
+        .expYield = 248,
+        .evYield_Defense = 3,
+        .itemCommon = ITEM_CELL_BATTERY,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("A-Golem"),
+        .cryId = CRY_GOLEM,
+        .natDexNum = DEX_GOLEM_ALOLAN,
+        .categoryName = _("Megaton"),
+        .height = 17,
+        .weight = 3160,
+        .description = COMPOUND_STRING(
+            "It fires rocks charged with electricity.\n"
+            "Even if the rock isn't fired that\n"
+            "accurately, just grazing an opponent\n"
+            "will cause numbness and fainting."),
+        .pokemonScale = 256,
+        .pokemonOffset = 3,
+        .trainerScale = 296,
+        .trainerOffset = 2,
+        FRONT_PIC(GolemAlolan, 56, 64),
+        .frontPicYOffset = 1,
+        .frontAnimFrames = sAnims_GolemAlolan,
+        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
+        BACK_PIC(GolemAlolan, 64, 48),
+        .backPicYOffset = 13,
+        //.backAnimId = BACK_ANIM_NONE,
+        PALETTES(GolemAlolan),
+        ICON(GolemAlolan),
+        FOLLOWER(GolemAlolan, TRACKS_FOOT)
+        .isAlolanForm = TRUE,
+        LEARNSETS(GolemAlolan),
+        .eggMoveLearnset = sGeodudeAlolanEggMoveLearnset,
+    },
+
     [SPECIES_PONYTA] =
     {
         .types = MON_TYPES(TYPE_FIRE),
@@ -24740,181 +24893,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif //P_FAMILY_ROTOM
 
-#if P_FAMILY_UXIE
-    [SPECIES_UXIE] =
-    {
-        .baseHP        = 75,
-        .baseAttack    = 75,
-        .baseDefense   = 130,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 75,
-        .baseSpDefense = 130,
-        .types = MON_TYPES(TYPE_PSYCHIC),
-        .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 290,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 261,
-    #else
-        .expYield = 210,
-    #endif
-        .evYield_Defense = 2,
-        .evYield_SpDefense = 1,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 80,
-        .friendship = 140,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .isLegendary = TRUE,
-        .speciesName = _("Uxie"),
-        .cryId = CRY_UXIE,
-        .natDexNum = DEX_UXIE,
-        .categoryName = _("Knowledge"),
-        .height = 3,
-        .weight = 3,
-        .description = COMPOUND_STRING(
-            "Known as ”The Being of Knowledge,”\n"
-            "according to some sources, this Pokémon\n"
-            "provided people with the intelligence\n"
-            "necessary to solve various problems."),
-        .pokemonScale = 530,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Uxie, 56, 56),
-        .frontPicYOffset = 6,
-        .frontAnimFrames = sAnims_Uxie,
-        .frontAnimId = ANIM_SWING_CONCAVE,
-        .enemyMonElevation = 6,
-        BACK_PIC(Uxie, 56, 48),
-        .backPicYOffset = 8,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Uxie),
-        ICON(Uxie),
-        FOLLOWER(Uxie, TRACKS_FOOT)
-        LEARNSETS(Uxie),
-    },
-#endif //P_FAMILY_UXIE
-
-#if P_FAMILY_MESPRIT
-    [SPECIES_MESPRIT] =
-    {
-        .baseHP        = 80,
-        .baseAttack    = 105,
-        .baseDefense   = 105,
-        .baseSpeed     = 80,
-        .baseSpAttack  = 105,
-        .baseSpDefense = 105,
-        .types = MON_TYPES(TYPE_PSYCHIC),
-        .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 290,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 261,
-    #else
-        .expYield = 210,
-    #endif
-        .evYield_Attack = 1,
-        .evYield_SpAttack = 1,
-        .evYield_SpDefense = 1,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 80,
-        .friendship = 140,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_PINK,
-        .isLegendary = TRUE,
-        .speciesName = _("Mesprit"),
-        .cryId = CRY_MESPRIT,
-        .natDexNum = DEX_MESPRIT,
-        .categoryName = _("Emotion"),
-        .height = 3,
-        .weight = 3,
-        .description = COMPOUND_STRING(
-            "Although it slumbers at the bottom of a\n"
-            "lake, its spirit is said to leave its body\n"
-            "and flitter on the water surface. It\n"
-            "taught humans of sorrow, pain, and joy."),
-        .pokemonScale = 530,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Mesprit, 48, 56),
-        .frontPicYOffset = 4,
-        .frontAnimFrames = sAnims_Mesprit,
-        .frontAnimId = ANIM_H_SLIDE_WOBBLE,
-        .enemyMonElevation = 6,
-        BACK_PIC(Mesprit, 64, 48),
-        .backPicYOffset = 8,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Mesprit),
-        ICON(Mesprit),
-        FOLLOWER(Mesprit, TRACKS_FOOT)
-        LEARNSETS(Mesprit),
-    },
-#endif //P_FAMILY_MESPRIT
-
-#if P_FAMILY_AZELF
-    [SPECIES_AZELF] =
-    {
-        .baseHP        = 75,
-        .baseAttack    = 125,
-        .baseDefense   = 70,
-        .baseSpeed     = 115,
-        .baseSpAttack  = 125,
-        .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_PSYCHIC),
-        .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 290,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 261,
-    #else
-        .expYield = 210,
-    #endif
-        .evYield_Attack = 2,
-        .evYield_SpAttack = 1,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 80,
-        .friendship = 140,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_BLUE,
-        .isLegendary = TRUE,
-        .speciesName = _("Azelf"),
-        .cryId = CRY_AZELF,
-        .natDexNum = DEX_AZELF,
-        .categoryName = _("Willpower"),
-        .height = 3,
-        .weight = 3,
-        .description = COMPOUND_STRING(
-            "This Pokémon is said to have endowed\n"
-            "humans with the determination needed to\n"
-            "do things. It is thought that Uxie, Mesprit\n"
-            "and Azelf all came from the same egg."),
-        .pokemonScale = 530,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Azelf, 48, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Azelf,
-        .frontAnimId = ANIM_V_SLIDE_WOBBLE,
-        .enemyMonElevation = 6,
-        BACK_PIC(Azelf, 64, 56),
-        .backPicYOffset = 6,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Azelf),
-        ICON(Azelf),
-        FOLLOWER(Azelf, TRACKS_FOOT)
-        LEARNSETS(Azelf),
-    },
-#endif //P_FAMILY_AZELF
-
 #if P_FAMILY_HEATRAN
     [SPECIES_HEATRAN] =
     {
@@ -25084,112 +25062,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Manaphy),
     },
 #endif //P_FAMILY_MANAPHY
-
-#if P_FAMILY_SHAYMIN
-#if P_UPDATED_EXP_YIELDS >= GEN_8
-    #define SHAYMIN_EXP_YIELD 300
-#elif P_UPDATED_EXP_YIELDS >= GEN_5
-    #define SHAYMIN_EXP_YIELD 270
-#else
-    #define SHAYMIN_EXP_YIELD 64
-#endif
-
-#define SHAYMIN_MISC_INFO                                                               \
-        .catchRate = 45,                                                                \
-        .expYield = SHAYMIN_EXP_YIELD,                                                  \
-        .itemCommon = ITEM_LUM_BERRY,                                                   \
-        .itemRare = ITEM_LUM_BERRY,                                                     \
-        .genderRatio = MON_GENDERLESS,                                                  \
-        .eggCycles = 120,                                                               \
-        .friendship = 100,                                                              \
-        .growthRate = GROWTH_MEDIUM_SLOW,                                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                      \
-        .bodyColor = BODY_COLOR_GREEN,                                                  \
-        .speciesName = _("Shaymin"),                                                    \
-        .natDexNum = DEX_SHAYMIN,                                              \
-        .categoryName = _("Gratitude"),                                                 \
-        .formSpeciesIdTable = sShayminFormSpeciesIdTable,                               \
-        .formChangeTable = sShayminFormChangeTable,                                     \
-        .isMythical = TRUE
-
-    [SPECIES_SHAYMIN_LAND] =
-    {
-        SHAYMIN_MISC_INFO,
-        .baseHP        = 100,
-        .baseAttack    = 100,
-        .baseDefense   = 100,
-        .baseSpeed     = 100,
-        .baseSpAttack  = 100,
-        .baseSpDefense = 100,
-        .evYield_HP = 3,
-        .types = MON_TYPES(TYPE_GRASS),
-        .abilities = {ABILITY_NATURAL_CURE, ABILITY_NONE},
-        .cryId = CRY_SHAYMIN_LAND,
-        .height = 2,
-        .weight = 21,
-        .description = COMPOUND_STRING(
-            "The flowers all over its body bloom if it is\n"
-            "lovingly hugged and senses gratitude. It\n"
-            "dissolves toxins in the air to transform\n"
-            "ruined land into a lush field of flowers."),
-        .pokemonScale = 682,
-        .pokemonOffset = 24,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(ShayminLand, 40, 32),
-        .frontPicYOffset = 16,
-        .frontAnimFrames = sAnims_ShayminLand,
-        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(ShayminLand, 56, 40),
-        .backPicYOffset = 15,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(ShayminLand),
-        ICON(ShayminLand),
-        FOLLOWER(ShayminLand, TRACKS_FOOT)
-        LEARNSETS(ShayminLand),
-    },
-
-    [SPECIES_SHAYMIN_SKY] =
-    {
-        SHAYMIN_MISC_INFO,
-        .baseHP        = 100,
-        .baseAttack    = 103,
-        .baseDefense   = 75,
-        .baseSpeed     = 127,
-        .baseSpAttack  = 120,
-        .baseSpDefense = 75,
-    #if P_UPDATED_EVS >= GEN_5
-        .evYield_Speed = 3,
-    #else
-        .evYield_HP = 3,
-    #endif
-        .types = MON_TYPES(TYPE_GRASS, TYPE_FLYING),
-        .abilities = {ABILITY_SERENE_GRACE, ABILITY_NONE},
-        .noFlip = TRUE,
-        .cryId = CRY_SHAYMIN_SKY,
-        .height = 4,
-        .weight = 52,
-        .description = COMPOUND_STRING(
-            "Upon taking in the scent of a particular\n"
-            "rare flower, Shaymin is enveloped in light\n"
-            "and its tiny body transforms, confering\n"
-            "the power of flight upon it."),
-        .pokemonScale = 682,
-        .pokemonOffset = 24,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(ShayminSky, 56, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_ShayminSky,
-        .frontAnimId = ANIM_V_STRETCH,
-        BACK_PIC(ShayminSky, 56, 64),
-        .backPicYOffset = 2,
-        .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(ShayminSky),
-        ICON(ShayminSky),
-        LEARNSETS(ShayminSky),
-    },
-#endif //P_FAMILY_SHAYMIN
 
 #if P_FAMILY_VICTINI
     [SPECIES_VICTINI] =
@@ -26800,266 +26672,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Seismitoad),
     },
 #endif //P_FAMILY_TYMPOLE
-
-#if P_FAMILY_THROH
-    [SPECIES_THROH] =
-    {
-        .baseHP        = 120,
-        .baseAttack    = 100,
-        .baseDefense   = 85,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 30,
-        .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .catchRate = 45,
-        .expYield = 163,
-        .evYield_HP = 2,
-        .itemRare = ITEM_BLACK_BELT,
-        .genderRatio = MON_MALE,
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = {ABILITY_GUTS, ABILITY_INNER_FOCUS, ABILITY_MOLD_BREAKER},
-        .bodyColor = BODY_COLOR_RED,
-        .speciesName = _("Throh"),
-        .cryId = CRY_THROH,
-        .natDexNum = DEX_THROH,
-        .categoryName = _("Judo"),
-        .height = 13,
-        .weight = 555,
-        .description = COMPOUND_STRING(
-            "When it tightens its belt, it becomes\n"
-            "stronger. Wild Throh use vines to weave\n"
-            "their own belts. It changes belts as it\n"
-            "gets more powerful."),
-        .pokemonScale = 272,
-        .pokemonOffset = 7,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Throh, 64, 48),
-        .frontPicYOffset = 10,
-        .frontAnimFrames = sAnims_Throh,
-        .frontAnimId = ANIM_CIRCULAR_STRETCH_TWICE,
-        BACK_PIC(Throh, 64, 48),
-        .backPicYOffset = 11,
-        .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Throh),
-        ICON(Throh),
-        FOOTPRINT(Throh)
-        FOLLOWER(Throh, TRACKS_FOOT)
-        LEARNSETS(Throh),
-    },
-#endif //P_FAMILY_THROH
-
-#if P_FAMILY_SAWK
-    [SPECIES_SAWK] =
-    {
-        .baseHP        = 75,
-        .baseAttack    = 125,
-        .baseDefense   = 75,
-        .baseSpeed     = 85,
-        .baseSpAttack  = 30,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .catchRate = 45,
-        .expYield = 163,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_BLACK_BELT,
-        .genderRatio = MON_MALE,
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        .abilities = {ABILITY_STURDY, ABILITY_INNER_FOCUS, ABILITY_MOLD_BREAKER},
-        .bodyColor = BODY_COLOR_BLUE,
-        .noFlip = TRUE,
-        .speciesName = _("Sawk"),
-        .cryId = CRY_SAWK,
-        .natDexNum = DEX_SAWK,
-        .categoryName = _("Karate"),
-        .height = 14,
-        .weight = 510,
-        .description = COMPOUND_STRING(
-            "The sound of Sawk punching boulders\n"
-            "and trees can be heard all the way from\n"
-            "the mountains where they train.\n"
-            "Disturbing their training angers them."),
-        .pokemonScale = 265,
-        .pokemonOffset = 4,
-        .trainerScale = 262,
-        .trainerOffset = 0,
-        FRONT_PIC(Sawk, 56, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_Sawk,
-        .frontAnimId = ANIM_GROW_VIBRATE,
-        BACK_PIC(Sawk, 64, 40),
-        .backPicYOffset = 13,
-        .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(Sawk),
-        ICON(Sawk),
-        FOOTPRINT(Sawk)
-        FOLLOWER(Sawk, TRACKS_FOOT)
-        LEARNSETS(Sawk),
-    },
-#endif //P_FAMILY_SAWK
-
-#if P_FAMILY_SEWADDLE
-    [SPECIES_SEWADDLE] =
-    {
-        .baseHP        = 45,
-        .baseAttack    = 53,
-        .baseDefense   = 70,
-        .baseSpeed     = 42,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
-        .catchRate = 255,
-        .expYield = 62,
-        .evYield_Defense = 1,
-        .itemRare = ITEM_MENTAL_HERB,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_SWARM, ABILITY_CHLOROPHYLL, ABILITY_OVERCOAT},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Sewaddle"),
-        .cryId = CRY_SEWADDLE,
-        .natDexNum = DEX_SEWADDLE,
-        .categoryName = _("Sewing"),
-        .height = 3,
-        .weight = 25,
-        .description = COMPOUND_STRING(
-            "It chews up leaves and sews them with\n"
-            "sticky thread extruded from its mouth.\n"
-            "Since this Pokémon makes its own clothes,\n"
-            "it is a mascot for fashion designers."),
-        .pokemonScale = 530,
-        .pokemonOffset = 15,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Sewaddle, 40, 40),
-        .frontPicYOffset = 14,
-        .frontAnimFrames = sAnims_Sewaddle,
-        .frontAnimId = ANIM_CIRCLE_INTO_BG,
-        BACK_PIC(Sewaddle, 40, 48),
-        .backPicYOffset = 13,
-        .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Sewaddle),
-        ICON(Sewaddle),
-        FOOTPRINT(Sewaddle)
-        FOLLOWER(Sewaddle, TRACKS_FOOT)
-        LEARNSETS(Sewaddle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_SWADLOON}),
-    },
-
-    [SPECIES_SWADLOON] =
-    {
-        .baseHP        = 55,
-        .baseAttack    = 63,
-        .baseDefense   = 90,
-        .baseSpeed     = 42,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 80,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
-        .catchRate = 120,
-        .expYield = 133,
-        .evYield_Defense = 2,
-        .itemRare = ITEM_MENTAL_HERB,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_LEAF_GUARD, ABILITY_CHLOROPHYLL, ABILITY_OVERCOAT},
-        .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Swadloon"),
-        .cryId = CRY_SWADLOON,
-        .natDexNum = DEX_SWADLOON,
-        .categoryName = _("Leaf-Wrapped"),
-        .height = 5,
-        .weight = 73,
-        .description = COMPOUND_STRING(
-            "Forests where Swadloon live have\n"
-            "superb foliage because the nutrients\n"
-            "they make from fallen leaves nourish\n"
-            "the plant life."),
-        .pokemonScale = 432,
-        .pokemonOffset = 15,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Swadloon, 56, 48),
-        .frontPicYOffset = 12,
-        .frontAnimFrames = sAnims_Swadloon,
-        .frontAnimId = ANIM_CIRCULAR_STRETCH_TWICE,
-        BACK_PIC(Swadloon, 48, 48),
-        .backPicYOffset = 10,
-        .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Swadloon),
-        ICON(Swadloon),
-        FOOTPRINT(Swadloon)
-        FOLLOWER(Swadloon, TRACKS_FOOT)
-        LEARNSETS(Swadloon),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_LEAVANNY}),
-    },
-
-    [SPECIES_LEAVANNY] =
-    {
-        .baseHP        = 75,
-        .baseAttack    = 103,
-        .baseDefense   = 80,
-        .baseSpeed     = 92,
-        .baseSpAttack  = 70,
-        .baseSpDefense = P_UPDATED_STATS >= GEN_6 ? 80 : 70,
-        .types = MON_TYPES(TYPE_BUG, TYPE_GRASS),
-        .catchRate = 45,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
-        .expYield = 250,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_7
-        .expYield = 225,
-    #else
-        .expYield = 221,
-    #endif
-        .evYield_Attack = 3,
-        .itemRare = ITEM_MENTAL_HERB,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_SWARM, ABILITY_CHLOROPHYLL, ABILITY_OVERCOAT},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Leavanny"),
-        .cryId = CRY_LEAVANNY,
-        .natDexNum = DEX_LEAVANNY,
-        .categoryName = _("Nurturing"),
-        .height = 12,
-        .weight = 205,
-        .description = COMPOUND_STRING(
-            "It keeps its eggs warm with heat from\n"
-            "fermenting leaves. It also uses leaves to\n"
-            "weave warm wrappings for Sewaddle by\n"
-            "using the silk secreted from its mouth."),
-        .pokemonScale = 282,
-        .pokemonOffset = 3,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Leavanny, 48, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Leavanny,
-        .frontAnimId = ANIM_GROW_VIBRATE,
-        BACK_PIC(Leavanny, 56, 64),
-        .backPicYOffset = 0,
-        .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Leavanny),
-        ICON(Leavanny),
-        FOOTPRINT(Leavanny)
-        FOLLOWER(Leavanny, TRACKS_FOOT)
-        LEARNSETS(Leavanny),
-    },
-#endif //P_FAMILY_SEWADDLE
 
 #if P_FAMILY_VENIPEDE
     [SPECIES_VENIPEDE] =
@@ -35582,580 +35194,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif //P_FAMILY_PIKIPEK
 
-#if P_FAMILY_YUNGOOS
-    [SPECIES_YUNGOOS] =
-    {
-        .baseHP        = 48,
-        .baseAttack    = 70,
-        .baseDefense   = 30,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 30,
-        .baseSpDefense = 30,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .catchRate = 255,
-        .expYield = 51,
-        .evYield_Attack = 1,
-        .itemRare = ITEM_PECHA_BERRY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_STAKEOUT, ABILITY_STRONG_JAW, ABILITY_ADAPTABILITY},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Yungoos"),
-        .cryId = CRY_YUNGOOS,
-        .natDexNum = DEX_YUNGOOS,
-        .categoryName = _("Loitering"),
-        .height = 4,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "With its sharp fangs, it will bite anything.\n"
-            "It wanders around in a never-ending\n"
-            "search for food. At dusk, it collapses\n"
-            "and falls asleep on the spot."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Yungoos, 64, 40),
-        .frontPicYOffset = 12,
-        .frontAnimFrames = sAnims_Yungoos,
-        .frontAnimId = ANIM_V_STRETCH,
-        BACK_PIC(Yungoos, 48, 40),
-        .backPicYOffset = 14,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Yungoos),
-        ICON(Yungoos),
-        FOOTPRINT(Yungoos)
-        FOLLOWER(Yungoos, TRACKS_FOOT)
-        LEARNSETS(Yungoos),
-        .evolutions = EVOLUTION({EVO_LEVEL_DAY, 20, SPECIES_GUMSHOOS}),
-    },
-
-    [SPECIES_GUMSHOOS] =
-    {
-        .baseHP        = 88,
-        .baseAttack    = 110,
-        .baseDefense   = 60,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .catchRate = 127,
-        .expYield = 146,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_PECHA_BERRY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_STAKEOUT, ABILITY_STRONG_JAW, ABILITY_ADAPTABILITY},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Gumshoos"),
-        .cryId = CRY_GUMSHOOS,
-        .natDexNum = DEX_GUMSHOOS,
-        .categoryName = _("Stakeout"),
-        .height = 7,
-        .weight = 142,
-        .description = COMPOUND_STRING(
-            "When it finds a trace of its prey, it\n"
-            "patiently stakes out the location...\n"
-            "but as it's diurnal, it's always snoozing\n"
-            "by nightfall."),
-        .pokemonScale = 365,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Gumshoos, 56, 56),
-        .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_Gumshoos,
-        .frontAnimId = ANIM_H_SHAKE,
-        BACK_PIC(Gumshoos, 48, 56),
-        .backPicYOffset = 7,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Gumshoos),
-        ICON(Gumshoos),
-        FOOTPRINT(Gumshoos)
-        FOLLOWER(Gumshoos, TRACKS_FOOT)
-        LEARNSETS(Gumshoos),
-    },
-#endif //P_FAMILY_YUNGOOS
-
-#if P_FAMILY_GRUBBIN
-    [SPECIES_GRUBBIN] =
-    {
-        .baseHP        = 47,
-        .baseAttack    = 62,
-        .baseDefense   = 45,
-        .baseSpeed     = 46,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 45,
-        .types = MON_TYPES(TYPE_BUG),
-        .catchRate = 255,
-        .expYield = 60,
-        .evYield_Attack = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_SWARM, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_GRAY,
-        .speciesName = _("Grubbin"),
-        .cryId = CRY_GRUBBIN,
-        .natDexNum = DEX_GRUBBIN,
-        .categoryName = _("Larva"),
-        .height = 4,
-        .weight = 44,
-        .description = COMPOUND_STRING(
-            "They often gather near places frequented\n"
-            "by electric Pokémon in order to avoid being\n"
-            "attacked by bird Pokémon, though it\n"
-            "normally lives underground."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Grubbin, 48, 32),
-        .frontPicYOffset = 17,
-        .frontAnimFrames = sAnims_Grubbin,
-        .frontAnimId = ANIM_H_SLIDE,
-        BACK_PIC(Grubbin, 64, 32),
-        .backPicYOffset = 16,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Grubbin),
-        ICON(Grubbin),
-        FOOTPRINT(Grubbin)
-        FOLLOWER(Grubbin, TRACKS_FOOT)
-        LEARNSETS(Grubbin),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARJABUG}),
-    },
-
-    [SPECIES_CHARJABUG] =
-    {
-        .baseHP        = 57,
-        .baseAttack    = 82,
-        .baseDefense   = 95,
-        .baseSpeed     = 36,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_BUG, TYPE_ELECTRIC),
-        .catchRate = 120,
-        .expYield = 140,
-        .evYield_Defense = 2,
-        .itemRare = ITEM_CELL_BATTERY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_BATTERY, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Charjabug"),
-        .cryId = CRY_CHARJABUG,
-        .natDexNum = DEX_CHARJABUG,
-        .categoryName = _("Battery"),
-        .height = 5,
-        .weight = 105,
-        .description = COMPOUND_STRING(
-            "From the food it digests, it generates\n"
-            "electricity, and it stores this energy in\n"
-            "its electric sac. On camping trips, people\n"
-            "are grateful to have one around."),
-        .pokemonScale = 432,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Charjabug, 40, 40),
-        .frontPicYOffset = 14,
-        .frontAnimFrames = sAnims_Charjabug,
-        .frontAnimId = ANIM_SHAKE_FLASH_YELLOW_SLOW,
-        BACK_PIC(Charjabug, 64, 40),
-        .backPicYOffset = 15,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Charjabug),
-        ICON(Charjabug, 1),
-        FOOTPRINT(Charjabug)
-        FOLLOWER(Charjabug, TRACKS_FOOT)
-        LEARNSETS(Charjabug),
-        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_VIKAVOLT},
-                                {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_VIKAVOLT}),
-    },
-
-    [SPECIES_VIKAVOLT] =
-    {
-        .baseHP        = 77,
-        .baseAttack    = 70,
-        .baseDefense   = 90,
-        .baseSpeed     = 43,
-        .baseSpAttack  = 145,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_BUG, TYPE_ELECTRIC),
-        .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 250 : 225,
-        .evYield_SpAttack = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_BLUE,
-        .speciesName = _("Vikavolt"),
-        .cryId = CRY_VIKAVOLT,
-        .natDexNum = DEX_VIKAVOLT,
-        .categoryName = _("Stag Beetle"),
-        .height = 15,
-        .weight = 450,
-        .description = COMPOUND_STRING(
-            "It concentrates electrical energy within\n"
-            "its large jaws and uses it to zap its foes.\n"
-            "It overwhelms bird Pokémon with shocking\n"
-            "beams of electrical energy."),
-        .pokemonScale = 268,
-        .pokemonOffset = 2,
-        .trainerScale = 271,
-        .trainerOffset = 0,
-        FRONT_PIC(Vikavolt, 64, 56),
-        .frontPicYOffset = 3,
-        .frontAnimFrames = sAnims_Vikavolt,
-        .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES,
-        .enemyMonElevation = 8,
-        BACK_PIC(Vikavolt, 64, 56),
-        .backPicYOffset = 7,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Vikavolt),
-        ICON(Vikavolt),
-        FOOTPRINT(Vikavolt)
-        FOLLOWER(Vikavolt, TRACKS_FOOT)
-        LEARNSETS(Vikavolt),
-    },
-#endif //P_FAMILY_GRUBBIN
-
-#if P_FAMILY_CRABRAWLER
-    [SPECIES_CRABRAWLER] =
-    {
-        .baseHP        = 47,
-        .baseAttack    = 82,
-        .baseDefense   = 57,
-        .baseSpeed     = 63,
-        .baseSpAttack  = 42,
-        .baseSpDefense = 47,
-        .types = MON_TYPES(TYPE_FIGHTING),
-        .catchRate = 225,
-        .expYield = 68,
-        .evYield_Attack = 1,
-        .itemRare = ITEM_ASPEAR_BERRY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRATE),
-        .abilities = {ABILITY_HYPER_CUTTER, ABILITY_IRON_FIST, ABILITY_ANGER_POINT},
-        .bodyColor = BODY_COLOR_PURPLE,
-        .speciesName = _("Crabrawler"),
-        .cryId = CRY_CRABRAWLER,
-        .natDexNum = DEX_CRABRAWLER,
-        .categoryName = _("Boxing"),
-        .height = 6,
-        .weight = 70,
-        .description = COMPOUND_STRING(
-            "While guarding its weak points with its\n"
-            "pincers, it looks for an opening and\n"
-            "unleashes punches. When it loses, it\n"
-            "foams at the mouth and faints."),
-        .pokemonScale = 422,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Crabrawler, 64, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_Crabrawler,
-        .frontAnimId = ANIM_V_SHAKE,
-        BACK_PIC(Crabrawler, 64, 48),
-        .backPicYOffset = 9,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Crabrawler),
-        ICON(Crabrawler),
-        FOOTPRINT(Crabrawler)
-        FOLLOWER(Crabrawler, TRACKS_FOOT)
-        LEARNSETS(Crabrawler),
-        .evolutions = EVOLUTION({EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_CRABOMINABLE},
-                                {EVO_ITEM, ITEM_ICE_STONE, SPECIES_CRABOMINABLE}),
-    },
-
-    [SPECIES_CRABOMINABLE] =
-    {
-        .baseHP        = 97,
-        .baseAttack    = 132,
-        .baseDefense   = 77,
-        .baseSpeed     = 43,
-        .baseSpAttack  = 62,
-        .baseSpDefense = 67,
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_ICE),
-        .catchRate = 60,
-        .expYield = 167,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_CHERI_BERRY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_INVERTEBRATE),
-        .abilities = {ABILITY_HYPER_CUTTER, ABILITY_IRON_FIST, ABILITY_ANGER_POINT},
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Crabminabl", "Crabominable"),
-        .cryId = CRY_CRABOMINABLE,
-        .natDexNum = DEX_CRABOMINABLE,
-        .categoryName = _("Woolly Crab"),
-        .height = 17,
-        .weight = 1800,
-        .description = COMPOUND_STRING(
-            "It aimed for the top but got lost and\n"
-            "ended up on a snowy mountain. Being forced\n"
-            "to endure the cold, this Pokémon evolved\n"
-            "and grew thick fur."),
-        .pokemonScale = 259,
-        .pokemonOffset = 0,
-        .trainerScale = 290,
-        .trainerOffset = 1,
-        FRONT_PIC(Crabominable, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Crabominable,
-        .frontAnimId = ANIM_SHRINK_GROW_VIBRATE_FAST,
-        BACK_PIC(Crabominable, 64, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Crabominable),
-        ICON(Crabominable),
-        FOOTPRINT(Crabominable)
-        FOLLOWER(Crabominable, TRACKS_FOOT)
-        LEARNSETS(Crabominable),
-    },
-#endif //P_FAMILY_CRABRAWLER
-
-#if P_FAMILY_ORICORIO
-#define ORICORIO_MISC_INFO                                      \
-        .baseHP        = 75,                                    \
-        .baseAttack    = 70,                                    \
-        .baseDefense   = 70,                                    \
-        .baseSpeed     = 93,                                    \
-        .baseSpAttack  = 98,                                    \
-        .baseSpDefense = 70,                                    \
-        .catchRate = 45,                                        \
-        .expYield = 167,                                        \
-        .evYield_SpAttack = 2,                                  \
-        .itemRare = ITEM_HONEY,                                 \
-        .genderRatio = PERCENT_FEMALE(75),                      \
-        .eggCycles = 20,                                        \
-        .friendship = STANDARD_FRIENDSHIP,                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),          \
-        .abilities = {ABILITY_DANCER, ABILITY_NONE},          \
-        .speciesName = _("Oricorio"),                           \
-        .natDexNum = DEX_ORICORIO,                     \
-        .categoryName = _("Dancing"),                           \
-        .height = 6,                                            \
-        .weight = 34,                                           \
-        .pokemonScale = 422,                                    \
-        .pokemonOffset = 12,                                    \
-        .trainerScale = 256,                                    \
-        .trainerOffset = 0,                                     \
-        .frontAnimFrames = sAnims_Oricorio,                     \
-        .backPicYOffset = 0,                                    \
-        FOOTPRINT(Oricorio)                                     \
-        LEARNSETS(Oricorio),                                    \
-        .formSpeciesIdTable = sOricorioFormSpeciesIdTable,      \
-        .formChangeTable = sOricorioFormChangeTable
-        //.backAnimId = BACK_ANIM_NONE,                       \
-
-    [SPECIES_ORICORIO_BAILE] =
-    {
-        ORICORIO_MISC_INFO,
-        .types = MON_TYPES(TYPE_FIRE, TYPE_FLYING),
-        .bodyColor = BODY_COLOR_RED,
-        .cryId = CRY_ORICORIO_BAILE,
-        .description = COMPOUND_STRING(
-            "It wins the hearts of its enemies\n"
-            "with its passionate dancing and then\n"
-            "uses the opening it creates to\n"
-            "burn them up with blazing flames."),
-        FRONT_PIC(OricorioBaile, 56, 64),
-        .frontPicYOffset = 2,
-        .frontAnimId = ANIM_CONCAVE_ARC_SMALL,
-        BACK_PIC(OricorioBaile, 64, 64),
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(OricorioBaile),
-        ICON(OricorioBaile),
-        FOLLOWER(OricorioBaile, TRACKS_FOOT)
-    },
-
-    [SPECIES_ORICORIO_POM_POM] =
-    {
-        ORICORIO_MISC_INFO,
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FLYING),
-        .bodyColor = BODY_COLOR_YELLOW,
-        .cryId = CRY_ORICORIO_POM_POM,
-        .description = COMPOUND_STRING(
-            "This form of Oricorio has sipped\n"
-            "yellow nectar. It uses nimble steps to\n"
-            "approach opponents, then knocks\n"
-            "them out with electric punches."),
-        FRONT_PIC(OricorioPomPom, 56, 56),
-        .frontPicYOffset = 5,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(OricorioPomPom, 64, 64),
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(OricorioPomPom),
-        ICON(OricorioPomPom, 1),
-    },
-
-    [SPECIES_ORICORIO_PAU] =
-    {
-        ORICORIO_MISC_INFO,
-        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FLYING),
-        .bodyColor = BODY_COLOR_PINK,
-        .cryId = CRY_ORICORIO_PAU,
-        .description = COMPOUND_STRING(
-            "This form of Oricorio has sipped\n"
-            "pink nectar. It elevates its mind with\n"
-            "the gentle steps of its dance, then\n"
-            "unleashes its psychic energy."),
-        FRONT_PIC(OricorioPau, 56, 64),
-        .frontPicYOffset = 3,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(OricorioPau, 64, 64),
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(OricorioPau),
-        ICON(OricorioPau, 1),
-    },
-
-    [SPECIES_ORICORIO_SENSU] =
-    {
-        ORICORIO_MISC_INFO,
-        .types = MON_TYPES(TYPE_GHOST, TYPE_FLYING),
-        .bodyColor = BODY_COLOR_PURPLE,
-        .cryId = CRY_ORICORIO_SENSU,
-        .description = COMPOUND_STRING(
-            "It charms its opponents with its\n"
-            "refined dancing. When they let their\n"
-            "guard down, it places a curse on\n"
-            "them that will bring on their demise."),
-        FRONT_PIC(OricorioSensu, 64, 56),
-        .frontPicYOffset = 4,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(OricorioSensu, 64, 64),
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(OricorioSensu),
-        ICON(OricorioSensu),
-    },
-#endif //P_FAMILY_ORICORIO
-
-#if P_FAMILY_CUTIEFLY
-    [SPECIES_CUTIEFLY] =
-    {
-        .baseHP        = 40,
-        .baseAttack    = 45,
-        .baseDefense   = 40,
-        .baseSpeed     = 84,
-        .baseSpAttack  = 55,
-        .baseSpDefense = 40,
-        .types = MON_TYPES(TYPE_BUG, TYPE_FAIRY),
-        .catchRate = 190,
-        .expYield = 61,
-        .evYield_Speed = 1,
-        .itemRare = ITEM_HONEY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_FAIRY),
-        .abilities = {ABILITY_HONEY_GATHER, ABILITY_SHIELD_DUST, ABILITY_SWEET_VEIL},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Cutiefly"),
-        .cryId = CRY_CUTIEFLY,
-        .natDexNum = DEX_CUTIEFLY,
-        .categoryName = _("Bee Fly"),
-        .height = 1,
-        .weight = 2,
-        .description = COMPOUND_STRING(
-            "Myriads of Cutiefly flutter above the\n"
-            "heads of people who have auras resembling\n"
-            "those of flowers. It can identify which\n"
-            "flowers are about to bloom."),
-        .pokemonScale = 682,
-        .pokemonOffset = 24,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Cutiefly, 33, 35),
-        .frontPicYOffset = 16,
-        .frontAnimFrames = sAnims_Cutiefly,
-        .frontAnimId = ANIM_H_SLIDE_WOBBLE,
-        .enemyMonElevation = 10,
-        BACK_PIC(Cutiefly, 56, 48),
-        .backPicYOffset = 15,
-        .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Cutiefly),
-        ICON(Cutiefly),
-        FOOTPRINT(Cutiefly)
-        FOLLOWER(Cutiefly, TRACKS_FOOT)
-        LEARNSETS(Cutiefly),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_RIBOMBEE}),
-    },
-
-    [SPECIES_RIBOMBEE] =
-    {
-        .baseHP        = 60,
-        .baseAttack    = 55,
-        .baseDefense   = 60,
-        .baseSpeed     = 124,
-        .baseSpAttack  = 95,
-        .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_BUG, TYPE_FAIRY),
-        .catchRate = 75,
-        .expYield = 162,
-        .evYield_Speed = 2,
-        .itemRare = ITEM_HONEY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_FAIRY),
-        .abilities = {ABILITY_HONEY_GATHER, ABILITY_SHIELD_DUST, ABILITY_SWEET_VEIL},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Ribombee"),
-        .cryId = CRY_RIBOMBEE,
-        .natDexNum = DEX_RIBOMBEE,
-        .categoryName = _("Bee Fly"),
-        .height = 2,
-        .weight = 5,
-        .description = COMPOUND_STRING(
-            "Ribombee rolls up pollen into puffs.\n"
-            "It makes many different varieties, some\n"
-            "used as food and others used in battle.\n"
-            "They are sometimes sold as supplements."),
-        .pokemonScale = 682,
-        .pokemonOffset = 24,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Ribombee, 32, 47),
-        .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_Ribombee,
-        .frontAnimId = ANIM_CONVEX_DOUBLE_ARC_TWICE,
-        .enemyMonElevation = 6,
-        BACK_PIC(Ribombee, 56, 48),
-        .backPicYOffset = 11,
-        .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Ribombee),
-        ICON(Ribombee),
-        FOOTPRINT(Ribombee)
-        FOLLOWER(Ribombee, TRACKS_FOOT)
-        LEARNSETS(Ribombee),
-    },
-#endif //P_FAMILY_CUTIEFLY
-
 #if P_FAMILY_ROCKRUFF
 #define ROCKRUFF_MISC_INFO                                      \
         .baseHP        = 45,                                    \
@@ -39102,204 +38140,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif //P_FAMILY_BLIPBUG
 
-#if P_FAMILY_NICKIT
-    [SPECIES_NICKIT] =
-    {
-        .baseHP        = 40,
-        .baseAttack    = 28,
-        .baseDefense   = 28,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 47,
-        .baseSpDefense = 52,
-        .types = MON_TYPES(TYPE_DARK),
-        .catchRate = 255,
-        .expYield = 49,
-        .evYield_SpDefense = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_RUN_AWAY, ABILITY_UNBURDEN, ABILITY_STAKEOUT},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Nickit"),
-        .cryId = CRY_NICKIT,
-        .natDexNum = DEX_NICKIT,
-        .categoryName = _("Fox"),
-        .height = 6,
-        .weight = 89,
-        .description = COMPOUND_STRING(
-            "Aided by the soft pads on its feet, it\n"
-            "silently raids the food stores of other\n"
-            "Pokémon. It survives off its\n"
-            "ill-gotten gains."),
-        .pokemonScale = 422,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Nickit, 56, 48),
-        .frontPicYOffset = 9,
-        .frontAnimFrames = sAnims_Nickit,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Nickit, 64, 56),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Nickit),
-        ICON(Nickit),
-        FOOTPRINT(Nickit)
-        FOLLOWER(Nickit, TRACKS_FOOT)
-        LEARNSETS(Nickit),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_THIEVUL}),
-    },
-
-    [SPECIES_THIEVUL] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 58,
-        .baseDefense   = 58,
-        .baseSpeed     = 90,
-        .baseSpAttack  = 87,
-        .baseSpDefense = 92,
-        .types = MON_TYPES(TYPE_DARK),
-        .catchRate = 127,
-        .expYield = 159,
-        .evYield_SpDefense = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_RUN_AWAY, ABILITY_UNBURDEN, ABILITY_STAKEOUT},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Thievul"),
-        .cryId = CRY_THIEVUL,
-        .natDexNum = DEX_THIEVUL,
-        .categoryName = _("Fox"),
-        .height = 12,
-        .weight = 199,
-        .description = COMPOUND_STRING(
-            "It secretly marks potential targets with\n"
-            "a scent. By following the scent, it\n"
-            "stalks its targets and steals from them\n"
-            "when they least expect it."),
-        .pokemonScale = 282,
-        .pokemonOffset = 4,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Thievul, 64, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_Thievul,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Thievul, 56, 64),
-        .backPicYOffset = 2,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Thievul),
-        ICON(Thievul),
-        FOOTPRINT(Thievul)
-        FOLLOWER(Thievul, TRACKS_FOOT)
-        LEARNSETS(Thievul),
-    },
-#endif //P_FAMILY_NICKIT
-
-#if P_FAMILY_GOSSIFLEUR
-    [SPECIES_GOSSIFLEUR] =
-    {
-        .baseHP        = 40,
-        .baseAttack    = 40,
-        .baseDefense   = 60,
-        .baseSpeed     = 10,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 60,
-        .types = MON_TYPES(TYPE_GRASS),
-        .catchRate = 190,
-        .expYield = 50,
-        .evYield_SpDefense = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = {ABILITY_COTTON_DOWN, ABILITY_REGENERATOR, ABILITY_EFFECT_SPORE},
-        .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Gossifleur"),
-        .cryId = CRY_GOSSIFLEUR,
-        .natDexNum = DEX_GOSSIFLEUR,
-        .categoryName = _("Flowering"),
-        .height = 4,
-        .weight = 22,
-        .description = COMPOUND_STRING(
-            "It anchors itself in the ground with its\n"
-            "single leg, then basks in the sun. After\n"
-            "absorbing enough sunlight, its petals\n"
-            "spread as it blooms brilliantly."),
-        .pokemonScale = 491,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Gossifleur, 48, 56),
-        .frontPicYOffset = 11,
-        .frontAnimFrames = sAnims_Gossifleur,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Gossifleur, 56, 48),
-        .backPicYOffset = 15,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Gossifleur),
-        ICON(Gossifleur),
-        FOOTPRINT(Gossifleur)
-        FOLLOWER(Gossifleur, TRACKS_FOOT)
-        LEARNSETS(Gossifleur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_ELDEGOSS}),
-    },
-
-    [SPECIES_ELDEGOSS] =
-    {
-        .baseHP        = 60,
-        .baseAttack    = 50,
-        .baseDefense   = 90,
-        .baseSpeed     = 60,
-        .baseSpAttack  = 80,
-        .baseSpDefense = 120,
-        .types = MON_TYPES(TYPE_GRASS),
-        .catchRate = 75,
-        .expYield = 161,
-        .evYield_SpDefense = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_GRASS),
-        .abilities = {ABILITY_COTTON_DOWN, ABILITY_REGENERATOR, ABILITY_EFFECT_SPORE},
-        .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Eldegoss"),
-        .cryId = CRY_ELDEGOSS,
-        .natDexNum = DEX_ELDEGOSS,
-        .categoryName = _("Cotton Bloom"),
-        .height = 5,
-        .weight = 25,
-        .description = COMPOUND_STRING(
-            "The seeds attached to its cotton fluff\n"
-            "are full of nutrients. It spreads them\n"
-            "on the wind so that plants and other\n"
-            "Pokémon can benefit from them."),
-        .pokemonScale = 432,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Eldegoss, 48, 56),
-        .frontPicYOffset = 4,
-        .frontAnimFrames = sAnims_Eldegoss,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Eldegoss, 64, 40),
-        .backPicYOffset = 15,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Eldegoss),
-        ICON(Eldegoss),
-        FOOTPRINT(Eldegoss)
-        FOLLOWER(Eldegoss, TRACKS_FOOT)
-        LEARNSETS(Eldegoss),
-    },
-#endif //P_FAMILY_GOSSIFLEUR
-
 #if P_FAMILY_WOOLOO
     [SPECIES_WOOLOO] =
     {
@@ -40109,105 +38949,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Sandaconda, TRACKS_FOOT)
     },
 #endif //P_FAMILY_SILICOBRA
-
-#if P_FAMILY_ARROKUDA
-    [SPECIES_ARROKUDA] =
-    {
-        .baseHP        = 41,
-        .baseAttack    = 63,
-        .baseDefense   = 40,
-        .baseSpeed     = 66,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 30,
-        .types = MON_TYPES(TYPE_WATER),
-        .catchRate = 255,
-        .expYield = 56,
-        .evYield_Speed = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FISH),
-        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_PROPELLER_TAIL},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = _("Arrokuda"),
-        .cryId = CRY_ARROKUDA,
-        .natDexNum = DEX_ARROKUDA,
-        .categoryName = _("Rush"),
-        .height = 5,
-        .weight = 10,
-        .description = COMPOUND_STRING(
-            "If it sees any movement around it, this\n"
-            "Pokémon charges for it straightaway,\n"
-            "leading with its sharply pointed jaw.\n"
-            "It's very proud of that jaw."),
-        .pokemonScale = 432,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Arrokuda, 56, 32),
-        .frontPicYOffset = 17,
-        .frontAnimFrames = sAnims_Arrokuda,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Arrokuda, 48, 40),
-        .backPicYOffset = 15,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Arrokuda),
-        ICON(Arrokuda),
-        FOOTPRINT(Arrokuda)
-        FOLLOWER(Arrokuda, TRACKS_FOOT)
-        LEARNSETS(Arrokuda),
-        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_BARRASKEWDA}),
-    },
-
-    [SPECIES_BARRASKEWDA] =
-    {
-        .baseHP        = 61,
-        .baseAttack    = 123,
-        .baseDefense   = 60,
-        .baseSpeed     = 136,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 50,
-        .types = MON_TYPES(TYPE_WATER),
-        .catchRate = 60,
-        .expYield = 172,
-        .evYield_Speed = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FISH),
-        .abilities = {ABILITY_SWIFT_SWIM, ABILITY_NONE, ABILITY_PROPELLER_TAIL},
-        .bodyColor = BODY_COLOR_BROWN,
-        .speciesName = HANDLE_EXPANDED_SPECIES_NAME("Barraskewd", "Barraskewda"),
-        .cryId = CRY_BARRASKEWDA,
-        .natDexNum = DEX_BARRASKEWDA,
-        .categoryName = _("Skewer"),
-        .height = 13,
-        .weight = 300,
-        .description = COMPOUND_STRING(
-            "This Pokémon has a jaw that's as sharp\n"
-            "as a spear and as strong as steel.\n"
-            "Apparently Barraskewda's flesh is\n"
-            "surprisingly tasty, too."),
-        .pokemonScale = 272,
-        .pokemonOffset = 3,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Barraskewda, 56, 48),
-        .frontPicYOffset = 8,
-        .frontAnimFrames = sAnims_Barraskewda,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Barraskewda, 64, 48),
-        .backPicYOffset = 11,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Barraskewda),
-        ICON(Barraskewda),
-        FOOTPRINT(Barraskewda)
-        FOLLOWER(Barraskewda, TRACKS_FOOT)
-        LEARNSETS(Barraskewda),
-    },
-#endif //P_FAMILY_ARROKUDA
 
 #if P_FAMILY_TOXEL
     [SPECIES_TOXEL] =
