@@ -1105,7 +1105,6 @@ static const union AnimCmd sAnim_Muk_1[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_SHELLDER
 static const union AnimCmd sAnim_Shellder_1[] =
 {
     ANIMCMD_FRAME(1, 5),
@@ -1123,9 +1122,7 @@ static const union AnimCmd sAnim_Cloyster_1[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SHELLDER
 
-#if P_FAMILY_GASTLY
 static const union AnimCmd sAnim_Gastly_1[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -1156,12 +1153,6 @@ static const union AnimCmd sAnim_Gengar_1[] =
     ANIMCMD_END,
 };
 
-#if P_MEGA_EVOLUTIONS
-PLACEHOLDER_ANIM_SINGLE_FRAME(GengarMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_FAMILY_GASTLY
-
-#if P_FAMILY_ONIX
 static const union AnimCmd sAnim_Onix_1[] =
 {
     ANIMCMD_FRAME(1, 50),
@@ -1169,7 +1160,6 @@ static const union AnimCmd sAnim_Onix_1[] =
     ANIMCMD_END,
 };
 
-#if P_GEN_2_CROSS_EVOS
 static const union AnimCmd sAnim_Steelix_1[] =
 {
     ANIMCMD_FRAME(0, 7),
@@ -1179,12 +1169,6 @@ static const union AnimCmd sAnim_Steelix_1[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-
-#if P_MEGA_EVOLUTIONS
-PLACEHOLDER_ANIM_SINGLE_FRAME(SteelixMega);
-#endif //P_MEGA_EVOLUTIONS
-#endif //P_GEN_2_CROSS_EVOS
-#endif //P_FAMILY_ONIX
 
 #if P_FAMILY_DROWZEE
 static const union AnimCmd sAnim_Drowzee_1[] =

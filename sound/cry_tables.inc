@@ -95,27 +95,13 @@ gCryTable::
 	cry Cry_Dewgong
 	cry Cry_Grimer
 	cry Cry_Muk
-.if P_FAMILY_SHELLDER == TRUE
 	cry Cry_Shellder
 	cry Cry_Cloyster
-.endif @ P_FAMILY_SHELLDER
-.if P_FAMILY_GASTLY == TRUE
 	cry Cry_Gastly
 	cry Cry_Haunter
 	cry Cry_Gengar
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GengarMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_GASTLY
-.if P_FAMILY_ONIX == TRUE
 	cry Cry_Onix
-.if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Steelix
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SteelixMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ONIX
 .if P_FAMILY_DROWZEE == TRUE
 	cry Cry_Drowzee
 	cry Cry_Hypno

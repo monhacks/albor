@@ -766,7 +766,6 @@ Cry_Grimer::
 Cry_Muk::
 	.incbin "sound/direct_sound_samples/cries/muk.bin"
 
-.if P_FAMILY_SHELLDER == TRUE
 	.align 2
 Cry_Shellder::
 	.incbin "sound/direct_sound_samples/cries/shellder.bin"
@@ -774,9 +773,7 @@ Cry_Shellder::
 	.align 2
 Cry_Cloyster::
 	.incbin "sound/direct_sound_samples/cries/cloyster.bin"
-.endif @ P_FAMILY_SHELLDER
 
-.if P_FAMILY_GASTLY == TRUE
 	.align 2
 Cry_Gastly::
 	.incbin "sound/direct_sound_samples/cries/gastly.bin"
@@ -789,30 +786,13 @@ Cry_Haunter::
 Cry_Gengar::
 	.incbin "sound/direct_sound_samples/cries/gengar.bin"
 
-.if P_MEGA_EVOLUTIONS == TRUE
-	.align 2
-Cry_GengarMega::
-	.incbin "sound/direct_sound_samples/cries/gengar_mega.bin"
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_FAMILY_GASTLY
-
-.if P_FAMILY_ONIX == TRUE
 	.align 2
 Cry_Onix::
 	.incbin "sound/direct_sound_samples/cries/onix.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Steelix::
 	.incbin "sound/direct_sound_samples/cries/steelix.bin"
-
-.if P_MEGA_EVOLUTIONS == TRUE
-	.align 2
-Cry_SteelixMega::
-	.incbin "sound/direct_sound_samples/cries/steelix_mega.bin"
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_ONIX
 
 .if P_FAMILY_DROWZEE == TRUE
 	.align 2

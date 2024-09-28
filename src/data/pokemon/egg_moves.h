@@ -171,58 +171,17 @@ static const u16 sGrimerEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_SHELLDER
 static const u16 sShellderEggMoveLearnset[] = {
-    MOVE_BUBBLE_BEAM,
-    MOVE_TAKE_DOWN,
-    MOVE_BARRIER,
-    MOVE_RAPID_SPIN,
-    MOVE_SCREECH,
-    MOVE_ICICLE_SPEAR,
-    MOVE_MUD_SHOT,
-    MOVE_ROCK_BLAST,
-    MOVE_WATER_PULSE,
-    MOVE_AQUA_RING,
-    MOVE_AVALANCHE,
-    MOVE_TWINEEDLE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_SHELLDER
 
-#if P_FAMILY_GASTLY
 static const u16 sGastlyEggMoveLearnset[] = {
-    MOVE_PSYWAVE,
-    MOVE_PERISH_SONG,
-    MOVE_HAZE,
-    MOVE_ASTONISH,
-    MOVE_GRUDGE,
-    MOVE_FIRE_PUNCH,
-    MOVE_ICE_PUNCH,
-    MOVE_THUNDER_PUNCH,
-    MOVE_DISABLE,
-    MOVE_SCARY_FACE,
-    MOVE_CLEAR_SMOG,
-    MOVE_SMOG,
-    MOVE_REFLECT_TYPE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_GASTLY
 
-#if P_FAMILY_ONIX
 static const u16 sOnixEggMoveLearnset[] = {
-    MOVE_FLAIL,
-    MOVE_BLOCK,
-    MOVE_DEFENSE_CURL,
-    MOVE_ROLLOUT,
-    MOVE_ROCK_BLAST,
-    MOVE_ROCK_CLIMB,
-    MOVE_HEAVY_SLAM,
-    MOVE_STEALTH_ROCK,
-    MOVE_ROTOTILLER,
-    MOVE_WIDE_GUARD,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_ONIX
 
 #if P_FAMILY_DROWZEE
 static const u16 sDrowzeeEggMoveLearnset[] = {

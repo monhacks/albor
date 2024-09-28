@@ -398,14 +398,12 @@ static const struct SpriteFrameImage sPicTable_Muk[] = {
     overworld_ascending_frames(gObjectEventPic_Muk, 4, 4),
 };
 
-#if P_FAMILY_SHELLDER
 static const struct SpriteFrameImage sPicTable_Shellder[] = {
     overworld_ascending_frames(gObjectEventPic_Shellder, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Cloyster[] = {
     overworld_ascending_frames(gObjectEventPic_Cloyster, 4, 4),
 };
-#endif //P_FAMILY_SHELLDER
 
 static const struct SpriteFrameImage sPicTable_Gastly[] = {
     overworld_ascending_frames(gObjectEventPic_Gastly, 4, 4),
