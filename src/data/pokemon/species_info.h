@@ -9990,6 +9990,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Chikorita),
         FOLLOWER(Chikorita, TRACKS_FOOT)
         LEARNSETS(Chikorita),
+        .eggMoveLearnset = sChikoritaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BAYLEEF}),
     },
 
@@ -10039,6 +10040,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Bayleef),
         FOLLOWER(Bayleef, TRACKS_FOOT)
         LEARNSETS(Bayleef),
+        .eggMoveLearnset = sChikoritaEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MEGANIUM}),
     },
 
@@ -10088,8 +10090,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_V_SHAKE,
         PALETTES(Meganium),
         ICON(Meganium),
+        ICON_FEMALE(Meganium),
         FOLLOWER(Meganium, TRACKS_FOOT)
+        FOLLOWER_FEMALE(Meganium, TRACKS_FOOT)
         LEARNSETS(Meganium),
+        .eggMoveLearnset = sChikoritaEggMoveLearnset,
     },
 
     [SPECIES_CYNDAQUIL] =

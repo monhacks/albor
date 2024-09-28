@@ -1336,6 +1336,7 @@ const u32 gObjectEventPic_Sylveon[] = INCBIN_U32("graphics/pokemon/sylveon/follo
     const u32 gObjectEventPic_Meganium[] = INCBIN_U32("graphics/pokemon/meganium/follower.4bpp");
     const u32 gMonFrontPic_MeganiumF[] = INCBIN_U32("graphics/pokemon/meganium/anim_frontf.4bpp.lz");
     const u32 gMonBackPic_MeganiumF[] = INCBIN_U32("graphics/pokemon/meganium/backf.4bpp.lz");
+    const u32 gObjectEventPic_MeganiumF[] = INCBIN_U32("graphics/pokemon/meganium/followerf.4bpp");
 #endif //P_FAMILY_CHIKORITA
 
 #if P_FAMILY_CYNDAQUIL

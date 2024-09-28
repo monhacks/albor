@@ -813,6 +813,9 @@ static const struct SpriteFrameImage sPicTable_Bayleef[] = {
 static const struct SpriteFrameImage sPicTable_Meganium[] = {
     overworld_ascending_frames(gObjectEventPic_Meganium, 4, 4),
 };
+static const struct SpriteFrameImage sPicTable_MeganiumF[] = {
+    overworld_ascending_frames(gObjectEventPic_MeganiumF, 4, 4),
+};
 #endif //P_FAMILY_CHIKORITA
 
 #if P_FAMILY_CYNDAQUIL
