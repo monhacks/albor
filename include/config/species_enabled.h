@@ -37,11 +37,6 @@
 #define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
-#define P_FAMILY_DROWZEE                 P_GEN_1_POKEMON
-#define P_FAMILY_KRABBY                  P_GEN_1_POKEMON
-#define P_FAMILY_VOLTORB                 P_GEN_1_POKEMON
-#define P_FAMILY_EXEGGCUTE               P_GEN_1_POKEMON
-#define P_FAMILY_CUBONE                  P_GEN_1_POKEMON
 #define P_FAMILY_HITMONS                 P_GEN_1_POKEMON
 #define P_FAMILY_LICKITUNG               P_GEN_1_POKEMON
 #define P_FAMILY_KOFFING                 P_GEN_1_POKEMON

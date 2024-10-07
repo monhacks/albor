@@ -102,26 +102,16 @@ gCryTable::
 	cry Cry_Gengar
 	cry Cry_Onix
 	cry Cry_Steelix
-.if P_FAMILY_DROWZEE == TRUE
 	cry Cry_Drowzee
 	cry Cry_Hypno
-.endif @ P_FAMILY_DROWZEE
-.if P_FAMILY_KRABBY == TRUE
 	cry Cry_Krabby
 	cry Cry_Kingler
-.endif @ P_FAMILY_KRABBY
-.if P_FAMILY_VOLTORB == TRUE
 	cry Cry_Voltorb
 	cry Cry_Electrode
-.endif @ P_FAMILY_VOLTORB
-.if P_FAMILY_EXEGGCUTE == TRUE
 	cry Cry_Exeggcute
 	cry Cry_Exeggutor
-.endif @ P_FAMILY_EXEGGCUTE
-.if P_FAMILY_CUBONE == TRUE
 	cry Cry_Cubone
 	cry Cry_Marowak
-.endif @ P_FAMILY_CUBONE
 .if P_FAMILY_HITMONS == TRUE
 .if P_GEN_2_CROSS_EVOS == TRUE
 	cry Cry_Tyrogue

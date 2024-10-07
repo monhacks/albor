@@ -1170,7 +1170,6 @@ static const union AnimCmd sAnim_Steelix_1[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_DROWZEE
 static const union AnimCmd sAnim_Drowzee_1[] =
 {
     ANIMCMD_FRAME(1, 12),
@@ -1193,9 +1192,7 @@ static const union AnimCmd sAnim_Hypno_1[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DROWZEE
 
-#if P_FAMILY_KRABBY
 static const union AnimCmd sAnim_Krabby_1[] =
 {
     ANIMCMD_FRAME(1, 16),
@@ -1213,9 +1210,7 @@ static const union AnimCmd sAnim_Kingler_1[] =
     ANIMCMD_FRAME(0, 14),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_KRABBY
 
-#if P_FAMILY_VOLTORB
 static const union AnimCmd sAnim_Voltorb_1[] =
 {
     ANIMCMD_FRAME(0, 4),
@@ -1235,13 +1230,6 @@ static const union AnimCmd sAnim_Electrode_1[] =
     ANIMCMD_END,
 };
 
-#if P_HISUIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(VoltorbHisuian);
-PLACEHOLDER_ANIM_SINGLE_FRAME(ElectrodeHisuian);
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_VOLTORB
-
-#if P_FAMILY_EXEGGCUTE
 static const union AnimCmd sAnim_Exeggcute_1[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -1263,12 +1251,6 @@ static const union AnimCmd sAnim_Exeggutor_1[] =
     ANIMCMD_END,
 };
 
-#if P_ALOLAN_FORMS
-PLACEHOLDER_ANIM_TWO_FRAMES(ExeggutorAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_EXEGGCUTE
-
-#if P_FAMILY_CUBONE
 static const union AnimCmd sAnim_Cubone_1[] =
 {
     ANIMCMD_FRAME(1, 6),
@@ -1291,10 +1273,7 @@ static const union AnimCmd sAnim_Marowak_1[] =
     ANIMCMD_END,
 };
 
-#if P_ALOLAN_FORMS
 PLACEHOLDER_ANIM_SINGLE_FRAME(MarowakAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_CUBONE
 
 #if P_FAMILY_HITMONS
 #if P_GEN_2_CROSS_EVOS
@@ -9737,10 +9716,7 @@ SINGLE_ANIMATION(Exeggcute);
 SINGLE_ANIMATION(Exeggutor);
 SINGLE_ANIMATION(Cubone);
 SINGLE_ANIMATION(Marowak);
-#if P_ALOLAN_FORMS
 SINGLE_ANIMATION(MarowakAlolan);
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_CUBONE
 #if P_FAMILY_HITMONS
 #if P_GEN_2_CROSS_EVOS
 SINGLE_ANIMATION(Tyrogue);

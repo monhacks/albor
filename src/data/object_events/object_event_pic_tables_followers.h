@@ -422,63 +422,43 @@ static const struct SpriteFrameImage sPicTable_Steelix[] = {
     overworld_ascending_frames(gObjectEventPic_Steelix, 4, 4),
 };
 
-#if P_FAMILY_DROWZEE
 static const struct SpriteFrameImage sPicTable_Drowzee[] = {
     overworld_ascending_frames(gObjectEventPic_Drowzee, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Hypno[] = {
     overworld_ascending_frames(gObjectEventPic_Hypno, 4, 4),
 };
-#endif //P_FAMILY_DROWZEE
 
-#if P_FAMILY_KRABBY
 static const struct SpriteFrameImage sPicTable_Krabby[] = {
     overworld_ascending_frames(gObjectEventPic_Krabby, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Kingler[] = {
     overworld_ascending_frames(gObjectEventPic_Kingler, 4, 4),
 };
-#endif //P_FAMILY_KRABBY
 
-#if P_FAMILY_VOLTORB
 static const struct SpriteFrameImage sPicTable_Voltorb[] = {
     overworld_ascending_frames(gObjectEventPic_Voltorb, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Electrode[] = {
     overworld_ascending_frames(gObjectEventPic_Electrode, 4, 4),
 };
-#if P_HISUIAN_FORMS
-static const struct SpriteFrameImage sPicTable_VoltorbHisuian[] = {
-    overworld_ascending_frames(gObjectEventPic_VoltorbHisuian, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_ElectrodeHisuian[] = {
-    overworld_ascending_frames(gObjectEventPic_ElectrodeHisuian, 4, 4),
-};
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_VOLTORB
 
-#if P_FAMILY_EXEGGCUTE
 static const struct SpriteFrameImage sPicTable_Exeggcute[] = {
     overworld_ascending_frames(gObjectEventPic_Exeggcute, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Exeggutor[] = {
     overworld_ascending_frames(gObjectEventPic_Exeggutor, 4, 4),
 };
-#endif //P_FAMILY_EXEGGCUTE
 
-#if P_FAMILY_CUBONE
 static const struct SpriteFrameImage sPicTable_Cubone[] = {
     overworld_ascending_frames(gObjectEventPic_Cubone, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Marowak[] = {
     overworld_ascending_frames(gObjectEventPic_Marowak, 4, 4),
 };
-#if P_ALOLAN_FORMS
 static const struct SpriteFrameImage sPicTable_MarowakAlolan[] = {
     overworld_ascending_frames(gObjectEventPic_MarowakAlolan, 4, 4),
 };
-#endif //P_ALOLAN_FORMS
-#endif //P_FAMILY_CUBONE
 
 #if P_FAMILY_HITMONS
 #if P_GEN_2_CROSS_EVOS

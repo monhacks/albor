@@ -183,25 +183,9 @@ static const u16 sOnixEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_DROWZEE
 static const u16 sDrowzeeEggMoveLearnset[] = {
-    MOVE_BARRIER,
-    MOVE_ASSIST,
-    MOVE_ROLE_PLAY,
-    MOVE_FIRE_PUNCH,
-    MOVE_THUNDER_PUNCH,
-    MOVE_ICE_PUNCH,
-    MOVE_NASTY_PLOT,
-    MOVE_FLATTER,
-    MOVE_PSYCHO_CUT,
-    MOVE_GUARD_SWAP,
-    MOVE_SECRET_POWER,
-    MOVE_SKILL_SWAP,
-    MOVE_POWER_SPLIT,
-    MOVE_PSYCHIC_TERRAIN,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_DROWZEE
 
 static const u16 sKrabbyEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,

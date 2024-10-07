@@ -794,7 +794,6 @@ Cry_Onix::
 Cry_Steelix::
 	.incbin "sound/direct_sound_samples/cries/steelix.bin"
 
-.if P_FAMILY_DROWZEE == TRUE
 	.align 2
 Cry_Drowzee::
 	.incbin "sound/direct_sound_samples/cries/drowzee.bin"
@@ -802,9 +801,7 @@ Cry_Drowzee::
 	.align 2
 Cry_Hypno::
 	.incbin "sound/direct_sound_samples/cries/hypno.bin"
-.endif @ P_FAMILY_DROWZEE
 
-.if P_FAMILY_KRABBY == TRUE
 	.align 2
 Cry_Krabby::
 	.incbin "sound/direct_sound_samples/cries/krabby.bin"
@@ -812,9 +809,7 @@ Cry_Krabby::
 	.align 2
 Cry_Kingler::
 	.incbin "sound/direct_sound_samples/cries/kingler.bin"
-.endif @ P_FAMILY_KRABBY
 
-.if P_FAMILY_VOLTORB == TRUE
 	.align 2
 Cry_Voltorb::
 	.incbin "sound/direct_sound_samples/cries/voltorb.bin"
@@ -822,9 +817,7 @@ Cry_Voltorb::
 	.align 2
 Cry_Electrode::
 	.incbin "sound/direct_sound_samples/cries/electrode.bin"
-.endif @ P_FAMILY_VOLTORB
 
-.if P_FAMILY_EXEGGCUTE == TRUE
 	.align 2
 Cry_Exeggcute::
 	.incbin "sound/direct_sound_samples/cries/exeggcute.bin"
@@ -832,9 +825,7 @@ Cry_Exeggcute::
 	.align 2
 Cry_Exeggutor::
 	.incbin "sound/direct_sound_samples/cries/exeggutor.bin"
-.endif @ P_FAMILY_EXEGGCUTE
 
-.if P_FAMILY_CUBONE == TRUE
 	.align 2
 Cry_Cubone::
 	.incbin "sound/direct_sound_samples/cries/cubone.bin"
@@ -842,7 +833,6 @@ Cry_Cubone::
 	.align 2
 Cry_Marowak::
 	.incbin "sound/direct_sound_samples/cries/marowak.bin"
-.endif @ P_FAMILY_CUBONE
 
 .if P_FAMILY_HITMONS == TRUE
 .if P_GEN_2_CROSS_EVOS == TRUE
