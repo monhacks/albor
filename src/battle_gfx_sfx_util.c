@@ -604,9 +604,9 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
-    UniquePalette(paletteOffset, &mon->box);
+    UniquePalette(paletteOffset, currentPersonality);
     CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
-    UniquePalette(BG_PLTT_ID(8) + BG_PLTT_ID(battler), &mon->box);
+    UniquePalette(BG_PLTT_ID(8) + BG_PLTT_ID(battler), currentPersonality);
     CpuCopy32(&gPlttBufferFaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], &gPlttBufferUnfaded[BG_PLTT_ID(8) + BG_PLTT_ID(battler)], PLTT_SIZE_4BPP);
 
     // transform's pink color
@@ -880,7 +880,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool8 trackEnemyPe
     lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, isShiny, personalityValue);
     LZDecompressWram(lzPaletteData, gDecompressionBuffer);
     LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
-    UniquePaletteByPersonality(paletteOffset, targetSpecies, personalityValue);
+    UniquePalette(paletteOffset, personalityValue);
     CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
 
     BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
