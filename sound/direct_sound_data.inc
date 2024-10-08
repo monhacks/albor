@@ -834,12 +834,9 @@ Cry_Cubone::
 Cry_Marowak::
 	.incbin "sound/direct_sound_samples/cries/marowak.bin"
 
-.if P_FAMILY_HITMONS == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Tyrogue::
 	.incbin "sound/direct_sound_samples/cries/tyrogue.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Hitmonlee::
@@ -849,12 +846,9 @@ Cry_Hitmonlee::
 Cry_Hitmonchan::
 	.incbin "sound/direct_sound_samples/cries/hitmonchan.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Hitmontop::
 	.incbin "sound/direct_sound_samples/cries/hitmontop.bin"
-.endif @ P_GEN_2_CROSS_EVOS
-.endif @ P_FAMILY_HITMONS
 
 .if P_FAMILY_LICKITUNG == TRUE
 	.align 2
@@ -919,11 +913,9 @@ Cry_Horsea::
 Cry_Seadra::
 	.incbin "sound/direct_sound_samples/cries/seadra.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Kingdra::
 	.incbin "sound/direct_sound_samples/cries/kingdra.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 .endif @ P_FAMILY_HORSEA
 
 .if P_FAMILY_GOLDEEN == TRUE
@@ -963,11 +955,9 @@ Cry_MrMime::
 Cry_Scyther::
 	.incbin "sound/direct_sound_samples/cries/scyther.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Scizor::
 	.incbin "sound/direct_sound_samples/cries/scizor.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 .if P_GEN_8_CROSS_EVOS == TRUE
 	.align 2
 Cry_Kleavor::
@@ -976,11 +966,9 @@ Cry_Kleavor::
 .endif @ P_FAMILY_SCYTHER
 
 .if P_FAMILY_JYNX == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Smoochum::
 	.incbin "sound/direct_sound_samples/cries/smoochum.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Jynx::
@@ -988,11 +976,9 @@ Cry_Jynx::
 .endif @ P_FAMILY_JYNX
 
 .if P_FAMILY_ELECTABUZZ == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Elekid::
 	.incbin "sound/direct_sound_samples/cries/elekid.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Electabuzz::
@@ -1006,11 +992,9 @@ Cry_Electivire::
 .endif @ P_FAMILY_ELECTABUZZ
 
 .if P_FAMILY_MAGMAR == TRUE
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Magby::
 	.incbin "sound/direct_sound_samples/cries/magby.bin"
-.endif @ P_GEN_2_CROSS_EVOS
 
 	.align 2
 Cry_Magmar::
@@ -1092,7 +1076,6 @@ Cry_Sylveon::
 Cry_Porygon::
 	.incbin "sound/direct_sound_samples/cries/porygon.bin"
 
-.if P_GEN_2_CROSS_EVOS == TRUE
 	.align 2
 Cry_Porygon2::
 	.incbin "sound/direct_sound_samples/cries/porygon2.bin"
@@ -1102,7 +1085,6 @@ Cry_Porygon2::
 Cry_PorygonZ::
 	.incbin "sound/direct_sound_samples/cries/porygon_z.bin"
 .endif @ P_GEN_4_CROSS_EVOS
-.endif @ P_GEN_2_CROSS_EVOS
 .endif @ P_FAMILY_PORYGON
 
 .if P_FAMILY_OMANYTE == TRUE
@@ -1320,11 +1302,9 @@ Cry_Ampharos::
 .endif @ P_FAMILY_MAREEP
 
 .if P_FAMILY_MARILL == TRUE
-.if P_GEN_3_CROSS_EVOS == TRUE
 	.align 2
 Cry_Azurill::
 	.incbin "sound/direct_sound_samples/cries/azurill.bin"
-.endif @ P_GEN_3_CROSS_EVOS
 
 	.align 2
 Cry_Marill::

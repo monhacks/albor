@@ -31,13 +31,10 @@
 
 // Cross-generation evolutions. Includes pre-evolutions.
 #define P_CROSS_GENERATION_EVOS          TRUE
-#define P_GEN_2_CROSS_EVOS               P_CROSS_GENERATION_EVOS
-#define P_GEN_3_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_4_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
 #define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
 
-#define P_FAMILY_HITMONS                 P_GEN_1_POKEMON
 #define P_FAMILY_LICKITUNG               P_GEN_1_POKEMON
 #define P_FAMILY_KOFFING                 P_GEN_1_POKEMON
 #define P_FAMILY_RHYHORN                 P_GEN_1_POKEMON

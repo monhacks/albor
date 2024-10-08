@@ -372,42 +372,18 @@ static const u16 sScytherEggMoveLearnset[] = {
 #endif //P_FAMILY_SCYTHER
 
 #if P_FAMILY_JYNX
-#if P_GEN_2_CROSS_EVOS
 static const u16 sSmoochumEggMoveLearnset[] = {
-    MOVE_MEDITATE,
-    MOVE_FAKE_OUT,
-    MOVE_WISH,
-    MOVE_ICE_PUNCH,
-    MOVE_MIRACLE_EYE,
-    MOVE_NASTY_PLOT,
-    MOVE_WAKE_UP_SLAP,
-    MOVE_CAPTIVATE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_JYNX
 
 #if P_FAMILY_ELECTABUZZ
-#if P_GEN_2_CROSS_EVOS
 static const u16 sElekidEggMoveLearnset[] = {
-    MOVE_KARATE_CHOP,
-    MOVE_BARRIER,
-    MOVE_ROLLING_KICK,
-    MOVE_MEDITATE,
-    MOVE_CROSS_CHOP,
-    MOVE_FIRE_PUNCH,
-    MOVE_ICE_PUNCH,
-    MOVE_DYNAMIC_PUNCH,
-    MOVE_FEINT,
-    MOVE_HAMMER_ARM,
-    MOVE_FOCUS_PUNCH,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_ELECTABUZZ
 
 #if P_FAMILY_MAGMAR
-#if P_GEN_2_CROSS_EVOS
 static const u16 sMagbyEggMoveLearnset[] = {
     MOVE_KARATE_CHOP,
     MOVE_MEGA_PUNCH,
@@ -425,7 +401,6 @@ static const u16 sMagbyEggMoveLearnset[] = {
     MOVE_BELCH,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_2_CROSS_EVOS
 #endif //P_FAMILY_MAGMAR
 
 #if P_FAMILY_PINSIR
@@ -800,23 +775,10 @@ static const u16 sMareepEggMoveLearnset[] = {
 #endif //P_FAMILY_MAREEP
 
 #if P_FAMILY_MARILL
-#if P_GEN_3_CROSS_EVOS
 static const u16 sAzurillEggMoveLearnset[] = {
-    MOVE_ENCORE,
-    MOVE_SING,
-    MOVE_REFRESH,
-    MOVE_SLAM,
-    MOVE_TICKLE,
-    MOVE_FAKE_TEARS,
-    MOVE_BODY_SLAM,
-    MOVE_WATER_SPORT,
-    MOVE_SOAK,
-    MOVE_MUDDY_WATER,
-    MOVE_COPYCAT,
-    MOVE_CAMOUFLAGE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_3_CROSS_EVOS
+
 static const u16 sMarillEggMoveLearnset[] = {
     MOVE_PRESENT,
     MOVE_AMNESIA,
