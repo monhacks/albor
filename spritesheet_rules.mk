@@ -3301,9 +3301,6 @@ $(POKEMONGFXDIR)/basculegion/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/basculegion/female/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/ursaluna/follower.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(POKEMONGFXDIR)/sneasler/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

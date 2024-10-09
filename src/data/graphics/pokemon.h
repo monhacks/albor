@@ -845,19 +845,17 @@ const u32 gMonBackPic_Hitmontop[] = INCBIN_U32("graphics/pokemon/hitmontop/back.
 const u32 gMonShinyPalette_Hitmontop[] = INCBIN_U32("graphics/pokemon/hitmontop/shiny.gbapal.lz");
 const u32 gObjectEventPic_Hitmontop[] = INCBIN_U32("graphics/pokemon/hitmontop/follower.4bpp");
 
-#if P_FAMILY_LICKITUNG
-    const u32 gMonFrontPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/anim_front.4bpp.lz");
-    const u32 gMonPalette_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/normal.gbapal.lz");
-    const u32 gMonBackPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/back.4bpp.lz");
-    const u32 gMonShinyPalette_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/follower.4bpp");
+const u32 gMonFrontPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/anim_front.4bpp.lz");
+const u32 gMonPalette_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/normal.gbapal.lz");
+const u32 gMonBackPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/back.4bpp.lz");
+const u32 gMonShinyPalette_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/shiny.gbapal.lz");
+const u32 gObjectEventPic_Lickitung[] = INCBIN_U32("graphics/pokemon/lickitung/follower.4bpp");
 
-    const u32 gMonFrontPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/anim_front.4bpp.lz");
-    const u32 gMonPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/normal.gbapal.lz");
-    const u32 gMonBackPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/back.4bpp.lz");
-    const u32 gMonShinyPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/follower.4bpp");
-#endif //P_FAMILY_LICKITUNG
+const u32 gMonFrontPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/anim_front.4bpp.lz");
+const u32 gMonPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/normal.gbapal.lz");
+const u32 gMonBackPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/back.4bpp.lz");
+const u32 gMonShinyPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/shiny.gbapal.lz");
+const u32 gObjectEventPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/follower.4bpp");
 
 #if P_FAMILY_KOFFING
     const u32 gMonFrontPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/anim_front.4bpp.lz");

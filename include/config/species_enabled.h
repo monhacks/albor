@@ -19,9 +19,6 @@
 #define P_GEN_8_POKEMON                  FALSE // Generation 8 Pokémon (SwSh, BDSP, LA)
 #define P_GEN_9_POKEMON                  FALSE // Generation 9 Pokémon (SV)
 
-// Battle gimmick specific Forms.
-#define P_PRIMAL_REVERSIONS              FALSE // Groudon and Kyogre only.
-
 // Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
 #define P_REGIONAL_FORMS                 TRUE
 #define P_ALOLAN_FORMS                   P_REGIONAL_FORMS
@@ -29,13 +26,6 @@
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-// Cross-generation evolutions. Includes pre-evolutions.
-#define P_CROSS_GENERATION_EVOS          TRUE
-#define P_GEN_4_CROSS_EVOS               P_CROSS_GENERATION_EVOS
-#define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
-#define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
-
-#define P_FAMILY_LICKITUNG               P_GEN_1_POKEMON
 #define P_FAMILY_KOFFING                 P_GEN_1_POKEMON
 #define P_FAMILY_RHYHORN                 P_GEN_1_POKEMON
 #define P_FAMILY_TANGELA                 P_GEN_1_POKEMON
@@ -528,6 +518,5 @@
 #define P_FAMILY_GOUGING_FIRE            P_GEN_9_POKEMON
 #define P_FAMILY_RAGING_BOLT             P_GEN_9_POKEMON
 #define P_FAMILY_IRON_BOULDER            P_GEN_9_POKEMON
-#define P_FAMILY_IRON_CROWN              P_GEN_9_POKEMON
 
 #endif // GUARD_CONFIG_SPECIES_ENABLED_H

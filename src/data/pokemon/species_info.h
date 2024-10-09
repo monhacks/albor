@@ -16162,7 +16162,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Gardevoir, TRACKS_FOOT)
     },
 
-#if P_GEN_4_CROSS_EVOS
 #define GALLADE_MISC_INFO                                   \
         .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FIGHTING),    \
         .catchRate = 45,                                    \
@@ -16223,7 +16222,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Gallade),
         FOLLOWER(Gallade, TRACKS_FOOT)
     },
-#endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_RALTS
 
 #if P_FAMILY_SURSKIT
@@ -17055,7 +17053,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
                                 {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_PROBOPASS}),
     },
 
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_PROBOPASS] =
     {
         .baseHP        = 60,
@@ -17106,7 +17103,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Probopass, TRACKS_FOOT)
         LEARNSETS(Probopass),
     },
-#endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_NOSEPASS
 
 #if P_FAMILY_SABLEYE
@@ -17594,7 +17590,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
 #endif //P_FAMILY_ELECTRIKE
 
 #if P_FAMILY_ROSELIA
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_BUDEW] =
     {
         .baseHP        = 40,
@@ -17645,7 +17640,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Budew),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_ROSELIA}),
     },
-#endif //P_GEN_4_CROSS_EVOS
 
     [SPECIES_ROSELIA] =
     {
@@ -17700,7 +17694,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SHINY_STONE, SPECIES_ROSERADE}),
     },
 
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_ROSERADE] =
     {
         .baseHP        = 60,
@@ -17760,7 +17753,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Roserade, TRACKS_FOOT)
         LEARNSETS(Roserade),
     },
-#endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_ROSELIA
 
 
@@ -19437,7 +19429,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
                                 {EVO_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR}),
     },
 
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_DUSKNOIR] =
     {
         .baseHP        = 45,
@@ -19494,7 +19485,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Dusknoir, TRACKS_FOOT)
         LEARNSETS(Dusknoir),
     },
-#endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_DUSKULL
 
 #if P_FAMILY_TROPIUS
@@ -19548,7 +19538,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
 #endif //P_FAMILY_TROPIUS
 
 #if P_FAMILY_CHIMECHO
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_CHINGLING] =
     {
         .baseHP        = 45,
@@ -19598,7 +19587,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Chingling),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_NIGHT, 0, SPECIES_CHIMECHO}),
     },
-#endif //P_GEN_4_CROSS_EVOS
 
     [SPECIES_CHIMECHO] =
     {
@@ -19825,7 +19813,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Glalie, TRACKS_FOOT)
     },
 
-#if P_GEN_4_CROSS_EVOS
     [SPECIES_FROSLASS] =
     {
         .baseHP        = 60,
@@ -19875,7 +19862,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Froslass, TRACKS_FOOT)
         LEARNSETS(Froslass),
     },
-#endif //P_GEN_4_CROSS_EVOS
 #endif //P_FAMILY_SNORUNT
 
 #if P_FAMILY_SPHEAL

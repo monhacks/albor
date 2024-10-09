@@ -116,12 +116,8 @@ gCryTable::
 	cry Cry_Hitmonlee
 	cry Cry_Hitmonchan
 	cry Cry_Hitmontop
-.if P_FAMILY_LICKITUNG == TRUE
 	cry Cry_Lickitung
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Lickilicky
-.endif @ P_GEN_4_CROSS_EVOS
-.endif @ P_FAMILY_LICKITUNG
 .if P_FAMILY_KOFFING == TRUE
 	cry Cry_Koffing
 	cry Cry_Weezing
@@ -129,15 +125,11 @@ gCryTable::
 .if P_FAMILY_RHYHORN == TRUE
 	cry Cry_Rhyhorn
 	cry Cry_Rhydon
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Rhyperior
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_RHYHORN
 .if P_FAMILY_TANGELA == TRUE
 	cry Cry_Tangela
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Tangrowth
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_TANGELA
 	cry Cry_Kangaskhan
 .if P_FAMILY_HORSEA == TRUE
@@ -154,17 +146,13 @@ gCryTable::
 	cry Cry_Starmie
 .endif @ P_FAMILY_STARYU
 .if P_FAMILY_MR_MIME == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_MimeJr
-.endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_MrMime
 .endif @ P_FAMILY_MR_MIME
 .if P_FAMILY_SCYTHER == TRUE
 	cry Cry_Scyther
 	cry Cry_Scizor
-.if P_GEN_8_CROSS_EVOS == TRUE
 	cry Cry_Kleavor
-.endif @ P_GEN_8_CROSS_EVOS
 .endif @ P_FAMILY_SCYTHER
 .if P_FAMILY_JYNX == TRUE
 	cry Cry_Smoochum
@@ -173,22 +161,15 @@ gCryTable::
 .if P_FAMILY_ELECTABUZZ == TRUE
 	cry Cry_Elekid
 	cry Cry_Electabuzz
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Electivire
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_ELECTABUZZ
 .if P_FAMILY_MAGMAR == TRUE
 	cry Cry_Magby
 	cry Cry_Magmar
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Magmortar
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_MAGMAR
 .if P_FAMILY_PINSIR == TRUE
 	cry Cry_Pinsir
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_PinsirMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_PINSIR
 .if P_FAMILY_TAUROS == TRUE
 	cry Cry_Tauros
@@ -196,9 +177,6 @@ gCryTable::
 .if P_FAMILY_MAGIKARP == TRUE
 	cry Cry_Magikarp
 	cry Cry_Gyarados
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GyaradosMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_MAGIKARP
 .if P_FAMILY_LAPRAS == TRUE
 	cry Cry_Lapras
@@ -218,9 +196,7 @@ gCryTable::
 .if P_FAMILY_PORYGON == TRUE
 	cry Cry_Porygon
 	cry Cry_Porygon2
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_PorygonZ
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_PORYGON
 .if P_FAMILY_OMANYTE == TRUE
 	cry Cry_Omanyte
@@ -232,14 +208,9 @@ gCryTable::
 .endif @ P_FAMILY_KABUTO
 .if P_FAMILY_AERODACTYL == TRUE
 	cry Cry_Aerodactyl
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AerodactylMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_AERODACTYL
 .if P_FAMILY_SNORLAX == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Munchlax
-.endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_Snorlax
 .endif @ P_FAMILY_SNORLAX
 .if P_FAMILY_ARTICUNO == TRUE
@@ -258,10 +229,6 @@ gCryTable::
 .endif @ P_FAMILY_DRATINI
 .if P_FAMILY_MEWTWO == TRUE
 	cry Cry_Mewtwo
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_MewtwoMegaX
-	cry Cry_MewtwoMegaY
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_MEWTWO
 .if P_FAMILY_MEW == TRUE
 	cry Cry_Mew
@@ -304,9 +271,7 @@ gCryTable::
 .if P_FAMILY_TOGEPI == TRUE
 	cry Cry_Togepi
 	cry Cry_Togetic
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Togekiss
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_TOGEPI
 .if P_FAMILY_NATU == TRUE
 	cry Cry_Natu
@@ -341,9 +306,7 @@ gCryTable::
 .endif @ P_FAMILY_SUNKERN
 .if P_FAMILY_YANMA == TRUE
 	cry Cry_Yanma
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Yanmega
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_YANMA
 .if P_FAMILY_WOOPER == TRUE
 	cry Cry_Wooper
@@ -376,15 +339,10 @@ gCryTable::
 .endif @ P_FAMILY_PINECO
 .if P_FAMILY_DUNSPARCE == TRUE
 	cry Cry_Dunsparce
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry Cry_Dudunsparce
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_DUNSPARCE
 .if P_FAMILY_GLIGAR == TRUE
 	cry Cry_Gligar
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Gliscor
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_GLIGAR
 .if P_FAMILY_SNUBBULL == TRUE
 	cry Cry_Snubbull
@@ -401,15 +359,10 @@ gCryTable::
 .endif @ P_FAMILY_SHUCKLE
 .if P_FAMILY_HERACROSS == TRUE
 	cry Cry_Heracross
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_HeracrossMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_HERACROSS
 .if P_FAMILY_SNEASEL == TRUE
 	cry Cry_Sneasel
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Weavile
-.endif @ P_GEN_4_CROSS_EVOS
 .if P_HISUIAN_FORMS == TRUE
 	cry Cry_Sneasler
 .endif @ P_HISUIAN_FORMS
@@ -417,9 +370,6 @@ gCryTable::
 .if P_FAMILY_TEDDIURSA == TRUE
 	cry Cry_Teddiursa
 	cry Cry_Ursaring
-.if P_GEN_8_CROSS_EVOS == TRUE
-	cry Cry_Ursaluna
-.endif @ P_GEN_8_CROSS_EVOS
 .endif @ P_FAMILY_TEDDIURSA
 .if P_FAMILY_SLUGMA == TRUE
 	cry Cry_Slugma
@@ -428,9 +378,7 @@ gCryTable::
 .if P_FAMILY_SWINUB == TRUE
 	cry Cry_Swinub
 	cry Cry_Piloswine
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Mamoswine
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_SWINUB
 .if P_FAMILY_CORSOLA == TRUE
 	cry Cry_Corsola
@@ -446,9 +394,7 @@ gCryTable::
 	cry Cry_Delibird
 .endif @ P_FAMILY_DELIBIRD
 .if P_FAMILY_MANTINE == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Mantyke
-.endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_Mantine
 .endif @ P_FAMILY_MANTINE
 .if P_FAMILY_SKARMORY == TRUE
@@ -457,9 +403,6 @@ gCryTable::
 .if P_FAMILY_HOUNDOUR == TRUE
 	cry Cry_Houndour
 	cry Cry_Houndoom
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_HoundoomMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_HOUNDOUR
 .if P_FAMILY_PHANPY == TRUE
 	cry Cry_Phanpy
@@ -467,9 +410,7 @@ gCryTable::
 .endif @ P_FAMILY_PHANPY
 .if P_FAMILY_STANTLER == TRUE
 	cry Cry_Stantler
-.if P_GEN_8_CROSS_EVOS == TRUE
 	cry Cry_Wyrdeer
-.endif @ P_GEN_8_CROSS_EVOS
 .endif @ P_FAMILY_STANTLER
 .if P_FAMILY_SMEARGLE == TRUE
 	cry Cry_Smeargle
@@ -490,9 +431,6 @@ gCryTable::
 	cry Cry_Larvitar
 	cry Cry_Pupitar
 	cry Cry_Tyranitar
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_TyranitarMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_LARVITAR
 .if P_FAMILY_LUGIA == TRUE
 	cry Cry_Lugia
@@ -507,25 +445,16 @@ gCryTable::
 	cry Cry_Treecko
 	cry Cry_Grovyle
 	cry Cry_Sceptile
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SceptileMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_TREECKO
 .if P_FAMILY_TORCHIC == TRUE
 	cry Cry_Torchic
 	cry Cry_Combusken
 	cry Cry_Blaziken
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_BlazikenMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_TORCHIC
 .if P_FAMILY_MUDKIP == TRUE
 	cry Cry_Mudkip
 	cry Cry_Marshtomp
 	cry Cry_Swampert
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SwampertMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_MUDKIP
 .if P_FAMILY_POOCHYENA == TRUE
 	cry Cry_Poochyena
@@ -567,15 +496,7 @@ gCryTable::
 	cry Cry_Ralts
 	cry Cry_Kirlia
 	cry Cry_Gardevoir
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GardevoirMega
-.endif @ P_MEGA_EVOLUTIONS
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Gallade
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GalladeMega
-.endif @ P_MEGA_EVOLUTIONS
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_RALTS
 .if P_FAMILY_SURSKIT == TRUE
 	cry Cry_Surskit
@@ -606,9 +527,7 @@ gCryTable::
 .endif @ P_FAMILY_MAKUHITA
 .if P_FAMILY_NOSEPASS == TRUE
 	cry Cry_Nosepass
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Probopass
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_NOSEPASS
 .if P_FAMILY_SKITTY == TRUE
 	cry Cry_Skitty
@@ -616,37 +535,22 @@ gCryTable::
 .endif @ P_FAMILY_SKITTY
 .if P_FAMILY_SABLEYE == TRUE
 	cry Cry_Sableye
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SableyeMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_SABLEYE
 .if P_FAMILY_MAWILE == TRUE
 	cry Cry_Mawile
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_MawileMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_MAWILE
 .if P_FAMILY_ARON == TRUE
 	cry Cry_Aron
 	cry Cry_Lairon
 	cry Cry_Aggron
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AggronMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_ARON
 .if P_FAMILY_MEDITITE == TRUE
 	cry Cry_Meditite
 	cry Cry_Medicham
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_MedichamMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_MEDITITE
 .if P_FAMILY_ELECTRIKE == TRUE
 	cry Cry_Electrike
 	cry Cry_Manectric
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_ManectricMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_ELECTRIKE
 .if P_FAMILY_PLUSLE == TRUE
 	cry Cry_Plusle
@@ -659,13 +563,9 @@ gCryTable::
 	cry Cry_Illumise
 .endif @ P_FAMILY_VOLBEAT_ILLUMISE
 .if P_FAMILY_ROSELIA == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Budew
-.endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_Roselia
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Roserade
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_ROSELIA
 .if P_FAMILY_GULPIN == TRUE
 	cry Cry_Gulpin
@@ -674,9 +574,6 @@ gCryTable::
 .if P_FAMILY_CARVANHA == TRUE
 	cry Cry_Carvanha
 	cry Cry_Sharpedo
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SharpedoMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_CARVANHA
 .if P_FAMILY_WAILMER == TRUE
 	cry Cry_Wailmer
@@ -685,9 +582,6 @@ gCryTable::
 .if P_FAMILY_NUMEL == TRUE
 	cry Cry_Numel
 	cry Cry_Camerupt
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_CameruptMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_NUMEL
 .if P_FAMILY_TORKOAL == TRUE
 	cry Cry_Torkoal
@@ -711,9 +605,6 @@ gCryTable::
 .if P_FAMILY_SWABLU == TRUE
 	cry Cry_Swablu
 	cry Cry_Altaria
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AltariaMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_SWABLU
 .if P_FAMILY_ZANGOOSE == TRUE
 	cry Cry_Zangoose
@@ -758,41 +649,26 @@ gCryTable::
 .if P_FAMILY_SHUPPET == TRUE
 	cry Cry_Shuppet
 	cry Cry_Banette
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_BanetteMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_SHUPPET
 .if P_FAMILY_DUSKULL == TRUE
 	cry Cry_Duskull
 	cry Cry_Dusclops
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Dusknoir
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_DUSKULL
 .if P_FAMILY_TROPIUS == TRUE
 	cry Cry_Tropius
 .endif @ P_FAMILY_TROPIUS
 .if P_FAMILY_CHIMECHO == TRUE
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Chingling
-.endif @ P_GEN_4_CROSS_EVOS
 	cry Cry_Chimecho
 .endif @ P_FAMILY_CHIMECHO
 .if P_FAMILY_ABSOL == TRUE
 	cry Cry_Absol
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AbsolMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_ABSOL
 .if P_FAMILY_SNORUNT == TRUE
 	cry Cry_Snorunt
 	cry Cry_Glalie
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GlalieMega
-.endif @ P_MEGA_EVOLUTIONS
-.if P_GEN_4_CROSS_EVOS == TRUE
 	cry Cry_Froslass
-.endif @ P_GEN_4_CROSS_EVOS
 .endif @ P_FAMILY_SNORUNT
 .if P_FAMILY_SPHEAL == TRUE
 	cry Cry_Spheal
@@ -814,17 +690,11 @@ gCryTable::
 	cry Cry_Bagon
 	cry Cry_Shelgon
 	cry Cry_Salamence
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_SalamenceMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_BAGON
 .if P_FAMILY_BELDUM == TRUE
 	cry Cry_Beldum
 	cry Cry_Metang
 	cry Cry_Metagross
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_MetagrossMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_BELDUM
 .if P_FAMILY_REGIROCK == TRUE
 	cry Cry_Regirock
@@ -837,33 +707,18 @@ gCryTable::
 .endif @ P_FAMILY_REGISTEEL
 .if P_FAMILY_LATIAS == TRUE
 	cry Cry_Latias
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_LatiasMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_LATIAS
 .if P_FAMILY_LATIOS == TRUE
 	cry Cry_Latios
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_LatiosMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_LATIOS
 .if P_FAMILY_KYOGRE == TRUE
 	cry Cry_Kyogre
-.if P_PRIMAL_REVERSIONS == TRUE
-	cry Cry_KyogrePrimal
-.endif @ P_PRIMAL_REVERSIONS
 .endif @ P_FAMILY_KYOGRE
 .if P_FAMILY_GROUDON == TRUE
 	cry Cry_Groudon
-.if P_PRIMAL_REVERSIONS == TRUE
-	cry Cry_GroudonPrimal
-.endif @ P_PRIMAL_REVERSIONS
 .endif @ P_FAMILY_GROUDON
 .if P_FAMILY_RAYQUAZA == TRUE
 	cry Cry_Rayquaza
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_RayquazaMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_RAYQUAZA
 .if P_FAMILY_JIRACHI == TRUE
 	cry Cry_Jirachi
@@ -943,9 +798,6 @@ gCryTable::
 .if P_FAMILY_BUNEARY == TRUE
 	cry Cry_Buneary
 	cry Cry_Lopunny
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_LopunnyMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_BUNEARY
 .if P_FAMILY_GLAMEOW == TRUE
 	cry Cry_Glameow
@@ -969,16 +821,10 @@ gCryTable::
 	cry Cry_Gible
 	cry Cry_Gabite
 	cry Cry_Garchomp
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_GarchompMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_GIBLE
 .if P_FAMILY_RIOLU == TRUE
 	cry Cry_Riolu
 	cry Cry_Lucario
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_LucarioMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_RIOLU
 .if P_FAMILY_HIPPOPOTAS == TRUE
 	cry Cry_Hippopotas
@@ -1002,9 +848,6 @@ gCryTable::
 .if P_FAMILY_SNOVER == TRUE
 	cry Cry_Snover
 	cry Cry_Abomasnow
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AbomasnowMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_SNOVER
 .if P_FAMILY_ROTOM == TRUE
 	cry Cry_Rotom
@@ -1121,9 +964,6 @@ gCryTable::
 .endif @ P_FAMILY_DRILBUR
 .if P_FAMILY_AUDINO == TRUE
 	cry Cry_Audino
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_AudinoMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_AUDINO
 .if P_FAMILY_TIMBURR == TRUE
 	cry Cry_Timburr
@@ -1316,9 +1156,6 @@ gCryTable::
 .if P_FAMILY_PAWNIARD == TRUE
 	cry Cry_Pawniard
 	cry Cry_Bisharp
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry Cry_Kingambit
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_PAWNIARD
 .if P_FAMILY_BOUFFALANT == TRUE
 	cry Cry_Bouffalant
@@ -1523,9 +1360,6 @@ gCryTable::
 .endif @ P_FAMILY_ZYGARDE
 .if P_FAMILY_DIANCIE == TRUE
 	cry Cry_Diancie
-.if P_MEGA_EVOLUTIONS == TRUE
-	cry Cry_DiancieMega
-.endif @ P_MEGA_EVOLUTIONS
 .endif @ P_FAMILY_DIANCIE
 .if P_FAMILY_HOOPA == TRUE
 	cry Cry_HoopaConfined
@@ -1787,10 +1621,6 @@ gCryTable::
 	cry Cry_Applin
 	cry Cry_Flapple
 	cry Cry_Appletun
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry Cry_Dipplin
-	cry Cry_Hydrapple
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_APPLIN
 .if P_FAMILY_SILICOBRA == TRUE
 	cry Cry_Silicobra
@@ -1877,9 +1707,6 @@ gCryTable::
 .endif @ P_FAMILY_ARCTOVISH
 .if P_FAMILY_DURALUDON == TRUE
 	cry Cry_Duraludon
-.if P_GEN_9_CROSS_EVOS == TRUE
-	cry Cry_Archaludon
-.endif @ P_GEN_9_CROSS_EVOS
 .endif @ P_FAMILY_DURALUDON
 .if P_FAMILY_DREEPY == TRUE
 	cry Cry_Dreepy
@@ -2174,9 +2001,6 @@ gCryTable::
 .if P_FAMILY_IRON_BOULDER == TRUE
 	cry Cry_IronBoulder
 .endif @ P_FAMILY_IRON_BOULDER
-.if P_FAMILY_IRON_CROWN == TRUE
-	cry Cry_IronCrown
-.endif @ P_FAMILY_IRON_CROWN
 
 	.align 2
 gCryTable_Reverse::

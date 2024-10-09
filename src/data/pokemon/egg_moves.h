@@ -1265,7 +1265,6 @@ static const u16 sDelibirdEggMoveLearnset[] = {
 #endif //P_FAMILY_DELIBIRD
 
 #if P_FAMILY_MANTINE
-#if P_GEN_4_CROSS_EVOS
 static const u16 sMantykeEggMoveLearnset[] = {
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
@@ -1281,7 +1280,6 @@ static const u16 sMantykeEggMoveLearnset[] = {
     MOVE_TAILWIND,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
 static const u16 sMantineEggMoveLearnset[] = {
     MOVE_TWISTER,
     MOVE_HYDRO_PUMP,
@@ -1891,7 +1889,6 @@ static const u16 sIllumiseEggMoveLearnset[] = {
 #endif //P_FAMILY_VOLBEAT_ILLUMISE
 
 #if P_FAMILY_ROSELIA
-#if P_GEN_4_CROSS_EVOS
 static const u16 sBudewEggMoveLearnset[] = {
     MOVE_SPIKES,
     MOVE_SYNTHESIS,
@@ -1908,7 +1905,6 @@ static const u16 sBudewEggMoveLearnset[] = {
     MOVE_GRASS_WHISTLE,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
 static const u16 sRoseliaEggMoveLearnset[] = {
     MOVE_SPIKES,
     MOVE_SYNTHESIS,
@@ -2319,7 +2315,6 @@ static const u16 sTropiusEggMoveLearnset[] = {
 #endif //P_FAMILY_TROPIUS
 
 #if P_FAMILY_CHIMECHO
-#if P_GEN_4_CROSS_EVOS
 static const u16 sChinglingEggMoveLearnset[] = {
     MOVE_DISABLE,
     MOVE_CURSE,
@@ -2332,7 +2327,6 @@ static const u16 sChinglingEggMoveLearnset[] = {
     MOVE_COSMIC_POWER,
     MOVE_UNAVAILABLE,
 };
-#endif //P_GEN_4_CROSS_EVOS
 static const u16 sChimechoEggMoveLearnset[] = {
     MOVE_DISABLE,
     MOVE_CURSE,
