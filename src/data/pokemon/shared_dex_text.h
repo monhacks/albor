@@ -36,13 +36,6 @@ const u8 gEeveePokedexText[] = _(
     "environment. Radiation from various\n"
     "Stones causes this Pokémon to evolve.");
 
-// Gen 2 families
-const u8 gUnownPokedexText[] = _(
-    "This Pokémon is shaped like ancient text\n"
-    "characters. Although research is ongoing,\n"
-    "it is a mystery as to which came first,\n"
-    "the ancient writings or the various Unown.");
-
 // Gen 3 families
 const u8 gDeoxysNormalPokedexText[] = _(
     "Deoxys emerged from a virus that came\n"
@@ -265,25 +258,3 @@ const u8 gToxtricityGigantamaxPokedexText[] = _(
     "across the land in a rampage,\n"
     "contaminating the earth with toxic sweat.");
 
-// Gen 9 families
-const u8 gOgerponTealMaskPokedexText[] = _(
-    "This Pokémon's type changes based on\n"
-    "which mask it's wearing. It confounds\n"
-    "its enemies with nimble movements\n"
-    "and kicks.");
-
-const u8 gOgerponWellspringMaskPokedexText[] = _(
-    "This form excels in both attack\n"
-    "and defense. It ceaselessly unleashes\n"
-    "moves like a spring gushes water.");
-
-const u8 gOgerponHearthflameMaskPokedexText[] = _(
-    "This form is the most aggressive,\n"
-    "bombarding enemies with the\n"
-    "intensity of flames blazing within a hearth.");
-
-const u8 gOgerponCornerstoneMaskPokedexText[] = _(
-    "In this form, it draws on the power\n"
-    "of stone. Its body is rock-solid,\n"
-    "protecting it from all manner of\n"
-    "attacks.");

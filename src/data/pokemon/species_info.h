@@ -15076,105 +15076,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Linoone, TRACKS_FOOT)
         LEARNSETS(Linoone),
     },
-
-#if P_GALARIAN_FORMS
-    [SPECIES_ZIGZAGOON_GALARIAN] =
-    {
-        ZIGZAGOON_MISC_INFO,
-        .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
-        .bodyColor = BODY_COLOR_WHITE,
-        .description = COMPOUND_STRING(
-            "Its restlessness has it constantly moving\n"
-            "in zigzags. It will purposely run into other\n"
-            "Pokémon to start fights. It's thought to\n"
-            "be the oldest form of Zigzagoon."),
-        FRONT_PIC(ZigzagoonGalarian, 56, 40),
-        .frontPicYOffset = 13,
-        .frontAnimFrames = sAnims_ZigzagoonGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(ZigzagoonGalarian, 56, 48),
-        .backPicYOffset = 12,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ZigzagoonGalarian),
-        ICON(ZigzagoonGalarian),
-        FOLLOWER(ZigzagoonGalarian, TRACKS_FOOT)
-        LEARNSETS(ZigzagoonGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LINOONE_GALARIAN}),
-    },
-
-    [SPECIES_LINOONE_GALARIAN] =
-    {
-        LINOONE_MISC_INFO,
-        .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
-        .description = COMPOUND_STRING(
-            "This very aggressive Pokémon will\n"
-            "recklessly challenge opponents stronger\n"
-            "than itself. It uses its long tongue to\n"
-            "taunt them to then tackle forcefully."),
-        FRONT_PIC(LinooneGalarian, 64, 40),
-        .frontPicYOffset = 13,
-        .frontAnimFrames = sAnims_LinooneGalarian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(LinooneGalarian, 64, 40),
-        .backPicYOffset = 13,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(LinooneGalarian),
-        ICON(LinooneGalarian),
-        FOLLOWER(LinooneGalarian, TRACKS_FOOT)
-        LEARNSETS(LinooneGalarian),
-        .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 35, SPECIES_OBSTAGOON}),
-    },
-
-    [SPECIES_OBSTAGOON] =
-    {
-        .baseHP        = 93,
-        .baseAttack    = 90,
-        .baseDefense   = 101,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 81,
-        .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
-        .catchRate = 45,
-        .expYield = 260,
-        .evYield_Defense = 3,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_RECKLESS, ABILITY_GUTS, ABILITY_DEFIANT},
-        .bodyColor = BODY_COLOR_GRAY,
-        .speciesName = _("Obstagoon"),
-        .cryId = CRY_OBSTAGOON,
-        .natDexNum = DEX_OBSTAGOON,
-        .categoryName = _("Blocking"),
-        .height = 16,
-        .weight = 460,
-        .description = COMPOUND_STRING(
-            "Its voice is staggering in volume.\n"
-            "Obstagoon has a tendency to take on a\n"
-            "threatening posture and shout--this move\n"
-            "is known as Obstruct."),
-        .pokemonScale = 259,
-        .pokemonOffset = 1,
-        .trainerScale = 296,
-        .trainerOffset = 1,
-        FRONT_PIC(Obstagoon, 56, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Obstagoon,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Obstagoon, 64, 64),
-        .backPicYOffset = 1,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Obstagoon),
-        ICON(Obstagoon),
-        FOOTPRINT(Obstagoon)
-        FOLLOWER(Obstagoon, TRACKS_FOOT)
-        LEARNSETS(Obstagoon),
-    },
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_ZIGZAGOON
 
 #if P_FAMILY_WURMPLE
@@ -27574,7 +27475,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(DarmanitanZenMode),
     },
 
-#if P_GALARIAN_FORMS
     [SPECIES_DARUMAKA_GALARIAN] =
     {
         DARUMAKA_MISC_INFO,
@@ -27670,7 +27570,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         PALETTES(DarmanitanGalarianZenMode),
         ICON(DarmanitanGalarianZenMode),
     },
-#endif //P_GALARIAN_FORMS
 #endif //P_FAMILY_DARUMAKA
 
 #if P_FAMILY_MARACTUS

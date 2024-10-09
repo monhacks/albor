@@ -6,8 +6,6 @@
 #include "text.h"
 #include "international_string_util.h"
 
-#define UNOWN_OFFSET 30000
-
 void ClearAllMail(void)
 {
     u8 i;
