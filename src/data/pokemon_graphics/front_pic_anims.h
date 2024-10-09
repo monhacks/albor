@@ -1337,7 +1337,6 @@ static const union AnimCmd sAnim_Lickilicky[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_KOFFING
 static const union AnimCmd sAnim_Koffing[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -1358,10 +1357,7 @@ static const union AnimCmd sAnim_Weezing[] =
     ANIMCMD_END,
 };
 
-#if P_GALARIAN_FORMS
 PLACEHOLDER_ANIM_SINGLE_FRAME(WeezingGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_KOFFING
 
 #if P_FAMILY_RHYHORN
 static const union AnimCmd sAnim_Rhyhorn[] =
@@ -9325,10 +9321,6 @@ PLACEHOLDER_ANIM_SINGLE_FRAME(IronTreads);
 PLACEHOLDER_ANIM_SINGLE_FRAME(IronBundle);
 #endif //P_FAMILY_IRON_BUNDLE
 
-#if P_FAMILY_IRON_HANDS
-PLACEHOLDER_ANIM_SINGLE_FRAME(IronHands);
-#endif //P_FAMILY_IRON_HANDS
-
 static const union AnimCmd sAnim_Egg[] =
 {
     ANIMCMD_FRAME(0, 6),
@@ -9342,7 +9334,7 @@ static const union AnimCmd sAnim_Egg[] =
 static const union AnimCmd *const sAnims_##name[] = \
 {                                                   \
     sAnim_GeneralFrame0,                            \
-    sAnim_##name##,                               \
+    sAnim_##name##,                                 \
 }
 
 
@@ -9482,13 +9474,9 @@ SINGLE_ANIMATION(Hitmonchan);
 SINGLE_ANIMATION(Hitmontop);
 SINGLE_ANIMATION(Lickitung);
 SINGLE_ANIMATION(Lickilicky);
-#if P_FAMILY_KOFFING
 SINGLE_ANIMATION(Koffing);
 SINGLE_ANIMATION(Weezing);
-#if P_GALARIAN_FORMS
 SINGLE_ANIMATION(WeezingGalarian);
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_KOFFING
 #if P_FAMILY_RHYHORN
 SINGLE_ANIMATION(Rhyhorn);
 SINGLE_ANIMATION(Rhydon);

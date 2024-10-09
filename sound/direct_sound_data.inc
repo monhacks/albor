@@ -858,7 +858,6 @@ Cry_Lickitung::
 Cry_Lickilicky::
 	.incbin "sound/direct_sound_samples/cries/lickilicky.bin"
 
-.if P_FAMILY_KOFFING == TRUE
 	.align 2
 Cry_Koffing::
 	.incbin "sound/direct_sound_samples/cries/koffing.bin"
@@ -866,7 +865,6 @@ Cry_Koffing::
 	.align 2
 Cry_Weezing::
 	.incbin "sound/direct_sound_samples/cries/weezing.bin"
-.endif @ P_FAMILY_KOFFING
 
 .if P_FAMILY_RHYHORN == TRUE
 	.align 2
@@ -5295,12 +5293,6 @@ Cry_IronTreads::
 Cry_IronBundle::
 	.incbin "sound/direct_sound_samples/cries/iron_bundle.bin"
 .endif @ P_FAMILY_IRON_BUNDLE
-
-.if P_FAMILY_IRON_HANDS == TRUE
-	.align 2
-Cry_IronHands::
-	.incbin "sound/direct_sound_samples/cries/iron_hands.bin"
-.endif @ P_FAMILY_IRON_HANDS
 
 .if P_FAMILY_IRON_JUGULIS == TRUE
 	.align 2

@@ -235,24 +235,9 @@ static const u16 sMewtwoEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_KOFFING
 static const u16 sKoffingEggMoveLearnset[] = {
-    MOVE_SCREECH,
-    MOVE_PSYWAVE,
-    MOVE_PSYBEAM,
-    MOVE_DESTINY_BOND,
-    MOVE_PAIN_SPLIT,
-    MOVE_GRUDGE,
-    MOVE_SPITE,
-    MOVE_CURSE,
-    MOVE_STOCKPILE,
-    MOVE_SWALLOW,
-    MOVE_SPIT_UP,
-    MOVE_TOXIC_SPIKES,
-    MOVE_VENOM_DRENCH,
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_KOFFING
 
 #if P_FAMILY_RHYHORN
 static const u16 sRhyhornEggMoveLearnset[] = {

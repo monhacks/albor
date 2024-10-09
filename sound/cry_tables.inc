@@ -118,10 +118,8 @@ gCryTable::
 	cry Cry_Hitmontop
 	cry Cry_Lickitung
 	cry Cry_Lickilicky
-.if P_FAMILY_KOFFING == TRUE
 	cry Cry_Koffing
 	cry Cry_Weezing
-.endif @ P_FAMILY_KOFFING
 .if P_FAMILY_RHYHORN == TRUE
 	cry Cry_Rhyhorn
 	cry Cry_Rhydon
@@ -1925,9 +1923,6 @@ gCryTable::
 .if P_FAMILY_IRON_BUNDLE == TRUE
 	cry Cry_IronBundle
 .endif @ P_FAMILY_IRON_BUNDLE
-.if P_FAMILY_IRON_HANDS == TRUE
-	cry Cry_IronHands
-.endif @ P_FAMILY_IRON_HANDS
 .if P_FAMILY_IRON_JUGULIS == TRUE
 	cry Cry_IronJugulis
 .endif @ P_FAMILY_IRON_JUGULIS

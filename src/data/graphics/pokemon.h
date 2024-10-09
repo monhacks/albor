@@ -857,25 +857,23 @@ const u32 gMonBackPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/bac
 const u32 gMonShinyPalette_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/shiny.gbapal.lz");
 const u32 gObjectEventPic_Lickilicky[] = INCBIN_U32("graphics/pokemon/lickilicky/follower.4bpp");
 
-#if P_FAMILY_KOFFING
-    const u32 gMonFrontPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/anim_front.4bpp.lz");
-    const u32 gMonPalette_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/normal.gbapal.lz");
-    const u32 gMonBackPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/back.4bpp.lz");
-    const u32 gMonShinyPalette_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/follower.4bpp");
+const u32 gMonFrontPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/anim_front.4bpp.lz");
+const u32 gMonPalette_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/normal.gbapal.lz");
+const u32 gMonBackPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/back.4bpp.lz");
+const u32 gMonShinyPalette_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/shiny.gbapal.lz");
+const u32 gObjectEventPic_Koffing[] = INCBIN_U32("graphics/pokemon/koffing/follower.4bpp");
 
-    const u32 gMonFrontPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/anim_front.4bpp.lz");
-    const u32 gMonPalette_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/normal.gbapal.lz");
-    const u32 gMonBackPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/back.4bpp.lz");
-    const u32 gMonShinyPalette_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/follower.4bpp");
+const u32 gMonFrontPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/anim_front.4bpp.lz");
+const u32 gMonPalette_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/normal.gbapal.lz");
+const u32 gMonBackPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/back.4bpp.lz");
+const u32 gMonShinyPalette_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/shiny.gbapal.lz");
+const u32 gObjectEventPic_Weezing[] = INCBIN_U32("graphics/pokemon/weezing/follower.4bpp");
 
-    const u32 gMonFrontPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/front.4bpp.lz");
-    const u32 gMonPalette_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/normal.gbapal.lz");
-    const u32 gMonBackPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/back.4bpp.lz");
-    const u32 gMonShinyPalette_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/shiny.gbapal.lz");
-    const u32 gObjectEventPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/follower.4bpp");
-#endif //P_FAMILY_KOFFING
+const u32 gMonFrontPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/front.4bpp.lz");
+const u32 gMonPalette_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/normal.gbapal.lz");
+const u32 gMonBackPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/back.4bpp.lz");
+const u32 gMonShinyPalette_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/shiny.gbapal.lz");
+const u32 gObjectEventPic_WeezingGalarian[] = INCBIN_U32("graphics/pokemon/weezing/galarian/follower.4bpp");
 
 #if P_FAMILY_RHYHORN
     const u32 gMonFrontPic_Rhyhorn[] = INCBIN_U32("graphics/pokemon/rhyhorn/anim_front.4bpp.lz");

@@ -480,19 +480,15 @@ static const struct SpriteFrameImage sPicTable_Lickilicky[] = {
     overworld_ascending_frames(gObjectEventPic_Lickilicky, 4, 4),
 };
 
-#if P_FAMILY_KOFFING
 static const struct SpriteFrameImage sPicTable_Koffing[] = {
     overworld_ascending_frames(gObjectEventPic_Koffing, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Weezing[] = {
     overworld_ascending_frames(gObjectEventPic_Weezing, 4, 4),
 };
-#if P_GALARIAN_FORMS
 static const struct SpriteFrameImage sPicTable_WeezingGalarian[] = {
     overworld_ascending_frames(gObjectEventPic_WeezingGalarian, 4, 4),
 };
-#endif //P_GALARIAN_FORMS
-#endif //P_FAMILY_KOFFING
 
 #if P_FAMILY_RHYHORN
 static const struct SpriteFrameImage sPicTable_Rhyhorn[] = {

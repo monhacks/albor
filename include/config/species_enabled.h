@@ -21,12 +21,10 @@
 
 // Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
 #define P_REGIONAL_FORMS                 TRUE
-#define P_ALOLAN_FORMS                   P_REGIONAL_FORMS
 #define P_GALARIAN_FORMS                 P_REGIONAL_FORMS
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-#define P_FAMILY_KOFFING                 P_GEN_1_POKEMON
 #define P_FAMILY_RHYHORN                 P_GEN_1_POKEMON
 #define P_FAMILY_TANGELA                 P_GEN_1_POKEMON
 #define P_FAMILY_HORSEA                  P_GEN_1_POKEMON
@@ -493,7 +491,6 @@
 #define P_FAMILY_SANDY_SHOCKS            P_GEN_9_POKEMON
 #define P_FAMILY_IRON_TREADS             P_GEN_9_POKEMON
 #define P_FAMILY_IRON_BUNDLE             P_GEN_9_POKEMON
-#define P_FAMILY_IRON_HANDS              P_GEN_9_POKEMON
 #define P_FAMILY_IRON_JUGULIS            P_GEN_9_POKEMON
 #define P_FAMILY_IRON_MOTH               P_GEN_9_POKEMON
 #define P_FAMILY_IRON_THORNS             P_GEN_9_POKEMON
