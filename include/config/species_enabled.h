@@ -40,7 +40,7 @@
 #define P_FAMILY_AIPOM                   P_GEN_2_POKEMON
 #define P_FAMILY_SUNKERN                 P_GEN_2_POKEMON
 #define P_FAMILY_YANMA                   P_GEN_2_POKEMON
-#define P_FAMILY_WOOPER                  P_GEN_2_POKEMON
+#define P_FAMILY_WOOPER                  P_GEN_2_POKEMON //H-Wooper + Clodsire
 #define P_FAMILY_MURKROW                 P_GEN_2_POKEMON
 #define P_FAMILY_MISDREAVUS              P_GEN_2_POKEMON
 #define P_FAMILY_WOBBUFFET               FALSE
@@ -58,7 +58,7 @@
 #define P_FAMILY_REMORAID                P_GEN_2_POKEMON
 #define P_FAMILY_DELIBIRD                P_GEN_2_POKEMON
 #define P_FAMILY_MANTINE                 P_GEN_2_POKEMON
-#define P_FAMILY_SKARMORY                P_GEN_2_POKEMON
+#define P_FAMILY_SKARMORY                FALSE
 #define P_FAMILY_HOUNDOUR                P_GEN_2_POKEMON
 #define P_FAMILY_PHANPY                  P_GEN_2_POKEMON
 #define P_FAMILY_STANTLER                P_GEN_2_POKEMON
