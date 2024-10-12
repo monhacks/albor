@@ -187,10 +187,8 @@ gCryTable::
 	cry Cry_Totodile
 	cry Cry_Croconaw
 	cry Cry_Feraligatr
-.if P_FAMILY_SENTRET == TRUE
 	cry Cry_Sentret
 	cry Cry_Furret
-.endif @ P_FAMILY_SENTRET
 .if P_FAMILY_HOOTHOOT == TRUE
 	cry Cry_Hoothoot
 	cry Cry_Noctowl
@@ -977,13 +975,6 @@ gCryTable::
 	cry Cry_Vanillish
 	cry Cry_Vanilluxe
 .endif @ P_FAMILY_VANILLITE
-.if P_FAMILY_DEERLING == TRUE
-	cry Cry_Deerling
-	cry Cry_Sawsbuck
-.endif @ P_FAMILY_DEERLING
-.if P_FAMILY_EMOLGA == TRUE
-	cry Cry_Emolga
-.endif @ P_FAMILY_EMOLGA
 .if P_FAMILY_KARRABLAST == TRUE
 	cry Cry_Karrablast
 	cry Cry_Escavalier
@@ -996,9 +987,6 @@ gCryTable::
 	cry Cry_Frillish
 	cry Cry_Jellicent
 .endif @ P_FAMILY_FRILLISH
-.if P_FAMILY_ALOMOMOLA == TRUE
-	cry Cry_Alomomola
-.endif @ P_FAMILY_ALOMOMOLA
 .if P_FAMILY_JOLTIK == TRUE
 	cry Cry_Joltik
 	cry Cry_Galvantula
@@ -1095,24 +1083,12 @@ gCryTable::
 .if P_FAMILY_VIRIZION == TRUE
 	cry Cry_Virizion
 .endif @ P_FAMILY_VIRIZION
-.if P_FAMILY_TORNADUS == TRUE
-	cry Cry_TornadusIncarnate
-	cry Cry_TornadusTherian
-.endif @ P_FAMILY_TORNADUS
-.if P_FAMILY_THUNDURUS == TRUE
-	cry Cry_ThundurusIncarnate
-	cry Cry_ThundurusTherian
-.endif @ P_FAMILY_THUNDURUS
 .if P_FAMILY_RESHIRAM == TRUE
 	cry Cry_Reshiram
 .endif @ P_FAMILY_RESHIRAM
 .if P_FAMILY_ZEKROM == TRUE
 	cry Cry_Zekrom
 .endif @ P_FAMILY_ZEKROM
-.if P_FAMILY_LANDORUS == TRUE
-	cry Cry_LandorusIncarnate
-	cry Cry_LandorusTherian
-.endif @ P_FAMILY_LANDORUS
 .if P_FAMILY_KELDEO == TRUE
 	cry Cry_Keldeo
 .endif @ P_FAMILY_KELDEO
@@ -1520,31 +1496,15 @@ gCryTable::
 	cry Cry_Sizzlipede
 	cry Cry_Centiskorch
 .endif @ P_FAMILY_SIZZLIPEDE
-.if P_FAMILY_CLOBBOPUS == TRUE
-	cry Cry_Clobbopus
-	cry Cry_Grapploct
-.endif @ P_FAMILY_CLOBBOPUS
 .if P_FAMILY_SINISTEA == TRUE
 	cry Cry_Sinistea
 	cry Cry_Polteageist
 .endif @ P_FAMILY_SINISTEA
-.if P_FAMILY_HATENNA == TRUE
-	cry Cry_Hatenna
-	cry Cry_Hattrem
-	cry Cry_Hatterene
-.endif @ P_FAMILY_HATENNA
 .if P_FAMILY_IMPIDIMP == TRUE
 	cry Cry_Impidimp
 	cry Cry_Morgrem
 	cry Cry_Grimmsnarl
 .endif @ P_FAMILY_IMPIDIMP
-.if P_FAMILY_MILCERY == TRUE
-	cry Cry_Milcery
-	cry Cry_Alcremie
-.endif @ P_FAMILY_MILCERY
-.if P_FAMILY_FALINKS == TRUE
-	cry Cry_Falinks
-.endif @ P_FAMILY_FALINKS
 .if P_FAMILY_PINCURCHIN == TRUE
 	cry Cry_Pincurchin
 .endif @ P_FAMILY_PINCURCHIN
@@ -1552,17 +1512,6 @@ gCryTable::
 	cry Cry_Snom
 	cry Cry_Frosmoth
 .endif @ P_FAMILY_SNOM
-.if P_FAMILY_STONJOURNER == TRUE
-	cry Cry_Stonjourner
-.endif @ P_FAMILY_STONJOURNER
-.if P_FAMILY_EISCUE == TRUE
-	cry Cry_EiscueIceFace
-	cry Cry_EiscueNoiceFace
-.endif @ P_FAMILY_EISCUE
-.if P_FAMILY_INDEEDEE == TRUE
-	cry Cry_IndeedeeMale
-	cry Cry_IndeedeeFemale
-.endif @ P_FAMILY_INDEEDEE
 .if P_FAMILY_CUFANT == TRUE
 	cry Cry_Cufant
 	cry Cry_Copperajah
