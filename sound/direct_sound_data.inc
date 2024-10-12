@@ -1098,7 +1098,6 @@ Cry_Mewtwo::
 Cry_Mew::
 	.incbin "sound/direct_sound_samples/cries/mew.bin"
 
-.if P_FAMILY_CHIKORITA == TRUE
 	.align 2
 Cry_Chikorita::
 	.incbin "sound/direct_sound_samples/cries/chikorita.bin"
@@ -1110,9 +1109,7 @@ Cry_Bayleef::
 	.align 2
 Cry_Meganium::
 	.incbin "sound/direct_sound_samples/cries/meganium.bin"
-.endif @ P_FAMILY_CHIKORITA
 
-.if P_FAMILY_CYNDAQUIL == TRUE
 	.align 2
 Cry_Cyndaquil::
 	.incbin "sound/direct_sound_samples/cries/cyndaquil.bin"
@@ -1124,9 +1121,7 @@ Cry_Quilava::
 	.align 2
 Cry_Typhlosion::
 	.incbin "sound/direct_sound_samples/cries/typhlosion.bin"
-.endif @ P_FAMILY_CYNDAQUIL
 
-.if P_FAMILY_TOTODILE == TRUE
 	.align 2
 Cry_Totodile::
 	.incbin "sound/direct_sound_samples/cries/totodile.bin"
@@ -1138,7 +1133,6 @@ Cry_Croconaw::
 	.align 2
 Cry_Feraligatr::
 	.incbin "sound/direct_sound_samples/cries/feraligatr.bin"
-.endif @ P_FAMILY_TOTODILE
 
 .if P_FAMILY_SENTRET == TRUE
 	.align 2
@@ -4530,16 +4524,6 @@ Cry_IndeedeeFemale::
 	.incbin "sound/direct_sound_samples/cries/indeedee_female.bin"
 .endif @ P_FAMILY_INDEEDEE
 
-.if P_FAMILY_MORPEKO == TRUE
-	.align 2
-Cry_MorpekoFullBelly::
-	.incbin "sound/direct_sound_samples/cries/morpeko_full_belly.bin"
-
-	.align 2
-Cry_MorpekoHangry::
-	.incbin "sound/direct_sound_samples/cries/morpeko_hangry.bin"
-.endif @ P_FAMILY_MORPEKO
-
 .if P_FAMILY_CUFANT == TRUE
 	.align 2
 Cry_Cufant::
@@ -4549,30 +4533,6 @@ Cry_Cufant::
 Cry_Copperajah::
 	.incbin "sound/direct_sound_samples/cries/copperajah.bin"
 .endif @ P_FAMILY_CUFANT
-
-.if P_FAMILY_DRACOZOLT == TRUE
-	.align 2
-Cry_Dracozolt::
-	.incbin "sound/direct_sound_samples/cries/dracozolt.bin"
-.endif @ P_FAMILY_DRACOZOLT
-
-.if P_FAMILY_ARCTOZOLT == TRUE
-	.align 2
-Cry_Arctozolt::
-	.incbin "sound/direct_sound_samples/cries/arctozolt.bin"
-.endif @ P_FAMILY_ARCTOZOLT
-
-.if P_FAMILY_DRACOVISH == TRUE
-	.align 2
-Cry_Dracovish::
-	.incbin "sound/direct_sound_samples/cries/dracovish.bin"
-.endif @ P_FAMILY_DRACOVISH
-
-.if P_FAMILY_ARCTOVISH == TRUE
-	.align 2
-Cry_Arctovish::
-	.incbin "sound/direct_sound_samples/cries/arctovish.bin"
-.endif @ P_FAMILY_ARCTOVISH
 
 .if P_FAMILY_DURALUDON == TRUE
 	.align 2

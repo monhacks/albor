@@ -3180,9 +3180,6 @@ $(POKEMONGFXDIR)/samurott/hisuian/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/decidueye/hisuian/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/typhlosion/hisuian/follower.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(POKEMONGFXDIR)/wyrdeer/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

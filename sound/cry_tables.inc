@@ -178,21 +178,15 @@ gCryTable::
 	cry Cry_Dragonite
 	cry Cry_Mewtwo
 	cry Cry_Mew
-.if P_FAMILY_CHIKORITA == TRUE
 	cry Cry_Chikorita
 	cry Cry_Bayleef
 	cry Cry_Meganium
-.endif @ P_FAMILY_CHIKORITA
-.if P_FAMILY_CYNDAQUIL == TRUE
 	cry Cry_Cyndaquil
 	cry Cry_Quilava
 	cry Cry_Typhlosion
-.endif @ P_FAMILY_CYNDAQUIL
-.if P_FAMILY_TOTODILE == TRUE
 	cry Cry_Totodile
 	cry Cry_Croconaw
 	cry Cry_Feraligatr
-.endif @ P_FAMILY_TOTODILE
 .if P_FAMILY_SENTRET == TRUE
 	cry Cry_Sentret
 	cry Cry_Furret
@@ -1569,26 +1563,10 @@ gCryTable::
 	cry Cry_IndeedeeMale
 	cry Cry_IndeedeeFemale
 .endif @ P_FAMILY_INDEEDEE
-.if P_FAMILY_MORPEKO == TRUE
-	cry Cry_MorpekoFullBelly
-	cry Cry_MorpekoHangry
-.endif @ P_FAMILY_MORPEKO
 .if P_FAMILY_CUFANT == TRUE
 	cry Cry_Cufant
 	cry Cry_Copperajah
 .endif @ P_FAMILY_CUFANT
-.if P_FAMILY_DRACOZOLT == TRUE
-	cry Cry_Dracozolt
-.endif @ P_FAMILY_DRACOZOLT
-.if P_FAMILY_ARCTOZOLT == TRUE
-	cry Cry_Arctozolt
-.endif @ P_FAMILY_ARCTOZOLT
-.if P_FAMILY_DRACOVISH == TRUE
-	cry Cry_Dracovish
-.endif @ P_FAMILY_DRACOVISH
-.if P_FAMILY_ARCTOVISH == TRUE
-	cry Cry_Arctovish
-.endif @ P_FAMILY_ARCTOVISH
 .if P_FAMILY_DURALUDON == TRUE
 	cry Cry_Duraludon
 .endif @ P_FAMILY_DURALUDON

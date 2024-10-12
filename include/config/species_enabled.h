@@ -23,9 +23,6 @@
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-#define P_FAMILY_CHIKORITA               P_GEN_2_POKEMON
-#define P_FAMILY_CYNDAQUIL               P_GEN_2_POKEMON
-#define P_FAMILY_TOTODILE                P_GEN_2_POKEMON
 #define P_FAMILY_SENTRET                 P_GEN_2_POKEMON
 #define P_FAMILY_HOOTHOOT                P_GEN_2_POKEMON
 #define P_FAMILY_LEDYBA                  P_GEN_2_POKEMON
@@ -381,12 +378,7 @@
 #define P_FAMILY_STONJOURNER             P_GEN_8_POKEMON
 #define P_FAMILY_EISCUE                  P_GEN_8_POKEMON
 #define P_FAMILY_INDEEDEE                P_GEN_8_POKEMON
-#define P_FAMILY_MORPEKO                 P_GEN_8_POKEMON
 #define P_FAMILY_CUFANT                  FALSE //TRUE
-#define P_FAMILY_DRACOZOLT               P_GEN_8_POKEMON
-#define P_FAMILY_ARCTOZOLT               P_GEN_8_POKEMON
-#define P_FAMILY_DRACOVISH               P_GEN_8_POKEMON
-#define P_FAMILY_ARCTOVISH               P_GEN_8_POKEMON
 #define P_FAMILY_DURALUDON               P_GEN_8_POKEMON
 #define P_FAMILY_DREEPY                  FALSE //TRUE
 #define P_FAMILY_ZACIAN                  P_GEN_8_POKEMON

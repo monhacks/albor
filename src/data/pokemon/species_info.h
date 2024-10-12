@@ -10191,8 +10191,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Quilava),
         FOLLOWER(Quilava, TRACKS_FOOT)
         LEARNSETS(Quilava),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION},
-                                {EVO_NONE, 0, SPECIES_TYPHLOSION_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION}),
     },
 
     [SPECIES_TYPHLOSION] =
@@ -10209,7 +10208,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Typhlosion"),
         .cryId = CRY_TYPHLOSION,
         .natDexNum = DEX_TYPHLOSION,
-        .formSpeciesIdTable = sTyphlosionFormSpeciesIdTable,
         .baseHP        = 78,
         .baseAttack    = 84,
         .baseDefense   = 78,
@@ -10242,55 +10240,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Typhlosion),
         FOLLOWER(Typhlosion, TRACKS_FOOT)
         LEARNSETS(Typhlosion),
-    },
-
-    [SPECIES_TYPHLOSION_HISUIAN] =
-    {
-        .catchRate = 45,
-        .expYield = 267,
-        .evYield_SpAttack = 3,
-        .genderRatio = PERCENT_FEMALE(25),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Typhlosion"),
-        .cryId = CRY_TYPHLOSION,
-        .natDexNum = DEX_TYPHLOSION,
-        .formSpeciesIdTable = sTyphlosionFormSpeciesIdTable,
-        .baseHP        = 73,
-        .baseAttack    = 84,
-        .baseDefense   = 78,
-        .baseSpeed     = 95,
-        .baseSpAttack  = 119,
-        .baseSpDefense = 85,
-        .types = MON_TYPES(TYPE_FIRE, TYPE_GHOST),
-        .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_FRISK},
-        .categoryName = _("Ghost Flame"),
-        .height = 16,
-        .weight = 698,
-        .description = COMPOUND_STRING(
-            "Said to purify lost, forsaken souls with\n"
-            "its flames and guide them to the afterlife.\n"
-            "It's believed its form was influenced by\n"
-            "the energy of Mt. Coronet in ancient times."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 268,
-        .trainerOffset = 1,
-        FRONT_PIC(TyphlosionHisuian, 48, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_TyphlosionHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(TyphlosionHisuian, 64, 56),
-        .backPicYOffset = 2,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(TyphlosionHisuian),
-        ICON(TyphlosionHisuian),
-        FOLLOWER(TyphlosionHisuian, TRACKS_FOOT)
-        LEARNSETS(TyphlosionHisuian),
-        .isHisuianForm = TRUE,
     },
 
     [SPECIES_TOTODILE] =

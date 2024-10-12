@@ -1906,7 +1906,6 @@ static const union AnimCmd sAnim_Mew[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_CHIKORITA
 static const union AnimCmd sAnim_Chikorita[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -1928,9 +1927,7 @@ static const union AnimCmd sAnim_Meganium[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CHIKORITA
 
-#if P_FAMILY_CYNDAQUIL
 static const union AnimCmd sAnim_Cyndaquil[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -1954,12 +1951,6 @@ static const union AnimCmd sAnim_Typhlosion[] =
     ANIMCMD_END,
 };
 
-#if P_HISUIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(TyphlosionHisuian);
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_CYNDAQUIL
-
-#if P_FAMILY_TOTODILE
 static const union AnimCmd sAnim_Totodile[] =
 {
     ANIMCMD_FRAME(1, 8),
@@ -1986,7 +1977,6 @@ static const union AnimCmd sAnim_Feraligatr[] =
     ANIMCMD_FRAME(0, 40),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TOTODILE
 
 #if P_FAMILY_SENTRET
 static const union AnimCmd sAnim_Sentret[] =
@@ -8805,30 +8795,10 @@ PLACEHOLDER_ANIM_SINGLE_FRAME(Eiscue);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Indeedee);
 #endif //P_FAMILY_INDEEDEE
 
-#if P_FAMILY_MORPEKO
-PLACEHOLDER_ANIM_SINGLE_FRAME(Morpeko);
-#endif //P_FAMILY_MORPEKO
-
 #if P_FAMILY_CUFANT
 PLACEHOLDER_ANIM_SINGLE_FRAME(Cufant);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Copperajah);
 #endif //P_FAMILY_CUFANT
-
-#if P_FAMILY_DRACOZOLT
-PLACEHOLDER_ANIM_SINGLE_FRAME(Dracozolt);
-#endif //P_FAMILY_DRACOZOLT
-
-#if P_FAMILY_ARCTOZOLT
-PLACEHOLDER_ANIM_SINGLE_FRAME(Arctozolt);
-#endif //P_FAMILY_ARCTOZOLT
-
-#if P_FAMILY_DRACOVISH
-PLACEHOLDER_ANIM_SINGLE_FRAME(Dracovish);
-#endif //P_FAMILY_DRACOVISH
-
-#if P_FAMILY_ARCTOVISH
-PLACEHOLDER_ANIM_SINGLE_FRAME(Arctovish);
-#endif //P_FAMILY_ARCTOVISH
 
 #if P_FAMILY_DURALUDON
 PLACEHOLDER_ANIM_SINGLE_FRAME(Duraludon);
@@ -9244,24 +9214,15 @@ SINGLE_ANIMATION(Dragonair);
 SINGLE_ANIMATION(Dragonite);
 SINGLE_ANIMATION(Mewtwo);
 SINGLE_ANIMATION(Mew);
-#if P_FAMILY_CHIKORITA
 SINGLE_ANIMATION(Chikorita);
 SINGLE_ANIMATION(Bayleef);
 SINGLE_ANIMATION(Meganium);
-#endif //P_FAMILY_CHIKORITA
-#if P_FAMILY_CYNDAQUIL
 SINGLE_ANIMATION(Cyndaquil);
 SINGLE_ANIMATION(Quilava);
 SINGLE_ANIMATION(Typhlosion);
-#if P_HISUIAN_FORMS
-SINGLE_ANIMATION(TyphlosionHisuian);
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_CYNDAQUIL
-#if P_FAMILY_TOTODILE
 SINGLE_ANIMATION(Totodile);
 SINGLE_ANIMATION(Croconaw);
 SINGLE_ANIMATION(Feraligatr);
-#endif //P_FAMILY_TOTODILE
 #if P_FAMILY_SENTRET
 SINGLE_ANIMATION(Sentret);
 SINGLE_ANIMATION(Furret);
