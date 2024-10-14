@@ -1846,7 +1846,7 @@ Items: Full Restore
 Double Battle: No
 AI: Basic Trainer
 
-Skarmory
+Metagross
 Level: 43
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
@@ -5016,7 +5016,7 @@ IVs: 25 HP / 25 Atk / 25 Def / 25 SpA / 25 SpD / 25 Spe
 - Protect
 - Aerial Ace
 
-Skarmory
+Metagross
 Level: 31
 IVs: 26 HP / 26 Atk / 26 Def / 26 SpA / 26 SpD / 26 Spe
 - Sand Attack
@@ -7353,7 +7353,7 @@ Doduo
 Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
-Skarmory
+Metagross
 Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
@@ -7370,7 +7370,7 @@ Music: Cool
 Double Battle: No
 AI: Check Bad Move
 
-Skarmory
+Metagross
 Level: 30
 IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
 
@@ -12537,7 +12537,7 @@ Swellow
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Skarmory
+Metagross
 Level: 32
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -13161,7 +13161,7 @@ Music: Cool
 Double Battle: No
 AI: Check Bad Move
 
-Skarmory
+Metagross
 Level: 17
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -13672,11 +13672,11 @@ Music: Cool
 Double Battle: No
 AI: Check Bad Move
 
-Skarmory
+Metagross
 Level: 25
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Skarmory
+Metagross
 Level: 25
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -15187,7 +15187,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Aerial Ace
 
-Skarmory
+Metagross
 Level: 43
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
@@ -15245,7 +15245,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Aerial Ace
 
-Skarmory
+Metagross
 Level: 48
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
@@ -15303,7 +15303,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Protect
 - Aerial Ace
 
-Skarmory
+Metagross
 Level: 53
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
@@ -15361,7 +15361,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Earthquake
 - Ice Beam
 
-Skarmory
+Metagross
 Level: 58
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Whirlwind
@@ -15863,7 +15863,7 @@ Items: Full Restore / Full Restore / Full Restore / Full Restore
 Double Battle: No
 AI: Basic Trainer
 
-Skarmory
+Metagross
 Level: 77
 IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Toxic

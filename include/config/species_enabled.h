@@ -23,7 +23,6 @@
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-#define P_FAMILY_SUNKERN                 P_GEN_2_POKEMON
 #define P_FAMILY_YANMA                   P_GEN_2_POKEMON
 #define P_FAMILY_WOOPER                  P_GEN_2_POKEMON //H-Wooper + Clodsire
 #define P_FAMILY_MURKROW                 P_GEN_2_POKEMON
@@ -40,12 +39,9 @@
 #define P_FAMILY_CORSOLA                 P_GEN_2_POKEMON
 #define P_FAMILY_REMORAID                P_GEN_2_POKEMON
 #define P_FAMILY_DELIBIRD                P_GEN_2_POKEMON
-#define P_FAMILY_MANTINE                 P_GEN_2_POKEMON
-#define P_FAMILY_SKARMORY                FALSE
 #define P_FAMILY_HOUNDOUR                P_GEN_2_POKEMON
 #define P_FAMILY_PHANPY                  P_GEN_2_POKEMON
 #define P_FAMILY_STANTLER                P_GEN_2_POKEMON
-#define P_FAMILY_SMEARGLE                FALSE
 #define P_FAMILY_MILTANK                 P_GEN_2_POKEMON
 #define P_FAMILY_RAIKOU                  P_GEN_2_POKEMON
 #define P_FAMILY_ENTEI                   P_GEN_2_POKEMON
@@ -222,16 +218,8 @@
 #define P_FAMILY_FLABEBE                 P_GEN_6_POKEMON
 #define P_FAMILY_SKIDDO                  FALSE //TRUE
 #define P_FAMILY_PANCHAM                 FALSE //TRUE
-#define P_FAMILY_FURFROU                 P_GEN_6_POKEMON
 #define P_FAMILY_ESPURR                  P_GEN_6_POKEMON
 #define P_FAMILY_HONEDGE                 FALSE //TRUE
-#define P_FAMILY_SPRITZEE                P_GEN_6_POKEMON
-#define P_FAMILY_SWIRLIX                 P_GEN_6_POKEMON
-#define P_FAMILY_INKAY                   P_GEN_6_POKEMON
-#define P_FAMILY_BINACLE                 P_GEN_6_POKEMON
-#define P_FAMILY_SKRELP                  P_GEN_6_POKEMON
-#define P_FAMILY_CLAUNCHER               P_GEN_6_POKEMON
-#define P_FAMILY_HELIOPTILE              P_GEN_6_POKEMON
 #define P_FAMILY_TYRUNT                  FALSE //TRUE
 #define P_FAMILY_AMAURA                  FALSE //TRUE
 #define P_FAMILY_HAWLUCHA                P_GEN_6_POKEMON
@@ -240,23 +228,10 @@
 #define P_FAMILY_DIANCIE                 FALSE //TRUE
 #define P_FAMILY_GOOMY                   FALSE //TRUE
 #define P_FAMILY_PHANTUMP                FALSE //TRUE
-#define P_FAMILY_PUMPKABOO               P_GEN_6_POKEMON
-#define P_FAMILY_BERGMITE                FALSE //TRUE
-#define P_FAMILY_NOIBAT                  P_GEN_6_POKEMON
-#define P_FAMILY_XERNEAS                 P_GEN_6_POKEMON
-#define P_FAMILY_YVELTAL                 P_GEN_6_POKEMON
-#define P_FAMILY_ZYGARDE                 P_GEN_6_POKEMON
-#define P_FAMILY_HOOPA                   P_GEN_6_POKEMON
-#define P_FAMILY_VOLCANION               FALSE //TRUE
 
 #define P_FAMILY_ROWLET                  FALSE //TRUE
 #define P_FAMILY_LITTEN                  FALSE //TRUE
 #define P_FAMILY_POPPLIO                 FALSE //TRUE
-#define P_FAMILY_PIKIPEK                 P_GEN_7_POKEMON
-#define P_FAMILY_YUNGOOS                 P_GEN_7_POKEMON
-#define P_FAMILY_GRUBBIN                 P_GEN_7_POKEMON
-#define P_FAMILY_CRABRAWLER              P_GEN_7_POKEMON
-#define P_FAMILY_CUTIEFLY                P_GEN_7_POKEMON
 #define P_FAMILY_ROCKRUFF                FALSE //TRUE
 #define P_FAMILY_WISHIWASHI              P_GEN_7_POKEMON
 #define P_FAMILY_MAREANIE                P_GEN_7_POKEMON
@@ -283,24 +258,6 @@
 #define P_FAMILY_DRAMPA                  FALSE //TRUE
 #define P_FAMILY_DHELMISE                P_GEN_7_POKEMON
 #define P_FAMILY_JANGMO_O                FALSE //TRUE
-#define P_FAMILY_TAPU_KOKO               P_GEN_7_POKEMON
-#define P_FAMILY_TAPU_LELE               P_GEN_7_POKEMON
-#define P_FAMILY_TAPU_BULU               P_GEN_7_POKEMON
-#define P_FAMILY_TAPU_FINI               P_GEN_7_POKEMON
-#define P_FAMILY_NIHILEGO                P_GEN_7_POKEMON
-#define P_FAMILY_BUZZWOLE                P_GEN_7_POKEMON
-#define P_FAMILY_PHEROMOSA               P_GEN_7_POKEMON
-#define P_FAMILY_CELESTEELA              P_GEN_7_POKEMON
-#define P_FAMILY_KARTANA                 P_GEN_7_POKEMON
-#define P_FAMILY_GUZZLORD                P_GEN_7_POKEMON
-#define P_FAMILY_BLACEPHALON             P_GEN_7_POKEMON
-#define P_FAMILY_ZERAORA                 P_GEN_7_POKEMON
-#define P_FAMILY_MELTAN                  P_GEN_7_POKEMON
-
-#define P_FAMILY_GROOKEY                 P_GEN_8_POKEMON
-#define P_FAMILY_SCORBUNNY               P_GEN_8_POKEMON
-#define P_FAMILY_SOBBLE                  P_GEN_8_POKEMON
-#define P_FAMILY_SKWOVET                 P_GEN_8_POKEMON
 #define P_FAMILY_ROOKIDEE                FALSE //TRUE
 #define P_FAMILY_BLIPBUG                 FALSE //TRUE
 #define P_FAMILY_WOOLOO                  FALSE //TRUE

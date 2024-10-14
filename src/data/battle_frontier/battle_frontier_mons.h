@@ -1716,7 +1716,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_MANTINE_1] = {
-        .species = SPECIES_MANTINE,
+        .species = SPECIES_TROPIUS,
         .moves = {MOVE_BUBBLE_BEAM, MOVE_AERIAL_ACE, MOVE_RAIN_DANCE, MOVE_ICY_WIND},
         .heldItem = ITEM_MYSTIC_WATER,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 252),
@@ -2451,7 +2451,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_MANTINE_2] = {
-        .species = SPECIES_MANTINE,
+        .species = SPECIES_TROPIUS,
         .moves = {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RAIN_DANCE, MOVE_CONFUSE_RAY},
         .heldItem = ITEM_SHELL_BELL,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 0),
@@ -2703,7 +2703,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_SKARMORY_1] = {
-        .species = SPECIES_SKARMORY,
+        .species = SPECIES_METANG,
         .moves = {MOVE_STEEL_WING, MOVE_AIR_CUTTER, MOVE_COUNTER, MOVE_AGILITY},
         .heldItem = ITEM_SCOPE_LENS,
         .ev = TRAINER_PARTY_EVS(170, 170, 0, 0, 0, 170),
@@ -3375,7 +3375,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_ATK
     },
     [FRONTIER_MON_SKARMORY_2] = {
-        .species = SPECIES_SKARMORY,
+        .species = SPECIES_METANG,
         .moves = {MOVE_SPIKES, MOVE_ROAR, MOVE_DRILL_PECK, MOVE_TOXIC},
         .heldItem = ITEM_BRIGHT_POWDER,
         .ev = TRAINER_PARTY_EVS(170, 170, 0, 0, 0, 170),
@@ -4047,7 +4047,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_SPEED
     },
     [FRONTIER_MON_SKARMORY_3] = {
-        .species = SPECIES_SKARMORY,
+        .species = SPECIES_METANG,
         .moves = {MOVE_TOXIC, MOVE_CURSE, MOVE_REST, MOVE_FLY},
         .heldItem = ITEM_CHESTO_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 252),
@@ -4719,7 +4719,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_DEF
     },
     [FRONTIER_MON_SKARMORY_4] = {
-        .species = SPECIES_SKARMORY,
+        .species = SPECIES_METANG,
         .moves = {MOVE_DRILL_PECK, MOVE_STEEL_WING, MOVE_COUNTER, MOVE_ROCK_SLIDE},
         .heldItem = ITEM_QUICK_CLAW,
         .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),

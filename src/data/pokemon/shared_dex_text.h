@@ -69,49 +69,6 @@ const u8 gSpewpaPokedexText[] = _(
     "the fur covering its body in an effort to\n"
     "threaten them.");
 
-const u8 gFurfrouPokedexText[] = _(
-    "Trimming its fluffy fur not only makes\n"
-    "it more elegant but also increases the\n"
-    "swiftness of its movements. These\n"
-    "Pokémon were the guardians of kings.");
-
-const u8 gXerneasPokedexText[] = _(
-    "Legends say that when the horns on\n"
-    "its head shine in seven colors, it is\n"
-    "sharing everlasting life. It slept for a\n"
-    "thousand years in the form of a tree");
-
-const u8 gZygarde50PokedexText[] = _(
-    "It's said to be monitoring the ecosystem\n"
-    "from deep in the caves where it lives.\n"
-    "There are rumors that even greater power\n"
-    "lies hidden within its cells.");
-
-const u8 gZygarde10PokedexText[] = _(
-    "This is Zygarde when about 10% of\n"
-    "its pieces have been assembled. It\n"
-    "leaps at its opponent's chest and\n"
-    "sinks its sharp fangs into them.");
-
-// Gen 7 families
-const u8 gGumshoosPokedexText[] = _(
-    "When it finds a trace of its prey, it\n"
-    "patiently stakes out the location...\n"
-    "but as it's diurnal, it's always snoozing\n"
-    "by nightfall.");
-
-const u8 gVikavoltPokedexText[] = _(
-    "It concentrates electrical energy within\n"
-    "its large jaws and uses it to zap its foes.\n"
-    "It overwhelms bird Pokémon with shocking\n"
-    "beams of electrical energy.");
-
-const u8 gRibombeePokedexText[] = _(
-    "Ribombee rolls up pollen into puffs.\n"
-    "It makes many different varieties, some\n"
-    "used as food and others used in battle.\n"
-    "They are sometimes sold as supplements.");
-
 const u8 gRockruffPokedexText[] = _(
     "This Pokémon has lived with people since\n"
     "times long ago. It can sense when its\n"
