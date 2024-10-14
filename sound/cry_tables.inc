@@ -189,54 +189,32 @@ gCryTable::
 	cry Cry_Feraligatr
 	cry Cry_Sentret
 	cry Cry_Furret
-.if P_FAMILY_HOOTHOOT == TRUE
 	cry Cry_Hoothoot
 	cry Cry_Noctowl
-.endif @ P_FAMILY_HOOTHOOT
-.if P_FAMILY_LEDYBA == TRUE
 	cry Cry_Ledyba
 	cry Cry_Ledian
-.endif @ P_FAMILY_LEDYBA
-.if P_FAMILY_SPINARAK == TRUE
 	cry Cry_Spinarak
 	cry Cry_Ariados
-.endif @ P_FAMILY_SPINARAK
-.if P_FAMILY_CHINCHOU == TRUE
 	cry Cry_Chinchou
 	cry Cry_Lanturn
-.endif @ P_FAMILY_CHINCHOU
-.if P_FAMILY_TOGEPI == TRUE
 	cry Cry_Togepi
 	cry Cry_Togetic
 	cry Cry_Togekiss
-.endif @ P_FAMILY_TOGEPI
-.if P_FAMILY_NATU == TRUE
 	cry Cry_Natu
 	cry Cry_Xatu
-.endif @ P_FAMILY_NATU
-.if P_FAMILY_MAREEP == TRUE
 	cry Cry_Mareep
 	cry Cry_Flaaffy
 	cry Cry_Ampharos
-.endif @ P_FAMILY_MAREEP
-.if P_FAMILY_MARILL == TRUE
 	cry Cry_Azurill
 	cry Cry_Marill
 	cry Cry_Azumarill
-.endif @ P_FAMILY_MARILL
-.if P_FAMILY_SUDOWOODO == TRUE
 	cry Cry_Bonsly
 	cry Cry_Sudowoodo
-.endif @ P_FAMILY_SUDOWOODO
-.if P_FAMILY_HOPPIP == TRUE
 	cry Cry_Hoppip
 	cry Cry_Skiploom
 	cry Cry_Jumpluff
-.endif @ P_FAMILY_HOPPIP
-.if P_FAMILY_AIPOM == TRUE
 	cry Cry_Aipom
 	cry Cry_Ambipom
-.endif @ P_FAMILY_AIPOM
 .if P_FAMILY_SUNKERN == TRUE
 	cry Cry_Sunkern
 	cry Cry_Sunflora
@@ -260,10 +238,6 @@ gCryTable::
 	cry Cry_Misdreavus
 	cry Cry_Mismagius
 .endif @ P_FAMILY_MISDREAVUS
-.if P_FAMILY_WOBBUFFET == TRUE
-	cry Cry_Wynaut
-	cry Cry_Wobbuffet
-.endif @ P_FAMILY_WOBBUFFET
 .if P_FAMILY_GIRAFARIG == TRUE
 	cry Cry_Girafarig
 .endif @ P_FAMILY_GIRAFARIG
@@ -271,9 +245,6 @@ gCryTable::
 	cry Cry_Pineco
 	cry Cry_Forretress
 .endif @ P_FAMILY_PINECO
-.if P_FAMILY_DUNSPARCE == TRUE
-	cry Cry_Dunsparce
-.endif @ P_FAMILY_DUNSPARCE
 .if P_FAMILY_GLIGAR == TRUE
 	cry Cry_Gligar
 	cry Cry_Gliscor
@@ -777,9 +748,6 @@ gCryTable::
 .if P_FAMILY_REGIGIGAS == TRUE
 	cry Cry_Regigigas
 .endif @ P_FAMILY_REGIGIGAS
-.if P_FAMILY_GIRATINA == TRUE
-	cry Cry_Giratina
-.endif @ P_FAMILY_GIRATINA
 .if P_FAMILY_CRESSELIA == TRUE
 	cry Cry_Cresselia
 .endif @ P_FAMILY_CRESSELIA
@@ -794,9 +762,6 @@ gCryTable::
 	cry Cry_ShayminLand
 	cry Cry_ShayminSky
 .endif @ P_FAMILY_SHAYMIN
-.if P_FAMILY_ARCEUS == TRUE
-	cry Cry_Arceus
-.endif @ P_FAMILY_ARCEUS
 .if P_FAMILY_VICTINI == TRUE
 	cry Cry_Victini
 .endif @ P_FAMILY_VICTINI
@@ -810,45 +775,9 @@ gCryTable::
 	cry Cry_Pignite
 	cry Cry_Emboar
 .endif @ P_FAMILY_TEPIG
-.if P_FAMILY_OSHAWOTT == TRUE
 	cry Cry_Oshawott
 	cry Cry_Dewott
 	cry Cry_Samurott
-.endif @ P_FAMILY_OSHAWOTT
-.if P_FAMILY_PATRAT == TRUE
-	cry Cry_Patrat
-	cry Cry_Watchog
-.endif @ P_FAMILY_PATRAT
-.if P_FAMILY_LILLIPUP == TRUE
-	cry Cry_Lillipup
-	cry Cry_Herdier
-	cry Cry_Stoutland
-.endif @ P_FAMILY_LILLIPUP
-.if P_FAMILY_PURRLOIN == TRUE
-	cry Cry_Purrloin
-	cry Cry_Liepard
-.endif @ P_FAMILY_PURRLOIN
-.if P_FAMILY_PANSAGE == TRUE
-	cry Cry_Pansage
-	cry Cry_Simisage
-.endif @ P_FAMILY_PANSAGE
-.if P_FAMILY_PANSEAR == TRUE
-	cry Cry_Pansear
-	cry Cry_Simisear
-.endif @ P_FAMILY_PANSEAR
-.if P_FAMILY_PANPOUR == TRUE
-	cry Cry_Panpour
-	cry Cry_Simipour
-.endif @ P_FAMILY_PANPOUR
-.if P_FAMILY_MUNNA == TRUE
-	cry Cry_Munna
-	cry Cry_Musharna
-.endif @ P_FAMILY_MUNNA
-.if P_FAMILY_PIDOVE == TRUE
-	cry Cry_Pidove
-	cry Cry_Tranquill
-	cry Cry_Unfezant
-.endif @ P_FAMILY_PIDOVE
 .if P_FAMILY_BLITZLE == TRUE
 	cry Cry_Blitzle
 	cry Cry_Zebstrika
@@ -874,27 +803,6 @@ gCryTable::
 	cry Cry_Gurdurr
 	cry Cry_Conkeldurr
 .endif @ P_FAMILY_TIMBURR
-.if P_FAMILY_TYMPOLE == TRUE
-	cry Cry_Tympole
-	cry Cry_Palpitoad
-	cry Cry_Seismitoad
-.endif @ P_FAMILY_TYMPOLE
-.if P_FAMILY_THROH == TRUE
-	cry Cry_Throh
-.endif @ P_FAMILY_THROH
-.if P_FAMILY_SAWK == TRUE
-	cry Cry_Sawk
-.endif @ P_FAMILY_SAWK
-.if P_FAMILY_SEWADDLE == TRUE
-	cry Cry_Sewaddle
-	cry Cry_Swadloon
-	cry Cry_Leavanny
-.endif @ P_FAMILY_SEWADDLE
-.if P_FAMILY_VENIPEDE == TRUE
-	cry Cry_Venipede
-	cry Cry_Whirlipede
-	cry Cry_Scolipede
-.endif @ P_FAMILY_VENIPEDE
 .if P_FAMILY_COTTONEE == TRUE
 	cry Cry_Cottonee
 	cry Cry_Whimsicott
@@ -1026,20 +934,6 @@ gCryTable::
 .if P_FAMILY_CRYOGONAL == TRUE
 	cry Cry_Cryogonal
 .endif @ P_FAMILY_CRYOGONAL
-.if P_FAMILY_SHELMET == TRUE
-	cry Cry_Shelmet
-	cry Cry_Accelgor
-.endif @ P_FAMILY_SHELMET
-.if P_FAMILY_STUNFISK == TRUE
-	cry Cry_Stunfisk
-.endif @ P_FAMILY_STUNFISK
-.if P_FAMILY_MIENFOO == TRUE
-	cry Cry_Mienfoo
-	cry Cry_Mienshao
-.endif @ P_FAMILY_MIENFOO
-.if P_FAMILY_DRUDDIGON == TRUE
-	cry Cry_Druddigon
-.endif @ P_FAMILY_DRUDDIGON
 .if P_FAMILY_GOLETT == TRUE
 	cry Cry_Golett
 	cry Cry_Golurk
@@ -1059,12 +953,6 @@ gCryTable::
 	cry Cry_Vullaby
 	cry Cry_Mandibuzz
 .endif @ P_FAMILY_VULLABY
-.if P_FAMILY_HEATMOR == TRUE
-	cry Cry_Heatmor
-.endif @ P_FAMILY_HEATMOR
-.if P_FAMILY_DURANT == TRUE
-	cry Cry_Durant
-.endif @ P_FAMILY_DURANT
 .if P_FAMILY_DEINO == TRUE
 	cry Cry_Deino
 	cry Cry_Zweilous
@@ -1074,30 +962,6 @@ gCryTable::
 	cry Cry_Larvesta
 	cry Cry_Volcarona
 .endif @ P_FAMILY_LARVESTA
-.if P_FAMILY_COBALION == TRUE
-	cry Cry_Cobalion
-.endif @ P_FAMILY_COBALION
-.if P_FAMILY_TERRAKION == TRUE
-	cry Cry_Terrakion
-.endif @ P_FAMILY_TERRAKION
-.if P_FAMILY_VIRIZION == TRUE
-	cry Cry_Virizion
-.endif @ P_FAMILY_VIRIZION
-.if P_FAMILY_RESHIRAM == TRUE
-	cry Cry_Reshiram
-.endif @ P_FAMILY_RESHIRAM
-.if P_FAMILY_ZEKROM == TRUE
-	cry Cry_Zekrom
-.endif @ P_FAMILY_ZEKROM
-.if P_FAMILY_KELDEO == TRUE
-	cry Cry_Keldeo
-.endif @ P_FAMILY_KELDEO
-.if P_FAMILY_MELOETTA == TRUE
-	cry Cry_Meloetta
-.endif @ P_FAMILY_MELOETTA
-.if P_FAMILY_GENESECT == TRUE
-	cry Cry_Genesect
-.endif @ P_FAMILY_GENESECT
 .if P_FAMILY_CHESPIN == TRUE
 	cry Cry_Chespin
 	cry Cry_Quilladin
@@ -1125,10 +989,6 @@ gCryTable::
 	cry Cry_Spewpa
 	cry Cry_Vivillon
 .endif @ P_FAMILY_SCATTERBUG
-.if P_FAMILY_LITLEO == TRUE
-	cry Cry_Litleo
-	cry Cry_Pyroar
-.endif @ P_FAMILY_LITLEO
 .if P_FAMILY_FLABEBE == TRUE
 	cry Cry_Flabebe
 	cry Cry_Floette
@@ -1446,14 +1306,6 @@ gCryTable::
 	cry Cry_Dottler
 	cry Cry_Orbeetle
 .endif @ P_FAMILY_BLIPBUG
-.if P_FAMILY_NICKIT == TRUE
-	cry Cry_Nickit
-	cry Cry_Thievul
-.endif @ P_FAMILY_NICKIT
-.if P_FAMILY_GOSSIFLEUR == TRUE
-	cry Cry_Gossifleur
-	cry Cry_Eldegoss
-.endif @ P_FAMILY_GOSSIFLEUR
 .if P_FAMILY_WOOLOO == TRUE
 	cry Cry_Wooloo
 	cry Cry_Dubwool
@@ -1496,10 +1348,6 @@ gCryTable::
 	cry Cry_Sizzlipede
 	cry Cry_Centiskorch
 .endif @ P_FAMILY_SIZZLIPEDE
-.if P_FAMILY_SINISTEA == TRUE
-	cry Cry_Sinistea
-	cry Cry_Polteageist
-.endif @ P_FAMILY_SINISTEA
 .if P_FAMILY_IMPIDIMP == TRUE
 	cry Cry_Impidimp
 	cry Cry_Morgrem
@@ -1550,16 +1398,6 @@ gCryTable::
 .if P_FAMILY_REGIDRAGO == TRUE
 	cry Cry_Regidrago
 .endif @ P_FAMILY_REGIDRAGO
-.if P_FAMILY_GLASTRIER == TRUE
-	cry Cry_Glastrier
-.endif @ P_FAMILY_GLASTRIER
-.if P_FAMILY_SPECTRIER == TRUE
-	cry Cry_Spectrier
-.endif @ P_FAMILY_SPECTRIER
-.if P_FAMILY_ENAMORUS == TRUE
-	cry Cry_EnamorusIncarnate
-	cry Cry_EnamorusTherian
-.endif @ P_FAMILY_ENAMORUS
 .if P_FAMILY_SPRIGATITO == TRUE
 	cry Cry_Sprigatito
 	cry Cry_Floragato
@@ -1570,16 +1408,6 @@ gCryTable::
 	cry Cry_Crocalor
 	cry Cry_Skeledirge
 .endif @ P_FAMILY_FUECOCO
-.if P_FAMILY_QUAXLY == TRUE
-	cry Cry_Quaxly
-	cry Cry_Quaxwell
-	cry Cry_Quaquaval
-.endif @ P_FAMILY_QUAXLY
-.if P_FAMILY_LECHONK == TRUE
-	cry Cry_Lechonk
-	cry Cry_OinkologneMale
-	cry Cry_OinkologneFemale
-.endif @ P_FAMILY_LECHONK
 .if P_FAMILY_TAROUNTULA == TRUE
 	cry Cry_Tarountula
 	cry Cry_Spidops
@@ -1588,33 +1416,9 @@ gCryTable::
 	cry Cry_Nymble
 	cry Cry_Lokix
 .endif @ P_FAMILY_NYMBLE
-.if P_FAMILY_PAWMI == TRUE
-	cry Cry_Pawmi
-	cry Cry_Pawmo
-	cry Cry_Pawmot
-.endif @ P_FAMILY_PAWMI
-.if P_FAMILY_TANDEMAUS == TRUE
-	cry Cry_Tandemaus
-	cry Cry_MausholdFamilyOfThree
-	cry Cry_MausholdFamilyOfFour
-.endif @ P_FAMILY_TANDEMAUS
-.if P_FAMILY_FIDOUGH == TRUE
-	cry Cry_Fidough
-	cry Cry_Dachsbun
-.endif @ P_FAMILY_FIDOUGH
-.if P_FAMILY_SMOLIV == TRUE
-	cry Cry_Smoliv
-	cry Cry_Dolliv
-	cry Cry_Arboliva
-.endif @ P_FAMILY_SMOLIV
 .if P_FAMILY_SQUAWKABILLY == TRUE
 	cry Cry_Squawkabilly
 .endif @ P_FAMILY_SQUAWKABILLY
-.if P_FAMILY_NACLI == TRUE
-	cry Cry_Nacli
-	cry Cry_Naclstack
-	cry Cry_Garganacl
-.endif @ P_FAMILY_NACLI
 .if P_FAMILY_CHARCADET == TRUE
 	cry Cry_Charcadet
 	cry Cry_Armarouge
@@ -1659,15 +1463,6 @@ gCryTable::
 	cry Cry_Flittle
 	cry Cry_Espathra
 .endif @ P_FAMILY_FLITTLE
-.if P_FAMILY_TINKATINK == TRUE
-	cry Cry_Tinkatink
-	cry Cry_Tinkatuff
-	cry Cry_Tinkaton
-.endif @ P_FAMILY_TINKATINK
-.if P_FAMILY_VAROOM == TRUE
-	cry Cry_Varoom
-	cry Cry_Revavroom
-.endif @ P_FAMILY_VAROOM
 .if P_FAMILY_ORTHWORM == TRUE
 	cry Cry_Orthworm
 .endif @ P_FAMILY_ORTHWORM

@@ -50,19 +50,6 @@ const u8 gMothimPokedexText[] = _(
     "any itself. Instead, it plots to steal\n"
     "honey collected by Combee.");
 
-const u8 gArceusPokedexText[] = _(
-    "It is told in mythology that this Pokémon\n"
-    "emerged from an egg and shaped all there\n"
-    "is in this world, before the universe\n"
-    "even existed.");
-
-// Gen 5 families
-const u8 gGenesectPokedexText[] = _(
-    "Over 300 million years ago, it was\n"
-    "feared as the strongest of hunters.\n"
-    "Team Plasma altered it and attached\n"
-    "a cannon to its back.");
-
 // Gen 6 families
 const u8 gGreninjaPokedexText[] = _(
     "It appears and vanishes with a ninja's\n"
