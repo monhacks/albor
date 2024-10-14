@@ -2275,7 +2275,6 @@ static const union AnimCmd sAnim_Sunflora[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_YANMA
 static const union AnimCmd sAnim_Yanma[] =
 {
     ANIMCMD_FRAME(1, 2),
@@ -2333,7 +2332,6 @@ static const union AnimCmd sAnim_Yanmega[] =
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_YANMA
 
 #if P_FAMILY_WOOPER
 static const union AnimCmd sAnim_Wooper[] =
@@ -2351,13 +2349,10 @@ static const union AnimCmd sAnim_Quagsire[] =
     ANIMCMD_END,
 };
 
-#if P_PALDEAN_FORMS
 PLACEHOLDER_ANIM_SINGLE_FRAME(WooperPaldean);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Clodsire);
-#endif //P_PALDEAN_FORMS
 #endif //P_FAMILY_WOOPER
 
-#if P_FAMILY_MURKROW
 static const union AnimCmd sAnim_Murkrow[] =
 {
     ANIMCMD_FRAME(1, 15),
@@ -2373,7 +2368,6 @@ static const union AnimCmd sAnim_Honchkrow[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_MURKROW
 
 #if P_FAMILY_MISDREAVUS
 static const union AnimCmd sAnim_Misdreavus[] =
@@ -5288,75 +5282,6 @@ static const union AnimCmd sAnim_Regigigas[] =
 };
 #endif //P_FAMILY_REGIGIGAS
 
-#if P_FAMILY_CRESSELIA
-static const union AnimCmd sAnim_Cresselia[] =
-{
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_CRESSELIA
-
-#if P_FAMILY_MANAPHY
-static const union AnimCmd sAnim_Phione[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Manaphy[] =
-{
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_MANAPHY
-
-#if P_FAMILY_DARKRAI
-static const union AnimCmd sAnim_Darkrai[] =
-{
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_DARKRAI
-
-#if P_FAMILY_SHAYMIN
-static const union AnimCmd sAnim_ShayminLand[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_FRAME(1, 10),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_ShayminSky[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 36),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_SHAYMIN
-
-#if P_FAMILY_VICTINI
-static const union AnimCmd sAnim_Victini[] =
-{
-    ANIMCMD_FRAME(0, 2),
-    ANIMCMD_FRAME(1, 46),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_VICTINI
-
 #if P_FAMILY_SNIVY
 static const union AnimCmd sAnim_Snivy[] =
 {
@@ -5659,23 +5584,6 @@ static const union AnimCmd sAnim_Lilligant[] =
 PLACEHOLDER_ANIM_SINGLE_FRAME(LilligantHisuian);
 #endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_PETILIL
-
-#if P_FAMILY_BASCULIN
-static const union AnimCmd sAnim_Basculin[] =
-{
-    ANIMCMD_FRAME(1, 8),
-    ANIMCMD_FRAME(0, 8),
-    ANIMCMD_FRAME(1, 8),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-#if P_HISUIAN_FORMS
-PLACEHOLDER_ANIM_SINGLE_FRAME(Basculegion);
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_BASCULIN
 
 #if P_FAMILY_SANDILE
 static const union AnimCmd sAnim_Sandile[] =
@@ -7012,134 +6920,6 @@ static const union AnimCmd sAnim_LycanrocDusk[] =
 };
 #endif //P_FAMILY_ROCKRUFF
 
-#if P_FAMILY_WISHIWASHI
-PLACEHOLDER_ANIM_SINGLE_FRAME(WishiwashiSolo);
-PLACEHOLDER_ANIM_SINGLE_FRAME(WishiwashiSchool);
-#endif //P_FAMILY_WISHIWASHI
-
-#if P_FAMILY_MAREANIE
-PLACEHOLDER_ANIM_SINGLE_FRAME(Mareanie);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Toxapex);
-#endif //P_FAMILY_MAREANIE
-
-#if P_FAMILY_MUDBRAY
-PLACEHOLDER_ANIM_SINGLE_FRAME(Mudbray);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Mudsdale);
-#endif //P_FAMILY_MUDBRAY
-
-#if P_FAMILY_DEWPIDER
-static const union AnimCmd sAnim_Dewpider[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 9),
-    ANIMCMD_FRAME(0, 9),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 9),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Araquanid[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 45),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_DEWPIDER
-
-#if P_FAMILY_FOMANTIS
-PLACEHOLDER_ANIM_SINGLE_FRAME(Fomantis);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Lurantis);
-#endif //P_FAMILY_FOMANTIS
-
-#if P_FAMILY_MORELULL
-PLACEHOLDER_ANIM_SINGLE_FRAME(Morelull);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Shiinotic);
-#endif //P_FAMILY_MORELULL
-
-#if P_FAMILY_SALANDIT
-static const union AnimCmd sAnim_Salandit[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Salazzle[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_SALANDIT
-
-#if P_FAMILY_STUFFUL
-static const union AnimCmd sAnim_Stufful[] =
-{
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_FRAME(1, 44),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Bewear[] =
-{
-    ANIMCMD_FRAME(0, 20),
-    ANIMCMD_FRAME(1, 60),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_STUFFUL
-
-#if P_FAMILY_BOUNSWEET
-PLACEHOLDER_ANIM_SINGLE_FRAME(Bounsweet);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Steenee);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Tsareena);
-#endif //P_FAMILY_BOUNSWEET
-
-#if P_FAMILY_COMFEY
-PLACEHOLDER_ANIM_SINGLE_FRAME(Comfey);
-#endif //P_FAMILY_COMFEY
-
-#if P_FAMILY_ORANGURU
-static const union AnimCmd sAnim_Oranguru[] =
-{
-    ANIMCMD_FRAME(1, 20),
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_ORANGURU
-
-#if P_FAMILY_PASSIMIAN
-static const union AnimCmd sAnim_Passimian[] =
-{
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_PASSIMIAN
-
-#if P_FAMILY_WIMPOD
-static const union AnimCmd sAnim_Wimpod[] =
-{
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_FRAME(1, 25),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-
-static const union AnimCmd sAnim_Golisopod[] =
-{
-    ANIMCMD_FRAME(0, 25),
-    ANIMCMD_FRAME(1, 15),
-    ANIMCMD_FRAME(0, 1),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_WIMPOD
-
 #if P_FAMILY_SANDYGAST
 PLACEHOLDER_ANIM_SINGLE_FRAME(Sandygast);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Palossand);
@@ -7782,22 +7562,16 @@ SINGLE_ANIMATION(Aipom);
 SINGLE_ANIMATION(Ambipom);
 SINGLE_ANIMATION(Sunkern);
 SINGLE_ANIMATION(Sunflora);
-#if P_FAMILY_YANMA
 SINGLE_ANIMATION(Yanma);
 SINGLE_ANIMATION(Yanmega);
-#endif //P_FAMILY_YANMA
 #if P_FAMILY_WOOPER
 SINGLE_ANIMATION(Wooper);
 SINGLE_ANIMATION(Quagsire);
-#if P_PALDEAN_FORMS
 SINGLE_ANIMATION(WooperPaldean);
 SINGLE_ANIMATION(Clodsire);
-#endif //P_PALDEAN_FORMS
 #endif //P_FAMILY_WOOPER
-#if P_FAMILY_MURKROW
 SINGLE_ANIMATION(Murkrow);
 SINGLE_ANIMATION(Honchkrow);
-#endif //P_FAMILY_MURKROW
 #if P_FAMILY_MISDREAVUS
 SINGLE_ANIMATION(Misdreavus);
 SINGLE_ANIMATION(Mismagius);
@@ -8311,23 +8085,6 @@ SINGLE_ANIMATION(Heatran);
 #if P_FAMILY_REGIGIGAS
 SINGLE_ANIMATION(Regigigas);
 #endif //P_FAMILY_REGIGIGAS
-#if P_FAMILY_CRESSELIA
-SINGLE_ANIMATION(Cresselia);
-#endif //P_FAMILY_CRESSELIA
-#if P_FAMILY_MANAPHY
-SINGLE_ANIMATION(Phione);
-SINGLE_ANIMATION(Manaphy);
-#endif //P_FAMILY_MANAPHY
-#if P_FAMILY_DARKRAI
-SINGLE_ANIMATION(Darkrai);
-#endif //P_FAMILY_DARKRAI
-#if P_FAMILY_SHAYMIN
-SINGLE_ANIMATION(ShayminLand);
-SINGLE_ANIMATION(ShayminSky);
-#endif //P_FAMILY_SHAYMIN
-#if P_FAMILY_VICTINI
-SINGLE_ANIMATION(Victini);
-#endif //P_FAMILY_VICTINI
 #if P_FAMILY_SNIVY
 SINGLE_ANIMATION(Snivy);
 SINGLE_ANIMATION(Servine);
@@ -8377,12 +8134,6 @@ SINGLE_ANIMATION(Lilligant);
 SINGLE_ANIMATION(LilligantHisuian);
 #endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_PETILIL
-#if P_FAMILY_BASCULIN
-SINGLE_ANIMATION(Basculin);
-#if P_HISUIAN_FORMS
-SINGLE_ANIMATION(Basculegion);
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_BASCULIN
 #if P_FAMILY_SANDILE
 SINGLE_ANIMATION(Sandile);
 SINGLE_ANIMATION(Krokorok);
@@ -8636,8 +8387,6 @@ SINGLE_ANIMATION(Rockruff);
 SINGLE_ANIMATION(LycanrocMidday);
 SINGLE_ANIMATION(LycanrocMidnight);
 SINGLE_ANIMATION(LycanrocDusk);
-SINGLE_ANIMATION(Salandit);
-SINGLE_ANIMATION(Salazzle);
 SINGLE_ANIMATION(Sandygast);
 SINGLE_ANIMATION(Palossand);
 SINGLE_ANIMATION(MimikyuDisguised);

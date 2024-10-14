@@ -217,21 +217,15 @@ gCryTable::
 	cry Cry_Ambipom
 	cry Cry_Sunkern
 	cry Cry_Sunflora
-.if P_FAMILY_YANMA == TRUE
 	cry Cry_Yanma
 	cry Cry_Yanmega
-.endif @ P_FAMILY_YANMA
 .if P_FAMILY_WOOPER == TRUE
 	cry Cry_Wooper
 	cry Cry_Quagsire
-.if P_PALDEAN_FORMS == TRUE
 	cry Cry_Clodsire
-.endif @ P_PALDEAN_FORMS
 .endif @ P_FAMILY_WOOPER
-.if P_FAMILY_MURKROW == TRUE
 	cry Cry_Murkrow
 	cry Cry_Honchkrow
-.endif @ P_FAMILY_MURKROW
 .if P_FAMILY_MISDREAVUS == TRUE
 	cry Cry_Misdreavus
 	cry Cry_Mismagius
@@ -739,23 +733,6 @@ gCryTable::
 .if P_FAMILY_REGIGIGAS == TRUE
 	cry Cry_Regigigas
 .endif @ P_FAMILY_REGIGIGAS
-.if P_FAMILY_CRESSELIA == TRUE
-	cry Cry_Cresselia
-.endif @ P_FAMILY_CRESSELIA
-.if P_FAMILY_MANAPHY == TRUE
-	cry Cry_Phione
-	cry Cry_Manaphy
-.endif @ P_FAMILY_MANAPHY
-.if P_FAMILY_DARKRAI == TRUE
-	cry Cry_Darkrai
-.endif @ P_FAMILY_DARKRAI
-.if P_FAMILY_SHAYMIN == TRUE
-	cry Cry_ShayminLand
-	cry Cry_ShayminSky
-.endif @ P_FAMILY_SHAYMIN
-.if P_FAMILY_VICTINI == TRUE
-	cry Cry_Victini
-.endif @ P_FAMILY_VICTINI
 .if P_FAMILY_SNIVY == TRUE
 	cry Cry_Snivy
 	cry Cry_Servine
@@ -802,12 +779,6 @@ gCryTable::
 	cry Cry_Petilil
 	cry Cry_Lilligant
 .endif @ P_FAMILY_PETILIL
-.if P_FAMILY_BASCULIN == TRUE
-	cry Cry_Basculin
-.if P_HISUIAN_FORMS == TRUE
-	cry Cry_Basculegion
-.endif @ P_HISUIAN_FORMS
-.endif @ P_FAMILY_BASCULIN
 .if P_FAMILY_SANDILE == TRUE
 	cry Cry_Sandile
 	cry Cry_Krokorok
@@ -1053,56 +1024,6 @@ gCryTable::
 	cry Cry_LycanrocMidnight
 	cry Cry_LycanrocDusk
 .endif @ P_FAMILY_ROCKRUFF
-.if P_FAMILY_WISHIWASHI == TRUE
-	cry Cry_WishiwashiSolo
-	cry Cry_WishiwashiSchool
-.endif @ P_FAMILY_WISHIWASHI
-.if P_FAMILY_MAREANIE == TRUE
-	cry Cry_Mareanie
-	cry Cry_Toxapex
-.endif @ P_FAMILY_MAREANIE
-.if P_FAMILY_MUDBRAY == TRUE
-	cry Cry_Mudbray
-	cry Cry_Mudsdale
-.endif @ P_FAMILY_MUDBRAY
-.if P_FAMILY_DEWPIDER == TRUE
-	cry Cry_Dewpider
-	cry Cry_Araquanid
-.endif @ P_FAMILY_DEWPIDER
-.if P_FAMILY_FOMANTIS == TRUE
-	cry Cry_Fomantis
-	cry Cry_Lurantis
-.endif @ P_FAMILY_FOMANTIS
-.if P_FAMILY_MORELULL == TRUE
-	cry Cry_Morelull
-	cry Cry_Shiinotic
-.endif @ P_FAMILY_MORELULL
-.if P_FAMILY_SALANDIT == TRUE
-	cry Cry_Salandit
-	cry Cry_Salazzle
-.endif @ P_FAMILY_SALANDIT
-.if P_FAMILY_STUFFUL == TRUE
-	cry Cry_Stufful
-	cry Cry_Bewear
-.endif @ P_FAMILY_STUFFUL
-.if P_FAMILY_BOUNSWEET == TRUE
-	cry Cry_Bounsweet
-	cry Cry_Steenee
-	cry Cry_Tsareena
-.endif @ P_FAMILY_BOUNSWEET
-.if P_FAMILY_COMFEY == TRUE
-	cry Cry_Comfey
-.endif @ P_FAMILY_COMFEY
-.if P_FAMILY_ORANGURU == TRUE
-	cry Cry_Oranguru
-.endif @ P_FAMILY_ORANGURU
-.if P_FAMILY_PASSIMIAN == TRUE
-	cry Cry_Passimian
-.endif @ P_FAMILY_PASSIMIAN
-.if P_FAMILY_WIMPOD == TRUE
-	cry Cry_Wimpod
-	cry Cry_Golisopod
-.endif @ P_FAMILY_WIMPOD
 .if P_FAMILY_SANDYGAST == TRUE
 	cry Cry_Sandygast
 	cry Cry_Palossand

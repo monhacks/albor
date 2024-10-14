@@ -840,14 +840,12 @@ static const struct SpriteFrameImage sPicTable_Ambipom[] = {
     overworld_ascending_frames(gObjectEventPic_Ambipom, 4, 4),
 };
 
-#if P_FAMILY_YANMA
 static const struct SpriteFrameImage sPicTable_Yanma[] = {
     overworld_ascending_frames(gObjectEventPic_Yanma, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Yanmega[] = {
     overworld_ascending_frames(gObjectEventPic_Yanmega, 4, 4),
 };
-#endif //P_FAMILY_YANMA
 
 #if P_FAMILY_WOOPER
 static const struct SpriteFrameImage sPicTable_Wooper[] = {
@@ -862,24 +860,20 @@ static const struct SpriteFrameImage sPicTable_Quagsire[] = {
 static const struct SpriteFrameImage sPicTable_QuagsireF[] = {
     overworld_ascending_frames(gObjectEventPic_QuagsireF, 4, 4),
 };
-#if P_PALDEAN_FORMS
 static const struct SpriteFrameImage sPicTable_WooperPaldean[] = {
     overworld_ascending_frames(gObjectEventPic_WooperPaldean, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Clodsire[] = {
     overworld_ascending_frames(gObjectEventPic_Clodsire, 4, 4),
 };
-#endif //P_PALDEAN_FORMS
 #endif //P_FAMILY_WOOPER
 
-#if P_FAMILY_MURKROW
 static const struct SpriteFrameImage sPicTable_Murkrow[] = {
     overworld_ascending_frames(gObjectEventPic_Murkrow, 4, 4),
 };
 static const struct SpriteFrameImage sPicTable_Honchkrow[] = {
     overworld_ascending_frames(gObjectEventPic_Honchkrow, 4, 4),
 };
-#endif //P_FAMILY_MURKROW
 
 #if P_FAMILY_MISDREAVUS
 static const struct SpriteFrameImage sPicTable_Misdreavus[] = {
@@ -2120,42 +2114,6 @@ static const struct SpriteFrameImage sPicTable_Regigigas[] = {
 };
 #endif //P_FAMILY_REGIGIGAS
 
-#if P_FAMILY_CRESSELIA
-static const struct SpriteFrameImage sPicTable_Cresselia[] = {
-    overworld_ascending_frames(gObjectEventPic_Cresselia, 4, 4),
-};
-#endif //P_FAMILY_CRESSELIA
-
-#if P_FAMILY_MANAPHY
-static const struct SpriteFrameImage sPicTable_Phione[] = {
-    overworld_ascending_frames(gObjectEventPic_Phione, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Manaphy[] = {
-    overworld_ascending_frames(gObjectEventPic_Manaphy, 4, 4),
-};
-#endif //P_FAMILY_MANAPHY
-
-#if P_FAMILY_DARKRAI
-static const struct SpriteFrameImage sPicTable_Darkrai[] = {
-    overworld_ascending_frames(gObjectEventPic_Darkrai, 4, 4),
-};
-#endif //P_FAMILY_DARKRAI
-
-#if P_FAMILY_SHAYMIN
-static const struct SpriteFrameImage sPicTable_ShayminLand[] = {
-    overworld_ascending_frames(gObjectEventPic_ShayminLand, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_ShayminSky[] = {
-    overworld_ascending_frames(gObjectEventPic_ShayminSky, 4, 4),
-};
-#endif //P_FAMILY_SHAYMIN
-
-#if P_FAMILY_VICTINI
-static const struct SpriteFrameImage sPicTable_Victini[] = {
-    overworld_ascending_frames(gObjectEventPic_Victini, 4, 4),
-};
-#endif //P_FAMILY_VICTINI
-
 #if P_FAMILY_SNIVY
 static const struct SpriteFrameImage sPicTable_Snivy[] = {
     overworld_ascending_frames(gObjectEventPic_Snivy, 4, 4),
@@ -2267,26 +2225,6 @@ static const struct SpriteFrameImage sPicTable_LilligantHisuian[] = {
 };
 #endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_PETILIL
-
-#if P_FAMILY_BASCULIN
-static const struct SpriteFrameImage sPicTable_BasculinRedStriped[] = {
-    overworld_ascending_frames(gObjectEventPic_BasculinRedStriped, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_BasculinBlueStriped[] = {
-    overworld_ascending_frames(gObjectEventPic_BasculinBlueStriped, 4, 4),
-};
-#if P_HISUIAN_FORMS
-static const struct SpriteFrameImage sPicTable_BasculinWhiteStriped[] = {
-    overworld_ascending_frames(gObjectEventPic_BasculinWhiteStriped, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_BasculegionMale[] = {
-    overworld_ascending_frames(gObjectEventPic_BasculegionMale, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_BasculegionFemale[] = {
-    overworld_ascending_frames(gObjectEventPic_BasculegionFemale, 4, 4),
-};
-#endif //P_HISUIAN_FORMS
-#endif //P_FAMILY_BASCULIN
 
 #if P_FAMILY_SANDILE
 static const struct SpriteFrameImage sPicTable_Sandile[] = {
@@ -2999,118 +2937,6 @@ static const struct SpriteFrameImage sPicTable_LycanrocDusk[] = {
     overworld_ascending_frames(gObjectEventPic_LycanrocDusk, 4, 4),
 };
 #endif //P_FAMILY_ROCKRUFF
-
-#if P_FAMILY_WISHIWASHI
-
-static const struct SpriteFrameImage sPicTable_WishiwashiSolo[] = {
-    overworld_ascending_frames(gObjectEventPic_WishiwashiSolo, 4, 4),
-};
-/*static const struct SpriteFrameImage sPicTable_WishiwashiSchool[] = {
-    overworld_ascending_frames(gObjectEventPic_WishiwashiSchool, 4, 4),
-};*/
-#endif //P_FAMILY_WISHIWASHI
-
-#if P_FAMILY_MAREANIE
-static const struct SpriteFrameImage sPicTable_Mareanie[] = {
-    overworld_ascending_frames(gObjectEventPic_Mareanie, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Toxapex[] = {
-    overworld_ascending_frames(gObjectEventPic_Toxapex, 4, 4),
-};
-#endif //P_FAMILY_MAREANIE
-
-#if P_FAMILY_MUDBRAY
-static const struct SpriteFrameImage sPicTable_Mudbray[] = {
-    overworld_ascending_frames(gObjectEventPic_Mudbray, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Mudsdale[] = {
-    overworld_ascending_frames(gObjectEventPic_Mudsdale, 4, 4),
-};
-#endif //P_FAMILY_MUDBRAY
-
-#if P_FAMILY_DEWPIDER
-static const struct SpriteFrameImage sPicTable_Dewpider[] = {
-    overworld_ascending_frames(gObjectEventPic_Dewpider, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Araquanid[] = {
-    overworld_ascending_frames(gObjectEventPic_Araquanid, 4, 4),
-};
-#endif //P_FAMILY_DEWPIDER
-
-#if P_FAMILY_FOMANTIS
-static const struct SpriteFrameImage sPicTable_Fomantis[] = {
-    overworld_ascending_frames(gObjectEventPic_Fomantis, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Lurantis[] = {
-    overworld_ascending_frames(gObjectEventPic_Lurantis, 4, 4),
-};
-#endif //P_FAMILY_FOMANTIS
-
-#if P_FAMILY_MORELULL
-static const struct SpriteFrameImage sPicTable_Morelull[] = {
-    overworld_ascending_frames(gObjectEventPic_Morelull, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Shiinotic[] = {
-    overworld_ascending_frames(gObjectEventPic_Shiinotic, 4, 4),
-};
-#endif //P_FAMILY_MORELULL
-
-#if P_FAMILY_SALANDIT
-static const struct SpriteFrameImage sPicTable_Salandit[] = {
-    overworld_ascending_frames(gObjectEventPic_Salandit, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Salazzle[] = {
-    overworld_ascending_frames(gObjectEventPic_Salazzle, 4, 4),
-};
-#endif //P_FAMILY_SALANDIT
-
-#if P_FAMILY_STUFFUL
-static const struct SpriteFrameImage sPicTable_Stufful[] = {
-    overworld_ascending_frames(gObjectEventPic_Stufful, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Bewear[] = {
-    overworld_ascending_frames(gObjectEventPic_Bewear, 4, 4),
-};
-#endif //P_FAMILY_STUFFUL
-
-#if P_FAMILY_BOUNSWEET
-static const struct SpriteFrameImage sPicTable_Bounsweet[] = {
-    overworld_ascending_frames(gObjectEventPic_Bounsweet, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Steenee[] = {
-    overworld_ascending_frames(gObjectEventPic_Steenee, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Tsareena[] = {
-    overworld_ascending_frames(gObjectEventPic_Tsareena, 4, 4),
-};
-#endif //P_FAMILY_BOUNSWEET
-
-#if P_FAMILY_COMFEY
-static const struct SpriteFrameImage sPicTable_Comfey[] = {
-    overworld_ascending_frames(gObjectEventPic_Comfey, 4, 4),
-};
-#endif //P_FAMILY_COMFEY
-
-#if P_FAMILY_ORANGURU
-static const struct SpriteFrameImage sPicTable_Oranguru[] = {
-    overworld_ascending_frames(gObjectEventPic_Oranguru, 4, 4),
-};
-#endif //P_FAMILY_ORANGURU
-
-#if P_FAMILY_PASSIMIAN
-static const struct SpriteFrameImage sPicTable_Passimian[] = {
-    overworld_ascending_frames(gObjectEventPic_Passimian, 4, 4),
-};
-#endif //P_FAMILY_PASSIMIAN
-
-#if P_FAMILY_WIMPOD
-static const struct SpriteFrameImage sPicTable_Wimpod[] = {
-    overworld_ascending_frames(gObjectEventPic_Wimpod, 4, 4),
-};
-static const struct SpriteFrameImage sPicTable_Golisopod[] = {
-    overworld_ascending_frames(gObjectEventPic_Golisopod, 4, 4),
-};
-#endif //P_FAMILY_WIMPOD
 
 #if P_FAMILY_SANDYGAST
 static const struct SpriteFrameImage sPicTable_Sandygast[] = {

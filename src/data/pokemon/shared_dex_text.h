@@ -75,24 +75,6 @@ const u8 gRockruffPokedexText[] = _(
     "Trainer is in the dumps and will stick\n"
     "close by its Trainer's side.");
 
-const u8 gAraquanidPokedexText[] = _(
-    "Despite what its appearance suggests,\n"
-    "it cares for others. If it finds vulnerable,\n"
-    "weak Pokémon, it protectively brings\n"
-    "them into its water bubble.");
-
-const u8 gLurantisPokedexText[] = _(
-    "It requires a lot of effort to maintain\n"
-    "Lurantis's vivid coloring, but some\n"
-    "collectors enjoy this work and treat it\n"
-    "as their hobby.");
-
-const u8 gSalazzlePokedexText[] = _(
-    "For some reason, only females have\n"
-    "been found. It creates a reverse harem of\n"
-    "male Salandit to live with. Its poisonous\n"
-    "gas is filled with pheromones.");
-
 const u8 gSilvallyNormalPokedexText[] = _(
     "Its trust in its partner awakens it.\n"
     "This Pokémon is capable of changing its\n"
