@@ -171,9 +171,9 @@ enum PlayerHasHowManyMons
 
 #define MAX_LEVEL_UP_MOVES       20
 
-#define MON_MALE       0x00
-#define MON_FEMALE     0xFE
-#define MON_GENDERLESS 0xFF
+#define MON_MALE       0
+#define MON_FEMALE     254
+#define MON_GENDERLESS 255
 
 enum FriendshipEvents
 {

@@ -72,6 +72,8 @@
 *Día de pago.
 *Chupasangre.
 
+*Recuperar En metálico (GetDynamicMoveType)
+*Probablemente haya que revisar todas las abilities que cambien prioridad, y las que absorban ataques.
 
 *limpiar minijuegos y saveblocks
 

@@ -2221,7 +2221,7 @@ void ClearEnemyPartyAfterChallenge()
     // We zero out the Enemy's party here when the player either wins or loses the challenge since we
     // can't do it the usual way in FreeResetData_ReturnToOvOrDoEvolutions() in battle_main.c due to the
     // way facilities like the Battle Factory and the Slateport Battle Tent work
-    if (gSpecialVar_0x8005 == 0)
+    if (gSpecialVar_5 == 0)
     {
         ZeroEnemyPartyMons();
     }
