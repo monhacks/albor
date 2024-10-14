@@ -13,6 +13,14 @@
         .frontPicFemale = gMonFrontPic_## sprite##F,        \
         .frontPicSizeFemale = MON_COORDS_SIZE(width, height)
 
+#if B_ENEMY_MON_SHADOW_STYLE >= GEN_4
+#define SHADOW(x, y, size)  .enemyShadowXOffset = x, .enemyShadowYOffset = y, .enemyShadowSize = size,
+#define NO_SHADOW           .suppressEnemyShadow = TRUE,
+#else
+#define SHADOW(x, y, size)  .enemyShadowXOffset = 0, .enemyShadowYOffset = 0, .enemyShadowSize = 0,
+#define NO_SHADOW           .suppressEnemyShadow = FALSE,
+#endif
+
 #define BACK_PIC(sprite, width, height)                     \
         .backPic = gMonBackPic_## sprite,                   \
         .backPicSize = MON_COORDS_SIZE(width, height)
@@ -83,12 +91,6 @@
 
 #define MON_TYPES(type1, ...) { type1, DEFAULT(type1, __VA_ARGS__) }
 #define MON_EGG_GROUPS(group1, ...) { group1, DEFAULT(group1, __VA_ARGS__) }
-
-#if POKEMON_NAME_LENGTH >= 12
-#define HANDLE_EXPANDED_SPECIES_NAME(_name, ...) _(DEFAULT(_name, __VA_ARGS__))
-#else
-#define HANDLE_EXPANDED_SPECIES_NAME(_name, ...) _(_name)
-#endif
 
 const struct SpeciesInfo gSpeciesInfo[] =
 {

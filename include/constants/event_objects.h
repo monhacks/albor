@@ -238,6 +238,7 @@ enum ShadowSizes
     SHADOW_SIZE_M,
     SHADOW_SIZE_L,
     SHADOW_SIZE_NONE,
+    SHADOW_SIZE_XL_BATTLE_ONLY = SHADOW_SIZE_NONE,
 };
 
 enum Tracks
@@ -305,7 +306,7 @@ enum ObjectEventPalTags
 };
 
 #define OBJ_EVENT_GFX_MON_BASE  512
-#define OBJ_EVENT_GFX_SPECIES_BITS 11
+#define OBJ_EVENT_GFX_SPECIES_BITS 12
 #define OBJ_EVENT_GFX_SPECIES_MASK ((1 << OBJ_EVENT_GFX_SPECIES_BITS) - 1)
 
 // Used to call a specific species' follower graphics. Useful for static encounters.
@@ -314,6 +315,8 @@ enum ObjectEventPalTags
 
 #define OW_SPECIES(x) (((x)->graphicsId & OBJ_EVENT_GFX_SPECIES_MASK) - OBJ_EVENT_GFX_MON_BASE)
 #define OW_FORM(x) ((x)->graphicsId >> OBJ_EVENT_GFX_SPECIES_BITS)
+// Whether Object Event is an OW pokemon
+#define IS_OW_MON_OBJ(obj) ((obj)->graphicsId >= OBJ_EVENT_GFX_MON_BASE)
 
 #define F_INANIMATE                        (1 << 6)
 #define F_DISABLE_REFLECTION_PALETTE_LOAD  (1 << 7)

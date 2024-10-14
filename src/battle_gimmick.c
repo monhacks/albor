@@ -139,12 +139,7 @@ void ChangeGimmickTriggerSprite(u32 spriteId, u32 animId)
 
 bool32 IsGimmickTriggerSpriteActive(void)
 {
-    if (GetSpriteTileStartByTag(TAG_GIMMICK_TRIGGER_TILE) == 0xFFFF)
-        return FALSE;
-    else if (IndexOfSpritePaletteTag(TAG_GIMMICK_TRIGGER_PAL) != 0xFF)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 void HideGimmickTriggerSprite(void)

@@ -1764,7 +1764,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
             ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
             ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
-        
+
         CreateFacilityMon(&gFacilityTrainerMons[monId],
                 level, ivs, otId, FLAG_FRONTIER_MON_FACTORY,
                 &sFactorySelectScreen->mons[i + firstMonId].monData);

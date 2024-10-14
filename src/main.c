@@ -32,6 +32,7 @@ static void IntrDummy(void);
 
 // Defined in the linker script so that the test build can override it.
 extern void gInitialMainCB2(void);
+extern void CB2_FlashNotDetectedScreen(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
@@ -101,7 +102,7 @@ void AgbMain()
     InitHeap(gHeap, HEAP_SIZE);
 
     if (gFlashMemoryPresent != TRUE)
-        SetMainCallback2(NULL);
+        SetMainCallback2((SAVE_TYPE_ERROR_SCREEN) ? CB2_FlashNotDetectedScreen : NULL);
 
     gAgbMainLoop_sp = __builtin_frame_address(0);
     AgbMainLoop();
@@ -146,12 +147,9 @@ void SetMainCallback2(MainCallback callback)
 
 void StartTimer1(void)
 {
-    if (HQ_RANDOM)
-    {
-        REG_TM2CNT_L = 0;
-        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
-    }
 
+    REG_TM2CNT_L = 0;
+    REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
     REG_TM1CNT_H = TIMER_ENABLE;
 }
 
@@ -159,24 +157,12 @@ void SeedRngAndSetTrainerId(void)
 {
     u32 val;
 
-    if (HQ_RANDOM)
-    {
-        REG_TM1CNT_H = 0;
-        REG_TM2CNT_H = 0;
-        val = ((u32)REG_TM2CNT_L) << 16;
-        val |= REG_TM1CNT_L;
-        SeedRng(val);
-        sTrainerId = Random();
-    }
-    else
-    {
-        // Do it exactly like it was originally done, including not stopping
-        // the timer beforehand.
-        val = REG_TM1CNT_L;
-        SeedRng((u16)val);
-        REG_TM1CNT_H = 0;
-        sTrainerId = val;
-    }
+    REG_TM1CNT_H = 0;
+    REG_TM2CNT_H = 0;
+    val = ((u32)REG_TM2CNT_L) << 16;
+    val |= REG_TM1CNT_L;
+    SeedRng(val);
+    sTrainerId = Random();
 }
 
 u16 GetGeneratedTrainerIdLower(void)
@@ -198,9 +184,9 @@ static void SeedRngWithRtc(void)
     struct SiiRtcInfo rtc;
     RtcGetInfo(&rtc);
     seconds =
-        ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+        ((HORAS_POR_DIA * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
         * MINUTOS_POR_HORA + BCD8(rtc.minute))
-        * SECONDS_PER_MINUTE + BCD8(rtc.second);
+        * SEGUNDOS_POR_MINUTO + BCD8(rtc.second);
     SeedRng(seconds);
     #undef BCD8
 }
