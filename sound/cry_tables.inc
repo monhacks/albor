@@ -804,18 +804,6 @@ gCryTable::
 	cry Cry_Yamask
 	cry Cry_Cofagrigus
 .endif @ P_FAMILY_YAMASK
-.if P_FAMILY_TIRTOUGA == TRUE
-	cry Cry_Tirtouga
-	cry Cry_Carracosta
-.endif @ P_FAMILY_TIRTOUGA
-.if P_FAMILY_ARCHEN == TRUE
-	cry Cry_Archen
-	cry Cry_Archeops
-.endif @ P_FAMILY_ARCHEN
-.if P_FAMILY_TRUBBISH == TRUE
-	cry Cry_Trubbish
-	cry Cry_Garbodor
-.endif @ P_FAMILY_TRUBBISH
 .if P_FAMILY_ZORUA == TRUE
 	cry Cry_Zorua
 	cry Cry_Zoroark
@@ -1026,25 +1014,6 @@ gCryTable::
 	cry Cry_Sandygast
 	cry Cry_Palossand
 .endif @ P_FAMILY_SANDYGAST
-.if P_FAMILY_PYUKUMUKU == TRUE
-	cry Cry_Pyukumuku
-.endif @ P_FAMILY_PYUKUMUKU
-.if P_FAMILY_TYPE_NULL == TRUE
-	cry Cry_TypeNull
-	cry Cry_Silvally
-.endif @ P_FAMILY_TYPE_NULL
-.if P_FAMILY_MINIOR == TRUE
-	cry Cry_Minior
-.endif @ P_FAMILY_MINIOR
-.if P_FAMILY_KOMALA == TRUE
-	cry Cry_Komala
-.endif @ P_FAMILY_KOMALA
-.if P_FAMILY_TURTONATOR == TRUE
-	cry Cry_Turtonator
-.endif @ P_FAMILY_TURTONATOR
-.if P_FAMILY_TOGEDEMARU == TRUE
-	cry Cry_Togedemaru
-.endif @ P_FAMILY_TOGEDEMARU
 .if P_FAMILY_MIMIKYU == TRUE
 	cry Cry_Mimikyu
 .endif @ P_FAMILY_MIMIKYU
@@ -1076,35 +1045,6 @@ gCryTable::
 	cry Cry_Wooloo
 	cry Cry_Dubwool
 .endif @ P_FAMILY_WOOLOO
-.if P_FAMILY_CHEWTLE == TRUE
-	cry Cry_Chewtle
-	cry Cry_Drednaw
-.endif @ P_FAMILY_CHEWTLE
-.if P_FAMILY_YAMPER == TRUE
-	cry Cry_Yamper
-	cry Cry_Boltund
-.endif @ P_FAMILY_YAMPER
-.if P_FAMILY_ROLYCOLY == TRUE
-	cry Cry_Rolycoly
-	cry Cry_Carkol
-	cry Cry_Coalossal
-.endif @ P_FAMILY_ROLYCOLY
-.if P_FAMILY_APPLIN == TRUE
-	cry Cry_Applin
-	cry Cry_Flapple
-	cry Cry_Appletun
-.endif @ P_FAMILY_APPLIN
-.if P_FAMILY_SILICOBRA == TRUE
-	cry Cry_Silicobra
-	cry Cry_Sandaconda
-.endif @ P_FAMILY_SILICOBRA
-.if P_FAMILY_CRAMORANT == TRUE
-	cry Cry_Cramorant
-.endif @ P_FAMILY_CRAMORANT
-.if P_FAMILY_ARROKUDA == TRUE
-	cry Cry_Arrokuda
-	cry Cry_Barraskewda
-.endif @ P_FAMILY_ARROKUDA
 .if P_FAMILY_TOXEL == TRUE
 	cry Cry_Toxel
 	cry Cry_ToxtricityAmped
