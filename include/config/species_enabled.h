@@ -9,7 +9,6 @@
 // so Pikachu depends on the Gen 1 setting despite Pichu being the lowest member of the evolution tree.
 // Eg: If P_GEN_2_POKEMON is set to FALSE, all members of the Sneasel Family will be disabled
 // (Sneasel + Hisuian, Weavile and Sneasler).
-#define P_GEN_2_POKEMON                  TRUE // Generation 2 Pokémon (GSC)
 #define P_GEN_3_POKEMON                  TRUE // Generation 3 Pokémon (RSE, FRLG)
 #define P_GEN_4_POKEMON                  FALSE // Generation 4 Pokémon (DPPt, HGSS)
 #define P_GEN_5_POKEMON                  FALSE // Generation 5 Pokémon (BW, B2W2)
@@ -18,34 +17,7 @@
 #define P_GEN_8_POKEMON                  FALSE // Generation 8 Pokémon (SwSh, BDSP, LA)
 #define P_GEN_9_POKEMON                  FALSE // Generation 9 Pokémon (SV)
 
-// Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
-#define P_REGIONAL_FORMS                 TRUE
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
-
-#define P_FAMILY_MISDREAVUS              P_GEN_2_POKEMON
-#define P_FAMILY_GIRAFARIG               P_GEN_2_POKEMON
-#define P_FAMILY_PINECO                  P_GEN_2_POKEMON
-#define P_FAMILY_GLIGAR                  P_GEN_2_POKEMON
-#define P_FAMILY_SNUBBULL                P_GEN_2_POKEMON
-#define P_FAMILY_HERACROSS               P_GEN_2_POKEMON
-#define P_FAMILY_SNEASEL                 P_GEN_2_POKEMON
-#define P_FAMILY_TEDDIURSA               P_GEN_2_POKEMON
-#define P_FAMILY_SLUGMA                  P_GEN_2_POKEMON
-#define P_FAMILY_SWINUB                  P_GEN_2_POKEMON
-#define P_FAMILY_CORSOLA                 P_GEN_2_POKEMON
-#define P_FAMILY_REMORAID                P_GEN_2_POKEMON
-#define P_FAMILY_DELIBIRD                P_GEN_2_POKEMON
-#define P_FAMILY_HOUNDOUR                P_GEN_2_POKEMON
-#define P_FAMILY_PHANPY                  P_GEN_2_POKEMON
-#define P_FAMILY_STANTLER                P_GEN_2_POKEMON
-#define P_FAMILY_MILTANK                 P_GEN_2_POKEMON
-#define P_FAMILY_RAIKOU                  P_GEN_2_POKEMON
-#define P_FAMILY_ENTEI                   P_GEN_2_POKEMON
-#define P_FAMILY_SUICUNE                 P_GEN_2_POKEMON
-#define P_FAMILY_LARVITAR                P_GEN_2_POKEMON
-#define P_FAMILY_LUGIA                   P_GEN_2_POKEMON
-#define P_FAMILY_HO_OH                   P_GEN_2_POKEMON
-#define P_FAMILY_CELEBI                  P_GEN_2_POKEMON
 
 #define P_FAMILY_TREECKO                 P_GEN_3_POKEMON
 #define P_FAMILY_TORCHIC                 P_GEN_3_POKEMON

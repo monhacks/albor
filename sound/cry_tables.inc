@@ -224,99 +224,46 @@ gCryTable::
 	cry Cry_Clodsire
 	cry Cry_Murkrow
 	cry Cry_Honchkrow
-.if P_FAMILY_MISDREAVUS == TRUE
 	cry Cry_Misdreavus
 	cry Cry_Mismagius
-.endif @ P_FAMILY_MISDREAVUS
-.if P_FAMILY_GIRAFARIG == TRUE
 	cry Cry_Girafarig
-.endif @ P_FAMILY_GIRAFARIG
-.if P_FAMILY_PINECO == TRUE
 	cry Cry_Pineco
 	cry Cry_Forretress
-.endif @ P_FAMILY_PINECO
-.if P_FAMILY_GLIGAR == TRUE
 	cry Cry_Gligar
 	cry Cry_Gliscor
-.endif @ P_FAMILY_GLIGAR
-.if P_FAMILY_SNUBBULL == TRUE
 	cry Cry_Snubbull
 	cry Cry_Granbull
-.endif @ P_FAMILY_SNUBBULL
-.if P_FAMILY_HERACROSS == TRUE
 	cry Cry_Heracross
-.endif @ P_FAMILY_HERACROSS
-.if P_FAMILY_SNEASEL == TRUE
 	cry Cry_Sneasel
 	cry Cry_Weavile
-.if P_HISUIAN_FORMS == TRUE
 	cry Cry_Sneasler
-.endif @ P_HISUIAN_FORMS
-.endif @ P_FAMILY_SNEASEL
-.if P_FAMILY_TEDDIURSA == TRUE
 	cry Cry_Teddiursa
 	cry Cry_Ursaring
-.endif @ P_FAMILY_TEDDIURSA
-.if P_FAMILY_SLUGMA == TRUE
 	cry Cry_Slugma
 	cry Cry_Magcargo
-.endif @ P_FAMILY_SLUGMA
-.if P_FAMILY_SWINUB == TRUE
 	cry Cry_Swinub
 	cry Cry_Piloswine
 	cry Cry_Mamoswine
-.endif @ P_FAMILY_SWINUB
-.if P_FAMILY_CORSOLA == TRUE
 	cry Cry_Corsola
-.endif @ P_FAMILY_CORSOLA
-.if P_FAMILY_REMORAID == TRUE
 	cry Cry_Remoraid
 	cry Cry_Octillery
-.endif @ P_FAMILY_REMORAID
-.if P_FAMILY_DELIBIRD == TRUE
 	cry Cry_Delibird
-.endif @ P_FAMILY_DELIBIRD
-.if P_FAMILY_HOUNDOUR == TRUE
 	cry Cry_Houndour
 	cry Cry_Houndoom
-.endif @ P_FAMILY_HOUNDOUR
-.if P_FAMILY_PHANPY == TRUE
 	cry Cry_Phanpy
 	cry Cry_Donphan
-.endif @ P_FAMILY_PHANPY
-.if P_FAMILY_STANTLER == TRUE
 	cry Cry_Stantler
 	cry Cry_Wyrdeer
-.endif @ P_FAMILY_STANTLER
-.if P_FAMILY_SMEARGLE == TRUE
-	cry Cry_Smeargle
-.endif @ P_FAMILY_SMEARGLE
-.if P_FAMILY_MILTANK == TRUE
 	cry Cry_Miltank
-.endif @ P_FAMILY_MILTANK
-.if P_FAMILY_RAIKOU == TRUE
 	cry Cry_Raikou
-.endif @ P_FAMILY_RAIKOU
-.if P_FAMILY_ENTEI == TRUE
 	cry Cry_Entei
-.endif @ P_FAMILY_ENTEI
-.if P_FAMILY_SUICUNE == TRUE
 	cry Cry_Suicune
-.endif @ P_FAMILY_SUICUNE
-.if P_FAMILY_LARVITAR == TRUE
 	cry Cry_Larvitar
 	cry Cry_Pupitar
 	cry Cry_Tyranitar
-.endif @ P_FAMILY_LARVITAR
-.if P_FAMILY_LUGIA == TRUE
 	cry Cry_Lugia
-.endif @ P_FAMILY_LUGIA
-.if P_FAMILY_HO_OH == TRUE
 	cry Cry_HoOh
-.endif @ P_FAMILY_HO_OH
-.if P_FAMILY_CELEBI == TRUE
 	cry Cry_Celebi
-.endif @ P_FAMILY_CELEBI
 .if P_FAMILY_TREECKO == TRUE
 	cry Cry_Treecko
 	cry Cry_Grovyle
