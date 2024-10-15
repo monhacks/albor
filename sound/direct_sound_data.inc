@@ -1262,7 +1262,6 @@ Cry_Yanma::
 Cry_Yanmega::
 	.incbin "sound/direct_sound_samples/cries/yanmega.bin"
 
-.if P_FAMILY_WOOPER == TRUE
 	.align 2
 Cry_Wooper::
 	.incbin "sound/direct_sound_samples/cries/wooper.bin"
@@ -1274,8 +1273,6 @@ Cry_Quagsire::
 	.align 2
 Cry_Clodsire::
 	.incbin "sound/direct_sound_samples/cries/clodsire.bin"
-
-.endif @ P_FAMILY_WOOPER
 
 	.align 2
 Cry_Murkrow::

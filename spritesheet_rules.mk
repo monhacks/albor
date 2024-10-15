@@ -2793,9 +2793,6 @@ $(POKEMONGFXDIR)/persian/alolan/follower.4bpp: %.4bpp: %.png
 $(POKEMONGFXDIR)/marowak/alolan/follower.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
-$(POKEMONGFXDIR)/wooper/wooper_paldean/overworld.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -mwidth 4 -mheight 4
-
 $(POKEMONGFXDIR)/clodsire/overworld.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 

@@ -1,12 +1,12 @@
 ﻿#define PLACEHOLDER_ANIM_SINGLE_FRAME(name)     \
-static const union AnimCmd sAnim_##name##[] =   \
+static const union AnimCmd sAnim_##name[] =     \
 {                                               \
     ANIMCMD_FRAME(0, 1),                        \
     ANIMCMD_END,                                \
 }
 
 #define PLACEHOLDER_ANIM_TWO_FRAMES(name)       \
-static const union AnimCmd sAnim_##name##[] =   \
+static const union AnimCmd sAnim_##name[] =     \
 {                                               \
     ANIMCMD_FRAME(0, 30),                       \
     ANIMCMD_FRAME(1, 30),                       \
@@ -2333,7 +2333,6 @@ static const union AnimCmd sAnim_Yanmega[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_WOOPER
 static const union AnimCmd sAnim_Wooper[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -2349,9 +2348,18 @@ static const union AnimCmd sAnim_Quagsire[] =
     ANIMCMD_END,
 };
 
-PLACEHOLDER_ANIM_SINGLE_FRAME(WooperPaldean);
-PLACEHOLDER_ANIM_SINGLE_FRAME(Clodsire);
-#endif //P_FAMILY_WOOPER
+static const union AnimCmd sAnim_WooperPaldean[] =
+{
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_FRAME(1, 15),
+    ANIMCMD_FRAME(0, 15),
+    ANIMCMD_END,
+};
+
+PLACEHOLDER_ANIM_SINGLE_FRAME(Clodsire); //Por hacer
 
 static const union AnimCmd sAnim_Murkrow[] =
 {
@@ -7324,7 +7332,7 @@ static const union AnimCmd sAnim_Egg[] =
 static const union AnimCmd *const sAnims_##name[] = \
 {                                                   \
     sAnim_GeneralFrame0,                            \
-    sAnim_##name##,                                 \
+    sAnim_##name,                                   \
 }
 
 SINGLE_ANIMATION(None);
@@ -7564,12 +7572,10 @@ SINGLE_ANIMATION(Sunkern);
 SINGLE_ANIMATION(Sunflora);
 SINGLE_ANIMATION(Yanma);
 SINGLE_ANIMATION(Yanmega);
-#if P_FAMILY_WOOPER
 SINGLE_ANIMATION(Wooper);
 SINGLE_ANIMATION(Quagsire);
 SINGLE_ANIMATION(WooperPaldean);
 SINGLE_ANIMATION(Clodsire);
-#endif //P_FAMILY_WOOPER
 SINGLE_ANIMATION(Murkrow);
 SINGLE_ANIMATION(Honchkrow);
 #if P_FAMILY_MISDREAVUS

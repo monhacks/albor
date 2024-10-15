@@ -847,7 +847,6 @@ static const struct SpriteFrameImage sPicTable_Yanmega[] = {
     overworld_ascending_frames(gObjectEventPic_Yanmega, 4, 4),
 };
 
-#if P_FAMILY_WOOPER
 static const struct SpriteFrameImage sPicTable_Wooper[] = {
     overworld_ascending_frames(gObjectEventPic_Wooper, 4, 4),
 };
@@ -866,7 +865,6 @@ static const struct SpriteFrameImage sPicTable_WooperPaldean[] = {
 static const struct SpriteFrameImage sPicTable_Clodsire[] = {
     overworld_ascending_frames(gObjectEventPic_Clodsire, 4, 4),
 };
-#endif //P_FAMILY_WOOPER
 
 static const struct SpriteFrameImage sPicTable_Murkrow[] = {
     overworld_ascending_frames(gObjectEventPic_Murkrow, 4, 4),

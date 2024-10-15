@@ -395,31 +395,12 @@ static const u16 sYanmaEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-#if P_FAMILY_WOOPER
 static const u16 sWooperEggMoveLearnset[] = {
-    MOVE_BODY_SLAM,
-    MOVE_ANCIENT_POWER,
-    MOVE_CURSE,
-    MOVE_MUD_SPORT,
-    MOVE_STOCKPILE,
-    MOVE_SWALLOW,
-    MOVE_SPIT_UP,
-    MOVE_COUNTER,
-    MOVE_ENCORE,
-    MOVE_DOUBLE_KICK,
-    MOVE_RECOVER,
-    MOVE_AFTER_YOU,
-    MOVE_SLEEP_TALK,
-    MOVE_ACID_SPRAY,
-    MOVE_GUARD_SWAP,
-    MOVE_EERIE_IMPULSE,
-    MOVE_POWER_UP_PUNCH,
     MOVE_UNAVAILABLE,
 };
 static const u16 sWooperPaldeanEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
-#endif //P_FAMILY_WOOPER
 
 static const u16 sMurkrowEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,

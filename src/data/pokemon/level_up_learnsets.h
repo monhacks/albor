@@ -1006,7 +1006,6 @@ static const struct LevelUpMove sYanmegaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-#if P_FAMILY_WOOPER
 static const struct LevelUpMove sWooperLevelUpLearnset[] = {
     LEVEL_UP_END
 };
@@ -1022,7 +1021,6 @@ static const struct LevelUpMove sWooperPaldeanLevelUpLearnset[] = {
 static const struct LevelUpMove sClodsireLevelUpLearnset[] = {
     LEVEL_UP_END
 };
-#endif //P_FAMILY_WOOPER
 
 static const struct LevelUpMove sMurkrowLevelUpLearnset[] = {
     LEVEL_UP_END

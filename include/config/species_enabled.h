@@ -22,7 +22,6 @@
 #define P_REGIONAL_FORMS                 TRUE
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 
-#define P_FAMILY_WOOPER                  P_GEN_2_POKEMON //H-Wooper + Clodsire
 #define P_FAMILY_MISDREAVUS              P_GEN_2_POKEMON
 #define P_FAMILY_GIRAFARIG               P_GEN_2_POKEMON
 #define P_FAMILY_PINECO                  P_GEN_2_POKEMON

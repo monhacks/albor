@@ -219,11 +219,9 @@ gCryTable::
 	cry Cry_Sunflora
 	cry Cry_Yanma
 	cry Cry_Yanmega
-.if P_FAMILY_WOOPER == TRUE
 	cry Cry_Wooper
 	cry Cry_Quagsire
 	cry Cry_Clodsire
-.endif @ P_FAMILY_WOOPER
 	cry Cry_Murkrow
 	cry Cry_Honchkrow
 .if P_FAMILY_MISDREAVUS == TRUE
