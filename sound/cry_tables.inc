@@ -264,95 +264,55 @@ gCryTable::
 	cry Cry_Lugia
 	cry Cry_HoOh
 	cry Cry_Celebi
-.if P_FAMILY_TREECKO == TRUE
 	cry Cry_Treecko
 	cry Cry_Grovyle
 	cry Cry_Sceptile
-.endif @ P_FAMILY_TREECKO
-.if P_FAMILY_TORCHIC == TRUE
 	cry Cry_Torchic
 	cry Cry_Combusken
 	cry Cry_Blaziken
-.endif @ P_FAMILY_TORCHIC
-.if P_FAMILY_MUDKIP == TRUE
 	cry Cry_Mudkip
 	cry Cry_Marshtomp
 	cry Cry_Swampert
-.endif @ P_FAMILY_MUDKIP
-.if P_FAMILY_POOCHYENA == TRUE
 	cry Cry_Poochyena
 	cry Cry_Mightyena
-.endif @ P_FAMILY_POOCHYENA
-.if P_FAMILY_ZIGZAGOON == TRUE
 	cry Cry_Zigzagoon
 	cry Cry_Linoone
-.endif @ P_FAMILY_ZIGZAGOON
-.if P_FAMILY_WURMPLE == TRUE
 	cry Cry_Wurmple
 	cry Cry_Silcoon
 	cry Cry_Beautifly
 	cry Cry_Cascoon
 	cry Cry_Dustox
-.endif @ P_FAMILY_WURMPLE
-.if P_FAMILY_LOTAD == TRUE
 	cry Cry_Lotad
 	cry Cry_Lombre
 	cry Cry_Ludicolo
-.endif @ P_FAMILY_LOTAD
-.if P_FAMILY_SEEDOT == TRUE
 	cry Cry_Seedot
 	cry Cry_Nuzleaf
 	cry Cry_Shiftry
-.endif @ P_FAMILY_SEEDOT
-.if P_FAMILY_TAILLOW == TRUE
 	cry Cry_Taillow
 	cry Cry_Swellow
-.endif @ P_FAMILY_TAILLOW
-.if P_FAMILY_WINGULL == TRUE
 	cry Cry_Wingull
 	cry Cry_Pelipper
-.endif @ P_FAMILY_WINGULL
-.if P_FAMILY_RALTS == TRUE
 	cry Cry_Ralts
 	cry Cry_Kirlia
 	cry Cry_Gardevoir
 	cry Cry_Gallade
-.endif @ P_FAMILY_RALTS
-.if P_FAMILY_SURSKIT == TRUE
 	cry Cry_Surskit
 	cry Cry_Masquerain
-.endif @ P_FAMILY_SURSKIT
-.if P_FAMILY_SHROOMISH == TRUE
 	cry Cry_Shroomish
 	cry Cry_Breloom
-.endif @ P_FAMILY_SHROOMISH
-.if P_FAMILY_SLAKOTH == TRUE
 	cry Cry_Slakoth
 	cry Cry_Vigoroth
 	cry Cry_Slaking
-.endif @ P_FAMILY_SLAKOTH
-.if P_FAMILY_NINCADA == TRUE
 	cry Cry_Nincada
 	cry Cry_Ninjask
 	cry Cry_Shedinja
-.endif @ P_FAMILY_NINCADA
-.if P_FAMILY_WHISMUR == TRUE
 	cry Cry_Whismur
 	cry Cry_Loudred
 	cry Cry_Exploud
-.endif @ P_FAMILY_WHISMUR
-.if P_FAMILY_MAKUHITA == TRUE
 	cry Cry_Makuhita
 	cry Cry_Hariyama
-.endif @ P_FAMILY_MAKUHITA
-.if P_FAMILY_NOSEPASS == TRUE
 	cry Cry_Nosepass
 	cry Cry_Probopass
-.endif @ P_FAMILY_NOSEPASS
-.if P_FAMILY_SKITTY == TRUE
-	cry Cry_Skitty
-	cry Cry_Delcatty
-.endif @ P_FAMILY_SKITTY
 .if P_FAMILY_SABLEYE == TRUE
 	cry Cry_Sableye
 .endif @ P_FAMILY_SABLEYE
@@ -466,10 +426,6 @@ gCryTable::
 .if P_FAMILY_KECLEON == TRUE
 	cry Cry_Kecleon
 .endif @ P_FAMILY_KECLEON
-.if P_FAMILY_SHUPPET == TRUE
-	cry Cry_Shuppet
-	cry Cry_Banette
-.endif @ P_FAMILY_SHUPPET
 .if P_FAMILY_DUSKULL == TRUE
 	cry Cry_Duskull
 	cry Cry_Dusclops
@@ -915,12 +871,6 @@ gCryTable::
 	cry Cry_Amaura
 	cry Cry_Aurorus
 .endif @ P_FAMILY_AMAURA
-.if P_FAMILY_HAWLUCHA == TRUE
-	cry Cry_Hawlucha
-.endif @ P_FAMILY_HAWLUCHA
-.if P_FAMILY_DEDENNE == TRUE
-	cry Cry_Dedenne
-.endif @ P_FAMILY_DEDENNE
 .if P_FAMILY_CARBINK == TRUE
 	cry Cry_Carbink
 .endif @ P_FAMILY_CARBINK
@@ -964,15 +914,6 @@ gCryTable::
 .if P_FAMILY_MIMIKYU == TRUE
 	cry Cry_Mimikyu
 .endif @ P_FAMILY_MIMIKYU
-.if P_FAMILY_BRUXISH == TRUE
-	cry Cry_Bruxish
-.endif @ P_FAMILY_BRUXISH
-.if P_FAMILY_DRAMPA == TRUE
-	cry Cry_Drampa
-.endif @ P_FAMILY_DRAMPA
-.if P_FAMILY_DHELMISE == TRUE
-	cry Cry_Dhelmise
-.endif @ P_FAMILY_DHELMISE
 .if P_FAMILY_JANGMO_O == TRUE
 	cry Cry_JangmoO
 	cry Cry_HakamoO
@@ -988,137 +929,26 @@ gCryTable::
 	cry Cry_Dottler
 	cry Cry_Orbeetle
 .endif @ P_FAMILY_BLIPBUG
-.if P_FAMILY_WOOLOO == TRUE
-	cry Cry_Wooloo
-	cry Cry_Dubwool
-.endif @ P_FAMILY_WOOLOO
 .if P_FAMILY_TOXEL == TRUE
 	cry Cry_Toxel
 	cry Cry_ToxtricityAmped
 	cry Cry_ToxtricityLowKey
 .endif @ P_FAMILY_TOXEL
-.if P_FAMILY_SIZZLIPEDE == TRUE
-	cry Cry_Sizzlipede
-	cry Cry_Centiskorch
-.endif @ P_FAMILY_SIZZLIPEDE
-.if P_FAMILY_IMPIDIMP == TRUE
-	cry Cry_Impidimp
-	cry Cry_Morgrem
-	cry Cry_Grimmsnarl
-.endif @ P_FAMILY_IMPIDIMP
-.if P_FAMILY_PINCURCHIN == TRUE
-	cry Cry_Pincurchin
-.endif @ P_FAMILY_PINCURCHIN
 .if P_FAMILY_SNOM == TRUE
 	cry Cry_Snom
 	cry Cry_Frosmoth
 .endif @ P_FAMILY_SNOM
-.if P_FAMILY_CUFANT == TRUE
-	cry Cry_Cufant
-	cry Cry_Copperajah
-.endif @ P_FAMILY_CUFANT
-.if P_FAMILY_DURALUDON == TRUE
-	cry Cry_Duraludon
-.endif @ P_FAMILY_DURALUDON
 .if P_FAMILY_DREEPY == TRUE
 	cry Cry_Dreepy
 	cry Cry_Drakloak
 	cry Cry_Dragapult
 .endif @ P_FAMILY_DREEPY
-.if P_FAMILY_ZACIAN == TRUE
-	cry Cry_ZacianHeroOfManyBattles
-	cry Cry_ZacianCrownedSword
-.endif @ P_FAMILY_ZACIAN
-.if P_FAMILY_ZAMAZENTA == TRUE
-	cry Cry_ZamazentaHeroOfManyBattles
-	cry Cry_ZamazentaCrownedShield
-.endif @ P_FAMILY_ZAMAZENTA
-.if P_FAMILY_ETERNATUS == TRUE
-	cry Cry_Eternatus
-	cry Cry_EternatusEternamax
-.endif @ P_FAMILY_ETERNATUS
-.if P_FAMILY_KUBFU == TRUE
-	cry Cry_Kubfu
-	cry Cry_UrshifuSingleStrikeStyle
-	cry Cry_UrshifuRapidStrikeStyle
-.endif @ P_FAMILY_KUBFU
-.if P_FAMILY_ZARUDE == TRUE
-	cry Cry_Zarude
-.endif @ P_FAMILY_ZARUDE
 .if P_FAMILY_REGIELEKI == TRUE
 	cry Cry_Regieleki
 .endif @ P_FAMILY_REGIELEKI
 .if P_FAMILY_REGIDRAGO == TRUE
 	cry Cry_Regidrago
 .endif @ P_FAMILY_REGIDRAGO
-.if P_FAMILY_SPRIGATITO == TRUE
-	cry Cry_Sprigatito
-	cry Cry_Floragato
-	cry Cry_Meowscarada
-.endif @ P_FAMILY_SPRIGATITO
-.if P_FAMILY_FUECOCO == TRUE
-	cry Cry_Fuecoco
-	cry Cry_Crocalor
-	cry Cry_Skeledirge
-.endif @ P_FAMILY_FUECOCO
-.if P_FAMILY_TAROUNTULA == TRUE
-	cry Cry_Tarountula
-	cry Cry_Spidops
-.endif @ P_FAMILY_TAROUNTULA
-.if P_FAMILY_NYMBLE == TRUE
-	cry Cry_Nymble
-	cry Cry_Lokix
-.endif @ P_FAMILY_NYMBLE
-.if P_FAMILY_SQUAWKABILLY == TRUE
-	cry Cry_Squawkabilly
-.endif @ P_FAMILY_SQUAWKABILLY
-.if P_FAMILY_CHARCADET == TRUE
-	cry Cry_Charcadet
-	cry Cry_Armarouge
-	cry Cry_Ceruledge
-.endif @ P_FAMILY_CHARCADET
-.if P_FAMILY_TADBULB == TRUE
-	cry Cry_Tadbulb
-	cry Cry_Bellibolt
-.endif @ P_FAMILY_TADBULB
-.if P_FAMILY_WATTREL == TRUE
-	cry Cry_Wattrel
-	cry Cry_Kilowattrel
-.endif @ P_FAMILY_WATTREL
-.if P_FAMILY_MASCHIFF == TRUE
-	cry Cry_Maschiff
-	cry Cry_Mabosstiff
-.endif @ P_FAMILY_MASCHIFF
-.if P_FAMILY_SHROODLE == TRUE
-	cry Cry_Shroodle
-	cry Cry_Grafaiai
-.endif @ P_FAMILY_SHROODLE
-.if P_FAMILY_BRAMBLIN == TRUE
-	cry Cry_Bramblin
-	cry Cry_Brambleghast
-.endif @ P_FAMILY_BRAMBLIN
-.if P_FAMILY_TOEDSCOOL == TRUE
-	cry Cry_Toedscool
-	cry Cry_Toedscruel
-.endif @ P_FAMILY_TOEDSCOOL
-.if P_FAMILY_KLAWF == TRUE
-	cry Cry_Klawf
-.endif @ P_FAMILY_KLAWF
-.if P_FAMILY_CAPSAKID == TRUE
-	cry Cry_Capsakid
-	cry Cry_Scovillain
-.endif @ P_FAMILY_CAPSAKID
-.if P_FAMILY_RELLOR == TRUE
-	cry Cry_Rellor
-	cry Cry_Rabsca
-.endif @ P_FAMILY_RELLOR
-.if P_FAMILY_FLITTLE == TRUE
-	cry Cry_Flittle
-	cry Cry_Espathra
-.endif @ P_FAMILY_FLITTLE
-.if P_FAMILY_ORTHWORM == TRUE
-	cry Cry_Orthworm
-.endif @ P_FAMILY_ORTHWORM
 .if P_FAMILY_GLIMMET == TRUE
 	cry Cry_Glimmet
 	cry Cry_Glimmora

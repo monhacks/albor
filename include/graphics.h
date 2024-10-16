@@ -63,9 +63,6 @@ extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
 extern const u32 gOpenPokeballGfx[];
 
-// Pokémon gfx
-extern const u16 gMonIconPalettes[][16];
-
 //Pokémon eggs
 extern const u32 gMonPalette_Egg_Normal1[];
 extern const u32 gMonPalette_Egg_Normal2[];

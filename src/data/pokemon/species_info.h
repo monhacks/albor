@@ -14194,7 +14194,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Celebi),
     },
 
-#if P_FAMILY_TREECKO
     [SPECIES_TREECKO] =
     {
         .baseHP        = 40,
@@ -14346,9 +14345,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Sceptile),
         FOLLOWER(Sceptile, TRACKS_FOOT)
     },
-#endif //P_FAMILY_TREECKO
 
-#if P_FAMILY_TORCHIC
     [SPECIES_TORCHIC] =
     {
         .baseHP        = 45,
@@ -14506,9 +14503,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Blaziken),
         FOLLOWER(Blaziken, TRACKS_FOOT)
     },
-#endif //P_FAMILY_TORCHIC
 
-#if P_FAMILY_MUDKIP
     [SPECIES_MUDKIP] =
     {
         .baseHP        = 50,
@@ -14660,9 +14655,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Swampert),
         FOLLOWER(Swampert, TRACKS_FOOT)
     },
-#endif //P_FAMILY_MUDKIP
 
-#if P_FAMILY_POOCHYENA
     [SPECIES_POOCHYENA] =
     {
         .baseHP        = 35,
@@ -14764,9 +14757,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Mightyena, TRACKS_FOOT)
         LEARNSETS(Mightyena),
     },
-#endif //P_FAMILY_POOCHYENA
 
-#if P_FAMILY_ZIGZAGOON
 #if P_UPDATED_EXP_YIELDS >= GEN_7
     #define ZIGZAGOON_EXP_YIELD 56
 #elif P_UPDATED_EXP_YIELDS >= GEN_5
@@ -14883,9 +14874,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Linoone, TRACKS_FOOT)
         LEARNSETS(Linoone),
     },
-#endif //P_FAMILY_ZIGZAGOON
 
-#if P_FAMILY_WURMPLE
     [SPECIES_WURMPLE] =
     {
         .baseHP        = 45,
@@ -15171,9 +15160,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Dustox, TRACKS_NONE)
         LEARNSETS(Dustox),
     },
-#endif //P_FAMILY_WURMPLE
 
-#if P_FAMILY_LOTAD
     [SPECIES_LOTAD] =
     {
         .baseHP        = 40,
@@ -15330,9 +15317,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ludicolo, TRACKS_FOOT)
         LEARNSETS(Ludicolo),
     },
-#endif //P_FAMILY_LOTAD
 
-#if P_FAMILY_SEEDOT
     [SPECIES_SEEDOT] =
     {
         .baseHP        = 40,
@@ -15489,9 +15474,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Shiftry, TRACKS_FOOT)
         LEARNSETS(Shiftry),
     },
-#endif //P_FAMILY_SEEDOT
 
-#if P_FAMILY_TAILLOW
     [SPECIES_TAILLOW] =
     {
         .baseHP        = 40,
@@ -15594,9 +15577,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Swellow, TRACKS_NONE)
         LEARNSETS(Swellow),
     },
-#endif //P_FAMILY_TAILLOW
 
-#if P_FAMILY_WINGULL
     [SPECIES_WINGULL] =
     {
         .baseHP        = 40,
@@ -15703,9 +15684,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pelipper, TRACKS_NONE)
         LEARNSETS(Pelipper),
     },
-#endif //P_FAMILY_WINGULL
 
-#if P_FAMILY_RALTS
 #define RALTS_FAMILY_TYPE2 (P_UPDATED_TYPES >= GEN_6 ? TYPE_FAIRY : TYPE_PSYCHIC)
 
 #if P_UPDATED_EGG_GROUPS >= GEN_8
@@ -15930,9 +15909,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Gallade),
         FOLLOWER(Gallade, TRACKS_FOOT)
     },
-#endif //P_FAMILY_RALTS
 
-#if P_FAMILY_SURSKIT
     [SPECIES_SURSKIT] =
     {
         .baseHP        = 40,
@@ -16044,9 +16021,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Masquerain, TRACKS_NONE)
         LEARNSETS(Masquerain),
     },
-#endif //P_FAMILY_SURSKIT
 
-#if P_FAMILY_SHROOMISH
     [SPECIES_SHROOMISH] =
     {
         .baseHP        = 60,
@@ -16145,9 +16120,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Breloom, TRACKS_FOOT)
         LEARNSETS(Breloom),
     },
-#endif //P_FAMILY_SHROOMISH
 
-#if P_FAMILY_SLAKOTH
     [SPECIES_SLAKOTH] =
     {
         .baseHP        = 60,
@@ -16299,9 +16272,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Slaking, TRACKS_FOOT)
         LEARNSETS(Slaking),
     },
-#endif //P_FAMILY_SLAKOTH
 
-#if P_FAMILY_NINCADA
     [SPECIES_NINCADA] =
     {
         .baseHP        = 31,
@@ -16450,9 +16421,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Shedinja, TRACKS_NONE)
         LEARNSETS(Shedinja),
     },
-#endif //P_FAMILY_NINCADA
 
-#if P_FAMILY_WHISMUR
     [SPECIES_WHISMUR] =
     {
         .baseHP        = 64,
@@ -16606,9 +16575,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Exploud, TRACKS_FOOT)
         LEARNSETS(Exploud),
     },
-#endif //P_FAMILY_WHISMUR
 
-#if P_FAMILY_MAKUHITA
     [SPECIES_MAKUHITA] =
     {
         .baseHP        = 72,
@@ -16707,9 +16674,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Hariyama, TRACKS_FOOT)
         LEARNSETS(Hariyama),
     },
-#endif //P_FAMILY_MAKUHITA
 
-#if P_FAMILY_NOSEPASS
     [SPECIES_NOSEPASS] =
     {
         .baseHP        = 30,
@@ -16811,7 +16776,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Probopass, TRACKS_FOOT)
         LEARNSETS(Probopass),
     },
-#endif //P_FAMILY_NOSEPASS
 
 #if P_FAMILY_SABLEYE
 #define SABLEYE_MISC_INFO                                           \
@@ -18925,111 +18889,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Kecleon),
     },
 #endif //P_FAMILY_KECLEON
-
-#if P_FAMILY_SHUPPET
-    [SPECIES_SHUPPET] =
-    {
-        .baseHP        = 44,
-        .baseAttack    = 75,
-        .baseDefense   = 35,
-        .baseSpeed     = 45,
-        .baseSpAttack  = 63,
-        .baseSpDefense = 33,
-        .types = MON_TYPES(TYPE_GHOST),
-        .catchRate = 225,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 59 : 97,
-        .evYield_Attack = 1,
-        .itemRare = ITEM_SPELL_TAG,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 25,
-        .friendship = 35,
-        .growthRate = GROWTH_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),
-        .abilities = {ABILITY_INSOMNIA, ABILITY_FRISK, ABILITY_CURSED_BODY},
-        .bodyColor = BODY_COLOR_BLACK,
-        .speciesName = _("Shuppet"),
-        .cryId = CRY_SHUPPET,
-        .natDexNum = DEX_SHUPPET,
-        .categoryName = _("Puppet"),
-        .height = 6,
-        .weight = 23,
-        .description = COMPOUND_STRING(
-            "This Pokémon roams about deep in the\n"
-            "night seeking such negative emotions as\n"
-            "grudges and envy. It retreats to its nest\n"
-            "when the sun begins to rise."),
-        .pokemonScale = 440,
-        .pokemonOffset = 20,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Shuppet, 40, 40),
-        .frontPicYOffset = 13,
-        .frontAnimFrames = sAnims_Shuppet,
-        .frontAnimId = ANIM_V_SLIDE_WOBBLE,
-        .enemyMonElevation = 14,
-        BACK_PIC(Shuppet, 56, 56),
-        .backPicYOffset = 5,
-        .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Shuppet),
-        ICON(Shuppet),
-        FOOTPRINT(Shuppet)
-        FOLLOWER(Shuppet, TRACKS_NONE)
-        LEARNSETS(Shuppet),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BANETTE}),
-    },
-
-#define BANETTE_MISC_INFO                                           \
-        .types = MON_TYPES(TYPE_GHOST),                             \
-        .catchRate = 45,                                            \
-        .evYield_Attack = 2,                                        \
-        .itemRare = ITEM_SPELL_TAG,                                 \
-        .genderRatio = PERCENT_FEMALE(50),                          \
-        .eggCycles = 25,                                            \
-        .friendship = 35,                                           \
-        .growthRate = GROWTH_FAST,                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS),           \
-        .bodyColor = BODY_COLOR_BLACK,                              \
-        .speciesName = _("Banette"),                                \
-        .natDexNum = DEX_BANETTE,                          \
-        .categoryName = _("Marionette"),                            \
-        FOOTPRINT(Banette)                                          \
-        LEARNSETS(Banette)
-
-    [SPECIES_BANETTE] =
-    {
-        BANETTE_MISC_INFO,
-        .baseHP        = 64,
-        .baseAttack    = 115,
-        .baseDefense   = 65,
-        .baseSpeed     = 65,
-        .baseSpAttack  = 83,
-        .baseSpDefense = 63,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 159 : 179,
-        .abilities = {ABILITY_INSOMNIA, ABILITY_FRISK, ABILITY_CURSED_BODY},
-        .cryId = CRY_BANETTE,
-        .height = 11,
-        .weight = 125,
-        .description = COMPOUND_STRING(
-            "An abandoned plush doll became this\n"
-            "Pokémon. They are said to live in garbage\n"
-            "dumps and wander about in search of the\n"
-            "children that threw them away."),
-        .pokemonScale = 262,
-        .pokemonOffset = 9,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Banette, 56, 56),
-        .frontPicYOffset = 7,
-        .frontAnimFrames = sAnims_Banette,
-        .frontAnimId = ANIM_CIRCULAR_STRETCH_TWICE,
-        BACK_PIC(Banette, 64, 64),
-        .backPicYOffset = 5,
-        .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Banette),
-        ICON(Banette),
-        FOLLOWER(Banette, TRACKS_FOOT)
-    },
-#endif //P_FAMILY_SHUPPET
 
 #if P_FAMILY_DUSKULL
     [SPECIES_DUSKULL] =
@@ -26034,47 +25893,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Lilligant, TRACKS_FOOT)
         LEARNSETS(Lilligant),
     },
-
-#if P_HISUIAN_FORMS
-    [SPECIES_LILLIGANT_HISUIAN] =
-    {
-        LILLIGANT_MISC_INFO,
-        .baseHP        = 70,
-        .baseAttack    = 105,
-        .baseDefense   = 75,
-        .baseSpeed     = 105,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 75,
-        .types = MON_TYPES(TYPE_GRASS, TYPE_FIGHTING),
-        .evYield_Attack = 1,
-        .evYield_Speed = 1,
-        .abilities = {ABILITY_CHLOROPHYLL, ABILITY_HUSTLE, ABILITY_LEAF_GUARD},
-        .categoryName = _("Spinning"),
-        .height = 12,
-        .weight = 192,
-        .description = COMPOUND_STRING(
-            "Its well-developed legs are the result of\n"
-            "a life spent on mountains covered in deep\n"
-            "snow. The scent it exudes from its flower\n"
-            "crown heartens those in proximity."),
-        .pokemonScale = 320,
-        .pokemonOffset = 7,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(LilligantHisuian, 56, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_LilligantHisuian,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(LilligantHisuian, 56, 56),
-        .backPicYOffset = 5,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(LilligantHisuian),
-        ICON(LilligantHisuian),
-        FOLLOWER(LilligantHisuian, TRACKS_FOOT)
-        LEARNSETS(LilligantHisuian),
-        .isHisuianForm = TRUE,
-    },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_PETILIL
 
 #if P_FAMILY_SANDILE
@@ -26994,7 +26812,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Zoroark),
     },
 
-#if P_HISUIAN_FORMS
     [SPECIES_ZORUA_HISUIAN] =
     {
         ZORUA_MISC_INFO,
@@ -27056,7 +26873,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(ZoroarkHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_ZORUA
 
 #if P_FAMILY_MINCCINO
@@ -29197,7 +29013,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Braviary),
     },
 
-#if P_HISUIAN_FORMS
     [SPECIES_BRAVIARY_HISUIAN] =
     {
         BRAVIARY_MISC_INFO,
@@ -29236,7 +29051,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(BraviaryHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_RUFFLET
 
 #if P_FAMILY_VULLABY
@@ -30871,109 +30685,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif //P_FAMILY_AMAURA
 
-#if P_FAMILY_HAWLUCHA
-    [SPECIES_HAWLUCHA] =
-    {
-        .baseHP        = 78,
-        .baseAttack    = 92,
-        .baseDefense   = 75,
-        .baseSpeed     = 118,
-        .baseSpAttack  = 74,
-        .baseSpDefense = 63,
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_FLYING),
-        .catchRate = 100,
-        .expYield = 175,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_KINGS_ROCK,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        #if P_UPDATED_EGG_GROUPS >= GEN_8
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_HUMAN_LIKE),
-        #else
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
-        #endif
-        .abilities = {ABILITY_LIMBER, ABILITY_UNBURDEN, ABILITY_MOLD_BREAKER},
-        .bodyColor = BODY_COLOR_GREEN,
-        .speciesName = _("Hawlucha"),
-        .cryId = CRY_HAWLUCHA,
-        .natDexNum = DEX_HAWLUCHA,
-        .categoryName = _("Wrestling"),
-        .height = 8,
-        .weight = 215,
-        .description = COMPOUND_STRING(
-            "With its wings, it controls its position in\n"
-            "the air. Its proficient fighting skills\n"
-            "enable it to keep up with big bruisers\n"
-            "like Machamp and Hariyama."),
-        .pokemonScale = 366,
-        .pokemonOffset = 7,
-        .trainerScale = 257,
-        .trainerOffset = 0,
-        FRONT_PIC(Hawlucha, 64, 56),
-        .frontPicYOffset = 8,
-        .frontAnimFrames = sAnims_Hawlucha,
-        .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
-        BACK_PIC(Hawlucha, 64, 48),
-        .backPicYOffset = 10,
-        .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Hawlucha),
-        ICON(Hawlucha),
-        FOLLOWER(Hawlucha, TRACKS_FOOT)
-        LEARNSETS(Hawlucha),
-    },
-#endif //P_FAMILY_HAWLUCHA
-
-#if P_FAMILY_DEDENNE
-    [SPECIES_DEDENNE] =
-    {
-        .baseHP        = 67,
-        .baseAttack    = 58,
-        .baseDefense   = 57,
-        .baseSpeed     = 101,
-        .baseSpAttack  = 81,
-        .baseSpDefense = 67,
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_FAIRY),
-        .catchRate = 180,
-        .expYield = 151,
-        .evYield_Speed = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
-        .abilities = {ABILITY_CHEEK_POUCH, ABILITY_PICKUP, ABILITY_PLUS},
-        .bodyColor = BODY_COLOR_YELLOW,
-        .speciesName = _("Dedenne"),
-        .cryId = CRY_DEDENNE,
-        .natDexNum = DEX_DEDENNE,
-        .categoryName = _("Antenna"),
-        .height = 2,
-        .weight = 22,
-        .description = COMPOUND_STRING(
-            "Its whiskers serve as antennas.\n"
-            "By sending and receiving electrical\n"
-            "waves, it can communicate with others\n"
-            "over vast distances."),
-        .pokemonScale = 682,
-        .pokemonOffset = 24,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Dedenne, 64, 40),
-        .frontPicYOffset = 13,
-        .frontAnimFrames = sAnims_Dedenne,
-        .frontAnimId = ANIM_GLOW_YELLOW,
-        BACK_PIC(Dedenne, 64, 48),
-        .backPicYOffset = 12,
-        .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Dedenne),
-        ICON(Dedenne),
-        FOLLOWER(Dedenne, TRACKS_FOOT)
-        LEARNSETS(Dedenne),
-    },
-#endif //P_FAMILY_DEDENNE
-
 #if P_FAMILY_CARBINK
     [SPECIES_CARBINK] =
     {
@@ -31493,7 +31204,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Decidueye),
     },
 
-#if P_HISUIAN_FORMS
     [SPECIES_DECIDUEYE_HISUIAN] =
     {
         DECIDUEYE_MISC_INFO,
@@ -31524,7 +31234,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(DecidueyeHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_HISUIAN_FORMS
 #endif //P_FAMILY_ROWLET
 
 #if P_FAMILY_LITTEN
@@ -32165,160 +31874,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
     },
 #endif //P_FAMILY_MIMIKYU
 
-#if P_FAMILY_BRUXISH
-    [SPECIES_BRUXISH] =
-    {
-        .baseHP        = 68,
-        .baseAttack    = 105,
-        .baseDefense   = 70,
-        .baseSpeed     = 92,
-        .baseSpAttack  = 70,
-        .baseSpDefense = 70,
-        .types = MON_TYPES(TYPE_WATER, TYPE_PSYCHIC),
-        .catchRate = 80,
-        .expYield = 166,
-        .evYield_Attack = 2,
-        .itemRare = ITEM_RAZOR_FANG,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FISH),
-        .abilities = {ABILITY_DAZZLING, ABILITY_STRONG_JAW, ABILITY_WONDER_SKIN},
-        .bodyColor = BODY_COLOR_PINK,
-        .speciesName = _("Bruxish"),
-        .cryId = CRY_BRUXISH,
-        .natDexNum = DEX_BRUXISH,
-        .categoryName = _("Gnash Teeth"),
-        .height = 9,
-        .weight = 190,
-        .description = COMPOUND_STRING(
-            "It stuns its prey with its psychic powers\n"
-            "and then grinds them to mush with its\n"
-            "strong teeth. Even Shellder's shell is no\n"
-            "match for it."),
-        .pokemonScale = 338,
-        .pokemonOffset = 8,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Bruxish, 56, 40),
-        .frontPicYOffset = 15,
-        .frontAnimFrames = sAnims_Bruxish,
-        .frontAnimId = ANIM_RISING_WOBBLE,
-        BACK_PIC(Bruxish, 64, 48),
-        .backPicYOffset = 14,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Bruxish),
-        ICON(Bruxish),
-        FOOTPRINT(Bruxish)
-        FOLLOWER(Bruxish, TRACKS_FOOT)
-        LEARNSETS(Bruxish),
-    },
-#endif //P_FAMILY_BRUXISH
-
-#if P_FAMILY_DRAMPA
-    [SPECIES_DRAMPA] =
-    {
-        .baseHP        = 78,
-        .baseAttack    = 60,
-        .baseDefense   = 85,
-        .baseSpeed     = 36,
-        .baseSpAttack  = 135,
-        .baseSpDefense = 91,
-        .types = MON_TYPES(TYPE_NORMAL, TYPE_DRAGON),
-        .catchRate = 70,
-        .expYield = 170,
-        .evYield_SpAttack = 2,
-        .itemRare = ITEM_PERSIM_BERRY,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 20,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
-        .abilities = {ABILITY_BERSERK, ABILITY_SAP_SIPPER, ABILITY_CLOUD_NINE},
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Drampa"),
-        .cryId = CRY_DRAMPA,
-        .natDexNum = DEX_DRAMPA,
-        .categoryName = _("Placid"),
-        .height = 30,
-        .weight = 1850,
-        .description = COMPOUND_STRING(
-            "This Pokémon is friendly to people and\n"
-            "loves children most of all. It comes from\n"
-            "deep in the mountains to play with\n"
-            "children it likes in town."),
-        .pokemonScale = 275,
-        .pokemonOffset = 7,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Drampa, 64, 64),
-        .frontPicYOffset = 0,
-        .frontAnimFrames = sAnims_Drampa,
-        .frontAnimId = ANIM_V_SHAKE_TWICE,
-        BACK_PIC(Drampa, 64, 56),
-        .backPicYOffset = 5,
-        .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Drampa),
-        ICON(Drampa),
-        FOOTPRINT(Drampa)
-        FOLLOWER(Drampa, TRACKS_FOOT)
-        LEARNSETS(Drampa),
-    },
-#endif //P_FAMILY_DRAMPA
-
-#if P_FAMILY_DHELMISE
-    [SPECIES_DHELMISE] =
-    {
-        .baseHP        = 70,
-        .baseAttack    = 131,
-        .baseDefense   = 100,
-        .baseSpeed     = 40,
-        .baseSpAttack  = 86,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_GHOST, TYPE_GRASS),
-        .catchRate = 25,
-        .expYield = 181,
-        .evYield_Attack = 2,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 25,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
-        .abilities = {ABILITY_STEELWORKER, ABILITY_NONE},
-        .bodyColor = BODY_COLOR_GREEN,
-        .noFlip = TRUE,
-        .speciesName = _("Dhelmise"),
-        .cryId = CRY_DHELMISE,
-        .natDexNum = DEX_DHELMISE,
-        .categoryName = _("Sea Creeper"),
-        .height = 39,
-        .weight = 2100,
-        .description = COMPOUND_STRING(
-            "The soul of seaweed adrift in the waves\n"
-            "became reborn as this Pokémon.\n"
-            "It maintains itself with new infusions of\n"
-            "seabed detritus and seaweed."),
-        .pokemonScale = 256,
-        .pokemonOffset = 0,
-        .trainerScale = 510,
-        .trainerOffset = 11,
-        FRONT_PIC(Dhelmise, 48, 64),
-        .frontPicYOffset = 1,
-        .frontAnimFrames = sAnims_Dhelmise,
-        .frontAnimId = ANIM_SWING_CONVEX,
-        .enemyMonElevation = 2,
-        BACK_PIC(Dhelmise, 64, 64),
-        .backPicYOffset = 3,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Dhelmise),
-        ICON(Dhelmise, 1),
-        FOOTPRINT(Dhelmise)
-        FOLLOWER(Dhelmise, TRACKS_FOOT)
-        LEARNSETS(Dhelmise),
-    },
-#endif //P_FAMILY_DHELMISE
-
 #if P_FAMILY_JANGMO_O
     [SPECIES_JANGMO_O] =
     {
@@ -32779,105 +32334,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Orbeetle, TRACKS_FOOT)
     },
 #endif //P_FAMILY_BLIPBUG
-
-#if P_FAMILY_WOOLOO
-    [SPECIES_WOOLOO] =
-    {
-        .baseHP        = 42,
-        .baseAttack    = 40,
-        .baseDefense   = 55,
-        .baseSpeed     = 48,
-        .baseSpAttack  = 40,
-        .baseSpDefense = 45,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .catchRate = 255,
-        .expYield = 122,
-        .evYield_Defense = 1,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_FLUFFY, ABILITY_RUN_AWAY, ABILITY_BULLETPROOF},
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Wooloo"),
-        .cryId = CRY_WOOLOO,
-        .natDexNum = DEX_WOOLOO,
-        .categoryName = _("Sheep"),
-        .height = 6,
-        .weight = 60,
-        .description = COMPOUND_STRING(
-            "Its curly fleece is such an effective\n"
-            "cushion that this Pokémon could fall off\n"
-            "a cliff and stand right back up at the\n"
-            "bottom, unharmed."),
-        .pokemonScale = 422,
-        .pokemonOffset = 12,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Wooloo, 40, 40),
-        .frontPicYOffset = 12,
-        .frontAnimFrames = sAnims_Wooloo,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Wooloo, 56, 32),
-        .backPicYOffset = 18,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Wooloo),
-        ICON(Wooloo),
-        FOOTPRINT(Wooloo)
-        FOLLOWER(Wooloo, TRACKS_FOOT)
-        LEARNSETS(Wooloo),
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_DUBWOOL}),
-    },
-
-    [SPECIES_DUBWOOL] =
-    {
-        .baseHP        = 72,
-        .baseAttack    = 80,
-        .baseDefense   = 100,
-        .baseSpeed     = 88,
-        .baseSpAttack  = 60,
-        .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_NORMAL),
-        .catchRate = 127,
-        .expYield = 172,
-        .evYield_Defense = 2,
-        .genderRatio = PERCENT_FEMALE(50),
-        .eggCycles = 15,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_MEDIUM_FAST,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
-        .abilities = {ABILITY_FLUFFY, ABILITY_STEADFAST, ABILITY_BULLETPROOF},
-        .bodyColor = BODY_COLOR_WHITE,
-        .speciesName = _("Dubwool"),
-        .cryId = CRY_DUBWOOL,
-        .natDexNum = DEX_DUBWOOL,
-        .categoryName = _("Sheep"),
-        .height = 13,
-        .weight = 430,
-        .description = COMPOUND_STRING(
-            "Weave a carpet from its springy wool,\n"
-            "and you end up with something closer to\n"
-            "a trampoline. You'll start to bounce the\n"
-            "moment you set foot on it."),
-        .pokemonScale = 272,
-        .pokemonOffset = 3,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Dubwool, 48, 56),
-        .frontPicYOffset = 5,
-        .frontAnimFrames = sAnims_Dubwool,
-        //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
-        BACK_PIC(Dubwool, 64, 40),
-        .backPicYOffset = 13,
-        //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Dubwool),
-        ICON(Dubwool),
-        FOOTPRINT(Dubwool)
-        FOLLOWER(Dubwool, TRACKS_FOOT)
-        LEARNSETS(Dubwool),
-    },
-#endif //P_FAMILY_WOOLOO
 
 #if P_FAMILY_TOXEL
     [SPECIES_TOXEL] =

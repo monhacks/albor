@@ -883,18 +883,6 @@ static const struct OamData sOamData_DisplayMon =
     .affineParam = 0
 };
 
-static const struct OamData sOamData_MonIcon;
-static const struct SpriteTemplate sSpriteTemplate_MonIcon =
-{
-    .tileTag = GFXTAG_MON_ICON,
-    .paletteTag = POKE_ICON_BASE_PAL_TAG,
-    .oam = &sOamData_MonIcon,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCallbackDummy,
-};
-
 static const struct OamData sOamData_MonIcon =
 {
     .y = 0,
@@ -910,6 +898,17 @@ static const struct OamData sOamData_MonIcon =
     .priority = 0,
     .paletteNum = 0,
     .affineParam = 0
+};
+
+static const struct SpriteTemplate sSpriteTemplate_MonIcon =
+{
+    .tileTag = GFXTAG_MON_ICON,
+    .paletteTag = POKE_ICON_BASE_PAL_TAG,
+    .oam = &sOamData_MonIcon,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
 };
 
 static const union AffineAnimCmd sAffineAnim_ReleaseMon_Release[] =
@@ -973,6 +972,7 @@ static const u8 sHandCursor_Gfx[] = INCBIN_U8("graphics/pokemon_storage/hand_cur
 //------------------------------------------------------------------------------
 //  SECTION: Misc utility
 //------------------------------------------------------------------------------
+
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, s32 bytesToBuffer)
 {
     s32 i, tileBytesToBuffer;
