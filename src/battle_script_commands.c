@@ -7082,9 +7082,6 @@ static void UpdateSentMonFlags(u32 battler)
 
     gHitMarker &= ~HITMARKER_FAINTED(battler);
     gSpecialStatuses[battler].faintedHasReplacement = FALSE;
-
-    if (!BattlerHasAi(battler))
-        gBattleStruct->appearedInBattle |= 1u << gBattlerPartyIndexes[battler];
 }
 
 static bool32 DoSwitchInEffectsForBattler(u32 battler)

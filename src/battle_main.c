@@ -2394,7 +2394,6 @@ static void BattleStartClearSetData(void)
     {
         gSideTimers[i].stickyWebBattlerId = 0xFF;
     }
-    gBattleStruct->appearedInBattle = 0;
     gBattleStruct->beatUpSlot = 0;
 
     for (i = 0; i < PARTY_SIZE; i++)
@@ -3218,12 +3217,7 @@ static void TryDoEventsBeforeFirstTurn(void)
             gBattleCommunication[i] = 0;
 
         for (i = 0; i < gBattlersCount; i++)
-        {
             gBattleMons[i].status2 &= ~STATUS2_FLINCHED;
-            // Record party slots of player's mons that appeared in battle
-            if (!BattlerHasAi(i))
-                gBattleStruct->appearedInBattle |= 1u << gBattlerPartyIndexes[i];
-        }
 
         *(&gBattleStruct->turnEffectsTracker) = 0;
         *(&gBattleStruct->turnEffectsBattlerId) = 0;

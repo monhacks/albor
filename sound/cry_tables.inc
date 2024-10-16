@@ -313,652 +313,839 @@ gCryTable::
 	cry Cry_Hariyama
 	cry Cry_Nosepass
 	cry Cry_Probopass
-.if P_FAMILY_SABLEYE == TRUE
 	cry Cry_Sableye
-.endif @ P_FAMILY_SABLEYE
-.if P_FAMILY_MAWILE == TRUE
 	cry Cry_Mawile
-.endif @ P_FAMILY_MAWILE
-.if P_FAMILY_ARON == TRUE
 	cry Cry_Aron
 	cry Cry_Lairon
 	cry Cry_Aggron
-.endif @ P_FAMILY_ARON
-.if P_FAMILY_MEDITITE == TRUE
 	cry Cry_Meditite
 	cry Cry_Medicham
-.endif @ P_FAMILY_MEDITITE
-.if P_FAMILY_ELECTRIKE == TRUE
 	cry Cry_Electrike
 	cry Cry_Manectric
-.endif @ P_FAMILY_ELECTRIKE
-.if P_FAMILY_PLUSLE == TRUE
-	cry Cry_Plusle
-.endif @ P_FAMILY_PLUSLE
-.if P_FAMILY_MINUN == TRUE
-	cry Cry_Minun
-.endif @ P_FAMILY_MINUN
-.if P_FAMILY_VOLBEAT_ILLUMISE == TRUE
-	cry Cry_Volbeat
-	cry Cry_Illumise
-.endif @ P_FAMILY_VOLBEAT_ILLUMISE
-.if P_FAMILY_ROSELIA == TRUE
 	cry Cry_Budew
 	cry Cry_Roselia
 	cry Cry_Roserade
-.endif @ P_FAMILY_ROSELIA
-.if P_FAMILY_GULPIN == TRUE
-	cry Cry_Gulpin
-	cry Cry_Swalot
-.endif @ P_FAMILY_GULPIN
-.if P_FAMILY_CARVANHA == TRUE
 	cry Cry_Carvanha
 	cry Cry_Sharpedo
-.endif @ P_FAMILY_CARVANHA
-.if P_FAMILY_WAILMER == TRUE
 	cry Cry_Wailmer
 	cry Cry_Wailord
-.endif @ P_FAMILY_WAILMER
-.if P_FAMILY_NUMEL == TRUE
 	cry Cry_Numel
 	cry Cry_Camerupt
-.endif @ P_FAMILY_NUMEL
-.if P_FAMILY_TORKOAL == TRUE
 	cry Cry_Torkoal
-.endif @ P_FAMILY_TORKOAL
-.if P_FAMILY_SPOINK == TRUE
 	cry Cry_Spoink
 	cry Cry_Grumpig
-.endif @ P_FAMILY_SPOINK
-.if P_FAMILY_SPINDA == TRUE
-	cry Cry_Spinda
-.endif @ P_FAMILY_SPINDA
-.if P_FAMILY_TRAPINCH == TRUE
 	cry Cry_Trapinch
 	cry Cry_Vibrava
 	cry Cry_Flygon
-.endif @ P_FAMILY_TRAPINCH
-.if P_FAMILY_CACNEA == TRUE
 	cry Cry_Cacnea
 	cry Cry_Cacturne
-.endif @ P_FAMILY_CACNEA
-.if P_FAMILY_SWABLU == TRUE
 	cry Cry_Swablu
 	cry Cry_Altaria
-.endif @ P_FAMILY_SWABLU
-.if P_FAMILY_ZANGOOSE == TRUE
-	cry Cry_Zangoose
-.endif @ P_FAMILY_ZANGOOSE
-.if P_FAMILY_SEVIPER == TRUE
-	cry Cry_Seviper
-.endif @ P_FAMILY_SEVIPER
-.if P_FAMILY_LUNATONE_SOLROCK == TRUE
 	cry Cry_Lunatone
 	cry Cry_Solrock
-.endif @ P_FAMILY_LUNATONE_SOLROCK
-.if P_FAMILY_BARBOACH == TRUE
-	cry Cry_Barboach
-	cry Cry_Whiscash
-.endif @ P_FAMILY_BARBOACH
-.if P_FAMILY_CORPHISH == TRUE
-	cry Cry_Corphish
-	cry Cry_Crawdaunt
-.endif @ P_FAMILY_CORPHISH
-.if P_FAMILY_BALTOY == TRUE
 	cry Cry_Baltoy
 	cry Cry_Claydol
-.endif @ P_FAMILY_BALTOY
-.if P_FAMILY_LILEEP == TRUE
 	cry Cry_Lileep
 	cry Cry_Cradily
-.endif @ P_FAMILY_LILEEP
-.if P_FAMILY_ANORITH == TRUE
 	cry Cry_Anorith
 	cry Cry_Armaldo
-.endif @ P_FAMILY_ANORITH
-.if P_FAMILY_FEEBAS == TRUE
 	cry Cry_Feebas
 	cry Cry_Milotic
-.endif @ P_FAMILY_FEEBAS
-.if P_FAMILY_CASTFORM == TRUE
 	cry Cry_Castform
-.endif @ P_FAMILY_CASTFORM
-.if P_FAMILY_KECLEON == TRUE
 	cry Cry_Kecleon
-.endif @ P_FAMILY_KECLEON
-.if P_FAMILY_DUSKULL == TRUE
 	cry Cry_Duskull
 	cry Cry_Dusclops
 	cry Cry_Dusknoir
-.endif @ P_FAMILY_DUSKULL
-.if P_FAMILY_TROPIUS == TRUE
 	cry Cry_Tropius
-.endif @ P_FAMILY_TROPIUS
-.if P_FAMILY_CHIMECHO == TRUE
 	cry Cry_Chingling
 	cry Cry_Chimecho
-.endif @ P_FAMILY_CHIMECHO
-.if P_FAMILY_ABSOL == TRUE
 	cry Cry_Absol
-.endif @ P_FAMILY_ABSOL
-.if P_FAMILY_SNORUNT == TRUE
 	cry Cry_Snorunt
 	cry Cry_Glalie
 	cry Cry_Froslass
-.endif @ P_FAMILY_SNORUNT
-.if P_FAMILY_SPHEAL == TRUE
 	cry Cry_Spheal
 	cry Cry_Sealeo
 	cry Cry_Walrein
-.endif @ P_FAMILY_SPHEAL
-.if P_FAMILY_CLAMPERL == TRUE
 	cry Cry_Clamperl
 	cry Cry_Huntail
 	cry Cry_Gorebyss
-.endif @ P_FAMILY_CLAMPERL
-.if P_FAMILY_RELICANTH == TRUE
 	cry Cry_Relicanth
-.endif @ P_FAMILY_RELICANTH
-.if P_FAMILY_LUVDISC == TRUE
 	cry Cry_Luvdisc
-.endif @ P_FAMILY_LUVDISC
-.if P_FAMILY_BAGON == TRUE
 	cry Cry_Bagon
 	cry Cry_Shelgon
 	cry Cry_Salamence
-.endif @ P_FAMILY_BAGON
-.if P_FAMILY_BELDUM == TRUE
 	cry Cry_Beldum
 	cry Cry_Metang
 	cry Cry_Metagross
-.endif @ P_FAMILY_BELDUM
-.if P_FAMILY_REGIROCK == TRUE
 	cry Cry_Regirock
-.endif @ P_FAMILY_REGIROCK
-.if P_FAMILY_REGICE == TRUE
 	cry Cry_Regice
-.endif @ P_FAMILY_REGICE
-.if P_FAMILY_REGISTEEL == TRUE
 	cry Cry_Registeel
-.endif @ P_FAMILY_REGISTEEL
-.if P_FAMILY_LATIAS == TRUE
 	cry Cry_Latias
-.endif @ P_FAMILY_LATIAS
-.if P_FAMILY_LATIOS == TRUE
 	cry Cry_Latios
-.endif @ P_FAMILY_LATIOS
-.if P_FAMILY_KYOGRE == TRUE
 	cry Cry_Kyogre
-.endif @ P_FAMILY_KYOGRE
-.if P_FAMILY_GROUDON == TRUE
 	cry Cry_Groudon
-.endif @ P_FAMILY_GROUDON
-.if P_FAMILY_RAYQUAZA == TRUE
 	cry Cry_Rayquaza
-.endif @ P_FAMILY_RAYQUAZA
-.if P_FAMILY_JIRACHI == TRUE
 	cry Cry_Jirachi
-.endif @ P_FAMILY_JIRACHI
-.if P_FAMILY_DEOXYS == TRUE
 	cry Cry_Deoxys
-.endif @ P_FAMILY_DEOXYS
-.if P_FAMILY_TURTWIG == TRUE
 	cry Cry_Turtwig
 	cry Cry_Grotle
 	cry Cry_Torterra
-.endif @ P_FAMILY_TURTWIG
-.if P_FAMILY_CHIMCHAR == TRUE
 	cry Cry_Chimchar
 	cry Cry_Monferno
 	cry Cry_Infernape
-.endif @ P_FAMILY_CHIMCHAR
-.if P_FAMILY_PIPLUP == TRUE
 	cry Cry_Piplup
 	cry Cry_Prinplup
 	cry Cry_Empoleon
-.endif @ P_FAMILY_PIPLUP
-.if P_FAMILY_STARLY == TRUE
 	cry Cry_Starly
 	cry Cry_Staravia
 	cry Cry_Staraptor
-.endif @ P_FAMILY_STARLY
-.if P_FAMILY_BIDOOF == TRUE
 	cry Cry_Bidoof
 	cry Cry_Bibarel
-.endif @ P_FAMILY_BIDOOF
-.if P_FAMILY_KRICKETOT == TRUE
 	cry Cry_Kricketot
 	cry Cry_Kricketune
-.endif @ P_FAMILY_KRICKETOT
-.if P_FAMILY_SHINX == TRUE
 	cry Cry_Shinx
 	cry Cry_Luxio
 	cry Cry_Luxray
-.endif @ P_FAMILY_SHINX
-.if P_FAMILY_CRANIDOS == TRUE
 	cry Cry_Cranidos
 	cry Cry_Rampardos
-.endif @ P_FAMILY_CRANIDOS
-.if P_FAMILY_SHIELDON == TRUE
 	cry Cry_Shieldon
 	cry Cry_Bastiodon
-.endif @ P_FAMILY_SHIELDON
-.if P_FAMILY_BURMY == TRUE
-	cry Cry_Burmy
-	cry Cry_Wormadam
-	cry Cry_Mothim
-.endif @ P_FAMILY_BURMY
-.if P_FAMILY_COMBEE == TRUE
 	cry Cry_Combee
 	cry Cry_Vespiquen
-.endif @ P_FAMILY_COMBEE
-.if P_FAMILY_PACHIRISU == TRUE
 	cry Cry_Pachirisu
-.endif @ P_FAMILY_PACHIRISU
-.if P_FAMILY_BUIZEL == TRUE
 	cry Cry_Buizel
 	cry Cry_Floatzel
-.endif @ P_FAMILY_BUIZEL
-.if P_FAMILY_CHERUBI == TRUE
 	cry Cry_Cherubi
 	cry Cry_Cherrim
-.endif @ P_FAMILY_CHERUBI
-.if P_FAMILY_SHELLOS == TRUE
 	cry Cry_Shellos
 	cry Cry_Gastrodon
-.endif @ P_FAMILY_SHELLOS
-.if P_FAMILY_DRIFLOON == TRUE
 	cry Cry_Drifloon
 	cry Cry_Drifblim
-.endif @ P_FAMILY_DRIFLOON
-.if P_FAMILY_BUNEARY == TRUE
 	cry Cry_Buneary
 	cry Cry_Lopunny
-.endif @ P_FAMILY_BUNEARY
-.if P_FAMILY_GLAMEOW == TRUE
-	cry Cry_Glameow
-	cry Cry_Purugly
-.endif @ P_FAMILY_GLAMEOW
-.if P_FAMILY_STUNKY == TRUE
-	cry Cry_Stunky
-	cry Cry_Skuntank
-.endif @ P_FAMILY_STUNKY
-.if P_FAMILY_BRONZOR == TRUE
 	cry Cry_Bronzor
 	cry Cry_Bronzong
-.endif @ P_FAMILY_BRONZOR
-.if P_FAMILY_CHATOT == TRUE
-	cry Cry_Chatot
-.endif @ P_FAMILY_CHATOT
-.if P_FAMILY_SPIRITOMB == TRUE
-	cry Cry_Spiritomb
-.endif @ P_FAMILY_SPIRITOMB
-.if P_FAMILY_GIBLE == TRUE
 	cry Cry_Gible
 	cry Cry_Gabite
 	cry Cry_Garchomp
-.endif @ P_FAMILY_GIBLE
-.if P_FAMILY_RIOLU == TRUE
 	cry Cry_Riolu
 	cry Cry_Lucario
-.endif @ P_FAMILY_RIOLU
-.if P_FAMILY_HIPPOPOTAS == TRUE
 	cry Cry_Hippopotas
 	cry Cry_Hippowdon
-.endif @ P_FAMILY_HIPPOPOTAS
-.if P_FAMILY_SKORUPI == TRUE
 	cry Cry_Skorupi
 	cry Cry_Drapion
-.endif @ P_FAMILY_SKORUPI
-.if P_FAMILY_CROAGUNK == TRUE
 	cry Cry_Croagunk
 	cry Cry_Toxicroak
-.endif @ P_FAMILY_CROAGUNK
-.if P_FAMILY_CARNIVINE == TRUE
-	cry Cry_Carnivine
-.endif @ P_FAMILY_CARNIVINE
-.if P_FAMILY_FINNEON == TRUE
-	cry Cry_Finneon
-	cry Cry_Lumineon
-.endif @ P_FAMILY_FINNEON
-.if P_FAMILY_SNOVER == TRUE
 	cry Cry_Snover
 	cry Cry_Abomasnow
-.endif @ P_FAMILY_SNOVER
-.if P_FAMILY_ROTOM == TRUE
 	cry Cry_Rotom
-.endif @ P_FAMILY_ROTOM
-.if P_FAMILY_HEATRAN == TRUE
 	cry Cry_Heatran
-.endif @ P_FAMILY_HEATRAN
-.if P_FAMILY_REGIGIGAS == TRUE
 	cry Cry_Regigigas
-.endif @ P_FAMILY_REGIGIGAS
-.if P_FAMILY_SNIVY == TRUE
 	cry Cry_Snivy
 	cry Cry_Servine
 	cry Cry_Serperior
-.endif @ P_FAMILY_SNIVY
-.if P_FAMILY_TEPIG == TRUE
 	cry Cry_Tepig
 	cry Cry_Pignite
 	cry Cry_Emboar
-.endif @ P_FAMILY_TEPIG
 	cry Cry_Oshawott
 	cry Cry_Dewott
 	cry Cry_Samurott
-.if P_FAMILY_BLITZLE == TRUE
 	cry Cry_Blitzle
 	cry Cry_Zebstrika
-.endif @ P_FAMILY_BLITZLE
-.if P_FAMILY_ROGGENROLA == TRUE
-	cry Cry_Roggenrola
-	cry Cry_Boldore
-	cry Cry_Gigalith
-.endif @ P_FAMILY_ROGGENROLA
-.if P_FAMILY_WOOBAT == TRUE
-	cry Cry_Woobat
-	cry Cry_Swoobat
-.endif @ P_FAMILY_WOOBAT
-.if P_FAMILY_DRILBUR == TRUE
 	cry Cry_Drilbur
 	cry Cry_Excadrill
-.endif @ P_FAMILY_DRILBUR
-.if P_FAMILY_AUDINO == TRUE
-	cry Cry_Audino
-.endif @ P_FAMILY_AUDINO
-.if P_FAMILY_TIMBURR == TRUE
 	cry Cry_Timburr
 	cry Cry_Gurdurr
 	cry Cry_Conkeldurr
-.endif @ P_FAMILY_TIMBURR
-.if P_FAMILY_COTTONEE == TRUE
-	cry Cry_Cottonee
-	cry Cry_Whimsicott
-.endif @ P_FAMILY_COTTONEE
-.if P_FAMILY_PETILIL == TRUE
-	cry Cry_Petilil
-	cry Cry_Lilligant
-.endif @ P_FAMILY_PETILIL
-.if P_FAMILY_SANDILE == TRUE
 	cry Cry_Sandile
 	cry Cry_Krokorok
 	cry Cry_Krookodile
-.endif @ P_FAMILY_SANDILE
-.if P_FAMILY_DARUMAKA == TRUE
 	cry Cry_Darumaka
 	cry Cry_Darmanitan
-.endif @ P_FAMILY_DARUMAKA
-.if P_FAMILY_MARACTUS == TRUE
-	cry Cry_Maractus
-.endif @ P_FAMILY_MARACTUS
-.if P_FAMILY_DWEBBLE == TRUE
-	cry Cry_Dwebble
-	cry Cry_Crustle
-.endif @ P_FAMILY_DWEBBLE
-.if P_FAMILY_SCRAGGY == TRUE
 	cry Cry_Scraggy
 	cry Cry_Scrafty
-.endif @ P_FAMILY_SCRAGGY
-.if P_FAMILY_SIGILYPH == TRUE
-	cry Cry_Sigilyph
-.endif @ P_FAMILY_SIGILYPH
-.if P_FAMILY_YAMASK == TRUE
 	cry Cry_Yamask
 	cry Cry_Cofagrigus
-.endif @ P_FAMILY_YAMASK
-.if P_FAMILY_ZORUA == TRUE
 	cry Cry_Zorua
 	cry Cry_Zoroark
-.endif @ P_FAMILY_ZORUA
-.if P_FAMILY_MINCCINO == TRUE
-	cry Cry_Minccino
-	cry Cry_Cinccino
-.endif @ P_FAMILY_MINCCINO
-.if P_FAMILY_GOTHITA == TRUE
 	cry Cry_Gothita
 	cry Cry_Gothorita
 	cry Cry_Gothitelle
-.endif @ P_FAMILY_GOTHITA
-.if P_FAMILY_SOLOSIS == TRUE
-	cry Cry_Solosis
-	cry Cry_Duosion
-	cry Cry_Reuniclus
-.endif @ P_FAMILY_SOLOSIS
-.if P_FAMILY_DUCKLETT == TRUE
-	cry Cry_Ducklett
-	cry Cry_Swanna
-.endif @ P_FAMILY_DUCKLETT
-.if P_FAMILY_VANILLITE == TRUE
-	cry Cry_Vanillite
-	cry Cry_Vanillish
-	cry Cry_Vanilluxe
-.endif @ P_FAMILY_VANILLITE
-.if P_FAMILY_KARRABLAST == TRUE
-	cry Cry_Karrablast
-	cry Cry_Escavalier
-.endif @ P_FAMILY_KARRABLAST
-.if P_FAMILY_FOONGUS == TRUE
 	cry Cry_Foongus
 	cry Cry_Amoonguss
-.endif @ P_FAMILY_FOONGUS
-.if P_FAMILY_FRILLISH == TRUE
 	cry Cry_Frillish
 	cry Cry_Jellicent
-.endif @ P_FAMILY_FRILLISH
-.if P_FAMILY_JOLTIK == TRUE
 	cry Cry_Joltik
 	cry Cry_Galvantula
-.endif @ P_FAMILY_JOLTIK
-.if P_FAMILY_FERROSEED == TRUE
 	cry Cry_Ferroseed
 	cry Cry_Ferrothorn
-.endif @ P_FAMILY_FERROSEED
-.if P_FAMILY_KLINK == TRUE
-	cry Cry_Klink
-	cry Cry_Klang
-	cry Cry_Klinklang
-.endif @ P_FAMILY_KLINK
-.if P_FAMILY_TYNAMO == TRUE
-	cry Cry_Tynamo
-	cry Cry_Eelektrik
-	cry Cry_Eelektross
-.endif @ P_FAMILY_TYNAMO
-.if P_FAMILY_ELGYEM == TRUE
 	cry Cry_Elgyem
 	cry Cry_Beheeyem
-.endif @ P_FAMILY_ELGYEM
-.if P_FAMILY_LITWICK == TRUE
 	cry Cry_Litwick
 	cry Cry_Lampent
 	cry Cry_Chandelure
-.endif @ P_FAMILY_LITWICK
-.if P_FAMILY_AXEW == TRUE
 	cry Cry_Axew
 	cry Cry_Fraxure
 	cry Cry_Haxorus
-.endif @ P_FAMILY_AXEW
-.if P_FAMILY_CUBCHOO == TRUE
 	cry Cry_Cubchoo
 	cry Cry_Beartic
-.endif @ P_FAMILY_CUBCHOO
-.if P_FAMILY_CRYOGONAL == TRUE
-	cry Cry_Cryogonal
-.endif @ P_FAMILY_CRYOGONAL
-.if P_FAMILY_GOLETT == TRUE
 	cry Cry_Golett
 	cry Cry_Golurk
-.endif @ P_FAMILY_GOLETT
-.if P_FAMILY_PAWNIARD == TRUE
 	cry Cry_Pawniard
 	cry Cry_Bisharp
-.endif @ P_FAMILY_PAWNIARD
-.if P_FAMILY_BOUFFALANT == TRUE
-	cry Cry_Bouffalant
-.endif @ P_FAMILY_BOUFFALANT
-.if P_FAMILY_RUFFLET == TRUE
 	cry Cry_Rufflet
 	cry Cry_Braviary
-.endif @ P_FAMILY_RUFFLET
-.if P_FAMILY_VULLABY == TRUE
 	cry Cry_Vullaby
 	cry Cry_Mandibuzz
-.endif @ P_FAMILY_VULLABY
-.if P_FAMILY_DEINO == TRUE
 	cry Cry_Deino
 	cry Cry_Zweilous
 	cry Cry_Hydreigon
-.endif @ P_FAMILY_DEINO
-.if P_FAMILY_LARVESTA == TRUE
 	cry Cry_Larvesta
 	cry Cry_Volcarona
-.endif @ P_FAMILY_LARVESTA
-.if P_FAMILY_CHESPIN == TRUE
 	cry Cry_Chespin
 	cry Cry_Quilladin
 	cry Cry_Chesnaught
-.endif @ P_FAMILY_CHESPIN
 	cry Cry_Fennekin
 	cry Cry_Braixen
 	cry Cry_Delphox
-.if P_FAMILY_FROAKIE == TRUE
 	cry Cry_Froakie
 	cry Cry_Frogadier
 	cry Cry_Greninja
-.endif @ P_FAMILY_FROAKIE
-.if P_FAMILY_BUNNELBY == TRUE
 	cry Cry_Bunnelby
 	cry Cry_Diggersby
-.endif @ P_FAMILY_BUNNELBY
-.if P_FAMILY_FLETCHLING == TRUE
 	cry Cry_Fletchling
 	cry Cry_Fletchinder
 	cry Cry_Talonflame
-.endif @ P_FAMILY_FLETCHLING
-.if P_FAMILY_SCATTERBUG == TRUE
-	cry Cry_Scatterbug
-	cry Cry_Spewpa
-	cry Cry_Vivillon
-.endif @ P_FAMILY_SCATTERBUG
-.if P_FAMILY_FLABEBE == TRUE
-	cry Cry_Flabebe
-	cry Cry_Floette
-	cry Cry_FloetteEternalFlower
-	cry Cry_Florges
-.endif @ P_FAMILY_FLABEBE
-.if P_FAMILY_SKIDDO == TRUE
 	cry Cry_Skiddo
 	cry Cry_Gogoat
-.endif @ P_FAMILY_SKIDDO
-.if P_FAMILY_PANCHAM == TRUE
 	cry Cry_Pancham
 	cry Cry_Pangoro
-.endif @ P_FAMILY_PANCHAM
-.if P_FAMILY_ESPURR == TRUE
-	cry Cry_Espurr
-	cry Cry_Meowstic
-.endif @ P_FAMILY_ESPURR
-.if P_FAMILY_HONEDGE == TRUE
 	cry Cry_Honedge
 	cry Cry_Doublade
 	cry Cry_Aegislash
-.endif @ P_FAMILY_HONEDGE
-.if P_FAMILY_TYRUNT == TRUE
 	cry Cry_Tyrunt
 	cry Cry_Tyrantrum
-.endif @ P_FAMILY_TYRUNT
-.if P_FAMILY_AMAURA == TRUE
 	cry Cry_Amaura
 	cry Cry_Aurorus
-.endif @ P_FAMILY_AMAURA
-.if P_FAMILY_CARBINK == TRUE
-	cry Cry_Carbink
-.endif @ P_FAMILY_CARBINK
-.if P_FAMILY_GOOMY == TRUE
 	cry Cry_Goomy
 	cry Cry_Sliggoo
 	cry Cry_Goodra
-.endif @ P_FAMILY_GOOMY
-.if P_FAMILY_PHANTUMP == TRUE
 	cry Cry_Phantump
 	cry Cry_Trevenant
-.endif @ P_FAMILY_PHANTUMP
-.if P_FAMILY_DIANCIE == TRUE
+	cry Cry_Carbink
 	cry Cry_Diancie
-.endif @ P_FAMILY_DIANCIE
-.if P_FAMILY_ROWLET == TRUE
 	cry Cry_Rowlet
 	cry Cry_Dartrix
 	cry Cry_Decidueye
-.endif @ P_FAMILY_ROWLET
-.if P_FAMILY_LITTEN == TRUE
 	cry Cry_Litten
 	cry Cry_Torracat
 	cry Cry_Incineroar
-.endif @ P_FAMILY_LITTEN
-.if P_FAMILY_POPPLIO == TRUE
 	cry Cry_Popplio
 	cry Cry_Brionne
 	cry Cry_Primarina
-.endif @ P_FAMILY_POPPLIO
-.if P_FAMILY_ROCKRUFF == TRUE
 	cry Cry_Rockruff
 	cry Cry_LycanrocMidday
 	cry Cry_LycanrocMidnight
 	cry Cry_LycanrocDusk
-.endif @ P_FAMILY_ROCKRUFF
-.if P_FAMILY_SANDYGAST == TRUE
 	cry Cry_Sandygast
 	cry Cry_Palossand
-.endif @ P_FAMILY_SANDYGAST
-.if P_FAMILY_MIMIKYU == TRUE
 	cry Cry_Mimikyu
-.endif @ P_FAMILY_MIMIKYU
-.if P_FAMILY_JANGMO_O == TRUE
 	cry Cry_JangmoO
 	cry Cry_HakamoO
 	cry Cry_KommoO
-.endif @ P_FAMILY_JANGMO_O
-.if P_FAMILY_ROOKIDEE == TRUE
 	cry Cry_Rookidee
 	cry Cry_Corvisquire
 	cry Cry_Corviknight
-.endif @ P_FAMILY_ROOKIDEE
-.if P_FAMILY_BLIPBUG == TRUE
 	cry Cry_Blipbug
 	cry Cry_Dottler
 	cry Cry_Orbeetle
-.endif @ P_FAMILY_BLIPBUG
-.if P_FAMILY_TOXEL == TRUE
 	cry Cry_Toxel
 	cry Cry_ToxtricityAmped
 	cry Cry_ToxtricityLowKey
-.endif @ P_FAMILY_TOXEL
-.if P_FAMILY_SNOM == TRUE
 	cry Cry_Snom
 	cry Cry_Frosmoth
-.endif @ P_FAMILY_SNOM
-.if P_FAMILY_DREEPY == TRUE
 	cry Cry_Dreepy
 	cry Cry_Drakloak
 	cry Cry_Dragapult
-.endif @ P_FAMILY_DREEPY
-.if P_FAMILY_REGIELEKI == TRUE
 	cry Cry_Regieleki
-.endif @ P_FAMILY_REGIELEKI
-.if P_FAMILY_REGIDRAGO == TRUE
 	cry Cry_Regidrago
-.endif @ P_FAMILY_REGIDRAGO
-.if P_FAMILY_GLIMMET == TRUE
 	cry Cry_Glimmet
 	cry Cry_Glimmora
-.endif @ P_FAMILY_GLIMMET
-.if P_FAMILY_GREAVARD == TRUE
 	cry Cry_Greavard
 	cry Cry_Houndstone
-.endif @ P_FAMILY_GREAVARD
 
 	.align 2
 gCryTable_Reverse::
-
-	.align 2
+	cry_reverse Cry_Bulbasaur
+	cry_reverse Cry_Ivysaur
+	cry_reverse Cry_Venusaur
+	cry_reverse Cry_Charmander
+	cry_reverse Cry_Charmeleon
+	cry_reverse Cry_Charizard
+	cry_reverse Cry_Squirtle
+	cry_reverse Cry_Wartortle
+	cry_reverse Cry_Blastoise
+	cry_reverse Cry_Caterpie
+	cry_reverse Cry_Metapod
+	cry_reverse Cry_Butterfree
+	cry_reverse Cry_Weedle
+	cry_reverse Cry_Kakuna
+	cry_reverse Cry_Beedrill
+	cry_reverse Cry_Pidgey
+	cry_reverse Cry_Pidgeotto
+	cry_reverse Cry_Pidgeot
+	cry_reverse Cry_Rattata
+	cry_reverse Cry_Raticate
+	cry_reverse Cry_Spearow
+	cry_reverse Cry_Fearow
+	cry_reverse Cry_Ekans
+	cry_reverse Cry_Arbok
+	cry_reverse Cry_Pichu
+	cry_reverse Cry_Pikachu
+	cry_reverse Cry_Raichu
+	cry_reverse Cry_Sandshrew
+	cry_reverse Cry_Sandslash
+	cry_reverse Cry_NidoranF
+	cry_reverse Cry_Nidorina
+	cry_reverse Cry_Nidoqueen
+	cry_reverse Cry_NidoranM
+	cry_reverse Cry_Nidorino
+	cry_reverse Cry_Nidoking
+	cry_reverse Cry_Cleffa
+	cry_reverse Cry_Clefairy
+	cry_reverse Cry_Clefable
+	cry_reverse Cry_Vulpix
+	cry_reverse Cry_Ninetales
+	cry_reverse Cry_Igglybuff
+	cry_reverse Cry_Jigglypuff
+	cry_reverse Cry_Wigglytuff
+	cry_reverse Cry_Zubat
+	cry_reverse Cry_Golbat
+	cry_reverse Cry_Crobat
+	cry_reverse Cry_Oddish
+	cry_reverse Cry_Gloom
+	cry_reverse Cry_Vileplume
+	cry_reverse Cry_Bellossom
+	cry_reverse Cry_Paras
+	cry_reverse Cry_Parasect
+	cry_reverse Cry_Diglett
+	cry_reverse Cry_Dugtrio
+	cry_reverse Cry_Meowth
+	cry_reverse Cry_Persian
+	cry_reverse Cry_Psyduck
+	cry_reverse Cry_Golduck
+	cry_reverse Cry_Mankey
+	cry_reverse Cry_Primeape
+	cry_reverse Cry_Annihilape
+	cry_reverse Cry_Growlithe
+	cry_reverse Cry_Arcanine
+	cry_reverse Cry_Poliwag
+	cry_reverse Cry_Poliwhirl
+	cry_reverse Cry_Poliwrath
+	cry_reverse Cry_Politoed
+	cry_reverse Cry_Abra
+	cry_reverse Cry_Kadabra
+	cry_reverse Cry_Alakazam
+	cry_reverse Cry_Machop
+	cry_reverse Cry_Machoke
+	cry_reverse Cry_Machamp
+	cry_reverse Cry_Bellsprout
+	cry_reverse Cry_Weepinbell
+	cry_reverse Cry_Victreebel
+	cry_reverse Cry_Tentacool
+	cry_reverse Cry_Tentacruel
+	cry_reverse Cry_Geodude
+	cry_reverse Cry_Graveler
+	cry_reverse Cry_Golem
+	cry_reverse Cry_Ponyta
+	cry_reverse Cry_Rapidash
+	cry_reverse Cry_Slowpoke
+	cry_reverse Cry_Slowbro
+	cry_reverse Cry_Slowking
+	cry_reverse Cry_Magnemite
+	cry_reverse Cry_Magneton
+	cry_reverse Cry_Magnezone
+	cry_reverse Cry_Doduo
+	cry_reverse Cry_Dodrio
+	cry_reverse Cry_Seel
+	cry_reverse Cry_Dewgong
+	cry_reverse Cry_Grimer
+	cry_reverse Cry_Muk
+	cry_reverse Cry_Shellder
+	cry_reverse Cry_Cloyster
+	cry_reverse Cry_Gastly
+	cry_reverse Cry_Haunter
+	cry_reverse Cry_Gengar
+	cry_reverse Cry_Onix
+	cry_reverse Cry_Steelix
+	cry_reverse Cry_Drowzee
+	cry_reverse Cry_Hypno
+	cry_reverse Cry_Krabby
+	cry_reverse Cry_Kingler
+	cry_reverse Cry_Voltorb
+	cry_reverse Cry_Electrode
+	cry_reverse Cry_Exeggcute
+	cry_reverse Cry_Exeggutor
+	cry_reverse Cry_Cubone
+	cry_reverse Cry_Marowak
+	cry_reverse Cry_Tyrogue
+	cry_reverse Cry_Hitmonlee
+	cry_reverse Cry_Hitmonchan
+	cry_reverse Cry_Hitmontop
+	cry_reverse Cry_Lickitung
+	cry_reverse Cry_Lickilicky
+	cry_reverse Cry_Koffing
+	cry_reverse Cry_Weezing
+	cry_reverse Cry_Rhyhorn
+	cry_reverse Cry_Rhydon
+	cry_reverse Cry_Rhyperior
+	cry_reverse Cry_Tangela
+	cry_reverse Cry_Tangrowth
+	cry_reverse Cry_Kangaskhan
+	cry_reverse Cry_Horsea
+	cry_reverse Cry_Seadra
+	cry_reverse Cry_Kingdra
+	cry_reverse Cry_Goldeen
+	cry_reverse Cry_Seaking
+	cry_reverse Cry_Staryu
+	cry_reverse Cry_Starmie
+	cry_reverse Cry_MimeJr
+	cry_reverse Cry_MrMime
+	cry_reverse Cry_Scyther
+	cry_reverse Cry_Scizor
+	cry_reverse Cry_Kleavor
+	cry_reverse Cry_Smoochum
+	cry_reverse Cry_Jynx
+	cry_reverse Cry_Elekid
+	cry_reverse Cry_Electabuzz
+	cry_reverse Cry_Electivire
+	cry_reverse Cry_Magby
+	cry_reverse Cry_Magmar
+	cry_reverse Cry_Magmortar
+	cry_reverse Cry_Pinsir
+	cry_reverse Cry_Tauros
+	cry_reverse Cry_Magikarp
+	cry_reverse Cry_Gyarados
+	cry_reverse Cry_Lapras
+	cry_reverse Cry_Eevee
+	cry_reverse Cry_Vaporeon
+	cry_reverse Cry_Jolteon
+	cry_reverse Cry_Flareon
+	cry_reverse Cry_Espeon
+	cry_reverse Cry_Umbreon
+	cry_reverse Cry_Leafeon
+	cry_reverse Cry_Glaceon
+	cry_reverse Cry_Sylveon
+	cry_reverse Cry_Porygon
+	cry_reverse Cry_Porygon2
+	cry_reverse Cry_PorygonZ
+	cry_reverse Cry_Omanyte
+	cry_reverse Cry_Omastar
+	cry_reverse Cry_Kabuto
+	cry_reverse Cry_Kabutops
+	cry_reverse Cry_Aerodactyl
+	cry_reverse Cry_Munchlax
+	cry_reverse Cry_Snorlax
+	cry_reverse Cry_Articuno
+	cry_reverse Cry_Zapdos
+	cry_reverse Cry_Moltres
+	cry_reverse Cry_Dratini
+	cry_reverse Cry_Dragonair
+	cry_reverse Cry_Dragonite
+	cry_reverse Cry_Mewtwo
+	cry_reverse Cry_Mew
+	cry_reverse Cry_Chikorita
+	cry_reverse Cry_Bayleef
+	cry_reverse Cry_Meganium
+	cry_reverse Cry_Cyndaquil
+	cry_reverse Cry_Quilava
+	cry_reverse Cry_Typhlosion
+	cry_reverse Cry_Totodile
+	cry_reverse Cry_Croconaw
+	cry_reverse Cry_Feraligatr
+	cry_reverse Cry_Sentret
+	cry_reverse Cry_Furret
+	cry_reverse Cry_Hoothoot
+	cry_reverse Cry_Noctowl
+	cry_reverse Cry_Ledyba
+	cry_reverse Cry_Ledian
+	cry_reverse Cry_Spinarak
+	cry_reverse Cry_Ariados
+	cry_reverse Cry_Chinchou
+	cry_reverse Cry_Lanturn
+	cry_reverse Cry_Togepi
+	cry_reverse Cry_Togetic
+	cry_reverse Cry_Togekiss
+	cry_reverse Cry_Natu
+	cry_reverse Cry_Xatu
+	cry_reverse Cry_Mareep
+	cry_reverse Cry_Flaaffy
+	cry_reverse Cry_Ampharos
+	cry_reverse Cry_Azurill
+	cry_reverse Cry_Marill
+	cry_reverse Cry_Azumarill
+	cry_reverse Cry_Bonsly
+	cry_reverse Cry_Sudowoodo
+	cry_reverse Cry_Hoppip
+	cry_reverse Cry_Skiploom
+	cry_reverse Cry_Jumpluff
+	cry_reverse Cry_Aipom
+	cry_reverse Cry_Ambipom
+	cry_reverse Cry_Sunkern
+	cry_reverse Cry_Sunflora
+	cry_reverse Cry_Yanma
+	cry_reverse Cry_Yanmega
+	cry_reverse Cry_Wooper
+	cry_reverse Cry_Quagsire
+	cry_reverse Cry_Clodsire
+	cry_reverse Cry_Murkrow
+	cry_reverse Cry_Honchkrow
+	cry_reverse Cry_Misdreavus
+	cry_reverse Cry_Mismagius
+	cry_reverse Cry_Girafarig
+	cry_reverse Cry_Pineco
+	cry_reverse Cry_Forretress
+	cry_reverse Cry_Gligar
+	cry_reverse Cry_Gliscor
+	cry_reverse Cry_Snubbull
+	cry_reverse Cry_Granbull
+	cry_reverse Cry_Heracross
+	cry_reverse Cry_Sneasel
+	cry_reverse Cry_Weavile
+	cry_reverse Cry_Sneasler
+	cry_reverse Cry_Teddiursa
+	cry_reverse Cry_Ursaring
+	cry_reverse Cry_Slugma
+	cry_reverse Cry_Magcargo
+	cry_reverse Cry_Swinub
+	cry_reverse Cry_Piloswine
+	cry_reverse Cry_Mamoswine
+	cry_reverse Cry_Corsola
+	cry_reverse Cry_Remoraid
+	cry_reverse Cry_Octillery
+	cry_reverse Cry_Delibird
+	cry_reverse Cry_Houndour
+	cry_reverse Cry_Houndoom
+	cry_reverse Cry_Phanpy
+	cry_reverse Cry_Donphan
+	cry_reverse Cry_Stantler
+	cry_reverse Cry_Wyrdeer
+	cry_reverse Cry_Miltank
+	cry_reverse Cry_Raikou
+	cry_reverse Cry_Entei
+	cry_reverse Cry_Suicune
+	cry_reverse Cry_Larvitar
+	cry_reverse Cry_Pupitar
+	cry_reverse Cry_Tyranitar
+	cry_reverse Cry_Lugia
+	cry_reverse Cry_HoOh
+	cry_reverse Cry_Celebi
+	cry_reverse Cry_Treecko
+	cry_reverse Cry_Grovyle
+	cry_reverse Cry_Sceptile
+	cry_reverse Cry_Torchic
+	cry_reverse Cry_Combusken
+	cry_reverse Cry_Blaziken
+	cry_reverse Cry_Mudkip
+	cry_reverse Cry_Marshtomp
+	cry_reverse Cry_Swampert
+	cry_reverse Cry_Poochyena
+	cry_reverse Cry_Mightyena
+	cry_reverse Cry_Zigzagoon
+	cry_reverse Cry_Linoone
+	cry_reverse Cry_Wurmple
+	cry_reverse Cry_Silcoon
+	cry_reverse Cry_Beautifly
+	cry_reverse Cry_Cascoon
+	cry_reverse Cry_Dustox
+	cry_reverse Cry_Lotad
+	cry_reverse Cry_Lombre
+	cry_reverse Cry_Ludicolo
+	cry_reverse Cry_Seedot
+	cry_reverse Cry_Nuzleaf
+	cry_reverse Cry_Shiftry
+	cry_reverse Cry_Taillow
+	cry_reverse Cry_Swellow
+	cry_reverse Cry_Wingull
+	cry_reverse Cry_Pelipper
+	cry_reverse Cry_Ralts
+	cry_reverse Cry_Kirlia
+	cry_reverse Cry_Gardevoir
+	cry_reverse Cry_Gallade
+	cry_reverse Cry_Surskit
+	cry_reverse Cry_Masquerain
+	cry_reverse Cry_Shroomish
+	cry_reverse Cry_Breloom
+	cry_reverse Cry_Slakoth
+	cry_reverse Cry_Vigoroth
+	cry_reverse Cry_Slaking
+	cry_reverse Cry_Nincada
+	cry_reverse Cry_Ninjask
+	cry_reverse Cry_Shedinja
+	cry_reverse Cry_Whismur
+	cry_reverse Cry_Loudred
+	cry_reverse Cry_Exploud
+	cry_reverse Cry_Makuhita
+	cry_reverse Cry_Hariyama
+	cry_reverse Cry_Nosepass
+	cry_reverse Cry_Probopass
+	cry_reverse Cry_Sableye
+	cry_reverse Cry_Mawile
+	cry_reverse Cry_Aron
+	cry_reverse Cry_Lairon
+	cry_reverse Cry_Aggron
+	cry_reverse Cry_Meditite
+	cry_reverse Cry_Medicham
+	cry_reverse Cry_Electrike
+	cry_reverse Cry_Manectric
+	cry_reverse Cry_Budew
+	cry_reverse Cry_Roselia
+	cry_reverse Cry_Roserade
+	cry_reverse Cry_Carvanha
+	cry_reverse Cry_Sharpedo
+	cry_reverse Cry_Wailmer
+	cry_reverse Cry_Wailord
+	cry_reverse Cry_Numel
+	cry_reverse Cry_Camerupt
+	cry_reverse Cry_Torkoal
+	cry_reverse Cry_Spoink
+	cry_reverse Cry_Grumpig
+	cry_reverse Cry_Trapinch
+	cry_reverse Cry_Vibrava
+	cry_reverse Cry_Flygon
+	cry_reverse Cry_Cacnea
+	cry_reverse Cry_Cacturne
+	cry_reverse Cry_Swablu
+	cry_reverse Cry_Altaria
+	cry_reverse Cry_Lunatone
+	cry_reverse Cry_Solrock
+	cry_reverse Cry_Baltoy
+	cry_reverse Cry_Claydol
+	cry_reverse Cry_Lileep
+	cry_reverse Cry_Cradily
+	cry_reverse Cry_Anorith
+	cry_reverse Cry_Armaldo
+	cry_reverse Cry_Feebas
+	cry_reverse Cry_Milotic
+	cry_reverse Cry_Castform
+	cry_reverse Cry_Kecleon
+	cry_reverse Cry_Duskull
+	cry_reverse Cry_Dusclops
+	cry_reverse Cry_Dusknoir
+	cry_reverse Cry_Tropius
+	cry_reverse Cry_Chingling
+	cry_reverse Cry_Chimecho
+	cry_reverse Cry_Absol
+	cry_reverse Cry_Snorunt
+	cry_reverse Cry_Glalie
+	cry_reverse Cry_Froslass
+	cry_reverse Cry_Spheal
+	cry_reverse Cry_Sealeo
+	cry_reverse Cry_Walrein
+	cry_reverse Cry_Clamperl
+	cry_reverse Cry_Huntail
+	cry_reverse Cry_Gorebyss
+	cry_reverse Cry_Relicanth
+	cry_reverse Cry_Luvdisc
+	cry_reverse Cry_Bagon
+	cry_reverse Cry_Shelgon
+	cry_reverse Cry_Salamence
+	cry_reverse Cry_Beldum
+	cry_reverse Cry_Metang
+	cry_reverse Cry_Metagross
+	cry_reverse Cry_Regirock
+	cry_reverse Cry_Regice
+	cry_reverse Cry_Registeel
+	cry_reverse Cry_Latias
+	cry_reverse Cry_Latios
+	cry_reverse Cry_Kyogre
+	cry_reverse Cry_Groudon
+	cry_reverse Cry_Rayquaza
+	cry_reverse Cry_Jirachi
+	cry_reverse Cry_Deoxys
+	cry_reverse Cry_Turtwig
+	cry_reverse Cry_Grotle
+	cry_reverse Cry_Torterra
+	cry_reverse Cry_Chimchar
+	cry_reverse Cry_Monferno
+	cry_reverse Cry_Infernape
+	cry_reverse Cry_Piplup
+	cry_reverse Cry_Prinplup
+	cry_reverse Cry_Empoleon
+	cry_reverse Cry_Starly
+	cry_reverse Cry_Staravia
+	cry_reverse Cry_Staraptor
+	cry_reverse Cry_Bidoof
+	cry_reverse Cry_Bibarel
+	cry_reverse Cry_Kricketot
+	cry_reverse Cry_Kricketune
+	cry_reverse Cry_Shinx
+	cry_reverse Cry_Luxio
+	cry_reverse Cry_Luxray
+	cry_reverse Cry_Cranidos
+	cry_reverse Cry_Rampardos
+	cry_reverse Cry_Shieldon
+	cry_reverse Cry_Bastiodon
+	cry_reverse Cry_Combee
+	cry_reverse Cry_Vespiquen
+	cry_reverse Cry_Pachirisu
+	cry_reverse Cry_Buizel
+	cry_reverse Cry_Floatzel
+	cry_reverse Cry_Cherubi
+	cry_reverse Cry_Cherrim
+	cry_reverse Cry_Shellos
+	cry_reverse Cry_Gastrodon
+	cry_reverse Cry_Drifloon
+	cry_reverse Cry_Drifblim
+	cry_reverse Cry_Buneary
+	cry_reverse Cry_Lopunny
+	cry_reverse Cry_Bronzor
+	cry_reverse Cry_Bronzong
+	cry_reverse Cry_Gible
+	cry_reverse Cry_Gabite
+	cry_reverse Cry_Garchomp
+	cry_reverse Cry_Riolu
+	cry_reverse Cry_Lucario
+	cry_reverse Cry_Hippopotas
+	cry_reverse Cry_Hippowdon
+	cry_reverse Cry_Skorupi
+	cry_reverse Cry_Drapion
+	cry_reverse Cry_Croagunk
+	cry_reverse Cry_Toxicroak
+	cry_reverse Cry_Snover
+	cry_reverse Cry_Abomasnow
+	cry_reverse Cry_Rotom
+	cry_reverse Cry_Heatran
+	cry_reverse Cry_Regigigas
+	cry_reverse Cry_Snivy
+	cry_reverse Cry_Servine
+	cry_reverse Cry_Serperior
+	cry_reverse Cry_Tepig
+	cry_reverse Cry_Pignite
+	cry_reverse Cry_Emboar
+	cry_reverse Cry_Oshawott
+	cry_reverse Cry_Dewott
+	cry_reverse Cry_Samurott
+	cry_reverse Cry_Blitzle
+	cry_reverse Cry_Zebstrika
+	cry_reverse Cry_Drilbur
+	cry_reverse Cry_Excadrill
+	cry_reverse Cry_Timburr
+	cry_reverse Cry_Gurdurr
+	cry_reverse Cry_Conkeldurr
+	cry_reverse Cry_Sandile
+	cry_reverse Cry_Krokorok
+	cry_reverse Cry_Krookodile
+	cry_reverse Cry_Darumaka
+	cry_reverse Cry_Darmanitan
+	cry_reverse Cry_Scraggy
+	cry_reverse Cry_Scrafty
+	cry_reverse Cry_Yamask
+	cry_reverse Cry_Cofagrigus
+	cry_reverse Cry_Zorua
+	cry_reverse Cry_Zoroark
+	cry_reverse Cry_Gothita
+	cry_reverse Cry_Gothorita
+	cry_reverse Cry_Gothitelle
+	cry_reverse Cry_Foongus
+	cry_reverse Cry_Amoonguss
+	cry_reverse Cry_Frillish
+	cry_reverse Cry_Jellicent
+	cry_reverse Cry_Joltik
+	cry_reverse Cry_Galvantula
+	cry_reverse Cry_Ferroseed
+	cry_reverse Cry_Ferrothorn
+	cry_reverse Cry_Elgyem
+	cry_reverse Cry_Beheeyem
+	cry_reverse Cry_Litwick
+	cry_reverse Cry_Lampent
+	cry_reverse Cry_Chandelure
+	cry_reverse Cry_Axew
+	cry_reverse Cry_Fraxure
+	cry_reverse Cry_Haxorus
+	cry_reverse Cry_Cubchoo
+	cry_reverse Cry_Beartic
+	cry_reverse Cry_Golett
+	cry_reverse Cry_Golurk
+	cry_reverse Cry_Pawniard
+	cry_reverse Cry_Bisharp
+	cry_reverse Cry_Rufflet
+	cry_reverse Cry_Braviary
+	cry_reverse Cry_Vullaby
+	cry_reverse Cry_Mandibuzz
+	cry_reverse Cry_Deino
+	cry_reverse Cry_Zweilous
+	cry_reverse Cry_Hydreigon
+	cry_reverse Cry_Larvesta
+	cry_reverse Cry_Volcarona
+	cry_reverse Cry_Chespin
+	cry_reverse Cry_Quilladin
+	cry_reverse Cry_Chesnaught
+	cry_reverse Cry_Fennekin
+	cry_reverse Cry_Braixen
+	cry_reverse Cry_Delphox
+	cry_reverse Cry_Froakie
+	cry_reverse Cry_Frogadier
+	cry_reverse Cry_Greninja
+	cry_reverse Cry_Bunnelby
+	cry_reverse Cry_Diggersby
+	cry_reverse Cry_Fletchling
+	cry_reverse Cry_Fletchinder
+	cry_reverse Cry_Talonflame
+	cry_reverse Cry_Skiddo
+	cry_reverse Cry_Gogoat
+	cry_reverse Cry_Pancham
+	cry_reverse Cry_Pangoro
+	cry_reverse Cry_Honedge
+	cry_reverse Cry_Doublade
+	cry_reverse Cry_Aegislash
+	cry_reverse Cry_Tyrunt
+	cry_reverse Cry_Tyrantrum
+	cry_reverse Cry_Amaura
+	cry_reverse Cry_Aurorus
+	cry_reverse Cry_Goomy
+	cry_reverse Cry_Sliggoo
+	cry_reverse Cry_Goodra
+	cry_reverse Cry_Phantump
+	cry_reverse Cry_Trevenant
+	cry_reverse Cry_Carbink
+	cry_reverse Cry_Diancie
+	cry_reverse Cry_Rowlet
+	cry_reverse Cry_Dartrix
+	cry_reverse Cry_Decidueye
+	cry_reverse Cry_Litten
+	cry_reverse Cry_Torracat
+	cry_reverse Cry_Incineroar
+	cry_reverse Cry_Popplio
+	cry_reverse Cry_Brionne
+	cry_reverse Cry_Primarina
+	cry_reverse Cry_Rockruff
+	cry_reverse Cry_LycanrocMidday
+	cry_reverse Cry_LycanrocMidnight
+	cry_reverse Cry_LycanrocDusk
+	cry_reverse Cry_Sandygast
+	cry_reverse Cry_Palossand
+	cry_reverse Cry_Mimikyu
+	cry_reverse Cry_JangmoO
+	cry_reverse Cry_HakamoO
+	cry_reverse Cry_KommoO
+	cry_reverse Cry_Rookidee
+	cry_reverse Cry_Corvisquire
+	cry_reverse Cry_Corviknight
+	cry_reverse Cry_Blipbug
+	cry_reverse Cry_Dottler
+	cry_reverse Cry_Orbeetle
+	cry_reverse Cry_Toxel
+	cry_reverse Cry_ToxtricityAmped
+	cry_reverse Cry_ToxtricityLowKey
+	cry_reverse Cry_Snom
+	cry_reverse Cry_Frosmoth
+	cry_reverse Cry_Dreepy
+	cry_reverse Cry_Drakloak
+	cry_reverse Cry_Dragapult
+	cry_reverse Cry_Regieleki
+	cry_reverse Cry_Regidrago
+	cry_reverse Cry_Glimmet
+	cry_reverse Cry_Glimmora
+	cry_reverse Cry_Greavard
+	cry_reverse Cry_Houndstone

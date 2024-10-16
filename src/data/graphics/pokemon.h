@@ -3238,20 +3238,6 @@ const u32 gObjectEventPic_Samurott[] = INCBIN_U32("graphics/pokemon/samurott/fol
     const u32 gObjectEventPic_Excadrill[] = INCBIN_U32("graphics/pokemon/excadrill/follower.4bpp");
 #endif //P_FAMILY_DRILBUR
 
-#if P_FAMILY_COTTONEE
-    const u32 gMonFrontPic_Cottonee[] = INCBIN_U32("graphics/pokemon/cottonee/anim_front.4bpp.lz");
-    const u32 gMonPalette_Cottonee[] = INCBIN_U32("graphics/pokemon/cottonee/normal.gbapal.lz");
-    const u32 gMonBackPic_Cottonee[] = INCBIN_U32("graphics/pokemon/cottonee/back.4bpp.lz");
-    const u32 gMonShinyPalette_Cottonee[] = INCBIN_U32("graphics/pokemon/cottonee/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Cottonee[] = INCBIN_U32("graphics/pokemon/cottonee/follower.4bpp");
-
-    const u32 gMonFrontPic_Whimsicott[] = INCBIN_U32("graphics/pokemon/whimsicott/anim_front.4bpp.lz");
-    const u32 gMonPalette_Whimsicott[] = INCBIN_U32("graphics/pokemon/whimsicott/normal.gbapal.lz");
-    const u32 gMonBackPic_Whimsicott[] = INCBIN_U32("graphics/pokemon/whimsicott/back.4bpp.lz");
-    const u32 gMonShinyPalette_Whimsicott[] = INCBIN_U32("graphics/pokemon/whimsicott/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Whimsicott[] = INCBIN_U32("graphics/pokemon/whimsicott/follower.4bpp");
-#endif //P_FAMILY_COTTONEE
-
 #if P_FAMILY_SANDILE
     const u32 gMonFrontPic_Sandile[] = INCBIN_U32("graphics/pokemon/sandile/anim_front.4bpp.lz");
     const u32 gMonPalette_Sandile[] = INCBIN_U32("graphics/pokemon/sandile/normal.gbapal.lz");
@@ -3539,14 +3525,6 @@ const u32 gObjectEventPic_Samurott[] = INCBIN_U32("graphics/pokemon/samurott/fol
     const u32 gMonShinyPalette_Beartic[] = INCBIN_U32("graphics/pokemon/beartic/shiny.gbapal.lz");
     const u32 gObjectEventPic_Beartic[] = INCBIN_U32("graphics/pokemon/beartic/follower.4bpp");
 #endif //P_FAMILY_CUBCHOO
-
-#if P_FAMILY_CRYOGONAL
-    const u32 gMonFrontPic_Cryogonal[] = INCBIN_U32("graphics/pokemon/cryogonal/anim_front.4bpp.lz");
-    const u32 gMonPalette_Cryogonal[] = INCBIN_U32("graphics/pokemon/cryogonal/normal.gbapal.lz");
-    const u32 gMonBackPic_Cryogonal[] = INCBIN_U32("graphics/pokemon/cryogonal/back.4bpp.lz");
-    const u32 gMonShinyPalette_Cryogonal[] = INCBIN_U32("graphics/pokemon/cryogonal/shiny.gbapal.lz");
-    const u32 gObjectEventPic_Cryogonal[] = INCBIN_U32("graphics/pokemon/cryogonal/follower.4bpp");
-#endif //P_FAMILY_CRYOGONAL
 
 #if P_FAMILY_GOLETT
     const u32 gMonFrontPic_Golett[] = INCBIN_U32("graphics/pokemon/golett/anim_front.4bpp.lz");
