@@ -3257,7 +3257,6 @@ static const union AnimCmd sAnim_Probopass[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_SABLEYE
 static const union AnimCmd sAnim_Sableye[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -3267,9 +3266,7 @@ static const union AnimCmd sAnim_Sableye[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SABLEYE
 
-#if P_FAMILY_MAWILE
 static const union AnimCmd sAnim_Mawile[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -3281,9 +3278,7 @@ static const union AnimCmd sAnim_Mawile[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_MAWILE
 
-#if P_FAMILY_ARON
 static const union AnimCmd sAnim_Aron[] =
 {
     ANIMCMD_FRAME(0, 33),
@@ -3311,9 +3306,7 @@ static const union AnimCmd sAnim_Aggron[] =
     ANIMCMD_FRAME(0, 11),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ARON
 
-#if P_FAMILY_MEDITITE
 static const union AnimCmd sAnim_Meditite[] =
 {
     ANIMCMD_FRAME(0, 22),
@@ -3333,9 +3326,7 @@ static const union AnimCmd sAnim_Medicham[] =
     ANIMCMD_FRAME(0, 11),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_MEDITITE
 
-#if P_FAMILY_ELECTRIKE
 static const union AnimCmd sAnim_Electrike[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -3355,9 +3346,7 @@ static const union AnimCmd sAnim_Manectric[] =
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ELECTRIKE
 
-#if P_FAMILY_ROSELIA
 static const union AnimCmd sAnim_Budew[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -3380,9 +3369,7 @@ static const union AnimCmd sAnim_Roserade[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ROSELIA
 
-#if P_FAMILY_CARVANHA
 static const union AnimCmd sAnim_Carvanha[] =
 {
     ANIMCMD_FRAME(0, 6),
@@ -3410,9 +3397,7 @@ static const union AnimCmd sAnim_Sharpedo[] =
     ANIMCMD_FRAME(0, 22),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CARVANHA
 
-#if P_FAMILY_WAILMER
 static const union AnimCmd sAnim_Wailmer[] =
 {
     ANIMCMD_FRAME(0, 22),
@@ -3432,9 +3417,7 @@ static const union AnimCmd sAnim_Wailord[] =
     ANIMCMD_FRAME(0, 33),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_WAILMER
 
-#if P_FAMILY_NUMEL
 static const union AnimCmd sAnim_Numel[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3456,9 +3439,7 @@ static const union AnimCmd sAnim_Camerupt[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_NUMEL
 
-#if P_FAMILY_TORKOAL
 static const union AnimCmd sAnim_Torkoal[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3468,9 +3449,7 @@ static const union AnimCmd sAnim_Torkoal[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TORKOAL
 
-#if P_FAMILY_SPOINK
 static const union AnimCmd sAnim_Spoink[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -3496,9 +3475,7 @@ static const union AnimCmd sAnim_Grumpig[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SPOINK
 
-#if P_FAMILY_TRAPINCH
 static const union AnimCmd sAnim_Trapinch[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3532,9 +3509,7 @@ static const union AnimCmd sAnim_Flygon[] =
     ANIMCMD_FRAME(0, 50),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TRAPINCH
 
-#if P_FAMILY_CACNEA
 static const union AnimCmd sAnim_Cacnea[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3560,9 +3535,7 @@ static const union AnimCmd sAnim_Cacturne[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CACNEA
 
-#if P_FAMILY_SWABLU
 static const union AnimCmd sAnim_Swablu[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -3584,9 +3557,7 @@ static const union AnimCmd sAnim_Altaria[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SWABLU
 
-#if P_FAMILY_BALTOY
 static const union AnimCmd sAnim_Baltoy[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3610,9 +3581,7 @@ static const union AnimCmd sAnim_Claydol[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BALTOY
 
-#if P_FAMILY_LILEEP
 static const union AnimCmd sAnim_Lileep[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3634,9 +3603,7 @@ static const union AnimCmd sAnim_Cradily[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LILEEP
 
-#if P_FAMILY_ANORITH
 static const union AnimCmd sAnim_Anorith[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3658,9 +3625,7 @@ static const union AnimCmd sAnim_Armaldo[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ANORITH
 
-#if P_FAMILY_FEEBAS
 static const union AnimCmd sAnim_Feebas[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3684,9 +3649,8 @@ static const union AnimCmd sAnim_Milotic[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FEEBAS
 
-#if P_FAMILY_CASTFORM
+
 static const union AnimCmd sAnim_CastformNormal[] =
 {
     ANIMCMD_FRAME(0, 12),
@@ -3728,9 +3692,7 @@ static const union AnimCmd sAnim_CastformSnowy[] =
     ANIMCMD_FRAME(0, 12),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CASTFORM
 
-#if P_FAMILY_KECLEON
 static const union AnimCmd sAnim_Kecleon[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -3740,9 +3702,8 @@ static const union AnimCmd sAnim_Kecleon[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_KECLEON
 
-#if P_FAMILY_DUSKULL
+
 static const union AnimCmd sAnim_Duskull[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3777,9 +3738,7 @@ static const union AnimCmd sAnim_Dusknoir[] =
     ANIMCMD_FRAME(0, 9),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DUSKULL
 
-#if P_FAMILY_TROPIUS
 static const union AnimCmd sAnim_Tropius[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3789,9 +3748,8 @@ static const union AnimCmd sAnim_Tropius[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TROPIUS
 
-#if P_FAMILY_CHIMECHO
+
 static const union AnimCmd sAnim_Chingling[] =
 {
     ANIMCMD_FRAME(1, 12),
@@ -3818,9 +3776,7 @@ static const union AnimCmd sAnim_Chimecho[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CHIMECHO
 
-#if P_FAMILY_ABSOL
 static const union AnimCmd sAnim_Absol[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3830,9 +3786,7 @@ static const union AnimCmd sAnim_Absol[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ABSOL
 
-#if P_FAMILY_SNORUNT
 static const union AnimCmd sAnim_Snorunt[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3860,9 +3814,7 @@ static const union AnimCmd sAnim_Froslass[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SNORUNT
 
-#if P_FAMILY_SPHEAL
 static const union AnimCmd sAnim_Spheal[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -3895,9 +3847,7 @@ static const union AnimCmd sAnim_Walrein[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SPHEAL
 
-#if P_FAMILY_CLAMPERL
 static const union AnimCmd sAnim_Clamperl[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3927,9 +3877,7 @@ static const union AnimCmd sAnim_Gorebyss[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CLAMPERL
 
-#if P_FAMILY_RELICANTH
 static const union AnimCmd sAnim_Relicanth[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3939,9 +3887,7 @@ static const union AnimCmd sAnim_Relicanth[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_RELICANTH
 
-#if P_FAMILY_LUVDISC
 static const union AnimCmd sAnim_Luvdisc[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3951,9 +3897,7 @@ static const union AnimCmd sAnim_Luvdisc[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LUVDISC
 
-#if P_FAMILY_BAGON
 static const union AnimCmd sAnim_Bagon[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -3983,9 +3927,7 @@ static const union AnimCmd sAnim_Salamence[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BAGON
 
-#if P_FAMILY_BELDUM
 static const union AnimCmd sAnim_Beldum[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4015,9 +3957,7 @@ static const union AnimCmd sAnim_Metagross[] =
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BELDUM
 
-#if P_FAMILY_REGIROCK
 static const union AnimCmd sAnim_Regirock[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4027,9 +3967,7 @@ static const union AnimCmd sAnim_Regirock[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_REGIROCK
 
-#if P_FAMILY_REGICE
 static const union AnimCmd sAnim_Regice[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -4039,9 +3977,7 @@ static const union AnimCmd sAnim_Regice[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_REGICE
 
-#if P_FAMILY_REGISTEEL
 static const union AnimCmd sAnim_Registeel[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4051,9 +3987,7 @@ static const union AnimCmd sAnim_Registeel[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_REGISTEEL
 
-#if P_FAMILY_LATIAS
 static const union AnimCmd sAnim_Latias[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4063,9 +3997,7 @@ static const union AnimCmd sAnim_Latias[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LATIAS
 
-#if P_FAMILY_LATIOS
 static const union AnimCmd sAnim_Latios[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4075,9 +4007,7 @@ static const union AnimCmd sAnim_Latios[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LATIOS
 
-#if P_FAMILY_KYOGRE
 static const union AnimCmd sAnim_Kyogre[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4087,9 +4017,7 @@ static const union AnimCmd sAnim_Kyogre[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_KYOGRE
 
-#if P_FAMILY_GROUDON
 static const union AnimCmd sAnim_Groudon[] =
 {
     ANIMCMD_FRAME(0, 11),
@@ -4099,9 +4027,7 @@ static const union AnimCmd sAnim_Groudon[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_GROUDON
 
-#if P_FAMILY_RAYQUAZA
 static const union AnimCmd sAnim_Rayquaza[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -4111,9 +4037,7 @@ static const union AnimCmd sAnim_Rayquaza[] =
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_RAYQUAZA
 
-#if P_FAMILY_JIRACHI
 static const union AnimCmd sAnim_Jirachi[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4128,9 +4052,7 @@ static const union AnimCmd sAnim_Jirachi[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_JIRACHI
 
-#if P_FAMILY_DEOXYS
 static const union AnimCmd sAnim_DeoxysNormal[] =
 {
     ANIMCMD_FRAME(0, 16),
@@ -4170,9 +4092,7 @@ static const union AnimCmd sAnim_DeoxysSpeed[] =
     ANIMCMD_FRAME(0, 16),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DEOXYS
 
-#if P_FAMILY_TURTWIG
 static const union AnimCmd sAnim_Turtwig[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -4195,9 +4115,7 @@ static const union AnimCmd sAnim_Torterra[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TURTWIG
 
-#if P_FAMILY_CHIMCHAR
 static const union AnimCmd sAnim_Chimchar[] =
 {
     ANIMCMD_FRAME(1, 8),
@@ -4226,9 +4144,7 @@ static const union AnimCmd sAnim_Infernape[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CHIMCHAR
 
-#if P_FAMILY_PIPLUP
 static const union AnimCmd sAnim_Piplup[] =
 {
     ANIMCMD_FRAME(0, 30),
@@ -4258,9 +4174,7 @@ static const union AnimCmd sAnim_Empoleon[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_PIPLUP
 
-#if P_FAMILY_STARLY
 static const union AnimCmd sAnim_Starly[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4284,9 +4198,7 @@ static const union AnimCmd sAnim_Staraptor[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_STARLY
 
-#if P_FAMILY_BIDOOF
 static const union AnimCmd sAnim_Bidoof[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4308,9 +4220,7 @@ static const union AnimCmd sAnim_Bibarel[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BIDOOF
 
-#if P_FAMILY_KRICKETOT
 static const union AnimCmd sAnim_Kricketot[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4343,9 +4253,7 @@ static const union AnimCmd sAnim_Kricketune[] =
     ANIMCMD_FRAME(0, 3),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_KRICKETOT
 
-#if P_FAMILY_SHINX
 static const union AnimCmd sAnim_Shinx[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -4370,9 +4278,7 @@ static const union AnimCmd sAnim_Luxray[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SHINX
 
-#if P_FAMILY_CRANIDOS
 static const union AnimCmd sAnim_Cranidos[] =
 {
     ANIMCMD_FRAME(1, 32),
@@ -4389,9 +4295,7 @@ static const union AnimCmd sAnim_Rampardos[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CRANIDOS
 
-#if P_FAMILY_SHIELDON
 static const union AnimCmd sAnim_Shieldon[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -4407,9 +4311,7 @@ static const union AnimCmd sAnim_Bastiodon[] =
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SHIELDON
 
-#if P_FAMILY_COMBEE
 static const union AnimCmd sAnim_Combee[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4435,9 +4337,7 @@ static const union AnimCmd sAnim_Vespiquen[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_COMBEE
 
-#if P_FAMILY_PACHIRISU
 static const union AnimCmd sAnim_Pachirisu[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4451,9 +4351,7 @@ static const union AnimCmd sAnim_Pachirisu[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_PACHIRISU
 
-#if P_FAMILY_BUIZEL
 static const union AnimCmd sAnim_Buizel[] =
 {
     ANIMCMD_FRAME(0, 12),
@@ -4472,9 +4370,7 @@ static const union AnimCmd sAnim_Floatzel[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BUIZEL
 
-#if P_FAMILY_CHERUBI
 static const union AnimCmd sAnim_Cherubi[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4509,9 +4405,7 @@ static const union AnimCmd sAnim_CherrimSunshine[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CHERUBI
 
-#if P_FAMILY_SHELLOS
 static const union AnimCmd sAnim_Shellos[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -4530,9 +4424,7 @@ static const union AnimCmd sAnim_Gastrodon[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SHELLOS
 
-#if P_FAMILY_DRIFLOON
 static const union AnimCmd sAnim_Drifloon[] =
 {
     ANIMCMD_FRAME(1, 25),
@@ -4552,9 +4444,7 @@ static const union AnimCmd sAnim_Drifblim[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DRIFLOON
 
-#if P_FAMILY_BUNEARY
 static const union AnimCmd sAnim_Buneary[] =
 {
     ANIMCMD_FRAME(1, 35),
@@ -4569,9 +4459,7 @@ static const union AnimCmd sAnim_Lopunny[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BUNEARY
 
-#if P_FAMILY_BRONZOR
 static const union AnimCmd sAnim_Bronzor[] =
 {
     ANIMCMD_FRAME(1, 9),
@@ -4596,9 +4484,7 @@ static const union AnimCmd sAnim_Bronzong[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BRONZOR
 
-#if P_FAMILY_GIBLE
 static const union AnimCmd sAnim_Gible[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -4624,9 +4510,7 @@ static const union AnimCmd sAnim_Garchomp[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_GIBLE
 
-#if P_FAMILY_RIOLU
 static const union AnimCmd sAnim_Riolu[] =
 {
     ANIMCMD_FRAME(0, 3),
@@ -4642,9 +4526,7 @@ static const union AnimCmd sAnim_Lucario[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_RIOLU
 
-#if P_FAMILY_HIPPOPOTAS
 static const union AnimCmd sAnim_Hippopotas[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -4659,9 +4541,7 @@ static const union AnimCmd sAnim_Hippowdon[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_HIPPOPOTAS
 
-#if P_FAMILY_SKORUPI
 static const union AnimCmd sAnim_Skorupi[] =
 {
     ANIMCMD_FRAME(1, 5),
@@ -4696,9 +4576,7 @@ static const union AnimCmd sAnim_Drapion[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SKORUPI
 
-#if P_FAMILY_CROAGUNK
 static const union AnimCmd sAnim_Croagunk[] =
 {
     ANIMCMD_FRAME(0, 3),
@@ -4717,9 +4595,7 @@ static const union AnimCmd sAnim_Toxicroak[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CROAGUNK
 
-#if P_FAMILY_SNOVER
 static const union AnimCmd sAnim_Snover[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -4735,9 +4611,7 @@ static const union AnimCmd sAnim_Abomasnow[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SNOVER
 
-#if P_FAMILY_ROTOM
 static const union AnimCmd sAnim_Rotom[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -4811,9 +4685,7 @@ static const union AnimCmd sAnim_RotomMow[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ROTOM
 
-#if P_FAMILY_HEATRAN
 static const union AnimCmd sAnim_Heatran[] =
 {
     ANIMCMD_FRAME(1, 50),
@@ -4821,18 +4693,14 @@ static const union AnimCmd sAnim_Heatran[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_HEATRAN
 
-#if P_FAMILY_REGIGIGAS
 static const union AnimCmd sAnim_Regigigas[] =
 {
     ANIMCMD_FRAME(1, 40),
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_REGIGIGAS
 
-#if P_FAMILY_SNIVY
 static const union AnimCmd sAnim_Snivy[] =
 {
     ANIMCMD_FRAME(0, 1),
@@ -4862,9 +4730,7 @@ static const union AnimCmd sAnim_Serperior[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SNIVY
 
-#if P_FAMILY_TEPIG
 static const union AnimCmd sAnim_Tepig[] =
 {
     ANIMCMD_FRAME(0, 27),
@@ -4909,7 +4775,6 @@ static const union AnimCmd sAnim_Emboar[] =
     ANIMCMD_FRAME(0, 4),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TEPIG
 
 static const union AnimCmd sAnim_Oshawott[] =
 {
@@ -4940,7 +4805,6 @@ static const union AnimCmd sAnim_Samurott[] =
     ANIMCMD_END,
 };
 
-#if P_FAMILY_BLITZLE
 static const union AnimCmd sAnim_Blitzle[] =
 {
     ANIMCMD_FRAME(1, 8),
@@ -4959,9 +4823,7 @@ static const union AnimCmd sAnim_Zebstrika[] =
     ANIMCMD_FRAME(0, 30),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BLITZLE
 
-#if P_FAMILY_DRILBUR
 static const union AnimCmd sAnim_Drilbur[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -4980,9 +4842,7 @@ static const union AnimCmd sAnim_Excadrill[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DRILBUR
 
-#if P_FAMILY_TIMBURR
 static const union AnimCmd sAnim_Timburr[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5009,9 +4869,7 @@ static const union AnimCmd sAnim_Conkeldurr[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TIMBURR
 
-#if P_FAMILY_SANDILE
 static const union AnimCmd sAnim_Sandile[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5036,9 +4894,7 @@ static const union AnimCmd sAnim_Krookodile[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SANDILE
 
-#if P_FAMILY_DARUMAKA
 static const union AnimCmd sAnim_Darumaka[] =
 {
     ANIMCMD_FRAME(1, 50),
@@ -5066,9 +4922,7 @@ static const union AnimCmd sAnim_DarmanitanZenMode[] =
 PLACEHOLDER_ANIM_SINGLE_FRAME(DarumakaGalarian);
 PLACEHOLDER_ANIM_SINGLE_FRAME(DarmanitanGalarianStandardMode);
 PLACEHOLDER_ANIM_SINGLE_FRAME(DarmanitanGalarianZenMode);
-#endif //P_FAMILY_DARUMAKA
 
-#if P_FAMILY_SCRAGGY
 static const union AnimCmd sAnim_Scraggy[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -5084,9 +4938,7 @@ static const union AnimCmd sAnim_Scrafty[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SCRAGGY
 
-#if P_FAMILY_YAMASK
 static const union AnimCmd sAnim_Yamask[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -5104,9 +4956,7 @@ static const union AnimCmd sAnim_Cofagrigus[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_YAMASK
 
-#if P_FAMILY_ZORUA
 static const union AnimCmd sAnim_Zorua[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5129,9 +4979,7 @@ static const union AnimCmd sAnim_Zoroark[] =
 
 PLACEHOLDER_ANIM_SINGLE_FRAME(ZoruaHisuian);
 PLACEHOLDER_ANIM_SINGLE_FRAME(ZoroarkHisuian);
-#endif //P_FAMILY_ZORUA
 
-#if P_FAMILY_GOTHITA
 static const union AnimCmd sAnim_Gothita[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -5159,9 +5007,7 @@ static const union AnimCmd sAnim_Gothitelle[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_GOTHITA
 
-#if P_FAMILY_FOONGUS
 static const union AnimCmd sAnim_Foongus[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5182,9 +5028,7 @@ static const union AnimCmd sAnim_Amoonguss[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FOONGUS
 
-#if P_FAMILY_FRILLISH
 static const union AnimCmd sAnim_Frillish[] =
 {
     ANIMCMD_FRAME(1, 30),
@@ -5203,9 +5047,7 @@ static const union AnimCmd sAnim_Jellicent[] =
     ANIMCMD_FRAME(0, 8),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FRILLISH
 
-#if P_FAMILY_JOLTIK
 static const union AnimCmd sAnim_Joltik[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5228,9 +5070,7 @@ static const union AnimCmd sAnim_Galvantula[] =
     ANIMCMD_FRAME(0, 6),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_JOLTIK
 
-#if P_FAMILY_FERROSEED
 static const union AnimCmd sAnim_Ferroseed[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -5250,9 +5090,7 @@ static const union AnimCmd sAnim_Ferrothorn[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FERROSEED
 
-#if P_FAMILY_ELGYEM
 static const union AnimCmd sAnim_Elgyem[] =
 {
     ANIMCMD_FRAME(1, 12),
@@ -5272,9 +5110,7 @@ static const union AnimCmd sAnim_Beheeyem[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ELGYEM
 
-#if P_FAMILY_LITWICK
 static const union AnimCmd sAnim_Litwick[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -5300,9 +5136,7 @@ static const union AnimCmd sAnim_Chandelure[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LITWICK
 
-#if P_FAMILY_AXEW
 static const union AnimCmd sAnim_Axew[] =
 {
     ANIMCMD_FRAME(1, 40),
@@ -5325,9 +5159,7 @@ static const union AnimCmd sAnim_Haxorus[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_AXEW
 
-#if P_FAMILY_CUBCHOO
 static const union AnimCmd sAnim_Cubchoo[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5344,9 +5176,7 @@ static const union AnimCmd sAnim_Beartic[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CUBCHOO
 
-#if P_FAMILY_GOLETT
 static const union AnimCmd sAnim_Golett[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5361,9 +5191,7 @@ static const union AnimCmd sAnim_Golurk[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_GOLETT
 
-#if P_FAMILY_PAWNIARD
 static const union AnimCmd sAnim_Pawniard[] =
 {
     ANIMCMD_FRAME(1, 5),
@@ -5383,9 +5211,7 @@ static const union AnimCmd sAnim_Bisharp[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_PAWNIARD
 
-#if P_FAMILY_RUFFLET
 static const union AnimCmd sAnim_Rufflet[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -5405,9 +5231,7 @@ static const union AnimCmd sAnim_Braviary[] =
 };
 
 PLACEHOLDER_ANIM_SINGLE_FRAME(BraviaryHisuian);
-#endif //P_FAMILY_RUFFLET
 
-#if P_FAMILY_VULLABY
 static const union AnimCmd sAnim_Vullaby[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5423,9 +5247,7 @@ static const union AnimCmd sAnim_Mandibuzz[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_VULLABY
 
-#if P_FAMILY_DEINO
 static const union AnimCmd sAnim_Deino[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5453,9 +5275,7 @@ static const union AnimCmd sAnim_Hydreigon[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DEINO
 
-#if P_FAMILY_LARVESTA
 static const union AnimCmd sAnim_Larvesta[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -5480,9 +5300,7 @@ static const union AnimCmd sAnim_Volcarona[] =
     ANIMCMD_FRAME(0, 25),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LARVESTA
 
-#if P_FAMILY_CHESPIN
 static const union AnimCmd sAnim_Chespin[] =
 {
     ANIMCMD_FRAME(0, 8),
@@ -5510,9 +5328,7 @@ static const union AnimCmd sAnim_Chesnaught[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CHESPIN
 
-#if P_FAMILY_FENNEKIN
 static const union AnimCmd sAnim_Fennekin[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5544,9 +5360,7 @@ static const union AnimCmd sAnim_Delphox[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FENNEKIN
 
-#if P_FAMILY_FROAKIE
 static const union AnimCmd sAnim_Froakie[] =
 {
     ANIMCMD_FRAME(0, 13),
@@ -5573,18 +5387,6 @@ static const union AnimCmd sAnim_Greninja[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd sAnim_GreninjaAsh[] =
-{
-    ANIMCMD_FRAME(1, 8),
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_FRAME(1, 35),
-    ANIMCMD_FRAME(1, 30),
-    ANIMCMD_FRAME(0, 10),
-    ANIMCMD_END,
-};
-#endif //P_FAMILY_FROAKIE
-
-#if P_FAMILY_BUNNELBY
 static const union AnimCmd sAnim_Bunnelby[] =
 {
     ANIMCMD_FRAME(1, 25),
@@ -5598,9 +5400,7 @@ static const union AnimCmd sAnim_Diggersby[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_BUNNELBY
 
-#if P_FAMILY_FLETCHLING
 static const union AnimCmd sAnim_Fletchling[] =
 {
     ANIMCMD_FRAME(1, 7),
@@ -5630,9 +5430,7 @@ static const union AnimCmd sAnim_Talonflame[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_FLETCHLING
 
-#if P_FAMILY_SKIDDO
 static const union AnimCmd sAnim_Skiddo[] =
 {
     ANIMCMD_FRAME(1, 15),
@@ -5647,9 +5445,7 @@ static const union AnimCmd sAnim_Gogoat[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_SKIDDO
 
-#if P_FAMILY_PANCHAM
 static const union AnimCmd sAnim_Pancham[] =
 {
     ANIMCMD_FRAME(1, 8),
@@ -5671,9 +5467,7 @@ static const union AnimCmd sAnim_Pangoro[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_PANCHAM
 
-#if P_FAMILY_HONEDGE
 static const union AnimCmd sAnim_Honedge[] =
 {
     ANIMCMD_FRAME(1, 50),
@@ -5711,9 +5505,7 @@ static const union AnimCmd sAnim_AegislashBlade[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_HONEDGE
 
-#if P_FAMILY_TYRUNT
 static const union AnimCmd sAnim_Tyrunt[] =
 {
     ANIMCMD_FRAME(1, 10),
@@ -5729,9 +5521,7 @@ static const union AnimCmd sAnim_Tyrantrum[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_TYRUNT
 
-#if P_FAMILY_AMAURA
 static const union AnimCmd sAnim_Amaura[] =
 {
     ANIMCMD_FRAME(1, 5),
@@ -5753,9 +5543,7 @@ static const union AnimCmd sAnim_Aurorus[] =
     ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_AMAURA
 
-#if P_FAMILY_CARBINK
 static const union AnimCmd sAnim_Carbink[] =
 {
     ANIMCMD_FRAME(0, 5),
@@ -5769,9 +5557,7 @@ static const union AnimCmd sAnim_Carbink[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_CARBINK
 
-#if P_FAMILY_GOOMY
 static const union AnimCmd sAnim_Goomy[] =
 {
     ANIMCMD_FRAME(0, 28),
@@ -5797,9 +5583,7 @@ static const union AnimCmd sAnim_Goodra[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_GOOMY
 
-#if P_FAMILY_PHANTUMP
 static const union AnimCmd sAnim_Phantump[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5818,9 +5602,7 @@ static const union AnimCmd sAnim_Trevenant[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_PHANTUMP
 
-#if P_FAMILY_DIANCIE
 static const union AnimCmd sAnim_Diancie[] =
 {
     ANIMCMD_FRAME(0, 20),
@@ -5828,9 +5610,7 @@ static const union AnimCmd sAnim_Diancie[] =
     ANIMCMD_FRAME(0, 10),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_DIANCIE
 
-#if P_FAMILY_ROWLET
 static const union AnimCmd sAnim_Rowlet[] =
 {
     ANIMCMD_FRAME(1, 30),
@@ -5853,21 +5633,15 @@ static const union AnimCmd sAnim_Decidueye[] =
 };
 
 PLACEHOLDER_ANIM_SINGLE_FRAME(DecidueyeHisuian);
-#endif //P_FAMILY_ROWLET
 
-#if P_FAMILY_LITTEN
 PLACEHOLDER_ANIM_SINGLE_FRAME(Litten);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Torracat);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Incineroar);
-#endif //P_FAMILY_LITTEN
 
-#if P_FAMILY_POPPLIO
 PLACEHOLDER_ANIM_SINGLE_FRAME(Popplio);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Brionne);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Primarina);
-#endif //P_FAMILY_POPPLIO
 
-#if P_FAMILY_ROCKRUFF
 static const union AnimCmd sAnim_Rockruff[] =
 {
     ANIMCMD_FRAME(1, 9),
@@ -5897,19 +5671,13 @@ static const union AnimCmd sAnim_LycanrocDusk[] =
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ROCKRUFF
 
-#if P_FAMILY_SANDYGAST
 PLACEHOLDER_ANIM_SINGLE_FRAME(Sandygast);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Palossand);
-#endif //P_FAMILY_SANDYGAST
 
-#if P_FAMILY_MIMIKYU
 PLACEHOLDER_ANIM_SINGLE_FRAME(MimikyuDisguised);
 PLACEHOLDER_ANIM_SINGLE_FRAME(MimikyuBusted);
-#endif //P_FAMILY_MIMIKYU
 
-#if P_FAMILY_JANGMO_O
 static const union AnimCmd sAnim_Jangmo_O[] =
 {
     ANIMCMD_FRAME(1, 15),
@@ -5933,9 +5701,7 @@ static const union AnimCmd sAnim_Kommo_O[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_JANGMO_O
 
-#if P_FAMILY_LUNATONE_SOLROCK
 static const union AnimCmd sAnim_Lunatone[] =
 {
     ANIMCMD_FRAME(0, 15),
@@ -5955,9 +5721,7 @@ static const union AnimCmd sAnim_Solrock[] =
     ANIMCMD_FRAME(0, 15),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_LUNATONE_SOLROCK
 
-#if P_FAMILY_ROOKIDEE
 static const union AnimCmd sAnim_Rookidee[] =
 {
     ANIMCMD_FRAME(0, 10),
@@ -5989,47 +5753,30 @@ static const union AnimCmd sAnim_Corviknight[] =
     ANIMCMD_FRAME(0, 1),
     ANIMCMD_END,
 };
-#endif //P_FAMILY_ROOKIDEE
 
-#if P_FAMILY_BLIPBUG
 PLACEHOLDER_ANIM_SINGLE_FRAME(Blipbug);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Dottler);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Orbeetle);
-#endif //P_FAMILY_BLIPBUG
 
-#if P_FAMILY_TOXEL
 PLACEHOLDER_ANIM_SINGLE_FRAME(Toxel);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Toxtricity);
-#endif //P_FAMILY_TOXEL
 
-#if P_FAMILY_SNOM
 PLACEHOLDER_ANIM_SINGLE_FRAME(Snom);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Frosmoth);
-#endif //P_FAMILY_SNOM
 
-#if P_FAMILY_DREEPY
 PLACEHOLDER_ANIM_SINGLE_FRAME(Dreepy);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Drakloak);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Dragapult);
-#endif //P_FAMILY_DREEPY
 
-#if P_FAMILY_REGIELEKI
 PLACEHOLDER_ANIM_SINGLE_FRAME(Regieleki);
-#endif //P_FAMILY_REGIELEKI
 
-#if P_FAMILY_REGIDRAGO
 PLACEHOLDER_ANIM_SINGLE_FRAME(Regidrago);
-#endif //P_FAMILY_REGIDRAGO
 
-#if P_FAMILY_GLIMMET
 PLACEHOLDER_ANIM_SINGLE_FRAME(Glimmet);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Glimmora);
-#endif //P_FAMILY_GLIMMET
 
-#if P_FAMILY_GREAVARD
 PLACEHOLDER_ANIM_SINGLE_FRAME(Greavard);
 PLACEHOLDER_ANIM_SINGLE_FRAME(Houndstone);
-#endif //P_FAMILY_GREAVARD
 
 static const union AnimCmd sAnim_Egg[] =
 {
@@ -6379,453 +6126,243 @@ SINGLE_ANIMATION(Makuhita);
 SINGLE_ANIMATION(Hariyama);
 SINGLE_ANIMATION(Nosepass);
 SINGLE_ANIMATION(Probopass);
-#if P_FAMILY_SABLEYE
 SINGLE_ANIMATION(Sableye);
-#endif //P_FAMILY_SABLEYE
-#if P_FAMILY_MAWILE
 SINGLE_ANIMATION(Mawile);
-#endif //P_FAMILY_MAWILE
-#if P_FAMILY_ARON
 SINGLE_ANIMATION(Aron);
 SINGLE_ANIMATION(Lairon);
 SINGLE_ANIMATION(Aggron);
-#endif //P_FAMILY_ARON
-#if P_FAMILY_MEDITITE
 SINGLE_ANIMATION(Meditite);
 SINGLE_ANIMATION(Medicham);
-#endif //P_FAMILY_MEDITITE
-#if P_FAMILY_ELECTRIKE
 SINGLE_ANIMATION(Electrike);
 SINGLE_ANIMATION(Manectric);
-#endif //P_FAMILY_ELECTRIKE
-#if P_FAMILY_ROSELIA
 SINGLE_ANIMATION(Budew);
 SINGLE_ANIMATION(Roselia);
 SINGLE_ANIMATION(Roserade);
-#endif //P_FAMILY_ROSELIA
-#if P_FAMILY_CARVANHA
 SINGLE_ANIMATION(Carvanha);
 SINGLE_ANIMATION(Sharpedo);
-#endif //P_FAMILY_CARVANHA
-#if P_FAMILY_WAILMER
 SINGLE_ANIMATION(Wailmer);
 SINGLE_ANIMATION(Wailord);
-#endif //P_FAMILY_WAILMER
-#if P_FAMILY_NUMEL
 SINGLE_ANIMATION(Numel);
 SINGLE_ANIMATION(Camerupt);
-#endif //P_FAMILY_NUMEL
-#if P_FAMILY_TORKOAL
 SINGLE_ANIMATION(Torkoal);
-#endif //P_FAMILY_TORKOAL
-#if P_FAMILY_SPOINK
 SINGLE_ANIMATION(Spoink);
 SINGLE_ANIMATION(Grumpig);
-#endif //P_FAMILY_SPOINK
-#if P_FAMILY_TRAPINCH
 SINGLE_ANIMATION(Trapinch);
 SINGLE_ANIMATION(Vibrava);
 SINGLE_ANIMATION(Flygon);
-#endif //P_FAMILY_TRAPINCH
-#if P_FAMILY_CACNEA
 SINGLE_ANIMATION(Cacnea);
 SINGLE_ANIMATION(Cacturne);
-#endif //P_FAMILY_CACNEA
-#if P_FAMILY_SWABLU
 SINGLE_ANIMATION(Swablu);
 SINGLE_ANIMATION(Altaria);
-#endif //P_FAMILY_SWABLU
-#if P_FAMILY_BALTOY
 SINGLE_ANIMATION(Baltoy);
 SINGLE_ANIMATION(Claydol);
-#endif //P_FAMILY_BALTOY
-#if P_FAMILY_LILEEP
 SINGLE_ANIMATION(Lileep);
 SINGLE_ANIMATION(Cradily);
-#endif //P_FAMILY_LILEEP
-#if P_FAMILY_ANORITH
 SINGLE_ANIMATION(Anorith);
 SINGLE_ANIMATION(Armaldo);
-#endif //P_FAMILY_ANORITH
-#if P_FAMILY_FEEBAS
 SINGLE_ANIMATION(Feebas);
 SINGLE_ANIMATION(Milotic);
-#endif //P_FAMILY_FEEBAS
-#if P_FAMILY_CASTFORM
 SINGLE_ANIMATION(CastformNormal);
 SINGLE_ANIMATION(CastformSunny);
 SINGLE_ANIMATION(CastformRainy);
 SINGLE_ANIMATION(CastformSnowy);
-#endif //P_FAMILY_CASTFORM
-#if P_FAMILY_KECLEON
 SINGLE_ANIMATION(Kecleon);
-#endif //P_FAMILY_KECLEON
-#if P_FAMILY_DUSKULL
 SINGLE_ANIMATION(Duskull);
 SINGLE_ANIMATION(Dusclops);
 SINGLE_ANIMATION(Dusknoir);
-#endif //P_FAMILY_DUSKULL
-#if P_FAMILY_TROPIUS
 SINGLE_ANIMATION(Tropius);
-#endif //P_FAMILY_TROPIUS
-#if P_FAMILY_CHIMECHO
 SINGLE_ANIMATION(Chingling);
 SINGLE_ANIMATION(Chimecho);
-#endif //P_FAMILY_CHIMECHO
-#if P_FAMILY_ABSOL
 SINGLE_ANIMATION(Absol);
-#endif //P_FAMILY_ABSOL
-#if P_FAMILY_SNORUNT
 SINGLE_ANIMATION(Snorunt);
 SINGLE_ANIMATION(Glalie);
 SINGLE_ANIMATION(Froslass);
-#endif //P_FAMILY_SNORUNT
-#if P_FAMILY_SPHEAL
 SINGLE_ANIMATION(Spheal);
 SINGLE_ANIMATION(Sealeo);
 SINGLE_ANIMATION(Walrein);
-#endif //P_FAMILY_SPHEAL
-#if P_FAMILY_CLAMPERL
 SINGLE_ANIMATION(Clamperl);
 SINGLE_ANIMATION(Huntail);
 SINGLE_ANIMATION(Gorebyss);
-#endif //P_FAMILY_CLAMPERL
-#if P_FAMILY_RELICANTH
 SINGLE_ANIMATION(Relicanth);
-#endif //P_FAMILY_RELICANTH
-#if P_FAMILY_LUVDISC
 SINGLE_ANIMATION(Luvdisc);
-#endif //P_FAMILY_LUVDISC
-#if P_FAMILY_BAGON
 SINGLE_ANIMATION(Bagon);
 SINGLE_ANIMATION(Shelgon);
 SINGLE_ANIMATION(Salamence);
-#endif //P_FAMILY_BAGON
-#if P_FAMILY_BELDUM
 SINGLE_ANIMATION(Beldum);
 SINGLE_ANIMATION(Metang);
 SINGLE_ANIMATION(Metagross);
-#endif //P_FAMILY_BELDUM
-#if P_FAMILY_REGIROCK
 SINGLE_ANIMATION(Regirock);
-#endif //P_FAMILY_REGIROCK
-#if P_FAMILY_REGICE
 SINGLE_ANIMATION(Regice);
-#endif //P_FAMILY_REGICE
-#if P_FAMILY_REGISTEEL
 SINGLE_ANIMATION(Registeel);
-#endif //P_FAMILY_REGISTEEL
-#if P_FAMILY_LATIAS
 SINGLE_ANIMATION(Latias);
-#endif //P_FAMILY_LATIAS
-#if P_FAMILY_LATIOS
 SINGLE_ANIMATION(Latios);
-#endif //P_FAMILY_LATIOS
-#if P_FAMILY_KYOGRE
 SINGLE_ANIMATION(Kyogre);
-#endif //P_FAMILY_KYOGRE
-#if P_FAMILY_GROUDON
 SINGLE_ANIMATION(Groudon);
-#endif //P_FAMILY_GROUDON
-#if P_FAMILY_RAYQUAZA
 SINGLE_ANIMATION(Rayquaza);
-#endif //P_FAMILY_RAYQUAZA
-#if P_FAMILY_JIRACHI
 SINGLE_ANIMATION(Jirachi);
-#endif //P_FAMILY_JIRACHI
-#if P_FAMILY_DEOXYS
 SINGLE_ANIMATION(DeoxysNormal);
 SINGLE_ANIMATION(DeoxysAttack);
 SINGLE_ANIMATION(DeoxysDefense);
 SINGLE_ANIMATION(DeoxysSpeed);
-#endif //P_FAMILY_DEOXYS
-#if P_FAMILY_TURTWIG
 SINGLE_ANIMATION(Turtwig);
 SINGLE_ANIMATION(Grotle);
 SINGLE_ANIMATION(Torterra);
-#endif //P_FAMILY_TURTWIG
-#if P_FAMILY_CHIMCHAR
 SINGLE_ANIMATION(Chimchar);
 SINGLE_ANIMATION(Monferno);
 SINGLE_ANIMATION(Infernape);
-#endif //P_FAMILY_CHIMCHAR
-#if P_FAMILY_PIPLUP
 SINGLE_ANIMATION(Piplup);
 SINGLE_ANIMATION(Prinplup);
 SINGLE_ANIMATION(Empoleon);
-#endif //P_FAMILY_PIPLUP
-#if P_FAMILY_STARLY
 SINGLE_ANIMATION(Starly);
 SINGLE_ANIMATION(Staravia);
 SINGLE_ANIMATION(Staraptor);
-#endif //P_FAMILY_STARLY
-#if P_FAMILY_BIDOOF
 SINGLE_ANIMATION(Bidoof);
 SINGLE_ANIMATION(Bibarel);
-#endif //P_FAMILY_BIDOOF
-#if P_FAMILY_KRICKETOT
 SINGLE_ANIMATION(Kricketot);
 SINGLE_ANIMATION(Kricketune);
-#endif //P_FAMILY_KRICKETOT
-#if P_FAMILY_SHINX
 SINGLE_ANIMATION(Shinx);
 SINGLE_ANIMATION(Luxio);
 SINGLE_ANIMATION(Luxray);
-#endif //P_FAMILY_SHINX
-#if P_FAMILY_CRANIDOS
 SINGLE_ANIMATION(Cranidos);
 SINGLE_ANIMATION(Rampardos);
-#endif //P_FAMILY_CRANIDOS
-#if P_FAMILY_SHIELDON
 SINGLE_ANIMATION(Shieldon);
 SINGLE_ANIMATION(Bastiodon);
-#endif //P_FAMILY_SHIELDON
-#if P_FAMILY_COMBEE
 SINGLE_ANIMATION(Combee);
 SINGLE_ANIMATION(Vespiquen);
-#endif //P_FAMILY_COMBEE
-#if P_FAMILY_PACHIRISU
 SINGLE_ANIMATION(Pachirisu);
-#endif //P_FAMILY_PACHIRISU
-#if P_FAMILY_BUIZEL
 SINGLE_ANIMATION(Buizel);
 SINGLE_ANIMATION(Floatzel);
-#endif //P_FAMILY_BUIZEL
-#if P_FAMILY_CHERUBI
 SINGLE_ANIMATION(Cherubi);
 SINGLE_ANIMATION(CherrimOvercast);
 SINGLE_ANIMATION(CherrimSunshine);
-#endif //P_FAMILY_CHERUBI
-#if P_FAMILY_SHELLOS
 SINGLE_ANIMATION(Shellos);
 SINGLE_ANIMATION(Gastrodon);
-#endif //P_FAMILY_SHELLOS
-#if P_FAMILY_DRIFLOON
 SINGLE_ANIMATION(Drifloon);
 SINGLE_ANIMATION(Drifblim);
-#endif //P_FAMILY_DRIFLOON
-#if P_FAMILY_BUNEARY
 SINGLE_ANIMATION(Buneary);
 SINGLE_ANIMATION(Lopunny);
-#endif //P_FAMILY_BUNEARY
-#if P_FAMILY_BRONZOR
 SINGLE_ANIMATION(Bronzor);
 SINGLE_ANIMATION(Bronzong);
-#endif //P_FAMILY_BRONZOR
-#if P_FAMILY_GIBLE
 SINGLE_ANIMATION(Gible);
 SINGLE_ANIMATION(Gabite);
 SINGLE_ANIMATION(Garchomp);
-#endif //P_FAMILY_GIBLE
-#if P_FAMILY_RIOLU
 SINGLE_ANIMATION(Riolu);
 SINGLE_ANIMATION(Lucario);
-#endif //P_FAMILY_RIOLU
-#if P_FAMILY_HIPPOPOTAS
 SINGLE_ANIMATION(Hippopotas);
 SINGLE_ANIMATION(Hippowdon);
-#endif //P_FAMILY_HIPPOPOTAS
-#if P_FAMILY_SKORUPI
 SINGLE_ANIMATION(Skorupi);
 SINGLE_ANIMATION(Drapion);
-#endif //P_FAMILY_SKORUPI
-#if P_FAMILY_CROAGUNK
 SINGLE_ANIMATION(Croagunk);
 SINGLE_ANIMATION(Toxicroak);
-#endif //P_FAMILY_CROAGUNK
-#if P_FAMILY_SNOVER
 SINGLE_ANIMATION(Snover);
 SINGLE_ANIMATION(Abomasnow);
-#endif //P_FAMILY_SNOVER
-#if P_FAMILY_ROTOM
 SINGLE_ANIMATION(Rotom);
 SINGLE_ANIMATION(RotomHeat);
 SINGLE_ANIMATION(RotomWash);
 SINGLE_ANIMATION(RotomFrost);
 SINGLE_ANIMATION(RotomFan);
 SINGLE_ANIMATION(RotomMow);
-#endif //P_FAMILY_ROTOM
-#if P_FAMILY_HEATRAN
 SINGLE_ANIMATION(Heatran);
-#endif //P_FAMILY_HEATRAN
-#if P_FAMILY_REGIGIGAS
 SINGLE_ANIMATION(Regigigas);
-#endif //P_FAMILY_REGIGIGAS
-#if P_FAMILY_SNIVY
 SINGLE_ANIMATION(Snivy);
 SINGLE_ANIMATION(Servine);
 SINGLE_ANIMATION(Serperior);
-#endif //P_FAMILY_SNIVY
-#if P_FAMILY_TEPIG
 SINGLE_ANIMATION(Tepig);
 SINGLE_ANIMATION(Pignite);
 SINGLE_ANIMATION(Emboar);
-#endif //P_FAMILY_TEPIG
 SINGLE_ANIMATION(Oshawott);
 SINGLE_ANIMATION(Dewott);
 SINGLE_ANIMATION(Samurott);
-#if P_FAMILY_BLITZLE
 SINGLE_ANIMATION(Blitzle);
 SINGLE_ANIMATION(Zebstrika);
-#endif //P_FAMILY_BLITZLE
-#if P_FAMILY_DRILBUR
 SINGLE_ANIMATION(Drilbur);
 SINGLE_ANIMATION(Excadrill);
-#endif //P_FAMILY_DRILBUR
-#if P_FAMILY_TIMBURR
 SINGLE_ANIMATION(Timburr);
 SINGLE_ANIMATION(Gurdurr);
 SINGLE_ANIMATION(Conkeldurr);
-#endif //P_FAMILY_TIMBURR
-#if P_FAMILY_SANDILE
 SINGLE_ANIMATION(Sandile);
 SINGLE_ANIMATION(Krokorok);
 SINGLE_ANIMATION(Krookodile);
-#endif //P_FAMILY_SANDILE
-#if P_FAMILY_DARUMAKA
 SINGLE_ANIMATION(Darumaka);
 SINGLE_ANIMATION(DarmanitanStandardMode);
 SINGLE_ANIMATION(DarmanitanZenMode);
 SINGLE_ANIMATION(DarumakaGalarian);
 SINGLE_ANIMATION(DarmanitanGalarianStandardMode);
 SINGLE_ANIMATION(DarmanitanGalarianZenMode);
-#endif //P_FAMILY_DARUMAKA
-#if P_FAMILY_SCRAGGY
 SINGLE_ANIMATION(Scraggy);
 SINGLE_ANIMATION(Scrafty);
-#endif //P_FAMILY_SCRAGGY
-#if P_FAMILY_YAMASK
 SINGLE_ANIMATION(Yamask);
 SINGLE_ANIMATION(Cofagrigus);
-#endif //P_FAMILY_YAMASK
-#if P_FAMILY_ZORUA
 SINGLE_ANIMATION(Zorua);
 SINGLE_ANIMATION(Zoroark);
 SINGLE_ANIMATION(ZoruaHisuian);
 SINGLE_ANIMATION(ZoroarkHisuian);
-#endif //P_FAMILY_ZORUA
-#if P_FAMILY_GOTHITA
 SINGLE_ANIMATION(Gothita);
 SINGLE_ANIMATION(Gothorita);
 SINGLE_ANIMATION(Gothitelle);
-#endif //P_FAMILY_GOTHITA
-#if P_FAMILY_FOONGUS
 SINGLE_ANIMATION(Foongus);
 SINGLE_ANIMATION(Amoonguss);
-#endif //P_FAMILY_FOONGUS
-#if P_FAMILY_FRILLISH
 SINGLE_ANIMATION(Frillish);
 SINGLE_ANIMATION(Jellicent);
-#endif //P_FAMILY_FRILLISH
-#if P_FAMILY_JOLTIK
 SINGLE_ANIMATION(Joltik);
 SINGLE_ANIMATION(Galvantula);
-#endif //P_FAMILY_JOLTIK
-#if P_FAMILY_FERROSEED
 SINGLE_ANIMATION(Ferroseed);
 SINGLE_ANIMATION(Ferrothorn);
-#endif //P_FAMILY_FERROSEED
-#if P_FAMILY_ELGYEM
 SINGLE_ANIMATION(Elgyem);
 SINGLE_ANIMATION(Beheeyem);
-#endif //P_FAMILY_ELGYEM
-#if P_FAMILY_LITWICK
 SINGLE_ANIMATION(Litwick);
 SINGLE_ANIMATION(Lampent);
 SINGLE_ANIMATION(Chandelure);
-#endif //P_FAMILY_LITWICK
-#if P_FAMILY_AXEW
 SINGLE_ANIMATION(Axew);
 SINGLE_ANIMATION(Fraxure);
 SINGLE_ANIMATION(Haxorus);
-#endif //P_FAMILY_AXEW
-#if P_FAMILY_CUBCHOO
 SINGLE_ANIMATION(Cubchoo);
 SINGLE_ANIMATION(Beartic);
-#endif //P_FAMILY_CUBCHOO
-#if P_FAMILY_GOLETT
 SINGLE_ANIMATION(Golett);
 SINGLE_ANIMATION(Golurk);
-#endif //P_FAMILY_GOLETT
-#if P_FAMILY_PAWNIARD
 SINGLE_ANIMATION(Pawniard);
 SINGLE_ANIMATION(Bisharp);
-#endif //P_FAMILY_PAWNIARD
-#if P_FAMILY_RUFFLET
 SINGLE_ANIMATION(Rufflet);
 SINGLE_ANIMATION(Braviary);
 SINGLE_ANIMATION(BraviaryHisuian);
-#endif //P_FAMILY_RUFFLET
-#if P_FAMILY_VULLABY
 SINGLE_ANIMATION(Vullaby);
 SINGLE_ANIMATION(Mandibuzz);
-#endif //P_FAMILY_VULLABY
-#if P_FAMILY_DEINO
 SINGLE_ANIMATION(Deino);
 SINGLE_ANIMATION(Zweilous);
 SINGLE_ANIMATION(Hydreigon);
-#endif //P_FAMILY_DEINO
-#if P_FAMILY_LARVESTA
 SINGLE_ANIMATION(Larvesta);
 SINGLE_ANIMATION(Volcarona);
-#endif //P_FAMILY_LARVESTA
-#if P_FAMILY_CHESPIN
 SINGLE_ANIMATION(Chespin);
 SINGLE_ANIMATION(Quilladin);
 SINGLE_ANIMATION(Chesnaught);
-#endif //P_FAMILY_CHESPIN
-#if P_FAMILY_FENNEKIN
 SINGLE_ANIMATION(Fennekin);
 SINGLE_ANIMATION(Braixen);
 SINGLE_ANIMATION(Delphox);
-#endif //P_FAMILY_FENNEKIN
-#if P_FAMILY_FROAKIE
 SINGLE_ANIMATION(Froakie);
 SINGLE_ANIMATION(Frogadier);
 SINGLE_ANIMATION(Greninja);
-SINGLE_ANIMATION(GreninjaAsh);
-#endif //P_FAMILY_FROAKIE
-#if P_FAMILY_BUNNELBY
 SINGLE_ANIMATION(Bunnelby);
 SINGLE_ANIMATION(Diggersby);
-#endif //P_FAMILY_BUNNELBY
-#if P_FAMILY_FLETCHLING
 SINGLE_ANIMATION(Fletchling);
 SINGLE_ANIMATION(Fletchinder);
 SINGLE_ANIMATION(Talonflame);
-#endif //P_FAMILY_FLETCHLING
-#if P_FAMILY_SKIDDO
 SINGLE_ANIMATION(Skiddo);
 SINGLE_ANIMATION(Gogoat);
-#endif //P_FAMILY_SKIDDO
-#if P_FAMILY_PANCHAM
 SINGLE_ANIMATION(Pancham);
 SINGLE_ANIMATION(Pangoro);
-#endif //P_FAMILY_PANCHAM
-#if P_FAMILY_HONEDGE
 SINGLE_ANIMATION(Honedge);
 SINGLE_ANIMATION(Doublade);
 SINGLE_ANIMATION(AegislashShield);
 SINGLE_ANIMATION(AegislashBlade);
-#endif //P_FAMILY_HONEDGE
-#if P_FAMILY_TYRUNT
 SINGLE_ANIMATION(Tyrunt);
 SINGLE_ANIMATION(Tyrantrum);
-#endif //P_FAMILY_TYRUNT
-#if P_FAMILY_AMAURA
 SINGLE_ANIMATION(Amaura);
 SINGLE_ANIMATION(Aurorus);
-#endif //P_FAMILY_AMAURA
-#if P_FAMILY_CARBINK
 SINGLE_ANIMATION(Carbink);
 SINGLE_ANIMATION(Diancie);
-#endif //P_FAMILY_CARBINK
-#if P_FAMILY_GOOMY
 SINGLE_ANIMATION(Goomy);
 SINGLE_ANIMATION(Sliggoo);
 SINGLE_ANIMATION(Goodra);
-#endif //P_FAMILY_GOOMY
-#if P_FAMILY_PHANTUMP
 SINGLE_ANIMATION(Phantump);
 SINGLE_ANIMATION(Trevenant);
 SINGLE_ANIMATION(Rowlet);

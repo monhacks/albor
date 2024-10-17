@@ -16777,7 +16777,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Probopass),
     },
 
-#if P_FAMILY_SABLEYE
 #define SABLEYE_MISC_INFO                                           \
         .types = MON_TYPES(TYPE_DARK, TYPE_GHOST),                  \
         .catchRate = 45,                                            \
@@ -16830,9 +16829,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Sableye),
         FOLLOWER(Sableye, TRACKS_FOOT)
     },
-#endif //P_FAMILY_SABLEYE
 
-#if P_FAMILY_MAWILE
 #if P_UPDATED_TYPES >= GEN_6
     #define MAWILE_TYPES { TYPE_STEEL, TYPE_FAIRY }
 #else
@@ -16891,9 +16888,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Mawile),
         FOLLOWER(Mawile, TRACKS_FOOT)
     },
-#endif //P_FAMILY_MAWILE
 
-#if P_FAMILY_ARON
     [SPECIES_ARON] =
     {
         .baseHP        = 50,
@@ -17051,9 +17046,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Aggron),
         FOLLOWER(Aggron, TRACKS_FOOT)
     },
-#endif //P_FAMILY_ARON
 
-#if P_FAMILY_MEDITITE
     [SPECIES_MEDITITE] =
     {
         .baseHP        = 30,
@@ -17157,9 +17150,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Medicham),
         FOLLOWER(Medicham, TRACKS_FOOT)
     },
-#endif //P_FAMILY_MEDITITE
 
-#if P_FAMILY_ELECTRIKE
     [SPECIES_ELECTRIKE] =
     {
         .baseHP        = 40,
@@ -17259,9 +17250,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Manectric),
         FOLLOWER(Manectric, TRACKS_FOOT)
     },
-#endif //P_FAMILY_ELECTRIKE
 
-#if P_FAMILY_ROSELIA
     [SPECIES_BUDEW] =
     {
         .baseHP        = 40,
@@ -17425,10 +17414,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Roserade, TRACKS_FOOT)
         LEARNSETS(Roserade),
     },
-#endif //P_FAMILY_ROSELIA
 
 
-#if P_FAMILY_CARVANHA
     [SPECIES_CARVANHA] =
     {
         .baseHP        = 45,
@@ -17530,9 +17517,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Sharpedo),
         FOLLOWER(Sharpedo, TRACKS_NONE)
     },
-#endif //P_FAMILY_CARVANHA
 
-#if P_FAMILY_WAILMER
     [SPECIES_WAILMER] =
     {
         .baseHP        = 130,
@@ -17630,9 +17615,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Wailord, TRACKS_NONE)
         LEARNSETS(Wailord),
     },
-#endif //P_FAMILY_WAILMER
 
-#if P_FAMILY_NUMEL
     [SPECIES_NUMEL] =
     {
         .baseHP        = 60,
@@ -17739,9 +17722,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Camerupt),
         FOLLOWER(Camerupt, TRACKS_FOOT)
     },
-#endif //P_FAMILY_NUMEL
 
-#if P_FAMILY_TORKOAL
     [SPECIES_TORKOAL] =
     {
         .baseHP        = 70,
@@ -17790,9 +17771,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Torkoal, TRACKS_FOOT)
         LEARNSETS(Torkoal),
     },
-#endif //P_FAMILY_TORKOAL
 
-#if P_FAMILY_TRAPINCH
     [SPECIES_TRAPINCH] =
     {
         .baseHP        = 45,
@@ -17960,9 +17939,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Flygon, TRACKS_NONE)
         LEARNSETS(Flygon),
     },
-#endif //P_FAMILY_TRAPINCH
 
-#if P_FAMILY_CACNEA
     [SPECIES_CACNEA] =
     {
         .baseHP        = 50,
@@ -18063,9 +18040,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cacturne, TRACKS_FOOT)
         LEARNSETS(Cacturne),
     },
-#endif //P_FAMILY_CACNEA
 
-#if P_FAMILY_SWABLU
     [SPECIES_SWABLU] =
     {
         .baseHP        = 45,
@@ -18165,9 +18140,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Altaria),
         FOLLOWER(Altaria, TRACKS_NONE)
     },
-#endif //P_FAMILY_SWABLU
 
-#if P_FAMILY_LUNATONE_SOLROCK
     [SPECIES_LUNATONE] =
     {
         .baseHP        = P_UPDATED_STATS >= GEN_7 ? 90 : 70,
@@ -18279,9 +18252,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Solrock, TRACKS_NONE)
         LEARNSETS(Solrock),
     },
-#endif //P_FAMILY_LUNATONE_SOLROCK
 
-#if P_FAMILY_BALTOY
     [SPECIES_BALTOY] =
     {
         .baseHP        = 40,
@@ -18382,9 +18353,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Claydol, TRACKS_NONE)
         LEARNSETS(Claydol),
     },
-#endif //P_FAMILY_BALTOY
 
-#if P_FAMILY_LILEEP
+
     [SPECIES_LILEEP] =
     {
         .baseHP        = 66,
@@ -18495,9 +18465,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cradily, TRACKS_SLITHER)
         LEARNSETS(Cradily),
     },
-#endif //P_FAMILY_LILEEP
 
-#if P_FAMILY_ANORITH
+
+
     [SPECIES_ANORITH] =
     {
         .baseHP        = 45,
@@ -18606,9 +18576,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Armaldo, TRACKS_FOOT)
         LEARNSETS(Armaldo),
     },
-#endif //P_FAMILY_ANORITH
 
-#if P_FAMILY_FEEBAS
     [SPECIES_FEEBAS] =
     {
         .baseHP        = 20,
@@ -18710,9 +18678,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Milotic, TRACKS_SLITHER)
         LEARNSETS(Milotic),
     },
-#endif //P_FAMILY_FEEBAS
 
-#if P_FAMILY_CASTFORM
+
 #define CASTFORM_MISC_INFO                                               \
         .baseHP        = 70,                                             \
         .baseAttack    = 40,                                             \
@@ -18837,9 +18804,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(CastformSnowy),
         FOLLOWER(CastformSnowy, TRACKS_NONE)
     },
-#endif //P_FAMILY_CASTFORM
 
-#if P_FAMILY_KECLEON
     [SPECIES_KECLEON] =
     {
         .baseHP        = 70,
@@ -18888,9 +18853,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Kecleon, TRACKS_FOOT)
         LEARNSETS(Kecleon),
     },
-#endif //P_FAMILY_KECLEON
 
-#if P_FAMILY_DUSKULL
+
     [SPECIES_DUSKULL] =
     {
         .baseHP        = 20,
@@ -19052,9 +19016,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Dusknoir, TRACKS_FOOT)
         LEARNSETS(Dusknoir),
     },
-#endif //P_FAMILY_DUSKULL
 
-#if P_FAMILY_TROPIUS
     [SPECIES_TROPIUS] =
     {
         .baseHP        = 99,
@@ -19102,9 +19064,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Tropius, TRACKS_FOOT)
         LEARNSETS(Tropius),
     },
-#endif //P_FAMILY_TROPIUS
 
-#if P_FAMILY_CHIMECHO
+
     [SPECIES_CHINGLING] =
     {
         .baseHP        = 45,
@@ -19217,9 +19178,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chimecho, TRACKS_NONE)
         LEARNSETS(Chimecho),
     },
-#endif //P_FAMILY_CHIMECHO
 
-#if P_FAMILY_ABSOL
 #define ABSOL_MISC_INFO                                     \
         .types = MON_TYPES(TYPE_DARK, TYPE_FAIRY),          \
         .catchRate = 30,                                    \
@@ -19272,9 +19231,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Absol),
         FOLLOWER(Absol, TRACKS_FOOT)
     },
-#endif //P_FAMILY_ABSOL
 
-#if P_FAMILY_SNORUNT
     [SPECIES_SNORUNT] =
     {
         .baseHP        = 50,
@@ -19429,9 +19386,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Froslass, TRACKS_FOOT)
         LEARNSETS(Froslass),
     },
-#endif //P_FAMILY_SNORUNT
 
-#if P_FAMILY_SPHEAL
     [SPECIES_SPHEAL] =
     {
         .baseHP        = 70,
@@ -19584,9 +19539,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Walrein, TRACKS_FOOT)
         LEARNSETS(Walrein),
     },
-#endif //P_FAMILY_SPHEAL
 
-#if P_FAMILY_CLAMPERL
     [SPECIES_CLAMPERL] =
     {
         .baseHP        = 35,
@@ -19738,9 +19691,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Gorebyss, TRACKS_SLITHER)
         LEARNSETS(Gorebyss),
     },
-#endif //P_FAMILY_CLAMPERL
 
-#if P_FAMILY_RELICANTH
     [SPECIES_RELICANTH] =
     {
         .baseHP        = 100,
@@ -19792,9 +19743,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Relicanth, TRACKS_NONE)
         LEARNSETS(Relicanth),
     },
-#endif //P_FAMILY_RELICANTH
 
-#if P_FAMILY_LUVDISC
     [SPECIES_LUVDISC] =
     {
         .baseHP        = 43,
@@ -19843,9 +19792,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Luvdisc, TRACKS_SPOT)
         LEARNSETS(Luvdisc),
     },
-#endif //P_FAMILY_LUVDISC
 
-#if P_FAMILY_BAGON
     [SPECIES_BAGON] =
     {
         .baseHP        = 45,
@@ -20004,9 +19951,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Salamence),
         FOLLOWER(Salamence, TRACKS_FOOT)
     },
-#endif //P_FAMILY_BAGON
 
-#if P_FAMILY_BELDUM
     [SPECIES_BELDUM] =
     {
         .baseHP        = 40,
@@ -20166,9 +20111,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Metagross),
         FOLLOWER(Metagross, TRACKS_FOOT)
     },
-#endif //P_FAMILY_BELDUM
 
-#if P_FAMILY_REGIROCK
     [SPECIES_REGIROCK] =
     {
         .baseHP        = 80,
@@ -20224,9 +20167,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Regirock, TRACKS_FOOT)
         LEARNSETS(Regirock),
     },
-#endif //P_FAMILY_REGIROCK
 
-#if P_FAMILY_REGICE
     [SPECIES_REGICE] =
     {
         .baseHP        = 80,
@@ -20281,9 +20222,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Regice, TRACKS_FOOT)
         LEARNSETS(Regice),
     },
-#endif //P_FAMILY_REGICE
 
-#if P_FAMILY_REGISTEEL
     [SPECIES_REGISTEEL] =
     {
         .baseHP        = 80,
@@ -20339,9 +20278,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Registeel, TRACKS_FOOT)
         LEARNSETS(Registeel),
     },
-#endif //P_FAMILY_REGISTEEL
 
-#if P_FAMILY_LATIAS
 #define LATIAS_MISC_INFO                                                \
         .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),                  \
         .catchRate = 3,                                                 \
@@ -20400,9 +20337,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Latias),
         FOLLOWER(Latias, TRACKS_NONE)
     },
-#endif //P_FAMILY_LATIAS
 
-#if P_FAMILY_LATIOS
 #define LATIOS_MISC_INFO                                                \
         .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),                  \
         .catchRate = 3,                                                 \
@@ -20461,9 +20396,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Latios),
         FOLLOWER(Latios, TRACKS_NONE)
     },
-#endif //P_FAMILY_LATIOS
 
-#if P_FAMILY_KYOGRE
 #define KYOGRE_MISC_INFO                                                            \
         .types = MON_TYPES(TYPE_WATER),                                             \
         .catchRate = 3,                                                             \
@@ -20522,9 +20455,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Kyogre),
         FOLLOWER(Kyogre, TRACKS_NONE)
     },
-#endif //P_FAMILY_KYOGRE
 
-#if P_FAMILY_GROUDON
 #define GROUDON_MISC_INFO                                                           \
         .catchRate = 3,                                                             \
         .evYield_Attack = 3,                                                        \
@@ -20582,9 +20513,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Groudon),
         FOLLOWER(Groudon, TRACKS_FOOT)
     },
-#endif //P_FAMILY_GROUDON
 
-#if P_FAMILY_RAYQUAZA
 #define RAYQUAZA_MISC_INFO                                                          \
         .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),                               \
         .catchRate = 45,                                                            \
@@ -20645,9 +20574,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Rayquaza),
         FOLLOWER(Rayquaza, TRACKS_NONE)
     },
-#endif //P_FAMILY_RAYQUAZA
 
-#if P_FAMILY_JIRACHI
     [SPECIES_JIRACHI] =
     {
         .baseHP        = 100,
@@ -20703,9 +20630,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Jirachi, TRACKS_NONE)
         LEARNSETS(Jirachi),
     },
-#endif //P_FAMILY_JIRACHI
 
-#if P_FAMILY_DEOXYS
 #if P_UPDATED_EXP_YIELDS >= GEN_8
     #define DEOXYS_EXP_YIELD 300
 #elif P_UPDATED_EXP_YIELDS >= GEN_5
@@ -20840,9 +20765,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(DeoxysSpeed),
         .formChangeTable = sDeoxysSpeedFormChangeTable,
     },
-#endif //P_FAMILY_DEOXYS
 
-#if P_FAMILY_TURTWIG
     [SPECIES_TURTWIG] =
     {
         .baseHP        = 55,
@@ -20997,9 +20920,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Torterra, TRACKS_FOOT)
         LEARNSETS(Torterra),
     },
-#endif //P_FAMILY_TURTWIG
 
-#if P_FAMILY_CHIMCHAR
     [SPECIES_CHIMCHAR] =
     {
         .baseHP        = 44,
@@ -21156,9 +21077,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Infernape, TRACKS_FOOT)
         LEARNSETS(Infernape),
     },
-#endif //P_FAMILY_CHIMCHAR
 
-#if P_FAMILY_PIPLUP
     [SPECIES_PIPLUP] =
     {
         .baseHP        = 53,
@@ -21322,9 +21241,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Empoleon, TRACKS_FOOT)
         LEARNSETS(Empoleon),
     },
-#endif //P_FAMILY_PIPLUP
 
-#if P_FAMILY_STARLY
     [SPECIES_STARLY] =
     {
         .baseHP        = 40,
@@ -21483,9 +21400,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Staraptor, TRACKS_FOOT)
         LEARNSETS(Staraptor),
     },
-#endif //P_FAMILY_STARLY
 
-#if P_FAMILY_BIDOOF
     [SPECIES_BIDOOF] =
     {
         .baseHP        = 59,
@@ -21585,9 +21500,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bibarel, TRACKS_FOOT)
         LEARNSETS(Bibarel),
     },
-#endif //P_FAMILY_BIDOOF
 
-#if P_FAMILY_KRICKETOT
     [SPECIES_KRICKETOT] =
     {
         .baseHP        = 37,
@@ -21691,9 +21604,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Kricketune, TRACKS_FOOT)
         LEARNSETS(Kricketune),
     },
-#endif //P_FAMILY_KRICKETOT
 
-#if P_FAMILY_SHINX
     [SPECIES_SHINX] =
     {
         .baseHP        = 45,
@@ -21851,9 +21762,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Luxray, TRACKS_FOOT)
         LEARNSETS(Luxray),
     },
-#endif //P_FAMILY_SHINX
 
-#if P_FAMILY_CRANIDOS
     [SPECIES_CRANIDOS] =
     {
         .baseHP        = 67,
@@ -21950,9 +21859,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Rampardos, TRACKS_FOOT)
         LEARNSETS(Rampardos),
     },
-#endif //P_FAMILY_CRANIDOS
 
-#if P_FAMILY_SHIELDON
     [SPECIES_SHIELDON] =
     {
         .baseHP        = 30,
@@ -22049,9 +21956,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bastiodon, TRACKS_FOOT)
         LEARNSETS(Bastiodon),
     },
-#endif //P_FAMILY_SHIELDON
 
-#if P_FAMILY_COMBEE
     [SPECIES_COMBEE] =
     {
         .baseHP        = 30,
@@ -22155,9 +22060,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Vespiquen, TRACKS_FOOT)
         LEARNSETS(Vespiquen),
     },
-#endif //P_FAMILY_COMBEE
 
-#if P_FAMILY_PACHIRISU
     [SPECIES_PACHIRISU] =
     {
         .baseHP        = 60,
@@ -22206,9 +22109,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pachirisu, TRACKS_FOOT)
         LEARNSETS(Pachirisu),
     },
-#endif //P_FAMILY_PACHIRISU
 
-#if P_FAMILY_BUIZEL
     [SPECIES_BUIZEL] =
     {
         .baseHP        = 55,
@@ -22307,9 +22208,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Floatzel, TRACKS_FOOT)
         LEARNSETS(Floatzel),
     },
-#endif //P_FAMILY_BUIZEL
 
-#if P_FAMILY_CHERUBI
     [SPECIES_CHERUBI] =
     {
         .baseHP        = 45,
@@ -22433,9 +22332,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         PALETTES(CherrimSunshine),
         ICON(CherrimSunshine),
     },
-#endif //P_FAMILY_CHERUBI
 
-#if P_FAMILY_SHELLOS
 #define SHELLOS_MISC_INFO                                                               \
         .baseHP        = 76,                                                            \
         .baseAttack    = 48,                                                            \
@@ -22574,9 +22471,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(GastrodonEastSea),
         FOLLOWER(GastrodonEastSea, TRACKS_FOOT)
     },
-#endif //P_FAMILY_SHELLOS
 
-#if P_FAMILY_DRIFLOON
     [SPECIES_DRIFLOON] =
     {
         .baseHP        = 90,
@@ -22675,9 +22570,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Drifblim, TRACKS_FOOT)
         LEARNSETS(Drifblim),
     },
-#endif //P_FAMILY_DRIFLOON
 
-#if P_FAMILY_BUNEARY
     [SPECIES_BUNEARY] =
     {
         .baseHP        = 55,
@@ -22779,9 +22672,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Lopunny),
         FOLLOWER(Lopunny, TRACKS_FOOT)
     },
-#endif //P_FAMILY_BUNEARY
 
-#if P_FAMILY_BRONZOR
     [SPECIES_BRONZOR] =
     {
         .baseHP        = 57,
@@ -22883,9 +22774,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bronzong, TRACKS_FOOT)
         LEARNSETS(Bronzong),
     },
-#endif //P_FAMILY_BRONZOR
 
-#if P_FAMILY_GIBLE
     [SPECIES_GIBLE] =
     {
         .baseHP        = 58,
@@ -23046,9 +22935,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Garchomp),
         FOLLOWER(Garchomp, TRACKS_FOOT)
     },
-#endif //P_FAMILY_GIBLE
 
-#if P_FAMILY_RIOLU
     [SPECIES_RIOLU] =
     {
         .baseHP        = 40,
@@ -23147,9 +23034,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Lucario),
         FOLLOWER(Lucario, TRACKS_FOOT)
     },
-#endif //P_FAMILY_RIOLU
 
-#if P_FAMILY_HIPPOPOTAS
     [SPECIES_HIPPOPOTAS] =
     {
         .baseHP        = 68,
@@ -23246,9 +23131,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Hippowdon, TRACKS_FOOT)
         LEARNSETS(Hippowdon),
     },
-#endif //P_FAMILY_HIPPOPOTAS
 
-#if P_FAMILY_SKORUPI
     [SPECIES_SKORUPI] =
     {
         .baseHP        = 40,
@@ -23345,9 +23228,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Drapion, TRACKS_FOOT)
         LEARNSETS(Drapion),
     },
-#endif //P_FAMILY_SKORUPI
 
-#if P_FAMILY_CROAGUNK
     [SPECIES_CROAGUNK] =
     {
         .baseHP        = 48,
@@ -23446,9 +23327,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Toxicroak, TRACKS_FOOT)
         LEARNSETS(Toxicroak),
     },
-#endif //P_FAMILY_CROAGUNK
 
-#if P_FAMILY_SNOVER
     [SPECIES_SNOVER] =
     {
         .baseHP        = 60,
@@ -23552,9 +23431,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Abomasnow),
         FOLLOWER(Abomasnow, TRACKS_FOOT)
     },
-#endif //P_FAMILY_SNOVER
 
-#if P_FAMILY_ROTOM
 #define ROTOM_MISC_INFO                                             \
         .catchRate = 45,                                            \
         .evYield_Speed = 1,                                         \
@@ -23743,9 +23620,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(RotomMow),
         FOLLOWER(RotomMow, TRACKS_FOOT)
     },
-#endif //P_FAMILY_ROTOM
 
-#if P_FAMILY_HEATRAN
     [SPECIES_HEATRAN] =
     {
         .baseHP        = 91,
@@ -23800,9 +23675,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Heatran, TRACKS_FOOT)
         LEARNSETS(Heatran),
     },
-#endif //P_FAMILY_HEATRAN
 
-#if P_FAMILY_REGIGIGAS
     [SPECIES_REGIGIGAS] =
     {
         .baseHP        = 110,
@@ -23856,9 +23729,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Regigigas, TRACKS_FOOT)
         LEARNSETS(Regigigas),
     },
-#endif //P_FAMILY_REGIGIGAS
 
-#if P_FAMILY_SNIVY
     [SPECIES_SNIVY] =
     {
         .baseHP        = 45,
@@ -24004,9 +23875,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Serperior, TRACKS_FOOT)
         LEARNSETS(Serperior),
     },
-#endif //P_FAMILY_SNIVY
 
-#if P_FAMILY_TEPIG
     [SPECIES_TEPIG] =
     {
         .baseHP        = 65,
@@ -24153,7 +24022,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Emboar, TRACKS_FOOT)
         LEARNSETS(Emboar),
     },
-#endif //P_FAMILY_TEPIG
 
     [SPECIES_OSHAWOTT] =
     {
@@ -24305,7 +24173,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Samurott),
     },
 
-#if P_FAMILY_BLITZLE
     [SPECIES_BLITZLE] =
     {
         .baseHP        = 45,
@@ -24402,9 +24269,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Zebstrika, TRACKS_FOOT)
         LEARNSETS(Zebstrika),
     },
-#endif //P_FAMILY_BLITZLE
 
-#if P_FAMILY_DRILBUR
     [SPECIES_DRILBUR] =
     {
         .baseHP        = 60,
@@ -24503,9 +24368,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Excadrill, TRACKS_FOOT)
         LEARNSETS(Excadrill),
     },
-#endif //P_FAMILY_DRILBUR
 
-#if P_FAMILY_TIMBURR
     [SPECIES_TIMBURR] =
     {
         .baseHP        = 75,
@@ -24651,9 +24514,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Conkeldurr, TRACKS_FOOT)
         LEARNSETS(Conkeldurr),
     },
-#endif //P_FAMILY_TIMBURR
 
-#if P_FAMILY_SANDILE
     [SPECIES_SANDILE] =
     {
         .baseHP        = 50,
@@ -24808,9 +24669,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Krookodile, TRACKS_FOOT)
         LEARNSETS(Krookodile),
     },
-#endif //P_FAMILY_SANDILE
 
-#if P_FAMILY_DARUMAKA
 #define DARUMAKA_MISC_INFO                                                  \
         .baseHP        = 70,                                                \
         .baseAttack    = 90,                                                \
@@ -25051,9 +24910,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         PALETTES(DarmanitanGalarianZenMode),
         ICON(DarmanitanGalarianZenMode),
     },
-#endif //P_FAMILY_DARUMAKA
 
-#if P_FAMILY_SCRAGGY
     [SPECIES_SCRAGGY] =
     {
         .baseHP        = 50,
@@ -25153,9 +25010,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Scrafty, TRACKS_FOOT)
         LEARNSETS(Scrafty),
     },
-#endif //P_FAMILY_SCRAGGY
 
-#if P_FAMILY_YAMASK
 #define YAMASK_MISC_INFO                                                   \
         .catchRate = 190,                                                  \
         .expYield = 61,                                                    \
@@ -25259,9 +25114,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cofagrigus, TRACKS_FOOT)
         LEARNSETS(Cofagrigus),
     },
-#endif //P_FAMILY_YAMASK
 
-#if P_FAMILY_ZORUA
 #define ZORUA_MISC_INFO                                     \
         .catchRate = 75,                                    \
         .expYield = 66,                                     \
@@ -25428,9 +25281,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(ZoroarkHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_FAMILY_ZORUA
 
-#if P_FAMILY_GOTHITA
     [SPECIES_GOTHITA] =
     {
         .baseHP        = 45,
@@ -25576,9 +25427,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Gothitelle, TRACKS_FOOT)
         LEARNSETS(Gothitelle),
     },
-#endif //P_FAMILY_GOTHITA
 
-#if P_FAMILY_FOONGUS
     [SPECIES_FOONGUS] =
     {
         .baseHP        = 69,
@@ -25676,9 +25525,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Amoonguss, TRACKS_FOOT)
         LEARNSETS(Amoonguss),
     },
-#endif //P_FAMILY_FOONGUS
 
-#if P_FAMILY_FRILLISH
     [SPECIES_FRILLISH] =
     {
         .baseHP        = 55,
@@ -25783,9 +25630,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Jellicent, TRACKS_FOOT)
         LEARNSETS(Jellicent),
     },
-#endif //P_FAMILY_FRILLISH
 
-#if P_FAMILY_JOLTIK
     [SPECIES_JOLTIK] =
     {
         .baseHP        = 50,
@@ -25882,9 +25727,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Galvantula, TRACKS_FOOT)
         LEARNSETS(Galvantula),
     },
-#endif //P_FAMILY_JOLTIK
 
-#if P_FAMILY_FERROSEED
     [SPECIES_FERROSEED] =
     {
         .baseHP        = 44,
@@ -25984,9 +25827,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ferrothorn, TRACKS_FOOT)
         LEARNSETS(Ferrothorn),
     },
-#endif //P_FAMILY_FERROSEED
 
-#if P_FAMILY_ELGYEM
     [SPECIES_ELGYEM] =
     {
         .baseHP        = 55,
@@ -26083,9 +25924,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Beheeyem, TRACKS_FOOT)
         LEARNSETS(Beheeyem),
     },
-#endif //P_FAMILY_ELGYEM
 
-#if P_FAMILY_LITWICK
     [SPECIES_LITWICK] =
     {
         .baseHP        = 50,
@@ -26246,9 +26085,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chandelure, TRACKS_FOOT)
         LEARNSETS(Chandelure),
     },
-#endif //P_FAMILY_LITWICK
 
-#if P_FAMILY_AXEW
     [SPECIES_AXEW] =
     {
         .baseHP        = 46,
@@ -26394,9 +26231,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Haxorus, TRACKS_FOOT)
         LEARNSETS(Haxorus),
     },
-#endif //P_FAMILY_AXEW
 
-#if P_FAMILY_CUBCHOO
     [SPECIES_CUBCHOO] =
     {
         .baseHP        = 55,
@@ -26493,9 +26328,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Beartic, TRACKS_FOOT)
         LEARNSETS(Beartic),
     },
-#endif //P_FAMILY_CUBCHOO
 
-#if P_FAMILY_GOLETT
     [SPECIES_GOLETT] =
     {
         .baseHP        = 59,
@@ -26596,9 +26429,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Golurk, TRACKS_FOOT)
         LEARNSETS(Golurk),
     },
-#endif //P_FAMILY_GOLETT
 
-#if P_FAMILY_PAWNIARD
     [SPECIES_PAWNIARD] =
     {
         .baseHP        = 45,
@@ -26696,9 +26527,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bisharp, TRACKS_FOOT)
         LEARNSETS(Bisharp),
     },
-#endif //P_FAMILY_PAWNIARD
 
-#if P_FAMILY_RUFFLET
     [SPECIES_RUFFLET] =
     {
         .baseHP        = 70,
@@ -26840,9 +26669,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(BraviaryHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_FAMILY_RUFFLET
 
-#if P_FAMILY_VULLABY
     [SPECIES_VULLABY] =
     {
         .baseHP        = 70,
@@ -26939,9 +26766,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Mandibuzz, TRACKS_FOOT)
         LEARNSETS(Mandibuzz),
     },
-#endif //P_FAMILY_VULLABY
 
-#if P_FAMILY_DEINO
     [SPECIES_DEINO] =
     {
         .baseHP        = 52,
@@ -27088,9 +26913,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Hydreigon, TRACKS_FOOT)
         LEARNSETS(Hydreigon),
     },
-#endif //P_FAMILY_DEINO
 
-#if P_FAMILY_LARVESTA
     [SPECIES_LARVESTA] =
     {
         .baseHP        = 55,
@@ -27190,9 +27013,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Volcarona, TRACKS_FOOT)
         LEARNSETS(Volcarona),
     },
-#endif //P_FAMILY_LARVESTA
 
-#if P_FAMILY_CHESPIN
     [SPECIES_CHESPIN] =
     {
         .baseHP        = 56,
@@ -27338,7 +27159,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chesnaught, TRACKS_FOOT)
         LEARNSETS(Chesnaught),
     },
-#endif //P_FAMILY_CHESPIN
 
     [SPECIES_FENNEKIN] =
     {
@@ -27483,7 +27303,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Delphox),
     },
 
-#if P_FAMILY_FROAKIE
     [SPECIES_FROAKIE] =
     {
         .baseHP        = 41,
@@ -27634,9 +27453,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_V_STRETCH,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
     },
-#endif //P_FAMILY_FROAKIE
 
-#if P_FAMILY_BUNNELBY
     [SPECIES_BUNNELBY] =
     {
         .baseHP        = 38,
@@ -27733,9 +27550,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Diggersby, TRACKS_FOOT)
         LEARNSETS(Diggersby),
     },
-#endif //P_FAMILY_BUNNELBY
 
-#if P_FAMILY_FLETCHLING
     [SPECIES_FLETCHLING] =
     {
         .baseHP        = 45,
@@ -27883,9 +27698,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Talonflame, TRACKS_FOOT)
         LEARNSETS(Talonflame),
     },
-#endif //P_FAMILY_FLETCHLING
 
-#if P_FAMILY_SKIDDO
     [SPECIES_SKIDDO] =
     {
         .baseHP        = 66,
@@ -27982,9 +27795,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Gogoat, TRACKS_FOOT)
         LEARNSETS(Gogoat),
     },
-#endif //P_FAMILY_SKIDDO
 
-#if P_FAMILY_PANCHAM
     [SPECIES_PANCHAM] =
     {
         .baseHP        = 67,
@@ -28085,9 +27896,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pangoro, TRACKS_FOOT)
         LEARNSETS(Pangoro),
     },
-#endif //P_FAMILY_PANCHAM
 
-#if P_FAMILY_HONEDGE
     [SPECIES_HONEDGE] =
     {
         .baseHP        = 45,
@@ -28277,9 +28086,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         PALETTES(AegislashBlade),
         ICON(AegislashBlade),
     },
-#endif //P_FAMILY_HONEDGE
 
-#if P_FAMILY_TYRUNT
     [SPECIES_TYRUNT] =
     {
         .baseHP        = 58,
@@ -28375,9 +28182,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Tyrantrum, TRACKS_FOOT)
         LEARNSETS(Tyrantrum),
     },
-#endif //P_FAMILY_TYRUNT
 
-#if P_FAMILY_AMAURA
     [SPECIES_AMAURA] =
     {
         .baseHP        = 77,
@@ -28472,61 +28277,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Aurorus, TRACKS_FOOT)
         LEARNSETS(Aurorus),
     },
-#endif //P_FAMILY_AMAURA
 
-#if P_FAMILY_CARBINK
-    [SPECIES_CARBINK] =
-    {
-        .baseHP        = 50,
-        .baseAttack    = 50,
-        .baseDefense   = 150,
-        .baseSpeed     = 50,
-        .baseSpAttack  = 50,
-        .baseSpDefense = 150,
-        .types = MON_TYPES(TYPE_ROCK, TYPE_FAIRY),
-        .catchRate = 60,
-        .expYield = 100,
-        .evYield_Defense = 1,
-        .evYield_SpDefense = 1,
-        .genderRatio = MON_GENDERLESS,
-        .eggCycles = 25,
-        .friendship = STANDARD_FRIENDSHIP,
-        .growthRate = GROWTH_SLOW,
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
-        .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_STURDY},
-        .bodyColor = BODY_COLOR_GRAY,
-        .speciesName = _("Carbink"),
-        .cryId = CRY_CARBINK,
-        .natDexNum = DEX_CARBINK,
-        .categoryName = _("Jewel"),
-        .height = 3,
-        .weight = 57,
-        .description = COMPOUND_STRING(
-            "Born from the high temperatures and\n"
-            "pressures deep underground, it defends\n"
-            "itself by firing beams from the jewel part\n"
-            "of its body."),
-        .pokemonScale = 530,
-        .pokemonOffset = 13,
-        .trainerScale = 256,
-        .trainerOffset = 0,
-        FRONT_PIC(Carbink, 48, 48),
-        .frontPicYOffset = 10,
-        .frontAnimFrames = sAnims_Carbink,
-        .frontAnimId = ANIM_ZIGZAG_SLOW,
-        .enemyMonElevation = 4,
-        BACK_PIC(Carbink, 56, 56),
-        .backPicYOffset = 7,
-        .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Carbink),
-        ICON(Carbink),
-        FOLLOWER(Carbink, TRACKS_FOOT)
-        LEARNSETS(Carbink),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DIANCIE}),
-    },
-#endif //P_FAMILY_CARBINK
-
-#if P_FAMILY_GOOMY
     [SPECIES_GOOMY] =
     {
         .baseHP        = 45,
@@ -28680,9 +28431,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Goodra, TRACKS_FOOT)
         LEARNSETS(Goodra),
     },
-#endif //P_FAMILY_GOOMY
 
-#if P_FAMILY_PHANTUMP
     [SPECIES_PHANTUMP] =
     {
         .baseHP        = 43,
@@ -28781,9 +28530,57 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Trevenant, TRACKS_FOOT)
         LEARNSETS(Trevenant),
     },
-#endif //P_FAMILY_PHANTUMP
 
-#if P_FAMILY_DIANCIE
+    [SPECIES_CARBINK] =
+    {
+        .baseHP        = 50,
+        .baseAttack    = 50,
+        .baseDefense   = 150,
+        .baseSpeed     = 50,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 150,
+        .types = MON_TYPES(TYPE_ROCK, TYPE_FAIRY),
+        .catchRate = 60,
+        .expYield = 100,
+        .evYield_Defense = 1,
+        .evYield_SpDefense = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
+        .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_STURDY},
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Carbink"),
+        .cryId = CRY_CARBINK,
+        .natDexNum = DEX_CARBINK,
+        .categoryName = _("Jewel"),
+        .height = 3,
+        .weight = 57,
+        .description = COMPOUND_STRING(
+            "Born from the high temperatures and\n"
+            "pressures deep underground, it defends\n"
+            "itself by firing beams from the jewel part\n"
+            "of its body."),
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        FRONT_PIC(Carbink, 48, 48),
+        .frontPicYOffset = 10,
+        .frontAnimFrames = sAnims_Carbink,
+        .frontAnimId = ANIM_ZIGZAG_SLOW,
+        .enemyMonElevation = 4,
+        BACK_PIC(Carbink, 56, 56),
+        .backPicYOffset = 7,
+        .backAnimId = BACK_ANIM_H_VIBRATE,
+        PALETTES(Carbink),
+        ICON(Carbink),
+        FOLLOWER(Carbink, TRACKS_FOOT)
+        LEARNSETS(Carbink),
+        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DIANCIE}),
+    },
+
 #define DIANCE_MISC_INFO                                                                \
         .types = MON_TYPES(TYPE_ROCK, TYPE_FAIRY),                                      \
         .catchRate = 3,                                                                 \
@@ -28838,9 +28635,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Diancie),
         FOLLOWER(Diancie, TRACKS_FOOT)
     },
-#endif //P_FAMILY_DIANCIE
 
-#if P_FAMILY_ROWLET
     [SPECIES_ROWLET] =
     {
         .baseHP        = 68,
@@ -29023,9 +28818,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(DecidueyeHisuian),
         .isHisuianForm = TRUE,
     },
-#endif //P_FAMILY_ROWLET
 
-#if P_FAMILY_LITTEN
     [SPECIES_LITTEN] =
     {
         .baseHP        = 45,
@@ -29171,9 +28964,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Incineroar, TRACKS_FOOT)
         LEARNSETS(Incineroar),
     },
-#endif //P_FAMILY_LITTEN
 
-#if P_FAMILY_POPPLIO
     [SPECIES_POPPLIO] =
     {
         .baseHP        = 50,
@@ -29319,9 +29110,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Primarina, TRACKS_FOOT)
         LEARNSETS(Primarina),
     },
-#endif //P_FAMILY_POPPLIO
 
-#if P_FAMILY_ROCKRUFF
 #define ROCKRUFF_MISC_INFO                                      \
         .baseHP        = 45,                                    \
         .baseAttack    = 65,                                    \
@@ -29485,9 +29274,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(LycanrocDusk, TRACKS_FOOT)
         LEARNSETS(LycanrocDusk),
     },
-#endif //P_FAMILY_ROCKRUFF
 
-#if P_FAMILY_SANDYGAST
     [SPECIES_SANDYGAST] =
     {
         .baseHP        = 55,
@@ -29586,9 +29373,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Palossand, TRACKS_FOOT)
         LEARNSETS(Palossand),
     },
-#endif //P_FAMILY_SANDYGAST
 
-#if P_FAMILY_MIMIKYU
 #define MIMIKYU_MISC_INFO                                           \
         .baseHP        = 55,                                        \
         .baseAttack    = 90,                                        \
@@ -29661,9 +29446,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         PALETTES(MimikyuBusted),
         ICON(MimikyuBusted, 1),
     },
-#endif //P_FAMILY_MIMIKYU
 
-#if P_FAMILY_JANGMO_O
     [SPECIES_JANGMO_O] =
     {
         .baseHP        = 45,
@@ -29812,9 +29595,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(KommoO, TRACKS_FOOT)
         LEARNSETS(KommoO),
     },
-#endif //P_FAMILY_JANGMO_O
 
-#if P_FAMILY_ROOKIDEE
     [SPECIES_ROOKIDEE] =
     {
         .baseHP        = 38,
@@ -29966,9 +29747,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Corviknight),
         FOLLOWER(Corviknight, TRACKS_FOOT)
     },
-#endif //P_FAMILY_ROOKIDEE
 
-#if P_FAMILY_BLIPBUG
     [SPECIES_BLIPBUG] =
     {
         .baseHP        = 25,
@@ -30122,9 +29901,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Orbeetle),
         FOLLOWER(Orbeetle, TRACKS_FOOT)
     },
-#endif //P_FAMILY_BLIPBUG
 
-#if P_FAMILY_TOXEL
     [SPECIES_TOXEL] =
     {
         .baseHP        = 40,
@@ -30256,9 +30033,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(ToxtricityLowKey, TRACKS_FOOT)
         LEARNSETS(ToxtricityLowKey),
     },
-#endif //P_FAMILY_TOXEL
 
-#if P_FAMILY_SNOM
     [SPECIES_SNOM] =
     {
         .baseHP        = 30,
@@ -30358,9 +30133,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Frosmoth, TRACKS_FOOT)
         LEARNSETS(Frosmoth),
     },
-#endif //P_FAMILY_SNOM
 
-#if P_FAMILY_DREEPY
     [SPECIES_DREEPY] =
     {
         .baseHP        = 28,
@@ -30507,9 +30280,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Dragapult, TRACKS_FOOT)
         LEARNSETS(Dragapult),
     },
-#endif //P_FAMILY_DREEPY
 
-#if P_FAMILY_REGIELEKI
     [SPECIES_REGIELEKI] =
     {
         .baseHP        = 80,
@@ -30558,9 +30329,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         LEARNSETS(Regieleki),
         .isLegendary = TRUE,
     },
-#endif //P_FAMILY_REGIELEKI
 
-#if P_FAMILY_REGIDRAGO
     [SPECIES_REGIDRAGO] =
     {
         .baseHP        = 200,
@@ -30609,9 +30378,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Regidrago, TRACKS_FOOT)
         LEARNSETS(Regidrago),
     },
-#endif //P_FAMILY_REGIDRAGO
 
-#if P_FAMILY_GLIMMET
     [SPECIES_GLIMMET] =
     {
         .baseHP        = 48,
@@ -30706,9 +30473,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Glimmora),
         LEARNSETS(Glimmora),
     },
-#endif //P_FAMILY_GLIMMET
 
-#if P_FAMILY_GREAVARD
     [SPECIES_GREAVARD] =
     {
         .baseHP        = 50,
@@ -30801,7 +30566,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICON(Houndstone),
         LEARNSETS(Houndstone),
     },
-#endif //P_FAMILY_GREAVARD
 
     [SPECIES_EGG] =
     {

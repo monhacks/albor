@@ -39,7 +39,7 @@
 - Last Respects como una versión de paliza fantasma.
 - Darle bunker a Tentacruel.
 - Cambiar animación de Presente.
-- Dentera: ataque custom de Vanilluxe que impide movimientos de mordedura.
+- Dentera: ataque custom que impide movimientos de mordedura.
 - Crear ataque Abducción (animación otra vez).
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
