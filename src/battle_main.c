@@ -278,7 +278,7 @@ static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 
 // extra args are money and ball
 #define TRAINER_CLASS(trainerClass, trainerName, ...)   \
-    [trainerClass] =                                    \
+    [TRAINER_CLASS_##trainerClass] =                    \
     {                                                   \
         .name = _(trainerName),                         \
         .money = DEFAULT(5, __VA_ARGS__),               \
@@ -4999,8 +4999,6 @@ bool32 TrySetAteType(u32 move, u32 battlerAtk, u32 attackerAbility)
             return FALSE;
         break;
     case EFFECT_TERA_STARSTORM:
-        if (gBattleMons[battlerAtk].species == SPECIES_TERAPAGOS_STELLAR)
-            return FALSE;
         break;
     case EFFECT_HIDDEN_POWER:
     case EFFECT_WEATHER_BALL:
@@ -5046,30 +5044,22 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
 {
     u32 moveType = gMovesInfo[move].type;
     u32 moveEffect = gMovesInfo[move].effect;
-    u32 species, heldItem, holdEffect, ability, type1, type2, type3;
+    u32 heldItem, holdEffect, ability;
 
     if (move == MOVE_STRUGGLE)
         return TYPE_NORMAL;
 
     if (gMain.inBattle)
     {
-        species = gBattleMons[battler].species;
         heldItem = gBattleMons[battler].item;
         holdEffect = GetBattlerHoldEffect(battler, TRUE);
         ability = GetBattlerAbility(battler);
-        type1 = gBattleMons[battler].types[0];
-        type2 = gBattleMons[battler].types[1];
-        type3 = gBattleMons[battler].types[2];
     }
     else
     {
-        species = GetMonData(mon, MON_DATA_SPECIES);
         heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
         holdEffect = ItemId_GetHoldEffect(heldItem);
         ability = GetMonAbility(mon);
-        type1 = gSpeciesInfo[species].types[0];
-        type2 = gSpeciesInfo[species].types[1];
-        type3 = TYPE_MYSTERY;
     }
 
     switch (moveEffect)
@@ -5144,90 +5134,12 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
             return ItemId_GetSecondaryId(heldItem);
         break;
     case EFFECT_REVELATION_DANCE:
-        if (GetActiveGimmick(battler) != GIMMICK_Z_MOVE)
-        {
-            u32 teraType;
-            if (GetActiveGimmick(battler) == GIMMICK_TERA && ((teraType = GetMonData(mon, MON_DATA_TERA_TYPE)) != TYPE_STELLAR))
-                return teraType;
-            else if (type1 != TYPE_MYSTERY && !(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST && type1 == TYPE_FLYING))
-                return type1;
-            else if (type2 != TYPE_MYSTERY && !(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST && type2 == TYPE_FLYING))
-                return type2;
-            else if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_ROOST)
-                return (B_ROOST_PURE_FLYING >= GEN_5 ? TYPE_NORMAL : TYPE_MYSTERY);
-            else if (type3 != TYPE_MYSTERY)
-                return type3;
-            else
-                return TYPE_MYSTERY;
-        }
-        break;
     case EFFECT_RAGING_BULL:
-        switch (species)
-        {
-        case SPECIES_TAUROS_PALDEA_COMBAT:
-        case SPECIES_TAUROS_PALDEA_BLAZE:
-        case SPECIES_TAUROS_PALDEA_AQUA:
-            return type2;
-        }
-        break;
     case EFFECT_IVY_CUDGEL:
-        switch (species)
-        {
-        case SPECIES_OGERPON_WELLSPRING:
-        case SPECIES_OGERPON_HEARTHFLAME:
-        case SPECIES_OGERPON_CORNERSTONE:
-        case SPECIES_OGERPON_WELLSPRING_TERA:
-        case SPECIES_OGERPON_HEARTHFLAME_TERA:
-        case SPECIES_OGERPON_CORNERSTONE_TERA:
-            return type2;
-        }
-        break;
     case EFFECT_NATURAL_GIFT:
-        if (ItemId_GetPocket(heldItem) == POCKET_BERRIES)
-            return gNaturalGiftTable[ITEM_TO_BERRY(heldItem)].type;
-        else
-            return moveType;
     case EFFECT_TERRAIN_PULSE:
-        if (gMain.inBattle)
-        {
-            if (IsBattlerTerrainAffected(battler, STATUS_FIELD_TERRAIN_ANY))
-            {
-                if (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN)
-                    return TYPE_ELECTRIC;
-                else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN)
-                    return TYPE_GRASS;
-                else if (gFieldStatuses & STATUS_FIELD_MISTY_TERRAIN)
-                    return TYPE_FAIRY;
-                else if (gFieldStatuses & STATUS_FIELD_PSYCHIC_TERRAIN)
-                    return TYPE_PSYCHIC;
-                else //failsafe
-                    return moveType;
-            }
-        }
-        else
-        {
-            switch (gWeatherPtr->currWeather)
-            {
-            case WEATHER_RAIN_THUNDERSTORM:
-                if (B_THUNDERSTORM_TERRAIN)
-                    return TYPE_ELECTRIC;
-                break;
-            case WEATHER_FOG_HORIZONTAL:
-            case WEATHER_FOG_DIAGONAL:
-                if (B_OVERWORLD_FOG >= GEN_8)
-                    return TYPE_FAIRY;
-                break;
-            }
-            return moveType;
-        }
-        break;
     case EFFECT_TERA_BLAST:
-        if (GetActiveGimmick(battler) == GIMMICK_TERA)
-            return GetMonData(mon, MON_DATA_TERA_TYPE);
-        break;
     case EFFECT_TERA_STARSTORM:
-        if (species == SPECIES_TERAPAGOS_STELLAR)
-            return TYPE_STELLAR;
         break;
     }
 

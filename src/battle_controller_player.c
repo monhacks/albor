@@ -48,7 +48,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
-#include "caps.h"
 #include "menu.h"
 #include "pokemon_summary_screen.h"
 

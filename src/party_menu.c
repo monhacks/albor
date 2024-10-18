@@ -32,7 +32,6 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "caps.h"
 #include "link.h"
 #include "mail.h"
 #include "main.h"
@@ -436,7 +435,6 @@ static void Task_HandleSwitchItemsFromBagYesNoInput(u8);
 static void Task_ValidateChosenHalfParty(u8);
 static bool8 GetBattleEntryEligibility(struct Pokemon *);
 static bool8 HasPartySlotAlreadyBeenSelected(u8);
-static u8 GetBattleEntryLevelCap(void);
 static u8 GetMaxBattleEntries(void);
 static u8 GetMinBattleEntries(void);
 static void Task_ContinueChoosingHalfParty(u8);
@@ -5152,16 +5150,14 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
+    if (sInitialLevel != MAX_LEVEL)
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
         BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
     }
     else
-    {
         cannotUseEffect = TRUE;
-    }
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {
@@ -6219,13 +6215,10 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u32 species;
 
     if (GetMonData(mon, MON_DATA_IS_EGG)
-        || GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap()
         || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
             && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
             && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
-    {
         return FALSE;
-    }
 
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
@@ -6339,19 +6332,6 @@ static u8 GetMinBattleEntries(void)
         return 1;
     default: // Battle Frontier
         return gSpecialVar_5;
-    }
-}
-
-static u8 GetBattleEntryLevelCap(void)
-{
-    switch (VarGet(VAR_FRONTIER_FACILITY))
-    {
-    case FACILITY_MULTI_OR_EREADER:
-        return MAX_LEVEL;
-    default: // Battle Frontier
-        if (gSpecialVar_4 == FRONTIER_LVL_50)
-            return FRONTIER_MAX_LEVEL_50;
-        return FRONTIER_MAX_LEVEL_OPEN;
     }
 }
 

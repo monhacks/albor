@@ -2037,7 +2037,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
 {
     u8 headerType = ScriptReadByte(ctx);
     struct WindowTemplate template;
-    u16 item = gSpecialVar_0x8006;
+    u16 item = gSpecialVar_6;
     u8 textY;
     u8 *dst;
     bool8 handleFlash = FALSE;
@@ -2077,10 +2077,10 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
 {
     DestroyItemIconSprite();
 
-    if (!GetSetItemObtained(gSpecialVar_0x8006, FLAG_GET_ITEM_OBTAINED))
+    if (!GetSetItemObtained(gSpecialVar_6, FLAG_GET_ITEM_OBTAINED))
     {
         //header box only exists if haven't seen item before
-        GetSetItemObtained(gSpecialVar_0x8006, FLAG_SET_ITEM_OBTAINED);
+        GetSetItemObtained(gSpecialVar_6, FLAG_SET_ITEM_OBTAINED);
         ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
         CopyWindowToVram(sHeaderBoxWindowId, 3);
         RemoveWindow(sHeaderBoxWindowId);

@@ -5,7 +5,6 @@
 #include "config/battle.h"
 #include "config/debug.h"
 #include "config/item.h"
-#include "config/caps.h"
 #include "config/pokemon.h"
 #include "config/overworld.h"
 

@@ -27,7 +27,6 @@
 #include "bg.h"
 #include "string_util.h"
 #include "pokemon_icon.h"
-#include "caps.h"
 #include "m4a.h"
 #include "mail.h"
 #include "event_data.h"
@@ -1987,32 +1986,16 @@ static void Cmd_critcalc(void)
     u16 partySlot;
     s32 critChance;
 
-    if (B_CRIT_CHANCE == GEN_1)
-        critChance = CalcCritChanceStageGen1(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
-    else
-        critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
+    critChance = CalcCritChanceStage(gBattlerAttacker, gBattlerTarget, gCurrentMove, TRUE);
 
     gPotentialItemEffectBattler = gBattlerAttacker;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
-        gIsCriticalHit = FALSE;
-    else if (critChance == -1)
+    if (critChance == -1)
         gIsCriticalHit = FALSE;
     else if (critChance == -2)
         gIsCriticalHit = TRUE;
     else
-    {
-        if (B_CRIT_CHANCE == GEN_1)
-        {
-            u8 critRoll = RandomUniform(RNG_CRITICAL_HIT, 1, 256);
-            if (critRoll <= critChance)
-                gIsCriticalHit = 1;
-            else
-                gIsCriticalHit = 0;
-        }
-        else
-            gIsCriticalHit = RandomChance(RNG_CRITICAL_HIT, 1, sCriticalHitOdds[critChance]);
-    }
+        gIsCriticalHit = RandomChance(RNG_CRITICAL_HIT, 1, sCriticalHitOdds[critChance]);
 
     // Counter for EVO_CRITICAL_HITS.
     partySlot = gBattlerPartyIndexes[gBattlerAttacker];
@@ -3814,41 +3797,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                 }
                 break;
             case MOVE_EFFECT_ORDER_UP:
-                {
-                    u32 stat = 0;
-                    bool32 commanderAffected = TRUE;
-                    switch (gBattleStruct->commanderActive[gEffectBattler])
-                    {
-                    case SPECIES_TATSUGIRI_CURLY:
-                        stat = STAT_ATK;
-                        break;
-                    case SPECIES_TATSUGIRI_DROOPY:
-                        stat = STAT_DEF;
-                        break;
-                    case SPECIES_TATSUGIRI_STRETCHY:
-                        stat = STAT_SPEED;
-                        break;
-                    default:
-                        commanderAffected = FALSE;
-                        break;
-                    }
-                    if (!commanderAffected
-                     || NoAliveMonsForEitherParty()
-                     || ChangeStatBuffs(SET_STAT_BUFF_VALUE(1),
-                                        stat,
-                                        affectsUser | STAT_CHANGE_UPDATE_MOVE_EFFECT,
-                                        0) == STAT_CHANGE_DIDNT_WORK)
-                    {
-                        gBattlescriptCurrInstr++;
-                    }
-                    else
-                    {
-                        gBattleScripting.animArg1 = gBattleScripting.moveEffect & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-                        gBattleScripting.animArg2 = 0;
-                        BattleScriptPush(gBattlescriptCurrInstr + 1);
-                        gBattlescriptCurrInstr = BattleScript_StatUp;
-                    }
-                }
                 break;
             }
         }
@@ -4389,29 +4337,15 @@ static void Cmd_getexp(void)
                 if (IsValidForBattle(&gPlayerParty[*expMonId]))
                 {
                     if (wasSentOut)
-                        gBattleMoveDamage = GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expValue);
+                        gBattleMoveDamage = gBattleStruct->expValue;
                     else
                         gBattleMoveDamage = 0;
 
                     if ((holdEffect == HOLD_EFFECT_EXP_SHARE || IsGen6ExpShareEnabled())
                         && (B_SPLIT_EXP < GEN_6 || gBattleMoveDamage == 0)) // only give exp share bonus in later gens if the mon wasn't sent out
-                    {
-                        gBattleMoveDamage += GetSoftLevelCapExpValue(gPlayerParty[*expMonId].level, gBattleStruct->expShareExpValue);;
-                    }
+                        gBattleMoveDamage += gBattleStruct->expShareExpValue;
 
                     ApplyExperienceMultipliers(&gBattleMoveDamage, *expMonId, gBattlerFainted);
-
-                    if (B_EXP_CAP_TYPE == EXP_CAP_HARD && gBattleMoveDamage != 0)
-                    {
-                        u32 growthRate = gSpeciesInfo[GetMonData(&gPlayerParty[*expMonId], MON_DATA_SPECIES)].growthRate;
-                        u32 currentExp = GetMonData(&gPlayerParty[*expMonId], MON_DATA_EXP);
-                        u32 levelCap = GetCurrentLevelCap();
-
-                        if (GetMonData(&gPlayerParty[*expMonId], MON_DATA_LEVEL) >= levelCap)
-                            gBattleMoveDamage = 0;
-                        else if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleMoveDamage)
-                            gBattleMoveDamage = gExperienceTables[growthRate][levelCap] - currentExp;
-                    }
 
                     if (IsTradedMon(&gPlayerParty[*expMonId]))
                     {
