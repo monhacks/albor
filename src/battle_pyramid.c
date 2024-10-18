@@ -1442,12 +1442,6 @@ u8 InBattlePyramid(void)
         return FALSE;
 }
 
-bool8 InBattlePyramid_(void)
-{
-    return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR
-        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP;
-}
-
 void PausePyramidChallenge(void)
 {
     if (InBattlePyramid())

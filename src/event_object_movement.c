@@ -1474,7 +1474,6 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 {
     struct SpriteTemplate *spriteTemplate;
     const struct SubspriteTable *subspriteTables;
-    const struct ObjectEventGraphicsInfo *graphicsInfo = GetObjectEventGraphicsInfo(graphicsId);
     struct Sprite *sprite;
     u8 spriteId;
     bool32 isShiny = graphicsId >= SPECIES_SHINY_TAG + OBJ_EVENT_GFX_MON_BASE;
@@ -1609,7 +1608,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
         if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
             LoadCompressedSpritePaletteWithTag(palette, species);
         else
-            LoadCompressedSpritePaletteWithTagHueShifted(palette, GetMonData(&mon, MON_DATA_PERSONALITY));
+            LoadCompressedSpritePaletteWithTagHueShifted(palette, species, GetMonData(mon, MON_DATA_PERSONALITY));
 
         paletteNum = IndexOfSpritePaletteTag(species);
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);

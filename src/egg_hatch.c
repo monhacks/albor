@@ -417,7 +417,7 @@ static u8 EggHatchCreateMonSprite(u8 useAlt, u8 state, u8 partyId, u16 *speciesL
             HandleLoadSpecialPokePic(TRUE,
                                      gMonSpritesGfxPtr->spritesGfx[(useAlt * 2) + B_POSITION_OPPONENT_LEFT],
                                      species, pid);
-            LoadCompressedSpritePaletteWithTagHueShifted(GetMonFrontSpritePal(mon), pid);
+            LoadCompressedSpritePaletteWithTagHueShifted(GetMonFrontSpritePal(mon), species, pid);
             *speciesLoc = species;
         }
         break;

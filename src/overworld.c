@@ -1975,9 +1975,9 @@ bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId)
     switch (caseId)
     {
     case FLAG_GET_ITEM_OBTAINED:
-        return gSaveBlock3Ptr->itemFlags[index] & mask;
+        return gSaveBlock2Ptr->itemFlags[index] & mask;
     case FLAG_SET_ITEM_OBTAINED:
-        gSaveBlock3Ptr->itemFlags[index] |= mask;
+        gSaveBlock2Ptr->itemFlags[index] |= mask;
         return TRUE;
     }
 #endif
@@ -2042,7 +2042,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     u8 *dst;
     bool8 handleFlash = FALSE;
 
-    if (GetFlashLevel() > 0 || InBattlePyramid_())
+    if (GetFlashLevel() > 0)
         handleFlash = TRUE;
 
     if (headerType == 1) // berry
@@ -2141,7 +2141,7 @@ static void DestroyItemIconSprite(void)
     FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId]);
     DestroySprite(&gSprites[sItemIconSpriteId]);
 
-    if ((GetFlashLevel() > 0 || InBattlePyramid_()) && sItemIconSpriteId2 != MAX_SPRITES)
+    if ((GetFlashLevel() > 0) && sItemIconSpriteId2 != MAX_SPRITES)
     {
         FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId2]);
         DestroySprite(&gSprites[sItemIconSpriteId2]);
