@@ -354,13 +354,13 @@ EventScript_EndSurface::
 	end
 
 EventScript_DigCommon:
-	isfollowerfieldmoveuser VAR_0x8004
-	setfieldeffectargument 3, VAR_0x8004 @ skip pose if true
+	isfollowerfieldmoveuser SPECIAL_VAR_4
+	setfieldeffectargument 3, SPECIAL_VAR_4 @ skip pose if true
 	dofieldeffect FLDEFF_USE_DIG
 	waitstate
 EventScript_DigSealedChamber:: @ fallthrough
 	setflag FLAG_SAFE_FOLLOWER_MOVEMENT
-	call_if_eq VAR_0x8004, TRUE, EventScript_FollowerFieldMove
+	call_if_eq SPECIAL_VAR_4, TRUE, EventScript_FollowerFieldMove
 	callnative DoBrailleDigEffect
 	releaseall
 	end

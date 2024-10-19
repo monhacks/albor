@@ -1437,13 +1437,7 @@ void FieldUseFunc_TmCase(u8 taskId)
 
 static void Task_DisplayPokeFluteMessage(u8 taskId)
 {
-    if (WaitFanfare(FALSE))
-    {
-        if (gTasks[taskId].data[3] == 0)
-            DisplayItemMessage(taskId, FONT_NORMAL, gText_PokeFluteAwakenedMon, CloseItemMessage);
-        else
-            DisplayItemMessageOnField(taskId, gText_PokeFluteAwakenedMon, Task_CloseCantUseKeyItemMessage);
-    }
+
 }
 
 static void Task_PlayPokeFlute(u8 taskId)
@@ -1454,29 +1448,7 @@ static void Task_PlayPokeFlute(u8 taskId)
 
 void ItemUseOutOfBattle_PokeFlute(u8 taskId)
 {
-    bool32 wokeSomeoneUp = FALSE;
-    u32 i;
-
-    for (i = 0; i < CalculatePlayerPartyCount(); i++)
-    {
-        if (!ExecuteTableBasedItemEffect(&gPlayerParty[i], ITEM_AWAKENING, i, 0))
-            wokeSomeoneUp = TRUE;
-    }
-
-    if (wokeSomeoneUp)
-    {
-        if (gTasks[taskId].data[3] == 0)
-            DisplayItemMessage(taskId, FONT_NORMAL, gText_PlayedPokeFlute, Task_PlayPokeFlute);
-        else
-            DisplayItemMessageOnField(taskId, gText_PlayedPokeFlute, Task_PlayPokeFlute);
-    }
-    else
-    {
-        if (gTasks[taskId].data[3] == 0)
-            DisplayItemMessage(taskId, FONT_NORMAL, gText_PlayedPokeFluteCatchy, CloseItemMessage);
-        else
-            DisplayItemMessageOnField(taskId, gText_PlayedPokeFluteCatchy, Task_CloseCantUseKeyItemMessage);
-    }
+    
 }
 
 static void ItemUseOnFieldCB_TownMap(u8 taskId)

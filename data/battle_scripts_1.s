@@ -6970,10 +6970,7 @@ BattleScript_MegaEvolution::
 	end3
 
 BattleScript_WishMegaEvolution::
-	flushtextbox
-	trytrainerslidemegaevolutionmsg
-	printstring STRINGID_FERVENTWISHREACHED
-	goto BattleScript_MegaEvolutionAfterString
+	end3
 
 BattleScript_PrimalReversion::
 	call BattleScript_PrimalReversionRet
@@ -9855,10 +9852,6 @@ BattleScript_LowerSideStatsEnd:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSetWeather::
-	playanimation 0, B_ANIM_MAX_SET_WEATHER
-	printfromtable gMoveWeatherChangeStringIds
-	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_ActivateWeatherAbilities
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSetTerrain::
@@ -10033,15 +10026,6 @@ BattleScript_EffectSteelsurge::
 @@@ END MAX MOVES @@@
 
 BattleScript_DynamaxBegins::
-	flushtextbox
-	trytrainerslidedynamaxmsg
-	returnatktoball
-	pause B_WAIT_TIME_SHORT
-	returntoball BS_SCRIPTING, TRUE
-	switchinanim BS_SCRIPTING, TRUE
-	updatedynamax
-	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
-	waitanimation
 	end3
 
 BattleScript_DynamaxEnds::

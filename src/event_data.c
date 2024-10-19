@@ -15,6 +15,10 @@ EWRAM_DATA u16 gSpecialVar_4 = 0;
 EWRAM_DATA u16 gSpecialVar_5 = 0;
 EWRAM_DATA u16 gSpecialVar_6 = 0;
 EWRAM_DATA u16 gSpecialVar_7 = 0;
+EWRAM_DATA u16 gSpecialVar_8 = 0;
+EWRAM_DATA u16 gSpecialVar_9 = 0;
+EWRAM_DATA u16 gSpecialVar_10 = 0;
+EWRAM_DATA u16 gSpecialVar_11 = 0;
 
 EWRAM_DATA u16 gSpecialVar_Result = 0;
 EWRAM_DATA u16 gSpecialVar_LastTalked = 0;

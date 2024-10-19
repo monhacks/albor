@@ -2,7 +2,7 @@
 .set AMOUNT, SPECIAL_VAR_1
 
 Std_ObtainItem::
-	copyvar VAR_0x8006, ITEMID
+	copyvar SPECIAL_VAR_6, ITEMID
 	additem ITEMID, AMOUNT
 	copyvar SPECIAL_VAR_7, SPECIAL_VAR_RESULT
 	call EventScript_ObtainItemMessage
@@ -64,7 +64,7 @@ EventScript_ContinueObtainedItem:
 	waitfanfare
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
-	setvar VAR_RESULT, TRUE
+	setvar SPECIAL_VAR_RESULT, TRUE
 	return
 
 EventScript_NoRoomForItem::
@@ -107,9 +107,9 @@ Std_FindItem::
 	lock
 	faceplayer
 	waitse
-	copyvar VAR_0x8006, ITEMID
-	copyvar VAR_0x8004, ITEMID
-	copyvar VAR_0x8005, AMOUNT
+	copyvar SPECIAL_VAR_6, ITEMID
+	copyvar SPECIAL_VAR_4, ITEMID
+	copyvar SPECIAL_VAR_5, AMOUNT
 	checkitemspace ITEMID, AMOUNT
 	copyvar SPECIAL_VAR_7, SPECIAL_VAR_RESULT
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
@@ -121,13 +121,13 @@ Std_FindItem::
 	return
 
 EventScript_PickUpItem::
-	removeobject VAR_LAST_TALKED
-	additem VAR_0x8004, VAR_0x8005
-	copyvar VAR_0x8006 VAR_0x8004
-	specialvar VAR_RESULT, BufferTMHMMoveName
-	copyvar VAR_0x8008, VAR_RESULT
-	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
-	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
+	removeobject SPECIAL_VAR_LAST_TALKED
+	additem SPECIAL_VAR_4, SPECIAL_VAR_5
+	copyvar SPECIAL_VAR_6 SPECIAL_VAR_4
+	specialvar SPECIAL_VAR_RESULT, BufferTMHMMoveName
+	copyvar SPECIAL_VAR_8, SPECIAL_VAR_RESULT
+	call_if_eq SPECIAL_VAR_8, TRUE, EventScript_FoundTMHM
+	call_if_eq SPECIAL_VAR_8, FALSE, EventScript_FoundItem
 	delay 10
 	showitemdescription
 	waitfanfare
@@ -175,11 +175,11 @@ EventScript_NoRoomToPickUpItem::
 EventScript_HiddenItemScript::
 	lockall
 	waitse
-	copyvar VAR_0x8006, VAR_0x8005
-	additem VAR_0x8005
-	copyvar VAR_0x8007, VAR_RESULT
-	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
-	checkitemtype VAR_0x8005
+	copyvar SPECIAL_VAR_6, SPECIAL_VAR_5
+	additem SPECIAL_VAR_5
+	copyvar SPECIAL_VAR_7, SPECIAL_VAR_RESULT
+	bufferitemnameplural STR_VAR_2, SPECIAL_VAR_5, 1
+	checkitemtype SPECIAL_VAR_5
 	call EventScript_BufferPocketNameAndTryFanfare
 	goto_if_eq SPECIAL_VAR_7, TRUE, EventScript_PickUpHiddenItem
 	goto_if_eq SPECIAL_VAR_7, FALSE, EventScript_NoRoomForHiddenItem
@@ -209,11 +209,10 @@ EventScript_PutHiddenItemInPocket::
 	showitemdescription
 	waitmessage
 	waitfanfare
-	bufferitemnameplural STR_VAR_2, VAR_0x8004, 1
-	copyvar VAR_0x8004, VAR_0x8008
+	bufferitemnameplural STR_VAR_2, SPECIAL_VAR_4, 1
+	copyvar SPECIAL_VAR_4, SPECIAL_VAR_8
 	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	hideitemdescription
-	special TryPutTreasureInvestigatorsOnAir
 	special SetHiddenItemFlag
 	releaseall
 	end

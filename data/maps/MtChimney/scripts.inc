@@ -110,7 +110,7 @@ MtChimney_EventScript_LavaCookieLady::
 	goto_if_eq SPECIAL_VAR_RESULT, FALSE, MtChimney_EventScript_NotEnoughMoney
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
 	checkitemspace ITEM_LAVA_COOKIE
-	call_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_RemoveMoney
+	call_if_eq SPECIAL_VAR_RESULT, TRUE, MtChimney_EventScript_RemoveMoney
 .if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_OFF
 	giveitem ITEM_LAVA_COOKIE
 	goto_if_eq SPECIAL_VAR_RESULT, FALSE, MtChimney_EventScript_BagIsFull
@@ -126,7 +126,7 @@ MtChimney_EventScript_BagIsFull::
 .else
 	hidemoneybox
 	giveitem ITEM_LAVA_COOKIE
-	goto_if_eq VAR_RESULT, FALSE, MtChimney_EventScript_BagIsFull
+	goto_if_eq SPECIAL_VAR_RESULT, FALSE, MtChimney_EventScript_BagIsFull
 	release
 	end
 

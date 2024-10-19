@@ -995,7 +995,6 @@ extern const u8 gBattleAnimGeneral_AffectionHangedOn[];
 extern const u8 gBattleAnimGeneral_Snow[];
 extern const u8 gBattleAnimGeneral_UltraBurst[];
 extern const u8 gBattleAnimGeneral_SaltCureDamage[];
-extern const u8 gBattleAnimGeneral_DynamaxGrowth[];
 extern const u8 gBattleAnimGeneral_SetWeather[];
 extern const u8 gBattleAnimGeneral_SyrupBombSpeedDrop[];
 extern const u8 gBattleAnimGeneral_Rainbow[];

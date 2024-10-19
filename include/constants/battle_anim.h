@@ -569,8 +569,8 @@
 #define B_ANIM_SNOW_CONTINUES           36
 #define B_ANIM_ULTRA_BURST              37
 #define B_ANIM_SALT_CURE_DAMAGE         38
-#define B_ANIM_DYNAMAX_GROWTH           39
-#define B_ANIM_MAX_SET_WEATHER          40
+#define B_ANIM_UNUSED_39           39
+#define B_ANIM_UNUSED_40          40
 #define B_ANIM_SYRUP_BOMB_SPEED_DROP    41
 #define B_ANIM_RAINBOW                  42
 #define B_ANIM_SEA_OF_FIRE              43
