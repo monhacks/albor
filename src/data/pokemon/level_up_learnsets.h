@@ -1521,6 +1521,15 @@ static const struct LevelUpMove sAltariaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+static const struct LevelUpMove sLunatoneLevelUpLearnset[] = {
+    LEVEL_UP_MOVE( 1, MOVE_ALLURING_VOICE),
+    LEVEL_UP_END
+};
+
+static const struct LevelUpMove sSolrockLevelUpLearnset[] = {
+    LEVEL_UP_END
+};
+
 static const struct LevelUpMove sBaltoyLevelUpLearnset[] = {
     LEVEL_UP_END
 };

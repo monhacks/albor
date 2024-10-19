@@ -1237,9 +1237,9 @@ static const struct SpriteFrameImage sPicTable_Aggron[] = {
 static const struct SpriteFrameImage sPicTable_Meditite[] = {
     overworld_ascending_frames(gObjectEventPic_Meditite, 4, 4),
 };
-static const struct SpriteFrameImage sPicTable_MedititeF[] = {
-    overworld_ascending_frames(gObjectEventPic_MedititeF, 4, 4),
-};
+//static const struct SpriteFrameImage sPicTable_MedititeF[] = {
+//    overworld_ascending_frames(gObjectEventPic_MedititeF, 4, 4),
+//};
 static const struct SpriteFrameImage sPicTable_Medicham[] = {
     overworld_ascending_frames(gObjectEventPic_Medicham, 4, 4),
 };
