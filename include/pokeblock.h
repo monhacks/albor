@@ -51,7 +51,7 @@ void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void
 void PreparePokeblockFeedScene(void);
 
 // pokeblock
-extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
+extern const s8 gPokeblockFlavorCompatibilityTable[NATURALEZAS_TOTALES * FLAVOR_COUNT];
 extern const u8 *const gPokeblockNames[];
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;

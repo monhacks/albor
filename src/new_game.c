@@ -43,7 +43,6 @@ extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
-static void ResetItemFlags(void);
 
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
 
@@ -181,12 +180,4 @@ void NewGameInitData(void)
     InitLilycoveLady();
     ResetAllApprenticeData();
     InitMatchCallCounters();
-    ResetTrainerHillResults();
-}
-
-static void ResetItemFlags(void)
-{
-#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
-    memset(&gSaveBlock2Ptr->itemFlags, 0, sizeof(gSaveBlock2Ptr->itemFlags));
-#endif
 }

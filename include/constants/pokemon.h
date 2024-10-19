@@ -48,17 +48,17 @@ enum PokemonEggGroups
     EGG_GROUP_BABY,
 };
 
-#define EGG_GROUPS_PER_MON            2
+#define GRUPOS_HUEVO_POR_POKEMON            2
 
-enum PokemonNatures
+enum NaturalezasPokemon
 {
-    NATURE_ATK,
-    NATURE_DEF,
-    NATURE_SP_ATK,
-    NATURE_SP_DEF,
-    NATURE_SPEED,
+    NATURALEZA_OFENSIVA,
+    NATURALEZA_DEFENSIVA,
+    NATURALEZA_OFENSIVA_ESPECIAL,
+    NATURALEZA_DEFENSIVA_ESPECIAL,
+    NATURALEZA_RAPIDA,
 
-    NUM_NATURES
+    NATURALEZAS_TOTALES
 };
 
 enum PokemonStats

@@ -1529,7 +1529,7 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
     DATA.currentPartyIndex = *partySize;
     DATA.currentMon = &party[DATA.currentPartyIndex];
     DATA.gender = 0xFF; // Male
-    DATA.nature = NATURE_ATK;
+    DATA.nature = NATURALEZA_OFENSIVA;
     (*partySize)++;
 
     CreateMon(DATA.currentMon, species, 100, 0, TRUE, 0, OT_ID_PRESET, 0);
@@ -1538,10 +1538,10 @@ void OpenPokemon(u32 sourceLine, u32 side, u32 species)
         SetMonData(DATA.currentMon, MON_DATA_MOVE1 + i, &data);
 }
 
-// (sNaturePersonalities[i] % NUM_NATURES) == i
+// (sNaturePersonalities[i] % NATURALEZAS_TOTALES) == i
 // (sNaturePersonalities[i] & 0xFF) == 0
 // NOTE: Using 25 << 8 rather than 0 << 8 to prevent shiny females.
-static const u16 sNaturePersonalities[NUM_NATURES] =
+static const u16 sNaturePersonalities[NATURALEZAS_TOTALES] =
 {
     25 << 8, 21 << 8, 17 << 8, 13 << 8,  9 << 8,
      5 << 8,  1 << 8, 22 << 8, 18 << 8, 14 << 8,
@@ -1555,7 +1555,7 @@ static u32 GenerateNature(u32 nature, u32 offset)
     if (offset <= nature)
         nature -= offset;
     else
-        nature = nature + NUM_NATURES - offset;
+        nature = nature + NATURALEZAS_TOTALES - offset;
     return sNaturePersonalities[nature];
 }
 
@@ -1574,7 +1574,7 @@ void ClosePokemon(u32 sourceLine)
     }
     data = FALSE;
     SetMonData(DATA.currentMon, MON_DATA_IS_SHINY, &data);
-    UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NUM_NATURES) | DATA.gender);
+    UpdateMonPersonality(&DATA.currentMon->box, GenerateNature(DATA.nature, DATA.gender % NATURALEZAS_TOTALES) | DATA.gender);
     DATA.currentMon = NULL;
 }
 
@@ -1602,7 +1602,7 @@ void Gender_(u32 sourceLine, u32 gender)
 void Nature_(u32 sourceLine, u32 nature)
 {
     INVALID_IF(!DATA.currentMon, "Nature outside of PLAYER/OPPONENT");
-    INVALID_IF(nature >= NUM_NATURES, "Illegal nature: %d", nature);
+    INVALID_IF(nature >= NATURALEZAS_TOTALES, "Illegal nature: %d", nature);
     DATA.nature = nature;
 }
 

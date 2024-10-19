@@ -63,7 +63,7 @@ static const struct LevelUpMove sKakunaLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sBeedrillLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(, MOVE_COLMENA),
+    LEVEL_UP_MOVE( 1, MOVE_COLMENA),
     LEVEL_UP_END
 };
 
@@ -248,7 +248,7 @@ static const struct LevelUpMove sVileplumeLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sBellossomLevelUpLearnset[] = {1
+static const struct LevelUpMove sBellossomLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_AROMATIC_MIST),
     LEVEL_UP_END
 };

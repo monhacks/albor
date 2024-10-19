@@ -277,19 +277,6 @@ void CallTrainerHillFunction(void)
     FreeDataStruct();
 }
 
-void ResetTrainerHillResults(void)
-{
-#if FREE_TRAINER_HILL == FALSE
-    s32 i;
-#endif //FREE_TRAINER_HILL
-
-    gSaveBlock2Ptr->frontier.savedGame = 0;
-#if FREE_TRAINER_HILL == FALSE
-    for (i = 0; i < NUM_TRAINER_HILL_MODES; i++)
-        SetTimerValue(&gSaveBlock1Ptr->trainerHillTimes[i], HILL_MAX_TIME);
-#endif //FREE_TRAINER_HILL
-}
-
 static u8 GetFloorId(void)
 {
     return gMapHeader.mapLayoutId - LAYOUT_TRAINER_HILL_1F;

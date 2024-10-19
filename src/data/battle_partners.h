@@ -49,7 +49,7 @@
 #line 17
             .lvl = 42,
 #line 16
-            .nature = NATURE_OFENSIVA,
+            .nature = NATURALEZA_OFENSIVA,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 20
@@ -70,7 +70,7 @@
 #line 27
             .lvl = 43,
 #line 26
-            .nature = NATURE_OFENSIVA,
+            .nature = NATURALEZA_OFENSIVA,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 30
@@ -91,7 +91,7 @@
 #line 37
             .lvl = 44,
 #line 36
-            .nature = NATURE_OFENSIVA,
+            .nature = NATURALEZA_OFENSIVA,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 40

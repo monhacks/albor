@@ -83,8 +83,8 @@ TEST("CreateNPCTrainerPartyForTrainer generates customized Pokémon")
     EXPECT(StringCompare(nickBuffer, COMPOUND_STRING("Wobbuffet")) == 0);
 
     EXPECT(GetMonGender(&testParty[0]) == MON_FEMALE);
-    EXPECT(GetNature(&testParty[0]) == NATURE_SPEED);
-    EXPECT(GetNature(&testParty[1]) == NATURE_ATK);
+    EXPECT(GetNature(&testParty[0]) == NATURALEZA_RAPIDA);
+    EXPECT(GetNature(&testParty[1]) == NATURALEZA_OFENSIVA);
 
     EXPECT_EQ(GetMonData(&testParty[0], MON_DATA_DYNAMAX_LEVEL), 5);
     EXPECT_EQ(GetMonData(&testParty[1], MON_DATA_DYNAMAX_LEVEL), 10);
@@ -105,7 +105,7 @@ TEST("ModifyPersonalityForNature can set any nature")
     u32 personality = 0, nature = 0, j = 0, k = 0;
     for (j = 0; j < 64; j++)
     {
-        for (k = 0; k < NUM_NATURES; k++)
+        for (k = 0; k < NATURALEZAS_TOTALES; k++)
         {
             PARAMETRIZE { personality = Random32(); nature = k; }
         }

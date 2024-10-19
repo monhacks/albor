@@ -94,9 +94,9 @@ EWRAM_DATA u16 gFollowerSteps = 0;
 // Support percentages are listed in comments off to the side instead
 #define PALACE_STYLE(atk, def, atkLow, defLow) {atk, atk + def, atkLow, atkLow + defLow}
 
-const struct NatureInfo gNaturesInfo[NUM_NATURES] =
+const struct NatureInfo gNaturesInfo[NATURALEZAS_TOTALES] =
 {
-    [NATURE_ATK] =
+    [NATURALEZA_OFENSIVA] =
     {
         .name = COMPOUND_STRING("Ofensiva"),
         .statUp = STAT_ATK,
@@ -107,7 +107,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_EAGER_FOR_MORE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_DEF] =
+    [NATURALEZA_DEFENSIVA] =
     {
         .name = COMPOUND_STRING("Defensiva"),
         .statUp = STAT_DEF,
@@ -118,9 +118,9 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_SP_ATK] =
+    [NATURALEZA_OFENSIVA_ESPECIAL] =
     {
-        .name = COMPOUND_STRING("Ofensiva esp."),
+        .name = COMPOUND_STRING("Ofensiva especial"),
         .statUp = STAT_SPATK,
         .backAnim = 1,
         .pokeBlockAnim = {ANIM_BRAVE, AFFINE_TURN_UP},
@@ -129,9 +129,9 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GETTING_IN_POS,
         .battlePalaceSmokescreen = PALACE_TARGET_WEAKER,
     },
-    [NATURE_SP_DEF] =
+    [NATURALEZA_DEFENSIVA_ESPECIAL] =
     {
-        .name = COMPOUND_STRING("Defensiva esp."),
+        .name = COMPOUND_STRING("Defensiva especial"),
         .statUp = STAT_SPDEF,
         .backAnim = 2,
         .pokeBlockAnim = {ANIM_ADAMANT, AFFINE_NONE},
@@ -140,7 +140,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
         .battlePalaceFlavorText = B_MSG_GLINT_IN_EYE,
         .battlePalaceSmokescreen = PALACE_TARGET_STRONGER,
     },
-    [NATURE_SPEED] =
+    [NATURALEZA_RAPIDA] =
     {
         .name = COMPOUND_STRING("Rápida"),
         .statUp = STAT_SPEED,
@@ -3047,12 +3047,12 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon)
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NATURALEZAS_TOTALES;
 }
 
 u8 GetNatureFromPersonality(u32 personality)
 {
-    return personality % NUM_NATURES;
+    return personality % NATURALEZAS_TOTALES;
 }
 
 static u32 GetGMaxTargetSpecies(u32 species)
@@ -3280,9 +3280,9 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_ATK:
-                    case NATURE_SP_ATK:
-                    case NATURE_SPEED:
+                    case NATURALEZA_OFENSIVA:
+                    case NATURALEZA_OFENSIVA_ESPECIAL:
+                    case NATURALEZA_RAPIDA:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }
@@ -3294,8 +3294,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
                     u8 nature = GetNature(mon);
                     switch (nature)
                     {
-                    case NATURE_DEF:
-                    case NATURE_SP_DEF:
+                    case NATURALEZA_DEFENSIVA:
+                    case NATURALEZA_DEFENSIVA_ESPECIAL:
                         targetSpecies = evolutions[i].targetSpecies;
                         break;
                     }

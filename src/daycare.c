@@ -1032,9 +1032,9 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 {
     s32 i, j;
 
-    for (i = 0; i < EGG_GROUPS_PER_MON; i++)
+    for (i = 0; i < GRUPOS_HUEVO_POR_POKEMON; i++)
     {
-        for (j = 0; j < EGG_GROUPS_PER_MON; j++)
+        for (j = 0; j < GRUPOS_HUEVO_POR_POKEMON; j++)
         {
             if (eggGroups1[i] == eggGroups2[j])
                 return TRUE;
@@ -1047,7 +1047,7 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 {
     u32 i;
-    u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];
+    u16 eggGroups[DAYCARE_MON_COUNT][GRUPOS_HUEVO_POR_POKEMON];
     u16 species[DAYCARE_MON_COUNT];
     u32 trainerIds[DAYCARE_MON_COUNT];
     u32 genders[DAYCARE_MON_COUNT];

@@ -143,15 +143,12 @@ static const u16 sGeodudeAlolanEggMoveLearnset[] = {
 static const u16 sPonytaEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
+
 static const u16 sPonytaGalarianEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
 static const u16 sSlowpokeEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sTaurosEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

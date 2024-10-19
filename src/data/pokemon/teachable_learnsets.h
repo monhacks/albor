@@ -400,12 +400,12 @@ static const u16 sGolemAlolanTeachableLearnset[] = {
 };
 
 static const u16 sPonytaTeachableLearnset[] = {
-    MOVE_CHARM
+    MOVE_CHARM,
     MOVE_UNAVAILABLE,
 };
 
 static const u16 sRapidashTeachableLearnset[] = {
-    MOVE_CHARM
+    MOVE_CHARM,
     MOVE_UNAVAILABLE,
 };
 

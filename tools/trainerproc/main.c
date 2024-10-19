@@ -1802,12 +1802,12 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             {
                 fprintf(f, "#line %d\n", pokemon->nature_line);
                 fprintf(f, "            .nature = ");
-                fprint_constant(f, "NATURE", pokemon->nature);
+                fprint_constant(f, "NATURALEZA", pokemon->nature);
                 fprintf(f, ",\n");
             }
             else
             {
-                fprintf(f, "            .nature = NATURE_ATK,\n");
+                fprintf(f, "            .nature = NATURALEZA_OFENSIVA,\n");
             }
 
             if (pokemon->shiny_line)
