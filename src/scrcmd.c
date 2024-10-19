@@ -2442,7 +2442,7 @@ bool8 Scrcmd_checkspecies(struct ScriptContext *ctx)
 bool8 Scrcmd_checkspecies_choose(struct ScriptContext *ctx)
 {
     u32 givenSpecies = VarGet(ScriptReadHalfword(ctx));
-    gSpecialVar_Result = (GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES) == givenSpecies);
+    gSpecialVar_Result = (GetMonData(&gPlayerParty[gSpecialVar_4], MON_DATA_SPECIES) == givenSpecies);
 
     return FALSE;
 }
