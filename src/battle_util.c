@@ -1660,8 +1660,6 @@ enum
     ENDTURN_PSYCHIC_TERRAIN,
     ENDTURN_ION_DELUGE,
     ENDTURN_FAIRY_LOCK,
-    ENDTURN_RETALIATE,
-    ENDTURN_WEATHER_FORM,
     ENDTURN_STATUS_HEAL,
     ENDTURN_RAINBOW,
     ENDTURN_SEA_OF_FIRE,
@@ -2154,25 +2152,6 @@ u8 DoFieldEndTurnEffects(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
-        case ENDTURN_RETALIATE:
-            if (gSideTimers[B_SIDE_PLAYER].retaliateTimer > 0)
-                gSideTimers[B_SIDE_PLAYER].retaliateTimer--;
-            if (gSideTimers[B_SIDE_OPPONENT].retaliateTimer > 0)
-                gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
-            gBattleStruct->turnCountersTracker++;
-            break;
-        case ENDTURN_WEATHER_FORM:
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (AbilityBattleEffects(ABILITYEFFECT_ON_WEATHER, i, 0, 0, 0))
-                {
-                    effect++;
-                    break;
-                }
-            }
-            if (effect == 0)
-                gBattleStruct->turnCountersTracker++;
-            break;
         case ENDTURN_STATUS_HEAL:
             for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
             {
@@ -2390,6 +2369,8 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 gBattleScripting.battler = battler;
                 gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_DamagingWeather);
                 effect++;
             }
@@ -2400,7 +2381,7 @@ u8 DoBattlerEndTurnEffects(void)
                   && !(gStatuses3[battler] & STATUS3_HEAL_BLOCK))
             {
                 gBattleScripting.battler = battler;
-                gBattleMoveDamage = -1 * (GetNonDynamaxMaxHP(battler) / 16);
+                gBattleMoveDamage = -1 * max(1, GetNonDynamaxMaxHP(battler) / 16);
                 BattleScriptExecute(BattleScript_IceBodyHeal);
                 effect++;
             }
@@ -2414,6 +2395,8 @@ u8 DoBattlerEndTurnEffects(void)
             {
                 gBattleScripting.battler = battler;
                 gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
                 BattleScriptExecute(BattleScript_DamagingWeather);
                 effect++;
             }
@@ -3264,7 +3247,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_ASLEEP: // check being asleep
-            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP) && !RandomPercentage(RNG_SLEEP, 75))
+            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_SLEEP) && !RandomPercentage(RNG_SLEEP_TURNS, 75))
             {
                 if (UproarWakeUpCheck(gBattlerAttacker))
                 {
@@ -3660,13 +3643,14 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                 else
                 {
                     gMultiHitCounter = gMovesInfo[gCurrentMove].strikeCount;
-                    PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 3, 0)
 
                     if (gMovesInfo[gCurrentMove].effect == EFFECT_DRAGON_DARTS
                      && CanTargetPartner(gBattlerAttacker, gBattlerTarget)
                      && TargetFullyImmuneToCurrMove(gBattlerAttacker, gBattlerTarget))
                         gBattlerTarget = BATTLE_PARTNER(gBattlerTarget);
                 }
+
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 3, 0)
             }
             else if (B_BEAT_UP >= GEN_5 && gMovesInfo[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
@@ -3896,17 +3880,6 @@ static const u16 sWeatherFlagsInfo[][3] =
     [ENUM_WEATHER_FOG] = {B_WEATHER_FOG_TEMPORARY, B_WEATHER_FOG_PERMANENT, HOLD_EFFECT_NONE},
 };
 
-static void ShouldChangeFormInWeather(u32 battler)
-{
-    int i;
-    int side = GetBattlerSide(battler);
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        gBattleStruct->allowedToChangeFormInWeather[i][side] = FALSE;
-    }
-}
-
 bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
 {
     u16 battlerAbility = GetBattlerAbility(battler);
@@ -3920,7 +3893,6 @@ bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
     else if (B_ABILITY_WEATHER < GEN_6 && viaAbility && !(gBattleWeather & sWeatherFlagsInfo[weatherEnumId][1]))
     {
         gBattleWeather = (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1]);
-        ShouldChangeFormInWeather(battler);
         return TRUE;
     }
     else if (!(gBattleWeather & (sWeatherFlagsInfo[weatherEnumId][0] | sWeatherFlagsInfo[weatherEnumId][1])))
@@ -3930,7 +3902,6 @@ bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility)
             gWishFutureKnock.weatherDuration = 8;
         else
             gWishFutureKnock.weatherDuration = 5;
-        ShouldChangeFormInWeather(battler);
         return TRUE;
     }
     return FALSE;
@@ -4912,6 +4883,19 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 effect++;
             }
             break;
+        case ABILITY_WIND_RIDER:
+            if (!gSpecialStatuses[battler].switchInAbilityDone 
+             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+             && gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TAILWIND)
+            {
+                gBattleScripting.savedBattler = gBattlerAttacker;
+                gBattlerAttacker = battler;
+                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
+                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
+                effect++;
+            }
+            break;
         case ABILITY_DESOLATE_LAND:
             if (TryChangeBattleWeather(battler, ENUM_WEATHER_SUN_PRIMAL, TRUE))
             {
@@ -5056,8 +5040,19 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             gBattlerAttacker = battler;
             switch (gLastUsedAbility)
             {
+            case ABILITY_PICKUP:
+                if (gBattleMons[battler].item == ITEM_NONE
+                 && gBattleStruct->changedItems[battler] == ITEM_NONE   // Will not inherit an item
+                 && PickupHasValidTarget(battler))
+                {
+                    gBattlerTarget = RandomUniformExcept(RNG_PICKUP, 0, gBattlersCount - 1, CantPickupItem);
+                    gLastUsedItem = GetUsedHeldItem(gBattlerTarget);
+                    BattleScriptPushCursorAndCallback(BattleScript_PickupActivates);
+                    effect++;
+                }
+                break;
             case ABILITY_HARVEST:
-                if ((IsBattlerWeatherAffected(battler, B_WEATHER_SUN) || Random() % 2 == 0)
+                if ((IsBattlerWeatherAffected(battler, B_WEATHER_SUN) || RandomPercentage(RNG_HARVEST, 50))
                  && gBattleMons[battler].item == ITEM_NONE
                  && gBattleStruct->changedItems[battler] == ITEM_NONE   // Will not inherit an item
                  && ItemId_GetPocket(GetUsedHeldItem(battler)) == POCKET_BERRIES)
@@ -11586,6 +11581,25 @@ bool32 BlocksPrankster(u16 move, u32 battlerPrankster, u32 battlerDef, bool32 ch
 u16 GetUsedHeldItem(u32 battler)
 {
     return gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
+}
+
+bool32 CantPickupItem(u32 battler)
+{
+    // Used by RandomUniformExcept() for RNG_PICKUP
+    if (battler == gBattlerAttacker && gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK))
+        return TRUE;
+    return !(IsBattlerAlive(battler) && GetUsedHeldItem(battler) && gBattleStruct->canPickupItem & (1u << battler));
+}
+
+bool32 PickupHasValidTarget(u32 battler)
+{
+    u32 i;
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (!CantPickupItem(i))
+            return TRUE;
+    }
+    return FALSE;
 }
 
 bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)

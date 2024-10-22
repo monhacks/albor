@@ -275,7 +275,7 @@ static void ShowMapNamePopUpWindow(void)
     if (OW_POPUP_GENERATION == GEN_5)
     {
         AddTextPrinterParameterized(mapNamePopUpWindowId, FONT_SHORT, mapDisplayHeader, 8, 2, TEXT_SKIP_DRAW, NULL);
-        
+
         if (OW_POPUP_BW_TIME_MODE != OW_POPUP_BW_TIME_NONE)
         {
             RtcCalcLocalTime();

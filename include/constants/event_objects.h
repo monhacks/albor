@@ -233,7 +233,7 @@ enum ObjectEventGraphics
 #define OBJ_EVENT_GFX_VAR_F  (OBJ_EVENT_GFX_VARS + 15)
 
 #define OBJ_EVENT_GFX_MON_BASE  512
-#define OBJ_EVENT_GFX_SPECIES_BITS 11
+#define OBJ_EVENT_GFX_SPECIES_BITS 12
 #define OBJ_EVENT_GFX_SPECIES_MASK ((1 << OBJ_EVENT_GFX_SPECIES_BITS) - 1)
 
 // Used to call a specific species' follower graphics. Useful for static encounters.

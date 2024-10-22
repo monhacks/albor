@@ -1553,13 +1553,9 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
-        {
             LoadCompressedSpritePaletteWithTag(palette, species);
-        }
         else
-        {
             LoadCompressedSpritePaletteWithTagHueShifted(palette, species, &mon->box);
-        }
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     }
