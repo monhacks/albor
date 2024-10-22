@@ -409,7 +409,6 @@ gSpecials::
 	def_special TryPrepareSecondApproachingTrainer
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
-	def_special SetTotemBoost
 	def_special TrySpecialOverworldEvo
 	def_special GetNumberSprayStrength
 	def_special GetSprayId

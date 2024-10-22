@@ -88,11 +88,10 @@ struct ResourceFlags
 #define RESOURCE_FLAG_FLASH_FIRE        1
 #define RESOURCE_FLAG_ROOST             2
 #define RESOURCE_FLAG_UNBURDEN          3
-#define RESOURCE_FLAG_TRACED            4
-#define RESOURCE_FLAG_EMERGENCY_EXIT    5
-#define RESOURCE_FLAG_NEUTRALIZING_GAS  6
-#define RESOURCE_FLAG_ICE_FACE          7
-#define RESOURCE_FLAG_MAGO              8
+#define RESOURCE_FLAG_EMERGENCY_EXIT    4
+#define RESOURCE_FLAG_NEUTRALIZING_GAS  5
+#define RESOURCE_FLAG_ICE_FACE          6
+#define RESOURCE_FLAG_MAGO              7
 
 struct DisableStruct
 {
@@ -661,6 +660,7 @@ struct BattleStruct
     u8 blunderPolicy:1; // should blunder policy activate
     u8 swapDamageCategory:1; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
     u8 bouncedMoveIsUsed:1;
+    u8 snatchedMoveIsUsed:1;
     u8 descriptionSubmenu:1; // For Move Description window in move selection screen
     u8 ackBallUseBtn:1; // Used for the last used ball feature
     u8 ballSwapped:1; // Used for the last used ball feature
@@ -972,6 +972,7 @@ extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
+extern u16 gLastUsedMoveType[MAX_BATTLERS_COUNT];
 extern u16 gLastResultingMoves[MAX_BATTLERS_COUNT];
 extern u16 gLockedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedMove;
