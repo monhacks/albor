@@ -514,7 +514,6 @@ static void ClearInWildMonRoom(void)
 
 static void SavePikeChallenge(void)
 {
-
 }
 
 static void PikeDummy1(void)

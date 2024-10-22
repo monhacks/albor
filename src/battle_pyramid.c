@@ -2,6 +2,7 @@
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "event_data.h"
+#include "frontier_util.h"
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -931,7 +932,6 @@ static void SetBattlePyramidData(void)
 
 static void SavePyramidChallenge(void)
 {
-
 }
 
 static void SetBattlePyramidPrize(void)
