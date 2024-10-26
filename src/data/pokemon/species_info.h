@@ -39,6 +39,14 @@
         .levelUpLearnset = s ## learn##LevelUpLearnset,     \
         .teachableLearnset = s ## learn##TeachableLearnset
 
+#if B_ENEMY_MON_SHADOW_STYLE >= GEN_4
+#define SHADOW(x, y, size)  .enemyShadowXOffset = x, .enemyShadowYOffset = y, .enemyShadowSize = size,
+#define NO_SHADOW           .suppressEnemyShadow = TRUE,
+#else
+#define SHADOW(x, y, size)  .enemyShadowXOffset = 0, .enemyShadowYOffset = 0, .enemyShadowSize = 0,
+#define NO_SHADOW           .suppressEnemyShadow = FALSE,
+#endif
+
 #if P_FOOTPRINTS
 #define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite,
 #else
@@ -54,7 +62,6 @@
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
-    .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
@@ -73,7 +80,6 @@
     .size = 512,                                                                            \
     .width = 32,                                                                            \
     .height = 32,                                                                           \
-    .paletteSlot = PALSLOT_NPC_1,                                                           \
     .shadowSize = SHADOW_SIZE_M,                                                            \
     .inanimate = FALSE,                                                                     \
     .compressed = FALSE,                                                                    \
@@ -131,7 +137,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .size = 512,
             .width = 32,
             .height = 32,
-            .paletteSlot = PALSLOT_NPC_1,
             .shadowSize = SHADOW_SIZE_M,
             .inanimate = FALSE,
             .compressed = FALSE,

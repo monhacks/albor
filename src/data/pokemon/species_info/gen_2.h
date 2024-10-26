@@ -245,7 +245,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         FOLLOWER(Quilava, TRACKS_FOOT)
         LEARNSETS(Quilava),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION},
-                                {EVO_NONE, 0, SPECIES_TYPHLOSION_HISUIAN}),
+                                {EVO_NONE, 0, SPECIES_TYPHLOSION_HISUI}),
     },
 
     [SPECIES_TYPHLOSION] =
@@ -297,7 +297,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         LEARNSETS(Typhlosion),
     },
 
-    [SPECIES_TYPHLOSION_HISUIAN] =
+    [SPECIES_TYPHLOSION_HISUI] =
     {
         .catchRate = 45,
         .expYield = 267,
@@ -2146,7 +2146,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         LEARNSETS(Quagsire),
     },
 
-    [SPECIES_WOOPER_PALDEAN] =
+    [SPECIES_WOOPER_PALDEA] =
     {
         .baseHP        = 55,
         .baseAttack    = 45,

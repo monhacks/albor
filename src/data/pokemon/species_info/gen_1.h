@@ -1010,7 +1010,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sRattataEggMoveLearnset,
     },
 
-    [SPECIES_RATTATA_ALOLAN] =
+    [SPECIES_RATTATA_ALOLA] =
     {
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
@@ -1058,10 +1058,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(RattataAlolan),
         .isAlolanForm = TRUE,
         .eggMoveLearnset = sRattataAlolanEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_RATICATE_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_RATICATE_ALOLA}),
     },
 
-    [SPECIES_RATICATE_ALOLAN] =
+    [SPECIES_RATICATE_ALOLA] =
     {
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
@@ -1405,7 +1405,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(Pikachu, TRACKS_FOOT)
         FOLLOWER_FEMALE(Pikachu, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
-                                {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLAN}),
+                                {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLA}),
     },
 
     [SPECIES_RAICHU] =
@@ -1460,7 +1460,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPichuEggMoveLearnset,
     },
 
-    [SPECIES_RAICHU_ALOLAN] =
+    [SPECIES_RAICHU_ALOLA] =
     {
         .catchRate = 75,
         .expYield = 243,
@@ -1613,7 +1613,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sSandshrewEggMoveLearnset,
     },
 
-    [SPECIES_SANDSHREW_ALOLAN] =
+    [SPECIES_SANDSHREW_ALOLA] =
     {
         .itemRare = ITEM_GRIP_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
@@ -1661,11 +1661,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(SandshrewAlolan, TRACKS_FOOT)
         LEARNSETS(SandshrewAlolan),
         .isAlolanForm = TRUE,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLA}),
         .eggMoveLearnset = sSandshrewAlolanEggMoveLearnset,
     },
 
-    [SPECIES_SANDSLASH_ALOLAN] =
+    [SPECIES_SANDSLASH_ALOLA] =
     {
         .itemRare = ITEM_GRIP_CLAW,
         .genderRatio = PERCENT_FEMALE(50),
@@ -2261,7 +2261,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sVulpixEggMoveLearnset,
     },
 
-    [SPECIES_VULPIX_ALOLAN] =
+    [SPECIES_VULPIX_ALOLA] =
     {
         .baseHP        = 38,
         .baseAttack    = 41,
@@ -2307,12 +2307,12 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         ICON(VulpixAlolan),
         FOLLOWER(VulpixAlolan, TRACKS_FOOT)
         LEARNSETS(VulpixAlolan),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLA}),
         .isAlolanForm = TRUE,
         .eggMoveLearnset = sVulpixAlolanEggMoveLearnset,
     },
 
-    [SPECIES_NINETALES_ALOLAN] =
+    [SPECIES_NINETALES_ALOLA] =
     {
         .catchRate = 75,
         .expYield = 177,
@@ -3276,7 +3276,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sMeowthEggMoveLearnset,
     },
 
-    [SPECIES_MEOWTH_ALOLAN] =
+    [SPECIES_MEOWTH_ALOLA] =
     {
         .catchRate = 255,
         .expYield = 58,
@@ -3323,11 +3323,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(MeowthAlolan, TRACKS_FOOT)
         LEARNSETS(MeowthAlolan),
         .isAlolanForm = TRUE,
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PERSIAN_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PERSIAN_ALOLA}),
         .eggMoveLearnset = sMeowthAlolanEggMoveLearnset,
     },
 
-    [SPECIES_PERSIAN_ALOLAN] =
+    [SPECIES_PERSIAN_ALOLA] =
     {
         .catchRate = 90,
         .expYield = 154,
@@ -3724,7 +3724,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sGrowlitheEggMoveLearnset,
     },
 
-    [SPECIES_GROWLITHE_HISUIAN] =
+    [SPECIES_GROWLITHE_HISUI] =
     {
         .baseHP        = 60,
         .baseAttack    = 75,
@@ -3771,11 +3771,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(GrowlitheHisuian, TRACKS_FOOT)
         LEARNSETS(GrowlitheHisuian),
         .isHisuianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE_HISUI}),
         .eggMoveLearnset = sGrowlitheHisuianEggMoveLearnset,
     },
 
-    [SPECIES_ARCANINE_HISUIAN] =
+    [SPECIES_ARCANINE_HISUI] =
     {
         .baseHP        = 90,
         .baseAttack    = 105,
@@ -4737,7 +4737,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Golem),
     },
 
-    [SPECIES_GEODUDE_ALOLAN] =
+    [SPECIES_GEODUDE_ALOLA] =
     {
         .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
         .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
@@ -4787,10 +4787,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(GeodudeAlolan, TRACKS_FOOT)
         LEARNSETS(GeodudeAlolan),
         .eggMoveLearnset = sGeodudeAlolanEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER_ALOLA}),
     },
 
-    [SPECIES_GRAVELER_ALOLAN] =
+    [SPECIES_GRAVELER_ALOLA] =
     {
         .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
         .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
@@ -4839,11 +4839,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         FOLLOWER(GravelerAlolan, TRACKS_FOOT)
         LEARNSETS(GravelerAlolan),
         .eggMoveLearnset = sGeodudeAlolanEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM_ALOLAN},
-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM_ALOLAN}),
+        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM_ALOLA},
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM_ALOLA}),
     },
 
-    [SPECIES_GOLEM_ALOLAN] =
+    [SPECIES_GOLEM_ALOLA] =
     {
         .types = MON_TYPES(TYPE_ROCK, TYPE_ELECTRIC),
         .abilities = {ABILITY_MAGNET_PULL, ABILITY_STURDY, ABILITY_GALVANIZE},
@@ -4994,7 +4994,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Rapidash),
     },
 
-    [SPECIES_PONYTA_GALARIAN] =
+    [SPECIES_PONYTA_GALAR] =
     {
         .abilities = {ABILITY_RUN_AWAY, ABILITY_PASTEL_VEIL, ABILITY_ANTICIPATION},
         .bodyColor = BODY_COLOR_WHITE,
@@ -5042,10 +5042,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sPonytaGalarianEggMoveLearnset,
         FOLLOWER(PonytaGalarian, TRACKS_FOOT)
         LEARNSETS(PonytaGalarian),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAPIDASH_GALARIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAPIDASH_GALAR}),
     },
 
-    [SPECIES_RAPIDASH_GALARIAN] =
+    [SPECIES_RAPIDASH_GALAR] =
     {
         .abilities = {ABILITY_RUN_AWAY, ABILITY_PASTEL_VEIL, ABILITY_ANTICIPATION},
         .bodyColor = BODY_COLOR_WHITE,
@@ -5248,7 +5248,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Slowking),
     },
 
-    [SPECIES_SLOWPOKE_GALARIAN] =
+    [SPECIES_SLOWPOKE_GALAR] =
     {
         .baseHP        = 90,
         .baseAttack    = 65,
@@ -5296,11 +5296,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(SlowpokeGalarian),
         .eggMoveLearnset = sSlowpokeGalarianEggMoveLearnset,
         .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_GALARICA_CUFF, SPECIES_SLOWBRO_GALARIAN},
-                                {EVO_ITEM, ITEM_GALARICA_WREATH, SPECIES_SLOWKING_GALARIAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_GALARICA_CUFF, SPECIES_SLOWBRO_GALAR},
+                                {EVO_ITEM, ITEM_GALARICA_WREATH, SPECIES_SLOWKING_GALAR}),
     },
 
-    [SPECIES_SLOWBRO_GALARIAN] =
+    [SPECIES_SLOWBRO_GALAR] =
     {
         .catchRate = 75,
         .itemRare = ITEM_KINGS_ROCK,
@@ -5351,7 +5351,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .isGalarianForm = TRUE,
     },
 
-    [SPECIES_SLOWKING_GALARIAN] =
+    [SPECIES_SLOWKING_GALAR] =
     {
         .catchRate = 70,
         .expYield = 172,
@@ -6512,7 +6512,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Electrode),
     },
 
-    [SPECIES_VOLTORB_HISUIAN] =
+    [SPECIES_VOLTORB_HISUI] =
     {
         .baseHP        = 40,
         .baseAttack    = 30,
@@ -6560,10 +6560,10 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(VoltorbHisuian),
         .isHisuianForm = TRUE,
         .eggMoveLearnset = sVoltorbHisuianEggMoveLearnset,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_ELECTRODE_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_ELECTRODE_HISUI}),
     },
 
-    [SPECIES_ELECTRODE_HISUIAN] =
+    [SPECIES_ELECTRODE_HISUI] =
     {
         .baseHP        = 60,
         .baseAttack    = 50,
@@ -6760,7 +6760,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Cubone),
         .eggMoveLearnset = sCuboneEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAROWAK},
-                                {EVO_NONE, 0, SPECIES_MAROWAK_ALOLAN}),
+                                {EVO_NONE, 0, SPECIES_MAROWAK_ALOLA}),
     },
 
     [SPECIES_MAROWAK] =
@@ -6813,7 +6813,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .eggMoveLearnset = sCuboneEggMoveLearnset,
     },
 
-    [SPECIES_MAROWAK_ALOLAN] =
+    [SPECIES_MAROWAK_ALOLA] =
     {
         .baseHP        = 60,
         .baseAttack    = 80,
@@ -7207,7 +7207,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Koffing),
         .eggMoveLearnset = sKoffingEggMoveLearnset,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_WEEZING},
-                                {EVO_NONE, 0, SPECIES_WEEZING_GALARIAN}),
+                                {EVO_NONE, 0, SPECIES_WEEZING_GALAR}),
     },
 
     [SPECIES_WEEZING] =
@@ -7262,7 +7262,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         LEARNSETS(Weezing),
     },
 
-    [SPECIES_WEEZING_GALARIAN] =
+    [SPECIES_WEEZING_GALAR] =
     {
         .baseHP        = 65,
         .baseAttack    = 90,

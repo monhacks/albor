@@ -83,4 +83,3 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Hacer limpieza final: objetivo unos 500 Pokémon. NO son necesarias todas las combinaciones de tipos, especialmente Normal-LoQueSea
 *Meter a Pachirisu como Elect-Normal
 *Spoink & Grumpig como Psychic-Poison en vez de G-Slow
-*Limpiar paletteSlot de ObjectEvent

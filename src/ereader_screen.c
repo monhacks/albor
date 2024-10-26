@@ -30,7 +30,7 @@ struct EReaderData
 
 static void Task_EReader(u8);
 
-struct EReaderData gEReaderData;
+COMMON_DATA struct EReaderData gEReaderData = {0};
 
 static void EReader_Reset(struct EReaderData *eReader)
 {

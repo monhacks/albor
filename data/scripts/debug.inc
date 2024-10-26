@@ -1,4 +1,3 @@
-.if DEBUG_OVERWORLD_MENU == TRUE
 Debug_MessageEnd:
 	waitmessage
 	waitbuttonpress
@@ -153,9 +152,9 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PIDGEOTTO, 1, ITEM_NONE
 	givemon SPECIES_PIDGEOT, 1, ITEM_NONE
 	givemon SPECIES_RATTATA, 1, ITEM_NONE
-	givemon SPECIES_RATTATA_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_RATTATA_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_RATICATE, 1, ITEM_NONE
-	givemon SPECIES_RATICATE_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_RATICATE_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_SPEAROW, 1, ITEM_NONE
 	givemon SPECIES_FEAROW, 1, ITEM_NONE
 	givemon SPECIES_EKANS, 1, ITEM_NONE
@@ -163,11 +162,11 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PICHU, 1, ITEM_NONE
 	givemon SPECIES_PIKACHU, 1, ITEM_NONE
 	givemon SPECIES_RAICHU, 1, ITEM_NONE
-	givemon SPECIES_RAICHU_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_RAICHU_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_SANDSHREW, 1, ITEM_NONE
-	givemon SPECIES_SANDSHREW_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_SANDSHREW_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_SANDSLASH, 1, ITEM_NONE
-	givemon SPECIES_SANDSLASH_ALOLAN, 1, ITEM_NONE
+	givemon SPECIES_SANDSLASH_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_NIDORAN_F, 1, ITEM_NONE
 	givemon SPECIES_NIDORINA, 1, ITEM_NONE
 	givemon SPECIES_NIDOQUEEN, 1, ITEM_NONE
@@ -185,8 +184,8 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
 	givemon SPECIES_GROWLITHE, 1, ITEM_NONE
 	givemon SPECIES_ARCANINE, 1, ITEM_NONE
-	givemon SPECIES_GROWLITHE_HISUIAN, 1, ITEM_NONE
-	givemon SPECIES_ARCANINE_HISUIAN, 1, ITEM_NONE
+	givemon SPECIES_GROWLITHE_HISUI, 1, ITEM_NONE
+	givemon SPECIES_ARCANINE_HISUI, 1, ITEM_NONE
 	givemon SPECIES_GASTLY, 1, ITEM_NONE
 	givemon SPECIES_HAUNTER, 1, ITEM_NONE
 	givemon SPECIES_GENGAR, 1, ITEM_NONE
@@ -216,9 +215,9 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PIDGEOTTO, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PIDGEOT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATTATA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RATTATA_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_RATTATA_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATICATE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RATICATE_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_RATICATE_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SPEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_FEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_EKANS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
@@ -226,11 +225,11 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PIKACHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RAICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RAICHU_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_RAICHU_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SANDSHREW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_SANDSHREW_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSHREW_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SANDSLASH, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_SANDSLASH_ALOLAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_SANDSLASH_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_NIDORAN_F, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_NIDORINA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_NIDOQUEEN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
@@ -248,7 +247,7 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GROWLITHE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ARCANINE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_GROWLITHE_HISUIAN, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
+	givemon SPECIES_GROWLITHE_HISUI, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GASTLY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_HAUNTER, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GENGAR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
@@ -557,5 +556,3 @@ Debug_EventScript_EWRAMCounters::
 Debug_EventScript_EWRAMCounters_Text::
 	.string "Follower Steps: {STR_VAR_1}.\n"
 	.string "Fishing Chain: {STR_VAR_2}.$"
-
-.endif

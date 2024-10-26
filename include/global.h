@@ -375,6 +375,9 @@ struct PlayersApprentice
     /*0xB8*/ struct ApprenticeQuestion questions[APPRENTICE_MAX_QUESTIONS];
 };
 
+#include "constants/items.h"
+#define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
@@ -398,7 +401,8 @@ struct SaveBlock2
     /*0xB0*/ struct PlayersApprentice playerApprentice; //eliminar
     /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT]; //eliminar
     /*0x64C*/ struct BattleFrontier frontier; //eliminar
-             struct Time fakeRTC;
+    struct Time fakeRTC;
+    u8 itemFlags[ITEM_FLAGS_COUNT];
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

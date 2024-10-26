@@ -42,6 +42,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
+#include "constants/pokedex.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -473,7 +474,7 @@ static void DestroyCategoryIcon(void);
 
 static u16 NationalPokedexNumToSpeciesHGSS(u16 nationalNum);
 
-void (*gPokedexVBlankCB)(void);
+COMMON_DATA void (*gPokedexVBlankCB)(void) = NULL;
 
 static const union AnimCmd sSpriteAnim_CategoryIcon0[] =
 {

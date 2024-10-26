@@ -2,6 +2,7 @@
 #define GUARD_POKEMON_SPRITE_VISUALIZER_H
 
 #include "constants/pokemon_sprite_visualizer.h"
+#include "constants/global.h"
 
 //Structs
 struct PokemonSpriteVisualizerModifyArrows
@@ -43,6 +44,17 @@ struct PokemonSpriteOffsets
     s8 offset_front_elevation;
 };
 
+struct PokemonShadowSettings
+{
+    s8 definedX;
+    s8 definedY;
+    u8 definedSize;
+
+    s8 overrideX;
+    s8 overrideY;
+    u8 overrideSize;
+};
+
 struct PokemonSpriteVisualizer
 {
     u16 currentmonId;
@@ -51,9 +63,11 @@ struct PokemonSpriteVisualizer
     u8 frontspriteId;
     u8 backspriteId;
     u8 followerspriteId;
-    u8 frontShadowSpriteId;
     bool8 isShiny;
     bool8 isFemale;
+    u8 frontShadowSpriteIdPrimary;
+    u8 frontShadowSpriteIdSecondary;
+    struct PokemonShadowSettings shadowSettings;
     struct PokemonSpriteVisualizerModifyArrows modifyArrows;
     struct PokemonSpriteVisualizerOptionArrows optionArrows;
     struct PokemonSpriteVisualizerYPosModifiyArrows yPosModifyArrows;

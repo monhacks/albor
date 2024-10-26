@@ -1,11 +1,13 @@
 #include "global.h"
 #include "braille_puzzles.h"
+#include "event_scripts.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "fldeff.h"
 #include "item_use.h"
 #include "overworld.h"
 #include "party_menu.h"
+#include "script.h"
 #include "sprite.h"
 #include "constants/field_effects.h"
 
@@ -31,7 +33,7 @@ bool8 SetUpFieldMove_Dig(void)
 static void FieldCallback_Dig(void)
 {
     Overworld_ResetStateAfterDigEscRope();
-    FieldEffectStart(FLDEFF_USE_DIG);
+    ScriptContext_SetupScript(EventScript_UseDig);
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
 }
 
@@ -53,7 +55,8 @@ static void StartDigFieldEffect(void)
     FieldEffectActiveListRemove(FLDEFF_USE_DIG);
     if (ShouldDoBrailleDigEffect())
     {
-        DoBrailleDigEffect();
+        // EventScript_DigSealedChamber handles DoBrailleDigEffect call
+        ScriptContext_Enable();
     }
     else
     {

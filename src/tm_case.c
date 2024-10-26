@@ -839,7 +839,7 @@ static void Action_Use(u8 taskId)
     ScheduleBgCopyTilemapToVram(1);
     // Chose a TM/HM to use, exit TM case for party menu
     gItemUseCB = ItemUseCB_TMHM;
-    sTMCaseDynamicResources->nextScreenCallback = CB2_ShowPartyMenuForItemUse;
+    sTMCaseDynamicResources->nextScreenCallback = CB2_ShowPartyMenuForItemUseTMCase;
     Task_BeginFadeOutFromTMCase(taskId);
 }
 

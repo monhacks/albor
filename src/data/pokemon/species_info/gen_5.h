@@ -448,7 +448,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(Dewott, TRACKS_FOOT)
         LEARNSETS(Dewott),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SAMUROTT},
-                                {EVO_NONE, 0, SPECIES_SAMUROTT_HISUIAN}),
+                                {EVO_NONE, 0, SPECIES_SAMUROTT_HISUI}),
     },
 
 #define SAMUROTT_MISC_INFO                                                  \
@@ -504,7 +504,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_HISUIAN_FORMS
-    [SPECIES_SAMUROTT_HISUIAN] =
+    [SPECIES_SAMUROTT_HISUI] =
     {
         SAMUROTT_MISC_INFO,
         .baseHP        = 90,
@@ -2896,7 +2896,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(Petilil, TRACKS_FOOT)
         LEARNSETS(Petilil),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_LILLIGANT},
-                                {EVO_NONE, 0, SPECIES_LILLIGANT_HISUIAN}),
+                                {EVO_NONE, 0, SPECIES_LILLIGANT_HISUI}),
     },
 
 #define LILLIGANT_MISC_INFO                                 \
@@ -2954,7 +2954,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_HISUIAN_FORMS
-    [SPECIES_LILLIGANT_HISUIAN] =
+    [SPECIES_LILLIGANT_HISUI] =
     {
         LILLIGANT_MISC_INFO,
         .baseHP        = 70,
@@ -3481,7 +3481,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_GALARIAN_FORMS
-    [SPECIES_DARUMAKA_GALARIAN] =
+    [SPECIES_DARUMAKA_GALAR] =
     {
         DARUMAKA_MISC_INFO,
         .types = MON_TYPES(TYPE_ICE),
@@ -3510,10 +3510,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(DarumakaGalarian, TRACKS_FOOT)
         LEARNSETS(DarumakaGalarian),
         .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_DARMANITAN_GALAR_STANDARD_MODE}),
     },
 
-#define DARMANITAN_GALARIAN_MISC_INFO                                           \
+#define DARMANITAN_GALAR_MISC_INFO                                           \
         .abilities = {ABILITY_GORILLA_TACTICS, ABILITY_NONE, ABILITY_ZEN_MODE},\
         .bodyColor = BODY_COLOR_WHITE,                                          \
         .height = 17,                                                           \
@@ -3526,9 +3526,9 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .formChangeTable = sDarmanitanGalarianFormChangeTable,                  \
         .isGalarianForm = TRUE
 
-    [SPECIES_DARMANITAN_GALARIAN_STANDARD_MODE] =
+    [SPECIES_DARMANITAN_GALAR_STANDARD_MODE] =
     {
-        DARMANITAN_GALARIAN_MISC_INFO,
+        DARMANITAN_GALAR_MISC_INFO,
         DARMANITAN_STANDARD_MISC_INFO,
         .types = MON_TYPES(TYPE_ICE),
         .categoryName = _("Zen Charm"),
@@ -3550,9 +3550,9 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(DarmanitanGalarianStandardMode, TRACKS_FOOT)
     },
 
-    [SPECIES_DARMANITAN_GALARIAN_ZEN_MODE] =
+    [SPECIES_DARMANITAN_GALAR_ZEN_MODE] =
     {
-        DARMANITAN_GALARIAN_MISC_INFO,
+        DARMANITAN_GALAR_MISC_INFO,
         DARMANITAN_ZEN_MODE_MISC_INFO,
         .baseHP        = 105,
         .baseAttack    = 160,
@@ -3990,7 +3990,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_GALARIAN_FORMS
-    [SPECIES_YAMASK_GALARIAN] =
+    [SPECIES_YAMASK_GALAR] =
     {
         YAMASK_MISC_INFO,
         .baseHP        = 38,
@@ -4512,7 +4512,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_HISUIAN_FORMS
-    [SPECIES_ZORUA_HISUIAN] =
+    [SPECIES_ZORUA_HISUI] =
     {
         ZORUA_MISC_INFO,
         .baseHP        = 35,
@@ -4540,10 +4540,10 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(ZoruaHisuian, TRACKS_FOOT)
         LEARNSETS(ZoruaHisuian),
         .isHisuianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK_HISUIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK_HISUI}),
     },
 
-    [SPECIES_ZOROARK_HISUIAN] =
+    [SPECIES_ZOROARK_HISUI] =
     {
         ZOROARK_MISC_INFO,
         .baseHP        = 55,
@@ -7055,7 +7055,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_GALARIAN_FORMS
-    [SPECIES_STUNFISK_GALARIAN] =
+    [SPECIES_STUNFISK_GALAR] =
     {
         STUNFISK_MISC_INFO,
         .baseHP        = 109,
@@ -7541,7 +7541,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         FOLLOWER(Rufflet, TRACKS_FOOT)
         LEARNSETS(Rufflet),
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_BRAVIARY},
-                                {EVO_NONE, 0, SPECIES_BRAVIARY_HISUIAN}),
+                                {EVO_NONE, 0, SPECIES_BRAVIARY_HISUI}),
     },
 
 #define BRAVIARY_MISC_INFO                                      \
@@ -7598,7 +7598,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
     },
 
 #if P_HISUIAN_FORMS
-    [SPECIES_BRAVIARY_HISUIAN] =
+    [SPECIES_BRAVIARY_HISUI] =
     {
         BRAVIARY_MISC_INFO,
         .baseHP        = 110,

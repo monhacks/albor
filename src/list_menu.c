@@ -90,7 +90,7 @@ static void SpriteCallback_RedArrowCursor(struct Sprite *sprite);
 EWRAM_DATA struct ScrollArrowsTemplate gTempScrollArrowTemplate = {0};
 
 // IWRAM common
-struct {
+COMMON_DATA struct {
     u8 cursorPal:4;
     u8 fillValue:4;
     u8 cursorShadowPal:4;
@@ -98,9 +98,9 @@ struct {
     u8 field_2_2:6; // unused
     u8 fontId:7;
     bool8 enabled:1;
-} gListMenuOverride;
+} gListMenuOverride = {0};
 
-struct ListMenuTemplate gMultiuseListMenuTemplate;
+COMMON_DATA struct ListMenuTemplate gMultiuseListMenuTemplate = {0};
 
 // const rom data
 static const struct
@@ -842,51 +842,6 @@ void ListMenuDefaultCursorMoveFunc(s32 itemIndex, bool8 onInit, struct ListMenu 
 {
     if (!onInit)
         PlaySE(SE_SELECT);
-}
-
-// unused
-s32 ListMenuGetUnkIndicatorsStructFields(u8 taskId, u8 field)
-{
-    struct UnkIndicatorsStruct *data = (void *) gTasks[taskId].data;
-
-    switch (field)
-    {
-    case 0:
-    case 1:
-        return (s32)(data->field_4);
-    case 2:
-        return data->field_C;
-    case 3:
-        return data->field_E;
-    case 4:
-        return data->field_10;
-    case 5:
-        return data->field_11;
-    case 6:
-        return data->field_12;
-    case 7:
-        return data->field_13;
-    case 8:
-        return data->field_14_0;
-    case 9:
-        return data->field_14_1;
-    case 10:
-        return data->field_15_0;
-    case 11:
-        return data->field_15_1;
-    case 12:
-        return data->field_16_0;
-    case 13:
-        return data->field_16_1;
-    case 14:
-        return data->field_16_2;
-    case 15:
-        return data->field_17_0;
-    case 16:
-        return data->field_17_1;
-    default:
-        return -1;
-    }
 }
 
 void ListMenuSetUnkIndicatorsStructField(u8 taskId, u8 field, s32 value)

@@ -704,7 +704,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     },
 
 #if P_GALARIAN_FORMS
-    [SPECIES_ZIGZAGOON_GALARIAN] =
+    [SPECIES_ZIGZAGOON_GALAR] =
     {
         ZIGZAGOON_MISC_INFO,
         .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),
@@ -726,10 +726,10 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         FOLLOWER(ZigzagoonGalarian, TRACKS_FOOT)
         LEARNSETS(ZigzagoonGalarian),
         .isGalarianForm = TRUE,
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LINOONE_GALARIAN}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LINOONE_GALAR}),
     },
 
-    [SPECIES_LINOONE_GALARIAN] =
+    [SPECIES_LINOONE_GALAR] =
     {
         LINOONE_MISC_INFO,
         .types = MON_TYPES(TYPE_DARK, TYPE_NORMAL),

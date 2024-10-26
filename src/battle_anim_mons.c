@@ -115,11 +115,7 @@ u8 GetBattlerSpriteCoord(u8 battlerId, u8 coordType)
         }
         else
         {
-            if (GetBattlerSide(battlerId) != B_SIDE_PLAYER)
-                mon = &gEnemyParty[gBattlerPartyIndexes[battlerId]];
-            else
-                mon = &gPlayerParty[gBattlerPartyIndexes[battlerId]];
-
+            mon = GetPartyBattlerData(battlerId);
             illusionMon = GetIllusionMonPtr(battlerId);
             if (illusionMon != NULL)
                 mon = illusionMon;
@@ -1927,7 +1923,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     if (!isBackpic)
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, personality);
+        UniquePalette(OBJ_PLTT_ID(palette), personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(palette)], &gPlttBufferUnfaded[OBJ_PLTT_ID(palette)], PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,
@@ -1937,7 +1933,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16
     else
     {
         LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(palette), PLTT_SIZE_4BPP);
-        UniquePaletteByPersonality(OBJ_PLTT_ID(palette), species, personality);
+        UniquePalette(OBJ_PLTT_ID(palette), personality);
         CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(palette)], &gPlttBufferUnfaded[OBJ_PLTT_ID(palette)], PLTT_SIZE_4BPP);
         LoadSpecialPokePic(gMonSpritesGfxPtr->buffer,
                            species,

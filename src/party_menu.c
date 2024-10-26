@@ -32,7 +32,6 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "level_caps.h"
 #include "link.h"
 #include "mail.h"
 #include "main.h"
@@ -242,7 +241,7 @@ static EWRAM_DATA u8 sInitialLevel = 0;
 static EWRAM_DATA u8 sFinalLevel = 0;
 
 // IWRAM common
-void (*gItemUseCB)(u8, TaskFunc);
+COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
 static void ResetPartyMenu(void);
 static void CB2_InitPartyMenu(void);
@@ -1086,7 +1085,7 @@ static void CreatePartyMonSprites(u8 slot)
             if (index < 16) 
             { // Like SetMonIconPalette, but by species & personality
                 LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-                UniquePaletteByPersonality(OBJ_PLTT_ID(index), gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].personality);
+                UniquePalette(OBJ_PLTT_ID(index), gMultiPartnerParty[actualSlot].personality);
                 CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
                 gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = index;
             }
@@ -4231,13 +4230,6 @@ static bool8 NotUsingHPEVItemOnShedinja(struct Pokemon *mon, u16 item)
     return TRUE;
 }
 
-bool32 IsItemFlute(u16 item)
-{
-    if (item == ITEM_BLUE_FLUTE || item == ITEM_RED_FLUTE || item == ITEM_YELLOW_FLUTE)
-        return TRUE;
-    return FALSE;
-}
-
 // Battle scripts called in HandleAction_UseItem
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
@@ -4255,8 +4247,7 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
-        if (!IsItemFlute(gSpecialVar_ItemId))
-            RemoveBagItem(gSpecialVar_ItemId, 1);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
@@ -4309,15 +4300,8 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     else
     {
         gPartyMenuUseExitCallback = TRUE;
-        if (!IsItemFlute(item))
-        {
-            PlaySE(SE_USE_ITEM);
-            RemoveBagItem(item, 1);
-        }
-        else
-        {
-            PlaySE(SE_GLASS_FLUTE);
-        }
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, 1);
         SetPartyMonAilmentGfx(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
         if (gSprites[sPartyMenuBoxes[gPartyMenu.slotId].statusSpriteId].invisible)
             DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
@@ -5184,16 +5168,14 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 holdEffectParam = ItemId_GetHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
+    if (sInitialLevel != MAX_LEVEL)
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
         BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
     }
     else
-    {
         cannotUseEffect = TRUE;
-    }
     PlaySE(SE_SELECT);
     if (cannotUseEffect)
     {
