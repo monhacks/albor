@@ -2636,6 +2636,16 @@ const u8* FaintClearSetData(u32 battler)
     gBattleStruct->palaceFlags &= ~(1u << battler);
     gBattleStruct->boosterEnergyActivates &= ~(1u << battler);
 
+    if (gBattleStruct->commanderActive[battler] != SPECIES_NONE)
+    {
+        u32 partner = BATTLE_PARTNER(battler);
+        if (IsBattlerAlive(partner))
+        {
+            BtlController_EmitSpriteInvisibility(partner, BUFFER_A, FALSE);
+            MarkBattlerForControllerExec(partner);
+        }
+    }
+
     for (i = 0; i < ARRAY_COUNT(gSideTimers); i++)
     {
         // User of sticky web fainted, so reset the stored battler ID
@@ -3435,20 +3445,25 @@ static void HandleTurnActionSelectionState(void)
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
+            u32 isAiRisky = AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY; // Risky AI switches aggressively even mid battle
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
             if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
             {
                 AI_DATA->aiCalcInProgress = TRUE;
-                if (ShouldSwitch(battler, FALSE))
-                    AI_DATA->shouldSwitch |= (1u << battler);
-                if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY) // Risky AI switches aggressively even mid battle
-                    AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, TRUE);
-                else
-                    AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
 
-                gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
+                // Setup battler data
+                sBattler_AI = battler;
+                BattleAI_SetupAIData(0xF, sBattler_AI);
+
+                // Setup switching data
+                AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, isAiRisky);
+                if (ShouldSwitch(battler))
+                    AI_DATA->shouldSwitch |= (1u << battler);
+
+                // Do scoring
+                gBattleStruct->aiMoveOrAction[battler] = BattleAI_ChooseMoveOrAction();
                 AI_DATA->aiCalcInProgress = FALSE;
             }
             // fallthrough
@@ -3459,7 +3474,7 @@ static void HandleTurnActionSelectionState(void)
                 || gBattleStruct->absentBattlerFlags & (1u << GetBattlerAtPosition(BATTLE_PARTNER(position)))
                 || gBattleCommunication[GetBattlerAtPosition(BATTLE_PARTNER(position))] == STATE_WAIT_ACTION_CONFIRMED)
             {
-                if (gBattleStruct->absentBattlerFlags & (1u << battler))
+                if ((gBattleStruct->absentBattlerFlags & (1u << battler)) || (gBattleStruct->commandingDondozo & (1u << battler)))
                 {
                     gChosenActionByBattler[battler] = B_ACTION_NOTHING_FAINTED;
                     if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
@@ -3556,7 +3571,8 @@ static void HandleTurnActionSelectionState(void)
                     if (((gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
-                                            | BATTLE_TYPE_RECORDED_LINK)))
+                                            | BATTLE_TYPE_RECORDED_LINK))
+                                            && !gTestRunnerEnabled)
                                             // Or if currently held by Sky Drop
                                             || gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
@@ -3673,8 +3689,9 @@ static void HandleTurnActionSelectionState(void)
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
-                else if (IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
+                else if ((IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
                          && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
+                         || (FlagGet(B_FLAG_NO_RUNNING) == TRUE && gBattleResources->bufferB[battler][1] == B_ACTION_RUN))
                 {
                     gSelectionBattleScripts[battler] = BattleScript_PrintCantEscapeFromBattle;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
@@ -3748,6 +3765,11 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.baseMoves[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                             }
                             gBattleCommunication[battler]++;
+
+                            if (gTestRunnerEnabled)
+                            {
+                                TestRunner_Battle_CheckChosenMove(battler, gChosenMoveByBattler[battler], gBattleStruct->moveTarget[battler]);
+                            }
                         }
                         break;
                     }
@@ -4405,6 +4427,9 @@ static void TurnValuesCleanUp(bool8 var0)
 
         if (gDisableStructs[i].substituteHP == 0)
             gBattleMons[i].status2 &= ~STATUS2_SUBSTITUTE;
+
+        if (!(gStatuses3[i] & STATUS3_COMMANDER))
+            gBattleStruct->commandingDondozo &= ~(1u << i);
 
         gSpecialStatuses[i].parentalBondState = PARENTAL_BOND_OFF;
     }

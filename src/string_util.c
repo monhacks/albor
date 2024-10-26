@@ -121,7 +121,6 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
-
 u16 StringLineLength(const u8 *str)
 {
     u16 i = 0, length = 0;

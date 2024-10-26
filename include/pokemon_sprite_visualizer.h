@@ -1,6 +1,7 @@
 #ifndef GUARD_POKEMON_SPRITE_VISUALIZER_H
 #define GUARD_POKEMON_SPRITE_VISUALIZER_H
 
+#include "constants/global.h"
 #include "constants/pokemon_sprite_visualizer.h"
 #include "constants/global.h"
 
@@ -73,6 +74,7 @@ struct PokemonSpriteVisualizer
     struct PokemonSpriteVisualizerYPosModifiyArrows yPosModifyArrows;
     struct PokemonSpriteConstValues constSpriteValues;
     struct PokemonSpriteOffsets offsetsSpriteValues;
+
     u8 animIdBack;
     u8 animIdFront;
     u8 battleBgType;

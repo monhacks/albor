@@ -47,11 +47,7 @@
 #define NO_SHADOW           .suppressEnemyShadow = FALSE,
 #endif
 
-#if P_FOOTPRINTS
-#define FOOTPRINT(sprite) .footprint = gMonFootprint_## sprite,
-#else
 #define FOOTPRINT(sprite)
-#endif
 
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
 //añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
@@ -100,12 +96,6 @@
 
 #define FLIP    0
 #define NO_FLIP 1
-
-#if POKEMON_NAME_LENGTH >= 12
-#define HANDLE_EXPANDED_SPECIES_NAME(_name, ...) _(DEFAULT(_name, __VA_ARGS__))
-#else
-#define HANDLE_EXPANDED_SPECIES_NAME(_name, ...) _(_name)
-#endif
 
 const struct SpeciesInfo gSpeciesInfo[] =
 {

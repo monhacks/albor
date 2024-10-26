@@ -358,7 +358,7 @@ struct AiLogicData
     u16 items[MAX_BATTLERS_COUNT];
     u16 holdEffects[MAX_BATTLERS_COUNT];
     u8 holdEffectParams[MAX_BATTLERS_COUNT];
-    u16 predictedMoves[MAX_BATTLERS_COUNT];
+    u16 lastUsedMove[MAX_BATTLERS_COUNT];
     u8 hpPercents[MAX_BATTLERS_COUNT];
     u16 partnerMove;
     u16 speedStats[MAX_BATTLERS_COUNT]; // Speed stats for all battles, calculated only once, same way as damages
@@ -1094,3 +1094,4 @@ static inline bool32 IsDoubleBattle(void)
 }
 
 #endif // GUARD_BATTLE_H
+

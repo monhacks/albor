@@ -1,10 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
 
-// Note: Since these tests are recorded battle, they don't test the right battle controller
-// behaviors. These have been tested in-game, in double, in multi, and in link battles. AI will always
-// revive their first fainted party member in order.
-
 ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_REVIVAL_BLESSING].effect == EFFECT_REVIVAL_BLESSING);
@@ -18,7 +14,7 @@ SINGLE_BATTLE_TEST("Revival Blessing revives a chosen fainted party member for t
         PLAYER(SPECIES_MEW) { HP(0); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(player, MOVE_REVIVAL_BLESSING); SEND_OUT(player, 2); }
+        TURN { MOVE(player, MOVE_REVIVAL_BLESSING, partyIndex:2); }
     } SCENE {
         MESSAGE("Wobbuffet used Revival Blessing!");
         MESSAGE("Wynaut was revived and is ready to fight again!");
@@ -33,9 +29,9 @@ SINGLE_BATTLE_TEST("Revival Blessing revives a fainted party member for an oppon
         OPPONENT(SPECIES_PICHU) { HP(0); }
         OPPONENT(SPECIES_PIKACHU) { HP(0); }
     } WHEN {
-        TURN { MOVE(opponent, MOVE_REVIVAL_BLESSING); SEND_OUT(opponent, 1); }
+        TURN { MOVE(opponent, MOVE_REVIVAL_BLESSING, partyIndex:1); }
     } SCENE {
-        MESSAGE("Foe Raichu used Revival Blessing!");
+        MESSAGE("The opposing Raichu used Revival Blessing!");
         MESSAGE("Pichu was revived and is ready to fight again!");
     }
 }

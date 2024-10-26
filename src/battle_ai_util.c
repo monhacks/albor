@@ -1451,6 +1451,8 @@ bool32 IsSemiInvulnerable(u32 battlerDef, u32 move)
 {
     if (gStatuses3[battlerDef] & STATUS3_PHANTOM_FORCE)
         return TRUE;
+    else if (gBattleStruct->commandingDondozo & (1u << battlerDef))
+        return TRUE;
     else if (!gMovesInfo[move].damagesAirborne && gStatuses3[battlerDef] & STATUS3_ON_AIR)
         return TRUE;
     else if (!gMovesInfo[move].damagesUnderwater && gStatuses3[battlerDef] & STATUS3_UNDERWATER)
@@ -3042,10 +3044,7 @@ bool32 AnyPartyMemberStatused(u32 battlerId, bool32 checkSoundproof)
     struct Pokemon *party;
     u32 i, battlerOnField1, battlerOnField2;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerId);
 
     if (IsDoubleBattle())
     {
@@ -3333,11 +3332,7 @@ bool32 ShouldUseWishAromatherapy(u32 battlerAtk, u32 battlerDef, u32 move)
     bool32 needHealing = FALSE;
 
     GetAIPartyIndexes(battlerAtk, &firstId, &lastId);
-
-    if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerAtk);
 
     if (CountUsablePartyMons(battlerAtk) == 0
       && (CanTargetFaintAi(battlerDef, battlerAtk) || BattlerWillFaintFromSecondaryDamage(battlerAtk, AI_DATA->abilities[battlerAtk])))
@@ -3423,9 +3418,16 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
         AI_THINKING_STRUCT->saved[battlerAtk].saved = FALSE;
     }
 
+
     dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE, AI_GetWeather(AI_DATA), rollType);
     // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
+
+    if (isPartyMonAttacker)
+        SetBattlerAiData(battlerAtk, AI_DATA);
+    else
+        SetBattlerAiData(battlerDef, AI_DATA);
+
     return dmg.expected;
 }
 
@@ -3445,11 +3447,7 @@ s32 CountUsablePartyMons(u32 battlerId)
 {
     s32 battlerOnField1, battlerOnField2, i, ret;
     struct Pokemon *party;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerId);
 
     if (IsDoubleBattle())
     {
@@ -3481,11 +3479,7 @@ bool32 IsPartyFullyHealedExceptBattler(u32 battlerId)
 {
     struct Pokemon *party;
     u32 i;
-
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-        party = gPlayerParty;
-    else
-        party = gEnemyParty;
+    party = GetBattlerParty(battlerId);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {

@@ -32,6 +32,7 @@ static void IntrDummy(void);
 
 // Defined in the linker script so that the test build can override it.
 extern void gInitialMainCB2(void);
+extern void CB2_FlashNotDetectedScreen(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
@@ -101,7 +102,7 @@ void AgbMain()
     InitHeap(gHeap, HEAP_SIZE);
 
     if (gFlashMemoryPresent != TRUE)
-        SetMainCallback2(NULL);
+        SetMainCallback2((SAVE_TYPE_ERROR_SCREEN) ? CB2_FlashNotDetectedScreen : NULL);
 
     gAgbMainLoop_sp = __builtin_frame_address(0);
     AgbMainLoop();

@@ -30,7 +30,6 @@ DOUBLE_BATTLE_TEST("Acupressure works on the ally if the user targeted itself bu
 
 DOUBLE_BATTLE_TEST("Acupressure fails on the user if it targeted its ally but switched positions via Ally Switch")
 {
-    KNOWN_FAILING; // Tested in Gen 5, Acupressure fails here
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_MEW);

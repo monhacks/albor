@@ -33,8 +33,8 @@ bool8 SetUpFieldMove_Dig(void)
 static void FieldCallback_Dig(void)
 {
     Overworld_ResetStateAfterDigEscRope();
-    ScriptContext_SetupScript(EventScript_UseDig);
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
+    ScriptContext_SetupScript(EventScript_UseDig);
 }
 
 bool8 FldEff_UseDig(void)
