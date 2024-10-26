@@ -295,7 +295,6 @@ enum MoveEndEffects
     MOVEEND_DEFROST,
     MOVEEND_RECOIL,
     MOVEEND_ITEM_EFFECTS_ATTACKER,
-    MOVEEND_MAGICIAN, // Occurs after final multi-hit strike, and after other items/abilities would activate
     MOVEEND_EJECT_ITEMS,
     MOVEEND_WHITE_HERB,
     MOVEEND_RED_CARD,

@@ -1183,14 +1183,6 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    // Weight-based moves are blocked by Dynamax.
-    if ((GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX) && IsMoveBlockedByDynamax(gCurrentMove))
-    {
-        BattleScriptPushCursor();
-        gBattlescriptCurrInstr = BattleScript_MoveBlockedByDynamax;
-        return;
-    }
-
     if (gBattleOutcome != 0)
     {
         gCurrentActionFuncId = B_ACTION_FINISHED;
