@@ -3018,9 +3018,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         PALETTES(Hippopotas),
         PALETTE_FEMALE(Hippopotas),
         ICON(Hippopotas),
-    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
         ICON_FEMALE(Hippopotas),
-    #endif
         FOOTPRINT(Hippopotas)
         FOLLOWER(Hippopotas, TRACKS_FOOT)
         LEARNSETS(Hippopotas),
@@ -3071,9 +3069,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         PALETTES(Hippowdon),
         PALETTE_FEMALE(Hippowdon),
         ICON(Hippowdon),
-    #if P_CUSTOM_GENDER_DIFF_ICONS == TRUE
         ICON_FEMALE(Hippowdon),
-    #endif
         FOOTPRINT(Hippowdon)
         FOLLOWER(Hippowdon, TRACKS_FOOT)
         LEARNSETS(Hippowdon),

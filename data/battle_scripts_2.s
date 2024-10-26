@@ -112,22 +112,6 @@ BattleScript_ItemIncreaseStat::
 	end
 
 BattleScript_UsePokeFlute::
-	checkpokeflute
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, 1, BattleScript_PokeFluteWakeUp
-	printstring STRINGID_POKEFLUTECATCHY
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_PokeFluteEnd
-
-BattleScript_PokeFluteWakeUp::
-	printstring STRINGID_POKEFLUTE
-	waitmessage B_WAIT_TIME_LONG
-	fanfare MUS_RG_POKE_FLUTE
-	waitfanfare
-	printstring STRINGID_MONHEARINGFLUTEAWOKE
-	waitmessage B_WAIT_TIME_LONG
-	updatestatusicon BS_PLAYER2
-	waitstate
-BattleScript_PokeFluteEnd::
 	finishaction
 
 BattleScript_ItemSetMist::
