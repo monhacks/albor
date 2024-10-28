@@ -783,7 +783,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
-        SOMBRA(1, 0, SHADOW_SIZE_M)
+        SOMBRA(1, 0, SHADOW_SIZE_S)
         FRONT_PIC(Weedle, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Weedle,
@@ -1036,7 +1036,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
-        SOMBRA(0, 16, SHADOW_SIZE_XL)
+        SOMBRA(0, 16, SHADOW_SIZE_L)
         FRONT_PIC(Pidgeot, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Pidgeot,
