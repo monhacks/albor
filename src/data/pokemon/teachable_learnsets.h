@@ -2401,16 +2401,6 @@ static const u16 sGoodraTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sSliggooHisuiTeachableLearnset[] = {
-    MOVE_CHARM,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sGoodraHisuiTeachableLearnset[] = {
-    MOVE_CHARM,
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sPhantumpTeachableLearnset[] = {
     MOVE_CHARM,
     MOVE_UNAVAILABLE,
