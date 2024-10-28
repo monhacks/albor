@@ -79,7 +79,8 @@
 
 porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/desarrollo/graficos /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h
 
-*Eliminar Obstagoon y formas galar. Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
-*Hacer limpieza final: objetivo unos 500 Pokémon. NO son necesarias todas las combinaciones de tipos, especialmente Normal-LoQueSea
-*Meter a Pachirisu como Elect-Normal
-*Spoink & Grumpig como Psychic-Poison en vez de G-Slow
+*Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
+*Pachirisu Elect-Normal
+*Spoink & Grumpig Psychic-Poison
+*Recordatorio de que el primer color de la paleta del Pokémon no puede ser negro (se bugea el almacenamiento).
+*Recordatorio de deserializar las pokeballs.
