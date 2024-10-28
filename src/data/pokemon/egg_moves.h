@@ -475,6 +475,30 @@ static const u16 sLarvitarEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sRaikouEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sEnteiEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSuicuneEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sLugiaEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sHoOhEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sCelebiEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sTreeckoEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };

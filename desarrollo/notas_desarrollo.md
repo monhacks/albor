@@ -84,3 +84,5 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Spoink & Grumpig Psychic-Poison
 *Recordatorio de que el primer color de la paleta del Pokémon no puede ser negro (se bugea el almacenamiento).
 *Recordatorio de deserializar las pokeballs.
+*Recordatorio de revisar learnsets (encanto, especialmente).
+*Recordatorio de limpiar species_info (traducir, solo lo necesario y usar constantes).

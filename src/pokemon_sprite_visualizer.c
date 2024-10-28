@@ -393,7 +393,7 @@ const u8 sShadowSizeLabels[][4] =
     [SHADOW_SIZE_S]                 = _(" S"),
     [SHADOW_SIZE_M]                 = _(" M"),
     [SHADOW_SIZE_L]                 = _(" L"),
-    [SHADOW_SIZE_XL_BATTLE_ONLY]    = _(" XL"),
+    [SHADOW_SIZE_XL]                = _(" XL"),
 };
 //Function declarations
 static void PrintDigitChars(struct PokemonSpriteVisualizer *data);
@@ -734,9 +734,6 @@ static void ResetOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
 
 static void ResetShadowSettings(struct PokemonSpriteVisualizer *data, u16 species)
 {
-    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3)
-        return;
-
     data->shadowSettings.definedX = gSpeciesInfo[species].enemyShadowXOffset;
     data->shadowSettings.definedY = gSpeciesInfo[species].enemyShadowYOffset;
     data->shadowSettings.definedSize = gSpeciesInfo[species].enemyShadowSize;
@@ -767,17 +764,6 @@ static u8 GetBattlerSpriteFinal_YCustom(u16 species, s8 offset_picCoords, s8 off
     return y;
 }
 
-static void UpdateShadowSpriteInvisible(struct PokemonSpriteVisualizer *data)
-{
-    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4)
-        return;
-
-    if (data->constSpriteValues.frontElevation + data->offsetsSpriteValues.offset_front_elevation == 0)
-        gSprites[data->frontShadowSpriteIdPrimary].invisible = TRUE;
-    else
-        gSprites[data->frontShadowSpriteIdPrimary].invisible = FALSE;
-}
-
 #define tFrontSpriteId  data[0]
 #define tSpriteSide     data[1]
 #define tShadowXOffset  data[2]
@@ -793,13 +779,10 @@ static void SpriteCB_EnemyShadowCustom(struct Sprite *shadowSprite)
     struct Sprite *battlerSprite = &gSprites[frontSpriteId];
 
     s8 xOffset = 0, yOffset = 0;
-    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4)
-    {
-        xOffset = shadowSprite->tShadowXOffset + (shadowSprite->tSpriteSide == SPRITE_SIDE_LEFT ? -16 : 16);
-        yOffset = shadowSprite->tShadowYOffset + 16;
+    xOffset = shadowSprite->tShadowXOffset + (shadowSprite->tSpriteSide == SPRITE_SIDE_LEFT ? -16 : 16);
+    yOffset = shadowSprite->tShadowYOffset + 16;
 
-        shadowSprite->y = battlerSprite->y + yOffset;
-    }
+    shadowSprite->y = battlerSprite->y + yOffset;
 
     shadowSprite->x = battlerSprite->x + xOffset;
     shadowSprite->x2 = battlerSprite->x2;
@@ -838,55 +821,35 @@ static void LoadAndCreateEnemyShadowSpriteCustom(struct PokemonSpriteVisualizer 
     bool8 invisible = FALSE;
     species = SanitizeSpeciesId(species);
 
-    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4)
-    {
-        invisible = gSpeciesInfo[species].suppressEnemyShadow;
+    invisible = gSpeciesInfo[species].suppressEnemyShadow;
 
-        LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadowsSized);
-        LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
-        u8 x = sBattlerCoords[0][1].x;
-        u8 y = sBattlerCoords[0][1].y;
-        s8 xOffset = data->shadowSettings.overrideX;
-        s8 yOffset = data->shadowSettings.overrideY;
-        u8 size = data->shadowSettings.overrideSize;
+    LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadowsSized);
+    LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
+    u8 x = sBattlerCoords[0][1].x;
+    u8 y = sBattlerCoords[0][1].y;
+    s8 xOffset = data->shadowSettings.overrideX;
+    s8 yOffset = data->shadowSettings.overrideY;
+    u8 size = data->shadowSettings.overrideSize;
 
-        data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 0xC8);
-        gSprites[data->frontShadowSpriteIdPrimary].tFrontSpriteId = data->frontspriteId;
-        gSprites[data->frontShadowSpriteIdPrimary].tSpriteSide = SPRITE_SIDE_LEFT;
-        gSprites[data->frontShadowSpriteIdPrimary].tShadowXOffset = (u8)xOffset;
-        gSprites[data->frontShadowSpriteIdPrimary].tShadowYOffset = (u8)yOffset;
-        gSprites[data->frontShadowSpriteIdPrimary].callback = SpriteCB_EnemyShadowCustom;
-        gSprites[data->frontShadowSpriteIdPrimary].oam.priority = 0;
-        gSprites[data->frontShadowSpriteIdPrimary].oam.tileNum += 8 * size;
-        gSprites[data->frontShadowSpriteIdPrimary].invisible = invisible;
+    data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 200);
+    gSprites[data->frontShadowSpriteIdPrimary].tFrontSpriteId = data->frontspriteId;
+    gSprites[data->frontShadowSpriteIdPrimary].tSpriteSide = SPRITE_SIDE_LEFT;
+    gSprites[data->frontShadowSpriteIdPrimary].tShadowXOffset = (u8)xOffset;
+    gSprites[data->frontShadowSpriteIdPrimary].tShadowYOffset = (u8)yOffset;
+    gSprites[data->frontShadowSpriteIdPrimary].callback = SpriteCB_EnemyShadowCustom;
+    gSprites[data->frontShadowSpriteIdPrimary].oam.priority = 0;
+    gSprites[data->frontShadowSpriteIdPrimary].oam.tileNum += 8 * size;
+    gSprites[data->frontShadowSpriteIdPrimary].invisible = invisible;
 
-        data->frontShadowSpriteIdSecondary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 0xC8);
-        gSprites[data->frontShadowSpriteIdSecondary].tFrontSpriteId = data->frontspriteId;
-        gSprites[data->frontShadowSpriteIdSecondary].tSpriteSide = SPRITE_SIDE_RIGHT;
-        gSprites[data->frontShadowSpriteIdSecondary].tShadowXOffset = (u8)xOffset;
-        gSprites[data->frontShadowSpriteIdSecondary].tShadowYOffset = (u8)yOffset;
-        gSprites[data->frontShadowSpriteIdSecondary].callback = SpriteCB_EnemyShadowCustom;
-        gSprites[data->frontShadowSpriteIdSecondary].oam.priority = 0;
-        gSprites[data->frontShadowSpriteIdSecondary].oam.tileNum += (8 * size) + 4;
-        gSprites[data->frontShadowSpriteIdSecondary].invisible = invisible;
-    }
-    else
-    {
-        if (gSpeciesInfo[species].enemyMonElevation == 0)
-            invisible = TRUE;
-
-        LoadCompressedSpriteSheet(&gSpriteSheet_EnemyShadow);
-        LoadSpritePalette(&sSpritePalettes_HealthBoxHealthBar[0]);
-        u8 x = sBattlerCoords[0][1].x;
-        u8 y = sBattlerCoords[0][1].y;
-
-        data->frontShadowSpriteIdPrimary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y + 29, 0xC8);
-        gSprites[data->frontShadowSpriteIdPrimary].data[0] = data->frontspriteId;
-
-        gSprites[data->frontShadowSpriteIdPrimary].callback = SpriteCB_EnemyShadowCustom;
-        gSprites[data->frontShadowSpriteIdPrimary].oam.priority = 0;
-        gSprites[data->frontShadowSpriteIdPrimary].invisible = invisible;
-    }
+    data->frontShadowSpriteIdSecondary = CreateSprite(&gSpriteTemplate_EnemyShadow, x, y, 200);
+    gSprites[data->frontShadowSpriteIdSecondary].tFrontSpriteId = data->frontspriteId;
+    gSprites[data->frontShadowSpriteIdSecondary].tSpriteSide = SPRITE_SIDE_RIGHT;
+    gSprites[data->frontShadowSpriteIdSecondary].tShadowXOffset = (u8)xOffset;
+    gSprites[data->frontShadowSpriteIdSecondary].tShadowYOffset = (u8)yOffset;
+    gSprites[data->frontShadowSpriteIdSecondary].callback = SpriteCB_EnemyShadowCustom;
+    gSprites[data->frontShadowSpriteIdSecondary].oam.priority = 0;
+    gSprites[data->frontShadowSpriteIdSecondary].oam.tileNum += (8 * size) + 4;
+    gSprites[data->frontShadowSpriteIdSecondary].invisible = invisible;
 }
 
 //Battle background functions
@@ -1120,9 +1083,6 @@ static void UpdateYPosOffsetText(struct PokemonSpriteVisualizer *data)
 
 static void UpdateShadowSettingsText(struct PokemonSpriteVisualizer *data)
 {
-    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3)
-        return;
-
     u8 text[16];
     u8 fontId = 0;
     u8 textConst[] = _("const val:");
@@ -1361,9 +1321,6 @@ static void ApplyOffsetSpriteValues(struct PokemonSpriteVisualizer *data)
     gSprites[data->backspriteId].y = VISUALIZER_MON_BACK_Y + gSpeciesInfo[species].backPicYOffset + data->offsetsSpriteValues.offset_back_picCoords;
     //Front
     gSprites[data->frontspriteId].y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, data->offsetsSpriteValues.offset_front_elevation);
-
-    if (data->currentSubmenu == 2)
-        UpdateShadowSpriteInvisible(data);
 }
 
 static void UpdateSubmenuOneOptionValue(u8 taskId, bool8 increment)
@@ -1523,7 +1480,6 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
         data->offsetsSpriteValues.offset_front_elevation = offset;
         y = GetBattlerSpriteFinal_YCustom(species, data->offsetsSpriteValues.offset_front_picCoords, offset);
         gSprites[data->frontspriteId].y = y;
-        UpdateShadowSpriteInvisible(data);
         break;
     }
 
@@ -1532,9 +1488,6 @@ static void UpdateSubmenuTwoOptionValue(u8 taskId, bool8 increment)
 
 static void UpdateShadowSettingsValue(u8 taskId, bool8 increment)
 {
-    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3)
-        return;
-
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     u8 option = data->submenuYpos[2];
     s8 *offset;
@@ -1565,15 +1518,12 @@ static void UpdateShadowSettingsValue(u8 taskId, bool8 increment)
 
 static void UpdateShadowSizeValue(u8 taskId, bool8 increment)
 {
-    if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3)
-        return;
-
     struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
     s8 update;
 
     if (increment)
     {
-        if (data->shadowSettings.overrideSize == SHADOW_SIZE_XL_BATTLE_ONLY)
+        if (data->shadowSettings.overrideSize == SHADOW_SIZE_XL)
         {
             update = -data->shadowSettings.overrideSize;
             data->shadowSettings.overrideSize = SHADOW_SIZE_S;
@@ -1588,7 +1538,7 @@ static void UpdateShadowSizeValue(u8 taskId, bool8 increment)
     {
         if (data->shadowSettings.overrideSize == SHADOW_SIZE_S)
         {
-            update = SHADOW_SIZE_XL_BATTLE_ONLY;
+            update = SHADOW_SIZE_XL;
             data->shadowSettings.overrideSize = update;
         }
         else
@@ -1806,7 +1756,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
     }
     else if (data->currentSubmenu == 2) //Submenu 2
     {
-        if (JOY_NEW(A_BUTTON) && B_ENEMY_MON_SHADOW_STYLE >= GEN_4)
+        if (JOY_NEW(A_BUTTON))
         {
             data->currentSubmenu = 3;
             PrintInstructionsOnWindow(data);
@@ -1913,8 +1863,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     DestroySprite(&gSprites[data->followerspriteId]);
 
     DestroySprite(&gSprites[data->frontShadowSpriteIdPrimary]);
-    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4)
-        DestroySprite(&gSprites[data->frontShadowSpriteIdSecondary]);
+    DestroySprite(&gSprites[data->frontShadowSpriteIdSecondary]);
 
     FreeMonSpritesGfx();
     ResetSpriteData();

@@ -8,43 +8,41 @@
         .frontPic = gMonFrontPic_## sprite,                 \
         .frontPicSize = MON_COORDS_SIZE(width, height)
 
-#define FRONT_PIC_FEMALE(sprite, width, height)             \
+#define FRONT_PIC_HEMBRA(sprite, width, height)             \
         .frontPicFemale = gMonFrontPic_## sprite##F,        \
         .frontPicSizeFemale = MON_COORDS_SIZE(width, height)
 
-#if B_ENEMY_MON_SHADOW_STYLE >= GEN_4
-#define SHADOW(x, y, size)  .enemyShadowXOffset = x, .enemyShadowYOffset = y, .enemyShadowSize = size,
-#define NO_SHADOW           .suppressEnemyShadow = TRUE,
-#else
-#define SHADOW(x, y, size)  .enemyShadowXOffset = 0, .enemyShadowYOffset = 0, .enemyShadowSize = 0,
-#define NO_SHADOW           .suppressEnemyShadow = FALSE,
-#endif
+#define SOMBRA(x, y, size)  .enemyShadowXOffset = x, .enemyShadowYOffset = y, .enemyShadowSize = size,
+#define SIN_SOMBRA          .suppressEnemyShadow = TRUE,
 
 #define BACK_PIC(sprite, width, height)                     \
         .backPic = gMonBackPic_## sprite,                   \
         .backPicSize = MON_COORDS_SIZE(width, height)
 
-#define BACK_PIC_FEMALE(sprite, width, height)              \
+#define BACK_PIC_HEMBRA(sprite, width, height)              \
         .backPicFemale = gMonBackPic_## sprite##F,          \
         .backPicSizeFemale = MON_COORDS_SIZE(width, height)
 
-#define PALETTES(pal)                                       \
+#define PALETA(pal)                                         \
         .palette = gMonPalette_## pal,                      \
         .shinyPalette = gMonShinyPalette_## pal
 
-#define PALETTE_FEMALE(pal)                                 \
+#define PALETA_HEMBRA(pal)                                  \
         .paletteFemale = gMonPalette_## pal##F,             \
         .shinyPaletteFemale = gMonShinyPalette_## pal##F
 
-#define ICON(sprite)                                        \
+#define ICONO(sprite)                                       \
         .iconSprite = gObjectEventPic_## sprite
 
-#define ICON_FEMALE(sprite)                                 \
+#define ICONO_HEMBRA(sprite)                                \
         .iconSpriteFemale = gObjectEventPic_## sprite##F
 
-#define LEARNSETS(learn)                                    \
+#define MOVIMIENTOS(learn)                                  \
         .levelUpLearnset = s ## learn##LevelUpLearnset,     \
         .teachableLearnset = s ## learn##TeachableLearnset
+
+#define MOVIMIENTOS_HUEVO(species)                          \
+        .eggMoveLearnset = s ## species##EggMoveLearnset
 
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
 //añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
@@ -66,7 +64,7 @@
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 },                                                                                          
 
-#define FOLLOWER_FEMALE(name, _tracks, ...)                                                 \
+#define FOLLOWER_HEMBRA(name, _tracks, ...)                                                 \
 .followerDataFemale = {                                                                     \
     .tileTag = TAG_NONE,                                                                    \
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
@@ -113,8 +111,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CircledQuestionMark, 40, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_NONE,
-        PALETTES(CircledQuestionMark),
-        ICON(Bulbasaur),
+        PALETA(CircledQuestionMark),
+        ICONO(Bulbasaur),
         .followerData = {
             .tileTag = TAG_NONE,
             .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
@@ -131,8 +129,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             .images = sPicTable_Bulbasaur,
             .affineAnims = gDummySpriteAffineAnimTable,
         },
-        LEARNSETS(None),
-        .eggMoveLearnset = sNoneEggMoveLearnset,
+        MOVIMIENTOS(None),
+        MOVIMIENTOS_HUEVO(None),
     },
 
     [SPECIES_BULBASAUR] =
@@ -170,6 +168,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 17,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 0, SHADOW_SIZE_S)
         FRONT_PIC(Bulbasaur, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Bulbasaur,
@@ -177,11 +176,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bulbasaur, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Bulbasaur),
-        ICON(Bulbasaur),
+        PALETA(Bulbasaur),
+        ICONO(Bulbasaur),
         FOLLOWER(Bulbasaur, TRACKS_FOOT)
-        LEARNSETS(Bulbasaur),
-        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
+        MOVIMIENTOS(Bulbasaur),
+        MOVIMIENTOS_HUEVO(Bulbasaur),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_IVYSAUR}),
     },
 
@@ -220,6 +219,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, 1, SHADOW_SIZE_M)
         FRONT_PIC(Ivysaur, 56, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Ivysaur,
@@ -228,11 +228,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
         .itemRare = ITEM_ABSORB_BULB,
-        PALETTES(Ivysaur),
-        ICON(Ivysaur),
+        PALETA(Ivysaur),
+        ICONO(Ivysaur),
         FOLLOWER(Ivysaur, TRACKS_FOOT)
-        LEARNSETS(Ivysaur),
-        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
+        MOVIMIENTOS(Ivysaur),
+        MOVIMIENTOS_HUEVO(Bulbasaur),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VENUSAUR}),
     },
 
@@ -257,7 +257,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Venusaur"),
         .natDexNum = DEX_VENUSAUR,
         .categoryName = _("Seed"),
-        LEARNSETS(Venusaur),
+        MOVIMIENTOS(Venusaur),
         .expYield = 263,
         .abilities = {ABILITY_SOLAR_POWER, ABILITY_THICK_FAT, ABILITY_OLOR_FLUVIAL},
         .cryId = CRY_VENUSAUR,
@@ -273,21 +273,22 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 388,
         .trainerOffset = 6,
         .itemRare = ITEM_ABSORB_BULB,
+        SOMBRA(0, 6, SHADOW_SIZE_L)
         FRONT_PIC(Venusaur, 64, 64),
-        FRONT_PIC_FEMALE(Venusaur, 64, 64),
+        FRONT_PIC_HEMBRA(Venusaur, 64, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Venusaur,
         .frontAnimId = ANIM_ROTATE_UP_SLAM_DOWN,
         BACK_PIC(Venusaur, 64, 48),
-        BACK_PIC_FEMALE(Venusaur, 64, 48),
+        BACK_PIC_HEMBRA(Venusaur, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Venusaur),
-        ICON(Venusaur),
-        ICON_FEMALE(Venusaur),
-        .eggMoveLearnset = sBulbasaurEggMoveLearnset,
+        PALETA(Venusaur),
+        ICONO(Venusaur),
+        ICONO_HEMBRA(Venusaur),
+        MOVIMIENTOS_HUEVO(Bulbasaur),
         FOLLOWER(Venusaur, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Venusaur, TRACKS_FOOT)
+        FOLLOWER_HEMBRA(Venusaur, TRACKS_FOOT)
     },
 
     [SPECIES_CHARMANDER] =
@@ -324,6 +325,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(2, 3, SHADOW_SIZE_M)
         FRONT_PIC(Charmander, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Charmander,
@@ -331,11 +333,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Charmander, 48, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Charmander),
-        ICON(Charmander),
-        LEARNSETS(Charmander),
+        PALETA(Charmander),
+        ICONO(Charmander),
+        MOVIMIENTOS(Charmander),
         .brilla = TRUE,
-        .eggMoveLearnset = sCharmanderEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Charmander),
         FOLLOWER(Charmander, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARMELEON}),
     },
@@ -375,6 +377,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 9,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(3, 4, SHADOW_SIZE_L)
         FRONT_PIC(Charmeleon, 56, 56),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Charmeleon,
@@ -382,10 +385,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Charmeleon, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Charmeleon),
-        ICON(Charmeleon),
-        LEARNSETS(Charmeleon),
-        .eggMoveLearnset = sCharmanderEggMoveLearnset,
+        PALETA(Charmeleon),
+        ICONO(Charmeleon),
+        MOVIMIENTOS(Charmeleon),
+        MOVIMIENTOS_HUEVO(Charmander),
         .brilla = TRUE,
         FOLLOWER(Charmeleon, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CHARIZARD}),
@@ -412,7 +415,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Charizard"),
         .natDexNum = DEX_CHARIZARD,
         .categoryName = _("Flame"),
-        LEARNSETS(Charizard),
+        MOVIMIENTOS(Charizard),
         .abilities = {ABILITY_MOXIE, ABILITY_BERSERK, ABILITY_AERILATE},
         .bodyColor = BODY_COLOR_RED,
         .cryId = CRY_CHARIZARD,
@@ -427,6 +430,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 1,
         .trainerScale = 302,
         .trainerOffset = 3,
+        SOMBRA(2, 13, SHADOW_SIZE_XL)
         FRONT_PIC(Charizard, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Charizard,
@@ -434,9 +438,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Charizard, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Charizard),
-        ICON(Charizard),
-        .eggMoveLearnset = sCharmanderEggMoveLearnset,
+        PALETA(Charizard),
+        ICONO(Charizard),
+        MOVIMIENTOS_HUEVO(Charmander),
         .brilla = TRUE,
         FOLLOWER(Charizard, TRACKS_FOOT)
     },
@@ -475,6 +479,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, 1, SHADOW_SIZE_M)
         FRONT_PIC(Squirtle, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Squirtle,
@@ -482,11 +487,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Squirtle, 48, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Squirtle),
-        ICON(Squirtle),
+        PALETA(Squirtle),
+        ICONO(Squirtle),
         FOLLOWER(Squirtle, TRACKS_FOOT)
-        LEARNSETS(Squirtle),
-        .eggMoveLearnset = sSquirtleEggMoveLearnset,
+        MOVIMIENTOS(Squirtle),
+        MOVIMIENTOS_HUEVO(Squirtle),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WARTORTLE}),
     },
 
@@ -525,6 +530,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 7, SHADOW_SIZE_L)
         FRONT_PIC(Wartortle, 56, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Wartortle,
@@ -532,11 +538,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wartortle, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Wartortle),
-        ICON(Wartortle),
+        PALETA(Wartortle),
+        ICONO(Wartortle),
         FOLLOWER(Wartortle, TRACKS_FOOT)
-        LEARNSETS(Wartortle),
-        .eggMoveLearnset = sSquirtleEggMoveLearnset,
+        MOVIMIENTOS(Wartortle),
+        MOVIMIENTOS_HUEVO(Squirtle),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BLASTOISE}),
     },
 
@@ -562,7 +568,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Blastoise"),
         .natDexNum = DEX_BLASTOISE,
         .categoryName = _("Shellfish"),
-        LEARNSETS(Blastoise),
+        MOVIMIENTOS(Blastoise),
         .cryId = CRY_BLASTOISE,
         .height = 16,
         .weight = 855,
@@ -575,6 +581,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = -1,
         .trainerScale = 293,
         .trainerOffset = 2,
+        SOMBRA(3, 8, SHADOW_SIZE_XL)
         FRONT_PIC(Blastoise, 64, 64),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Blastoise,
@@ -583,9 +590,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Blastoise, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Blastoise),
-        ICON(Blastoise),
-        .eggMoveLearnset = sSquirtleEggMoveLearnset,
+        PALETA(Blastoise),
+        ICONO(Blastoise),
+        MOVIMIENTOS_HUEVO(Squirtle),
         FOLLOWER(Blastoise, TRACKS_FOOT)
     },
 
@@ -623,6 +630,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(4, 1, SHADOW_SIZE_S)
         FRONT_PIC(Caterpie, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Caterpie,
@@ -630,10 +638,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Caterpie, 48, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Caterpie),
-        ICON(Caterpie),
+        PALETA(Caterpie),
+        ICONO(Caterpie),
         FOLLOWER(Caterpie, TRACKS_BUG)
-        LEARNSETS(Caterpie),
+        MOVIMIENTOS(Caterpie),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_METAPOD}),
     },
 
@@ -671,6 +679,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(2, 0, SHADOW_SIZE_M)
         FRONT_PIC(Metapod, 40, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Metapod,
@@ -678,10 +687,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Metapod, 40, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Metapod),
-        ICON(Metapod),
+        PALETA(Metapod),
+        ICONO(Metapod),
         FOLLOWER(Metapod, TRACKS_SPOT)
-        LEARNSETS(Metapod),
+        MOVIMIENTOS(Metapod),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BUTTERFREE}),
     },
 
@@ -710,7 +719,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_BUTTERFREE,
         .natDexNum = DEX_BUTTERFREE,
         .categoryName = _("Butterfly"),
-        LEARNSETS(Butterfree),
+        MOVIMIENTOS(Butterfree),
         .height = 11,
         .weight = 320,
         .description = COMPOUND_STRING(
@@ -722,21 +731,22 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 14, SHADOW_SIZE_M)
         FRONT_PIC(Butterfree, 64, 56),
-        FRONT_PIC_FEMALE(Butterfree, 64, 56),
+        FRONT_PIC_HEMBRA(Butterfree, 64, 56),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Butterfree,
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .enemyMonElevation = 12,
         BACK_PIC(Butterfree, 64, 56),
-        BACK_PIC_FEMALE(Butterfree, 64, 56),
+        BACK_PIC_HEMBRA(Butterfree, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Butterfree),
-        ICON(Butterfree),
-        ICON_FEMALE(Butterfree),
+        PALETA(Butterfree),
+        ICONO(Butterfree),
+        ICONO_HEMBRA(Butterfree),
         FOLLOWER(Butterfree, TRACKS_NONE)
-        FOLLOWER_FEMALE(Butterfree, TRACKS_NONE)
+        FOLLOWER_HEMBRA(Butterfree, TRACKS_NONE)
     },
 
     [SPECIES_WEEDLE] =
@@ -773,6 +783,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, 0, SHADOW_SIZE_M)
         FRONT_PIC(Weedle, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Weedle,
@@ -781,10 +792,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Weedle, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Weedle),
-        ICON(Weedle),
+        PALETA(Weedle),
+        ICONO(Weedle),
         FOLLOWER(Weedle, TRACKS_BUG)
-        LEARNSETS(Weedle),
+        MOVIMIENTOS(Weedle),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_KAKUNA}),
     },
 
@@ -822,6 +833,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 17,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(-1, 3, SHADOW_SIZE_S)
         FRONT_PIC(Kakuna, 24, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Kakuna,
@@ -830,10 +842,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kakuna, 32, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Kakuna),
-        ICON(Kakuna),
+        PALETA(Kakuna),
+        ICONO(Kakuna),
         FOLLOWER(Kakuna, TRACKS_SPOT)
-        LEARNSETS(Kakuna),
+        MOVIMIENTOS(Kakuna),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BEEDRILL}),
     },
 
@@ -853,7 +865,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Beedrill"),
         .natDexNum = DEX_BEEDRILL,
         .categoryName = _("Poison Bee"),
-        LEARNSETS(Beedrill),
+        MOVIMIENTOS(Beedrill),
         .baseHP        = 70,
         .baseDefense   = 80,
         .baseSpeed     = 120,
@@ -874,6 +886,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 2,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(6, 16, SHADOW_SIZE_L)
         FRONT_PIC(Beedrill, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Beedrill,
@@ -882,8 +895,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Beedrill, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Beedrill),
-        ICON(Beedrill),
+        PALETA(Beedrill),
+        ICONO(Beedrill),
         FOLLOWER(Beedrill, TRACKS_NONE)
     },
 
@@ -921,6 +934,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = -3,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 0, SHADOW_SIZE_M)
         FRONT_PIC(Pidgey, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Pidgey,
@@ -928,11 +942,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pidgey, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Pidgey),
-        ICON(Pidgey),
+        PALETA(Pidgey),
+        ICONO(Pidgey),
         FOLLOWER(Pidgey, TRACKS_FOOT)
-        LEARNSETS(Pidgey),
-        .eggMoveLearnset = sPidgeyEggMoveLearnset,
+        MOVIMIENTOS(Pidgey),
+        MOVIMIENTOS_HUEVO(Pidgey),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_PIDGEOTTO}),
     },
 
@@ -970,6 +984,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 10,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 7, SHADOW_SIZE_L)
         FRONT_PIC(Pidgeotto, 56, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Pidgeotto,
@@ -978,11 +993,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pidgeotto, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Pidgeotto),
-        ICON(Pidgeotto),
+        PALETA(Pidgeotto),
+        ICONO(Pidgeotto),
         FOLLOWER(Pidgeotto, TRACKS_NONE)
-        LEARNSETS(Pidgeotto),
-        .eggMoveLearnset = sPidgeyEggMoveLearnset,
+        MOVIMIENTOS(Pidgeotto),
+        MOVIMIENTOS_HUEVO(Pidgey),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_PIDGEOT}),
     },
 
@@ -1000,7 +1015,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Pidgeot"),
         .natDexNum = DEX_PIDGEOT,
         .categoryName = _("Bird"),
-        LEARNSETS(Pidgeot),
+        MOVIMIENTOS(Pidgeot),
         .baseHP        = 83,
         .baseAttack    = 50,
         .baseDefense   = 75,
@@ -1021,6 +1036,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 16, SHADOW_SIZE_XL)
         FRONT_PIC(Pidgeot, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Pidgeot,
@@ -1029,9 +1045,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pidgeot, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Pidgeot),
-        ICON(Pidgeot),
-        .eggMoveLearnset = sPidgeyEggMoveLearnset,
+        PALETA(Pidgeot),
+        ICONO(Pidgeot),
+        MOVIMIENTOS_HUEVO(Pidgey),
         FOLLOWER(Pidgeot, TRACKS_NONE)
     },
 
@@ -1069,22 +1085,23 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 21,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, -1, SHADOW_SIZE_M)
         FRONT_PIC(Rattata, 40, 40),
-        FRONT_PIC_FEMALE(Rattata, 40, 40),
+        FRONT_PIC_HEMBRA(Rattata, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Rattata,
         .frontAnimId = ANIM_H_JUMPS,
         BACK_PIC(Rattata, 64, 56),
-        BACK_PIC_FEMALE(Rattata, 64, 56),
+        BACK_PIC_HEMBRA(Rattata, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Rattata),
-        ICON(Rattata),
-        ICON_FEMALE(Rattata),
+        PALETA(Rattata),
+        ICONO(Rattata),
+        ICONO_HEMBRA(Rattata),
         FOLLOWER(Rattata, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Rattata, TRACKS_FOOT)
-        LEARNSETS(Rattata),
-        .eggMoveLearnset = sRattataEggMoveLearnset,
+        FOLLOWER_HEMBRA(Rattata, TRACKS_FOOT)
+        MOVIMIENTOS(Rattata),
+        MOVIMIENTOS_HUEVO(Rattata),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RATICATE}),
     },
 
@@ -1122,22 +1139,23 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, 7, SHADOW_SIZE_M)
         FRONT_PIC(Raticate, 64, 56),
-        FRONT_PIC_FEMALE(Raticate, 64, 56),
+        FRONT_PIC_HEMBRA(Raticate, 64, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Raticate,
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         BACK_PIC(Raticate, 64, 48),
-        BACK_PIC_FEMALE(Raticate, 64, 48),
+        BACK_PIC_HEMBRA(Raticate, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Raticate),
-        ICON(Raticate),
-        ICON_FEMALE(Raticate),
+        PALETA(Raticate),
+        ICONO(Raticate),
+        ICONO_HEMBRA(Raticate),
         FOLLOWER(Raticate, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Raticate, TRACKS_FOOT)
-        LEARNSETS(Raticate),
-        .eggMoveLearnset = sRattataEggMoveLearnset,
+        FOLLOWER_HEMBRA(Raticate, TRACKS_FOOT)
+        MOVIMIENTOS(Raticate),
+        MOVIMIENTOS_HUEVO(Rattata),
     },
 
     [SPECIES_RATTATA_ALOLA] =
@@ -1174,6 +1192,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 21,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(-2, 2, SHADOW_SIZE_S)
         FRONT_PIC(RattataAlola, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_RattataAlola,
@@ -1181,12 +1200,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RattataAlola, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(RattataAlola),
-        ICON(RattataAlola),
+        PALETA(RattataAlola),
+        ICONO(RattataAlola),
         FOLLOWER(RattataAlola, TRACKS_FOOT)
-        LEARNSETS(RattataAlola),
+        MOVIMIENTOS(RattataAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sRattataAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(RattataAlola),
         .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_RATICATE_ALOLA}),
     },
 
@@ -1224,6 +1243,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 5, SHADOW_SIZE_L)
         FRONT_PIC(RaticateAlola, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_RaticateAlola,
@@ -1231,12 +1251,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RaticateAlola, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(RaticateAlola),
-        ICON(RaticateAlola),
+        PALETA(RaticateAlola),
+        ICONO(RaticateAlola),
         FOLLOWER(RaticateAlola, TRACKS_FOOT)
-        LEARNSETS(RaticateAlola),
+        MOVIMIENTOS(RaticateAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sRattataAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(RattataAlola),
     },
 
     [SPECIES_SPEAROW] =
@@ -1281,12 +1301,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Spearow, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Spearow),
-        ICON(Spearow),
+        PALETA(Spearow),
+        ICONO(Spearow),
         FOLLOWER(Spearow, TRACKS_FOOT)
-        LEARNSETS(Spearow),
+        MOVIMIENTOS(Spearow),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FEAROW}),
-        .eggMoveLearnset = sSpearowEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Spearow),
     },
 
     [SPECIES_FEAROW] =
@@ -1333,11 +1353,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Fearow, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Fearow),
-        ICON(Fearow),
+        PALETA(Fearow),
+        ICONO(Fearow),
         FOLLOWER(Fearow, TRACKS_NONE)
-        LEARNSETS(Fearow),
-        .eggMoveLearnset = sSpearowEggMoveLearnset,
+        MOVIMIENTOS(Fearow),
+        MOVIMIENTOS_HUEVO(Spearow),
     },
 
     [SPECIES_EKANS] =
@@ -1382,12 +1402,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ekans, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Ekans),
-        ICON(Ekans),
+        PALETA(Ekans),
+        ICONO(Ekans),
         FOLLOWER(Ekans, TRACKS_SLITHER)
-        LEARNSETS(Ekans),
+        MOVIMIENTOS(Ekans),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ARBOK}),
-        .eggMoveLearnset = sEkansEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Ekans),
     },
 
     [SPECIES_ARBOK] =
@@ -1431,11 +1451,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Arbok, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Arbok),
-        ICON(Arbok),
+        PALETA(Arbok),
+        ICONO(Arbok),
         FOLLOWER(Arbok, TRACKS_SLITHER)
-        LEARNSETS(Arbok),
-        .eggMoveLearnset = sEkansEggMoveLearnset,
+        MOVIMIENTOS(Arbok),
+        MOVIMIENTOS_HUEVO(Ekans),
     },
 
     [SPECIES_PICHU] =
@@ -1468,7 +1488,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
-        LEARNSETS(Pichu),
+        MOVIMIENTOS(Pichu),
         FRONT_PIC(Pichu, 32, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Pichu,
@@ -1476,9 +1496,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pichu, 48, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Pichu),
-        ICON(Pichu),
-        .eggMoveLearnset = sPichuEggMoveLearnset,
+        PALETA(Pichu),
+        ICONO(Pichu),
+        MOVIMIENTOS_HUEVO(Pichu),
         FOLLOWER(Pichu, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PIKACHU}),
         .itemRare = ITEM_LIGHT_BALL,
@@ -1506,7 +1526,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_PIKACHU,
         .natDexNum = DEX_PIKACHU,
         .categoryName = _("Mouse"),
-        LEARNSETS(Pikachu),
+        MOVIMIENTOS(Pikachu),
         .height = 4,
         .weight = 60,
         .pokemonScale = 479,
@@ -1517,21 +1537,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
             .description = COMPOUND_STRING("???"),
         FRONT_PIC(Pikachu, 48, 48),
-        FRONT_PIC_FEMALE(Pikachu, 48, 48),
+        FRONT_PIC_HEMBRA(Pikachu, 48, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Pikachu,
         .frontAnimId = ANIM_FLASH_YELLOW,
         .frontAnimDelay = 25,
         BACK_PIC(Pikachu, 64, 56),
-        BACK_PIC_FEMALE(Pikachu, 64, 56),
+        BACK_PIC_HEMBRA(Pikachu, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Pikachu),
-        ICON(Pikachu),
-        .eggMoveLearnset = sPichuEggMoveLearnset,
-        ICON_FEMALE(Pikachu),
+        PALETA(Pikachu),
+        ICONO(Pikachu),
+        MOVIMIENTOS_HUEVO(Pichu),
+        ICONO_HEMBRA(Pikachu),
         FOLLOWER(Pikachu, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Pikachu, TRACKS_FOOT)
+        FOLLOWER_HEMBRA(Pikachu, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
                                 {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLA}),
     },
@@ -1572,19 +1592,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Raichu, 64, 64),
-        FRONT_PIC_FEMALE(Raichu, 64, 64),
+        FRONT_PIC_HEMBRA(Raichu, 64, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Raichu,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Raichu, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Raichu),
-        ICON(Raichu),
+        PALETA(Raichu),
+        ICONO(Raichu),
         FOLLOWER(Raichu, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Raichu, TRACKS_FOOT)
-        LEARNSETS(Raichu),
-        .eggMoveLearnset = sPichuEggMoveLearnset,
+        FOLLOWER_HEMBRA(Raichu, TRACKS_FOOT)
+        MOVIMIENTOS(Raichu),
+        MOVIMIENTOS_HUEVO(Pichu),
     },
 
     [SPECIES_RAICHU_ALOLA] =
@@ -1630,11 +1650,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RaichuAlola, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(RaichuAlola),
-        ICON(RaichuAlola),
+        PALETA(RaichuAlola),
+        ICONO(RaichuAlola),
         FOLLOWER(RaichuAlola, TRACKS_FOOT)
-        LEARNSETS(RaichuAlola),
-        .eggMoveLearnset = sPichuEggMoveLearnset,
+        MOVIMIENTOS(RaichuAlola),
+        MOVIMIENTOS_HUEVO(Pichu),
         .itemRare = ITEM_LIGHT_BALL,
     },
 
@@ -1680,12 +1700,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sandshrew, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Sandshrew),
-        ICON(Sandshrew),
+        PALETA(Sandshrew),
+        ICONO(Sandshrew),
         FOLLOWER(Sandshrew, TRACKS_FOOT)
-        LEARNSETS(Sandshrew),
+        MOVIMIENTOS(Sandshrew),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SANDSLASH}),
-        .eggMoveLearnset = sSandshrewEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Sandshrew),
     },
 
     [SPECIES_SANDSLASH] =
@@ -1730,11 +1750,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sandslash, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Sandslash),
-        ICON(Sandslash),
+        PALETA(Sandslash),
+        ICONO(Sandslash),
         FOLLOWER(Sandslash, TRACKS_FOOT)
-        LEARNSETS(Sandslash),
-        .eggMoveLearnset = sSandshrewEggMoveLearnset,
+        MOVIMIENTOS(Sandslash),
+        MOVIMIENTOS_HUEVO(Sandshrew),
     },
 
     [SPECIES_SANDSHREW_ALOLA] =
@@ -1779,13 +1799,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(SandshrewAlola, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(SandshrewAlola),
-        ICON(SandshrewAlola),
+        PALETA(SandshrewAlola),
+        ICONO(SandshrewAlola),
         FOLLOWER(SandshrewAlola, TRACKS_FOOT)
-        LEARNSETS(SandshrewAlola),
+        MOVIMIENTOS(SandshrewAlola),
         .isAlolaForm = TRUE,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLA}),
-        .eggMoveLearnset = sSandshrewAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(SandshrewAlola),
     },
 
     [SPECIES_SANDSLASH_ALOLA] =
@@ -1830,12 +1850,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(SandslashAlola, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(SandslashAlola),
-        ICON(SandslashAlola),
+        PALETA(SandslashAlola),
+        ICONO(SandslashAlola),
         FOLLOWER(SandslashAlola, TRACKS_FOOT)
-        LEARNSETS(SandslashAlola),
+        MOVIMIENTOS(SandslashAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sSandshrewEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Sandshrew),
     },
 
     [SPECIES_NIDORAN_F] =
@@ -1880,12 +1900,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(NidoranF, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(NidoranF),
-        ICON(NidoranF),
+        PALETA(NidoranF),
+        ICONO(NidoranF),
         FOLLOWER(NidoranF, TRACKS_FOOT)
-        LEARNSETS(NidoranF),
+        MOVIMIENTOS(NidoranF),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINA}),
-        .eggMoveLearnset = sNidoranFEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(NidoranF),
     },
 
     [SPECIES_NIDORINA] =
@@ -1929,12 +1949,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nidorina, 56, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Nidorina),
-        ICON(Nidorina),
+        PALETA(Nidorina),
+        ICONO(Nidorina),
         FOLLOWER(Nidorina, TRACKS_FOOT)
-        LEARNSETS(Nidorina),
+        MOVIMIENTOS(Nidorina),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOQUEEN}),
-        .eggMoveLearnset = sNidoranFEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(NidoranF),
     },
 
     [SPECIES_NIDOQUEEN] =
@@ -1978,11 +1998,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nidoqueen, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Nidoqueen),
-        ICON(Nidoqueen),
+        PALETA(Nidoqueen),
+        ICONO(Nidoqueen),
         FOLLOWER(Nidoqueen, TRACKS_FOOT)
-        LEARNSETS(Nidoqueen),
-        .eggMoveLearnset = sNidoranFEggMoveLearnset,
+        MOVIMIENTOS(Nidoqueen),
+        MOVIMIENTOS_HUEVO(NidoranF),
     },
 
     [SPECIES_NIDORAN_M] =
@@ -2026,12 +2046,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(NidoranM, 48, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(NidoranM),
-        ICON(NidoranM),
+        PALETA(NidoranM),
+        ICONO(NidoranM),
         FOLLOWER(NidoranM, TRACKS_FOOT)
-        LEARNSETS(NidoranM),
+        MOVIMIENTOS(NidoranM),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINO}),
-        .eggMoveLearnset = sNidoranMEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(NidoranM),
     },
 
     [SPECIES_NIDORINO] =
@@ -2075,12 +2095,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nidorino, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Nidorino),
-        ICON(Nidorino),
+        PALETA(Nidorino),
+        ICONO(Nidorino),
         FOLLOWER(Nidorino, TRACKS_FOOT)
-        LEARNSETS(Nidorino),
+        MOVIMIENTOS(Nidorino),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOKING}),
-        .eggMoveLearnset = sNidoranMEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(NidoranM),
     },
 
     [SPECIES_NIDOKING] =
@@ -2125,11 +2145,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nidoking, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Nidoking),
-        ICON(Nidoking),
+        PALETA(Nidoking),
+        ICONO(Nidoking),
         FOLLOWER(Nidoking, TRACKS_FOOT)
-        LEARNSETS(Nidoking),
-        .eggMoveLearnset = sNidoranMEggMoveLearnset,
+        MOVIMIENTOS(Nidoking),
+        MOVIMIENTOS_HUEVO(NidoranM),
     },
 
     [SPECIES_CLEFFA] =
@@ -2175,12 +2195,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cleffa, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Cleffa),
-        ICON(Cleffa),
+        PALETA(Cleffa),
+        ICONO(Cleffa),
         FOLLOWER(Cleffa, TRACKS_FOOT)
-        LEARNSETS(Cleffa),
+        MOVIMIENTOS(Cleffa),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CLEFAIRY}),
-        .eggMoveLearnset = sCleffaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Cleffa),
     },
 
     [SPECIES_CLEFAIRY] =
@@ -2226,12 +2246,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Clefairy, 56, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Clefairy),
-        ICON(Clefairy),
+        PALETA(Clefairy),
+        ICONO(Clefairy),
         FOLLOWER(Clefairy, TRACKS_FOOT)
-        LEARNSETS(Clefairy),
+        MOVIMIENTOS(Clefairy),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_CLEFABLE}),
-        .eggMoveLearnset = sCleffaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Cleffa),
     },
 
     [SPECIES_CLEFABLE] =
@@ -2277,11 +2297,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Clefable, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Clefable),
-        ICON(Clefable),
+        PALETA(Clefable),
+        ICONO(Clefable),
         FOLLOWER(Clefable, TRACKS_FOOT)
-        LEARNSETS(Clefable),
-        .eggMoveLearnset = sCleffaEggMoveLearnset,
+        MOVIMIENTOS(Clefable),
+        MOVIMIENTOS_HUEVO(Cleffa),
     },
 
     [SPECIES_VULPIX] =
@@ -2325,12 +2345,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vulpix, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Vulpix),
-        ICON(Vulpix),
+        PALETA(Vulpix),
+        ICONO(Vulpix),
         FOLLOWER(Vulpix, TRACKS_FOOT)
-        LEARNSETS(Vulpix),
+        MOVIMIENTOS(Vulpix),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES}),
-        .eggMoveLearnset = sVulpixEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Vulpix),
     },
 
     [SPECIES_NINETALES] =
@@ -2374,11 +2394,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ninetales, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Ninetales),
-        ICON(Ninetales),
+        PALETA(Ninetales),
+        ICONO(Ninetales),
         FOLLOWER(Ninetales, TRACKS_FOOT)
-        LEARNSETS(Ninetales),
-        .eggMoveLearnset = sVulpixEggMoveLearnset,
+        MOVIMIENTOS(Ninetales),
+        MOVIMIENTOS_HUEVO(Vulpix),
     },
 
     [SPECIES_VULPIX_ALOLA] =
@@ -2422,13 +2442,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(VulpixAlola, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(VulpixAlola),
-        ICON(VulpixAlola),
+        PALETA(VulpixAlola),
+        ICONO(VulpixAlola),
         FOLLOWER(VulpixAlola, TRACKS_FOOT)
-        LEARNSETS(VulpixAlola),
+        MOVIMIENTOS(VulpixAlola),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLA}),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sVulpixAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(VulpixAlola),
     },
 
     [SPECIES_NINETALES_ALOLA] =
@@ -2472,12 +2492,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(NinetalesAlola, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(NinetalesAlola),
-        ICON(NinetalesAlola),
+        PALETA(NinetalesAlola),
+        ICONO(NinetalesAlola),
         FOLLOWER(NinetalesAlola, TRACKS_FOOT)
-        LEARNSETS(NinetalesAlola),
+        MOVIMIENTOS(NinetalesAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sVulpixAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(VulpixAlola),
     },
 
     [SPECIES_IGGLYBUFF] =
@@ -2523,10 +2543,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Igglybuff, 40, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Igglybuff),
-        ICON(Igglybuff),
+        PALETA(Igglybuff),
+        ICONO(Igglybuff),
         FOLLOWER(Igglybuff, TRACKS_FOOT)
-        LEARNSETS(Igglybuff),
+        MOVIMIENTOS(Igglybuff),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_JIGGLYPUFF}),
     },
 
@@ -2573,10 +2593,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Jigglypuff, 56, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Jigglypuff),
-        ICON(Jigglypuff),
+        PALETA(Jigglypuff),
+        ICONO(Jigglypuff),
         FOLLOWER(Jigglypuff, TRACKS_FOOT)
-        LEARNSETS(Jigglypuff),
+        MOVIMIENTOS(Jigglypuff),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF}),
     },
 
@@ -2623,10 +2643,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .itemRare = ITEM_SILK_SCARF,
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Wigglytuff),
-        ICON(Wigglytuff),
+        PALETA(Wigglytuff),
+        ICONO(Wigglytuff),
         FOLLOWER(Wigglytuff, TRACKS_FOOT)
-        LEARNSETS(Wigglytuff),
+        MOVIMIENTOS(Wigglytuff),
     },
 
     [SPECIES_ZUBAT] =
@@ -2664,21 +2684,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Zubat, 56, 48),
-        FRONT_PIC_FEMALE(Zubat, 56, 48),
+        FRONT_PIC_HEMBRA(Zubat, 56, 48),
         .frontPicYOffset = 16,
         .frontAnimFrames = sAnims_Zubat,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .enemyMonElevation = 16,
         BACK_PIC(Zubat, 56, 56),
-        BACK_PIC_FEMALE(Zubat, 56, 56),
+        BACK_PIC_HEMBRA(Zubat, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Zubat),
-        ICON(Zubat),
-        ICON_FEMALE(Zubat),
+        PALETA(Zubat),
+        ICONO(Zubat),
+        ICONO_HEMBRA(Zubat),
         FOLLOWER(Zubat, TRACKS_NONE)
-        FOLLOWER_FEMALE(Zubat, TRACKS_FOOT)
-        LEARNSETS(Zubat),
+        FOLLOWER_HEMBRA(Zubat, TRACKS_FOOT)
+        MOVIMIENTOS(Zubat),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GOLBAT}),
     },
 
@@ -2717,21 +2737,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Golbat, 64, 56),
-        FRONT_PIC_FEMALE(Golbat, 64, 56),
+        FRONT_PIC_HEMBRA(Golbat, 64, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Golbat,
         .frontAnimId = ANIM_H_SLIDE_WOBBLE,
         .enemyMonElevation = 10,
         BACK_PIC(Golbat, 56, 40),
-        BACK_PIC_FEMALE(Golbat, 56, 40),
+        BACK_PIC_HEMBRA(Golbat, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Golbat),
-        ICON(Golbat),
-        ICON_FEMALE(Golbat),
+        PALETA(Golbat),
+        ICONO(Golbat),
+        ICONO_HEMBRA(Golbat),
         FOLLOWER(Golbat, TRACKS_NONE)
-        FOLLOWER_FEMALE(Golbat, TRACKS_NONE)
-        LEARNSETS(Golbat),
+        FOLLOWER_HEMBRA(Golbat, TRACKS_NONE)
+        MOVIMIENTOS(Golbat),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CROBAT}),
     },
 
@@ -2777,10 +2797,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Crobat, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Crobat),
-        ICON(Crobat),
+        PALETA(Crobat),
+        ICONO(Crobat),
         FOLLOWER(Crobat, TRACKS_NONE)
-        LEARNSETS(Crobat),
+        MOVIMIENTOS(Crobat),
     },
 
     [SPECIES_ODDISH] =
@@ -2825,12 +2845,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Oddish, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Oddish),
-        ICON(Oddish),
+        PALETA(Oddish),
+        ICONO(Oddish),
         FOLLOWER(Oddish, TRACKS_FOOT)
-        LEARNSETS(Oddish),
+        MOVIMIENTOS(Oddish),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GLOOM}),
-        .eggMoveLearnset = sOddishEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Oddish),
     },
 
     [SPECIES_GLOOM] =
@@ -2869,23 +2889,23 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Gloom, 56, 48),
-        FRONT_PIC_FEMALE(Gloom, 56, 48),
+        FRONT_PIC_HEMBRA(Gloom, 56, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Gloom,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
         BACK_PIC(Gloom, 64, 48),
-        BACK_PIC_FEMALE(Gloom, 64, 48),
+        BACK_PIC_HEMBRA(Gloom, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Gloom),
-        ICON(Gloom),
-        ICON_FEMALE(Gloom),
+        PALETA(Gloom),
+        ICONO(Gloom),
+        ICONO_HEMBRA(Gloom),
         FOLLOWER(Gloom, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Gloom, TRACKS_FOOT)
-        LEARNSETS(Gloom),
+        FOLLOWER_HEMBRA(Gloom, TRACKS_FOOT)
+        MOVIMIENTOS(Gloom),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VILEPLUME},
                                 {EVO_ITEM, ITEM_SUN_STONE, SPECIES_BELLOSSOM}),
-        .eggMoveLearnset = sOddishEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Oddish),
     },
 
     [SPECIES_VILEPLUME] =
@@ -2924,21 +2944,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Vileplume, 56, 56),
-        FRONT_PIC_FEMALE(Vileplume, 56, 56),
+        FRONT_PIC_HEMBRA(Vileplume, 56, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Vileplume,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
         BACK_PIC(Vileplume, 64, 56),
-        BACK_PIC_FEMALE(Vileplume, 64, 56),
+        BACK_PIC_HEMBRA(Vileplume, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Vileplume),
-        ICON(Vileplume),
-        ICON_FEMALE(Vileplume),
+        PALETA(Vileplume),
+        ICONO(Vileplume),
+        ICONO_HEMBRA(Vileplume),
         FOLLOWER(Vileplume, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Vileplume, TRACKS_FOOT)
-        LEARNSETS(Vileplume),
-        .eggMoveLearnset = sOddishEggMoveLearnset,
+        FOLLOWER_HEMBRA(Vileplume, TRACKS_FOOT)
+        MOVIMIENTOS(Vileplume),
+        MOVIMIENTOS_HUEVO(Oddish),
     },
 
     [SPECIES_BELLOSSOM] =
@@ -2983,11 +3003,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bellossom, 48, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Bellossom),
-        ICON(Bellossom),
+        PALETA(Bellossom),
+        ICONO(Bellossom),
         FOLLOWER(Bellossom, TRACKS_FOOT)
-        LEARNSETS(Bellossom),
-        .eggMoveLearnset = sOddishEggMoveLearnset,
+        MOVIMIENTOS(Bellossom),
+        MOVIMIENTOS_HUEVO(Oddish),
     },
 
     [SPECIES_PARAS] =
@@ -3033,12 +3053,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Paras, 64, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Paras),
-        ICON(Paras),
+        PALETA(Paras),
+        ICONO(Paras),
         FOLLOWER(Paras, TRACKS_BUG)
-        LEARNSETS(Paras),
+        MOVIMIENTOS(Paras),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PARASECT}),
-        .eggMoveLearnset = sParasEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Paras),
     },
 
     [SPECIES_PARASECT] =
@@ -3084,11 +3104,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Parasect, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Parasect),
-        ICON(Parasect),
+        PALETA(Parasect),
+        ICONO(Parasect),
         FOLLOWER(Parasect, TRACKS_BUG)
-        LEARNSETS(Parasect),
-        .eggMoveLearnset = sParasEggMoveLearnset,
+        MOVIMIENTOS(Parasect),
+        MOVIMIENTOS_HUEVO(Paras),
     },
 
     [SPECIES_DIGLETT] =
@@ -3133,12 +3153,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Diglett, 40, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Diglett),
-        ICON(Diglett),
+        PALETA(Diglett),
+        ICONO(Diglett),
         FOLLOWER(Diglett, TRACKS_NONE)
-        LEARNSETS(Diglett),
+        MOVIMIENTOS(Diglett),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DUGTRIO}),
-        .eggMoveLearnset = sDiglettEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Diglett),
     },
 
     [SPECIES_DUGTRIO] =
@@ -3183,11 +3203,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dugtrio, 48, 32),
         .backPicYOffset = 17,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Dugtrio),
-        ICON(Dugtrio),
+        PALETA(Dugtrio),
+        ICONO(Dugtrio),
         FOLLOWER(Dugtrio, TRACKS_NONE)
-        LEARNSETS(Dugtrio),
-        .eggMoveLearnset = sDiglettEggMoveLearnset,
+        MOVIMIENTOS(Dugtrio),
+        MOVIMIENTOS_HUEVO(Diglett),
     },
 
     [SPECIES_MEOWTH] =
@@ -3233,12 +3253,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Meowth, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Meowth),
-        ICON(Meowth),
+        PALETA(Meowth),
+        ICONO(Meowth),
         FOLLOWER(Meowth, TRACKS_FOOT)
-        LEARNSETS(Meowth),
+        MOVIMIENTOS(Meowth),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PERSIAN}),
-        .eggMoveLearnset = sMeowthEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Meowth),
     },
 
     [SPECIES_PERSIAN] =
@@ -3284,11 +3304,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Persian, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Persian),
-        ICON(Persian),
+        PALETA(Persian),
+        ICONO(Persian),
         FOLLOWER(Persian, TRACKS_FOOT)
-        LEARNSETS(Persian),
-        .eggMoveLearnset = sMeowthEggMoveLearnset,
+        MOVIMIENTOS(Persian),
+        MOVIMIENTOS_HUEVO(Meowth),
     },
 
     [SPECIES_MEOWTH_ALOLA] =
@@ -3332,13 +3352,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MeowthAlola, 64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MeowthAlola),
-        ICON(MeowthAlola),
+        PALETA(MeowthAlola),
+        ICONO(MeowthAlola),
         FOLLOWER(MeowthAlola, TRACKS_FOOT)
-        LEARNSETS(MeowthAlola),
+        MOVIMIENTOS(MeowthAlola),
         .isAlolaForm = TRUE,
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PERSIAN_ALOLA}),
-        .eggMoveLearnset = sMeowthAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(MeowthAlola),
     },
 
     [SPECIES_PERSIAN_ALOLA] =
@@ -3382,12 +3402,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(PersianAlola, 64, 56),
         .backPicYOffset = 8,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PersianAlola),
-        ICON(PersianAlola),
+        PALETA(PersianAlola),
+        ICONO(PersianAlola),
         FOLLOWER(PersianAlola, TRACKS_FOOT)
-        LEARNSETS(PersianAlola),
+        MOVIMIENTOS(PersianAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sMeowthAlolaEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(MeowthAlola),
     },
 
     [SPECIES_PSYDUCK] =
@@ -3431,12 +3451,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Psyduck, 48, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Psyduck),
-        ICON(Psyduck),
+        PALETA(Psyduck),
+        ICONO(Psyduck),
         FOLLOWER(Psyduck, TRACKS_FOOT)
-        LEARNSETS(Psyduck),
+        MOVIMIENTOS(Psyduck),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GOLDUCK}),
-        .eggMoveLearnset = sPsyduckEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Psyduck),
     },
 
     [SPECIES_GOLDUCK] =
@@ -3480,11 +3500,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Golduck, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Golduck),
-        ICON(Golduck),
+        PALETA(Golduck),
+        ICONO(Golduck),
         FOLLOWER(Golduck, TRACKS_FOOT)
-        LEARNSETS(Golduck),
-        .eggMoveLearnset = sPsyduckEggMoveLearnset,
+        MOVIMIENTOS(Golduck),
+        MOVIMIENTOS_HUEVO(Psyduck),
     },
 
     [SPECIES_MANKEY] =
@@ -3529,11 +3549,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mankey, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Mankey),
-        ICON(Mankey),
+        PALETA(Mankey),
+        ICONO(Mankey),
         FOLLOWER(Mankey, TRACKS_FOOT)
-        LEARNSETS(Mankey),
-        .eggMoveLearnset = sMankeyEggMoveLearnset,
+        MOVIMIENTOS(Mankey),
+        MOVIMIENTOS_HUEVO(Mankey),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PRIMEAPE},
                                 {EVO_MOVE, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
     },
@@ -3580,11 +3600,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Primeape, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Primeape),
-        ICON(Primeape),
+        PALETA(Primeape),
+        ICONO(Primeape),
         FOLLOWER(Primeape, TRACKS_FOOT)
-        LEARNSETS(Primeape),
-        .eggMoveLearnset = sMankeyEggMoveLearnset,
+        MOVIMIENTOS(Primeape),
+        MOVIMIENTOS_HUEVO(Mankey),
     },
 
     [SPECIES_ANNIHILAPE] =
@@ -3629,11 +3649,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Annihilape, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Annihilape),
-        ICON(Annihilape),
+        PALETA(Annihilape),
+        ICONO(Annihilape),
         FOLLOWER(Annihilape, TRACKS_FOOT)
-        LEARNSETS(Annihilape),
-        .eggMoveLearnset = sMankeyEggMoveLearnset,
+        MOVIMIENTOS(Annihilape),
+        MOVIMIENTOS_HUEVO(Mankey),
     },
 
     [SPECIES_GROWLITHE] =
@@ -3678,12 +3698,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Growlithe, 48, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Growlithe),
-        ICON(Growlithe),
+        PALETA(Growlithe),
+        ICONO(Growlithe),
         FOLLOWER(Growlithe, TRACKS_FOOT)
-        LEARNSETS(Growlithe),
+        MOVIMIENTOS(Growlithe),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE}),
-        .eggMoveLearnset = sGrowlitheEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Growlithe),
     },
 
     [SPECIES_ARCANINE] =
@@ -3728,11 +3748,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Arcanine, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Arcanine),
-        ICON(Arcanine),
+        PALETA(Arcanine),
+        ICONO(Arcanine),
         FOLLOWER(Arcanine, TRACKS_FOOT)
-        LEARNSETS(Arcanine),
-        .eggMoveLearnset = sGrowlitheEggMoveLearnset,
+        MOVIMIENTOS(Arcanine),
+        MOVIMIENTOS_HUEVO(Growlithe),
     },
 
     [SPECIES_GROWLITHE_HISUI] =
@@ -3776,13 +3796,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(GrowlitheHisui, 56, 56),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(GrowlitheHisui),
-        ICON(GrowlitheHisui),
+        PALETA(GrowlitheHisui),
+        ICONO(GrowlitheHisui),
         FOLLOWER(GrowlitheHisui, TRACKS_FOOT)
-        LEARNSETS(GrowlitheHisui),
+        MOVIMIENTOS(GrowlitheHisui),
         .isHisuiForm = TRUE,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE_HISUI}),
-        .eggMoveLearnset = sGrowlitheHisuiEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(GrowlitheHisui),
     },
 
     [SPECIES_ARCANINE_HISUI] =
@@ -3826,12 +3846,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(ArcanineHisui, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(ArcanineHisui),
-        ICON(ArcanineHisui),
+        PALETA(ArcanineHisui),
+        ICONO(ArcanineHisui),
         FOLLOWER(ArcanineHisui, TRACKS_FOOT)
-        LEARNSETS(ArcanineHisui),
+        MOVIMIENTOS(ArcanineHisui),
         .isHisuiForm = TRUE,
-        .eggMoveLearnset = sGrowlitheHisuiEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(GrowlitheHisui),
     },
 
     [SPECIES_POLIWAG] =
@@ -3876,12 +3896,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Poliwag, 48, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Poliwag),
-        ICON(Poliwag),
+        PALETA(Poliwag),
+        ICONO(Poliwag),
         FOLLOWER(Poliwag, TRACKS_FOOT)
-        LEARNSETS(Poliwag),
+        MOVIMIENTOS(Poliwag),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_POLIWHIRL}),
-        .eggMoveLearnset = sPoliwagEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Poliwag),
     },
 
     [SPECIES_POLIWHIRL] =
@@ -3928,14 +3948,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Poliwhirl, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Poliwhirl),
-        ICON(Poliwhirl),
+        PALETA(Poliwhirl),
+        ICONO(Poliwhirl),
         FOLLOWER(Poliwhirl, TRACKS_FOOT)
-        LEARNSETS(Poliwhirl),
+        MOVIMIENTOS(Poliwhirl),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH},
                                 {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED},
                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}),
-        .eggMoveLearnset = sPoliwagEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Poliwag),
     },
 
     [SPECIES_POLIWRATH] =
@@ -3981,11 +4001,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Poliwrath, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Poliwrath),
-        ICON(Poliwrath),
+        PALETA(Poliwrath),
+        ICONO(Poliwrath),
         FOLLOWER(Poliwrath, TRACKS_FOOT)
-        LEARNSETS(Poliwrath),
-        .eggMoveLearnset = sPoliwagEggMoveLearnset,
+        MOVIMIENTOS(Poliwrath),
+        MOVIMIENTOS_HUEVO(Poliwag),
     },
 
     [SPECIES_POLITOED] =
@@ -4025,20 +4045,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Politoed, 48, 56),
-        FRONT_PIC_FEMALE(Politoed, 48, 56),
+        FRONT_PIC_HEMBRA(Politoed, 48, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Politoed,
         .frontAnimId = ANIM_H_JUMPS_V_STRETCH,
         .frontAnimDelay = 40,
         BACK_PIC(Politoed, 56, 56),
-        BACK_PIC_FEMALE(Politoed, 56, 56),
+        BACK_PIC_HEMBRA(Politoed, 56, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Politoed),
-        ICON(Politoed),
+        PALETA(Politoed),
+        ICONO(Politoed),
         FOLLOWER(Politoed, TRACKS_FOOT)
-        LEARNSETS(Politoed),
-        .eggMoveLearnset = sPoliwagEggMoveLearnset,
+        MOVIMIENTOS(Politoed),
+        MOVIMIENTOS_HUEVO(Poliwag),
     },
 
     [SPECIES_ABRA] =
@@ -4083,12 +4103,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Abra, 56, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Abra),
-        ICON(Abra),
+        PALETA(Abra),
+        ICONO(Abra),
         FOLLOWER(Abra, TRACKS_NONE)
-        LEARNSETS(Abra),
+        MOVIMIENTOS(Abra),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KADABRA}),
-        .eggMoveLearnset = sAbraEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Abra),
     },
 
     [SPECIES_KADABRA] =
@@ -4128,20 +4148,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Kadabra, 64, 56),
-        FRONT_PIC_FEMALE(Kadabra, 64, 56),
+        FRONT_PIC_HEMBRA(Kadabra, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Kadabra,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Kadabra, 64, 48),
-        BACK_PIC_FEMALE(Kadabra, 64, 48),
+        BACK_PIC_HEMBRA(Kadabra, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Kadabra),
-        ICON(Kadabra),
+        PALETA(Kadabra),
+        ICONO(Kadabra),
         FOLLOWER(Kadabra, TRACKS_NONE)
-        LEARNSETS(Kadabra),
+        MOVIMIENTOS(Kadabra),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_TWISTED_SPOON, SPECIES_ALAKAZAM}),
-        .eggMoveLearnset = sAbraEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Abra),
     },
 
     [SPECIES_ALAKAZAM] =
@@ -4170,7 +4190,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Alakazam"),
         .natDexNum = DEX_ALAKAZAM,
         .categoryName = _("Psi"),
-        LEARNSETS(Alakazam),
+        MOVIMIENTOS(Alakazam),
         .description = COMPOUND_STRING(
             "While it has strong psychic abilities and\n"
             "high intelligence, an Alakazam's muscles\n"
@@ -4181,18 +4201,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Alakazam, 64, 64),
-        FRONT_PIC_FEMALE(Alakazam, 64, 64),
+        FRONT_PIC_HEMBRA(Alakazam, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Alakazam,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Alakazam, 64, 56),
-        BACK_PIC_FEMALE(Alakazam, 64, 56),
+        BACK_PIC_HEMBRA(Alakazam, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Alakazam),
-        ICON(Alakazam),
+        PALETA(Alakazam),
+        ICONO(Alakazam),
         FOLLOWER(Alakazam, TRACKS_NONE)
-        .eggMoveLearnset = sAbraEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Abra),
     },
 
     [SPECIES_MACHOP] =
@@ -4237,12 +4257,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Machop, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Machop),
-        ICON(Machop),
+        PALETA(Machop),
+        ICONO(Machop),
         FOLLOWER(Machop, TRACKS_FOOT)
-        LEARNSETS(Machop),
+        MOVIMIENTOS(Machop),
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_MACHOKE}),
-        .eggMoveLearnset = sMachopEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Machop),
     },
 
     [SPECIES_MACHOKE] =
@@ -4288,11 +4308,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Machoke, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Machoke),
-        ICON(Machoke),
+        PALETA(Machoke),
+        ICONO(Machoke),
         FOLLOWER(Machoke, TRACKS_FOOT)
-        LEARNSETS(Machoke),
-        .eggMoveLearnset = sMachopEggMoveLearnset,
+        MOVIMIENTOS(Machoke),
+        MOVIMIENTOS_HUEVO(Machop),
         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_MACHAMP},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_MACHAMP}),
     },
@@ -4321,7 +4341,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_MACHAMP,
         .natDexNum = DEX_MACHAMP,
         .categoryName = _("Superpower"),
-        LEARNSETS(Machamp),
+        MOVIMIENTOS(Machamp),
         .height = 16,
         .weight = 1300,
         .description = COMPOUND_STRING(
@@ -4340,9 +4360,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Machamp, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Machamp),
-        ICON(Machamp),
-        .eggMoveLearnset = sMachopEggMoveLearnset,
+        PALETA(Machamp),
+        ICONO(Machamp),
+        MOVIMIENTOS_HUEVO(Machop),
         FOLLOWER(Machamp, TRACKS_FOOT)
     },
 
@@ -4387,11 +4407,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bellsprout, 40, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Bellsprout),
-        ICON(Bellsprout),
+        PALETA(Bellsprout),
+        ICONO(Bellsprout),
         FOLLOWER(Bellsprout, TRACKS_FOOT)
-        LEARNSETS(Bellsprout),
-        .eggMoveLearnset = sBellsproutEggMoveLearnset,
+        MOVIMIENTOS(Bellsprout),
+        MOVIMIENTOS_HUEVO(Bellsprout),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WEEPINBELL}),
     },
 
@@ -4437,11 +4457,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Weepinbell, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Weepinbell),
-        ICON(Weepinbell),
+        PALETA(Weepinbell),
+        ICONO(Weepinbell),
         FOLLOWER(Weepinbell, TRACKS_SPOT)
-        LEARNSETS(Weepinbell),
-        .eggMoveLearnset = sBellsproutEggMoveLearnset,
+        MOVIMIENTOS(Weepinbell),
+        MOVIMIENTOS_HUEVO(Bellsprout),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VICTREEBEL}),
     },
 
@@ -4486,11 +4506,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Victreebel, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Victreebel),
-        ICON(Victreebel),
-        .eggMoveLearnset = sBellsproutEggMoveLearnset,
+        PALETA(Victreebel),
+        ICONO(Victreebel),
+        MOVIMIENTOS_HUEVO(Bellsprout),
         FOLLOWER(Victreebel, TRACKS_SPOT)
-        LEARNSETS(Victreebel),
+        MOVIMIENTOS(Victreebel),
     },
 
     [SPECIES_TENTACOOL] =
@@ -4535,11 +4555,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tentacool, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Tentacool),
-        ICON(Tentacool),
+        PALETA(Tentacool),
+        ICONO(Tentacool),
         FOLLOWER(Tentacool, TRACKS_SPOT)
-        LEARNSETS(Tentacool),
-        .eggMoveLearnset = sTentacoolEggMoveLearnset,
+        MOVIMIENTOS(Tentacool),
+        MOVIMIENTOS_HUEVO(Tentacool),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_TENTACRUEL}),
     },
 
@@ -4585,11 +4605,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tentacruel, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Tentacruel),
-        ICON(Tentacruel),
+        PALETA(Tentacruel),
+        ICONO(Tentacruel),
         FOLLOWER(Tentacruel, TRACKS_BUG)
-        .eggMoveLearnset = sTentacoolEggMoveLearnset,
-        LEARNSETS(Tentacruel),
+        MOVIMIENTOS_HUEVO(Tentacool),
+        MOVIMIENTOS(Tentacruel),
     },
 
     [SPECIES_GEODUDE] =
@@ -4635,11 +4655,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Geodude, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Geodude),
-        ICON(Geodude),
+        PALETA(Geodude),
+        ICONO(Geodude),
         FOLLOWER(Geodude, TRACKS_SPOT)
-        LEARNSETS(Geodude),
-        .eggMoveLearnset = sGeodudeEggMoveLearnset,
+        MOVIMIENTOS(Geodude),
+        MOVIMIENTOS_HUEVO(Geodude),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER}),
     },
 
@@ -4685,11 +4705,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Graveler, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Graveler),
-        ICON(Graveler),
+        PALETA(Graveler),
+        ICONO(Graveler),
         FOLLOWER(Graveler, TRACKS_FOOT)
-        LEARNSETS(Graveler),
-        .eggMoveLearnset = sGeodudeEggMoveLearnset,
+        MOVIMIENTOS(Graveler),
+        MOVIMIENTOS_HUEVO(Geodude),
         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM}),
     },
@@ -4736,11 +4756,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Golem, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Golem),
-        ICON(Golem),
-        .eggMoveLearnset = sGeodudeEggMoveLearnset,
+        PALETA(Golem),
+        ICONO(Golem),
+        MOVIMIENTOS_HUEVO(Geodude),
         FOLLOWER(Golem, TRACKS_FOOT)
-        LEARNSETS(Golem),
+        MOVIMIENTOS(Golem),
     },
 
     [SPECIES_GEODUDE_ALOLA] =
@@ -4786,12 +4806,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(GeodudeAlola, 64, 56),
         .backPicYOffset = 13,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GeodudeAlola),
-        ICON(GeodudeAlola),
+        PALETA(GeodudeAlola),
+        ICONO(GeodudeAlola),
         FOLLOWER(GeodudeAlola, TRACKS_FOOT)
         .isAlolaForm = TRUE,
-        LEARNSETS(GeodudeAlola),
-        .eggMoveLearnset = sGeodudeAlolaEggMoveLearnset,
+        MOVIMIENTOS(GeodudeAlola),
+        MOVIMIENTOS_HUEVO(GeodudeAlola),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER_ALOLA}),
     },
 
@@ -4837,12 +4857,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(GravelerAlola, 64, 48),
         .backPicYOffset = 10,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GravelerAlola),
-        ICON(GravelerAlola),
+        PALETA(GravelerAlola),
+        ICONO(GravelerAlola),
         FOLLOWER(GravelerAlola, TRACKS_FOOT)
         .isAlolaForm = TRUE,
-        LEARNSETS(GravelerAlola),
-        .eggMoveLearnset = sGeodudeAlolaEggMoveLearnset,
+        MOVIMIENTOS(GravelerAlola),
+        MOVIMIENTOS_HUEVO(GeodudeAlola),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_GOLEM_ALOLA}),
     },
 
@@ -4888,12 +4908,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(GolemAlola, 64, 48),
         .backPicYOffset = 13,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(GolemAlola),
-        ICON(GolemAlola),
+        PALETA(GolemAlola),
+        ICONO(GolemAlola),
         FOLLOWER(GolemAlola, TRACKS_FOOT)
         .isAlolaForm = TRUE,
-        LEARNSETS(GolemAlola),
-        .eggMoveLearnset = sGeodudeAlolaEggMoveLearnset,
+        MOVIMIENTOS(GolemAlola),
+        MOVIMIENTOS_HUEVO(GeodudeAlola),
     },
 
     [SPECIES_PONYTA] =
@@ -4938,11 +4958,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ponyta, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Ponyta),
-        ICON(Ponyta),
+        PALETA(Ponyta),
+        ICONO(Ponyta),
         FOLLOWER(Ponyta, TRACKS_FOOT)
-        LEARNSETS(Ponyta),
-        .eggMoveLearnset = sPonytaEggMoveLearnset,
+        MOVIMIENTOS(Ponyta),
+        MOVIMIENTOS_HUEVO(Ponyta),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAPIDASH}),
     },
 
@@ -4987,11 +5007,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rapidash, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Rapidash),
-        ICON(Rapidash),
-        .eggMoveLearnset = sPonytaEggMoveLearnset,
+        PALETA(Rapidash),
+        ICONO(Rapidash),
+        MOVIMIENTOS_HUEVO(Ponyta),
         FOLLOWER(Rapidash, TRACKS_FOOT)
-        LEARNSETS(Rapidash),
+        MOVIMIENTOS(Rapidash),
     },
 
     [SPECIES_PONYTA_GALAR] =
@@ -5036,11 +5056,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(PonytaGalar, 64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(PonytaGalar),
-        ICON(PonytaGalar),
-        .eggMoveLearnset = sPonytaGalarEggMoveLearnset,
+        PALETA(PonytaGalar),
+        ICONO(PonytaGalar),
+        MOVIMIENTOS_HUEVO(PonytaGalar),
         FOLLOWER(PonytaGalar, TRACKS_FOOT)
-        LEARNSETS(PonytaGalar),
+        MOVIMIENTOS(PonytaGalar),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAPIDASH_GALAR}),
     },
 
@@ -5086,11 +5106,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RapidashGalar, 64, 56),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(RapidashGalar),
-        ICON(RapidashGalar),
-        .eggMoveLearnset = sPonytaGalarEggMoveLearnset,
+        PALETA(RapidashGalar),
+        ICONO(RapidashGalar),
+        MOVIMIENTOS_HUEVO(PonytaGalar),
         FOLLOWER(RapidashGalar, TRACKS_FOOT)
-        LEARNSETS(RapidashGalar),
+        MOVIMIENTOS(RapidashGalar),
     },
 
     [SPECIES_SLOWPOKE] =
@@ -5135,11 +5155,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Slowpoke, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Slowpoke),
-        ICON(Slowpoke),
+        PALETA(Slowpoke),
+        ICONO(Slowpoke),
         FOLLOWER(Slowpoke, TRACKS_FOOT)
-        LEARNSETS(Slowpoke),
-        .eggMoveLearnset = sSlowpokeEggMoveLearnset,
+        MOVIMIENTOS(Slowpoke),
+        MOVIMIENTOS_HUEVO(Slowpoke),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SLOWBRO},
                                 {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING},
                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}),
@@ -5187,11 +5207,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Slowbro, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Slowbro),
-        ICON(Slowbro),
-        .eggMoveLearnset = sSlowpokeEggMoveLearnset,
+        PALETA(Slowbro),
+        ICONO(Slowbro),
+        MOVIMIENTOS_HUEVO(Slowpoke),
         FOLLOWER(Slowbro, TRACKS_FOOT)
-        LEARNSETS(Slowbro),
+        MOVIMIENTOS(Slowbro),
     },
 
     [SPECIES_SLOWKING] =
@@ -5235,12 +5255,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_SHRINK_GROW,
         BACK_PIC(Slowking, 56, 64),
         .backPicYOffset = 3,
-        .eggMoveLearnset = sSlowpokeEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Slowpoke),
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Slowking),
-        ICON(Slowking),
+        PALETA(Slowking),
+        ICONO(Slowking),
         FOLLOWER(Slowking, TRACKS_FOOT)
-        LEARNSETS(Slowking),
+        MOVIMIENTOS(Slowking),
     },
 
     [SPECIES_MAGNEMITE] =
@@ -5287,11 +5307,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magnemite, 48, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Magnemite),
-        ICON(Magnemite),
-        .eggMoveLearnset = sMagnemiteEggMoveLearnset,
+        PALETA(Magnemite),
+        ICONO(Magnemite),
+        MOVIMIENTOS_HUEVO(Magnemite),
         FOLLOWER(Magnemite, TRACKS_NONE)
-        LEARNSETS(Magnemite),
+        MOVIMIENTOS(Magnemite),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MAGNETON}),
     },
 
@@ -5339,11 +5359,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magneton, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Magneton),
-        ICON(Magneton),
+        PALETA(Magneton),
+        ICONO(Magneton),
         FOLLOWER(Magneton, TRACKS_NONE)
-        LEARNSETS(Magneton),
-        .eggMoveLearnset = sMagnemiteEggMoveLearnset,
+        MOVIMIENTOS(Magneton),
+        MOVIMIENTOS_HUEVO(Magnemite),
         .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_MAGNEZONE},
                                 {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_MAGNEZONE}),
     },
@@ -5392,11 +5412,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magnezone, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Magnezone),
-        ICON(Magnezone),
-        .eggMoveLearnset = sMagnemiteEggMoveLearnset,
+        PALETA(Magnezone),
+        ICONO(Magnezone),
+        MOVIMIENTOS_HUEVO(Magnemite),
         FOLLOWER(Magnezone, TRACKS_FOOT)
-        LEARNSETS(Magnezone),
+        MOVIMIENTOS(Magnezone),
     },
 
     [SPECIES_DODUO] =
@@ -5435,19 +5455,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 257,
         .trainerOffset = -1,
         FRONT_PIC(Doduo, 64, 56),
-        FRONT_PIC_FEMALE(Doduo, 64, 56),
+        FRONT_PIC_HEMBRA(Doduo, 64, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Doduo,
         .frontAnimId = ANIM_H_SHAKE_SLOW,
         BACK_PIC(Doduo, 64, 56),
-        BACK_PIC_FEMALE(Doduo, 64, 56),
+        BACK_PIC_HEMBRA(Doduo, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Doduo),
-        ICON(Doduo),
-        .eggMoveLearnset = sDoduoEggMoveLearnset,
+        PALETA(Doduo),
+        ICONO(Doduo),
+        MOVIMIENTOS_HUEVO(Doduo),
         FOLLOWER(Doduo, TRACKS_FOOT)
-        LEARNSETS(Doduo),
+        MOVIMIENTOS(Doduo),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DODRIO}),
     },
 
@@ -5487,19 +5507,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 268,
         .trainerOffset = 0,
         FRONT_PIC(Dodrio, 64, 64),
-        FRONT_PIC_FEMALE(Dodrio, 64, 64),
+        FRONT_PIC_HEMBRA(Dodrio, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Dodrio,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Dodrio, 64, 64),
-        BACK_PIC_FEMALE(Dodrio, 64, 64),
+        BACK_PIC_HEMBRA(Dodrio, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Dodrio),
-        ICON(Dodrio),
+        PALETA(Dodrio),
+        ICONO(Dodrio),
         FOLLOWER(Dodrio, TRACKS_FOOT)
-        .eggMoveLearnset = sDoduoEggMoveLearnset,
-        LEARNSETS(Dodrio),
+        MOVIMIENTOS_HUEVO(Doduo),
+        MOVIMIENTOS(Dodrio),
     },
 
     [SPECIES_SEEL] =
@@ -5543,11 +5563,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Seel, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Seel),
-        ICON(Seel),
+        PALETA(Seel),
+        ICONO(Seel),
         FOLLOWER(Seel, TRACKS_SLITHER)
-        LEARNSETS(Seel),
-        .eggMoveLearnset = sSeelEggMoveLearnset,
+        MOVIMIENTOS(Seel),
+        MOVIMIENTOS_HUEVO(Seel),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DEWGONG}),
     },
 
@@ -5592,11 +5612,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dewgong, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Dewgong),
-        ICON(Dewgong),
-        .eggMoveLearnset = sSeelEggMoveLearnset,
+        PALETA(Dewgong),
+        ICONO(Dewgong),
+        MOVIMIENTOS_HUEVO(Seel),
         FOLLOWER(Dewgong, TRACKS_FOOT)
-        LEARNSETS(Dewgong),
+        MOVIMIENTOS(Dewgong),
     },
 
     [SPECIES_GRIMER] =
@@ -5641,11 +5661,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Grimer, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Grimer),
-        ICON(Grimer),
-        .eggMoveLearnset = sGrimerEggMoveLearnset,
+        PALETA(Grimer),
+        ICONO(Grimer),
+        MOVIMIENTOS_HUEVO(Grimer),
         FOLLOWER(Grimer, TRACKS_SLITHER)
-        LEARNSETS(Grimer),
+        MOVIMIENTOS(Grimer),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MUK}),
     },
 
@@ -5693,11 +5713,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Muk, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(Muk),
-        ICON(Muk),
-        .eggMoveLearnset = sGrimerEggMoveLearnset,
+        PALETA(Muk),
+        ICONO(Muk),
+        MOVIMIENTOS_HUEVO(Grimer),
         FOLLOWER(Muk, TRACKS_SLITHER)
-        LEARNSETS(Muk),
+        MOVIMIENTOS(Muk),
     },
 
     [SPECIES_SHELLDER] =
@@ -5743,11 +5763,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Shellder, 48, 24),
         .backPicYOffset = 21,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Shellder),
-        ICON(Shellder),
+        PALETA(Shellder),
+        ICONO(Shellder),
         FOLLOWER(Shellder, TRACKS_SPOT)
-        LEARNSETS(Shellder),
-        .eggMoveLearnset = sShellderEggMoveLearnset,
+        MOVIMIENTOS(Shellder),
+        MOVIMIENTOS_HUEVO(Shellder),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_CLOYSTER}),
     },
 
@@ -5793,11 +5813,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cloyster, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Cloyster),
-        ICON(Cloyster),
-        .eggMoveLearnset = sShellderEggMoveLearnset,
+        PALETA(Cloyster),
+        ICONO(Cloyster),
+        MOVIMIENTOS_HUEVO(Shellder),
         FOLLOWER(Cloyster, TRACKS_NONE)
-        LEARNSETS(Cloyster),
+        MOVIMIENTOS(Cloyster),
     },
 
     [SPECIES_GASTLY] =
@@ -5844,11 +5864,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gastly, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Gastly),
-        ICON(Gastly),
-        .eggMoveLearnset = sGastlyEggMoveLearnset,
+        PALETA(Gastly),
+        ICONO(Gastly),
+        MOVIMIENTOS_HUEVO(Gastly),
         FOLLOWER(Gastly, TRACKS_NONE)
-        LEARNSETS(Gastly),
+        MOVIMIENTOS(Gastly),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_HAUNTER}),
     },
 
@@ -5897,11 +5917,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Haunter, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Haunter),
-        ICON(Haunter),
-        .eggMoveLearnset = sGastlyEggMoveLearnset,
+        PALETA(Haunter),
+        ICONO(Haunter),
+        MOVIMIENTOS_HUEVO(Gastly),
         FOLLOWER(Haunter, TRACKS_NONE)
-        LEARNSETS(Haunter),
+        MOVIMIENTOS(Haunter),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GENGAR}),
     },
 
@@ -5921,7 +5941,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Gengar"),
         .natDexNum = DEX_GENGAR,
         .categoryName = _("Shadow"),
-        LEARNSETS(Gengar),
+        MOVIMIENTOS(Gengar),
         .baseHP        = 60,
         .baseAttack    = 65,
         .baseDefense   = 60,
@@ -5948,9 +5968,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gengar, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Gengar),
-        ICON(Gengar),
-        .eggMoveLearnset = sGastlyEggMoveLearnset,
+        PALETA(Gengar),
+        ICONO(Gengar),
+        MOVIMIENTOS_HUEVO(Gastly),
         FOLLOWER(Gengar, TRACKS_NONE)
     },
 
@@ -5995,11 +6015,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Onix, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Onix),
-        ICON(Onix),
+        PALETA(Onix),
+        ICONO(Onix),
         FOLLOWER(Onix, TRACKS_SLITHER)
-        LEARNSETS(Onix),
-        .eggMoveLearnset = sOnixEggMoveLearnset,
+        MOVIMIENTOS(Onix),
+        MOVIMIENTOS_HUEVO(Onix),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX}),
     },
 
@@ -6018,7 +6038,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Steelix"),
         .natDexNum = DEX_STEELIX,
         .categoryName = _("Iron Snake"),
-        LEARNSETS(Steelix),
+        MOVIMIENTOS(Steelix),
         .baseHP        = 75,
         .baseAttack    = 85,
         .baseDefense   = 200,
@@ -6040,18 +6060,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 516,
         .trainerOffset = 13,
         FRONT_PIC(Steelix, 64, 64),
-        FRONT_PIC_FEMALE(Steelix, 64, 64),
+        FRONT_PIC_HEMBRA(Steelix, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Steelix,
         .frontAnimId = ANIM_V_SHAKE,
         .frontAnimDelay = 45,
         BACK_PIC(Steelix, 64, 64),
-        BACK_PIC_FEMALE(Steelix, 64, 64),
+        BACK_PIC_HEMBRA(Steelix, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Steelix),
-        ICON(Steelix),
-        .eggMoveLearnset = sOnixEggMoveLearnset,
+        PALETA(Steelix),
+        ICONO(Steelix),
+        MOVIMIENTOS_HUEVO(Onix),
         FOLLOWER(Steelix, TRACKS_SLITHER)
     },
 
@@ -6097,11 +6117,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drowzee, 56, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Drowzee),
-        ICON(Drowzee),
-        .eggMoveLearnset = sDrowzeeEggMoveLearnset,
+        PALETA(Drowzee),
+        ICONO(Drowzee),
+        MOVIMIENTOS_HUEVO(Drowzee),
         FOLLOWER(Drowzee, TRACKS_FOOT)
-        LEARNSETS(Drowzee),
+        MOVIMIENTOS(Drowzee),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_HYPNO}),
     },
 
@@ -6140,20 +6160,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 257,
         .trainerOffset = 0,
         FRONT_PIC(Hypno, 64, 64),
-        FRONT_PIC_FEMALE(Hypno, 64, 64),
+        FRONT_PIC_HEMBRA(Hypno, 64, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Hypno,
         .frontAnimId = ANIM_GROW_VIBRATE,
         .frontAnimDelay = 40,
         BACK_PIC(Hypno, 64, 56),
-        BACK_PIC_FEMALE(Hypno, 64, 56),
+        BACK_PIC_HEMBRA(Hypno, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Hypno),
-        ICON(Hypno),
-        .eggMoveLearnset = sDrowzeeEggMoveLearnset,
+        PALETA(Hypno),
+        ICONO(Hypno),
+        MOVIMIENTOS_HUEVO(Drowzee),
         FOLLOWER(Hypno, TRACKS_FOOT)
-        LEARNSETS(Hypno),
+        MOVIMIENTOS(Hypno),
     },
 
     [SPECIES_KRABBY] =
@@ -6197,11 +6217,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Krabby, 56, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Krabby),
-        ICON(Krabby),
+        PALETA(Krabby),
+        ICONO(Krabby),
         FOLLOWER(Krabby, TRACKS_FOOT)
-        LEARNSETS(Krabby),
-        .eggMoveLearnset = sKrabbyEggMoveLearnset,
+        MOVIMIENTOS(Krabby),
+        MOVIMIENTOS_HUEVO(Krabby),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KINGLER}),
     },
 
@@ -6229,7 +6249,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_KINGLER,
         .natDexNum = DEX_KINGLER,
         .categoryName = _("Pincer"),
-        LEARNSETS(Kingler),
+        MOVIMIENTOS(Kingler),
         .height = 13,
         .weight = 600,
         .description = COMPOUND_STRING(
@@ -6249,9 +6269,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kingler, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Kingler),
-        ICON(Kingler),
-        .eggMoveLearnset = sKrabbyEggMoveLearnset,
+        PALETA(Kingler),
+        ICONO(Kingler),
+        MOVIMIENTOS_HUEVO(Krabby),
         FOLLOWER(Kingler, TRACKS_FOOT)
     },
 
@@ -6296,11 +6316,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Voltorb, 48, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Voltorb),
-        ICON(Voltorb),
+        PALETA(Voltorb),
+        ICONO(Voltorb),
         FOLLOWER(Voltorb, TRACKS_SPOT)
-        LEARNSETS(Voltorb),
-        .eggMoveLearnset = sVoltorbEggMoveLearnset,
+        MOVIMIENTOS(Voltorb),
+        MOVIMIENTOS_HUEVO(Voltorb),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ELECTRODE}),
     },
 
@@ -6345,11 +6365,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Electrode, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Electrode),
-        ICON(Electrode),
-        .eggMoveLearnset = sVoltorbEggMoveLearnset,
+        PALETA(Electrode),
+        ICONO(Electrode),
+        MOVIMIENTOS_HUEVO(Voltorb),
         FOLLOWER(Electrode, TRACKS_SPOT)
-        LEARNSETS(Electrode),
+        MOVIMIENTOS(Electrode),
     },
 
     [SPECIES_EXEGGCUTE] =
@@ -6394,11 +6414,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Exeggcute, 64, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Exeggcute),
-        ICON(Exeggcute),
+        PALETA(Exeggcute),
+        ICONO(Exeggcute),
         FOLLOWER(Exeggcute, TRACKS_SPOT)
-        LEARNSETS(Exeggcute),
-        .eggMoveLearnset = sExeggcuteEggMoveLearnset,
+        MOVIMIENTOS(Exeggcute),
+        MOVIMIENTOS_HUEVO(Exeggcute),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_EXEGGUTOR}),
     },
 
@@ -6443,11 +6463,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Exeggutor, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Exeggutor),
-        ICON(Exeggutor),
-        .eggMoveLearnset = sExeggcuteEggMoveLearnset,
+        PALETA(Exeggutor),
+        ICONO(Exeggutor),
+        MOVIMIENTOS_HUEVO(Exeggcute),
         FOLLOWER(Exeggutor, TRACKS_FOOT)
-        LEARNSETS(Exeggutor),
+        MOVIMIENTOS(Exeggutor),
     },
 
     [SPECIES_CUBONE] =
@@ -6493,11 +6513,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cubone, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Cubone),
-        ICON(Cubone),
+        PALETA(Cubone),
+        ICONO(Cubone),
         FOLLOWER(Cubone, TRACKS_FOOT)
-        LEARNSETS(Cubone),
-        .eggMoveLearnset = sCuboneEggMoveLearnset,
+        MOVIMIENTOS(Cubone),
+        MOVIMIENTOS_HUEVO(Cubone),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAROWAK},
                                 {EVO_NONE, 0, SPECIES_MAROWAK_ALOLA}),
     },
@@ -6544,11 +6564,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Marowak, 48, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Marowak),
-        ICON(Marowak),
+        PALETA(Marowak),
+        ICONO(Marowak),
         FOLLOWER(Marowak, TRACKS_FOOT)
-        LEARNSETS(Marowak),
-        .eggMoveLearnset = sCuboneEggMoveLearnset,
+        MOVIMIENTOS(Marowak),
+        MOVIMIENTOS_HUEVO(Cubone),
     },
 
     [SPECIES_MAROWAK_ALOLA] =
@@ -6593,12 +6613,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MarowakAlola, 56, 56),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MarowakAlola),
-        ICON(MarowakAlola),
+        PALETA(MarowakAlola),
+        ICONO(MarowakAlola),
         FOLLOWER(MarowakAlola, TRACKS_FOOT)
-        LEARNSETS(MarowakAlola),
+        MOVIMIENTOS(MarowakAlola),
         .isAlolaForm = TRUE,
-        .eggMoveLearnset = sCuboneEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Cubone),
     },
 
     [SPECIES_TYROGUE] =
@@ -6642,11 +6662,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tyrogue, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Tyrogue),
-        ICON(Tyrogue),
+        PALETA(Tyrogue),
+        ICONO(Tyrogue),
         FOLLOWER(Tyrogue, TRACKS_FOOT)
-        LEARNSETS(Tyrogue),
-        .eggMoveLearnset = sTyrogueEggMoveLearnset,
+        MOVIMIENTOS(Tyrogue),
+        MOVIMIENTOS_HUEVO(Tyrogue),
         .evolutions = EVOLUTION({EVO_LEVEL_ATK_LT_DEF, 30, SPECIES_HITMONCHAN},
                                 {EVO_LEVEL_ATK_GT_DEF, 30, SPECIES_HITMONLEE},
                                 {EVO_LEVEL_ATK_EQ_DEF, 30, SPECIES_HITMONTOP}),
@@ -6693,11 +6713,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hitmonlee, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Hitmonlee),
-        ICON(Hitmonlee),
-        .eggMoveLearnset = sTyrogueEggMoveLearnset,
+        PALETA(Hitmonlee),
+        ICONO(Hitmonlee),
+        MOVIMIENTOS_HUEVO(Tyrogue),
         FOLLOWER(Hitmonlee, TRACKS_FOOT)
-        LEARNSETS(Hitmonlee),
+        MOVIMIENTOS(Hitmonlee),
     },
 
     [SPECIES_HITMONCHAN] =
@@ -6741,11 +6761,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hitmonchan, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Hitmonchan),
-        ICON(Hitmonchan),
-        .eggMoveLearnset = sTyrogueEggMoveLearnset,
+        PALETA(Hitmonchan),
+        ICONO(Hitmonchan),
+        MOVIMIENTOS_HUEVO(Tyrogue),
         FOLLOWER(Hitmonchan, TRACKS_FOOT)
-        LEARNSETS(Hitmonchan),
+        MOVIMIENTOS(Hitmonchan),
     },
 
     [SPECIES_HITMONTOP] =
@@ -6789,11 +6809,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hitmontop, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-        PALETTES(Hitmontop),
-        ICON(Hitmontop),
-        .eggMoveLearnset = sTyrogueEggMoveLearnset,
+        PALETA(Hitmontop),
+        ICONO(Hitmontop),
+        MOVIMIENTOS_HUEVO(Tyrogue),
         FOLLOWER(Hitmontop, TRACKS_FOOT)
-        LEARNSETS(Hitmontop),
+        MOVIMIENTOS(Hitmontop),
     },
 
     [SPECIES_LICKITUNG] =
@@ -6838,11 +6858,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .itemRare = ITEM_SILK_SCARF,
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Lickitung),
-        ICON(Lickitung),
+        PALETA(Lickitung),
+        ICONO(Lickitung),
         FOLLOWER(Lickitung, TRACKS_FOOT)
-        LEARNSETS(Lickitung),
-        .eggMoveLearnset = sLickitungEggMoveLearnset,
+        MOVIMIENTOS(Lickitung),
+        MOVIMIENTOS_HUEVO(Lickitung),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ROLLOUT, SPECIES_LICKILICKY}),
     },
 
@@ -6888,11 +6908,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lickilicky, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Lickilicky),
-        ICON(Lickilicky),
-        .eggMoveLearnset = sLickitungEggMoveLearnset,
+        PALETA(Lickilicky),
+        ICONO(Lickilicky),
+        MOVIMIENTOS_HUEVO(Lickitung),
         FOLLOWER(Lickilicky, TRACKS_FOOT)
-        LEARNSETS(Lickilicky),
+        MOVIMIENTOS(Lickilicky),
     },
 
     [SPECIES_KOFFING] =
@@ -6938,11 +6958,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Koffing, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Koffing),
-        ICON(Koffing),
+        PALETA(Koffing),
+        ICONO(Koffing),
         FOLLOWER(Koffing, TRACKS_NONE)
-        LEARNSETS(Koffing),
-        .eggMoveLearnset = sKoffingEggMoveLearnset,
+        MOVIMIENTOS(Koffing),
+        MOVIMIENTOS_HUEVO(Koffing),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_WEEZING},
                                 {EVO_NONE, 0, SPECIES_WEEZING_GALAR}),
     },
@@ -6991,11 +7011,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Weezing, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Weezing),
-        ICON(Weezing),
-        .eggMoveLearnset = sKoffingEggMoveLearnset,
+        PALETA(Weezing),
+        ICONO(Weezing),
+        MOVIMIENTOS_HUEVO(Koffing),
         FOLLOWER(Weezing, TRACKS_NONE)
-        LEARNSETS(Weezing),
+        MOVIMIENTOS(Weezing),
     },
 
     [SPECIES_WEEZING_GALAR] =
@@ -7043,11 +7063,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(WeezingGalar, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(WeezingGalar),
-        ICON(WeezingGalar),
-        .eggMoveLearnset = sKoffingEggMoveLearnset,
+        PALETA(WeezingGalar),
+        ICONO(WeezingGalar),
+        MOVIMIENTOS_HUEVO(Koffing),
         FOLLOWER(WeezingGalar, TRACKS_FOOT)
-        LEARNSETS(WeezingGalar),
+        MOVIMIENTOS(WeezingGalar),
     },
 
     [SPECIES_RHYHORN] =
@@ -7086,19 +7106,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Rhyhorn, 56, 40),
-        FRONT_PIC_FEMALE(Rhyhorn, 56, 40),
+        FRONT_PIC_HEMBRA(Rhyhorn, 56, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Rhyhorn,
         .frontAnimId = ANIM_V_SHAKE,
         BACK_PIC(Rhyhorn, 64, 48),
-        BACK_PIC_FEMALE(Rhyhorn, 64, 48),
+        BACK_PIC_HEMBRA(Rhyhorn, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Rhyhorn),
-        ICON(Rhyhorn),
+        PALETA(Rhyhorn),
+        ICONO(Rhyhorn),
         FOLLOWER(Rhyhorn, TRACKS_FOOT)
-        LEARNSETS(Rhyhorn),
-        .eggMoveLearnset = sRhyhornEggMoveLearnset,
+        MOVIMIENTOS(Rhyhorn),
+        MOVIMIENTOS_HUEVO(Rhyhorn),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RHYDON}),
     },
 
@@ -7138,19 +7158,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 299,
         .trainerOffset = 2,
         FRONT_PIC(Rhydon, 64, 56),
-        FRONT_PIC_FEMALE(Rhydon, 64, 56),
+        FRONT_PIC_HEMBRA(Rhydon, 64, 56),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Rhydon,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Rhydon, 64, 56),
-        BACK_PIC_FEMALE(Rhydon, 64, 56),
+        BACK_PIC_HEMBRA(Rhydon, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Rhydon),
-        ICON(Rhydon),
-        .eggMoveLearnset = sRhyhornEggMoveLearnset,
+        PALETA(Rhydon),
+        ICONO(Rhydon),
+        MOVIMIENTOS_HUEVO(Rhyhorn),
         FOLLOWER(Rhydon, TRACKS_FOOT)
-        LEARNSETS(Rhydon),
+        MOVIMIENTOS(Rhydon),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_PROTECTOR, SPECIES_RHYPERIOR}),
     },
 
@@ -7190,19 +7210,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 369,
         .trainerOffset = 7,
         FRONT_PIC(Rhyperior, 64, 64),
-        FRONT_PIC_FEMALE(Rhyperior, 64, 64),
+        FRONT_PIC_HEMBRA(Rhyperior, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Rhyperior,
         .frontAnimId = ANIM_V_SHAKE_TWICE,
         BACK_PIC(Rhyperior, 64, 64),
-        BACK_PIC_FEMALE(Rhyperior, 64, 64),
+        BACK_PIC_HEMBRA(Rhyperior, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Rhyperior),
-        ICON(Rhyperior),
-        .eggMoveLearnset = sRhyhornEggMoveLearnset,
+        PALETA(Rhyperior),
+        ICONO(Rhyperior),
+        MOVIMIENTOS_HUEVO(Rhyhorn),
         FOLLOWER(Rhyperior, TRACKS_FOOT)
-        LEARNSETS(Rhyperior),
+        MOVIMIENTOS(Rhyperior),
     },
 
     [SPECIES_TANGELA] =
@@ -7246,11 +7266,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tangela, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Tangela),
-        ICON(Tangela),
+        PALETA(Tangela),
+        ICONO(Tangela),
         FOLLOWER(Tangela, TRACKS_FOOT)
-        LEARNSETS(Tangela),
-        .eggMoveLearnset = sTangelaEggMoveLearnset,
+        MOVIMIENTOS(Tangela),
+        MOVIMIENTOS_HUEVO(Tangela),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_TANGROWTH}),
     },
 
@@ -7289,18 +7309,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 334,
         .trainerOffset = 4,
         FRONT_PIC(Tangrowth, 64, 64),
-        FRONT_PIC_FEMALE(Tangrowth, 64, 64),
+        FRONT_PIC_HEMBRA(Tangrowth, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Tangrowth,
         .frontAnimId = ANIM_H_STRETCH,
         BACK_PIC(Tangrowth, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Tangrowth),
-        ICON(Tangrowth),
+        PALETA(Tangrowth),
+        ICONO(Tangrowth),
         FOLLOWER(Tangrowth, TRACKS_FOOT)
-        .eggMoveLearnset = sTangelaEggMoveLearnset,
-        LEARNSETS(Tangrowth),
+        MOVIMIENTOS_HUEVO(Tangela),
+        MOVIMIENTOS(Tangrowth),
     },
 
     [SPECIES_KANGASKHAN] =
@@ -7322,7 +7342,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 387,
         .trainerOffset = 8,
-        LEARNSETS(Kangaskhan),
+        MOVIMIENTOS(Kangaskhan),
         .baseHP        = 105,
         .baseAttack    = 95,
         .baseDefense   = 80,
@@ -7345,9 +7365,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kangaskhan, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Kangaskhan),
-        ICON(Kangaskhan),
-        .eggMoveLearnset = sKangaskhanEggMoveLearnset,
+        PALETA(Kangaskhan),
+        ICONO(Kangaskhan),
+        MOVIMIENTOS_HUEVO(Kangaskhan),
         FOLLOWER(Kangaskhan, TRACKS_FOOT)
     },
 
@@ -7393,11 +7413,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Horsea, 48, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Horsea),
-        ICON(Horsea),
+        PALETA(Horsea),
+        ICONO(Horsea),
         FOLLOWER(Horsea, TRACKS_SPOT)
-        LEARNSETS(Horsea),
-        .eggMoveLearnset = sHorseaEggMoveLearnset,
+        MOVIMIENTOS(Horsea),
+        MOVIMIENTOS_HUEVO(Horsea),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEADRA}),
     },
 
@@ -7444,11 +7464,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Seadra, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Seadra),
-        ICON(Seadra),
+        PALETA(Seadra),
+        ICONO(Seadra),
         FOLLOWER(Seadra, TRACKS_SPOT)
-        LEARNSETS(Seadra),
-        .eggMoveLearnset = sHorseaEggMoveLearnset,
+        MOVIMIENTOS(Seadra),
+        MOVIMIENTOS_HUEVO(Horsea),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DRAGON_SCALE, SPECIES_KINGDRA}),
     },
 
@@ -7496,11 +7516,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kingdra, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Kingdra),
-        ICON(Kingdra),
-        .eggMoveLearnset = sHorseaEggMoveLearnset,
+        PALETA(Kingdra),
+        ICONO(Kingdra),
+        MOVIMIENTOS_HUEVO(Horsea),
         FOLLOWER(Kingdra, TRACKS_SPOT)
-        LEARNSETS(Kingdra),
+        MOVIMIENTOS(Kingdra),
     },
 
     [SPECIES_GOLDEEN] =
@@ -7539,19 +7559,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Goldeen, 64, 40),
-        FRONT_PIC_FEMALE(Goldeen, 64, 40),
+        FRONT_PIC_HEMBRA(Goldeen, 64, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Goldeen,
         .frontAnimId = ANIM_H_SLIDE_WOBBLE,
         BACK_PIC(Goldeen, 64, 48),
-        BACK_PIC_FEMALE(Goldeen, 64, 48),
+        BACK_PIC_HEMBRA(Goldeen, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Goldeen),
-        ICON(Goldeen),
+        PALETA(Goldeen),
+        ICONO(Goldeen),
         FOLLOWER(Goldeen, TRACKS_SPOT)
-        LEARNSETS(Goldeen),
-        .eggMoveLearnset = sGoldeenEggMoveLearnset,
+        MOVIMIENTOS(Goldeen),
+        MOVIMIENTOS_HUEVO(Goldeen),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SEAKING}),
     },
 
@@ -7591,19 +7611,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Seaking, 64, 56),
-        FRONT_PIC_FEMALE(Seaking, 64, 56),
+        FRONT_PIC_HEMBRA(Seaking, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Seaking,
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         BACK_PIC(Seaking, 64, 56),
-        BACK_PIC_FEMALE(Seaking, 64, 56),
+        BACK_PIC_HEMBRA(Seaking, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Seaking),
-        ICON(Seaking),
-        .eggMoveLearnset = sGoldeenEggMoveLearnset,
+        PALETA(Seaking),
+        ICONO(Seaking),
+        MOVIMIENTOS_HUEVO(Goldeen),
         FOLLOWER(Seaking, TRACKS_SPOT)
-        LEARNSETS(Seaking),
+        MOVIMIENTOS(Seaking),
     },
 
     [SPECIES_STARYU] =
@@ -7650,11 +7670,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Staryu, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Staryu),
-        ICON(Staryu),
+        PALETA(Staryu),
+        ICONO(Staryu),
         FOLLOWER(Staryu, TRACKS_FOOT)
-        LEARNSETS(Staryu),
-        .eggMoveLearnset = sStaryuEggMoveLearnset,
+        MOVIMIENTOS(Staryu),
+        MOVIMIENTOS_HUEVO(Staryu),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE}),
     },
 
@@ -7701,11 +7721,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Starmie, 64, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Starmie),
-        ICON(Starmie),
-        .eggMoveLearnset = sStaryuEggMoveLearnset,
+        PALETA(Starmie),
+        ICONO(Starmie),
+        MOVIMIENTOS_HUEVO(Staryu),
         FOLLOWER(Starmie, TRACKS_FOOT)
-        LEARNSETS(Starmie),
+        MOVIMIENTOS(Starmie),
     },
 
     [SPECIES_MIME_JR] =
@@ -7749,11 +7769,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MimeJr, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(MimeJr),
-        ICON(MimeJr),
+        PALETA(MimeJr),
+        ICONO(MimeJr),
         FOLLOWER(MimeJr, TRACKS_FOOT)
-        LEARNSETS(MimeJr),
-        .eggMoveLearnset = sMimeJrEggMoveLearnset,
+        MOVIMIENTOS(MimeJr),
+        MOVIMIENTOS_HUEVO(MimeJr),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_MIMIC, SPECIES_MR_MIME}),
     },
 
@@ -7798,11 +7818,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MrMime, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(MrMime),
-        ICON(MrMime),
+        PALETA(MrMime),
+        ICONO(MrMime),
         FOLLOWER(MrMime, TRACKS_FOOT)
-        LEARNSETS(MrMime),
-        .eggMoveLearnset = sMimeJrEggMoveLearnset,
+        MOVIMIENTOS(MrMime),
+        MOVIMIENTOS_HUEVO(MimeJr),
     },
 
     [SPECIES_SCYTHER] =
@@ -7840,7 +7860,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 293,
         .trainerOffset = 2,
         FRONT_PIC(Scyther, 56, 64),
-        FRONT_PIC_FEMALE(Scyther, 56, 64),
+        FRONT_PIC_HEMBRA(Scyther, 56, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Scyther,
         .frontAnimId = ANIM_H_VIBRATE,
@@ -7848,11 +7868,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Scyther, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Scyther),
-        ICON(Scyther),
+        PALETA(Scyther),
+        ICONO(Scyther),
         FOLLOWER(Scyther, TRACKS_FOOT)
-        LEARNSETS(Scyther),
-        .eggMoveLearnset = sScytherEggMoveLearnset,
+        MOVIMIENTOS(Scyther),
+        MOVIMIENTOS_HUEVO(Scyther),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_BLACK_AUGURITE, SPECIES_KLEAVOR},
                                 {EVO_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}),
     },
@@ -7871,7 +7891,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Scizor"),
         .natDexNum = DEX_SCIZOR,
         .categoryName = _("Pincer"),
-        LEARNSETS(Scizor),
+        MOVIMIENTOS(Scizor),
         .baseHP        = 70,
         .baseAttack    = 130,
         .baseDefense   = 100,
@@ -7893,7 +7913,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Scizor, 64, 64),
-        FRONT_PIC_FEMALE(Scizor, 64, 64),
+        FRONT_PIC_HEMBRA(Scizor, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Scizor,
         .frontAnimId = ANIM_H_VIBRATE,
@@ -7901,9 +7921,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Scizor, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Scizor),
-        ICON(Scizor),
-        .eggMoveLearnset = sScytherEggMoveLearnset,
+        PALETA(Scizor),
+        ICONO(Scizor),
+        MOVIMIENTOS_HUEVO(Scyther),
         FOLLOWER(Scizor, TRACKS_FOOT)
     },
 
@@ -7948,11 +7968,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kleavor, 64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Kleavor),
-        ICON(Kleavor),
-        .eggMoveLearnset = sScytherEggMoveLearnset,
+        PALETA(Kleavor),
+        ICONO(Kleavor),
+        MOVIMIENTOS_HUEVO(Scyther),
         FOLLOWER(Kleavor, TRACKS_FOOT)
-        LEARNSETS(Kleavor),
+        MOVIMIENTOS(Kleavor),
     },
 
     [SPECIES_SMOOCHUM] =
@@ -7997,11 +8017,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Smoochum, 40, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Smoochum),
-        ICON(Smoochum),
-        .eggMoveLearnset = sSmoochumEggMoveLearnset,
+        PALETA(Smoochum),
+        ICONO(Smoochum),
+        MOVIMIENTOS_HUEVO(Smoochum),
         FOLLOWER(Smoochum, TRACKS_FOOT)
-        LEARNSETS(Smoochum),
+        MOVIMIENTOS(Smoochum),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_JYNX}),
     },
 
@@ -8046,11 +8066,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Jynx, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Jynx),
-        ICON(Jynx),
-        .eggMoveLearnset = sSmoochumEggMoveLearnset,
+        PALETA(Jynx),
+        ICONO(Jynx),
+        MOVIMIENTOS_HUEVO(Smoochum),
         FOLLOWER(Jynx, TRACKS_FOOT)
-        LEARNSETS(Jynx),
+        MOVIMIENTOS(Jynx),
     },
 
     [SPECIES_ELEKID] =
@@ -8096,12 +8116,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Elekid, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Elekid),
-        ICON(Elekid),
+        PALETA(Elekid),
+        ICONO(Elekid),
         FOLLOWER(Elekid, TRACKS_FOOT)
-        LEARNSETS(Elekid),
+        MOVIMIENTOS(Elekid),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_ELECTABUZZ}),
-        .eggMoveLearnset = sElekidEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Elekid),
     },
 
     [SPECIES_ELECTABUZZ] =
@@ -8147,12 +8167,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Electabuzz, 64, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Electabuzz),
-        ICON(Electabuzz),
+        PALETA(Electabuzz),
+        ICONO(Electabuzz),
         FOLLOWER(Electabuzz, TRACKS_FOOT)
-        LEARNSETS(Electabuzz),
+        MOVIMIENTOS(Electabuzz),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ELECTIRIZER, SPECIES_ELECTIVIRE}),
-        .eggMoveLearnset = sElekidEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Elekid),
     },
 
     [SPECIES_ELECTIVIRE] =
@@ -8197,11 +8217,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Electivire, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Electivire),
-        ICON(Electivire),
+        PALETA(Electivire),
+        ICONO(Electivire),
         FOLLOWER(Electivire, TRACKS_FOOT)
-        LEARNSETS(Electivire),
-        .eggMoveLearnset = sElekidEggMoveLearnset,
+        MOVIMIENTOS(Electivire),
+        MOVIMIENTOS_HUEVO(Elekid),
     },
 
     [SPECIES_MAGBY] =
@@ -8247,12 +8267,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magby, 40, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Magby),
-        ICON(Magby),
+        PALETA(Magby),
+        ICONO(Magby),
         FOLLOWER(Magby, TRACKS_FOOT)
-        LEARNSETS(Magby),
+        MOVIMIENTOS(Magby),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGMAR}),
-        .eggMoveLearnset = sMagbyEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Magby),
     },
 
     [SPECIES_MAGMAR] =
@@ -8297,11 +8317,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magmar, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Magmar),
-        ICON(Magmar),
+        PALETA(Magmar),
+        ICONO(Magmar),
         FOLLOWER(Magmar, TRACKS_FOOT)
-        LEARNSETS(Magmar),
-        .eggMoveLearnset = sMagbyEggMoveLearnset,
+        MOVIMIENTOS(Magmar),
+        MOVIMIENTOS_HUEVO(Magby),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_MAGMARIZER, SPECIES_MAGMORTAR}),
     },
 
@@ -8348,11 +8368,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magmortar, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Magmortar),
-        ICON(Magmortar),
+        PALETA(Magmortar),
+        ICONO(Magmortar),
         FOLLOWER(Magmortar, TRACKS_FOOT)
-        LEARNSETS(Magmortar),
-        .eggMoveLearnset = sMagbyEggMoveLearnset,
+        MOVIMIENTOS(Magmortar),
+        MOVIMIENTOS_HUEVO(Magby),
     },
 
     [SPECIES_PINSIR] =
@@ -8368,7 +8388,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Pinsir"),
         .natDexNum = DEX_PINSIR,
         .categoryName = _("Stag Beetle"),
-        LEARNSETS(Pinsir),
+        MOVIMIENTOS(Pinsir),
         .baseHP        = 65,
         .baseAttack    = 125,
         .baseDefense   = 100,
@@ -8397,9 +8417,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pinsir, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Pinsir),
-        ICON(Pinsir),
-        .eggMoveLearnset = sPinsirEggMoveLearnset,
+        PALETA(Pinsir),
+        ICONO(Pinsir),
+        MOVIMIENTOS_HUEVO(Pinsir),
         FOLLOWER(Pinsir, TRACKS_FOOT)
     },
 
@@ -8446,11 +8466,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tauros, 64, 48),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Tauros),
-        ICON(Tauros),
+        PALETA(Tauros),
+        ICONO(Tauros),
         FOLLOWER(Tauros, TRACKS_FOOT)
-        LEARNSETS(Tauros),
-        .eggMoveLearnset = sTaurosEggMoveLearnset,
+        MOVIMIENTOS(Tauros),
+        MOVIMIENTOS_HUEVO(Tauros),
     },
 
     [SPECIES_MAGIKARP] =
@@ -8488,19 +8508,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Magikarp, 48, 56),
-        FRONT_PIC_FEMALE(Magikarp, 48, 56),
+        FRONT_PIC_HEMBRA(Magikarp, 48, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Magikarp,
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES,
         BACK_PIC(Magikarp, 64, 56),
-        BACK_PIC_FEMALE(Magikarp, 64, 56),
+        BACK_PIC_HEMBRA(Magikarp, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Magikarp),
-        ICON(Magikarp),
+        PALETA(Magikarp),
+        ICONO(Magikarp),
         FOLLOWER(Magikarp, TRACKS_SPOT)
-        LEARNSETS(Magikarp),
-        .eggMoveLearnset = sMagikarpEggMoveLearnset,
+        MOVIMIENTOS(Magikarp),
+        MOVIMIENTOS_HUEVO(Magikarp),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GYARADOS}),
     },
 
@@ -8522,7 +8542,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 6,
         .trainerScale = 481,
         .trainerOffset = 13,
-        LEARNSETS(Gyarados),
+        MOVIMIENTOS(Gyarados),
         .baseHP        = 95,
         .baseAttack    = 125,
         .baseDefense   = 79,
@@ -8541,17 +8561,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "it will appear and burn everything to the\n"
             "ground with intensely hot flames."),
         FRONT_PIC(Gyarados, 64, 64),
-        FRONT_PIC_FEMALE(Gyarados, 64, 64),
+        FRONT_PIC_HEMBRA(Gyarados, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Gyarados,
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
         BACK_PIC(Gyarados, 64, 64),
-        BACK_PIC_FEMALE(Gyarados, 64, 64),
+        BACK_PIC_HEMBRA(Gyarados, 64, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Gyarados),
-        ICON(Gyarados),
-        .eggMoveLearnset = sMagikarpEggMoveLearnset,
+        PALETA(Gyarados),
+        ICONO(Gyarados),
+        MOVIMIENTOS_HUEVO(Magikarp),
         FOLLOWER(Gyarados, TRACKS_SLITHER)
     },
 
@@ -8580,7 +8600,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_LAPRAS,
         .natDexNum = DEX_LAPRAS,
         .categoryName = _("Transport"),
-        LEARNSETS(Lapras),
+        MOVIMIENTOS(Lapras),
         .height = 25,
         .weight = 2200,
         .description = COMPOUND_STRING(
@@ -8599,9 +8619,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lapras, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Lapras),
-        ICON(Lapras),
-        .eggMoveLearnset = sLaprasEggMoveLearnset,
+        PALETA(Lapras),
+        ICONO(Lapras),
+        MOVIMIENTOS_HUEVO(Lapras),
         FOLLOWER(Lapras, TRACKS_SLITHER)
     },
 
@@ -8628,7 +8648,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_EEVEE,
         .natDexNum = DEX_EEVEE,
         .categoryName = _("Evolution"),
-        LEARNSETS(Eevee),
+        MOVIMIENTOS(Eevee),
         .height = 3,
         .weight = 65,
         .description = COMPOUND_STRING(
@@ -8642,17 +8662,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerOffset = 0,
         .itemRare = ITEM_SILK_SCARF,
         FRONT_PIC(Eevee, 40, 48),
-        FRONT_PIC_FEMALE(Eevee, 40, 48),
+        FRONT_PIC_HEMBRA(Eevee, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Eevee,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Eevee, 56, 48),
-        BACK_PIC_FEMALE(Eevee, 56, 48),
+        BACK_PIC_HEMBRA(Eevee, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Eevee),
-        ICON(Eevee),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Eevee),
+        ICONO(Eevee),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Eevee, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
                                 {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
@@ -8707,11 +8727,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vaporeon, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Vaporeon),
-        ICON(Vaporeon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Vaporeon),
+        ICONO(Vaporeon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Vaporeon, TRACKS_FOOT)
-        LEARNSETS(Vaporeon),
+        MOVIMIENTOS(Vaporeon),
     },
 
     [SPECIES_JOLTEON] =
@@ -8755,11 +8775,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Jolteon, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Jolteon),
-        ICON(Jolteon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Jolteon),
+        ICONO(Jolteon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Jolteon, TRACKS_FOOT)
-        LEARNSETS(Jolteon),
+        MOVIMIENTOS(Jolteon),
     },
 
     [SPECIES_FLAREON] =
@@ -8803,11 +8823,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Flareon, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Flareon),
-        ICON(Flareon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Flareon),
+        ICONO(Flareon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Flareon, TRACKS_FOOT)
-        LEARNSETS(Flareon),
+        MOVIMIENTOS(Flareon),
     },
 
     [SPECIES_ESPEON] =
@@ -8851,11 +8871,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Espeon, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Espeon),
-        ICON(Espeon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Espeon),
+        ICONO(Espeon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Espeon, TRACKS_FOOT)
-        LEARNSETS(Espeon),
+        MOVIMIENTOS(Espeon),
     },
 
     [SPECIES_UMBREON] =
@@ -8899,11 +8919,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Umbreon, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Umbreon),
-        ICON(Umbreon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Umbreon),
+        ICONO(Umbreon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Umbreon, TRACKS_FOOT)
-        LEARNSETS(Umbreon),
+        MOVIMIENTOS(Umbreon),
     },
 
     [SPECIES_LEAFEON] =
@@ -8947,11 +8967,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Leafeon, 48, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Leafeon),
-        ICON(Leafeon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Leafeon),
+        ICONO(Leafeon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Leafeon, TRACKS_FOOT)
-        LEARNSETS(Leafeon),
+        MOVIMIENTOS(Leafeon),
     },
 
     [SPECIES_GLACEON] =
@@ -8995,11 +9015,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Glaceon, 56, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Glaceon),
-        ICON(Glaceon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Glaceon),
+        ICONO(Glaceon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Glaceon, TRACKS_FOOT)
-        LEARNSETS(Glaceon),
+        MOVIMIENTOS(Glaceon),
     },
 
     [SPECIES_SYLVEON] =
@@ -9044,11 +9064,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sylveon, 64, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Sylveon),
-        ICON(Sylveon),
-        .eggMoveLearnset = sEeveeEggMoveLearnset,
+        PALETA(Sylveon),
+        ICONO(Sylveon),
+        MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Sylveon, TRACKS_FOOT)
-        LEARNSETS(Sylveon),
+        MOVIMIENTOS(Sylveon),
     },
 
     [SPECIES_PORYGON] =
@@ -9093,11 +9113,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Porygon, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Porygon),
-        ICON(Porygon),
-        .eggMoveLearnset = sPorygonEggMoveLearnset,
+        PALETA(Porygon),
+        ICONO(Porygon),
+        MOVIMIENTOS_HUEVO(Porygon),
         FOLLOWER(Porygon, TRACKS_NONE)
-        LEARNSETS(Porygon),
+        MOVIMIENTOS(Porygon),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_UPGRADE, SPECIES_PORYGON2}),
     },
 
@@ -9144,11 +9164,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Porygon2, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Porygon2),
-        ICON(Porygon2),
-        .eggMoveLearnset = sPorygonEggMoveLearnset,
+        PALETA(Porygon2),
+        ICONO(Porygon2),
+        MOVIMIENTOS_HUEVO(Porygon),
         FOLLOWER(Porygon2, TRACKS_NONE)
-        LEARNSETS(Porygon2),
+        MOVIMIENTOS(Porygon2),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUBIOUS_DISC, SPECIES_PORYGON_Z}),
     },
 
@@ -9195,11 +9215,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(PorygonZ, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(PorygonZ),
-        ICON(PorygonZ),
-        .eggMoveLearnset = sPorygonEggMoveLearnset,
+        PALETA(PorygonZ),
+        ICONO(PorygonZ),
+        MOVIMIENTOS_HUEVO(Porygon),
         FOLLOWER(PorygonZ, TRACKS_FOOT)
-        LEARNSETS(PorygonZ),
+        MOVIMIENTOS(PorygonZ),
     },
 
     [SPECIES_OMANYTE] =
@@ -9243,11 +9263,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Omanyte, 48, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Omanyte),
-        ICON(Omanyte),
-        .eggMoveLearnset = sOmanyteEggMoveLearnset,
+        PALETA(Omanyte),
+        ICONO(Omanyte),
+        MOVIMIENTOS_HUEVO(Omanyte),
         FOLLOWER(Omanyte, TRACKS_BUG)
-        LEARNSETS(Omanyte),
+        MOVIMIENTOS(Omanyte),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_OMASTAR}),
     },
 
@@ -9292,11 +9312,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Omastar, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Omastar),
-        ICON(Omastar),
-        .eggMoveLearnset = sOmanyteEggMoveLearnset,
+        PALETA(Omastar),
+        ICONO(Omastar),
+        MOVIMIENTOS_HUEVO(Omanyte),
         FOLLOWER(Omastar, TRACKS_FOOT)
-        LEARNSETS(Omastar),
+        MOVIMIENTOS(Omastar),
     },
 
     [SPECIES_KABUTO] =
@@ -9340,11 +9360,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kabuto, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Kabuto),
-        ICON(Kabuto),
-        .eggMoveLearnset = sKabutoEggMoveLearnset,
+        PALETA(Kabuto),
+        ICONO(Kabuto),
+        MOVIMIENTOS_HUEVO(Kabuto),
         FOLLOWER(Kabuto, TRACKS_BUG)
-        LEARNSETS(Kabuto),
+        MOVIMIENTOS(Kabuto),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KABUTOPS}),
     },
 
@@ -9389,11 +9409,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kabutops, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Kabutops),
-        ICON(Kabutops),
-        .eggMoveLearnset = sKabutoEggMoveLearnset,
+        PALETA(Kabutops),
+        ICONO(Kabutops),
+        MOVIMIENTOS_HUEVO(Kabuto),
         FOLLOWER(Kabutops, TRACKS_FOOT)
-        LEARNSETS(Kabutops),
+        MOVIMIENTOS(Kabutops),
     },
 
     [SPECIES_AERODACTYL] =
@@ -9410,7 +9430,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Aerodactyl"),
         .natDexNum = DEX_AERODACTYL,
         .categoryName = _("Fossil"),
-        LEARNSETS(Aerodactyl),
+        MOVIMIENTOS(Aerodactyl),
         .baseHP        = 80,
         .baseAttack    = 105,
         .baseDefense   = 65,
@@ -9439,9 +9459,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Aerodactyl, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Aerodactyl),
-        ICON(Aerodactyl),
-        .eggMoveLearnset = sAerodactylEggMoveLearnset,
+        PALETA(Aerodactyl),
+        ICONO(Aerodactyl),
+        MOVIMIENTOS_HUEVO(Aerodactyl),
         FOLLOWER(Aerodactyl, TRACKS_NONE)
     },
 
@@ -9488,11 +9508,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Munchlax, 48, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Munchlax),
-        ICON(Munchlax),
+        PALETA(Munchlax),
+        ICONO(Munchlax),
         FOLLOWER(Munchlax, TRACKS_FOOT)
-        LEARNSETS(Munchlax),
-        .eggMoveLearnset = sMunchlaxEggMoveLearnset,
+        MOVIMIENTOS(Munchlax),
+        MOVIMIENTOS_HUEVO(Munchlax),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_SNORLAX}),
     },
 
@@ -9521,7 +9541,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .cryId = CRY_SNORLAX,
         .natDexNum = DEX_SNORLAX,
         .categoryName = _("Sleeping"),
-        LEARNSETS(Snorlax),
+        MOVIMIENTOS(Snorlax),
         .height = 21,
         .weight = 4600,
         .description = COMPOUND_STRING(
@@ -9540,9 +9560,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Snorlax, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Snorlax),
-        ICON(Snorlax),
-        .eggMoveLearnset = sMunchlaxEggMoveLearnset,
+        PALETA(Snorlax),
+        ICONO(Snorlax),
+        MOVIMIENTOS_HUEVO(Munchlax),
         FOLLOWER(Snorlax, TRACKS_FOOT)
     },
 
@@ -9588,11 +9608,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Articuno, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Articuno),
-        ICON(Articuno),
-        .eggMoveLearnset = sArticunoEggMoveLearnset,
+        PALETA(Articuno),
+        ICONO(Articuno),
+        MOVIMIENTOS_HUEVO(Articuno),
         FOLLOWER(Articuno, TRACKS_NONE)
-        LEARNSETS(Articuno),
+        MOVIMIENTOS(Articuno),
     },
 
     [SPECIES_ZAPDOS] =
@@ -9638,11 +9658,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zapdos, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Zapdos),
-        ICON(Zapdos),
-        .eggMoveLearnset = sZapdosEggMoveLearnset,
+        PALETA(Zapdos),
+        ICONO(Zapdos),
+        MOVIMIENTOS_HUEVO(Zapdos),
         FOLLOWER(Zapdos, TRACKS_NONE)
-        LEARNSETS(Zapdos),
+        MOVIMIENTOS(Zapdos),
     },
 
     [SPECIES_MOLTRES] =
@@ -9687,11 +9707,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Moltres, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Moltres),
-        ICON(Moltres),
-        .eggMoveLearnset = sMoltresEggMoveLearnset,
+        PALETA(Moltres),
+        ICONO(Moltres),
+        MOVIMIENTOS_HUEVO(Moltres),
         FOLLOWER(Moltres, TRACKS_NONE)
-        LEARNSETS(Moltres),
+        MOVIMIENTOS(Moltres),
     },
 
     [SPECIES_DRATINI] =
@@ -9736,12 +9756,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dratini, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Dratini),
-        ICON(Dratini),
+        PALETA(Dratini),
+        ICONO(Dratini),
         FOLLOWER(Dratini, TRACKS_SLITHER)
-        LEARNSETS(Dratini),
+        MOVIMIENTOS(Dratini),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_DRAGONAIR}),
-        .eggMoveLearnset = sDratiniEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Dratini),
     },
 
     [SPECIES_DRAGONAIR] =
@@ -9786,12 +9806,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dragonair, 40, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Dragonair),
-        ICON(Dragonair),
+        PALETA(Dragonair),
+        ICONO(Dragonair),
         FOLLOWER(Dragonair, TRACKS_SLITHER)
-        LEARNSETS(Dragonair),
+        MOVIMIENTOS(Dragonair),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAGONITE}),
-        .eggMoveLearnset = sDratiniEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Dratini),
     },
 
     [SPECIES_DRAGONITE] =
@@ -9836,11 +9856,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dragonite, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Dragonite),
-        ICON(Dragonite),
+        PALETA(Dragonite),
+        ICONO(Dragonite),
         FOLLOWER(Dragonite, TRACKS_NONE)
-        LEARNSETS(Dragonite),
-        .eggMoveLearnset = sDratiniEggMoveLearnset,
+        MOVIMIENTOS(Dragonite),
+        MOVIMIENTOS_HUEVO(Dratini),
     },
 
     [SPECIES_MEWTWO] =
@@ -9856,7 +9876,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Mewtwo"),
         .natDexNum = DEX_MEWTWO,
         .categoryName = _("Genetic"),
-        LEARNSETS(Mewtwo),
+        MOVIMIENTOS(Mewtwo),
         .isLegendary = TRUE,
         .baseHP        = 106,
         .baseAttack    = 110,
@@ -9886,10 +9906,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mewtwo, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Mewtwo),
-        ICON(Mewtwo),
+        PALETA(Mewtwo),
+        ICONO(Mewtwo),
         FOLLOWER(Mewtwo, TRACKS_FOOT)
-        .eggMoveLearnset = sMewtwoEggMoveLearnset,
+        MOVIMIENTOS_HUEVO(Mewtwo),
     },
 
     [SPECIES_MEW] =
@@ -9935,11 +9955,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mew, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Mew),
-        ICON(Mew),
+        PALETA(Mew),
+        ICONO(Mew),
         FOLLOWER(Mew, TRACKS_NONE)
-        LEARNSETS(Mew),
-        .eggMoveLearnset = sMewEggMoveLearnset,
+        MOVIMIENTOS(Mew),
+        MOVIMIENTOS_HUEVO(Mew),
     },
 
     [SPECIES_CHIKORITA] =
@@ -9983,11 +10003,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chikorita, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Chikorita),
-        ICON(Chikorita),
+        PALETA(Chikorita),
+        ICONO(Chikorita),
         FOLLOWER(Chikorita, TRACKS_FOOT)
-        LEARNSETS(Chikorita),
-        .eggMoveLearnset = sChikoritaEggMoveLearnset,
+        MOVIMIENTOS(Chikorita),
+        MOVIMIENTOS_HUEVO(Chikorita),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BAYLEEF}),
     },
 
@@ -10033,11 +10053,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bayleef, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Bayleef),
-        ICON(Bayleef),
+        PALETA(Bayleef),
+        ICONO(Bayleef),
         FOLLOWER(Bayleef, TRACKS_FOOT)
-        LEARNSETS(Bayleef),
-        .eggMoveLearnset = sChikoritaEggMoveLearnset,
+        MOVIMIENTOS(Bayleef),
+        MOVIMIENTOS_HUEVO(Chikorita),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MEGANIUM}),
     },
 
@@ -10077,21 +10097,21 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 277,
         .trainerOffset = 1,
         FRONT_PIC(Meganium, 48, 64),
-        FRONT_PIC_FEMALE(Meganium, 48, 64),
+        FRONT_PIC_HEMBRA(Meganium, 48, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Meganium,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Meganium, 56, 64),
-        BACK_PIC_FEMALE(Meganium, 56, 64),
+        BACK_PIC_HEMBRA(Meganium, 56, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Meganium),
-        ICON(Meganium),
-        ICON_FEMALE(Meganium),
+        PALETA(Meganium),
+        ICONO(Meganium),
+        ICONO_HEMBRA(Meganium),
         FOLLOWER(Meganium, TRACKS_FOOT)
-        FOLLOWER_FEMALE(Meganium, TRACKS_FOOT)
-        LEARNSETS(Meganium),
-        .eggMoveLearnset = sChikoritaEggMoveLearnset,
+        FOLLOWER_HEMBRA(Meganium, TRACKS_FOOT)
+        MOVIMIENTOS(Meganium),
+        MOVIMIENTOS_HUEVO(Chikorita),
     },
 
     [SPECIES_CYNDAQUIL] =
@@ -10135,10 +10155,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cyndaquil, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Cyndaquil),
-        ICON(Cyndaquil),
+        PALETA(Cyndaquil),
+        ICONO(Cyndaquil),
         FOLLOWER(Cyndaquil, TRACKS_FOOT)
-        LEARNSETS(Cyndaquil),
+        MOVIMIENTOS(Cyndaquil),
+        MOVIMIENTOS_HUEVO(Cyndaquil),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_QUILAVA}),
     },
 
@@ -10184,10 +10205,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Quilava, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Quilava),
-        ICON(Quilava),
+        PALETA(Quilava),
+        ICONO(Quilava),
         FOLLOWER(Quilava, TRACKS_FOOT)
-        LEARNSETS(Quilava),
+        MOVIMIENTOS(Quilava),
+        MOVIMIENTOS_HUEVO(Cyndaquil),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION}),
     },
 
@@ -10233,10 +10255,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Typhlosion, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Typhlosion),
-        ICON(Typhlosion),
+        PALETA(Typhlosion),
+        ICONO(Typhlosion),
         FOLLOWER(Typhlosion, TRACKS_FOOT)
-        LEARNSETS(Typhlosion),
+        MOVIMIENTOS(Typhlosion),
+        MOVIMIENTOS_HUEVO(Cyndaquil),
     },
 
     [SPECIES_TOTODILE] =
@@ -10280,10 +10303,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Totodile, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Totodile),
-        ICON(Totodile),
+        PALETA(Totodile),
+        ICONO(Totodile),
         FOLLOWER(Totodile, TRACKS_FOOT)
-        LEARNSETS(Totodile),
+        MOVIMIENTOS(Totodile),
+        MOVIMIENTOS_HUEVO(Totodile),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CROCONAW}),
     },
 
@@ -10330,10 +10354,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Croconaw, 56, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Croconaw),
-        ICON(Croconaw),
+        PALETA(Croconaw),
+        ICONO(Croconaw),
         FOLLOWER(Croconaw, TRACKS_FOOT)
-        LEARNSETS(Croconaw),
+        MOVIMIENTOS(Croconaw),
+        MOVIMIENTOS_HUEVO(Totodile),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_FERALIGATR}),
     },
 
@@ -10380,10 +10405,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Feraligatr, 56, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Feraligatr),
-        ICON(Feraligatr),
+        PALETA(Feraligatr),
+        ICONO(Feraligatr),
         FOLLOWER(Feraligatr, TRACKS_FOOT)
-        LEARNSETS(Feraligatr),
+        MOVIMIENTOS(Feraligatr),
+        MOVIMIENTOS_HUEVO(Totodile),
     },
 
     [SPECIES_SENTRET] =
@@ -10427,10 +10453,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sentret, 48, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Sentret),
-        ICON(Sentret),
+        PALETA(Sentret),
+        ICONO(Sentret),
         FOLLOWER(Sentret, TRACKS_FOOT)
-        LEARNSETS(Sentret),
+        MOVIMIENTOS(Sentret),
+        MOVIMIENTOS_HUEVO(Sentret),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FURRET}),
     },
 
@@ -10475,10 +10502,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Furret, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Furret),
-        ICON(Furret),
+        PALETA(Furret),
+        ICONO(Furret),
         FOLLOWER(Furret, TRACKS_FOOT)
-        LEARNSETS(Furret),
+        MOVIMIENTOS(Furret),
+        MOVIMIENTOS_HUEVO(Sentret),
     },
 
     [SPECIES_HOOTHOOT] =
@@ -10522,10 +10550,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hoothoot, 56, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Hoothoot),
-        ICON(Hoothoot),
+        PALETA(Hoothoot),
+        ICONO(Hoothoot),
         FOLLOWER(Hoothoot, TRACKS_FOOT)
-        LEARNSETS(Hoothoot),
+        MOVIMIENTOS(Hoothoot),
+        MOVIMIENTOS_HUEVO(Hoothoot),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NOCTOWL}),
     },
 
@@ -10570,10 +10599,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Noctowl, 48, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Noctowl),
-        ICON(Noctowl),
+        PALETA(Noctowl),
+        ICONO(Noctowl),
         FOLLOWER(Noctowl, TRACKS_NONE)
-        LEARNSETS(Noctowl),
+        MOVIMIENTOS(Noctowl),
+        MOVIMIENTOS_HUEVO(Hoothoot),
     },
 
     [SPECIES_LEDYBA] =
@@ -10611,18 +10641,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Ledyba, 48, 48),
-        FRONT_PIC_FEMALE(Ledyba, 48, 48),
+        FRONT_PIC_HEMBRA(Ledyba, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Ledyba,
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         BACK_PIC(Ledyba, 56, 48),
-        BACK_PIC_FEMALE(Ledyba, 56, 48),
+        BACK_PIC_HEMBRA(Ledyba, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Ledyba),
-        ICON(Ledyba),
+        PALETA(Ledyba),
+        ICONO(Ledyba),
         FOLLOWER(Ledyba, TRACKS_BUG)
-        LEARNSETS(Ledyba),
+        MOVIMIENTOS(Ledyba),
+        MOVIMIENTOS_HUEVO(Ledyba),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_LEDIAN}),
     },
 
@@ -10661,19 +10692,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Ledian, 48, 56),
-        FRONT_PIC_FEMALE(Ledian, 48, 56),
+        FRONT_PIC_HEMBRA(Ledian, 48, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Ledian,
         .frontAnimId = ANIM_V_SLIDE_WOBBLE,
         .enemyMonElevation = 10,
         BACK_PIC(Ledian, 64, 64),
-        BACK_PIC_FEMALE(Ledian, 64, 64),
+        BACK_PIC_HEMBRA(Ledian, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Ledian),
-        ICON(Ledian),
+        PALETA(Ledian),
+        ICONO(Ledian),
         FOLLOWER(Ledian, TRACKS_FOOT)
-        LEARNSETS(Ledian),
+        MOVIMIENTOS(Ledian),
+        MOVIMIENTOS_HUEVO(Ledyba),
     },
 
     [SPECIES_SPINARAK] =
@@ -10717,10 +10749,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Spinarak, 64, 32),
         .backPicYOffset = 16,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Spinarak),
-        ICON(Spinarak),
+        PALETA(Spinarak),
+        ICONO(Spinarak),
         FOLLOWER(Spinarak, TRACKS_BUG)
-        LEARNSETS(Spinarak),
+        MOVIMIENTOS(Spinarak),
+        MOVIMIENTOS_HUEVO(Spinarak),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_ARIADOS}),
     },
 
@@ -10765,10 +10798,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ariados, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Ariados),
-        ICON(Ariados),
+        PALETA(Ariados),
+        ICONO(Ariados),
         FOLLOWER(Ariados, TRACKS_BUG)
-        LEARNSETS(Ariados),
+        MOVIMIENTOS(Ariados),
+        MOVIMIENTOS_HUEVO(Spinarak),
     },
 
     [SPECIES_CHINCHOU] =
@@ -10813,10 +10847,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chinchou, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Chinchou),
-        ICON(Chinchou),
+        PALETA(Chinchou),
+        ICONO(Chinchou),
         FOLLOWER(Chinchou, TRACKS_SPOT)
-        LEARNSETS(Chinchou),
+        MOVIMIENTOS(Chinchou),
+        MOVIMIENTOS_HUEVO(Chinchou),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_LANTURN}),
     },
 
@@ -10862,10 +10897,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lanturn, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Lanturn),
-        ICON(Lanturn),
+        PALETA(Lanturn),
+        ICONO(Lanturn),
         FOLLOWER(Lanturn, TRACKS_SPOT)
-        LEARNSETS(Lanturn),
+        MOVIMIENTOS(Lanturn),
+        MOVIMIENTOS_HUEVO(Chinchou),
     },
 
     [SPECIES_TOGEPI] =
@@ -10909,10 +10945,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Togepi, 48, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Togepi),
-        ICON(Togepi),
+        PALETA(Togepi),
+        ICONO(Togepi),
         FOLLOWER(Togepi, TRACKS_FOOT)
-        LEARNSETS(Togepi),
+        MOVIMIENTOS(Togepi),
+        MOVIMIENTOS_HUEVO(Togepi),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_TOGETIC}),
     },
 
@@ -10957,10 +10994,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Togetic, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Togetic),
-        ICON(Togetic),
+        PALETA(Togetic),
+        ICONO(Togetic),
         FOLLOWER(Togetic, TRACKS_NONE)
-        LEARNSETS(Togetic),
+        MOVIMIENTOS(Togetic),
+        MOVIMIENTOS_HUEVO(Togepi),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SHINY_STONE, SPECIES_TOGEKISS}),
     },
 
@@ -11008,10 +11046,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Togekiss, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Togekiss),
-        ICON(Togekiss),
+        PALETA(Togekiss),
+        ICONO(Togekiss),
         FOLLOWER(Togekiss, TRACKS_NONE, sAnimTable_Following_Asym)
-        LEARNSETS(Togekiss),
+        MOVIMIENTOS(Togekiss),
+        MOVIMIENTOS_HUEVO(Togepi),
     },
 
     [SPECIES_NATU] =
@@ -11056,10 +11095,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Natu, 40, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Natu),
-        ICON(Natu),
+        PALETA(Natu),
+        ICONO(Natu),
         FOLLOWER(Natu, TRACKS_FOOT)
-        LEARNSETS(Natu),
+        MOVIMIENTOS(Natu),
+        MOVIMIENTOS_HUEVO(Natu),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_XATU}),
     },
 
@@ -11099,17 +11139,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 318,
         .trainerOffset = 4,
         FRONT_PIC(Xatu, 40, 56),
-        FRONT_PIC_FEMALE(Xatu, 40, 56),
+        FRONT_PIC_HEMBRA(Xatu, 40, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Xatu,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Xatu, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Xatu),
-        ICON(Xatu),
+        PALETA(Xatu),
+        ICONO(Xatu),
         FOLLOWER(Xatu, TRACKS_FOOT)
-        LEARNSETS(Xatu),
+        MOVIMIENTOS(Xatu),
+        MOVIMIENTOS_HUEVO(Natu),
     },
 
     [SPECIES_MAREEP] =
@@ -11155,10 +11196,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 15,
         .brilla = TRUE,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Mareep),
-        ICON(Mareep),
+        PALETA(Mareep),
+        ICONO(Mareep),
         FOLLOWER(Mareep, TRACKS_FOOT)
-        LEARNSETS(Mareep),
+        MOVIMIENTOS(Mareep),
+        MOVIMIENTOS_HUEVO(Mareep),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FLAAFFY}),
     },
 
@@ -11203,11 +11245,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Flaaffy, 48, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Flaaffy),
+        PALETA(Flaaffy),
         .brilla = TRUE,
-        ICON(Flaaffy),
+        ICONO(Flaaffy),
         FOLLOWER(Flaaffy, TRACKS_FOOT)
-        LEARNSETS(Flaaffy),
+        MOVIMIENTOS(Flaaffy),
+        MOVIMIENTOS_HUEVO(Mareep),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_AMPHAROS}),
     },
 
@@ -11230,7 +11273,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 4,
         .trainerScale = 256,
         .trainerOffset = 0,
-        LEARNSETS(Ampharos),
+        MOVIMIENTOS(Ampharos),
+        MOVIMIENTOS_HUEVO(Mareep),
         .baseHP        = 90,
         .baseAttack    = 75,
         .baseDefense   = 85,
@@ -11254,9 +11298,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ampharos, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Ampharos),
+        PALETA(Ampharos),
         .brilla = TRUE,
-        ICON(Ampharos),
+        ICONO(Ampharos),
         FOLLOWER(Ampharos, TRACKS_FOOT)
     },
 
@@ -11301,10 +11345,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Azurill, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Azurill),
-        ICON(Azurill),
+        PALETA(Azurill),
+        ICONO(Azurill),
         FOLLOWER(Azurill, TRACKS_FOOT)
-        LEARNSETS(Azurill),
+        MOVIMIENTOS(Azurill),
+        MOVIMIENTOS_HUEVO(Azurill),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_MARILL}),
     },
 
@@ -11349,10 +11394,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Marill, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Marill),
-        ICON(Marill),
+        PALETA(Marill),
+        ICONO(Marill),
         FOLLOWER(Marill, TRACKS_FOOT)
-        LEARNSETS(Marill),
+        MOVIMIENTOS(Marill),
+        MOVIMIENTOS_HUEVO(Azurill),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_AZUMARILL}),
     },
 
@@ -11397,10 +11443,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Azumarill, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Azumarill),
-        ICON(Azumarill),
+        PALETA(Azumarill),
+        ICONO(Azumarill),
+        MOVIMIENTOS_HUEVO(Azurill),
         FOLLOWER(Azumarill, TRACKS_FOOT)
-        LEARNSETS(Azumarill),
+        MOVIMIENTOS(Azumarill),
     },
 
     [SPECIES_BONSLY] =
@@ -11444,10 +11491,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bonsly, 40, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Bonsly),
-        ICON(Bonsly),
+        PALETA(Bonsly),
+        ICONO(Bonsly),
         FOLLOWER(Bonsly, TRACKS_FOOT)
-        LEARNSETS(Bonsly),
+        MOVIMIENTOS(Bonsly),
+        MOVIMIENTOS_HUEVO(Bonsly),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_MIMIC, SPECIES_SUDOWOODO}),
     },
 
@@ -11486,18 +11534,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Sudowoodo, 48, 56),
-        FRONT_PIC_FEMALE(Sudowoodo, 48, 56),
+        FRONT_PIC_HEMBRA(Sudowoodo, 48, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Sudowoodo,
         .frontAnimId = ANIM_H_SLIDE_SLOW,
         BACK_PIC(Sudowoodo, 48, 56),
-        BACK_PIC_FEMALE(Sudowoodo, 48, 56),
+        BACK_PIC_HEMBRA(Sudowoodo, 48, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Sudowoodo),
-        ICON(Sudowoodo),
+        PALETA(Sudowoodo),
+        ICONO(Sudowoodo),
         FOLLOWER(Sudowoodo, TRACKS_FOOT)
-        LEARNSETS(Sudowoodo),
+        MOVIMIENTOS(Sudowoodo),
+        MOVIMIENTOS_HUEVO(Bonsly),
     },
 
     [SPECIES_HOPPIP] =
@@ -11542,10 +11591,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hoppip, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Hoppip),
-        ICON(Hoppip),
+        PALETA(Hoppip),
+        ICONO(Hoppip),
         FOLLOWER(Hoppip, TRACKS_NONE)
-        LEARNSETS(Hoppip),
+        MOVIMIENTOS(Hoppip),
+        MOVIMIENTOS_HUEVO(Hoppip),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_SKIPLOOM}),
     },
 
@@ -11591,10 +11641,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Skiploom, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Skiploom),
-        ICON(Skiploom),
+        PALETA(Skiploom),
+        ICONO(Skiploom),
         FOLLOWER(Skiploom, TRACKS_NONE)
-        LEARNSETS(Skiploom),
+        MOVIMIENTOS(Skiploom),
+        MOVIMIENTOS_HUEVO(Hoppip),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JUMPLUFF}),
     },
 
@@ -11640,10 +11691,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Jumpluff, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Jumpluff),
-        ICON(Jumpluff),
+        PALETA(Jumpluff),
+        ICONO(Jumpluff),
         FOLLOWER(Jumpluff, TRACKS_NONE)
-        LEARNSETS(Jumpluff),
+        MOVIMIENTOS(Jumpluff),
+        MOVIMIENTOS_HUEVO(Hoppip),
     },
 
     [SPECIES_AIPOM] =
@@ -11681,18 +11733,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Aipom, 32, 64),
-        FRONT_PIC_FEMALE(Aipom, 32, 64),
+        FRONT_PIC_HEMBRA(Aipom, 32, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Aipom,
         .frontAnimId = ANIM_H_JUMPS_V_STRETCH,
         BACK_PIC(Aipom, 64, 64),
-        BACK_PIC_FEMALE(Aipom, 64, 64),
+        BACK_PIC_HEMBRA(Aipom, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Aipom),
-        ICON(Aipom),
+        PALETA(Aipom),
+        ICONO(Aipom),
         FOLLOWER(Aipom, TRACKS_FOOT)
-        LEARNSETS(Aipom),
+        MOVIMIENTOS(Aipom),
+        MOVIMIENTOS_HUEVO(Aipom),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_DOUBLE_HIT, SPECIES_AMBIPOM}),
     },
 
@@ -11731,18 +11784,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Ambipom, 64, 64),
-        FRONT_PIC_FEMALE(Ambipom, 64, 64),
+        FRONT_PIC_HEMBRA(Ambipom, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Ambipom,
         .frontAnimId = ANIM_BACK_AND_LUNGE,
         BACK_PIC(Ambipom, 64, 64),
-        BACK_PIC_FEMALE(Ambipom, 64, 64),
+        BACK_PIC_HEMBRA(Ambipom, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Ambipom),
-        ICON(Ambipom),
+        PALETA(Ambipom),
+        ICONO(Ambipom),
         FOLLOWER(Ambipom, TRACKS_FOOT)
-        LEARNSETS(Ambipom),
+        MOVIMIENTOS(Ambipom),
+        MOVIMIENTOS_HUEVO(Aipom),
     },
 
     [SPECIES_SUNKERN] =
@@ -11786,10 +11840,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sunkern, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Sunkern),
-        ICON(Sunkern),
+        PALETA(Sunkern),
+        ICONO(Sunkern),
         FOLLOWER(Sunkern, TRACKS_SPOT)
-        LEARNSETS(Sunkern),
+        MOVIMIENTOS(Sunkern),
+        MOVIMIENTOS_HUEVO(Sunkern),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_SUNFLORA}),
     },
 
@@ -11834,10 +11889,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sunflora, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Sunflora),
-        ICON(Sunflora),
+        PALETA(Sunflora),
+        ICONO(Sunflora),
         FOLLOWER(Sunflora, TRACKS_FOOT)
-        LEARNSETS(Sunflora),
+        MOVIMIENTOS(Sunflora),
+        MOVIMIENTOS_HUEVO(Sunkern),
     },
 
     [SPECIES_YANMA] =
@@ -11883,10 +11939,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Yanma, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Yanma),
-        ICON(Yanma),
+        PALETA(Yanma),
+        ICONO(Yanma),
         FOLLOWER(Yanma, TRACKS_NONE)
-        LEARNSETS(Yanma),
+        MOVIMIENTOS(Yanma),
+        MOVIMIENTOS_HUEVO(Yanma),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_YANMEGA}),
     },
 
@@ -11933,10 +11990,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Yanmega, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Yanmega),
-        ICON(Yanmega),
-        FOLLOWER(Yanmega, TRACKS_FOOT)
-        LEARNSETS(Yanmega),
+        PALETA(Yanmega),
+        ICONO(Yanmega),
+        FOLLOWER(Yanmega, TRACKS_NONE)
+        MOVIMIENTOS(Yanmega),
+        MOVIMIENTOS_HUEVO(Yanma),
     },
 
     [SPECIES_WOOPER] =
@@ -11974,19 +12032,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "On land, they coat their bodies with a\n"
             "gooey, toxic film."),
         FRONT_PIC(Wooper, 40, 32),
-        FRONT_PIC_FEMALE(Wooper, 40, 32),
+        FRONT_PIC_HEMBRA(Wooper, 40, 32),
         .frontPicYOffset = 16,
         .frontAnimFrames = sAnims_Wooper,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Wooper, 64, 40),
-        BACK_PIC_FEMALE(Wooper, 64, 40),
+        BACK_PIC_HEMBRA(Wooper, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Wooper),
-        ICON(Wooper),
+        PALETA(Wooper),
+        ICONO(Wooper),
         FOLLOWER(Wooper, TRACKS_FOOT)
-        LEARNSETS(Wooper),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_QUAGSIRE}),
+        MOVIMIENTOS(Wooper),
+        MOVIMIENTOS_HUEVO(Wooper),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_QUAGSIRE}),
     },
 
     [SPECIES_QUAGSIRE] =
@@ -12024,18 +12083,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Quagsire, 64, 56),
-        FRONT_PIC_FEMALE(Quagsire, 64, 56),
+        FRONT_PIC_HEMBRA(Quagsire, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Quagsire,
         .frontAnimId = ANIM_H_STRETCH,
         BACK_PIC(Quagsire, 64, 56),
-        BACK_PIC_FEMALE(Quagsire, 64, 56),
+        BACK_PIC_HEMBRA(Quagsire, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Quagsire),
-        ICON(Quagsire),
+        PALETA(Quagsire),
+        ICONO(Quagsire),
         FOLLOWER(Quagsire, TRACKS_FOOT)
-        LEARNSETS(Quagsire),
+        MOVIMIENTOS(Quagsire),
+        MOVIMIENTOS_HUEVO(Wooper),
     },
 
     [SPECIES_WOOPER_PALDEA] =
@@ -12080,10 +12140,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(WooperPaldea, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(WooperPaldea),
-        ICON(WooperPaldea),
-        LEARNSETS(WooperPaldea),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CLODSIRE}),
+        PALETA(WooperPaldea),
+        ICONO(WooperPaldea),
+        MOVIMIENTOS(WooperPaldea),
+        MOVIMIENTOS_HUEVO(WooperPaldea),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CLODSIRE}),
     },
 
     [SPECIES_CLODSIRE] =
@@ -12127,9 +12188,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Clodsire, 64, 64),
         .backPicYOffset = 15,
         //.backAnimId = BACK_ANIM_NONE, //por hacer
-        PALETTES(Clodsire),
-        ICON(Clodsire),
-        LEARNSETS(Clodsire),
+        PALETA(Clodsire),
+        ICONO(Clodsire),
+        MOVIMIENTOS(Clodsire),
+        MOVIMIENTOS_HUEVO(WooperPaldea),
     },
 
     [SPECIES_MURKROW] =
@@ -12167,19 +12229,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 1,
         FRONT_PIC(Murkrow, 48, 40),
-        FRONT_PIC_FEMALE(Murkrow, 48, 40),
+        FRONT_PIC_HEMBRA(Murkrow, 48, 40),
         .frontPicYOffset = 15,
         .frontAnimFrames = sAnims_Murkrow,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         .enemyMonElevation = 12,
         BACK_PIC(Murkrow, 40, 56),
-        BACK_PIC_FEMALE(Murkrow, 40, 56),
+        BACK_PIC_HEMBRA(Murkrow, 40, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Murkrow),
-        ICON(Murkrow),
+        PALETA(Murkrow),
+        ICONO(Murkrow),
         FOLLOWER(Murkrow, TRACKS_FOOT)
-        LEARNSETS(Murkrow),
+        MOVIMIENTOS(Murkrow),
+        MOVIMIENTOS_HUEVO(Murkrow),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_HONCHKROW}),
     },
 
@@ -12224,10 +12287,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Honchkrow, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(Honchkrow),
-        ICON(Honchkrow),
+        PALETA(Honchkrow),
+        ICONO(Honchkrow),
         FOLLOWER(Honchkrow, TRACKS_FOOT)
-        LEARNSETS(Honchkrow),
+        MOVIMIENTOS(Honchkrow),
+        MOVIMIENTOS_HUEVO(Murkrow),
     },
 
     [SPECIES_MISDREAVUS] =
@@ -12272,10 +12336,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Misdreavus, 56, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Misdreavus),
-        ICON(Misdreavus),
+        PALETA(Misdreavus),
+        ICONO(Misdreavus),
         FOLLOWER(Misdreavus, TRACKS_NONE)
-        LEARNSETS(Misdreavus),
+        MOVIMIENTOS(Misdreavus),
+        MOVIMIENTOS_HUEVO(Misdreavus),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_MISMAGIUS}),
     },
 
@@ -12322,10 +12387,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mismagius, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Mismagius),
-        ICON(Mismagius),
-        FOLLOWER(Mismagius, TRACKS_FOOT)
-        LEARNSETS(Mismagius),
+        PALETA(Mismagius),
+        ICONO(Mismagius),
+        FOLLOWER(Mismagius, TRACKS_NONE)
+        MOVIMIENTOS(Mismagius),
+        MOVIMIENTOS_HUEVO(Misdreavus),
     },
 
     [SPECIES_GIRAFARIG] =
@@ -12363,18 +12429,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Girafarig, 56, 64),
-        FRONT_PIC_FEMALE(Girafarig, 56, 64),
+        FRONT_PIC_HEMBRA(Girafarig, 56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Girafarig,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Girafarig, 64, 64),
-        BACK_PIC_FEMALE(Girafarig, 64, 64),
+        BACK_PIC_HEMBRA(Girafarig, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Girafarig),
-        ICON(Girafarig),
+        PALETA(Girafarig),
+        ICONO(Girafarig),
         FOLLOWER(Girafarig, TRACKS_FOOT)
-        LEARNSETS(Girafarig),
+        MOVIMIENTOS(Girafarig),
+        MOVIMIENTOS_HUEVO(Girafarig),
     },
 
     [SPECIES_PINECO] =
@@ -12418,11 +12485,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pineco, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Pineco),
-        ICON(Pineco),
+        PALETA(Pineco),
+        ICONO(Pineco),
         FOLLOWER(Pineco, TRACKS_SPOT)
-        LEARNSETS(Pineco),
-        .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_FORRETRESS}),
+        MOVIMIENTOS(Pineco),
+        MOVIMIENTOS_HUEVO(Pineco),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_FORRETRESS}),
     },
 
     [SPECIES_FORRETRESS] =
@@ -12466,10 +12534,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Forretress, 64, 32),
         .backPicYOffset = 16,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Forretress),
-        ICON(Forretress),
+        PALETA(Forretress),
+        ICONO(Forretress),
         FOLLOWER(Forretress, TRACKS_SPOT)
-        LEARNSETS(Forretress),
+        MOVIMIENTOS(Forretress),
+        MOVIMIENTOS_HUEVO(Pineco),
     },
 
     [SPECIES_GLIGAR] =
@@ -12507,19 +12576,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Gligar, 56, 56),
-        FRONT_PIC_FEMALE(Gligar, 56, 56),
+        FRONT_PIC_HEMBRA(Gligar, 56, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Gligar,
         .frontAnimId = ANIM_SHRINK_GROW,
         .enemyMonElevation = 8,
         BACK_PIC(Gligar, 64, 64),
-        BACK_PIC_FEMALE(Gligar, 64, 64),
+        BACK_PIC_HEMBRA(Gligar, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Gligar),
-        ICON(Gligar),
+        PALETA(Gligar),
+        ICONO(Gligar),
         FOLLOWER(Gligar, TRACKS_NONE)
-        LEARNSETS(Gligar),
+        MOVIMIENTOS(Gligar),
+        MOVIMIENTOS_HUEVO(Gligar),
         .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_FANG, SPECIES_GLISCOR},
                                 {EVO_ITEM_NIGHT, ITEM_RAZOR_FANG, SPECIES_GLISCOR}),
     },
@@ -12566,10 +12636,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gliscor, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Gliscor),
-        ICON(Gliscor),
+        PALETA(Gliscor),
+        ICONO(Gliscor),
         FOLLOWER(Gliscor, TRACKS_FOOT)
-        LEARNSETS(Gliscor),
+        MOVIMIENTOS(Gliscor),
+        MOVIMIENTOS_HUEVO(Gligar),
     },
 
     [SPECIES_SNUBBULL] =
@@ -12613,11 +12684,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Snubbull, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Snubbull),
-        ICON(Snubbull),
+        PALETA(Snubbull),
+        ICONO(Snubbull),
         FOLLOWER(Snubbull, TRACKS_FOOT)
-        LEARNSETS(Snubbull),
-        .evolutions = EVOLUTION({EVO_LEVEL, 23, SPECIES_GRANBULL}),
+        MOVIMIENTOS(Snubbull),
+        MOVIMIENTOS_HUEVO(Snubbull),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GRANBULL}),
     },
 
     [SPECIES_GRANBULL] =
@@ -12661,10 +12733,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Granbull, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Granbull),
-        ICON(Granbull),
+        PALETA(Granbull),
+        ICONO(Granbull),
         FOLLOWER(Granbull, TRACKS_FOOT)
-        LEARNSETS(Granbull),
+        MOVIMIENTOS(Granbull),
+        MOVIMIENTOS_HUEVO(Snubbull),
     },
 
     [SPECIES_HERACROSS] =
@@ -12681,7 +12754,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Heracross"),
         .natDexNum = DEX_HERACROSS,
         .categoryName = _("Single Horn"),
-        LEARNSETS(Heracross),
+        MOVIMIENTOS(Heracross),
+        MOVIMIENTOS_HUEVO(Heracross),
         .baseHP        = 80,
         .baseAttack    = 125,
         .baseDefense   = 75,
@@ -12703,16 +12777,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Heracross, 64, 64),
-        FRONT_PIC_FEMALE(Heracross, 64, 64),
+        FRONT_PIC_HEMBRA(Heracross, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Heracross,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Heracross, 48, 64),
-        BACK_PIC_FEMALE(Heracross, 48, 64),
+        BACK_PIC_HEMBRA(Heracross, 48, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Heracross),
-        ICON(Heracross),
+        PALETA(Heracross),
+        ICONO(Heracross),
         FOLLOWER(Heracross, TRACKS_FOOT)
     },
 
@@ -12753,18 +12827,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "unguarded nests and steals eggs for food\n"
             "while the parents are away."),
         FRONT_PIC(Sneasel, 56, 48),
-        FRONT_PIC_FEMALE(Sneasel, 56, 48),
+        FRONT_PIC_HEMBRA(Sneasel, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Sneasel,
         .frontAnimId = ANIM_H_JUMPS,
         BACK_PIC(Sneasel, 64, 64),
-        BACK_PIC_FEMALE(Sneasel, 64, 64),
+        BACK_PIC_HEMBRA(Sneasel, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Sneasel),
-        ICON(Sneasel),
+        PALETA(Sneasel),
+        ICONO(Sneasel),
         FOLLOWER(Sneasel, TRACKS_FOOT)
-        LEARNSETS(Sneasel),
+        MOVIMIENTOS(Sneasel),
+        MOVIMIENTOS_HUEVO(Sneasel),
         .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE},
                                 {EVO_ITEM_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE}),
     },
@@ -12806,18 +12881,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Weavile, 56, 56),
-        FRONT_PIC_FEMALE(Weavile, 56, 56),
+        FRONT_PIC_HEMBRA(Weavile, 56, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Weavile,
         .frontAnimId = ANIM_H_VIBRATE,
         BACK_PIC(Weavile, 64, 64),
-        BACK_PIC_FEMALE(Weavile, 64, 64),
+        BACK_PIC_HEMBRA(Weavile, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Weavile),
-        ICON(Weavile),
+        PALETA(Weavile),
+        ICONO(Weavile),
         FOLLOWER(Weavile, TRACKS_FOOT)
-        LEARNSETS(Weavile),
+        MOVIMIENTOS(Weavile),
+        MOVIMIENTOS_HUEVO(Sneasel),
     },
 
     [SPECIES_SNEASLER] =
@@ -12861,10 +12937,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sneasler, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Sneasler),
-        ICON(Sneasler),
+        PALETA(Sneasler),
+        ICONO(Sneasler),
         FOLLOWER(Sneasler, TRACKS_FOOT)
-        LEARNSETS(Sneasler),
+        MOVIMIENTOS(Sneasler),
+        MOVIMIENTOS_HUEVO(Sneasel),
     },
 
     [SPECIES_TEDDIURSA] =
@@ -12910,10 +12987,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Teddiursa, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Teddiursa),
-        ICON(Teddiursa),
+        PALETA(Teddiursa),
+        ICONO(Teddiursa),
         FOLLOWER(Teddiursa, TRACKS_FOOT)
-        LEARNSETS(Teddiursa),
+        MOVIMIENTOS(Teddiursa),
+        MOVIMIENTOS_HUEVO(Teddiursa),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_URSARING}),
     },
 
@@ -12952,18 +13030,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Ursaring, 64, 64),
-        FRONT_PIC_FEMALE(Ursaring, 64, 64),
+        FRONT_PIC_HEMBRA(Ursaring, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Ursaring,
         .frontAnimId = ANIM_H_SHAKE,
         BACK_PIC(Ursaring, 56, 64),
-        BACK_PIC_FEMALE(Ursaring, 56, 64),
+        BACK_PIC_HEMBRA(Ursaring, 56, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Ursaring),
-        ICON(Ursaring),
+        PALETA(Ursaring),
+        ICONO(Ursaring),
         FOLLOWER(Ursaring, TRACKS_FOOT)
-        LEARNSETS(Ursaring)
+        MOVIMIENTOS(Ursaring),
+        MOVIMIENTOS_HUEVO(Teddiursa),
     },
 
     [SPECIES_SLUGMA] =
@@ -13008,10 +13087,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Slugma, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Slugma),
-        ICON(Slugma),
+        PALETA(Slugma),
+        ICONO(Slugma),
         FOLLOWER(Slugma, TRACKS_SLITHER)
-        LEARNSETS(Slugma),
+        MOVIMIENTOS(Slugma),
+        MOVIMIENTOS_HUEVO(Slugma),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGCARGO}),
     },
 
@@ -13057,11 +13137,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Magcargo, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Magcargo),
-        ICON(Magcargo),
+        PALETA(Magcargo),
+        ICONO(Magcargo),
         .itemRare = ITEM_CHARCOAL,
         FOLLOWER(Magcargo, TRACKS_SLITHER)
-        LEARNSETS(Magcargo),
+        MOVIMIENTOS(Magcargo),
+        MOVIMIENTOS_HUEVO(Slugma),
     },
 
     [SPECIES_SWINUB] =
@@ -13105,10 +13186,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Swinub, 56, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Swinub),
-        ICON(Swinub),
-        FOLLOWER(Swinub, TRACKS_FOOT)
-        LEARNSETS(Swinub),
+        PALETA(Swinub),
+        ICONO(Swinub),
+        FOLLOWER(Swinub, TRACKS_SPOT)
+        MOVIMIENTOS(Swinub),
+        MOVIMIENTOS_HUEVO(Swinub),
         .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_PILOSWINE}),
     },
 
@@ -13148,18 +13230,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Piloswine, 48, 56),
-        FRONT_PIC_FEMALE(Piloswine, 48, 56),
+        FRONT_PIC_HEMBRA(Piloswine, 48, 56),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Piloswine,
         .frontAnimId = ANIM_H_SHAKE,
         BACK_PIC(Piloswine, 64, 48),
-        BACK_PIC_FEMALE(Piloswine, 64, 48),
+        BACK_PIC_HEMBRA(Piloswine, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Piloswine),
-        ICON(Piloswine),
-        FOLLOWER(Piloswine, TRACKS_FOOT)
-        LEARNSETS(Piloswine),
+        PALETA(Piloswine),
+        ICONO(Piloswine),
+        FOLLOWER(Piloswine, TRACKS_SPOT)
+        MOVIMIENTOS(Piloswine),
+        MOVIMIENTOS_HUEVO(Swinub),
         .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_MAMOSWINE}),
     },
 
@@ -13198,17 +13281,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 423,
         .trainerOffset = 8,
         FRONT_PIC(Mamoswine, 64, 56),
-        FRONT_PIC_FEMALE(Mamoswine, 64, 56),
+        FRONT_PIC_HEMBRA(Mamoswine, 64, 56),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Mamoswine,
         .frontAnimId = ANIM_BACK_AND_LUNGE,
         BACK_PIC(Mamoswine, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Mamoswine),
-        ICON(Mamoswine),
-        FOLLOWER(Mamoswine, TRACKS_FOOT)
-        LEARNSETS(Mamoswine),
+        PALETA(Mamoswine),
+        ICONO(Mamoswine),
+        FOLLOWER(Mamoswine, TRACKS_SPOT)
+        MOVIMIENTOS(Mamoswine),
+        MOVIMIENTOS_HUEVO(Swinub),
     },
 
     [SPECIES_CORSOLA] =
@@ -13254,10 +13338,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Corsola, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Corsola),
-        ICON(Corsola),
-        FOLLOWER(Corsola, TRACKS_FOOT)
-        LEARNSETS(Corsola),
+        PALETA(Corsola),
+        ICONO(Corsola),
+        FOLLOWER(Corsola, TRACKS_NONE)
+        MOVIMIENTOS(Corsola),
+        MOVIMIENTOS_HUEVO(Corsola),
     },
 
     [SPECIES_REMORAID] =
@@ -13301,10 +13386,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Remoraid, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Remoraid),
-        ICON(Remoraid),
+        PALETA(Remoraid),
+        ICONO(Remoraid),
         FOLLOWER(Remoraid, TRACKS_SPOT)
-        LEARNSETS(Remoraid),
+        MOVIMIENTOS(Remoraid),
+        MOVIMIENTOS_HUEVO(Remoraid),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_OCTILLERY}),
     },
 
@@ -13344,19 +13430,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Octillery, 56, 48),
-        FRONT_PIC_FEMALE(Octillery, 56, 48),
+        FRONT_PIC_HEMBRA(Octillery, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Octillery,
         .frontAnimId = ANIM_V_STRETCH,
         .frontAnimDelay = 20,
         BACK_PIC(Octillery, 64, 56),
-        BACK_PIC_FEMALE(Octillery, 64, 56),
+        BACK_PIC_HEMBRA(Octillery, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Octillery),
-        ICON(Octillery),
+        PALETA(Octillery),
+        ICONO(Octillery),
         FOLLOWER(Octillery, TRACKS_SLITHER)
-        LEARNSETS(Octillery),
+        MOVIMIENTOS(Octillery),
+        MOVIMIENTOS_HUEVO(Remoraid),
     },
 
     [SPECIES_DELIBIRD] =
@@ -13400,10 +13487,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Delibird, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Delibird),
-        ICON(Delibird),
+        PALETA(Delibird),
+        ICONO(Delibird),
         FOLLOWER(Delibird, TRACKS_FOOT)
-        LEARNSETS(Delibird),
+        MOVIMIENTOS(Delibird),
+        MOVIMIENTOS_HUEVO(Delibird),
     },
 
     [SPECIES_HOUNDOUR] =
@@ -13447,10 +13535,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Houndour, 40, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Houndour),
-        ICON(Houndour),
+        PALETA(Houndour),
+        ICONO(Houndour),
         FOLLOWER(Houndour, TRACKS_FOOT)
-        LEARNSETS(Houndour),
+        MOVIMIENTOS(Houndour),
+        MOVIMIENTOS_HUEVO(Houndour),
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HOUNDOOM}),
     },
 
@@ -13468,7 +13557,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Houndoom"),
         .natDexNum = DEX_HOUNDOOM,
         .categoryName = _("Dark"),
-        LEARNSETS(Houndoom),
+        MOVIMIENTOS(Houndoom),
+        MOVIMIENTOS_HUEVO(Houndour),
         .baseHP        = 75,
         .baseAttack    = 90,
         .baseDefense   = 50,
@@ -13490,16 +13580,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Houndoom, 64, 64),
-        FRONT_PIC_FEMALE(Houndoom, 64, 64),
+        FRONT_PIC_HEMBRA(Houndoom, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Houndoom,
         .frontAnimId = ANIM_V_SHAKE,
         BACK_PIC(Houndoom, 64, 56),
-        BACK_PIC_FEMALE(Houndoom, 64, 56),
+        BACK_PIC_HEMBRA(Houndoom, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Houndoom),
-        ICON(Houndoom),
+        PALETA(Houndoom),
+        ICONO(Houndoom),
         FOLLOWER(Houndoom, TRACKS_FOOT)
     },
 
@@ -13544,11 +13634,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Phanpy, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Phanpy),
-        ICON(Phanpy),
+        PALETA(Phanpy),
+        ICONO(Phanpy),
         FOLLOWER(Phanpy, TRACKS_FOOT)
-        LEARNSETS(Phanpy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_DONPHAN}),
+        MOVIMIENTOS(Phanpy),
+        MOVIMIENTOS_HUEVO(Phanpy),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DONPHAN}),
     },
 
     [SPECIES_DONPHAN] =
@@ -13587,18 +13678,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Donphan, 64, 48),
-        FRONT_PIC_FEMALE(Donphan, 64, 48),
+        FRONT_PIC_HEMBRA(Donphan, 64, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Donphan,
         .frontAnimId = ANIM_ROTATE_UP_SLAM_DOWN,
         BACK_PIC(Donphan, 64, 48),
-        BACK_PIC_FEMALE(Donphan, 64, 48),
+        BACK_PIC_HEMBRA(Donphan, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Donphan),
-        ICON(Donphan),
+        PALETA(Donphan),
+        ICONO(Donphan),
         FOLLOWER(Donphan, TRACKS_FOOT)
-        LEARNSETS(Donphan),
+        MOVIMIENTOS(Donphan),
+        MOVIMIENTOS_HUEVO(Phanpy),
     },
 
     [SPECIES_STANTLER] =
@@ -13642,10 +13734,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Stantler, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Stantler),
-        ICON(Stantler),
+        PALETA(Stantler),
+        ICONO(Stantler),
         FOLLOWER(Stantler, TRACKS_FOOT)
-        LEARNSETS(Stantler),
+        MOVIMIENTOS(Stantler),
+        MOVIMIENTOS_HUEVO(Stantler),
         .evolutions = EVOLUTION({EVO_USE_MOVE_TWENTY_TIMES, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}),
     },
 
@@ -13691,10 +13784,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wyrdeer, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Wyrdeer),
-        ICON(Wyrdeer),
+        PALETA(Wyrdeer),
+        ICONO(Wyrdeer),
         FOLLOWER(Wyrdeer, TRACKS_FOOT)
-        LEARNSETS(Wyrdeer),
+        MOVIMIENTOS(Wyrdeer),
+        MOVIMIENTOS_HUEVO(Stantler),
     },
 
     [SPECIES_MILTANK] =
@@ -13740,10 +13834,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Miltank, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Miltank),
-        ICON(Miltank),
+        PALETA(Miltank),
+        ICONO(Miltank),
         FOLLOWER(Miltank, TRACKS_FOOT)
-        LEARNSETS(Miltank),
+        MOVIMIENTOS(Miltank),
+        MOVIMIENTOS_HUEVO(Miltank),
     },
 
     [SPECIES_RAIKOU] =
@@ -13789,10 +13884,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Raikou, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Raikou),
-        ICON(Raikou),
+        PALETA(Raikou),
+        ICONO(Raikou),
         FOLLOWER(Raikou, TRACKS_FOOT)
-        LEARNSETS(Raikou),
+        MOVIMIENTOS(Raikou),
+        MOVIMIENTOS_HUEVO(Raikou),
     },
 
     [SPECIES_ENTEI] =
@@ -13838,10 +13934,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Entei, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Entei),
-        ICON(Entei),
+        PALETA(Entei),
+        ICONO(Entei),
         FOLLOWER(Entei, TRACKS_FOOT)
-        LEARNSETS(Entei),
+        MOVIMIENTOS(Entei),
+        MOVIMIENTOS_HUEVO(Entei),
     },
 
     [SPECIES_SUICUNE] =
@@ -13887,10 +13984,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Suicune, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Suicune),
-        ICON(Suicune),
+        PALETA(Suicune),
+        ICONO(Suicune),
         FOLLOWER(Suicune, TRACKS_FOOT)
-        LEARNSETS(Suicune),
+        MOVIMIENTOS(Suicune),
+        MOVIMIENTOS_HUEVO(Suicune),
     },
 
     [SPECIES_LARVITAR] =
@@ -13934,10 +14032,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Larvitar, 56, 64),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Larvitar),
-        ICON(Larvitar),
+        PALETA(Larvitar),
+        ICONO(Larvitar),
         FOLLOWER(Larvitar, TRACKS_FOOT)
-        LEARNSETS(Larvitar),
+        MOVIMIENTOS(Larvitar),
+        MOVIMIENTOS_HUEVO(Larvitar),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PUPITAR}),
     },
 
@@ -13982,10 +14081,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pupitar, 48, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Pupitar),
-        ICON(Pupitar),
+        PALETA(Pupitar),
+        ICONO(Pupitar),
         FOLLOWER(Pupitar, TRACKS_SPOT)
-        LEARNSETS(Pupitar),
+        MOVIMIENTOS(Pupitar),
+        MOVIMIENTOS_HUEVO(Larvitar),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_TYRANITAR}),
     },
 
@@ -14003,7 +14103,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Tyranitar"),
         .natDexNum = DEX_TYRANITAR,
         .categoryName = _("Armor"),
-        LEARNSETS(Tyranitar),
+        MOVIMIENTOS(Tyranitar),
+        MOVIMIENTOS_HUEVO(Larvitar),
         .baseHP        = 100,
         .baseAttack    = 134,
         .baseDefense   = 110,
@@ -14032,8 +14133,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tyranitar, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Tyranitar),
-        ICON(Tyranitar),
+        PALETA(Tyranitar),
+        ICONO(Tyranitar),
         FOLLOWER(Tyranitar, TRACKS_FOOT)
     },
 
@@ -14081,10 +14182,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lugia, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Lugia),
-        ICON(Lugia),
+        PALETA(Lugia),
+        ICONO(Lugia),
         FOLLOWER(Lugia, TRACKS_NONE)
-        LEARNSETS(Lugia),
+        MOVIMIENTOS(Lugia),
+        MOVIMIENTOS_HUEVO(Lugia),
     },
 
     [SPECIES_HO_OH] =
@@ -14132,10 +14234,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(HoOh, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(HoOh),
-        ICON(HoOh),
+        PALETA(HoOh),
+        ICONO(HoOh),
         FOLLOWER(HoOh, TRACKS_NONE)
-        LEARNSETS(HoOh),
+        MOVIMIENTOS(HoOh),
+        MOVIMIENTOS_HUEVO(HoOh),
     },
 
     [SPECIES_CELEBI] =
@@ -14181,10 +14284,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Celebi, 48, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
-        PALETTES(Celebi),
-        ICON(Celebi),
+        PALETA(Celebi),
+        ICONO(Celebi),
         FOLLOWER(Celebi, TRACKS_NONE)
-        LEARNSETS(Celebi),
+        MOVIMIENTOS(Celebi),
+        MOVIMIENTOS_HUEVO(Celebi),
     },
 
     [SPECIES_TREECKO] =
@@ -14228,10 +14332,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Treecko, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Treecko),
-        ICON(Treecko),
+        PALETA(Treecko),
+        ICONO(Treecko),
         FOLLOWER(Treecko, TRACKS_FOOT)
-        LEARNSETS(Treecko),
+        MOVIMIENTOS(Treecko),
+        MOVIMIENTOS_HUEVO(Treecko),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_GROVYLE}),
     },
 
@@ -14276,30 +14381,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Grovyle, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Grovyle),
-        ICON(Grovyle),
+        PALETA(Grovyle),
+        ICONO(Grovyle),
         FOLLOWER(Grovyle, TRACKS_FOOT)
-        LEARNSETS(Grovyle),
+        MOVIMIENTOS(Grovyle),
+        MOVIMIENTOS_HUEVO(Treecko),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SCEPTILE}),
     },
 
-#define SCEPTILE_MISC_INFO                                              \
-        .catchRate = 45,                                                \
-        .evYield_Speed = 3,                                             \
-        .genderRatio = PERCENT_FEMALE(25),                            \
-        .eggCycles = 20,                                                \
-        .friendship = STANDARD_FRIENDSHIP,                              \
-        .growthRate = GROWTH_MEDIUM_SLOW,                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),\
-        .bodyColor = BODY_COLOR_GREEN,                                  \
-        .speciesName = _("Sceptile"),                                   \
-        .natDexNum = DEX_SCEPTILE,                             \
-        .categoryName = _("Forest"),                                    \
-        LEARNSETS(Sceptile)
-
     [SPECIES_SCEPTILE] =
     {
-        SCEPTILE_MISC_INFO,
+        .catchRate = 45,
+        .evYield_Speed = 3,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_DRAGON),
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Sceptile"),
+        .natDexNum = DEX_SCEPTILE,
+        .categoryName = _("Forest"),
+        MOVIMIENTOS(Sceptile),
+        MOVIMIENTOS_HUEVO(Treecko),
         .baseHP        = 70,
         .baseAttack    = 85,
         .baseDefense   = 65,
@@ -14307,13 +14411,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpAttack  = 105,
         .baseSpDefense = 85,
         .types = MON_TYPES(TYPE_GRASS),
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 239,
-    #else
-        .expYield = 208,
-    #endif
         .abilities = {ABILITY_OVERGROW, ABILITY_NONE, ABILITY_UNBURDEN},
         .cryId = CRY_SCEPTILE,
         .height = 17,
@@ -14334,8 +14432,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sceptile, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Sceptile),
-        ICON(Sceptile),
+        PALETA(Sceptile),
+        ICONO(Sceptile),
         FOLLOWER(Sceptile, TRACKS_FOOT)
     },
 
@@ -14349,7 +14447,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_FIRE),
         .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 62 : 65,
+        .expYield = 62,
         .evYield_SpAttack = 1,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
@@ -14378,13 +14476,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimFrames = sAnims_Torchic,
         .frontAnimId = ANIM_V_JUMPS_SMALL,
         BACK_PIC(Torchic, 40, 48),
-        BACK_PIC_FEMALE(Torchic, 40, 48),
+        BACK_PIC_HEMBRA(Torchic, 40, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Torchic),
-        ICON(Torchic),
+        PALETA(Torchic),
+        ICONO(Torchic),
         FOLLOWER(Torchic, TRACKS_FOOT)
-        LEARNSETS(Torchic),
+        MOVIMIENTOS(Torchic),
+        MOVIMIENTOS_HUEVO(Torchic),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_COMBUSKEN}),
     },
 
@@ -14424,58 +14523,51 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Combusken, 48, 64),
-        FRONT_PIC_FEMALE(Combusken, 48, 64),
+        FRONT_PIC_HEMBRA(Combusken, 48, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Combusken,
         .frontAnimId = ANIM_V_JUMPS_H_JUMPS,
         BACK_PIC(Combusken, 64, 64),
-        BACK_PIC_FEMALE(Combusken, 64, 64),
+        BACK_PIC_HEMBRA(Combusken, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Combusken),
-        ICON(Combusken),
+        PALETA(Combusken),
+        ICONO(Combusken),
         FOLLOWER(Combusken, TRACKS_FOOT)
-        LEARNSETS(Combusken),
+        MOVIMIENTOS(Combusken),
+        MOVIMIENTOS_HUEVO(Torchic),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLAZIKEN}),
     },
 
-#define BLAZIKEN_MISC_INFO                                  \
-        .types = MON_TYPES(TYPE_FIRE, TYPE_FIGHTING),       \
-        .catchRate = 45,                                    \
-        .evYield_Attack = 3,                                \
-        .genderRatio = PERCENT_FEMALE(25),                \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_SLOW,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),       \
-        .bodyColor = BODY_COLOR_RED,                        \
-        .speciesName = _("Blaziken"),                       \
-        .natDexNum = DEX_BLAZIKEN,                 \
-        .categoryName = _("Blaze"),                         \
-        .height = 19,                                       \
-        .weight = 520,                                      \
-        .pokemonScale = 256,                                \
-        .pokemonOffset = 0,                                 \
-        .trainerScale = 301,                                \
-        .trainerOffset = 4,                                 \
-        LEARNSETS(Blaziken)
-
     [SPECIES_BLAZIKEN] =
     {
-        BLAZIKEN_MISC_INFO,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_FIGHTING),
+        .catchRate = 45,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Blaziken"),
+        .natDexNum = DEX_BLAZIKEN,
+        .categoryName = _("Blaze"),
+        .height = 19,
+        .weight = 520,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 301,
+        .trainerOffset = 4,
+        MOVIMIENTOS(Blaziken),
+        MOVIMIENTOS_HUEVO(Torchic),
         .baseHP        = 80,
         .baseAttack    = 120,
         .baseDefense   = 70,
         .baseSpeed     = 80,
         .baseSpAttack  = 110,
         .baseSpDefense = 70,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 239,
-    #else
-        .expYield = 209,
-    #endif
         .abilities = {ABILITY_BLAZE, ABILITY_NONE, ABILITY_SPEED_BOOST},
         .cryId = CRY_BLAZIKEN,
         .description = COMPOUND_STRING(
@@ -14484,16 +14576,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "feathers burn off, and new, supple\n"
             "feathers grow back in their place."),
         FRONT_PIC(Blaziken, 56, 64),
-        FRONT_PIC_FEMALE(Blaziken, 56, 64),
+        FRONT_PIC_HEMBRA(Blaziken, 56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Blaziken,
         .frontAnimId = ANIM_H_SHAKE,
         BACK_PIC(Blaziken, 64, 64),
-        BACK_PIC_FEMALE(Blaziken, 64, 64),
+        BACK_PIC_HEMBRA(Blaziken, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Blaziken),
-        ICON(Blaziken),
+        PALETA(Blaziken),
+        ICONO(Blaziken),
         FOLLOWER(Blaziken, TRACKS_FOOT)
     },
 
@@ -14538,10 +14630,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mudkip, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Mudkip),
-        ICON(Mudkip),
+        PALETA(Mudkip),
+        ICONO(Mudkip),
         FOLLOWER(Mudkip, TRACKS_FOOT)
-        LEARNSETS(Mudkip),
+        MOVIMIENTOS(Mudkip),
+        MOVIMIENTOS_HUEVO(Mudkip),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_MARSHTOMP}),
     },
 
@@ -14586,44 +14679,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Marshtomp, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Marshtomp),
-        ICON(Marshtomp),
+        PALETA(Marshtomp),
+        ICONO(Marshtomp),
         FOLLOWER(Marshtomp, TRACKS_FOOT)
-        LEARNSETS(Marshtomp),
+        MOVIMIENTOS(Marshtomp),
+        MOVIMIENTOS_HUEVO(Mudkip),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SWAMPERT}),
     },
 
-#define SWAMPERT_MISC_INFO                                               \
-        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND),                     \
-        .catchRate = 45,                                                 \
-        .evYield_Attack = 3,                                             \
-        .genderRatio = PERCENT_FEMALE(25),                             \
-        .eggCycles = 20,                                                 \
-        .friendship = STANDARD_FRIENDSHIP,                               \
-        .growthRate = GROWTH_MEDIUM_SLOW,                                \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),\
-        .bodyColor = BODY_COLOR_BLUE,                                    \
-        .speciesName = _("Swampert"),                                    \
-        .natDexNum = DEX_SWAMPERT,                              \
-        .categoryName = _("Mud Fish"),                                   \
-        LEARNSETS(Swampert)
-
     [SPECIES_SWAMPERT] =
     {
-        SWAMPERT_MISC_INFO,
+        .types = MON_TYPES(TYPE_WATER, TYPE_GROUND),
+        .catchRate = 45,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER, EGG_GROUP_ANFIBIO),
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Swampert"),
+        .natDexNum = DEX_SWAMPERT,
+        .categoryName = _("Mud Fish"),
+        MOVIMIENTOS(Swampert),
+        MOVIMIENTOS_HUEVO(Mudkip),
         .baseHP        = 100,
         .baseAttack    = 110,
         .baseDefense   = 90,
         .baseSpeed     = 60,
         .baseSpAttack  = 85,
         .baseSpDefense = 90,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 268,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 241,
-    #else
-        .expYield = 210,
-    #endif
         .abilities = {ABILITY_TORRENT, ABILITY_NONE, ABILITY_DAMP},
         .cryId = CRY_SWAMPERT,
         .height = 15,
@@ -14644,8 +14730,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Swampert, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Swampert),
-        ICON(Swampert),
+        PALETA(Swampert),
+        ICONO(Swampert),
         FOLLOWER(Swampert, TRACKS_FOOT)
     },
 
@@ -14659,13 +14745,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 30,
         .types = MON_TYPES(TYPE_DARK),
         .catchRate = 255,
-    #if P_UPDATED_EXP_YIELDS >= GEN_7
         .expYield = 56,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 44,
-    #else
-        .expYield = 55,
-    #endif
         .evYield_Attack = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 15,
@@ -14696,10 +14776,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Poochyena, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Poochyena),
-        ICON(Poochyena),
+        PALETA(Poochyena),
+        ICONO(Poochyena),
         FOLLOWER(Poochyena, TRACKS_FOOT)
-        LEARNSETS(Poochyena),
+        MOVIMIENTOS(Poochyena),
+        MOVIMIENTOS_HUEVO(Poochyena),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_MIGHTYENA}),
     },
 
@@ -14744,78 +14825,40 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mightyena, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Mightyena),
-        ICON(Mightyena),
+        PALETA(Mightyena),
+        ICONO(Mightyena),
         FOLLOWER(Mightyena, TRACKS_FOOT)
-        LEARNSETS(Mightyena),
+        MOVIMIENTOS(Mightyena),
+        MOVIMIENTOS_HUEVO(Poochyena),
     },
-
-#if P_UPDATED_EXP_YIELDS >= GEN_7
-    #define ZIGZAGOON_EXP_YIELD 56
-#elif P_UPDATED_EXP_YIELDS >= GEN_5
-    #define ZIGZAGOON_EXP_YIELD 48
-#else
-    #define ZIGZAGOON_EXP_YIELD 60
-#endif
-
-#define ZIGZAGOON_MISC_INFO                                                     \
-        .baseHP        = 38,                                                    \
-        .baseAttack    = 30,                                                    \
-        .baseDefense   = 41,                                                    \
-        .baseSpeed     = 60,                                                    \
-        .baseSpAttack  = 30,                                                    \
-        .baseSpDefense = 41,                                                    \
-        .catchRate = 255,                                                       \
-        .expYield = ZIGZAGOON_EXP_YIELD,                                        \
-        .evYield_Speed = 1,                                                     \
-        .genderRatio = PERCENT_FEMALE(50),                                      \
-        .eggCycles = 15,                                                        \
-        .friendship = STANDARD_FRIENDSHIP,                                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),                           \
-        .abilities = {ABILITY_PICKUP, ABILITY_GLUTTONY, ABILITY_QUICK_FEET},  \
-        .speciesName = _("Zigzagoon"),                                          \
-        .cryId = CRY_ZIGZAGOON,                                                 \
-        .natDexNum = DEX_ZIGZAGOON,                                    \
-        .categoryName = _("Tiny Raccoon"),                                      \
-        .height = 4,                                                            \
-        .weight = 175,                                                          \
-        .pokemonScale = 560,                                                    \
-        .pokemonOffset = 22,                                                    \
-        .trainerScale = 256,                                                    \
-        .trainerOffset = 0
-
-#define LINOONE_MISC_INFO                                                       \
-        .baseHP        = 78,                                                    \
-        .baseAttack    = 70,                                                    \
-        .baseDefense   = 61,                                                    \
-        .baseSpeed     = 100,                                                   \
-        .baseSpAttack  = 50,                                                    \
-        .baseSpDefense = 61,                                                    \
-        .catchRate = 90,                                                        \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 147 : 128,                \
-        .evYield_Speed = 2,                                                     \
-        .genderRatio = PERCENT_FEMALE(50),                                      \
-        .eggCycles = 15,                                                        \
-        .friendship = STANDARD_FRIENDSHIP,                                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),                           \
-        .abilities = {ABILITY_PICKUP, ABILITY_GLUTTONY, ABILITY_QUICK_FEET},  \
-        .bodyColor = BODY_COLOR_WHITE,                                          \
-        .speciesName = _("Linoone"),                                            \
-        .cryId = CRY_LINOONE,                                                   \
-        .natDexNum = DEX_LINOONE,                                      \
-        .categoryName = _("Rushing"),                                           \
-        .height = 5,                                                            \
-        .weight = 325,                                                          \
-        .pokemonScale = 321,                                                    \
-        .pokemonOffset = 7,                                                     \
-        .trainerScale = 256,                                                    \
-        .trainerOffset = 0
 
     [SPECIES_ZIGZAGOON] =
     {
-        ZIGZAGOON_MISC_INFO,
+        .baseHP        = 38,
+        .baseAttack    = 30,
+        .baseDefense   = 41,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 41,
+        .catchRate = 255,
+        .expYield = 56,
+        .evYield_Speed = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = {ABILITY_PICKUP, ABILITY_GLUTTONY, ABILITY_QUICK_FEET},
+        .speciesName = _("Zigzagoon"),
+        .cryId = CRY_ZIGZAGOON,
+        .natDexNum = DEX_ZIGZAGOON,
+        .categoryName = _("Tiny Raccoon"),
+        .height = 4,
+        .weight = 175,
+        .pokemonScale = 560,
+        .pokemonOffset = 22,
+        .trainerScale = 256,
+        .trainerOffset = 0,
         .types = MON_TYPES(TYPE_NORMAL),
         .itemCommon = ITEM_POTION,
         .itemRare = ITEM_REVIVE,
@@ -14832,16 +14875,41 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zigzagoon, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Zigzagoon),
-        ICON(Zigzagoon),
+        PALETA(Zigzagoon),
+        ICONO(Zigzagoon),
         FOLLOWER(Zigzagoon, TRACKS_FOOT)
-        LEARNSETS(Zigzagoon),
+        MOVIMIENTOS(Zigzagoon),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LINOONE}),
     },
 
     [SPECIES_LINOONE] =
     {
-        LINOONE_MISC_INFO,
+        .baseHP        = 78,
+        .baseAttack    = 70,
+        .baseDefense   = 61,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 50,
+        .baseSpDefense = 61,
+        .catchRate = 90,
+        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 147 : 128,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = {ABILITY_PICKUP, ABILITY_GLUTTONY, ABILITY_QUICK_FEET},
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Linoone"),
+        .cryId = CRY_LINOONE,
+        .natDexNum = DEX_LINOONE,
+        .categoryName = _("Rushing"),
+        .height = 5,
+        .weight = 325,
+        .pokemonScale = 321,
+        .pokemonOffset = 7,
+        .trainerScale = 256,
+        .trainerOffset = 0,
         .types = MON_TYPES(TYPE_NORMAL),
         .itemCommon = ITEM_POTION,
         .itemRare = ITEM_MAX_REVIVE,
@@ -14857,10 +14925,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Linoone, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Linoone),
-        ICON(Linoone),
+        PALETA(Linoone),
+        ICONO(Linoone),
         FOLLOWER(Linoone, TRACKS_FOOT)
-        LEARNSETS(Linoone),
+        MOVIMIENTOS(Linoone),
     },
 
     [SPECIES_WURMPLE] =
@@ -14912,10 +14980,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wurmple, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Wurmple),
-        ICON(Wurmple),
+        PALETA(Wurmple),
+        ICONO(Wurmple),
         FOLLOWER(Wurmple, TRACKS_BUG)
-        LEARNSETS(Wurmple),
+        MOVIMIENTOS(Wurmple),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_SILCOON, 7, SPECIES_SILCOON},
                                 {EVO_LEVEL_CASCOON, 7, SPECIES_CASCOON}),
@@ -14962,10 +15030,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Silcoon, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Silcoon),
-        ICON(Silcoon),
+        PALETA(Silcoon),
+        ICONO(Silcoon),
         FOLLOWER(Silcoon, TRACKS_BUG)
-        LEARNSETS(Silcoon),
+        MOVIMIENTOS(Silcoon),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEAUTIFLY}),
     },
@@ -15014,19 +15082,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Beautifly, 64, 56),
-        FRONT_PIC_FEMALE(Beautifly, 64, 56),
+        FRONT_PIC_HEMBRA(Beautifly, 64, 56),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Beautifly,
         .frontAnimId = ANIM_V_SLIDE,
         .enemyMonElevation = 10,
         BACK_PIC(Beautifly, 64, 64),
-        BACK_PIC_FEMALE(Beautifly, 64, 64),
+        BACK_PIC_HEMBRA(Beautifly, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Beautifly),
-        ICON(Beautifly),
+        PALETA(Beautifly),
+        ICONO(Beautifly),
         FOLLOWER(Beautifly, TRACKS_NONE)
-        LEARNSETS(Beautifly),
+        MOVIMIENTOS(Beautifly),
     },
 
     [SPECIES_CASCOON] =
@@ -15076,10 +15144,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cascoon, 56, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Cascoon),
-        ICON(Cascoon),
+        PALETA(Cascoon),
+        ICONO(Cascoon),
         FOLLOWER(Cascoon, TRACKS_BUG)
-        LEARNSETS(Cascoon),
+        MOVIMIENTOS(Cascoon),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DUSTOX}),
     },
@@ -15130,19 +15198,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Dustox, 64, 48),
-        FRONT_PIC_FEMALE(Dustox, 64, 48),
+        FRONT_PIC_HEMBRA(Dustox, 64, 48),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Dustox,
         .frontAnimId = ANIM_V_JUMPS_H_JUMPS,
         .enemyMonElevation = 12,
         BACK_PIC(Dustox, 64, 64),
-        BACK_PIC_FEMALE(Dustox, 64, 64),
+        BACK_PIC_HEMBRA(Dustox, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Dustox),
-        ICON(Dustox),
+        PALETA(Dustox),
+        ICONO(Dustox),
         FOLLOWER(Dustox, TRACKS_NONE)
-        LEARNSETS(Dustox),
+        MOVIMIENTOS(Dustox),
     },
 
     [SPECIES_LOTAD] =
@@ -15187,10 +15255,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lotad, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Lotad),
-        ICON(Lotad),
+        PALETA(Lotad),
+        ICONO(Lotad),
         FOLLOWER(Lotad, TRACKS_FOOT)
-        LEARNSETS(Lotad),
+        MOVIMIENTOS(Lotad),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_LOMBRE}),
     },
 
@@ -15236,10 +15304,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lombre, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Lombre),
-        ICON(Lombre),
+        PALETA(Lombre),
+        ICONO(Lombre),
         FOLLOWER(Lombre, TRACKS_FOOT)
-        LEARNSETS(Lombre),
+        MOVIMIENTOS(Lombre),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_LUDICOLO}),
     },
 
@@ -15285,18 +15353,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 268,
         .trainerOffset = -1,
         FRONT_PIC(Ludicolo, 56, 64),
-        FRONT_PIC_FEMALE(Ludicolo, 56, 64),
+        FRONT_PIC_HEMBRA(Ludicolo, 56, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Ludicolo,
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES_SLOW,
         BACK_PIC(Ludicolo, 64, 56),
-        BACK_PIC_FEMALE(Ludicolo, 64, 56),
+        BACK_PIC_HEMBRA(Ludicolo, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Ludicolo),
-        ICON(Ludicolo),
+        PALETA(Ludicolo),
+        ICONO(Ludicolo),
         FOLLOWER(Ludicolo, TRACKS_FOOT)
-        LEARNSETS(Ludicolo),
+        MOVIMIENTOS(Ludicolo),
     },
 
     [SPECIES_SEEDOT] =
@@ -15341,10 +15409,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Seedot, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Seedot),
-        ICON(Seedot),
+        PALETA(Seedot),
+        ICONO(Seedot),
         FOLLOWER(Seedot, TRACKS_FOOT)
-        LEARNSETS(Seedot),
+        MOVIMIENTOS(Seedot),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_NUZLEAF}),
     },
 
@@ -15383,19 +15451,19 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Nuzleaf, 40, 56),
-        FRONT_PIC_FEMALE(Nuzleaf, 40, 56),
+        FRONT_PIC_HEMBRA(Nuzleaf, 40, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Nuzleaf,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Nuzleaf, 56, 48),
-        BACK_PIC_FEMALE(Nuzleaf, 56, 48),
+        BACK_PIC_HEMBRA(Nuzleaf, 56, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Nuzleaf),
-        ICON(Nuzleaf),
+        PALETA(Nuzleaf),
+        ICONO(Nuzleaf),
         .itemRare = ITEM_BLACK_GLASSES,
         FOLLOWER(Nuzleaf, TRACKS_FOOT)
-        LEARNSETS(Nuzleaf),
+        MOVIMIENTOS(Nuzleaf),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_SHIFTRY}),
     },
 
@@ -15439,18 +15507,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Shiftry, 64, 56),
-        FRONT_PIC_FEMALE(Shiftry, 64, 56),
+        FRONT_PIC_HEMBRA(Shiftry, 64, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Shiftry,
         .frontAnimId = ANIM_H_VIBRATE,
         BACK_PIC(Shiftry, 64, 56),
-        BACK_PIC_FEMALE(Shiftry, 64, 56),
+        BACK_PIC_HEMBRA(Shiftry, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Shiftry),
-        ICON(Shiftry),
+        PALETA(Shiftry),
+        ICONO(Shiftry),
         FOLLOWER(Shiftry, TRACKS_FOOT)
-        LEARNSETS(Shiftry),
+        MOVIMIENTOS(Shiftry),
     },
 
     [SPECIES_TAILLOW] =
@@ -15494,10 +15562,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Taillow, 56, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Taillow),
-        ICON(Taillow),
+        PALETA(Taillow),
+        ICONO(Taillow),
         FOLLOWER(Taillow, TRACKS_FOOT)
-        LEARNSETS(Taillow),
+        MOVIMIENTOS(Taillow),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_SWELLOW}),
     },
 
@@ -15548,10 +15616,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Swellow, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Swellow),
-        ICON(Swellow),
+        PALETA(Swellow),
+        ICONO(Swellow),
         FOLLOWER(Swellow, TRACKS_NONE)
-        LEARNSETS(Swellow),
+        MOVIMIENTOS(Swellow),
     },
 
     [SPECIES_WINGULL] =
@@ -15597,10 +15665,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wingull, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Wingull),
-        ICON(Wingull),
+        PALETA(Wingull),
+        ICONO(Wingull),
         FOLLOWER(Wingull, TRACKS_NONE)
-        LEARNSETS(Wingull),
+        MOVIMIENTOS(Wingull),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PELIPPER}),
     },
 
@@ -15653,19 +15721,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pelipper, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Pelipper),
-        ICON(Pelipper),
+        PALETA(Pelipper),
+        ICONO(Pelipper),
         FOLLOWER(Pelipper, TRACKS_NONE)
-        LEARNSETS(Pelipper),
+        MOVIMIENTOS(Pelipper),
     },
-
-#define RALTS_FAMILY_TYPE2 (P_UPDATED_TYPES >= GEN_6 ? TYPE_FAIRY : TYPE_PSYCHIC)
-
-#if P_UPDATED_EGG_GROUPS >= GEN_8
-    #define RALTS_FAMILY_EGG_GROUPS MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS)
-#else
-    #define RALTS_FAMILY_EGG_GROUPS MON_EGG_GROUPS(EGG_GROUP_AMORPHOUS)
-#endif
 
     [SPECIES_RALTS] =
     {
@@ -15675,7 +15735,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 40,
         .baseSpAttack  = 45,
         .baseSpDefense = 35,
-        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
         .catchRate = 235,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 40 : 70,
         .evYield_SpAttack = 1,
@@ -15683,7 +15743,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = RALTS_FAMILY_EGG_GROUPS,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS),
         .abilities = {ABILITY_SYNCHRONIZE, ABILITY_TRACE, ABILITY_TELEPATHY},
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Ralts"),
@@ -15708,10 +15768,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ralts, 32, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Ralts),
-        ICON(Ralts),
+        PALETA(Ralts),
+        ICONO(Ralts),
         FOLLOWER(Ralts, TRACKS_FOOT)
-        LEARNSETS(Ralts),
+        MOVIMIENTOS(Ralts),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KIRLIA}),
     },
 
@@ -15723,7 +15783,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 50,
         .baseSpAttack  = 65,
         .baseSpDefense = 55,
-        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
         .catchRate = 120,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 97 : 140,
         .evYield_SpAttack = 2,
@@ -15731,7 +15791,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .eggCycles = 20,
         .friendship = 35,
         .growthRate = GROWTH_SLOW,
-        .eggGroups = RALTS_FAMILY_EGG_GROUPS,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS),
         .abilities = {ABILITY_SYNCHRONIZE, ABILITY_TRACE, ABILITY_TELEPATHY},
         .bodyColor = BODY_COLOR_WHITE,
         .speciesName = _("Kirlia"),
@@ -15756,38 +15816,35 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kirlia, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Kirlia),
-        ICON(Kirlia),
+        PALETA(Kirlia),
+        ICONO(Kirlia),
         FOLLOWER(Kirlia, TRACKS_FOOT)
-        LEARNSETS(Kirlia),
+        MOVIMIENTOS(Kirlia),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                 {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}),
     },
 
-#define GARDEVOIR_MISC_INFO                                 \
-        .catchRate = 45,                                    \
-        .evYield_SpAttack = 3,                              \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = 35,                                   \
-        .growthRate = GROWTH_SLOW,                          \
-        .eggGroups = RALTS_FAMILY_EGG_GROUPS,               \
-        .types = MON_TYPES(TYPE_PSYCHIC, RALTS_FAMILY_TYPE2),\
-        .bodyColor = BODY_COLOR_WHITE,                      \
-        .speciesName = _("Gardevoir"),                      \
-        .natDexNum = DEX_GARDEVOIR,                \
-        .categoryName = _("Embrace"),                       \
-        .height = 16,                                       \
-        .weight = 484,                                      \
-        .pokemonScale = 256,                                \
-        .pokemonOffset = 0,                                 \
-        .trainerScale = 256,                                \
-        .trainerOffset = 0,                                 \
-        LEARNSETS(Gardevoir)
-
     [SPECIES_GARDEVOIR] =
     {
-        GARDEVOIR_MISC_INFO,
+        .catchRate = 45,
+        .evYield_SpAttack = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS),
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FAIRY),
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Gardevoir"),
+        .natDexNum = DEX_GARDEVOIR,
+        .categoryName = _("Embrace"),
+        .height = 16,
+        .weight = 484,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Gardevoir),
         .baseHP        = 68,
         .baseAttack    = 65,
         .baseDefense   = 65,
@@ -15815,34 +15872,31 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gardevoir, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Gardevoir),
-        ICON(Gardevoir),
+        PALETA(Gardevoir),
+        ICONO(Gardevoir),
         FOLLOWER(Gardevoir, TRACKS_FOOT)
     },
 
-#define GALLADE_MISC_INFO                                   \
-        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FIGHTING),    \
-        .catchRate = 45,                                    \
-        .evYield_Attack = 3,                                \
-        .genderRatio = MON_MALE,                            \
-        .eggCycles = 20,                                    \
-        .friendship = 35,                                   \
-        .growthRate = GROWTH_SLOW,                          \
-        .eggGroups = RALTS_FAMILY_EGG_GROUPS,               \
-        .bodyColor = BODY_COLOR_WHITE,                      \
-        .speciesName = _("Gallade"),                        \
-        .natDexNum = DEX_GALLADE,                  \
-        .categoryName = _("Blade"),                         \
-        .height = 16,                                       \
-        .pokemonScale = 259,                                \
-        .pokemonOffset = 1,                                 \
-        .trainerScale = 296,                                \
-        .trainerOffset = 1,                                 \
-        LEARNSETS(Gallade)
-
     [SPECIES_GALLADE] =
     {
-        GALLADE_MISC_INFO,
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_FIGHTING),
+        .catchRate = 45,
+        .evYield_Attack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE, EGG_GROUP_AMORPHOUS),
+        .bodyColor = BODY_COLOR_WHITE,
+        .speciesName = _("Gallade"),
+        .natDexNum = DEX_GALLADE,
+        .categoryName = _("Blade"),
+        .height = 16,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
+        MOVIMIENTOS(Gallade),
         .baseHP        = 68,
         .baseAttack    = 125,
         .baseDefense   = 65,
@@ -15875,8 +15929,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gallade, 64, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Gallade),
-        ICON(Gallade),
+        PALETA(Gallade),
+        ICONO(Gallade),
         FOLLOWER(Gallade, TRACKS_FOOT)
     },
 
@@ -15922,10 +15976,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Surskit, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_SPRING,
-        PALETTES(Surskit),
-        ICON(Surskit),
+        PALETA(Surskit),
+        ICONO(Surskit),
         FOLLOWER(Surskit, TRACKS_BUG)
-        LEARNSETS(Surskit),
+        MOVIMIENTOS(Surskit),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_MASQUERAIN}),
     },
 
@@ -15984,10 +16038,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Masquerain, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Masquerain),
-        ICON(Masquerain),
+        PALETA(Masquerain),
+        ICONO(Masquerain),
         FOLLOWER(Masquerain, TRACKS_NONE)
-        LEARNSETS(Masquerain),
+        MOVIMIENTOS(Masquerain),
     },
 
     [SPECIES_SHROOMISH] =
@@ -16032,10 +16086,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Shroomish, 56, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Shroomish),
-        ICON(Shroomish),
+        PALETA(Shroomish),
+        ICONO(Shroomish),
         FOLLOWER(Shroomish, TRACKS_FOOT)
-        LEARNSETS(Shroomish),
+        MOVIMIENTOS(Shroomish),
         .evolutions = EVOLUTION({EVO_LEVEL, 23, SPECIES_BRELOOM}),
     },
 
@@ -16081,10 +16135,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Breloom, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Breloom),
-        ICON(Breloom),
+        PALETA(Breloom),
+        ICONO(Breloom),
         FOLLOWER(Breloom, TRACKS_FOOT)
-        LEARNSETS(Breloom),
+        MOVIMIENTOS(Breloom),
     },
 
     [SPECIES_SLAKOTH] =
@@ -16128,10 +16182,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Slakoth, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Slakoth),
-        ICON(Slakoth),
+        PALETA(Slakoth),
+        ICONO(Slakoth),
         FOLLOWER(Slakoth, TRACKS_FOOT)
-        LEARNSETS(Slakoth),
+        MOVIMIENTOS(Slakoth),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_VIGOROTH}),
     },
 
@@ -16176,10 +16230,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vigoroth, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Vigoroth),
-        ICON(Vigoroth),
+        PALETA(Vigoroth),
+        ICONO(Vigoroth),
         FOLLOWER(Vigoroth, TRACKS_FOOT)
-        LEARNSETS(Vigoroth),
+        MOVIMIENTOS(Vigoroth),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SLAKING}),
     },
 
@@ -16230,10 +16284,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Slaking, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Slaking),
-        ICON(Slaking),
+        PALETA(Slaking),
+        ICONO(Slaking),
         FOLLOWER(Slaking, TRACKS_FOOT)
-        LEARNSETS(Slaking),
+        MOVIMIENTOS(Slaking),
     },
 
     [SPECIES_NINCADA] =
@@ -16278,10 +16332,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nincada, 64, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Nincada),
-        ICON(Nincada),
+        PALETA(Nincada),
+        ICONO(Nincada),
         FOLLOWER(Nincada, TRACKS_BUG)
-        LEARNSETS(Nincada),
+        MOVIMIENTOS(Nincada),
         .evolutions = EVOLUTION({EVO_LEVEL_NINJASK, 30, SPECIES_NINJASK},
                                 {EVO_LEVEL_SHEDINJA, 30, SPECIES_SHEDINJA}),
     },
@@ -16328,10 +16382,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ninjask, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Ninjask),
-        ICON(Ninjask),
+        PALETA(Ninjask),
+        ICONO(Ninjask),
         FOLLOWER(Ninjask, TRACKS_NONE)
-        LEARNSETS(Ninjask),
+        MOVIMIENTOS(Ninjask),
     },
 
     [SPECIES_SHEDINJA] =
@@ -16376,10 +16430,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Shedinja, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Shedinja),
-        ICON(Shedinja),
+        PALETA(Shedinja),
+        ICONO(Shedinja),
         FOLLOWER(Shedinja, TRACKS_NONE)
-        LEARNSETS(Shedinja),
+        MOVIMIENTOS(Shedinja),
     },
 
     [SPECIES_WHISMUR] =
@@ -16423,10 +16477,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Whismur, 56, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Whismur),
-        ICON(Whismur),
+        PALETA(Whismur),
+        ICONO(Whismur),
         FOLLOWER(Whismur, TRACKS_FOOT)
-        LEARNSETS(Whismur),
+        MOVIMIENTOS(Whismur),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LOUDRED}),
     },
 
@@ -16471,10 +16525,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Loudred, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Loudred),
-        ICON(Loudred),
+        PALETA(Loudred),
+        ICONO(Loudred),
         FOLLOWER(Loudred, TRACKS_FOOT)
-        LEARNSETS(Loudred),
+        MOVIMIENTOS(Loudred),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_EXPLOUD}),
     },
 
@@ -16527,10 +16581,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Exploud, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Exploud),
-        ICON(Exploud),
+        PALETA(Exploud),
+        ICONO(Exploud),
         FOLLOWER(Exploud, TRACKS_FOOT)
-        LEARNSETS(Exploud),
+        MOVIMIENTOS(Exploud),
     },
 
     [SPECIES_MAKUHITA] =
@@ -16575,10 +16629,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Makuhita, 56, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Makuhita),
-        ICON(Makuhita),
+        PALETA(Makuhita),
+        ICONO(Makuhita),
         FOLLOWER(Makuhita, TRACKS_FOOT)
-        LEARNSETS(Makuhita),
+        MOVIMIENTOS(Makuhita),
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HARIYAMA}),
     },
 
@@ -16624,10 +16678,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hariyama, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Hariyama),
-        ICON(Hariyama),
+        PALETA(Hariyama),
+        ICONO(Hariyama),
         FOLLOWER(Hariyama, TRACKS_FOOT)
-        LEARNSETS(Hariyama),
+        MOVIMIENTOS(Hariyama),
     },
 
     [SPECIES_NOSEPASS] =
@@ -16672,10 +16726,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Nosepass, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Nosepass),
-        ICON(Nosepass),
+        PALETA(Nosepass),
+        ICONO(Nosepass),
         FOLLOWER(Nosepass, TRACKS_FOOT)
-        LEARNSETS(Nosepass),
+        MOVIMIENTOS(Nosepass),
         .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_PROBOPASS},
                                 {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_PROBOPASS}),
     },
@@ -16690,7 +16744,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 150,
         .types = MON_TYPES(TYPE_ROCK, TYPE_STEEL),
         .catchRate = 60,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 184 : 198,
+        .expYield = 184,
         .evYield_Defense = 1,
         .evYield_SpDefense = 2,
         .itemRare = ITEM_MAGNET,
@@ -16724,39 +16778,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Probopass, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Probopass),
-        ICON(Probopass),
+        PALETA(Probopass),
+        ICONO(Probopass),
         FOLLOWER(Probopass, TRACKS_FOOT)
-        LEARNSETS(Probopass),
+        MOVIMIENTOS(Probopass),
     },
-
-#define SABLEYE_MISC_INFO                                           \
-        .types = MON_TYPES(TYPE_DARK, TYPE_GHOST),                  \
-        .catchRate = 45,                                            \
-        .evYield_Attack = 1,                                        \
-        .evYield_Defense = 1,                                       \
-        .genderRatio = PERCENT_FEMALE(50),                          \
-        .eggCycles = 25,                                            \
-        .friendship = 35,                                           \
-        .growthRate = GROWTH_MEDIUM_SLOW,                           \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),          \
-        .bodyColor = BODY_COLOR_PURPLE,                             \
-        .speciesName = _("Sableye"),                                \
-        .natDexNum = DEX_SABLEYE,                          \
-        .categoryName = _("Darkness"),                              \
-        .height = 5,                                                \
-        LEARNSETS(Sableye)
 
     [SPECIES_SABLEYE] =
     {
-        SABLEYE_MISC_INFO,
+        .types = MON_TYPES(TYPE_DARK, TYPE_GHOST),
+        .catchRate = 45,
+        .evYield_Attack = 1,
+        .evYield_Defense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = 35,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Sableye"),
+        .natDexNum = DEX_SABLEYE,
+        .categoryName = _("Darkness"),
+        .height = 5,
+        MOVIMIENTOS(Sableye),
         .baseHP        = 50,
         .baseAttack    = 75,
         .baseDefense   = 75,
         .baseSpeed     = 50,
         .baseSpAttack  = 65,
         .baseSpDefense = 65,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 133 : 98,
+        .expYield = 133,
         .itemRare = ITEM_WIDE_LENS,
         .abilities = {ABILITY_KEEN_EYE, ABILITY_STALL, ABILITY_PRANKSTER},
         .cryId = CRY_SABLEYE,
@@ -16777,43 +16828,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sableye, 48, 48),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Sableye),
-        ICON(Sableye),
+        PALETA(Sableye),
+        ICONO(Sableye),
         FOLLOWER(Sableye, TRACKS_FOOT)
     },
 
-#if P_UPDATED_TYPES >= GEN_6
-    #define MAWILE_TYPES { TYPE_STEEL, TYPE_FAIRY }
-#else
-    #define MAWILE_TYPES { TYPE_STEEL, TYPE_STEEL }
-#endif
-
-#define MAWILE_MISC_INFO                                             \
-        .types = MAWILE_TYPES,                                       \
-        .catchRate = 45,                                             \
-        .evYield_Attack = 1,                                         \
-        .evYield_Defense = 1,                                        \
-        .genderRatio = PERCENT_FEMALE(50),                           \
-        .eggCycles = 20,                                             \
-        .friendship = STANDARD_FRIENDSHIP,                           \
-        .growthRate = GROWTH_FAST,                                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),\
-        .bodyColor = BODY_COLOR_BLACK,                               \
-        .speciesName = _("Mawile"),                                  \
-        .natDexNum = DEX_MAWILE,                            \
-        .categoryName = _("Deceiver"),                               \
-        LEARNSETS(Mawile)
-
     [SPECIES_MAWILE] =
     {
-        MAWILE_MISC_INFO,
+        .types = {TYPE_STEEL, TYPE_FAIRY},
+        .catchRate = 45,
+        .evYield_Attack = 1,
+        .evYield_Defense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Mawile"),
+        .natDexNum = DEX_MAWILE,
+        .categoryName = _("Deceiver"),
+        MOVIMIENTOS(Mawile),
         .baseHP        = 50,
         .baseAttack    = 85,
         .baseDefense   = 85,
         .baseSpeed     = 50,
         .baseSpAttack  = 55,
         .baseSpDefense = 55,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 133 : 98,
+        .expYield = 133,
         .itemRare = ITEM_IRON_BALL,
         .abilities = {ABILITY_HYPER_CUTTER, ABILITY_INTIMIDATE, ABILITY_SHEER_FORCE},
         .cryId = CRY_MAWILE,
@@ -16835,8 +16877,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mawile, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Mawile),
-        ICON(Mawile),
+        PALETA(Mawile),
+        ICONO(Mawile),
         FOLLOWER(Mawile, TRACKS_FOOT)
     },
 
@@ -16850,7 +16892,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 40,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
         .catchRate = 180,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 66 : 96,
+        .expYield = 66,
         .evYield_Defense = 1,
         .itemRare = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
@@ -16882,10 +16924,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Aron, 48, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Aron),
-        ICON(Aron),
+        PALETA(Aron),
+        ICONO(Aron),
         FOLLOWER(Aron, TRACKS_FOOT)
-        LEARNSETS(Aron),
+        MOVIMIENTOS(Aron),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_LAIRON}),
     },
 
@@ -16899,7 +16941,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
         .catchRate = 90,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 151 : 152,
+        .expYield = 151,
         .evYield_Defense = 2,
         .itemRare = ITEM_HARD_STONE,
         .genderRatio = PERCENT_FEMALE(50),
@@ -16931,31 +16973,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lairon, 64, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Lairon),
-        ICON(Lairon),
+        PALETA(Lairon),
+        ICONO(Lairon),
         FOLLOWER(Lairon, TRACKS_FOOT)
-        LEARNSETS(Lairon),
+        MOVIMIENTOS(Lairon),
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_AGGRON}),
     },
 
-#define AGGRON_MISC_INFO                                        \
-        .catchRate = 45,                                        \
-        .evYield_Defense = 3,                                   \
-        .itemRare = ITEM_HARD_STONE,                            \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 35,                                        \
-        .friendship = 35,                                       \
-        .growthRate = GROWTH_SLOW,                              \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),         \
-        .bodyColor = BODY_COLOR_GRAY,                           \
-        .speciesName = _("Aggron"),                             \
-        .natDexNum = DEX_AGGRON,                       \
-        .categoryName = _("Iron Armor"),                        \
-        LEARNSETS(Aggron)
-
     [SPECIES_AGGRON] =
     {
-        AGGRON_MISC_INFO,
+        .catchRate = 45,
+        .evYield_Defense = 3,
+        .itemRare = ITEM_HARD_STONE,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 35,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MONSTER),
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Aggron"),
+        .natDexNum = DEX_AGGRON,
+        .categoryName = _("Iron Armor"),
+        MOVIMIENTOS(Aggron),
         .baseHP        = 70,
         .baseAttack    = 110,
         .baseDefense   = 180,
@@ -16963,13 +17002,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpAttack  = 60,
         .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_STEEL, TYPE_ROCK),
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 265,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 239,
-    #else
-        .expYield = 205,
-    #endif
         .abilities = {ABILITY_STURDY, ABILITY_ROCK_HEAD, ABILITY_HEAVY_METAL},
         .cryId = CRY_AGGRON,
         .height = 21,
@@ -16990,8 +17023,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Aggron, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Aggron),
-        ICON(Aggron),
+        PALETA(Aggron),
+        ICONO(Aggron),
         FOLLOWER(Aggron, TRACKS_FOOT)
     },
 
@@ -17005,7 +17038,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 55,
         .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
         .catchRate = 180,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 56 : 91,
+        .expYield = 56,
         .evYield_Speed = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -17030,45 +17063,42 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Meditite, 48, 48),
-        FRONT_PIC_FEMALE(Meditite, 48, 48),
+        FRONT_PIC_HEMBRA(Meditite, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Meditite,
         .frontAnimId = ANIM_BOUNCE_ROTATE_TO_SIDES,
         BACK_PIC(Meditite, 48, 48),
-        BACK_PIC_FEMALE(Meditite, 48, 48),
+        BACK_PIC_HEMBRA(Meditite, 48, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Meditite),
-        ICON(Meditite),
+        PALETA(Meditite),
+        ICONO(Meditite),
         FOLLOWER(Meditite, TRACKS_FOOT)
-        LEARNSETS(Meditite),
+        MOVIMIENTOS(Meditite),
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_MEDICHAM}),
     },
 
-#define MEDICHAM_MISC_INFO                                          \
-        .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),            \
-        .catchRate = 90,                                            \
-        .evYield_Speed = 2,                                         \
-        .genderRatio = PERCENT_FEMALE(50),                          \
-        .eggCycles = 20,                                            \
-        .friendship = STANDARD_FRIENDSHIP,                          \
-        .growthRate = GROWTH_MEDIUM_FAST,                           \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),          \
-        .bodyColor = BODY_COLOR_RED,                                \
-        .speciesName = _("Medicham"),                               \
-        .natDexNum = DEX_MEDICHAM,                         \
-        .categoryName = _("Meditate"),                              \
-        .height = 13,                                               \
-        .weight = 315,                                              \
-        .pokemonScale = 298,                                        \
-        .pokemonOffset = 5,                                         \
-        .trainerScale = 256,                                        \
-        .trainerOffset = 0,                                         \
-        LEARNSETS(Medicham)
-
     [SPECIES_MEDICHAM] =
     {
-        MEDICHAM_MISC_INFO,
+        .types = MON_TYPES(TYPE_FIGHTING, TYPE_PSYCHIC),
+        .catchRate = 90,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Medicham"),
+        .natDexNum = DEX_MEDICHAM,
+        .categoryName = _("Meditate"),
+        .height = 13,
+        .weight = 315,
+        .pokemonScale = 298,
+        .pokemonOffset = 5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Medicham),
         .baseHP        = 60,
         .baseAttack    = 60,
         .baseDefense   = 75,
@@ -17084,16 +17114,16 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "actions. It battles with elegant, dance-\n"
             "like movement."),
         FRONT_PIC(Medicham, 40, 64),
-        FRONT_PIC_FEMALE(Medicham, 40, 64),
+        FRONT_PIC_HEMBRA(Medicham, 40, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Medicham,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
         BACK_PIC(Medicham, 56, 64),
-        BACK_PIC_FEMALE(Medicham, 56, 64),
+        BACK_PIC_HEMBRA(Medicham, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Medicham),
-        ICON(Medicham),
+        PALETA(Medicham),
+        ICONO(Medicham),
         FOLLOWER(Medicham, TRACKS_FOOT)
     },
 
@@ -17138,31 +17168,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Electrike, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Electrike),
-        ICON(Electrike),
+        PALETA(Electrike),
+        ICONO(Electrike),
         FOLLOWER(Electrike, TRACKS_FOOT)
-        LEARNSETS(Electrike),
+        MOVIMIENTOS(Electrike),
         .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_MANECTRIC}),
     },
 
-#define MANECTRIC_MISC_INFO                                 \
-        .types = MON_TYPES(TYPE_ELECTRIC),                  \
-        .catchRate = 45,                                    \
-        .evYield_Speed = 2,                                 \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_SLOW,                          \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),       \
-        .bodyColor = BODY_COLOR_YELLOW,                     \
-        .speciesName = _("Manectric"),                      \
-        .natDexNum = DEX_MANECTRIC,                \
-        .categoryName = _("Discharge"),                     \
-        LEARNSETS(Manectric)
-
     [SPECIES_MANECTRIC] =
     {
-        MANECTRIC_MISC_INFO,
+        .types = MON_TYPES(TYPE_ELECTRIC),
+        .catchRate = 45,
+        .evYield_Speed = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .bodyColor = BODY_COLOR_YELLOW,
+        .speciesName = _("Manectric"),
+        .natDexNum = DEX_MANECTRIC,
+        .categoryName = _("Discharge"),
+        MOVIMIENTOS(Manectric),
         .baseHP        = 70,
         .baseAttack    = 75,
         .baseDefense   = 60,
@@ -17190,8 +17217,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Manectric, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Manectric),
-        ICON(Manectric),
+        PALETA(Manectric),
+        ICONO(Manectric),
         FOLLOWER(Manectric, TRACKS_FOOT)
     },
 
@@ -17238,10 +17265,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Budew, 40, 56),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Budew),
-        ICON(Budew),
+        PALETA(Budew),
+        ICONO(Budew),
         FOLLOWER(Budew, TRACKS_FOOT)
-        LEARNSETS(Budew),
+        MOVIMIENTOS(Budew),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_ROSELIA}),
     },
 
@@ -17255,8 +17282,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 80,
         .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
         .catchRate = 150,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 140 : 152,
-        .evYield_SpAttack = (P_UPDATED_EVS >= GEN_4) ? 2 : 1,
+        .expYield = 140,
+        .evYield_SpAttack = 2,
         .itemRare = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -17282,18 +17309,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Roselia, 56, 48),
-        FRONT_PIC_FEMALE(Roselia, 56, 48),
+        FRONT_PIC_HEMBRA(Roselia, 56, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Roselia,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
         BACK_PIC(Roselia, 64, 56),
-        BACK_PIC_FEMALE(Roselia, 64, 56),
+        BACK_PIC_HEMBRA(Roselia, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
-        PALETTES(Roselia),
-        ICON(Roselia),
+        PALETA(Roselia),
+        ICONO(Roselia),
         FOLLOWER(Roselia, TRACKS_FOOT)
-        LEARNSETS(Roselia),
+        MOVIMIENTOS(Roselia),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SHINY_STONE, SPECIES_ROSERADE}),
     },
 
@@ -17301,21 +17328,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
     {
         .baseHP        = 60,
         .baseAttack    = 70,
-        .baseDefense   = P_UPDATED_STATS >= GEN_6 ? 65 : 55,
+        .baseDefense   = 65,
         .baseSpeed     = 90,
         .baseSpAttack  = 125,
         .baseSpDefense = 105,
         .types = MON_TYPES(TYPE_GRASS, TYPE_POISON),
         .catchRate = 75,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 258,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_7
-        .expYield = 232,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 227,
-    #else
-        .expYield = 204,
-    #endif
         .evYield_SpAttack = 3,
         .itemRare = ITEM_POISON_BARB,
         .genderRatio = PERCENT_FEMALE(50),
@@ -17342,18 +17361,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Roserade, 48, 56),
-        FRONT_PIC_FEMALE(Roserade, 48, 56),
+        FRONT_PIC_HEMBRA(Roserade, 48, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Roserade,
         .frontAnimId = ANIM_H_VIBRATE,
         BACK_PIC(Roserade, 64, 56),
-        BACK_PIC_FEMALE(Roserade, 64, 56),
+        BACK_PIC_HEMBRA(Roserade, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Roserade),
-        ICON(Roserade),
+        PALETA(Roserade),
+        ICONO(Roserade),
         FOLLOWER(Roserade, TRACKS_FOOT)
-        LEARNSETS(Roserade),
+        MOVIMIENTOS(Roserade),
     },
 
 
@@ -17399,32 +17418,29 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Carvanha, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SPRING_REPEATED,
-        PALETTES(Carvanha),
-        ICON(Carvanha),
+        PALETA(Carvanha),
+        ICONO(Carvanha),
         FOLLOWER(Carvanha, TRACKS_NONE)
-        LEARNSETS(Carvanha),
+        MOVIMIENTOS(Carvanha),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SHARPEDO}),
     },
 
-#define SHARPEDO_MISC_INFO                                      \
-        .types = MON_TYPES(TYPE_WATER, TYPE_DARK),              \
-        .catchRate = 60,                                        \
-        .evYield_Attack = 2,                                    \
-        .itemRare = ITEM_DEEP_SEA_TOOTH,                        \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 20,                                        \
-        .friendship = 35,                                       \
-        .growthRate = GROWTH_SLOW,                              \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ),         \
-        .bodyColor = BODY_COLOR_BLUE,                           \
-        .speciesName = _("Sharpedo"),                           \
-        .natDexNum = DEX_SHARPEDO,                     \
-        .categoryName = _("Brutal"),                            \
-        LEARNSETS(Sharpedo)
-
     [SPECIES_SHARPEDO] =
     {
-        SHARPEDO_MISC_INFO,
+        .types = MON_TYPES(TYPE_WATER, TYPE_DARK),
+        .catchRate = 60,
+        .evYield_Attack = 2,
+        .itemRare = ITEM_DEEP_SEA_TOOTH,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_PEZ),
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Sharpedo"),
+        .natDexNum = DEX_SHARPEDO,
+        .categoryName = _("Brutal"),
+        MOVIMIENTOS(Sharpedo),
         .baseHP        = 70,
         .baseAttack    = 120,
         .baseDefense   = 40,
@@ -17452,8 +17468,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sharpedo, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Sharpedo),
-        ICON(Sharpedo),
+        PALETA(Sharpedo),
+        ICONO(Sharpedo),
         FOLLOWER(Sharpedo, TRACKS_NONE)
     },
 
@@ -17498,10 +17514,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wailmer, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Wailmer),
-        ICON(Wailmer),
+        PALETA(Wailmer),
+        ICONO(Wailmer),
         FOLLOWER(Wailmer, TRACKS_SPOT)
-        LEARNSETS(Wailmer),
+        MOVIMIENTOS(Wailmer),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_WAILORD}),
     },
 
@@ -17547,10 +17563,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Wailord, 64, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Wailord),
-        ICON(Wailord),
+        PALETA(Wailord),
+        ICONO(Wailord),
         FOLLOWER(Wailord, TRACKS_NONE)
-        LEARNSETS(Wailord),
+        MOVIMIENTOS(Wailord),
     },
 
     [SPECIES_NUMEL] =
@@ -17589,40 +17605,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Numel, 40, 48),
-        FRONT_PIC_FEMALE(Numel, 40, 48),
+        FRONT_PIC_HEMBRA(Numel, 40, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Numel,
         .frontAnimId = ANIM_V_SLIDE,
         BACK_PIC(Numel, 56, 56),
-        BACK_PIC_FEMALE(Numel, 56, 56),
+        BACK_PIC_HEMBRA(Numel, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Numel),
-        ICON(Numel),
+        PALETA(Numel),
+        ICONO(Numel),
         FOLLOWER(Numel, TRACKS_FOOT)
-        LEARNSETS(Numel),
+        MOVIMIENTOS(Numel),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CAMERUPT}),
     },
 
-#define CAMERUPT_MISC_INFO                                  \
-        .types = MON_TYPES(TYPE_FIRE, TYPE_GROUND),         \
-        .catchRate = 150,                                   \
-        .evYield_Attack = 1,                                \
-        .evYield_SpAttack = 1,                              \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),       \
-        .bodyColor = BODY_COLOR_RED,                        \
-        .speciesName = _("Camerupt"),                       \
-        .natDexNum = DEX_CAMERUPT,                 \
-        .categoryName = _("Eruption"),                      \
-        LEARNSETS(Camerupt)
-
     [SPECIES_CAMERUPT] =
     {
-        CAMERUPT_MISC_INFO,
+        .types = MON_TYPES(TYPE_FIRE, TYPE_GROUND),
+        .catchRate = 150,
+        .evYield_Attack = 1,
+        .evYield_SpAttack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Camerupt"),
+        .natDexNum = DEX_CAMERUPT,
+        .categoryName = _("Eruption"),
+        MOVIMIENTOS(Camerupt),
         .baseHP        = 70,
         .baseAttack    = 100,
         .baseDefense   = 70,
@@ -17644,17 +17657,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 345,
         .trainerOffset = 6,
         FRONT_PIC(Camerupt, 64, 56),
-        FRONT_PIC_FEMALE(Camerupt, 64, 56),
+        FRONT_PIC_HEMBRA(Camerupt, 64, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Camerupt,
         .frontAnimId = ANIM_V_SHAKE,
         BACK_PIC(Camerupt, 64, 40),
-        BACK_PIC_FEMALE(Camerupt, 64, 40),
+        BACK_PIC_HEMBRA(Camerupt, 64, 40),
         .backPicYOffset = 13,
         .itemRare = ITEM_CHARCOAL,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Camerupt),
-        ICON(Camerupt),
+        PALETA(Camerupt),
+        ICONO(Camerupt),
         FOLLOWER(Camerupt, TRACKS_FOOT)
     },
 
@@ -17668,7 +17681,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 70,
         .types = MON_TYPES(TYPE_FIRE),
         .catchRate = 90,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 165 : 161,
+        .expYield = 165,
         .evYield_Defense = 2,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -17700,10 +17713,114 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Torkoal, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Torkoal),
-        ICON(Torkoal),
+        PALETA(Torkoal),
+        ICONO(Torkoal),
         FOLLOWER(Torkoal, TRACKS_FOOT)
-        LEARNSETS(Torkoal),
+        MOVIMIENTOS(Torkoal),
+    },
+
+    [SPECIES_SPOINK] =
+    {
+        .baseHP        = 60,
+        .baseAttack    = 25,
+        .baseDefense   = 35,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 70,
+        .baseSpDefense = 80,
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_POISON),
+        .catchRate = 255,
+        .expYield = 66,
+        .evYield_SpDefense = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = {ABILITY_THICK_FAT, ABILITY_OWN_TEMPO, ABILITY_GLUTTONY},
+        .bodyColor = BODY_COLOR_BLACK,
+        .speciesName = _("Spoink"),
+        .cryId = CRY_SPOINK,
+        .natDexNum = DEX_SPOINK,
+        .categoryName = _("Bounce"),
+        .height = 7,
+        .weight = 306,
+        .description = COMPOUND_STRING(
+            "A Pokémon that manipulates psychic power\n"
+            "at will. It doesn't stop bouncing even when\n"
+            "it is asleep. It loves eating mushrooms\n"
+            "that grow underground."),
+        .pokemonScale = 423,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Spoink,
+        .frontPicSize = MON_COORDS_SIZE(32, 48),
+        .frontPicYOffset = 9,
+        .frontAnimFrames = sAnims_Spoink,
+        .frontAnimId = ANIM_H_JUMPS_V_STRETCH_TWICE,
+        .backPic = gMonBackPic_Spoink,
+        .backPicSize = MON_COORDS_SIZE(40, 64),
+        .backPicYOffset = 4,
+        .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
+        PALETA(Spoink),
+        ICONO(Spoink),
+        SOMBRA(-1, 5, SHADOW_SIZE_S)
+        FOLLOWER(Spoink, TRACKS_SPOT)
+        MOVIMIENTOS(Spoink),
+        MOVIMIENTOS_HUEVO(Spoink),
+        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GRUMPIG}),
+    },
+
+    [SPECIES_GRUMPIG] =
+    {
+        .baseHP        = 80,
+        .baseAttack    = 45,
+        .baseDefense   = 65,
+        .baseSpeed     = 80,
+        .baseSpAttack  = 90,
+        .baseSpDefense = 110,
+        .types = MON_TYPES(TYPE_PSYCHIC, TYPE_POISON),
+        .catchRate = 60,
+        .expYield = 165,
+        .evYield_SpDefense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .abilities = {ABILITY_THICK_FAT, ABILITY_OWN_TEMPO, ABILITY_GLUTTONY},
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Grumpig"),
+        .cryId = CRY_GRUMPIG,
+        .natDexNum = DEX_GRUMPIG,
+        .categoryName = _("Manipulate"),
+        .height = 9,
+        .weight = 715,
+        .description = COMPOUND_STRING(
+            "It stores power in the black pearls on its\n"
+            "forehead. When it uses psychic power, it\n"
+            "performs an odd dance step. Its style of\n"
+            "dancing became hugely popular overseas."),
+        .pokemonScale = 358,
+        .pokemonOffset = 10,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPic = gMonFrontPic_Grumpig,
+        .frontPicSize = MON_COORDS_SIZE(56, 64),
+        .frontPicYOffset = 2,
+        .frontAnimFrames = sAnims_Grumpig,
+        .frontAnimId = ANIM_H_JUMPS_V_STRETCH,
+        .frontAnimDelay = 15,
+        .backPic = gMonBackPic_Grumpig,
+        .backPicSize = MON_COORDS_SIZE(64, 64),
+        .backPicYOffset = 2,
+        .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
+        PALETA(Grumpig),
+        ICONO(Grumpig),
+        SOMBRA(-1, 8, SHADOW_SIZE_M)
+        FOLLOWER(Grumpig, TRACKS_FOOT)
+        MOVIMIENTOS(Grumpig),
+        MOVIMIENTOS_HUEVO(Spoink),
     },
 
     [SPECIES_TRAPINCH] =
@@ -17716,18 +17833,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 45,
         .types = MON_TYPES(TYPE_GROUND),
         .catchRate = 255,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 58 : 73,
+        .expYield = 58,
         .evYield_Attack = 1,
         .itemRare = ITEM_SOFT_SAND,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        #if P_UPDATED_EGG_GROUPS >= GEN_8
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_DRAGON),
-        #else
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        #endif
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_DRAGON),
         .abilities = {ABILITY_HYPER_CUTTER, ABILITY_ARENA_TRAP, ABILITY_SHEER_FORCE},
         .bodyColor = BODY_COLOR_BROWN,
         .speciesName = _("Trapinch"),
@@ -17752,10 +17865,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Trapinch, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Trapinch),
-        ICON(Trapinch),
+        PALETA(Trapinch),
+        ICONO(Trapinch),
         FOLLOWER(Trapinch, TRACKS_FOOT)
-        LEARNSETS(Trapinch),
+        MOVIMIENTOS(Trapinch),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VIBRAVA}),
     },
 
@@ -17769,18 +17882,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 50,
         .types = MON_TYPES(TYPE_GROUND, TYPE_DRAGON),
         .catchRate = 120,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 119 : 126,
+        .expYield = 119,
         .evYield_Attack = 1,
         .evYield_Speed = 1,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,
         .growthRate = GROWTH_MEDIUM_SLOW,
-        #if P_UPDATED_EGG_GROUPS >= GEN_8
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_DRAGON),
-        #else
-            .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
-        #endif
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG, EGG_GROUP_DRAGON),
         .abilities = {ABILITY_LEVITATE, ABILITY_LEVITATE, ABILITY_LEVITATE},
         .bodyColor = BODY_COLOR_GREEN,
         .speciesName = _("Vibrava"),
@@ -17805,10 +17914,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vibrava, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Vibrava),
-        ICON(Vibrava),
+        PALETA(Vibrava),
+        ICONO(Vibrava),
         FOLLOWER(Vibrava, TRACKS_FOOT)
-        LEARNSETS(Vibrava),
+        MOVIMIENTOS(Vibrava),
         .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_FLYGON}),
     },
 
@@ -17865,10 +17974,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Flygon, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Flygon),
-        ICON(Flygon),
+        PALETA(Flygon),
+        ICONO(Flygon),
         FOLLOWER(Flygon, TRACKS_NONE)
-        LEARNSETS(Flygon),
+        MOVIMIENTOS(Flygon),
     },
 
     [SPECIES_CACNEA] =
@@ -17913,10 +18022,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cacnea, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Cacnea),
-        ICON(Cacnea),
+        PALETA(Cacnea),
+        ICONO(Cacnea),
         FOLLOWER(Cacnea, TRACKS_FOOT)
-        LEARNSETS(Cacnea),
+        MOVIMIENTOS(Cacnea),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_CACTURNE}),
     },
 
@@ -17957,17 +18066,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Cacturne, 64, 64),
-        FRONT_PIC_FEMALE(Cacturne, 64, 64),
+        FRONT_PIC_HEMBRA(Cacturne, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Cacturne,
         .frontAnimId = ANIM_V_SLIDE,
         BACK_PIC(Cacturne, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Cacturne),
-        ICON(Cacturne),
+        PALETA(Cacturne),
+        ICONO(Cacturne),
         FOLLOWER(Cacturne, TRACKS_FOOT)
-        LEARNSETS(Cacturne),
+        MOVIMIENTOS(Cacturne),
     },
 
     [SPECIES_SWABLU] =
@@ -18011,30 +18120,27 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Swablu, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Swablu),
-        ICON(Swablu),
+        PALETA(Swablu),
+        ICONO(Swablu),
         FOLLOWER(Swablu, TRACKS_NONE)
-        LEARNSETS(Swablu),
+        MOVIMIENTOS(Swablu),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_ALTARIA}),
     },
 
-#define ALTARIA_MISC_INFO                                              \
-        .catchRate = 45,                                               \
-        .evYield_SpDefense = 2,                                        \
-        .genderRatio = PERCENT_FEMALE(50),                             \
-        .eggCycles = 20,                                               \
-        .friendship = STANDARD_FRIENDSHIP,                             \
-        .growthRate = GROWTH_ERRATIC,                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_DRAGON),\
-        .bodyColor = BODY_COLOR_BLUE,                                  \
-        .speciesName = _("Altaria"),                                   \
-        .natDexNum = DEX_ALTARIA,                             \
-        .categoryName = _("Humming"),                                  \
-        LEARNSETS(Altaria)
-
     [SPECIES_ALTARIA] =
     {
-        ALTARIA_MISC_INFO,
+        .catchRate = 45,
+        .evYield_SpDefense = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_ERRATIC,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING, EGG_GROUP_DRAGON),
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Altaria"),
+        .natDexNum = DEX_ALTARIA,
+        .categoryName = _("Humming"),
+        MOVIMIENTOS(Altaria),
         .baseHP        = 75,
         .baseAttack    = 70,
         .baseDefense   = 90,
@@ -18063,8 +18169,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Altaria, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Altaria),
-        ICON(Altaria),
+        PALETA(Altaria),
+        ICONO(Altaria),
         FOLLOWER(Altaria, TRACKS_NONE)
     },
 
@@ -18117,10 +18223,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lunatone, 48, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Lunatone),
-        ICON(Lunatone),
+        PALETA(Lunatone),
+        ICONO(Lunatone),
         FOLLOWER(Lunatone, TRACKS_NONE)
-        LEARNSETS(Lunatone),
+        MOVIMIENTOS(Lunatone),
     },
 
     [SPECIES_SOLROCK] =
@@ -18172,10 +18278,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Solrock, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Solrock),
-        ICON(Solrock),
+        PALETA(Solrock),
+        ICONO(Solrock),
         FOLLOWER(Solrock, TRACKS_NONE)
-        LEARNSETS(Solrock),
+        MOVIMIENTOS(Solrock),
     },
 
     [SPECIES_BALTOY] =
@@ -18221,10 +18327,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Baltoy, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Baltoy),
-        ICON(Baltoy),
+        PALETA(Baltoy),
+        ICONO(Baltoy),
         FOLLOWER(Baltoy, TRACKS_SPOT)
-        LEARNSETS(Baltoy),
+        MOVIMIENTOS(Baltoy),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CLAYDOL}),
     },
 
@@ -18271,10 +18377,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Claydol, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Claydol),
-        ICON(Claydol),
+        PALETA(Claydol),
+        ICONO(Claydol),
         FOLLOWER(Claydol, TRACKS_NONE)
-        LEARNSETS(Claydol),
+        MOVIMIENTOS(Claydol),
     },
 
 
@@ -18326,10 +18432,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lileep, 48, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(Lileep),
-        ICON(Lileep),
+        PALETA(Lileep),
+        ICONO(Lileep),
         FOLLOWER(Lileep, TRACKS_SLITHER)
-        LEARNSETS(Lileep),
+        MOVIMIENTOS(Lileep),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CRADILY}),
     },
 
@@ -18381,10 +18487,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cradily, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Cradily),
-        ICON(Cradily),
+        PALETA(Cradily),
+        ICONO(Cradily),
         FOLLOWER(Cradily, TRACKS_SLITHER)
-        LEARNSETS(Cradily),
+        MOVIMIENTOS(Cradily),
     },
 
 
@@ -18436,10 +18542,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Anorith, 56, 32),
         .backPicYOffset = 19,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Anorith),
-        ICON(Anorith),
+        PALETA(Anorith),
+        ICONO(Anorith),
         FOLLOWER(Anorith, TRACKS_BUG)
-        LEARNSETS(Anorith),
+        MOVIMIENTOS(Anorith),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ARMALDO}),
     },
 
@@ -18490,10 +18596,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Armaldo, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Armaldo),
-        ICON(Armaldo),
+        PALETA(Armaldo),
+        ICONO(Armaldo),
         FOLLOWER(Armaldo, TRACKS_FOOT)
-        LEARNSETS(Armaldo),
+        MOVIMIENTOS(Armaldo),
     },
 
     [SPECIES_FEEBAS] =
@@ -18537,10 +18643,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Feebas, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SPRING,
-        PALETTES(Feebas),
-        ICON(Feebas),
+        PALETA(Feebas),
+        ICONO(Feebas),
         FOLLOWER(Feebas, TRACKS_SPOT)
-        LEARNSETS(Feebas),
+        MOVIMIENTOS(Feebas),
         .evolutions = EVOLUTION({EVO_BEAUTY, 170, SPECIES_MILOTIC},
                                 {EVO_TRADE_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC},
                                 {EVO_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC}),
@@ -18581,57 +18687,53 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 360,
         .trainerOffset = 7,
         FRONT_PIC(Milotic, 64, 64),
-        FRONT_PIC_FEMALE(Milotic, 64, 64),
+        FRONT_PIC_HEMBRA(Milotic, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Milotic,
         .frontAnimId = ANIM_CIRCULAR_STRETCH_TWICE,
         .frontAnimDelay = 45,
         BACK_PIC(Milotic, 64, 64),
-        BACK_PIC_FEMALE(Milotic, 64, 64),
+        BACK_PIC_HEMBRA(Milotic, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Milotic),
-        ICON(Milotic),
+        PALETA(Milotic),
+        ICONO(Milotic),
         FOLLOWER(Milotic, TRACKS_SLITHER)
-        LEARNSETS(Milotic),
+        MOVIMIENTOS(Milotic),
     },
-
-
-#define CASTFORM_MISC_INFO                                               \
-        .baseHP        = 70,                                             \
-        .baseAttack    = 40,                                             \
-        .baseDefense   = 70,                                             \
-        .baseSpeed     = 100,                                             \
-        .baseSpAttack  = 100,                                             \
-        .baseSpDefense = 100,                                             \
-        .catchRate = 45,                                                 \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 147 : 145,         \
-        .evYield_HP = 1,                                                 \
-        .itemCommon = ITEM_MYSTIC_WATER,                                 \
-        .itemRare = ITEM_MYSTIC_WATER,                                   \
-        .genderRatio = PERCENT_FEMALE(50),                               \
-        .eggCycles = 25,                                                 \
-        .friendship = STANDARD_FRIENDSHIP,                               \
-        .growthRate = GROWTH_MEDIUM_FAST,                                \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS),\
-        .abilities = {ABILITY_FORECAST, ABILITY_NONE},                 \
-        .speciesName = _("Castform"),                                    \
-        .cryId = CRY_CASTFORM,                                           \
-        .natDexNum = DEX_CASTFORM,                              \
-        .categoryName = _("Weather"),                                    \
-        .height = 3,                                                     \
-        .weight = 8,                                                     \
-        .pokemonScale = 435,                                             \
-        .pokemonOffset = -5,                                             \
-        .trainerScale = 256,                                             \
-        .trainerOffset = 0,                                              \
-        LEARNSETS(Castform),                                             \
-        .formSpeciesIdTable = sCastformFormSpeciesIdTable,               \
-        .formChangeTable = sCastformFormChangeTable
 
     [SPECIES_CASTFORM_NORMAL] =
     {
-        CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 40,
+        .baseDefense   = 70,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
+        .catchRate = 45,
+        .expYield = 147 ,
+        .evYield_HP = 1,
+        .itemCommon = ITEM_MYSTIC_WATER,
+        .itemRare = ITEM_MYSTIC_WATER,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_FORECAST, ABILITY_NONE},
+        .speciesName = _("Castform"),
+        .cryId = CRY_CASTFORM,
+        .natDexNum = DEX_CASTFORM,
+        .categoryName = _("Weather"),
+        .height = 3,
+        .weight = 8,
+        .pokemonScale = 435,
+        .pokemonOffset = -5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Castform),
+        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
+        .formChangeTable = sCastformFormChangeTable,
         .types = MON_TYPES(TYPE_NORMAL),
         .bodyColor = BODY_COLOR_GRAY,
         .description = COMPOUND_STRING(
@@ -18647,14 +18749,43 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CastformNormal, 32, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(CastformNormal),
-        ICON(CastformNormal),
+        PALETA(CastformNormal),
+        ICONO(CastformNormal),
         FOLLOWER(CastformNormal, TRACKS_NONE)
     },
 
     [SPECIES_CASTFORM_SUNNY] =
     {
-        CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 40,
+        .baseDefense   = 70,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
+        .catchRate = 45,
+        .expYield = 147 ,
+        .evYield_HP = 1,
+        .itemCommon = ITEM_MYSTIC_WATER,
+        .itemRare = ITEM_MYSTIC_WATER,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_FORECAST, ABILITY_NONE},
+        .speciesName = _("Castform"),
+        .cryId = CRY_CASTFORM,
+        .natDexNum = DEX_CASTFORM,
+        .categoryName = _("Weather"),
+        .height = 3,
+        .weight = 8,
+        .pokemonScale = 435,
+        .pokemonOffset = -5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Castform),
+        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
+        .formChangeTable = sCastformFormChangeTable,
         .types = MON_TYPES(TYPE_FIRE),
         .bodyColor = BODY_COLOR_RED,
         .description = COMPOUND_STRING(
@@ -18670,14 +18801,43 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CastformSunny, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(CastformSunny),
-        ICON(CastformSunny),
+        PALETA(CastformSunny),
+        ICONO(CastformSunny),
         FOLLOWER(CastformSunny, TRACKS_NONE)
     },
 
     [SPECIES_CASTFORM_RAINY] =
     {
-        CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 40,
+        .baseDefense   = 70,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
+        .catchRate = 45,
+        .expYield = 147 ,
+        .evYield_HP = 1,
+        .itemCommon = ITEM_MYSTIC_WATER,
+        .itemRare = ITEM_MYSTIC_WATER,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_FORECAST, ABILITY_NONE},
+        .speciesName = _("Castform"),
+        .cryId = CRY_CASTFORM,
+        .natDexNum = DEX_CASTFORM,
+        .categoryName = _("Weather"),
+        .height = 3,
+        .weight = 8,
+        .pokemonScale = 435,
+        .pokemonOffset = -5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Castform),
+        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
+        .formChangeTable = sCastformFormChangeTable,
         .types = MON_TYPES(TYPE_WATER),
         .bodyColor = BODY_COLOR_BLUE,
         .description = COMPOUND_STRING(
@@ -18693,14 +18853,43 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CastformRainy, 40, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(CastformRainy),
-        ICON(CastformRainy),
+        PALETA(CastformRainy),
+        ICONO(CastformRainy),
         FOLLOWER(CastformRainy, TRACKS_NONE)
     },
 
     [SPECIES_CASTFORM_SNOWY] =
     {
-        CASTFORM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 40,
+        .baseDefense   = 70,
+        .baseSpeed     = 100,
+        .baseSpAttack  = 100,
+        .baseSpDefense = 100,
+        .catchRate = 45,
+        .expYield = 147 ,
+        .evYield_HP = 1,
+        .itemCommon = ITEM_MYSTIC_WATER,
+        .itemRare = ITEM_MYSTIC_WATER,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_FORECAST, ABILITY_NONE},
+        .speciesName = _("Castform"),
+        .cryId = CRY_CASTFORM,
+        .natDexNum = DEX_CASTFORM,
+        .categoryName = _("Weather"),
+        .height = 3,
+        .weight = 8,
+        .pokemonScale = 435,
+        .pokemonOffset = -5,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Castform),
+        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
+        .formChangeTable = sCastformFormChangeTable,
         .types = MON_TYPES(TYPE_ICE),
         .bodyColor = BODY_COLOR_WHITE,
         .description = COMPOUND_STRING(
@@ -18716,8 +18905,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CastformSnowy, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(CastformSnowy),
-        ICON(CastformSnowy),
+        PALETA(CastformSnowy),
+        ICONO(CastformSnowy),
         FOLLOWER(CastformSnowy, TRACKS_NONE)
     },
 
@@ -18763,10 +18952,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kecleon, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Kecleon),
-        ICON(Kecleon),
+        PALETA(Kecleon),
+        ICONO(Kecleon),
         FOLLOWER(Kecleon, TRACKS_FOOT)
-        LEARNSETS(Kecleon),
+        MOVIMIENTOS(Kecleon),
     },
 
 
@@ -18814,10 +19003,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Duskull, 56, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Duskull),
-        ICON(Duskull),
+        PALETA(Duskull),
+        ICONO(Duskull),
         FOLLOWER(Duskull, TRACKS_NONE)
-        LEARNSETS(Duskull),
+        MOVIMIENTOS(Duskull),
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_DUSCLOPS}),
     },
 
@@ -18865,10 +19054,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dusclops, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Dusclops),
-        ICON(Dusclops),
+        PALETA(Dusclops),
+        ICONO(Dusclops),
         FOLLOWER(Dusclops, TRACKS_FOOT)
-        LEARNSETS(Dusclops),
+        MOVIMIENTOS(Dusclops),
         .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR},
                                 {EVO_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR}),
     },
@@ -18923,10 +19112,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dusknoir, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Dusknoir),
-        ICON(Dusknoir),
+        PALETA(Dusknoir),
+        ICONO(Dusknoir),
         FOLLOWER(Dusknoir, TRACKS_FOOT)
-        LEARNSETS(Dusknoir),
+        MOVIMIENTOS(Dusknoir),
     },
 
     [SPECIES_TROPIUS] =
@@ -18970,10 +19159,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tropius, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Tropius),
-        ICON(Tropius),
+        PALETA(Tropius),
+        ICONO(Tropius),
         FOLLOWER(Tropius, TRACKS_FOOT)
-        LEARNSETS(Tropius),
+        MOVIMIENTOS(Tropius),
     },
 
 
@@ -19019,10 +19208,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chingling, 48, 48),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Chingling),
-        ICON(Chingling),
+        PALETA(Chingling),
+        ICONO(Chingling),
         FOLLOWER(Chingling, TRACKS_FOOT)
-        LEARNSETS(Chingling),
+        MOVIMIENTOS(Chingling),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_NIGHT, 0, SPECIES_CHIMECHO}),
     },
 
@@ -19082,36 +19271,33 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chimecho, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Chimecho),
-        ICON(Chimecho),
+        PALETA(Chimecho),
+        ICONO(Chimecho),
         FOLLOWER(Chimecho, TRACKS_NONE)
-        LEARNSETS(Chimecho),
+        MOVIMIENTOS(Chimecho),
     },
-
-#define ABSOL_MISC_INFO                                     \
-        .types = MON_TYPES(TYPE_DARK, TYPE_FAIRY),          \
-        .catchRate = 30,                                    \
-        .evYield_Attack = 2,                                \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 25,                                    \
-        .friendship = 35,                                   \
-        .growthRate = GROWTH_MEDIUM_SLOW,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),       \
-        .bodyColor = BODY_COLOR_WHITE,                      \
-        .noFlip = TRUE,                                     \
-        .speciesName = _("Absol"),                          \
-        .natDexNum = DEX_ABSOL,                    \
-        .categoryName = _("Disaster"),                      \
-        .height = 12,                                       \
-        .pokemonScale = 301,                                \
-        .pokemonOffset = 3,                                 \
-        .trainerScale = 256,                                \
-        .trainerOffset = 0,                                 \
-        LEARNSETS(Absol)
 
     [SPECIES_ABSOL] =
     {
-        ABSOL_MISC_INFO,
+        .types = MON_TYPES(TYPE_DARK, TYPE_FAIRY),
+        .catchRate = 30,
+        .evYield_Attack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = 35,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .bodyColor = BODY_COLOR_WHITE,
+        .noFlip = TRUE,
+        .speciesName = _("Absol"),
+        .natDexNum = DEX_ABSOL,
+        .categoryName = _("Disaster"),
+        .height = 12,
+        .pokemonScale = 301,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Absol),
         .baseHP        = 65,
         .baseAttack    = 130,
         .baseDefense   = 60,
@@ -19135,8 +19321,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Absol, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Absol),
-        ICON(Absol),
+        PALETA(Absol),
+        ICONO(Absol),
         FOLLOWER(Absol, TRACKS_FOOT)
     },
 
@@ -19182,31 +19368,28 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Snorunt, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Snorunt),
-        ICON(Snorunt),
+        PALETA(Snorunt),
+        ICONO(Snorunt),
         FOLLOWER(Snorunt, TRACKS_FOOT)
-        LEARNSETS(Snorunt),
+        MOVIMIENTOS(Snorunt),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GLALIE},
                                 {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
     },
 
-#define GLALIE_MISC_INFO                                    \
-        .types = MON_TYPES(TYPE_ICE, TYPE_ROCK),            \
-        .catchRate = 75,                                    \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 20,                                    \
-        .friendship = STANDARD_FRIENDSHIP,                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),\
-        .bodyColor = BODY_COLOR_GRAY,                       \
-        .speciesName = _("Glalie"),                         \
-        .natDexNum = DEX_GLALIE,                   \
-        .categoryName = _("Face"),                          \
-        LEARNSETS(Glalie)
-
     [SPECIES_GLALIE] =
     {
-        GLALIE_MISC_INFO,
+        .types = MON_TYPES(TYPE_ICE, TYPE_ROCK),
+        .catchRate = 75,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_MINERAL),
+        .bodyColor = BODY_COLOR_GRAY,
+        .speciesName = _("Glalie"),
+        .natDexNum = DEX_GLALIE,
+        .categoryName = _("Face"),
+        MOVIMIENTOS(Glalie),
         .brilla = TRUE,
         .baseHP        = 60,
         .baseAttack    = 110,
@@ -19238,8 +19421,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Glalie, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Glalie),
-        ICON(Glalie),
+        PALETA(Glalie),
+        ICONO(Glalie),
         FOLLOWER(Glalie, TRACKS_FOOT)
     },
 
@@ -19286,10 +19469,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Froslass, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Froslass),
-        ICON(Froslass),
+        PALETA(Froslass),
+        ICONO(Froslass),
         FOLLOWER(Froslass, TRACKS_FOOT)
-        LEARNSETS(Froslass),
+        MOVIMIENTOS(Froslass),
     },
 
     [SPECIES_SPHEAL] =
@@ -19334,10 +19517,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Spheal, 48, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Spheal),
-        ICON(Spheal),
+        PALETA(Spheal),
+        ICONO(Spheal),
         FOLLOWER(Spheal, TRACKS_FOOT)
-        LEARNSETS(Spheal),
+        MOVIMIENTOS(Spheal),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEALEO}),
     },
 
@@ -19382,10 +19565,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sealeo, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Sealeo),
-        ICON(Sealeo),
+        PALETA(Sealeo),
+        ICONO(Sealeo),
         FOLLOWER(Sealeo, TRACKS_FOOT)
-        LEARNSETS(Sealeo),
+        MOVIMIENTOS(Sealeo),
         .evolutions = EVOLUTION({EVO_LEVEL, 44, SPECIES_WALREIN}),
     },
 
@@ -19436,10 +19619,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Walrein, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Walrein),
-        ICON(Walrein),
+        PALETA(Walrein),
+        ICONO(Walrein),
         FOLLOWER(Walrein, TRACKS_FOOT)
-        LEARNSETS(Walrein),
+        MOVIMIENTOS(Walrein),
     },
 
     [SPECIES_CLAMPERL] =
@@ -19484,10 +19667,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Clamperl, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Clamperl),
-        ICON(Clamperl),
+        PALETA(Clamperl),
+        ICONO(Clamperl),
         FOLLOWER(Clamperl, TRACKS_SPOT)
-        LEARNSETS(Clamperl),
+        MOVIMIENTOS(Clamperl),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
                                 {EVO_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}),
     },
@@ -19535,10 +19718,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Huntail, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Huntail),
-        ICON(Huntail),
+        PALETA(Huntail),
+        ICONO(Huntail),
         FOLLOWER(Huntail, TRACKS_SLITHER)
-        LEARNSETS(Huntail),
+        MOVIMIENTOS(Huntail),
     },
 
     [SPECIES_GOREBYSS] =
@@ -19583,10 +19766,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gorebyss, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Gorebyss),
-        ICON(Gorebyss),
+        PALETA(Gorebyss),
+        ICONO(Gorebyss),
         FOLLOWER(Gorebyss, TRACKS_SLITHER)
-        LEARNSETS(Gorebyss),
+        MOVIMIENTOS(Gorebyss),
     },
 
     [SPECIES_RELICANTH] =
@@ -19626,18 +19809,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Relicanth, 56, 56),
-        FRONT_PIC_FEMALE(Relicanth, 56, 56),
+        FRONT_PIC_HEMBRA(Relicanth, 56, 56),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Relicanth,
         .frontAnimId = ANIM_TIP_MOVE_FORWARD,
         BACK_PIC(Relicanth, 64, 40),
-        BACK_PIC_FEMALE(Relicanth, 64, 40),
+        BACK_PIC_HEMBRA(Relicanth, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Relicanth),
-        ICON(Relicanth),
+        PALETA(Relicanth),
+        ICONO(Relicanth),
         FOLLOWER(Relicanth, TRACKS_NONE)
-        LEARNSETS(Relicanth),
+        MOVIMIENTOS(Relicanth),
     },
 
     [SPECIES_LUVDISC] =
@@ -19682,10 +19865,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Luvdisc, 40, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SPRING_REPEATED,
-        PALETTES(Luvdisc),
-        ICON(Luvdisc),
+        PALETA(Luvdisc),
+        ICONO(Luvdisc),
         FOLLOWER(Luvdisc, TRACKS_SPOT)
-        LEARNSETS(Luvdisc),
+        MOVIMIENTOS(Luvdisc),
     },
 
     [SPECIES_BAGON] =
@@ -19730,10 +19913,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bagon, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Bagon),
-        ICON(Bagon),
+        PALETA(Bagon),
+        ICONO(Bagon),
         FOLLOWER(Bagon, TRACKS_FOOT)
-        LEARNSETS(Bagon),
+        MOVIMIENTOS(Bagon),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SHELGON}),
     },
 
@@ -19779,45 +19962,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Shelgon, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Shelgon),
-        ICON(Shelgon),
+        PALETA(Shelgon),
+        ICONO(Shelgon),
         FOLLOWER(Shelgon, TRACKS_FOOT)
-        LEARNSETS(Shelgon),
+        MOVIMIENTOS(Shelgon),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_SALAMENCE}),
     },
 
-#define SALAMENCE_MISC_INFO                                 \
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),       \
-        .catchRate = 45,                                    \
-        .evYield_Attack = 3,                                \
-        .itemRare = ITEM_DRAGON_FANG,                       \
-        .genderRatio = PERCENT_FEMALE(50),                  \
-        .eggCycles = 40,                                    \
-        .friendship = 35,                                   \
-        .growthRate = GROWTH_SLOW,                          \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_DRAGON),      \
-        .bodyColor = BODY_COLOR_BLUE,                       \
-        .speciesName = _("Salamence"),                      \
-        .natDexNum = DEX_SALAMENCE,                \
-        .categoryName = _("Dragon"),                        \
-        LEARNSETS(Salamence)
-
     [SPECIES_SALAMENCE] =
     {
-        SALAMENCE_MISC_INFO,
+        .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),
+        .catchRate = 45,
+        .evYield_Attack = 3,
+        .itemRare = ITEM_DRAGON_FANG,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 40,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_DRAGON),
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Salamence"),
+        .natDexNum = DEX_SALAMENCE,
+        .categoryName = _("Dragon"),
+        MOVIMIENTOS(Salamence),
         .baseHP        = 95,
         .baseAttack    = 135,
         .baseDefense   = 80,
         .baseSpeed     = 100,
         .baseSpAttack  = 110,
         .baseSpDefense = 80,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 218,
-    #endif
         .abilities = {ABILITY_INTIMIDATE, ABILITY_NONE, ABILITY_MOXIE},
         .cryId = CRY_SALAMENCE,
         .height = 15,
@@ -19839,8 +20013,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Salamence, 56, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Salamence),
-        ICON(Salamence),
+        PALETA(Salamence),
+        ICONO(Salamence),
         FOLLOWER(Salamence, TRACKS_FOOT)
     },
 
@@ -19854,7 +20028,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 60,
         .types = MON_TYPES(TYPE_STEEL, TYPE_PSYCHIC),
         .catchRate = 3,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 60 : 103,
+        .expYield = 60,
         .evYield_Defense = 1,
         .itemRare = ITEM_METAL_COAT,
         .genderRatio = MON_GENDERLESS,
@@ -19887,10 +20061,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Beldum, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Beldum),
-        ICON(Beldum),
+        PALETA(Beldum),
+        ICONO(Beldum),
         FOLLOWER(Beldum, TRACKS_NONE)
-        LEARNSETS(Beldum),
+        MOVIMIENTOS(Beldum),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_METANG}),
     },
@@ -19937,45 +20111,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Metang, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Metang),
-        ICON(Metang),
+        PALETA(Metang),
+        ICONO(Metang),
         FOLLOWER(Metang, TRACKS_NONE)
-        LEARNSETS(Metang),
+        MOVIMIENTOS(Metang),
         .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_METAGROSS}),
     },
 
-#define METAGROSS_MISC_INFO                                     \
-        .types = MON_TYPES(TYPE_STEEL, TYPE_PSYCHIC),           \
-        .catchRate = 3,                                         \
-        .evYield_Defense = 3,                                   \
-        .itemRare = ITEM_METAL_COAT,                            \
-        .genderRatio = MON_GENDERLESS,                          \
-        .eggCycles = 40,                                        \
-        .friendship = 35,                                       \
-        .growthRate = GROWTH_SLOW,                              \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),         \
-        .bodyColor = BODY_COLOR_BLUE,                           \
-        .speciesName = _("Metagross"),                          \
-        .natDexNum = DEX_METAGROSS,                    \
-        .categoryName = _("Iron Leg"),                          \
-        LEARNSETS(Metagross)
-
     [SPECIES_METAGROSS] =
     {
-        METAGROSS_MISC_INFO,
+        .types = MON_TYPES(TYPE_STEEL, TYPE_PSYCHIC),
+        .catchRate = 3,
+        .evYield_Defense = 3,
+        .itemRare = ITEM_METAL_COAT,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 40,
+        .friendship = 35,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_MINERAL),
+        .bodyColor = BODY_COLOR_BLUE,
+        .speciesName = _("Metagross"),
+        .natDexNum = DEX_METAGROSS,
+        .categoryName = _("Iron Leg"),
+        MOVIMIENTOS(Metagross),
         .baseHP        = 80,
         .baseAttack    = 135,
         .baseDefense   = 130,
         .baseSpeed     = 70,
         .baseSpAttack  = 95,
         .baseSpDefense = 90,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 210,
-    #endif
         .abilities = {ABILITY_CLEAR_BODY, ABILITY_NONE, ABILITY_LIGHT_METAL},
         .cryId = CRY_METAGROSS,
         .height = 16,
@@ -19996,8 +20161,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Metagross, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Metagross),
-        ICON(Metagross),
+        PALETA(Metagross),
+        ICONO(Metagross),
         FOLLOWER(Metagross, TRACKS_FOOT)
     },
 
@@ -20050,10 +20215,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Regirock, 64, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Regirock),
-        ICON(Regirock),
+        PALETA(Regirock),
+        ICONO(Regirock),
         FOLLOWER(Regirock, TRACKS_FOOT)
-        LEARNSETS(Regirock),
+        MOVIMIENTOS(Regirock),
     },
 
     [SPECIES_REGICE] =
@@ -20104,10 +20269,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Regice, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Regice),
-        ICON(Regice),
+        PALETA(Regice),
+        ICONO(Regice),
         FOLLOWER(Regice, TRACKS_FOOT)
-        LEARNSETS(Regice),
+        MOVIMIENTOS(Regice),
     },
 
     [SPECIES_REGISTEEL] =
@@ -20159,43 +20324,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Registeel, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Registeel),
-        ICON(Registeel),
+        PALETA(Registeel),
+        ICONO(Registeel),
         FOLLOWER(Registeel, TRACKS_FOOT)
-        LEARNSETS(Registeel),
+        MOVIMIENTOS(Registeel),
     },
-
-#define LATIAS_MISC_INFO                                                \
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),                  \
-        .catchRate = 3,                                                 \
-        .evYield_SpDefense = 3,                                         \
-        .genderRatio = MON_FEMALE,                                      \
-        .eggCycles = 120,                                               \
-        .friendship = 90,                                               \
-        .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),      \
-        .speciesName = _("Latias"),                                     \
-        .natDexNum = DEX_LATIAS,                               \
-        .categoryName = _("Eon"),                                       \
-        LEARNSETS(Latias),                                              \
-        .isLegendary = TRUE
 
     [SPECIES_LATIAS] =
     {
-        LATIAS_MISC_INFO,
+        .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),
+        .catchRate = 3,
+        .evYield_SpDefense = 3,
+        .genderRatio = MON_FEMALE,
+        .eggCycles = 120,
+        .friendship = 90,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .speciesName = _("Latias"),
+        .natDexNum = DEX_LATIAS,
+        .categoryName = _("Eon"),
+        MOVIMIENTOS(Latias),
+        .isLegendary = TRUE,
         .baseHP        = 80,
         .baseAttack    = 80,
         .baseDefense   = 90,
         .baseSpeed     = 110,
         .baseSpAttack  = 110,
         .baseSpDefense = 130,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 211,
-    #endif
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_RED,
         .cryId = CRY_LATIAS,
@@ -20218,42 +20374,33 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Latias, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Latias),
-        ICON(Latias),
+        PALETA(Latias),
+        ICONO(Latias),
         FOLLOWER(Latias, TRACKS_NONE)
     },
 
-#define LATIOS_MISC_INFO                                                \
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),                  \
-        .catchRate = 3,                                                 \
-        .evYield_SpAttack = 3,                                          \
-        .genderRatio = MON_MALE,                                        \
-        .eggCycles = 120,                                               \
-        .friendship = 90,                                               \
-        .growthRate = GROWTH_SLOW,                                      \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),      \
-        .isLegendary = TRUE,                                            \
-        .speciesName = _("Latios"),                                     \
-        .natDexNum = DEX_LATIOS,                               \
-        .categoryName = _("Eon"),                                       \
-        LEARNSETS(Latios)
-
     [SPECIES_LATIOS] =
     {
-        LATIOS_MISC_INFO,
+        .types = MON_TYPES(TYPE_DRAGON, TYPE_PSYCHIC),
+        .catchRate = 3,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_MALE,
+        .eggCycles = 120,
+        .friendship = 90,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .isLegendary = TRUE,
+        .speciesName = _("Latios"),
+        .natDexNum = DEX_LATIOS,
+        .categoryName = _("Eon"),
+        MOVIMIENTOS(Latios),
         .baseHP        = 80,
         .baseAttack    = 90,
         .baseDefense   = 80,
         .baseSpeed     = 110,
         .baseSpAttack  = 130,
         .baseSpDefense = 110,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 211,
-    #endif
         .abilities = {ABILITY_LEVITATE, ABILITY_NONE},
         .bodyColor = BODY_COLOR_BLUE,
         .cryId = CRY_LATIOS,
@@ -20276,43 +20423,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Latios, 56, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Latios),
-        ICON(Latios),
+        PALETA(Latios),
+        ICONO(Latios),
         FOLLOWER(Latios, TRACKS_NONE)
     },
 
-#define KYOGRE_MISC_INFO                                                            \
-        .types = MON_TYPES(TYPE_WATER),                                             \
-        .catchRate = 3,                                                             \
-        .evYield_SpAttack = 3,                                                      \
-        .genderRatio = MON_GENDERLESS,                                              \
-        .eggCycles = 120,                                                           \
-        .friendship = 0,                                                            \
-        .growthRate = GROWTH_SLOW,                                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                  \
-        .bodyColor = BODY_COLOR_BLUE,                                               \
-        .isLegendary = TRUE,                                                        \
-        .speciesName = _("Kyogre"),                                                 \
-        .natDexNum = DEX_KYOGRE,                                           \
-        .categoryName = _("Sea Basin"),                                             \
-        LEARNSETS(Kyogre)
-
     [SPECIES_KYOGRE] =
     {
-        KYOGRE_MISC_INFO,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 3,
+        .evYield_SpAttack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .bodyColor = BODY_COLOR_BLUE,
+        .isLegendary = TRUE,
+        .speciesName = _("Kyogre"),
+        .natDexNum = DEX_KYOGRE,
+        .categoryName = _("Sea Basin"),
+        MOVIMIENTOS(Kyogre),
         .baseHP        = 100,
         .baseAttack    = 100,
         .baseDefense   = 90,
         .baseSpeed     = 90,
         .baseSpAttack  = 150,
         .baseSpDefense = 140,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 335,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 302,
-    #else
-        .expYield = 218,
-    #endif
         .abilities = {ABILITY_DRIZZLE, ABILITY_NONE},
         .cryId = CRY_KYOGRE,
         .height = 45,
@@ -20334,43 +20472,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Kyogre, 64, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Kyogre),
-        ICON(Kyogre),
+        PALETA(Kyogre),
+        ICONO(Kyogre),
         FOLLOWER(Kyogre, TRACKS_NONE)
     },
 
-#define GROUDON_MISC_INFO                                                           \
-        .catchRate = 3,                                                             \
-        .evYield_Attack = 3,                                                        \
-        .genderRatio = MON_GENDERLESS,                                              \
-        .eggCycles = 120,                                                           \
-        .friendship = 0,                                                            \
-        .growthRate = GROWTH_SLOW,                                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                  \
-        .bodyColor = BODY_COLOR_RED,                                                \
-        .isLegendary = TRUE,                                                        \
-        .speciesName = _("Groudon"),                                                \
-        .cryId = CRY_GROUDON,                                                       \
-        .natDexNum = DEX_GROUDON,                                          \
-        .categoryName = _("Continent"),                                             \
-        LEARNSETS(Groudon)
-
     [SPECIES_GROUDON] =
     {
-        GROUDON_MISC_INFO,
+        .catchRate = 3,
+        .evYield_Attack = 3,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .bodyColor = BODY_COLOR_RED,
+        .isLegendary = TRUE,
+        .speciesName = _("Groudon"),
+        .cryId = CRY_GROUDON,
+        .natDexNum = DEX_GROUDON,
+        .categoryName = _("Continent"),
+        MOVIMIENTOS(Groudon),
         .baseHP        = 100,
         .baseAttack    = 150,
         .baseDefense   = 140,
         .baseSpeed     = 90,
         .baseSpAttack  = 100,
         .baseSpDefense = 90,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 335,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 302,
-    #else
-        .expYield = 218,
-    #endif
         .types = MON_TYPES(TYPE_GROUND),
         .abilities = {ABILITY_DROUGHT, ABILITY_NONE},
         .height = 35,
@@ -20391,45 +20520,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Groudon, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Groudon),
-        ICON(Groudon),
+        PALETA(Groudon),
+        ICONO(Groudon),
         FOLLOWER(Groudon, TRACKS_FOOT)
     },
 
-#define RAYQUAZA_MISC_INFO                                                          \
-        .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),                               \
-        .catchRate = 45,                                                            \
-        .evYield_Attack = 2,                                                        \
-        .evYield_SpAttack = 1,                                                      \
-        .genderRatio = MON_GENDERLESS,                                              \
-        .eggCycles = 120,                                                           \
-        .friendship = 0,                                                            \
-        .growthRate = GROWTH_SLOW,                                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                  \
-        .bodyColor = BODY_COLOR_GREEN,                                              \
-        .speciesName = _("Rayquaza"),                                               \
-        .cryId = CRY_RAYQUAZA,                                                      \
-        .natDexNum = DEX_RAYQUAZA,                                         \
-        .categoryName = _("Sky High"),                                              \
-        LEARNSETS(Rayquaza),                                                        \
-        .isLegendary = TRUE
-
     [SPECIES_RAYQUAZA] =
     {
-        RAYQUAZA_MISC_INFO,
+        .types = MON_TYPES(TYPE_DRAGON, TYPE_FLYING),
+        .catchRate = 45,
+        .evYield_Attack = 2,
+        .evYield_SpAttack = 1,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .bodyColor = BODY_COLOR_GREEN,
+        .speciesName = _("Rayquaza"),
+        .cryId = CRY_RAYQUAZA,
+        .natDexNum = DEX_RAYQUAZA,
+        .categoryName = _("Sky High"),
+        MOVIMIENTOS(Rayquaza),
+        .isLegendary = TRUE,
         .baseHP        = 105,
         .baseAttack    = 150,
         .baseDefense   = 90,
         .baseSpeed     = 95,
         .baseSpAttack  = 150,
         .baseSpDefense = 90,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 340,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 306,
-    #else
-        .expYield = 220,
-    #endif
         .abilities = {ABILITY_AIR_LOCK, ABILITY_NONE},
         .height = 70,
         .weight = 2065,
@@ -20451,8 +20571,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rayquaza, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Rayquaza),
-        ICON(Rayquaza),
+        PALETA(Rayquaza),
+        ICONO(Rayquaza),
         FOLLOWER(Rayquaza, TRACKS_NONE)
     },
 
@@ -20466,13 +20586,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 100,
         .types = MON_TYPES(TYPE_STEEL, TYPE_PSYCHIC),
         .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 300,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 270,
-    #else
-        .expYield = 215,
-    #endif
         .evYield_HP = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
@@ -20505,48 +20619,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Jirachi, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Jirachi),
-        ICON(Jirachi),
+        PALETA(Jirachi),
+        ICONO(Jirachi),
         FOLLOWER(Jirachi, TRACKS_NONE)
-        LEARNSETS(Jirachi),
+        MOVIMIENTOS(Jirachi),
     },
-
-#if P_UPDATED_EXP_YIELDS >= GEN_8
-    #define DEOXYS_EXP_YIELD 300
-#elif P_UPDATED_EXP_YIELDS >= GEN_5
-    #define DEOXYS_EXP_YIELD 270
-#else
-    #define DEOXYS_EXP_YIELD 215
-#endif
-
-#define DEOXYS_MISC_INFO                                                            \
-        .types = MON_TYPES(TYPE_PSYCHIC),                                           \
-        .catchRate = 3,                                                             \
-        .expYield = DEOXYS_EXP_YIELD,                                               \
-        .genderRatio = MON_GENDERLESS,                                              \
-        .eggCycles = 120,                                                           \
-        .friendship = 0,                                                            \
-        .growthRate = GROWTH_SLOW,                                                  \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),                  \
-        .abilities = {ABILITY_PRESSURE, ABILITY_NONE},                            \
-        .bodyColor = BODY_COLOR_RED,                                                \
-        .isMythical = TRUE,                                                         \
-        .speciesName = _("Deoxys"),                                                 \
-        .cryId = CRY_DEOXYS,                                                        \
-        .natDexNum = DEX_DEOXYS,                                           \
-        .categoryName = _("DNA"),                                                   \
-        .height = 17,                                                               \
-        .weight = 608,                                                              \
-            .description = COMPOUND_STRING("???"),                                    \
-        .pokemonScale = 256,                                                        \
-        .pokemonOffset = 0,                                                         \
-        .trainerScale = 290,                                                        \
-        .trainerOffset = 2,                                                         \
-        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable
 
     [SPECIES_DEOXYS_NORMAL] =
     {
-        DEOXYS_MISC_INFO,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 3,
+        .expYield = 300,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .isMythical = TRUE,
+        .speciesName = _("Deoxys"),
+        .cryId = CRY_DEOXYS,
+        .natDexNum = DEX_DEOXYS,
+        .categoryName = _("DNA"),
+        .height = 17,
+        .weight = 608,
+        .description = COMPOUND_STRING("???"),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 2,
+        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
         .baseHP        = 50,
         .baseAttack    = 150,
         .baseDefense   = 50,
@@ -20563,16 +20666,38 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DeoxysNormal, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(DeoxysNormal),
-        ICON(DeoxysNormal),
+        PALETA(DeoxysNormal),
+        ICONO(DeoxysNormal),
         FOLLOWER(DeoxysNormal, TRACKS_FOOT)
-        LEARNSETS(DeoxysNormal),
+        MOVIMIENTOS(DeoxysNormal),
         .formChangeTable = sDeoxysNormalFormChangeTable,
     },
 
     [SPECIES_DEOXYS_ATTACK] =
     {
-        DEOXYS_MISC_INFO,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 3,
+        .expYield = 300,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .isMythical = TRUE,
+        .speciesName = _("Deoxys"),
+        .cryId = CRY_DEOXYS,
+        .natDexNum = DEX_DEOXYS,
+        .categoryName = _("DNA"),
+        .height = 17,
+        .weight = 608,
+        .description = COMPOUND_STRING("???"),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 2,
+        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
         .baseHP        = 50,
         .baseAttack    = 180,
         .baseDefense   = 20,
@@ -20588,16 +20713,38 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DeoxysAttack, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(DeoxysAttack),
-        ICON(DeoxysAttack),
+        PALETA(DeoxysAttack),
+        ICONO(DeoxysAttack),
         FOLLOWER(DeoxysAttack, TRACKS_FOOT)
-        LEARNSETS(DeoxysAttack),
+        MOVIMIENTOS(DeoxysAttack),
         .formChangeTable = sDeoxysAttackFormChangeTable,
     },
 
     [SPECIES_DEOXYS_DEFENSE] =
     {
-        DEOXYS_MISC_INFO,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 3,
+        .expYield = 300,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .isMythical = TRUE,
+        .speciesName = _("Deoxys"),
+        .cryId = CRY_DEOXYS,
+        .natDexNum = DEX_DEOXYS,
+        .categoryName = _("DNA"),
+        .height = 17,
+        .weight = 608,
+        .description = COMPOUND_STRING("???"),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 2,
+        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
         .baseHP        = 50,
         .baseAttack    = 70,
         .baseDefense   = 160,
@@ -20613,16 +20760,38 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DeoxysDefense, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(DeoxysDefense),
-        ICON(DeoxysDefense),
+        PALETA(DeoxysDefense),
+        ICONO(DeoxysDefense),
         FOLLOWER(DeoxysDefense, TRACKS_FOOT)
-        LEARNSETS(DeoxysDefense),
+        MOVIMIENTOS(DeoxysDefense),
         .formChangeTable = sDeoxysDefenseFormChangeTable,
     },
 
     [SPECIES_DEOXYS_SPEED] =
     {
-        DEOXYS_MISC_INFO,
+        .types = MON_TYPES(TYPE_PSYCHIC),
+        .catchRate = 3,
+        .expYield = 300,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BABY),
+        .abilities = {ABILITY_PRESSURE, ABILITY_NONE},
+        .bodyColor = BODY_COLOR_RED,
+        .isMythical = TRUE,
+        .speciesName = _("Deoxys"),
+        .cryId = CRY_DEOXYS,
+        .natDexNum = DEX_DEOXYS,
+        .categoryName = _("DNA"),
+        .height = 17,
+        .weight = 608,
+        .description = COMPOUND_STRING("???"),
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 290,
+        .trainerOffset = 2,
+        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
         .baseHP        = 50,
         .baseAttack    = 95,
         .baseDefense   = 90,
@@ -20638,10 +20807,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DeoxysSpeed, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(DeoxysSpeed),
-        ICON(DeoxysSpeed),
+        PALETA(DeoxysSpeed),
+        ICONO(DeoxysSpeed),
         FOLLOWER(DeoxysSpeed, TRACKS_FOOT)
-        LEARNSETS(DeoxysSpeed),
+        MOVIMIENTOS(DeoxysSpeed),
         .formChangeTable = sDeoxysSpeedFormChangeTable,
     },
 
@@ -20686,10 +20855,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Turtwig, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Turtwig),
-        ICON(Turtwig),
+        PALETA(Turtwig),
+        ICONO(Turtwig),
         FOLLOWER(Turtwig, TRACKS_FOOT)
-        LEARNSETS(Turtwig),
+        MOVIMIENTOS(Turtwig),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_GROTLE}),
     },
 
@@ -20735,10 +20904,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Grotle, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Grotle),
-        ICON(Grotle),
+        PALETA(Grotle),
+        ICONO(Grotle),
         FOLLOWER(Grotle, TRACKS_FOOT)
-        LEARNSETS(Grotle),
+        MOVIMIENTOS(Grotle),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_TORTERRA}),
     },
 
@@ -20791,10 +20960,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Torterra, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_GREEN,
-        PALETTES(Torterra),
-        ICON(Torterra),
+        PALETA(Torterra),
+        ICONO(Torterra),
         FOLLOWER(Torterra, TRACKS_FOOT)
-        LEARNSETS(Torterra),
+        MOVIMIENTOS(Torterra),
     },
 
     [SPECIES_CHIMCHAR] =
@@ -20839,10 +21008,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chimchar, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Chimchar),
-        ICON(Chimchar),
+        PALETA(Chimchar),
+        ICONO(Chimchar),
         FOLLOWER(Chimchar, TRACKS_FOOT)
-        LEARNSETS(Chimchar),
+        MOVIMIENTOS(Chimchar),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_MONFERNO}),
     },
 
@@ -20889,10 +21058,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Monferno, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Monferno),
-        ICON(Monferno),
+        PALETA(Monferno),
+        ICONO(Monferno),
         FOLLOWER(Monferno, TRACKS_FOOT)
-        LEARNSETS(Monferno),
+        MOVIMIENTOS(Monferno),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_INFERNAPE}),
     },
 
@@ -20945,10 +21114,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Infernape, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Infernape),
-        ICON(Infernape),
+        PALETA(Infernape),
+        ICONO(Infernape),
         FOLLOWER(Infernape, TRACKS_FOOT)
-        LEARNSETS(Infernape),
+        MOVIMIENTOS(Infernape),
     },
 
     [SPECIES_PIPLUP] =
@@ -20996,10 +21165,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Piplup, 40, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Piplup),
-        ICON(Piplup),
+        PALETA(Piplup),
+        ICONO(Piplup),
         FOLLOWER(Piplup, TRACKS_FOOT)
-        LEARNSETS(Piplup),
+        MOVIMIENTOS(Piplup),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_PRINPLUP}),
     },
 
@@ -21048,10 +21217,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Prinplup, 48, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Prinplup),
-        ICON(Prinplup),
+        PALETA(Prinplup),
+        ICONO(Prinplup),
         FOLLOWER(Prinplup, TRACKS_FOOT)
-        LEARNSETS(Prinplup),
+        MOVIMIENTOS(Prinplup),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_EMPOLEON}),
     },
 
@@ -21106,10 +21275,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Empoleon, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Empoleon),
-        ICON(Empoleon),
+        PALETA(Empoleon),
+        ICONO(Empoleon),
         FOLLOWER(Empoleon, TRACKS_FOOT)
-        LEARNSETS(Empoleon),
+        MOVIMIENTOS(Empoleon),
     },
 
     [SPECIES_STARLY] =
@@ -21147,18 +21316,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Starly, 40, 40),
-        FRONT_PIC_FEMALE(Starly, 40, 40),
+        FRONT_PIC_HEMBRA(Starly, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Starly,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Starly, 56, 48),
-        BACK_PIC_FEMALE(Starly, 56, 48),
+        BACK_PIC_HEMBRA(Starly, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Starly),
-        ICON(Starly),
+        PALETA(Starly),
+        ICONO(Starly),
         FOLLOWER(Starly, TRACKS_FOOT)
-        LEARNSETS(Starly),
+        MOVIMIENTOS(Starly),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_STARAVIA}),
     },
 
@@ -21197,18 +21366,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Staravia, 40, 48),
-        FRONT_PIC_FEMALE(Staravia, 40, 48),
+        FRONT_PIC_HEMBRA(Staravia, 40, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Staravia,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Staravia, 64, 64),
-        BACK_PIC_FEMALE(Staravia, 64, 64),
+        BACK_PIC_HEMBRA(Staravia, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Staravia),
-        ICON(Staravia),
+        PALETA(Staravia),
+        ICONO(Staravia),
         FOLLOWER(Staravia, TRACKS_FOOT)
-        LEARNSETS(Staravia),
+        MOVIMIENTOS(Staravia),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_STARAPTOR}),
     },
 
@@ -21255,17 +21424,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Staraptor, 56, 64),
-        FRONT_PIC_FEMALE(Staraptor, 56, 64),
+        FRONT_PIC_HEMBRA(Staraptor, 56, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Staraptor,
         .frontAnimId = ANIM_V_SHAKE,
         BACK_PIC(Staraptor, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Staraptor),
-        ICON(Staraptor),
+        PALETA(Staraptor),
+        ICONO(Staraptor),
         FOLLOWER(Staraptor, TRACKS_FOOT)
-        LEARNSETS(Staraptor),
+        MOVIMIENTOS(Staraptor),
     },
 
     [SPECIES_BIDOOF] =
@@ -21303,18 +21472,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Bidoof, 40, 40),
-        FRONT_PIC_FEMALE(Bidoof, 40, 40),
+        FRONT_PIC_HEMBRA(Bidoof, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Bidoof,
         .frontAnimId = ANIM_H_SLIDE_SLOW,
         BACK_PIC(Bidoof, 64, 40),
-        BACK_PIC_FEMALE(Bidoof, 64, 40),
+        BACK_PIC_HEMBRA(Bidoof, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Bidoof),
-        ICON(Bidoof),
+        PALETA(Bidoof),
+        ICONO(Bidoof),
         FOLLOWER(Bidoof, TRACKS_FOOT)
-        LEARNSETS(Bidoof),
+        MOVIMIENTOS(Bidoof),
         .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_BIBAREL}),
     },
 
@@ -21353,17 +21522,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 257,
         .trainerOffset = 0,
         FRONT_PIC(Bibarel, 56, 48),
-        FRONT_PIC_FEMALE(Bibarel, 56, 48),
+        FRONT_PIC_HEMBRA(Bibarel, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Bibarel,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Bibarel, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Bibarel),
-        ICON(Bibarel),
+        PALETA(Bibarel),
+        ICONO(Bibarel),
         FOLLOWER(Bibarel, TRACKS_FOOT)
-        LEARNSETS(Bibarel),
+        MOVIMIENTOS(Bibarel),
     },
 
     [SPECIES_KRICKETOT] =
@@ -21402,18 +21571,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Kricketot, 48, 48),
-        FRONT_PIC_FEMALE(Kricketot, 48, 48),
+        FRONT_PIC_HEMBRA(Kricketot, 48, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Kricketot,
         .frontAnimId = ANIM_H_JUMPS,
         BACK_PIC(Kricketot, 48, 56),
-        BACK_PIC_FEMALE(Kricketot, 48, 56),
+        BACK_PIC_HEMBRA(Kricketot, 48, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Kricketot),
-        ICON(Kricketot),
+        PALETA(Kricketot),
+        ICONO(Kricketot),
         FOLLOWER(Kricketot, TRACKS_FOOT)
-        LEARNSETS(Kricketot),
+        MOVIMIENTOS(Kricketot),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_KRICKETUNE}),
     },
@@ -21454,18 +21623,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 257,
         .trainerOffset = 0,
         FRONT_PIC(Kricketune, 56, 56),
-        FRONT_PIC_FEMALE(Kricketune, 56, 56),
+        FRONT_PIC_HEMBRA(Kricketune, 56, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Kricketune,
         .frontAnimId = ANIM_H_SLIDE_SLOW,
         BACK_PIC(Kricketune, 56, 64),
-        BACK_PIC_FEMALE(Kricketune, 56, 64),
+        BACK_PIC_HEMBRA(Kricketune, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Kricketune),
-        ICON(Kricketune),
+        PALETA(Kricketune),
+        ICONO(Kricketune),
         FOLLOWER(Kricketune, TRACKS_FOOT)
-        LEARNSETS(Kricketune),
+        MOVIMIENTOS(Kricketune),
     },
 
     [SPECIES_SHINX] =
@@ -21503,18 +21672,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Shinx, 48, 40),
-        FRONT_PIC_FEMALE(Shinx, 48, 40),
+        FRONT_PIC_HEMBRA(Shinx, 48, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Shinx,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Shinx, 64, 48),
-        BACK_PIC_FEMALE(Shinx, 64, 48),
+        BACK_PIC_HEMBRA(Shinx, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Shinx),
-        ICON(Shinx),
+        PALETA(Shinx),
+        ICONO(Shinx),
         FOLLOWER(Shinx, TRACKS_FOOT)
-        LEARNSETS(Shinx),
+        MOVIMIENTOS(Shinx),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LUXIO}),
     },
 
@@ -21553,18 +21722,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Luxio, 48, 48),
-        FRONT_PIC_FEMALE(Luxio, 48, 48),
+        FRONT_PIC_HEMBRA(Luxio, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Luxio,
         .frontAnimId = ANIM_H_STRETCH,
         BACK_PIC(Luxio, 64, 64),
-        BACK_PIC_FEMALE(Luxio, 64, 64),
+        BACK_PIC_HEMBRA(Luxio, 64, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Luxio),
-        ICON(Luxio),
+        PALETA(Luxio),
+        ICONO(Luxio),
         FOLLOWER(Luxio, TRACKS_FOOT)
-        LEARNSETS(Luxio),
+        MOVIMIENTOS(Luxio),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_LUXRAY}),
     },
 
@@ -21609,18 +21778,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 262,
         .trainerOffset = 0,
         FRONT_PIC(Luxray, 64, 64),
-        FRONT_PIC_FEMALE(Luxray, 64, 64),
+        FRONT_PIC_HEMBRA(Luxray, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Luxray,
         .frontAnimId = ANIM_GLOW_YELLOW,
         BACK_PIC(Luxray, 64, 64),
-        BACK_PIC_FEMALE(Luxray, 64, 64),
+        BACK_PIC_HEMBRA(Luxray, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Luxray),
-        ICON(Luxray),
+        PALETA(Luxray),
+        ICONO(Luxray),
         FOLLOWER(Luxray, TRACKS_FOOT)
-        LEARNSETS(Luxray),
+        MOVIMIENTOS(Luxray),
     },
 
     [SPECIES_CRANIDOS] =
@@ -21664,10 +21833,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cranidos, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Cranidos),
-        ICON(Cranidos),
+        PALETA(Cranidos),
+        ICONO(Cranidos),
         FOLLOWER(Cranidos, TRACKS_FOOT)
-        LEARNSETS(Cranidos),
+        MOVIMIENTOS(Cranidos),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAMPARDOS}),
     },
 
@@ -21712,10 +21881,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rampardos, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Rampardos),
-        ICON(Rampardos),
+        PALETA(Rampardos),
+        ICONO(Rampardos),
         FOLLOWER(Rampardos, TRACKS_FOOT)
-        LEARNSETS(Rampardos),
+        MOVIMIENTOS(Rampardos),
     },
 
     [SPECIES_SHIELDON] =
@@ -21759,10 +21928,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Shieldon, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Shieldon),
-        ICON(Shieldon),
+        PALETA(Shieldon),
+        ICONO(Shieldon),
         FOLLOWER(Shieldon, TRACKS_FOOT)
-        LEARNSETS(Shieldon),
+        MOVIMIENTOS(Shieldon),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BASTIODON}),
     },
 
@@ -21807,10 +21976,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bastiodon, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Bastiodon),
-        ICON(Bastiodon),
+        PALETA(Bastiodon),
+        ICONO(Bastiodon),
         FOLLOWER(Bastiodon, TRACKS_FOOT)
-        LEARNSETS(Bastiodon),
+        MOVIMIENTOS(Bastiodon),
     },
 
     [SPECIES_COMBEE] =
@@ -21856,11 +22025,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Combee, 64, 48),
         .backPicYOffset = 22,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Combee),
-        PALETTE_FEMALE(Combee),
-        ICON(Combee),
+        PALETA(Combee),
+        PALETA_HEMBRA(Combee),
+        ICONO(Combee),
         FOLLOWER(Combee, TRACKS_FOOT)
-        LEARNSETS(Combee),
+        MOVIMIENTOS(Combee),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 30, SPECIES_VESPIQUEN}),
     },
@@ -21909,10 +22078,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vespiquen, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-        PALETTES(Vespiquen),
-        ICON(Vespiquen),
+        PALETA(Vespiquen),
+        ICONO(Vespiquen),
         FOLLOWER(Vespiquen, TRACKS_FOOT)
-        LEARNSETS(Vespiquen),
+        MOVIMIENTOS(Vespiquen),
     },
 
     [SPECIES_PACHIRISU] =
@@ -21923,7 +22092,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpeed     = 95,
         .baseSpAttack  = 45,
         .baseSpDefense = 90,
-        .types = MON_TYPES(TYPE_ELECTRIC),
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_NORMAL),
         .catchRate = 200,
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 142 : 120,
         .evYield_Speed = 1,
@@ -21950,17 +22119,17 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Pachirisu, 48, 56),
-        FRONT_PIC_FEMALE(Pachirisu, 48, 56),
+        FRONT_PIC_HEMBRA(Pachirisu, 48, 56),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Pachirisu,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Pachirisu, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Pachirisu),
-        ICON(Pachirisu),
+        PALETA(Pachirisu),
+        ICONO(Pachirisu),
         FOLLOWER(Pachirisu, TRACKS_FOOT)
-        LEARNSETS(Pachirisu),
+        MOVIMIENTOS(Pachirisu),
     },
 
     [SPECIES_BUIZEL] =
@@ -22002,13 +22171,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimFrames = sAnims_Buizel,
         .frontAnimId = ANIM_GROW_VIBRATE,
         BACK_PIC(Buizel, 64, 48),
-        BACK_PIC_FEMALE(Buizel, 64, 48),
+        BACK_PIC_HEMBRA(Buizel, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Buizel),
-        ICON(Buizel),
+        PALETA(Buizel),
+        ICONO(Buizel),
         FOLLOWER(Buizel, TRACKS_FOOT)
-        LEARNSETS(Buizel),
+        MOVIMIENTOS(Buizel),
         .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_FLOATZEL}),
     },
 
@@ -22051,13 +22220,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimFrames = sAnims_Floatzel,
         .frontAnimId = ANIM_H_JUMPS_V_STRETCH,
         BACK_PIC(Floatzel, 64, 64),
-        BACK_PIC_FEMALE(Floatzel, 64, 64),
+        BACK_PIC_HEMBRA(Floatzel, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Floatzel),
-        ICON(Floatzel),
+        PALETA(Floatzel),
+        ICONO(Floatzel),
         FOLLOWER(Floatzel, TRACKS_FOOT)
-        LEARNSETS(Floatzel),
+        MOVIMIENTOS(Floatzel),
     },
 
     [SPECIES_CHERUBI] =
@@ -22102,48 +22271,45 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cherubi, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Cherubi),
-        ICON(Cherubi),
+        PALETA(Cherubi),
+        ICONO(Cherubi),
         FOLLOWER(Cherubi, TRACKS_FOOT)
-        LEARNSETS(Cherubi),
+        MOVIMIENTOS(Cherubi),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_CHERRIM_OVERCAST}),
     },
 
-#define CHERRIM_MISC_INFO                                            \
-        .baseHP        = 70,                                         \
-        .baseAttack    = 60,                                         \
-        .baseDefense   = 70,                                         \
-        .baseSpeed     = 85,                                         \
-        .baseSpAttack  = 87,                                         \
-        .baseSpDefense = 78,                                         \
-        .types = MON_TYPES(TYPE_GRASS),                              \
-        .catchRate = 75,                                             \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 158 : 133,     \
-        .evYield_SpAttack = 2,                                       \
-        .itemRare = ITEM_MIRACLE_SEED,                               \
-        .genderRatio = PERCENT_FEMALE(50),                           \
-        .eggCycles = 20,                                             \
-        .friendship = STANDARD_FRIENDSHIP,                           \
-        .growthRate = GROWTH_MEDIUM_FAST,                            \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),\
-        .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},          \
-        .speciesName = _("Cherrim"),                                 \
-        .cryId = CRY_CHERRIM,                                        \
-        .natDexNum = DEX_CHERRIM,                           \
-        .categoryName = _("Blossom"),                                \
-        .height = 5,                                                 \
-        .weight = 93,                                                \
-        .pokemonScale = 432,                                         \
-        .pokemonOffset = 13,                                         \
-        .trainerScale = 256,                                         \
-        .trainerOffset = 0,                                          \
-        LEARNSETS(Cherrim),                                          \
-        .formSpeciesIdTable = sCherrimFormSpeciesIdTable,            \
-        .formChangeTable = sCherrimFormChangeTable
-
     [SPECIES_CHERRIM_OVERCAST] =
     {
-        CHERRIM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 60,
+        .baseDefense   = 70,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 87,
+        .baseSpDefense = 78,
+        .types = MON_TYPES(TYPE_GRASS),
+        .catchRate = 75,
+        .expYield = 158,
+        .evYield_SpAttack = 2,
+        .itemRare = ITEM_MIRACLE_SEED,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),
+        .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},
+        .speciesName = _("Cherrim"),
+        .cryId = CRY_CHERRIM,
+        .natDexNum = DEX_CHERRIM,
+        .categoryName = _("Blossom"),
+        .height = 5,
+        .weight = 93,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Cherrim),
+        .formSpeciesIdTable = sCherrimFormSpeciesIdTable,
+        .formChangeTable = sCherrimFormChangeTable,
         .bodyColor = BODY_COLOR_PURPLE,
         .description = COMPOUND_STRING(
             "It's motionless, save for the occasional\n"
@@ -22157,14 +22323,43 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CherrimOvercast, 40, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(CherrimOvercast),
-        ICON(CherrimOvercast),
+        PALETA(CherrimOvercast),
+        ICONO(CherrimOvercast),
         FOLLOWER(CherrimOvercast, TRACKS_FOOT)
     },
 
     [SPECIES_CHERRIM_SUNSHINE] =
     {
-        CHERRIM_MISC_INFO,
+        .baseHP        = 70,
+        .baseAttack    = 60,
+        .baseDefense   = 70,
+        .baseSpeed     = 85,
+        .baseSpAttack  = 87,
+        .baseSpDefense = 78,
+        .types = MON_TYPES(TYPE_GRASS),
+        .catchRate = 75,
+        .expYield = 158,
+        .evYield_SpAttack = 2,
+        .itemRare = ITEM_MIRACLE_SEED,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY, EGG_GROUP_GRASS),
+        .abilities = {ABILITY_FLOWER_GIFT, ABILITY_NONE},
+        .speciesName = _("Cherrim"),
+        .cryId = CRY_CHERRIM,
+        .natDexNum = DEX_CHERRIM,
+        .categoryName = _("Blossom"),
+        .height = 5,
+        .weight = 93,
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        MOVIMIENTOS(Cherrim),
+        .formSpeciesIdTable = sCherrimFormSpeciesIdTable,
+        .formChangeTable = sCherrimFormChangeTable,
         .bodyColor = BODY_COLOR_PINK,
         .description = COMPOUND_STRING(
             "Cherrim takes this form on sunny days.\n"
@@ -22178,8 +22373,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(CherrimSunshine, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(CherrimSunshine),
-        ICON(CherrimSunshine),
+        PALETA(CherrimSunshine),
+        ICONO(CherrimSunshine),
     },
 
 #define SHELLOS_MISC_INFO                                                               \
@@ -22213,7 +22408,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_V_STRETCH,                                                  \
         .backPicYOffset = 8,                                                            \
         .backAnimId = BACK_ANIM_H_SPRING,                                               \
-        LEARNSETS(Shellos),                                                             \
+        MOVIMIENTOS(Shellos),                                                             \
         .formSpeciesIdTable = sShellosFormSpeciesIdTable
 
     [SPECIES_SHELLOS_WEST] =
@@ -22228,8 +22423,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FRONT_PIC(ShellosWest, 40, 40),
         .frontPicYOffset = 13,
         BACK_PIC(ShellosWest, 40, 56),
-        PALETTES(ShellosWest),
-        ICON(ShellosWest),
+        PALETA(ShellosWest),
+        ICONO(ShellosWest),
         FOLLOWER(ShellosWest, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GASTRODON_WEST}),
     },
@@ -22246,8 +22441,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FRONT_PIC(ShellosEast, 40, 40),
         .frontPicYOffset = 14,
         BACK_PIC(ShellosEast, 56, 48),
-        PALETTES(ShellosEast),
-        ICON(ShellosEast),
+        PALETA(ShellosEast),
+        ICONO(ShellosEast),
         FOLLOWER(ShellosEast, TRACKS_FOOT)
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GASTRODON_EAST}),
     },
@@ -22284,7 +22479,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_CIRCULAR_STRETCH_TWICE,                                     \
         .backPicYOffset = 3,                                                            \
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,                                    \
-        LEARNSETS(Gastrodon),                                                           \
+        MOVIMIENTOS(Gastrodon),                                                           \
         .formSpeciesIdTable = sGastrodonFormSpeciesIdTable
 
     [SPECIES_GASTRODON_WEST] =
@@ -22298,8 +22493,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "different color, a fierce battle will ensue."),
         FRONT_PIC(GastrodonWest, 48, 48),
         BACK_PIC(GastrodonWest, 56, 64),
-        PALETTES(GastrodonWest),
-        ICON(GastrodonWest),
+        PALETA(GastrodonWest),
+        ICONO(GastrodonWest),
         FOLLOWER(GastrodonWest, TRACKS_FOOT)
     },
 
@@ -22314,8 +22509,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "be found on mountains, far from the sea."),
         FRONT_PIC(GastrodonEast, 56, 48),
         BACK_PIC(GastrodonEast, 56, 64),
-        PALETTES(GastrodonEast),
-        ICON(GastrodonEast),
+        PALETA(GastrodonEast),
+        ICONO(GastrodonEast),
         FOLLOWER(GastrodonEast, TRACKS_FOOT)
     },
 
@@ -22361,10 +22556,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drifloon, 40, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Drifloon),
-        ICON(Drifloon),
+        PALETA(Drifloon),
+        ICONO(Drifloon),
         FOLLOWER(Drifloon, TRACKS_FOOT)
-        LEARNSETS(Drifloon),
+        MOVIMIENTOS(Drifloon),
         .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_DRIFBLIM}),
     },
 
@@ -22410,10 +22605,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drifblim, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Drifblim),
-        ICON(Drifblim),
+        PALETA(Drifblim),
+        ICONO(Drifblim),
         FOLLOWER(Drifblim, TRACKS_FOOT)
-        LEARNSETS(Drifblim),
+        MOVIMIENTOS(Drifblim),
     },
 
     [SPECIES_BUNEARY] =
@@ -22458,10 +22653,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Buneary, 64, 64),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Buneary),
-        ICON(Buneary),
+        PALETA(Buneary),
+        ICONO(Buneary),
         FOLLOWER(Buneary, TRACKS_FOOT)
-        LEARNSETS(Buneary),
+        MOVIMIENTOS(Buneary),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_LOPUNNY}),
     },
 
@@ -22477,7 +22672,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Lopunny"),                                      \
         .natDexNum = DEX_LOPUNNY,                                \
         .categoryName = _("Rabbit"),                                      \
-        LEARNSETS(Lopunny)
+        MOVIMIENTOS(Lopunny)
 
     [SPECIES_LOPUNNY] =
     {
@@ -22511,8 +22706,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .itemRare = ITEM_SILK_SCARF,
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Lopunny),
-        ICON(Lopunny),
+        PALETA(Lopunny),
+        ICONO(Lopunny),
         FOLLOWER(Lopunny, TRACKS_FOOT)
     },
 
@@ -22559,10 +22754,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bronzor, 40, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Bronzor),
-        ICON(Bronzor),
+        PALETA(Bronzor),
+        ICONO(Bronzor),
         FOLLOWER(Bronzor, TRACKS_NONE)
-        LEARNSETS(Bronzor),
+        MOVIMIENTOS(Bronzor),
         .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_BRONZONG}),
     },
 
@@ -22610,10 +22805,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bronzong, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Bronzong),
-        ICON(Bronzong),
+        PALETA(Bronzong),
+        ICONO(Bronzong),
         FOLLOWER(Bronzong, TRACKS_NONE)
-        LEARNSETS(Bronzong),
+        MOVIMIENTOS(Bronzong),
     },
 
     [SPECIES_GIBLE] =
@@ -22651,18 +22846,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Gible, 48, 48),
-        FRONT_PIC_FEMALE(Gible, 48, 48),
+        FRONT_PIC_HEMBRA(Gible, 48, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Gible,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Gible, 56, 48),
-        BACK_PIC_FEMALE(Gible, 56, 48),
+        BACK_PIC_HEMBRA(Gible, 56, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Gible),
-        ICON(Gible),
+        PALETA(Gible),
+        ICONO(Gible),
         FOLLOWER(Gible, TRACKS_FOOT)
-        LEARNSETS(Gible),
+        MOVIMIENTOS(Gible),
         .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_GABITE}),
     },
 
@@ -22701,18 +22896,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 262,
         .trainerOffset = 0,
         FRONT_PIC(Gabite, 64, 64),
-        FRONT_PIC_FEMALE(Gabite, 64, 64),
+        FRONT_PIC_HEMBRA(Gabite, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Gabite,
         .frontAnimId = ANIM_V_STRETCH,
         BACK_PIC(Gabite, 64, 64),
-        BACK_PIC_FEMALE(Gabite, 64, 64),
+        BACK_PIC_HEMBRA(Gabite, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Gabite),
-        ICON(Gabite),
+        PALETA(Gabite),
+        ICONO(Gabite),
         FOLLOWER(Gabite, TRACKS_FOOT)
-        LEARNSETS(Gabite),
+        MOVIMIENTOS(Gabite),
         .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_GARCHOMP}),
     },
 
@@ -22735,7 +22930,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 1,                                             \
         .trainerScale = 326,                                            \
         .trainerOffset = 4,                                             \
-        LEARNSETS(Garchomp)
+        MOVIMIENTOS(Garchomp)
 
     [SPECIES_GARCHOMP] =
     {
@@ -22761,7 +22956,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
             "covered in fine scales that reduce drag,\n"
             "enabling it to fly at high speeds."),
         FRONT_PIC(Garchomp, 64, 64),
-        FRONT_PIC_FEMALE(Garchomp, 64, 64),
+        FRONT_PIC_HEMBRA(Garchomp, 64, 64),
         .itemRare = ITEM_DRAGON_FANG,
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Garchomp,
@@ -22769,8 +22964,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Garchomp, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Garchomp),
-        ICON(Garchomp),
+        PALETA(Garchomp),
+        ICONO(Garchomp),
         FOLLOWER(Garchomp, TRACKS_FOOT)
     },
 
@@ -22815,10 +23010,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Riolu, 64, 64),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Riolu),
-        ICON(Riolu),
+        PALETA(Riolu),
+        ICONO(Riolu),
         FOLLOWER(Riolu, TRACKS_FOOT)
-        LEARNSETS(Riolu),
+        MOVIMIENTOS(Riolu),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_LUCARIO}),
     },
 
@@ -22836,7 +23031,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Lucario"),                                       \
         .natDexNum = DEX_LUCARIO,                                 \
         .categoryName = _("Aura"),                                         \
-        LEARNSETS(Lucario)
+        MOVIMIENTOS(Lucario)
 
     [SPECIES_LUCARIO] =
     {
@@ -22868,8 +23063,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lucario, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Lucario),
-        ICON(Lucario),
+        PALETA(Lucario),
+        ICONO(Lucario),
         FOLLOWER(Lucario, TRACKS_FOOT)
     },
 
@@ -22914,11 +23109,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hippopotas, 64, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Hippopotas),
-        PALETTE_FEMALE(Hippopotas),
-        ICON(Hippopotas),
+        PALETA(Hippopotas),
+        PALETA_HEMBRA(Hippopotas),
+        ICONO(Hippopotas),
         FOLLOWER(Hippopotas, TRACKS_FOOT)
-        LEARNSETS(Hippopotas),
+        MOVIMIENTOS(Hippopotas),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_HIPPOWDON}),
     },
 
@@ -22963,11 +23158,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hippowdon, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Hippowdon),
-        PALETTE_FEMALE(Hippowdon),
-        ICON(Hippowdon),
+        PALETA(Hippowdon),
+        PALETA_HEMBRA(Hippowdon),
+        ICONO(Hippowdon),
         FOLLOWER(Hippowdon, TRACKS_FOOT)
-        LEARNSETS(Hippowdon),
+        MOVIMIENTOS(Hippowdon),
     },
 
     [SPECIES_SKORUPI] =
@@ -23012,10 +23207,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Skorupi, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Skorupi),
-        ICON(Skorupi),
+        PALETA(Skorupi),
+        ICONO(Skorupi),
         FOLLOWER(Skorupi, TRACKS_FOOT)
-        LEARNSETS(Skorupi),
+        MOVIMIENTOS(Skorupi),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_DRAPION}),
     },
 
@@ -23061,10 +23256,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drapion, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Drapion),
-        ICON(Drapion),
+        PALETA(Drapion),
+        ICONO(Drapion),
         FOLLOWER(Drapion, TRACKS_FOOT)
-        LEARNSETS(Drapion),
+        MOVIMIENTOS(Drapion),
     },
 
     [SPECIES_CROAGUNK] =
@@ -23102,18 +23297,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Croagunk, 40, 48),
-        FRONT_PIC_FEMALE(Croagunk, 40, 48),
+        FRONT_PIC_HEMBRA(Croagunk, 40, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Croagunk,
         .frontAnimId = ANIM_RAPID_H_HOPS,
         BACK_PIC(Croagunk, 56, 56),
-        BACK_PIC_FEMALE(Croagunk, 56, 56),
+        BACK_PIC_HEMBRA(Croagunk, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Croagunk),
-        ICON(Croagunk),
+        PALETA(Croagunk),
+        ICONO(Croagunk),
         FOLLOWER(Croagunk, TRACKS_FOOT)
-        LEARNSETS(Croagunk),
+        MOVIMIENTOS(Croagunk),
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_TOXICROAK}),
     },
 
@@ -23152,18 +23347,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Toxicroak, 56, 56),
-        FRONT_PIC_FEMALE(Toxicroak, 56, 56),
+        FRONT_PIC_HEMBRA(Toxicroak, 56, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Toxicroak,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Toxicroak, 56, 56),
-        BACK_PIC_FEMALE(Toxicroak, 56, 56),
+        BACK_PIC_HEMBRA(Toxicroak, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Toxicroak),
-        ICON(Toxicroak),
+        PALETA(Toxicroak),
+        ICONO(Toxicroak),
         FOLLOWER(Toxicroak, TRACKS_FOOT)
-        LEARNSETS(Toxicroak),
+        MOVIMIENTOS(Toxicroak),
     },
 
     [SPECIES_SNOVER] =
@@ -23202,18 +23397,18 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 257,
         .trainerOffset = 0,
         FRONT_PIC(Snover, 64, 48),
-        FRONT_PIC_FEMALE(Snover, 64, 48),
+        FRONT_PIC_HEMBRA(Snover, 64, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Snover,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Snover, 64, 56),
-        BACK_PIC_FEMALE(Snover, 64, 56),
+        BACK_PIC_HEMBRA(Snover, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Snover),
-        ICON(Snover),
+        PALETA(Snover),
+        ICONO(Snover),
         FOLLOWER(Snover, TRACKS_FOOT)
-        LEARNSETS(Snover),
+        MOVIMIENTOS(Snover),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ABOMASNOW}),
     },
 
@@ -23231,7 +23426,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Abomasnow"),                                 \
         .natDexNum = DEX_ABOMASNOW,                           \
         .categoryName = _("Frost Tree"),                               \
-        LEARNSETS(Abomasnow)
+        MOVIMIENTOS(Abomasnow)
 
     [SPECIES_ABOMASNOW] =
     {
@@ -23258,15 +23453,15 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 348,
         .trainerOffset = 6,
         FRONT_PIC(Abomasnow, 64, 64),
-        FRONT_PIC_FEMALE(Abomasnow, 64, 64),
+        FRONT_PIC_HEMBRA(Abomasnow, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Abomasnow,
         .frontAnimId = ANIM_H_SHAKE,
         BACK_PIC(Abomasnow, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Abomasnow),
-        ICON(Abomasnow),
+        PALETA(Abomasnow),
+        ICONO(Abomasnow),
         FOLLOWER(Abomasnow, TRACKS_FOOT)
     },
 
@@ -23291,7 +23486,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 13,                                        \
         .trainerScale = 256,                                        \
         .trainerOffset = 0,                                         \
-        LEARNSETS(Rotom),                                           \
+        MOVIMIENTOS(Rotom),                                           \
         .formSpeciesIdTable = sRotomFormSpeciesIdTable,             \
         .formChangeTable = sRotomFormChangeTable
 
@@ -23320,8 +23515,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rotom, 56, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Rotom),
-        ICON(Rotom),
+        PALETA(Rotom),
+        ICONO(Rotom),
         FOLLOWER(Rotom, TRACKS_FOOT)
     },
 
@@ -23360,8 +23555,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RotomHeat, 64, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(RotomHeat),
-        ICON(RotomHeat),
+        PALETA(RotomHeat),
+        ICONO(RotomHeat),
         FOLLOWER(RotomHeat, TRACKS_FOOT)
     },
 
@@ -23384,8 +23579,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RotomWash, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(RotomWash),
-        ICON(RotomWash),
+        PALETA(RotomWash),
+        ICONO(RotomWash),
         FOLLOWER(RotomWash, TRACKS_FOOT)
     },
 
@@ -23407,8 +23602,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RotomFrost, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(RotomFrost),
-        ICON(RotomFrost),
+        PALETA(RotomFrost),
+        ICONO(RotomFrost),
         FOLLOWER(RotomFrost, TRACKS_FOOT)
     },
 
@@ -23431,8 +23626,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RotomFan, 64, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(RotomFan),
-        ICON(RotomFan),
+        PALETA(RotomFan),
+        ICONO(RotomFan),
         FOLLOWER(RotomFan, TRACKS_FOOT)
     },
 
@@ -23454,8 +23649,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(RotomMow, 56, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(RotomMow),
-        ICON(RotomMow),
+        PALETA(RotomMow),
+        ICONO(RotomMow),
         FOLLOWER(RotomMow, TRACKS_FOOT)
     },
 
@@ -23508,10 +23703,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Heatran, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Heatran),
-        ICON(Heatran),
+        PALETA(Heatran),
+        ICONO(Heatran),
         FOLLOWER(Heatran, TRACKS_FOOT)
-        LEARNSETS(Heatran),
+        MOVIMIENTOS(Heatran),
     },
 
     [SPECIES_REGIGIGAS] =
@@ -23524,13 +23719,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 110,
         .types = MON_TYPES(TYPE_NORMAL),
         .catchRate = 3,
-    #if P_UPDATED_EXP_YIELDS >= GEN_8
         .expYield = 335,
-    #elif P_UPDATED_EXP_YIELDS >= GEN_5
-        .expYield = 302,
-    #else
-        .expYield = 220,
-    #endif
         .evYield_Attack = 3,
         .genderRatio = MON_GENDERLESS,
         .eggCycles = 120,
@@ -23562,10 +23751,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Regigigas, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Regigigas),
-        ICON(Regigigas),
+        PALETA(Regigigas),
+        ICONO(Regigigas),
         FOLLOWER(Regigigas, TRACKS_FOOT)
-        LEARNSETS(Regigigas),
+        MOVIMIENTOS(Regigigas),
     },
 
     [SPECIES_SNIVY] =
@@ -23609,10 +23798,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Snivy, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Snivy),
-        ICON(Snivy),
+        PALETA(Snivy),
+        ICONO(Snivy),
         FOLLOWER(Snivy, TRACKS_FOOT)
-        LEARNSETS(Snivy),
+        MOVIMIENTOS(Snivy),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_SERVINE}),
     },
 
@@ -23657,10 +23846,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Servine, 48, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Servine),
-        ICON(Servine),
+        PALETA(Servine),
+        ICONO(Servine),
         FOLLOWER(Servine, TRACKS_FOOT)
-        LEARNSETS(Servine),
+        MOVIMIENTOS(Servine),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SERPERIOR}),
     },
 
@@ -23674,7 +23863,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 95,
         .types = MON_TYPES(TYPE_GRASS),
         .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 264 : 238,
+        .expYield = 264,
         .evYield_Speed = 3,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
@@ -23705,10 +23894,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Serperior, 64, 64),
         .backPicYOffset = 1,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Serperior),
-        ICON(Serperior),
+        PALETA(Serperior),
+        ICONO(Serperior),
         FOLLOWER(Serperior, TRACKS_FOOT)
-        LEARNSETS(Serperior),
+        MOVIMIENTOS(Serperior),
     },
 
     [SPECIES_TEPIG] =
@@ -23752,10 +23941,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tepig, 48, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Tepig),
-        ICON(Tepig),
+        PALETA(Tepig),
+        ICONO(Tepig),
         FOLLOWER(Tepig, TRACKS_FOOT)
-        LEARNSETS(Tepig),
+        MOVIMIENTOS(Tepig),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_PIGNITE}),
     },
 
@@ -23800,10 +23989,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pignite, 64, 64),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Pignite),
-        ICON(Pignite),
+        PALETA(Pignite),
+        ICONO(Pignite),
         FOLLOWER(Pignite, TRACKS_FOOT)
-        LEARNSETS(Pignite),
+        MOVIMIENTOS(Pignite),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_EMBOAR}),
     },
 
@@ -23817,7 +24006,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .baseSpDefense = 65,
         .types = MON_TYPES(TYPE_FIRE, TYPE_FIGHTING),
         .catchRate = 45,
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 264 : 238,
+        .expYield = 264,
         .evYield_Attack = 3,
         .genderRatio = PERCENT_FEMALE(25),
         .eggCycles = 20,
@@ -23849,10 +24038,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Emboar, 64, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Emboar),
-        ICON(Emboar),
+        PALETA(Emboar),
+        ICONO(Emboar),
         FOLLOWER(Emboar, TRACKS_FOOT)
-        LEARNSETS(Emboar),
+        MOVIMIENTOS(Emboar),
     },
 
     [SPECIES_OSHAWOTT] =
@@ -23896,10 +24085,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Oshawott, 40, 48),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Oshawott),
-        ICON(Oshawott),
+        PALETA(Oshawott),
+        ICONO(Oshawott),
         FOLLOWER(Oshawott, TRACKS_FOOT)
-        LEARNSETS(Oshawott),
+        MOVIMIENTOS(Oshawott),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_DEWOTT}),
     },
 
@@ -23944,10 +24133,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dewott, 56, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Dewott),
-        ICON(Dewott),
+        PALETA(Dewott),
+        ICONO(Dewott),
         FOLLOWER(Dewott, TRACKS_FOOT)
-        LEARNSETS(Dewott),
+        MOVIMIENTOS(Dewott),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SAMUROTT}),
     },
 
@@ -23995,10 +24184,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Samurott, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_BLUE,
-        PALETTES(Samurott),
-        ICON(Samurott),
+        PALETA(Samurott),
+        ICONO(Samurott),
         FOLLOWER(Samurott, TRACKS_FOOT)
-        LEARNSETS(Samurott),
+        MOVIMIENTOS(Samurott),
     },
 
     [SPECIES_BLITZLE] =
@@ -24042,10 +24231,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Blitzle, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Blitzle),
-        ICON(Blitzle),
+        PALETA(Blitzle),
+        ICONO(Blitzle),
         FOLLOWER(Blitzle, TRACKS_FOOT)
-        LEARNSETS(Blitzle),
+        MOVIMIENTOS(Blitzle),
         .evolutions = EVOLUTION({EVO_LEVEL, 27, SPECIES_ZEBSTRIKA}),
     },
 
@@ -24090,10 +24279,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zebstrika, 64, 64),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Zebstrika),
-        ICON(Zebstrika),
+        PALETA(Zebstrika),
+        ICONO(Zebstrika),
         FOLLOWER(Zebstrika, TRACKS_FOOT)
-        LEARNSETS(Zebstrika),
+        MOVIMIENTOS(Zebstrika),
     },
 
     [SPECIES_DRILBUR] =
@@ -24138,10 +24327,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drilbur, 64, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Drilbur),
-        ICON(Drilbur),
+        PALETA(Drilbur),
+        ICONO(Drilbur),
         FOLLOWER(Drilbur, TRACKS_FOOT)
-        LEARNSETS(Drilbur),
+        MOVIMIENTOS(Drilbur),
         .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_EXCADRILL}),
     },
 
@@ -24187,10 +24376,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Excadrill, 64, 64),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Excadrill),
-        ICON(Excadrill),
+        PALETA(Excadrill),
+        ICONO(Excadrill),
         FOLLOWER(Excadrill, TRACKS_FOOT)
-        LEARNSETS(Excadrill),
+        MOVIMIENTOS(Excadrill),
     },
 
     [SPECIES_TIMBURR] =
@@ -24234,10 +24423,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Timburr, 64, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Timburr),
-        ICON(Timburr),
+        PALETA(Timburr),
+        ICONO(Timburr),
         FOLLOWER(Timburr, TRACKS_FOOT)
-        LEARNSETS(Timburr),
+        MOVIMIENTOS(Timburr),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GURDURR}),
     },
 
@@ -24282,10 +24471,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gurdurr, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Gurdurr),
-        ICON(Gurdurr),
+        PALETA(Gurdurr),
+        ICONO(Gurdurr),
         FOLLOWER(Gurdurr, TRACKS_FOOT)
-        LEARNSETS(Gurdurr),
+        MOVIMIENTOS(Gurdurr),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CONKELDURR}),
     },
 
@@ -24330,10 +24519,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Conkeldurr, 64, 56),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Conkeldurr),
-        ICON(Conkeldurr),
+        PALETA(Conkeldurr),
+        ICONO(Conkeldurr),
         FOLLOWER(Conkeldurr, TRACKS_FOOT)
-        LEARNSETS(Conkeldurr),
+        MOVIMIENTOS(Conkeldurr),
     },
 
     [SPECIES_SANDILE] =
@@ -24378,10 +24567,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sandile, 64, 32),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Sandile),
-        ICON(Sandile),
+        PALETA(Sandile),
+        ICONO(Sandile),
         FOLLOWER(Sandile, TRACKS_FOOT)
-        LEARNSETS(Sandile),
+        MOVIMIENTOS(Sandile),
         .evolutions = EVOLUTION({EVO_LEVEL, 29, SPECIES_KROKOROK}),
     },
 
@@ -24427,10 +24616,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Krokorok, 56, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Krokorok),
-        ICON(Krokorok),
+        PALETA(Krokorok),
+        ICONO(Krokorok),
         FOLLOWER(Krokorok, TRACKS_FOOT)
-        LEARNSETS(Krokorok),
+        MOVIMIENTOS(Krokorok),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_KROOKODILE}),
     },
 
@@ -24482,10 +24671,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Krookodile, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Krookodile),
-        ICON(Krookodile),
+        PALETA(Krookodile),
+        ICONO(Krookodile),
         FOLLOWER(Krookodile, TRACKS_FOOT)
-        LEARNSETS(Krookodile),
+        MOVIMIENTOS(Krookodile),
     },
 
 #define DARUMAKA_MISC_INFO                                                  \
@@ -24532,10 +24721,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Darumaka, 56, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Darumaka),
-        ICON(Darumaka),
+        PALETA(Darumaka),
+        ICONO(Darumaka),
         FOLLOWER(Darumaka, TRACKS_FOOT)
-        LEARNSETS(Darumaka),
+        MOVIMIENTOS(Darumaka),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_DARMANITAN_STANDARD}),
     },
 
@@ -24576,7 +24765,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 3,                                                 \
         .trainerScale = 256,                                                \
         .trainerOffset = 0,                                                 \
-        LEARNSETS(Darmanitan),                                              \
+        MOVIMIENTOS(Darmanitan),                                              \
         .formChangeTable = sDarmanitanFormChangeTable
 
     [SPECIES_DARMANITAN_STANDARD] =
@@ -24598,8 +24787,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DarmanitanStandard, 64, 64),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(DarmanitanStandard),
-        ICON(DarmanitanStandard),
+        PALETA(DarmanitanStandard),
+        ICONO(DarmanitanStandard),
         FOLLOWER(DarmanitanStandard, TRACKS_FOOT)
     },
 
@@ -24626,8 +24815,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DarmanitanZen, 56, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(DarmanitanZen),
-        ICON(DarmanitanZen),
+        PALETA(DarmanitanZen),
+        ICONO(DarmanitanZen),
     },
 
     [SPECIES_DARUMAKA_GALAR] =
@@ -24654,10 +24843,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DarumakaGalar, 56, 48),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(DarumakaGalar),
-        ICON(DarumakaGalar),
+        PALETA(DarumakaGalar),
+        ICONO(DarumakaGalar),
         FOLLOWER(DarumakaGalar, TRACKS_FOOT)
-        LEARNSETS(DarumakaGalar),
+        MOVIMIENTOS(DarumakaGalar),
         .isGalarForm = TRUE,
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_DARMANITAN_GALAR_STANDARD}),
     },
@@ -24671,7 +24860,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 3,                                                     \
         .trainerScale = 256,                                                    \
         .trainerOffset = 0,                                                     \
-        LEARNSETS(DarmanitanGalar),                                          \
+        MOVIMIENTOS(DarmanitanGalar),                                          \
         .formChangeTable = sDarmanitanGalarFormChangeTable,                  \
         .isGalarForm = TRUE
 
@@ -24693,9 +24882,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DarmanitanGalarStandard, 56, 64),
         .backPicYOffset = 2,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(DarmanitanGalarStandard),
+        PALETA(DarmanitanGalarStandard),
         .itemRare = ITEM_SNOWBALL,
-        ICON(DarmanitanGalarStandard),
+        ICONO(DarmanitanGalarStandard),
         FOLLOWER(DarmanitanGalarStandard, TRACKS_FOOT)
     },
 
@@ -24722,8 +24911,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DarmanitanGalarZen, 64, 64),
         .backPicYOffset = 1,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(DarmanitanGalarZen),
-        ICON(DarmanitanGalarZen),
+        PALETA(DarmanitanGalarZen),
+        ICONO(DarmanitanGalarZen),
     },
 
     [SPECIES_SCRAGGY] =
@@ -24768,10 +24957,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Scraggy, 48, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Scraggy),
-        ICON(Scraggy),
+        PALETA(Scraggy),
+        ICONO(Scraggy),
         FOLLOWER(Scraggy, TRACKS_FOOT)
-        LEARNSETS(Scraggy),
+        MOVIMIENTOS(Scraggy),
         .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_SCRAFTY}),
     },
 
@@ -24818,10 +25007,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Scrafty, 48, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Scrafty),
-        ICON(Scrafty),
+        PALETA(Scrafty),
+        ICONO(Scrafty),
         FOLLOWER(Scrafty, TRACKS_FOOT)
-        LEARNSETS(Scrafty),
+        MOVIMIENTOS(Scrafty),
     },
 
 #define YAMASK_MISC_INFO                                                   \
@@ -24870,10 +25059,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Yamask, 40, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Yamask),
-        ICON(Yamask),
+        PALETA(Yamask),
+        ICONO(Yamask),
         FOLLOWER(Yamask, TRACKS_FOOT)
-        LEARNSETS(Yamask),
+        MOVIMIENTOS(Yamask),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_COFAGRIGUS}),
     },
 
@@ -24919,10 +25108,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cofagrigus, 56, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Cofagrigus),
-        ICON(Cofagrigus),
+        PALETA(Cofagrigus),
+        ICONO(Cofagrigus),
         FOLLOWER(Cofagrigus, TRACKS_FOOT)
-        LEARNSETS(Cofagrigus),
+        MOVIMIENTOS(Cofagrigus),
     },
 
 #define ZORUA_MISC_INFO                                     \
@@ -24989,10 +25178,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zorua, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Zorua),
-        ICON(Zorua),
+        PALETA(Zorua),
+        ICONO(Zorua),
         FOLLOWER(Zorua, TRACKS_FOOT)
-        LEARNSETS(Zorua),
+        MOVIMIENTOS(Zorua),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK}),
     },
 
@@ -25020,10 +25209,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zoroark, 64, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Zoroark),
-        ICON(Zoroark),
+        PALETA(Zoroark),
+        ICONO(Zoroark),
         FOLLOWER(Zoroark, TRACKS_FOOT)
-        LEARNSETS(Zoroark),
+        MOVIMIENTOS(Zoroark),
     },
 
     [SPECIES_ZORUA_HISUI] =
@@ -25049,10 +25238,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(ZoruaHisui, 56, 64),
         .backPicYOffset = 1,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ZoruaHisui),
-        ICON(ZoruaHisui),
+        PALETA(ZoruaHisui),
+        ICONO(ZoruaHisui),
         FOLLOWER(ZoruaHisui, TRACKS_FOOT)
-        LEARNSETS(ZoruaHisui),
+        MOVIMIENTOS(ZoruaHisui),
         .isHisuiForm = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK_HISUI}),
     },
@@ -25081,10 +25270,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(ZoroarkHisui, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ZoroarkHisui),
-        ICON(ZoroarkHisui),
+        PALETA(ZoroarkHisui),
+        ICONO(ZoroarkHisui),
         FOLLOWER(ZoroarkHisui, TRACKS_FOOT)
-        LEARNSETS(ZoroarkHisui),
+        MOVIMIENTOS(ZoroarkHisui),
         .isHisuiForm = TRUE,
     },
 
@@ -25129,10 +25318,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gothita, 48, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Gothita),
-        ICON(Gothita),
+        PALETA(Gothita),
+        ICONO(Gothita),
         FOLLOWER(Gothita, TRACKS_FOOT)
-        LEARNSETS(Gothita),
+        MOVIMIENTOS(Gothita),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_GOTHORITA}),
     },
 
@@ -25177,10 +25366,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gothorita, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Gothorita),
-        ICON(Gothorita),
+        PALETA(Gothorita),
+        ICONO(Gothorita),
         FOLLOWER(Gothorita, TRACKS_FOOT)
-        LEARNSETS(Gothorita),
+        MOVIMIENTOS(Gothorita),
         .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_GOTHITELLE}),
     },
 
@@ -25225,10 +25414,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gothitelle, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(Gothitelle),
-        ICON(Gothitelle),
+        PALETA(Gothitelle),
+        ICONO(Gothitelle),
         FOLLOWER(Gothitelle, TRACKS_FOOT)
-        LEARNSETS(Gothitelle),
+        MOVIMIENTOS(Gothitelle),
     },
 
     [SPECIES_FOONGUS] =
@@ -25272,10 +25461,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Foongus, 48, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Foongus),
-        ICON(Foongus),
+        PALETA(Foongus),
+        ICONO(Foongus),
         FOLLOWER(Foongus, TRACKS_FOOT)
-        LEARNSETS(Foongus),
+        MOVIMIENTOS(Foongus),
         .evolutions = EVOLUTION({EVO_LEVEL, 39, SPECIES_AMOONGUSS}),
     },
 
@@ -25321,10 +25510,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Amoonguss, 64, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Amoonguss),
-        ICON(Amoonguss),
+        PALETA(Amoonguss),
+        ICONO(Amoonguss),
         FOLLOWER(Amoonguss, TRACKS_FOOT)
-        LEARNSETS(Amoonguss),
+        MOVIMIENTOS(Amoonguss),
     },
 
     [SPECIES_FRILLISH] =
@@ -25362,20 +25551,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Frillish, 56, 56),
-        FRONT_PIC_FEMALE(Frillish, 56, 56),
+        FRONT_PIC_HEMBRA(Frillish, 56, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Frillish,
         .frontAnimId = ANIM_RISING_WOBBLE,
         BACK_PIC(Frillish, 40, 56),
-        BACK_PIC_FEMALE(Frillish, 40, 56),
+        BACK_PIC_HEMBRA(Frillish, 40, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Frillish),
-        PALETTE_FEMALE(Frillish),
-        ICON(Frillish),
-        ICON_FEMALE(Frillish),
+        PALETA(Frillish),
+        PALETA_HEMBRA(Frillish),
+        ICONO(Frillish),
+        ICONO_HEMBRA(Frillish),
         FOLLOWER(Frillish, TRACKS_FOOT)
-        LEARNSETS(Frillish),
+        MOVIMIENTOS(Frillish),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JELLICENT}),
     },
 
@@ -25414,20 +25603,20 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerScale = 348,
         .trainerOffset = 6,
         FRONT_PIC(Jellicent, 64, 64),
-        FRONT_PIC_FEMALE(Jellicent, 64, 64),
+        FRONT_PIC_HEMBRA(Jellicent, 64, 64),
         .frontPicYOffset = 3,
         .frontAnimFrames = sAnims_Jellicent,
         .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Jellicent, 64, 48),
-        BACK_PIC_FEMALE(Jellicent, 64, 48),
+        BACK_PIC_HEMBRA(Jellicent, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Jellicent),
-        PALETTE_FEMALE(Jellicent),
-        ICON(Jellicent),
-        ICON_FEMALE(Jellicent),
+        PALETA(Jellicent),
+        PALETA_HEMBRA(Jellicent),
+        ICONO(Jellicent),
+        ICONO_HEMBRA(Jellicent),
         FOLLOWER(Jellicent, TRACKS_FOOT)
-        LEARNSETS(Jellicent),
+        MOVIMIENTOS(Jellicent),
     },
 
     [SPECIES_JOLTIK] =
@@ -25471,10 +25660,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Joltik, 48, 32),
         .backPicYOffset = 19,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Joltik),
-        ICON(Joltik),
+        PALETA(Joltik),
+        ICONO(Joltik),
         FOLLOWER(Joltik, TRACKS_FOOT)
-        LEARNSETS(Joltik),
+        MOVIMIENTOS(Joltik),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GALVANTULA}),
     },
 
@@ -25519,10 +25708,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Galvantula, 64, 40),
         .backPicYOffset = 18,
         .backAnimId = BACK_ANIM_SHAKE_FLASH_YELLOW,
-        PALETTES(Galvantula),
-        ICON(Galvantula),
+        PALETA(Galvantula),
+        ICONO(Galvantula),
         FOLLOWER(Galvantula, TRACKS_FOOT)
-        LEARNSETS(Galvantula),
+        MOVIMIENTOS(Galvantula),
     },
 
     [SPECIES_FERROSEED] =
@@ -25567,10 +25756,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ferroseed, 48, 40),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Ferroseed),
-        ICON(Ferroseed),
+        PALETA(Ferroseed),
+        ICONO(Ferroseed),
         FOLLOWER(Ferroseed, TRACKS_FOOT)
-        LEARNSETS(Ferroseed),
+        MOVIMIENTOS(Ferroseed),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_FERROTHORN}),
     },
 
@@ -25617,10 +25806,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Ferrothorn, 64, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Ferrothorn),
-        ICON(Ferrothorn),
+        PALETA(Ferrothorn),
+        ICONO(Ferrothorn),
         FOLLOWER(Ferrothorn, TRACKS_FOOT)
-        LEARNSETS(Ferrothorn),
+        MOVIMIENTOS(Ferrothorn),
     },
 
     [SPECIES_ELGYEM] =
@@ -25664,10 +25853,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Elgyem, 48, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Elgyem),
-        ICON(Elgyem),
+        PALETA(Elgyem),
+        ICONO(Elgyem),
         FOLLOWER(Elgyem, TRACKS_FOOT)
-        LEARNSETS(Elgyem),
+        MOVIMIENTOS(Elgyem),
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_BEHEEYEM}),
     },
 
@@ -25712,10 +25901,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Beheeyem, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Beheeyem),
-        ICON(Beheeyem),
+        PALETA(Beheeyem),
+        ICONO(Beheeyem),
         FOLLOWER(Beheeyem, TRACKS_FOOT)
-        LEARNSETS(Beheeyem),
+        MOVIMIENTOS(Beheeyem),
     },
 
     [SPECIES_LITWICK] =
@@ -25764,10 +25953,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Litwick, 40, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Litwick),
-        ICON(Litwick),
+        PALETA(Litwick),
+        ICONO(Litwick),
         FOLLOWER(Litwick, TRACKS_FOOT)
-        LEARNSETS(Litwick),
+        MOVIMIENTOS(Litwick),
         .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_LAMPENT}),
     },
 
@@ -25817,10 +26006,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Lampent, 56, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Lampent),
-        ICON(Lampent),
+        PALETA(Lampent),
+        ICONO(Lampent),
         FOLLOWER(Lampent, TRACKS_FOOT)
-        LEARNSETS(Lampent),
+        MOVIMIENTOS(Lampent),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_CHANDELURE}),
     },
 
@@ -25870,10 +26059,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chandelure, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_CONVEX_DOUBLE_ARC,
-        PALETTES(Chandelure),
-        ICON(Chandelure),
+        PALETA(Chandelure),
+        ICONO(Chandelure),
         FOLLOWER(Chandelure, TRACKS_FOOT)
-        LEARNSETS(Chandelure),
+        MOVIMIENTOS(Chandelure),
     },
 
     [SPECIES_AXEW] =
@@ -25917,10 +26106,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Axew, 48, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Axew),
-        ICON(Axew),
+        PALETA(Axew),
+        ICONO(Axew),
         FOLLOWER(Axew, TRACKS_FOOT)
-        LEARNSETS(Axew),
+        MOVIMIENTOS(Axew),
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_FRAXURE}),
     },
 
@@ -25965,10 +26154,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Fraxure, 64, 48),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Fraxure),
-        ICON(Fraxure),
+        PALETA(Fraxure),
+        ICONO(Fraxure),
         FOLLOWER(Fraxure, TRACKS_FOOT)
-        LEARNSETS(Fraxure),
+        MOVIMIENTOS(Fraxure),
         .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_HAXORUS}),
     },
 
@@ -26013,10 +26202,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Haxorus, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Haxorus),
-        ICON(Haxorus),
+        PALETA(Haxorus),
+        ICONO(Haxorus),
         FOLLOWER(Haxorus, TRACKS_FOOT)
-        LEARNSETS(Haxorus),
+        MOVIMIENTOS(Haxorus),
     },
 
     [SPECIES_CUBCHOO] =
@@ -26060,10 +26249,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Cubchoo, 40, 40),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Cubchoo),
-        ICON(Cubchoo),
+        PALETA(Cubchoo),
+        ICONO(Cubchoo),
         FOLLOWER(Cubchoo, TRACKS_FOOT)
-        LEARNSETS(Cubchoo),
+        MOVIMIENTOS(Cubchoo),
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BEARTIC}),
     },
 
@@ -26108,10 +26297,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Beartic, 64, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Beartic),
-        ICON(Beartic),
+        PALETA(Beartic),
+        ICONO(Beartic),
         FOLLOWER(Beartic, TRACKS_FOOT)
-        LEARNSETS(Beartic),
+        MOVIMIENTOS(Beartic),
     },
 
     [SPECIES_GOLETT] =
@@ -26157,10 +26346,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Golett, 64, 56),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Golett),
-        ICON(Golett),
+        PALETA(Golett),
+        ICONO(Golett),
         FOLLOWER(Golett, TRACKS_FOOT)
-        LEARNSETS(Golett),
+        MOVIMIENTOS(Golett),
         .evolutions = EVOLUTION({EVO_LEVEL, 43, SPECIES_GOLURK}),
     },
 
@@ -26207,10 +26396,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Golurk, 64, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Golurk),
-        ICON(Golurk),
+        PALETA(Golurk),
+        ICONO(Golurk),
         FOLLOWER(Golurk, TRACKS_FOOT)
-        LEARNSETS(Golurk),
+        MOVIMIENTOS(Golurk),
     },
 
     [SPECIES_PAWNIARD] =
@@ -26254,10 +26443,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pawniard, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Pawniard),
-        ICON(Pawniard),
+        PALETA(Pawniard),
+        ICONO(Pawniard),
         FOLLOWER(Pawniard, TRACKS_FOOT)
-        LEARNSETS(Pawniard),
+        MOVIMIENTOS(Pawniard),
         .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
     },
 
@@ -26303,10 +26492,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bisharp, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Bisharp),
-        ICON(Bisharp),
+        PALETA(Bisharp),
+        ICONO(Bisharp),
         FOLLOWER(Bisharp, TRACKS_FOOT)
-        LEARNSETS(Bisharp),
+        MOVIMIENTOS(Bisharp),
     },
 
     [SPECIES_RUFFLET] =
@@ -26350,10 +26539,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rufflet, 48, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Rufflet),
-        ICON(Rufflet),
+        PALETA(Rufflet),
+        ICONO(Rufflet),
         FOLLOWER(Rufflet, TRACKS_FOOT)
-        LEARNSETS(Rufflet),
+        MOVIMIENTOS(Rufflet),
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_BRAVIARY},
                                 {EVO_NONE, 0, SPECIES_BRAVIARY_HISUI}),
     },
@@ -26403,10 +26592,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Braviary, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Braviary),
-        ICON(Braviary),
+        PALETA(Braviary),
+        ICONO(Braviary),
         FOLLOWER(Braviary, TRACKS_FOOT)
-        LEARNSETS(Braviary),
+        MOVIMIENTOS(Braviary),
     },
 
     [SPECIES_BRAVIARY_HISUI] =
@@ -26441,10 +26630,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(BraviaryHisui, 64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(BraviaryHisui),
-        ICON(BraviaryHisui),
+        PALETA(BraviaryHisui),
+        ICONO(BraviaryHisui),
         FOLLOWER(BraviaryHisui, TRACKS_FOOT)
-        LEARNSETS(BraviaryHisui),
+        MOVIMIENTOS(BraviaryHisui),
         .isHisuiForm = TRUE,
     },
 
@@ -26489,10 +26678,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Vullaby, 64, 48),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Vullaby),
-        ICON(Vullaby),
+        PALETA(Vullaby),
+        ICONO(Vullaby),
         FOLLOWER(Vullaby, TRACKS_FOOT)
-        LEARNSETS(Vullaby),
+        MOVIMIENTOS(Vullaby),
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_MANDIBUZZ}),
     },
 
@@ -26537,10 +26726,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Mandibuzz, 64, 48),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(Mandibuzz),
-        ICON(Mandibuzz),
+        PALETA(Mandibuzz),
+        ICONO(Mandibuzz),
         FOLLOWER(Mandibuzz, TRACKS_FOOT)
-        LEARNSETS(Mandibuzz),
+        MOVIMIENTOS(Mandibuzz),
     },
 
     [SPECIES_DEINO] =
@@ -26584,10 +26773,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Deino, 48, 48),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Deino),
-        ICON(Deino),
+        PALETA(Deino),
+        ICONO(Deino),
         FOLLOWER(Deino, TRACKS_FOOT)
-        LEARNSETS(Deino),
+        MOVIMIENTOS(Deino),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_ZWEILOUS}),
     },
 
@@ -26632,10 +26821,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Zweilous, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Zweilous),
-        ICON(Zweilous),
+        PALETA(Zweilous),
+        ICONO(Zweilous),
         FOLLOWER(Zweilous, TRACKS_FOOT)
-        LEARNSETS(Zweilous),
+        MOVIMIENTOS(Zweilous),
         .evolutions = EVOLUTION({EVO_LEVEL, 64, SPECIES_HYDREIGON}),
     },
 
@@ -26681,10 +26870,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Hydreigon, 64, 56),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Hydreigon),
-        ICON(Hydreigon),
+        PALETA(Hydreigon),
+        ICONO(Hydreigon),
         FOLLOWER(Hydreigon, TRACKS_FOOT)
-        LEARNSETS(Hydreigon),
+        MOVIMIENTOS(Hydreigon),
     },
 
     [SPECIES_LARVESTA] =
@@ -26728,10 +26917,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Larvesta, 64, 48),
         .backPicYOffset = 12,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Larvesta),
-        ICON(Larvesta),
+        PALETA(Larvesta),
+        ICONO(Larvesta),
         FOLLOWER(Larvesta, TRACKS_FOOT)
-        LEARNSETS(Larvesta),
+        MOVIMIENTOS(Larvesta),
         .evolutions = EVOLUTION({EVO_LEVEL, 59, SPECIES_VOLCARONA}),
     },
 
@@ -26779,10 +26968,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Volcarona, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_SHAKE_GLOW_RED,
-        PALETTES(Volcarona),
-        ICON(Volcarona),
+        PALETA(Volcarona),
+        ICONO(Volcarona),
         FOLLOWER(Volcarona, TRACKS_FOOT)
-        LEARNSETS(Volcarona),
+        MOVIMIENTOS(Volcarona),
     },
 
     [SPECIES_CHESPIN] =
@@ -26826,10 +27015,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chespin, 56, 64),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_H_SLIDE,
-        PALETTES(Chespin),
-        ICON(Chespin),
+        PALETA(Chespin),
+        ICONO(Chespin),
         FOLLOWER(Chespin, TRACKS_FOOT)
-        LEARNSETS(Chespin),
+        MOVIMIENTOS(Chespin),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_QUILLADIN}),
     },
 
@@ -26874,10 +27063,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Quilladin, 64, 48),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_GROW,
-        PALETTES(Quilladin),
-        ICON(Quilladin),
+        PALETA(Quilladin),
+        ICONO(Quilladin),
         FOLLOWER(Quilladin, TRACKS_FOOT)
-        LEARNSETS(Quilladin),
+        MOVIMIENTOS(Quilladin),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHESNAUGHT}),
     },
 
@@ -26922,10 +27111,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Chesnaught, 64, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Chesnaught),
-        ICON(Chesnaught),
+        PALETA(Chesnaught),
+        ICONO(Chesnaught),
         FOLLOWER(Chesnaught, TRACKS_FOOT)
-        LEARNSETS(Chesnaught),
+        MOVIMIENTOS(Chesnaught),
     },
 
     [SPECIES_FENNEKIN] =
@@ -26969,10 +27158,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Fennekin, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Fennekin),
-        ICON(Fennekin),
+        PALETA(Fennekin),
+        ICONO(Fennekin),
         FOLLOWER(Fennekin, TRACKS_FOOT)
-        LEARNSETS(Fennekin),
+        MOVIMIENTOS(Fennekin),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BRAIXEN}),
     },
 
@@ -27017,10 +27206,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Braixen, 64, 56),
         .backPicYOffset = 10,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
-        PALETTES(Braixen),
-        ICON(Braixen),
+        PALETA(Braixen),
+        ICONO(Braixen),
         FOLLOWER(Braixen, TRACKS_FOOT)
-        LEARNSETS(Braixen),
+        MOVIMIENTOS(Braixen),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_DELPHOX}),
     },
 
@@ -27065,10 +27254,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Delphox, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Delphox),
-        ICON(Delphox),
+        PALETA(Delphox),
+        ICONO(Delphox),
         FOLLOWER(Delphox, TRACKS_FOOT)
-        LEARNSETS(Delphox),
+        MOVIMIENTOS(Delphox),
     },
 
     [SPECIES_FROAKIE] =
@@ -27112,10 +27301,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Froakie, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Froakie),
-        ICON(Froakie),
+        PALETA(Froakie),
+        ICONO(Froakie),
         FOLLOWER(Froakie, TRACKS_FOOT)
-        LEARNSETS(Froakie),
+        MOVIMIENTOS(Froakie),
         .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_FROGADIER}),
     },
 
@@ -27160,10 +27349,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Frogadier, 64, 56),
         .backPicYOffset = 6,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(Frogadier),
-        ICON(Frogadier),
+        PALETA(Frogadier),
+        ICONO(Frogadier),
         FOLLOWER(Frogadier, TRACKS_FOOT)
-        LEARNSETS(Frogadier),
+        MOVIMIENTOS(Frogadier),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GRENINJA}),
     },
 
@@ -27181,8 +27370,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimFrames = sAnims_Greninja,                     \
         BACK_PIC(Greninja, 64, 48),                             \
         .backPicYOffset = 11,                                   \
-        PALETTES(Greninja),                                     \
-        ICON(Greninja),                                      \
+        PALETA(Greninja),                                     \
+        ICONO(Greninja),                                      \
         FOLLOWER(Greninja, TRACKS_FOOT)
 
 
@@ -27205,7 +27394,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 2,                             \
         .trainerScale = 271,                            \
         .trainerOffset = 0,                             \
-        LEARNSETS(Greninja)
+        MOVIMIENTOS(Greninja)
 
     [SPECIES_GRENINJA] =
     {
@@ -27259,10 +27448,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Bunnelby, 48, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Bunnelby),
-        ICON(Bunnelby),
+        PALETA(Bunnelby),
+        ICONO(Bunnelby),
         FOLLOWER(Bunnelby, TRACKS_FOOT)
-        LEARNSETS(Bunnelby),
+        MOVIMIENTOS(Bunnelby),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_DIGGERSBY}),
     },
 
@@ -27307,10 +27496,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Diggersby, 64, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Diggersby),
-        ICON(Diggersby),
+        PALETA(Diggersby),
+        ICONO(Diggersby),
         FOLLOWER(Diggersby, TRACKS_FOOT)
-        LEARNSETS(Diggersby),
+        MOVIMIENTOS(Diggersby),
     },
 
     [SPECIES_FLETCHLING] =
@@ -27354,10 +27543,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Fletchling, 64, 40),
         .backPicYOffset = 14,
         .backAnimId = BACK_ANIM_TRIANGLE_DOWN,
-        PALETTES(Fletchling),
-        ICON(Fletchling),
+        PALETA(Fletchling),
+        ICONO(Fletchling),
         FOLLOWER(Fletchling, TRACKS_FOOT)
-        LEARNSETS(Fletchling),
+        MOVIMIENTOS(Fletchling),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_FLETCHINDER}),
     },
 
@@ -27403,10 +27592,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Fletchinder, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Fletchinder),
-        ICON(Fletchinder),
+        PALETA(Fletchinder),
+        ICONO(Fletchinder),
         FOLLOWER(Fletchinder, TRACKS_FOOT)
-        LEARNSETS(Fletchinder),
+        MOVIMIENTOS(Fletchinder),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_TALONFLAME}),
     },
 
@@ -27452,10 +27641,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Talonflame, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Talonflame),
-        ICON(Talonflame),
+        PALETA(Talonflame),
+        ICONO(Talonflame),
         FOLLOWER(Talonflame, TRACKS_FOOT)
-        LEARNSETS(Talonflame),
+        MOVIMIENTOS(Talonflame),
     },
 
     [SPECIES_SKIDDO] =
@@ -27499,10 +27688,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Skiddo, 56, 48),
         .backPicYOffset = 8,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Skiddo),
-        ICON(Skiddo),
+        PALETA(Skiddo),
+        ICONO(Skiddo),
         FOLLOWER(Skiddo, TRACKS_FOOT)
-        LEARNSETS(Skiddo),
+        MOVIMIENTOS(Skiddo),
         .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_GOGOAT}),
     },
 
@@ -27547,10 +27736,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Gogoat, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_DIP_RIGHT_SIDE,
-        PALETTES(Gogoat),
-        ICON(Gogoat),
+        PALETA(Gogoat),
+        ICONO(Gogoat),
         FOLLOWER(Gogoat, TRACKS_FOOT)
-        LEARNSETS(Gogoat),
+        MOVIMIENTOS(Gogoat),
     },
 
     [SPECIES_PANCHAM] =
@@ -27594,10 +27783,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pancham, 48, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-        PALETTES(Pancham),
-        ICON(Pancham),
+        PALETA(Pancham),
+        ICONO(Pancham),
         FOLLOWER(Pancham, TRACKS_FOOT)
-        LEARNSETS(Pancham),
+        MOVIMIENTOS(Pancham),
         .evolutions = EVOLUTION({EVO_LEVEL_DARK_TYPE_MON_IN_PARTY, 32, SPECIES_PANGORO}),
     },
 
@@ -27642,10 +27831,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Pangoro, 64, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Pangoro),
-        ICON(Pangoro),
+        PALETA(Pangoro),
+        ICONO(Pangoro),
         FOLLOWER(Pangoro, TRACKS_FOOT)
-        LEARNSETS(Pangoro),
+        MOVIMIENTOS(Pangoro),
     },
 
     [SPECIES_HONEDGE] =
@@ -27690,10 +27879,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Honedge, 48, 56),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(Honedge),
-        ICON(Honedge),
+        PALETA(Honedge),
+        ICONO(Honedge),
         FOLLOWER(Honedge, TRACKS_FOOT)
-        LEARNSETS(Honedge),
+        MOVIMIENTOS(Honedge),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_DOUBLADE}),
     },
 
@@ -27739,10 +27928,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Doublade, 64, 64),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Doublade),
-        ICON(Doublade),
+        PALETA(Doublade),
+        ICONO(Doublade),
         FOLLOWER(Doublade, TRACKS_FOOT)
-        LEARNSETS(Doublade),
+        MOVIMIENTOS(Doublade),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_AEGISLASH_SHIELD}),
     },
 
@@ -27767,7 +27956,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,                                     \
         .trainerScale = 290,                                    \
         .trainerOffset = 1,                                     \
-        LEARNSETS(Aegislash),                                   \
+        MOVIMIENTOS(Aegislash),                                   \
         .formSpeciesIdTable = sAegislashFormSpeciesIdTable,     \
         .formChangeTable = sAegislashFormChangeTable
 
@@ -27797,8 +27986,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(AegislashShield, 64, 64),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(AegislashShield),
-        ICON(AegislashShield),
+        PALETA(AegislashShield),
+        ICONO(AegislashShield),
         FOLLOWER(AegislashShield, TRACKS_FOOT)
     },
 
@@ -27831,8 +28020,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(AegislashBlade, 64, 64),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_JOLT_RIGHT,
-        PALETTES(AegislashBlade),
-        ICON(AegislashBlade),
+        PALETA(AegislashBlade),
+        ICONO(AegislashBlade),
     },
 
     [SPECIES_TYRUNT] =
@@ -27876,10 +28065,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tyrunt, 64, 48),
         .backPicYOffset = 11,
         .backAnimId = BACK_ANIM_H_SHAKE,
-        PALETTES(Tyrunt),
-        ICON(Tyrunt),
+        PALETA(Tyrunt),
+        ICONO(Tyrunt),
         FOLLOWER(Tyrunt, TRACKS_FOOT)
-        LEARNSETS(Tyrunt),
+        MOVIMIENTOS(Tyrunt),
         .evolutions = EVOLUTION({EVO_LEVEL_DAY, 39, SPECIES_TYRANTRUM}),
     },
 
@@ -27925,10 +28114,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Tyrantrum, 64, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
-        PALETTES(Tyrantrum),
-        ICON(Tyrantrum),
+        PALETA(Tyrantrum),
+        ICONO(Tyrantrum),
         FOLLOWER(Tyrantrum, TRACKS_FOOT)
-        LEARNSETS(Tyrantrum),
+        MOVIMIENTOS(Tyrantrum),
     },
 
     [SPECIES_AMAURA] =
@@ -27972,10 +28161,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Amaura, 40, 64),
         .backPicYOffset = 3,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Amaura),
-        ICON(Amaura),
+        PALETA(Amaura),
+        ICONO(Amaura),
         FOLLOWER(Amaura, TRACKS_FOOT)
-        LEARNSETS(Amaura),
+        MOVIMIENTOS(Amaura),
         .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 39, SPECIES_AURORUS}),
     },
 
@@ -28020,10 +28209,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Aurorus, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Aurorus),
-        ICON(Aurorus),
+        PALETA(Aurorus),
+        ICONO(Aurorus),
         FOLLOWER(Aurorus, TRACKS_FOOT)
-        LEARNSETS(Aurorus),
+        MOVIMIENTOS(Aurorus),
     },
 
     [SPECIES_GOOMY] =
@@ -28068,10 +28257,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Goomy, 48, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_H_SPRING,
-        PALETTES(Goomy),
-        ICON(Goomy),
+        PALETA(Goomy),
+        ICONO(Goomy),
         FOLLOWER(Goomy, TRACKS_FOOT)
-        LEARNSETS(Goomy),
+        MOVIMIENTOS(Goomy),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_SLIGGOO}),
     },
 
@@ -28120,10 +28309,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sliggoo, 48, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Sliggoo),
-        ICON(Sliggoo),
+        PALETA(Sliggoo),
+        ICONO(Sliggoo),
         FOLLOWER(Sliggoo, TRACKS_FOOT)
-        LEARNSETS(Sliggoo),
+        MOVIMIENTOS(Sliggoo),
         .evolutions = EVOLUTION({EVO_LEVEL_RAIN, 50, SPECIES_GOODRA},
                                 {EVO_LEVEL_FOG, 50, SPECIES_GOODRA}),
     },
@@ -28172,10 +28361,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Goodra, 64, 64),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW,
-        PALETTES(Goodra),
-        ICON(Goodra),
+        PALETA(Goodra),
+        ICONO(Goodra),
         FOLLOWER(Goodra, TRACKS_FOOT)
-        LEARNSETS(Goodra),
+        MOVIMIENTOS(Goodra),
     },
 
     [SPECIES_PHANTUMP] =
@@ -28220,10 +28409,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Phantump, 64, 56),
         .backPicYOffset = 9,
         .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-        PALETTES(Phantump),
-        ICON(Phantump),
+        PALETA(Phantump),
+        ICONO(Phantump),
         FOLLOWER(Phantump, TRACKS_FOOT)
-        LEARNSETS(Phantump),
+        MOVIMIENTOS(Phantump),
         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_TREVENANT},
                                 {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_TREVENANT}),
     },
@@ -28269,10 +28458,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Trevenant, 64, 64),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_LOW,
-        PALETTES(Trevenant),
-        ICON(Trevenant),
+        PALETA(Trevenant),
+        ICONO(Trevenant),
         FOLLOWER(Trevenant, TRACKS_FOOT)
-        LEARNSETS(Trevenant),
+        MOVIMIENTOS(Trevenant),
     },
 
     [SPECIES_CARBINK] =
@@ -28318,10 +28507,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Carbink, 56, 56),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_H_VIBRATE,
-        PALETTES(Carbink),
-        ICON(Carbink),
+        PALETA(Carbink),
+        ICONO(Carbink),
         FOLLOWER(Carbink, TRACKS_FOOT)
-        LEARNSETS(Carbink),
+        MOVIMIENTOS(Carbink),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DIANCIE}),
     },
 
@@ -28339,7 +28528,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .speciesName = _("Diancie"),                                                    \
         .natDexNum = DEX_DIANCIE,                                              \
         .categoryName = _("Jewel"),                                                     \
-        LEARNSETS(Diancie),                                                             \
+        MOVIMIENTOS(Diancie),                                                             \
         .isMythical = TRUE
 
     [SPECIES_DIANCIE] =
@@ -28372,8 +28561,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Diancie, 64, 64),
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_CIRCLE_COUNTERCLOCKWISE,
-        PALETTES(Diancie),
-        ICON(Diancie),
+        PALETA(Diancie),
+        ICONO(Diancie),
         FOLLOWER(Diancie, TRACKS_FOOT)
     },
 
@@ -28418,10 +28607,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rowlet, 43, 36),
         .backPicYOffset = 15,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
-        PALETTES(Rowlet),
-        ICON(Rowlet),
+        PALETA(Rowlet),
+        ICONO(Rowlet),
         FOLLOWER(Rowlet, TRACKS_FOOT)
-        LEARNSETS(Rowlet),
+        MOVIMIENTOS(Rowlet),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_DARTRIX}),
     },
 
@@ -28467,37 +28656,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dartrix, 56, 54),
         .backPicYOffset = 4,
         .backAnimId = BACK_ANIM_V_STRETCH,
-        PALETTES(Dartrix),
-        ICON(Dartrix),
+        PALETA(Dartrix),
+        ICONO(Dartrix),
         FOLLOWER(Dartrix, TRACKS_FOOT)
-        LEARNSETS(Dartrix),
+        MOVIMIENTOS(Dartrix),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE},
                                 {EVO_NONE, 0, SPECIES_DECIDUEYE_HISUI}),
     },
 
-#define DECIDUEYE_MISC_INFO                                     \
-        .catchRate = 45,                                        \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 265 : 239,\
-        .evYield_Attack = 3,                                    \
-        .genderRatio = PERCENT_FEMALE(25),                    \
-        .eggCycles = 15,                                        \
-        .friendship = STANDARD_FRIENDSHIP,                      \
-        .growthRate = GROWTH_MEDIUM_SLOW,                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),          \
-        .bodyColor = BODY_COLOR_BROWN,                          \
-        .speciesName = _("Decidueye"),                          \
-        .cryId = CRY_DECIDUEYE,                                 \
-        .natDexNum = DEX_DECIDUEYE,                    \
-        .categoryName = _("Arrow Quill"),                       \
-        .height = 16,                                           \
-        .pokemonScale = 259,                                    \
-        .pokemonOffset = 1,                                     \
-        .trainerScale = 296,                                    \
-        .trainerOffset = 1
-
     [SPECIES_DECIDUEYE] =
     {
-        DECIDUEYE_MISC_INFO,
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Decidueye"),
+        .cryId = CRY_DECIDUEYE,
+        .natDexNum = DEX_DECIDUEYE,
+        .categoryName = _("Arrow Quill"),
+        .height = 16,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
         .baseHP        = 78,
         .baseAttack    = 107,
         .baseDefense   = 75,
@@ -28519,15 +28705,32 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Decidueye, 46, 62),
         .backPicYOffset = 0,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(Decidueye),
-        ICON(Decidueye),
+        PALETA(Decidueye),
+        ICONO(Decidueye),
         FOLLOWER(Decidueye, TRACKS_FOOT)
-        LEARNSETS(Decidueye),
+        MOVIMIENTOS(Decidueye),
     },
 
     [SPECIES_DECIDUEYE_HISUI] =
     {
-        DECIDUEYE_MISC_INFO,
+        .catchRate = 45,
+        .expYield = 265,
+        .evYield_Attack = 3,
+        .genderRatio = PERCENT_FEMALE(25),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Decidueye"),
+        .cryId = CRY_DECIDUEYE,
+        .natDexNum = DEX_DECIDUEYE,
+        .categoryName = _("Arrow Quill"),
+        .height = 16,
+        .pokemonScale = 259,
+        .pokemonOffset = 1,
+        .trainerScale = 296,
+        .trainerOffset = 1,
         .baseHP        = 88,
         .baseAttack    = 112,
         .baseDefense   = 80,
@@ -28549,10 +28752,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(DecidueyeHisui, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(DecidueyeHisui),
-        ICON(DecidueyeHisui),
+        PALETA(DecidueyeHisui),
+        ICONO(DecidueyeHisui),
         FOLLOWER(DecidueyeHisui, TRACKS_FOOT)
-        LEARNSETS(DecidueyeHisui),
+        MOVIMIENTOS(DecidueyeHisui),
         .isHisuiForm = TRUE,
     },
 
@@ -28597,10 +28800,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Litten, 64, 48),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Litten),
-        ICON(Litten),
+        PALETA(Litten),
+        ICONO(Litten),
         FOLLOWER(Litten, TRACKS_FOOT)
-        LEARNSETS(Litten),
+        MOVIMIENTOS(Litten),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_TORRACAT}),
     },
 
@@ -28645,10 +28848,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Torracat, 64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Torracat),
-        ICON(Torracat),
+        PALETA(Torracat),
+        ICONO(Torracat),
         FOLLOWER(Torracat, TRACKS_FOOT)
-        LEARNSETS(Torracat),
+        MOVIMIENTOS(Torracat),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_INCINEROAR}),
     },
 
@@ -28693,10 +28896,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Incineroar, 64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Incineroar),
-        ICON(Incineroar),
+        PALETA(Incineroar),
+        ICONO(Incineroar),
         FOLLOWER(Incineroar, TRACKS_FOOT)
-        LEARNSETS(Incineroar),
+        MOVIMIENTOS(Incineroar),
     },
 
     [SPECIES_POPPLIO] =
@@ -28740,10 +28943,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Popplio, 48, 48),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Popplio),
-        ICON(Popplio),
+        PALETA(Popplio),
+        ICONO(Popplio),
         FOLLOWER(Popplio, TRACKS_FOOT)
-        LEARNSETS(Popplio),
+        MOVIMIENTOS(Popplio),
         .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_BRIONNE}),
     },
 
@@ -28788,10 +28991,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Brionne, 48, 56),
         .backPicYOffset = 9,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Brionne),
-        ICON(Brionne),
+        PALETA(Brionne),
+        ICONO(Brionne),
         FOLLOWER(Brionne, TRACKS_FOOT)
-        LEARNSETS(Brionne),
+        MOVIMIENTOS(Brionne),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PRIMARINA}),
     },
 
@@ -28836,51 +29039,48 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Primarina, 64, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Primarina),
-        ICON(Primarina),
+        PALETA(Primarina),
+        ICONO(Primarina),
         FOLLOWER(Primarina, TRACKS_FOOT)
-        LEARNSETS(Primarina),
+        MOVIMIENTOS(Primarina),
     },
-
-#define ROCKRUFF_MISC_INFO                                      \
-        .baseHP        = 45,                                    \
-        .baseAttack    = 65,                                    \
-        .baseDefense   = 40,                                    \
-        .baseSpeed     = 60,                                    \
-        .baseSpAttack  = 30,                                    \
-        .baseSpDefense = 40,                                    \
-        .types = MON_TYPES(TYPE_ROCK),                          \
-        .catchRate = 190,                                       \
-        .expYield = 56,                                         \
-        .evYield_Attack = 1,                                    \
-        .genderRatio = PERCENT_FEMALE(50),                      \
-        .eggCycles = 15,                                        \
-        .friendship = STANDARD_FRIENDSHIP,                      \
-        .growthRate = GROWTH_MEDIUM_FAST,                       \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),           \
-        .bodyColor = BODY_COLOR_BROWN,                          \
-        .speciesName = _("Rockruff"),                           \
-        .cryId = CRY_ROCKRUFF,                                  \
-        .natDexNum = DEX_ROCKRUFF,                     \
-        .categoryName = _("Puppy"),                             \
-        .height = 5,                                            \
-        .weight = 92,                                           \
-            .description = COMPOUND_STRING("???"),                    \
-        .pokemonScale = 432,                                    \
-        .pokemonOffset = 13,                                    \
-        .trainerScale = 256,                                    \
-        .trainerOffset = 0,                                     \
-        .frontPicYOffset = 11,                                  \
-        .frontAnimFrames = sAnims_Rockruff,                     \
-        .frontAnimId = ANIM_V_STRETCH,                          \
-        .backPicYOffset = 7,                                    \
-        PALETTES(Rockruff),                                     \
-        ICON(Rockruff),                                         \
-        LEARNSETS(Rockruff)
 
     [SPECIES_ROCKRUFF] =
     {
-        ROCKRUFF_MISC_INFO,
+        .baseHP        = 45,
+        .baseAttack    = 65,
+        .baseDefense   = 40,
+        .baseSpeed     = 60,
+        .baseSpAttack  = 30,
+        .baseSpDefense = 40,
+        .types = MON_TYPES(TYPE_ROCK),
+        .catchRate = 190,
+        .expYield = 56,
+        .evYield_Attack = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD),
+        .bodyColor = BODY_COLOR_BROWN,
+        .speciesName = _("Rockruff"),
+        .cryId = CRY_ROCKRUFF,
+        .natDexNum = DEX_ROCKRUFF,
+        .categoryName = _("Puppy"),
+        .height = 5,
+        .weight = 92,
+        .description = COMPOUND_STRING("???"),
+        .pokemonScale = 432,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontPicYOffset = 11,
+        .frontAnimFrames = sAnims_Rockruff,
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPicYOffset = 7,
+        PALETA(Rockruff),
+        ICONO(Rockruff),
+        MOVIMIENTOS(Rockruff),
         .abilities = {ABILITY_KEEN_EYE, ABILITY_VITAL_SPIRIT, ABILITY_STEADFAST},
         .evolutions = EVOLUTION({EVO_LEVEL_DAY, 25, SPECIES_LYCANROC_MIDDAY},
                                 {EVO_LEVEL_NIGHT, 25, SPECIES_LYCANROC_MIDNIGHT}),
@@ -28931,10 +29131,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_V_SHAKE,
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(LycanrocMidday),
-        ICON(LycanrocMidday),
+        PALETA(LycanrocMidday),
+        ICONO(LycanrocMidday),
         FOLLOWER(LycanrocMidday, TRACKS_FOOT)
-        LEARNSETS(LycanrocMidday),
+        MOVIMIENTOS(LycanrocMidday),
     },
 
     [SPECIES_LYCANROC_MIDNIGHT] =
@@ -28961,10 +29161,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_SHRINK_GROW_VIBRATE_SLOW,
         .backPicYOffset = 7,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(LycanrocMidnight),
-        ICON(LycanrocMidnight),
+        PALETA(LycanrocMidnight),
+        ICONO(LycanrocMidnight),
         FOLLOWER(LycanrocMidnight, TRACKS_FOOT)
-        LEARNSETS(LycanrocMidnight),
+        MOVIMIENTOS(LycanrocMidnight),
     },
 
     [SPECIES_LYCANROC_DUSK] =
@@ -28991,10 +29191,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .frontAnimId = ANIM_V_SHAKE,
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE,
-        PALETTES(LycanrocDusk),
-        ICON(LycanrocDusk),
+        PALETA(LycanrocDusk),
+        ICONO(LycanrocDusk),
         FOLLOWER(LycanrocDusk, TRACKS_FOOT)
-        LEARNSETS(LycanrocDusk),
+        MOVIMIENTOS(LycanrocDusk),
     },
 
     [SPECIES_SANDYGAST] =
@@ -29039,10 +29239,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Sandygast, 40, 48),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Sandygast),
-        ICON(Sandygast),
+        PALETA(Sandygast),
+        ICONO(Sandygast),
         FOLLOWER(Sandygast, TRACKS_FOOT)
-        LEARNSETS(Sandygast),
+        MOVIMIENTOS(Sandygast),
         .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_PALOSSAND}),
     },
 
@@ -29088,10 +29288,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Palossand, 64, 64),
         .backPicYOffset = 2,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Palossand),
-        ICON(Palossand),
+        PALETA(Palossand),
+        ICONO(Palossand),
         FOLLOWER(Palossand, TRACKS_FOOT)
-        LEARNSETS(Palossand),
+        MOVIMIENTOS(Palossand),
     },
 
 #define MIMIKYU_MISC_INFO                                           \
@@ -29123,7 +29323,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 24,                                        \
         .trainerScale = 256,                                        \
         .trainerOffset = 0,                                         \
-        LEARNSETS(Mimikyu),                                         \
+        MOVIMIENTOS(Mimikyu),                                         \
         .formSpeciesIdTable = sMimikyuFormSpeciesIdTable
 
     [SPECIES_MIMIKYU_DISGUISED] =
@@ -29141,8 +29341,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MimikyuDisguised, 56, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MimikyuDisguised),
-        ICON(MimikyuDisguised),
+        PALETA(MimikyuDisguised),
+        ICONO(MimikyuDisguised),
         FOLLOWER(MimikyuDisguised, TRACKS_FOOT)
     },
 
@@ -29161,8 +29361,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(MimikyuBusted, 64, 40),
         .backPicYOffset = 15,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(MimikyuBusted),
-        ICON(MimikyuBusted),
+        PALETA(MimikyuBusted),
+        ICONO(MimikyuBusted),
     },
 
     [SPECIES_JANGMO_O] =
@@ -29207,10 +29407,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(JangmoO, 42, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_GROW_STUTTER,
-        PALETTES(JangmoO),
-        ICON(JangmoO),
+        PALETA(JangmoO),
+        ICONO(JangmoO),
         FOLLOWER(JangmoO, TRACKS_FOOT)
-        LEARNSETS(JangmoO),
+        MOVIMIENTOS(JangmoO),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_HAKAMO_O}),
     },
 
@@ -29256,10 +29456,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(HakamoO, 49, 56),
         .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_H_STRETCH,
-        PALETTES(HakamoO),
-        ICON(HakamoO),
+        PALETA(HakamoO),
+        ICONO(HakamoO),
         FOLLOWER(HakamoO, TRACKS_FOOT)
-        LEARNSETS(HakamoO),
+        MOVIMIENTOS(HakamoO),
         .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_KOMMO_O}),
     },
 
@@ -29305,10 +29505,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(KommoO, 60, 60),
         .backPicYOffset = 2,
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
-        PALETTES(KommoO),
-        ICON(KommoO),
+        PALETA(KommoO),
+        ICONO(KommoO),
         FOLLOWER(KommoO, TRACKS_FOOT)
-        LEARNSETS(KommoO),
+        MOVIMIENTOS(KommoO),
     },
 
     [SPECIES_ROOKIDEE] =
@@ -29352,10 +29552,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Rookidee, 64, 32),
         .backPicYOffset = 17,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Rookidee),
-        ICON(Rookidee),
+        PALETA(Rookidee),
+        ICONO(Rookidee),
         FOLLOWER(Rookidee, TRACKS_FOOT)
-        LEARNSETS(Rookidee),
+        MOVIMIENTOS(Rookidee),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_CORVISQUIRE}),
     },
 
@@ -29401,40 +29601,37 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Corvisquire, 56, 48),
         .backPicYOffset = 9,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Corvisquire),
-        ICON(Corvisquire),
+        PALETA(Corvisquire),
+        ICONO(Corvisquire),
         FOLLOWER(Corvisquire, TRACKS_FOOT)
-        LEARNSETS(Corvisquire),
+        MOVIMIENTOS(Corvisquire),
         .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_CORVIKNIGHT}),
     },
 
-#define CORVIKNIGHT_MISC_INFO                                                       \
-        .baseHP        = 98,                                                        \
-        .baseAttack    = 87,                                                        \
-        .baseDefense   = 105,                                                       \
-        .baseSpeed     = 67,                                                        \
-        .baseSpAttack  = 53,                                                        \
-        .baseSpDefense = 85,                                                        \
-        .types = MON_TYPES(TYPE_FLYING, TYPE_STEEL),                                \
-        .catchRate = 45,                                                            \
-        .expYield = 248,                                                            \
-        .evYield_Defense = 3,                                                       \
-        .genderRatio = PERCENT_FEMALE(50),                                          \
-        .eggCycles = 15,                                                            \
-        .friendship = STANDARD_FRIENDSHIP,                                          \
-        .growthRate = GROWTH_MEDIUM_SLOW,                                           \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),                              \
-        .abilities = {ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_MIRROR_ARMOR},   \
-        .bodyColor = BODY_COLOR_PURPLE,                                             \
-        .speciesName = _("Corviknigh"),                                             \
-        .cryId = CRY_CORVIKNIGHT,                                                   \
-        .natDexNum = DEX_CORVIKNIGHT,                                      \
-        .categoryName = _("Raven"),                                                 \
-        LEARNSETS(Corviknight)
-
     [SPECIES_CORVIKNIGHT] =
     {
-        CORVIKNIGHT_MISC_INFO,
+        .baseHP        = 98,
+        .baseAttack    = 87,
+        .baseDefense   = 105,
+        .baseSpeed     = 67,
+        .baseSpAttack  = 53,
+        .baseSpDefense = 85,
+        .types = MON_TYPES(TYPE_FLYING, TYPE_STEEL),
+        .catchRate = 45,
+        .expYield = 248,
+        .evYield_Defense = 3,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FLYING),
+        .abilities = {ABILITY_PRESSURE, ABILITY_UNNERVE, ABILITY_MIRROR_ARMOR},
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Corviknigh"),
+        .cryId = CRY_CORVIKNIGHT,
+        .natDexNum = DEX_CORVIKNIGHT,
+        .categoryName = _("Raven"),
+        MOVIMIENTOS(Corviknight),
         .height = 22,
         .weight = 750,
         .description = COMPOUND_STRING(
@@ -29453,8 +29650,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Corviknight, 64, 64),
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Corviknight),
-        ICON(Corviknight),
+        PALETA(Corviknight),
+        ICONO(Corviknight),
         FOLLOWER(Corviknight, TRACKS_FOOT)
     },
 
@@ -29498,10 +29695,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Blipbug, 40, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Blipbug),
-        ICON(Blipbug),
+        PALETA(Blipbug),
+        ICONO(Blipbug),
         FOLLOWER(Blipbug, TRACKS_FOOT)
-        LEARNSETS(Blipbug),
+        MOVIMIENTOS(Blipbug),
         .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DOTTLER}),
     },
@@ -29548,41 +29745,38 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dottler, 56, 32),
         .backPicYOffset = 17,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Dottler),
-        ICON(Dottler),
+        PALETA(Dottler),
+        ICONO(Dottler),
         FOLLOWER(Dottler, TRACKS_FOOT)
-        LEARNSETS(Dottler),
+        MOVIMIENTOS(Dottler),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ORBEETLE}),
     },
 
-#define ORBEETLE_MISC_INFO                                                  \
-        .baseHP        = 60,                                                \
-        .baseAttack    = 45,                                                \
-        .baseDefense   = 110,                                               \
-        .baseSpeed     = 90,                                                \
-        .baseSpAttack  = 80,                                                \
-        .baseSpDefense = 120,                                               \
-        .types = MON_TYPES(TYPE_BUG, TYPE_PSYCHIC),                         \
-        .catchRate = 45,                                                    \
-        .expYield = 253,                                                    \
-        .evYield_SpDefense = 3,                                             \
-        .itemRare = ITEM_PSYCHIC_SEED,                                      \
-        .genderRatio = PERCENT_FEMALE(50),                                  \
-        .eggCycles = 15,                                                    \
-        .friendship = STANDARD_FRIENDSHIP,                                  \
-        .growthRate = GROWTH_MEDIUM_FAST,                                   \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),                         \
-        .abilities = {ABILITY_SWARM, ABILITY_FRISK, ABILITY_TELEPATHY},   \
-        .bodyColor = BODY_COLOR_RED,                                        \
-        .speciesName = _("Orbeetle"),                                       \
-        .cryId = CRY_ORBEETLE,                                              \
-        .natDexNum = DEX_ORBEETLE,                                 \
-        .categoryName = _("Seven Spot"),                                    \
-        LEARNSETS(Orbeetle)
-
     [SPECIES_ORBEETLE] =
     {
-        ORBEETLE_MISC_INFO,
+        .baseHP        = 60,
+        .baseAttack    = 45,
+        .baseDefense   = 110,
+        .baseSpeed     = 90,
+        .baseSpAttack  = 80,
+        .baseSpDefense = 120,
+        .types = MON_TYPES(TYPE_BUG, TYPE_PSYCHIC),
+        .catchRate = 45,
+        .expYield = 253,
+        .evYield_SpDefense = 3,
+        .itemRare = ITEM_PSYCHIC_SEED,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 15,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_BUG),
+        .abilities = {ABILITY_SWARM, ABILITY_FRISK, ABILITY_TELEPATHY},
+        .bodyColor = BODY_COLOR_RED,
+        .speciesName = _("Orbeetle"),
+        .cryId = CRY_ORBEETLE,
+        .natDexNum = DEX_ORBEETLE,
+        .categoryName = _("Seven Spot"),
+        MOVIMIENTOS(Orbeetle),
         .height = 4,
         .weight = 408,
         .description = COMPOUND_STRING(
@@ -29602,8 +29796,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Orbeetle, 64, 56),
         .backPicYOffset = 6,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Orbeetle),
-        ICON(Orbeetle),
+        PALETA(Orbeetle),
+        ICONO(Orbeetle),
         FOLLOWER(Orbeetle, TRACKS_FOOT)
     },
 
@@ -29648,39 +29842,36 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Toxel, 48, 56),
         .backPicYOffset = 8,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Toxel),
-        ICON(Toxel),
+        PALETA(Toxel),
+        ICONO(Toxel),
         FOLLOWER(Toxel, TRACKS_FOOT)
-        LEARNSETS(Toxel),
+        MOVIMIENTOS(Toxel),
         .evolutions = EVOLUTION({EVO_LEVEL_NATURE_AMPED, 30, SPECIES_TOXTRICITY_AMPED},
                                 {EVO_LEVEL_NATURE_LOW_KEY, 30, SPECIES_TOXTRICITY_LOW_KEY}),
     },
 
-#define TOXTRICITY_MISC_INFO                                            \
-        .baseHP        = 75,                                            \
-        .baseAttack    = 98,                                            \
-        .baseDefense   = 70,                                            \
-        .baseSpeed     = 75,                                            \
-        .baseSpAttack  = 114,                                           \
-        .baseSpDefense = 70,                                            \
-        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),                 \
-        .catchRate = 45,                                                \
-        .expYield = 176,                                                \
-        .evYield_SpAttack = 2,                                          \
-        .genderRatio = PERCENT_FEMALE(50),                              \
-        .eggCycles = 25,                                                \
-        .friendship = STANDARD_FRIENDSHIP,                              \
-        .growthRate = GROWTH_MEDIUM_SLOW,                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),              \
-        .bodyColor = BODY_COLOR_PURPLE,                                 \
-        .speciesName = _("Toxtricity"),                                 \
-        .natDexNum = DEX_TOXTRICITY,                           \
-        .categoryName = _("Punk"),                                      \
-        .formSpeciesIdTable = sToxtricityFormSpeciesIdTable
-
     [SPECIES_TOXTRICITY_AMPED] =
     {
-        TOXTRICITY_MISC_INFO,
+        .baseHP        = 75,
+        .baseAttack    = 98,
+        .baseDefense   = 70,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 114,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
+        .catchRate = 45,
+        .expYield = 176,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Toxtricity"),
+        .natDexNum = DEX_TOXTRICITY,
+        .categoryName = _("Punk"),
+        .formSpeciesIdTable = sToxtricityFormSpeciesIdTable,
         .abilities = {ABILITY_PUNK_ROCK, ABILITY_PLUS, ABILITY_TECHNICIAN},
         .cryId = CRY_TOXTRICITY_AMPED,
         .height = 16,
@@ -29701,15 +29892,34 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(ToxtricityAmped, 56, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ToxtricityAmped),
-        ICON(ToxtricityAmped),
+        PALETA(ToxtricityAmped),
+        ICONO(ToxtricityAmped),
         FOLLOWER(ToxtricityAmped, TRACKS_FOOT)
-        LEARNSETS(ToxtricityAmped),
+        MOVIMIENTOS(ToxtricityAmped),
     },
 
     [SPECIES_TOXTRICITY_LOW_KEY] =
     {
-        TOXTRICITY_MISC_INFO,
+        .baseHP        = 75,
+        .baseAttack    = 98,
+        .baseDefense   = 70,
+        .baseSpeed     = 75,
+        .baseSpAttack  = 114,
+        .baseSpDefense = 70,
+        .types = MON_TYPES(TYPE_ELECTRIC, TYPE_POISON),
+        .catchRate = 45,
+        .expYield = 176,
+        .evYield_SpAttack = 2,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 25,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_SLOW,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_HUMAN_LIKE),
+        .bodyColor = BODY_COLOR_PURPLE,
+        .speciesName = _("Toxtricity"),
+        .natDexNum = DEX_TOXTRICITY,
+        .categoryName = _("Punk"),
+        .formSpeciesIdTable = sToxtricityFormSpeciesIdTable,
         .abilities = {ABILITY_PUNK_ROCK, ABILITY_MINUS, ABILITY_TECHNICIAN},
         .cryId = CRY_TOXTRICITY_LOW_KEY,
         .height = 16,
@@ -29729,10 +29939,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(ToxtricityLowKey, 48, 64),
         .backPicYOffset = 0,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(ToxtricityLowKey),
-        ICON(ToxtricityLowKey),
+        PALETA(ToxtricityLowKey),
+        ICONO(ToxtricityLowKey),
         FOLLOWER(ToxtricityLowKey, TRACKS_FOOT)
-        LEARNSETS(ToxtricityLowKey),
+        MOVIMIENTOS(ToxtricityLowKey),
     },
 
     [SPECIES_SNOM] =
@@ -29777,10 +29987,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Snom, 48, 32),
         .backPicYOffset = 17,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Snom),
-        ICON(Snom),
+        PALETA(Snom),
+        ICONO(Snom),
         FOLLOWER(Snom, TRACKS_FOOT)
-        LEARNSETS(Snom),
+        MOVIMIENTOS(Snom),
         .evolutions = EVOLUTION({EVO_FRIENDSHIP_NIGHT, 0, SPECIES_FROSMOTH}),
     },
 
@@ -29827,10 +30037,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Frosmoth, 64, 64),
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Frosmoth),
-        ICON(Frosmoth),
+        PALETA(Frosmoth),
+        ICONO(Frosmoth),
         FOLLOWER(Frosmoth, TRACKS_FOOT)
-        LEARNSETS(Frosmoth),
+        MOVIMIENTOS(Frosmoth),
     },
 
     [SPECIES_DREEPY] =
@@ -29875,10 +30085,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dreepy, 56, 40),
         .backPicYOffset = 15,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Dreepy),
-        ICON(Dreepy),
+        PALETA(Dreepy),
+        ICONO(Dreepy),
         FOLLOWER(Dreepy, TRACKS_FOOT)
-        LEARNSETS(Dreepy),
+        MOVIMIENTOS(Dreepy),
         .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAKLOAK}),
     },
 
@@ -29923,10 +30133,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Drakloak, 64, 48),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Drakloak),
-        ICON(Drakloak),
+        PALETA(Drakloak),
+        ICONO(Drakloak),
         FOLLOWER(Drakloak, TRACKS_FOOT)
-        LEARNSETS(Drakloak),
+        MOVIMIENTOS(Drakloak),
         .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_DRAGAPULT}),
     },
 
@@ -29972,10 +30182,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Dragapult, 64, 56),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Dragapult),
-        ICON(Dragapult),
+        PALETA(Dragapult),
+        ICONO(Dragapult),
         FOLLOWER(Dragapult, TRACKS_FOOT)
-        LEARNSETS(Dragapult),
+        MOVIMIENTOS(Dragapult),
     },
 
     [SPECIES_REGIELEKI] =
@@ -30020,10 +30230,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Regieleki, 64, 48),
         .backPicYOffset = 9,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Regieleki),
-        ICON(Regieleki),
+        PALETA(Regieleki),
+        ICONO(Regieleki),
         FOLLOWER(Regieleki, TRACKS_FOOT)
-        LEARNSETS(Regieleki),
+        MOVIMIENTOS(Regieleki),
         .isLegendary = TRUE,
     },
 
@@ -30070,10 +30280,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Regidrago, 64, 56),
         .backPicYOffset = 7,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Regidrago),
-        ICON(Regidrago),
+        PALETA(Regidrago),
+        ICONO(Regidrago),
         FOLLOWER(Regidrago, TRACKS_FOOT)
-        LEARNSETS(Regidrago),
+        MOVIMIENTOS(Regidrago),
     },
 
     [SPECIES_GLIMMET] =
@@ -30118,9 +30328,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Glimmet, 64, 64),
         .backPicYOffset = 14,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Glimmet),
-        ICON(Glimmet),
-        LEARNSETS(Glimmet),
+        PALETA(Glimmet),
+        ICONO(Glimmet),
+        MOVIMIENTOS(Glimmet),
         .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_GLIMMORA}),
     },
 
@@ -30166,9 +30376,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Glimmora, 64, 64),
         .backPicYOffset = 11,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Glimmora),
-        ICON(Glimmora),
-        LEARNSETS(Glimmora),
+        PALETA(Glimmora),
+        ICONO(Glimmora),
+        MOVIMIENTOS(Glimmora),
     },
 
     [SPECIES_GREAVARD] =
@@ -30212,9 +30422,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Greavard, 64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Greavard),
-        ICON(Greavard),
-        LEARNSETS(Greavard),
+        PALETA(Greavard),
+        ICONO(Greavard),
+        MOVIMIENTOS(Greavard),
         .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_HOUNDSTONE}),
     },
 
@@ -30259,9 +30469,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_PIC(Houndstone, 64, 64),
         .backPicYOffset = 4,
         //.backAnimId = BACK_ANIM_NONE,
-        PALETTES(Houndstone),
-        ICON(Houndstone),
-        LEARNSETS(Houndstone),
+        PALETA(Houndstone),
+        ICONO(Houndstone),
+        MOVIMIENTOS(Houndstone),
     },
 
     [SPECIES_EGG] =
@@ -30273,6 +30483,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backPicYOffset = 20,
         .palette = gMonPalette_Egg,
         .shinyPalette = gMonPalette_Egg,
-        ICON(Egg),
+        ICONO(Egg),
     },
 };
