@@ -2226,7 +2226,7 @@ static void PlayerHandleChooseAction(u32 battler)
     TryRestoreLastUsedBall();
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
 
-    LoadMonIconPalettes();
+    //LoadMonIconPalettes();
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
     monIconData = CreateMonIcon(species, SpriteCb_MonIcon, 20, 132, 1, personality);

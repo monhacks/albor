@@ -2804,7 +2804,7 @@ static void PrintNotEggInfo(void)
 
     if (dexNum != 0xFFFF)
     {
-        u8 digitCount = (NATIONAL_DEX_COUNT > 999) ? 4 : 3;
+        u8 digitCount = (DEX_COUNT > 999) ? 4 : 3;
         StringCopy(gStringVar1, &gText_NumberClear01[0]);
         ConvertIntToDecimalStringN(gStringVar2, dexNum, STR_CONV_MODE_LEADING_ZEROS, digitCount);
         StringAppend(gStringVar1, gStringVar2);
@@ -3889,10 +3889,6 @@ static void SetMonTypeIcons(void)
     else
     {
         SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
-    }
-    if (P_SHOW_TERA_TYPE >= GEN_9)
-    {
-        SetTypeSpritePosAndPal(summary->teraType, 200, 48, SPRITE_ARR_ID_TYPE + 2);
     }
 }
 

@@ -1673,18 +1673,6 @@ void CopyPyramidTrainerLoseSpeech(u16 trainerId)
     FrontierSpeechToString(gFacilityTrainers[trainerId].speechLose);
 }
 
-u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
-{
-    int i;
-
-    for (i = 0; i < ARRAY_COUNT(sTrainerClassEncounterMusic); i++)
-    {
-        if (sTrainerClassEncounterMusic[i].trainerClass == gFacilityClassToTrainerClass[gFacilityTrainers[trainerId].facilityClass])
-            return sTrainerClassEncounterMusic[i].trainerEncounterMusic;
-    }
-    return TRAINER_ENCOUNTER_MUSIC_MALE;
-}
-
 static u16 GetUniqueTrainerId(u8 objectEventId)
 {
     int i;

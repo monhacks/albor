@@ -298,9 +298,7 @@ static u8 GetFloorId(void)
 
 u8 GetTrainerHillOpponentClass(u16 trainerId)
 {
-    u8 id = trainerId - 1;
-
-    return gFacilityClassToTrainerClass[sFloorTrainers->facilityClass[id]];
+    return 0;
 }
 
 void GetTrainerHillTrainerName(u8 *dst, u16 trainerId)

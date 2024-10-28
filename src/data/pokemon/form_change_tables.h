@@ -26,7 +26,6 @@ static const struct FormChange sDeoxysSpeedFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
-#if P_FAMILY_CHERUBI
 static const struct FormChange sCherrimFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CHERRIM_SUNSHINE, B_WEATHER_SUN, ABILITY_FLOWER_GIFT},
     {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CHERRIM_OVERCAST, ~B_WEATHER_SUN, ABILITY_FLOWER_GIFT},
@@ -51,14 +50,13 @@ static const struct FormChange sDarmanitanFormChangeTable[] = {
     {FORM_CHANGE_TERMINATOR},
 };
 
-static const struct FormChange sDarmanitanGalarianFormChangeTable[] = {
+static const struct FormChange sDarmanitanGalarFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN_GALAR_STANDARD, ABILITY_ZEN_MODE, HP_HIGHER_THAN,   50},
     {FORM_CHANGE_BATTLE_HP_PERCENT, SPECIES_DARMANITAN_GALAR_ZEN,      ABILITY_ZEN_MODE, HP_LOWER_EQ_THAN, 50},
     {FORM_CHANGE_FAINT,             SPECIES_DARMANITAN_GALAR_STANDARD},
     {FORM_CHANGE_END_BATTLE,        SPECIES_DARMANITAN_GALAR_STANDARD},
     {FORM_CHANGE_TERMINATOR},
 };
-#endif //P_FAMILY_DARUMAKA
 
 static const struct FormChange sAegislashFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_SWITCH, SPECIES_AEGISLASH_SHIELD},

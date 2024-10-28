@@ -303,10 +303,10 @@ struct SpeciesInfo /*0xC4*/
             u32 isUltraBurst:1;
             u32 isGigantamax:1;
             u32 isTeraForm:1;
-            u32 isAlolanForm:1;
-            u32 isGalarianForm:1;
-            u32 isHisuianForm:1;
-            u32 isPaldeanForm:1;
+            u32 isAlolaForm:1;
+            u32 isGalarForm:1;
+            u32 isHisuiForm:1;
+            u32 isPaldeaForm:1;
             u32 cannotBeTraded:1;
             u32 perfectIVCount:3;   // This species will always generate with the specified amount of perfect IVs.
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
@@ -528,8 +528,6 @@ extern struct SpriteTemplate gMultiuseSpriteTemplate;
 extern u16 gFollowerSteps;
 
 extern const struct MoveInfo gMovesInfo[];
-extern const u8 gFacilityClassToPicIndex[];
-extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const u8 gPPUpGetMask[];
@@ -682,7 +680,6 @@ void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u16 species, bool8 oneF
 void StopPokemonAnimationDelayTask(void);
 void BattleAnimateBackSprite(struct Sprite *sprite, u16 species);
 u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId);
-u16 FacilityClassToPicIndex(u16 facilityClass);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void);

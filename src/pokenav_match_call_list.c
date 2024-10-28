@@ -312,24 +312,7 @@ bool32 ShouldDrawRematchPokeballIcon(int index)
 
 int GetMatchCallTrainerPic(int index)
 {
-    int headerId;
-    struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-    if (!state->matchCallEntries[index].isSpecialTrainer)
-    {
-        index = GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId);
-        return GetTrainerPicFromId(index);
-    }
-
-    headerId = state->matchCallEntries[index].headerId;
-    index = MatchCall_GetRematchTableIdx(headerId);
-    if (index != REMATCH_TABLE_ENTRIES)
-    {
-        index = GetTrainerIdxByRematchIdx(index);
-        return GetTrainerPicFromId(index);
-    }
-
-    index = MatchCall_GetOverrideFacilityClass(headerId);
-    return gFacilityClassToPicIndex[index];
+    return 0;
 }
 
 const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)

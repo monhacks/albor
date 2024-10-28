@@ -927,30 +927,28 @@ static void DrawPartyMonIcons(void)
     u8 icon_x = 0;
     u8 icon_y = 0;
 
-    LoadMonIconPalettes();
-
     for (i = 0; i < gPlayerPartyCount; i++)
     {
         //calc icon position (centered)
         if (gPlayerPartyCount == 1)
         {
-            icon_x = MON_ICON_START_X + MON_ICON_PADDING*0.5;
+            icon_x = MON_ICON_START_X + MON_ICON_PADDING * 0.5;
             icon_y = MON_ICON_START_Y + MON_ICON_PADDING;
         }
         else if (gPlayerPartyCount == 2)
         {
-            icon_x = MON_ICON_START_X + MON_ICON_PADDING*0.5;
-            icon_y = i < 2 ? MON_ICON_START_Y + MON_ICON_PADDING*0.5 + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING*0.5 + MON_ICON_PADDING * (i - 2);
+            icon_x = MON_ICON_START_X + MON_ICON_PADDING * 0.5;
+            icon_y = i < 2 ? MON_ICON_START_Y + MON_ICON_PADDING * 0.5 + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING * 0.5 + MON_ICON_PADDING * (i - 2);
         }
         else if (gPlayerPartyCount == 3)
         {
-            icon_x = MON_ICON_START_X + MON_ICON_PADDING*0.5;
+            icon_x = MON_ICON_START_X + MON_ICON_PADDING * 0.5;
             icon_y = i < 3 ? MON_ICON_START_Y + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING * (i - 3);
         }
         else if (gPlayerPartyCount == 4)
         {
             icon_x = i < 2 ? MON_ICON_START_X : MON_ICON_START_X + MON_ICON_PADDING;
-            icon_y = i < 2 ? MON_ICON_START_Y + MON_ICON_PADDING*0.5 + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING*0.5 + MON_ICON_PADDING * (i - 2);
+            icon_y = i < 2 ? MON_ICON_START_Y + MON_ICON_PADDING * 0.5 + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING * 0.5 + MON_ICON_PADDING * (i - 2);
         }
         else
         {

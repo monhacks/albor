@@ -154,7 +154,6 @@ static bool8 Task_SetCardFlipped(struct Task *task);
 static bool8 Task_AnimateCardFlipUp(struct Task *task);
 static bool8 Task_EndCardFlip(struct Task *task);
 static void UpdateCardFlipRegs(u16);
-static void LoadMonIconGfx(void);
 
 static const u32 sTrainerCardStickers_Gfx[]      = INCBIN_U32("graphics/trainer_card/frlg/stickers.4bpp.lz");
 static const u16 sUnused_Pal[]                   = INCBIN_U16("graphics/trainer_card/unused.gbapal");
@@ -568,7 +567,6 @@ static void CB2_InitTrainerCard(void)
         gMain.state++;
         break;
     case 5:
-        LoadMonIconGfx();
         gMain.state++;
         break;
     case 6:
@@ -1264,34 +1262,6 @@ static void PrintPokemonIconsOnCard(void)
     }
 }
 
-static void LoadMonIconGfx(void)
-{
-    u8 i;
-
-    CpuSet(gMonIconPalettes, sData->monIconPal, 0x60);
-    switch (sData->trainerCard.monIconTint)
-    {
-    case MON_ICON_TINT_NORMAL:
-        break;
-    case MON_ICON_TINT_BLACK:
-        TintPalette_CustomTone(sData->monIconPal, 96, 0, 0, 0);
-        break;
-    case MON_ICON_TINT_PINK:
-        TintPalette_CustomTone(sData->monIconPal, 96, 500, 330, 310);
-        break;
-    case MON_ICON_TINT_SEPIA:
-        TintPalette_SepiaTone(sData->monIconPal, 96);
-        break;
-    }
-    LoadPalette(sData->monIconPal, BG_PLTT_ID(5), 6 * PLTT_SIZE_4BPP);
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (sData->trainerCard.monSpecies[i])
-            LoadBgTiles(3, GetMonIconTiles(sData->trainerCard.monSpecies[i], 0), 512, 16 * i + 32);
-    }
-}
-
 static void PrintStickersOnCard(void)
 {
     u8 i;
@@ -1762,10 +1732,5 @@ static u8 VersionToCardType(u8 version)
 
 static void CreateTrainerCardTrainerPic(void)
 {
-    CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sTrainerPicFacilityClass[sData->cardType][sData->trainerCard.gender]),
-                TRUE,
-                sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][0],
-                sTrainerPicOffset[sData->isHoenn][sData->trainerCard.gender][1],
-                8,
-                WIN_TRAINER_PIC);
+
 }

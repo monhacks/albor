@@ -317,7 +317,7 @@ struct FromScreenData
 
 struct PokedexView
 {
-    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT + 1];
+    struct PokedexListItem pokedexList[DEX_COUNT + 1];
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 selectedPokemonBackup;
@@ -1188,15 +1188,15 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
 
-    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    for (i = 0; i < DEX_COUNT; i++)
     {
         pokedexView->pokedexList[i].dexNum = 0xFFFF;
         pokedexView->pokedexList[i].seen = FALSE;
         pokedexView->pokedexList[i].owned = FALSE;
     }
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].dexNum = 0;
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].seen = FALSE;
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].owned = FALSE;
+    pokedexView->pokedexList[DEX_COUNT].dexNum = 0;
+    pokedexView->pokedexList[DEX_COUNT].seen = FALSE;
+    pokedexView->pokedexList[DEX_COUNT].owned = FALSE;
     pokedexView->pokemonListCount = 0;
     pokedexView->selectedPokemon = 0;
     pokedexView->selectedPokemonBackup = 0;
@@ -1481,7 +1481,7 @@ static void CreatePokedexList(void)
 
     sPokedexView->pokemonListCount = 0;
 
-    for (i = 0, r5 = 0, r10 = 0; i < NATIONAL_DEX_COUNT; i++)
+    for (i = 0, r5 = 0, r10 = 0; i < DEX_COUNT; i++)
     {
         dexNum = i + 1;
         if (GetSetPokedexFlag(dexNum, FLAG_GET_SEEN))
@@ -1497,7 +1497,7 @@ static void CreatePokedexList(void)
         }
     }
 
-    for (i = sPokedexView->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
+    for (i = sPokedexView->pokemonListCount; i < DEX_COUNT; i++)
     {
         sPokedexView->pokedexList[i].dexNum = 0xFFFF;
         sPokedexView->pokedexList[i].seen = FALSE;
@@ -1532,7 +1532,7 @@ static void CreateMonListEntry(u8 position, u16 b)
         entryNum = b - 5;
         for (i = 0; i <= 10; i++)
         {
-            if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+            if (entryNum < 0 || entryNum >= DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
             {
                 ClearMonListEntry(MON_LIST_X, i * 2);
             }
@@ -1557,7 +1557,7 @@ static void CreateMonListEntry(u8 position, u16 b)
         break;
     case 1: // Up
         entryNum = b - 5;
-        if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+        if (entryNum < 0 || entryNum >= DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
         {
             ClearMonListEntry(MON_LIST_X, sPokedexView->listVOffset * 2);
         }
@@ -1583,7 +1583,7 @@ static void CreateMonListEntry(u8 position, u16 b)
         vOffset = sPokedexView->listVOffset + 10;
         if (vOffset >= LIST_SCROLL_STEP)
             vOffset -= LIST_SCROLL_STEP;
-        if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+        if (entryNum < 0 || entryNum >= DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
             ClearMonListEntry(MON_LIST_X, vOffset * 2);
         else
         {
@@ -1613,7 +1613,7 @@ static void CreateMonDexNum(u16 entryNum, u8 left, u8 top)
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
     memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
-    if (NATIONAL_DEX_COUNT > 999)
+    if (DEX_COUNT > 999)
     {
         text[0] = CHAR_0 + dexNum / 1000;
         offset++;
@@ -1686,7 +1686,7 @@ u16 GetNationalPokedexCount(u8 caseID)
 {
     u16 count = 0;
     u16 i;
-    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    for (i = 0; i < DEX_COUNT; i++)
     {
         switch (caseID)
         {
@@ -1766,7 +1766,7 @@ bool16 HasAllMons(void)
 {
     u32 i, j;
 
-    for (i = 1; i < NATIONAL_DEX_COUNT + 1; i++)
+    for (i = 1; i < DEX_COUNT + 1; i++)
     {
         j = NationalPokedexNumToSpecies(i);
         if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
@@ -2083,7 +2083,7 @@ static u8 ClearMonSprites(void)
 
 static u16 GetPokemonSpriteToDisplay(u16 species)
 {
-    if (species >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[species].dexNum == 0xFFFF)
+    if (species >= DEX_COUNT || sPokedexView->pokedexList[species].dexNum == 0xFFFF)
         return 0xFFFF;
     else
         return sPokedexView->pokedexList[species].dexNum;
@@ -3254,7 +3254,7 @@ static void PrintMonInfo(u32 num, u32 owned, u32 newEntry)
     const u8 *name;
     const u8 *category;
     const u8 *description;
-    u8 digitCount = (NATIONAL_DEX_COUNT > 999) ? 4 : 3;
+    u8 digitCount = (DEX_COUNT > 999) ? 4 : 3;
 
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), num, STR_CONV_MODE_LEADING_ZEROS, digitCount);
     PrintInfoScreenTextWhite(str, 123, 17);
@@ -3601,7 +3601,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         if (gTasks[taskId].data[1] == 0)
         {
             //Icon
-            FreeMonIconPalettes(); //Free space for new pallete
+            //FreeMonIconPalettes(); //Free space for new pallete
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
@@ -4538,7 +4538,7 @@ static void Task_SwitchScreensFromStatsScreen(u8 taskId)
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]); //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].data[3]]);       //Destroy item icon
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
 
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
@@ -4569,7 +4569,7 @@ static void Task_ExitStatsScreen(u8 taskId)
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[3]]); //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].data[3]]);       //Destroy item icon
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
 
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
@@ -4698,7 +4698,7 @@ static void Task_LoadEvolutionScreen(u8 taskId)
             sPokedexView->selectedScreen = EVO_SCREEN;
             ResetEvoScreenDataStruct();
             //Icon
-            FreeMonIconPalettes(); //Free space for new pallete
+            //FreeMonIconPalettes(); //Free space for new pallete
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             PrintPreEvolutions(taskId, NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum));
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18 + 32*sPokedexView->numPreEvolutions, 31, 4); //Create pokemon sprite
@@ -5300,7 +5300,7 @@ static void Task_SwitchScreensFromEvolutionScreen(u8 taskId)
     u8 i;
     if (!gPaletteFade.active)
     {
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
         for (i = 1; i <= gTasks[taskId].data[3]; i++)
         {
@@ -5328,7 +5328,7 @@ static void Task_ExitEvolutionScreen(u8 taskId)
     u8 i;
     if (!gPaletteFade.active)
     {
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
         for (i = 1; i <= gTasks[taskId].data[3]; i++)
         {
@@ -5392,7 +5392,7 @@ static void Task_LoadFormsScreen(u8 taskId)
         if (gTasks[taskId].data[1] == 0)
         {
             //Icon
-            FreeMonIconPalettes(); //Free space for new pallete
+            //FreeMonIconPalettes(); //Free space for new pallete
             LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
@@ -5594,7 +5594,7 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId)
     u8 i;
     if (!gPaletteFade.active)
     {
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
         for (i = 1; i <= gTasks[taskId].data[3]; i++)
         {
@@ -5619,7 +5619,7 @@ static void Task_ExitFormsScreen(u8 taskId)
     u8 i;
     if (!gPaletteFade.active)
     {
-        FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
+        //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
         for (i = 1; i <= gTasks[taskId].data[3]; i++)
         {

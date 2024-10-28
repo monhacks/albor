@@ -55,7 +55,6 @@ void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);
 s32 GetHighestLevelInPlayerParty(void);
-u16 FacilityClassToGraphicsId(u8 facilityClass);
 void TrySetLinkBattleTowerEnemyPartyLevel(void);
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst);
 
