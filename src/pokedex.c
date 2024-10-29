@@ -317,7 +317,7 @@ struct FromScreenData
 
 struct PokedexView
 {
-    struct PokedexListItem pokedexList[DEX_COUNT + 1];
+    struct PokedexListItem pokedexList[DEX_COUNT];
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 selectedPokemonBackup;
@@ -1194,7 +1194,7 @@ static void ResetPokedexView(struct PokedexView *pokedexView)
         pokedexView->pokedexList[i].seen = FALSE;
         pokedexView->pokedexList[i].owned = FALSE;
     }
-    pokedexView->pokedexList[DEX_COUNT].dexNum = 0;
+    pokedexView->pokedexList[DEX_COUNT - 1].dexNum = 0;
     pokedexView->pokedexList[DEX_COUNT].seen = FALSE;
     pokedexView->pokedexList[DEX_COUNT].owned = FALSE;
     pokedexView->pokemonListCount = 0;
@@ -1766,10 +1766,10 @@ bool16 HasAllMons(void)
 {
     u32 i, j;
 
-    for (i = 1; i < DEX_COUNT + 1; i++)
+    for (i = 1; i < DEX_COUNT; i++)
     {
         j = NationalPokedexNumToSpecies(i);
-        if (!(gSpeciesInfo[j].isMythical && !gSpeciesInfo[j].dexForceRequired) && !GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
+        if (!GetSetPokedexFlag(j, FLAG_GET_CAUGHT))
             return FALSE;
     }
     return TRUE;
@@ -3253,7 +3253,6 @@ static void PrintMonInfo(u32 num, u32 owned, u32 newEntry)
     u16 species;
     const u8 *name;
     const u8 *category;
-    const u8 *description;
     u8 digitCount = (DEX_COUNT > 999) ? 4 : 3;
 
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), num, STR_CONV_MODE_LEADING_ZEROS, digitCount);
@@ -3275,11 +3274,6 @@ static void PrintMonInfo(u32 num, u32 owned, u32 newEntry)
     }
     PrintInfoScreenText(category, 123, 31);
     PrintMonMeasurements(species, owned);
-    if (owned)
-        description = GetSpeciesPokedexDescription(species);
-    else
-        description = sExpandedPlaceholder_PokedexDescription;
-    PrintInfoScreenText(description, GetStringCenterAlignXOffset(FONT_NORMAL, description, 0xF0), 93);
 
     //Type Icon(s)
     if (owned)

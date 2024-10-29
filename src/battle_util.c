@@ -1559,21 +1559,7 @@ u8 GetImprisonedMovesCount(u32 battler, u16 move)
 
 u32 GetBattlerAffectionHearts(u32 battler)
 {
-    u8 side = GetBattlerSide(battler);
-    struct Pokemon *party = GetSideParty(side);
-    u16 species = GetMonData(&party[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
-
-    if (side != B_SIDE_PLAYER)
-        return AFFECTION_NO_HEARTS;
-    else if (gSpeciesInfo[species].isMegaEvolution
-          || (gBattleTypeFlags & (BATTLE_TYPE_EREADER_TRAINER
-                                | BATTLE_TYPE_FRONTIER
-                                | BATTLE_TYPE_LINK
-                                | BATTLE_TYPE_RECORDED_LINK
-                                | BATTLE_TYPE_SECRET_BASE)))
-        return AFFECTION_NO_HEARTS;
-
-    return GetMonAffectionHearts(&party[gBattlerPartyIndexes[battler]]);
+    return 0;
 }
 
 static void TryToRevertMimicryAndFlags(void)
@@ -10945,34 +10931,22 @@ void ActivateUltraBurst(u32 battler)
 
 bool32 IsBattlerMegaEvolved(u32 battler)
 {
-    // While Transform does copy stats and visuals, it shouldn't be counted as true Mega Evolution.
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-    return (gSpeciesInfo[gBattleMons[battler].species].isMegaEvolution);
+    return FALSE;
 }
 
 bool32 IsBattlerPrimalReverted(u32 battler)
 {
-    // While Transform does copy stats and visuals, it shouldn't be counted as true Primal Revesion.
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-    return (gSpeciesInfo[gBattleMons[battler].species].isPrimalReversion);
+    return FALSE;
 }
 
 bool32 IsBattlerUltraBursted(u32 battler)
 {
-    // While Transform does copy stats and visuals, it shouldn't be counted as true Ultra Burst.
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-    return (gSpeciesInfo[gBattleMons[battler].species].isUltraBurst);
+    return FALSE;
 }
 
 bool32 IsBattlerInTeraForm(u32 battler)
 {
-    // While Transform does copy stats and visuals, it shouldn't be counted as a true Tera Form.
-    if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED)
-        return FALSE;
-    return (gSpeciesInfo[gBattleMons[battler].species].isTeraForm);
+    return FALSE;
 }
 
 // Returns SPECIES_NONE if no form change is possible

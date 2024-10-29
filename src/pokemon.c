@@ -2264,14 +2264,6 @@ const u8 *GetSpeciesCategory(u16 species)
     return gSpeciesInfo[species].categoryName;
 }
 
-const u8 *GetSpeciesPokedexDescription(u16 species)
-{
-    species = SanitizeSpeciesId(species);
-    if (gSpeciesInfo[species].description == NULL)
-        return gSpeciesInfo[SPECIES_NONE].description;
-    return gSpeciesInfo[species].description;
-}
-
 u16 GetSpeciesHeight(u16 species)
 {
     return gSpeciesInfo[SanitizeSpeciesId(species)].height;
@@ -3543,7 +3535,7 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum)
 
     species = 1;
 
-    while (species < (NUM_SPECIES) && gSpeciesInfo[species].natDexNum != nationalNum)
+    while (species < (NUM_SPECIES) && gSpeciesInfo[species].dexNum != nationalNum)
         species++;
 
     if (species == NUM_SPECIES)
@@ -3558,7 +3550,7 @@ u16 SpeciesToNationalPokedexNum(u16 species)
     if (!species)
         return DEX_NONE;
 
-    return gSpeciesInfo[species].natDexNum;
+    return gSpeciesInfo[species].dexNum;
 }
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
