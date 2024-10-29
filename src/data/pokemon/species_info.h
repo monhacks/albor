@@ -1294,6 +1294,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 22,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 1, SHADOW_SIZE_S)
         FRONT_PIC(Spearow, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Spearow,
@@ -1344,6 +1345,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 1,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 20, SHADOW_SIZE_L)
         FRONT_PIC(Fearow, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Fearow,
@@ -1394,6 +1396,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 12,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(2, 2, SHADOW_SIZE_M)
         FRONT_PIC(Ekans, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Ekans,
@@ -1444,6 +1447,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 0,
         .trainerScale = 296,
         .trainerOffset = 2,
+        SOMBRA(3, 12, SHADOW_SIZE_XL)
         FRONT_PIC(Arbok, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Arbok,
@@ -1483,12 +1487,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .categoryName = _("Tiny Mouse"),
         .height = 3,
         .weight = 20,
-            .description = COMPOUND_STRING("???"),
+        .description = COMPOUND_STRING("???"),
         .pokemonScale = 508,
         .pokemonOffset = 20,
         .trainerScale = 256,
         .trainerOffset = 0,
         MOVIMIENTOS(Pichu),
+        SOMBRA(0, -1, SHADOW_SIZE_S)
         FRONT_PIC(Pichu, 32, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Pichu,
@@ -1535,7 +1540,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .trainerOffset = 0,
         .genderRatio = PERCENT_FEMALE(50),
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
-            .description = COMPOUND_STRING("???"),
+        .description = COMPOUND_STRING("???"),
+        SOMBRA(1, 5, SHADOW_SIZE_M)
         FRONT_PIC(Pikachu, 48, 48),
         FRONT_PIC_HEMBRA(Pikachu, 48, 48),
         .frontPicYOffset = 9,
@@ -1591,6 +1597,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(-2, 11, SHADOW_SIZE_L)
         FRONT_PIC(Raichu, 64, 64),
         FRONT_PIC_HEMBRA(Raichu, 64, 64),
         .frontPicYOffset = 3,
@@ -1642,6 +1649,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 13,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(5, 19, SHADOW_SIZE_L)
         FRONT_PIC(RaichuAlola, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_RaichuAlola,
@@ -1693,6 +1701,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(0, 1, SHADOW_SIZE_M)
         FRONT_PIC(Sandshrew, 48, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Sandshrew,
@@ -1743,6 +1752,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(5, 4, SHADOW_SIZE_L)
         FRONT_PIC(Sandslash, 64, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Sandslash,
@@ -1792,10 +1802,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 18,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(-1, 2, SHADOW_SIZE_M)
         FRONT_PIC(SandshrewAlola, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_SandshrewAlola,
-        .frontAnimId = ANIM_CONCAVE_ARC_SMALL_TWICE,
+        .frontAnimId = ANIM_H_SLIDE,
         BACK_PIC(SandshrewAlola, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
@@ -1843,6 +1854,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .pokemonOffset = 11,
         .trainerScale = 256,
         .trainerOffset = 0,
+        SOMBRA(1, 12, SHADOW_SIZE_L)
         FRONT_PIC(SandslashAlola, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_SandslashAlola,
@@ -22377,43 +22389,40 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(CherrimSunshine),
     },
 
-#define SHELLOS_MISC_INFO                                                               \
-        .baseHP        = 76,                                                            \
-        .baseAttack    = 48,                                                            \
-        .baseDefense   = 48,                                                            \
-        .baseSpeed     = 34,                                                            \
-        .baseSpAttack  = 57,                                                            \
-        .baseSpDefense = 62,                                                            \
-        .types = MON_TYPES(TYPE_WATER),                                                 \
-        .catchRate = 190,                                                               \
-        .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 65 : 73,                          \
-        .evYield_HP = 1,                                                                \
-        .genderRatio = PERCENT_FEMALE(50),                                              \
-        .eggCycles = 20,                                                                \
-        .friendship = STANDARD_FRIENDSHIP,                                              \
-        .growthRate = GROWTH_MEDIUM_FAST,                                               \
-        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_AMORPHOUS),            \
-        .abilities = {ABILITY_STICKY_HOLD, ABILITY_STORM_DRAIN, ABILITY_SAND_FORCE},  \
-        .speciesName = _("Shellos"),                                                    \
-        .cryId = CRY_SHELLOS,                                                           \
-        .natDexNum = DEX_SHELLOS,                                              \
-        .categoryName = _("Sea Slug"),                                                  \
-        .height = 3,                                                                    \
-        .weight = 63,                                                                   \
-        .pokemonScale = 530,                                                            \
-        .pokemonOffset = 13,                                                            \
-        .trainerScale = 256,                                                            \
-        .trainerOffset = 0,                                                             \
-        .frontAnimFrames = sAnims_Shellos,                                              \
-        .frontAnimId = ANIM_V_STRETCH,                                                  \
-        .backPicYOffset = 8,                                                            \
-        .backAnimId = BACK_ANIM_H_SPRING,                                               \
-        MOVIMIENTOS(Shellos),                                                             \
-        .formSpeciesIdTable = sShellosFormSpeciesIdTable
-
     [SPECIES_SHELLOS_WEST] =
     {
-        SHELLOS_MISC_INFO,
+        .baseHP        = 76,
+        .baseAttack    = 48,
+        .baseDefense   = 48,
+        .baseSpeed     = 34,
+        .baseSpAttack  = 57,
+        .baseSpDefense = 62,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 190,
+        .expYield = 65,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_STICKY_HOLD, ABILITY_STORM_DRAIN, ABILITY_SAND_FORCE},
+        .speciesName = _("Shellos"),
+        .cryId = CRY_SHELLOS,
+        .natDexNum = DEX_SHELLOS,
+        .categoryName = _("Sea Slug"),
+        .height = 3,
+        .weight = 63,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontAnimFrames = sAnims_Shellos,
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPicYOffset = 8,
+        .backAnimId = BACK_ANIM_H_SPRING,
+        MOVIMIENTOS(Shellos),
+        .formSpeciesIdTable = sShellosFormSpeciesIdTable,
         .bodyColor = BODY_COLOR_PURPLE,
         .description = COMPOUND_STRING(
             "It oozes a purple fluid to deter enemies.\n"
@@ -22431,7 +22440,38 @@ const struct SpeciesInfo gSpeciesInfo[] =
 
     [SPECIES_SHELLOS_EAST] =
     {
-        SHELLOS_MISC_INFO,
+        .baseHP        = 76,
+        .baseAttack    = 48,
+        .baseDefense   = 48,
+        .baseSpeed     = 34,
+        .baseSpAttack  = 57,
+        .baseSpDefense = 62,
+        .types = MON_TYPES(TYPE_WATER),
+        .catchRate = 190,
+        .expYield = 65,
+        .evYield_HP = 1,
+        .genderRatio = PERCENT_FEMALE(50),
+        .eggCycles = 20,
+        .friendship = STANDARD_FRIENDSHIP,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = MON_EGG_GROUPS(EGG_GROUP_ANFIBIO, EGG_GROUP_AMORPHOUS),
+        .abilities = {ABILITY_STICKY_HOLD, ABILITY_STORM_DRAIN, ABILITY_SAND_FORCE},
+        .speciesName = _("Shellos"),
+        .cryId = CRY_SHELLOS,
+        .natDexNum = DEX_SHELLOS,
+        .categoryName = _("Sea Slug"),
+        .height = 3,
+        .weight = 63,
+        .pokemonScale = 530,
+        .pokemonOffset = 13,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+        .frontAnimFrames = sAnims_Shellos,
+        .frontAnimId = ANIM_V_STRETCH,
+        .backPicYOffset = 8,
+        .backAnimId = BACK_ANIM_H_SPRING,
+        MOVIMIENTOS(Shellos),
+        .formSpeciesIdTable = sShellosFormSpeciesIdTable,
         .bodyColor = BODY_COLOR_BLUE,
         .description = COMPOUND_STRING(
             "It's capable of spending a limited amount\n"
