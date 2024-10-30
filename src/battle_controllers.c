@@ -17,7 +17,6 @@
 #include "string_util.h"
 #include "sound.h"
 #include "task.h"
-#include "test_runner.h"
 #include "util.h"
 #include "text.h"
 #include "constants/abilities.h"
@@ -2045,16 +2044,6 @@ void BtlController_HandlePrintString(u32 battler, bool32 arenaPtsDeduct)
     stringId = (u16 *)(&gBattleResources->bufferA[battler][2]);
     BufferStringBattle(*stringId, battler);
 
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordMessage(gDisplayedStringBattle);
-        if (gTestRunnerHeadless)
-        {
-            BattleControllerComplete(battler);
-            return;
-        }
-    }
-
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MSG);
     gBattlerControllerFuncs[battler] = Controller_WaitForString;
     if (arenaPtsDeduct)
@@ -2075,14 +2064,12 @@ void BtlController_HandleHealthBarUpdate(u32 battler, bool32 updateHpText)
     if (hpVal != INSTANT_HP_BAR_DROP)
     {
         SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, curHP, hpVal);
-        TestRunner_Battle_RecordHP(battler, curHP, min(maxHP, max(0, curHP - hpVal)));
     }
     else
     {
         SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], maxHP, 0, hpVal);
         if (updateHpText)
             UpdateHpTextInHealthbox(gHealthboxSpriteIds[battler], HP_CURRENT, 0, maxHP);
-        TestRunner_Battle_RecordHP(battler, curHP, 0);
     }
 
     gBattlerControllerFuncs[battler] = Controller_WaitForHealthBar;

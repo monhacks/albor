@@ -23,7 +23,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "util.h"
 #include "window.h"
@@ -474,8 +473,6 @@ static void RecordedOpponentHandleStatusIconUpdate(u32 battler)
     if (!IsBattleSEPlaying(battler))
     {
         DoStatusIconUpdate(battler);
-        if (gTestRunnerEnabled)
-            TestRunner_Battle_RecordStatus1(battler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_STATUS));
     }
 }
 

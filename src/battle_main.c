@@ -49,7 +49,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "trig.h"
 #include "util.h"
@@ -3568,11 +3567,10 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     }
 
-                    if (((gBattleTypeFlags & (BATTLE_TYPE_LINK
+                    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK))
-                                            && !gTestRunnerEnabled)
                                             // Or if currently held by Sky Drop
                                             || gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
@@ -3765,11 +3763,6 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.baseMoves[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                             }
                             gBattleCommunication[battler]++;
-
-                            if (gTestRunnerEnabled)
-                            {
-                                TestRunner_Battle_CheckChosenMove(battler, gChosenMoveByBattler[battler], gBattleStruct->moveTarget[battler]);
-                            }
                         }
                         break;
                     }

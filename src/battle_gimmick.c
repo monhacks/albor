@@ -12,7 +12,6 @@
 #include "pokemon.h"
 #include "sprite.h"
 #include "util.h"
-#include "test_runner.h"
 
 #include "data/gimmicks.h"
 
