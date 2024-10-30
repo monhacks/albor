@@ -162,8 +162,6 @@ struct SioMultiCnt
     u16 data;          // data
 };
 
-#define ST_SIO_MULTI_MODE 2 // Multi-player communication mode
-
 // baud rate
 #define ST_SIO_9600_BPS   0 //   9600 bps
 #define ST_SIO_38400_BPS  1 //  38400 bps

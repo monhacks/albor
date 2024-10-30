@@ -1,8 +1,5 @@
 #include "global.h"
 #include "malloc.h"
-#if TESTING
-#include "test/test.h"
-#endif
 
 static void *sHeapStart;
 static u32 sHeapSize;
@@ -83,24 +80,6 @@ void *AllocInternal(void *heapStart, u32 size, const char *location)
 
         if (pos->next == head)
         {
-#if TESTING
-            const struct MemBlock *head = HeapHead();
-            const struct MemBlock *block = head;
-            do
-            {
-                if (block->allocated)
-                {
-                    const char *location = MemBlockLocation(block);
-                    if (location)
-                        Test_MgbaPrintf("%s: %d bytes allocated", location, block->size);
-                    else
-                        Test_MgbaPrintf("<unknown>: %d bytes allocated", block->size);
-                }
-                block = block->next;
-            }
-            while (block != head);
-            Test_ExitWithResult(TEST_RESULT_ERROR, SourceLine(0), ":L%s:%d, %s: OOM allocating %d bytes", gTestRunnerState.test->filename, SourceLine(0), location, size);
-#endif
             return NULL;
         }
 

@@ -3598,21 +3598,10 @@ const struct SpriteTemplate gPhotonGeyserZapBallTemplate =
 
 // GEN 8
 //snipe shot
-static const union AffineAnimCmd sSpriteAffineAnim_LargeSpikePointedLeft[] =
-{
-    AFFINEANIMCMD_FRAME(0, 0, 32, 1), //45 degree turn
-    AFFINEANIMCMD_END
-};
-
 static const union AffineAnimCmd sSpriteAffineAnim_LargeSpikePointedRight[] =
 {
     AFFINEANIMCMD_FRAME(0, 0, -32, 1), //45 degree turn
     AFFINEANIMCMD_END
-};
-static const union AffineAnimCmd* const sSpriteAffineAnimTable_LargeSpike[] =
-{
-    sSpriteAffineAnim_LargeSpikePointedLeft,
-    sSpriteAffineAnim_LargeSpikePointedRight,
 };
 
 static const union AffineAnimCmd* const sSpriteAffineAnimTable_SnipeShot[] =

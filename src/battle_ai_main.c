@@ -280,9 +280,6 @@ u32 BattleAI_ChooseMoveOrAction(void)
     // Clear protect structures, some flags may be set during AI calcs
     // e.g. pranksterElevated from GetMovePriority
     memset(&gProtectStructs, 0, MAX_BATTLERS_COUNT * sizeof(struct ProtectStruct));
-    #if TESTING
-    TestRunner_Battle_CheckAiMoveScores(sBattler_AI);
-    #endif // TESTING
     return ret;
 }
 
@@ -3692,7 +3689,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
     case EFFECT_STEALTH_ROCK:
     case EFFECT_STICKY_WEB:
     case EFFECT_TOXIC_SPIKES:
-        if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData));
+        if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData))
         {
             if (gDisableStructs[battlerAtk].isFirstTurn)
                 ADJUST_SCORE(BEST_EFFECT);
@@ -4660,7 +4657,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
                     break;
                 case MOVE_EFFECT_STEALTH_ROCK:
                 case MOVE_EFFECT_SPIKES:
-                    if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData));
+                    if (AI_ShouldSetUpHazards(battlerAtk, battlerDef, aiData))
                     {
                         if (gDisableStructs[battlerAtk].isFirstTurn)
                             ADJUST_SCORE(BEST_EFFECT);

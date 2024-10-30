@@ -21,22 +21,6 @@ static void AnimTask_FrozenIceCube_Step2(u8 taskId);
 static void AnimTask_FrozenIceCube_Step3(u8 taskId);
 static void AnimTask_FrozenIceCube_Step4(u8 taskId);
 static void Task_DoStatusAnimation(u8 taskId);
-static void AnimFlashingCircleImpact(struct Sprite *sprite);
-static void AnimFlashingCircleImpact_Step(struct Sprite *sprite);
-
-static const union AnimCmd sAnim_FlickeringOrb[] =
-{
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(4, 3),
-    ANIMCMD_FRAME(8, 3),
-    ANIMCMD_FRAME(12, 3),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd *const sAnims_FlickeringOrb[] =
-{
-    sAnim_FlickeringOrb
-};
 
 static const union AnimCmd sAnim_WeatherBallNormal[] =
 {
@@ -97,78 +81,6 @@ const struct SpriteTemplate gSpinningSparkleSpriteTemplate =
     .callback = AnimSpinningSparkle,
 };
 
-// Unused
-static const struct SpriteTemplate sFlickeringFootSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_MONSTER_FOOT,
-    .paletteTag = ANIM_TAG_MONSTER_FOOT,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimTranslateLinearAndFlicker,
-};
-
-static const union AnimCmd sAnim_FlickeringImpact_0[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd sAnim_FlickeringImpact_1[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd sAnim_FlickeringImpact_2[] =
-{
-    ANIMCMD_FRAME(0, 5),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd *const sAnims_FlickeringImpact[] =
-{
-    sAnim_FlickeringImpact_0,
-    sAnim_FlickeringImpact_1,
-    sAnim_FlickeringImpact_2,
-};
-
-// Unused
-static const struct SpriteTemplate sFlickeringImpactSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_IMPACT,
-    .paletteTag = ANIM_TAG_IMPACT,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlickeringImpact,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimTranslateLinearAndFlicker,
-};
-
-static const union AnimCmd sAnim_FlickeringShrinkOrb[] =
-{
-    ANIMCMD_FRAME(0, 15),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd *const sAnims_FlickeringShrinkOrb[] =
-{
-    sAnim_FlickeringShrinkOrb
-};
-
-static const union AffineAnimCmd sAffineAnim_FlickeringShrinkOrb[] =
-{
-    AFFINEANIMCMD_FRAME(96, 96, 0, 0),
-    AFFINEANIMCMD_FRAME(2, 2, 0, 1),
-    AFFINEANIMCMD_JUMP(1)
-};
-
-static const union AffineAnimCmd *const sAffineAnims_FlickeringShrinkOrb[] =
-{
-    sAffineAnim_FlickeringShrinkOrb
-};
-
 static const struct Subsprite sFrozenIceCubeSubsprites[] =
 {
     {
@@ -220,52 +132,6 @@ static const struct SpriteTemplate sFrozenIceCubeSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
-
-static const struct SpriteTemplate sFlashingCircleImpactSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_CIRCLE_IMPACT,
-    .paletteTag = ANIM_TAG_CIRCLE_IMPACT,
-    .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimFlashingCircleImpact,
-};
-
-static void AnimFlashingCircleImpact(struct Sprite *sprite)
-{
-    if (sprite->data[6] == 0)
-    {
-        sprite->invisible = FALSE;
-        sprite->callback = AnimFlashingCircleImpact_Step;
-        AnimFlashingCircleImpact_Step(sprite);
-    }
-    else
-    {
-        sprite->data[6]--;
-    }
-}
-
-static void AnimFlashingCircleImpact_Step(struct Sprite *sprite)
-{
-    sprite->x2 = Cos(sprite->data[0], 32);
-    sprite->y2 = Sin(sprite->data[0], 8);
-    if (sprite->data[0] < 128)
-        sprite->subpriority = 29;
-    else
-        sprite->subpriority = 31;
-    sprite->data[0] = (sprite->data[0] + 8) & 0xFF;
-    sprite->data[5] += sprite->data[1];
-    sprite->y2 += sprite->data[5] >> 8;
-    sprite->data[2]++;
-    if (sprite->data[2] == 52)
-    {
-        if (sprite->data[7])
-            DestroySpriteAndFreeResources(sprite);
-        else
-            DestroySprite(sprite);
-    }
-}
 
 void AnimTask_FrozenIceCubeAttacker(u8 taskId)
 {

@@ -451,17 +451,6 @@ static const union AnimCmd *const sAnims_MapIndicatorCursor[] =
     [MAP_INDICATOR_SQUARE]    = sAnim_MapIndicatorCursor_Square
 };
 
-static const union AffineAnimCmd sAffineAnim_Unused[] =
-{
-    AFFINEANIMCMD_FRAME(256, 256, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused[] =
-{
-    sAffineAnim_Unused
-};
-
 static const struct SpriteTemplate sSpriteTemplates_Cursors[] =
 {
     // Triangular cursor

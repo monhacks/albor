@@ -43,11 +43,7 @@ bool32 CanActivateGimmick(u32 battler, enum Gimmick gimmick)
 // Returns whether the player has a gimmick selected while in the move selection menu.
 bool32 IsGimmickSelected(u32 battler, enum Gimmick gimmick)
 {
-    // There's no player select in tests, but some gimmicks need to test choice before they are fully activated.
-    if (TESTING)
-        return (gBattleStruct->gimmick.toActivate & (1u << battler)) && gBattleStruct->gimmick.usableGimmick[battler] == gimmick;
-    else
-        return gBattleStruct->gimmick.usableGimmick[battler] == gimmick && gBattleStruct->gimmick.playerSelect;
+    return FALSE;
 }
 
 // Sets a battler as having a gimmick active using their party index.

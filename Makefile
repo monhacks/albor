@@ -11,8 +11,6 @@ BUILD_DIR := build
 
 # Compares the ROM to a checksum of the original - only makes sense using when non-modern
 COMPARE     ?= 0
-# Executes the Test Runner System that checks that all mechanics work as expected
-TEST         ?= 0
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
 # Count unused warnings as errors. Used by RH-Hideout's repo
@@ -22,9 +20,6 @@ DEBUG        ?= 0
 
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
-endif
-ifeq (check,$(MAKECMDGOALS))
-  TEST := 1
 endif
 ifeq (debug,$(MAKECMDGOALS))
   DEBUG := 1
@@ -62,26 +57,16 @@ CPP := $(PREFIX)cpp
 
 ROM_NAME := $(FILE_NAME).gba
 OBJ_DIR_NAME := $(BUILD_DIR)/modern
-OBJ_DIR_NAME_TEST := $(BUILD_DIR)/modern-test
 OBJ_DIR_NAME_DEBUG := $(BUILD_DIR)/modern-debug
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
-TESTELF = $(ROM_NAME:.gba=-test.elf)
-HEADLESSELF = $(ROM_NAME:.gba=-test-headless.elf)
 
 # Pick our active variables
 ROM := $(ROM_NAME)
-ifeq ($(TEST), 0)
-  OBJ_DIR := $(OBJ_DIR_NAME)
-else
-  OBJ_DIR := $(OBJ_DIR_NAME_TEST)
-endif
+OBJ_DIR := $(OBJ_DIR_NAME)
 ifeq ($(DEBUG),1)
   OBJ_DIR := $(OBJ_DIR_NAME_DEBUG)
-endif
-ifeq ($(TESTELF),$(MAKECMDGOALS))
-  TEST := 1
 endif
 ELF := $(ROM:.gba=.elf)
 MAP := $(ROM:.gba=.map)
@@ -94,14 +79,12 @@ DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
-TEST_SUBDIR = test
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
-TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 
 SHELL := bash -o pipefail
 
@@ -117,7 +100,7 @@ O_LEVEL ?= g
 else
 O_LEVEL ?= 2
 endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
@@ -175,7 +158,7 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck generated clean-generated $(TESTELF)
+RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern generated clean-generated
 .PHONY: all rom modern compare check debug
 .PHONY: $(RULES_NO_SCAN)
 
@@ -214,11 +197,6 @@ C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-TEST_SRCS_IN := $(wildcard $(TEST_SUBDIR)/*.c $(TEST_SUBDIR)/*/*.c $(TEST_SUBDIR)/*/*/*.c)
-TEST_SRCS := $(foreach src,$(TEST_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
-TEST_OBJS := $(patsubst $(TEST_SUBDIR)/%.c,$(TEST_BUILDDIR)/%.o,$(TEST_SRCS))
-TEST_OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(TEST_OBJS))
-
 C_ASM_SRCS := $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
 C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
 
@@ -240,35 +218,13 @@ MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
-SUBDIRS  := $(sort $(dir $(OBJS) $(dir $(TEST_OBJS))))
+SUBDIRS  := $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(SUBDIRS))
 
 # Pretend rules that are actually flags defer to `make all`
 modern: all
 compare: all
 debug: all
-
-LD_SCRIPT_TEST := ld_script_test.ld
-
-$(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
-	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
-
-$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
-	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
-	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
-
-ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
-TEST_SKIP_IS_FAIL := \x01
-else
-TEST_SKIP_IS_FAIL := \x00
-endif
-
-check: $(TESTELF)
-	@cp $< $(HEADLESSELF)
-	$(PATCHELF) $(HEADLESSELF) gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "$(TEST_SKIP_IS_FAIL)"
-	$(OBJCOPY) $(HEADLESSELF)
 
 # Other rules
 rom: $(ROM)
@@ -289,15 +245,11 @@ clean-assets:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 
-tidy: tidymodern tidycheck tidydebug
+tidy: tidymodern tidydebug
 
 tidymodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
 	rm -rf $(OBJ_DIR_NAME)
-
-tidycheck:
-	rm -f $(TESTELF) $(HEADLESSELF)
-	rm -rf $(OBJ_DIR_NAME_TEST)
 
 tidydebug:
 	rm -rf $(DEBUG_OBJ_DIR_NAME)

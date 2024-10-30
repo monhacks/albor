@@ -87,7 +87,6 @@ static void PlayerBufferRunCommand(u32 battler);
 static void MoveSelectionDisplayPpNumber(u32 battler);
 static void MoveSelectionDisplayMoveType(u32 battler);
 static void MoveSelectionDisplayMoveNames(u32 battler);
-static void MoveSelectionDisplayMoveDescription(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static void WaitForMonSelection(u32 battler);
 static void CompleteWhenChoseItem(u32 battler);
@@ -887,8 +886,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_RIGHT) && !gBattleStruct->zmove.viewing)
@@ -902,8 +899,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_UP) && !gBattleStruct->zmove.viewing)
@@ -916,8 +911,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_DOWN) && !gBattleStruct->zmove.viewing)
@@ -931,8 +924,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
 }
@@ -1461,42 +1452,18 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     if (gBattleResources->bufferA[battler][2] == TRUE) // check if we didn't want to display pp number
         return;
 
-        if (moveInfo->moves[0] != MOVE_NONE)
+    for (u8 i = 0; i < 4; i++)
+    {
+        if (moveInfo->moves[i] != MOVE_NONE)
         {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);     
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1 + i); // B_WIN_PP_1, B_WIN_PP_2, etc.
         }
         else
         {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_1);     
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_1 + i); // B_WIN_PP_1, B_WIN_PP_2, etc.
         }
-        if (moveInfo->moves[1] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_2);     
-        }
-        if (moveInfo->moves[2] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_3);     
-        }
-        if (moveInfo->moves[3] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_4);     
-        }
+    }
 }
 
 static const struct OamData sOamData_IconTypes =
@@ -1976,54 +1943,6 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 		sprite4->oam.priority = 0;
 		sprite4->subpriority = 1;
     }
-}
-
-static void MoveSelectionDisplayMoveDescription(u32 battler)
-{
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[battler][4]);
-    u16 move = moveInfo->moves[gMoveSelectionCursor[battler]];
-    u16 pwr = gMovesInfo[move].power;
-    u16 acc = gMovesInfo[move].accuracy;
-    u8 cat = gMovesInfo[move].category;
-
-    u8 pwr_num[3], acc_num[3];
-    u8 cat_desc[7] = _("CAT: ");
-    u8 pwr_desc[7] = _("PWR: ");
-    u8 acc_desc[7] = _("ACC: ");
-    u8 cat_start[] = _("{CLEAR_TO 0x03}");
-    u8 pwr_start[] = _("{CLEAR_TO 0x38}");
-    u8 acc_start[] = _("{CLEAR_TO 0x6D}");
-    LoadMessageBoxAndBorderGfx();
-    DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
-    if (pwr < 2)
-        StringCopy(pwr_num, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(pwr_num, pwr, STR_CONV_MODE_LEFT_ALIGN, 3);
-    if (acc < 2)
-        StringCopy(acc_num, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(acc_num, acc, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(gDisplayedStringBattle, cat_start);
-    StringAppend(gDisplayedStringBattle, cat_desc);
-    StringAppend(gDisplayedStringBattle, pwr_start);
-    StringAppend(gDisplayedStringBattle, pwr_desc);
-    StringAppend(gDisplayedStringBattle, pwr_num);
-    StringAppend(gDisplayedStringBattle, acc_start);
-    StringAppend(gDisplayedStringBattle, acc_desc);
-    StringAppend(gDisplayedStringBattle, acc_num);
-    StringAppend(gDisplayedStringBattle, gText_NewLine);
-    if (gMovesInfo[move].effect == EFFECT_PLACEHOLDER)
-        StringAppend(gDisplayedStringBattle, gNotDoneYetDescription);
-    else
-        StringAppend(gDisplayedStringBattle, gMovesInfo[move].description);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
-
-    if (gCategoryIconSpriteId == 0xFF)
-        gCategoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 38, 64, 1);
-
-    StartSpriteAnim(&gSprites[gCategoryIconSpriteId], cat);
-
-    CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
 }
 
 void CB2_SetUpReshowBattleScreenAfterMenu(void)

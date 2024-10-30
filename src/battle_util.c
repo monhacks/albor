@@ -10857,31 +10857,6 @@ bool32 CanMegaEvolve(u32 battler)
 
 bool32 CanUltraBurst(u32 battler)
 {
-    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Check if Player has a Z-Ring
-    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
-        return FALSE;
-
-    // Check if Trainer has already Ultra Bursted.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_ULTRA_BURST))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE)
-        return FALSE;
-
-    // Check if mon is currently held by Sky Drop
-    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
-        return FALSE;
-
-    // Check if there is an entry in the form change table for Ultra Burst and battler is holding a Z-Crystal.
-    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_ULTRA_BURST) != SPECIES_NONE && holdEffect == HOLD_EFFECT_Z_CRYSTAL)
-        return TRUE;
-
-    // No checks passed, the mon CAN'T ultra burst.
     return FALSE;
 }
 

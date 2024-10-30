@@ -61,47 +61,7 @@ void ApplyBattlerVisualsForTeraAnim(u32 battler)
 // Returns whether a battler can Terastallize.
 bool32 CanTerastallize(u32 battler)
 {
-    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Prevents Zigzagoon from terastalizing in vanilla.
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        return FALSE;
-
-    if (TESTING || GetBattlerSide(battler) == B_SIDE_OPPONENT)
-    {
-        // Skip all other checks in this block, go to HasTrainerUsedGimmick
-    }
-    else if (!CheckBagHasItem(ITEM_TERA_ORB, 1))
-    {
-        return FALSE;
-    }
-    else if (FlagGet(B_FLAG_TERA_ORB_NO_COST))
-    {
-        // Tera Orb is not depleted, go to HasTrainerUsedGimmick
-    }
-    else if (!FlagGet(B_FLAG_TERA_ORB_CHARGED))
-    {
-        return FALSE;
-    }
-
-    // Check if Trainer has already Terastallized.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_TERA))
-        return FALSE;
-
-    // Check if AI battler is intended to Terastallize.
-    if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_TERA))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE)
-        return FALSE;
-
-    // Check if battler is holding a Z-Crystal or Mega Stone.
-    if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE)) // tests make this check already
-        return FALSE;
-
-    // Every check passed!
-    return TRUE;
+    return FALSE;
 }
 
 // Returns a battler's Tera type.

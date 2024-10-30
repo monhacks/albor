@@ -161,44 +161,6 @@ static void InitDomeTrainers(void);
 static EWRAM_DATA struct TourneyTreeInfoCard *sInfoCard = {0};
 static EWRAM_DATA u8 *sTilemapBuffer = NULL;
 
-// This array is searched in-order to determine what battle style a tourney trainer uses.
-// If the sum of the points for the party's moves meets/exceeds all the point totals of an element, then they use that battle style
-static const u8 sBattleStyleThresholds[NUM_BATTLE_STYLES - 1][NUM_MOVE_POINT_TYPES] =
-{
-    [DOME_BATTLE_STYLE_RISKY]           = {[MOVE_POINTS_RISKY] = 1},
-    [DOME_BATTLE_STYLE_STALL]           = {[MOVE_POINTS_HEAL] = 2, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DEF] = 2},
-    [DOME_BATTLE_STYLE_VARIED]          = {[MOVE_POINTS_COMBO] = 1, [MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_STATUS] = 1, [MOVE_POINTS_DEF] = 1},
-    [DOME_BATTLE_STYLE_COMBO_HIGH]      = {[MOVE_POINTS_COMBO] = 3},
-    [DOME_BATTLE_STYLE_RARE_MOVES]      = {[MOVE_POINTS_RARE] = 2},
-    [DOME_BATTLE_STYLE_RARE_MOVE]       = {[MOVE_POINTS_RARE] = 1},
-    [DOME_BATTLE_STYLE_HP]              = {[MOVE_POINTS_HEAL] = 3},
-    [DOME_BATTLE_STYLE_STORE_POWER]     = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_HEAL] = 1},
-    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = {[MOVE_POINTS_STAT_LOWER] = 1, [MOVE_POINTS_STATUS] = 1},
-    [DOME_BATTLE_STYLE_LUCK]            = {[MOVE_POINTS_LUCK] = 2},
-    [DOME_BATTLE_STYLE_REGAL]           = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_DEF] = 1, [MOVE_POINTS_POPULAR] = 1, [MOVE_POINTS_STRONG] = 1},
-    [DOME_BATTLE_STYLE_LOW_PP]          = {[MOVE_POINTS_LOW_PP] = 3},
-    [DOME_BATTLE_STYLE_STATUS_ATK]      = {[MOVE_POINTS_STAT_RAISE] = 1, [MOVE_POINTS_STATUS] = 1},
-    [DOME_BATTLE_STYLE_ENDURE]          = {[MOVE_POINTS_HEAL] = 2, [MOVE_POINTS_DEF] = 2},
-    [DOME_BATTLE_STYLE_STATUS]          = {[MOVE_POINTS_STATUS] = 2},
-    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = {[MOVE_POINTS_ACCURATE] = 3, [MOVE_POINTS_STRONG] = 3},
-    [DOME_BATTLE_STYLE_AGGRESSIVE]      = {[MOVE_POINTS_STRONG] = 4},
-    [DOME_BATTLE_STYLE_DEF]             = {[MOVE_POINTS_DEF] = 3},
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = {[MOVE_POINTS_STAT_LOWER] = 2, [MOVE_POINTS_STATUS] = 2}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_ENFEEBLE_LOW will always succeed before it
-    [DOME_BATTLE_STYLE_POPULAR_POWER]   = {[MOVE_POINTS_POWERFUL] = 3, [MOVE_POINTS_POPULAR] = 3},
-    [DOME_BATTLE_STYLE_COMBO_LOW]       = {[MOVE_POINTS_COMBO] = 2},
-    [DOME_BATTLE_STYLE_ACCURATE]        = {[MOVE_POINTS_HEAL] = 1, [MOVE_POINTS_ACCURATE] = 3},
-    [DOME_BATTLE_STYLE_POWERFUL]        = {[MOVE_POINTS_POWERFUL] = 4},
-    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = {[MOVE_POINTS_DMG] = 7},
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = {[MOVE_POINTS_DEF] = 4}, // BUG: This battle style is unobtainable; DOME_BATTLE_STYLE_DEF will always succeed before it
-    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = {[MOVE_POINTS_POPULAR] = 2, [MOVE_POINTS_STRONG] = 4},
-    [DOME_BATTLE_STYLE_EFFECTS]         = {[MOVE_POINTS_EFFECT] = 4},
-    [DOME_BATTLE_STYLE_BALANCED]        = {0}, // If no other thresholds are met, this battle style is used
-    [DOME_BATTLE_STYLE_UNUSED1]         = {0}, // Here below is unreachable
-    [DOME_BATTLE_STYLE_UNUSED2]         = {0},
-    [DOME_BATTLE_STYLE_UNUSED3]         = {0},
-  //[DOME_BATTLE_STYLE_UNUSED4]         = {0}, // Excluded here, presumably was meant to be a style just for Dome Ace Tucker
-};
-
 // 1st array is for cursor position (sprite id): cursor can be on a trainer info button, a match info button, or the exit/cancel button
 // 2nd array is for round count. For some reason this array contains an inaccessible Round 5 which is identical to Round 4
 // 3rd array is movement direction (see the MOVE_DIR_* constants in UpdateTourneyTreeCursor)
@@ -535,13 +497,6 @@ static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
     {},
 };
 
-// Unused
-static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
-{
-    {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
-    {},
-};
-
 static const struct OamData sOamData_TourneyTreePokeball =
 {
     .y = 0,
@@ -864,129 +819,6 @@ static const u8 sTrainerAndRoundToLastMatchCardNum[DOME_TOURNAMENT_TRAINERS_COUN
 };
 
 static const u8 sTournamentIdToPairedTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] = {0, 15, 8, 7, 3, 12, 11, 4, 1, 14, 9, 6, 2, 13, 10, 5};
-
-// The first line of text on a trainers info card. It describes their potential to win, based on their seed in the tournament tree.
-// Dome Ace Tucker has their own separate potential text.
-static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
-{
-    BattleDome_Text_Potential1, // Highest potential
-    BattleDome_Text_Potential2,
-    BattleDome_Text_Potential3,
-    BattleDome_Text_Potential4,
-    BattleDome_Text_Potential5,
-    BattleDome_Text_Potential6,
-    BattleDome_Text_Potential7,
-    BattleDome_Text_Potential8,
-    BattleDome_Text_Potential9,
-    BattleDome_Text_Potential10,
-    BattleDome_Text_Potential11,
-    BattleDome_Text_Potential12,
-    BattleDome_Text_Potential13,
-    BattleDome_Text_Potential14,
-    BattleDome_Text_Potential15,
-    BattleDome_Text_Potential16, // Lowest potential
-    BattleDome_Text_PotentialDomeAceTucker,
-};
-
-// The second line of text on a trainers info card. It gives information about their battle style (dependent on their party's moves).
-static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
-{
-    [DOME_BATTLE_STYLE_RISKY]           = BattleDome_Text_StyleRiskDisaster,
-    [DOME_BATTLE_STYLE_STALL]           = BattleDome_Text_StyleEndureLongBattles,
-    [DOME_BATTLE_STYLE_VARIED]          = BattleDome_Text_StyleVariesTactics,
-    [DOME_BATTLE_STYLE_COMBO_HIGH]      = BattleDome_Text_StyleToughWinningPattern,
-    [DOME_BATTLE_STYLE_RARE_MOVES]      = BattleDome_Text_StyleUsesVeryRareMove,   // Seems like the text for these two was swapped
-    [DOME_BATTLE_STYLE_RARE_MOVE]       = BattleDome_Text_StyleUsesStartlingMoves, //
-    [DOME_BATTLE_STYLE_HP]              = BattleDome_Text_StyleConstantlyWatchesHP,
-    [DOME_BATTLE_STYLE_STORE_POWER]     = BattleDome_Text_StyleStoresAndLoosesPower,
-    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = BattleDome_Text_StyleEnfeeblesFoes,
-    [DOME_BATTLE_STYLE_LUCK]            = BattleDome_Text_StylePrefersLuckTactics,
-    [DOME_BATTLE_STYLE_REGAL]           = BattleDome_Text_StyleRegalAtmosphere,
-    [DOME_BATTLE_STYLE_LOW_PP]          = BattleDome_Text_StylePowerfulLowPPMoves,
-    [DOME_BATTLE_STYLE_STATUS_ATK]      = BattleDome_Text_StyleEnfeebleThenAttack,
-    [DOME_BATTLE_STYLE_ENDURE]          = BattleDome_Text_StyleBattlesWhileEnduring,
-    [DOME_BATTLE_STYLE_STATUS]          = BattleDome_Text_StyleUpsetsFoesEmotionally,
-    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = BattleDome_Text_StyleStrongAndStraightforward,
-    [DOME_BATTLE_STYLE_AGGRESSIVE]      = BattleDome_Text_StyleAggressivelyStrongMoves,
-    [DOME_BATTLE_STYLE_DEF]             = BattleDome_Text_StyleCleverlyDodgesAttacks,
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = BattleDome_Text_StyleUsesUpsettingMoves,
-    [DOME_BATTLE_STYLE_POPULAR_POWER]   = BattleDome_Text_StyleUsesPopularMoves,
-    [DOME_BATTLE_STYLE_COMBO_LOW]       = BattleDome_Text_StyleHasPowerfulComboMoves,
-    [DOME_BATTLE_STYLE_ACCURATE]        = BattleDome_Text_StyleUsesHighProbabilityMoves,
-    [DOME_BATTLE_STYLE_POWERFUL]        = BattleDome_Text_StyleAggressivelySpectacularMoves,
-    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = BattleDome_Text_StyleEmphasizesOffenseOverDefense,
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = BattleDome_Text_StyleEmphasizesDefenseOverOffense,
-    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = BattleDome_Text_StyleAttacksQuicklyStrongMoves,
-    [DOME_BATTLE_STYLE_EFFECTS]         = BattleDome_Text_StyleUsesAddedEffectMoves,
-    [DOME_BATTLE_STYLE_BALANCED]        = BattleDome_Text_StyleUsesBalancedMixOfMoves,
-    [DOME_BATTLE_STYLE_UNUSED1]         = BattleDome_Text_StyleSampleMessage1,
-    [DOME_BATTLE_STYLE_UNUSED2]         = BattleDome_Text_StyleSampleMessage2,
-    [DOME_BATTLE_STYLE_UNUSED3]         = BattleDome_Text_StyleSampleMessage3,
-    [DOME_BATTLE_STYLE_UNUSED4]         = BattleDome_Text_StyleSampleMessage4,
-};
-
-// The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokémon's effort values and Nature).
-static const u8 *const sBattleDomeOpponentStatsTexts[] =
-{
-    BattleDome_Text_EmphasizesHPAndAtk,      // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
-    BattleDome_Text_EmphasizesHPAndDef,
-    BattleDome_Text_EmphasizesHPAndSpeed,
-    BattleDome_Text_EmphasizesHPAndSpAtk,
-    BattleDome_Text_EmphasizesHPAndSpDef,
-    BattleDome_Text_EmphasizesAtkAndDef,     // DOME_TEXT_ATK starts here
-    BattleDome_Text_EmphasizesAtkAndSpeed,
-    BattleDome_Text_EmphasizesAtkAndSpAtk,
-    BattleDome_Text_EmphasizesAtkAndSpDef,
-    BattleDome_Text_EmphasizesDefAndSpeed,   // DOME_TEXT_DEF starts here
-    BattleDome_Text_EmphasizesDefAndSpAtk,
-    BattleDome_Text_EmphasizesDefAndSpDef,
-    BattleDome_Text_EmphasizesSpeedAndSpAtk, // DOME_TEXT_SPEED starts here
-    BattleDome_Text_EmphasizesSpeedAndSpDef,
-    BattleDome_Text_EmphasizesSpAtkAndSpDef, // DOME_TEXT_SPATK starts here
-    BattleDome_Text_EmphasizesHP,            // DOME_TEXT_ONE_GOOD_STAT starts here
-    BattleDome_Text_EmphasizesAtk,
-    BattleDome_Text_EmphasizesDef,
-    BattleDome_Text_EmphasizesSpeed,
-    BattleDome_Text_EmphasizesSpAtk,
-    BattleDome_Text_EmphasizesSpDef,
-    BattleDome_Text_NeglectsHPAndAtk,        // DOME_TEXT_TWO_BAD_STATS starts here
-    BattleDome_Text_NeglectsHPAndDef,
-    BattleDome_Text_NeglectsHPAndSpeed,
-    BattleDome_Text_NeglectsHPAndSpAtk,
-    BattleDome_Text_NeglectsHPAndSpDef,
-    BattleDome_Text_NeglectsAtkAndDef,
-    BattleDome_Text_NeglectsAtkAndSpeed,
-    BattleDome_Text_NeglectsAtkAndSpAtk,
-    BattleDome_Text_NeglectsAtkAndSpDef,
-    BattleDome_Text_NeglectsDefAndSpeed,
-    BattleDome_Text_NeglectsDefAndSpAtk,
-    BattleDome_Text_NeglectsDefAndSpDef,
-    BattleDome_Text_NeglectsSpeedAndSpAtk,
-    BattleDome_Text_NeglectsSpeedAndSpDef,
-    BattleDome_Text_NeglectsSpAtkAndSpDef,
-    BattleDome_Text_NeglectsHP,              // DOME_TEXT_ONE_BAD_STAT starts here
-    BattleDome_Text_NeglectsAtk,
-    BattleDome_Text_NeglectsDef,
-    BattleDome_Text_NeglectsSpeed,
-    BattleDome_Text_NeglectsSpAtk,
-    BattleDome_Text_NeglectsSpDef,
-    [DOME_TEXT_WELL_BALANCED] = BattleDome_Text_RaisesMonsWellBalanced,
-};
-
-static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};
-static const u8 sInfoTrainerMonY[FRONTIER_PARTY_SIZE] = { 38,  62,  78};
-static const u8 sSpeciesNameTextYCoords[] = {0, 4, 0};
-
-// Offsets within sBattleDomeOpponentStatsTexts for stat combinations
-// SPDEF has no offset because by then all stat combinations have been reached, so it has no combination texts
-static const u8 sStatTextOffsets[NUM_STATS - 1] =
-{
-    DOME_TEXT_HP,
-    DOME_TEXT_ATK,
-    DOME_TEXT_DEF,
-    DOME_TEXT_SPEED,
-    DOME_TEXT_SPATK
-};
 
 static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT] =
 {
