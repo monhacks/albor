@@ -5,17 +5,11 @@ MAKER_CODE  := 01
 REVISION    := 0
 
 # `File name`.gba
-FILE_NAME := pokeemerald
+FILE_NAME := albor
 BUILD_DIR := build
 
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
-# Adds -Og and -g flags, which optimize the build for debugging and include debug info respectively
-DEBUG        ?= 0
-
-ifeq (debug,$(MAKECMDGOALS))
-  DEBUG := 1
-endif
 
 # Default make rule
 all: rom
@@ -28,16 +22,10 @@ OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 
-EXE :=
-ifeq ($(OS),Windows_NT)
-  EXE := .exe
-endif
-
 CPP := $(PREFIX)cpp
 
 ROM_NAME := $(FILE_NAME).gba
 OBJ_DIR_NAME := $(BUILD_DIR)/modern
-OBJ_DIR_NAME_DEBUG := $(BUILD_DIR)/modern-debug
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
@@ -45,9 +33,6 @@ MAP_NAME := $(ROM_NAME:.gba=.map)
 # Pick our active variables
 ROM := $(ROM_NAME)
 OBJ_DIR := $(OBJ_DIR_NAME)
-ifeq ($(DEBUG),1)
-  OBJ_DIR := $(OBJ_DIR_NAME_DEBUG)
-endif
 ELF := $(ROM:.gba=.elf)
 MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
@@ -75,11 +60,7 @@ INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
-ifeq ($(DEBUG),1)
-O_LEVEL ?= g
-else
 O_LEVEL ?= 2
-endif
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
@@ -90,13 +71,8 @@ ifeq ($(ANALYZE),1)
 endif
 LIBPATH := -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
 LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
-# Enable debug info if set
 ifeq ($(DINFO),1)
   override CFLAGS += -g
-else
-  ifeq ($(DEBUG),1)
-    override CFLAGS += -g
-  endif
 endif
 
 ifeq ($(NOOPT),1)
@@ -108,17 +84,17 @@ endif
 AUTO_GEN_TARGETS :=
 include make_tools.mk
 # Tool executables
-GFX          := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
-AIF          := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
-MID          := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
-SCANINC      := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
-PREPROC      := $(TOOLS_DIR)/preproc/preproc$(EXE)
-RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
-FIX          := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
-MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
-JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
-TRAINERPROC  := $(TOOLS_DIR)/trainerproc/trainerproc$(EXE)
-PATCHELF     := $(TOOLS_DIR)/patchelf/patchelf$(EXE)
+GFX          := $(TOOLS_DIR)/gbagfx/gbagfx
+AIF          := $(TOOLS_DIR)/aif2pcm/aif2pcm
+MID          := $(TOOLS_DIR)/mid2agb/mid2agb
+SCANINC      := $(TOOLS_DIR)/scaninc/scaninc
+PREPROC      := $(TOOLS_DIR)/preproc/preproc
+RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen
+FIX          := $(TOOLS_DIR)/gbafix/gbafix
+MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson
+JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc
+TRAINERPROC  := $(TOOLS_DIR)/trainerproc/trainerproc
+PATCHELF     := $(TOOLS_DIR)/patchelf/patchelf
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -133,7 +109,7 @@ MAKEFLAGS += --no-print-directory
 .DELETE_ON_ERROR:
 
 RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern generated clean-generated
-.PHONY: all rom modern check debug
+.PHONY: all rom modern check
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -197,7 +173,6 @@ $(shell mkdir -p $(SUBDIRS))
 
 # Pretend rules that are actually flags defer to `make all`
 modern: all
-debug: all
 
 # Other rules
 rom: $(ROM)
@@ -215,14 +190,11 @@ clean-assets:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 
-tidy: tidymodern tidydebug
+tidy: tidymodern
 
 tidymodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
 	rm -rf $(OBJ_DIR_NAME)
-
-tidydebug:
-	rm -rf $(DEBUG_OBJ_DIR_NAME)
 
 # Other rules
 include graphics_file_rules.mk
