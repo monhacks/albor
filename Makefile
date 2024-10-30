@@ -3,7 +3,6 @@ TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
-KEEP_TEMPS  ?= 0
 
 # `File name`.gba
 FILE_NAME := pokeemerald
@@ -11,8 +10,6 @@ BUILD_DIR := build
 
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
-# Count unused warnings as errors. Used by RH-Hideout's repo
-UNUSED_ERROR ?= 0
 # Adds -Og and -g flags, which optimize the build for debugging and include debug info respectively
 DEBUG        ?= 0
 
@@ -23,19 +20,7 @@ endif
 # Default make rule
 all: rom
 
-# Toolchain selection
-TOOLCHAIN := $(DEVKITARM)
-# don't use dkP's base_tools anymore
-# because the redefinition of $(CC) conflicts
-# with when we want to use $(CC) to preprocess files
-# thus, manually create the variables for the bin
-# files, or use arm-none-eabi binaries on the system
-# if dkP is not installed on this system
-ifneq (,$(TOOLCHAIN))
-  ifneq ($(wildcard $(TOOLCHAIN)/bin),)
-    export PATH := $(TOOLCHAIN)/bin:$(PATH)
-  endif
-endif
+TOOLCHAIN := /usr/local/bin/arm-none-eabi-gcc
 
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
@@ -102,12 +87,6 @@ CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
 override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 ifeq ($(ANALYZE),1)
   override CFLAGS += -fanalyzer
-endif
-# Only throw an error for unused elements if its RH-Hideout's repo
-ifeq ($(UNUSED_ERROR),0)
-  ifneq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
-    override CFLAGS += -Wno-error=unused-variable -Wno-error=unused-const-variable -Wno-error=unused-parameter -Wno-error=unused-function -Wno-error=unused-but-set-parameter -Wno-error=unused-but-set-variable -Wno-error=unused-value -Wno-error=unused-local-typedefs
-  endif
 endif
 LIBPATH := -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
 LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
@@ -288,15 +267,8 @@ $(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
 # It doesn't look like $(shell) can be deferred so there might not be a better way (Icedude_907: there is soon).
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
-ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
 	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
-else
-	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
-endif
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
 	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
