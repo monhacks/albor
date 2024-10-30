@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Tera Blast changes from Normal-type to the user's Tera Type"
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TERA_BLAST].type == TYPE_NORMAL);
-        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_DARK); }
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TIPO_SINIESTRO); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); }
@@ -26,40 +26,40 @@ SINGLE_BATTLE_TEST("Tera Blast has correct effectiveness for every Tera Type")
     u32 species;
     u32 type;
 
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FLYING;   }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_POISON;   }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_FIRE;     }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_BUG;      }
-    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TYPE_ICE;      }
-    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_GROUND;   }
-    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_ROCK;     }
-    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TYPE_WATER;    }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TIPO_VOLADOR;   }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TIPO_VENENO;   }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TIPO_FUEGO;     }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TIPO_BICHO;      }
+    PARAMETRIZE { species = SPECIES_CHIKORITA; type = TIPO_HIELO;      }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TIPO_TIERRA;   }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TIPO_ROCA;     }
+    PARAMETRIZE { species = SPECIES_CYNDAQUIL; type = TIPO_AGUA;    }
     PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_NORMAL;   }
-    PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_GHOST;    }
-    PARAMETRIZE { species = SPECIES_GASTLY;    type = TYPE_PSYCHIC;  }
-    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TYPE_GRASS;    }
-    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TYPE_ELECTRIC; }
-    PARAMETRIZE { species = SPECIES_DRATINI;   type = TYPE_DRAGON;   }
-    PARAMETRIZE { species = SPECIES_DRATINI;   type = TYPE_FAIRY;    }
-    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TYPE_FIGHTING; }
-    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TYPE_STEEL;    }
-    PARAMETRIZE { species = SPECIES_ABRA;      type = TYPE_DARK;     }
+    PARAMETRIZE { species = SPECIES_GASTLY;    type = TIPO_FANTASMA;    }
+    PARAMETRIZE { species = SPECIES_GASTLY;    type = TIPO_PSIQUICO;  }
+    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TIPO_PLANTA;    }
+    PARAMETRIZE { species = SPECIES_TOTODILE;  type = TIPO_ELECTRICO; }
+    PARAMETRIZE { species = SPECIES_DRATINI;   type = TIPO_DRAGON;   }
+    PARAMETRIZE { species = SPECIES_DRATINI;   type = TIPO_HADA;    }
+    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TIPO_LUCHA; }
+    PARAMETRIZE { species = SPECIES_SNEASEL;   type = TIPO_ACERO;    }
+    PARAMETRIZE { species = SPECIES_ABRA;      type = TIPO_SINIESTRO;     }
 
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[0] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[1] == TYPE_GRASS);
-        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[0] == TYPE_FIRE);
-        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[1] == TYPE_FIRE);
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TYPE_GHOST);
-        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[1] == TYPE_POISON);
-        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[1] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[0] == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[1] == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[0] == TYPE_DARK);
-        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[1] == TYPE_ICE);
-        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[0] == TYPE_PSYCHIC);
-        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[1] == TYPE_PSYCHIC);
+        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[0] == TIPO_PLANTA);
+        ASSUME(gSpeciesInfo[SPECIES_CHIKORITA].types[1] == TIPO_PLANTA);
+        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[0] == TIPO_FUEGO);
+        ASSUME(gSpeciesInfo[SPECIES_CYNDAQUIL].types[1] == TIPO_FUEGO);
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[0] == TIPO_FANTASMA);
+        ASSUME(gSpeciesInfo[SPECIES_GASTLY].types[1] == TIPO_VENENO);
+        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[0] == TIPO_AGUA);
+        ASSUME(gSpeciesInfo[SPECIES_TOTODILE].types[1] == TIPO_AGUA);
+        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[0] == TIPO_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_DRATINI].types[1] == TIPO_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[0] == TIPO_SINIESTRO);
+        ASSUME(gSpeciesInfo[SPECIES_SNEASEL].types[1] == TIPO_HIELO);
+        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[0] == TIPO_PSIQUICO);
+        ASSUME(gSpeciesInfo[SPECIES_ABRA].types[1] == TIPO_PSIQUICO);
         PLAYER(SPECIES_WOBBUFFET) { TeraType(type); }
         OPPONENT(species);
     } WHEN {
@@ -175,7 +175,7 @@ SINGLE_BATTLE_TEST("Stellar-type Tera Blast activates a Stellar-type Pokemon's W
 SINGLE_BATTLE_TEST("Flying-type Tera Blast does not have its priority boosted by Gale Wings")
 {
     GIVEN {
-        PLAYER(SPECIES_TALONFLAME) { Ability(ABILITY_GALE_WINGS); TeraType(TYPE_FLYING); }
+        PLAYER(SPECIES_TALONFLAME) { Ability(ABILITY_GALE_WINGS); TeraType(TIPO_VOLADOR); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN { MOVE(player, MOVE_TERA_BLAST, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_QUICK_ATTACK); }

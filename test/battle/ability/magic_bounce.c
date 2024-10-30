@@ -41,7 +41,7 @@ SINGLE_BATTLE_TEST("Magic Bounce cannot bounce back powder moves against Grass T
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
-        ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TIPO_PLANTA);
         PLAYER(SPECIES_ODDISH);
         OPPONENT(SPECIES_ESPEON) { Ability(ABILITY_MAGIC_BOUNCE); }
     } WHEN {

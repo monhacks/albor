@@ -91,8 +91,8 @@ extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE + 1];
 
 extern const struct OamData gOamData_BattleSpriteOpponentSide;
 extern const struct OamData gOamData_BattleSpritePlayerSide;
-extern const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES];
-extern const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES];
+extern const struct TypeInfo gTypesInfo[NUMERO_DE_TIPOS];
+extern const uq4_12_t gTypeEffectivenessTable[NUMERO_DE_TIPOS][NUMERO_DE_TIPOS];
 
 extern const u8 *const gStatusConditionStringsTable[7];
 

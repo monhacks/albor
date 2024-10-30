@@ -10,7 +10,7 @@ SINGLE_BATTLE_TEST("Sheer Cold doesn't affect Ice-type Pokémon")
 {
     GIVEN {
         ASSUME(B_SHEER_COLD_IMMUNITY >= GEN_7);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TIPO_HIELO);
         PLAYER(SPECIES_MEW);
         OPPONENT(SPECIES_GLALIE);
     } WHEN {

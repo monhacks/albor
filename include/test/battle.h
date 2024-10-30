@@ -88,7 +88,7 @@
  *   {
  *       GIVEN {
  *           ASSUME(gMovesInfo[MOVE_STUN_SPORE].powderMove);
- *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TYPE_GRASS);
+ *           ASSUME(gSpeciesInfo[SPECIES_ODDISH].types[0] == TIPO_PLANTA);
  *           PLAYER(SPECIES_ODDISH); // 1.
  *           OPPONENT(SPECIES_ODDISH); // 2.
  *       } WHEN {
@@ -228,7 +228,7 @@
  *         PARAMETRIZE { hp = 99; }
  *         PARAMETRIZE { hp = 33; }
  *         GIVEN {
- *             ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+ *             ASSUME(gMovesInfo[MOVE_EMBER].type == TIPO_FUEGO);
  *             PLAYER(SPECIES_CHARMANDER) { Ability(ABILITY_BLAZE); MaxHP(99); HP(hp); }
  *             OPPONENT(SPECIES_WOBBUFFET);
  *         } WHEN {

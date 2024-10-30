@@ -5,8 +5,8 @@
 ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_SNOWSCAPE].effect == EFFECT_SNOWSCAPE);
-    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_ICE && gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_ICE);
-    ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE || gSpeciesInfo[SPECIES_GLALIE].types[1] == TYPE_ICE);
+    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TIPO_HIELO && gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TIPO_HIELO);
+    ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TIPO_HIELO || gSpeciesInfo[SPECIES_GLALIE].types[1] == TIPO_HIELO);
     ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
 }
 

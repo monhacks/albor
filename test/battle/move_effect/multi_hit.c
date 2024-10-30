@@ -164,8 +164,8 @@ SINGLE_BATTLE_TEST("Scale Shot is immune to Fairy types and will end the move co
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SCALE_SHOT].effect == EFFECT_MULTI_HIT);
-        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].type == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_CLEFAIRY].types[0] == TYPE_FAIRY || gSpeciesInfo[SPECIES_CLEFAIRY].types[1] == TYPE_FAIRY);
+        ASSUME(gMovesInfo[MOVE_SCALE_SHOT].type == TIPO_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_CLEFAIRY].types[0] == TIPO_HADA || gSpeciesInfo[SPECIES_CLEFAIRY].types[1] == TIPO_HADA);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_CLEFAIRY) { HP(1); }
     } WHEN {

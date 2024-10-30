@@ -6381,10 +6381,10 @@ gBattleAnimMove_SearingShot::
 
 gBattleAnimMove_TechnoBlast::
 	createvisualtask AnimTask_TechnoBlast, 0x5
-	jumpargeq 0x0, TYPE_FIRE, TechnoBlastFire
-	jumpargeq 0x0, TYPE_WATER, TechnoBlastWater
-	jumpargeq 0x0, TYPE_ELECTRIC, TechnoBlastElectric
-	jumpargeq 0x0, TYPE_ICE, TechnoBlastIce
+	jumpargeq 0x0, TIPO_FUEGO, TechnoBlastFire
+	jumpargeq 0x0, TIPO_AGUA, TechnoBlastWater
+	jumpargeq 0x0, TIPO_ELECTRICO, TechnoBlastElectric
+	jumpargeq 0x0, TIPO_HIELO, TechnoBlastIce
 TechnoBlastNormal:
 	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT @charge animation
 	loadspritegfx ANIM_TAG_ORBS @circles
@@ -14485,10 +14485,10 @@ gBattleAnimMove_TerrainPulse::
 	setalpha 12, 8
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 7, RGB_BLACK
 	createvisualtask AnimTask_TerrainPulse, 0x5
-	jumpargeq 0x0, TYPE_ELECTRIC, TerrainPulseElectric
-	jumpargeq 0x0, TYPE_GRASS, TerrainPulseGrass
-	jumpargeq 0x0, TYPE_FAIRY, TerrainPulseFairy
-	jumpargeq 0x0, TYPE_PSYCHIC, TerrainPulsePsychic
+	jumpargeq 0x0, TIPO_ELECTRICO, TerrainPulseElectric
+	jumpargeq 0x0, TIPO_PLANTA, TerrainPulseGrass
+	jumpargeq 0x0, TIPO_HADA, TerrainPulseFairy
+	jumpargeq 0x0, TIPO_PSIQUICO, TerrainPulsePsychic
 TerrainPulseNormal:
 	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_DRAGON_PULSE, 0, 12, 12, RGB_WHITE
 	waitforvisualfinish
@@ -28570,41 +28570,9 @@ MegaEvolutionParticles:
 	return
 
 gBattleAnimGeneral_TeraCharge::
-	loadspritegfx ANIM_TAG_TERA_CRYSTAL
-	loadspritegfx ANIM_TAG_TERA_SHATTER
-	loadspritegfx ANIM_TAG_FOCUS_ENERGY
-	loadspritegfx ANIM_TAG_WHIP_HIT @green color
-	loadspritegfx ANIM_TAG_SWEAT_BEAD @blue color
-	loadspritegfx ANIM_TAG_PAW_PRINT @yellow color
-	monbg ANIM_ATTACKER
-	setalpha 12, 8
-	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 0, 6, 0, 11, RGB_RED
-	call RainbowEndureEffect
-	call RainbowEndureEffect
-	call RainbowEndureEffect
-	call RainbowEndureEffect
-	call RainbowEndureEffect
-	waitforvisualfinish
-	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_ATTACKER
-	createsprite gTeraCrystalSpriteTemplate, ANIM_ATTACKER, 41, 0, 0, 0, 0
-	delay 20
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 16, RGB_WHITEALPHA
-	waitforvisualfinish
-	createvisualtask AnimTask_TransformMon, 2, 1, 0
-	call TeraChargeParticles
-	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_ATTACKER
-	clearmonbg ANIM_ATK_PARTNER
-	blendoff
 	end
 
 TeraChargeParticles:
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 0, -5, 8
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 1, 5, 9
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 2, 5, -8
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 2, -5, -8
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 1, -10, 0
-	createsprite gTeraCrystalSpreadSpriteTemplate, ANIM_TARGET, 0, 0, 10, 0
 	return
 
 gBattleAnimGeneral_TeraActivate::

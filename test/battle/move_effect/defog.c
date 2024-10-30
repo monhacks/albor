@@ -310,7 +310,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes Aurora Veil from p
     PARAMETRIZE { move = MOVE_CELEBRATE; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_HAIL].effect == EFFECT_HAIL);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TIPO_HIELO);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }
         OPPONENT(SPECIES_GLALIE) { Speed(2); }
@@ -342,7 +342,7 @@ DOUBLE_BATTLE_TEST("Defog lowers evasiveness by 1 and removes everything it can"
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_HAIL].effect == EFFECT_HAIL);
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TIPO_HIELO);
         PLAYER(SPECIES_GLALIE) { Speed(4); }
         PLAYER(SPECIES_GLALIE) { Speed(3); }
         PLAYER(SPECIES_GLALIE) { Speed(12); }

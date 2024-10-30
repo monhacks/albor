@@ -4,7 +4,7 @@
 SINGLE_BATTLE_TEST("Volt Absorb heals 25% when hit by electric type moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TIPO_ELECTRICO);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -19,7 +19,7 @@ SINGLE_BATTLE_TEST("Volt Absorb heals 25% when hit by electric type moves")
 SINGLE_BATTLE_TEST("Volt Absorb does not activate if protected")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TIPO_ELECTRICO);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
@@ -32,7 +32,7 @@ SINGLE_BATTLE_TEST("Volt Absorb does not activate if protected")
 SINGLE_BATTLE_TEST("Volt Absorb activates on status moves")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDER_WAVE].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDER_WAVE].type == TIPO_ELECTRICO);
         ASSUME(gMovesInfo[MOVE_THUNDER_WAVE].category == DAMAGE_CATEGORY_STATUS);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -88,7 +88,7 @@ DOUBLE_BATTLE_TEST("Volt Absorb does not stop Electric Typed Explosion from dama
 SINGLE_BATTLE_TEST("Volt Absorb prevents Cell Battery from activating")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDER_SHOCK].type == TIPO_ELECTRICO);
         PLAYER(SPECIES_JOLTEON) { Ability(ABILITY_VOLT_ABSORB); HP(1); MaxHP(100); Item(ITEM_CELL_BATTERY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {

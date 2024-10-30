@@ -124,7 +124,7 @@ static const u16 sEvoItems[] = {ITEM_FIRE_STONE, ITEM_WATER_STONE, ITEM_THUNDER_
 static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[] = {
     [0] = /* pokemon with moves that paraylze */
     {
-        .type = TYPE_MYSTERY, // no type limitation
+        .type = TIPO_MISTERIO, // no type limitation
         .moves = sParalyzingMoves,
         .nMoves = NELEMS(sParalyzingMoves),
         .abilities = {ABILITY_STATIC},
@@ -132,14 +132,14 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
     },
     [1] = /* pokemon with moves that poison */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .moves = sPoisoningMoves,
         .nMoves = NELEMS(sPoisoningMoves),
         .abilities = {ABILITY_POISON_POINT},
     },
     [2] = /* Pokemon with moves that burn */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .moves = sBurningMoves,
         .nMoves = NELEMS(sBurningMoves),
         .abilities = {ABILITY_FLAME_BODY},
@@ -147,7 +147,7 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
     },
     [3] = /* pokemon with moves that waste PP */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .moves = sPPReducingMoves,
         .nMoves = NELEMS(sPPReducingMoves),
         .abilities = {ABILITY_PRESSURE},
@@ -155,42 +155,42 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
     },
     [4] = /* pokemon with Levitate */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .abilities = {ABILITY_LEVITATE},
         .nAbilities = 1,
     },
     [5] = /* pokemon with trapping abilities */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .abilities = {ABILITY_SHADOW_TAG, ABILITY_ARENA_TRAP}, // TODO magnet pull?
         .nAbilities = 2,
     },
     [6] = /* ice types */
     {
-        .type = TYPE_ICE,
+        .type = TIPO_HIELO,
     },
 
     [7] = /* pokemon with explosion effects */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .moves = sExplosionMoves,
         .nMoves = NELEMS(sExplosionMoves),
     },
     [8] = /* psychic types */
     {
-        .type = TYPE_PSYCHIC,
+        .type = TIPO_PSIQUICO,
     },
     [9] = /* rock types */
     {
-        .type = TYPE_ROCK,
+        .type = TIPO_ROCA,
     },
     [10] = /* fighting types */
     {
-        .type = TYPE_FIGHTING,
+        .type = TIPO_LUCHA,
     },
     [11] = /* pokemon with weather-altering effects */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .moves = sWeatherChangingMoves,
         .nMoves = NELEMS(sWeatherChangingMoves),
         .abilities = {ABILITY_SAND_SPIT, ABILITY_DRIZZLE, ABILITY_SNOW_WARNING, ABILITY_DROUGHT, ABILITY_SAND_STREAM},
@@ -198,37 +198,37 @@ static const struct BattlePyramidRequirement sBattlePyramidRequirementsByRound[]
     },
     [12] = /* bug types */
     {
-        .type = TYPE_BUG,
+        .type = TIPO_BICHO,
     },
     [13] = /* dark types */
     {
-        .type = TYPE_DARK,
+        .type = TIPO_SINIESTRO,
     },
     [14] = /* water types */
     {
-        .type = TYPE_WATER,
+        .type = TIPO_AGUA,
     },
     [15] = /* ghost types */
     {
-        .type = TYPE_GHOST,
+        .type = TIPO_FANTASMA,
     },
     [16] = /* steel types */
     {
-        .type = TYPE_STEEL,
+        .type = TIPO_ACERO,
     },
     [17] = /* flying/dragon types */
     {
-        .type = TYPE_DRAGON,
+        .type = TIPO_DRAGON,
     },
     [18] = /* evolve via water/thunder/fire stone */
     {
-        .type = TYPE_MYSTERY,
+        .type = TIPO_MISTERIO,
         .evoItems = sEvoItems,
         .nEvoItems = 3,
     },
     [19] = /* normal with powerful moves */
     {
-        .type = TYPE_NORMAL,
+        .type = TIPO_NORMAL,
         .moves = sPowerfulNormalMoves,
         .nMoves = NELEMS(sPowerfulNormalMoves),
     },

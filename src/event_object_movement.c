@@ -2009,46 +2009,46 @@ void GetFollowerAction(struct ScriptContext *ctx) // Essentially a big switch fo
         {
         case MAPSEC_RUSTBORO_CITY:
         case MAPSEC_PEWTER_CITY:
-            multi = TYPE_ROCK;
+            multi = TIPO_ROCA;
             break;
         case MAPSEC_DEWFORD_TOWN:
-            multi = TYPE_FIGHTING;
+            multi = TIPO_LUCHA;
             break;
         case MAPSEC_MAUVILLE_CITY:
         case MAPSEC_VERMILION_CITY:
-            multi = TYPE_ELECTRIC;
+            multi = TIPO_ELECTRICO;
             break;
         case MAPSEC_LAVARIDGE_TOWN:
         case MAPSEC_CINNABAR_ISLAND:
-            multi = TYPE_FIRE;
+            multi = TIPO_FUEGO;
             break;
         case MAPSEC_PETALBURG_CITY:
-            multi = TYPE_NORMAL;
+            multi = TIPO_NORMAL;
             break;
         case MAPSEC_FORTREE_CITY:
-            multi = TYPE_FLYING;
+            multi = TIPO_VOLADOR;
             break;
         case MAPSEC_MOSSDEEP_CITY:
         case MAPSEC_SAFFRON_CITY:
-            multi = TYPE_PSYCHIC;
+            multi = TIPO_PSIQUICO;
             break;
         case MAPSEC_SOOTOPOLIS_CITY:
         case MAPSEC_CERULEAN_CITY:
-            multi = TYPE_WATER;
+            multi = TIPO_AGUA;
             break;
         case MAPSEC_CELADON_CITY:
-            multi = TYPE_GRASS;
+            multi = TIPO_PLANTA;
             break;
         case MAPSEC_FUCHSIA_CITY:
-            multi = TYPE_POISON;
+            multi = TIPO_VENENO;
             break;
         case MAPSEC_VIRIDIAN_CITY:
-            multi = TYPE_GROUND;
+            multi = TIPO_TIERRA;
             break;
         default:
-            multi = NUMBER_OF_MON_TYPES;
+            multi = NUMERO_DE_TIPOS;
         }
-        if (multi < NUMBER_OF_MON_TYPES)
+        if (multi < NUMERO_DE_TIPOS)
         {
             multi = GetTypeEffectiveness(mon, multi);
             if (multi <= UQ_4_12(0.5))
@@ -8806,8 +8806,8 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
     u32 reflectionFlags[NUM_REFLECTION_TYPES - 1] = {
-        [REFL_TYPE_ICE   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
-        [REFL_TYPE_WATER - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
+        [REFL_TIPO_HIELO   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
+        [REFL_TIPO_AGUA - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
     };
     u8 reflType = ObjectEventGetNearbyReflectionType(objEvent);
 
@@ -9029,9 +9029,9 @@ static u8 ObjectEventGetNearbyReflectionType(struct ObjectEvent *objEvent)
 static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
 {
     if (MetatileBehavior_IsIce(behavior))
-        return REFL_TYPE_ICE;
+        return REFL_TIPO_HIELO;
     else if (MetatileBehavior_IsReflective(behavior))
-        return REFL_TYPE_WATER;
+        return REFL_TIPO_AGUA;
     else
         return REFL_TYPE_NONE;
 }

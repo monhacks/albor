@@ -14,11 +14,11 @@ SINGLE_BATTLE_TEST("Tar Shot doubles the effectiveness of Fire-type moves used o
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
     PARAMETRIZE { species = SPECIES_OMASTAR; } // Dual type with double resists
 
-    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] == TYPE_PSYCHIC);
-    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] == TYPE_PSYCHIC);
-    ASSUME(gSpeciesInfo[SPECIES_OMASTAR].types[0] == TYPE_ROCK);
-    ASSUME(gSpeciesInfo[SPECIES_OMASTAR].types[1] == TYPE_WATER);
-    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] == TIPO_PSIQUICO);
+    ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] == TIPO_PSIQUICO);
+    ASSUME(gSpeciesInfo[SPECIES_OMASTAR].types[0] == TIPO_ROCA);
+    ASSUME(gSpeciesInfo[SPECIES_OMASTAR].types[1] == TIPO_AGUA);
+    ASSUME(gMovesInfo[MOVE_EMBER].type == TIPO_FUEGO);
 
     GIVEN {
         PLAYER(SPECIES_WOBBUFFET);

@@ -924,7 +924,6 @@ extern const u8 gText_ReturnToPokedex[];
 extern const u8 gText_SelectPokedexMode[];
 extern const u8 gText_SelectPokedexListingMode[];
 extern const u8 gText_ListByFirstLetter[];
-extern const u8 gText_ListByBodyColor[];
 extern const u8 gText_ListByType[];
 extern const u8 gText_ExecuteSearchSwitch[];
 extern const u8 gText_DexHoennTitle[];

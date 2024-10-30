@@ -1517,111 +1517,106 @@ static const struct OamData sOamData_IconTypes =
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeNone[] = {
-    ANIMCMD_FRAME(TYPE_NONE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NINGUNO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeNormal[] = {
-    ANIMCMD_FRAME(TYPE_NORMAL * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NORMAL * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFighting[] = {
-    ANIMCMD_FRAME(TYPE_FIGHTING * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_LUCHA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFlying[] = {
-    ANIMCMD_FRAME(TYPE_FLYING * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VOLADOR * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypePoison[] = {
-    ANIMCMD_FRAME(TYPE_POISON * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VENENO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGround[] = {
-    ANIMCMD_FRAME(TYPE_GROUND * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_TIERRA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeRock[] = {
-    ANIMCMD_FRAME(TYPE_ROCK * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ROCA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeBug[] = {
-    ANIMCMD_FRAME(TYPE_BUG * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_BICHO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGhost[] = {
-    ANIMCMD_FRAME(TYPE_GHOST * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FANTASMA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeSteel[] = {
-    ANIMCMD_FRAME(TYPE_STEEL * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ACERO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeMystery[] = {
-    ANIMCMD_FRAME(TYPE_MYSTERY * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_MISTERIO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFire[] = {
-    ANIMCMD_FRAME(TYPE_FIRE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FUEGO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeWater[] = {
-    ANIMCMD_FRAME(TYPE_WATER * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_AGUA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGrass[] = {
-    ANIMCMD_FRAME(TYPE_GRASS * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PLANTA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeElectric[] = {
-    ANIMCMD_FRAME(TYPE_ELECTRIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ELECTRICO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypePsychic[] = {
-    ANIMCMD_FRAME(TYPE_PSYCHIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PSIQUICO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeIce[] = {
-    ANIMCMD_FRAME(TYPE_ICE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HIELO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeDragon[] = {
-    ANIMCMD_FRAME(TYPE_DRAGON * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_DRAGON * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeDark[] = {
-    ANIMCMD_FRAME(TYPE_DARK * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_SINIESTRO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFairy[] = {
-    ANIMCMD_FRAME(TYPE_FAIRY * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HADA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_IconTypeStellar[] = {
-    ANIMCMD_FRAME(TYPE_STELLAR * 4, 0, FALSE, FALSE),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES] = {
+static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMERO_DE_TIPOS] = {
     sSpriteAnim_IconTypeNone,
     sSpriteAnim_IconTypeNormal,
     sSpriteAnim_IconTypeFighting,
@@ -1642,13 +1637,12 @@ static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_IconTypeDragon,
     sSpriteAnim_IconTypeDark,
     sSpriteAnim_IconTypeFairy,
-    sSpriteAnim_IconTypeStellar,
 };
 
 const struct CompressedSpriteSheet sSpriteSheet_IconTypes =
 {
     .data = gIconTypes_Gfx,
-    .size = (NUMBER_OF_MON_TYPES) * 0x80,
+    .size = (NUMERO_DE_TIPOS) * 128,
     .tag = TAG_ICON_TYPES
 };
 const struct SpriteTemplate sSpriteTemplate_IconTypes =
@@ -1661,29 +1655,28 @@ const struct SpriteTemplate sSpriteTemplate_IconTypes =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
+static const u8 sMoveTypeToOamPaletteNum[NUMERO_DE_TIPOS] =
 {
-    [TYPE_NONE] = 14,
-    [TYPE_NORMAL] = 14,
-    [TYPE_FIGHTING] = 13,
-    [TYPE_FLYING] = 14,
-    [TYPE_POISON] = 15,
-    [TYPE_GROUND] = 14,
-    [TYPE_ROCK] = 15,
-    [TYPE_BUG] = 13,
-    [TYPE_GHOST] = 14,
-    [TYPE_STEEL] = 15,
-    [TYPE_MYSTERY] = 15,
-    [TYPE_FIRE] = 14,
-    [TYPE_WATER] = 14,
-    [TYPE_GRASS] = 13,
-    [TYPE_ELECTRIC] = 13,
-    [TYPE_PSYCHIC] = 15,
-    [TYPE_ICE] = 14,
-    [TYPE_DRAGON] = 13,
-    [TYPE_DARK] = 13,
-    [TYPE_FAIRY] = 13,
-    [TYPE_STELLAR] = 14,
+    [TIPO_NINGUNO] = 14,
+    [TIPO_NORMAL] = 14,
+    [TIPO_LUCHA] = 13,
+    [TIPO_VOLADOR] = 14,
+    [TIPO_VENENO] = 15,
+    [TIPO_TIERRA] = 14,
+    [TIPO_ROCA] = 15,
+    [TIPO_BICHO] = 13,
+    [TIPO_FANTASMA] = 14,
+    [TIPO_ACERO] = 15,
+    [TIPO_MISTERIO] = 15,
+    [TIPO_FUEGO] = 14,
+    [TIPO_AGUA] = 14,
+    [TIPO_PLANTA] = 13,
+    [TIPO_ELECTRICO] = 13,
+    [TIPO_PSIQUICO] = 15,
+    [TIPO_HIELO] = 14,
+    [TIPO_DRAGON] = 13,
+    [TIPO_SINIESTRO] = 13,
+    [TIPO_HADA] = 13,
 };
 
 void LoadPalettesTypes(u32 battler)
@@ -1698,241 +1691,241 @@ void LoadPalettesTypes(u32 battler)
 
     switch (pal1)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal2)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal3)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal4)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
     }

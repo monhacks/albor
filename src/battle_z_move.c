@@ -136,8 +136,8 @@ u32 GetTypeBasedZMove(u32 move)
 {
     u32 moveType = gMovesInfo[move].type;
 
-    if (moveType >= NUMBER_OF_MON_TYPES)
-        moveType = TYPE_MYSTERY;
+    if (moveType >= NUMERO_DE_TIPOS)
+        moveType = TIPO_MISTERIO;
 
     // Z-Weather Ball changes types, however Revelation Dance, -ate ability affected moves, and Hidden Power do not
     if (gBattleStruct->dynamicMoveType && gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
@@ -175,7 +175,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
             if (zEffect == Z_EFFECT_CURSE)
             {
-                if (moveInfo->monTypes[0] == TYPE_GHOST || moveInfo->monTypes[1] == TYPE_GHOST || moveInfo->monTypes[2] == TYPE_GHOST)
+                if (moveInfo->monTypes[0] == TIPO_FANTASMA || moveInfo->monTypes[1] == TIPO_FANTASMA || moveInfo->monTypes[2] == TIPO_FANTASMA)
                     zEffect = Z_EFFECT_RECOVER_HP;
                 else
                     zEffect = Z_EFFECT_ATK_UP_1;
@@ -311,7 +311,7 @@ void SetZEffect(void)
 
     if (effect == Z_EFFECT_CURSE)
     {
-        if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+        if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TIPO_FANTASMA))
             effect = Z_EFFECT_RECOVER_HP;
         else
             effect = Z_EFFECT_ATK_UP_1;

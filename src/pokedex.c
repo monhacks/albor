@@ -3058,10 +3058,10 @@ static void SetTypeIconPosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 
     sprite = &gSprites[sPokedexView->typeIconSpriteIds[spriteArrayId]];
     StartSpriteAnim(sprite, typeId);
-    if (typeId < NUMBER_OF_MON_TYPES)
+    if (typeId < NUMERO_DE_TIPOS)
         sprite->oam.paletteNum = gTypesInfo[typeId].palette;
     else
-        sprite->oam.paletteNum = sContestCategoryToOamPaletteNum[typeId - NUMBER_OF_MON_TYPES];
+        sprite->oam.paletteNum = sContestCategoryToOamPaletteNum[typeId - NUMERO_DE_TIPOS];
     sprite->x = x + 16;
     sprite->y = y + 8;
     SetSpriteInvisibility(spriteArrayId, FALSE);
@@ -3079,7 +3079,7 @@ static void PrintCurrentSpeciesTypeInfo(u8 newEntry, u16 species)
     type1 = gSpeciesInfo[species].types[0];
     type2 = gSpeciesInfo[species].types[1];
     if (species == SPECIES_NONE)
-        type1 = type2 = TYPE_MYSTERY;
+        type1 = type2 = TIPO_MISTERIO;
 
     if (type1 == type2)
     {
@@ -3249,10 +3249,8 @@ static u8* ReplaceDecimalSeparator(const u8* originalString)
 static void PrintMonInfo(u32 num, u32 owned, u32 newEntry)
 {
     u8 str[16];
-    u8 str2[32];
     u16 species;
     const u8 *name;
-    const u8 *category;
     u8 digitCount = (DEX_COUNT > 999) ? 4 : 3;
 
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), num, STR_CONV_MODE_LEADING_ZEROS, digitCount);
@@ -3263,16 +3261,6 @@ static void PrintMonInfo(u32 num, u32 owned, u32 newEntry)
     else
         name = sText_TenDashes;
     PrintInfoScreenTextWhite(name, 139 + (6 * digitCount), 17);
-    if (owned)
-    {
-        CopyMonCategoryText(species, str2);
-        category = str2;
-    }
-    else
-    {
-        category = gText_5MarksPokemon;
-    }
-    PrintInfoScreenText(category, 123, 31);
     PrintMonMeasurements(species, owned);
 
     //Type Icon(s)
@@ -3871,7 +3859,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     }
     else
     {
-        SetTypeIconPosAndPal(NUMBER_OF_MON_TYPES + gMovesInfo[move].contestCategory, moves_x + 146, moves_y + 17, 1);
+        SetTypeIconPosAndPal(NUMERO_DE_TIPOS + gMovesInfo[move].contestCategory, moves_x + 146, moves_y + 17, 1);
         SetSpriteInvisibility(0, TRUE);
     }
 

@@ -1411,7 +1411,7 @@ void GenerateBattlePyramidWildMon(void)
             continue;
 
         // check type
-        if (reqs->type != TYPE_MYSTERY && gSpeciesInfo[species].types[0] != reqs->type && gSpeciesInfo[species].types[1] != reqs->type)
+        if (reqs->type != TIPO_MISTERIO && gSpeciesInfo[species].types[0] != reqs->type && gSpeciesInfo[species].types[1] != reqs->type)
             continue;
 
         // check base stat total

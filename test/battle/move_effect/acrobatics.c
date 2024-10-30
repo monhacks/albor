@@ -4,7 +4,7 @@
 ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_ACROBATICS].effect == EFFECT_ACROBATICS);
-    ASSUME(gMovesInfo[MOVE_ACROBATICS].type == TYPE_FLYING);
+    ASSUME(gMovesInfo[MOVE_ACROBATICS].type == TIPO_VOLADOR);
 }
 
 SINGLE_BATTLE_TEST("Acrobatics doubles in power if the user has no held item", s16 damage)
@@ -31,7 +31,7 @@ SINGLE_BATTLE_TEST("Acrobatics still doubles in power when Flying Gem is consume
     PARAMETRIZE { heldItem = ITEM_FLYING_GEM; }
     GIVEN {
         ASSUME(gItemsInfo[ITEM_FLYING_GEM].holdEffect == HOLD_EFFECT_GEMS);
-        ASSUME(gItemsInfo[ITEM_FLYING_GEM].secondaryId == TYPE_FLYING);
+        ASSUME(gItemsInfo[ITEM_FLYING_GEM].secondaryId == TIPO_VOLADOR);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET) { Item(heldItem); }
     } WHEN {

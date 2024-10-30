@@ -2,28 +2,30 @@
 #define GUARD_CONSTANTS_POKEMON_H
 
 // Pokémon types
-#define TYPE_NONE             0
-#define TYPE_NORMAL           1
-#define TYPE_FIGHTING         2
-#define TYPE_FLYING           3
-#define TYPE_POISON           4
-#define TYPE_GROUND           5
-#define TYPE_ROCK             6
-#define TYPE_BUG              7
-#define TYPE_GHOST            8
-#define TYPE_STEEL            9
-#define TYPE_MYSTERY          10
-#define TYPE_FIRE             11
-#define TYPE_WATER            12
-#define TYPE_GRASS            13
-#define TYPE_ELECTRIC         14
-#define TYPE_PSYCHIC          15
-#define TYPE_ICE              16
-#define TYPE_DRAGON           17
-#define TYPE_DARK             18
-#define TYPE_FAIRY            19
-#define TYPE_STELLAR          20
-#define NUMBER_OF_MON_TYPES   21
+enum TiposPokemon
+{
+    TIPO_NINGUNO,
+    TIPO_NORMAL,
+    TIPO_LUCHA,
+    TIPO_VOLADOR,
+    TIPO_VENENO,
+    TIPO_TIERRA,
+    TIPO_ROCA,
+    TIPO_BICHO,
+    TIPO_FANTASMA,
+    TIPO_ACERO,
+    TIPO_MISTERIO,
+    TIPO_FUEGO,
+    TIPO_AGUA,
+    TIPO_PLANTA,
+    TIPO_ELECTRICO,
+    TIPO_PSIQUICO,
+    TIPO_HIELO,
+    TIPO_DRAGON,
+    TIPO_SINIESTRO,
+    TIPO_HADA,
+    NUMERO_DE_TIPOS
+};
 
 // Pokémon egg groups
 #define EGG_GROUP_NONE                0
@@ -209,18 +211,6 @@
 #define GROWTH_MEDIUM_SLOW  3
 #define GROWTH_FAST         4
 #define GROWTH_SLOW         5
-
-// Body colors for Pokédex search
-#define BODY_COLOR_RED      0
-#define BODY_COLOR_BLUE     1
-#define BODY_COLOR_YELLOW   2
-#define BODY_COLOR_GREEN    3
-#define BODY_COLOR_BLACK    4
-#define BODY_COLOR_BROWN    5
-#define BODY_COLOR_PURPLE   6
-#define BODY_COLOR_GRAY     7
-#define BODY_COLOR_WHITE    8
-#define BODY_COLOR_PINK     9
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 

@@ -20,7 +20,7 @@ SINGLE_BATTLE_TEST("Hail deals 1/16 damage per turn")
 SINGLE_BATTLE_TEST("Hail damage does not affect Ice-type Pokémon")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TYPE_ICE);
+        ASSUME(gSpeciesInfo[SPECIES_GLALIE].types[0] == TIPO_HIELO);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_GLALIE);
     } WHEN {

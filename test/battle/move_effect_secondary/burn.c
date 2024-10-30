@@ -24,7 +24,7 @@ SINGLE_BATTLE_TEST("Ember inflicts burn")
 SINGLE_BATTLE_TEST("Ember cannot burn a Fire-type Pokémon")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_CHARMANDER].types[0] == TYPE_FIRE);
+        ASSUME(gSpeciesInfo[SPECIES_CHARMANDER].types[0] == TIPO_FUEGO);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_CHARMANDER);
     } WHEN {
@@ -109,9 +109,9 @@ SINGLE_BATTLE_TEST("Scald shouldn't burn a Water-type Pokémon")
 #endif
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TIPO_AGUA);
         ASSUME(MoveHasAdditionalEffect(MOVE_SCALD, MOVE_EFFECT_BURN) == TRUE);
-        ASSUME(gMovesInfo[MOVE_SCALD].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_SCALD].type == TIPO_AGUA);
         PLAYER(SPECIES_SQUIRTLE);
         OPPONENT(SPECIES_SQUIRTLE);
     } WHEN {

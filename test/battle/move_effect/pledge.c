@@ -344,7 +344,7 @@ DOUBLE_BATTLE_TEST("Pledge move combo interactions with Powder are correct")
     PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 4; speedRight = 3; }
     PARAMETRIZE { moveLeft = MOVE_GRASS_PLEDGE; moveRight = MOVE_FIRE_PLEDGE; speedLeft = 3; speedRight = 4; } // FAIL 2
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_FIRE_PLEDGE].type == TIPO_FUEGO);
         PLAYER(SPECIES_WOBBUFFET) { Speed(speedLeft); }
         PLAYER(SPECIES_WYNAUT) { Speed(speedRight); }
         OPPONENT(SPECIES_WOBBUFFET) { Speed(8); }

@@ -5,7 +5,7 @@ ASSUMPTIONS
 {
     ASSUME(gMovesInfo[MOVE_POWDER].effect == EFFECT_POWDER);
     ASSUME(gMovesInfo[MOVE_POWDER].powderMove == TRUE);
-    ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+    ASSUME(gMovesInfo[MOVE_EMBER].type == TIPO_FUEGO);
 }
 
 
@@ -135,7 +135,7 @@ DOUBLE_BATTLE_TEST("Powder fails if target is already affected by Powder")
 SINGLE_BATTLE_TEST("Powder fails if the target is Grass type")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_VENUSAUR].types[0] == TYPE_GRASS || gSpeciesInfo[SPECIES_VENUSAUR].types[1] == TYPE_GRASS);
+        ASSUME(gSpeciesInfo[SPECIES_VENUSAUR].types[0] == TIPO_PLANTA || gSpeciesInfo[SPECIES_VENUSAUR].types[1] == TIPO_PLANTA);
         PLAYER(SPECIES_VENUSAUR);
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -165,7 +165,7 @@ DOUBLE_BATTLE_TEST("Powder still blocks the target's Fire type moves even if it 
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_FORESTS_CURSE].effect == EFFECT_THIRD_TYPE);
-        ASSUME(gMovesInfo[MOVE_FORESTS_CURSE].argument == TYPE_GRASS);
+        ASSUME(gMovesInfo[MOVE_FORESTS_CURSE].argument == TIPO_PLANTA);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_TREVENANT);
@@ -225,7 +225,7 @@ SINGLE_BATTLE_TEST("Powder doesn't prevent a Fire move from thawing its user out
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_FLAME_WHEEL].thawsUser);
-        ASSUME(gMovesInfo[MOVE_FLAME_WHEEL].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_FLAME_WHEEL].type == TIPO_FUEGO);
         PLAYER(SPECIES_WOBBUFFET) { Status1(STATUS1_FREEZE); }
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -268,7 +268,7 @@ DOUBLE_BATTLE_TEST("Powder damages a target using Shell Trap even if it wasn't h
     PARAMETRIZE { move = MOVE_TICKLE;}
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SHELL_TRAP].effect == EFFECT_SHELL_TRAP);
-        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_SHELL_TRAP].type == TIPO_FUEGO);
         ASSUME(gMovesInfo[MOVE_TACKLE].category == DAMAGE_CATEGORY_PHYSICAL);
         ASSUME(gMovesInfo[MOVE_EMBER].category == DAMAGE_CATEGORY_SPECIAL);
         ASSUME(gMovesInfo[MOVE_TICKLE].category == DAMAGE_CATEGORY_STATUS);

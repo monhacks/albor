@@ -559,7 +559,7 @@ AI_SINGLE_BATTLE_TEST("AI will only choose Surf 1/3 times if the opposing mon ha
 {
     PASSES_RANDOMLY(1, 3, RNG_AI_ABILITY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TIPO_ELECTRICO);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
         OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
@@ -576,7 +576,7 @@ AI_SINGLE_BATTLE_TEST("AI will choose Thunderbolt then Surf 2/3 times if the opp
 {
     PASSES_RANDOMLY(2, 3, RNG_AI_ABILITY);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TIPO_ELECTRICO);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_LANTURN) { Ability(ABILITY_VOLT_ABSORB); };
         OPPONENT(SPECIES_LANTURN) { Moves(MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_SURF); }
@@ -599,9 +599,9 @@ AI_SINGLE_BATTLE_TEST("AI will choose Scratch over Power-up Punch with Contrary"
         ASSUME(gMovesInfo[MOVE_SCRATCH].power == 40);
         ASSUME(gMovesInfo[MOVE_SCRATCH].type == TYPE_NORMAL);
         ASSUME(gMovesInfo[MOVE_POWER_UP_PUNCH].power == 40);
-        ASSUME(gMovesInfo[MOVE_POWER_UP_PUNCH].type == TYPE_FIGHTING);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_POWER_UP_PUNCH].type == TIPO_LUCHA);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TIPO_AGUA);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TIPO_AGUA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SQUIRTLE) { };
         OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_SCRATCH, MOVE_POWER_UP_PUNCH); }
@@ -623,11 +623,11 @@ AI_SINGLE_BATTLE_TEST("AI will choose Superpower over Outrage with Contrary")
     PARAMETRIZE {ability = ABILITY_CONTRARY; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_SUPERPOWER].power == 120);
-        ASSUME(gMovesInfo[MOVE_SUPERPOWER].type == TYPE_FIGHTING);
+        ASSUME(gMovesInfo[MOVE_SUPERPOWER].type == TIPO_LUCHA);
         ASSUME(gMovesInfo[MOVE_OUTRAGE].power == 120);
-        ASSUME(gMovesInfo[MOVE_OUTRAGE].type == TYPE_DRAGON);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_OUTRAGE].type == TIPO_DRAGON);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[0] == TIPO_AGUA);
+        ASSUME(gSpeciesInfo[SPECIES_SQUIRTLE].types[1] == TIPO_AGUA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SQUIRTLE) { };
         OPPONENT(SPECIES_MALAMAR) { Ability(ability); Moves(MOVE_OUTRAGE, MOVE_SUPERPOWER); }

@@ -53,7 +53,7 @@ enum {
     TRANSITION_TYPE_NORMAL,
     TRANSITION_TYPE_CAVE,
     TRANSITION_TYPE_FLASH,
-    TRANSITION_TYPE_WATER,
+    TRANSITION_TIPO_AGUA,
 };
 
 enum {
@@ -119,7 +119,7 @@ static const u8 sBattleTransitionTable_Wild[][2] =
     [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_SLICE,          B_TRANSITION_WHITE_BARS_FADE},
     [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_CLOCKWISE_WIPE, B_TRANSITION_GRID_SQUARES},
     [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_BLUR,           B_TRANSITION_GRID_SQUARES},
-    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_WAVE,           B_TRANSITION_RIPPLE},
+    [TRANSITION_TIPO_AGUA]  = {B_TRANSITION_WAVE,           B_TRANSITION_RIPPLE},
 };
 
 static const u8 sBattleTransitionTable_Trainer[][2] =
@@ -127,7 +127,7 @@ static const u8 sBattleTransitionTable_Trainer[][2] =
     [TRANSITION_TYPE_NORMAL] = {B_TRANSITION_POKEBALLS_TRAIL, B_TRANSITION_ANGLED_WIPES},
     [TRANSITION_TYPE_CAVE]   = {B_TRANSITION_SHUFFLE,         B_TRANSITION_BIG_POKEBALL},
     [TRANSITION_TYPE_FLASH]  = {B_TRANSITION_BLUR,            B_TRANSITION_GRID_SQUARES},
-    [TRANSITION_TYPE_WATER]  = {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},
+    [TRANSITION_TIPO_AGUA]  = {B_TRANSITION_SWIRL,           B_TRANSITION_RIPPLE},
 };
 
 // Battle Frontier (excluding Pyramid and Dome, which have their own tables below)
@@ -800,14 +800,14 @@ static u8 GetBattleTransitionTypeByMap(void)
         return TRANSITION_TYPE_FLASH;
 
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return TRANSITION_TYPE_WATER;
+        return TRANSITION_TIPO_AGUA;
 
     switch (gMapHeader.mapType)
     {
     case MAP_TYPE_UNDERGROUND:
         return TRANSITION_TYPE_CAVE;
     case MAP_TYPE_UNDERWATER:
-        return TRANSITION_TYPE_WATER;
+        return TRANSITION_TIPO_AGUA;
     default:
         return TRANSITION_TYPE_NORMAL;
     }

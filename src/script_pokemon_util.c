@@ -252,29 +252,14 @@ void HasGigantamaxFactor(struct ScriptContext *ctx)
 
 void ToggleGigantamaxFactor(struct ScriptContext *ctx)
 {
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = FALSE;
-
-    if (partyIndex < PARTY_SIZE)
-    {
-        bool32 gigantamaxFactor;
-
-        if (gSpeciesInfo[SanitizeSpeciesId(GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES))].isMythical)
-            return;
-
-        gigantamaxFactor = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
-        gigantamaxFactor = !gigantamaxFactor;
-        SetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
-        gSpecialVar_Result = TRUE;
-    }
 }
 
 void CheckTeraType(struct ScriptContext *ctx)
 {
     u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    gSpecialVar_Result = TYPE_NONE;
+    gSpecialVar_Result = TIPO_NINGUNO;
 
     if (partyIndex < PARTY_SIZE)
         gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE);
@@ -285,7 +270,7 @@ void SetTeraType(struct ScriptContext *ctx)
     u32 type = ScriptReadByte(ctx);
     u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
 
-    if (type < NUMBER_OF_MON_TYPES && partyIndex < PARTY_SIZE)
+    if (type < NUMERO_DE_TIPOS && partyIndex < PARTY_SIZE)
         SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
 }
 
@@ -326,14 +311,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     else if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
         isShiny = FALSE;
     SetMonData(&mon, MON_DATA_IS_SHINY, &isShiny);
-
-    // gigantamax factor
-    SetMonData(&mon, MON_DATA_GIGANTAMAX_FACTOR, &ggMaxFactor);
-
-    // tera type
-    if (teraType >= NUMBER_OF_MON_TYPES)
-        teraType = TYPE_NONE;
-    SetMonData(&mon, MON_DATA_TERA_TYPE, &teraType);
 
     // EV and IV
     for (i = 0; i < NUM_STATS; i++)
@@ -436,7 +413,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
-    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMBER_OF_MON_TYPES);
+    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMERO_DE_TIPOS);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
@@ -474,7 +451,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u16 move4         = PARSE_FLAG(20, MOVE_NONE);
     bool8 isShiny     = PARSE_FLAG(21, FALSE);
     bool8 ggMaxFactor = PARSE_FLAG(22, FALSE);
-    u8 teraType       = PARSE_FLAG(23, NUMBER_OF_MON_TYPES);
+    u8 teraType       = PARSE_FLAG(23, NUMERO_DE_TIPOS);
 
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};

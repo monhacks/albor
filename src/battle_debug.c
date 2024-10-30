@@ -2068,7 +2068,7 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         break;
     case LIST_ITEM_TYPES:
         data->modifyArrows.minValue = 0;
-        data->modifyArrows.maxValue = NUMBER_OF_MON_TYPES - 1;
+        data->modifyArrows.maxValue = NUMERO_DE_TIPOS - 1;
         data->modifyArrows.maxDigits = 2;
         data->modifyArrows.modifiedValPtr = (u8 *)((&gBattleMons[data->battlerId].types[0]) + data->currentSecondaryListItemId);
         data->modifyArrows.typeOfVal = VAL_U8;

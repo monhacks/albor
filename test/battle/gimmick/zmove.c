@@ -23,7 +23,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Moves are not affected by -ate abilities")
 {
     GIVEN {
         ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-        ASSUME(gSpeciesInfo[SPECIES_SWELLOW].types[1] == TYPE_FLYING);
+        ASSUME(gSpeciesInfo[SPECIES_SWELLOW].types[1] == TIPO_VOLADOR);
         PLAYER(SPECIES_AURORUS) { Ability(ABILITY_REFRIGERATE); Item(ITEM_NORMALIUM_Z); }
         OPPONENT(SPECIES_SWELLOW);
     } WHEN {
@@ -136,7 +136,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_BOOST_CRITS raises a battler's critical hi
 DOUBLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DESTINY_BOND].type == TYPE_GHOST);
+        ASSUME(gMovesInfo[MOVE_DESTINY_BOND].type == TIPO_FANTASMA);
         ASSUME(gMovesInfo[MOVE_DESTINY_BOND].zMove.effect == Z_EFFECT_FOLLOW_ME);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_GHOSTIUM_Z); }
         PLAYER(SPECIES_MEW);
@@ -157,7 +157,7 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_FOLLOW_ME redirects attacks to the user")
 SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_RESTORE_REPLACEMENT_HP fully heals the replacement battler's HP")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].type == TYPE_DARK);
+        ASSUME(gMovesInfo[MOVE_PARTING_SHOT].type == TIPO_SINIESTRO);
         ASSUME(gMovesInfo[MOVE_PARTING_SHOT].zMove.effect == Z_EFFECT_RESTORE_REPLACEMENT_HP);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_DARKINIUM_Z); }
         PLAYER(SPECIES_MEW) { HP(1); }
@@ -181,10 +181,10 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_CURSE activates Z_EFFECT_RECOVER_HP or Z_E
     PARAMETRIZE { species = SPECIES_WOBBUFFET; }
     PARAMETRIZE { species = SPECIES_DUSCLOPS; }
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_CURSE].type == TYPE_GHOST);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TYPE_GHOST);
-        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TYPE_GHOST);
-        ASSUME(gSpeciesInfo[SPECIES_DUSCLOPS].types[0] == TYPE_GHOST);
+        ASSUME(gMovesInfo[MOVE_CURSE].type == TIPO_FANTASMA);
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[0] != TIPO_FANTASMA);
+        ASSUME(gSpeciesInfo[SPECIES_WOBBUFFET].types[1] != TIPO_FANTASMA);
+        ASSUME(gSpeciesInfo[SPECIES_DUSCLOPS].types[0] == TIPO_FANTASMA);
         ASSUME(gMovesInfo[MOVE_CURSE].zMove.effect == Z_EFFECT_CURSE);
         PLAYER(species) { Item(ITEM_GHOSTIUM_Z); HP(1); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -218,7 +218,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z_EFFECT_CURSE activates Z_EFFECT_RECOVER_HP or Z_E
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used non-status move as a Z-Move")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
+        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TIPO_VOLADOR);
         ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].zMove.effect == Z_EFFECT_ATK_UP_2);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -240,7 +240,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stage
 SINGLE_BATTLE_TEST("(Z-MOVE) Z-Mirror Move raises the user's attack by two stages and copies the last used status move regularly")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
+        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TIPO_VOLADOR);
         ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].zMove.effect == Z_EFFECT_ATK_UP_2);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         OPPONENT(SPECIES_WOBBUFFET);
@@ -308,10 +308,10 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Nature Power transforms into different Z-Moves ba
 {
     u32 terrainMove = MOVE_NONE;
     u32 zMove = MOVE_NONE;
-    PARAMETRIZE { terrainMove = MOVE_ELECTRIC_TERRAIN;  zMove = gTypesInfo[TYPE_ELECTRIC].zMove; }
-    PARAMETRIZE { terrainMove = MOVE_PSYCHIC_TERRAIN;   zMove = gTypesInfo[TYPE_PSYCHIC].zMove; }
-    PARAMETRIZE { terrainMove = MOVE_GRASSY_TERRAIN;    zMove = gTypesInfo[TYPE_GRASS].zMove; }
-    PARAMETRIZE { terrainMove = MOVE_MISTY_TERRAIN;     zMove = gTypesInfo[TYPE_FAIRY].zMove; }
+    PARAMETRIZE { terrainMove = MOVE_ELECTRIC_TERRAIN;  zMove = gTypesInfo[TIPO_ELECTRICO].zMove; }
+    PARAMETRIZE { terrainMove = MOVE_PSYCHIC_TERRAIN;   zMove = gTypesInfo[TIPO_PSIQUICO].zMove; }
+    PARAMETRIZE { terrainMove = MOVE_GRASSY_TERRAIN;    zMove = gTypesInfo[TIPO_PLANTA].zMove; }
+    PARAMETRIZE { terrainMove = MOVE_MISTY_TERRAIN;     zMove = gTypesInfo[TIPO_HADA].zMove; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_NATURE_POWER].type == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
@@ -349,10 +349,10 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Weather Ball transforms into different Z-Moves ba
 {
     u32 weatherMove = MOVE_NONE;
     u32 zMove = MOVE_NONE;
-    PARAMETRIZE { weatherMove = MOVE_RAIN_DANCE;  zMove = gTypesInfo[TYPE_WATER].zMove; }
-    PARAMETRIZE { weatherMove = MOVE_SUNNY_DAY;   zMove = gTypesInfo[TYPE_FIRE].zMove; }
-    PARAMETRIZE { weatherMove = MOVE_SANDSTORM;   zMove = gTypesInfo[TYPE_ROCK].zMove; }
-    PARAMETRIZE { weatherMove = MOVE_HAIL;        zMove = gTypesInfo[TYPE_ICE].zMove; }
+    PARAMETRIZE { weatherMove = MOVE_RAIN_DANCE;  zMove = gTypesInfo[TIPO_AGUA].zMove; }
+    PARAMETRIZE { weatherMove = MOVE_SUNNY_DAY;   zMove = gTypesInfo[TIPO_FUEGO].zMove; }
+    PARAMETRIZE { weatherMove = MOVE_SANDSTORM;   zMove = gTypesInfo[TIPO_ROCA].zMove; }
+    PARAMETRIZE { weatherMove = MOVE_HAIL;        zMove = gTypesInfo[TIPO_HIELO].zMove; }
     GIVEN {
         ASSUME(gMovesInfo[MOVE_WEATHER_BALL].type == TYPE_NORMAL);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_NORMALIUM_Z); }
@@ -400,7 +400,7 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Z-Sleep Talk turns Weather Ball into Breakneck Blit
 SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of maximum HP to the user")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_EMBER].type == TIPO_FUEGO);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
         OPPONENT(SPECIES_VIVILLON);
     } WHEN {
@@ -417,8 +417,8 @@ SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves and deals 25% of ma
 DOUBLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_EMBER].type == TYPE_FIRE);
-        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TYPE_FLYING);
+        ASSUME(gMovesInfo[MOVE_EMBER].type == TIPO_FUEGO);
+        ASSUME(gMovesInfo[MOVE_MIRROR_MOVE].type == TIPO_VOLADOR);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FLYINIUM_Z); }
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
@@ -436,7 +436,7 @@ DOUBLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves (from Z-Mirror Move
 SINGLE_BATTLE_TEST("(Z-MOVE) Powder blocks Fire type Z-Moves but not boosts granted")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].type == TYPE_FIRE);
+        ASSUME(gMovesInfo[MOVE_WILL_O_WISP].type == TIPO_FUEGO);
         ASSUME(gMovesInfo[MOVE_WILL_O_WISP].zMove.effect == Z_EFFECT_ATK_UP_1);
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_FIRIUM_Z); }
         OPPONENT(SPECIES_VIVILLON);

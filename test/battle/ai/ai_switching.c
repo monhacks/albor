@@ -401,8 +401,8 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch in trapping mon m
     PARAMETRIZE { aiSmartSwitchingFlag = AI_FLAG_SMART_SWITCHING; }
 
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_GOLURK].types[0] == TYPE_GROUND);
-        ASSUME(gSpeciesInfo[SPECIES_GOLURK].types[1] == TYPE_GHOST);
+        ASSUME(gSpeciesInfo[SPECIES_GOLURK].types[0] == TIPO_TIERRA);
+        ASSUME(gSpeciesInfo[SPECIES_GOLURK].types[1] == TIPO_FANTASMA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartSwitchingFlag);
         PLAYER(SPECIES_ELECTRODE) { Speed(4); Moves(MOVE_THUNDERBOLT, MOVE_AURA_SPHERE, MOVE_PROTECT); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); };
@@ -423,7 +423,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: AI will switch in trapping mon
     PARAMETRIZE { aiSmartMonChoicesFlag = 0; } // No trapping behaviour
     PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; } // Traps with mid battle switches
     GIVEN{
-        ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TYPE_STEEL);
+        ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TIPO_ACERO);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag);
         PLAYER(SPECIES_MAWILE) { Speed(2); Moves(MOVE_PROTECT, MOVE_TACKLE); }
         PLAYER(SPECIES_WOBBUFFET) { Speed(1); }
@@ -444,7 +444,7 @@ AI_SINGLE_BATTLE_TEST("AI won't use trapping behaviour if player only has 1 mon 
     PARAMETRIZE { aiSmartMonChoicesFlag = 0; } // No trapping behaviour
     PARAMETRIZE { aiSmartMonChoicesFlag = AI_FLAG_SMART_MON_CHOICES; } // Traps with mid battle switches
     GIVEN{
-        ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TYPE_STEEL);
+        ASSUME(gSpeciesInfo[SPECIES_MAWILE].types[0] == TIPO_ACERO);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | aiSmartMonChoicesFlag);
         PLAYER(SPECIES_MAWILE) { Speed(2); Moves(MOVE_PROTECT, MOVE_TACKLE); }
         OPPONENT(SPECIES_SNORLAX) { Speed(3); Moves(MOVE_SELF_DESTRUCT); }
@@ -459,11 +459,11 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if mon would 
 {
     PASSES_RANDOMLY(50, 100, RNG_AI_SWITCH_HASBADODDS);
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_RHYDON].types[0] == TYPE_GROUND);
-        ASSUME(gSpeciesInfo[SPECIES_PELIPPER].types[0] == TYPE_WATER);
-        ASSUME(gSpeciesInfo[SPECIES_PELIPPER].types[1] == TYPE_FLYING);
-        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TYPE_ELECTRIC);
-        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].type == TYPE_GROUND);
+        ASSUME(gSpeciesInfo[SPECIES_RHYDON].types[0] == TIPO_TIERRA);
+        ASSUME(gSpeciesInfo[SPECIES_PELIPPER].types[0] == TIPO_AGUA);
+        ASSUME(gSpeciesInfo[SPECIES_PELIPPER].types[1] == TIPO_VOLADOR);
+        ASSUME(gMovesInfo[MOVE_THUNDERBOLT].type == TIPO_ELECTRICO);
+        ASSUME(gMovesInfo[MOVE_EARTHQUAKE].type == TIPO_TIERRA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING | AI_FLAG_SMART_MON_CHOICES);
         PLAYER(SPECIES_ELECTRODE) { Moves(MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_THUNDER_SHOCK); }
         OPPONENT(SPECIES_PELIPPER) { Moves(MOVE_EARTHQUAKE); };
@@ -476,13 +476,13 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if mon would 
 AI_SINGLE_BATTLE_TEST("Switch AI: AI will switch out if it can't deal damage to a mon with Wonder Guard")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[0] == TYPE_BUG);
-        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[1] == TYPE_GHOST);
+        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[0] == TIPO_BICHO);
+        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[1] == TIPO_FANTASMA);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[0] == ABILITY_WONDER_GUARD);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[1] == ABILITY_NONE);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[2] == ABILITY_NONE);
         ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_SHADOW_BALL].type == TYPE_GHOST);
+        ASSUME(gMovesInfo[MOVE_SHADOW_BALL].type == TIPO_FANTASMA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
         PLAYER(SPECIES_SHEDINJA) { Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -495,13 +495,13 @@ AI_SINGLE_BATTLE_TEST("Switch AI: AI will switch out if it can't deal damage to 
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it can't deal damage to a mon with Wonder Guard")
 {
     GIVEN {
-        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[0] == TYPE_BUG);
-        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[1] == TYPE_GHOST);
+        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[0] == TIPO_BICHO);
+        ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].types[1] == TIPO_FANTASMA);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[0] == ABILITY_WONDER_GUARD);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[1] == ABILITY_NONE);
         ASSUME(gSpeciesInfo[SPECIES_SHEDINJA].abilities[2] == ABILITY_NONE);
         ASSUME(gMovesInfo[MOVE_TACKLE].type == TYPE_NORMAL);
-        ASSUME(gMovesInfo[MOVE_SHADOW_BALL].type == TYPE_GHOST);
+        ASSUME(gMovesInfo[MOVE_SHADOW_BALL].type == TIPO_FANTASMA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_SHEDINJA) { Moves(MOVE_TACKLE); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -636,7 +636,7 @@ AI_DOUBLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has bee
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's mon is semi-invulnerable and it has an absorber")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DIVE].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_DIVE].type == TIPO_AGUA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_LUVDISC) { Moves(MOVE_DIVE); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -651,7 +651,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has an 
 {
     PASSES_RANDOMLY(33, 100, RNG_AI_SWITCH_ABSORBING);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TIPO_AGUA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_LUVDISC) { Moves(MOVE_WATER_GUN); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_SHOCK_WAVE); }
@@ -666,7 +666,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
 {
     PASSES_RANDOMLY(100, 100, RNG_AI_SWITCH_ABSORBING);
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_SOLAR_BEAM].type == TYPE_GRASS);
+        ASSUME(gMovesInfo[MOVE_SOLAR_BEAM].type == TIPO_PLANTA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_BELLOSSOM) { Moves(MOVE_SOLAR_BEAM); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -680,7 +680,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's mon is charging and it has a good switchin immunity (type)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DIG].type == TYPE_GROUND);
+        ASSUME(gMovesInfo[MOVE_DIG].type == TIPO_TIERRA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_SANDSHREW) { Moves(MOVE_DIG); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -694,7 +694,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's mon is charging and it has a good switchin immunity (ability)")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_DIG].type == TYPE_GROUND);
+        ASSUME(gMovesInfo[MOVE_DIG].type == TIPO_TIERRA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_SANDSHREW) { Moves(MOVE_DIG); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }
@@ -708,7 +708,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if player's m
 AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_SWITCHING: AI will switch out if it has an absorber")
 {
     GIVEN {
-        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TYPE_WATER);
+        ASSUME(gMovesInfo[MOVE_WATER_GUN].type == TIPO_AGUA);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT | AI_FLAG_SMART_SWITCHING);
         PLAYER(SPECIES_LUVDISC) { Moves(MOVE_WATER_GUN); }
         OPPONENT(SPECIES_ZIGZAGOON) { Moves(MOVE_TACKLE); }

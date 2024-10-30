@@ -236,7 +236,6 @@ struct SpeciesInfo
     u8 baseSpDefense;
     u8 types[2];
     u8 catchRate;
-    u8 forceTeraType;
     u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
     u16 evYield_HP:2;
     u16 evYield_Attack:2;
@@ -252,8 +251,6 @@ struct SpeciesInfo
     u8 growthRate;
     u8 eggGroups[2];
     u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
-    u8 safariZoneFleeRate;
-    u8 categoryName[13];
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u16 cryId;
     u16 dexNum;
@@ -263,7 +260,6 @@ struct SpeciesInfo
     u16 pokemonOffset;
     u16 trainerScale;
     u16 trainerOffset;
-    u8 bodyColor:7;
     u8 noFlip:1;
     u8 frontAnimDelay;
     u8 frontAnimId;
@@ -287,11 +283,6 @@ struct SpeciesInfo
     u8 backPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
     u8 enemyMonElevation; // This determines how much higher above the usual position the enemy Pokémon is during battle. Species that float or fly have nonzero values.
     u32 isLegendary:1;
-    u32 isMythical:1;
-    u32 isAlolaForm:1;
-    u32 isGalarForm:1;
-    u32 isHisuiForm:1;
-    u32 perfectIVCount:3;   // This species will always generate with the specified amount of perfect IVs.
     u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
     u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
     u32 brilla:1;
@@ -590,7 +581,6 @@ u8 GetSecretBaseTrainerClass(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
 bool8 IsPokemonStorageFull(void);
 const u8 *GetSpeciesName(u16 species);
-const u8 *GetSpeciesCategory(u16 species);
 u16 GetSpeciesHeight(u16 species);
 u16 GetSpeciesWeight(u16 species);
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
