@@ -311,10 +311,6 @@ void DoMoveAnim(u16 move)
     LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
-static void Nop(void)
-{
-}
-
 void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
