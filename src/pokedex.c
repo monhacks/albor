@@ -150,7 +150,6 @@ static const u8 sText_Stats_eggGroup_WATER_3[] = _("WATER {CIRCLE_3}");
 static const u8 sText_Stats_eggGroup_MINERAL[] = _("MINERAL");
 static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("AMORPHOUS");
 static const u8 sText_Stats_eggGroup_WATER_2[] = _("WATER {CIRCLE_2}");
-static const u8 sText_Stats_eggGroup_DITTO[] = _("DITTO");
 static const u8 sText_Stats_eggGroup_DRAGON[] = _("DRAGON");
 static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("---");
 
@@ -4336,7 +4335,7 @@ static void PrintStatsScreen_Left(u8 taskId)
         base_i++;
 
         //Egg cycles
-        if (sPokedexView->sPokemonStats.eggGroup1 == EGG_GROUP_BABY || sPokedexView->sPokemonStats.eggGroup2 == EGG_GROUP_BABY) //Species without eggs (legendaries etc)
+        if (sPokedexView->sPokemonStats.eggGroup1 == GRUPO_HUEVO_BEBE || sPokedexView->sPokemonStats.eggGroup2 == GRUPO_HUEVO_BEBE) //Species without eggs (legendaries etc)
         {
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_EggCycles, base_x, base_y + base_y_offset*base_i);
             PrintStatsScreenTextSmall(WIN_STATS_LEFT, gText_ThreeDashes, 78, base_y + base_y_offset*base_i);
@@ -4371,49 +4370,46 @@ static void PrintStatsScreen_Left(u8 taskId)
         //Egg group 1
         switch (sPokedexView->sPokemonStats.eggGroup1)
         {
-        case EGG_GROUP_MONSTER     :
+        case GRUPO_HUEVO_MONSTRUO     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_MONSTER);
             break;
-        case EGG_GROUP_ANFIBIO     :
+        case GRUPO_HUEVO_ANFIBIO     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_1);
             break;
-        case EGG_GROUP_BUG         :
+        case GRUPO_HUEVO_BICHO         :
             StringCopy(gStringVar1, sText_Stats_eggGroup_BUG);
             break;
-        case EGG_GROUP_FLYING      :
+        case GRUPO_HUEVO_PAJARO      :
             StringCopy(gStringVar1, sText_Stats_eggGroup_FLYING);
             break;
-        case EGG_GROUP_FIELD       :
+        case GRUPO_HUEVO_CAMPESTRE       :
             StringCopy(gStringVar1, sText_Stats_eggGroup_FIELD);
             break;
-        case EGG_GROUP_FAIRY       :
+        case GRUPO_HUEVO_HADA       :
             StringCopy(gStringVar1, sText_Stats_eggGroup_FAIRY);
             break;
-        case EGG_GROUP_GRASS       :
+        case GRUPO_HUEVO_PLANTA       :
             StringCopy(gStringVar1, sText_Stats_eggGroup_GRASS);
             break;
-        case EGG_GROUP_HUMAN_LIKE  :
+        case GRUPO_HUEVO_HUMANOIDE  :
             StringCopy(gStringVar1, sText_Stats_eggGroup_HUMAN_LIKE);
             break;
-        case EGG_GROUP_INVERTEBRADO     :
+        case GRUPO_HUEVO_INVERTEBRADO     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_3);
             break;
-        case EGG_GROUP_MINERAL     :
+        case GRUPO_HUEVO_MINERAL     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_MINERAL);
             break;
-        case EGG_GROUP_AMORPHOUS   :
+        case GRUPO_HUEVO_AMORFO   :
             StringCopy(gStringVar1, sText_Stats_eggGroup_AMORPHOUS);
             break;
-        case EGG_GROUP_PEZ     :
+        case GRUPO_HUEVO_PEZ     :
             StringCopy(gStringVar1, sText_Stats_eggGroup_WATER_2);
             break;
-        case EGG_GROUP_DITTO       :
-            StringCopy(gStringVar1, sText_Stats_eggGroup_DITTO);
-            break;
-        case EGG_GROUP_DRAGON      :
+        case GRUPO_HUEVO_DRAGON      :
             StringCopy(gStringVar1, sText_Stats_eggGroup_DRAGON);
             break;
-        case EGG_GROUP_BABY:
+        case GRUPO_HUEVO_BEBE:
             StringCopy(gStringVar1, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
             break;
         }
@@ -4422,49 +4418,46 @@ static void PrintStatsScreen_Left(u8 taskId)
         {
             switch (sPokedexView->sPokemonStats.eggGroup2)
             {
-            case EGG_GROUP_MONSTER     :
+            case GRUPO_HUEVO_MONSTRUO     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MONSTER);
                 break;
-            case EGG_GROUP_ANFIBIO     :
+            case GRUPO_HUEVO_ANFIBIO     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_1);
                 break;
-            case EGG_GROUP_BUG         :
+            case GRUPO_HUEVO_BICHO         :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_BUG);
                 break;
-            case EGG_GROUP_FLYING      :
+            case GRUPO_HUEVO_PAJARO      :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FLYING);
                 break;
-            case EGG_GROUP_FIELD       :
+            case GRUPO_HUEVO_CAMPESTRE       :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FIELD);
                 break;
-            case EGG_GROUP_FAIRY       :
+            case GRUPO_HUEVO_HADA       :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_FAIRY);
                 break;
-            case EGG_GROUP_GRASS       :
+            case GRUPO_HUEVO_PLANTA       :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_GRASS);
                 break;
-            case EGG_GROUP_HUMAN_LIKE  :
+            case GRUPO_HUEVO_HUMANOIDE  :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_HUMAN_LIKE);
                 break;
-            case EGG_GROUP_INVERTEBRADO     :
+            case GRUPO_HUEVO_INVERTEBRADO     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_3);
                 break;
-            case EGG_GROUP_MINERAL     :
+            case GRUPO_HUEVO_MINERAL     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_MINERAL);
                 break;
-            case EGG_GROUP_AMORPHOUS   :
+            case GRUPO_HUEVO_AMORFO   :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_AMORPHOUS);
                 break;
-            case EGG_GROUP_PEZ     :
+            case GRUPO_HUEVO_PEZ     :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_WATER_2);
                 break;
-            case EGG_GROUP_DITTO       :
-                StringCopy(gStringVar2, sText_Stats_eggGroup_DITTO);
-                break;
-            case EGG_GROUP_DRAGON      :
+            case GRUPO_HUEVO_DRAGON      :
                 StringCopy(gStringVar2, sText_Stats_eggGroup_DRAGON);
                 break;
-            case EGG_GROUP_BABY:
+            case GRUPO_HUEVO_BEBE:
                 StringCopy(gStringVar2, sText_Stats_eggGroup_NO_EGGS_DISCOVERED);
                 break;
             }

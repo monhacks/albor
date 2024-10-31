@@ -5156,6 +5156,7 @@ static bool8 MonPlaceChange_CursorUp(void)
 // When a single pokemon is picked up
 static void MoveMon(void)
 {
+    u16 palette[16] = {0};
     switch (sCursorArea)
     {
     case CURSOR_AREA_IN_PARTY:
@@ -5164,7 +5165,6 @@ static void MoveMon(void)
         // party pokemon will have their palette updated elsewhere when leaving the party menu
         break;
     case CURSOR_AREA_IN_BOX:
-        u16 palette[16] = {0};
         SetMovingMonData(StorageGetCurrentBox(), sCursorPosition);
         SetMovingMonSprite(MODE_BOX, sCursorPosition);
 

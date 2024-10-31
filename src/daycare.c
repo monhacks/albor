@@ -26,8 +26,6 @@
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 
-#define IS_DITTO(species) (gSpeciesInfo[species].eggGroups[0] == EGG_GROUP_DITTO || gSpeciesInfo[species].eggGroups[1] == EGG_GROUP_DITTO)
-
 static void ClearDaycareMonMail(struct DaycareMail *mail);
 static void SetInitialEggData(struct Pokemon *mon, u16 species, struct DayCare *daycare);
 static void DaycarePrintMonInfo(u8 windowId, u32 daycareSlotId, u8 y);
@@ -421,7 +419,7 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         if (ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE
-            && (P_NATURE_INHERITANCE != GEN_3 || GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE || IS_DITTO(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES))))
+            && (P_NATURE_INHERITANCE != GEN_3 || GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE))
         {
             slot = i;
             numWithEverstone++;
@@ -1032,9 +1030,9 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 {
     s32 i, j;
 
-    for (i = 0; i < EGG_GROUPS_PER_MON; i++)
+    for (i = 0; i < GRUPOS_HUEVO_POR_POKEMON; i++)
     {
-        for (j = 0; j < EGG_GROUPS_PER_MON; j++)
+        for (j = 0; j < GRUPOS_HUEVO_POR_POKEMON; j++)
         {
             if (eggGroups1[i] == eggGroups2[j])
                 return TRUE;
@@ -1047,7 +1045,7 @@ static bool8 EggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
 u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
 {
     u32 i;
-    u16 eggGroups[DAYCARE_MON_COUNT][EGG_GROUPS_PER_MON];
+    u16 eggGroups[DAYCARE_MON_COUNT][GRUPOS_HUEVO_POR_POKEMON];
     u16 species[DAYCARE_MON_COUNT];
     u32 trainerIds[DAYCARE_MON_COUNT];
     u32 genders[DAYCARE_MON_COUNT];
@@ -1065,38 +1063,19 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     }
 
     // check unbreedable egg group
-    if (eggGroups[0][0] == EGG_GROUP_BABY || eggGroups[1][0] == EGG_GROUP_BABY)
-        return PARENTS_INCOMPATIBLE;
-    // two Ditto can't breed
-    if (eggGroups[0][0] == EGG_GROUP_DITTO && eggGroups[1][0] == EGG_GROUP_DITTO)
+    if (eggGroups[0][0] == GRUPO_HUEVO_BEBE || eggGroups[1][0] == GRUPO_HUEVO_BEBE)
         return PARENTS_INCOMPATIBLE;
 
-    // one parent is Ditto
-    if (eggGroups[0][0] == EGG_GROUP_DITTO || eggGroups[1][0] == EGG_GROUP_DITTO)
-    {
-        if (trainerIds[0] == trainerIds[1])
-            return PARENTS_LOW_COMPATIBILITY;
-
-        return PARENTS_MED_COMPATIBILITY;
-    }
-    // neither parent is Ditto
+    if (genders[0] == genders[1] && genders[0] != MON_GENDERLESS)
+        return PARENTS_INCOMPATIBLE;
+    if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
+        return PARENTS_INCOMPATIBLE;
+    if (genders[0] == MON_GENDERLESS && genders[1] == MON_GENDERLESS)
+        return PARENTS_LOW_COMPATIBILITY;
+    if (species[0] == species[1])
+        return PARENTS_MAX_COMPATIBILITY;
     else
-    {
-        if (genders[0] == genders[1] && genders[0] != MON_GENDERLESS)
-            return PARENTS_INCOMPATIBLE;
-        if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
-            return PARENTS_INCOMPATIBLE;
-        if (genders[0] == MON_GENDERLESS && genders[1] == MON_GENDERLESS)
-            return PARENTS_LOW_COMPATIBILITY;
-        if (species[0] == species[1])
-        {
-            return PARENTS_MAX_COMPATIBILITY;
-        }
-        else
-        {
-            return PARENTS_MED_COMPATIBILITY;
-        }
-    }
+        return PARENTS_MED_COMPATIBILITY;
 }
 
 static u8 GetDaycareCompatibilityScoreFromSave(void)

@@ -28,24 +28,26 @@ enum TiposPokemon
 };
 
 // Pokémon egg groups
-#define EGG_GROUP_NONE                0
-#define EGG_GROUP_MONSTER             1
-#define EGG_GROUP_ANFIBIO             2
-#define EGG_GROUP_BUG                 3
-#define EGG_GROUP_FLYING              4
-#define EGG_GROUP_FIELD               5
-#define EGG_GROUP_FAIRY               6
-#define EGG_GROUP_GRASS               7
-#define EGG_GROUP_HUMAN_LIKE          8
-#define EGG_GROUP_INVERTEBRADO        9
-#define EGG_GROUP_MINERAL             10
-#define EGG_GROUP_AMORPHOUS           11
-#define EGG_GROUP_PEZ                 12
-#define EGG_GROUP_DITTO               13
-#define EGG_GROUP_DRAGON              14
-#define EGG_GROUP_BABY                15
+enum GruposHuevo
+{
+    GRUPO_HUEVO_NINGUNO,
+    GRUPO_HUEVO_MONSTRUO,
+    GRUPO_HUEVO_ANFIBIO,
+    GRUPO_HUEVO_BICHO,
+    GRUPO_HUEVO_PAJARO,
+    GRUPO_HUEVO_CAMPESTRE,
+    GRUPO_HUEVO_HADA,
+    GRUPO_HUEVO_PLANTA,
+    GRUPO_HUEVO_HUMANOIDE,
+    GRUPO_HUEVO_INVERTEBRADO,
+    GRUPO_HUEVO_MINERAL,
+    GRUPO_HUEVO_AMORFO,
+    GRUPO_HUEVO_PEZ,
+    GRUPO_HUEVO_DRAGON,
+    GRUPO_HUEVO_BEBE,
+};
 
-#define EGG_GROUPS_PER_MON            2
+#define GRUPOS_HUEVO_POR_POKEMON    2
 
 // Pokémon natures
 #define NATURE_OFENSIVA             0
@@ -204,7 +206,6 @@ enum TiposPokemon
 #define DAMAGE_CATEGORY_SPECIAL     1
 #define DAMAGE_CATEGORY_STATUS      2
 
-// Growth rates
 #define GROWTH_MEDIUM_FAST  0
 #define GROWTH_ERRATIC      1
 #define GROWTH_FLUCTUATING  2
