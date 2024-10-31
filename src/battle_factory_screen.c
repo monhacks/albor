@@ -1977,20 +1977,7 @@ static u8 Select_OptionOthers(void)
 
 static void Select_PrintMonCategory(void)
 {
-    u16 species;
-    u8 text[30];
-    u8 x;
-    u8 monId = sFactorySelectScreen->cursorPos;
-    if (monId < SELECTABLE_MONS_COUNT)
-    {
-        PutWindowTilemap(SELECT_WIN_MON_CATEGORY);
-        FillWindowPixelBuffer(SELECT_WIN_MON_CATEGORY, PIXEL_FILL(0));
-        species = GetMonData(&sFactorySelectScreen->mons[monId].monData, MON_DATA_SPECIES, NULL);
-        CopyMonCategoryText(species, text);
-        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 118);
-        AddTextPrinterParameterized(SELECT_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
-        CopyWindowToVram(SELECT_WIN_MON_CATEGORY, COPYWIN_GFX);
-    }
+
 }
 
 static void Select_CreateMonSprite(void)
@@ -3917,28 +3904,7 @@ static void Swap_PrintMonSpeciesForTransition(void)
 
 static void Swap_PrintMonCategory(void)
 {
-    u16 species;
-    u8 text[30];
-    u8 x;
-    u8 monId = sFactorySwapScreen->cursorPos;
 
-    FillWindowPixelBuffer(SWAP_WIN_MON_CATEGORY, PIXEL_FILL(0));
-    if (monId >= FRONTIER_PARTY_SIZE)
-    {
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
-    }
-    else
-    {
-        PutWindowTilemap(SWAP_WIN_MON_CATEGORY);
-        if (!sFactorySwapScreen->inEnemyScreen)
-            species = GetMonData(&gPlayerParty[monId], MON_DATA_SPECIES, NULL);
-        else
-            species = GetMonData(&gEnemyParty[monId], MON_DATA_SPECIES, NULL);
-        CopyMonCategoryText(species, text);
-        x = GetStringRightAlignXOffset(FONT_NORMAL, text, 118);
-        AddTextPrinterParameterized(SWAP_WIN_MON_CATEGORY, FONT_NORMAL, text, x, 1, 0, NULL);
-        CopyWindowToVram(SWAP_WIN_MON_CATEGORY, COPYWIN_GFX);
-    }
 }
 
 static void Swap_InitActions(u8 id)

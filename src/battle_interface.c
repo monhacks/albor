@@ -28,7 +28,6 @@
 #include "item.h"
 #include "item_icon.h"
 #include "item_use.h"
-#include "test_runner.h"
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -2796,13 +2795,6 @@ void CreateAbilityPopUp(u8 battlerId, u32 ability, bool32 isDoubleBattle)
 
     if (gBattleScripting.abilityPopupOverwrite != 0)
         ability = gBattleScripting.abilityPopupOverwrite;
-
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordAbilityPopUp(battlerId, ability);
-        if (gTestRunnerHeadless)
-            return;
-    }
 
     if (!gBattleStruct->activeAbilityPopUps)
     {

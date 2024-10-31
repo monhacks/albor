@@ -21,8 +21,8 @@ enum SpinnerRunnerFollowPatterns
 enum ReflectionTypes
 {
     REFL_TYPE_NONE,
-    REFL_TYPE_ICE,
-    REFL_TYPE_WATER,
+    REFL_TIPO_HIELO,
+    REFL_TIPO_AGUA,
     NUM_REFLECTION_TYPES
 };
 

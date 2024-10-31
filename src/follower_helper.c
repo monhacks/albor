@@ -12,7 +12,7 @@
 #include "constants/songs.h"
 #include "constants/weather.h"
 
-#define TYPE_NOT_TYPE1 NUMBER_OF_MON_TYPES
+#define TYPE_NOT_TYPE1 NUMERO_DE_TIPOS
 
 // difficult conditional messages follow
 static const u8 sCondMsg00[] = _("{STR_VAR_1} danced happily.");
@@ -96,7 +96,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_NEUTRAL,
         .conditions =
         {
-            MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
+            MATCH_TYPES(TIPO_FUEGO, TIPO_FUEGO),
         },
     },
     [COND_MSG_EVER_GRANDE] =
@@ -253,7 +253,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_UPSET,
         .conditions =
         {
-            MATCH_TYPES(TYPE_DRAGON, TYPE_DRAGON),
+            MATCH_TYPES(TIPO_DRAGON, TIPO_DRAGON),
             MATCH_MAPSEC(MAPSEC_SKY_PILLAR),
         },
     },
@@ -264,7 +264,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_UPSET,
         .conditions =
         {
-            MATCH_NOT_TYPES(TYPE_GHOST, TYPE_GHOST),
+            MATCH_NOT_TYPES(TIPO_FANTASMA, TIPO_FANTASMA),
             MATCH_MAPSEC(MAPSEC_MT_PYRE),
             MATCH_MUSIC(MUS_MT_PYRE),
         },
@@ -275,7 +275,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_UPSET,
         .conditions =
         {
-            MATCH_TYPES(TYPE_FIRE, TYPE_FIRE),
+            MATCH_TYPES(TIPO_FUEGO, TIPO_FUEGO),
             MATCH_WEATHER(WEATHER_RAIN, WEATHER_RAIN_THUNDERSTORM),
         },
     },
@@ -315,7 +315,7 @@ const struct FollowerMsgInfoExtended gFollowerConditionalMessages[COND_MSG_COUNT
         .emotion = FOLLOWER_EMOTION_MUSIC,
         .conditions =
         {
-        MATCH_NOT_TYPES(TYPE_FIRE, TYPE_FIRE),
+        MATCH_NOT_TYPES(TIPO_FUEGO, TIPO_FUEGO),
         MATCH_WEATHER(WEATHER_RAIN, WEATHER_RAIN_THUNDERSTORM)
     }
     },

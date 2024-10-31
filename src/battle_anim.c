@@ -18,8 +18,6 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "test_runner.h"
-#include "test/battle.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 
@@ -311,29 +309,9 @@ void DoMoveAnim(u16 move)
     LaunchBattleAnimation(ANIM_TYPE_MOVE, move);
 }
 
-static void Nop(void)
-{
-}
-
 void LaunchBattleAnimation(u32 animType, u32 animId)
 {
     s32 i;
-
-    if (gTestRunnerEnabled)
-    {
-        TestRunner_Battle_RecordAnimation(animType, animId);
-        // Play Transform and Ally Switch even in Headless as these move animations also change mon data.
-        if (gTestRunnerHeadless
-            #if TESTING // Because gBattleTestRunnerState is not seen outside of test env.
-             && !gBattleTestRunnerState->forceMoveAnim
-            #endif // TESTING
-            && !(animType == ANIM_TYPE_MOVE && (animId == MOVE_TRANSFORM || animId == MOVE_ALLY_SWITCH)))
-        {
-            gAnimScriptCallback = Nop;
-            gAnimScriptActive = FALSE;
-            return;
-        }
-    }
 
     sAnimHideHpBoxes = !(animType == ANIM_TYPE_MOVE && animId == MOVE_TRANSFORM);
     if (animType != ANIM_TYPE_MOVE)

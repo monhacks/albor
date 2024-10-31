@@ -49,7 +49,6 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "trig.h"
 #include "util.h"
@@ -2665,7 +2664,7 @@ const u8* FaintClearSetData(u32 battler)
 
     gBattleMons[battler].types[0] = gSpeciesInfo[gBattleMons[battler].species].types[0];
     gBattleMons[battler].types[1] = gSpeciesInfo[gBattleMons[battler].species].types[1];
-    gBattleMons[battler].types[2] = TYPE_MYSTERY;
+    gBattleMons[battler].types[2] = TIPO_MISTERIO;
 
     Ai_UpdateFaintData(battler);
     TryBattleFormChange(battler, FORM_CHANGE_FAINT);
@@ -2766,7 +2765,7 @@ static void DoBattleIntro(void)
                 memcpy(&gBattleMons[battler], &gBattleResources->bufferB[battler][4], sizeof(struct BattlePokemon));
                 gBattleMons[battler].types[0] = gSpeciesInfo[gBattleMons[battler].species].types[0];
                 gBattleMons[battler].types[1] = gSpeciesInfo[gBattleMons[battler].species].types[1];
-                gBattleMons[battler].types[2] = TYPE_MYSTERY;
+                gBattleMons[battler].types[2] = TIPO_MISTERIO;
                 gBattleMons[battler].ability = GetAbilityBySpecies(gBattleMons[battler].species, gBattleMons[battler].abilityNum);
                 gBattleStruct->hpOnSwitchout[GetBattlerSide(battler)] = gBattleMons[battler].hp;
                 gBattleMons[battler].status2 = 0;
@@ -3348,7 +3347,7 @@ u8 IsRunningFromBattleImpossible(u32 battler)
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return BATTLE_RUN_SUCCESS;
-    if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TYPE_GHOST))
+    if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TIPO_FANTASMA))
         return BATTLE_RUN_SUCCESS;
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         return BATTLE_RUN_SUCCESS;
@@ -3568,11 +3567,10 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     }
 
-                    if (((gBattleTypeFlags & (BATTLE_TYPE_LINK
+                    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK
                                             | BATTLE_TYPE_FRONTIER_NO_PYRAMID
                                             | BATTLE_TYPE_EREADER_TRAINER
                                             | BATTLE_TYPE_RECORDED_LINK))
-                                            && !gTestRunnerEnabled)
                                             // Or if currently held by Sky Drop
                                             || gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
@@ -3765,11 +3763,6 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.baseMoves[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                             }
                             gBattleCommunication[battler]++;
-
-                            if (gTestRunnerEnabled)
-                            {
-                                TestRunner_Battle_CheckChosenMove(battler, gChosenMoveByBattler[battler], gBattleStruct->moveTarget[battler]);
-                            }
                         }
                         break;
                     }
@@ -4090,19 +4083,19 @@ s8 GetMovePriority(u32 battler, u16 move)
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
         return gMovesInfo[MOVE_MAX_GUARD].priority;
 
-    if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TYPE_FLYING)
+    if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TIPO_VOLADOR)
     {
         priority++;
     }
-    else if (ability == ABILITY_TIERRA_SUELTA && gMovesInfo[move].type == TYPE_GROUND)
+    else if (ability == ABILITY_TIERRA_SUELTA && gMovesInfo[move].type == TIPO_TIERRA)
     {
         priority++;
     }
-    else if (ability == ABILITY_PACIFICADOR && gMovesInfo[move].type == TYPE_FAIRY)
+    else if (ability == ABILITY_PACIFICADOR && gMovesInfo[move].type == TIPO_HADA)
     {
         priority++;
     }
-    else if (ability == ABILITY_SUPERORDENADOR && gMovesInfo[move].type == TYPE_PSYCHIC)
+    else if (ability == ABILITY_SUPERORDENADOR && gMovesInfo[move].type == TIPO_PSIQUICO)
     {
         priority++;
     }
@@ -5023,7 +5016,7 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
     u32 heldItem, holdEffect, ability;
 
     if (move == MOVE_STRUGGLE)
-        return TYPE_NORMAL;
+        return TIPO_NORMAL;
 
     if (gMain.inBattle)
     {
@@ -5044,13 +5037,13 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
         if (gMain.inBattle && WEATHER_HAS_EFFECT)
         {
             if (gBattleWeather & B_WEATHER_RAIN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                return TYPE_WATER;
+                return TIPO_AGUA;
             else if (gBattleWeather & B_WEATHER_SANDSTORM)
-                return TYPE_ROCK;
+                return TIPO_ROCA;
             else if (gBattleWeather & B_WEATHER_SUN && holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                return TYPE_FIRE;
+                return TIPO_FUEGO;
             else if (gBattleWeather & (B_WEATHER_SNOW | B_WEATHER_HAIL))
-                return TYPE_ICE;
+                return TIPO_HIELO;
             else
                 return moveType;
         }
@@ -5060,17 +5053,17 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
             {
             case WEATHER_DROUGHT:
                 if (holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                    return TYPE_FIRE;
+                    return TIPO_FUEGO;
                 break;
             case WEATHER_RAIN:
             case WEATHER_RAIN_THUNDERSTORM:
                 if (holdEffect != HOLD_EFFECT_UTILITY_UMBRELLA)
-                    return TYPE_WATER;
+                    return TIPO_AGUA;
                 break;
             case WEATHER_SNOW:
-                return TYPE_ICE;
+                return TIPO_HIELO;
             case WEATHER_SANDSTORM:
-                return TYPE_ROCK;
+                return TIPO_ROCA;
             }
             return moveType;
         }
@@ -5097,10 +5090,10 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
                         | ((GetMonData(mon, MON_DATA_SPDEF_IV) & 1) << 5);
             }
 
-            // Subtract 6 instead of 1 below because 5 types are excluded (TYPE_NONE, TYPE_NORMAL, TYPE_MYSTERY, TYPE_FAIRY and TYPE_STELLAR)
+            // Subtract 6 instead of 1 below because 5 types are excluded (TYPE_NONE, TIPO_NORMAL, TIPO_MISTERIO & TIPO_HADA)
             // The final + 2 skips past TYPE_NONE and Normal.
-            moveType = ((NUMBER_OF_MON_TYPES - 6) * typeBits) / 63 + 2;
-            if (moveType >= TYPE_MYSTERY)
+            moveType = ((NUMERO_DE_TIPOS - 6) * typeBits) / 63 + 2;
+            if (moveType >= TIPO_MISTERIO)
                 moveType++;
             return ((moveType | F_DYNAMIC_TYPE_IGNORE_PHYSICALITY) & 0x3F);
         }
@@ -5119,14 +5112,14 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
         break;
     }
 
-    if (moveType == TYPE_NORMAL
+    if (moveType == TIPO_NORMAL
      && ((!gMain.inBattle)
      && GetActiveGimmick(battler) != GIMMICK_DYNAMAX))
     {
         if (gMain.inBattle && ateBoost != NULL)
             *ateBoost = TRUE;
     }
-    else if (moveType != TYPE_NORMAL
+    else if (moveType != TIPO_NORMAL
           && moveEffect != EFFECT_HIDDEN_POWER
           && moveEffect != EFFECT_WEATHER_BALL
           && ability == ABILITY_NORMALIZE
@@ -5134,14 +5127,14 @@ u32 GetDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler, u8 *ateBoost)
     {
         if (gMain.inBattle && ateBoost != NULL && GetActiveGimmick(battler) != GIMMICK_DYNAMAX)
             *ateBoost = TRUE;
-        return TYPE_NORMAL;
+        return TIPO_NORMAL;
     }
     else if (gMovesInfo[move].soundMove && ability == ABILITY_LIQUID_VOICE)
     {
-        return TYPE_WATER;
+        return TIPO_AGUA;
     }
 
-    return TYPE_NONE;
+    return TIPO_NINGUNO;
 }
 
 void SetTypeBeforeUsingMove(u32 move, u32 battler)
@@ -5158,13 +5151,13 @@ void SetTypeBeforeUsingMove(u32 move, u32 battler)
                                   move,
                                   battler,
                                   &gBattleStruct->ateBoost[battler]);
-    if (moveType != TYPE_NONE)
+    if (moveType != TIPO_NINGUNO)
         gBattleStruct->dynamicMoveType = moveType | F_DYNAMIC_TYPE_SET;
 
     moveType = GetMoveType(move);
-    if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
+    if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TIPO_NORMAL)
         || gStatuses4[battler] & STATUS4_ELECTRIFIED)
-        gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+        gBattleStruct->dynamicMoveType = TIPO_ELECTRICO | F_DYNAMIC_TYPE_SET;
 
     // Check if a gem should activate.
     if (holdEffect == HOLD_EFFECT_GEMS && GetMoveType(move) == ItemId_GetSecondaryId(heldItem))

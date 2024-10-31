@@ -33,7 +33,6 @@
 #include "strings.h"
 #include "string_util.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "util.h"
 #include "window.h"
@@ -87,7 +86,6 @@ static void PlayerBufferRunCommand(u32 battler);
 static void MoveSelectionDisplayPpNumber(u32 battler);
 static void MoveSelectionDisplayMoveType(u32 battler);
 static void MoveSelectionDisplayMoveNames(u32 battler);
-static void MoveSelectionDisplayMoveDescription(u32 battler);
 static void SwitchIn_HandleSoundAndEnd(u32 battler);
 static void WaitForMonSelection(u32 battler);
 static void CompleteWhenChoseItem(u32 battler);
@@ -887,8 +885,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_RIGHT) && !gBattleStruct->zmove.viewing)
@@ -902,8 +898,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_UP) && !gBattleStruct->zmove.viewing)
@@ -916,8 +910,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
     else if (JOY_NEW(DPAD_DOWN) && !gBattleStruct->zmove.viewing)
@@ -931,8 +923,6 @@ void HandleInputChooseMove(u32 battler)
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
             MoveSelectionDisplayPpNumber(battler);
             MoveSelectionDisplayMoveType(battler);
-            if (gBattleStruct->descriptionSubmenu)
-                MoveSelectionDisplayMoveDescription(battler);
         }
     }
 }
@@ -1254,7 +1244,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8 taskId)
     exp -= currLvlExp;
     expToNextLvl = gExperienceTables[gSpeciesInfo[species].growthRate][level + 1] - currLvlExp;
     SetBattleBarStruct(battler, gHealthboxSpriteIds[battler], expToNextLvl, exp, -gainedExp);
-    TestRunner_Battle_RecordExp(battler, exp, -gainedExp);
     PlaySE(SE_EXP);
     gTasks[taskId].func = Task_GiveExpWithExpBar;
 }
@@ -1461,42 +1450,18 @@ static void MoveSelectionDisplayPpNumber(u32 battler)
     if (gBattleResources->bufferA[battler][2] == TRUE) // check if we didn't want to display pp number
         return;
 
-        if (moveInfo->moves[0] != MOVE_NONE)
+    for (u8 i = 0; i < 4; i++)
+    {
+        if (moveInfo->moves[i] != MOVE_NONE)
         {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[0], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1);     
+            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_1 + i); // B_WIN_PP_1, B_WIN_PP_2, etc.
         }
         else
         {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_1);     
+            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_1 + i); // B_WIN_PP_1, B_WIN_PP_2, etc.
         }
-        if (moveInfo->moves[1] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[1], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_2);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_2);     
-        }
-        if (moveInfo->moves[2] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[2], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_3);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_3);     
-        }
-        if (moveInfo->moves[3] != MOVE_NONE)
-        {
-            ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[3], STR_CONV_MODE_RIGHT_ALIGN, 2);
-            BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_4);     
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_OneDash, B_WIN_PP_4);     
-        }
+    }
 }
 
 static const struct OamData sOamData_IconTypes =
@@ -1517,111 +1482,106 @@ static const struct OamData sOamData_IconTypes =
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeNone[] = {
-    ANIMCMD_FRAME(TYPE_NONE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NINGUNO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeNormal[] = {
-    ANIMCMD_FRAME(TYPE_NORMAL * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NORMAL * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFighting[] = {
-    ANIMCMD_FRAME(TYPE_FIGHTING * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_LUCHA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFlying[] = {
-    ANIMCMD_FRAME(TYPE_FLYING * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VOLADOR * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypePoison[] = {
-    ANIMCMD_FRAME(TYPE_POISON * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VENENO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGround[] = {
-    ANIMCMD_FRAME(TYPE_GROUND * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_TIERRA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeRock[] = {
-    ANIMCMD_FRAME(TYPE_ROCK * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ROCA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeBug[] = {
-    ANIMCMD_FRAME(TYPE_BUG * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_BICHO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGhost[] = {
-    ANIMCMD_FRAME(TYPE_GHOST * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FANTASMA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeSteel[] = {
-    ANIMCMD_FRAME(TYPE_STEEL * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ACERO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeMystery[] = {
-    ANIMCMD_FRAME(TYPE_MYSTERY * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_MISTERIO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFire[] = {
-    ANIMCMD_FRAME(TYPE_FIRE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FUEGO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeWater[] = {
-    ANIMCMD_FRAME(TYPE_WATER * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_AGUA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeGrass[] = {
-    ANIMCMD_FRAME(TYPE_GRASS * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PLANTA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeElectric[] = {
-    ANIMCMD_FRAME(TYPE_ELECTRIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ELECTRICO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypePsychic[] = {
-    ANIMCMD_FRAME(TYPE_PSYCHIC * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PSIQUICO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeIce[] = {
-    ANIMCMD_FRAME(TYPE_ICE * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HIELO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeDragon[] = {
-    ANIMCMD_FRAME(TYPE_DRAGON * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_DRAGON * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeDark[] = {
-    ANIMCMD_FRAME(TYPE_DARK * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_SINIESTRO * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
 static const union AnimCmd sSpriteAnim_IconTypeFairy[] = {
-    ANIMCMD_FRAME(TYPE_FAIRY * 4, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HADA * 4, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_IconTypeStellar[] = {
-    ANIMCMD_FRAME(TYPE_STELLAR * 4, 0, FALSE, FALSE),
-    ANIMCMD_END
-};
-
-static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES] = {
+static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMERO_DE_TIPOS] = {
     sSpriteAnim_IconTypeNone,
     sSpriteAnim_IconTypeNormal,
     sSpriteAnim_IconTypeFighting,
@@ -1642,13 +1602,12 @@ static const union AnimCmd *const sSpriteAnimTable_IconTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_IconTypeDragon,
     sSpriteAnim_IconTypeDark,
     sSpriteAnim_IconTypeFairy,
-    sSpriteAnim_IconTypeStellar,
 };
 
 const struct CompressedSpriteSheet sSpriteSheet_IconTypes =
 {
     .data = gIconTypes_Gfx,
-    .size = (NUMBER_OF_MON_TYPES) * 0x80,
+    .size = (NUMERO_DE_TIPOS) * 128,
     .tag = TAG_ICON_TYPES
 };
 const struct SpriteTemplate sSpriteTemplate_IconTypes =
@@ -1661,29 +1620,28 @@ const struct SpriteTemplate sSpriteTemplate_IconTypes =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy
 };
-static const u8 sMoveTypeToOamPaletteNum[NUMBER_OF_MON_TYPES] =
+static const u8 sMoveTypeToOamPaletteNum[NUMERO_DE_TIPOS] =
 {
-    [TYPE_NONE] = 14,
-    [TYPE_NORMAL] = 14,
-    [TYPE_FIGHTING] = 13,
-    [TYPE_FLYING] = 14,
-    [TYPE_POISON] = 15,
-    [TYPE_GROUND] = 14,
-    [TYPE_ROCK] = 15,
-    [TYPE_BUG] = 13,
-    [TYPE_GHOST] = 14,
-    [TYPE_STEEL] = 15,
-    [TYPE_MYSTERY] = 15,
-    [TYPE_FIRE] = 14,
-    [TYPE_WATER] = 14,
-    [TYPE_GRASS] = 13,
-    [TYPE_ELECTRIC] = 13,
-    [TYPE_PSYCHIC] = 15,
-    [TYPE_ICE] = 14,
-    [TYPE_DRAGON] = 13,
-    [TYPE_DARK] = 13,
-    [TYPE_FAIRY] = 13,
-    [TYPE_STELLAR] = 14,
+    [TIPO_NINGUNO] = 14,
+    [TIPO_NORMAL] = 14,
+    [TIPO_LUCHA] = 13,
+    [TIPO_VOLADOR] = 14,
+    [TIPO_VENENO] = 15,
+    [TIPO_TIERRA] = 14,
+    [TIPO_ROCA] = 15,
+    [TIPO_BICHO] = 13,
+    [TIPO_FANTASMA] = 14,
+    [TIPO_ACERO] = 15,
+    [TIPO_MISTERIO] = 15,
+    [TIPO_FUEGO] = 14,
+    [TIPO_AGUA] = 14,
+    [TIPO_PLANTA] = 13,
+    [TIPO_ELECTRICO] = 13,
+    [TIPO_PSIQUICO] = 15,
+    [TIPO_HIELO] = 14,
+    [TIPO_DRAGON] = 13,
+    [TIPO_SINIESTRO] = 13,
+    [TIPO_HADA] = 13,
 };
 
 void LoadPalettesTypes(u32 battler)
@@ -1698,241 +1656,241 @@ void LoadPalettesTypes(u32 battler)
 
     switch (pal1)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(12), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal2)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(13), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal3)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(14), PLTT_SIZE_4BPP);
         break;
     }
     switch (pal4)
     {
-    case TYPE_BUG:
+    case TIPO_BICHO:
         LoadCompressedPalette(gMoveTypePalBug, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DARK:
+    case TIPO_SINIESTRO:
         LoadCompressedPalette(gMoveTypePalDark, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_DRAGON:
+    case TIPO_DRAGON:
         LoadCompressedPalette(gMoveTypePalDragon, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ELECTRIC:
+    case TIPO_ELECTRICO:
         LoadCompressedPalette(gMoveTypePalElectric, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FAIRY:
+    case TIPO_HADA:
         LoadCompressedPalette(gMoveTypePalFairy, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIGHTING:
+    case TIPO_LUCHA:
         LoadCompressedPalette(gMoveTypePalFight, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FIRE:
+    case TIPO_FUEGO:
         LoadCompressedPalette(gMoveTypePalFire, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_FLYING:
+    case TIPO_VOLADOR:
         LoadCompressedPalette(gMoveTypePalFlying, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GHOST:
+    case TIPO_FANTASMA:
         LoadCompressedPalette(gMoveTypePalGhost, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GRASS:
+    case TIPO_PLANTA:
         LoadCompressedPalette(gMoveTypePalGrass, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_GROUND:
+    case TIPO_TIERRA:
         LoadCompressedPalette(gMoveTypePalGround, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ICE:
+    case TIPO_HIELO:
         LoadCompressedPalette(gMoveTypePalIce, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_MYSTERY:
+    case TIPO_MISTERIO:
         LoadCompressedPalette(gMoveTypePalMystery, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_NORMAL:
+    case TIPO_NORMAL:
         LoadCompressedPalette(gMoveTypePalNormal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_POISON:
+    case TIPO_VENENO:
         LoadCompressedPalette(gMoveTypePalPoison, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_PSYCHIC:
+    case TIPO_PSIQUICO:
         LoadCompressedPalette(gMoveTypePalPsychic, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_ROCK:
+    case TIPO_ROCA:
         LoadCompressedPalette(gMoveTypePalRock, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_STEEL:
+    case TIPO_ACERO:
         LoadCompressedPalette(gMoveTypePalSteel, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
-    case TYPE_WATER:
+    case TIPO_AGUA:
         LoadCompressedPalette(gMoveTypePalWater, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
         break;
     }
@@ -1983,54 +1941,6 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 		sprite4->oam.priority = 0;
 		sprite4->subpriority = 1;
     }
-}
-
-static void MoveSelectionDisplayMoveDescription(u32 battler)
-{
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct*)(&gBattleResources->bufferA[battler][4]);
-    u16 move = moveInfo->moves[gMoveSelectionCursor[battler]];
-    u16 pwr = gMovesInfo[move].power;
-    u16 acc = gMovesInfo[move].accuracy;
-    u8 cat = gMovesInfo[move].category;
-
-    u8 pwr_num[3], acc_num[3];
-    u8 cat_desc[7] = _("CAT: ");
-    u8 pwr_desc[7] = _("PWR: ");
-    u8 acc_desc[7] = _("ACC: ");
-    u8 cat_start[] = _("{CLEAR_TO 0x03}");
-    u8 pwr_start[] = _("{CLEAR_TO 0x38}");
-    u8 acc_start[] = _("{CLEAR_TO 0x6D}");
-    LoadMessageBoxAndBorderGfx();
-    DrawStdWindowFrame(B_WIN_MOVE_DESCRIPTION, FALSE);
-    if (pwr < 2)
-        StringCopy(pwr_num, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(pwr_num, pwr, STR_CONV_MODE_LEFT_ALIGN, 3);
-    if (acc < 2)
-        StringCopy(acc_num, gText_ThreeDashes);
-    else
-        ConvertIntToDecimalStringN(acc_num, acc, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringCopy(gDisplayedStringBattle, cat_start);
-    StringAppend(gDisplayedStringBattle, cat_desc);
-    StringAppend(gDisplayedStringBattle, pwr_start);
-    StringAppend(gDisplayedStringBattle, pwr_desc);
-    StringAppend(gDisplayedStringBattle, pwr_num);
-    StringAppend(gDisplayedStringBattle, acc_start);
-    StringAppend(gDisplayedStringBattle, acc_desc);
-    StringAppend(gDisplayedStringBattle, acc_num);
-    StringAppend(gDisplayedStringBattle, gText_NewLine);
-    if (gMovesInfo[move].effect == EFFECT_PLACEHOLDER)
-        StringAppend(gDisplayedStringBattle, gNotDoneYetDescription);
-    else
-        StringAppend(gDisplayedStringBattle, gMovesInfo[move].description);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_DESCRIPTION);
-
-    if (gCategoryIconSpriteId == 0xFF)
-        gCategoryIconSpriteId = CreateSprite(&gSpriteTemplate_CategoryIcons, 38, 64, 1);
-
-    StartSpriteAnim(&gSprites[gCategoryIconSpriteId], cat);
-
-    CopyWindowToVram(B_WIN_MOVE_DESCRIPTION, COPYWIN_FULL);
 }
 
 void CB2_SetUpReshowBattleScreenAfterMenu(void)

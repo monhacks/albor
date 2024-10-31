@@ -13,11 +13,7 @@
 #define COMMON_DATA __attribute__((section("common_data")))
 #define UNUSED __attribute__((unused))
 
-#if MODERN
 #define NOINLINE __attribute__((noinline))
-#else
-#define NOINLINE
-#endif
 
 #define ALIGNED(n) __attribute__((aligned(n)))
 #define PACKED __attribute__((packed))

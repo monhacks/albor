@@ -1319,27 +1319,7 @@ static void CB_ShowTradeMonSummaryScreen(void)
 
 static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 playerMonIdx, u8 partnerMonIdx)
 {
-    int i;
-    u16 partnerSpecies;
-    u8 hasLiveMon = 0;
-
-    // Make sure mon to be traded isn't player's last alive mon
-    for (i = 0; i < playerPartyCount; i++)
-    {
-        if (playerMonIdx != i)
-            hasLiveMon += aliveMons[i];
-    }
-    partnerMonIdx %= PARTY_SIZE;
-    partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
-
-    // Can't trade specific species
-    if (gSpeciesInfo[partnerSpecies].cannotBeTraded)
-        return PARTNER_MON_INVALID;
-
-    if (hasLiveMon)
-        hasLiveMon = BOTH_MONS_VALID;
-
-    return hasLiveMon; //PLAYER_MON_INVALID or BOTH_MONS_VALID
+    return 0;
 }
 
 // Returns TRUE if the partner's selected mon is invalid, FALSE otherwise
@@ -2081,51 +2061,7 @@ static void SaveTradeGiftRibbons(void)
 
 static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int monIdx)
 {
-    int i, numMonsLeft;
-    struct LinkPlayer *partner;
-    u32 species[PARTY_SIZE];
-    u32 species2[PARTY_SIZE];
-
-    for (i = 0; i < partyCount; i++)
-    {
-        species2[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES_OR_EGG);
-        species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
-    }
-
-    partner = &gLinkPlayers[GetMultiplayerId() ^ 1];
-    if ((partner->version & 0xFF) != VERSION_RUBY &&
-        (partner->version & 0xFF) != VERSION_SAPPHIRE)
-    {
-        // Does partner not have National Dex
-        if (!(partner->progressFlagsCopy & 0xF))
-        {
-            if (species2[monIdx] == SPECIES_EGG)
-                return CANT_TRADE_PARTNER_EGG_YET;
-        }
-    }
-
-    // Can't trade specific species
-    if (gSpeciesInfo[species[monIdx]].cannotBeTraded)
-        return CANT_TRADE_INVALID_MON;
-
-    // Make Eggs not count for numMonsLeft
-    for (i = 0; i < partyCount; i++)
-    {
-        if (species2[i] == SPECIES_EGG)
-            species2[i] = SPECIES_NONE;
-    }
-
-    // Count alive mons in party, excluding selected trade mon
-    for (numMonsLeft = 0, i = 0; i < partyCount; i++)
-    {
-        if (i != monIdx)
-            numMonsLeft += species2[i];
-    }
-
-    if (numMonsLeft != 0)
-        return CAN_TRADE_MON;
-    else
-        return CANT_TRADE_LAST_MON;
+    return 0;
 }
 
 s32 GetGameProgressForLinkTrade(void)

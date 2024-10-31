@@ -41,9 +41,6 @@ bool32 CanDynamax(u32 battler)
 // Returns whether a battler is transformed into a Gigantamax form.
 bool32 IsGigantamaxed(u32 battler)
 {
-    struct Pokemon *mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
-    if ((gSpeciesInfo[gBattleMons[battler].species].isGigantamax) && GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR))
-        return TRUE;
     return FALSE;
 }
 
@@ -223,8 +220,8 @@ u8 GetMaxMovePower(u32 move)
     }
 
     tier = GetMaxPowerTier(move);
-    if (gMovesInfo[move].type == TYPE_FIGHTING
-     || gMovesInfo[move].type == TYPE_POISON
+    if (gMovesInfo[move].type == TIPO_LUCHA
+     || gMovesInfo[move].type == TIPO_VENENO
      || move == MOVE_MULTI_ATTACK)
     {
         switch (tier)
@@ -342,16 +339,16 @@ void ChooseDamageNonTypesString(u8 type)
 {
     switch (type)
     {
-        case TYPE_GRASS:
+        case TIPO_PLANTA:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRAPPED_WITH_VINES;
             break;
-        case TYPE_WATER:
+        case TIPO_AGUA:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CAUGHT_IN_VORTEX;
             break;
-        case TYPE_FIRE:
+        case TIPO_FUEGO:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SURROUNDED_BY_FIRE;
             break;
-        case TYPE_ROCK:
+        case TIPO_ROCA:
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SURROUNDED_BY_ROCKS;
             break;
     }

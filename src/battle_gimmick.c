@@ -12,7 +12,6 @@
 #include "pokemon.h"
 #include "sprite.h"
 #include "util.h"
-#include "test_runner.h"
 
 #include "data/gimmicks.h"
 
@@ -43,11 +42,7 @@ bool32 CanActivateGimmick(u32 battler, enum Gimmick gimmick)
 // Returns whether the player has a gimmick selected while in the move selection menu.
 bool32 IsGimmickSelected(u32 battler, enum Gimmick gimmick)
 {
-    // There's no player select in tests, but some gimmicks need to test choice before they are fully activated.
-    if (TESTING)
-        return (gBattleStruct->gimmick.toActivate & (1u << battler)) && gBattleStruct->gimmick.usableGimmick[battler] == gimmick;
-    else
-        return gBattleStruct->gimmick.usableGimmick[battler] == gimmick && gBattleStruct->gimmick.playerSelect;
+    return FALSE;
 }
 
 // Sets a battler as having a gimmick active using their party index.
@@ -65,30 +60,6 @@ enum Gimmick GetActiveGimmick(u32 battler)
 // Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick)
 {
-    // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.
-    if (TESTING)
-    {
-        return gimmick == TestRunner_Battle_GetChosenGimmick(GetBattlerSide(battler), gBattlerPartyIndexes[battler]);
-    }
-    // The player can bypass these checks because they can choose through the controller.
-    else if (GetBattlerSide(battler) == B_SIDE_PLAYER
-         && !((gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
-    {
-        return TRUE;
-    }
-    // Check the trainer party data to see if a gimmick is intended.
-    else
-    {
-        bool32 isSecondTrainer = (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT) && (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT;
-        u16 trainerId = isSecondTrainer ? gTrainerBattleOpponent_B : gTrainerBattleOpponent_A;
-        const struct TrainerMon *mon = &GetTrainerPartyFromId(trainerId)[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]];
-
-        if (gimmick == GIMMICK_TERA && mon->teraType != TYPE_NONE)
-            return TRUE;
-        if (gimmick == GIMMICK_DYNAMAX && mon->shouldUseDynamax)
-            return TRUE;
-    }
-
     return FALSE;
 }
 

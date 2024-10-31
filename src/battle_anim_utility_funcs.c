@@ -276,7 +276,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     u16 species;
     int spriteId, newSpriteId;
     u16 var0;
-    u32 bg1Cnt;
+    u16 bg1Cnt; // Cambiar a u16 para obtener el valor correcto
     struct BattleAnimBgData animBgData;
 
     var0 = 0;
@@ -289,18 +289,16 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(8, 12));
-    bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-    ((struct BgCnt *)&bg1Cnt)->priority = 0;
-    ((struct BgCnt *)&bg1Cnt)->screenSize = 0;
-    SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
 
-    if (!IsContest())
-    {
-        ((struct BgCnt *)&bg1Cnt)->charBaseBlock = 1;
-        SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-    }
+    bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT); // Obtener el valor de BG1CNT
+    struct BgCnt *bg1CntStruct = (struct BgCnt *)&bg1Cnt; // Convertir a puntero de BgCnt
 
-    if (IsDoubleBattle() && !IsContest())
+    bg1CntStruct->priority = 0; // Cambiar la prioridad
+    bg1CntStruct->screenSize = 0; // Cambiar el tamaño de la pantalla
+    bg1CntStruct->charBaseBlock = 1; // Cambiar el bloque base de caracteres
+    SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt); // Guardar el valor actualizado
+
+    if (IsDoubleBattle())
     {
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_RIGHT
          || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)
@@ -308,25 +306,22 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
             if (IsBattlerSpriteVisible(BATTLE_PARTNER(gBattleAnimAttacker)) == TRUE)
             {
                 gSprites[gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)]].oam.priority -= 1;
-                ((struct BgCnt *)&bg1Cnt)->priority = 1;
-                SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
+
+                bg1CntStruct->priority = 1; // Cambiar la prioridad
+                SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt); // Guardar el valor actualizado
+
                 var0 = 1;
             }
         }
     }
 
-    if (IsContest())
-    {
-        species = gContestResources->moveAnim->species;
-    }
+    // Obtención de especies
+    if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
     else
-    {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-        else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
-    }
+        species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattleAnimAttacker]], MON_DATA_SPECIES);
 
+    // Creación de sprites
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = CreateInvisibleSpriteCopy(gBattleAnimAttacker, spriteId, species);
     GetBattleAnimBg1Data(&animBgData);
@@ -345,7 +340,8 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
 {
     struct BattleAnimBgData animBgData;
     struct Sprite *sprite;
-    u32 bg1Cnt;
+    u32 bg1CntValue; // Cambiar a u32 para almacenar el valor de BG1CNT
+    struct BgCnt *bg1CntStruct; // Puntero a la estructura BgCnt
 
     gTasks[taskId].data[10] += 4;
     gBattle_BG1_Y -= 4;
@@ -362,12 +358,11 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
                                       | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
             SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL  | WINOUT_WIN01_OBJ  | WINOUT_WIN01_CLR
                                        | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
-            if (!IsContest())
-            {
-                bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-                ((struct BgCnt *)&bg1Cnt)->charBaseBlock = 0;
-                SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-            }
+
+            bg1CntValue = GetGpuReg(REG_OFFSET_BG1CNT); // Obtener el valor de BG1CNT
+            bg1CntStruct = (struct BgCnt *)&bg1CntValue; // Convertir a puntero de BgCnt
+            bg1CntStruct->charBaseBlock = 0; // Modificar el bloque base de caracteres
+            SetGpuReg(REG_OFFSET_BG1CNT, bg1CntValue); // Guardar el valor actualizado
 
             SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -386,6 +381,7 @@ static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8 taskId)
         }
     }
 }
+
 
 // Defines for data array in sAnimStatsChangeData
 #define aDecrease         data[0]
@@ -809,14 +805,14 @@ void StartMonScrollingBgMask(u8 taskId, u16 scrollSpeed, u8 battler, bool8 inclu
 {
     u16 species;
     u8 spriteId, spriteId2;
-    u32 bg1Cnt;
+    u32 bg1CntValue; // Cambiado a u32
     struct BattleAnimBgData animBgData;
     u8 battler2;
 
     spriteId2 = 0;
     battler2 = BATTLE_PARTNER(battler);
 
-    if (IsContest() || (includePartner && !IsBattlerSpriteVisible(battler2)))
+    if (includePartner && !IsBattlerSpriteVisible(battler2))
         includePartner = FALSE;
 
     gBattle_WIN0H = 0;
@@ -828,28 +824,21 @@ void StartMonScrollingBgMask(u8 taskId, u16 scrollSpeed, u8 battler, bool8 inclu
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJWIN_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
-    bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-    ((vBgCnt *)&bg1Cnt)->priority = 0;
-    ((vBgCnt *)&bg1Cnt)->screenSize = 0;
-    ((vBgCnt *)&bg1Cnt)->areaOverflowMode = 1;
-    if (!IsContest())
-    {
-        ((vBgCnt *)&bg1Cnt)->charBaseBlock = 1;
-    }
+    
+    bg1CntValue = GetGpuReg(REG_OFFSET_BG1CNT); // Obtener el valor de BG1CNT
+    struct BgCnt *bg1CntStruct = (struct BgCnt *)&bg1CntValue; // Convertir a puntero de BgCnt
+    bg1CntStruct->priority = 0;
+    bg1CntStruct->screenSize = 0;
+    bg1CntStruct->areaOverflowMode = 1;
+    bg1CntStruct->charBaseBlock = 1; // Siempre será verdadero en este caso
 
-    SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
+    SetGpuReg(REG_OFFSET_BG1CNT, bg1CntValue); // Guardar el valor actualizado
 
-    if (IsContest())
-    {
-        species = gContestResources->moveAnim->species;
-    }
+    // Obtener el species del Pokémon
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+        species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     else
-    {
-        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
-            species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
-        else
-            species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
-    }
+        species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
 
     spriteId = CreateInvisibleSpriteCopy(battler, gBattlerSpriteIds[battler], species);
     if (includePartner)
@@ -912,12 +901,10 @@ static void UpdateMonScrollingBgMask(u8 taskId)
                                           | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
                 SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL  | WINOUT_WIN01_OBJ  | WINOUT_WIN01_CLR
                                            | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
-                if (!IsContest())
-                {
-                    u32 bg1Cnt = GetGpuReg(REG_OFFSET_BG1CNT);
-                    ((vBgCnt *)&bg1Cnt)->charBaseBlock = 0;
-                    SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt);
-                }
+                u32 bg1CntValue = GetGpuReg(REG_OFFSET_BG1CNT);
+                struct BgCnt *bg1CntStruct = (struct BgCnt *)&bg1CntValue; // Convertir a puntero de BgCnt
+                bg1CntStruct->charBaseBlock = 0; // Modificar el bloque base de caracteres
+                SetGpuReg(REG_OFFSET_BG1CNT, bg1CntValue); // Guardar el valor actualizado
 
                 SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);
                 SetGpuReg(REG_OFFSET_BLDCNT, 0);

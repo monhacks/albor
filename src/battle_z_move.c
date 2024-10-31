@@ -65,32 +65,7 @@ bool32 IsZMove(u32 move)
 
 bool32 CanUseZMove(u32 battler)
 {
-    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Check if Player has Z-Power Ring.
-    if (!TESTING && (battler == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && battler == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
-        return FALSE;
-
-    // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
-    if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
-        return FALSE;
-
-    // Check if Trainer has already used a Z-Move.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_Z_MOVE))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE && GetActiveGimmick(battler) != GIMMICK_ULTRA_BURST)
-        return FALSE;
-
-    // Check if battler isn't holding a Z-Crystal.
-    if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
-        return FALSE;
-
-    // All checks passed!
-    return TRUE;
+    return FALSE;
 }
 
 u32 GetUsableZMove(u32 battler, u32 move)
@@ -136,8 +111,8 @@ u32 GetTypeBasedZMove(u32 move)
 {
     u32 moveType = gMovesInfo[move].type;
 
-    if (moveType >= NUMBER_OF_MON_TYPES)
-        moveType = TYPE_MYSTERY;
+    if (moveType >= NUMERO_DE_TIPOS)
+        moveType = TIPO_MISTERIO;
 
     // Z-Weather Ball changes types, however Revelation Dance, -ate ability affected moves, and Hidden Power do not
     if (gBattleStruct->dynamicMoveType && gMovesInfo[move].effect == EFFECT_WEATHER_BALL)
@@ -175,7 +150,7 @@ bool32 MoveSelectionDisplayZMove(u16 zmove, u32 battler)
 
             if (zEffect == Z_EFFECT_CURSE)
             {
-                if (moveInfo->monTypes[0] == TYPE_GHOST || moveInfo->monTypes[1] == TYPE_GHOST || moveInfo->monTypes[2] == TYPE_GHOST)
+                if (moveInfo->monTypes[0] == TIPO_FANTASMA || moveInfo->monTypes[1] == TIPO_FANTASMA || moveInfo->monTypes[2] == TIPO_FANTASMA)
                     zEffect = Z_EFFECT_RECOVER_HP;
                 else
                     zEffect = Z_EFFECT_ATK_UP_1;
@@ -311,7 +286,7 @@ void SetZEffect(void)
 
     if (effect == Z_EFFECT_CURSE)
     {
-        if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+        if (IS_BATTLER_OF_TYPE(gBattlerAttacker, TIPO_FANTASMA))
             effect = Z_EFFECT_RECOVER_HP;
         else
             effect = Z_EFFECT_ATK_UP_1;

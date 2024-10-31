@@ -84,7 +84,6 @@ static void AnimForesightMagnifyingGlass_Step(struct Sprite *);
 static void AnimMeteorMashStar(struct Sprite *);
 static void AnimMeteorMashStar_Step(struct Sprite *sprite);
 static void AnimBlockX_Step(struct Sprite *);
-static void AnimUnusedItemBagSteal(struct Sprite *);
 static void AnimKnockOffStrike(struct Sprite *);
 static void AnimRecycle(struct Sprite *);
 static void AnimRecycle_Step(struct Sprite *);
@@ -112,8 +111,6 @@ static void AnimTask_OdorSleuthMovementWaitFinish(u8);
 static void MoveOdorSleuthClone(struct Sprite *);
 static void AnimTask_TeeterDanceMovement_Step(u8);
 static void AnimTask_SlackOffSquish_Step(u8);
-static void AnimTask_TeraCrystalShatter(struct Sprite *);
-static void AnimTask_TeraCrystalShatter_Step(struct Sprite *);
 
 const union AnimCmd gScratchAnimCmds[] =
 {
@@ -1074,17 +1071,6 @@ const struct SpriteTemplate gMeteorMashStarSpriteTemplate =
     .callback = AnimMeteorMashStar,
 };
 
-static const struct SpriteTemplate sUnusedStarBurstSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_GOLD_STARS,
-    .paletteTag = ANIM_TAG_GOLD_STARS,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimParticleBurst,
-};
-
 const struct SpriteTemplate gBlockXSpriteTemplate =
 {
     .tileTag = ANIM_TAG_X_SIGN,
@@ -1094,17 +1080,6 @@ const struct SpriteTemplate gBlockXSpriteTemplate =
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimBlockX,
-};
-
-static const struct SpriteTemplate sUnusedItemBagStealSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_ITEM_BAG,
-    .paletteTag = ANIM_TAG_ITEM_BAG,
-    .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimUnusedItemBagSteal,
 };
 
 const union AnimCmd gKnockOffStrikeAnimCmds[] =
@@ -1259,28 +1234,6 @@ const struct SpriteTemplate gOmegaSymbolSpriteTemplate =
     .callback = AnimGhostStatusSprite,
 };
 
-const struct SpriteTemplate gTeraCrystalSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TERA_CRYSTAL,
-    .paletteTag = ANIM_TAG_TERA_CRYSTAL,
-    .oam = &gOamData_AffineDouble_ObjBlend_64x64,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gAffineAnims_LusterPurgeCircle,
-    .callback = AnimSpriteOnMonPos,
-};
-
-const struct SpriteTemplate gTeraCrystalSpreadSpriteTemplate =
-{
-    .tileTag = ANIM_TAG_TERA_SHATTER,
-    .paletteTag = ANIM_TAG_TERA_SHATTER,
-    .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = AnimTask_TeraCrystalShatter,
-};
-
 const struct SpriteTemplate gPinkPetalVortexTemplate =
 {
     .tileTag = ANIM_TAG_PINK_PETAL,
@@ -1291,35 +1244,6 @@ const struct SpriteTemplate gPinkPetalVortexTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimParticleInVortex
 };
-
-// Task data for AnimTask_TeraCrystalShatter
-#define tCounter    data[0]
-#define tDX         data[6]
-#define tDY         data[7]
-
-static void AnimTask_TeraCrystalShatter(struct Sprite *sprite)
-{
-    sprite->x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X);
-    sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y);
-    sprite->oam.tileNum += gBattleAnimArgs[0] * 4;
-
-    sprite->tCounter = 0;
-    sprite->tDX = gBattleAnimArgs[1];
-    sprite->tDY = gBattleAnimArgs[2];
-
-    sprite->callback = AnimTask_TeraCrystalShatter_Step;
-}
-
-static void AnimTask_TeraCrystalShatter_Step(struct Sprite *sprite)
-{
-    sprite->x += sprite->tDX;
-    sprite->y += sprite->tDY;
-
-    if (++sprite->tCounter > 15)
-        DestroyAnimSprite(sprite);
-}
-
-#undef tCounter
 
 void AnimBlackSmoke(struct Sprite *sprite)
 {
@@ -3503,7 +3427,7 @@ static void AnimTask_RolePlaySilhouette_Step2(u8 taskId)
     if (++gTasks[taskId].data[12] == 9)
     {
         ResetSpriteRotScale_PreserveAffine(&gSprites[spriteId]);
-        DestroySpriteAndFreeResources_(&gSprites[spriteId]);
+        DestroySpriteAndFreeResources(&gSprites[spriteId]);
         gTasks[taskId].func = DestroyAnimVisualTaskAndDisableBlend;
     }
 }
@@ -5399,7 +5323,7 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
     case 3:
         spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
         spriteId2 = gTasks[taskId].data[15];
-        DestroySpriteAndFreeResources_(&gSprites[spriteId2]);
+        DestroySpriteAndFreeResources(&gSprites[spriteId2]);
         if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
             gSprites[spriteId].x2 = -gSprites[spriteId].x - 32;
         else
@@ -5426,49 +5350,6 @@ void AnimTask_SnatchOpposingMonMove(u8 taskId)
         gTasks[taskId].data[1] &= 0xFF;
         if (gSprites[spriteId].x2 == 0)
             DestroyAnimVisualTask(taskId);
-        break;
-    }
-}
-
-static void AnimUnusedItemBagSteal(struct Sprite *sprite)
-{
-    switch (sprite->data[7])
-    {
-    case 0:
-        if (gBattleAnimArgs[7] == -1)
-        {
-            PlaySE12WithPanning(SE_M_VITAL_THROW, BattleAnimAdjustPanning(SOUND_PAN_TARGET));
-            sprite->y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y) + 16;
-            sprite->data[0] = -32;
-            sprite->data[7]++;
-            sprite->invisible = FALSE;
-            if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_OPPONENT && !IsContest())
-                sprite->subpriority = gSprites[GetAnimBattlerSpriteId(ANIM_TARGET)].subpriority - 1;
-        }
-        else
-        {
-            sprite->invisible = TRUE;
-        }
-        break;
-    case 1:
-        sprite->y2 = Sin(sprite->data[1], sprite->data[0]);
-        sprite->data[1] += 5;
-        if (sprite->data[1] > 0x7F)
-        {
-            sprite->data[0] = sprite->data[0] / 2;
-            sprite->data[3]++;
-            sprite->data[1] -= 0x7F;
-        }
-
-        sprite->data[2] += 0x100;
-        if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
-            sprite->x2 -= (sprite->data[2] >> 8);
-        else
-            sprite->x2 += (sprite->data[2] >> 8);
-
-        sprite->data[2] &= 0xFF;
-        if (sprite->data[3] == 2)
-            DestroyAnimSprite(sprite);
         break;
     }
 }

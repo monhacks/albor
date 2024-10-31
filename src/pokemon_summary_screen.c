@@ -807,142 +807,137 @@ static const struct OamData sOamData_MoveTypes =
     .affineParam = 0,
 };
 static const union AnimCmd sSpriteAnim_TypeNone[] = {
-    ANIMCMD_FRAME(TYPE_NONE * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NINGUNO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeNormal[] = {
-    ANIMCMD_FRAME(TYPE_NORMAL * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_NORMAL * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeFighting[] = {
-    ANIMCMD_FRAME(TYPE_FIGHTING * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_LUCHA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeFlying[] = {
-    ANIMCMD_FRAME(TYPE_FLYING * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VOLADOR * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypePoison[] = {
-    ANIMCMD_FRAME(TYPE_POISON * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_VENENO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeGround[] = {
-    ANIMCMD_FRAME(TYPE_GROUND * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_TIERRA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeRock[] = {
-    ANIMCMD_FRAME(TYPE_ROCK * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ROCA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeBug[] = {
-    ANIMCMD_FRAME(TYPE_BUG * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_BICHO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeGhost[] = {
-    ANIMCMD_FRAME(TYPE_GHOST * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FANTASMA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeSteel[] = {
-    ANIMCMD_FRAME(TYPE_STEEL * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ACERO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeMystery[] = {
-    ANIMCMD_FRAME(TYPE_MYSTERY * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_MISTERIO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeFire[] = {
-    ANIMCMD_FRAME(TYPE_FIRE * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_FUEGO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeWater[] = {
-    ANIMCMD_FRAME(TYPE_WATER * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_AGUA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeGrass[] = {
-    ANIMCMD_FRAME(TYPE_GRASS * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PLANTA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeElectric[] = {
-    ANIMCMD_FRAME(TYPE_ELECTRIC * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_ELECTRICO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypePsychic[] = {
-    ANIMCMD_FRAME(TYPE_PSYCHIC * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_PSIQUICO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeIce[] = {
-    ANIMCMD_FRAME(TYPE_ICE * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HIELO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeDragon[] = {
-    ANIMCMD_FRAME(TYPE_DRAGON * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_DRAGON * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeDark[] = {
-    ANIMCMD_FRAME(TYPE_DARK * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_SINIESTRO * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_TypeFairy[] = {
-    ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
-    ANIMCMD_END
-};
-static const union AnimCmd sSpriteAnim_TypeStellar[] = {
-    ANIMCMD_FRAME(TYPE_STELLAR * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME(TIPO_HADA * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategoryCool[] = {
-    ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMERO_DE_TIPOS) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategoryBeauty[] = {
-    ANIMCMD_FRAME((CONTEST_CATEGORY_BEAUTY + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME((CONTEST_CATEGORY_BEAUTY + NUMERO_DE_TIPOS) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategoryCute[] = {
-    ANIMCMD_FRAME((CONTEST_CATEGORY_CUTE + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME((CONTEST_CATEGORY_CUTE + NUMERO_DE_TIPOS) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategorySmart[] = {
-    ANIMCMD_FRAME((CONTEST_CATEGORY_SMART + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME((CONTEST_CATEGORY_SMART + NUMERO_DE_TIPOS) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
 static const union AnimCmd sSpriteAnim_CategoryTough[] = {
-    ANIMCMD_FRAME((CONTEST_CATEGORY_TOUGH + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
+    ANIMCMD_FRAME((CONTEST_CATEGORY_TOUGH + NUMERO_DE_TIPOS) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
-static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT] = {
-    [TYPE_NONE] = sSpriteAnim_TypeNone,
-    [TYPE_NORMAL] = sSpriteAnim_TypeNormal,
-    [TYPE_FIGHTING] = sSpriteAnim_TypeFighting,
-    [TYPE_FLYING] = sSpriteAnim_TypeFlying,
-    [TYPE_POISON] = sSpriteAnim_TypePoison,
-    [TYPE_GROUND] = sSpriteAnim_TypeGround,
-    [TYPE_ROCK] = sSpriteAnim_TypeRock,
-    [TYPE_BUG] = sSpriteAnim_TypeBug,
-    [TYPE_GHOST] = sSpriteAnim_TypeGhost,
-    [TYPE_STEEL] = sSpriteAnim_TypeSteel,
-    [TYPE_MYSTERY] = sSpriteAnim_TypeMystery,
-    [TYPE_FIRE] = sSpriteAnim_TypeFire,
-    [TYPE_WATER] = sSpriteAnim_TypeWater,
-    [TYPE_GRASS] = sSpriteAnim_TypeGrass,
-    [TYPE_ELECTRIC] = sSpriteAnim_TypeElectric,
-    [TYPE_PSYCHIC] = sSpriteAnim_TypePsychic,
-    [TYPE_ICE] = sSpriteAnim_TypeIce,
-    [TYPE_DRAGON] = sSpriteAnim_TypeDragon,
-    [TYPE_DARK] = sSpriteAnim_TypeDark,
-    [TYPE_FAIRY] = sSpriteAnim_TypeFairy,
-    [TYPE_STELLAR] = sSpriteAnim_TypeStellar,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_COOL] = sSpriteAnim_CategoryCool,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_BEAUTY] = sSpriteAnim_CategoryBeauty,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_CUTE] = sSpriteAnim_CategoryCute,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_SMART] = sSpriteAnim_CategorySmart,
-    [NUMBER_OF_MON_TYPES + CONTEST_CATEGORY_TOUGH] = sSpriteAnim_CategoryTough,
+static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMERO_DE_TIPOS + CONTEST_CATEGORIES_COUNT] = {
+    [TIPO_NINGUNO] = sSpriteAnim_TypeNone,
+    [TIPO_NORMAL] = sSpriteAnim_TypeNormal,
+    [TIPO_LUCHA] = sSpriteAnim_TypeFighting,
+    [TIPO_VOLADOR] = sSpriteAnim_TypeFlying,
+    [TIPO_VENENO] = sSpriteAnim_TypePoison,
+    [TIPO_TIERRA] = sSpriteAnim_TypeGround,
+    [TIPO_ROCA] = sSpriteAnim_TypeRock,
+    [TIPO_BICHO] = sSpriteAnim_TypeBug,
+    [TIPO_FANTASMA] = sSpriteAnim_TypeGhost,
+    [TIPO_ACERO] = sSpriteAnim_TypeSteel,
+    [TIPO_MISTERIO] = sSpriteAnim_TypeMystery,
+    [TIPO_FUEGO] = sSpriteAnim_TypeFire,
+    [TIPO_AGUA] = sSpriteAnim_TypeWater,
+    [TIPO_PLANTA] = sSpriteAnim_TypeGrass,
+    [TIPO_ELECTRICO] = sSpriteAnim_TypeElectric,
+    [TIPO_PSIQUICO] = sSpriteAnim_TypePsychic,
+    [TIPO_HIELO] = sSpriteAnim_TypeIce,
+    [TIPO_DRAGON] = sSpriteAnim_TypeDragon,
+    [TIPO_SINIESTRO] = sSpriteAnim_TypeDark,
+    [TIPO_HADA] = sSpriteAnim_TypeFairy,
+    [NUMERO_DE_TIPOS + CONTEST_CATEGORY_COOL] = sSpriteAnim_CategoryCool,
+    [NUMERO_DE_TIPOS + CONTEST_CATEGORY_BEAUTY] = sSpriteAnim_CategoryBeauty,
+    [NUMERO_DE_TIPOS + CONTEST_CATEGORY_CUTE] = sSpriteAnim_CategoryCute,
+    [NUMERO_DE_TIPOS + CONTEST_CATEGORY_SMART] = sSpriteAnim_CategorySmart,
+    [NUMERO_DE_TIPOS + CONTEST_CATEGORY_TOUGH] = sSpriteAnim_CategoryTough,
 };
 
 const struct CompressedSpriteSheet gSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
-    .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 256,
+    .size = (NUMERO_DE_TIPOS + CONTEST_CATEGORIES_COUNT) * 256,
     .tag = TAG_MOVE_TYPES
 };
 const struct SpriteTemplate gSpriteTemplate_MoveTypes =
@@ -3867,10 +3862,10 @@ void SetTypeSpritePosAndPal(u8 typeId, u8 x, u8 y, u8 spriteArrayId)
 {
     struct Sprite *sprite = &gSprites[sMonSummaryScreen->spriteIds[spriteArrayId]];
     StartSpriteAnim(sprite, typeId);
-    if (typeId < NUMBER_OF_MON_TYPES)
+    if (typeId < NUMERO_DE_TIPOS)
         sprite->oam.paletteNum = gTypesInfo[typeId].palette;
     else
-        sprite->oam.paletteNum = sContestCategoryToOamPaletteNum[typeId - NUMBER_OF_MON_TYPES];
+        sprite->oam.paletteNum = sContestCategoryToOamPaletteNum[typeId - NUMERO_DE_TIPOS];
     sprite->x = x + 16;
     sprite->y = y + 8;
     SetSpriteInvisibility(spriteArrayId, FALSE);
@@ -3922,7 +3917,7 @@ static void SetContestMoveTypeIcons(void)
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
-            SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gMovesInfo[summary->moves[i]].contestCategory, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+            SetTypeSpritePosAndPal(NUMERO_DE_TIPOS + gMovesInfo[summary->moves[i]].contestCategory, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
         else
             SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
     }
@@ -3948,7 +3943,7 @@ static void SetNewMoveTypeIcon(void)
         }
         else
         {
-            SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gMovesInfo[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
+            SetTypeSpritePosAndPal(NUMERO_DE_TIPOS + gMovesInfo[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
         }
     }
 }

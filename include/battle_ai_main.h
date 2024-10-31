@@ -51,27 +51,22 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 #define STRONG_RISKY_EFFECT     3
 #define AVERAGE_RISKY_EFFECT    2
 
-#include "test_runner.h"
-
 // Logs for debugging AI tests.
 #define SET_SCORE(battler, movesetIndex, val) \
     do \
     { \
-        TestRunner_Battle_AISetScore(__FILE__, __LINE__, battler, movesetIndex, val); \
         AI_THINKING_STRUCT->score[movesetIndex] = val; \
     } while (0) \
 
 #define ADJUST_SCORE(val) \
     do \
     { \
-        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         score += val; \
     } while (0) \
 
 #define ADJUST_AND_RETURN_SCORE(val) \
     do \
     { \
-        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         score += val; \
         return score; \
     } while (0) \
@@ -79,7 +74,6 @@ typedef s32 (*AiScoreFunc)(u32, u32, u32, s32);
 #define ADJUST_SCORE_PTR(val) \
     do \
     { \
-        TestRunner_Battle_AIAdjustScore(__FILE__, __LINE__, sBattler_AI, AI_THINKING_STRUCT->movesetIndex, val); \
         (*score) += val; \
     } while (0) \
 

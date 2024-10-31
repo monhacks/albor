@@ -3,49 +3,18 @@ TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
 REVISION    := 0
-KEEP_TEMPS  ?= 0
 
 # `File name`.gba
-FILE_NAME := pokeemerald
+FILE_NAME := albor
 BUILD_DIR := build
 
-# Compares the ROM to a checksum of the original - only makes sense using when non-modern
-COMPARE     ?= 0
-# Executes the Test Runner System that checks that all mechanics work as expected
-TEST         ?= 0
 # Enables -fanalyzer C flag to analyze in depth potential UBs
 ANALYZE      ?= 0
-# Count unused warnings as errors. Used by RH-Hideout's repo
-UNUSED_ERROR ?= 0
-# Adds -Og and -g flags, which optimize the build for debugging and include debug info respectively
-DEBUG        ?= 0
-
-ifeq (compare,$(MAKECMDGOALS))
-  COMPARE := 1
-endif
-ifeq (check,$(MAKECMDGOALS))
-  TEST := 1
-endif
-ifeq (debug,$(MAKECMDGOALS))
-  DEBUG := 1
-endif
 
 # Default make rule
 all: rom
 
-# Toolchain selection
-TOOLCHAIN := $(DEVKITARM)
-# don't use dkP's base_tools anymore
-# because the redefinition of $(CC) conflicts
-# with when we want to use $(CC) to preprocess files
-# thus, manually create the variables for the bin
-# files, or use arm-none-eabi binaries on the system
-# if dkP is not installed on this system
-ifneq (,$(TOOLCHAIN))
-  ifneq ($(wildcard $(TOOLCHAIN)/bin),)
-    export PATH := $(TOOLCHAIN)/bin:$(PATH)
-  endif
-endif
+TOOLCHAIN := /usr/local/bin/arm-none-eabi-gcc
 
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
@@ -53,36 +22,17 @@ OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as
 LD := $(PREFIX)ld
 
-EXE :=
-ifeq ($(OS),Windows_NT)
-  EXE := .exe
-endif
-
 CPP := $(PREFIX)cpp
 
 ROM_NAME := $(FILE_NAME).gba
 OBJ_DIR_NAME := $(BUILD_DIR)/modern
-OBJ_DIR_NAME_TEST := $(BUILD_DIR)/modern-test
-OBJ_DIR_NAME_DEBUG := $(BUILD_DIR)/modern-debug
 
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
-TESTELF = $(ROM_NAME:.gba=-test.elf)
-HEADLESSELF = $(ROM_NAME:.gba=-test-headless.elf)
 
 # Pick our active variables
 ROM := $(ROM_NAME)
-ifeq ($(TEST), 0)
-  OBJ_DIR := $(OBJ_DIR_NAME)
-else
-  OBJ_DIR := $(OBJ_DIR_NAME_TEST)
-endif
-ifeq ($(DEBUG),1)
-  OBJ_DIR := $(OBJ_DIR_NAME_DEBUG)
-endif
-ifeq ($(TESTELF),$(MAKECMDGOALS))
-  TEST := 1
-endif
+OBJ_DIR := $(OBJ_DIR_NAME)
 ELF := $(ROM:.gba=.elf)
 MAP := $(ROM:.gba=.map)
 SYM := $(ROM:.gba=.sym)
@@ -94,14 +44,12 @@ DATA_SRC_SUBDIR = src/data
 DATA_ASM_SUBDIR = data
 SONG_SUBDIR = sound/songs
 MID_SUBDIR = sound/songs/midi
-TEST_SUBDIR = test
 
 C_BUILDDIR = $(OBJ_DIR)/$(C_SUBDIR)
 ASM_BUILDDIR = $(OBJ_DIR)/$(ASM_SUBDIR)
 DATA_ASM_BUILDDIR = $(OBJ_DIR)/$(DATA_ASM_SUBDIR)
 SONG_BUILDDIR = $(OBJ_DIR)/$(SONG_SUBDIR)
 MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
-TEST_BUILDDIR = $(OBJ_DIR)/$(TEST_SUBDIR)
 
 SHELL := bash -o pipefail
 
@@ -112,12 +60,8 @@ INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
 INCLUDE_SCANINC_ARGS := $(INCLUDE_DIRS:%=-I %)
 
-ifeq ($(DEBUG),1)
-O_LEVEL ?= g
-else
 O_LEVEL ?= 2
-endif
-CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST)
+CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
@@ -125,21 +69,10 @@ override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=
 ifeq ($(ANALYZE),1)
   override CFLAGS += -fanalyzer
 endif
-# Only throw an error for unused elements if its RH-Hideout's repo
-ifeq ($(UNUSED_ERROR),0)
-  ifneq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
-    override CFLAGS += -Wno-error=unused-variable -Wno-error=unused-const-variable -Wno-error=unused-parameter -Wno-error=unused-function -Wno-error=unused-but-set-parameter -Wno-error=unused-but-set-variable -Wno-error=unused-value -Wno-error=unused-local-typedefs
-  endif
-endif
 LIBPATH := -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libgcc.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libnosys.a))" -L "$(dir $(shell $(PATH_ARMCC) -mthumb -print-file-name=libc.a))"
 LIB := $(LIBPATH) -lc -lnosys -lgcc -L../../libagbsyscall -lagbsyscall
-# Enable debug info if set
 ifeq ($(DINFO),1)
   override CFLAGS += -g
-else
-  ifeq ($(DEBUG),1)
-    override CFLAGS += -g
-  endif
 endif
 
 ifeq ($(NOOPT),1)
@@ -151,18 +84,17 @@ endif
 AUTO_GEN_TARGETS :=
 include make_tools.mk
 # Tool executables
-GFX          := $(TOOLS_DIR)/gbagfx/gbagfx$(EXE)
-AIF          := $(TOOLS_DIR)/aif2pcm/aif2pcm$(EXE)
-MID          := $(TOOLS_DIR)/mid2agb/mid2agb$(EXE)
-SCANINC      := $(TOOLS_DIR)/scaninc/scaninc$(EXE)
-PREPROC      := $(TOOLS_DIR)/preproc/preproc$(EXE)
-RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
-FIX          := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
-MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
-JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
-TRAINERPROC  := $(TOOLS_DIR)/trainerproc/trainerproc$(EXE)
-PATCHELF     := $(TOOLS_DIR)/patchelf/patchelf$(EXE)
-ROMTEST      ?= $(shell { command -v mgba-rom-test || command -v $(TOOLS_DIR)/mgba/mgba-rom-test$(EXE); } 2>/dev/null)
+GFX          := $(TOOLS_DIR)/gbagfx/gbagfx
+AIF          := $(TOOLS_DIR)/aif2pcm/aif2pcm
+MID          := $(TOOLS_DIR)/mid2agb/mid2agb
+SCANINC      := $(TOOLS_DIR)/scaninc/scaninc
+PREPROC      := $(TOOLS_DIR)/preproc/preproc
+RAMSCRGEN    := $(TOOLS_DIR)/ramscrgen/ramscrgen
+FIX          := $(TOOLS_DIR)/gbafix/gbafix
+MAPJSON      := $(TOOLS_DIR)/mapjson/mapjson
+JSONPROC     := $(TOOLS_DIR)/jsonproc/jsonproc
+TRAINERPROC  := $(TOOLS_DIR)/trainerproc/trainerproc
+PATCHELF     := $(TOOLS_DIR)/patchelf/patchelf
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -176,8 +108,8 @@ MAKEFLAGS += --no-print-directory
 # Delete files that weren't built properly
 .DELETE_ON_ERROR:
 
-RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck generated clean-generated $(TESTELF)
-.PHONY: all rom modern compare check debug
+RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern generated clean-generated
+.PHONY: all rom modern check
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
@@ -215,11 +147,6 @@ C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
-TEST_SRCS_IN := $(wildcard $(TEST_SUBDIR)/*.c $(TEST_SUBDIR)/*/*.c $(TEST_SUBDIR)/*/*/*.c)
-TEST_SRCS := $(foreach src,$(TEST_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
-TEST_OBJS := $(patsubst $(TEST_SUBDIR)/%.c,$(TEST_BUILDDIR)/%.o,$(TEST_SRCS))
-TEST_OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(TEST_OBJS))
-
 C_ASM_SRCS := $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)
 C_ASM_OBJS := $(patsubst $(C_SUBDIR)/%.s,$(C_BUILDDIR)/%.o,$(C_ASM_SRCS))
 
@@ -241,41 +168,14 @@ MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
 OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
-SUBDIRS  := $(sort $(dir $(OBJS) $(dir $(TEST_OBJS))))
+SUBDIRS  := $(sort $(dir $(OBJS)))
 $(shell mkdir -p $(SUBDIRS))
 
 # Pretend rules that are actually flags defer to `make all`
 modern: all
-compare: all
-debug: all
-
-LD_SCRIPT_TEST := ld_script_test.ld
-
-$(OBJ_DIR)/ld_script_test.ld: $(LD_SCRIPT_TEST) $(LD_SCRIPT_DEPS)
-	cd $(OBJ_DIR) && sed "s#tools/#../../tools/#g" ../../$(LD_SCRIPT_TEST) > ld_script_test.ld
-
-$(TESTELF): $(OBJ_DIR)/ld_script_test.ld $(OBJS) $(TEST_OBJS) libagbsyscall tools check-tools
-	@echo "cd $(OBJ_DIR) && $(LD) -T ld_script_test.ld -o ../../$@ <objects> <test-objects> <lib>"
-	@cd $(OBJ_DIR) && $(LD) $(TESTLDFLAGS) -T ld_script_test.ld -o ../../$@ $(OBJS_REL) $(TEST_OBJS_REL) $(LIB)
-	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) -d0 --silent
-	$(PATCHELF) $(TESTELF) gTestRunnerArgv "$(TESTS)\0"
-
-ifeq ($(GITHUB_REPOSITORY_OWNER),rh-hideout)
-TEST_SKIP_IS_FAIL := \x01
-else
-TEST_SKIP_IS_FAIL := \x00
-endif
-
-check: $(TESTELF)
-	@cp $< $(HEADLESSELF)
-	$(PATCHELF) $(HEADLESSELF) gTestRunnerHeadless '\x01' gTestRunnerSkipIsFail "$(TEST_SKIP_IS_FAIL)"
-	$(ROMTESTHYDRA) $(ROMTEST) $(OBJCOPY) $(HEADLESSELF)
 
 # Other rules
 rom: $(ROM)
-ifeq ($(COMPARE),1)
-	@$(SHA1) rom.sha1
-endif
 
 syms: $(SYM)
 
@@ -290,18 +190,11 @@ clean-assets:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
 
-tidy: tidymodern tidycheck tidydebug
+tidy: tidymodern
 
 tidymodern:
 	rm -f $(ROM_NAME) $(ELF_NAME) $(MAP_NAME)
 	rm -rf $(OBJ_DIR_NAME)
-
-tidycheck:
-	rm -f $(TESTELF) $(HEADLESSELF)
-	rm -rf $(OBJ_DIR_NAME_TEST)
-
-tidydebug:
-	rm -rf $(DEBUG_OBJ_DIR_NAME)
 
 # Other rules
 include graphics_file_rules.mk
@@ -346,15 +239,11 @@ $(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
 # It doesn't look like $(shell) can be deferred so there might not be a better way (Icedude_907: there is soon).
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
-ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
 	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
-else
-	@$(CPP) $(CPPFLAGS) $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
-endif
+
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.c
+	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
 
 ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(C_SRCS:.c=.d))
@@ -372,6 +261,9 @@ endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
 	$(PREPROC) $< charmap.txt | $(CPP) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+
+$(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
+	$(SCANINC) -M $@ $(INCLUDE_SCANINC_ARGS) -I "" $<
 
 ifneq ($(NODEP),1)
 -include $(addprefix $(OBJ_DIR)/,$(C_ASM_SRCS:.s=.d))

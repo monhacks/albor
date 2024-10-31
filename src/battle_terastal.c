@@ -61,47 +61,7 @@ void ApplyBattlerVisualsForTeraAnim(u32 battler)
 // Returns whether a battler can Terastallize.
 bool32 CanTerastallize(u32 battler)
 {
-    u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
-
-    // Prevents Zigzagoon from terastalizing in vanilla.
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        return FALSE;
-
-    if (TESTING || GetBattlerSide(battler) == B_SIDE_OPPONENT)
-    {
-        // Skip all other checks in this block, go to HasTrainerUsedGimmick
-    }
-    else if (!CheckBagHasItem(ITEM_TERA_ORB, 1))
-    {
-        return FALSE;
-    }
-    else if (FlagGet(B_FLAG_TERA_ORB_NO_COST))
-    {
-        // Tera Orb is not depleted, go to HasTrainerUsedGimmick
-    }
-    else if (!FlagGet(B_FLAG_TERA_ORB_CHARGED))
-    {
-        return FALSE;
-    }
-
-    // Check if Trainer has already Terastallized.
-    if (HasTrainerUsedGimmick(battler, GIMMICK_TERA))
-        return FALSE;
-
-    // Check if AI battler is intended to Terastallize.
-    if (!ShouldTrainerBattlerUseGimmick(battler, GIMMICK_TERA))
-        return FALSE;
-
-    // Check if battler has another gimmick active.
-    if (GetActiveGimmick(battler) != GIMMICK_NONE)
-        return FALSE;
-
-    // Check if battler is holding a Z-Crystal or Mega Stone.
-    if (!TESTING && (holdEffect == HOLD_EFFECT_Z_CRYSTAL || holdEffect == HOLD_EFFECT_MEGA_STONE)) // tests make this check already
-        return FALSE;
-
-    // Every check passed!
-    return TRUE;
+    return FALSE;
 }
 
 // Returns a battler's Tera type.
@@ -129,54 +89,10 @@ bool32 IsTypeStellarBoosted(u32 battler, u32 type)
 // Power multipliers from Smogon Research thread.
 uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
 {
-    u32 teraType = GetBattlerTeraType(battler);
-    bool32 hasAdaptability = (GetBattlerAbility(battler) == ABILITY_ADAPTABILITY);
-
-    // Safety check.
-    if (GetActiveGimmick(battler) != GIMMICK_TERA)
-        return UQ_4_12(1.0);
-
-    // Stellar-type checks.
-    if (teraType == TYPE_STELLAR)
-    {
-        bool32 shouldBoost = IsTypeStellarBoosted(battler, type);
-        if (IS_BATTLER_OF_BASE_TYPE(battler, type))
-        {
-            if (shouldBoost)
-                return UQ_4_12(2.0);
-            else
-                return UQ_4_12(1.5);
-        }
-        else if (shouldBoost)
-            return UQ_4_12(1.2);
-        else
-            return UQ_4_12(1.0);
-    }
-    // Base and Tera type.
-    if (type == teraType && IS_BATTLER_OF_BASE_TYPE(battler, type))
-    {
-        if (hasAdaptability)
-            return UQ_4_12(2.25);
-        else
-            return UQ_4_12(2.0);
-    }
-    // Base or Tera type only.
-    else if ((type == teraType && !IS_BATTLER_OF_BASE_TYPE(battler, type))
-             || (type != teraType && IS_BATTLER_OF_BASE_TYPE(battler, type)))
-    {
-        if (hasAdaptability)
-            return UQ_4_12(2.0);
-        else
-            return UQ_4_12(1.5);
-    }
-    // Neither base or Tera type.
-    else
-    {
-        return UQ_4_12(1.0);
-    }
+    return UQ_4_12(1.0);
 }
 
 u16 GetTeraTypeRGB(u32 type)
 {
-    return gTypesInfo[type].teraTypeRGBValue;
+    return 0;
 }

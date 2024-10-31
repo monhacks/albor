@@ -43,7 +43,6 @@ const u8 gText_ReturnToPokedex[] = _("Return to the POKéDEX.");
 const u8 gText_SelectPokedexMode[] = _("Select the POKéDEX mode.");
 const u8 gText_SelectPokedexListingMode[] = _("Select the POKéDEX listing mode.");
 const u8 gText_ListByFirstLetter[] = _("List by the first letter in the name.\nSpotted POKéMON only.");
-const u8 gText_ListByBodyColor[] = _("List by body color.\nSpotted POKéMON only.");
 const u8 gText_ListByType[] = _("List by type.\nOwned POKéMON only.");
 const u8 gText_ExecuteSearchSwitch[] = _("Execute search/switch.");
 const u8 gText_DexHoennTitle[] = _("HOENN DEX");

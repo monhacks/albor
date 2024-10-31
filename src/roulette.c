@@ -3079,25 +3079,9 @@ static const union AffineAnimCmd sAffineAnim_TaillowShadow[] =
     AFFINEANIMCMD_END
 };
 
-static const union AffineAnimCmd *const sAffineAnims_Unused3[] =
-{
-    sAffineAnim_Unused3
-};
-
 static const union AffineAnimCmd *const sAffineAnims_TaillowShadow[] =
 {
     sAffineAnim_TaillowShadow
-};
-
-static const union AffineAnimCmd sAffineAnim_Unused4[] =
-{
-    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_Unused4[] =
-{
-    sAffineAnim_Unused4
 };
 
 static const union AnimCmd sAnim_ShroomishBallShadow[] =

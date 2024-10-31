@@ -43,11 +43,11 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
     },
     [GIMMICK_TERA] =
     {
-        .triggerSheet = &sSpriteSheet_TeraTrigger,
-        .triggerPal = &sSpritePalette_TeraTrigger,
+        .triggerSheet = &sSpriteSheet_DynamaxTrigger,
+        .triggerPal = &sSpritePalette_DynamaxTrigger,
         .triggerTemplate = &sSpriteTemplate_GimmickTrigger,
         .indicatorSheet = NULL, // handled separately
-        .indicatorPal = &sSpritePalette_TeraIndicator,
+        .indicatorPal = &sSpritePalette_MiscIndicator,
         .CanActivate = CanTerastallize,
         .ActivateGimmick = ActivateTera,
     }

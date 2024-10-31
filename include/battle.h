@@ -761,22 +761,22 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0) || (gBattleStruct->enduredDamage & (1u << gBattlerTarget)))
 #define BATTLER_TURN_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0) || (gBattleStruct->enduredDamage & (1u << battler)))
 
-#define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0, FALSE) == type || GetBattlerType(battlerId, 1, FALSE) == type || (GetBattlerType(battlerId, 2, FALSE) != TYPE_MYSTERY && GetBattlerType(battlerId, 2, FALSE) == type)))
-#define IS_BATTLER_OF_BASE_TYPE(battlerId, type)((GetBattlerType(battlerId, 0, TRUE) == type || GetBattlerType(battlerId, 1, TRUE) == type || (GetBattlerType(battlerId, 2, TRUE) != TYPE_MYSTERY && GetBattlerType(battlerId, 2, TRUE) == type)))
-#define IS_BATTLER_TYPELESS(battlerId)(GetBattlerType(battlerId, 0, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 1, FALSE) == TYPE_MYSTERY && GetBattlerType(battlerId, 2, FALSE) == TYPE_MYSTERY)
+#define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TIPO_MISTERIO && GetBattlerType(battlerId, 2) == type)))
+#define IS_BATTLER_OF_BASE_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TIPO_MISTERIO && GetBattlerType(battlerId, 2) == type)))
+#define IS_BATTLER_TYPELESS(battlerId)(GetBattlerType(battlerId, 0) == TIPO_MISTERIO && GetBattlerType(battlerId, 1) == TIPO_MISTERIO && GetBattlerType(battlerId, 2) == TIPO_MISTERIO)
 
 #define SET_BATTLER_TYPE(battlerId, type)              \
 {                                                      \
     gBattleMons[battlerId].types[0] = type;            \
     gBattleMons[battlerId].types[1] = type;            \
-    gBattleMons[battlerId].types[2] = TYPE_MYSTERY;    \
+    gBattleMons[battlerId].types[2] = TIPO_MISTERIO;    \
 }
 
 #define RESTORE_BATTLER_TYPE(battlerId)                                                        \
 {                                                                                              \
     gBattleMons[battlerId].types[0] = gSpeciesInfo[gBattleMons[battlerId].species].types[0];   \
     gBattleMons[battlerId].types[1] = gSpeciesInfo[gBattleMons[battlerId].species].types[1];   \
-    gBattleMons[battlerId].types[2] = TYPE_MYSTERY;                                            \
+    gBattleMons[battlerId].types[2] = TIPO_MISTERIO;                                            \
 }
 
 #define IS_BATTLER_PROTECTED(battlerId)(gProtectStructs[battlerId].protected                                           \

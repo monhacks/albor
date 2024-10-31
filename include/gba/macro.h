@@ -9,23 +9,18 @@
            CPU_SET_##bit##BIT | CPU_SET_SRC_FIXED | ((size)/(bit/8) & 0x1FFFFF)); \
 }
 
-#if MODERN
 #define CPU_FILL(value, dest, size, bit) \
     do \
     { \
         _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
         CPU_FILL_UNCHECKED(value, dest, size, bit); \
     } while (0)
-#else
-#define CPU_FILL(value, dest, size, bit) CPU_FILL_UNCHECKED(value, dest, size, bit)
-#endif
 
 #define CpuFill16(value, dest, size) CPU_FILL(value, dest, size, 16)
 #define CpuFill32(value, dest, size) CPU_FILL(value, dest, size, 32)
 
 #define CPU_COPY_UNCHECKED(src, dest, size, bit) CpuSet(src, dest, CPU_SET_##bit##BIT | ((size)/(bit/8) & 0x1FFFFF))
 
-#if MODERN
 #define CPU_COPY(src, dest, size, bit) \
     do \
     { \
@@ -33,9 +28,6 @@
         _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
         CPU_COPY_UNCHECKED(src, dest, size, bit); \
     } while (0)
-#else
-#define CPU_COPY(src, dest, size, bit) CPU_COPY_UNCHECKED(src, dest, size, bit)
-#endif
 
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
@@ -102,7 +94,6 @@
     asm volatile("stmia %0!, {%1, %2, %3}" : "+l" (dmaRegs) : "l" (r_src), "l" (r_dst), "l" (r_ctl) : "memory");  \
 }
 
-#if MODERN
 // NOTE: Assumes 16-bit DMAs.
 #define DmaSet(dmaNum, src, dest, control) \
     do \
@@ -111,10 +102,6 @@
         _Static_assert(_Alignof(dest) >= __builtin_choose_expr(__builtin_constant_p(control), ((control) & (DMA_32BIT << 16)) ? 4 : 2, 2), "destination potentially unaligned"); \
         DmaSetUnchecked(dmaNum, src, dest, control); \
     } while (0)
-#else
-#define DmaSet(dmaNum, src, dest, control) \
-    DmaSetUnchecked(dmaNum, src, dest, control)
-#endif
 
 #define DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit)                                    \
 {                                                                                             \
@@ -126,16 +113,12 @@
          | ((size)/(bit/8)));                                                                 \
 }
 
-#if MODERN
 #define DMA_FILL(dmaNum, value, dest, size, bit) \
     do \
     { \
         _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
         DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit); \
     } while (0)
-#else
-#define DMA_FILL(dmaNum, value, dest, size, bit) DMA_FILL_UNCHECKED(dmaNum, value, dest, size, bit)
-#endif
 
 #define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
 #define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
@@ -152,16 +135,12 @@
     DmaFill##bit(dmaNum, 0, _dest, _size);  \
 }
 
-#if MODERN
 #define DMA_CLEAR(dmaNum, dest, size, bit) \
     do \
     { \
         _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
         DMA_CLEAR_UNCHECKED(dmaNum, dest, size, bit); \
     } while (0)
-#else
-#define DMA_CLEAR(dmaNum, dest, size, bit) DMA_CLEAR_UNCHECKED(dmaNum, dest, size, bit)
-#endif
 
 #define DmaClear16(dmaNum, dest, size) DMA_CLEAR(dmaNum, dest, size, 16)
 #define DmaClear32(dmaNum, dest, size) DMA_CLEAR(dmaNum, dest, size, 32)
@@ -173,7 +152,6 @@
            (DMA_ENABLE | DMA_START_NOW | DMA_##bit##BIT | DMA_SRC_INC | DMA_DEST_INC) << 16 \
          | ((size)/(bit/8)))
 
-#if MODERN
 #define DMA_COPY(dmaNum, src, dest, size, bit) \
     do \
     { \
@@ -181,9 +159,6 @@
         _Static_assert(_Alignof(dest) >= (bit / 8), "destination potentially unaligned"); \
         DMA_COPY_UNCHECKED(dmaNum, src, dest, size, bit); \
     } while (0)
-#else
-#define DMA_COPY(dmaNum, src, dest, size, bit) DMA_COPY_UNCHECKED(dmaNum, src, dest, size, bit)
-#endif
 
 #define DmaCopy16(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 16)
 #define DmaCopy32(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 32)

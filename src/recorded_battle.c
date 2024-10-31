@@ -14,7 +14,6 @@
 #include "malloc.h"
 #include "util.h"
 #include "task.h"
-#include "test_runner.h"
 #include "text.h"
 #include "battle_setup.h"
 #include "frontier_util.h"
@@ -165,9 +164,6 @@ void RecordedBattle_ClearBattlerAction(u8 battlerId, u8 bytesToClear)
 
 u8 RecordedBattle_GetBattlerAction(u32 actionType, u8 battlerId)
 {
-    if (gTestRunnerEnabled)
-        TestRunner_Battle_CheckBattleRecordActionType(battlerId, sBattlerRecordSizes[battlerId], actionType);
-
     // Trying to read past array or invalid action byte, battle is over.
     if (sBattlerRecordSizes[battlerId] >= BATTLER_RECORD_SIZE || sBattleRecords[battlerId][sBattlerRecordSizes[battlerId]] == 0xFF)
     {

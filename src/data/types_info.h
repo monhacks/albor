@@ -4,39 +4,38 @@
 #define X UQ_4_12
 #define ______ X(1.0) // Regular effectiveness.
 
-const uq4_12_t gTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
+const uq4_12_t gTypeEffectivenessTable[NUMERO_DE_TIPOS][NUMERO_DE_TIPOS] =
 {//                   Defender -->
- //  Attacker           None   Normal Fighting Flying  Poison  Ground   Rock    Bug     Ghost   Steel  Mystery  Fire   Water   Grass  Electric Psychic   Ice   Dragon   Dark   Fairy   Stellar
-    [TYPE_NONE]     = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_NORMAL]   = {______, ______, ______, ______, ______, ______, X(0.5), ______, X(0.0), ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIGHTING] = {______, X(2.0), ______, X(0.5), X(0.5), ______, X(2.0), X(0.5), X(0.0), X(2.0), ______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), X(0.5), ______},
-    [TYPE_FLYING]   = {______, ______, X(2.0), ______, ______, ______, X(0.5), X(2.0), ______, X(0.5), ______, ______, ______, X(2.0), X(0.5), ______, X(0.5), ______, ______, ______, ______},
-    [TYPE_POISON]   = {______, ______, ______, ______, X(0.5), X(0.5), X(0.5), X(2.0), X(0.5), X(0.0), ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, X(2.0), ______},
-    [TYPE_GROUND]   = {______, X(0.5), ______, X(0.0), X(2.0), ______, X(2.0), X(0.5), ______, X(2.0), ______, X(2.0), ______, X(0.5), X(2.0), ______, ______, ______, ______, ______, ______},
-    [TYPE_ROCK]     = {______, ______, X(0.5), X(2.0), ______, X(0.5), X(0.5), X(2.0), ______, X(0.5), ______, X(2.0), ______, ______, ______, ______, X(2.0), ______, ______, ______, ______},
-    [TYPE_BUG]      = {______, ______, X(0.5), X(0.5), X(0.5), ______, ______, ______, X(2.0), X(0.5), ______, X(0.5), ______, X(2.0), ______, X(2.0), ______, ______, X(2.0), X(2.0), ______},
-    [TYPE_GHOST]    = {______, X(0.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______, ______},
-    [TYPE_STEEL]    = {______, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), ______, X(0.5), X(0.5), ______, X(0.5), ______, X(2.0), ______, ______, X(2.0), ______},
-    [TYPE_MYSTERY]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_FIRE]     = {______, ______, ______, ______, ______, ______, X(0.5), X(2.0), ______, X(2.0), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(2.0), X(0.0), ______, ______, ______},
-    [TYPE_WATER]    = {______, ______, ______, ______, ______, X(2.0), X(2.0), ______, ______, ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, X(0.5), X(0.5), ______, ______, ______},
-    [TYPE_GRASS]    = {______, ______, ______, X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), ______, ______, ______, X(0.5), X(2.0), X(0.5), ______, ______, ______, ______, ______, ______, ______},
-    [TYPE_ELECTRIC] = {______, ______, ______, X(2.0), ______, X(0.0), ______, ______, ______, X(2.0), ______, ______, X(2.0), X(0.5), X(0.5), ______, ______, X(0.5), ______, ______, ______},
-    [TYPE_PSYCHIC]  = {______, ______, X(2.0), ______, X(2.0), ______, ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, X(0.5), ______, ______, X(0.0), ______, ______},
-    [TYPE_ICE]      = {______, ______, ______, X(2.0), ______, X(2.0), ______, ______, ______, X(0.5), ______, X(0.5), X(0.5), X(2.0), ______, ______, X(0.5), X(2.0), ______, ______, ______},
-    [TYPE_DRAGON]   = {______, ______, ______, ______, ______, ______, ______, ______, ______, X(0.5), ______, ______, ______, ______, ______, ______, ______, X(2.0), ______, X(0.0), ______},
-    [TYPE_DARK]     = {______, ______, X(0.5), ______, ______, ______, ______, ______, X(2.0), ______, ______, ______, ______, ______, ______, X(2.0), ______, ______, X(0.5), X(0.5), ______},
-    [TYPE_FAIRY]    = {______, ______, X(2.0), ______, X(0.5), ______, ______, ______, ______, X(0.5), ______, X(0.5), ______, ______, ______, ______, ______, X(2.0), X(2.0), ______, ______},
-    [TYPE_STELLAR]  = {______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______, ______},
+ //  Attacker             Ninguno  Normal  Lucha   Volador Veneno  Tierra  Roca    Bicho   Fantasma Acero   Misterio Fuego   Agua    Planta  Eléctrico Psíquico Hielo   Dragón  Siniestro Hada
+    [TIPO_NINGUNO]      = {______, ______, ______, ______, ______, ______, ______, ______, ______,  ______, ______,  ______, ______, ______, ______,   ______,  ______, ______, ______,   ______},
+    [TIPO_NORMAL]       = {______, ______, ______, ______, ______, ______, X(0.5), ______, X(0.0),  ______, ______,  ______, ______, ______, ______,   ______,  ______, ______, ______,   ______},
+    [TIPO_LUCHA]        = {______, X(2.0), ______, X(0.5), X(0.5), ______, X(2.0), X(0.5), X(0.0),  X(2.0), ______,  ______, ______, ______, ______,   X(0.5),  X(2.0), ______, X(2.0),   X(0.5)},
+    [TIPO_VOLADOR]      = {______, ______, X(2.0), ______, ______, ______, X(0.5), X(2.0), ______,  X(0.5), ______,  ______, ______, X(2.0), X(0.5),   ______,  X(0.5), ______, ______,   ______},
+    [TIPO_VENENO]       = {______, ______, ______, ______, X(0.5), X(0.5), X(0.5), X(2.0), X(0.5),  X(0.0), ______,  ______, ______, X(2.0), ______,   ______,  ______, ______, ______,   X(2.0)},
+    [TIPO_TIERRA]       = {______, X(0.5), ______, X(0.0), X(2.0), ______, X(2.0), X(0.5), ______,  X(2.0), ______,  X(2.0), ______, X(0.5), X(2.0),   ______,  ______, ______, ______,   ______},
+    [TIPO_ROCA]         = {______, ______, X(0.5), X(2.0), ______, X(0.5), X(0.5), X(2.0), ______,  X(0.5), ______,  X(2.0), ______, ______, ______,   ______,  X(2.0), ______, ______,   ______},
+    [TIPO_BICHO]        = {______, ______, X(0.5), X(0.5), X(0.5), ______, ______, ______, X(2.0),  X(0.5), ______,  X(0.5), ______, X(2.0), ______,   X(2.0),  ______, ______, X(2.0),   X(2.0)},
+    [TIPO_FANTASMA]     = {______, X(0.0), ______, ______, ______, ______, ______, ______, X(2.0),  ______, ______,  ______, ______, ______, ______,   X(2.0),  ______, ______, X(0.5),   ______},
+    [TIPO_ACERO]        = {______, ______, ______, ______, ______, ______, X(2.0), ______, ______,  X(0.5), ______,  X(0.5), X(0.5), ______, X(0.5),   ______,  X(2.0), ______, ______,   X(2.0)},
+    [TIPO_MISTERIO]     = {______, ______, ______, ______, ______, ______, ______, ______, ______,  ______, ______,  ______, ______, ______, ______,   ______,  ______, ______, ______,   ______},
+    [TIPO_FUEGO]        = {______, ______, ______, ______, ______, ______, X(0.5), X(2.0), ______,  X(2.0), ______,  X(0.5), X(0.5), X(2.0), ______,   ______,  X(2.0), X(0.0), ______,   ______},
+    [TIPO_AGUA]         = {______, ______, ______, ______, ______, X(2.0), X(2.0), ______, ______,  ______, ______,  X(2.0), X(0.5), X(0.5), ______,   ______,  X(0.5), X(0.5), ______,   ______},
+    [TIPO_PLANTA]       = {______, ______, ______, X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), ______,  ______, ______,  X(0.5), X(2.0), X(0.5), ______,   ______,  ______, ______, ______,   ______},
+    [TIPO_ELECTRICO]    = {______, ______, ______, X(2.0), ______, X(0.0), ______, ______, ______,  X(2.0), ______,  ______, X(2.0), X(0.5), X(0.5),   ______,  ______, X(0.5), ______,   ______},
+    [TIPO_PSIQUICO]     = {______, ______, X(2.0), ______, X(2.0), ______, ______, ______, ______,  X(2.0), ______,  ______, ______, ______, ______,   X(0.5),  ______, ______, X(0.0),   ______},
+    [TIPO_HIELO]        = {______, ______, ______, X(2.0), ______, X(2.0), ______, ______, ______,  X(0.5), ______,  X(0.5), X(0.5), X(2.0), ______,   ______,  X(0.5), X(2.0), ______,   ______},
+    [TIPO_DRAGON]       = {______, ______, ______, ______, ______, ______, ______, ______, ______,  X(0.5), ______,  ______, ______, ______, ______,   ______,  ______, X(2.0), ______,   X(0.0)},
+    [TIPO_SINIESTRO]    = {______, ______, X(0.5), ______, ______, ______, ______, ______, X(2.0),  ______, ______,  ______, ______, ______, ______,   X(2.0),  ______, ______, X(0.5),   X(0.5)},
+    [TIPO_HADA]         = {______, ______, X(2.0), ______, X(0.5), ______, ______, ______, ______,  X(0.5), ______,  X(0.5), ______, ______, ______,   ______,  ______, X(2.0), X(2.0),   ______},
 };
 
 #undef ______
 #undef X
 
-// .generic is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
-const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
+// .generic is large enough that the text for TIPO_ELECTRICO will exceed TEXT_BUFF_ARRAY_COUNT.
+const struct TypeInfo gTypesInfo[NUMERO_DE_TIPOS] =
 {
-    [TYPE_NONE] =
+    [TIPO_NINGUNO] =
     {
         .name = _("None"),
         .generic = _("un ataque None"),
@@ -47,7 +46,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         .useSecondTypeIconPalette = FALSE,
         .isSpecialCaseType = TRUE,
     },
-    [TYPE_NORMAL] =
+    [TIPO_NORMAL] =
     {
         .name = _("Normal"),
         .generic = _("un ataque Normal"),
@@ -64,7 +63,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_NORMAL_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_NORMAL,
     },
-    [TYPE_FIGHTING] =
+    [TIPO_LUCHA] =
     {
         .name = _("Lucha"),
         .generic = _("un ataque Luchador"),
@@ -83,7 +82,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_FIGHTING_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_FIGHTING,
     },
-    [TYPE_FLYING] =
+    [TIPO_VOLADOR] =
     {
         .name = _("Volador"),
         .generic = _("un ataque Volador"),
@@ -102,7 +101,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_FLYING_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_FLYING,
     },
-    [TYPE_POISON] =
+    [TIPO_VENENO] =
     {
         .name = _("Veneno"),
         .generic = _("un ataque Venenoso"),
@@ -121,7 +120,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_POISON_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_POISON,
     },
-    [TYPE_GROUND] =
+    [TIPO_TIERRA] =
     {
         .name = _("Tierra"),
         .generic = _("un ataque Terrestre"),
@@ -140,7 +139,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_GROUND_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_GROUND,
     },
-    [TYPE_ROCK] =
+    [TIPO_ROCA] =
     {
         .name = _("Roca"),
         .generic = _("un ataque Rocoso"),
@@ -159,7 +158,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_ROCK_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_ROCK,
     },
-    [TYPE_BUG] =
+    [TIPO_BICHO] =
     {
         .name = _("Bicho"),
         .generic = _("un ataque Insectil"),
@@ -178,7 +177,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_BUG_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_BUG,
     },
-    [TYPE_GHOST] =
+    [TIPO_FANTASMA] =
     {
         .name = _("Fantasma"),
         .generic = _("un ataque Fantasmal"),
@@ -197,7 +196,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_GHOST_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_GHOST,
     },
-    [TYPE_STEEL] =
+    [TIPO_ACERO] =
     {
         .name = _("Acero"),
         .generic = _("un ataque Férrico"),
@@ -216,7 +215,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_STEEL_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_STEEL,
     },
-    [TYPE_MYSTERY] =
+    [TIPO_MISTERIO] =
     {
         .name = _("???"),
         .generic = _("a ??? move"),
@@ -225,7 +224,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         .useSecondTypeIconPalette = FALSE,
         .isSpecialCaseType = TRUE,
     },
-    [TYPE_FIRE] =
+    [TIPO_FUEGO] =
     {
         .name = _("Fuego"),
         .generic = _("un ataque Fogoso"),
@@ -244,7 +243,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_FIRE_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_FIRE,
     },
-    [TYPE_WATER] =
+    [TIPO_AGUA] =
     {
         .name = _("Agua"),
         .generic = _("un ataque Acuático"),
@@ -263,7 +262,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_WATER_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_WATER,
     },
-    [TYPE_GRASS] =
+    [TIPO_PLANTA] =
     {
         .name = _("Planta"),
         .generic = _("un ataque Herbáceo"),
@@ -282,7 +281,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_GRASS_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_GRASS,
     },
-    [TYPE_ELECTRIC] =
+    [TIPO_ELECTRICO] =
     {
         .name = _("Eléctrico"),
         .generic = _("un ataque Eléctrico"),
@@ -301,7 +300,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_ELECTRIC_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_ELECTRIC,
     },
-    [TYPE_PSYCHIC] =
+    [TIPO_PSIQUICO] =
     {
         .name = _("Psíquico"),
         .generic = _("un ataque Psíquico"),
@@ -320,7 +319,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_PSYCHIC_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_PSYCHIC,
     },
-    [TYPE_ICE] =
+    [TIPO_HIELO] =
     {
         .name = _("Hielo"),
         .generic = _("un ataque Helado"),
@@ -339,7 +338,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_ICE_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_ICE,
     },
-    [TYPE_DRAGON] =
+    [TIPO_DRAGON] =
     {
         .name = _("Dragón"),
         .generic = _("un ataque Draconiano"),
@@ -358,7 +357,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_DRAGON_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_DRAGON,
     },
-    [TYPE_DARK] =
+    [TIPO_SINIESTRO] =
     {
         .name = _("Siniestro"),
         .generic = _("un ataque Siniestro"),
@@ -377,7 +376,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.teraShard = ITEM_DARK_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_DARK,
     },
-    [TYPE_FAIRY] =
+    [TIPO_HADA] =
     {
         .name = _("Hada"),
         .generic = _("un ataque Feérico"),
@@ -395,17 +394,5 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
         //.memory = ITEM_FAIRY_MEMORY,
         //.teraShard = ITEM_FAIRY_TERA_SHARD,
         //.arceusForm = SPECIES_ARCEUS_FAIRY,
-    },
-    [TYPE_STELLAR] =
-    {
-        .name = _("Stellar"),
-        .generic = _("a STELLAR move"),
-        .palette = 15,
-        .zMove = MOVE_BREAKNECK_BLITZ,
-        .maxMove = MOVE_MAX_STRIKE,
-        .paletteTMHM = gItemIconPalette_NormalTMHM, // failsafe
-        .useSecondTypeIconPalette = FALSE,
-        .isSpecialCaseType = TRUE,
-        // .teraShard = ITEM_STELLAR_TERA_SHARD,
     },
 };

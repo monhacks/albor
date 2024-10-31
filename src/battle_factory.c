@@ -538,17 +538,17 @@ static void GenerateInitialRentalMons(void)
 // Determines if the upcoming opponent has a single most-common
 // type in its party. If there are two different types that are
 // tied, then the opponent is deemed to have no preferred type,
-// and NUMBER_OF_MON_TYPES is the result.
+// and NUMERO_DE_TIPOS is the result.
 static void GetOpponentMostCommonMonType(void)
 {
     u8 i;
-    u8 typeCounts[NUMBER_OF_MON_TYPES];
+    u8 typeCounts[NUMERO_DE_TIPOS];
     u8 mostCommonTypes[2];
 
     gFacilityTrainerMons = gBattleFrontierMons;
 
     // Count the number of times each type occurs in the opponent's party.
-    for (i = TYPE_NORMAL; i < NUMBER_OF_MON_TYPES; i++)
+    for (i = TIPO_NORMAL; i < NUMERO_DE_TIPOS; i++)
         typeCounts[i] = 0;
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
@@ -563,7 +563,7 @@ static void GetOpponentMostCommonMonType(void)
     // its count is equal to the most-common type.
     mostCommonTypes[0] = 0;
     mostCommonTypes[1] = 0;
-    for (i = 1; i < NUMBER_OF_MON_TYPES; i++)
+    for (i = 1; i < NUMERO_DE_TIPOS; i++)
     {
         if (typeCounts[mostCommonTypes[0]] < typeCounts[i])
             mostCommonTypes[0] = i;
@@ -581,11 +581,11 @@ static void GetOpponentMostCommonMonType(void)
         else if (mostCommonTypes[0] == mostCommonTypes[1])
             gSpecialVar_Result = mostCommonTypes[0];
         else
-            gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+            gSpecialVar_Result = NUMERO_DE_TIPOS;
     }
     else
     {
-        gSpecialVar_Result = NUMBER_OF_MON_TYPES;
+        gSpecialVar_Result = NUMERO_DE_TIPOS;
     }
 }
 

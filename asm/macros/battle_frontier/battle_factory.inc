@@ -81,7 +81,7 @@
 	special CallBattleFactoryFunction
 	.endm
 
-	@ Return the pokemon type most common in the opponents team, or NUMBER_OF_MON_TYPES if there is no standout type
+	@ Return the pokemon type most common in the opponents team, or NUMERO_DE_TIPOS if there is no standout type
 	.macro factory_getopponentmontype
 	setvar VAR_0x8004, BATTLE_FACTORY_FUNC_GET_OPPONENT_MON_TYPE
 	special CallBattleFactoryFunction

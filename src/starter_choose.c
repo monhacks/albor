@@ -569,38 +569,7 @@ static void Task_DeclineStarter(u8 taskId)
 
 static void CreateStarterPokemonLabel(u8 selection)
 {
-    u8 categoryText[32];
-    struct WindowTemplate winTemplate;
-    const u8 *speciesName;
-    s32 width;
-    u8 labelLeft, labelRight, labelTop, labelBottom;
 
-    u16 species = GetStarterPokemon(selection);
-    CopyMonCategoryText(species, categoryText);
-    speciesName = GetSpeciesName(species);
-
-    winTemplate = sWindowTemplate_StarterLabel;
-    winTemplate.tilemapLeft = sStarterLabelCoords[selection][0];
-    winTemplate.tilemapTop = sStarterLabelCoords[selection][1];
-
-    sStarterLabelWindowId = AddWindow(&winTemplate);
-    FillWindowPixelBuffer(sStarterLabelWindowId, PIXEL_FILL(0));
-
-    width = GetStringCenterAlignXOffset(FONT_NARROW, categoryText, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NARROW, width, 1, sTextColors, 0, categoryText);
-
-    width = GetStringCenterAlignXOffset(FONT_NORMAL, speciesName, 0x68);
-    AddTextPrinterParameterized3(sStarterLabelWindowId, FONT_NORMAL, width, 17, sTextColors, 0, speciesName);
-
-    PutWindowTilemap(sStarterLabelWindowId);
-    ScheduleBgCopyTilemapToVram(0);
-
-    labelLeft = sStarterLabelCoords[selection][0] * 8 - 4;
-    labelRight = (sStarterLabelCoords[selection][0] + 13) * 8 + 4;
-    labelTop = sStarterLabelCoords[selection][1] * 8;
-    labelBottom = (sStarterLabelCoords[selection][1] + 4) * 8;
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(labelLeft, labelRight));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(labelTop, labelBottom));
 }
 
 static void ClearStarterLabel(void)

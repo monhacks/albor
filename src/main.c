@@ -21,7 +21,6 @@
 #include "intro.h"
 #include "main.h"
 #include "trainer_hill.h"
-#include "test_runner.h"
 #include "constants/rgb.h"
 
 static void VBlankIntr(void);
@@ -306,7 +305,7 @@ static void VBlankIntr(void)
 
     m4aSoundMain();
 
-    if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED))))
+    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
         AdvanceRandom();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;
