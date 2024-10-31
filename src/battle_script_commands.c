@@ -14874,42 +14874,6 @@ static void Cmd_handleballthrow(void)
                 ballMultiplier = 400;
             break;
         case ITEM_HEAVY_BALL:
-            i = GetSpeciesWeight(gBattleMons[gBattlerTarget].species);
-            if (B_HEAVY_BALL_MODIFIER >= GEN_7)
-            {
-                if (i < 1000)
-                    ballAddition = -20;
-                else if (i < 2000)
-                    ballAddition = 0;
-                else if (i < 3000)
-                    ballAddition = 20;
-                else
-                    ballAddition = 30;
-            }
-            else if (B_HEAVY_BALL_MODIFIER >= GEN_4)
-            {
-                if (i < 2048)
-                    ballAddition = -20;
-                else if (i < 3072)
-                    ballAddition = 20;
-                else if (i < 4096)
-                    ballAddition = 30;
-                else
-                    ballAddition = 40;
-            }
-            else
-            {
-                if (i < 1024)
-                    ballAddition = -20;
-                else if (i < 2048)
-                    ballAddition = 0;
-                else if (i < 3072)
-                    ballAddition = 20;
-                else if (i < 4096)
-                    ballAddition = 30;
-                else
-                    ballAddition = 40;
-            }
             break;
         case ITEM_DREAM_BALL:
             if (B_DREAM_BALL_MODIFIER >= GEN_8 && (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP || GetBattlerAbility(gBattlerTarget) == ABILITY_COMATOSE))
