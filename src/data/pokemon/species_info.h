@@ -8,9 +8,9 @@
 
 #define FRONT_PIC_HEMBRA(sprite, width, height) .frontPicFemale = gMonFrontPic_## sprite##F,    .frontPicSizeFemale = MON_COORDS_SIZE(width, height)
 
-#define SOMBRA(x, y, size)  .enemyShadowXOffset = x,    .enemyShadowYOffset = y,    .enemyShadowSize = size,
+#define SOMBRA(x, y, size)  .enemyShadowXOffset = x,    .enemyShadowYOffset = y,    .enemyShadowSize = size
 
-#define SIN_SOMBRA  .suppressEnemyShadow = TRUE,
+#define SIN_SOMBRA  .suppressEnemyShadow = TRUE
 
 #define BACK_PIC(sprite, width, height) .backPic = gMonBackPic_## sprite,   .backPicSize = MON_COORDS_SIZE(width, height)
 
@@ -145,7 +145,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(BULBASAUR),
         .itemRare = ITEM_ABSORB_BULB,
         POKEDEX(BULBASAUR),
-        SOMBRA(0, 0, SHADOW_SIZE_S)
+        SOMBRA(0, 0, SHADOW_SIZE_S),
         FRONT_PIC(Bulbasaur, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Bulbasaur,
@@ -183,7 +183,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Ivysaur),
         GRITO(IVYSAUR),
         POKEDEX(IVYSAUR),
-        SOMBRA(1, 1, SHADOW_SIZE_M)
+        SOMBRA(1, 1, SHADOW_SIZE_M),
         FRONT_PIC(Ivysaur, 56, 48),
         .frontPicYOffset = 9,
         .frontAnimFrames = sAnims_Ivysaur,
@@ -224,7 +224,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .abilities = {ABILITY_SOLAR_POWER, ABILITY_THICK_FAT, ABILITY_OLOR_FLUVIAL},
         GRITO(VENUSAUR),
         .itemRare = ITEM_ABSORB_BULB,
-        SOMBRA(0, 6, SHADOW_SIZE_L)
+        SOMBRA(0, 6, SHADOW_SIZE_L),
         FRONT_PIC(Venusaur, 64, 64),
         FRONT_PIC_HEMBRA(Venusaur, 64, 64),
         .frontPicYOffset = 3,
@@ -263,7 +263,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Charmander),
         GRITO(CHARMANDER),
         POKEDEX(CHARMANDER),
-        SOMBRA(2, 3, SHADOW_SIZE_M)
+        SOMBRA(2, 3, SHADOW_SIZE_M),
         FRONT_PIC(Charmander, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Charmander,
@@ -302,7 +302,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Charmeleon),
         GRITO(CHARMELEON),
         POKEDEX(CHARMELEON),
-        SOMBRA(3, 4, SHADOW_SIZE_L)
+        SOMBRA(3, 4, SHADOW_SIZE_L),
         FRONT_PIC(Charmeleon, 56, 56),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_Charmeleon,
@@ -342,7 +342,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS(Charizard),
         .abilities = {ABILITY_MOXIE, ABILITY_BERSERK, ABILITY_AERILATE},
         GRITO(CHARIZARD),
-        SOMBRA(2, 13, SHADOW_SIZE_XL)
+        SOMBRA(2, 13, SHADOW_SIZE_XL),
         FRONT_PIC(Charizard, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Charizard,
@@ -378,7 +378,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Squirtle),
         GRITO(SQUIRTLE),
         POKEDEX(SQUIRTLE),
-        SOMBRA(1, 1, SHADOW_SIZE_M)
+        SOMBRA(1, 1, SHADOW_SIZE_M),
         FRONT_PIC(Squirtle, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Squirtle,
@@ -416,7 +416,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Wartortle),
         GRITO(WARTORTLE),
         POKEDEX(WARTORTLE),
-        SOMBRA(0, 7, SHADOW_SIZE_L)
+        SOMBRA(0, 7, SHADOW_SIZE_L),
         FRONT_PIC(Wartortle, 56, 56),
         .frontPicYOffset = 7,
         .frontAnimFrames = sAnims_Wartortle,
@@ -454,7 +454,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(BLASTOISE),
         MOVIMIENTOS(Blastoise),
         GRITO(BLASTOISE),
-        SOMBRA(3, 8, SHADOW_SIZE_XL)
+        SOMBRA(3, 8, SHADOW_SIZE_XL),
         FRONT_PIC(Blastoise, 64, 64),
         .frontPicYOffset = 4,
         .frontAnimFrames = sAnims_Blastoise,
@@ -490,7 +490,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Caterpie),
         GRITO(CATERPIE),
         POKEDEX(CATERPIE),
-        SOMBRA(4, 1, SHADOW_SIZE_S)
+        SOMBRA(4, 1, SHADOW_SIZE_S),
         FRONT_PIC(Caterpie, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Caterpie,
@@ -526,7 +526,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Metapod),
         GRITO(METAPOD),
         POKEDEX(METAPOD),
-        SOMBRA(2, 0, SHADOW_SIZE_M)
+        SOMBRA(2, 0, SHADOW_SIZE_M),
         FRONT_PIC(Metapod, 40, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Metapod,
@@ -565,7 +565,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(BUTTERFREE),
         POKEDEX(BUTTERFREE),
         MOVIMIENTOS(Butterfree),
-        SOMBRA(0, 14, SHADOW_SIZE_M)
+        SOMBRA(0, 14, SHADOW_SIZE_M),
         FRONT_PIC(Butterfree, 64, 56),
         FRONT_PIC_HEMBRA(Butterfree, 64, 56),
         .frontPicYOffset = 10,
@@ -604,7 +604,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Weedle),
         GRITO(WEEDLE),
         POKEDEX(WEEDLE),
-        SOMBRA(1, 0, SHADOW_SIZE_S)
+        SOMBRA(1, 0, SHADOW_SIZE_S),
         FRONT_PIC(Weedle, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_Weedle,
@@ -641,7 +641,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Kakuna),
         GRITO(KAKUNA),
         POKEDEX(KAKUNA),
-        SOMBRA(-1, 3, SHADOW_SIZE_S)
+        SOMBRA(-1, 3, SHADOW_SIZE_S),
         FRONT_PIC(Kakuna, 24, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Kakuna,
@@ -681,7 +681,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .expYield = 198,
         .abilities = {ABILITY_SNIPER, ABILITY_POISON_TOUCH, ABILITY_ENJAMBRE},
         GRITO(BEEDRILL),
-        SOMBRA(6, 16, SHADOW_SIZE_L)
+        SOMBRA(6, 16, SHADOW_SIZE_L),
         FRONT_PIC(Beedrill, 64, 56),
         .frontPicYOffset = 5,
         .frontAnimFrames = sAnims_Beedrill,
@@ -716,7 +716,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Pidgey),
         GRITO(PIDGEY),
         POKEDEX(PIDGEY),
-        SOMBRA(0, 0, SHADOW_SIZE_M)
+        SOMBRA(0, 0, SHADOW_SIZE_M),
         FRONT_PIC(Pidgey, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Pidgey,
@@ -753,7 +753,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Pidgeotto),
         GRITO(PIDGEOTTO),
         POKEDEX(PIDGEOTTO),
-        SOMBRA(0, 7, SHADOW_SIZE_L)
+        SOMBRA(0, 7, SHADOW_SIZE_L),
         FRONT_PIC(Pidgeotto, 56, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Pidgeotto,
@@ -792,7 +792,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .expYield = 240,
         .abilities = {ABILITY_KEEN_EYE, ABILITY_NORMALIZE, ABILITY_BELLO_PLUMAJE},
         GRITO(PIDGEOT),
-        SOMBRA(0, 16, SHADOW_SIZE_L)
+        SOMBRA(0, 16, SHADOW_SIZE_L),
         FRONT_PIC(Pidgeot, 64, 64),
         .frontPicYOffset = 2,
         .frontAnimFrames = sAnims_Pidgeot,
@@ -828,7 +828,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(RATTATA),
         TIPO(NORMAL),
         .abilities = {ABILITY_RUN_AWAY, ABILITY_STRONG_JAW, ABILITY_PESTE_BUBONICA},
-        SOMBRA(1, -1, SHADOW_SIZE_M)
+        SOMBRA(1, -1, SHADOW_SIZE_M),
         FRONT_PIC(Rattata, 40, 40),
         FRONT_PIC_HEMBRA(Rattata, 40, 40),
         .frontPicYOffset = 13,
@@ -869,7 +869,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_HP = 2,
         TIPO(NORMAL),
         .abilities = {ABILITY_RUN_AWAY, ABILITY_STRONG_JAW, ABILITY_PESTE_BUBONICA},
-        SOMBRA(1, 7, SHADOW_SIZE_M)
+        SOMBRA(1, 7, SHADOW_SIZE_M),
         FRONT_PIC(Raticate, 64, 56),
         FRONT_PIC_HEMBRA(Raticate, 64, 56),
         .frontPicYOffset = 6,
@@ -909,7 +909,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(RATTATA_ALOLA),
         TIPOS(SINIESTRO, NORMAL),
         .abilities = {ABILITY_GLUTTONY, ABILITY_THICK_FAT, ABILITY_PESTE_BUBONICA},
-        SOMBRA(-2, 2, SHADOW_SIZE_S)
+        SOMBRA(-2, 2, SHADOW_SIZE_S),
         FRONT_PIC(RattataAlola, 40, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_RattataAlola,
@@ -946,7 +946,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_Defense = 2,
         TIPOS(SINIESTRO, NORMAL),
         .abilities = {ABILITY_GLUTTONY, ABILITY_THICK_FAT, ABILITY_PESTE_BUBONICA},
-        SOMBRA(0, 5, SHADOW_SIZE_L)
+        SOMBRA(0, 5, SHADOW_SIZE_L),
         FRONT_PIC(RaticateAlola, 56, 48),
         .frontPicYOffset = 8,
         .frontAnimFrames = sAnims_RaticateAlola,
@@ -983,6 +983,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Spearow),
         GRITO(SPEAROW),
         POKEDEX(SPEAROW),
+        SOMBRA(0, 1, SHADOW_SIZE_S),
         FRONT_PIC(Spearow, 40, 40),
         .frontPicYOffset = 12,
         .frontAnimFrames = sAnims_Spearow,
@@ -1020,6 +1021,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Fearow),
         GRITO(FEAROW),
         POKEDEX(FEAROW),
+        SOMBRA(0, 20, SHADOW_SIZE_L),
         FRONT_PIC(Fearow, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_Fearow,
@@ -1057,6 +1059,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Ekans),
         GRITO(EKANS),
         POKEDEX(EKANS),
+        SOMBRA(2, 2, SHADOW_SIZE_M),
         FRONT_PIC(Ekans, 48, 48),
         .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Ekans,
@@ -1094,6 +1097,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Arbok),
         GRITO(ARBOK),
         POKEDEX(ARBOK),
+        SOMBRA(3, 12, SHADOW_SIZE_XL),
         FRONT_PIC(Arbok, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_Arbok,
@@ -1130,6 +1134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(PICHU),
         POKEDEX(PICHU),
         MOVIMIENTOS(Pichu),
+        SOMBRA(0, -1, SHADOW_SIZE_S),
         FRONT_PIC(Pichu, 32, 40),
         .frontPicYOffset = 14,
         .frontAnimFrames = sAnims_Pichu,
@@ -1168,6 +1173,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS(Pikachu),
         .genderRatio = PERCENT_FEMALE(50),
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FIELD, EGG_GROUP_FAIRY),
+        SOMBRA(1, 5, SHADOW_SIZE_M),
         FRONT_PIC(Pikachu, 48, 48),
         FRONT_PIC_HEMBRA(Pikachu, 48, 48),
         .frontPicYOffset = 9,
@@ -1210,6 +1216,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .itemRare = ITEM_LIGHT_BALL,
         TIPOS(ELECTRICO, HADA),
         .abilities = {ABILITY_ILLUMINATE, ABILITY_SUENO_ELECTRICO, ABILITY_GENERADOR},
+        SOMBRA(-2, 11, SHADOW_SIZE_L),
         FRONT_PIC(Raichu, 64, 64),
         FRONT_PIC_HEMBRA(Raichu, 64, 64),
         .frontPicYOffset = 3,
@@ -1247,6 +1254,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evYield_SpDefense = 3,
         TIPOS(ELECTRICO, PSIQUICO),
         .abilities = {ABILITY_LEVITATE, ABILITY_TINTED_LENS, ABILITY_SURFERO},
+        SOMBRA(5, 19, SHADOW_SIZE_L),
         FRONT_PIC(RaichuAlola, 64, 64),
         .frontPicYOffset = 0,
         .frontAnimFrames = sAnims_RaichuAlola,
@@ -1285,6 +1293,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         DEFENSA_ESPECIAL(30),
         TIPO(TIERRA),
         .abilities = {ABILITY_SHARPNESS, ABILITY_TIERRA_SUELTA, ABILITY_PUNZON},
+        SOMBRA(0, 1, SHADOW_SIZE_M),
         FRONT_PIC(Sandshrew, 48, 48),
         .frontPicYOffset = 11,
         .frontAnimFrames = sAnims_Sandshrew,
@@ -1322,6 +1331,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         DEFENSA_ESPECIAL(60),
         TIPO(TIERRA),
         .abilities = {ABILITY_SHARPNESS, ABILITY_TIERRA_SUELTA, ABILITY_PUNZON},
+        SOMBRA(5, 4, SHADOW_SIZE_L),
         FRONT_PIC(Sandslash, 64, 56),
         .frontPicYOffset = 6,
         .frontAnimFrames = sAnims_Sandslash,
@@ -1358,10 +1368,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         DEFENSA_ESPECIAL(35),
         TIPOS(HIELO, ACERO),
         .abilities = {ABILITY_SLUSH_RUSH, ABILITY_ICE_BODY, ABILITY_IRON_BARBS},
+        SOMBRA(-1, 2, SHADOW_SIZE_M),
         FRONT_PIC(SandshrewAlola, 40, 40),
         .frontPicYOffset = 13,
         .frontAnimFrames = sAnims_SandshrewAlola,
-        .frontAnimId = ANIM_CONCAVE_ARC_SMALL_TWICE,
+        .frontAnimId = ANIM_H_SLIDE,
         BACK_PIC(SandshrewAlola, 56, 40),
         .backPicYOffset = 13,
         .backAnimId = BACK_ANIM_CONCAVE_ARC_SMALL,
@@ -1395,12 +1406,12 @@ const struct SpeciesInfo gSpeciesInfo[] =
         DEFENSA_ESPECIAL(80),
         TIPOS(HIELO, ACERO),
         .abilities = {ABILITY_SLUSH_RUSH, ABILITY_ICE_BODY, ABILITY_IRON_BARBS},
+        SOMBRA(1, 12, SHADOW_SIZE_L),
         FRONT_PIC(SandslashAlola, 64, 64),
         .frontPicYOffset = 1,
         .frontAnimFrames = sAnims_SandslashAlola,
         .frontAnimId = ANIM_H_VIBRATE,
         BACK_PIC(SandslashAlola, 64, 56),
-        .backPicYOffset = 5,
         .backAnimId = BACK_ANIM_V_SHAKE_H_SLIDE,
         PALETAS(SandslashAlola),
         ICONO(SandslashAlola),
@@ -13073,7 +13084,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_CONCAVE_ARC_LARGE,
         PALETAS(Spoink),
         ICONO(Spoink),
-        SOMBRA(-1, 5, SHADOW_SIZE_S)
+        SOMBRA(-1, 5, SHADOW_SIZE_S),
         FOLLOWER(Spoink, TRACKS_SPOT),
         MOVIMIENTOS(Spoink),
         MOVIMIENTOS_HUEVO(Spoink),
@@ -13113,7 +13124,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .backAnimId = BACK_ANIM_SHRINK_GROW_VIBRATE,
         PALETAS(Grumpig),
         ICONO(Grumpig),
-        SOMBRA(-1, 8, SHADOW_SIZE_M)
+        SOMBRA(-1, 8, SHADOW_SIZE_M),
         FOLLOWER(Grumpig, TRACKS_FOOT),
         MOVIMIENTOS(Grumpig),
         MOVIMIENTOS_HUEVO(Spoink),
