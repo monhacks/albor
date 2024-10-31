@@ -14,7 +14,7 @@ ANALYZE      ?= 0
 # Default make rule
 all: rom
 
-TOOLCHAIN := /usr/local/bin/arm-none-eabi-gcc
+TOOLCHAIN := /usr/local/Cellar/arm-none-eabi-gcc
 
 PREFIX := arm-none-eabi-
 OBJCOPY := $(PREFIX)objcopy
