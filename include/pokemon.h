@@ -254,12 +254,6 @@ struct SpeciesInfo
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u16 cryId;
     u16 dexNum;
-    u16 height; //in decimeters
-    u16 weight; //in hectograms
-    u16 pokemonScale;
-    u16 pokemonOffset;
-    u16 trainerScale;
-    u16 trainerOffset;
     u8 noFlip:1;
     u8 frontAnimDelay;
     u8 frontAnimId;
@@ -581,8 +575,6 @@ u8 GetSecretBaseTrainerClass(void);
 bool8 IsPlayerPartyAndPokemonStorageFull(void);
 bool8 IsPokemonStorageFull(void);
 const u8 *GetSpeciesName(u16 species);
-u16 GetSpeciesHeight(u16 species);
-u16 GetSpeciesWeight(u16 species);
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species);
 const u16 *GetSpeciesTeachableLearnset(u16 species);
 const u16 *GetSpeciesEggMoves(u16 species);

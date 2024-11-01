@@ -10,9 +10,6 @@ s8 GetSetPokedexFlag(u16 nationalDexNo, u8 caseID);
 u16 CreateMonSpriteFromNationalDexNumberHGSS(u16 nationalNum, s16 x, s16 y, u16 paletteSlot);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
-void PrintMonMeasurements(u16 species, u32 owned);
-u8* ConvertMonHeightToString(u32 height);
-u8* ConvertMonWeightToString(u32 weight);
 void CB2_OpenPokedexPlusHGSS(void);
 void Task_DisplayCaughtMonDexPageHGSS(u8);
 

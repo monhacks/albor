@@ -8751,36 +8751,7 @@ u32 GetMoveSlot(u16 *moves, u32 move)
 
 u32 GetBattlerWeight(u32 battler)
 {
-    u32 i;
-    u32 weight = GetSpeciesWeight(gBattleMons[battler].species);
-    u32 ability = GetBattlerAbility(battler);
-    u32 holdEffect = GetBattlerHoldEffect(battler, TRUE);
-
-    if (ability == ABILITY_HEAVY_METAL)
-        weight *= 2;
-    else if (ability == ABILITY_LIGHT_METAL)
-        weight /= 2;
-
-    if (holdEffect == HOLD_EFFECT_FLOAT_STONE)
-        weight /= 2;
-
-    for (i = 0; i < gDisableStructs[battler].autotomizeCount; i++)
-    {
-        if (weight > 1000)
-        {
-            weight -= 1000;
-        }
-        else if (weight <= 1000)
-        {
-            weight = 1;
-            break;
-        }
-    }
-
-    if (weight == 0)
-        weight = 1;
-
-    return weight;
+    return 0;
 }
 
 u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc)
