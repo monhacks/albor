@@ -14726,10 +14726,36 @@ u8 GetCatchingBattler(void)
         return GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
 }
 
+u8 CalculateShakes(u32 odds)
+{
+    u8 shakes = 0;
+    u8 maxShakes = BALL_3_SHAKES_SUCCESS;
+
+    if (gLastUsedItem == ITEM_MASTER_BALL)
+    {
+        shakes = maxShakes;
+    }
+    else
+    {
+        if (odds < 1)
+            odds = 1;
+        if (odds > 255)
+            odds = 255; // Limita a 255
+
+        u8 probabilityScale = (255 - odds) * maxShakes / 255;
+
+        for (shakes = 0; shakes < maxShakes && (Random() & 0xFF) < probabilityScale; shakes++);
+    }
+
+    return shakes;
+}
+
 static void Cmd_handleballthrow(void)
 {
     CMD_ARGS();
 
+    u32 odds;
+    u8 catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
     u16 ballMultiplier = 100;
 
     if (gBattleControllerExecFlags)
@@ -14745,210 +14771,63 @@ static void Cmd_handleballthrow(void)
     }
     else
     {
-        u32 odds, i;
-        u8 catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
-
         gLastThrownBall = gLastUsedItem;
         gBallToDisplay = gLastThrownBall;
 
-        switch (gLastUsedItem)
-        {
-        case ITEM_ULTRA_BALL:
-            ballMultiplier = 200;
-            break;
-        case ITEM_SPORT_BALL:
-            if (B_SPORT_BALL_MODIFIER <= GEN_7)
-                ballMultiplier = 150;
-            break;
-        case ITEM_GREAT_BALL:
-            ballMultiplier = 150;
-            break;
-        case ITEM_SAFARI_BALL:
-            if (B_SAFARI_BALL_MODIFIER <= GEN_7)
-                ballMultiplier = 150;
-            break;
-        case ITEM_NET_BALL:
-            if (IS_BATTLER_OF_TYPE(gBattlerTarget, TIPO_AGUA) || IS_BATTLER_OF_TYPE(gBattlerTarget, TIPO_BICHO))
-                ballMultiplier = B_NET_BALL_MODIFIER >= GEN_7 ? 350 : 300;
-            break;
-        case ITEM_DIVE_BALL:
-            if (GetCurrentMapType() == MAP_TYPE_UNDERWATER
-                || (B_DIVE_BALL_MODIFIER >= GEN_4 && (gIsFishingEncounter || gIsSurfingEncounter)))
-                ballMultiplier = 350;
-            break;
-        case ITEM_NEST_BALL:
-            if (B_NEST_BALL_MODIFIER >= GEN_6)
-            {
-                //((41 - Pokémon's level) ÷ 10)× if Pokémon's level is between 1 and 29, 1× otherwise.
-                if (gBattleMons[gBattlerTarget].level < 30)
-                    ballMultiplier = 410 - (gBattleMons[gBattlerTarget].level * 10);
-            }
-            else if (B_NEST_BALL_MODIFIER >= GEN_5)
-            {
-                //((41 - Pokémon's level) ÷ 10)×, minimum 1×
-                if (gBattleMons[gBattlerTarget].level < 31)
-                    ballMultiplier = 410 - (gBattleMons[gBattlerTarget].level * 10);
-            }
-            else if (gBattleMons[gBattlerTarget].level < 40)
-            {
-                //((40 - Pokémon's level) ÷ 10)×, minimum 1×
-                ballMultiplier = 400 - (gBattleMons[gBattlerTarget].level * 10);
-                if (ballMultiplier <= 90)
-                    ballMultiplier = 100;
-            }
-            break;
-        case ITEM_REPEAT_BALL:
-            if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
-                ballMultiplier = (B_REPEAT_BALL_MODIFIER >= GEN_7 ? 350 : 300);
-            break;
-        case ITEM_TIMER_BALL:
-            ballMultiplier = 100 + (gBattleResults.battleTurnCounter * (B_TIMER_BALL_MODIFIER >= GEN_5 ? 30 : 10));
-            if (ballMultiplier > 400)
-                ballMultiplier = 400;
-            break;
-        case ITEM_DUSK_BALL:
-            i = GetTimeOfDay();
-            if (i == TIEMPO_TARDE || i == TIEMPO_NOCHE || gMapHeader.cave || gMapHeader.mapType == MAP_TYPE_UNDERGROUND)
-                ballMultiplier = (B_DUSK_BALL_MODIFIER >= GEN_7 ? 300 : 350);
-            break;
-        case ITEM_QUICK_BALL:
-            if (gBattleResults.battleTurnCounter == 0)
-                ballMultiplier = (B_QUICK_BALL_MODIFIER >= GEN_5 ? 500 : 400);
-            break;
-        case ITEM_LEVEL_BALL:
-            if (gBattleMons[gBattlerAttacker].level >= 4 * gBattleMons[gBattlerTarget].level)
-                ballMultiplier = 800;
-            else if (gBattleMons[gBattlerAttacker].level > 2 * gBattleMons[gBattlerTarget].level)
-                ballMultiplier = 400;
-            else if (gBattleMons[gBattlerAttacker].level > gBattleMons[gBattlerTarget].level)
-                ballMultiplier = 200;
-            break;
-        case ITEM_LURE_BALL:
-            if (gIsFishingEncounter)
-            {
-                if (B_LURE_BALL_MODIFIER >= GEN_8)
-                    ballMultiplier = 400;
-                else if (B_LURE_BALL_MODIFIER >= GEN_7)
-                    ballMultiplier = 500;
-                else
-                    ballMultiplier = 300;
-            }
-            break;
-        case ITEM_MOON_BALL:
-        {
-            const struct Evolution *evolutions = GetSpeciesEvolutions(gBattleMons[gBattlerTarget].species);
-            if (evolutions == NULL)
-                break;
-            for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
-            {
-                if (evolutions[i].method == EVO_ITEM
-                    && evolutions[i].param == ITEM_MOON_STONE)
-                    ballMultiplier = 400;
-            }
-        }
-        break;
-        case ITEM_LOVE_BALL:
-            if (gBattleMons[gBattlerTarget].species == gBattleMons[gBattlerAttacker].species)
-            {
-                u8 gender1 = GetMonGender(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
-                u8 gender2 = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
+        // Cálculo de PS restantes
+        u8 currentHP = gBattleMons[gBattlerTarget].hp;
+        u8 maxHP = gBattleMons[gBattlerTarget].maxHP;
+        u8 hpLossMultiplier;
 
-                if (gender1 != gender2 && gender1 != MON_GENDERLESS && gender2 != MON_GENDERLESS)
-                    ballMultiplier = 800;
-            }
-            break;
-        case ITEM_FAST_BALL:
-            if (gSpeciesInfo[gBattleMons[gBattlerTarget].species].baseSpeed >= 100)
-                ballMultiplier = 400;
-            break;
-        case ITEM_HEAVY_BALL:
-            break;
-        case ITEM_DREAM_BALL:
-            if (B_DREAM_BALL_MODIFIER >= GEN_8 && (gBattleMons[gBattlerTarget].status1 & STATUS1_SLEEP || GetBattlerAbility(gBattlerTarget) == ABILITY_COMATOSE))
-                ballMultiplier = 400;
-            break;
-        case ITEM_BEAST_BALL:
-            ballMultiplier = 10;
-            break;
-        }
+        if (currentHP >= 80) 
+            hpLossMultiplier = 1;      // 100 - 80
+        else if (currentHP >= 60) 
+            hpLossMultiplier = 2;      // 79 - 60
+        else if (currentHP >= 40) 
+            hpLossMultiplier = 3;      // 59 - 40
+        else if (currentHP >= 20) 
+            hpLossMultiplier = 4;      // 39 - 20
+        else 
+            hpLossMultiplier = 5;      // < 20
 
         odds = (catchRate * ballMultiplier / 100)
-            * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
-            / (3 * gBattleMons[gBattlerTarget].maxHP);
+            * (maxHP * 3 - currentHP * 2)
+            / (3 * maxHP);
+
+        odds = (odds * 255) / 100;
+        if (odds > 255) odds = 255;
+
+        odds = (odds * hpLossMultiplier) / 7;
 
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_ANY))
-            odds *= 2;
+            odds = (odds * 2 > 255) ? 255 : odds * 2;
 
-        if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
-            gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
-
-        if (odds > 254) // mon caught
+        if (odds >= 255) // Captura garantizada
         {
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, BALL_3_SHAKES_SUCCESS);
             MarkBattlerForControllerExec(gBattlerAttacker);
             TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
             gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
             SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-
-            if (CalculatePlayerPartyCount() == PARTY_SIZE)
-                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-            else
-                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-
-            if (gLastUsedItem == ITEM_HEAL_BALL)
-            {
-                MonRestorePP(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
-                HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], STATUS1_ANY, gBattlerTarget);
-                gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
-                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
-            }
+            gBattleCommunication[MULTISTRING_CHOOSER] = (CalculatePlayerPartyCount() == PARTY_SIZE) ? 0 : 1;
+            return;
         }
-        else // mon may be caught, calculate shakes
+
+        if ((Random() & 0xFF) < odds) // Captura exitosa
         {
-            u8 shakes;
-            u8 maxShakes;
-
-             maxShakes = BALL_3_SHAKES_SUCCESS;
-
-            if (gLastUsedItem == ITEM_MASTER_BALL)
-            {
-                shakes = maxShakes;
-            }
-            else
-            {
-                odds = Sqrt(Sqrt(16711680 / odds));
-                odds = 1048560 / odds;
-                for (shakes = 0; shakes < maxShakes && Random() < odds; shakes++);
-            }
-
+            BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, BALL_3_SHAKES_SUCCESS);
+            MarkBattlerForControllerExec(gBattlerAttacker);
+            TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
+            gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
+            SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
+        }
+        else // No capturado
+        {
+            u8 shakes = CalculateShakes(odds);
             BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, shakes);
             MarkBattlerForControllerExec(gBattlerAttacker);
-
-            if (shakes == maxShakes) // mon caught, copy of the code above
-            {
-                TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
-                gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
-                SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
-
-                if (CalculatePlayerPartyCount() == PARTY_SIZE)
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                else
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-
-                if (gLastUsedItem == ITEM_HEAL_BALL)
-                {
-                    MonRestorePP(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]]);
-                    HealStatusConditions(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], STATUS1_ANY, gBattlerTarget);
-                    gBattleMons[gBattlerTarget].hp = gBattleMons[gBattlerTarget].maxHP;
-                    SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HP, &gBattleMons[gBattlerTarget].hp);
-                }
-            }
-            else // not caught
-            {
-                gLastUsedBall = gLastUsedItem;
-                gBattleCommunication[MULTISTRING_CHOOSER] = shakes;
-                gBattlescriptCurrInstr = BattleScript_ShakeBallThrow;
-            }
+            gBattleCommunication[MULTISTRING_CHOOSER] = shakes;
+            gBattlescriptCurrInstr = BattleScript_ShakeBallThrow;
         }
     }
 }

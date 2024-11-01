@@ -96,6 +96,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Objetos exclusivos potenciadores: Objetos como Cuchara torcida potencian un 25% los ataques de una familia concreta (Alakazam).
     *Desarme ya no aumenta su potencia si quita el objeto, pero se le ha subido la potencia a 70.
     *Los objetos potenciadores de ataques de un tipo, como Colmillo dragón, potencian un 25% los ataques de ese tipo.
+    *Se ha cambiado y simplificado la fórmula de captura de Pokémon. Ahora solo hay Pokéball normal y Pokéball favorables: Las Pokéball favorables duplican las posibilidades de captura de un cierto tipo de Pokémon. El ratio de captura de los Pokémon va desde 255 de Pokémon como Caterpie; a 3, de Pokémon legendarios mayores. Cualquier problema de estado duplica las posibilidades de captura. Además, cada 20% de PS que el Pokémon haya perdido, aumenta en uno el multiplicador de posibilidades: Menos del 20% de PS, multiplica las posibilidades x5. En resumen, intentar capturar a un Caterpie, con Pokéball normal, sin estado y al 100% de PS, tiene un 60% de éxito; intentar capturar a un Rayquaza, con menos del 20% de PS, con Pokéball favorable y con estado, sucede un 11%.
 
 ## Cambios a mecánicas distintas de batalla:
     *El juego cuenta con un sistema de avance del tiempo que no es a partir del tiempo del sistema, sino por la cantidad de frames que pasan en el juego: Cada segundo de tiempo real en el juego equivalen a 20 segundos, es decir, 3 minutos son 1 hora. 
