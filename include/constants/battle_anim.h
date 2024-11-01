@@ -580,16 +580,18 @@
 #define B_ANIM_SIMPLE_HEAL              51
 #define NUM_B_ANIMS_GENERAL             52
 
-// special animations table (sBattleAnims_Special)
-#define B_ANIM_LVL_UP                   0
-#define B_ANIM_SWITCH_OUT_PLAYER_MON    1
-#define B_ANIM_SWITCH_OUT_OPPONENT_MON  2
-#define B_ANIM_BALL_THROW               3
-#define B_ANIM_BALL_THROW_WITH_TRAINER  4
-#define B_ANIM_SUBSTITUTE_TO_MON        5
-#define B_ANIM_MON_TO_SUBSTITUTE        6
-#define B_ANIM_CRITICAL_CAPTURE_THROW   7
-#define NUM_B_ANIMS_SPECIAL             8
+enum AnimacionesEspecialesBatalla //(sBattleAnims_Special)
+{
+    B_ANIM_LVL_UP,
+    B_ANIM_SWITCH_OUT_PLAYER_MON,
+    B_ANIM_SWITCH_OUT_OPPONENT_MON,
+    B_ANIM_BALL_THROW,
+    B_ANIM_BALL_THROW_WITH_TRAINER,
+    B_ANIM_SUBSTITUTE_TO_MON,
+    B_ANIM_MON_TO_SUBSTITUTE,
+
+    NUM_B_ANIMS_SPECIAL
+};
 
 // status animation table (sBattleAnims_StatusConditions)
 #define B_ANIM_STATUS_PSN               0

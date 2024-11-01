@@ -5273,18 +5273,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
                 break;
             case ABILITY_BALL_FETCH:
-                if (gBattleMons[battler].item == ITEM_NONE
-                    && gBattleResults.catchAttempts[gLastUsedBall - ITEM_ULTRA_BALL] >= 1
-                    && !gHasFetchedBall)
-                {
-                    gBattleScripting.battler = battler;
-                    BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, 2, &gLastUsedBall);
-                    MarkBattlerForControllerExec(battler);
-                    gHasFetchedBall = TRUE;
-                    gLastUsedItem = gLastUsedBall;
-                    BattleScriptPushCursorAndCallback(BattleScript_BallFetch);
-                    effect++;
-                }
                 break;
             case ABILITY_HUNGER_SWITCH:
                 if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TURN_END))

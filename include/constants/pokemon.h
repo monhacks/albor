@@ -27,7 +27,6 @@ enum TiposPokemon
     NUMERO_DE_TIPOS
 };
 
-// Pokémon egg groups
 enum GruposHuevo
 {
     GRUPO_HUEVO_NINGUNO,
@@ -46,6 +45,11 @@ enum GruposHuevo
     GRUPO_HUEVO_DRAGON,
     GRUPO_HUEVO_BEBE,
 };
+
+enum RatiosCaptura
+{
+    RATIO_CAPTURA_LEGENDARIO = 
+}
 
 #define GRUPOS_HUEVO_POR_POKEMON    2
 

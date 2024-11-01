@@ -1996,26 +1996,24 @@ void BtlController_HandleFaintAnimation(u32 battler)
 #undef sSpeedX
 #undef sSpeedY
 
-static void HandleBallThrow(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+static void HandleBallThrow(u32 battler, u32 target, u32 animId)
 {
     gDoingBattleAnim = TRUE;
-    if (allowCriticalCapture && IsCriticalCapture())
-        animId = B_ANIM_CRITICAL_CAPTURE_THROW;
     InitAndLaunchSpecialAnimation(battler, battler, target, animId);
 
     gBattlerControllerFuncs[battler] = Controller_WaitForBallThrow;
 }
 
-void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+void BtlController_HandleSuccessBallThrowAnim(u32 battler, u32 target, u32 animId)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = BALL_3_SHAKES_SUCCESS;
-    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+    HandleBallThrow(battler, target, animId);
 }
 
-void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId, bool32 allowCriticalCapture)
+void BtlController_HandleBallThrowAnim(u32 battler, u32 target, u32 animId)
 {
     gBattleSpritesDataPtr->animationData->ballThrowCaseId = gBattleResources->bufferA[battler][1];
-    HandleBallThrow(battler, target, animId, allowCriticalCapture);
+    HandleBallThrow(battler, target, animId);
 }
 
 void BtlController_HandleMoveAnimation(u32 battler)

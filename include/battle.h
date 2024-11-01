@@ -865,8 +865,6 @@ struct BattleAnimationInfo
     u8 field_6;
     u8 field_7;
     u8 ballThrowCaseId:6;
-    u8 isCriticalCapture:1;
-    u8 criticalCaptureSuccess:1;
     u8 introAnimActive:1;
     u8 wildMonInvisible:1;
     u8 field_9_x1C:3;
@@ -1054,7 +1052,6 @@ extern u8 gLeveledUpInBattle;
 extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
-extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
 extern u16 gBallToDisplay;

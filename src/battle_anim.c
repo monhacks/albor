@@ -259,7 +259,6 @@ static const u8* const sBattleAnims_Special[NUM_B_ANIMS_SPECIAL] =
     [B_ANIM_BALL_THROW_WITH_TRAINER]    = gBattleAnimSpecial_BallThrowWithTrainer,
     [B_ANIM_SUBSTITUTE_TO_MON]          = gBattleAnimSpecial_SubstituteToMon,
     [B_ANIM_MON_TO_SUBSTITUTE]          = gBattleAnimSpecial_MonToSubstitute,
-    [B_ANIM_CRITICAL_CAPTURE_THROW]     = gBattleAnimSpecial_CriticalCaptureBallThrow,
 };
 
 void ClearBattleAnimationVars(void)

@@ -28958,15 +28958,6 @@ gBattleAnimSpecial_MonToSubstitute::
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end
 
-gBattleAnimSpecial_CriticalCaptureBallThrow::
-	createvisualtask AnimTask_LoadBallGfx, 2
-	delay 0
-	playsewithpan SE_FALL, 0
-	createvisualtask AnimTask_ThrowBall, 2
-	createvisualtask AnimTask_IsBallBlockedByTrainer, 2
-	jumpreteq -1, BallThrowTrainerBlock
-	goto BallThrowEnd
-
 @@@@@@@@@@ Z MOVES @@@@@@@@@@
 gBattleAnimMove_BreakneckBlitz::
 	loadspritegfx ANIM_TAG_HOLLOW_ORB

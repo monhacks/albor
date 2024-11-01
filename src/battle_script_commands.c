@@ -324,7 +324,6 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite *sprite);
-static bool32 CriticalCapture(u32 odds);
 static void BestowItem(u32 battlerAtk, u32 battlerDef);
 static bool8 IsFinalStrikeEffect(u32 moveEffect);
 static void TryUpdateRoundTurnOrder(void);
@@ -14732,7 +14731,6 @@ static void Cmd_handleballthrow(void)
     CMD_ARGS();
 
     u16 ballMultiplier = 100;
-    s8 ballAddition = 0;
 
     if (gBattleControllerExecFlags)
         return;
@@ -14745,23 +14743,13 @@ static void Cmd_handleballthrow(void)
         MarkBattlerForControllerExec(gBattlerAttacker);
         gBattlescriptCurrInstr = BattleScript_TrainerBallBlock;
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-    {
-        BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, BALL_3_SHAKES_SUCCESS);
-        MarkBattlerForControllerExec(gBattlerAttacker);
-        gBattlescriptCurrInstr = BattleScript_WallyBallThrow;
-    }
     else
     {
         u32 odds, i;
-        u8 catchRate;
+        u8 catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
 
         gLastThrownBall = gLastUsedItem;
         gBallToDisplay = gLastThrownBall;
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            catchRate = gBattleStruct->safariCatchFactor * 1275 / 100;
-        else
-            catchRate = gSpeciesInfo[gBattleMons[gBattlerTarget].species].catchRate;
 
         switch (gLastUsedItem)
         {
@@ -14884,20 +14872,12 @@ static void Cmd_handleballthrow(void)
             break;
         }
 
-        // catchRate is unsigned, which means that it may potentially overflow if sum is applied directly.
-        if (catchRate < 21 && ballAddition == -20)
-            catchRate = 1;
-        else
-            catchRate = catchRate + ballAddition;
-
         odds = (catchRate * ballMultiplier / 100)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_SLEEP | STATUS1_FREEZE))
+        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_ANY))
             odds *= 2;
-        if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON | STATUS1_FROSTBITE))
-            odds = (odds * 15) / 10;
 
         if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
             gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
@@ -14928,18 +14908,7 @@ static void Cmd_handleballthrow(void)
             u8 shakes;
             u8 maxShakes;
 
-            gBattleSpritesDataPtr->animationData->isCriticalCapture = FALSE;
-            gBattleSpritesDataPtr->animationData->criticalCaptureSuccess = FALSE;
-
-            if (CriticalCapture(odds))
-            {
-                maxShakes = BALL_1_SHAKE;  // critical capture doesn't guarantee capture
-                gBattleSpritesDataPtr->animationData->isCriticalCapture = TRUE;
-            }
-            else
-            {
-                maxShakes = BALL_3_SHAKES_SUCCESS;
-            }
+             maxShakes = BALL_3_SHAKES_SUCCESS;
 
             if (gLastUsedItem == ITEM_MASTER_BALL)
             {
@@ -14957,9 +14926,6 @@ static void Cmd_handleballthrow(void)
 
             if (shakes == maxShakes) // mon caught, copy of the code above
             {
-                if (IsCriticalCapture())
-                    gBattleSpritesDataPtr->animationData->criticalCaptureSuccess = TRUE;
-
                 TryBattleFormChange(gBattlerTarget, FORM_CHANGE_END_BATTLE);
                 gBattlescriptCurrInstr = BattleScript_SuccessBallThrow;
                 SetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_POKEBALL, &gLastUsedItem);
@@ -14979,14 +14945,8 @@ static void Cmd_handleballthrow(void)
             }
             else // not caught
             {
-                if (!gHasFetchedBall)
-                    gLastUsedBall = gLastUsedItem;
-
-                if (IsCriticalCapture())
-                    gBattleCommunication[MULTISTRING_CHOOSER] = BALL_3_SHAKES_FAIL;
-                else
-                    gBattleCommunication[MULTISTRING_CHOOSER] = shakes;
-
+                gLastUsedBall = gLastUsedItem;
+                gBattleCommunication[MULTISTRING_CHOOSER] = shakes;
                 gBattlescriptCurrInstr = BattleScript_ShakeBallThrow;
             }
         }
@@ -15532,38 +15492,6 @@ void BS_DoStockpileStatChangesWearOff(void)
     {
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
-}
-
-static bool32 CriticalCapture(u32 odds)
-{
-    u32 numCaught;
-
-    if (B_CRITICAL_CAPTURE == FALSE)
-        return FALSE;
-
-    numCaught = GetNationalPokedexCount(FLAG_GET_CAUGHT);
-
-    if (numCaught <= (DEX_COUNT * 30) / 650)
-        odds = 0;
-    else if (numCaught <= (DEX_COUNT * 150) / 650)
-        odds /= 2;
-    else if (numCaught <= (DEX_COUNT * 300) / 650)
-        ;   // odds = (odds * 100) / 100;
-    else if (numCaught <= (DEX_COUNT * 450) / 650)
-        odds = (odds * 150) / 100;
-    else if (numCaught <= (DEX_COUNT * 600) / 650)
-        odds *= 2;
-    else
-        odds = (odds * 250) / 100;
-
-    if (CheckBagHasItem(ITEM_CATCHING_CHARM, 1))
-        odds = (odds * (100 + B_CATCHING_CHARM_BOOST)) / 100;
-
-    odds /= 6;
-    if ((Random() % 255) < odds)
-        return TRUE;
-
-    return FALSE;
 }
 
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler)

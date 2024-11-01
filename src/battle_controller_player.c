@@ -2073,12 +2073,12 @@ static void PlayerHandlePaletteFade(u32 battler)
 
 static void PlayerHandleSuccessBallThrowAnim(u32 battler)
 {
-    BtlController_HandleSuccessBallThrowAnim(battler, gBattlerTarget, B_ANIM_BALL_THROW, TRUE);
+    BtlController_HandleSuccessBallThrowAnim(battler, gBattlerTarget, B_ANIM_BALL_THROW);
 }
 
 void PlayerHandleBallThrowAnim(u32 battler)
 {
-    BtlController_HandleBallThrowAnim(battler, gBattlerTarget, B_ANIM_BALL_THROW, TRUE);
+    BtlController_HandleBallThrowAnim(battler, gBattlerTarget, B_ANIM_BALL_THROW);
 }
 
 static void PlayerHandlePause(u32 battler)
