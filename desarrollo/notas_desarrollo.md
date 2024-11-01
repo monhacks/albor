@@ -87,3 +87,4 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Arreglar .pal de Charmander (y de charmeleon?) No de Charizard.
 *Añadir caso de crianza para Latios/Latias y Nidoran.
 *¿Cómo criar a Tauros?
+*Decouple poké balls de item id
