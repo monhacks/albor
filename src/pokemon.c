@@ -2514,8 +2514,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (evCount >= maxAllowedEVs)
                                 return TRUE;
 
-                            // Ensure the increase does not exceed the max EV per stat (252)
-                            evCap = (itemEffect[10] & ITEM10_IS_VITAMIN) ? EV_ITEM_RAISE_LIMIT : MAX_PER_STAT_EVS;
+                            evCap = MAX_PER_STAT_EVS;
 
                             // Check if the per-stat limit is reached
                             if (dataSigned >= evCap)
@@ -2703,8 +2702,7 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
                             if (evCount >= maxAllowedEVs)
                                 return TRUE;
 
-                            // Ensure the increase does not exceed the max EV per stat (252)
-                            evCap = (itemEffect[10] & ITEM10_IS_VITAMIN) ? EV_ITEM_RAISE_LIMIT : MAX_PER_STAT_EVS;
+                            evCap = MAX_PER_STAT_EVS;
 
                             // Check if the per-stat limit is reached
                             if (dataSigned >= evCap)
@@ -3419,9 +3417,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, NULL)
      && GetGMaxTargetSpecies(species) != SPECIES_NONE
      && GetGMaxTargetSpecies(targetSpecies) == SPECIES_NONE)
-    {
         return SPECIES_NONE;
-    }
 
     if (consumeItem)
     {
@@ -3430,33 +3426,6 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 
     }
 
     return targetSpecies;
-}
-
-bool8 IsMonPastEvolutionLevel(struct Pokemon *mon)
-{
-    int i;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    const struct Evolution *evolutions = GetSpeciesEvolutions(species);
-
-    if (evolutions == NULL)
-        return FALSE;
-
-    for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
-    {
-        if (SanitizeSpeciesId(evolutions[i].targetSpecies) == SPECIES_NONE)
-            continue;
-
-        switch (evolutions[i].method)
-        {
-        case EVO_LEVEL:
-            if (evolutions[i].param <= level)
-                return TRUE;
-            break;
-        }
-    }
-
-    return FALSE;
 }
 
 u16 NationalPokedexNumToSpecies(u16 nationalNum)

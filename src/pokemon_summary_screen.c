@@ -1231,7 +1231,7 @@ static void VBlank(void)
 
 static void CB2_InitSummaryScreen(void)
 {
-    while (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && LoadGraphics() != TRUE && MenuHelpers_IsLinkActive() != TRUE);
+    while (LoadGraphics() != TRUE);
 }
 
 static bool8 LoadGraphics(void)
@@ -1593,7 +1593,7 @@ static void BeginCloseSummaryScreen(u8 taskId)
 
 static void CloseSummaryScreen(u8 taskId)
 {
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         if (sMonSummaryScreen->callback == gInitialSummaryScreenCallback)
             gInitialSummaryScreenCallback = NULL;
@@ -1613,7 +1613,7 @@ static void CloseSummaryScreen(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE && !gPaletteFade.active)
+    if (!gPaletteFade.active)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -1808,7 +1808,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
         gSprites[sMonSummaryScreen->spriteIds[SPRITE_ARR_ID_MON]].data[2] = 0;
         break;
     default:
-        if (!MenuHelpers_ShouldWaitForLinkRecv() && !FuncIsActiveTask(Task_ShowStatusWindow))
+        if (!FuncIsActiveTask(Task_ShowStatusWindow))
         {
             data[0] = 0;
             gTasks[taskId].func = Task_HandleInput;
@@ -2039,41 +2039,38 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (JOY_NEW(DPAD_UP))
     {
-        if (JOY_NEW(DPAD_UP))
-        {
-            data[0] = 4;
-            ChangeSelectedMove(data, -1, &sMonSummaryScreen->firstMoveIndex);
-        }
-        else if (JOY_NEW(DPAD_DOWN))
-        {
-            data[0] = 4;
-            ChangeSelectedMove(data, 1, &sMonSummaryScreen->firstMoveIndex);
-        }
-        else if (JOY_NEW(A_BUTTON))
-        {
-            if (sMonSummaryScreen->lockMovesFlag == TRUE
-             || (sMonSummaryScreen->newMove == MOVE_NONE && sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES))
-            {
-                PlaySE(SE_SELECT);
-                CloseMoveSelectMode(taskId);
-            }
-            else if (HasMoreThanOneMove() == TRUE)
-            {
-                PlaySE(SE_SELECT);
-                SwitchToMovePositionSwitchMode(taskId);
-            }
-            else
-            {
-                PlaySE(SE_FAILURE);
-            }
-        }
-        else if (JOY_NEW(B_BUTTON))
+        data[0] = 4;
+        ChangeSelectedMove(data, -1, &sMonSummaryScreen->firstMoveIndex);
+    }
+    else if (JOY_NEW(DPAD_DOWN))
+    {
+        data[0] = 4;
+        ChangeSelectedMove(data, 1, &sMonSummaryScreen->firstMoveIndex);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        if (sMonSummaryScreen->lockMovesFlag == TRUE
+            || (sMonSummaryScreen->newMove == MOVE_NONE && sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES))
         {
             PlaySE(SE_SELECT);
             CloseMoveSelectMode(taskId);
         }
+        else if (HasMoreThanOneMove() == TRUE)
+        {
+            PlaySE(SE_SELECT);
+            SwitchToMovePositionSwitchMode(taskId);
+        }
+        else
+        {
+            PlaySE(SE_FAILURE);
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        CloseMoveSelectMode(taskId);
     }
 }
 
@@ -2183,29 +2180,26 @@ static void Task_HandleInput_MovePositionSwitch(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (JOY_NEW(DPAD_UP))
     {
-        if (JOY_NEW(DPAD_UP))
-        {
-            data[0] = 3;
-            ChangeSelectedMove(&data[0], -1, &sMonSummaryScreen->secondMoveIndex);
-        }
-        else if (JOY_NEW(DPAD_DOWN))
-        {
-            data[0] = 3;
-            ChangeSelectedMove(&data[0], 1, &sMonSummaryScreen->secondMoveIndex);
-        }
-        else if (JOY_NEW(A_BUTTON))
-        {
-            if (sMonSummaryScreen->firstMoveIndex == sMonSummaryScreen->secondMoveIndex)
-                ExitMovePositionSwitchMode(taskId, FALSE);
-            else
-                ExitMovePositionSwitchMode(taskId, TRUE);
-        }
-        else if (JOY_NEW(B_BUTTON))
-        {
+        data[0] = 3;
+        ChangeSelectedMove(&data[0], -1, &sMonSummaryScreen->secondMoveIndex);
+    }
+    else if (JOY_NEW(DPAD_DOWN))
+    {
+        data[0] = 3;
+        ChangeSelectedMove(&data[0], 1, &sMonSummaryScreen->secondMoveIndex);
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        if (sMonSummaryScreen->firstMoveIndex == sMonSummaryScreen->secondMoveIndex)
             ExitMovePositionSwitchMode(taskId, FALSE);
-        }
+        else
+            ExitMovePositionSwitchMode(taskId, TRUE);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        ExitMovePositionSwitchMode(taskId, FALSE);
     }
 }
 
@@ -2324,44 +2318,41 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (gPaletteFade.active != TRUE)
     {
-        if (gPaletteFade.active != TRUE)
+        if (JOY_NEW(DPAD_UP))
         {
-            if (JOY_NEW(DPAD_UP))
-            {
-                data[0] = 4;
-                ChangeSelectedMove(data, -1, &sMonSummaryScreen->firstMoveIndex);
-            }
-            else if (JOY_NEW(DPAD_DOWN))
-            {
-                data[0] = 4;
-                ChangeSelectedMove(data, 1, &sMonSummaryScreen->firstMoveIndex);
-            }
-            else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
-            {
-                ChangePage(taskId, -1);
-            }
-            else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
-            {
-                ChangePage(taskId, 1);
-            }
-            else if (JOY_NEW(A_BUTTON))
-            {
-                StopPokemonAnimations();
-                PlaySE(SE_SELECT);
-                sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
-                gSpecialVar_0x8005 = sMoveSlotToReplace;
-                BeginCloseSummaryScreen(taskId);
-            }
-            else if (JOY_NEW(B_BUTTON))
-            {
-                StopPokemonAnimations();
-                PlaySE(SE_SELECT);
-                sMoveSlotToReplace = MAX_MON_MOVES;
-                gSpecialVar_0x8005 = MAX_MON_MOVES;
-                BeginCloseSummaryScreen(taskId);
-            }
+            data[0] = 4;
+            ChangeSelectedMove(data, -1, &sMonSummaryScreen->firstMoveIndex);
+        }
+        else if (JOY_NEW(DPAD_DOWN))
+        {
+            data[0] = 4;
+            ChangeSelectedMove(data, 1, &sMonSummaryScreen->firstMoveIndex);
+        }
+        else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+        {
+            ChangePage(taskId, -1);
+        }
+        else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+        {
+            ChangePage(taskId, 1);
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            StopPokemonAnimations();
+            PlaySE(SE_SELECT);
+            sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
+            gSpecialVar_0x8005 = sMoveSlotToReplace;
+            BeginCloseSummaryScreen(taskId);
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            StopPokemonAnimations();
+            PlaySE(SE_SELECT);
+            sMoveSlotToReplace = MAX_MON_MOVES;
+            gSpecialVar_0x8005 = MAX_MON_MOVES;
+            BeginCloseSummaryScreen(taskId);
         }
     }
 }

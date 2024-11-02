@@ -236,7 +236,7 @@ struct SpeciesInfo
     u8 baseSpDefense;
     u8 types[2];
     u8 catchRate;
-    u16 expYield; // expYield was changed from u8 to u16 for the new Exp System.
+    u8 expYield;
     u16 evYield_HP:2;
     u16 evYield_Attack:2;
     u16 evYield_Defense:2;
@@ -494,7 +494,7 @@ extern u16 gFollowerSteps;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const struct SpeciesInfo gSpeciesInfo[];
-extern const u32 gExperienceTables[][MAX_LEVEL + 1];
+extern const u32 gExperienceTables[TIPOS_DE_CRECIMIENTO][MAX_LEVEL + 1];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
@@ -594,7 +594,6 @@ u8 *UseStatIncreaseItem(u16 itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner);
-bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);

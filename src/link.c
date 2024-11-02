@@ -61,10 +61,8 @@ static u8 sChecksumAvailable;
 static u8 sHandshakePlayerCount;
 
 COMMON_DATA u16 gLinkPartnersHeldKeys[6] = {0};
-COMMON_DATA u32 gLinkDebugSeed = 0;
 COMMON_DATA struct LinkPlayerBlock gLocalLinkPlayerBlock = {0};
 COMMON_DATA bool8 gLinkErrorOccurred = 0;
-COMMON_DATA u32 gLinkDebugFlags = 0;
 COMMON_DATA bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u8 gBlockReceivedStatus[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u16 gLinkHeldKeys = 0;
@@ -562,12 +560,6 @@ static void LinkCB_RequestPlayerDataExchange(void)
     gLinkCallback = NULL;
 }
 
-void SetLinkDebugValues(u32 seed, u32 flags)
-{
-    gLinkDebugSeed = seed;
-    gLinkDebugFlags = flags;
-}
-
 u8 GetSavedLinkPlayerCountAsBitFlags(void)
 {
     int i;
@@ -872,14 +864,6 @@ void LinkPlayerFromBlock(u32 who)
 u32 GetLinkRecvQueueLength(void)
 {
     return gLink.recvQueue.count;
-}
-
-bool32 IsLinkRecvQueueAtOverworldMax(void)
-{
-    if (GetLinkRecvQueueLength() >= OVERWORLD_RECV_QUEUE_MAX)
-        return TRUE;
-
-    return FALSE;
 }
 
 void ConvertLinkPlayerName(struct LinkPlayer *player)

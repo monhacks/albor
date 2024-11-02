@@ -4056,7 +4056,6 @@ static void PrintStatsScreen_Left(u8 taskId)
     //TOGGLE--------------------------------------
     if (gTasks[taskId].data[5] == 0)
     {
-        u32 growthRate = sPokedexView->sPokemonStats.growthRate;
         u32 totalStats = sPokedexView->sPokemonStats.baseHP + sPokedexView->sPokemonStats.baseAttack + sPokedexView->sPokemonStats.baseDefense + sPokedexView->sPokemonStats.baseSpAttack +sPokedexView->sPokemonStats.baseSpDefense + sPokedexView->sPokemonStats.baseSpeed;
 
         //Total stats
@@ -4067,29 +4066,6 @@ static void PrintStatsScreen_Left(u8 taskId)
 
         //Growth rate
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, sText_Stats_Growthrate, base_x, base_y + base_y_offset*base_i);
-        switch (growthRate)
-        {
-        case GROWTH_MEDIUM_FAST:
-            StringCopy(strEV, sText_Stats_MEDIUM_FAST);
-            break;
-        case GROWTH_ERRATIC:
-            StringCopy(strEV, sText_Stats_ERRATIC);
-            break;
-        case GROWTH_FLUCTUATING:
-            StringCopy(strEV, sText_Stats_FLUCTUATING);
-            break;
-        case GROWTH_MEDIUM_SLOW:
-            StringCopy(strEV, sText_Stats_MEDIUM_SLOW);
-            break;
-        case GROWTH_FAST:
-            StringCopy(strEV, sText_Stats_FAST);
-            break;
-        case GROWTH_SLOW:
-            StringCopy(strEV, sText_Stats_SLOW);
-            break;
-        default:
-            break;
-        }
         align_x = GetStringRightAlignXOffset(0, strEV, total_x);
         PrintStatsScreenTextSmall(WIN_STATS_LEFT, strEV, align_x, base_y + base_y_offset*base_i);
     }

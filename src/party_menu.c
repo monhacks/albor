@@ -562,7 +562,7 @@ static void CB2_InitPartyMenu(void)
 {
     while (TRUE)
     {
-        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || ShowPartyMenu() == TRUE || MenuHelpers_IsLinkActive() == TRUE)
+        if (ShowPartyMenu() == TRUE)
             break;
     }
 }
@@ -595,8 +595,7 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 5:
-        if (!MenuHelpers_IsLinkActive())
-            ResetTasks();
+        ResetTasks();
         gMain.state++;
         break;
     case 6:
@@ -1281,7 +1280,7 @@ u8 GetPartyMenuType(void)
 
 void Task_HandleChooseMonInput(u8 taskId)
 {
-    if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (!gPaletteFade.active)
     {
         s8 *slotPtr = GetCurrentPartySlotPtr();
 
@@ -1428,8 +1427,7 @@ static void HandleChooseMonCancel(u8 taskId, s8 *slotPtr)
         PlaySE(SE_SELECT);
         if (DisplayCancelChooseMonYesNo(taskId) != TRUE)
         {
-            if (!MenuHelpers_IsLinkActive())
-                gSpecialVar_0x8004 = PARTY_SIZE + 1;
+            gSpecialVar_0x8004 = PARTY_SIZE + 1;
             gPartyMenuUseExitCallback = FALSE;
             *slotPtr = PARTY_SIZE + 1;
             Task_ClosePartyMenu(taskId);
@@ -1766,30 +1764,14 @@ bool8 IsPartyMenuTextPrinterActive(void)
     return FuncIsActiveTask(Task_PrintAndWaitForText);
 }
 
-static void Task_WaitForLinkAndReturnToChooseMon(u8 taskId)
-{
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
-    {
-        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
-        gTasks[taskId].func = Task_HandleChooseMonInput;
-    }
-}
-
 static void Task_ReturnToChooseMonAfterText(u8 taskId)
 {
     if (IsPartyMenuTextPrinterActive() != TRUE)
     {
         ClearStdWindowAndFrameToTransparent(WIN_MSG, FALSE);
         ClearWindowTilemap(WIN_MSG);
-        if (MenuHelpers_IsLinkActive() == TRUE)
-        {
-            gTasks[taskId].func = Task_WaitForLinkAndReturnToChooseMon;
-        }
-        else
-        {
-            DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
-            gTasks[taskId].func = Task_HandleChooseMonInput;
-        }
+        DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+        gTasks[taskId].func = Task_HandleChooseMonInput;
     }
 }
 
@@ -2775,7 +2757,7 @@ static void Task_TryCreateSelectionWindow(u8 taskId)
 
 static void Task_HandleSelectionMenuInput(u8 taskId)
 {
-    if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (!gPaletteFade.active)
     {
         s8 input;
         s16 *data = gTasks[taskId].data;

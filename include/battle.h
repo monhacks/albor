@@ -808,8 +808,6 @@ struct BattleScripting
     s32 painSplitHp;
     s32 bideDmg;
     u8 multihitString[6];
-    bool8 expOnCatch;
-    u8 unused;
     u8 animArg1;
     u8 animArg2;
     u16 savedStringId;

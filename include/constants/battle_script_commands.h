@@ -5,8 +5,6 @@
 #define sPAINSPLIT_HP                (gBattleScripting + 0x00) // painSplitHp
 #define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
 #define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
-#define sEXP_CATCH                   (gBattleScripting + 0x0E) // expOnCatch
-#define sUNUSED                      (gBattleScripting + 0x0F) // unused
 #define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
 #define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
 #define sSAVED_STRINID               (gBattleScripting + 0x12) // savedStringId

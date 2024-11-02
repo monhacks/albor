@@ -642,11 +642,7 @@ static void Task_StandingOnHiddenItem(u8 taskId)
 
 void ItemUseOutOfBattle_PokeblockCase(u8 taskId)
 {
-    if (MenuHelpers_IsLinkActive() == TRUE)
-    {
-        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
-    }
-    else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+    if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
     {
         gBagMenu->newScreenCallback = CB2_OpenPokeblockFromBag;
         Task_FadeAndCloseBagMenu(taskId);

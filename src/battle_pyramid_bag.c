@@ -446,9 +446,7 @@ static void VBlankCB_PyramidBag(void)
 
 static void CB2_LoadPyramidBagMenu(void)
 {
-    while (MenuHelpers_ShouldWaitForLinkRecv() != TRUE
-        && LoadPyramidBagMenu() != TRUE
-        && MenuHelpers_IsLinkActive() != TRUE);
+    while (LoadPyramidBagMenu() != TRUE);
 }
 
 static bool8 LoadPyramidBagMenu(void)
@@ -478,8 +476,7 @@ static bool8 LoadPyramidBagMenu(void)
             gMain.state++;
             break;
         case 5:
-            if (!MenuHelpers_IsLinkActive())
-                ResetTasks();
+            ResetTasks();
             gMain.state++;
             break;
         case 6:
@@ -891,7 +888,7 @@ static void Task_ClosePyramidBag(u8 taskId)
 static void Task_HandlePyramidBagInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE || gPaletteFade.active)
+    if (gPaletteFade.active)
         return;
 
     if (JOY_NEW(SELECT_BUTTON))
@@ -996,74 +993,68 @@ static void PrintMenuActionText_MultiRow(u8 windowId, u8 horizontalCount, u8 ver
 
 static void HandleMenuActionInput_SingleRow(u8 taskId)
 {
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    s32 id = Menu_ProcessInputNoWrap();
+    switch (id)
     {
-        s32 id = Menu_ProcessInputNoWrap();
-        switch (id)
-        {
-        case MENU_NOTHING_CHOSEN:
-            break;
-        case MENU_B_PRESSED:
-            PlaySE(SE_SELECT);
-            sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
-                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
-            break;
-        }
+    case MENU_NOTHING_CHOSEN:
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
+            sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
+        break;
     }
 }
 
 static void HandleMenuActionInput_2x2(u8 taskId)
 {
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    s8 id = Menu_GetCursorPos();
+    if (JOY_NEW(DPAD_UP))
     {
-        s8 id = Menu_GetCursorPos();
-        if (JOY_NEW(DPAD_UP))
-        {
-            if (id > 0 && IsValidMenuAction(id - 2))
-            {
-                PlaySE(SE_SELECT);
-                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
-            }
-        }
-        else if (JOY_NEW(DPAD_DOWN))
-        {
-            if (id < gPyramidBagMenu->menuActionsCount - 2 && IsValidMenuAction(id + 2))
-            {
-                PlaySE(SE_SELECT);
-                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
-            }
-        }
-        else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
-        {
-            if (id & 1 && IsValidMenuAction(id - 1))
-            {
-                PlaySE(SE_SELECT);
-                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
-            }
-        }
-        else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
-        {
-            if (!(id & 1) && IsValidMenuAction(id + 1))
-            {
-                PlaySE(SE_SELECT);
-                ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
-            }
-        }
-        else if (JOY_NEW(A_BUTTON))
+        if (id > 0 && IsValidMenuAction(id - 2))
         {
             PlaySE(SE_SELECT);
-            if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
-                sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
+            ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_UP);
         }
-        else if (JOY_NEW(B_BUTTON))
+    }
+    else if (JOY_NEW(DPAD_DOWN))
+    {
+        if (id < gPyramidBagMenu->menuActionsCount - 2 && IsValidMenuAction(id + 2))
         {
             PlaySE(SE_SELECT);
-            sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
+            ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_NONE, MENU_CURSOR_DELTA_DOWN);
         }
+    }
+    else if (JOY_NEW(DPAD_LEFT) || GetLRKeysPressed() == MENU_L_PRESSED)
+    {
+        if (id & 1 && IsValidMenuAction(id - 1))
+        {
+            PlaySE(SE_SELECT);
+            ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_LEFT, MENU_CURSOR_DELTA_NONE);
+        }
+    }
+    else if (JOY_NEW(DPAD_RIGHT) || GetLRKeysPressed() == MENU_R_PRESSED)
+    {
+        if (!(id & 1) && IsValidMenuAction(id + 1))
+        {
+            PlaySE(SE_SELECT);
+            ChangeMenuGridCursorPosition(MENU_CURSOR_DELTA_RIGHT, MENU_CURSOR_DELTA_NONE);
+        }
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        if (sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8 != NULL)
+            sMenuActions[gPyramidBagMenu->menuActionIds[id]].func.void_u8(taskId);
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sMenuActions[ACTION_CANCEL].func.void_u8(taskId);
     }
 }
 
@@ -1338,36 +1329,33 @@ static void Task_BeginItemSwap(u8 taskId)
 static void Task_ItemSwapHandleInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
+    if (JOY_NEW(SELECT_BUTTON))
     {
-        if (JOY_NEW(SELECT_BUTTON))
+        PlaySE(SE_SELECT);
+        ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
+        PerformItemSwap(taskId);
+    }
+    else
+    {
+        s32 id = ListMenu_ProcessInput(tListTaskId);
+        ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
+        SetSwapLineInvisibility(FALSE);
+        UpdateSwapLinePos(gPyramidBagMenuState.cursorPosition);
+        switch (id)
         {
+        case LIST_NOTHING_CHOSEN:
+            break;
+        case LIST_CANCEL:
             PlaySE(SE_SELECT);
-            ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
-            PerformItemSwap(taskId);
-        }
-        else
-        {
-            s32 id = ListMenu_ProcessInput(tListTaskId);
-            ListMenuGetScrollAndRow(tListTaskId, &gPyramidBagMenuState.scrollPosition, &gPyramidBagMenuState.cursorPosition);
-            SetSwapLineInvisibility(FALSE);
-            UpdateSwapLinePos(gPyramidBagMenuState.cursorPosition);
-            switch (id)
-            {
-            case LIST_NOTHING_CHOSEN:
-                break;
-            case LIST_CANCEL:
-                PlaySE(SE_SELECT);
-                if (JOY_NEW(A_BUTTON))
-                    PerformItemSwap(taskId);
-                else
-                    CancelItemSwap(taskId);
-                break;
-            default:
-                PlaySE(SE_SELECT);
+            if (JOY_NEW(A_BUTTON))
                 PerformItemSwap(taskId);
-                break;
-            }
+            else
+                CancelItemSwap(taskId);
+            break;
+        default:
+            PlaySE(SE_SELECT);
+            PerformItemSwap(taskId);
+            break;
         }
     }
 }

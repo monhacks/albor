@@ -271,13 +271,10 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
-void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
-void CreateWirelessStatusIndicatorSprite(u8 x, u8 y);
 void SetLinkStandbyCallback(void);
 void CheckShouldAdvanceLinkState(void);
 void SetCloseLinkCallback(void);
-void SetLinkDebugValues(u32 seed, u32 flags);
 void SetSuppressLinkErrorMessage(bool8 flag);
 void ConvertLinkPlayerName(struct LinkPlayer *linkPlayer);
 void ClearSavedLinkPlayers(void);
@@ -286,13 +283,10 @@ void LocalLinkPlayerToBlock(void);
 void LinkPlayerFromBlock(u32 who);
 void ResetLinkPlayerCount(void);
 void SaveLinkPlayers(u8 playerCount);
-bool32 IsLinkRecvQueueAtOverworldMax(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
-extern u32 gLinkDebugSeed;
 extern struct LinkPlayerBlock gLocalLinkPlayerBlock;
 extern bool8 gLinkErrorOccurred;
-extern u32 gLinkDebugFlags;
 extern bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS];
 extern u8 gBlockReceivedStatus[MAX_LINK_PLAYERS];
 extern u16 gLinkHeldKeys;

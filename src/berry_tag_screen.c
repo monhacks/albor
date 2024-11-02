@@ -208,11 +208,7 @@ static void CB2_InitBerryTagScreen(void)
 {
     while (1)
     {
-        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE)
-            break;
         if (InitBerryTagScreen() == TRUE)
-            break;
-        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -245,8 +241,7 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 5:
-        if (!MenuHelpers_IsLinkActive())
-            ResetTasks();
+        ResetTasks();
         gMain.state++;
         break;
     case 6:

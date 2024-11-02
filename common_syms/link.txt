@@ -1,8 +1,6 @@
 gLinkPartnersHeldKeys
-gLinkDebugSeed
 gLocalLinkPlayerBlock
 gLinkErrorOccurred
-gLinkDebugFlags
 gRemoteLinkPlayersNotReceived
 gBlockReceivedStatus
 gLinkHeldKeys

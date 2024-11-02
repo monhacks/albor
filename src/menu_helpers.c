@@ -285,24 +285,6 @@ bool8 IsWritingMailAllowed(u16 itemId)
     return TRUE;
 }
 
-bool8 MenuHelpers_IsLinkActive(void)
-{
-    return FALSE;
-}
-
-static bool8 IsActiveOverworldLinkBusy(void)
-{
-    return FALSE;
-}
-
-bool8 MenuHelpers_ShouldWaitForLinkRecv(void)
-{
-    if (IsActiveOverworldLinkBusy() == TRUE || IsLinkRecvQueueAtOverworldMax() == TRUE )
-        return TRUE;
-    else
-        return FALSE;
-}
-
 void SetItemListPerPageCount(struct ItemSlot *slots, u8 slotsCount, u8 *pageItems, u8 *totalItems, u8 maxPerPage)
 {
     u16 i;

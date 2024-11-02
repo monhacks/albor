@@ -15,15 +15,15 @@
 #define TYPE_NOT_TYPE1 NUMERO_DE_TIPOS
 
 // difficult conditional messages follow
-static const u8 sCondMsg00[] = _("{STR_VAR_1} danced happily.");
-static const u8 sCondMsg01[] = _("{STR_VAR_1} danced beautifully.");
+static const u8 sCondMsg00[] = _("{STR_VAR_1} danza feliz.");
+static const u8 sCondMsg01[] = _("{STR_VAR_1} baila bien.");
 static const u8* const sCelebiTexts[] = {sCondMsg00, sCondMsg01, NULL};
 static const u8 sCondMsg02[] = _("{STR_VAR_1} emitted fire and shouted.");
-static const u8 sCondMsg03[] = _("{STR_VAR_1} is vigorously producing\nfire!");
-static const u8 sCondMsg04[] = _("{STR_VAR_1} spat fire!");
+static const u8 sCondMsg03[] = _("¡{STR_VAR_1} lanza llamas!");
+static const u8 sCondMsg04[] = _("¡{STR_VAR_1} escupe fuego!");
 static const u8 sCondMsg05[] = _("{STR_VAR_1} is vigorously breathing\nfire!");
 static const u8* const sFireTexts[] = {sCondMsg02, sCondMsg03, sCondMsg04, sCondMsg05, NULL};
-static const u8 sCondMsg06[] = _("{STR_VAR_1} is staring straight at\nthe POKéMON LEAGUE.");
+static const u8 sCondMsg06[] = _("{STR_VAR_1} mira fijamente\nla Liga Pokémon.");
 static const u8 sCondMsg07[] = _("Your POKéMON is staring intently at\nthe mountain peak.");
 static const u8 sCondMsg08[] = _("Sniff sniff, something smells good!");
 static const u8 sCondMsg09[] = _("Your POKéMON is surveying the\nshelves restlessly.");
@@ -55,24 +55,24 @@ static const u8 sCondMsg29[] = _("{STR_VAR_1} is trembling with fear.");
 static const u8 sCondMsg30[] = _("{STR_VAR_1} seems somehow sad…");
 static const u8* const sFearTexts[] = {sCondMsg29, sCondMsg30, NULL};
 static const u8 sCondMsg31[] = _("{STR_VAR_1} is taking shelter in the\ngrass from the rain.");
-static const u8 sCondMsg32[] = _("{STR_VAR_1} seems very cold.");
-static const u8 sCondMsg33[] = _("{STR_VAR_1} is staring at the sea.");
-static const u8 sCondMsg34[] = _("Your POKéMON is staring intently at\nthe sea!");
-static const u8 sCondMsg35[] = _("{STR_VAR_1} is looking at the\nsurging sea.");
+static const u8 sCondMsg32[] = _("{STR_VAR_1} parece helarse...");
+static const u8 sCondMsg33[] = _("{STR_VAR_1} mira a los lejos\n hacia el mar.");
+static const u8 sCondMsg34[] = _("¡{STR_VAR_1} observa atentamente\nel océano!");
+static const u8 sCondMsg35[] = _("{STR_VAR_1} mira al inmenso\nmar.");
 static const u8* const sSeaTexts[] = {sCondMsg33, sCondMsg34, sCondMsg35, NULL};
-static const u8 sCondMsg36[] = _("{STR_VAR_1} is listening to the\nsound of the waterfall.");
-static const u8 sCondMsg37[] = _("{STR_VAR_1} seems to be happy about\nthe rain!");
-static const u8 sCondMsg38[] = _("{STR_VAR_1} is staring at its\nreflection in the water.");
+static const u8 sCondMsg36[] = _("{STR_VAR_1} escucha con atención\nel sonido de la cascada.");
+static const u8 sCondMsg37[] = _("¡{STR_VAR_1} parece pasárselo\npipa bajo la lluvia!");
+static const u8 sCondMsg38[] = _("{STR_VAR_1} mira fijamente\nsu reflejo en el agua.");
 static const u8 sCondMsg39[] = _("{STR_VAR_1} seems to relax as it\nhears the sound of rustling leaves…");
 static const u8 sCondMsg40[] = _("{STR_VAR_1} is gnawing at the ice.");
-static const u8 sCondMsg41[] = _("{STR_VAR_1} is touching the ice.");
+static const u8 sCondMsg41[] = _("{STR_VAR_1} toca el hielo.");
 static const u8* const sIceTexts[] = {sCondMsg26, sCondMsg40, sCondMsg41, NULL};
 static const u8 sCondMsg42[] = _("¡La quemadura de {STR_VAR_1}\nparece muy dolorosa!");
 static const u8 sCondMsg43[] = _("¡{STR_VAR_1} le encanta\nestar en la calle!");
 static const u8 sCondMsg44[] = _("{STR_VAR_1} mira atentamente\nhacia las nubes.");
 static const u8* const sDayTexts[] = {sCondMsg43, sCondMsg44, NULL};
-static const u8 sCondMsg45[] = _("Your POKéMON is staring spellbound\nat the night sky!");
-static const u8 sCondMsg46[] = _("Your POKéMON is happily gazing at\nthe beautiful, starry sky!");
+static const u8 sCondMsg45[] = _("A {STR_VAR_1} le hechiza\nel cielo nocturno!");
+static const u8 sCondMsg46[] = _("¡{STR_VAR_1} se emboba\nmirando las estrellas!");
 static const u8* const sNightTexts[] = {sCondMsg45, sCondMsg46, NULL};
 
 // See the struct definition in follower_helper.h for more info
