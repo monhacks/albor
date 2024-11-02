@@ -14774,21 +14774,20 @@ static void Cmd_handleballthrow(void)
         gLastThrownBall = gLastUsedItem;
         gBallToDisplay = gLastThrownBall;
 
-        // Cálculo de PS restantes
         u8 currentHP = gBattleMons[gBattlerTarget].hp;
         u8 maxHP = gBattleMons[gBattlerTarget].maxHP;
         u8 hpLossMultiplier;
 
         if (currentHP >= 80) 
-            hpLossMultiplier = 1;      // 100 - 80
+            hpLossMultiplier = 1;   // 100 - 80
         else if (currentHP >= 60) 
-            hpLossMultiplier = 2;      // 79 - 60
+            hpLossMultiplier = 2;   // 79 - 60
         else if (currentHP >= 40) 
-            hpLossMultiplier = 3;      // 59 - 40
+            hpLossMultiplier = 3;   // 59 - 40
         else if (currentHP >= 20) 
-            hpLossMultiplier = 4;      // 39 - 20
+            hpLossMultiplier = 4;   // 39 - 20
         else 
-            hpLossMultiplier = 5;      // < 20
+            hpLossMultiplier = 5;   // < 20
 
         odds = (catchRate * ballMultiplier / 100)
             * (maxHP * 3 - currentHP * 2)

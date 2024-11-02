@@ -140,14 +140,10 @@ u8 GetBattlerYDelta(u8 battlerId, u16 species)
     u8 ret;
     species = SanitizeSpeciesId(species);
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER || IsContest())
-    {
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         ret = gSpeciesInfo[species].backPicYOffset;
-    }
     else
-    {
         ret = gSpeciesInfo[species].frontPicYOffset;
-    }
     return ret;
 }
 
@@ -156,11 +152,8 @@ u8 GetBattlerElevation(u8 battlerId, u16 species)
     u8 ret = 0;
     if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
     {
-        if (!IsContest())
-        {
-            species = SanitizeSpeciesId(species);
-            ret = gSpeciesInfo[species].enemyMonElevation;
-        }
+        species = SanitizeSpeciesId(species);
+        ret = gSpeciesInfo[species].enemyMonElevation;
     }
     return ret;
 }
@@ -170,10 +163,8 @@ u8 GetBattlerSpriteFinal_Y(u8 battlerId, u16 species, bool8 a3)
     u16 offset;
     u8 y;
 
-    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER || IsContest())
-    {
+    if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         offset = GetBattlerYDelta(battlerId, species);
-    }
     else
     {
         offset = GetBattlerYDelta(battlerId, species);
