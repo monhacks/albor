@@ -519,6 +519,10 @@ static const u16 sZigzagoonEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sWurmpleEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sLotadEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };

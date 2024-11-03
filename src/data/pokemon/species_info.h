@@ -2930,8 +2930,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Poliwag),
         FOLLOWER(Poliwag, TRACKS_FOOT),
         MOVIMIENTOS(Poliwag),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_POLIWHIRL}),
         MOVIMIENTOS_HUEVO(Poliwag),
+        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_POLIWHIRL}),
     },
 
     [SPECIES_POLIWHIRL] =
@@ -2969,10 +2969,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Poliwhirl),
         FOLLOWER(Poliwhirl, TRACKS_FOOT),
         MOVIMIENTOS(Poliwhirl),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH},
-                                {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED},
-                                {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}),
         MOVIMIENTOS_HUEVO(Poliwag),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH},
+                                {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}),
     },
 
     [SPECIES_POLIWRATH] =
@@ -3186,6 +3185,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(25)),
         GRUPO_HUEVO(HUMANOIDE),
         HABILIDADES(GUTS, NO_GUARD, STEADFAST),
+        SOMBRA(0, 4, S),
         NOMBRE(Machop),
         GRITO(MACHOP),
         POKEDEX(MACHOP),
@@ -3199,7 +3199,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Machop),
         FOLLOWER(Machop, TRACKS_FOOT),
         MOVIMIENTOS(Machop),
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_MACHOKE}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MACHOKE}),
         MOVIMIENTOS_HUEVO(Machop),
     },
 
@@ -3222,6 +3222,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(25)),
         GRUPO_HUEVO(HUMANOIDE),
         HABILIDADES(GUTS, NO_GUARD, STEADFAST),
+        SOMBRA(-1, 9, M),
         NO_VOLTEAR,
         NOMBRE(Machoke),
         GRITO(MACHOKE),
@@ -3237,8 +3238,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Machoke, TRACKS_FOOT),
         MOVIMIENTOS(Machoke),
         MOVIMIENTOS_HUEVO(Machop),
-        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_MACHAMP},
-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_MACHAMP}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MACHAMP}),
     },
 
     [SPECIES_MACHAMP] =
@@ -3260,6 +3260,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(25)),
         GRUPO_HUEVO(HUMANOIDE),
         HABILIDADES(GUTS, NO_GUARD, STEADFAST),
+        SOMBRA(6, 13, L),
         NOMBRE(Machamp),
         GRITO(MACHAMP),
         POKEDEX(MACHAMP),
@@ -3294,6 +3295,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(PLANTA),
         HABILIDADES(MATAMOSCAS, CARNIVORO, GLUTTONY),
+        SOMBRA(0, 2, S),
         NOMBRE(Bellsprout),
         GRITO(BELLSPROUT),
         POKEDEX(BELLSPROUT),
@@ -3329,6 +3331,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(PLANTA),
         HABILIDADES(MATAMOSCAS, CARNIVORO, GLUTTONY),
+        SOMBRA(-2, 1, S),
         NOMBRE(Weepinbell),
         GRITO(WEEPINBELL),
         POKEDEX(WEEPINBELL),
@@ -3365,6 +3368,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(PLANTA),
         HABILIDADES(MATAMOSCAS, CARNIVORO, GLUTTONY),
+        SOMBRA(-3, 6, M),
         NOMBRE(Victreebell),
         GRITO(VICTREEBEL),
         POKEDEX(VICTREEBELL),
@@ -3486,7 +3490,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Geodude, TRACKS_SPOT),
         MOVIMIENTOS(Geodude),
         MOVIMIENTOS_HUEVO(Geodude),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_GRAVELER}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GRAVELER}),
     },
 
     [SPECIES_GRAVELER] =
@@ -3522,8 +3526,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Graveler, TRACKS_FOOT),
         MOVIMIENTOS(Graveler),
         MOVIMIENTOS_HUEVO(Geodude),
-        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM},
-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM}),
+        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GOLEM}),
     },
 
     [SPECIES_GOLEM] =
@@ -3842,7 +3845,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS(Slowpoke),
         MOVIMIENTOS_HUEVO(Slowpoke),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SLOWBRO},
-                                {EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING},
                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}),
     },
 
@@ -6376,13 +6378,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
                                 {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
                                 {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
-                                {EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON},
-                                {EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON},
+                                {EVO_LEVEL_DAY, 0, SPECIES_ESPEON},
+                                {EVO_LEVEL_NIGHT, 0, SPECIES_UMBREON},
                                 {EVO_SPECIFIC_MAP, MAP_PETALBURG_WOODS, SPECIES_LEAFEON},
                                 {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
                                 {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
                                 {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
-                                {EVO_FRIENDSHIP_MOVE_TYPE, TIPO_HADA, SPECIES_SYLVEON}),
+                                {EVO_FRIENDSHIP, SPECIES_SYLVEON}),
     },
 
     [SPECIES_VAPOREON] =
@@ -10829,6 +10831,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Zigzagoon),
         FOLLOWER(Zigzagoon, TRACKS_FOOT),
         MOVIMIENTOS(Zigzagoon),
+        MOVIMIENTOS_HUEVO(Zigzagoon),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LINOONE}),
     },
 
@@ -10865,6 +10868,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Linoone),
         FOLLOWER(Linoone, TRACKS_FOOT),
         MOVIMIENTOS(Linoone),
+        MOVIMIENTOS_HUEVO(Zigzagoon),
     },
 
     [SPECIES_WURMPLE] =
@@ -10900,7 +10904,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Wurmple),
         FOLLOWER(Wurmple, TRACKS_BUG),
         MOVIMIENTOS(Wurmple),
-        .tmIlliterate = TRUE,
+        MOVIMIENTOS_HUEVO(Wurmple),
         .evolutions = EVOLUTION({EVO_LEVEL_SILCOON, 7, SPECIES_SILCOON},
                                 {EVO_LEVEL_CASCOON, 7, SPECIES_CASCOON}),
     },
@@ -10936,7 +10940,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Silcoon),
         FOLLOWER(Silcoon, TRACKS_BUG),
         MOVIMIENTOS(Silcoon),
-        .tmIlliterate = TRUE,
+        MOVIMIENTOS_HUEVO(Wurmple),
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEAUTIFLY}),
     },
 
@@ -10975,6 +10979,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Beautifly),
         FOLLOWER(Beautifly, TRACKS_NONE),
         MOVIMIENTOS(Beautifly),
+        MOVIMIENTOS_HUEVO(Wurmple),
     },
 
     [SPECIES_CASCOON] =
@@ -11008,7 +11013,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Cascoon),
         FOLLOWER(Cascoon, TRACKS_BUG),
         MOVIMIENTOS(Cascoon),
-        .tmIlliterate = TRUE,
+        MOVIMIENTOS_HUEVO(Wurmple),
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DUSTOX}),
     },
 
@@ -11047,6 +11052,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dustox),
         FOLLOWER(Dustox, TRACKS_NONE),
         MOVIMIENTOS(Dustox),
+        MOVIMIENTOS_HUEVO(Wurmple),
     },
 
     [SPECIES_LOTAD] =
@@ -11081,6 +11087,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Lotad),
         FOLLOWER(Lotad, TRACKS_FOOT),
         MOVIMIENTOS(Lotad),
+        MOVIMIENTOS_HUEVO(Lotad),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_LOMBRE}),
     },
 
@@ -11116,6 +11123,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Lombre),
         FOLLOWER(Lombre, TRACKS_FOOT),
         MOVIMIENTOS(Lombre),
+        MOVIMIENTOS_HUEVO(Lotad),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_LUDICOLO}),
     },
 
@@ -11153,6 +11161,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ludicolo),
         FOLLOWER(Ludicolo, TRACKS_FOOT),
         MOVIMIENTOS(Ludicolo),
+        MOVIMIENTOS_HUEVO(Lotad),
     },
 
     [SPECIES_SEEDOT] =
@@ -11187,6 +11196,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Seedot),
         FOLLOWER(Seedot, TRACKS_FOOT),
         MOVIMIENTOS(Seedot),
+        MOVIMIENTOS_HUEVO(Seedot),
         .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_NUZLEAF}),
     },
 
@@ -11224,6 +11234,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         OBJETO_RARO(BLACK_GLASSES),
         FOLLOWER(Nuzleaf, TRACKS_FOOT),
         MOVIMIENTOS(Nuzleaf),
+        MOVIMIENTOS_HUEVO(Seedot),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_SHIFTRY}),
     },
 
@@ -11261,6 +11272,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shiftry),
         FOLLOWER(Shiftry, TRACKS_FOOT),
         MOVIMIENTOS(Shiftry),
+        MOVIMIENTOS_HUEVO(Seedot),
     },
 
     [SPECIES_TAILLOW] =
@@ -11294,6 +11306,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Taillow),
         FOLLOWER(Taillow, TRACKS_FOOT),
         MOVIMIENTOS(Taillow),
+        MOVIMIENTOS_HUEVO(Taillow),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_SWELLOW}),
     },
 
@@ -11328,6 +11341,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Swellow),
         FOLLOWER(Swellow, TRACKS_NONE),
         MOVIMIENTOS(Swellow),
+        MOVIMIENTOS_HUEVO(Taillow),
     },
 
     [SPECIES_WINGULL] =
@@ -11363,6 +11377,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Wingull),
         FOLLOWER(Wingull, TRACKS_NONE),
         MOVIMIENTOS(Wingull),
+        MOVIMIENTOS_HUEVO(Wingull),
         .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PELIPPER}),
     },
 
@@ -11399,6 +11414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pelipper),
         FOLLOWER(Pelipper, TRACKS_NONE),
         MOVIMIENTOS(Pelipper),
+        MOVIMIENTOS_HUEVO(Wingull),
     },
 
     [SPECIES_RALTS] =
@@ -11432,6 +11448,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ralts),
         FOLLOWER(Ralts, TRACKS_FOOT),
         MOVIMIENTOS(Ralts),
+        MOVIMIENTOS_HUEVO(Ralts),
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KIRLIA}),
     },
 
@@ -11466,6 +11483,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Kirlia),
         FOLLOWER(Kirlia, TRACKS_FOOT),
         MOVIMIENTOS(Kirlia),
+        MOVIMIENTOS_HUEVO(Ralts),
         .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
                                 {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}),
     },
@@ -11484,6 +11502,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Gardevoir),
         POKEDEX(GARDEVOIR),
         MOVIMIENTOS(Gardevoir),
+        MOVIMIENTOS_HUEVO(Ralts),
         PS(68),
         ATAQUE(65),
         DEFENSA(65),
@@ -11517,6 +11536,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Gallade),
         POKEDEX(GALLADE),
         MOVIMIENTOS(Gallade),
+        MOVIMIENTOS_HUEVO(Ralts),
         PS(68),
         ATAQUE(125),
         DEFENSA(65),
@@ -11568,6 +11588,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Surskit),
         FOLLOWER(Surskit, TRACKS_BUG),
         MOVIMIENTOS(Surskit),
+        MOVIMIENTOS_HUEVO(Surskit),
         .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_MASQUERAIN}),
     },
 
@@ -11605,6 +11626,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Masquerain),
         FOLLOWER(Masquerain, TRACKS_NONE),
         MOVIMIENTOS(Masquerain),
+        MOVIMIENTOS_HUEVO(Surskit),
     },
 
     [SPECIES_SHROOMISH] =
@@ -11639,6 +11661,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shroomish),
         FOLLOWER(Shroomish, TRACKS_FOOT),
         MOVIMIENTOS(Shroomish),
+        MOVIMIENTOS_HUEVO(Shroomish),
         .evolutions = EVOLUTION({EVO_LEVEL, 23, SPECIES_BRELOOM}),
     },
 
@@ -11674,6 +11697,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Breloom),
         FOLLOWER(Breloom, TRACKS_FOOT),
         MOVIMIENTOS(Breloom),
+        MOVIMIENTOS_HUEVO(Shroomish),
     },
 
     [SPECIES_SLAKOTH] =
@@ -11707,6 +11731,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Slakoth),
         FOLLOWER(Slakoth, TRACKS_FOOT),
         MOVIMIENTOS(Slakoth),
+        MOVIMIENTOS_HUEVO(Slakoth),
         .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_VIGOROTH}),
     },
 
@@ -11741,6 +11766,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Vigoroth),
         FOLLOWER(Vigoroth, TRACKS_FOOT),
         MOVIMIENTOS(Vigoroth),
+        MOVIMIENTOS_HUEVO(Slakoth),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SLAKING}),
     },
 
@@ -11775,6 +11801,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Slaking),
         FOLLOWER(Slaking, TRACKS_FOOT),
         MOVIMIENTOS(Slaking),
+        MOVIMIENTOS_HUEVO(Slakoth),
     },
 
     [SPECIES_NINCADA] =
@@ -11809,6 +11836,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Nincada),
         FOLLOWER(Nincada, TRACKS_BUG),
         MOVIMIENTOS(Nincada),
+        MOVIMIENTOS_HUEVO(Nincada),
         .evolutions = EVOLUTION({EVO_LEVEL_NINJASK, 30, SPECIES_NINJASK},
                                 {EVO_LEVEL_SHEDINJA, 30, SPECIES_SHEDINJA}),
     },
@@ -11845,6 +11873,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ninjask),
         FOLLOWER(Ninjask, TRACKS_NONE),
         MOVIMIENTOS(Ninjask),
+        MOVIMIENTOS_HUEVO(Nincada),
     },
 
     [SPECIES_SHEDINJA] =
@@ -11879,6 +11908,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shedinja),
         FOLLOWER(Shedinja, TRACKS_NONE),
         MOVIMIENTOS(Shedinja),
+        MOVIMIENTOS_HUEVO(Nincada),
     },
 
     [SPECIES_WHISMUR] =
@@ -12468,7 +12498,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Budew),
         FOLLOWER(Budew, TRACKS_FOOT),
         MOVIMIENTOS(Budew),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_ROSELIA}),
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_ROSELIA}),
     },
 
     [SPECIES_ROSELIA] =
@@ -13419,7 +13449,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Feebas, TRACKS_SPOT),
         MOVIMIENTOS(Feebas),
         .evolutions = EVOLUTION({EVO_BEAUTY, 170, SPECIES_MILOTIC},
-                                {EVO_TRADE_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC},
                                 {EVO_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC}),
     },
 
@@ -13715,8 +13744,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dusclops),
         FOLLOWER(Dusclops, TRACKS_FOOT),
         MOVIMIENTOS(Dusclops),
-        .evolutions = EVOLUTION({EVO_TRADE_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR},
-                                {EVO_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_REAPER_CLOTH, SPECIES_DUSKNOIR}),
     },
 
     [SPECIES_DUSKNOIR] =
@@ -13820,7 +13848,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Chingling),
         FOLLOWER(Chingling, TRACKS_FOOT),
         MOVIMIENTOS(Chingling),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP_NIGHT, 0, SPECIES_CHIMECHO}),
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CHIMECHO}),
     },
 
     [SPECIES_CHIMECHO] =
@@ -14417,7 +14445,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Beldum),
         FOLLOWER(Beldum, TRACKS_NONE),
         MOVIMIENTOS(Beldum),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_METANG}),
     },
 
@@ -15475,7 +15502,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Kricketot),
         FOLLOWER(Kricketot, TRACKS_FOOT),
         MOVIMIENTOS(Kricketot),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_KRICKETUNE}),
     },
 
@@ -15790,7 +15816,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Combee),
         FOLLOWER(Combee, TRACKS_FOOT),
         MOVIMIENTOS(Combee),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 30, SPECIES_VESPIQUEN}),
     },
 
@@ -16525,7 +16550,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Riolu),
         FOLLOWER(Riolu, TRACKS_FOOT),
         MOVIMIENTOS(Riolu),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP_DAY, 0, SPECIES_LUCARIO}),
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_LUCARIO}),
     },
 
     [SPECIES_LUCARIO] =
@@ -20488,8 +20513,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Phantump),
         FOLLOWER(Phantump, TRACKS_FOOT),
         MOVIMIENTOS(Phantump),
-        .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_TREVENANT},
-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_TREVENANT}),
+        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 30, SPECIES_TREVENANT}),
     },
 
     [SPECIES_TREVENANT] =
@@ -21444,7 +21468,6 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Blipbug),
         FOLLOWER(Blipbug, TRACKS_FOOT),
         MOVIMIENTOS(Blipbug),
-        .tmIlliterate = TRUE,
         .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DOTTLER}),
     },
 
@@ -21653,7 +21676,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Snom),
         FOLLOWER(Snom, TRACKS_FOOT),
         MOVIMIENTOS(Snom),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP_NIGHT, 0, SPECIES_FROSMOTH}),
+        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_FROSMOTH}),
     },
 
     [SPECIES_FROSMOTH] =

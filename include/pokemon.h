@@ -249,9 +249,9 @@ struct SpeciesInfo
     u8 eggCycles;
     u8 friendship;
     u8 growthRate;
-    u8 eggGroups[2];
-    u16 abilities[NUM_ABILITY_SLOTS]; // 3 abilities, no longer u8 because we have over 255 abilities now.
-    u8 speciesName[POKEMON_NAME_LENGTH + 1];
+    u8 eggGroups[GRUPOS_HUEVO_POR_POKEMON];
+    u16 abilities[NUM_ABILITY_SLOTS];
+    u8 speciesName[POKEMON_NAME_LENGTH];
     u16 cryId;
     u16 dexNum;
     u8 noFlip:1;
@@ -277,7 +277,6 @@ struct SpeciesInfo
     u8 backPicYOffset; // The number of pixels between the drawn pixel area and the bottom edge.
     u8 enemyMonElevation; // This determines how much higher above the usual position the enemy Pokémon is during battle. Species that float or fly have nonzero values.
     u32 isLegendary:1;
-    u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
     u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
     u32 brilla:1;
     u32 transparente:1;

@@ -5432,8 +5432,6 @@ BattleScript_FaintAttacker::
 
 BattleScript_FaintTarget::
 	tryillusionoff BS_TARGET
-	tryactivategulpmissile
-	tryupdateleaderscresttracker
 	playfaintcry BS_TARGET
 	pause B_WAIT_TIME_LONG
 	dofaintanimation BS_TARGET
@@ -7532,7 +7530,6 @@ BattleScript_DoRecoil::
 	datahpupdate BS_ATTACKER
 	printstring STRINGID_PKMNHITWITHRECOIL
 	waitmessage B_WAIT_TIME_LONG
-	tryupdaterecoiltracker
 	tryfaintmon BS_ATTACKER
 BattleScript_RecoilEnd::
 	return

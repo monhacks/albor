@@ -16202,47 +16202,11 @@ static void TryUpdateEvolutionTracker(u32 evolutionMethod, u32 upAmount, u16 use
                         if (evolutions[i].param == usedMove)
                             SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
                         break;
-                    case EVO_RECOIL_DAMAGE_MALE:
-                    case EVO_RECOIL_DAMAGE_FEMALE:
-                        if (gBattleMons[gBattlerAttacker].hp == 0)
-                            val = 0;
-                        SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
-                        break;
-                    case EVO_DEFEAT_THREE_WITH_ITEM:
-                        if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_SPECIES) == GetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_SPECIES)
-                         && GetMonData(&gEnemyParty[gBattlerPartyIndexes[gBattlerTarget]], MON_DATA_HELD_ITEM) == evolutions[i].param)
-                            SetMonData(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]], MON_DATA_EVOLUTION_TRACKER, &val);
-                        break;
                 }
                 return;
             }
         }
     }
-}
-
-void BS_TryUpdateRecoilTracker(void)
-{
-    NATIVE_ARGS();
-    u8 gender = GetMonGender(&gPlayerParty[gBattlerPartyIndexes[gBattlerAttacker]]);
-
-    switch(gender)
-    {
-        case MON_MALE:
-            TryUpdateEvolutionTracker(EVO_RECOIL_DAMAGE_MALE, gBattleMoveDamage, MOVE_NONE);
-            break;
-        case MON_FEMALE:
-            TryUpdateEvolutionTracker(EVO_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage, MOVE_NONE);
-            break;
-    }
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_TryUpdateLeadersCrestTracker(void)
-{
-    NATIVE_ARGS();
-    TryUpdateEvolutionTracker(EVO_DEFEAT_THREE_WITH_ITEM, 1, MOVE_NONE);
-    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 void BS_TryTidyUp(void)
