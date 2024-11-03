@@ -38,7 +38,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_RALTS] = {
         .species = SPECIES_RALTS,
         .moves = {MOVE_CONFUSION, MOVE_IMPRISON, MOVE_DOUBLE_TEAM, MOVE_LIGHT_SCREEN},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
         .nature = NATURE_DEFENSIVA
     },
@@ -633,7 +633,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_ABRA] = {
         .species = SPECIES_ABRA,
         .moves = {MOVE_MIMIC, MOVE_METRONOME, MOVE_FLASH, MOVE_SEISMIC_TOSS},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 0, 0),
         .nature = NATURE_OFENSIVA
     },
@@ -745,7 +745,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_NATU] = {
         .species = SPECIES_NATU,
         .moves = {MOVE_NIGHT_SHADE, MOVE_FUTURE_SIGHT, MOVE_CONFUSE_RAY, MOVE_FLASH},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
         .nature = NATURE_DEFENSIVA
     },
@@ -1186,7 +1186,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_KADABRA_1] = {
         .species = SPECIES_KADABRA,
         .moves = {MOVE_CONFUSION, MOVE_ROLE_PLAY, MOVE_FUTURE_SIGHT, MOVE_DISABLE},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 0),
         .nature = NATURE_DEFENSIVA
     },
@@ -1466,7 +1466,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_CHIMECHO_1] = {
         .species = SPECIES_CHIMECHO,
         .moves = {MOVE_PSYWAVE, MOVE_TAKE_DOWN, MOVE_HEAL_BELL, MOVE_SAFEGUARD},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
         .nature = NATURE_DEFENSIVA_ESPECIAL
     },
@@ -1725,7 +1725,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_STANTLER_1] = {
         .species = SPECIES_STANTLER,
         .moves = {MOVE_EXTRASENSORY, MOVE_CONFUSE_RAY, MOVE_STOMP, MOVE_SAND_ATTACK},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
         .nature = NATURE_DEFENSIVA_ESPECIAL
     },
@@ -1921,7 +1921,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_KADABRA_2] = {
         .species = SPECIES_KADABRA,
         .moves = {MOVE_PSYCHIC, MOVE_THUNDER_WAVE, MOVE_REFLECT, MOVE_RECOVER},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 0),
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
@@ -2201,7 +2201,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_CHIMECHO_2] = {
         .species = SPECIES_CHIMECHO,
         .moves = {MOVE_PSYCHIC, MOVE_HYPNOSIS, MOVE_DREAM_EATER, MOVE_HEAL_BELL},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(170, 0, 170, 0, 0, 170),
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
@@ -2810,7 +2810,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_HYPNO_1] = {
         .species = SPECIES_HYPNO,
         .moves = {MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_ICE_PUNCH, MOVE_HYPNOSIS},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 252, 0),
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
@@ -3482,7 +3482,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     [FRONTIER_MON_HYPNO_2] = {
         .species = SPECIES_HYPNO,
         .moves = {MOVE_HYPNOSIS, MOVE_NIGHTMARE, MOVE_DREAM_EATER, MOVE_PSYCHIC},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 252),
         .nature = NATURE_OFENSIVA_ESPECIAL
     },

@@ -71,7 +71,7 @@ static const u8 sCondMsg42[] = _("¡La quemadura de {STR_VAR_1}\nparece muy dolo
 static const u8 sCondMsg43[] = _("¡{STR_VAR_1} le encanta\nestar en la calle!");
 static const u8 sCondMsg44[] = _("{STR_VAR_1} mira atentamente\nhacia las nubes.");
 static const u8* const sDayTexts[] = {sCondMsg43, sCondMsg44, NULL};
-static const u8 sCondMsg45[] = _("A {STR_VAR_1} le hechiza\nel cielo nocturno!");
+static const u8 sCondMsg45[] = _("¡A {STR_VAR_1} le hechiza\nel cielo nocturno!");
 static const u8 sCondMsg46[] = _("¡{STR_VAR_1} se emboba\nmirando las estrellas!");
 static const u8* const sNightTexts[] = {sCondMsg45, sCondMsg46, NULL};
 

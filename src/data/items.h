@@ -7723,7 +7723,7 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_SharpBeak,
     },
 
-    [ITEM_TWISTED_SPOON] =
+    [ITEM_CUCHARA_TORCIDA] =
     {
         .name = _("Cuchara torcida"),
         .price = 2000,

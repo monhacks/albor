@@ -60,7 +60,6 @@ static u16 sRecvNonzeroCheck;
 static u8 sChecksumAvailable;
 static u8 sHandshakePlayerCount;
 
-COMMON_DATA u16 gLinkPartnersHeldKeys[6] = {0};
 COMMON_DATA struct LinkPlayerBlock gLocalLinkPlayerBlock = {0};
 COMMON_DATA bool8 gLinkErrorOccurred = 0;
 COMMON_DATA bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS] = {0};
@@ -76,10 +75,8 @@ COMMON_DATA bool8 gSavedLinkPlayerCount = 0;
 COMMON_DATA u16 gSendCmd[CMD_LENGTH] = {0};
 COMMON_DATA u8 gSavedMultiplayerId = 0;
 COMMON_DATA bool8 gReceivedRemoteLinkPlayers = 0;
-COMMON_DATA struct LinkTestBGInfo gLinkTestBGInfo = {0};
 COMMON_DATA void (*gLinkCallback)(void) = NULL;
 COMMON_DATA u8 gShouldAdvanceLinkState = 0;
-COMMON_DATA u16 gLinkTestBlockChecksums[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u8 gBlockRequestType = 0;
 COMMON_DATA u8 gLastSendQueueCount = 0;
 COMMON_DATA struct Link gLink = {0};

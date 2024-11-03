@@ -14324,7 +14324,7 @@ static void Cmd_pickup(void)
             && heldItem == ITEM_NONE
             && (Random() % 16) == 0)
         {
-            heldItem = ITEM_TWISTED_SPOON;
+            heldItem = ITEM_CUCHARA_TORCIDA;
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
         }
         else if ((species == SPECIES_ELEKID || species == SPECIES_ELECTABUZZ || species == SPECIES_ELECTIVIRE)

@@ -1190,7 +1190,7 @@ const struct TrainerMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
     [SLATEPORT_TENT_MON_KIRLIA] = {
         .species = SPECIES_KIRLIA,
         .moves = {MOVE_CALM_MIND, MOVE_CONFUSION, MOVE_DOUBLE_TEAM, MOVE_GROWL},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(128, 128, 128, 0, 0, 128),
         .nature = NATURE_DEFENSIVA_ESPECIAL
     },
@@ -2012,7 +2012,7 @@ const struct TrainerMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
     [VERDANTURF_TENT_MON_SOLROCK] = {
         .species = SPECIES_SOLROCK,
         .moves = {MOVE_HARDEN, MOVE_FIRE_SPIN, MOVE_MIMIC, MOVE_PSYWAVE},
-        .heldItem = ITEM_TWISTED_SPOON,
+        .heldItem = ITEM_CUCHARA_TORCIDA,
         .ev = TRAINER_PARTY_EVS(0, 128, 128, 0, 128, 128),
         .nature = NATURE_OFENSIVA
     },

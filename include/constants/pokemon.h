@@ -227,8 +227,14 @@ enum CampoExperiencia
 #define AFFECTION_FOUR_HEARTS   4 // 220-254 friendship
 #define AFFECTION_FIVE_HEARTS   5 // Max friendship
 
-// Friendship value that the majority of species use.
-#define STANDARD_FRIENDSHIP 50
+enum Amistad
+{
+    AMISTAD_LEGENDARIO_MAYOR    = 10,
+    AMISTAD_LEGENDARIO_MENOR    = 20,
+    AMISTAD_SEMILEGENDARIO      = 30,
+    AMISTAD_ESPECIAL            = 40,
+    AMISTAD_NORMAL              = 50,
+};
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
