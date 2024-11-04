@@ -39,23 +39,21 @@
 - Last Respects como una versión de paliza fantasma.
 - Darle bunker a Tentacruel.
 - Cambiar animación de Presente.
-- Dentera: ataque custom de Vanilluxe que impide movimientos de mordedura.
 - Crear ataque Abducción (animación otra vez).
 - Crear habilidad Instinto de supervivencia, sube at. y at. esp y vel. si salud debajo de 50% (relicanth)
 - Habilidad Instito maternal: Recibe todos los ataques en dobles (señuelo), kangaskhan, nidoquen.
 - Mirar lo que hace la expansión para mostrar tipos dinámicos en combate (Weather ball, día de pago).
-- Comprobar animaciones (Día de pago, buena baza).
 - Testear Mago.
 - Arreglar animación al subir de nivel (incorporar la no usada como indicador de evo).
 - Cambiar animación de Chupasangre usando como referencia Colmillo Veneno.
 - Crear Barrera eléctrica (baneful búnker pero paraliza): Dárselo a Electivire.
 - Check move_target_all_battlers de lightning rod vs storm drain.
-- Borrar sprites Helioptile/Heliolisk, Farfetchd, incorporar Conkeldurr.
 - Hueso quemado (objeto raro en Cubone que lo hace evolucionar a Marowak Alolan).
 - Usar viejas partículas: ANIM_TAG_ASCUAS
 - Crear habilidad exclusiva de Beedrill (Empalador o algo así).
 - Arreglar tiendas.
 - Arreglar icono de guardado que cambia con el día.
+- Limpiar IsContest
 
 -Lista de moves hechos:
 *Bomba huevo.

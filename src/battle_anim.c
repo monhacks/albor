@@ -2039,10 +2039,7 @@ static void Cmd_jumpargeq(void)
 static void Cmd_jumpifcontest(void)
 {
     sBattleAnimScriptPtr++;
-    if (IsContest())
-        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
-    else
-        sBattleAnimScriptPtr += 4;
+    sBattleAnimScriptPtr += 4;
 }
 
 static void Cmd_splitbgprio(void)

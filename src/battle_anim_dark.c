@@ -454,8 +454,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         FillPalette(RGB_BLACK, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         scanlineParams.dmaDest = &REG_BG1VOFS;
         var0 = WINOUT_WIN01_BG1;
-        if (!IsContest())
-            gBattle_BG2_X += DISPLAY_WIDTH;
+        gBattle_BG2_X += DISPLAY_WIDTH;
     }
     else
     {
@@ -464,8 +463,7 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
         FillPalette(RGB_BLACK, BG_PLTT_ID(9), PLTT_SIZE_4BPP);
         scanlineParams.dmaDest = &REG_BG2VOFS;
         var0 = WINOUT_WIN01_BG2;
-        if (!IsContest())
-            gBattle_BG1_X += DISPLAY_WIDTH;
+        gBattle_BG1_X += DISPLAY_WIDTH;
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
