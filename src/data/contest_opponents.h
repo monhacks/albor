@@ -920,7 +920,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_BOBBY] = {
-        .species = SPECIES_DODRIO,
+        .species = SPECIES_MEW,
         .nickname = _("DUODO"),
         .trainerName = _("BOBBY"),
         .trainerGfxId = OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M,
@@ -1368,7 +1368,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_JADA] = {
-        .species = SPECIES_SEEL,
+        .species = SPECIES_MEW,
         .nickname = _("SEELEY"),
         .trainerName = _("JADA"),
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_2,
@@ -2124,7 +2124,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_BRYCE] = {
-        .species = SPECIES_PINECO,
+        .species = SPECIES_MEW,
         .nickname = _("PINOC"),
         .trainerName = _("BRYCE"),
         .trainerGfxId = OBJ_EVENT_GFX_BUG_CATCHER,
@@ -2208,7 +2208,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_DEVON] = {
-        .species = SPECIES_MILTANK,
+        .species = SPECIES_MEW,
         .nickname = _("MILKAN"),
         .trainerName = _("DEVON"),
         .trainerGfxId = OBJ_EVENT_GFX_POKEFAN_M,
@@ -2516,7 +2516,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_JANELLE] = {
-        .species = SPECIES_LUVDISC,
+        .species = SPECIES_MEW,
         .nickname = _("LUVIS"),
         .trainerName = _("JANELLE"),
         .trainerGfxId = OBJ_EVENT_GFX_GIRL_2,
@@ -2572,7 +2572,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_SASHA] = {
-        .species = SPECIES_ELECTRODE,
+        .species = SPECIES_MEW,
         .nickname = _("RODLECT"),
         .trainerName = _("SASHA"),
         .trainerGfxId = OBJ_EVENT_GFX_TWIN,

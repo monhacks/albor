@@ -15,7 +15,7 @@ static const struct LilycoveContestLadyValues sContestLadyValues[] =
 {
     [CONTEST_CATEGORY_COOL] = {
         .monGfxId = OBJ_EVENT_GFX_OW_MON,
-        .monSpecies = SPECIES_ZIGZAGOON,
+        .monSpecies = SPECIES_MEW,
         .monName = COMPOUND_STRING("HANDSOME"),
         .categoryName = COMPOUND_STRING("coolness"),
         .contestName = gText_CoolnessContest,

@@ -206,7 +206,7 @@ Poochyena
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Zigzagoon
+Mew
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -1152,7 +1152,7 @@ Music: Girl
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 13
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 - Sand Attack
@@ -1199,7 +1199,7 @@ Music: Girl
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 27
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 - Sand Attack
@@ -1216,7 +1216,7 @@ Music: Girl
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 30
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 - Sand Attack
@@ -1233,7 +1233,7 @@ Music: Girl
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 33
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 - Sand Attack
@@ -1250,7 +1250,7 @@ Music: Girl
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 36
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Sand Attack
@@ -1505,7 +1505,7 @@ Items: Full Restore
 Double Battle: No
 AI: Basic Trainer
 
-Dodrio
+Mew
 Level: 42
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
@@ -2123,7 +2123,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Nugget
+Mew @ Nugget
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -2184,7 +2184,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Nugget
+Mew @ Nugget
 Level: 11
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Tackle
@@ -2228,7 +2228,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 27
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -2242,7 +2242,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 30
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -2256,7 +2256,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 33
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -2270,7 +2270,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 36
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Fury Swipes
@@ -2527,7 +2527,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Nugget
+Mew @ Nugget
 Level: 7
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -2572,7 +2572,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 27
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -2586,7 +2586,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -2600,7 +2600,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -2614,7 +2614,7 @@ Items: Full Restore
 Double Battle: No
 AI: Check Bad Move
 
-Linoone @ Nugget
+Mew @ Nugget
 Level: 36
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Fury Swipes
@@ -3799,7 +3799,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 20
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -3842,7 +3842,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 26
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -3859,7 +3859,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 29
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -3884,7 +3884,7 @@ Swellow
 Level: 31
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
-Linoone
+Mew
 Level: 31
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -3905,7 +3905,7 @@ Sandslash
 Level: 34
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
-Linoone
+Mew
 Level: 34
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
@@ -4511,7 +4511,7 @@ Music: Rich
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 36
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 - Headbutt
@@ -4536,7 +4536,7 @@ Music: Rich
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 39
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 - Headbutt
@@ -4560,7 +4560,7 @@ Music: Rich
 Double Battle: No
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 41
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Headbutt
@@ -4966,7 +4966,7 @@ IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Encore
 - Feint Attack
 
-Linoone
+Mew
 Level: 29
 IVs: 24 HP / 24 Atk / 24 Def / 24 SpA / 24 SpD / 24 Spe
 - Slash
@@ -5375,7 +5375,7 @@ Music: Twins
 Double Battle: Yes
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 15
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 - Growl
@@ -5399,7 +5399,7 @@ Music: Twins
 Double Battle: Yes
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 28
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 - Growl
@@ -5423,7 +5423,7 @@ Music: Twins
 Double Battle: Yes
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 31
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 - Growl
@@ -5447,7 +5447,7 @@ Music: Twins
 Double Battle: Yes
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 34
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 - Growl
@@ -5471,7 +5471,7 @@ Music: Twins
 Double Battle: Yes
 AI: Check Bad Move
 
-Linoone
+Mew
 Level: 36
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 - Growl
@@ -5499,7 +5499,7 @@ Taillow @ Oran Berry
 Level: 16
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
-Zigzagoon @ Oran Berry
+Mew @ Oran Berry
 Level: 16
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -5962,7 +5962,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -6023,7 +6023,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 17
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 - Headbutt
@@ -6160,7 +6160,7 @@ Swellow
 Level: 31
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
-Linoone
+Mew
 Level: 29
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -6181,7 +6181,7 @@ Swellow
 Level: 34
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
-Linoone
+Mew
 Level: 32
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
@@ -6198,11 +6198,11 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 14
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Zigzagoon
+Mew
 Level: 16
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -6215,7 +6215,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 4
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -6808,7 +6808,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 17
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -6821,7 +6821,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 28
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -6834,7 +6834,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 31
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -6847,7 +6847,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Dodrio
+Mew
 Level: 34
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -6860,7 +6860,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Dodrio
+Mew
 Level: 37
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
@@ -6873,7 +6873,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 17
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -6886,7 +6886,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 28
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -6899,7 +6899,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 31
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -6912,7 +6912,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Dodrio
+Mew
 Level: 34
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -6925,7 +6925,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Dodrio
+Mew
 Level: 37
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
@@ -6955,7 +6955,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 25
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -7349,7 +7349,7 @@ Music: Cool
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 27
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 
@@ -7400,7 +7400,7 @@ Music: Cool
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 29
 IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
 
@@ -9844,7 +9844,7 @@ Whismur
 Level: 11
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Zigzagoon
+Mew
 Level: 11
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -9915,7 +9915,7 @@ Loudred
 Level: 22
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
-Linoone
+Mew
 Level: 22
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -9948,7 +9948,7 @@ Loudred
 Level: 25
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
-Linoone
+Mew
 Level: 25
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -9981,7 +9981,7 @@ Loudred
 Level: 28
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
-Linoone
+Mew
 Level: 28
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -10014,7 +10014,7 @@ Loudred
 Level: 31
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
-Linoone
+Mew
 Level: 31
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
@@ -10650,7 +10650,7 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Thunder Wave
 - Quick Attack
 
-Linoone
+Mew
 Level: 32
 IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
 - Surf
@@ -11053,7 +11053,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 4
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -12941,7 +12941,7 @@ Music: Rich
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon @ Nugget
+Mew @ Nugget
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -12963,7 +12963,7 @@ Lotad
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Zigzagoon @ Nugget
+Mew @ Nugget
 Level: 8
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -13255,7 +13255,7 @@ Music: Male
 Double Battle: No
 AI: Check Bad Move
 
-Zigzagoon
+Mew
 Level: 14
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -13774,11 +13774,11 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-Dodrio
+Mew
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -13893,7 +13893,7 @@ Music: Female
 Double Battle: No
 AI: Check Bad Move
 
-Doduo
+Mew
 Level: 17
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
@@ -14056,7 +14056,7 @@ Tropius
 Level: 25
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
-Zigzagoon
+Mew
 Level: 25
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -16591,7 +16591,7 @@ Mightyena
 Level: 31
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
-Zigzagoon
+Mew
 Level: 31
 IVs: 1 HP / 1 Atk / 1 Def / 1 SpA / 1 SpD / 1 Spe
 
@@ -16624,7 +16624,7 @@ Mightyena
 Level: 33
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
-Linoone
+Mew
 Level: 33
 IVs: 2 HP / 2 Atk / 2 Def / 2 SpA / 2 SpD / 2 Spe
 
@@ -16657,7 +16657,7 @@ Mightyena
 Level: 35
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
-Linoone
+Mew
 Level: 35
 IVs: 3 HP / 3 Atk / 3 Def / 3 SpA / 3 SpD / 3 Spe
 
@@ -16690,7 +16690,7 @@ Mightyena
 Level: 37
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 
-Linoone
+Mew
 Level: 37
 IVs: 4 HP / 4 Atk / 4 Def / 4 SpA / 4 SpD / 4 Spe
 

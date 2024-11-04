@@ -754,14 +754,14 @@ const struct BattleFrontierTrainer gSlateportBattleTentTrainers[NUM_BATTLE_TENT_
 const struct TrainerMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
 {
     [SLATEPORT_TENT_MON_ZIGZAGOON_1] = {
-        .species = SPECIES_ZIGZAGOON,
+        .species = SPECIES_MEW,
         .moves = {MOVE_TACKLE, MOVE_CHARM, MOVE_ODOR_SLEUTH, MOVE_PIN_MISSILE},
         .heldItem = ITEM_CHOICE_BAND,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
         .nature = NATURE_RAPIDA
     },
     [SLATEPORT_TENT_MON_ZIGZAGOON_2] = {
-        .species = SPECIES_ZIGZAGOON,
+        .species = SPECIES_MEW,
         .moves = {MOVE_DIG, MOVE_MUD_SPORT, MOVE_TAIL_WHIP, MOVE_REST},
         .heldItem = ITEM_LUM_BERRY,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -894,7 +894,7 @@ const struct TrainerMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [SLATEPORT_TENT_MON_LINOONE] = {
-        .species = SPECIES_LINOONE,
+        .species = SPECIES_MEW,
         .moves = {MOVE_HEADBUTT, MOVE_TICKLE, MOVE_TAIL_WHIP, MOVE_REST},
         .heldItem = ITEM_MENTAL_HERB,
         .ev = TRAINER_PARTY_EVS(170, 170, 0, 0, 0, 170),
@@ -915,7 +915,7 @@ const struct TrainerMon gSlateportBattleTentMons[NUM_SLATEPORT_TENT_MONS] =
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
     [SLATEPORT_TENT_MON_VOLTORB] = {
-        .species = SPECIES_VOLTORB,
+        .species = SPECIES_MEW,
         .moves = {MOVE_SPARK, MOVE_ROLLOUT, MOVE_CHARGE, MOVE_SCREECH},
         .heldItem = ITEM_NONE,
         .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 252, 252),
@@ -1814,7 +1814,7 @@ const struct TrainerMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [VERDANTURF_TENT_MON_ZIGZAGOON] = {
-        .species = SPECIES_ZIGZAGOON,
+        .species = SPECIES_MEW,
         .moves = {MOVE_COVET, MOVE_GROWL, MOVE_PIN_MISSILE, MOVE_MUD_SPORT},
         .heldItem = ITEM_SITRUS_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),
@@ -1947,7 +1947,7 @@ const struct TrainerMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
         .nature = NATURE_DEFENSIVA
     },
     [VERDANTURF_TENT_MON_LINOONE] = {
-        .species = SPECIES_LINOONE,
+        .species = SPECIES_MEW,
         .moves = {MOVE_HEADBUTT, MOVE_TICKLE, MOVE_PROTECT, MOVE_REST},
         .heldItem = ITEM_QUICK_CLAW,
         .ev = TRAINER_PARTY_EVS(128, 128, 128, 0, 0, 128),
@@ -2031,7 +2031,7 @@ const struct TrainerMon gVerdanturfBattleTentMons[NUM_VERDANTURF_TENT_MONS] =
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
     [VERDANTURF_TENT_MON_VOLTORB] = {
-        .species = SPECIES_VOLTORB,
+        .species = SPECIES_MEW,
         .moves = {MOVE_PROTECT, MOVE_SELF_DESTRUCT, MOVE_SPARK, MOVE_SCREECH},
         .heldItem = ITEM_SCOPE_LENS,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -2695,7 +2695,7 @@ const struct TrainerMon gFallarborBattleTentMons[NUM_FALLARBOR_TENT_MONS] =
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
     [FALLARBOR_TENT_MON_LINOONE_1] = {
-        .species = SPECIES_LINOONE,
+        .species = SPECIES_MEW,
         .moves = {MOVE_ODOR_SLEUTH, MOVE_COVET, MOVE_ROCK_SMASH, MOVE_CHARM},
         .heldItem = ITEM_SILK_SCARF,
         .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 252),
@@ -2828,7 +2828,7 @@ const struct TrainerMon gFallarborBattleTentMons[NUM_FALLARBOR_TENT_MONS] =
         .nature = NATURE_OFENSIVA_ESPECIAL
     },
     [FALLARBOR_TENT_MON_VOLTORB] = {
-        .species = SPECIES_VOLTORB,
+        .species = SPECIES_MEW,
         .moves = {MOVE_CHARGE, MOVE_SPARK, MOVE_SCREECH, MOVE_SONIC_BOOM},
         .heldItem = ITEM_ASPEAR_BERRY,
         .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
@@ -2849,7 +2849,7 @@ const struct TrainerMon gFallarborBattleTentMons[NUM_FALLARBOR_TENT_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [FALLARBOR_TENT_MON_LINOONE_2] = {
-        .species = SPECIES_LINOONE,
+        .species = SPECIES_MEW,
         .moves = {MOVE_FURY_SWIPES, MOVE_SAND_ATTACK, MOVE_SHOCK_WAVE, MOVE_GROWL},
         .heldItem = ITEM_MAGNET,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 0),
