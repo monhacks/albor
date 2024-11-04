@@ -1079,15 +1079,11 @@ static void CreatePartyMonSprites(u8 slot)
 
         if (gMultiPartnerParty[actualSlot].species != SPECIES_NONE)
         {
-            u8 index = slot < PARTY_SIZE ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + slot) : 0xFF;
             CreatePartyMonIconSpriteParameterized(gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].personality, &sPartyMenuBoxes[slot], 0);
-            if (index < 16) 
-            { // Like SetMonIconPalette, but by species & personality
-                LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
-                UniquePalette(OBJ_PLTT_ID(index), gMultiPartnerParty[actualSlot].personality);
-                CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
-                gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = index;
-            }
+            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(gMultiPartnerParty[actualSlot].species, 0, gMultiPartnerParty[actualSlot].personality), OBJ_PLTT_ID(2 + slot), PLTT_SIZE_4BPP);
+            UniquePalette(OBJ_PLTT_ID(2 + slot), gMultiPartnerParty[actualSlot].personality);
+            CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2 + slot)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2 + slot)], PLTT_SIZE_4BPP);
+            gSprites[sPartyMenuBoxes[slot].monSpriteId].oam.paletteNum = 2 + slot;
 
             CreatePartyMonHeldItemSpriteParameterized(gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].heldItem, &sPartyMenuBoxes[slot]);
             CreatePartyMonPokeballSpriteParameterized(gMultiPartnerParty[actualSlot].species, &sPartyMenuBoxes[slot]);
@@ -3780,13 +3776,20 @@ static bool8 SetUpFieldMove_Dive(void)
 
 static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *menuBox, u32 slot)
 {
-    u16 species;
-    u8 index = slot < PARTY_SIZE ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + slot) : 0xFF;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
 
-    species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-    CreatePartyMonIconSpriteParameterized(species, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1);
-    SetMonIconPalette(mon, &gSprites[menuBox->monSpriteId], index);
-    UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
+    if (species != SPECIES_NONE)
+    {
+        menuBox->monSpriteId = CreateMonIcon(species, SpriteCB_MonIcon, menuBox->spriteCoords[0], menuBox->spriteCoords[1], 4, personality);
+        gSprites[menuBox->monSpriteId].oam.priority = 1;
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(2 + slot), PLTT_SIZE_4BPP);
+        UniquePalette(OBJ_PLTT_ID(2 + slot), personality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(2 + slot)], &gPlttBufferUnfaded[OBJ_PLTT_ID(2 + slot)], PLTT_SIZE_4BPP);
+        gSprites[menuBox->monSpriteId].oam.paletteNum = 2 + slot;
+        UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
+    }
 }
 
 static void CreatePartyMonIconSpriteParameterized(u16 species, u32 pid, struct PartyMenuBox *menuBox, u8 priority)
@@ -3794,6 +3797,7 @@ static void CreatePartyMonIconSpriteParameterized(u16 species, u32 pid, struct P
     if (species != SPECIES_NONE)
     {
         menuBox->monSpriteId = CreateMonIcon(species, SpriteCB_MonIcon, menuBox->spriteCoords[0], menuBox->spriteCoords[1], 4, pid);
+        gSprites[menuBox->monSpriteId].oam.priority = priority;
         gSprites[menuBox->monSpriteId].oam.priority = priority;
     }
 }

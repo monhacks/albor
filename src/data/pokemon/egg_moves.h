@@ -874,3 +874,11 @@ static const u16 sDreepyEggMoveLearnset[] = {
 static const u16 sGlimmetEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
+
+static const u16 sRegielekiEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sRegidragoEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
