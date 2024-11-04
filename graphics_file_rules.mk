@@ -17,6 +17,7 @@ MISCGFXDIR := graphics/misc
 POKEDEXGFXDIR := graphics/pokedex
 STARTERGFXDIR := graphics/starter_choose
 NAMINGGFXDIR := graphics/naming_screen
+TITLESCREENGFXDIR := graphics/title_screen
 
 types := none normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark fairy
 contest_types := cool beauty cute smart tough
@@ -242,8 +243,12 @@ $(FONTGFXDIR)/frlg_female.fwjpnfont: $(FONTGFXDIR)/japanese_frlg_female.png
 
 
 ### Miscellaneous ###
-graphics/title_screen/pokemon_logo.gbapal: %.gbapal: %.pal
+
+$(TITLESCREENGFXDIR)/pokemon_logo.gbapal: %.gbapal: %.pal
 	$(GFX) $< $@ -num_colors 224
+
+$(TITLESCREENGFXDIR)/emerald_version.8bpp: %.8bpp: %.png
+	$(GFX) $< $@ -mwidth 8 -mheight 4
 
 graphics/pokenav/region_map/map.8bpp: %.8bpp: %.png
 	$(GFX) $< $@ -num_tiles 233 -Wnum_tiles
