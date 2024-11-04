@@ -84,10 +84,6 @@ static const u16 sParasEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sDiglettEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sMeowthEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
@@ -136,15 +132,7 @@ static const u16 sGeodudeEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sGeodudeAlolaEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sPonytaEggMoveLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sPonytaGalarEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 

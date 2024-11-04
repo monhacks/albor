@@ -255,14 +255,6 @@ static const u16 sParasectTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sDiglettTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sDugtrioTeachableLearnset[] = {
-    MOVE_UNAVAILABLE,
-};
-
 static const u16 sMeowthTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };

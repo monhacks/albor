@@ -215,16 +215,16 @@ static const u8 sSurpriseMsg06[] = _("¡{STR_VAR_1} parece revitalizado!");
 static const u8 sSurpriseMsg07[] = _("{STR_VAR_1} suddenly turned around\nand started barking!");
 static const u8 sSurpriseMsg08[] = _("{STR_VAR_1} suddenly turned around!");
 static const u8 sSurpriseMsg09[] = _("Your POKéMON was surprised that you\nsuddenly spoke to it!");
-static const u8 sSurpriseMsg10[] = _("Sniff sniff, something smells really\ngood!");
+static const u8 sSurpriseMsg10[] = _("¡Um, algo huele muy bien!");
 static const u8 sSurpriseMsg11[] = _("¡{STR_VAR_1} tiene energías\nrenovadas!");
-static const u8 sSurpriseMsg12[] = _("{STR_VAR_1} is wobbling and seems\nabout to fall over.");
-static const u8 sSurpriseMsg13[] = _("{STR_VAR_1} is in danger of falling\nover.");
-static const u8 sSurpriseMsg14[] = _("{STR_VAR_1} is walking along\ncautiously.");
-static const u8 sSurpriseMsg15[] = _("{STR_VAR_1} is getting tense with\nnervous energy.");
+static const u8 sSurpriseMsg12[] = _("{STR_VAR_1} está dando tumbos.");
+static const u8 sSurpriseMsg13[] = _("{STR_VAR_1} parece a punto de\ncaerse…");
+static const u8 sSurpriseMsg14[] = _("{STR_VAR_1} camina con\nextrema cautela.");
+static const u8 sSurpriseMsg15[] = _("{STR_VAR_1} parece que se tensa.");
 static const u8 sSurpriseMsg16[] = _("¡{STR_VAR_1} percibió algo extraño\ny le sorprendió!");
-static const u8 sSurpriseMsg17[] = _("{STR_VAR_1} is scared and snuggled\nup to you!");
-static const u8 sSurpriseMsg18[] = _("{STR_VAR_1} is feeling an unusual\npresence…");
-static const u8 sSurpriseMsg19[] = _("{STR_VAR_1} is getting tense with\nnervous energy.");
+static const u8 sSurpriseMsg17[] = _("¡{STR_VAR_1} se asusta y quiere\nabrazarse contigo!");
+static const u8 sSurpriseMsg18[] = _("{STR_VAR_1} siente una presencia\ninusual…");
+static const u8 sSurpriseMsg19[] = _("{STR_VAR_1} se tensa enérgicamente.");
 // Conditional messages, index 20
 static const u8 sSurpriseMsg20[] = _("¡{STR_VAR_1} parece sorprenderse\npor la lluvia!");
 

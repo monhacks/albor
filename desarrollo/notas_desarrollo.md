@@ -80,9 +80,10 @@
 porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/desarrollo/graficos /Users/ivanmartinez/Desktop/Decompilación/pokeemerald/include/constants/metatile_behaviors.h
 
 *Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
-*Pachirisu Elect-Normal
-*Spoink & Grumpig Psychic-Poison
+*Porygon Elect-Normal??
 *Recordatorio de que el primer color de la paleta del Pokémon no puede ser negro (se bugea el almacenamiento).
 *Recordatorio de deserializar las pokeballs.
 *Recordatorio de revisar learnsets (encanto, especialmente).
 *Recordatorio de limpiar species_info (traducir, solo lo necesario y usar constantes).
+*Habilidad exclusiva de Floatzel: flotador. En lluvia, no toca suelo. Además, x2 vel en lluvia.
+*Arreglar .pal de Charmander (y de charmeleon?) No de Charizard.

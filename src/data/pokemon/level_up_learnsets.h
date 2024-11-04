@@ -261,14 +261,6 @@ static const struct LevelUpMove sParasectLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sDiglettLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sDugtrioLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
 static const struct LevelUpMove sMeowthLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_PAY_DAY),
     LEVEL_UP_END
@@ -400,31 +392,11 @@ static const struct LevelUpMove sGolemLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
-static const struct LevelUpMove sGeodudeAlolaLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sGravelerAlolaLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sGolemAlolaLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
 static const struct LevelUpMove sPonytaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
 static const struct LevelUpMove sRapidashLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sPonytaGalarLevelUpLearnset[] = {
-    LEVEL_UP_END
-};
-
-static const struct LevelUpMove sRapidashGalarLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 

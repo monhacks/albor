@@ -274,7 +274,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_DEFENSIVA_ESPECIAL
     },
     [FRONTIER_MON_DIGLETT] = {
-        .species = SPECIES_DIGLETT,
+        .species = SPECIES_MEW,
         .moves = {MOVE_MAGNITUDE, MOVE_SLASH, MOVE_ROCK_TOMB, MOVE_SAND_ATTACK},
         .heldItem = ITEM_KINGS_ROCK,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -2605,7 +2605,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_DEFENSIVA_ESPECIAL
     },
     [FRONTIER_MON_DUGTRIO_1] = {
-        .species = SPECIES_DUGTRIO,
+        .species = SPECIES_MEW,
         .moves = {MOVE_EARTHQUAKE, MOVE_TRI_ATTACK, MOVE_SLASH, MOVE_SAND_TOMB},
         .heldItem = ITEM_SOFT_SAND,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -3277,7 +3277,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [FRONTIER_MON_DUGTRIO_2] = {
-        .species = SPECIES_DUGTRIO,
+        .species = SPECIES_MEW,
         .moves = {MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER, MOVE_AERIAL_ACE, MOVE_TRI_ATTACK},
         .heldItem = ITEM_KINGS_ROCK,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -3949,7 +3949,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [FRONTIER_MON_DUGTRIO_3] = {
-        .species = SPECIES_DUGTRIO,
+        .species = SPECIES_MEW,
         .moves = {MOVE_EARTHQUAKE, MOVE_DOUBLE_EDGE, MOVE_SLUDGE_BOMB, MOVE_FISSURE},
         .heldItem = ITEM_KINGS_ROCK,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
@@ -4621,7 +4621,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_OFENSIVA
     },
     [FRONTIER_MON_DUGTRIO_4] = {
-        .species = SPECIES_DUGTRIO,
+        .species = SPECIES_MEW,
         .moves = {MOVE_EARTHQUAKE, MOVE_DOUBLE_EDGE, MOVE_ROCK_SLIDE, MOVE_FISSURE},
         .heldItem = ITEM_KINGS_ROCK,
         .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
