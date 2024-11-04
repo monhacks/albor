@@ -152,9 +152,7 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PIDGEOTTO, 1, ITEM_NONE
 	givemon SPECIES_PIDGEOT, 1, ITEM_NONE
 	givemon SPECIES_RATTATA, 1, ITEM_NONE
-	givemon SPECIES_RATTATA_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_RATICATE, 1, ITEM_NONE
-	givemon SPECIES_RATICATE_ALOLA, 1, ITEM_NONE
 	givemon SPECIES_SPEAROW, 1, ITEM_NONE
 	givemon SPECIES_FEAROW, 1, ITEM_NONE
 	givemon SPECIES_EKANS, 1, ITEM_NONE
@@ -184,8 +182,6 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_ANNIHILAPE, 1, ITEM_NONE
 	givemon SPECIES_GROWLITHE, 1, ITEM_NONE
 	givemon SPECIES_ARCANINE, 1, ITEM_NONE
-	givemon SPECIES_GROWLITHE_HISUI, 1, ITEM_NONE
-	givemon SPECIES_ARCANINE_HISUI, 1, ITEM_NONE
 	givemon SPECIES_GASTLY, 1, ITEM_NONE
 	givemon SPECIES_HAUNTER, 1, ITEM_NONE
 	givemon SPECIES_GENGAR, 1, ITEM_NONE
@@ -215,9 +211,7 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PIDGEOTTO, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PIDGEOT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATTATA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RATTATA_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATICATE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_RATICATE_ALOLA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_SPEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_FEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_EKANS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
@@ -247,7 +241,6 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_ANNIHILAPE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GROWLITHE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ARCANINE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_GROWLITHE_HISUI, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GASTLY, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_HAUNTER, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_GENGAR, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE

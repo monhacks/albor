@@ -11745,8 +11745,8 @@ bool8 IsMonBannedFromSkyBattles(u16 species)
     {
 #if B_SKY_BATTLE_STRICT_ELIGIBILITY == TRUE
         case SPECIES_SPEAROW:
-        case SPECIES_DODUO:
-        case SPECIES_DODRIO:
+        case SPECIES_MEW:
+        case SPECIES_MEW:
         case SPECIES_HOOTHOOT:
         case SPECIES_NATU:
         case SPECIES_MURKROW:
