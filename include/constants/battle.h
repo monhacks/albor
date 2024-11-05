@@ -23,26 +23,38 @@
  *   +---------------------------+
  */
 
-#define MAX_BATTLERS_COUNT  4
-
-#define B_POSITION_PLAYER_LEFT        0
-#define B_POSITION_OPPONENT_LEFT      1
-#define B_POSITION_PLAYER_RIGHT       2
-#define B_POSITION_OPPONENT_RIGHT     3
+enum BattlersPositions
+{
+    B_POSITION_PLAYER_LEFT,
+    B_POSITION_OPPONENT_LEFT,
+    B_POSITION_PLAYER_RIGHT,
+    B_POSITION_OPPONENT_RIGHT,
+    MAX_BATTLERS_COUNT
+};
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
 #define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
 #define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
-#define B_SIDE_PLAYER     0
-#define B_SIDE_OPPONENT   1
-#define NUM_BATTLE_SIDES  2
+enum BattlersSides
+{
+    B_SIDE_PLAYER,
+    B_SIDE_OPPONENT,
+    NUM_BATTLE_SIDES
+};
 
 #define B_FLANK_LEFT  0
 #define B_FLANK_RIGHT 1
 
 #define BIT_SIDE        1
 #define BIT_FLANK       2
+
+enum ModosBatalla
+{
+    MODO_INDIVIDUAL,
+    MODO_DOBLES,
+    NUMERO_DE_MODOS
+};
 
 // Battle Type Flags
 #define BATTLE_TYPE_DOUBLE             (1 << 0)

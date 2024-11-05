@@ -33,19 +33,22 @@ static void CreateBattlerTrace(struct Task *task, u8 taskId);
 
 EWRAM_DATA static union AffineAnimCmd *sAnimTaskAffineAnim = NULL;
 
-const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
+//Donde se definen las coordenadas base de los Pokémon
+const struct UCoords8 sBattlerCoords[NUMERO_DE_MODOS][MAX_BATTLERS_COUNT] =
 {
-    { // Single battle
-        { 72, 80 },
-        { 176, 40 },
-        { 48, 40 },
-        { 112, 80 },
+    [MODO_INDIVIDUAL] =
+    {                                //x    y
+        [B_POSITION_PLAYER_LEFT]    = {72,  80},
+        [B_POSITION_OPPONENT_LEFT]  = {176, 40},
+        [B_POSITION_PLAYER_RIGHT]   = {48,  40},
+        [B_POSITION_OPPONENT_RIGHT] = {112, 80},
     },
-    { // Double battle
-        { 32, 80 },
-        { 200, 40 },
-        { 90, 88 },
-        { 152, 32 },
+    [MODO_DOBLES] =
+    {                                //x    y
+        [B_POSITION_PLAYER_LEFT]    = {32,  80},
+        [B_POSITION_OPPONENT_LEFT]  = {200, 40},
+        [B_POSITION_PLAYER_RIGHT]   = {90,  88},
+        [B_POSITION_OPPONENT_RIGHT] = {152, 32},
     },
 };
 

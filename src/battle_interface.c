@@ -762,16 +762,16 @@ static const struct WindowTemplate sHealthboxWindowTemplate = {
 
 // This function is here to cover a specific case - one player's mon in a 2 vs 1 double battle. In this scenario - display singles layout.
 // The same goes for a 2 vs 1 where opponent has only one pokemon.
-u32 WhichBattleCoords(u32 battlerId) // 0 - singles, 1 - doubles
+u32 WhichBattleCoords(u32 battlerId)
 {
     if (GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT
         && gPlayerPartyCount == 1
         && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-        return 0;
+        return MODO_INDIVIDUAL;
     else if (GetBattlerPosition(battlerId) == B_POSITION_OPPONENT_LEFT
              && gEnemyPartyCount == 1
              && !(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
-        return 0;
+        return MODO_INDIVIDUAL;
     else
         return IsDoubleBattle();
 }
@@ -783,7 +783,7 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
     u8 healthbarSpriteId;
     struct Sprite *healthBarSpritePtr;
 
-    if (WhichBattleCoords(battlerId) == 0) // Singles
+    if (WhichBattleCoords(battlerId) == MODO_INDIVIDUAL)
     {
         if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
         {
@@ -1047,10 +1047,10 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
         objVram = (void *)(OBJ_VRAM0);
-        if (!WhichBattleCoords(battler))
-            objVram += spriteTileNum + 0x820;
+        if (!WhichBattleCoords(battler)) //Esto se puede cambiar por MODO_INDIVIDUAL
+            objVram += spriteTileNum + 2080;
         else
-            objVram += spriteTileNum + 0x420;
+            objVram += spriteTileNum + 1056;
     }
     else
     {
@@ -1165,7 +1165,7 @@ static void UpdateOpponentHpTextSingles(u32 healthboxSpriteId, s16 value, u32 ma
 void UpdateHpTextInHealthbox(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp)
 {
     u32 battlerId = gSprites[healthboxSpriteId].hMain_Battler;
-    if (WhichBattleCoords(battlerId))
+    if (WhichBattleCoords(battlerId)) //Esto se puede cambiar por MODO_DOBLES
     {
         UpdateHpTextInHealthboxInDoubles(healthboxSpriteId, maxOrCurrent, currHp, maxHp);
     }
