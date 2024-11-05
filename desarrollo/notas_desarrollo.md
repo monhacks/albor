@@ -85,3 +85,5 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Recordatorio de limpiar species_info (traducir, solo lo necesario y usar constantes).
 *Habilidad exclusiva de Floatzel: flotador. En lluvia, no toca suelo. Además, x2 vel en lluvia.
 *Arreglar .pal de Charmander (y de charmeleon?) No de Charizard.
+*Añadir caso de crianza para Latios/Latias y Nidoran.
+*¿Cómo criar a Tauros?
