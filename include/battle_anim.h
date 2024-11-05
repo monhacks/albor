@@ -32,7 +32,6 @@ struct BattleAnimBgData
     u8 paletteId;
     u8 bgId;
     u16 tilesOffset;
-    u16 unused;
 };
 
 struct BattleAnimBackground

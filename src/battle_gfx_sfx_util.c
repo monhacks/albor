@@ -649,24 +649,6 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
     }
-
-    // dynamax tint
-    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
-    {
-        BlendPalette(paletteOffset, 16, 4, RGB(31, 0, 12));
-        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZE_4BPP);
-    }
-
-    // Terastallization's tint
-    if (GetActiveGimmick(battler) == GIMMICK_TERA)
-    {
-        BlendPalette(paletteOffset, 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battler)));
-        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
-    }
-}
-
-void BattleGfxSfxDummy2(u16 species)
-{
 }
 
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battler)
@@ -937,14 +919,9 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
 
     if (!loadMonSprite)
     {
-        if (IsContest())
-            position = B_POSITION_PLAYER_LEFT;
-        else
-            position = GetBattlerPosition(battler);
+        position = GetBattlerPosition(battler);
 
-        if (IsContest())
-            LZDecompressVram(gBattleAnimSpriteGfx_SubstituteBack, gMonSpritesGfxPtr->spritesGfx[position]);
-        else if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             LZDecompressVram(gBattleAnimSpriteGfx_Substitute, gMonSpritesGfxPtr->spritesGfx[position]);
         else
             LZDecompressVram(gBattleAnimSpriteGfx_SubstituteBack, gMonSpritesGfxPtr->spritesGfx[position]);
@@ -958,10 +935,7 @@ void BattleLoadSubstituteOrMonSpriteGfx(u8 battler, bool8 loadMonSprite)
         LoadCompressedPalette(gBattleAnimSpritePal_Substitute, palOffset, PLTT_SIZE_4BPP);
     }
     else
-    {
-        if (!IsContest())
-            BattleLoadMonSpriteGfx(&GetBattlerParty(battler)[gBattlerPartyIndexes[battler]], battler);
-    }
+        BattleLoadMonSpriteGfx(&GetBattlerParty(battler)[gBattlerPartyIndexes[battler]], battler);
 }
 
 void LoadBattleMonGfxAndAnimate(u8 battler, bool8 loadMonSprite, u8 spriteId)
@@ -1219,7 +1193,7 @@ void HideBattlerShadowSprite(u8 battler)
 // Color the background tiles surrounding the action selection and move windows
 void FillAroundBattleWindows(void)
 {
-    u16 *vramPtr = (u16 *)(VRAM + 0x240);
+    u16 *vramPtr = (u16 *)(VRAM + 576);
     s32 i;
     s32 j;
 
