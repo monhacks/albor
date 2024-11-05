@@ -30,7 +30,6 @@ static void SerialIntr(void);
 static void IntrDummy(void);
 
 // Defined in the linker script so that the test build can override it.
-extern void gInitialMainCB2(void);
 extern void CB2_FlashNotDetectedScreen(void);
 
 const u8 gGameVersion = GAME_VERSION;
@@ -60,12 +59,10 @@ const IntrFunc gIntrTableTemplate[] =
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
 COMMON_DATA u16 gKeyRepeatStartDelay = 0;
-COMMON_DATA bool8 gLinkTransferringData = 0;
 COMMON_DATA struct Main gMain = {0};
 COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
 COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
-COMMON_DATA u8 gLinkVSyncDisabled = 0;
 COMMON_DATA u32 IntrMain_Buffer[512] = {0};
 COMMON_DATA s8 gPcmDmaCounter = 0;
 COMMON_DATA void *gAgbMainLoop_sp = NULL;
@@ -124,7 +121,7 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
-    SetMainCallback2(gInitialMainCB2);
+    SetMainCallback2(CB2_InitCopyrightScreenAfterBootup);
     gSaveBlock2Ptr = &gSaveblock2.block;
     gPokemonStoragePtr = &gPokemonStorage.block;
 }
@@ -305,7 +302,7 @@ static void VBlankIntr(void)
 
     m4aSoundMain();
 
-    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
+    if (!gMain.inBattle)
         AdvanceRandom();
 
     INTR_CHECK |= INTR_FLAG_VBLANK;

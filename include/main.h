@@ -47,12 +47,10 @@ extern const u8 RomHeaderGameCode[GAME_CODE_LENGTH];
 extern const u8 RomHeaderSoftwareVersion;
 
 extern u16 gKeyRepeatStartDelay;
-extern bool8 gLinkTransferringData;
 extern struct Main gMain;
 extern u16 gKeyRepeatContinueDelay;
 extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
-extern u8 gLinkVSyncDisabled;
 extern u32 IntrMain_Buffer[];
 extern s8 gPcmDmaCounter;
 

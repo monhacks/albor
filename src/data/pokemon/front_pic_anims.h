@@ -1673,9 +1673,8 @@ static const union AnimCmd sAnim_Munchlax[] =
 
 static const union AnimCmd sAnim_Snorlax[] =
 {
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(1, 50),
-    ANIMCMD_FRAME(0, 10),
+    ANIMCMD_FRAME(1, 40),
+    ANIMCMD_FRAME(0, 20),
     ANIMCMD_END,
 };
 

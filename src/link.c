@@ -65,7 +65,6 @@ COMMON_DATA bool8 gLinkErrorOccurred = 0;
 COMMON_DATA bool8 gRemoteLinkPlayersNotReceived[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u8 gBlockReceivedStatus[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u16 gLinkHeldKeys = 0;
-COMMON_DATA u16 ALIGNED(4) gRecvCmds[MAX_RFU_PLAYERS][CMD_LENGTH] = {0};
 COMMON_DATA u32 gLinkStatus = 0;
 COMMON_DATA bool8 gReadyToExitStandby[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA bool8 gReadyToCloseLink[MAX_LINK_PLAYERS] = {0};
@@ -230,7 +229,6 @@ void OpenLink(void)
     ResetSerial();
     InitLink();
     gLinkCallback = LinkCB_RequestPlayerDataExchange;
-    gLinkVSyncDisabled = FALSE;
     gLinkErrorOccurred = FALSE;
     gSuppressLinkErrorMessage = FALSE;
     ResetBlockSend();
@@ -712,7 +710,6 @@ static void LinkCB_WaitCloseLink(void)
     {
         // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
-        gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
     }
@@ -756,7 +753,6 @@ static void LinkCB_WaitCloseLinkWithJP(void)
     {
         // All ready, close link
         gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
-        gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
     }
