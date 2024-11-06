@@ -1198,14 +1198,6 @@ static void Task_GiveExpToMon(u8 taskId)
                 + UQ_4_12_TO_INT((gBattleScripting.levelUpHP * UQ_4_12(1.5)) + UQ_4_12_ROUND);
             CalculateMonStats(mon);
 
-            // Reapply Dynamax HP multiplier after stats are recalculated.
-            if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && monId == gBattlerPartyIndexes[battler])
-            {
-                ApplyDynamaxHPMultiplier(battler, mon);
-                gBattleMons[battler].hp = gBattleStruct->dynamax.levelUpHP;
-                SetMonData(mon, MON_DATA_HP, &gBattleMons[battler].hp);
-            }
-
             gainedExp -= nextLvlExp - currExp;
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, RET_VALUE_LEVELED_UP, gainedExp);
 

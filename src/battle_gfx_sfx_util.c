@@ -707,7 +707,7 @@ bool8 BattleLoadAllHealthBoxesGfx(u8 state)
         {
             if (state == 2)
             {
-                if (WhichBattleCoords(0))
+                if (WhichBattleCoords(B_POSITION_PLAYER_LEFT) == MODO_DOBLES)
                     LoadCompressedSpriteSheet(&sSpriteSheets_DoublesPlayerHealthbox[0]);
                 else
                     LoadCompressedSpriteSheet(&sSpriteSheet_SinglesPlayerHealthbox);
