@@ -1698,14 +1698,8 @@ static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
         case SPECIES_CASTFORM_NORMAL:
             *species = GetOverworldCastformForm();
             break;
-        //case SPECIES_CHERRIM:
-        //    *species = GetOverworldCherrimForm();
-        //    break;
         //case SPECIES_DARMANITAN:
         //    *species = GetOverworldDarmanitanForm();
-        //    break;
-        //case SPECIES_MIMIKYU:
-        //    *species = GetOverworldMimikyuForm();
         //    break;
         //case SPECIES_AEGISLASH:
         //    *species = GetOverworldAegislashForm();

@@ -67,7 +67,7 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Las posibilidades de encontrar un Pokémon shiny son de 1/4096.
     *Los EVs máximos son 504 en total, y 252 por stat.
     *Los ataques de pulsos/auras y balas se han unificado, por lo que las habilidades Megadisparador y Antibalas funcionan con todos.
-    *Se han cambiado muchas habilidades y se han añadido muchas otras. No hay habilidades inútiles en el juego, y todos los Pokémon tienen 3 habilidades (excepto Pokémon con habilidades intrínsecas, como Shedinja, Mimikyu...).
+    *Se han cambiado muchas habilidades y se han añadido muchas otras. No hay habilidades inútiles en el juego, y todos los Pokémon tienen 3 habilidades (excepto Pokémon con habilidades intrínsecas, como Shedinja, Aegislash).
     *Forcejeo tiene STAB de tipo Normal.
     *Se ha cambiado cómo funciona el STAB: Pokémon con 1 solo tipo tienen 50% de STAB, mientras que Pokémon con 2 tipos tienen 25% de STAB con cada uno de sus tipos.
     *Clima soleado y lluvioso potencian un 25% los ataques de fuego y agua (aunque siguen reduciéndose 50% la potencia de sus contrapartes).
@@ -91,8 +91,8 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Se pueden transmitir movimientos huevo entre 2 Pokémon de la misma especie si se deja a ambos en la guardería, uno conoce el movimiento huevo y el otro tiene un hueco libre.
     *Se han expandido las cajas Pokémon hasta 30.
     *Los índices críticos se han modificado: Normal 1/16 (6,25%), +1 1/8 (12,5%), +2 1/4 (25%), +3 1/2 (50%) y +4 1/1 (100%).
-    *Rework de Velo floral: Habilidad exclusivo de Bellossom, que impide cambios de estado y bajadas de stats de equipo si hay Sol (no hace falta que sean tipo Planta).
-    *Habilidad exclusiva de Persian y A-Persian: En metálico, potencia ataques de Acero un 25%, y convierte Día de pago en tipo Acero. Además, este es su ataque exclusivo, y ahora tiene 100 de potencia.
+    *Rework de Velo floral: impide cambios de estado y bajadas de stats de equipo si hay Sol (no hace falta que sean tipo Planta).
+    *Habilidad exclusiva de Persian: En metálico, potencia ataques de Acero un 25%, y convierte Día de pago en tipo Acero. Además, este es su ataque exclusivo, y ahora tiene 100 de potencia.
     *Objetos exclusivos potenciadores: Objetos como Cuchara torcida potencian un 25% los ataques de una familia concreta (Alakazam).
     *Desarme ya no aumenta su potencia si quita el objeto, pero se le ha subido la potencia a 70.
     *Los objetos potenciadores de ataques de un tipo, como Colmillo dragón, potencian un 25% los ataques de ese tipo.

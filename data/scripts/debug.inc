@@ -153,8 +153,6 @@ Debug_EventScript_Script_1::
 	givemon SPECIES_PIDGEOT, 1, ITEM_NONE
 	givemon SPECIES_RATTATA, 1, ITEM_NONE
 	givemon SPECIES_RATICATE, 1, ITEM_NONE
-	givemon SPECIES_SPEAROW, 1, ITEM_NONE
-	givemon SPECIES_FEAROW, 1, ITEM_NONE
 	givemon SPECIES_EKANS, 1, ITEM_NONE
 	givemon SPECIES_ARBOK, 1, ITEM_NONE
 	givemon SPECIES_PICHU, 1, ITEM_NONE
@@ -212,8 +210,6 @@ Debug_EventScript_Script_2::
 	givemon SPECIES_PIDGEOT, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATTATA, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_RATICATE, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_SPEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
-	givemon SPECIES_FEAROW, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_EKANS, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_ARBOK, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE
 	givemon SPECIES_PICHU, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, TRUE

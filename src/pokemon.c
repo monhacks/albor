@@ -3902,8 +3902,6 @@ u16 GetBattleBGM(void)
         case SPECIES_REGICE:
         case SPECIES_REGISTEEL:
         case SPECIES_REGIGIGAS:
-        case SPECIES_REGIELEKI:
-        case SPECIES_REGIDRAGO:
             return MUS_VS_REGI;
         default:
             return MUS_RG_VS_LEGEND;
@@ -3984,8 +3982,6 @@ u16 GetBattleBGM(void)
         case SPECIES_REGICE:
         case SPECIES_REGISTEEL:
         case SPECIES_REGIGIGAS:
-        case SPECIES_REGIELEKI:
-        case SPECIES_REGIDRAGO:
             return MUS_VS_REGI;
         case SPECIES_LATIAS:
         case SPECIES_LATIOS:

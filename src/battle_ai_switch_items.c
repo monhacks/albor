@@ -1647,10 +1647,6 @@ static u32 GetSwitchinHitsToKO(s32 damageTaken, u32 battler)
         hitsToKO++;
     }
 
-    // Disguise will always add an extra hit to KO
-    if (opponentCanBreakMold && AI_DATA->switchinCandidate.battleMon.species == SPECIES_MIMIKYU_DISGUISED)
-        hitsToKO++;
-
     // If mon had a hypothetical status from TSpikes, clear it
     if (AI_DATA->switchinCandidate.hypotheticalStatus == TRUE)
     {

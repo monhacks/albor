@@ -20,8 +20,6 @@ gCryTable::
 	cry Cry_Pidgeot
 	cry Cry_Rattata
 	cry Cry_Raticate
-	cry Cry_Spearow
-	cry Cry_Fearow
 	cry Cry_Ekans
 	cry Cry_Arbok
 	cry Cry_Pichu
@@ -46,10 +44,6 @@ gCryTable::
 	cry Cry_Zubat
 	cry Cry_Golbat
 	cry Cry_Crobat
-	cry Cry_Oddish
-	cry Cry_Gloom
-	cry Cry_Vileplume
-	cry Cry_Bellossom
 	cry Cry_Paras
 	cry Cry_Parasect
 	cry Cry_Meowth
@@ -81,9 +75,6 @@ gCryTable::
 	cry Cry_Golem
 	cry Cry_Ponyta
 	cry Cry_Rapidash
-	cry Cry_Slowpoke
-	cry Cry_Slowbro
-	cry Cry_Slowking
 	cry Cry_Magnemite
 	cry Cry_Magneton
 	cry Cry_Magnezone
@@ -280,8 +271,6 @@ gCryTable::
 	cry Cry_Gallade
 	cry Cry_Surskit
 	cry Cry_Masquerain
-	cry Cry_Shroomish
-	cry Cry_Breloom
 	cry Cry_Slakoth
 	cry Cry_Vigoroth
 	cry Cry_Slaking
@@ -391,12 +380,6 @@ gCryTable::
 	cry Cry_Bastiodon
 	cry Cry_Combee
 	cry Cry_Vespiquen
-	cry Cry_Buizel
-	cry Cry_Floatzel
-	cry Cry_Cherubi
-	cry Cry_Cherrim
-	cry Cry_Shellos
-	cry Cry_Gastrodon
 	cry Cry_Drifloon
 	cry Cry_Drifblim
 	cry Cry_Buneary
@@ -428,20 +411,12 @@ gCryTable::
 	cry Cry_Samurott
 	cry Cry_Drilbur
 	cry Cry_Excadrill
-	cry Cry_Sandile
-	cry Cry_Krokorok
-	cry Cry_Krookodile
 	cry Cry_Darumaka
 	cry Cry_Darmanitan
 	cry Cry_Yamask
 	cry Cry_Cofagrigus
 	cry Cry_Zorua
 	cry Cry_Zoroark
-	cry Cry_Gothita
-	cry Cry_Gothorita
-	cry Cry_Gothitelle
-	cry Cry_Foongus
-	cry Cry_Amoonguss
 	cry Cry_Frillish
 	cry Cry_Jellicent
 	cry Cry_Joltik
@@ -458,8 +433,6 @@ gCryTable::
 	cry Cry_Haxorus
 	cry Cry_Cubchoo
 	cry Cry_Beartic
-	cry Cry_Golett
-	cry Cry_Golurk
 	cry Cry_Pawniard
 	cry Cry_Bisharp
 	cry Cry_Deino
@@ -476,8 +449,6 @@ gCryTable::
 	cry Cry_Froakie
 	cry Cry_Frogadier
 	cry Cry_Greninja
-	cry Cry_Bunnelby
-	cry Cry_Diggersby
 	cry Cry_Fletchling
 	cry Cry_Fletchinder
 	cry Cry_Talonflame
@@ -493,10 +464,6 @@ gCryTable::
 	cry Cry_Goomy
 	cry Cry_Sliggoo
 	cry Cry_Goodra
-	cry Cry_Phantump
-	cry Cry_Trevenant
-	cry Cry_Carbink
-	cry Cry_Diancie
 	cry Cry_Rowlet
 	cry Cry_Dartrix
 	cry Cry_Decidueye
@@ -506,13 +473,8 @@ gCryTable::
 	cry Cry_Popplio
 	cry Cry_Brionne
 	cry Cry_Primarina
-	cry Cry_Rockruff
-	cry Cry_LycanrocMidday
-	cry Cry_LycanrocMidnight
-	cry Cry_LycanrocDusk
 	cry Cry_Sandygast
 	cry Cry_Palossand
-	cry Cry_Mimikyu
 	cry Cry_JangmoO
 	cry Cry_HakamoO
 	cry Cry_KommoO
@@ -522,18 +484,11 @@ gCryTable::
 	cry Cry_Blipbug
 	cry Cry_Dottler
 	cry Cry_Orbeetle
-	cry Cry_Toxel
-	cry Cry_ToxtricityAmped
-	cry Cry_ToxtricityLowKey
 	cry Cry_Snom
 	cry Cry_Frosmoth
 	cry Cry_Dreepy
 	cry Cry_Drakloak
 	cry Cry_Dragapult
-	cry Cry_Regieleki
-	cry Cry_Regidrago
-	cry Cry_Glimmet
-	cry Cry_Glimmora
 
 	.align 2
 gCryTable_Reverse::
@@ -557,8 +512,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Pidgeot
 	cry_reverse Cry_Rattata
 	cry_reverse Cry_Raticate
-	cry_reverse Cry_Spearow
-	cry_reverse Cry_Fearow
 	cry_reverse Cry_Ekans
 	cry_reverse Cry_Arbok
 	cry_reverse Cry_Pichu
@@ -583,10 +536,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Zubat
 	cry_reverse Cry_Golbat
 	cry_reverse Cry_Crobat
-	cry_reverse Cry_Oddish
-	cry_reverse Cry_Gloom
-	cry_reverse Cry_Vileplume
-	cry_reverse Cry_Bellossom
 	cry_reverse Cry_Paras
 	cry_reverse Cry_Parasect
 	cry_reverse Cry_Meowth
@@ -618,9 +567,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Golem
 	cry_reverse Cry_Ponyta
 	cry_reverse Cry_Rapidash
-	cry_reverse Cry_Slowpoke
-	cry_reverse Cry_Slowbro
-	cry_reverse Cry_Slowking
 	cry_reverse Cry_Magnemite
 	cry_reverse Cry_Magneton
 	cry_reverse Cry_Magnezone
@@ -817,8 +763,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Gallade
 	cry_reverse Cry_Surskit
 	cry_reverse Cry_Masquerain
-	cry_reverse Cry_Shroomish
-	cry_reverse Cry_Breloom
 	cry_reverse Cry_Slakoth
 	cry_reverse Cry_Vigoroth
 	cry_reverse Cry_Slaking
@@ -928,12 +872,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Bastiodon
 	cry_reverse Cry_Combee
 	cry_reverse Cry_Vespiquen
-	cry_reverse Cry_Buizel
-	cry_reverse Cry_Floatzel
-	cry_reverse Cry_Cherubi
-	cry_reverse Cry_Cherrim
-	cry_reverse Cry_Shellos
-	cry_reverse Cry_Gastrodon
 	cry_reverse Cry_Drifloon
 	cry_reverse Cry_Drifblim
 	cry_reverse Cry_Buneary
@@ -965,20 +903,12 @@ gCryTable_Reverse::
 	cry_reverse Cry_Samurott
 	cry_reverse Cry_Drilbur
 	cry_reverse Cry_Excadrill
-	cry_reverse Cry_Sandile
-	cry_reverse Cry_Krokorok
-	cry_reverse Cry_Krookodile
 	cry_reverse Cry_Darumaka
 	cry_reverse Cry_Darmanitan
 	cry_reverse Cry_Yamask
 	cry_reverse Cry_Cofagrigus
 	cry_reverse Cry_Zorua
 	cry_reverse Cry_Zoroark
-	cry_reverse Cry_Gothita
-	cry_reverse Cry_Gothorita
-	cry_reverse Cry_Gothitelle
-	cry_reverse Cry_Foongus
-	cry_reverse Cry_Amoonguss
 	cry_reverse Cry_Frillish
 	cry_reverse Cry_Jellicent
 	cry_reverse Cry_Joltik
@@ -995,8 +925,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Haxorus
 	cry_reverse Cry_Cubchoo
 	cry_reverse Cry_Beartic
-	cry_reverse Cry_Golett
-	cry_reverse Cry_Golurk
 	cry_reverse Cry_Pawniard
 	cry_reverse Cry_Bisharp
 	cry_reverse Cry_Deino
@@ -1013,8 +941,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Froakie
 	cry_reverse Cry_Frogadier
 	cry_reverse Cry_Greninja
-	cry_reverse Cry_Bunnelby
-	cry_reverse Cry_Diggersby
 	cry_reverse Cry_Fletchling
 	cry_reverse Cry_Fletchinder
 	cry_reverse Cry_Talonflame
@@ -1030,10 +956,6 @@ gCryTable_Reverse::
 	cry_reverse Cry_Goomy
 	cry_reverse Cry_Sliggoo
 	cry_reverse Cry_Goodra
-	cry_reverse Cry_Phantump
-	cry_reverse Cry_Trevenant
-	cry_reverse Cry_Carbink
-	cry_reverse Cry_Diancie
 	cry_reverse Cry_Rowlet
 	cry_reverse Cry_Dartrix
 	cry_reverse Cry_Decidueye
@@ -1043,13 +965,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Popplio
 	cry_reverse Cry_Brionne
 	cry_reverse Cry_Primarina
-	cry_reverse Cry_Rockruff
-	cry_reverse Cry_LycanrocMidday
-	cry_reverse Cry_LycanrocMidnight
-	cry_reverse Cry_LycanrocDusk
 	cry_reverse Cry_Sandygast
 	cry_reverse Cry_Palossand
-	cry_reverse Cry_Mimikyu
 	cry_reverse Cry_JangmoO
 	cry_reverse Cry_HakamoO
 	cry_reverse Cry_KommoO
@@ -1059,15 +976,8 @@ gCryTable_Reverse::
 	cry_reverse Cry_Blipbug
 	cry_reverse Cry_Dottler
 	cry_reverse Cry_Orbeetle
-	cry_reverse Cry_Toxel
-	cry_reverse Cry_ToxtricityAmped
-	cry_reverse Cry_ToxtricityLowKey
 	cry_reverse Cry_Snom
 	cry_reverse Cry_Frosmoth
 	cry_reverse Cry_Dreepy
 	cry_reverse Cry_Drakloak
 	cry_reverse Cry_Dragapult
-	cry_reverse Cry_Regieleki
-	cry_reverse Cry_Regidrago
-	cry_reverse Cry_Glimmet
-	cry_reverse Cry_Glimmora

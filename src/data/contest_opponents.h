@@ -388,7 +388,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_GRANT] = {
-        .species = SPECIES_SHROOMISH,
+        .species = SPECIES_MEW,
         .nickname = _("SMISH"),
         .trainerName = _("GRANT"),
         .trainerGfxId = OBJ_EVENT_GFX_YOUNGSTER,
@@ -1312,7 +1312,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_LUKE] = {
-        .species = SPECIES_SLOWBRO,
+        .species = SPECIES_MEW,
         .nickname = _("BROWLO"),
         .trainerName = _("LUKE"),
         .trainerGfxId = OBJ_EVENT_GFX_FAT_MAN,
@@ -2404,7 +2404,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_AUBREY] = {
-        .species = SPECIES_BELLOSSOM,
+        .species = SPECIES_MEW,
         .nickname = _("BLOSSOM"),
         .trainerName = _("AUBREY"),
         .trainerGfxId = OBJ_EVENT_GFX_WOMAN_4,
@@ -2852,7 +2852,7 @@ const struct ContestPokemon gContestOpponents[] =
         .otId = CONTEST_AI_TRAINER_ID,
     },
     [CONTEST_OPPONENT_TREY] = {
-        .species = SPECIES_SLOWKING,
+        .species = SPECIES_MEW,
         .nickname = _("SLOWGO"),
         .trainerName = _("TREY"),
         .trainerGfxId = OBJ_EVENT_GFX_SAILOR,

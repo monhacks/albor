@@ -1048,9 +1048,6 @@ static void InitRouletteTableData(void)
     {
         switch (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG))
         {
-        case SPECIES_SHROOMISH:
-            sRoulette->partySpeciesFlags |= HAS_SHROOMISH;
-            break;
         case SPECIES_TAILLOW:
             sRoulette->partySpeciesFlags |= HAS_TAILLOW;
             break;
@@ -4210,10 +4207,6 @@ static void SetBallStuck(struct Sprite *sprite)
             PlayCry_Normal(SPECIES_TAILLOW, -63);
         else
             PlayCry_Normal(SPECIES_TAILLOW, 63);
-    }
-    else
-    {
-        PlayCry_Normal(SPECIES_SHROOMISH, -63);
     }
 
     slotsToSkip = 2;

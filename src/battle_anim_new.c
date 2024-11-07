@@ -8586,17 +8586,6 @@ void AnimTask_GetTimeOfDay(u8 taskId)
     DestroyAnimVisualTask(taskId);
 }
 
-void AnimTask_GetLycanrocForm(u8 taskId)
-{
-    if (GetMonData(GetIllusionMonPtr(gBattleAnimAttacker), MON_DATA_SPECIES) == SPECIES_LYCANROC_MIDNIGHT)
-        gBattleAnimArgs[0] = 1;
-    else
-        gBattleAnimArgs[0] = 0;
-
-    gBattleAnimArgs[0] = 0;
-    DestroyAnimVisualTask(taskId);
-}
-
 // Scales up the target mon sprite
 // Used in Let's Snuggle Forever
 // No args.
