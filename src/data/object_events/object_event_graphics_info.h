@@ -3109,8 +3109,6 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Fossil = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-extern const struct SpriteFrameImage sPicTable_Kecleon[];
-
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonBridgeShadow = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,
@@ -3124,7 +3122,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonBridgeShado
     .oam = &gObjectEventBaseOam_32x32,
     .subspriteTables = sOamTables_32x32,
     .anims = sAnimTable_Following,
-    .images = sPicTable_Kecleon,
+    .images = sPicTable_Fossil,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 

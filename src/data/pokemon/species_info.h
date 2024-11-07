@@ -122,7 +122,7 @@
     .oam = &gObjectEventBaseOam_32x32,                                                      \
     .subspriteTables = sOamTables_32x32,                                                    \
     .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
-    .images = sPicTable_##name,                                                             \
+    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name, 4, 4), },\
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 }
 
@@ -140,7 +140,7 @@
     .oam = &gObjectEventBaseOam_32x32,                                                      \
     .subspriteTables = sOamTables_32x32,                                                    \
     .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
-    .images = sPicTable_##name##F,                                                          \
+    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name##F, 4, 4), },\
     .affineAnims = gDummySpriteAffineAnimTable,                                             \
 }
 
@@ -1183,7 +1183,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         AMISTAD(NORMAL),
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPOS_HUEVO(CAMPESTRE, HADA),
-        NOMBRE(A-Raichu),
+        NOMBRE(Raichu),
         GRITO(RAICHU),
         POKEDEX(RAICHU_ALOLA),
         PS(60),
@@ -1295,7 +1295,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         CRECIMIENTO(NORMAL),
         AMISTAD(NORMAL),
         EV_DEFENSA(1),
-        NOMBRE(A-Sandshrew),
+        NOMBRE(Sandshrew),
         GRITO(SANDSHREW),
         POKEDEX(SANDSHREW_ALOLA),
         PS(50),
@@ -1332,7 +1332,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         CRECIMIENTO(NORMAL),
         AMISTAD(NORMAL),
         EV_DEFENSA(2),
-        NOMBRE(A-Sandslash),
+        NOMBRE(Sandslash),
         GRITO(SANDSLASH),
         POKEDEX(SANDSLASH_ALOLA),
         PS(75),
@@ -1770,7 +1770,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         CRECIMIENTO(NORMAL),
         AMISTAD(NORMAL),
         EV_VELOCIDAD(1),
-        NOMBRE(A-Vulpix),
+        NOMBRE(Vulpix),
         GRITO(VULPIX),
         POKEDEX(VULPIX_ALOLA),
         GENERO(PORCENTAJE_HEMBRA(75)),
@@ -1800,7 +1800,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         CRECIMIENTO(NORMAL),
         AMISTAD(NORMAL),
         EV_DEFENSA_ESPECIAL(2),
-        NOMBRE(A-Ninetales),
+        NOMBRE(Ninetales),
         GRITO(NINETALES),
         POKEDEX(NINETALES_ALOLA),
         GENERO(PORCENTAJE_HEMBRA(75)),
@@ -2366,7 +2366,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         AMISTAD(NORMAL),
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(CAMPESTRE),
-        NOMBRE(A-Meowth),
+        NOMBRE(Meowth),
         GRITO(MEOWTH),
         POKEDEX(MEOWTH_ALOLA),
         PS(40),
@@ -2402,7 +2402,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         AMISTAD(NORMAL),
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(CAMPESTRE),
-        NOMBRE(A-Persian),
+        NOMBRE(Persian),
         GRITO(PERSIAN),
         POKEDEX(PERSIAN_ALOLA),
         PS(70),
@@ -4304,7 +4304,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         OBJETO_RARO(THICK_CLUB),
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(MONSTRUO),
-        NOMBRE(A-Marowak),
+        NOMBRE(Marowak),
         GRITO(MAROWAK),
         POKEDEX(MAROWAK_ALOLA),
         TIPOS(FUEGO, FANTASMA),
@@ -4321,6 +4321,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(MarowakAlola, TRACKS_FOOT),
         MOVIMIENTOS(MarowakAlola),
         MOVIMIENTOS_HUEVO(Cubone),
+        BRILLA,
     },
 
     [SPECIES_TYROGUE] =
@@ -4633,7 +4634,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(AMORFO),
         NO_VOLTEAR,
-        NOMBRE(G-Weezing),
+        NOMBRE(Weezing),
         GRITO(WEEZING),
         POKEDEX(WEEZING_GALAR),
         TIPOS(VENENO, HADA),
@@ -16781,7 +16782,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(CAMPESTRE),
         HABILIDADES(HUSTLE, NONE, INNER_FOCUS),
-        NOMBRE(G-Darumaka),
+        NOMBRE(Darumaka),
         GRITO(DARUMAKA),
         POKEDEX(DARUMAKA_GALAR),
         TIPO(HIELO),
@@ -17017,7 +17018,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(25)),
         GRUPO_HUEVO(CAMPESTRE),
         HABILIDADES(ILLUSION, NONE, NONE),
-        NOMBRE(H-Zorua),
+        NOMBRE(Zorua),
         GRITO(ZORUA),
         POKEDEX(ZORUA_HISUI),
         PS(35),
@@ -17051,7 +17052,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(25)),
         GRUPO_HUEVO(CAMPESTRE),
         HABILIDADES(ILLUSION, NONE, NONE),
-        NOMBRE(H-Zoroark),
+        NOMBRE(Zoroark),
         GRITO(ZOROARK),
         POKEDEX(ZOROARK_HISUI),
         PS(55),

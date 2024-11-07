@@ -1264,14 +1264,12 @@ static const union AnimCmd *const sAnimTable_RayquazaSpotlightEffect[] = {
     sAnim_RayquazaSpotlightEffect,
 };
 
-extern const struct SpriteFrameImage sPicTable_Rayquaza[];
-
 const struct SpriteTemplate gFieldEffectObjectTemplate_Rayquaza = {
     .tileTag = TAG_NONE,
     .paletteTag = TAG_NONE,
     .oam = &gObjectEventBaseOam_32x32,
     .anims = sAnimTable_RayquazaSpotlightEffect,
-    .images = sPicTable_Rayquaza,
+    .images = sPicTable_SmallSparkle,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = UpdateRayquazaSpotlightEffect,
 };

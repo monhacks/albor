@@ -564,6 +564,18 @@ static const u16 sSwabluEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
+static const u16 sLunatoneEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sSolrockEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
+static const u16 sBaltoyEggMoveLearnset[] = {
+    MOVE_UNAVAILABLE,
+};
+
 static const u16 sLileepEggMoveLearnset[] = {
     MOVE_UNAVAILABLE,
 };
