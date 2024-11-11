@@ -73,7 +73,7 @@
 #define MAPSEC_UNDERWATER_SEAFLOOR_CAVERN   0x45
 #define MAPSEC_VICTORY_ROAD                 0x46
 #define MAPSEC_MIRAGE_ISLAND                0x47
-#define MAPSEC_CAVE_OF_ORIGIN               0x48
+#define MAPSEC_UNUSED_0x48               0x48
 #define MAPSEC_SOUTHERN_ISLAND              0x49
 #define MAPSEC_FIERY_PATH                   0x4A
 #define MAPSEC_FIERY_PATH2                  0x4B

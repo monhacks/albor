@@ -375,9 +375,6 @@ gStdScripts_End::
 	.include "data/maps/SeafloorCavern_Room7/scripts.inc"
 	.include "data/maps/SeafloorCavern_Room8/scripts.inc"
 	.include "data/maps/SeafloorCavern_Room9/scripts.inc"
-	.include "data/maps/CaveOfOrigin_Entrance/scripts.inc"
-	.include "data/maps/CaveOfOrigin_1F/scripts.inc"
-	.include "data/maps/CaveOfOrigin_B1F/scripts.inc"
 	.include "data/maps/VictoryRoad_1F/scripts.inc"
 	.include "data/maps/VictoryRoad_B1F/scripts.inc"
 	.include "data/maps/VictoryRoad_B2F/scripts.inc"
@@ -818,7 +815,6 @@ Common_EventScript_FerryDepartIsland::
 	call Common_EventScript_FerryDepart
 	return
 
-	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"
 
 Common_EventScript_NameReceivedPartyMon::
@@ -970,16 +966,6 @@ gText_SorryWirelessClubAdjustments::
 gText_UndergoingAdjustments::
 	.string "It appears to be undergoing\n"
 	.string "adjustments…$"
-
-@ Unused
-gText_SorryTradeCenterInspections::
-	.string "I'm terribly sorry. The TRADE CENTER\n"
-	.string "is undergoing inspections.$"
-
-@ Unused
-gText_SorryRecordCornerPreparation::
-	.string "I'm terribly sorry. The RECORD CORNER\n"
-	.string "is under preparation.$"
 
 gText_PlayerHandedOverTheItem::
 	.string "{PLAYER} handed over the\n"
