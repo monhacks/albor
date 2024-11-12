@@ -868,10 +868,6 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
             else
                 warpEvent = SetWarpDestinationTrainerHill4F();
         }
-        else if (trainerHillMapId == TRAINER_HILL_ROOF)
-        {
-            warpEvent = SetWarpDestinationTrainerHillFinalFloor(warpEventId);
-        }
         else
         {
             warpEvent = &gMapHeader.events->warps[warpEventId];

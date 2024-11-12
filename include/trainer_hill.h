@@ -49,7 +49,6 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg);
 bool32 InTrainerHill(void);
 u8 GetCurrentTrainerHillMapId(void);
 const struct WarpEvent* SetWarpDestinationTrainerHill4F(void);
-const struct WarpEvent* SetWarpDestinationTrainerHillFinalFloor(u8 warpEventId);
 u16 LocalIdToHillTrainerId(u8 localId);
 bool8 GetHillTrainerFlag(u8 objectEventId);
 void SetHillTrainerFlag(void);
