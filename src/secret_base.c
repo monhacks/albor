@@ -42,7 +42,6 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/metatile_labels.h"
 #include "constants/moves.h"
-#include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -97,41 +96,6 @@ static const struct SecretBaseEntranceMetatiles sSecretBaseEntranceMetatiles[] =
     {.closedMetatileId = METATILE_Fallarbor_BrownCaveIndent,    .openMetatileId = METATILE_Fallarbor_BrownCaveOpen},
     {.closedMetatileId = METATILE_Fortree_SecretBase_Shrub,     .openMetatileId = METATILE_Fortree_SecretBase_ShrubOpen},
 };
-
-// mapNum, warpId, x, y
-// x, y positions are for when the player warps in for the first time (in front of the computer)
-static const u8 sSecretBaseEntrancePositions[NUM_SECRET_BASE_GROUPS * 4] =
-{
-    [SECRET_BASE_RED_CAVE1]    = MAP_NUM(SECRET_BASE_RED_CAVE1),    0,  1,  3,
-    [SECRET_BASE_RED_CAVE2]    = MAP_NUM(SECRET_BASE_RED_CAVE2),    0,  5,  9,
-    [SECRET_BASE_RED_CAVE3]    = MAP_NUM(SECRET_BASE_RED_CAVE3),    0,  1,  3,
-    [SECRET_BASE_RED_CAVE4]    = MAP_NUM(SECRET_BASE_RED_CAVE4),    0,  7, 13,
-    [SECRET_BASE_BROWN_CAVE1]  = MAP_NUM(SECRET_BASE_BROWN_CAVE1),  0,  2,  3,
-    [SECRET_BASE_BROWN_CAVE2]  = MAP_NUM(SECRET_BASE_BROWN_CAVE2),  0,  9,  2,
-    [SECRET_BASE_BROWN_CAVE3]  = MAP_NUM(SECRET_BASE_BROWN_CAVE3),  0, 13,  4,
-    [SECRET_BASE_BROWN_CAVE4]  = MAP_NUM(SECRET_BASE_BROWN_CAVE4),  0,  1,  2,
-    [SECRET_BASE_BLUE_CAVE1]   = MAP_NUM(SECRET_BASE_BLUE_CAVE1),   0,  1,  3,
-    [SECRET_BASE_BLUE_CAVE2]   = MAP_NUM(SECRET_BASE_BLUE_CAVE2),   0,  1,  2,
-    [SECRET_BASE_BLUE_CAVE3]   = MAP_NUM(SECRET_BASE_BLUE_CAVE3),   0,  3, 15,
-    [SECRET_BASE_BLUE_CAVE4]   = MAP_NUM(SECRET_BASE_BLUE_CAVE4),   0,  3, 14,
-    [SECRET_BASE_YELLOW_CAVE1] = MAP_NUM(SECRET_BASE_YELLOW_CAVE1), 0,  9,  3,
-    [SECRET_BASE_YELLOW_CAVE2] = MAP_NUM(SECRET_BASE_YELLOW_CAVE2), 0,  8,  7,
-    [SECRET_BASE_YELLOW_CAVE3] = MAP_NUM(SECRET_BASE_YELLOW_CAVE3), 0,  3,  6,
-    [SECRET_BASE_YELLOW_CAVE4] = MAP_NUM(SECRET_BASE_YELLOW_CAVE4), 0,  5,  9,
-    [SECRET_BASE_TREE1]        = MAP_NUM(SECRET_BASE_TREE1),        0,  2,  3,
-    [SECRET_BASE_TREE2]        = MAP_NUM(SECRET_BASE_TREE2),        0,  5,  6,
-    [SECRET_BASE_TREE3]        = MAP_NUM(SECRET_BASE_TREE3),        0, 15,  3,
-    [SECRET_BASE_TREE4]        = MAP_NUM(SECRET_BASE_TREE4),        0,  4, 10,
-    [SECRET_BASE_SHRUB1]       = MAP_NUM(SECRET_BASE_SHRUB1),       0,  3,  3,
-    [SECRET_BASE_SHRUB2]       = MAP_NUM(SECRET_BASE_SHRUB2),       0,  1,  2,
-    [SECRET_BASE_SHRUB3]       = MAP_NUM(SECRET_BASE_SHRUB3),       0,  7,  8,
-    [SECRET_BASE_SHRUB4]       = MAP_NUM(SECRET_BASE_SHRUB4),       0,  9,  6,
-};
-
-#define GET_BASE_MAP_NUM(group)    (sSecretBaseEntrancePositions[(group) + 0])
-#define GET_BASE_WARP_ID(group)    (sSecretBaseEntrancePositions[(group) + 1])
-#define GET_BASE_COMPUTER_X(group) (sSecretBaseEntrancePositions[(group) + 2])
-#define GET_BASE_COMPUTER_Y(group) (sSecretBaseEntrancePositions[(group) + 3])
 
 static const struct MenuAction sRegistryMenuActions[] =
 {
@@ -258,55 +222,12 @@ void CheckPlayerHasSecretBase(void)
 
 static u8 GetSecretBaseTypeInFrontOfPlayer_(void)
 {
-    s16 x, y;
-    s16 behavior;
-
-    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    behavior = MapGridGetMetatileBehaviorAt(x, y) & 0xFFF;
-    if (behavior == MB_SECRET_BASE_SPOT_RED_CAVE || behavior == MB_SECRET_BASE_SPOT_RED_CAVE_OPEN)
-        return SECRET_BASE_RED_CAVE;
-
-    if (behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE || behavior == MB_SECRET_BASE_SPOT_BROWN_CAVE_OPEN)
-        return SECRET_BASE_BROWN_CAVE;
-
-    if (behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE || behavior == MB_SECRET_BASE_SPOT_BLUE_CAVE_OPEN)
-        return SECRET_BASE_BLUE_CAVE;
-
-    if (behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE || behavior == MB_SECRET_BASE_SPOT_YELLOW_CAVE_OPEN)
-        return SECRET_BASE_YELLOW_CAVE;
-
-    if (behavior == MB_SECRET_BASE_SPOT_TREE_LEFT  || behavior == MB_SECRET_BASE_SPOT_TREE_LEFT_OPEN
-     || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT || behavior == MB_SECRET_BASE_SPOT_TREE_RIGHT_OPEN)
-        return SECRET_BASE_TREE;
-
-    if (behavior == MB_SECRET_BASE_SPOT_SHRUB || behavior == MB_SECRET_BASE_SPOT_SHRUB_OPEN)
-        return SECRET_BASE_SHRUB;
-
     return 0;
 }
 
 void GetSecretBaseTypeInFrontOfPlayer(void)
 {
     gSpecialVar_0x8007 = GetSecretBaseTypeInFrontOfPlayer_();
-}
-
-static void FindMetatileIdMapCoords(s16 *x, s16 *y, u16 metatileId)
-{
-    s16 i, j;
-    const struct MapLayout *mapLayout = gMapHeader.mapLayout;
-
-    for (j = 0; j < mapLayout->height; j++)
-    {
-        for (i = 0; i < mapLayout->width; i++)
-        {
-            if ((mapLayout->map[j * mapLayout->width + i] & MAPGRID_METATILE_ID_MASK) == metatileId)
-            {
-                *x = i;
-                *y = j;
-                return;
-            }
-        }
-    }
 }
 
 // Opens or closes the secret base entrance metatile in front of the player.
@@ -372,39 +293,12 @@ void SetPlayerSecretBase(void)
 // Set the 'open' entrance metatile for any occupied secret base on this map
 void SetOccupiedSecretBaseEntranceMetatiles(struct MapEvents const *events)
 {
-    u16 bgId;
-    u16 i, j;
 
-    for (bgId = 0; bgId < events->bgEventCount; bgId++)
-    {
-        if (events->bgEvents[bgId].kind == BG_EVENT_SECRET_BASE)
-        {
-            for (j = 0; j < SECRET_BASES_COUNT; j++)
-            {
-                if (gSaveBlock1Ptr->secretBases[j].secretBaseId == events->bgEvents[bgId].bgUnion.secretBaseId)
-                {
-                    s16 x = events->bgEvents[bgId].x + MAP_OFFSET;
-                    s16 y = events->bgEvents[bgId].y + MAP_OFFSET;
-                    s16 tile_id = MapGridGetMetatileIdAt(x, y);
-                    for (i = 0; i < ARRAY_COUNT(sSecretBaseEntranceMetatiles); i++)
-                    {
-                        if (sSecretBaseEntranceMetatiles[i].closedMetatileId == tile_id)
-                        {
-                            MapGridSetMetatileIdAt(x, y, sSecretBaseEntranceMetatiles[i].openMetatileId | MAPGRID_COLLISION_MASK);
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-    }
 }
 
 static void SetSecretBaseWarpDestination(void)
 {
-    s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(SECRET_BASE_RED_CAVE1), GET_BASE_MAP_NUM(secretBaseGroup), GET_BASE_WARP_ID(secretBaseGroup));
+
 }
 
 #define tState data[0]
@@ -444,101 +338,17 @@ void EnterSecretBase(void)
 
 bool8 SecretBaseMapPopupEnabled(void)
 {
-    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE && VarGet(VAR_INIT_SECRET_BASE) == 0)
-        return FALSE;
-
-    return TRUE;
-}
-
-static void EnterNewlyCreatedSecretBase_WaitFadeIn(u8 taskId)
-{
-    ObjectEventTurn(&gObjectEvents[gPlayerAvatar.objectEventId], DIR_NORTH);
-    if (IsWeatherNotFadingIn() == TRUE)
-    {
-        ScriptContext_Enable();
-        DestroyTask(taskId);
-    }
-}
-
-static void EnterNewlyCreatedSecretBase_StartFadeIn(void)
-{
-    s16 x = 0, y = 0;
-
-    LockPlayerFieldControls();
-    HideMapNamePopUpWindow();
-    FindMetatileIdMapCoords(&x, &y, METATILE_SecretBase_PC);
-    x += MAP_OFFSET;
-    y += MAP_OFFSET;
-    MapGridSetMetatileIdAt(x, y, METATILE_SecretBase_PC | MAPGRID_COLLISION_MASK);
-    CurrentMapDrawMetatileAt(x, y);
-    FadeInFromBlack();
-    CreateTask(EnterNewlyCreatedSecretBase_WaitFadeIn, 0);
-}
-
-static void Task_EnterNewlyCreatedSecretBase(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        s8 secretBaseGroup = SECRET_BASE_ID_TO_GROUP(sCurSecretBaseId);
-        SetWarpDestination(
-            gSaveBlock1Ptr->location.mapGroup,
-            gSaveBlock1Ptr->location.mapNum,
-            WARP_ID_NONE,
-            GET_BASE_COMPUTER_X(secretBaseGroup),
-            GET_BASE_COMPUTER_Y(secretBaseGroup));
-        WarpIntoMap();
-        gFieldCallback = EnterNewlyCreatedSecretBase_StartFadeIn;
-        SetMainCallback2(CB2_LoadMap);
-        DestroyTask(taskId);
-    }
-}
-
-void EnterNewlyCreatedSecretBase(void)
-{
-    CreateTask(Task_EnterNewlyCreatedSecretBase, 0);
-    FadeScreen(FADE_TO_BLACK, 0);
+    return FALSE;
 }
 
 bool8 CurMapIsSecretBase(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SECRET_BASE_RED_CAVE1)
-     && (u8)gSaveBlock1Ptr->location.mapNum <= MAP_NUM(SECRET_BASE_SHRUB4))
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 void InitSecretBaseAppearance(bool8 hidePC)
 {
-    u16 secretBaseIdx;
-    s16 x, y = 0;
-    u8 *decorations;
-    u8 *decorPos;
 
-    if (CurMapIsSecretBase())
-    {
-        secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
-        decorations = gSaveBlock1Ptr->secretBases[secretBaseIdx].decorations;
-        decorPos = gSaveBlock1Ptr->secretBases[secretBaseIdx].decorationPositions;
-        for (x = 0; x < DECOR_MAX_SECRET_BASE; x++)
-        {
-            if (decorations[x] > 0 && decorations[x] <= NUM_DECORATIONS && gDecorations[decorations[x]].permission != DECORPERM_SPRITE)
-                ShowDecorationOnMap((decorPos[x] >> 4) + MAP_OFFSET, (decorPos[x] & 0xF) + MAP_OFFSET, decorations[x]);
-        }
-
-        if (secretBaseIdx != 0)
-        {
-            // Another player's secret base. Change PC type to the "Register" PC.
-            FindMetatileIdMapCoords(&x, &y, METATILE_SecretBase_PC);
-            MapGridSetMetatileIdAt(x + MAP_OFFSET, y + MAP_OFFSET, METATILE_SecretBase_RegisterPC | MAPGRID_COLLISION_MASK);
-        }
-        else if (hidePC == TRUE && VarGet(VAR_SECRET_BASE_INITIALIZED) == 1)
-        {
-            // Change PC to regular ground tile.
-            FindMetatileIdMapCoords(&x, &y, METATILE_SecretBase_PC);
-            MapGridSetMetatileIdAt(x + MAP_OFFSET, y + MAP_OFFSET, METATILE_SecretBase_Ground | MAPGRID_COLLISION_MASK);
-        }
-    }
 }
 
 void InitSecretBaseDecorationSprites(void)
@@ -650,24 +460,12 @@ void SetSecretBaseOwnerGfxId(void)
 
 void SetCurSecretBaseIdFromPosition(const struct MapPosition *position, const struct MapEvents *events)
 {
-    s16 i;
-    for (i = 0; i < events->bgEventCount; i++)
-    {
-        if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE
-          && position->x == events->bgEvents[i].x + MAP_OFFSET
-          && position->y == events->bgEvents[i].y + MAP_OFFSET)
-        {
-            sCurSecretBaseId = events->bgEvents[i].bgUnion.secretBaseId;
-            break;
-        }
-    }
+
 }
 
 void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEvents *events)
 {
-    SetCurSecretBaseIdFromPosition(position, events);
-    TrySetCurSecretBaseIndex();
-    ScriptContext_SetupScript(SecretBase_EventScript_Enter);
+
 }
 
 bool8 TrySetCurSecretBase(void)
@@ -815,32 +613,7 @@ void MoveOutOfSecretBase(void)
 
 static void ClosePlayerSecretBaseEntrance(void)
 {
-    u16 i;
-    u16 j;
-    s16 metatileId;
-    const struct MapEvents *events = gMapHeader.events;
 
-    for (i = 0; i < events->bgEventCount; i++)
-    {
-        if (events->bgEvents[i].kind == BG_EVENT_SECRET_BASE
-         && gSaveBlock1Ptr->secretBases[0].secretBaseId == events->bgEvents[i].bgUnion.secretBaseId)
-        {
-            metatileId = MapGridGetMetatileIdAt(events->bgEvents[i].x + MAP_OFFSET, events->bgEvents[i].y + MAP_OFFSET);
-            for (j = 0; j < ARRAY_COUNT(sSecretBaseEntranceMetatiles); j++)
-            {
-                if (sSecretBaseEntranceMetatiles[j].openMetatileId == metatileId)
-                {
-                    MapGridSetMetatileIdAt(events->bgEvents[i].x + MAP_OFFSET,
-                                           events->bgEvents[i].y + MAP_OFFSET,
-                                           sSecretBaseEntranceMetatiles[j].closedMetatileId | MAPGRID_COLLISION_MASK);
-                    break;
-                }
-            }
-
-            DrawWholeMapView();
-            break;
-        }
-    }
 }
 
 // When the player moves to a new secret base by interacting with a new secret base
@@ -1103,12 +876,7 @@ static void ReturnToMainRegistryMenu(u8 taskId)
 
 static void GoToSecretBasePCRegisterMenu(u8 taskId)
 {
-    if (VarGet(VAR_CURRENT_SECRET_BASE) == 0)
-        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
-    else
-        ScriptContext_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
 
-    DestroyTask(taskId);
 }
 
 #undef tNumBases
@@ -1129,27 +897,7 @@ static u8 GetSecretBaseOwnerType(u8 secretBaseIdx)
 
 const u8 *GetSecretBaseTrainerLoseText(void)
 {
-    u8 ownerType = GetSecretBaseOwnerType(VarGet(VAR_CURRENT_SECRET_BASE));
-    if (ownerType == 0)
-        return SecretBase_Text_Trainer0Defeated;
-    else if (ownerType == 1)
-        return SecretBase_Text_Trainer1Defeated;
-    else if (ownerType == 2)
-        return SecretBase_Text_Trainer2Defeated;
-    else if (ownerType == 3)
-        return SecretBase_Text_Trainer3Defeated;
-    else if (ownerType == 4)
-        return SecretBase_Text_Trainer4Defeated;
-    else if (ownerType == 5)
-        return SecretBase_Text_Trainer5Defeated;
-    else if (ownerType == 6)
-        return SecretBase_Text_Trainer6Defeated;
-    else if (ownerType == 7)
-        return SecretBase_Text_Trainer7Defeated;
-    else if (ownerType == 8)
-        return SecretBase_Text_Trainer8Defeated;
-    else
-        return SecretBase_Text_Trainer9Defeated;
+    return 0;
 }
 
 void PrepSecretBaseBattleFlags(void)

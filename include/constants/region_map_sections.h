@@ -87,7 +87,7 @@
 #define MAPSEC_ANCIENT_TOMB                 0x53
 #define MAPSEC_INSIDE_OF_TRUCK              0x54
 #define MAPSEC_SKY_PILLAR                   0x55
-#define MAPSEC_SECRET_BASE                  0x56
+#define MAPSEC_UNUSED_0x56                  0x56
 #define MAPSEC_DYNAMIC                      0x57
 #define MAPSEC_PALLET_TOWN                  0x58
 #define MAPSEC_VIRIDIAN_CITY                0x59

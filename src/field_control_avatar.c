@@ -271,9 +271,6 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
     // Don't play interaction sound for certain scripts.
     if (script != LittlerootTown_BrendansHouse_2F_EventScript_PC
      && script != LittlerootTown_MaysHouse_2F_EventScript_PC
-     && script != SecretBase_EventScript_PC
-     && script != SecretBase_EventScript_DollInteract
-     && script != SecretBase_EventScript_CushionInteract
      && script != EventScript_PC)
         PlaySE(SE_SELECT);
 
@@ -402,14 +399,6 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
         return EventScript_HiddenItemScript;
-    case BG_EVENT_SECRET_BASE:
-        if (direction == DIR_NORTH)
-        {
-            gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
-            if (TrySetCurSecretBase())
-                return SecretBase_EventScript_CheckEntrance;
-        }
-        return NULL;
     }
 
     return bgEvent->bgUnion.script;
@@ -457,17 +446,6 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))
     {
-        if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_PC;
-        if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_SandOrnament;
-        if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_ShieldOrToyTV;
-        if (MetatileBehavior_IsSecretBaseDecorationBase(metatileBehavior) == TRUE)
-        {
-            CheckInteractedWithFriendsFurnitureBottom();
-            return NULL;
-        }
         if (MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
         {
             CheckInteractedWithFriendsFurnitureMiddle();
@@ -686,22 +664,19 @@ static bool8 UpdatePoisonStepCounter(void)
 {
     u16 *ptr;
 
-    if (gMapHeader.mapType != MAP_TYPE_SECRET_BASE)
+    ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
+    (*ptr)++;
+    (*ptr) %= 4;
+    if (*ptr == 0)
     {
-        ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
-        (*ptr)++;
-        (*ptr) %= 4;
-        if (*ptr == 0)
+        switch (DoPoisonFieldEffect())
         {
-            switch (DoPoisonFieldEffect())
-            {
-            case FLDPSN_NONE:
-                return FALSE;
-            case FLDPSN_PSN:
-                return FALSE;
-            case FLDPSN_FNT:
-                return TRUE;
-            }
+        case FLDPSN_NONE:
+            return FALSE;
+        case FLDPSN_PSN:
+            return FALSE;
+        case FLDPSN_FNT:
+            return TRUE;
         }
     }
     return FALSE;

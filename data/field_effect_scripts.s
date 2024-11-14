@@ -266,7 +266,6 @@ gFieldEffectScript_SweetScent::
 	field_eff_end
 
 gFieldEffectScript_SandPillar::
-	field_eff_loadfadedpal_callnative gSpritePalette_SandPillar, FldEff_SandPillar
 	field_eff_end
 
 gFieldEffectScript_Bubbles::

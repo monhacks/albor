@@ -318,16 +318,6 @@ extern const u8 ContestLadyShow_Text_Intro[];
 extern const u8 ContestLadyShow_Text_Won[];
 extern const u8 ContestLadyShow_Text_Lost[];
 extern const u8 ContestLadyShow_Text_LostBadly[];
-extern const u8 SecretBase_Text_Trainer0Defeated[];
-extern const u8 SecretBase_Text_Trainer1Defeated[];
-extern const u8 SecretBase_Text_Trainer2Defeated[];
-extern const u8 SecretBase_Text_Trainer3Defeated[];
-extern const u8 SecretBase_Text_Trainer4Defeated[];
-extern const u8 SecretBase_Text_Trainer5Defeated[];
-extern const u8 SecretBase_Text_Trainer6Defeated[];
-extern const u8 SecretBase_Text_Trainer7Defeated[];
-extern const u8 SecretBase_Text_Trainer8Defeated[];
-extern const u8 SecretBase_Text_Trainer9Defeated[];
 
 //field effects
 extern const u8 EventScript_UseStrength[];
@@ -510,30 +500,11 @@ extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall[];
 extern const u8 SSTidalCorridor_EventScript_ReachedStepCount[];
 extern const u8 EventScript_FallDownHoleMtPyre[];
 
-// Secret Base
-extern const u8 SecretBase_EventScript_PC[];
-extern const u8 SecretBase_EventScript_PCCancel[];
-extern const u8 SecretBase_EventScript_ShowRegisterMenu[];
-extern const u8 SecretBase_EventScript_SandOrnament[];
-extern const u8 SecretBase_EventScript_ShieldOrToyTV[];
-extern const u8 SecretBase_EventScript_DollInteract[];
-extern const u8 SecretBase_EventScript_CushionInteract[];
-extern const u8 SecretBase_EventScript_CheckEntrance[];
-extern const u8 SecretBase_EventScript_Enter[];
-extern const u8 SecretBase_EventScript_InitDecorations[];
-extern const u8 SecretBase_EventScript_PutAwayDecoration[];
-extern const u8 SecretBase_EventScript_SetDecoration[];
-
 // Battle Pyramid.
 extern const u8 BattlePyramid_Retire[];
 extern const u8 BattlePyramid_WarpToNextFloor[];
 extern const u8 BattlePyramid_TrainerBattle[];
 extern const u8 BattlePyramid_FindItemBall[];
-
-// fldeff misc
-extern const u8 SecretBase_EventScript_CaveUseSecretPower[];
-extern const u8 SecretBase_EventScript_TreeUseSecretPower[];
-extern const u8 SecretBase_EventScript_ShrubUseSecretPower[];
 
 // trainer hill
 extern const u8 TrainerHill_EventScript_TrainerBattle[];
