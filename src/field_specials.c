@@ -1981,7 +1981,6 @@ bool8 UsedPokemonCenterWarp(void)
         MAP_EVER_GRANDE_CITY_POKEMON_CENTER_1F,
         MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
         MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
-        MAP_UNION_ROOM,
         MAP_UNDEFINED
     };
 
@@ -1995,11 +1994,6 @@ bool8 UsedPokemonCenterWarp(void)
     }
 
     return FALSE;
-}
-
-bool32 PlayerNotAtTrainerHillEntrance(void)
-{
-    return TRUE;
 }
 
 void UpdateFrontierManiac(u16 daysSince)
@@ -3706,8 +3700,6 @@ bool8 InPokemonCenter(void)
         MAP_EVER_GRANDE_CITY_POKEMON_LEAGUE_1F,
         MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F,
         MAP_BATTLE_COLOSSEUM_2P,
-        MAP_TRADE_CENTER,
-        MAP_RECORD_CORNER,
         MAP_BATTLE_COLOSSEUM_4P,
         MAP_UNDEFINED
     };

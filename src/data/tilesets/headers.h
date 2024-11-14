@@ -743,17 +743,6 @@ const struct Tileset gTileset_IslandHarbor =
     .callback = NULL,
 };
 
-const struct Tileset gTileset_TrainerHill =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_TrainerHill,
-    .palettes = gTilesetPalettes_TrainerHill,
-    .metatiles = gMetatiles_TrainerHill,
-    .metatileAttributes = gMetatileAttributes_TrainerHill,
-    .callback = NULL,
-};
-
 const struct Tileset gTileset_NavelRock =
 {
     .isCompressed = TRUE,
@@ -795,17 +784,6 @@ const struct Tileset gTileset_MysteryEventsHouse =
     .palettes = gTilesetPalettes_MysteryEventsHouse,
     .metatiles = gMetatiles_MysteryEventsHouse,
     .metatileAttributes = gMetatileAttributes_MysteryEventsHouse,
-    .callback = NULL,
-};
-
-const struct Tileset gTileset_UnionRoom =
-{
-    .isCompressed = TRUE,
-    .isSecondary = TRUE,
-    .tiles = gTilesetTiles_UnionRoom,
-    .palettes = gTilesetPalettes_UnionRoom,
-    .metatiles = gMetatiles_UnionRoom,
-    .metatileAttributes = gMetatileAttributes_UnionRoom,
     .callback = NULL,
 };
 

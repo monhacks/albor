@@ -1378,8 +1378,3 @@ void ResetRecvBuffer(void)
         }
     }
 }
-
-bool32 ShouldCheckForUnionRoom(void)
-{
-    return FALSE;
-}

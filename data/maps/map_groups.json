@@ -447,8 +447,6 @@
     "SecretBase_Tree4",
     "SecretBase_Shrub4",
     "BattleColosseum_2P",
-    "TradeCenter",
-    "RecordCorner",
     "BattleColosseum_4P",
     "ContestHall",
     "ContestHallBeauty",
@@ -475,8 +473,7 @@
     "BattlePyramidSquare13",
     "BattlePyramidSquare14",
     "BattlePyramidSquare15",
-    "BattlePyramidSquare16",
-    "UnionRoom"
+    "BattlePyramidSquare16"
   ],
   "gMapGroup_SpecialArea": [
     "SafariZone_Northwest",
