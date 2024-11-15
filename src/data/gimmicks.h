@@ -48,7 +48,7 @@ const struct GimmickInfo gGimmicksInfo[GIMMICKS_COUNT] =
         .triggerTemplate = &sSpriteTemplate_GimmickTrigger,
         .indicatorSheet = NULL, // handled separately
         .indicatorPal = &sSpritePalette_MiscIndicator,
-        .CanActivate = CanTerastallize,
-        .ActivateGimmick = ActivateTera,
+        .CanActivate = CanDynamax,
+        .ActivateGimmick = ActivateDynamax,
     }
 };

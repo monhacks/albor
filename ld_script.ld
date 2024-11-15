@@ -334,9 +334,8 @@ SECTIONS {
     {
         data/event_scripts.o(script_data);
         data/battle_anim_scripts.o(script_data);
-        data/battle_scripts_1.o(script_data);
+        data/battle_scripts.o(script_data);
         data/field_effect_scripts.o(script_data);
-        data/battle_scripts_2.o(script_data);
         data/contest_ai_scripts.o(script_data);
         data/mystery_event_script_cmd_table.o(script_data);
     } > ROM =0

@@ -14,7 +14,6 @@
 #include "pokeball.h"
 #include "battle_debug.h"
 #include "battle_dynamax.h"
-#include "battle_terastal.h"
 #include "battle_gimmick.h"
 #include "random.h" // for rng_value_t
 

@@ -16276,9 +16276,7 @@ void BS_RemoveWeather(void)
 
 void BS_ApplyTerastallization(void)
 {
-    NATIVE_ARGS();
-    ApplyBattlerVisualsForTeraAnim(gBattlerAttacker);
-    gBattlescriptCurrInstr = cmd->nextInstr;
+
 }
 
 void BS_DamageToQuarterTargetHP(void)
