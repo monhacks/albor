@@ -1207,7 +1207,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             //Palettes
             palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
             LoadCompressedSpritePaletteWithTag(palette, species);
-            LoadCompressedPalette(palette, OBJ_PLTT_ID(5), PLTT_SIZE_4BPP);
+            LoadCompressedPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
             //Front
             HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             data->isShiny = FALSE;
@@ -1217,7 +1217,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             gMultiuseSpriteTemplate.paletteTag = species;
             front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
             data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
-            gSprites[data->frontspriteId].oam.paletteNum = 5;
+            gSprites[data->frontspriteId].oam.paletteNum = 0;
             gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
             gSprites[data->frontspriteId].oam.priority = 0;
             //Front Shadow
@@ -1229,7 +1229,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             offset_y = gSpeciesInfo[species].backPicYOffset;
             data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
-            gSprites[data->backspriteId].oam.paletteNum = 4;
+            gSprites[data->backspriteId].oam.paletteNum = 0;
             gSprites[data->backspriteId].callback = SpriteCallbackDummy;
             gSprites[data->backspriteId].oam.priority = 0;
 
@@ -1879,7 +1879,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     //Palettes
     palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
     LoadCompressedSpritePaletteWithTag(palette, species);
-    LoadCompressedPalette(palette, OBJ_PLTT_ID(5), PLTT_SIZE_4BPP);
+    LoadCompressedPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
     //Front
     HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
@@ -1887,10 +1887,10 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     gMultiuseSpriteTemplate.paletteTag = species;
     front_y = GetBattlerSpriteFinal_YCustom(species, 0, 0);
     data->frontspriteId = CreateSprite(&gMultiuseSpriteTemplate, front_x, front_y, 0);
-    gSprites[data->frontspriteId].oam.paletteNum = 5;
+    gSprites[data->frontspriteId].oam.paletteNum = 0;
     personality = Random32();
-    UniquePalette(OBJ_PLTT_ID(1), personality);
-    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
+    UniquePalette(OBJ_PLTT_ID(0), personality);
+    CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(0)], &gPlttBufferUnfaded[OBJ_PLTT_ID(0)], PLTT_SIZE_4BPP);
     gSprites[data->frontspriteId].callback = SpriteCallbackDummy;
     gSprites[data->frontspriteId].oam.priority = 0;
     //Front Shadow
@@ -1902,7 +1902,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gSpeciesInfo[species].backPicYOffset;
     data->backspriteId = CreateSprite(&gMultiuseSpriteTemplate, VISUALIZER_MON_BACK_X, VISUALIZER_MON_BACK_Y + offset_y, 0);
-    gSprites[data->backspriteId].oam.paletteNum = 5;
+    gSprites[data->backspriteId].oam.paletteNum = 0;
     gSprites[data->backspriteId].callback = SpriteCallbackDummy;
     gSprites[data->backspriteId].oam.priority = 0;
 
