@@ -244,7 +244,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
     }
 }
 
-#define CONSTANTE_DE_PALETAS_UNICAS 80  // Esta constante define la variación de colores máxima que tendrán los Pokémon según su personalidad
+#define CONSTANTE_DE_PALETAS_UNICAS 128
 
 void UniquePalette(u16 palOffset, u32 personality)
 {
@@ -256,13 +256,11 @@ void UniquePalette(u16 palOffset, u32 personality)
         u32 index = i + palOffset;
         struct PlttData *data = (struct PlttData *)&gPlttBufferUnfaded[index];
         
-        // Convertir los valores RGB de 0-31 a un rango más adecuado para los cálculos
         s32 r = (data->r * 1000) / 31;
         s32 g = (data->g * 1000) / 31;
         s32 b = (data->b * 1000) / 31;
         s32 maxv, minv, d, h, s, l, o, p, q;
 
-        // Encontrar el valor máximo y mínimo de los tres colores
         maxv = r;
         if (g > maxv) maxv = g;
         if (b > maxv) maxv = b;
@@ -271,12 +269,10 @@ void UniquePalette(u16 palOffset, u32 personality)
         if (g < minv) minv = g;
         if (b < minv) minv = b;
 
-        // Calcular la diferencia
         d = maxv - minv;
         l = (maxv + minv) / 2;
         s = (maxv == minv) ? 0 : ((l > 500) ? (1000 * d / (2000 - maxv - minv)) : (1000 * d / (maxv + minv)));
 
-        // Determinar el tono (hue)
         if (maxv != minv)
         {
             if (maxv == r)
@@ -286,34 +282,23 @@ void UniquePalette(u16 palOffset, u32 personality)
             else
                 h = 1000 * (r - g) / d + 4000;
 
-            h /= 6;  // Convertir a un rango de 0 a 1000
+            h /= 6;
         }
         else
-        {
             h = 0;
-        }
 
-        // Modificar el tono según la personalidad
-        if (personality % 2 == 0)  // Personalidad par
-        {
+        if (personality % 2 == 0)
             h = (h + value + 1000) % 1000;
-        }
-        else  // Personalidad impar
-        {
+        else 
             h = (h - value + 1000) % 1000;
-        }
 
-        // Si la saturación es 0 (colores apagados o grises), mantenemos el color tal cual
         if (s != 0)
         {
-            // Rotación del tono, ajustando sin modificar saturación ni luminosidad
-            o = (h + 333) % 1000;  // Rotar el tono (modificando solo el hue)
+            o = (h + 333) % 1000;
 
-            // La saturación y luminosidad permanecen constantes
             p = (l < 500) ? (l * (s + 1000) / 1000) : (l + s - l * s / 1000);
             q = l * 2 - p;
 
-            // Calcular los componentes de color (r, g, b) después de modificar el tono
             if (o < 167)
                 r = q + (p - q) * o * 6 / 1000;
             else if (o < 500)
@@ -347,13 +332,10 @@ void UniquePalette(u16 palOffset, u32 personality)
         }
         else
         {
-            // Si la saturación es 0 (grises), dejamos los colores tal cual
             r = l;
             g = l;
             b = l;
         }
-
-        // Guardamos el nuevo color en la tabla de paletas
         gPlttBufferFaded[index] = RGB((u8)(r * 31 / 1000), (u8)(g * 31 / 1000), (u8)(b * 31 / 1000));
     }
 }
@@ -395,18 +377,12 @@ void UniquePaletteBuffered(u16 * buffer, u32 personality)
             h /= 6;
         }
         else
-        {
             h = 0;
-        }
 
-        if (personality % 2 == 0)  // Personalidad par
-        {
+        if (personality % 2 == 0)
             h = (h + value + 1000) % 1000;
-        }
-        else  // Personalidad impar
-        {
+        else 
             h = (h - value + 1000) % 1000;
-        }
 
         if (s != 0)
         {
