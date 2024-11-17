@@ -6,23 +6,11 @@ static const struct FormChange sCastformFormChangeTable[] = {
     {FORM_CHANGE_BATTLE_WEATHER,                SPECIES_CASTFORM_NORMAL, B_WEATHER_NONE, ABILITY_FORECAST},
 };
 
-static const struct FormChange sDeoxysNormalFormChangeTable[] = {
-    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_ATTACK,  ITEM_METEORITE},
-    {FORM_CHANGE_TERMINATOR},
-};
-
-static const struct FormChange sDeoxysAttackFormChangeTable[] = {
-    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_DEFENSE,  ITEM_METEORITE},
-    {FORM_CHANGE_TERMINATOR},
-};
-
-static const struct FormChange sDeoxysDefenseFormChangeTable[] = {
-    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_SPEED,  ITEM_METEORITE},
-    {FORM_CHANGE_TERMINATOR},
-};
-
-static const struct FormChange sDeoxysSpeedFormChangeTable[] = {
-    {FORM_CHANGE_ITEM_USE, SPECIES_DEOXYS_NORMAL,  ITEM_METEORITE},
+static const struct FormChange sDeoxysFormChangeTable[] = {
+    {FORM_CHANGE_ITEM_USE_MULTICHOICE, SPECIES_DEOXYS_NORMAL,   ITEM_METEORITE, 0},
+    {FORM_CHANGE_ITEM_USE_MULTICHOICE, SPECIES_DEOXYS_ATTACK,   ITEM_METEORITE, 1},
+    {FORM_CHANGE_ITEM_USE_MULTICHOICE, SPECIES_DEOXYS_DEFENSE,  ITEM_METEORITE, 2},
+    {FORM_CHANGE_ITEM_USE_MULTICHOICE, SPECIES_DEOXYS_SPEED,    ITEM_METEORITE, 3},
     {FORM_CHANGE_TERMINATOR},
 };
 

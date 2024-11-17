@@ -138,7 +138,7 @@ static const u8 sText_Var1ThrownAway[] = _("The {STR_VAR_1}\nwas thrown away.");
 EWRAM_DATA static struct PokeblockSavedData sSavedPokeblockData = {0};
 EWRAM_DATA static struct PokeblockMenuStruct *sPokeblockMenu = NULL;
 
-const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT] =
+const s8 gPokeblockFlavorCompatibilityTable[NUMERO_NATURALEZAS * FLAVOR_COUNT] =
 {
      // Spicy,  Dry, Sweet, Bitter, Sour
           1,      0,    0,     0,     0, // Ofensiva

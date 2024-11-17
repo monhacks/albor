@@ -3358,8 +3358,8 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         if (JOY_NEW(DPAD_UP))
         {
             gTasks[taskId].tInput += sPowersOfTen[gTasks[taskId].tDigit];
-            if (gTasks[taskId].tInput > NUM_NATURES-1)
-                gTasks[taskId].tInput = NUM_NATURES-1;
+            if (gTasks[taskId].tInput > NUMERO_NATURALEZAS-1)
+                gTasks[taskId].tInput = NUMERO_NATURALEZAS-1;
         }
         if (JOY_NEW(DPAD_DOWN))
         {
@@ -3925,8 +3925,8 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     EVs[5]          = sDebugMonData->mon_ev_sdef;
 
     //Nature
-    if (nature == NUM_NATURES || nature == 0xFF)
-        nature = Random() % NUM_NATURES;
+    if (nature == NUMERO_NATURALEZAS || nature == 0xFF)
+        nature = Random() % NUMERO_NATURALEZAS;
     CreateMonWithNature(&mon, species, level, 32, nature);
 
     //Shininess

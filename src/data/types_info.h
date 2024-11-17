@@ -220,7 +220,7 @@ const struct TypeInfo gTypesInfo[NUMERO_DE_TIPOS] =
         .name = _("???"),
         .generic = _("a ??? move"),
         .palette = 14,
-        .damageCategory = DAMAGE_CATEGORY_SPECIAL,
+        .damageCategory = CATEGORIA_ESPECIAL,
         .useSecondTypeIconPalette = FALSE,
         .isSpecialCaseType = TRUE,
     },

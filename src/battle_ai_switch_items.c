@@ -843,7 +843,7 @@ static bool32 ShouldSwitchIfEncored(u32 battler)
         return FALSE;
 
     // Switch out if status move
-    if (gMovesInfo[encoredMove].category == DAMAGE_CATEGORY_STATUS)
+    if (gMovesInfo[encoredMove].category == CATEGORIA_ESTADO)
         return SetSwitchinAndSwitch(battler, PARTY_SIZE);
 
     // Stay in if effective move
@@ -863,7 +863,7 @@ static bool32 ShouldSwitchIfBadChoiceLock(u32 battler)
 
     if (HOLD_EFFECT_CHOICE(holdEffect) && gBattleMons[battler].ability != ABILITY_KLUTZ)
     {
-        if (gMovesInfo[gLastUsedMove].category == DAMAGE_CATEGORY_STATUS)
+        if (gMovesInfo[gLastUsedMove].category == CATEGORIA_ESTADO)
             return SetSwitchinAndSwitch(battler, PARTY_SIZE);
     }
 

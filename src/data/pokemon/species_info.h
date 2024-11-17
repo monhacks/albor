@@ -1,6 +1,6 @@
 #include "constants/abilities.h"
 
-#define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVOLUTIONS_END}, }
+#define EVOLUTION(...) (const struct Evolution[]) { __VA_ARGS__, { EVO_FIN}, }
 
 #define FRONT_PIC(sprite, width, height)    .frontPic = gMonFrontPic_## sprite, .frontPicSize = MON_COORDS_SIZE(width, height)
 
@@ -106,42 +106,44 @@
 
 #define GENERO(genero)  .genderRatio = genero
 
+#define FORMAS(especie) .formSpeciesIdTable = s ## especie##FormSpeciesIdTable, .formChangeTable = s ## especie##FormChangeTable
+
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
 //añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
-#define FOLLOWER(name, _tracks, ...)                                                        \
-.followerData = {                                                                           \
-    .tileTag = TAG_NONE,                                                                    \
-    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
-    .size = 512,                                                                            \
-    .width = 32,                                                                            \
-    .height = 32,                                                                           \
-    .shadowSize = SHADOW_SIZE_M,                                                            \
-    .inanimate = FALSE,                                                                     \
-    .compressed = FALSE,                                                                    \
-    .tracks = _tracks,                                                                      \
-    .oam = &gObjectEventBaseOam_32x32,                                                      \
-    .subspriteTables = sOamTables_32x32,                                                    \
-    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
-    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name, 4, 4), },\
-    .affineAnims = gDummySpriteAffineAnimTable,                                             \
+#define FOLLOWER(name, _tracks, ...)                                                                            \
+.followerData = {                                                                                               \
+    .tileTag = TAG_NONE,                                                                                        \
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                                    \
+    .size = 512,                                                                                                \
+    .width = 32,                                                                                                \
+    .height = 32,                                                                                               \
+    .shadowSize = SHADOW_SIZE_M,                                                                                \
+    .inanimate = FALSE,                                                                                         \
+    .compressed = FALSE,                                                                                        \
+    .tracks = _tracks,                                                                                          \
+    .oam = &gObjectEventBaseOam_32x32,                                                                          \
+    .subspriteTables = sOamTables_32x32,                                                                        \
+    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                                        \
+    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name, 4, 4) },   \
+    .affineAnims = gDummySpriteAffineAnimTable,                                                                 \
 }
 
-#define FOLLOWER_HEMBRA(name, _tracks, ...)                                                 \
-.followerDataFemale = {                                                                     \
-    .tileTag = TAG_NONE,                                                                    \
-    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                \
-    .size = 512,                                                                            \
-    .width = 32,                                                                            \
-    .height = 32,                                                                           \
-    .shadowSize = SHADOW_SIZE_M,                                                            \
-    .inanimate = FALSE,                                                                     \
-    .compressed = FALSE,                                                                    \
-    .tracks = _tracks,                                                                      \
-    .oam = &gObjectEventBaseOam_32x32,                                                      \
-    .subspriteTables = sOamTables_32x32,                                                    \
-    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                    \
-    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name##F, 4, 4), },\
-    .affineAnims = gDummySpriteAffineAnimTable,                                             \
+#define FOLLOWER_HEMBRA(name, _tracks, ...)                                                                     \
+.followerDataFemale = {                                                                                         \
+    .tileTag = TAG_NONE,                                                                                        \
+    .paletteTag = OBJ_EVENT_PAL_TAG_DYNAMIC,                                                                    \
+    .size = 512,                                                                                                \
+    .width = 32,                                                                                                \
+    .height = 32,                                                                                               \
+    .shadowSize = SHADOW_SIZE_M,                                                                                \
+    .inanimate = FALSE,                                                                                         \
+    .compressed = FALSE,                                                                                        \
+    .tracks = _tracks,                                                                                          \
+    .oam = &gObjectEventBaseOam_32x32,                                                                          \
+    .subspriteTables = sOamTables_32x32,                                                                        \
+    .anims = DEFAULT(sAnimTable_Following, __VA_ARGS__),                                                        \
+    .images = (const struct SpriteFrameImage[]) { overworld_ascending_frames(gObjectEventPic_##name##F, 4, 4) },\
+    .affineAnims = gDummySpriteAffineAnimTable,                                                                 \
 }
 
 const struct SpeciesInfo gSpeciesInfo[] =
@@ -198,7 +200,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bulbasaur, TRACKS_FOOT),
         MOVIMIENTOS(Bulbasaur),
         MOVIMIENTOS_HUEVO(Bulbasaur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_IVYSAUR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_IVYSAUR}),
     },
 
     [SPECIES_IVYSAUR] =
@@ -236,7 +238,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ivysaur, TRACKS_FOOT),
         MOVIMIENTOS(Ivysaur),
         MOVIMIENTOS_HUEVO(Bulbasaur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VENUSAUR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_VENUSAUR}),
     },
 
     [SPECIES_VENUSAUR] =
@@ -314,7 +316,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BRILLA,
         MOVIMIENTOS_HUEVO(Charmander),
         FOLLOWER(Charmander, TRACKS_FOOT),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CHARMELEON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_CHARMELEON}),
     },
 
     [SPECIES_CHARMELEON] =
@@ -352,7 +354,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Charmander),
         BRILLA,
         FOLLOWER(Charmeleon, TRACKS_FOOT),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CHARIZARD}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_CHARIZARD}),
     },
 
     [SPECIES_CHARIZARD] =
@@ -425,7 +427,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Squirtle, TRACKS_FOOT),
         MOVIMIENTOS(Squirtle),
         MOVIMIENTOS_HUEVO(Squirtle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WARTORTLE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_WARTORTLE}),
     },
 
     [SPECIES_WARTORTLE] =
@@ -462,7 +464,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Wartortle, TRACKS_FOOT),
         MOVIMIENTOS(Wartortle),
         MOVIMIENTOS_HUEVO(Squirtle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_BLASTOISE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_BLASTOISE}),
     },
 
     [SPECIES_BLASTOISE] =
@@ -533,7 +535,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Caterpie),
         FOLLOWER(Caterpie, TRACKS_BUG),
         MOVIMIENTOS(Caterpie),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_METAPOD}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_METAPOD}),
     },
 
     [SPECIES_METAPOD] =
@@ -568,7 +570,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Metapod),
         FOLLOWER(Metapod, TRACKS_SPOT),
         MOVIMIENTOS(Metapod),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BUTTERFREE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_BUTTERFREE}),
     },
 
     [SPECIES_BUTTERFREE] =
@@ -645,7 +647,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Weedle),
         FOLLOWER(Weedle, TRACKS_BUG),
         MOVIMIENTOS(Weedle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_KAKUNA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_KAKUNA}),
     },
 
     [SPECIES_KAKUNA] =
@@ -681,7 +683,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Kakuna),
         FOLLOWER(Kakuna, TRACKS_SPOT),
         MOVIMIENTOS(Kakuna),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BEEDRILL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_BEEDRILL}),
     },
 
     [SPECIES_BEEDRILL] =
@@ -754,7 +756,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pidgey, TRACKS_FOOT),
         MOVIMIENTOS(Pidgey),
         MOVIMIENTOS_HUEVO(Pidgey),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_PIDGEOTTO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_PIDGEOTTO}),
     },
 
     [SPECIES_PIDGEOTTO] =
@@ -791,7 +793,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pidgeotto, TRACKS_NONE),
         MOVIMIENTOS(Pidgeotto),
         MOVIMIENTOS_HUEVO(Pidgey),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_PIDGEOT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_PIDGEOT}),
     },
 
     [SPECIES_PIDGEOT] =
@@ -867,7 +869,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER_HEMBRA(Rattata, TRACKS_FOOT),
         MOVIMIENTOS(Rattata),
         MOVIMIENTOS_HUEVO(Rattata),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RATICATE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_RATICATE}),
     },
 
     [SPECIES_RATICATE] =
@@ -942,7 +944,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ekans),
         FOLLOWER(Ekans, TRACKS_SLITHER),
         MOVIMIENTOS(Ekans),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ARBOK}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_ARBOK}),
         MOVIMIENTOS_HUEVO(Ekans),
     },
 
@@ -1014,7 +1016,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pichu),
         MOVIMIENTOS_HUEVO(Pichu),
         FOLLOWER(Pichu, TRACKS_FOOT),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_PIKACHU}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_PIKACHU}),
         OBJETO_RARO(LIGHT_BALL),
     },
 
@@ -1057,8 +1059,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO_HEMBRA(Pikachu),
         FOLLOWER(Pikachu, TRACKS_FOOT),
         FOLLOWER_HEMBRA(Pikachu, TRACKS_FOOT),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU},
-                                {EVO_ITEM, ITEM_STRANGE_SOUVENIR, SPECIES_RAICHU_ALOLA}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MAGNET, SPECIES_RAICHU},
+                                {EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_RAICHU_ALOLA}),
     },
 
     [SPECIES_RAICHU] =
@@ -1169,7 +1171,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Sandshrew),
         FOLLOWER(Sandshrew, TRACKS_FOOT),
         MOVIMIENTOS(Sandshrew),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SANDSLASH}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_SANDSLASH}),
         MOVIMIENTOS_HUEVO(Sandshrew),
     },
 
@@ -1242,7 +1244,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(SandshrewAlola),
         FOLLOWER(SandshrewAlola, TRACKS_FOOT),
         MOVIMIENTOS(SandshrewAlola),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_SANDSLASH_ALOLA}),
+        .evolutions = EVOLUTION({EVO_NIVEL_NIEVE, 30, SPECIES_SANDSLASH_ALOLA}),
         MOVIMIENTOS_HUEVO(SandshrewAlola),
     },
 
@@ -1314,7 +1316,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(NidoranF),
         FOLLOWER(NidoranF, TRACKS_FOOT),
         MOVIMIENTOS(NidoranF),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_NIDORINA}),
         MOVIMIENTOS_HUEVO(NidoranF),
     },
 
@@ -1350,7 +1352,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Nidorina),
         FOLLOWER(Nidorina, TRACKS_FOOT),
         MOVIMIENTOS(Nidorina),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOQUEEN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_NIDOQUEEN}),
         MOVIMIENTOS_HUEVO(NidoranF),
     },
 
@@ -1421,7 +1423,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(NidoranM),
         FOLLOWER(NidoranM, TRACKS_FOOT),
         MOVIMIENTOS(NidoranM),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NIDORINO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_NIDORINO}),
         MOVIMIENTOS_HUEVO(NidoranM),
     },
 
@@ -1457,7 +1459,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Nidorino),
         FOLLOWER(Nidorino, TRACKS_FOOT),
         MOVIMIENTOS(Nidorino),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOKING}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_NIDOKING}),
         MOVIMIENTOS_HUEVO(NidoranM),
     },
 
@@ -1531,7 +1533,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Cleffa),
         FOLLOWER(Cleffa, TRACKS_FOOT),
         MOVIMIENTOS(Cleffa),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CLEFAIRY}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_CLEFAIRY}),
         MOVIMIENTOS_HUEVO(Cleffa),
     },
 
@@ -1569,7 +1571,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Clefairy),
         FOLLOWER(Clefairy, TRACKS_FOOT),
         MOVIMIENTOS(Clefairy),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_CLEFABLE}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_MT_MOON, SPECIES_CLEFABLE}),
         MOVIMIENTOS_HUEVO(Cleffa),
     },
 
@@ -1642,7 +1644,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Vulpix),
         FOLLOWER(Vulpix, TRACKS_FOOT),
         MOVIMIENTOS(Vulpix),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_POKEMON_TOWER, SPECIES_NINETALES}),
         MOVIMIENTOS_HUEVO(Vulpix),
     },
 
@@ -1713,7 +1715,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(VulpixAlola),
         FOLLOWER(VulpixAlola, TRACKS_FOOT),
         MOVIMIENTOS(VulpixAlola),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_NINETALES_ALOLA}),
+        .evolutions = EVOLUTION({EVO_NIVEL_NIEVE, 30, SPECIES_NINETALES_ALOLA}),
         MOVIMIENTOS_HUEVO(VulpixAlola),
     },
 
@@ -1786,7 +1788,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Igglybuff),
         FOLLOWER(Igglybuff, TRACKS_FOOT),
         MOVIMIENTOS(Igglybuff),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_JIGGLYPUFF}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_JIGGLYPUFF}),
     },
 
     [SPECIES_JIGGLYPUFF] =
@@ -1823,7 +1825,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Jigglypuff),
         FOLLOWER(Jigglypuff, TRACKS_FOOT),
         MOVIMIENTOS(Jigglypuff),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF}),
+        .evolutions = EVOLUTION({EVO_MOVE, MOVE_HYPER_VOICE, SPECIES_WIGGLYTUFF}),
     },
 
     [SPECIES_WIGGLYTUFF] =
@@ -1899,7 +1901,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Zubat, TRACKS_NONE),
         FOLLOWER_HEMBRA(Zubat, TRACKS_NONE),
         MOVIMIENTOS(Zubat),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GOLBAT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_GOLBAT}),
     },
 
     [SPECIES_GOLBAT] =
@@ -1939,7 +1941,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Golbat, TRACKS_NONE),
         FOLLOWER_HEMBRA(Golbat, TRACKS_NONE),
         MOVIMIENTOS(Golbat),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CROBAT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_CROBAT}),
     },
 
     [SPECIES_CROBAT] =
@@ -2011,7 +2013,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Paras),
         FOLLOWER(Paras, TRACKS_BUG),
         MOVIMIENTOS(Paras),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PARASECT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_PARASECT}),
         MOVIMIENTOS_HUEVO(Paras),
     },
 
@@ -2086,7 +2088,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Meowth),
         FOLLOWER(Meowth, TRACKS_FOOT),
         MOVIMIENTOS(Meowth),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PERSIAN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_PERSIAN}),
         MOVIMIENTOS_HUEVO(Meowth),
     },
 
@@ -2159,7 +2161,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Psyduck),
         FOLLOWER(Psyduck, TRACKS_FOOT),
         MOVIMIENTOS(Psyduck),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GOLDUCK}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_GOLDUCK}),
         MOVIMIENTOS_HUEVO(Psyduck),
     },
 
@@ -2232,8 +2234,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Mankey, TRACKS_FOOT),
         MOVIMIENTOS(Mankey),
         MOVIMIENTOS_HUEVO(Mankey),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_PRIMEAPE},
-                                {EVO_MOVE, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_PRIMEAPE},
+                                {EVO_MOVIMIENTO, MOVE_RAGE_FIST, SPECIES_ANNIHILAPE}),
     },
 
     [SPECIES_PRIMEAPE] =
@@ -2341,7 +2343,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Growlithe),
         FOLLOWER(Growlithe, TRACKS_FOOT),
         MOVIMIENTOS(Growlithe),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_EVER_GRANDE_CITY, SPECIES_ARCANINE}), //MAPSEC_TORRE_QUEMADA
         MOVIMIENTOS_HUEVO(Growlithe),
     },
 
@@ -2415,7 +2417,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Poliwag, TRACKS_FOOT),
         MOVIMIENTOS(Poliwag),
         MOVIMIENTOS_HUEVO(Poliwag),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_POLIWHIRL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_POLIWHIRL}),
     },
 
     [SPECIES_POLIWHIRL] =
@@ -2454,8 +2456,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Poliwhirl, TRACKS_FOOT),
         MOVIMIENTOS(Poliwhirl),
         MOVIMIENTOS_HUEVO(Poliwag),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH},
-                                {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_POLIWRATH},
+                                {EVO_NIVEL_LLUVIA, 40, SPECIES_POLITOED}),
     },
 
     [SPECIES_POLIWRATH] =
@@ -2568,7 +2570,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Abra),
         FOLLOWER(Abra, TRACKS_NONE),
         MOVIMIENTOS(Abra),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KADABRA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_KADABRA}),
         MOVIMIENTOS_HUEVO(Abra),
     },
 
@@ -2683,7 +2685,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Machop),
         FOLLOWER(Machop, TRACKS_FOOT),
         MOVIMIENTOS(Machop),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MACHOKE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_MACHOKE}),
         MOVIMIENTOS_HUEVO(Machop),
     },
 
@@ -2722,7 +2724,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Machoke, TRACKS_FOOT),
         MOVIMIENTOS(Machoke),
         MOVIMIENTOS_HUEVO(Machop),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MACHAMP}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_MACHAMP}),
     },
 
     [SPECIES_MACHAMP] =
@@ -2794,7 +2796,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bellsprout, TRACKS_FOOT),
         MOVIMIENTOS(Bellsprout),
         MOVIMIENTOS_HUEVO(Bellsprout),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_WEEPINBELL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_WEEPINBELL}),
     },
 
     [SPECIES_WEEPINBELL] =
@@ -2831,7 +2833,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Weepinbell, TRACKS_SPOT),
         MOVIMIENTOS(Weepinbell),
         MOVIMIENTOS_HUEVO(Bellsprout),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_VICTREEBEL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_VICTREEBEL}),
     },
 
     [SPECIES_VICTREEBEL] =
@@ -2903,7 +2905,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Tentacool, TRACKS_SPOT),
         MOVIMIENTOS(Tentacool),
         MOVIMIENTOS_HUEVO(Tentacool),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_TENTACRUEL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_TENTACRUEL}),
     },
 
     [SPECIES_TENTACRUEL] =
@@ -2977,7 +2979,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Geodude, TRACKS_SPOT),
         MOVIMIENTOS(Geodude),
         MOVIMIENTOS_HUEVO(Geodude),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_GRAVELER}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_GRAVELER}),
     },
 
     [SPECIES_GRAVELER] =
@@ -3014,7 +3016,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Graveler, TRACKS_FOOT),
         MOVIMIENTOS(Graveler),
         MOVIMIENTOS_HUEVO(Geodude),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GOLEM}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_GOLEM}),
     },
 
     [SPECIES_GOLEM] =
@@ -3087,7 +3089,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ponyta, TRACKS_FOOT),
         MOVIMIENTOS(Ponyta),
         MOVIMIENTOS_HUEVO(Ponyta),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAPIDASH}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_RAPIDASH}),
     },
 
     [SPECIES_RAPIDASH] =
@@ -3161,7 +3163,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Magnemite),
         FOLLOWER(Magnemite, TRACKS_NONE),
         MOVIMIENTOS(Magnemite),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_MAGNETON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_MAGNETON}),
     },
 
     [SPECIES_MAGNETON] =
@@ -3200,8 +3202,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Magneton, TRACKS_NONE),
         MOVIMIENTOS(Magneton),
         MOVIMIENTOS_HUEVO(Magnemite),
-        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_MAGNEZONE},
-                                {EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_MAGNEZONE}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_NEW_MAUVILLE, SPECIES_MAGNEZONE}),
     },
 
     [SPECIES_MAGNEZONE] =
@@ -3276,7 +3277,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Grimer),
         FOLLOWER(Grimer, TRACKS_SLITHER),
         MOVIMIENTOS(Grimer),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MUK}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_MUK}),
     },
 
     [SPECIES_MUK] =
@@ -3352,7 +3353,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Shellder, TRACKS_SPOT),
         MOVIMIENTOS(Shellder),
         MOVIMIENTOS_HUEVO(Shellder),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_CLOYSTER}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_CLOYSTER}),
     },
 
     [SPECIES_CLOYSTER] =
@@ -3427,7 +3428,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Gastly),
         FOLLOWER(Gastly, TRACKS_NONE),
         MOVIMIENTOS(Gastly),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_HAUNTER}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_HAUNTER}),
     },
 
     [SPECIES_HAUNTER] =
@@ -3467,7 +3468,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Gastly),
         FOLLOWER(Haunter, TRACKS_NONE),
         MOVIMIENTOS(Haunter),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_GENGAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_GENGAR}),
     },
 
     [SPECIES_GENGAR] =
@@ -3615,7 +3616,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Drowzee),
         FOLLOWER(Drowzee, TRACKS_FOOT),
         MOVIMIENTOS(Drowzee),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_HYPNO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_HYPNO}),
     },
 
     [SPECIES_HYPNO] =
@@ -3689,7 +3690,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Krabby, TRACKS_FOOT),
         MOVIMIENTOS(Krabby),
         MOVIMIENTOS_HUEVO(Krabby),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KINGLER}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_KINGLER}),
     },
 
     [SPECIES_KINGLER] =
@@ -3763,7 +3764,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Exeggcute, TRACKS_SPOT),
         MOVIMIENTOS(Exeggcute),
         MOVIMIENTOS_HUEVO(Exeggcute),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEAF_STONE, SPECIES_EXEGGUTOR}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_ROUTE_101, SPECIES_EXEGGUTOR}), //MAPSEC_BAHIA_GRESCA?
     },
 
     [SPECIES_EXEGGUTOR] =
@@ -3836,8 +3837,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cubone, TRACKS_FOOT),
         MOVIMIENTOS(Cubone),
         MOVIMIENTOS_HUEVO(Cubone),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAROWAK},
-                                {EVO_NONE, 0, SPECIES_MAROWAK_ALOLA}),
+        .evolutions = EVOLUTION({EVO_NIVEL_DIA, 40, SPECIES_MAROWAK},
+                                {EVO_NIVEL_NOCHE, 40, SPECIES_MAROWAK_ALOLA}),
     },
 
     [SPECIES_MAROWAK] =
@@ -3946,9 +3947,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Tyrogue, TRACKS_FOOT),
         MOVIMIENTOS(Tyrogue),
         MOVIMIENTOS_HUEVO(Tyrogue),
-        .evolutions = EVOLUTION({EVO_LEVEL_ATK_LT_DEF, 30, SPECIES_HITMONCHAN},
-                                {EVO_LEVEL_ATK_GT_DEF, 30, SPECIES_HITMONLEE},
-                                {EVO_LEVEL_ATK_EQ_DEF, 30, SPECIES_HITMONTOP}),
+        .evolutions = EVOLUTION({EVO_NIVEL_MENOS_ATAQUE, 30, SPECIES_HITMONCHAN},
+                                {EVO_NIVEL_MAS_ATAQUE, 30, SPECIES_HITMONLEE},
+                                {EVO_NIVEL_IGUAL_ATAQUE, 30, SPECIES_HITMONTOP}),
     },
 
     [SPECIES_HITMONLEE] =
@@ -4090,7 +4091,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Lickitung, TRACKS_FOOT),
         MOVIMIENTOS(Lickitung),
         MOVIMIENTOS_HUEVO(Lickitung),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_ROLLOUT, SPECIES_LICKILICKY}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_ROLLOUT, SPECIES_LICKILICKY}),
     },
 
     [SPECIES_LICKILICKY] =
@@ -4164,8 +4165,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Koffing, TRACKS_NONE),
         MOVIMIENTOS(Koffing),
         MOVIMIENTOS_HUEVO(Koffing),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_WEEZING},
-                                {EVO_NONE, 0, SPECIES_WEEZING_GALAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_WEEZING},
+                                {EVO_NO, 0, SPECIES_WEEZING_GALAR}), //EVO_MAPSEC, MAPSEC_BOSQUE_ENCANTADO?
     },
 
     [SPECIES_WEEZING] =
@@ -4280,7 +4281,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Rhyhorn, TRACKS_FOOT),
         MOVIMIENTOS(Rhyhorn),
         MOVIMIENTOS_HUEVO(Rhyhorn),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_RHYDON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_RHYDON}),
     },
 
     [SPECIES_RHYDON] =
@@ -4393,7 +4394,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Tangela, TRACKS_FOOT),
         MOVIMIENTOS(Tangela),
         MOVIMIENTOS_HUEVO(Tangela),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_TANGROWTH}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_ANCIENT_POWER, SPECIES_TANGROWTH}),
     },
 
     [SPECIES_TANGROWTH] =
@@ -4476,11 +4477,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ATAQUE_ESPECIAL(70),
         DEFENSA_ESPECIAL(25),
         TIPO(AGUA),
-        RATIO_CAPTURA(NORMAL_1_EVO),
-        CAMPO_EXPERIENCIA(NORMAL_1_EVO),
-        CICLO_HUEVO(NORMAL),
-        CRECIMIENTO(NORMAL),
-        AMISTAD(NORMAL),
+        RATIO_CAPTURA(ESPECIAL_1_EVO),
+        CAMPO_EXPERIENCIA(ESPECIAL_1_EVO),
+        CICLO_HUEVO(ESPECIAL),
+        CRECIMIENTO(ESPECIAL),
+        AMISTAD(ESPECIAL),
         EV_ATAQUE_ESPECIAL(1),
         OBJETO_RARO(DRAGON_SCALE),
         GENERO(PORCENTAJE_HEMBRA(50)),
@@ -4501,7 +4502,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Horsea, TRACKS_SPOT),
         MOVIMIENTOS(Horsea),
         MOVIMIENTOS_HUEVO(Horsea),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEADRA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_SEADRA}),
     },
 
     [SPECIES_SEADRA] =
@@ -4513,11 +4514,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ATAQUE_ESPECIAL(95),
         DEFENSA_ESPECIAL(45),
         TIPO(AGUA),
-        RATIO_CAPTURA(NORMAL_2_EVO),
-        CAMPO_EXPERIENCIA(NORMAL_2_EVO),
-        CICLO_HUEVO(NORMAL),
-        CRECIMIENTO(NORMAL),
-        AMISTAD(NORMAL),
+        RATIO_CAPTURA(ESPECIAL_2_EVO),
+        CAMPO_EXPERIENCIA(ESPECIAL_2_EVO),
+        CICLO_HUEVO(ESPECIAL),
+        CRECIMIENTO(ESPECIAL),
+        AMISTAD(ESPECIAL),
         EV_DEFENSA(1),
         EV_ATAQUE_ESPECIAL(1),
         OBJETO_RARO(DRAGON_SCALE),
@@ -4539,7 +4540,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Seadra, TRACKS_SPOT),
         MOVIMIENTOS(Seadra),
         MOVIMIENTOS_HUEVO(Horsea),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DRAGON_SCALE, SPECIES_KINGDRA}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DRAGON_FANG, SPECIES_KINGDRA}),
     },
 
     [SPECIES_KINGDRA] =
@@ -4551,11 +4552,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ATAQUE_ESPECIAL(95),
         DEFENSA_ESPECIAL(95),
         TIPOS(AGUA, DRAGON),
-        RATIO_CAPTURA(NORMAL_3_EVO),
-        CAMPO_EXPERIENCIA(NORMAL_3_EVO),
-        CICLO_HUEVO(NORMAL),
-        CRECIMIENTO(NORMAL),
-        AMISTAD(NORMAL),
+        RATIO_CAPTURA(ESPECIAL_3_EVO),
+        CAMPO_EXPERIENCIA(ESPECIAL_3_EVO),
+        CICLO_HUEVO(ESPECIAL),
+        CRECIMIENTO(ESPECIAL),
+        AMISTAD(ESPECIAL),
         EV_ATAQUE(1),
         EV_ATAQUE_ESPECIAL(1),
         EV_DEFENSA_ESPECIAL(1),
@@ -4616,7 +4617,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Goldeen, TRACKS_SPOT),
         MOVIMIENTOS(Goldeen),
         MOVIMIENTOS_HUEVO(Goldeen),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SEAKING}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_SEAKING}),
     },
 
     [SPECIES_SEAKING] =
@@ -4693,7 +4694,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Staryu, TRACKS_FOOT),
         MOVIMIENTOS(Staryu),
         MOVIMIENTOS_HUEVO(Staryu),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE}),
+        .evolutions = EVOLUTION({EVO_MAPSEC, MAPSEC_MT_MOON, SPECIES_STARMIE}),
     },
 
     [SPECIES_STARMIE] =
@@ -4766,7 +4767,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(MimeJr, TRACKS_FOOT),
         MOVIMIENTOS(MimeJr),
         MOVIMIENTOS_HUEVO(MimeJr),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_MIMIC, SPECIES_MR_MIME}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_MIMIC, SPECIES_MR_MIME}),
     },
 
     [SPECIES_MR_MIME] =
@@ -4839,7 +4840,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Scyther, TRACKS_FOOT),
         MOVIMIENTOS(Scyther),
         MOVIMIENTOS_HUEVO(Scyther),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_BLACK_AUGURITE, SPECIES_KLEAVOR},
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_HARD_STONE, SPECIES_KLEAVOR},
                                 {EVO_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR}),
     },
 
@@ -4949,7 +4950,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Smoochum),
         FOLLOWER(Smoochum, TRACKS_FOOT),
         MOVIMIENTOS(Smoochum),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_JYNX}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_JYNX}),
     },
 
     [SPECIES_JYNX] =
@@ -5021,7 +5022,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Elekid),
         FOLLOWER(Elekid, TRACKS_FOOT),
         MOVIMIENTOS(Elekid),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_ELECTABUZZ}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_ELECTABUZZ}),
         MOVIMIENTOS_HUEVO(Elekid),
     },
 
@@ -5133,7 +5134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Magby),
         FOLLOWER(Magby, TRACKS_FOOT),
         MOVIMIENTOS(Magby),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGMAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_MAGMAR}),
         MOVIMIENTOS_HUEVO(Magby),
     },
 
@@ -5292,11 +5293,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ATAQUE_ESPECIAL(15),
         DEFENSA_ESPECIAL(20),
         TIPO(AGUA),
-        RATIO_CAPTURA(NORMAL_1_EVO),
-        CAMPO_EXPERIENCIA(NORMAL_1_EVO),
-        CICLO_HUEVO(NORMAL),
-        CRECIMIENTO(NORMAL),
-        AMISTAD(NORMAL),
+        RATIO_CAPTURA(ESPECIAL_1_EVO),
+        CAMPO_EXPERIENCIA(ESPECIAL_1_EVO),
+        CICLO_HUEVO(ESPECIAL),
+        CRECIMIENTO(ESPECIAL),
+        AMISTAD(ESPECIAL),
         EV_VELOCIDAD(1),
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPOS_HUEVO(PEZ, DRAGON),
@@ -5318,7 +5319,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Magikarp, TRACKS_SPOT),
         MOVIMIENTOS(Magikarp),
         MOVIMIENTOS_HUEVO(Magikarp),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GYARADOS}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DRAGON_FANG, SPECIES_GYARADOS}),
     },
 
     [SPECIES_GYARADOS] =
@@ -5432,16 +5433,14 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Eevee),
         MOVIMIENTOS_HUEVO(Eevee),
         FOLLOWER(Eevee, TRACKS_FOOT),
-        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON},
-                                {EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON},
-                                {EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON},
-                                {EVO_LEVEL_DAY, 0, SPECIES_ESPEON},
-                                {EVO_LEVEL_NIGHT, 0, SPECIES_UMBREON},
-                                {EVO_SPECIFIC_MAP, MAP_PETALBURG_WOODS, SPECIES_LEAFEON},
-                                {EVO_ITEM, ITEM_LEAF_STONE, SPECIES_LEAFEON},
-                                {EVO_SPECIFIC_MAP, MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM, SPECIES_GLACEON},
-                                {EVO_ITEM, ITEM_ICE_STONE, SPECIES_GLACEON},
-                                {EVO_FRIENDSHIP, SPECIES_SYLVEON}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_MAGNET, SPECIES_JOLTEON},
+                                {EVO_ITEM, ITEM_MYSTIC_WATER, SPECIES_VAPOREON},
+                                {EVO_ITEM, ITEM_CHARCOAL, SPECIES_FLAREON},
+                                {EVO_NIVEL_DIA, 40, SPECIES_ESPEON},
+                                {EVO_NIVEL_NOCHE, 40, SPECIES_UMBREON},
+                                {EVO_MAPSEC, MAPSEC_PETALBURG_WOODS, SPECIES_LEAFEON},
+                                {EVO_MAPSEC, MAPSEC_SHOAL_CAVE, SPECIES_GLACEON},
+                                {EVO_AMISTAD, SPECIES_SYLVEON}),
     },
 
     [SPECIES_VAPOREON] =
@@ -5870,7 +5869,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Omanyte),
         FOLLOWER(Omanyte, TRACKS_BUG),
         MOVIMIENTOS(Omanyte),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_OMASTAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_OMASTAR}),
     },
 
     [SPECIES_OMASTAR] =
@@ -5941,7 +5940,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS_HUEVO(Kabuto),
         FOLLOWER(Kabuto, TRACKS_BUG),
         MOVIMIENTOS(Kabuto),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_KABUTOPS}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_KABUTOPS}),
     },
 
     [SPECIES_KABUTOPS] =
@@ -6050,7 +6049,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Munchlax, TRACKS_FOOT),
         MOVIMIENTOS(Munchlax),
         MOVIMIENTOS_HUEVO(Munchlax),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_SNORLAX}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_SNORLAX}),
     },
 
     [SPECIES_SNORLAX] =
@@ -6232,7 +6231,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dratini),
         FOLLOWER(Dratini, TRACKS_SLITHER),
         MOVIMIENTOS(Dratini),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_DRAGONAIR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_DRAGONAIR}),
         MOVIMIENTOS_HUEVO(Dratini),
     },
 
@@ -6269,7 +6268,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dragonair),
         FOLLOWER(Dragonair, TRACKS_SLITHER),
         MOVIMIENTOS(Dragonair),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAGONITE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_DRAGONITE}),
         MOVIMIENTOS_HUEVO(Dratini),
     },
 
@@ -6415,7 +6414,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chikorita, TRACKS_FOOT),
         MOVIMIENTOS(Chikorita),
         MOVIMIENTOS_HUEVO(Chikorita),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BAYLEEF}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_BAYLEEF}),
     },
 
     [SPECIES_BAYLEEF] =
@@ -6452,7 +6451,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bayleef, TRACKS_FOOT),
         MOVIMIENTOS(Bayleef),
         MOVIMIENTOS_HUEVO(Chikorita),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_MEGANIUM}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_MEGANIUM}),
     },
 
     [SPECIES_MEGANIUM] =
@@ -6503,7 +6502,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(65),
         ATAQUE_ESPECIAL(60),
         DEFENSA_ESPECIAL(50),
-        TIPOS(FUEGO, TIERRA),
+        TIPO(FUEGO),
         RATIO_CAPTURA(ESPECIAL_1_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_1_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -6528,7 +6527,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cyndaquil, TRACKS_FOOT),
         MOVIMIENTOS(Cyndaquil),
         MOVIMIENTOS_HUEVO(Cyndaquil),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_QUILAVA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_QUILAVA}),
     },
 
     [SPECIES_QUILAVA] =
@@ -6539,7 +6538,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(80),
         ATAQUE_ESPECIAL(80),
         DEFENSA_ESPECIAL(65),
-        TIPOS(FUEGO, TIERRA),
+        TIPO(FUEGO),
         RATIO_CAPTURA(ESPECIAL_2_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_2_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -6565,7 +6564,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Quilava, TRACKS_FOOT),
         MOVIMIENTOS(Quilava),
         MOVIMIENTOS_HUEVO(Cyndaquil),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_TYPHLOSION}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_TYPHLOSION}),
     },
 
     [SPECIES_TYPHLOSION] =
@@ -6587,7 +6586,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(100),
         ATAQUE_ESPECIAL(109),
         DEFENSA_ESPECIAL(85),
-        TIPOS(FUEGO, TIERRA),
+        TIPO(FUEGO),
         HABILIDADES(BLAZE, NONE, FLASH_FIRE),
         SOMBRA(4, 14, L),
         FRONT_PIC(Typhlosion, 56, 64),
@@ -6637,7 +6636,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Totodile, TRACKS_FOOT),
         MOVIMIENTOS(Totodile),
         MOVIMIENTOS_HUEVO(Totodile),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_CROCONAW}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_CROCONAW}),
     },
 
     [SPECIES_CROCONAW] =
@@ -6675,7 +6674,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Croconaw, TRACKS_FOOT),
         MOVIMIENTOS(Croconaw),
         MOVIMIENTOS_HUEVO(Totodile),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_FERALIGATR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_FERALIGATR}),
     },
 
     [SPECIES_FERALIGATR] =
@@ -6748,7 +6747,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Sentret, TRACKS_FOOT),
         MOVIMIENTOS(Sentret),
         MOVIMIENTOS_HUEVO(Sentret),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FURRET}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 15, SPECIES_FURRET}),
     },
 
     [SPECIES_FURRET] =
@@ -6819,7 +6818,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Hoothoot, TRACKS_FOOT),
         MOVIMIENTOS(Hoothoot),
         MOVIMIENTOS_HUEVO(Hoothoot),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_NOCTOWL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_NOCTOWL}),
     },
 
     [SPECIES_NOCTOWL] =
@@ -6892,7 +6891,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ledyba, TRACKS_BUG),
         MOVIMIENTOS(Ledyba),
         MOVIMIENTOS_HUEVO(Ledyba),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_LEDIAN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_LEDIAN}),
     },
 
     [SPECIES_LEDIAN] =
@@ -6966,7 +6965,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Spinarak, TRACKS_BUG),
         MOVIMIENTOS(Spinarak),
         MOVIMIENTOS_HUEVO(Spinarak),
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_ARIADOS}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 22, SPECIES_ARIADOS}),
     },
 
     [SPECIES_ARIADOS] =
@@ -7038,7 +7037,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chinchou, TRACKS_SPOT),
         MOVIMIENTOS(Chinchou),
         MOVIMIENTOS_HUEVO(Chinchou),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_LANTURN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_LANTURN}),
     },
 
     [SPECIES_LANTURN] =
@@ -7110,7 +7109,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Togepi, TRACKS_FOOT),
         MOVIMIENTOS(Togepi),
         MOVIMIENTOS_HUEVO(Togepi),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_TOGETIC}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_TOGETIC}),
     },
 
     [SPECIES_TOGETIC] =
@@ -7221,7 +7220,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Natu, TRACKS_FOOT),
         MOVIMIENTOS(Natu),
         MOVIMIENTOS_HUEVO(Natu),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_XATU}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_XATU}),
     },
 
     [SPECIES_XATU] =
@@ -7296,7 +7295,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Mareep, TRACKS_FOOT),
         MOVIMIENTOS(Mareep),
         MOVIMIENTOS_HUEVO(Mareep),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_FLAAFFY}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 15, SPECIES_FLAAFFY}),
     },
 
     [SPECIES_FLAAFFY] =
@@ -7333,7 +7332,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Flaaffy, TRACKS_FOOT),
         MOVIMIENTOS(Flaaffy),
         MOVIMIENTOS_HUEVO(Mareep),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_AMPHAROS}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_AMPHAROS}),
     },
 
     [SPECIES_AMPHAROS] =
@@ -7406,7 +7405,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Azurill, TRACKS_FOOT),
         MOVIMIENTOS(Azurill),
         MOVIMIENTOS_HUEVO(Azurill),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_MARILL}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_MARILL}),
     },
 
     [SPECIES_MARILL] =
@@ -7442,7 +7441,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Marill, TRACKS_FOOT),
         MOVIMIENTOS(Marill),
         MOVIMIENTOS_HUEVO(Azurill),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_AZUMARILL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_AZUMARILL}),
     },
 
     [SPECIES_AZUMARILL] =
@@ -7513,7 +7512,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Bonsly, TRACKS_FOOT),
         MOVIMIENTOS(Bonsly),
         MOVIMIENTOS_HUEVO(Bonsly),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_MIMIC, SPECIES_SUDOWOODO}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_MIMIC, SPECIES_SUDOWOODO}),
     },
 
     [SPECIES_SUDOWOODO] =
@@ -7587,7 +7586,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Hoppip, TRACKS_NONE),
         MOVIMIENTOS(Hoppip),
         MOVIMIENTOS_HUEVO(Hoppip),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_SKIPLOOM}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_SKIPLOOM}),
     },
 
     [SPECIES_SKIPLOOM] =
@@ -7624,7 +7623,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Skiploom, TRACKS_NONE),
         MOVIMIENTOS(Skiploom),
         MOVIMIENTOS_HUEVO(Hoppip),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JUMPLUFF}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_JUMPLUFF}),
     },
 
     [SPECIES_JUMPLUFF] =
@@ -7698,7 +7697,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Aipom, TRACKS_FOOT),
         MOVIMIENTOS(Aipom),
         MOVIMIENTOS_HUEVO(Aipom),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_DOUBLE_HIT, SPECIES_AMBIPOM}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_DOUBLE_HIT, SPECIES_AMBIPOM}),
     },
 
     [SPECIES_AMBIPOM] =
@@ -7844,7 +7843,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Yanma, TRACKS_NONE),
         MOVIMIENTOS(Yanma),
         MOVIMIENTOS_HUEVO(Yanma),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_YANMEGA}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_ANCIENT_POWER, SPECIES_YANMEGA}),
     },
 
     [SPECIES_YANMEGA] =
@@ -8178,7 +8177,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Snubbull, TRACKS_FOOT),
         MOVIMIENTOS(Snubbull),
         MOVIMIENTOS_HUEVO(Snubbull),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GRANBULL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_GRANBULL}),
     },
 
     [SPECIES_GRANBULL] =
@@ -8403,7 +8402,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Teddiursa, TRACKS_FOOT),
         MOVIMIENTOS(Teddiursa),
         MOVIMIENTOS_HUEVO(Teddiursa),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_URSARING}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_URSARING}),
     },
 
     [SPECIES_URSARING] =
@@ -8477,7 +8476,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Slugma, TRACKS_SLITHER),
         MOVIMIENTOS(Slugma),
         MOVIMIENTOS_HUEVO(Slugma),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_MAGCARGO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_MAGCARGO}),
     },
 
     [SPECIES_MAGCARGO] =
@@ -8550,7 +8549,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Swinub, TRACKS_SPOT),
         MOVIMIENTOS(Swinub),
         MOVIMIENTOS_HUEVO(Swinub),
-        .evolutions = EVOLUTION({EVO_LEVEL, 33, SPECIES_PILOSWINE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 33, SPECIES_PILOSWINE}),
     },
 
     [SPECIES_PILOSWINE] =
@@ -8589,7 +8588,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Piloswine, TRACKS_SPOT),
         MOVIMIENTOS(Piloswine),
         MOVIMIENTOS_HUEVO(Swinub),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_ANCIENT_POWER, SPECIES_MAMOSWINE}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_ANCIENT_POWER, SPECIES_MAMOSWINE}),
     },
 
     [SPECIES_MAMOSWINE] =
@@ -8733,7 +8732,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Houndour, TRACKS_FOOT),
         MOVIMIENTOS(Houndour),
         MOVIMIENTOS_HUEVO(Houndour),
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HOUNDOOM}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 24, SPECIES_HOUNDOOM}),
     },
 
     [SPECIES_HOUNDOOM] =
@@ -8806,7 +8805,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Phanpy, TRACKS_FOOT),
         MOVIMIENTOS(Phanpy),
         MOVIMIENTOS_HUEVO(Phanpy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_DONPHAN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_DONPHAN}),
     },
 
     [SPECIES_DONPHAN] =
@@ -8880,7 +8879,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Stantler, TRACKS_FOOT),
         MOVIMIENTOS(Stantler),
         MOVIMIENTOS_HUEVO(Stantler),
-        .evolutions = EVOLUTION({EVO_USE_MOVE_TWENTY_TIMES, MOVE_PSYSHIELD_BASH, SPECIES_WYRDEER}),
+        .evolutions = EVOLUTION({EVO_NIVEL_NIEVE, 30, SPECIES_WYRDEER}),
     },
 
     [SPECIES_WYRDEER] =
@@ -9063,7 +9062,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Larvitar, TRACKS_FOOT),
         MOVIMIENTOS(Larvitar),
         MOVIMIENTOS_HUEVO(Larvitar),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PUPITAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_PUPITAR}),
     },
 
     [SPECIES_PUPITAR] =
@@ -9099,7 +9098,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Pupitar, TRACKS_SPOT),
         MOVIMIENTOS(Pupitar),
         MOVIMIENTOS_HUEVO(Larvitar),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_TYRANITAR}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_TYRANITAR}),
     },
 
     [SPECIES_TYRANITAR] =
@@ -9285,7 +9284,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Treecko, TRACKS_FOOT),
         MOVIMIENTOS(Treecko),
         MOVIMIENTOS_HUEVO(Treecko),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_GROVYLE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_GROVYLE}),
     },
 
     [SPECIES_GROVYLE] =
@@ -9321,7 +9320,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Grovyle, TRACKS_FOOT),
         MOVIMIENTOS(Grovyle),
         MOVIMIENTOS_HUEVO(Treecko),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SCEPTILE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_SCEPTILE}),
     },
 
     [SPECIES_SCEPTILE] =
@@ -9393,7 +9392,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Torchic, TRACKS_FOOT),
         MOVIMIENTOS(Torchic),
         MOVIMIENTOS_HUEVO(Torchic),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_COMBUSKEN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_COMBUSKEN}),
     },
 
     [SPECIES_COMBUSKEN] =
@@ -9432,7 +9431,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Combusken, TRACKS_FOOT),
         MOVIMIENTOS(Combusken),
         MOVIMIENTOS_HUEVO(Torchic),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_BLAZIKEN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_BLAZIKEN}),
     },
 
     [SPECIES_BLAZIKEN] =
@@ -9505,7 +9504,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Mudkip, TRACKS_FOOT),
         MOVIMIENTOS(Mudkip),
         MOVIMIENTOS_HUEVO(Mudkip),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_MARSHTOMP}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_MARSHTOMP}),
     },
 
     [SPECIES_MARSHTOMP] =
@@ -9541,7 +9540,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Marshtomp, TRACKS_FOOT),
         MOVIMIENTOS(Marshtomp),
         MOVIMIENTOS_HUEVO(Mudkip),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SWAMPERT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_SWAMPERT}),
     },
 
     [SPECIES_SWAMPERT] =
@@ -9612,7 +9611,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Poochyena, TRACKS_FOOT),
         MOVIMIENTOS(Poochyena),
         MOVIMIENTOS_HUEVO(Poochyena),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_MIGHTYENA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_MIGHTYENA}),
     },
 
     [SPECIES_MIGHTYENA] =
@@ -9685,8 +9684,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Wurmple, TRACKS_BUG),
         MOVIMIENTOS(Wurmple),
         MOVIMIENTOS_HUEVO(Wurmple),
-        .evolutions = EVOLUTION({EVO_LEVEL_SILCOON, 7, SPECIES_SILCOON},
-                                {EVO_LEVEL_CASCOON, 7, SPECIES_CASCOON}),
+        .evolutions = EVOLUTION({EVO_NIVEL_SILCOON, 7, SPECIES_SILCOON},
+                                {EVO_NIVEL_CASCOON, 7, SPECIES_CASCOON}),
     },
 
     [SPECIES_SILCOON] =
@@ -9722,7 +9721,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Silcoon, TRACKS_BUG),
         MOVIMIENTOS(Silcoon),
         MOVIMIENTOS_HUEVO(Wurmple),
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_BEAUTIFLY}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 10, SPECIES_BEAUTIFLY}),
     },
 
     [SPECIES_BEAUTIFLY] =
@@ -9797,7 +9796,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cascoon, TRACKS_BUG),
         MOVIMIENTOS(Cascoon),
         MOVIMIENTOS_HUEVO(Wurmple),
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DUSTOX}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 10, SPECIES_DUSTOX}),
     },
 
     [SPECIES_DUSTOX] =
@@ -9873,7 +9872,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Lotad, TRACKS_FOOT),
         MOVIMIENTOS(Lotad),
         MOVIMIENTOS_HUEVO(Lotad),
-        .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_LOMBRE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 14, SPECIES_LOMBRE}),
     },
 
     [SPECIES_LOMBRE] =
@@ -9985,7 +9984,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Seedot, TRACKS_FOOT),
         MOVIMIENTOS(Seedot),
         MOVIMIENTOS_HUEVO(Seedot),
-        .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_NUZLEAF}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 14, SPECIES_NUZLEAF}),
     },
 
     [SPECIES_NUZLEAF] =
@@ -10098,7 +10097,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Taillow, TRACKS_FOOT),
         MOVIMIENTOS(Taillow),
         MOVIMIENTOS_HUEVO(Taillow),
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_SWELLOW}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 22, SPECIES_SWELLOW}),
     },
 
     [SPECIES_SWELLOW] =
@@ -10171,7 +10170,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Wingull, TRACKS_NONE),
         MOVIMIENTOS(Wingull),
         MOVIMIENTOS_HUEVO(Wingull),
-        .evolutions = EVOLUTION({EVO_LEVEL, 25, SPECIES_PELIPPER}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 25, SPECIES_PELIPPER}),
     },
 
     [SPECIES_PELIPPER] =
@@ -10244,7 +10243,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Ralts, TRACKS_FOOT),
         MOVIMIENTOS(Ralts),
         MOVIMIENTOS_HUEVO(Ralts),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_KIRLIA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_KIRLIA}),
     },
 
     [SPECIES_KIRLIA] =
@@ -10280,8 +10279,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Kirlia, TRACKS_FOOT),
         MOVIMIENTOS(Kirlia),
         MOVIMIENTOS_HUEVO(Ralts),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GARDEVOIR},
-                                {EVO_ITEM_MALE, ITEM_DAWN_STONE, SPECIES_GALLADE}),
+        .evolutions = EVOLUTION({EVO_NIVEL_HEMBRA, 30, SPECIES_GARDEVOIR},
+                                {EVO_NIVEL_MACHO, 30, SPECIES_GALLADE}),
     },
 
     [SPECIES_GARDEVOIR] =
@@ -10292,7 +10291,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         CRECIMIENTO(NORMAL),
         AMISTAD(NORMAL),
         EV_ATAQUE_ESPECIAL(3),
-        GENERO(PORCENTAJE_HEMBRA(50)),
+        GENERO(MON_MALE),
         GRUPOS_HUEVO(HUMANOIDE, AMORFO),
         TIPOS(PSIQUICO, HADA),
         NOMBRE(Gardevoir),
@@ -10388,7 +10387,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Surskit, TRACKS_BUG),
         MOVIMIENTOS(Surskit),
         MOVIMIENTOS_HUEVO(Surskit),
-        .evolutions = EVOLUTION({EVO_LEVEL, 22, SPECIES_MASQUERAIN}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 22, SPECIES_MASQUERAIN}),
     },
 
     [SPECIES_MASQUERAIN] =
@@ -10462,7 +10461,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Slakoth, TRACKS_FOOT),
         MOVIMIENTOS(Slakoth),
         MOVIMIENTOS_HUEVO(Slakoth),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_VIGOROTH}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_VIGOROTH}),
     },
 
     [SPECIES_VIGOROTH] =
@@ -10498,7 +10497,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Vigoroth, TRACKS_FOOT),
         MOVIMIENTOS(Vigoroth),
         MOVIMIENTOS_HUEVO(Slakoth),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SLAKING}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_SLAKING}),
     },
 
     [SPECIES_SLAKING] =
@@ -10570,8 +10569,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Nincada, TRACKS_BUG),
         MOVIMIENTOS(Nincada),
         MOVIMIENTOS_HUEVO(Nincada),
-        .evolutions = EVOLUTION({EVO_LEVEL_NINJASK, 30, SPECIES_NINJASK},
-                                {EVO_LEVEL_SHEDINJA, 30, SPECIES_SHEDINJA}),
+        .evolutions = EVOLUTION({EVO_NIVEL_NINJASK, 30, SPECIES_NINJASK},
+                                {EVO_NIVEL_SHEDINJA, 30, SPECIES_SHEDINJA}),
     },
 
     [SPECIES_NINJASK] =
@@ -10679,7 +10678,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Whismur, TRACKS_FOOT),
         MOVIMIENTOS(Whismur),
         MOVIMIENTOS_HUEVO(Whismur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LOUDRED}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_LOUDRED}),
     },
 
     [SPECIES_LOUDRED] =
@@ -10715,7 +10714,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Loudred, TRACKS_FOOT),
         MOVIMIENTOS(Loudred),
         MOVIMIENTOS_HUEVO(Whismur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_EXPLOUD}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_EXPLOUD}),
     },
 
     [SPECIES_EXPLOUD] =
@@ -10787,7 +10786,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Makuhita, TRACKS_FOOT),
         MOVIMIENTOS(Makuhita),
         MOVIMIENTOS_HUEVO(Makuhita),
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_HARIYAMA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 24, SPECIES_HARIYAMA}),
     },
 
     [SPECIES_HARIYAMA] =
@@ -11010,7 +11009,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Aron, TRACKS_FOOT),
         MOVIMIENTOS(Aron),
         MOVIMIENTOS_HUEVO(Aron),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_LAIRON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 32, SPECIES_LAIRON}),
     },
 
     [SPECIES_LAIRON] =
@@ -11047,7 +11046,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Lairon, TRACKS_FOOT),
         MOVIMIENTOS(Lairon),
         MOVIMIENTOS_HUEVO(Aron),
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_AGGRON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 42, SPECIES_AGGRON}),
     },
 
     [SPECIES_AGGRON] =
@@ -11121,7 +11120,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Meditite, TRACKS_FOOT),
         MOVIMIENTOS(Meditite),
         MOVIMIENTOS_HUEVO(Meditite),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_MEDICHAM}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 37, SPECIES_MEDICHAM}),
     },
 
     [SPECIES_MEDICHAM] =
@@ -11194,7 +11193,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Electrike, TRACKS_FOOT),
         MOVIMIENTOS(Electrike),
         MOVIMIENTOS_HUEVO(Electrike),
-        .evolutions = EVOLUTION({EVO_LEVEL, 26, SPECIES_MANECTRIC}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 26, SPECIES_MANECTRIC}),
     },
 
     [SPECIES_MANECTRIC] =
@@ -11267,7 +11266,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Budew, TRACKS_FOOT),
         MOVIMIENTOS(Budew),
         MOVIMIENTOS_HUEVO(Budew),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_ROSELIA}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_ROSELIA}),
     },
 
     [SPECIES_ROSELIA] =
@@ -11383,7 +11382,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Carvanha, TRACKS_NONE),
         MOVIMIENTOS(Carvanha),
         MOVIMIENTOS_HUEVO(Carvanha),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SHARPEDO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_SHARPEDO}),
     },
 
     [SPECIES_SHARPEDO] =
@@ -11455,7 +11454,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Wailmer, TRACKS_SPOT),
         MOVIMIENTOS(Wailmer),
         MOVIMIENTOS_HUEVO(Wailmer),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_WAILORD}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_WAILORD}),
     },
 
     [SPECIES_WAILORD] =
@@ -11530,7 +11529,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Numel, TRACKS_FOOT),
         MOVIMIENTOS(Numel),
         MOVIMIENTOS_HUEVO(Numel),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_CAMERUPT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_CAMERUPT}),
     },
 
     [SPECIES_CAMERUPT] =
@@ -11642,7 +11641,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Trapinch, TRACKS_FOOT),
         MOVIMIENTOS(Trapinch),
         MOVIMIENTOS_HUEVO(Trapinch),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_VIBRAVA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_VIBRAVA}),
     },
 
     [SPECIES_VIBRAVA] =
@@ -11679,7 +11678,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Vibrava, TRACKS_FOOT),
         MOVIMIENTOS(Vibrava),
         MOVIMIENTOS_HUEVO(Trapinch),
-        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_FLYGON}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 45, SPECIES_FLYGON}),
     },
 
     [SPECIES_FLYGON] =
@@ -11753,7 +11752,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Cacnea, TRACKS_FOOT),
         MOVIMIENTOS(Cacnea),
         MOVIMIENTOS_HUEVO(Cacnea),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_CACTURNE}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 32, SPECIES_CACTURNE}),
     },
 
     [SPECIES_CACTURNE] =
@@ -11827,7 +11826,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Swablu, TRACKS_NONE),
         MOVIMIENTOS(Swablu),
         MOVIMIENTOS_HUEVO(Swablu),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_ALTARIA}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_ALTARIA}),
     },
 
     [SPECIES_ALTARIA] =
@@ -11974,7 +11973,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Baltoy, TRACKS_SPOT),
         MOVIMIENTOS(Baltoy),
         MOVIMIENTOS_HUEVO(Baltoy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CLAYDOL}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_CLAYDOL}),
     },
 
     [SPECIES_CLAYDOL] =
@@ -12048,7 +12047,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Lileep, TRACKS_SLITHER),
         MOVIMIENTOS(Lileep),
         MOVIMIENTOS_HUEVO(Lileep),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_CRADILY}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_CRADILY}),
     },
 
     [SPECIES_CRADILY] =
@@ -12119,7 +12118,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Anorith, TRACKS_BUG),
         MOVIMIENTOS(Anorith),
         MOVIMIENTOS_HUEVO(Anorith),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ARMALDO}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_ARMALDO}),
     },
 
     [SPECIES_ARMALDO] =
@@ -12188,8 +12187,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Feebas, TRACKS_SPOT),
         MOVIMIENTOS(Feebas),
         MOVIMIENTOS_HUEVO(Feebas),
-        .evolutions = EVOLUTION({EVO_BEAUTY, 170, SPECIES_MILOTIC},
-                                {EVO_ITEM, ITEM_PRISM_SCALE, SPECIES_MILOTIC}),
+        //.evolutions = EVOLUTION({EVO_MAPSEC, ??, SPECIES_MILOTIC}),
     },
 
     [SPECIES_MILOTIC] =
@@ -12253,8 +12251,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(CASTFORM),
         MOVIMIENTOS(Castform),
         MOVIMIENTOS_HUEVO(Castform),
-        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
-        .formChangeTable = sCastformFormChangeTable,
+        FORMAS(Castform),
         TIPO(NORMAL),
         FRONT_PIC(CastformNormal, 24, 32),
         ELEVACION_FRONT_PIC(17),
@@ -12292,8 +12289,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(CASTFORM),
         MOVIMIENTOS(Castform),
         MOVIMIENTOS_HUEVO(Castform),
-        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
-        .formChangeTable = sCastformFormChangeTable,
+        FORMAS(Castform),
         TIPO(FUEGO),
         FRONT_PIC(CastformSunny, 40, 48),
         ELEVACION_FRONT_PIC(9),
@@ -12331,8 +12327,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(CASTFORM),
         MOVIMIENTOS(Castform),
         MOVIMIENTOS_HUEVO(Castform),
-        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
-        .formChangeTable = sCastformFormChangeTable,
+        FORMAS(Castform),
         TIPO(AGUA),
         FRONT_PIC(CastformRainy, 32, 48),
         ELEVACION_FRONT_PIC(9),
@@ -12370,8 +12365,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         POKEDEX(CASTFORM),
         MOVIMIENTOS(Castform),
         MOVIMIENTOS_HUEVO(Castform),
-        .formSpeciesIdTable = sCastformFormSpeciesIdTable,
-        .formChangeTable = sCastformFormChangeTable,
+        FORMAS(Castform),
         TIPO(HIELO),
         FRONT_PIC(CastformSnowy, 40, 56),
         ELEVACION_FRONT_PIC(8),
@@ -12454,7 +12448,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Duskull, TRACKS_NONE),
         MOVIMIENTOS(Duskull),
         MOVIMIENTOS_HUEVO(Duskull),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_DUSCLOPS}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 37, SPECIES_DUSCLOPS}),
     },
 
     [SPECIES_DUSCLOPS] =
@@ -12599,7 +12593,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Chingling, TRACKS_FOOT),
         MOVIMIENTOS(Chingling),
         MOVIMIENTOS_HUEVO(Chingling),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_CHIMECHO}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_CHIMECHO}),
     },
 
     [SPECIES_CHIMECHO] =
@@ -12708,7 +12702,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Snorunt, TRACKS_FOOT),
         MOVIMIENTOS(Snorunt),
         MOVIMIENTOS_HUEVO(Snorunt),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_GLALIE},
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_GLALIE},
                                 {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
     },
 
@@ -12817,7 +12811,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Spheal),
         FOLLOWER(Spheal, TRACKS_FOOT),
         MOVIMIENTOS(Spheal),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_SEALEO}),
+        MOVIMIENTOS_HUEVO(Spheal),
+        .evolutions = EVOLUTION({EVO_NIVEL, 32, SPECIES_SEALEO}),
     },
 
     [SPECIES_SEALEO] =
@@ -12851,7 +12846,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Sealeo),
         FOLLOWER(Sealeo, TRACKS_FOOT),
         MOVIMIENTOS(Sealeo),
-        .evolutions = EVOLUTION({EVO_LEVEL, 44, SPECIES_WALREIN}),
+        MOVIMIENTOS_HUEVO(Spheal),
+        .evolutions = EVOLUTION({EVO_NIVEL, 44, SPECIES_WALREIN}),
     },
 
     [SPECIES_WALREIN] =
@@ -12885,6 +12881,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Walrein),
         FOLLOWER(Walrein, TRACKS_FOOT),
         MOVIMIENTOS(Walrein),
+        MOVIMIENTOS_HUEVO(Spheal),
     },
 
     [SPECIES_CLAMPERL] =
@@ -12919,6 +12916,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Clamperl),
         FOLLOWER(Clamperl, TRACKS_SPOT),
         MOVIMIENTOS(Clamperl),
+        MOVIMIENTOS_HUEVO(Clamperl),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
                                 {EVO_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}),
     },
@@ -12956,6 +12954,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Huntail),
         FOLLOWER(Huntail, TRACKS_SLITHER),
         MOVIMIENTOS(Huntail),
+        MOVIMIENTOS_HUEVO(Clamperl),
     },
 
     [SPECIES_GOREBYSS] =
@@ -12990,6 +12989,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Gorebyss),
         FOLLOWER(Gorebyss, TRACKS_SLITHER),
         MOVIMIENTOS(Gorebyss),
+        MOVIMIENTOS_HUEVO(Clamperl),
     },
 
     [SPECIES_RELICANTH] =
@@ -13027,6 +13027,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Relicanth),
         FOLLOWER(Relicanth, TRACKS_NONE),
         MOVIMIENTOS(Relicanth),
+        MOVIMIENTOS_HUEVO(Relicanth),
     },
 
     [SPECIES_BAGON] =
@@ -13061,7 +13062,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Bagon),
         FOLLOWER(Bagon, TRACKS_FOOT),
         MOVIMIENTOS(Bagon),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_SHELGON}),
+        MOVIMIENTOS_HUEVO(Bagon),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_SHELGON}),
     },
 
     [SPECIES_SHELGON] =
@@ -13096,7 +13098,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shelgon),
         FOLLOWER(Shelgon, TRACKS_FOOT),
         MOVIMIENTOS(Shelgon),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_SALAMENCE}),
+        MOVIMIENTOS_HUEVO(Bagon),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_SALAMENCE}),
     },
 
     [SPECIES_SALAMENCE] =
@@ -13131,6 +13134,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(H_SHAKE),
         PALETAS(Salamence),
         ICONO(Salamence),
+        MOVIMIENTOS_HUEVO(Bagon),
         FOLLOWER(Salamence, TRACKS_FOOT),
     },
 
@@ -13167,7 +13171,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Beldum),
         FOLLOWER(Beldum, TRACKS_NONE),
         MOVIMIENTOS(Beldum),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_METANG}),
+        MOVIMIENTOS_HUEVO(Beldum),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_METANG}),
     },
 
     [SPECIES_METANG] =
@@ -13202,7 +13207,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Metang),
         FOLLOWER(Metang, TRACKS_NONE),
         MOVIMIENTOS(Metang),
-        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_METAGROSS}),
+        MOVIMIENTOS_HUEVO(Beldum),
+        .evolutions = EVOLUTION({EVO_NIVEL, 45, SPECIES_METAGROSS}),
     },
 
     [SPECIES_METAGROSS] =
@@ -13220,6 +13226,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Metagross),
         POKEDEX(METAGROSS),
         MOVIMIENTOS(Metagross),
+        MOVIMIENTOS_HUEVO(Beldum),
         PS(80),
         ATAQUE(135),
         DEFENSA(130),
@@ -13272,6 +13279,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Regirock),
         FOLLOWER(Regirock, TRACKS_FOOT),
         MOVIMIENTOS(Regirock),
+        MOVIMIENTOS_HUEVO(Regirock),
     },
 
     [SPECIES_REGICE] =
@@ -13306,6 +13314,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Regice),
         FOLLOWER(Regice, TRACKS_FOOT),
         MOVIMIENTOS(Regice),
+        MOVIMIENTOS_HUEVO(Regice),
     },
 
     [SPECIES_REGISTEEL] =
@@ -13341,6 +13350,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Registeel),
         FOLLOWER(Registeel, TRACKS_FOOT),
         MOVIMIENTOS(Registeel),
+        MOVIMIENTOS_HUEVO(Registeel),
     },
 
     [SPECIES_LATIAS] =
@@ -13357,6 +13367,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Latias),
         POKEDEX(LATIAS),
         MOVIMIENTOS(Latias),
+        MOVIMIENTOS_HUEVO(Latias),
         LEGENDARIO,
         PS(80),
         ATAQUE(80),
@@ -13393,6 +13404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Latios),
         POKEDEX(LATIOS),
         MOVIMIENTOS(Latios),
+        MOVIMIENTOS_HUEVO(Latios),
         PS(80),
         ATAQUE(90),
         DEFENSA(80),
@@ -13428,6 +13440,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Kyogre),
         POKEDEX(KYOGRE),
         MOVIMIENTOS(Kyogre),
+        MOVIMIENTOS_HUEVO(Kyogre),
         PS(100),
         ATAQUE(100),
         DEFENSA(90),
@@ -13463,6 +13476,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(GROUDON),
         POKEDEX(GROUDON),
         MOVIMIENTOS(Groudon),
+        MOVIMIENTOS_HUEVO(Groudon),
         PS(100),
         ATAQUE(150),
         DEFENSA(140),
@@ -13498,6 +13512,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(RAYQUAZA),
         POKEDEX(RAYQUAZA),
         MOVIMIENTOS(Rayquaza),
+        MOVIMIENTOS_HUEVO(Rayquaza),
         LEGENDARIO,
         PS(105),
         ATAQUE(150),
@@ -13552,6 +13567,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Jirachi),
         FOLLOWER(Jirachi, TRACKS_NONE),
         MOVIMIENTOS(Jirachi),
+        MOVIMIENTOS_HUEVO(Jirachi),
     },
 
     [SPECIES_DEOXYS_NORMAL] =
@@ -13569,7 +13585,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Deoxys),
         GRITO(DEOXYS),
         POKEDEX(DEOXYS),
-        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
+        FORMAS(Deoxys),
         PS(50),
         ATAQUE(150),
         DEFENSA(50),
@@ -13589,7 +13605,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(DeoxysNormal),
         FOLLOWER(DeoxysNormal, TRACKS_FOOT),
         MOVIMIENTOS(DeoxysNormal),
-        .formChangeTable = sDeoxysNormalFormChangeTable,
+        MOVIMIENTOS_HUEVO(Deoxys),
     },
 
     [SPECIES_DEOXYS_ATTACK] =
@@ -13607,7 +13623,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Deoxys),
         GRITO(DEOXYS),
         POKEDEX(DEOXYS),
-        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
+        FORMAS(Deoxys),
         PS(50),
         ATAQUE(180),
         DEFENSA(20),
@@ -13626,7 +13642,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(DeoxysAttack),
         FOLLOWER(DeoxysAttack, TRACKS_FOOT),
         MOVIMIENTOS(DeoxysAttack),
-        .formChangeTable = sDeoxysAttackFormChangeTable,
+        MOVIMIENTOS_HUEVO(Deoxys),
     },
 
     [SPECIES_DEOXYS_DEFENSE] =
@@ -13644,7 +13660,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Deoxys),
         GRITO(DEOXYS),
         POKEDEX(DEOXYS),
-        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
+        FORMAS(Deoxys),
         PS(50),
         ATAQUE(70),
         DEFENSA(160),
@@ -13663,7 +13679,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(DeoxysDefense),
         FOLLOWER(DeoxysDefense, TRACKS_FOOT),
         MOVIMIENTOS(DeoxysDefense),
-        .formChangeTable = sDeoxysDefenseFormChangeTable,
+        MOVIMIENTOS_HUEVO(Deoxys),
     },
 
     [SPECIES_DEOXYS_SPEED] =
@@ -13681,7 +13697,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Deoxys),
         GRITO(DEOXYS),
         POKEDEX(DEOXYS),
-        .formSpeciesIdTable = sDeoxysFormSpeciesIdTable,
+        FORMAS(Deoxys),
         PS(50),
         ATAQUE(95),
         DEFENSA(90),
@@ -13700,7 +13716,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(DeoxysSpeed),
         FOLLOWER(DeoxysSpeed, TRACKS_FOOT),
         MOVIMIENTOS(DeoxysSpeed),
-        .formChangeTable = sDeoxysSpeedFormChangeTable,
+        MOVIMIENTOS_HUEVO(Deoxys),
     },
 
     [SPECIES_TURTWIG] =
@@ -13734,7 +13750,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Turtwig),
         FOLLOWER(Turtwig, TRACKS_FOOT),
         MOVIMIENTOS(Turtwig),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_GROTLE}),
+        MOVIMIENTOS_HUEVO(Turtwig),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_GROTLE}),
     },
 
     [SPECIES_GROTLE] =
@@ -13769,7 +13786,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Grotle),
         FOLLOWER(Grotle, TRACKS_FOOT),
         MOVIMIENTOS(Grotle),
-        .evolutions = EVOLUTION({EVO_LEVEL, 32, SPECIES_TORTERRA}),
+        MOVIMIENTOS_HUEVO(Turtwig),
+        .evolutions = EVOLUTION({EVO_NIVEL, 32, SPECIES_TORTERRA}),
     },
 
     [SPECIES_TORTERRA] =
@@ -13805,6 +13823,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Torterra),
         FOLLOWER(Torterra, TRACKS_FOOT),
         MOVIMIENTOS(Torterra),
+        MOVIMIENTOS_HUEVO(Turtwig),
     },
 
     [SPECIES_CHIMCHAR] =
@@ -13839,7 +13858,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Chimchar),
         FOLLOWER(Chimchar, TRACKS_FOOT),
         MOVIMIENTOS(Chimchar),
-        .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_MONFERNO}),
+        MOVIMIENTOS_HUEVO(Chimchar),
+        .evolutions = EVOLUTION({EVO_NIVEL, 14, SPECIES_MONFERNO}),
     },
 
     [SPECIES_MONFERNO] =
@@ -13875,7 +13895,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Monferno),
         FOLLOWER(Monferno, TRACKS_FOOT),
         MOVIMIENTOS(Monferno),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_INFERNAPE}),
+        MOVIMIENTOS_HUEVO(Chimchar),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_INFERNAPE}),
     },
 
     [SPECIES_INFERNAPE] =
@@ -13911,6 +13932,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Infernape),
         FOLLOWER(Infernape, TRACKS_FOOT),
         MOVIMIENTOS(Infernape),
+        MOVIMIENTOS_HUEVO(Chimchar),
     },
 
     [SPECIES_PIPLUP] =
@@ -13944,7 +13966,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Piplup),
         FOLLOWER(Piplup, TRACKS_FOOT),
         MOVIMIENTOS(Piplup),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_PRINPLUP}),
+        MOVIMIENTOS_HUEVO(Piplup),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_PRINPLUP}),
     },
 
     [SPECIES_PRINPLUP] =
@@ -13978,7 +14001,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Prinplup),
         FOLLOWER(Prinplup, TRACKS_FOOT),
         MOVIMIENTOS(Prinplup),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_EMPOLEON}),
+        MOVIMIENTOS_HUEVO(Piplup),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_EMPOLEON}),
     },
 
     [SPECIES_EMPOLEON] =
@@ -14012,6 +14036,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Empoleon),
         FOLLOWER(Empoleon, TRACKS_FOOT),
         MOVIMIENTOS(Empoleon),
+        MOVIMIENTOS_HUEVO(Piplup),
     },
 
     [SPECIES_STARLY] =
@@ -14047,7 +14072,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Starly),
         FOLLOWER(Starly, TRACKS_FOOT),
         MOVIMIENTOS(Starly),
-        .evolutions = EVOLUTION({EVO_LEVEL, 14, SPECIES_STARAVIA}),
+        MOVIMIENTOS_HUEVO(Starly),
+        .evolutions = EVOLUTION({EVO_NIVEL, 14, SPECIES_STARAVIA}),
     },
 
     [SPECIES_STARAVIA] =
@@ -14083,7 +14109,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Staravia),
         FOLLOWER(Staravia, TRACKS_FOOT),
         MOVIMIENTOS(Staravia),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_STARAPTOR}),
+        MOVIMIENTOS_HUEVO(Starly),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_STARAPTOR}),
     },
 
     [SPECIES_STARAPTOR] =
@@ -14118,6 +14145,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Staraptor),
         FOLLOWER(Staraptor, TRACKS_FOOT),
         MOVIMIENTOS(Staraptor),
+        MOVIMIENTOS_HUEVO(Starly),
     },
 
     [SPECIES_BIDOOF] =
@@ -14153,7 +14181,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Bidoof),
         FOLLOWER(Bidoof, TRACKS_FOOT),
         MOVIMIENTOS(Bidoof),
-        .evolutions = EVOLUTION({EVO_LEVEL, 15, SPECIES_BIBAREL}),
+        MOVIMIENTOS_HUEVO(Bidoof),
+        .evolutions = EVOLUTION({EVO_NIVEL, 15, SPECIES_BIBAREL}),
     },
 
     [SPECIES_BIBAREL] =
@@ -14188,6 +14217,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Bibarel),
         FOLLOWER(Bibarel, TRACKS_FOOT),
         MOVIMIENTOS(Bibarel),
+        MOVIMIENTOS_HUEVO(Bidoof),
     },
 
     [SPECIES_KRICKETOT] =
@@ -14224,7 +14254,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Kricketot),
         FOLLOWER(Kricketot, TRACKS_FOOT),
         MOVIMIENTOS(Kricketot),
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_KRICKETUNE}),
+        MOVIMIENTOS_HUEVO(Kricketot),
+        .evolutions = EVOLUTION({EVO_NIVEL, 10, SPECIES_KRICKETUNE}),
     },
 
     [SPECIES_KRICKETUNE] =
@@ -14261,6 +14292,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Kricketune),
         FOLLOWER(Kricketune, TRACKS_FOOT),
         MOVIMIENTOS(Kricketune),
+        MOVIMIENTOS_HUEVO(Kricketot),
     },
 
     [SPECIES_SHINX] =
@@ -14296,7 +14328,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shinx),
         FOLLOWER(Shinx, TRACKS_FOOT),
         MOVIMIENTOS(Shinx),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_LUXIO}),
+        MOVIMIENTOS_HUEVO(Shinx),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_LUXIO}),
     },
 
     [SPECIES_LUXIO] =
@@ -14332,7 +14365,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Luxio),
         FOLLOWER(Luxio, TRACKS_FOOT),
         MOVIMIENTOS(Luxio),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_LUXRAY}),
+        MOVIMIENTOS_HUEVO(Shinx),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_LUXRAY}),
     },
 
     [SPECIES_LUXRAY] =
@@ -14368,6 +14402,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Luxray),
         FOLLOWER(Luxray, TRACKS_FOOT),
         MOVIMIENTOS(Luxray),
+        MOVIMIENTOS_HUEVO(Shinx),
     },
 
     [SPECIES_CRANIDOS] =
@@ -14401,7 +14436,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Cranidos),
         FOLLOWER(Cranidos, TRACKS_FOOT),
         MOVIMIENTOS(Cranidos),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_RAMPARDOS}),
+        MOVIMIENTOS_HUEVO(Cranidos),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_RAMPARDOS}),
     },
 
     [SPECIES_RAMPARDOS] =
@@ -14435,6 +14471,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Rampardos),
         FOLLOWER(Rampardos, TRACKS_FOOT),
         MOVIMIENTOS(Rampardos),
+        MOVIMIENTOS_HUEVO(Cranidos),
     },
 
     [SPECIES_SHIELDON] =
@@ -14468,7 +14505,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Shieldon),
         FOLLOWER(Shieldon, TRACKS_FOOT),
         MOVIMIENTOS(Shieldon),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_BASTIODON}),
+        MOVIMIENTOS_HUEVO(Shieldon),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_BASTIODON}),
     },
 
     [SPECIES_BASTIODON] =
@@ -14502,6 +14540,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Bastiodon),
         FOLLOWER(Bastiodon, TRACKS_FOOT),
         MOVIMIENTOS(Bastiodon),
+        MOVIMIENTOS_HUEVO(Shieldon),
     },
 
     [SPECIES_COMBEE] =
@@ -14538,7 +14577,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Combee),
         FOLLOWER(Combee, TRACKS_FOOT),
         MOVIMIENTOS(Combee),
-        .evolutions = EVOLUTION({EVO_LEVEL_FEMALE, 30, SPECIES_VESPIQUEN}),
+        MOVIMIENTOS_HUEVO(Combee),
+        .evolutions = EVOLUTION({EVO_NIVEL_HEMBRA, 30, SPECIES_VESPIQUEN}),
     },
 
     [SPECIES_VESPIQUEN] =
@@ -14575,6 +14615,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Vespiquen),
         FOLLOWER(Vespiquen, TRACKS_FOOT),
         MOVIMIENTOS(Vespiquen),
+        MOVIMIENTOS_HUEVO(Combee),
     },
 
     [SPECIES_DRIFLOON] =
@@ -14609,7 +14650,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Drifloon),
         FOLLOWER(Drifloon, TRACKS_FOOT),
         MOVIMIENTOS(Drifloon),
-        .evolutions = EVOLUTION({EVO_LEVEL, 28, SPECIES_DRIFBLIM}),
+        MOVIMIENTOS_HUEVO(Drifloon),
+        .evolutions = EVOLUTION({EVO_NIVEL, 28, SPECIES_DRIFBLIM}),
     },
 
     [SPECIES_DRIFBLIM] =
@@ -14644,6 +14686,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Drifblim),
         FOLLOWER(Drifblim, TRACKS_FOOT),
         MOVIMIENTOS(Drifblim),
+        MOVIMIENTOS_HUEVO(Drifloon),
     },
 
     [SPECIES_BUNEARY] =
@@ -14678,7 +14721,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Buneary),
         FOLLOWER(Buneary, TRACKS_FOOT),
         MOVIMIENTOS(Buneary),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_LOPUNNY}),
+        MOVIMIENTOS_HUEVO(Buneary),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_LOPUNNY}),
     },
 
     [SPECIES_LOPUNNY] =
@@ -14694,6 +14738,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Lopunny),
         POKEDEX(LOPUNNY),
         MOVIMIENTOS(Lopunny),
+        MOVIMIENTOS_HUEVO(Buneary),
         PS(65),
         ATAQUE(76),
         DEFENSA(84),
@@ -14748,7 +14793,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Gible),
         FOLLOWER(Gible, TRACKS_FOOT),
         MOVIMIENTOS(Gible),
-        .evolutions = EVOLUTION({EVO_LEVEL, 24, SPECIES_GABITE}),
+        MOVIMIENTOS_HUEVO(Gible),
+        .evolutions = EVOLUTION({EVO_NIVEL, 24, SPECIES_GABITE}),
     },
 
     [SPECIES_GABITE] =
@@ -14784,7 +14830,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Gabite),
         FOLLOWER(Gabite, TRACKS_FOOT),
         MOVIMIENTOS(Gabite),
-        .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_GARCHOMP}),
+        MOVIMIENTOS_HUEVO(Gible),
+        .evolutions = EVOLUTION({EVO_NIVEL, 48, SPECIES_GARCHOMP}),
     },
 
     [SPECIES_GARCHOMP] =
@@ -14801,6 +14848,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Garchomp),
         POKEDEX(GARCHOMP),
         MOVIMIENTOS(Garchomp),
+        MOVIMIENTOS_HUEVO(Gible),
         PS(108),
         ATAQUE(130),
         DEFENSA(95),
@@ -14853,7 +14901,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Riolu),
         FOLLOWER(Riolu, TRACKS_FOOT),
         MOVIMIENTOS(Riolu),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_LUCARIO}),
+        MOVIMIENTOS_HUEVO(Riolu),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_LUCARIO}),
     },
 
     [SPECIES_LUCARIO] =
@@ -14871,6 +14920,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Lucario),
         POKEDEX(LUCARIO),
         MOVIMIENTOS(Lucario),
+        MOVIMIENTOS_HUEVO(Riolu),
         PS(70),
         ATAQUE(110),
         DEFENSA(70),
@@ -14922,7 +14972,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Hippopotas),
         FOLLOWER(Hippopotas, TRACKS_FOOT),
         MOVIMIENTOS(Hippopotas),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_HIPPOWDON}),
+        MOVIMIENTOS_HUEVO(Hippopotas),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_HIPPOWDON}),
     },
 
     [SPECIES_HIPPOWDON] =
@@ -14957,6 +15008,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Hippowdon),
         FOLLOWER(Hippowdon, TRACKS_FOOT),
         MOVIMIENTOS(Hippowdon),
+        MOVIMIENTOS_HUEVO(Hippopotas),
     },
 
     [SPECIES_SKORUPI] =
@@ -14991,7 +15043,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Skorupi),
         FOLLOWER(Skorupi, TRACKS_FOOT),
         MOVIMIENTOS(Skorupi),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_DRAPION}),
+        MOVIMIENTOS_HUEVO(Skorupi),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_DRAPION}),
     },
 
     [SPECIES_DRAPION] =
@@ -15026,6 +15079,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Drapion),
         FOLLOWER(Drapion, TRACKS_FOOT),
         MOVIMIENTOS(Drapion),
+        MOVIMIENTOS_HUEVO(Skorupi),
     },
 
     [SPECIES_CROAGUNK] =
@@ -15061,7 +15115,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Croagunk),
         FOLLOWER(Croagunk, TRACKS_FOOT),
         MOVIMIENTOS(Croagunk),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_TOXICROAK}),
+        MOVIMIENTOS_HUEVO(Croagunk),
+        .evolutions = EVOLUTION({EVO_NIVEL, 37, SPECIES_TOXICROAK}),
     },
 
     [SPECIES_TOXICROAK] =
@@ -15097,6 +15152,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Toxicroak),
         FOLLOWER(Toxicroak, TRACKS_FOOT),
         MOVIMIENTOS(Toxicroak),
+        MOVIMIENTOS_HUEVO(Croagunk),
     },
 
     [SPECIES_SNOVER] =
@@ -15133,7 +15189,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Snover),
         FOLLOWER(Snover, TRACKS_FOOT),
         MOVIMIENTOS(Snover),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_ABOMASNOW}),
+        MOVIMIENTOS_HUEVO(Snover),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_ABOMASNOW}),
     },
 
     [SPECIES_ABOMASNOW] =
@@ -15151,6 +15208,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Abomasnow),
         POKEDEX(ABOMASNOW),
         MOVIMIENTOS(Abomasnow),
+        MOVIMIENTOS_HUEVO(Snover),
         PS(90),
         ATAQUE(92),
         DEFENSA(75),
@@ -15188,8 +15246,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         PS(50),
         ATAQUE(50),
         DEFENSA(77),
@@ -15226,8 +15284,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         TIPOS(ELECTRICO, FUEGO),
         PS(50),
         ATAQUE(65),
@@ -15263,8 +15321,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         TIPOS(ELECTRICO, AGUA),
         NO_VOLTEAR,
         PS(50),
@@ -15301,8 +15359,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         TIPOS(ELECTRICO, HIELO),
         PS(50),
         ATAQUE(65),
@@ -15338,8 +15396,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         TIPOS(ELECTRICO, VOLADOR),
         PS(50),
         ATAQUE(65),
@@ -15376,8 +15434,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ROTOM),
         POKEDEX(ROTOM),
         MOVIMIENTOS(Rotom),
-        .formSpeciesIdTable = sRotomFormSpeciesIdTable,
-        .formChangeTable = sRotomFormChangeTable,
+        MOVIMIENTOS_HUEVO(Rotom),
+        FORMAS(Rotom),
         TIPOS(ELECTRICO, PLANTA),
         PS(50),
         ATAQUE(65),
@@ -15430,6 +15488,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Heatran),
         FOLLOWER(Heatran, TRACKS_FOOT),
         MOVIMIENTOS(Heatran),
+        MOVIMIENTOS_HUEVO(Heatran),
     },
 
     [SPECIES_REGIGIGAS] =
@@ -15464,6 +15523,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Regigigas),
         FOLLOWER(Regigigas, TRACKS_FOOT),
         MOVIMIENTOS(Regigigas),
+        MOVIMIENTOS_HUEVO(Regigigas),
     },
 
     [SPECIES_SNIVY] =
@@ -15497,7 +15557,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Snivy),
         FOLLOWER(Snivy, TRACKS_FOOT),
         MOVIMIENTOS(Snivy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_SERVINE}),
+        MOVIMIENTOS_HUEVO(Snivy),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_SERVINE}),
     },
 
     [SPECIES_SERVINE] =
@@ -15531,7 +15592,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Servine),
         FOLLOWER(Servine, TRACKS_FOOT),
         MOVIMIENTOS(Servine),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SERPERIOR}),
+        MOVIMIENTOS_HUEVO(Snivy),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_SERPERIOR}),
     },
 
     [SPECIES_SERPERIOR] =
@@ -15565,6 +15627,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Serperior),
         FOLLOWER(Serperior, TRACKS_FOOT),
         MOVIMIENTOS(Serperior),
+        MOVIMIENTOS_HUEVO(Snivy),
     },
 
     [SPECIES_TEPIG] =
@@ -15575,7 +15638,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(45),
         ATAQUE_ESPECIAL(45),
         DEFENSA_ESPECIAL(45),
-        TIPO(FUEGO),
+        TIPOS(FUEGO, TIERRA),
         RATIO_CAPTURA(ESPECIAL_1_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_1_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -15598,7 +15661,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Tepig),
         FOLLOWER(Tepig, TRACKS_FOOT),
         MOVIMIENTOS(Tepig),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_PIGNITE}),
+        MOVIMIENTOS_HUEVO(Tepig),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_PIGNITE}),
     },
 
     [SPECIES_PIGNITE] =
@@ -15609,7 +15673,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(55),
         ATAQUE_ESPECIAL(70),
         DEFENSA_ESPECIAL(55),
-        TIPOS(FUEGO, LUCHA),
+        TIPOS(FUEGO, TIERRA),
         RATIO_CAPTURA(ESPECIAL_2_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_2_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -15632,7 +15696,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pignite),
         FOLLOWER(Pignite, TRACKS_FOOT),
         MOVIMIENTOS(Pignite),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_EMBOAR}),
+        MOVIMIENTOS_HUEVO(Tepig),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_EMBOAR}),
     },
 
     [SPECIES_EMBOAR] =
@@ -15643,7 +15708,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(65),
         ATAQUE_ESPECIAL(100),
         DEFENSA_ESPECIAL(65),
-        TIPOS(FUEGO, LUCHA),
+        TIPOS(FUEGO, TIERRA),
         RATIO_CAPTURA(ESPECIAL_3_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_3_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -15667,6 +15732,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Emboar),
         FOLLOWER(Emboar, TRACKS_FOOT),
         MOVIMIENTOS(Emboar),
+        MOVIMIENTOS_HUEVO(Tepig),
     },
 
     [SPECIES_OSHAWOTT] =
@@ -15700,7 +15766,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Oshawott),
         FOLLOWER(Oshawott, TRACKS_FOOT),
         MOVIMIENTOS(Oshawott),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_DEWOTT}),
+        MOVIMIENTOS_HUEVO(Oshawott),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_DEWOTT}),
     },
 
     [SPECIES_DEWOTT] =
@@ -15734,7 +15801,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dewott),
         FOLLOWER(Dewott, TRACKS_FOOT),
         MOVIMIENTOS(Dewott),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SAMUROTT}),
+        MOVIMIENTOS_HUEVO(Oshawott),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_SAMUROTT}),
     },
 
     [SPECIES_SAMUROTT] =
@@ -15768,6 +15836,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Samurott),
         FOLLOWER(Samurott, TRACKS_FOOT),
         MOVIMIENTOS(Samurott),
+        MOVIMIENTOS_HUEVO(Oshawott),
     },
 
     [SPECIES_DRILBUR] =
@@ -15802,7 +15871,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Drilbur),
         FOLLOWER(Drilbur, TRACKS_FOOT),
         MOVIMIENTOS(Drilbur),
-        .evolutions = EVOLUTION({EVO_LEVEL, 31, SPECIES_EXCADRILL}),
+        MOVIMIENTOS_HUEVO(Drilbur),
+        .evolutions = EVOLUTION({EVO_NIVEL, 31, SPECIES_EXCADRILL}),
     },
 
     [SPECIES_EXCADRILL] =
@@ -15837,6 +15907,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Excadrill),
         FOLLOWER(Excadrill, TRACKS_FOOT),
         MOVIMIENTOS(Excadrill),
+        MOVIMIENTOS_HUEVO(Drilbur),
     },
 
     [SPECIES_DARUMAKA] =
@@ -15870,7 +15941,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Darumaka),
         FOLLOWER(Darumaka, TRACKS_FOOT),
         MOVIMIENTOS(Darumaka),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_DARMANITAN_STANDARD}),
+        MOVIMIENTOS_HUEVO(Darumaka),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_DARMANITAN_STANDARD}),
     },
 
     [SPECIES_DARMANITAN_STANDARD] =
@@ -15892,10 +15964,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Darmanitan),
         GRITO(DARMANITAN),
         POKEDEX(DARMANITAN),
-        .formSpeciesIdTable = sDarmanitanFormSpeciesIdTable,
+        FORMAS(Darmanitan),
         HABILIDADES(SHEER_FORCE, NONE, ZEN_MODE),
         MOVIMIENTOS(Darmanitan),
-        .formChangeTable = sDarmanitanFormChangeTable,
+        MOVIMIENTOS_HUEVO(Darumaka),
         TIPO(FUEGO),
         FRONT_PIC(DarmanitanStandard, 56, 64),
         ELEVACION_FRONT_PIC(2),
@@ -15921,10 +15993,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Darmanitan),
         GRITO(DARMANITAN),
         POKEDEX(DARMANITAN),
-        .formSpeciesIdTable = sDarmanitanFormSpeciesIdTable,
+        FORMAS(Darmanitan),
         HABILIDADES(SHEER_FORCE, NONE, ZEN_MODE),
         MOVIMIENTOS(Darmanitan),
-        .formChangeTable = sDarmanitanFormChangeTable,
+        MOVIMIENTOS_HUEVO(Darumaka),
         PS(105),
         ATAQUE(30),
         DEFENSA(105),
@@ -15974,6 +16046,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(DarumakaGalar),
         FOLLOWER(DarumakaGalar, TRACKS_FOOT),
         MOVIMIENTOS(DarumakaGalar),
+        MOVIMIENTOS_HUEVO(DarumakaGalar),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_ICE_STONE, SPECIES_DARMANITAN_GALAR_STANDARD}),
     },
 
@@ -15997,7 +16070,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Darmanitan),
         GRITO(DARMANITAN),
         POKEDEX(DARMANITAN_GALAR),
-        .formSpeciesIdTable = sDarmanitanGalarFormSpeciesIdTable,
+        FORMAS(DarmanitanGalar),
         TIPO(HIELO),
         OBJETO_RARO(SNOWBALL),
         FRONT_PIC(DarmanitanGalarStandard, 56, 64),
@@ -16017,7 +16090,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
     {
         HABILIDADES(GORILLA_TACTICS, NONE, ZEN_MODE),
         MOVIMIENTOS(DarmanitanGalar),
-        .formChangeTable = sDarmanitanGalarFormChangeTable,
+        MOVIMIENTOS_HUEVO(DarumakaGalar),
         EV_ATAQUE_ESPECIAL(2),
         RATIO_CAPTURA(ESPECIAL_3_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_3_EVO),
@@ -16029,7 +16102,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         NOMBRE(Darmanitan),
         GRITO(DARMANITAN),
         POKEDEX(DARMANITAN_GALAR),
-        .formSpeciesIdTable = sDarmanitanFormSpeciesIdTable,
+        FORMAS(DarmanitanGalar),
         PS(105),
         ATAQUE(160),
         DEFENSA(55),
@@ -16080,7 +16153,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Yamask),
         FOLLOWER(Yamask, TRACKS_FOOT),
         MOVIMIENTOS(Yamask),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_COFAGRIGUS}),
+        MOVIMIENTOS_HUEVO(Yamask),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_COFAGRIGUS}),
     },
 
     [SPECIES_COFAGRIGUS] =
@@ -16115,6 +16189,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Cofagrigus),
         FOLLOWER(Cofagrigus, TRACKS_FOOT),
         MOVIMIENTOS(Cofagrigus),
+        MOVIMIENTOS_HUEVO(Yamask),
     },
 
     [SPECIES_ZORUA] =
@@ -16148,7 +16223,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Zorua),
         FOLLOWER(Zorua, TRACKS_FOOT),
         MOVIMIENTOS(Zorua),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK}),
+        MOVIMIENTOS_HUEVO(Zorua),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_ZOROARK}),
     },
 
     [SPECIES_ZOROARK] =
@@ -16182,6 +16258,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Zoroark),
         FOLLOWER(Zoroark, TRACKS_FOOT),
         MOVIMIENTOS(Zoroark),
+        MOVIMIENTOS_HUEVO(Zorua),
     },
 
     [SPECIES_ZORUA_HISUI] =
@@ -16215,7 +16292,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(ZoruaHisui),
         FOLLOWER(ZoruaHisui, TRACKS_FOOT),
         MOVIMIENTOS(ZoruaHisui),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ZOROARK_HISUI}),
+        MOVIMIENTOS_HUEVO(ZoruaHisui),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_ZOROARK_HISUI}),
     },
 
     [SPECIES_ZOROARK_HISUI] =
@@ -16249,6 +16327,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(ZoroarkHisui),
         FOLLOWER(ZoroarkHisui, TRACKS_FOOT),
         MOVIMIENTOS(ZoroarkHisui),
+        MOVIMIENTOS_HUEVO(ZoruaHisui),
     },
 
     [SPECIES_FRILLISH] =
@@ -16286,7 +16365,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO_HEMBRA(Frillish),
         FOLLOWER(Frillish, TRACKS_FOOT),
         MOVIMIENTOS(Frillish),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_JELLICENT}),
+        MOVIMIENTOS_HUEVO(Frillish),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_JELLICENT}),
     },
 
     [SPECIES_JELLICENT] =
@@ -16324,6 +16404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO_HEMBRA(Jellicent),
         FOLLOWER(Jellicent, TRACKS_FOOT),
         MOVIMIENTOS(Jellicent),
+        MOVIMIENTOS_HUEVO(Frillish),
     },
 
     [SPECIES_JOLTIK] =
@@ -16357,7 +16438,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Joltik),
         FOLLOWER(Joltik, TRACKS_FOOT),
         MOVIMIENTOS(Joltik),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GALVANTULA}),
+        MOVIMIENTOS_HUEVO(Joltik),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_GALVANTULA}),
     },
 
     [SPECIES_GALVANTULA] =
@@ -16391,6 +16473,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Galvantula),
         FOLLOWER(Galvantula, TRACKS_FOOT),
         MOVIMIENTOS(Galvantula),
+        MOVIMIENTOS_HUEVO(Joltik),
     },
 
     [SPECIES_FERROSEED] =
@@ -16425,7 +16508,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ferroseed),
         FOLLOWER(Ferroseed, TRACKS_FOOT),
         MOVIMIENTOS(Ferroseed),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_FERROTHORN}),
+        MOVIMIENTOS_HUEVO(Ferroseed),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_FERROTHORN}),
     },
 
     [SPECIES_FERROTHORN] =
@@ -16461,6 +16545,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Ferrothorn),
         FOLLOWER(Ferrothorn, TRACKS_FOOT),
         MOVIMIENTOS(Ferrothorn),
+        MOVIMIENTOS_HUEVO(Ferroseed),
     },
 
     [SPECIES_ELGYEM] =
@@ -16494,7 +16579,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Elgyem),
         FOLLOWER(Elgyem, TRACKS_FOOT),
         MOVIMIENTOS(Elgyem),
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_BEHEEYEM}),
+        MOVIMIENTOS_HUEVO(Elgyem),
+        .evolutions = EVOLUTION({EVO_NIVEL, 42, SPECIES_BEHEEYEM}),
     },
 
     [SPECIES_BEHEEYEM] =
@@ -16528,6 +16614,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Beheeyem),
         FOLLOWER(Beheeyem, TRACKS_FOOT),
         MOVIMIENTOS(Beheeyem),
+        MOVIMIENTOS_HUEVO(Elgyem),
     },
 
     [SPECIES_LITWICK] =
@@ -16562,7 +16649,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Litwick),
         FOLLOWER(Litwick, TRACKS_FOOT),
         MOVIMIENTOS(Litwick),
-        .evolutions = EVOLUTION({EVO_LEVEL, 41, SPECIES_LAMPENT}),
+        MOVIMIENTOS_HUEVO(Litwick),
+        .evolutions = EVOLUTION({EVO_NIVEL, 41, SPECIES_LAMPENT}),
     },
 
     [SPECIES_LAMPENT] =
@@ -16597,6 +16685,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Lampent),
         FOLLOWER(Lampent, TRACKS_FOOT),
         MOVIMIENTOS(Lampent),
+        MOVIMIENTOS_HUEVO(Litwick),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_CHANDELURE}),
     },
 
@@ -16632,6 +16721,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Chandelure),
         FOLLOWER(Chandelure, TRACKS_FOOT),
         MOVIMIENTOS(Chandelure),
+        MOVIMIENTOS_HUEVO(Litwick),
     },
 
     [SPECIES_AXEW] =
@@ -16665,7 +16755,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Axew),
         FOLLOWER(Axew, TRACKS_FOOT),
         MOVIMIENTOS(Axew),
-        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_FRAXURE}),
+        MOVIMIENTOS_HUEVO(Axew),
+        .evolutions = EVOLUTION({EVO_NIVEL, 38, SPECIES_FRAXURE}),
     },
 
     [SPECIES_FRAXURE] =
@@ -16699,7 +16790,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Fraxure),
         FOLLOWER(Fraxure, TRACKS_FOOT),
         MOVIMIENTOS(Fraxure),
-        .evolutions = EVOLUTION({EVO_LEVEL, 48, SPECIES_HAXORUS}),
+        MOVIMIENTOS_HUEVO(Axew),
+        .evolutions = EVOLUTION({EVO_NIVEL, 48, SPECIES_HAXORUS}),
     },
 
     [SPECIES_HAXORUS] =
@@ -16733,6 +16825,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Haxorus),
         FOLLOWER(Haxorus, TRACKS_FOOT),
         MOVIMIENTOS(Haxorus),
+        MOVIMIENTOS_HUEVO(Axew),
     },
 
     [SPECIES_CUBCHOO] =
@@ -16766,7 +16859,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Cubchoo),
         FOLLOWER(Cubchoo, TRACKS_FOOT),
         MOVIMIENTOS(Cubchoo),
-        .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_BEARTIC}),
+        MOVIMIENTOS_HUEVO(Cubchoo),
+        .evolutions = EVOLUTION({EVO_NIVEL, 37, SPECIES_BEARTIC}),
     },
 
     [SPECIES_BEARTIC] =
@@ -16777,7 +16871,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(50),
         ATAQUE_ESPECIAL(70),
         DEFENSA_ESPECIAL(80),
-        TIPO(HIELO),
+        TIPOS(HIELO, LUCHA),
         RATIO_CAPTURA(NORMAL_3_EVO),
         CAMPO_EXPERIENCIA(NORMAL_3_EVO),
         CICLO_HUEVO(NORMAL),
@@ -16800,6 +16894,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Beartic),
         FOLLOWER(Beartic, TRACKS_FOOT),
         MOVIMIENTOS(Beartic),
+        MOVIMIENTOS_HUEVO(Cubchoo),
     },
 
     [SPECIES_PAWNIARD] =
@@ -16833,7 +16928,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pawniard),
         FOLLOWER(Pawniard, TRACKS_FOOT),
         MOVIMIENTOS(Pawniard),
-        .evolutions = EVOLUTION({EVO_LEVEL, 52, SPECIES_BISHARP}),
+        MOVIMIENTOS_HUEVO(Pawniard),
+        .evolutions = EVOLUTION({EVO_NIVEL, 52, SPECIES_BISHARP}),
     },
 
     [SPECIES_BISHARP] =
@@ -16868,6 +16964,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Bisharp),
         FOLLOWER(Bisharp, TRACKS_FOOT),
         MOVIMIENTOS(Bisharp),
+        MOVIMIENTOS_HUEVO(Pawniard),
     },
 
     [SPECIES_DEINO] =
@@ -16901,7 +16998,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Deino),
         FOLLOWER(Deino, TRACKS_FOOT),
         MOVIMIENTOS(Deino),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_ZWEILOUS}),
+        MOVIMIENTOS_HUEVO(Deino),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_ZWEILOUS}),
     },
 
     [SPECIES_ZWEILOUS] =
@@ -16935,7 +17033,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Zweilous),
         FOLLOWER(Zweilous, TRACKS_FOOT),
         MOVIMIENTOS(Zweilous),
-        .evolutions = EVOLUTION({EVO_LEVEL, 64, SPECIES_HYDREIGON}),
+        MOVIMIENTOS_HUEVO(Deino),
+        .evolutions = EVOLUTION({EVO_NIVEL, 64, SPECIES_HYDREIGON}),
     },
 
     [SPECIES_HYDREIGON] =
@@ -16970,6 +17069,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Hydreigon),
         FOLLOWER(Hydreigon, TRACKS_FOOT),
         MOVIMIENTOS(Hydreigon),
+        MOVIMIENTOS_HUEVO(Deino),
     },
 
     [SPECIES_LARVESTA] =
@@ -17001,9 +17101,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(H_SLIDE),
         PALETAS(Larvesta),
         ICONO(Larvesta),
-        FOLLOWER(Larvesta, TRACKS_FOOT),
+        FOLLOWER(Larvesta, TRACKS_BUG),
         MOVIMIENTOS(Larvesta),
-        .evolutions = EVOLUTION({EVO_LEVEL, 59, SPECIES_VOLCARONA}),
+        MOVIMIENTOS_HUEVO(Larvesta),
+        .evolutions = EVOLUTION({EVO_NIVEL, 59, SPECIES_VOLCARONA}),
     },
 
     [SPECIES_VOLCARONA] =
@@ -17038,8 +17139,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(SHAKE_GLOW_RED),
         PALETAS(Volcarona),
         ICONO(Volcarona),
-        FOLLOWER(Volcarona, TRACKS_FOOT),
+        FOLLOWER(Volcarona, TRACKS_NONE),
         MOVIMIENTOS(Volcarona),
+        MOVIMIENTOS_HUEVO(Larvesta),
     },
 
     [SPECIES_CHESPIN] =
@@ -17073,7 +17175,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Chespin),
         FOLLOWER(Chespin, TRACKS_FOOT),
         MOVIMIENTOS(Chespin),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_QUILLADIN}),
+        MOVIMIENTOS_HUEVO(Chespin),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_QUILLADIN}),
     },
 
     [SPECIES_QUILLADIN] =
@@ -17084,7 +17187,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         VELOCIDAD(57),
         ATAQUE_ESPECIAL(56),
         DEFENSA_ESPECIAL(58),
-        TIPO(PLANTA),
+        TIPOS(PLANTA, LUCHA),
         RATIO_CAPTURA(ESPECIAL_2_EVO),
         CAMPO_EXPERIENCIA(ESPECIAL_2_EVO),
         CICLO_HUEVO(ESPECIAL),
@@ -17107,7 +17210,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Quilladin),
         FOLLOWER(Quilladin, TRACKS_FOOT),
         MOVIMIENTOS(Quilladin),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_CHESNAUGHT}),
+        MOVIMIENTOS_HUEVO(Chespin),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_CHESNAUGHT}),
     },
 
     [SPECIES_CHESNAUGHT] =
@@ -17141,6 +17245,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Chesnaught),
         FOLLOWER(Chesnaught, TRACKS_FOOT),
         MOVIMIENTOS(Chesnaught),
+        MOVIMIENTOS_HUEVO(Chespin),
     },
 
     [SPECIES_FENNEKIN] =
@@ -17174,7 +17279,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Fennekin),
         FOLLOWER(Fennekin, TRACKS_FOOT),
         MOVIMIENTOS(Fennekin),
-        .evolutions = EVOLUTION({EVO_LEVEL, 20, SPECIES_BRAIXEN}),
+        MOVIMIENTOS_HUEVO(Fennekin),
+        .evolutions = EVOLUTION({EVO_NIVEL, 20, SPECIES_BRAIXEN}),
     },
 
     [SPECIES_BRAIXEN] =
@@ -17208,7 +17314,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Braixen),
         FOLLOWER(Braixen, TRACKS_FOOT),
         MOVIMIENTOS(Braixen),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_DELPHOX}),
+        MOVIMIENTOS_HUEVO(Fennekin),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_DELPHOX}),
     },
 
     [SPECIES_DELPHOX] =
@@ -17242,6 +17349,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Delphox),
         FOLLOWER(Delphox, TRACKS_FOOT),
         MOVIMIENTOS(Delphox),
+        MOVIMIENTOS_HUEVO(Fennekin),
     },
 
     [SPECIES_FROAKIE] =
@@ -17275,7 +17383,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Froakie),
         FOLLOWER(Froakie, TRACKS_FOOT),
         MOVIMIENTOS(Froakie),
-        .evolutions = EVOLUTION({EVO_LEVEL, 16, SPECIES_FROGADIER}),
+        MOVIMIENTOS_HUEVO(Froakie),
+        .evolutions = EVOLUTION({EVO_NIVEL, 16, SPECIES_FROGADIER}),
     },
 
     [SPECIES_FROGADIER] =
@@ -17309,7 +17418,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Frogadier),
         FOLLOWER(Frogadier, TRACKS_FOOT),
         MOVIMIENTOS(Frogadier),
-        .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_GRENINJA}),
+        MOVIMIENTOS_HUEVO(Froakie),
+        .evolutions = EVOLUTION({EVO_NIVEL, 36, SPECIES_GRENINJA}),
     },
 
     [SPECIES_GRENINJA] =
@@ -17326,6 +17436,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(GRENINJA),
         POKEDEX(GRENINJA),
         MOVIMIENTOS(Greninja),
+        MOVIMIENTOS_HUEVO(Froakie),
         PS(72),
         ATAQUE(95),
         DEFENSA(67),
@@ -17377,7 +17488,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Fletchling),
         FOLLOWER(Fletchling, TRACKS_FOOT),
         MOVIMIENTOS(Fletchling),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_FLETCHINDER}),
+        MOVIMIENTOS_HUEVO(Fletchling),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_FLETCHINDER}),
     },
 
     [SPECIES_FLETCHINDER] =
@@ -17412,7 +17524,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Fletchinder),
         FOLLOWER(Fletchinder, TRACKS_FOOT),
         MOVIMIENTOS(Fletchinder),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_TALONFLAME}),
+        MOVIMIENTOS_HUEVO(Fletchling),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_TALONFLAME}),
     },
 
     [SPECIES_TALONFLAME] =
@@ -17447,6 +17560,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Talonflame),
         FOLLOWER(Talonflame, TRACKS_FOOT),
         MOVIMIENTOS(Talonflame),
+        MOVIMIENTOS_HUEVO(Fletchling),
     },
 
     [SPECIES_PANCHAM] =
@@ -17480,7 +17594,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pancham),
         FOLLOWER(Pancham, TRACKS_FOOT),
         MOVIMIENTOS(Pancham),
-        .evolutions = EVOLUTION({EVO_LEVEL_DARK_TYPE_MON_IN_PARTY, 32, SPECIES_PANGORO}),
+        MOVIMIENTOS_HUEVO(Pancham),
+        .evolutions = EVOLUTION({EVO_NIVEL_SINIESTRO_EQUIPO, 32, SPECIES_PANGORO}),
     },
 
     [SPECIES_PANGORO] =
@@ -17514,6 +17629,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Pangoro),
         FOLLOWER(Pangoro, TRACKS_FOOT),
         MOVIMIENTOS(Pangoro),
+        MOVIMIENTOS_HUEVO(Pancham),
     },
 
     [SPECIES_HONEDGE] =
@@ -17548,7 +17664,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Honedge),
         FOLLOWER(Honedge, TRACKS_FOOT),
         MOVIMIENTOS(Honedge),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_DOUBLADE}),
+        MOVIMIENTOS_HUEVO(Honedge),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_DOUBLADE}),
     },
 
     [SPECIES_DOUBLADE] =
@@ -17583,6 +17700,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Doublade),
         FOLLOWER(Doublade, TRACKS_FOOT),
         MOVIMIENTOS(Doublade),
+        MOVIMIENTOS_HUEVO(Honedge),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_AEGISLASH_SHIELD}),
     },
 
@@ -17601,8 +17719,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(AEGISLASH),
         POKEDEX(AEGISLASH),
         MOVIMIENTOS(Aegislash),
-        .formSpeciesIdTable = sAegislashFormSpeciesIdTable,
-        .formChangeTable = sAegislashFormChangeTable,
+        MOVIMIENTOS_HUEVO(Honedge),
+        FORMAS(Aegislash),
         PS(60),
         ATAQUE(50),
         DEFENSA(150),
@@ -17638,8 +17756,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(AEGISLASH),
         POKEDEX(AEGISLASH),
         MOVIMIENTOS(Aegislash),
-        .formSpeciesIdTable = sAegislashFormSpeciesIdTable,
-        .formChangeTable = sAegislashFormChangeTable,
+        MOVIMIENTOS_HUEVO(Honedge),
+        FORMAS(Aegislash),
         PS(60),
         ATAQUE(150),
         DEFENSA(50),
@@ -17690,7 +17808,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Tyrunt),
         FOLLOWER(Tyrunt, TRACKS_FOOT),
         MOVIMIENTOS(Tyrunt),
-        .evolutions = EVOLUTION({EVO_LEVEL_DAY, 39, SPECIES_TYRANTRUM}),
+        MOVIMIENTOS_HUEVO(Tyrunt),
+        .evolutions = EVOLUTION({EVO_NIVEL_DIA, 39, SPECIES_TYRANTRUM}),
     },
 
     [SPECIES_TYRANTRUM] =
@@ -17725,6 +17844,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Tyrantrum),
         FOLLOWER(Tyrantrum, TRACKS_FOOT),
         MOVIMIENTOS(Tyrantrum),
+        MOVIMIENTOS_HUEVO(Tyrunt),
     },
 
     [SPECIES_AMAURA] =
@@ -17758,7 +17878,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Amaura),
         FOLLOWER(Amaura, TRACKS_FOOT),
         MOVIMIENTOS(Amaura),
-        .evolutions = EVOLUTION({EVO_LEVEL_NIGHT, 39, SPECIES_AURORUS}),
+        MOVIMIENTOS_HUEVO(Amaura),
+        .evolutions = EVOLUTION({EVO_NIVEL_NOCHE, 39, SPECIES_AURORUS}),
     },
 
     [SPECIES_AURORUS] =
@@ -17792,6 +17913,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Aurorus),
         FOLLOWER(Aurorus, TRACKS_FOOT),
         MOVIMIENTOS(Aurorus),
+        MOVIMIENTOS_HUEVO(Amaura),
     },
 
     [SPECIES_GOOMY] =
@@ -17826,7 +17948,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Goomy),
         FOLLOWER(Goomy, TRACKS_FOOT),
         MOVIMIENTOS(Goomy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_SLIGGOO}),
+        MOVIMIENTOS_HUEVO(Goomy),
+        .evolutions = EVOLUTION({EVO_NIVEL, 40, SPECIES_SLIGGOO}),
     },
 
     [SPECIES_SLIGGOO] =
@@ -17861,8 +17984,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Sliggoo),
         FOLLOWER(Sliggoo, TRACKS_FOOT),
         MOVIMIENTOS(Sliggoo),
-        .evolutions = EVOLUTION({EVO_LEVEL_RAIN, 50, SPECIES_GOODRA},
-                                {EVO_LEVEL_FOG, 50, SPECIES_GOODRA}),
+        MOVIMIENTOS_HUEVO(Goomy),
+        .evolutions = EVOLUTION({EVO_NIVEL_LLUVIA, 50, SPECIES_GOODRA},
+                                {EVO_NIVEL_NIEBLA, 50, SPECIES_GOODRA}),
     },
 
     [SPECIES_GOODRA] =
@@ -17896,6 +18020,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Goodra),
         FOLLOWER(Goodra, TRACKS_FOOT),
         MOVIMIENTOS(Goodra),
+        MOVIMIENTOS_HUEVO(Goomy),
     },
 
     [SPECIES_ROWLET] =
@@ -17929,7 +18054,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Rowlet),
         FOLLOWER(Rowlet, TRACKS_FOOT),
         MOVIMIENTOS(Rowlet),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_DARTRIX}),
+        MOVIMIENTOS_HUEVO(Rowlet),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_DARTRIX}),
     },
 
     [SPECIES_DARTRIX] =
@@ -17964,7 +18090,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dartrix),
         FOLLOWER(Dartrix, TRACKS_FOOT),
         MOVIMIENTOS(Dartrix),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE}),
+        MOVIMIENTOS_HUEVO(Rowlet),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_DECIDUEYE}),
     },
 
     [SPECIES_DECIDUEYE] =
@@ -17998,6 +18125,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Decidueye),
         FOLLOWER(Decidueye, TRACKS_FOOT),
         MOVIMIENTOS(Decidueye),
+        MOVIMIENTOS_HUEVO(Rowlet),
     },
 
     [SPECIES_LITTEN] =
@@ -18031,7 +18159,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Litten),
         FOLLOWER(Litten, TRACKS_FOOT),
         MOVIMIENTOS(Litten),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_TORRACAT}),
+        MOVIMIENTOS_HUEVO(Litten),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_TORRACAT}),
     },
 
     [SPECIES_TORRACAT] =
@@ -18065,7 +18194,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Torracat),
         FOLLOWER(Torracat, TRACKS_FOOT),
         MOVIMIENTOS(Torracat),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_INCINEROAR}),
+        MOVIMIENTOS_HUEVO(Litten),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_INCINEROAR}),
     },
 
     [SPECIES_INCINEROAR] =
@@ -18099,6 +18229,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Incineroar),
         FOLLOWER(Incineroar, TRACKS_FOOT),
         MOVIMIENTOS(Incineroar),
+        MOVIMIENTOS_HUEVO(Litten),
     },
 
     [SPECIES_POPPLIO] =
@@ -18132,7 +18263,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Popplio),
         FOLLOWER(Popplio, TRACKS_FOOT),
         MOVIMIENTOS(Popplio),
-        .evolutions = EVOLUTION({EVO_LEVEL, 17, SPECIES_BRIONNE}),
+        MOVIMIENTOS_HUEVO(Popplio),
+        .evolutions = EVOLUTION({EVO_NIVEL, 17, SPECIES_BRIONNE}),
     },
 
     [SPECIES_BRIONNE] =
@@ -18166,7 +18298,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Brionne),
         FOLLOWER(Brionne, TRACKS_FOOT),
         MOVIMIENTOS(Brionne),
-        .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_PRIMARINA}),
+        MOVIMIENTOS_HUEVO(Popplio),
+        .evolutions = EVOLUTION({EVO_NIVEL, 34, SPECIES_PRIMARINA}),
     },
 
     [SPECIES_PRIMARINA] =
@@ -18200,6 +18333,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Primarina),
         FOLLOWER(Primarina, TRACKS_FOOT),
         MOVIMIENTOS(Primarina),
+        MOVIMIENTOS_HUEVO(Popplio),
     },
 
     [SPECIES_SANDYGAST] =
@@ -18234,7 +18368,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Sandygast),
         FOLLOWER(Sandygast, TRACKS_FOOT),
         MOVIMIENTOS(Sandygast),
-        .evolutions = EVOLUTION({EVO_LEVEL, 42, SPECIES_PALOSSAND}),
+        MOVIMIENTOS_HUEVO(Sandygast),
+        .evolutions = EVOLUTION({EVO_NIVEL, 42, SPECIES_PALOSSAND}),
     },
 
     [SPECIES_PALOSSAND] =
@@ -18269,6 +18404,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Palossand),
         FOLLOWER(Palossand, TRACKS_FOOT),
         MOVIMIENTOS(Palossand),
+        MOVIMIENTOS_HUEVO(Sandygast),
     },
 
     [SPECIES_JANGMO_O] =
@@ -18303,7 +18439,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(JangmoO),
         FOLLOWER(JangmoO, TRACKS_FOOT),
         MOVIMIENTOS(JangmoO),
-        .evolutions = EVOLUTION({EVO_LEVEL, 35, SPECIES_HAKAMO_O}),
+        MOVIMIENTOS_HUEVO(JangmoO),
+        .evolutions = EVOLUTION({EVO_NIVEL, 35, SPECIES_HAKAMO_O}),
     },
 
     [SPECIES_HAKAMO_O] =
@@ -18338,7 +18475,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(HakamoO),
         FOLLOWER(HakamoO, TRACKS_FOOT),
         MOVIMIENTOS(HakamoO),
-        .evolutions = EVOLUTION({EVO_LEVEL, 45, SPECIES_KOMMO_O}),
+        MOVIMIENTOS_HUEVO(JangmoO),
+        .evolutions = EVOLUTION({EVO_NIVEL, 45, SPECIES_KOMMO_O}),
     },
 
     [SPECIES_KOMMO_O] =
@@ -18373,6 +18511,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(KommoO),
         FOLLOWER(KommoO, TRACKS_FOOT),
         MOVIMIENTOS(KommoO),
+        MOVIMIENTOS_HUEVO(JangmoO),
     },
 
     [SPECIES_ROOKIDEE] =
@@ -18406,7 +18545,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Rookidee),
         FOLLOWER(Rookidee, TRACKS_FOOT),
         MOVIMIENTOS(Rookidee),
-        .evolutions = EVOLUTION({EVO_LEVEL, 18, SPECIES_CORVISQUIRE}),
+        MOVIMIENTOS_HUEVO(Rookidee),
+        .evolutions = EVOLUTION({EVO_NIVEL, 18, SPECIES_CORVISQUIRE}),
     },
 
     [SPECIES_CORVISQUIRE] =
@@ -18441,7 +18581,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Corvisquire),
         FOLLOWER(Corvisquire, TRACKS_FOOT),
         MOVIMIENTOS(Corvisquire),
-        .evolutions = EVOLUTION({EVO_LEVEL, 38, SPECIES_CORVIKNIGHT}),
+        MOVIMIENTOS_HUEVO(Rookidee),
+        .evolutions = EVOLUTION({EVO_NIVEL, 38, SPECIES_CORVIKNIGHT}),
     },
 
     [SPECIES_CORVIKNIGHT] =
@@ -18462,10 +18603,11 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GENERO(PORCENTAJE_HEMBRA(50)),
         GRUPO_HUEVO(PAJARO),
         HABILIDADES(PRESSURE, UNNERVE, MIRROR_ARMOR),
-        NOMBRE(Corviknigh),
+        NOMBRE(Corviknight),
         GRITO(CORVIKNIGHT),
         POKEDEX(CORVIKNIGHT),
         MOVIMIENTOS(Corviknight),
+        MOVIMIENTOS_HUEVO(Rookidee),
         FRONT_PIC(Corviknight, 56, 64),
         ELEVACION_FRONT_PIC(2),
         FRONT_ANIM(Corviknight, H_VIBRATE),
@@ -18508,7 +18650,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Blipbug),
         FOLLOWER(Blipbug, TRACKS_FOOT),
         MOVIMIENTOS(Blipbug),
-        .evolutions = EVOLUTION({EVO_LEVEL, 10, SPECIES_DOTTLER}),
+        MOVIMIENTOS_HUEVO(Blipbug),
+        .evolutions = EVOLUTION({EVO_NIVEL, 10, SPECIES_DOTTLER}),
     },
 
     [SPECIES_DOTTLER] =
@@ -18543,7 +18686,8 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Dottler),
         FOLLOWER(Dottler, TRACKS_FOOT),
         MOVIMIENTOS(Dottler),
-        .evolutions = EVOLUTION({EVO_LEVEL, 30, SPECIES_ORBEETLE}),
+        MOVIMIENTOS_HUEVO(Blipbug),
+        .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_ORBEETLE}),
     },
 
     [SPECIES_ORBEETLE] =
@@ -18569,6 +18713,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(ORBEETLE),
         POKEDEX(ORBEETLE),
         MOVIMIENTOS(Orbeetle),
+        MOVIMIENTOS_HUEVO(Blipbug),
         FRONT_PIC(Orbeetle, 48, 56),
         ELEVACION_FRONT_PIC(4),
         FRONT_ANIM(Orbeetle, V_SQUISH_AND_BOUNCE),
@@ -18614,7 +18759,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Snom, TRACKS_SPOT),
         MOVIMIENTOS(Snom),
         MOVIMIENTOS_HUEVO(Snom),
-        .evolutions = EVOLUTION({EVO_FRIENDSHIP, 0, SPECIES_FROSMOTH}),
+        .evolutions = EVOLUTION({EVO_AMISTAD, 0, SPECIES_FROSMOTH}),
     },
 
     [SPECIES_FROSMOTH] =
@@ -18686,7 +18831,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Dreepy, TRACKS_NONE),
         MOVIMIENTOS(Dreepy),
         MOVIMIENTOS_HUEVO(Dreepy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 50, SPECIES_DRAKLOAK}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 50, SPECIES_DRAKLOAK}),
     },
 
     [SPECIES_DRAKLOAK] =
@@ -18722,7 +18867,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Drakloak, TRACKS_NONE),
         MOVIMIENTOS(Drakloak),
         MOVIMIENTOS_HUEVO(Dreepy),
-        .evolutions = EVOLUTION({EVO_LEVEL, 60, SPECIES_DRAGAPULT}),
+        .evolutions = EVOLUTION({EVO_NIVEL, 60, SPECIES_DRAGAPULT}),
     },
 
     [SPECIES_DRAGAPULT] =

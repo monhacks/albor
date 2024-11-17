@@ -87,9 +87,6 @@ static void SaveChangesToPlayerParty(void);
 static void HandleBattleVariantEndParty(void);
 static void CB2_EndTrainerBattle(void);
 static bool32 IsPlayerDefeated(u32 battleOutcome);
-#if FREE_MATCH_CALL == FALSE
-static u16 GetRematchTrainerId(u16 trainerId);
-#endif //FREE_MATCH_CALL
 static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
@@ -1184,18 +1181,6 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         TrainerBattleLoadArgs(sContinueScriptDoubleBattleParams, data);
         SetMapVarsToTrainer();
         return EventScript_TryDoDoubleTrainerBattle;
-#if FREE_MATCH_CALL == FALSE
-    case TRAINER_BATTLE_REMATCH_DOUBLE:
-        TrainerBattleLoadArgs(sDoubleBattleParams, data);
-        SetMapVarsToTrainer();
-        gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
-        return EventScript_TryDoDoubleRematchBattle;
-    case TRAINER_BATTLE_REMATCH:
-        TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
-        SetMapVarsToTrainer();
-        gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
-        return EventScript_TryDoRematchBattle;
-#endif //FREE_MATCH_CALL
     case TRAINER_BATTLE_PYRAMID:
         if (gApproachingTrainerId == 0)
         {
@@ -1789,12 +1774,7 @@ static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *t
 
 static void ClearTrainerWantRematchState(const struct RematchTrainer *table, u16 firstBattleTrainerId)
 {
-#if FREE_MATCH_CALL == FALSE
-    s32 tableId = TrainerIdToRematchTableId(table, firstBattleTrainerId);
 
-    if (tableId != -1)
-        gSaveBlock1Ptr->trainerRematches[tableId] = 0;
-#endif //FREE_MATCH_CALL
 }
 
 static u32 GetTrainerMatchCallFlag(u32 trainerId)
@@ -1832,57 +1812,12 @@ static bool8 WasSecondRematchWon(const struct RematchTrainer *table, u16 firstBa
     return TRUE;
 }
 
-#if FREE_MATCH_CALL == FALSE
-static bool32 HasAtLeastFiveBadges(void)
-{
-    s32 i, count;
-
-    for (count = 0, i = 0; i < ARRAY_COUNT(sBadgeFlags); i++)
-    {
-        if (FlagGet(sBadgeFlags[i]) == TRUE)
-        {
-            if (++count >= 5)
-                return TRUE;
-        }
-    }
-
-    return FALSE;
-}
-#endif //FREE_MATCH_CALL
-
 #define STEP_COUNTER_MAX 255
 
 void IncrementRematchStepCounter(void)
 {
-#if FREE_MATCH_CALL == FALSE
-    if (!HasAtLeastFiveBadges())
-        return;
 
-    if (IsVsSeekerEnabled())
-        return;
-
-    if (gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
-        gSaveBlock1Ptr->trainerRematchStepCounter = STEP_COUNTER_MAX;
-    else
-        gSaveBlock1Ptr->trainerRematchStepCounter++;
-#endif //FREE_MATCH_CALL
 }
-
-#if FREE_MATCH_CALL == FALSE
-static bool32 IsRematchStepCounterMaxed(void)
-{
-    if (HasAtLeastFiveBadges() && gSaveBlock1Ptr->trainerRematchStepCounter >= STEP_COUNTER_MAX)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-void TryUpdateRandomTrainerRematches(u16 mapGroup, u16 mapNum)
-{
-    if (IsRematchStepCounterMaxed() && UpdateRandomTrainerRematches(gRematchTable, mapGroup, mapNum) == TRUE)
-        gSaveBlock1Ptr->trainerRematchStepCounter = 0;
-}
-#endif //FREE_MATCH_CALL
 
 bool32 DoesSomeoneWantRematchIn(u16 mapGroup, u16 mapNum)
 {
@@ -1893,16 +1828,6 @@ bool32 IsRematchTrainerIn(u16 mapGroup, u16 mapNum)
 {
     return IsRematchTrainerIn_(gRematchTable, mapGroup, mapNum);
 }
-
-#if FREE_MATCH_CALL == FALSE
-static u16 GetRematchTrainerId(u16 trainerId)
-{
-    if (FlagGet(I_VS_SEEKER_CHARGING) && (I_VS_SEEKER_CHARGING != 0))
-        return GetRematchTrainerIdVSSeeker(trainerId);
-    else
-        return GetRematchTrainerIdFromTable(gRematchTable, trainerId);
-}
-#endif //FREE_MATCH_CALL
 
 u16 GetLastBeatenRematchTrainerId(u16 trainerId)
 {

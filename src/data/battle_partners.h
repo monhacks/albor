@@ -49,8 +49,7 @@
 #line 17
             .lvl = 42,
 #line 16
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 20
                 MOVE_LIGHT_SCREEN,
@@ -70,8 +69,7 @@
 #line 27
             .lvl = 43,
 #line 26
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 30
                 MOVE_TOXIC,
@@ -91,8 +89,7 @@
 #line 37
             .lvl = 44,
 #line 36
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 40
                 MOVE_THUNDER,

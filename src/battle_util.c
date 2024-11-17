@@ -3541,7 +3541,7 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
                         gBattlescriptCurrInstr = BattleScript_ZMoveActivatePowder;
                     }
                 }
-                else if (gMovesInfo[gCurrentMove].category == DAMAGE_CATEGORY_STATUS)
+                else if (gMovesInfo[gCurrentMove].category == CATEGORIA_ESTADO)
                 {
                     if (!alreadyUsed)
                     {
@@ -5265,38 +5265,12 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     effect++;
                 }
                 break;
-            case ABILITY_SCHOOLING:
-                if (gBattleMons[battler].level < 20)
-                    break;
             // Fallthrough
             case ABILITY_ZEN_MODE:
-            case ABILITY_SHIELDS_DOWN:
-            case ABILITY_POWER_CONSTRUCT:
                 if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_HP_PERCENT))
                 {
                     gBattlerAttacker = battler;
                     BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3);
-                    effect++;
-                }
-                break;
-            case ABILITY_BALL_FETCH:
-                break;
-            case ABILITY_HUNGER_SWITCH:
-                if (TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TURN_END))
-                {
-                    gBattlerAttacker = battler;
-                    BattleScriptPushCursorAndCallback(BattleScript_AttackerFormChangeEnd3NoPopup);
-                    effect++;
-                }
-                break;
-            case ABILITY_CUD_CHEW:
-                if (gDisableStructs[battler].cudChew == TRUE)
-                {
-                    gBattleScripting.battler = battler;
-                    gDisableStructs[battler].cudChew = FALSE;
-                    gLastUsedItem = gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)];
-                    gBattleStruct->usedHeldItems[gBattlerPartyIndexes[battler]][GetBattlerSide(battler)] = ITEM_NONE;
-                    BattleScriptPushCursorAndCallback(BattleScript_CudChewActivates);
                     effect++;
                 }
                 break;
@@ -6599,22 +6573,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
 
 bool32 TryPrimalReversion(u32 battler)
 {
-    if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_PRIMAL_ORB
-     && GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_PRIMAL_REVERSION) != SPECIES_NONE)
-    {
-        if (gBattlerAttacker == battler)
-        {
-            BattleScriptPushCursorAndCallback(BattleScript_PrimalReversion);
-        }
-        else
-        {
-            // edge case for scenarios like a switch-in after activated eject button
-            gBattleScripting.savedBattler = gBattlerAttacker;
-            gBattlerAttacker = battler;
-            BattleScriptPushCursorAndCallback(BattleScript_PrimalReversionRestoreAttacker);
-        }
-        return TRUE;
-    }
     return FALSE;
 }
 
@@ -7373,11 +7331,11 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
+            effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, CATEGORIA_FISICA);
         break;
     case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
+            effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, CATEGORIA_ESPECIAL);
         break;
     case HOLD_EFFECT_RANDOM_STAT_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
@@ -8353,10 +8311,10 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
-                effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, DAMAGE_CATEGORY_PHYSICAL);
+                effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, CATEGORIA_FISICA);
                 break;
             case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
-                effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, DAMAGE_CATEGORY_SPECIAL);
+                effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, CATEGORIA_ESPECIAL);
                 break;
             case HOLD_EFFECT_CURE_STATUS: // only Toxic Chain's interaction with Knock Off
             case HOLD_EFFECT_CURE_PSN:
@@ -8619,7 +8577,7 @@ bool32 IsMoveMakingContact(u32 move, u32 battlerAtk)
 
     if (!gMovesInfo[move].makesContact)
     {
-        if (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == DAMAGE_CATEGORY_PHYSICAL)
+        if (gMovesInfo[move].effect == EFFECT_SHELL_SIDE_ARM && gBattleStruct->shellSideArmCategory[battlerAtk][gBattlerTarget] == CATEGORIA_FISICA)
             return TRUE;
         else
             return FALSE;
@@ -9847,7 +9805,7 @@ static bool32 CanEvolve(u32 species)
 
     if (evolutions != NULL)
     {
-        for (i = 0; evolutions[i].method != EVOLUTIONS_END; i++)
+        for (i = 0; evolutions[i].method != EVO_FIN; i++)
         {
             if (evolutions[i].method
              && SanitizeSpeciesId(evolutions[i].targetSpecies) != SPECIES_NONE)
@@ -10614,7 +10572,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(u32 move, u32 mov
     if (recordAbilities && (illusionSpecies = GetIllusionMonSpecies(battlerDef)))
         TryNoticeIllusionInTypeEffectiveness(move, moveType, battlerAtk, battlerDef, modifier, illusionSpecies);
 
-    if (gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS && move != MOVE_THUNDER_WAVE)
+    if (gMovesInfo[move].category == CATEGORIA_ESTADO && move != MOVE_THUNDER_WAVE)
     {
         modifier = UQ_4_12(1.0);
         if (B_GLARE_GHOST < GEN_4 && move == MOVE_GLARE && IS_BATTLER_OF_TYPE(battlerDef, TIPO_FANTASMA))
@@ -10826,25 +10784,6 @@ bool32 IsPartnerMonFromSameTrainer(u32 battler)
 
 bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)
 {
-    u32 i;
-    const struct FormChange *formChanges = GetSpeciesFormChanges(species);
-
-    if (formChanges != NULL)
-    {
-        for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
-        {
-            switch (formChanges[i].method)
-            {
-            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
-            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
-            case FORM_CHANGE_BATTLE_ULTRA_BURST:
-            case FORM_CHANGE_ITEM_HOLD:
-                if (formChanges[i].param1 == heldItemId)
-                    return TRUE;
-                break;
-            }
-        }
-    }
     return FALSE;
 }
 
@@ -10860,39 +10799,12 @@ bool32 CanUltraBurst(u32 battler)
 
 void ActivateMegaEvolution(u32 battler)
 {
-    gLastUsedItem = gBattleMons[battler].item;
-    SetActiveGimmick(battler, GIMMICK_MEGA);
-    if (GetBattleFormChangeTargetSpecies(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE) != SPECIES_NONE)
-        BattleScriptExecute(BattleScript_WishMegaEvolution);
-    else
-        BattleScriptExecute(BattleScript_MegaEvolution);
+
 }
 
 void ActivateUltraBurst(u32 battler)
 {
-    gLastUsedItem = gBattleMons[battler].item;
-    SetActiveGimmick(battler, GIMMICK_ULTRA_BURST);
-    BattleScriptExecute(BattleScript_UltraBurst);
-}
 
-bool32 IsBattlerMegaEvolved(u32 battler)
-{
-    return FALSE;
-}
-
-bool32 IsBattlerPrimalReverted(u32 battler)
-{
-    return FALSE;
-}
-
-bool32 IsBattlerUltraBursted(u32 battler)
-{
-    return FALSE;
-}
-
-bool32 IsBattlerInTeraForm(u32 battler)
-{
-    return FALSE;
 }
 
 // Returns SPECIES_NONE if no form change is possible
@@ -10902,32 +10814,15 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
     u16 targetSpecies = SPECIES_NONE;
     u16 species = gBattleMons[battler].species;
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
-    struct Pokemon *mon = &GetBattlerParty(battler)[gBattlerPartyIndexes[battler]];
-    u16 heldItem;
 
     if (formChanges != NULL)
     {
-        heldItem = gBattleMons[battler].item;
-
         for (i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++)
         {
             if (method == formChanges[i].method && species != formChanges[i].targetSpecies)
             {
                 switch (method)
                 {
-                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM:
-                case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
-                case FORM_CHANGE_BATTLE_ULTRA_BURST:
-                    if (heldItem == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
-                    if (gBattleMons[battler].moves[0] == formChanges[i].param1
-                     || gBattleMons[battler].moves[1] == formChanges[i].param1
-                     || gBattleMons[battler].moves[2] == formChanges[i].param1
-                     || gBattleMons[battler].moves[3] == formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
                 case FORM_CHANGE_BATTLE_SWITCH:
                     if (formChanges[i].param1 == GetBattlerAbility(battler) || formChanges[i].param1 == ABILITY_NONE)
                         targetSpecies = formChanges[i].targetSpecies;
@@ -10949,10 +10844,6 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                             break;
                         }
                     }
-                    break;
-                case FORM_CHANGE_BATTLE_GIGANTAMAX:
-                    if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR))
-                        targetSpecies = formChanges[i].targetSpecies;
                     break;
                 case FORM_CHANGE_BATTLE_WEATHER:
                     // Check if there is a required ability and if the battler's ability does not match it
@@ -10976,15 +10867,6 @@ u16 GetBattleFormChangeTargetSpecies(u32 battler, u16 method)
                         targetSpecies = formChanges[i].targetSpecies;
                     }
                     break;
-                case FORM_CHANGE_BATTLE_TURN_END:
-                case FORM_CHANGE_HIT_BY_MOVE:
-                    if (formChanges[i].param1 == GetBattlerAbility(battler))
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
-                case FORM_CHANGE_STATUS:
-                    if (gBattleMons[battler].status1 & formChanges[i].param1)
-                        targetSpecies = formChanges[i].targetSpecies;
-                    break;
                 }
             }
         }
@@ -10999,14 +10881,6 @@ bool32 CanBattlerFormChange(u32 battler, u16 method)
     if (gBattleMons[battler].status2 & STATUS2_TRANSFORMED
         && B_TRANSFORM_FORM_CHANGES >= GEN_5)
         return FALSE;
-    // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle.
-    if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
-        return TRUE;
-    else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
-        return TRUE;
-    // Gigantamaxed Pokemon should revert upon fainting, switching, or ending the battle.
-    else if (IsGigantamaxed(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
-        return TRUE;
     return DoesSpeciesHaveFormChangeMethod(gBattleMons[battler].species, method);
 }
 
@@ -11038,18 +10912,6 @@ bool32 TryBattleFormChange(u32 battler, u32 method)
     else if (gBattleStruct->changedSpecies[side][monId] != SPECIES_NONE)
     {
         bool32 restoreSpecies = FALSE;
-
-        // Mega Evolved and Ultra Bursted Pokémon should always revert to normal upon fainting or ending the battle, so no need to add it to the form change tables.
-        if ((IsBattlerMegaEvolved(battler) || IsBattlerUltraBursted(battler) || IsBattlerInTeraForm(battler)) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_END_BATTLE))
-            restoreSpecies = TRUE;
-
-        // Unlike Megas, Primal Reversion isn't canceled on fainting.
-        else if (IsBattlerPrimalReverted(battler) && (method == FORM_CHANGE_END_BATTLE))
-            restoreSpecies = TRUE;
-
-        // Gigantamax Pokemon have their forms reverted after fainting, switching, or ending the battle.
-        else if (IsGigantamaxed(battler) && (method == FORM_CHANGE_FAINT || method == FORM_CHANGE_BATTLE_SWITCH || method == FORM_CHANGE_END_BATTLE))
-            restoreSpecies = TRUE;
 
         if (restoreSpecies)
         {
@@ -11169,9 +11031,9 @@ bool32 ShouldGetStatBadgeBoost(u16 badgeFlag, u32 battler)
 
 static u32 SwapMoveDamageCategory(u32 move)
 {
-    if (gMovesInfo[move].category == DAMAGE_CATEGORY_PHYSICAL)
-        return DAMAGE_CATEGORY_SPECIAL;
-    return DAMAGE_CATEGORY_PHYSICAL;
+    if (gMovesInfo[move].category == CATEGORIA_FISICA)
+        return CATEGORIA_ESPECIAL;
+    return CATEGORIA_FISICA;
 }
 
 u8 GetBattleMoveCategory(u32 moveId)
@@ -11184,7 +11046,7 @@ u8 GetBattleMoveCategory(u32 moveId)
         return gMovesInfo[moveId].category;
 
     if (IS_MOVE_STATUS(moveId))
-        return DAMAGE_CATEGORY_STATUS;
+        return CATEGORIA_ESTADO;
     return gTypesInfo[GetMoveType(gCurrentMove)].damageCategory;
 }
 
@@ -11239,9 +11101,9 @@ u8 GetCategoryBasedOnStats(u32 battler)
     spAttack = spAttack / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][1];
 
     if (spAttack >= attack)
-        return DAMAGE_CATEGORY_SPECIAL;
+        return CATEGORIA_ESPECIAL;
     else
-        return DAMAGE_CATEGORY_PHYSICAL;
+        return CATEGORIA_FISICA;
 }
 
 static u32 GetFlingPowerFromItemId(u32 itemId)
@@ -12053,9 +11915,9 @@ void SetShellSideArmCategory(void)
             special = ((((2 * gBattleMons[battlerAtk].level / 5 + 2) * gMovesInfo[MOVE_SHELL_SIDE_ARM].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
             if ((physical > special) || (physical == special && RandomPercentage(RNG_SHELL_SIDE_ARM, 50)))
-                gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = DAMAGE_CATEGORY_PHYSICAL;
+                gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = CATEGORIA_FISICA;
             else
-                gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = DAMAGE_CATEGORY_SPECIAL;
+                gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] = CATEGORIA_ESPECIAL;
         }
     }
 }

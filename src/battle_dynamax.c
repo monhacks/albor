@@ -47,16 +47,7 @@ bool32 IsGigantamaxed(u32 battler)
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
 void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon)
 {
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA)
-        return;
-    else
-    {
-        u32 scale = 150 + 5 * GetMonData(mon, MON_DATA_DYNAMAX_LEVEL);
-        u32 hp = (GetMonData(mon, MON_DATA_HP) * scale + 99) / 100;
-        u32 maxHP = (GetMonData(mon, MON_DATA_MAX_HP) * scale + 99) / 100;
-        SetMonData(mon, MON_DATA_HP, &hp);
-        SetMonData(mon, MON_DATA_MAX_HP, &maxHP);
-    }
+
 }
 
 // Returns the non-Dynamax HP of a Pokemon.
@@ -88,23 +79,7 @@ u16 GetNonDynamaxMaxHP(u32 battler)
 // Sets flags used for Dynamaxing and checks Gigantamax forms.
 void ActivateDynamax(u32 battler)
 {
-    // Set appropriate use flags.
-    SetActiveGimmick(battler, GIMMICK_DYNAMAX);
-    SetGimmickAsActivated(battler, GIMMICK_DYNAMAX);
-    gBattleStruct->dynamax.dynamaxTurns[battler] = DYNAMAX_TURNS_COUNT;
 
-    // Substitute is removed upon Dynamaxing.
-    gBattleMons[battler].status2 &= ~STATUS2_SUBSTITUTE;
-    ClearBehindSubstituteBit(battler);
-
-    // Choiced Moves are reset upon Dynamaxing.
-    gBattleStruct->choicedMove[battler] = MOVE_NONE;
-
-    // Try Gigantamax form change.
-    if (!(gBattleMons[battler].status2 & STATUS2_TRANSFORMED)) // Ditto cannot Gigantamax.
-        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
-
-    BattleScriptExecute(BattleScript_DynamaxBegins);
 }
 
 // Unsets the flags used for Dynamaxing and reverts max HP if needed.
@@ -173,7 +148,7 @@ u16 GetMaxMove(u32 battler, u32 baseMove)
     {
         return MOVE_STRUGGLE;
     }
-    else if (gMovesInfo[baseMove].category == DAMAGE_CATEGORY_STATUS)
+    else if (gMovesInfo[baseMove].category == CATEGORIA_ESTADO)
     {
         move = MOVE_MAX_GUARD;
     }

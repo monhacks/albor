@@ -70,15 +70,6 @@ struct Pokemon
     bool shiny;
     int shiny_line;
 
-    int dynamax_level;
-    int dynamax_level_line;
-
-    bool gigantamax_factor;
-    bool gigantamax_factor_line;
-
-    struct String tera_type;
-    int tera_type_line;
-
     struct String moves[MAX_MON_MOVES];
     int moves_n;
     int move1_line;
@@ -726,7 +717,7 @@ static bool parse_pokemon_nature(struct Parser *p, struct Token *nature)
         return false;
 
     skip_whitespace(&p_);
-    if (!match_exact(&p_, "Nature"))
+    if (!match_exact(&p_, "Naturaleza"))
         return false;
 
     skip_whitespace(&p_);
@@ -744,7 +735,7 @@ static bool parse_attribute(struct Parser *p, struct Token *key, struct Token *v
 
     if (parse_pokemon_nature(p, value))
     {
-        static const struct Source nature_source = { .path=NULL, .buffer=(unsigned char *)"Nature", .buffer_n=6 };
+        static const struct Source nature_source = { .path=NULL, .buffer=(unsigned char *)"Naturaleza", .buffer_n=6 };
         key->source = &nature_source;
         key->location = p->location;
         key->begin = 0;
@@ -767,7 +758,7 @@ static bool parse_attribute(struct Parser *p, struct Token *key, struct Token *v
     }
     else
     {
-        return set_parse_error(p, p_.location, "expected ':' or 'Nature'");
+        return set_parse_error(p, p_.location, "expected ':' or 'Naturaleza'");
     }
 
     *p = p_;
@@ -1315,10 +1306,10 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 if (!token_int(p, &value, &pokemon->friendship))
                     any_error = !show_parse_error(p);
             }
-            else if (is_literal_token(&key, "Nature"))
+            else if (is_literal_token(&key, "Naturaleza"))
             {
                 if (pokemon->nature_line)
-                    any_error = !set_show_parse_error(p, value.location, "duplicate 'Nature'");
+                    any_error = !set_show_parse_error(p, value.location, "duplicate 'Naturaleza'");
                 pokemon->nature_line = value.location.line;
                 pokemon->nature = token_string(&value);
             }
@@ -1330,32 +1321,9 @@ static bool parse_trainer(struct Parser *p, const struct Parsed *parsed, struct 
                 if (!token_bool(p, &value, &pokemon->shiny))
                     any_error = !show_parse_error(p);
             }
-            else if (is_literal_token(&key, "Dynamax Level"))
-            {
-                if (pokemon->dynamax_level_line)
-                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Dynamax Level'");
-                pokemon->dynamax_level_line = value.location.line;
-                if (!token_int(p, &value, &pokemon->dynamax_level))
-                    any_error = !show_parse_error(p);
-            }
-            else if (is_literal_token(&key, "Gigantamax"))
-            {
-                if (pokemon->gigantamax_factor_line)
-                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Gigantamax'");
-                pokemon->gigantamax_factor_line = value.location.line;
-                if (!token_bool(p, &value, &pokemon->gigantamax_factor))
-                    any_error = !show_parse_error(p);
-            }
-            else if (is_literal_token(&key, "Tera Type"))
-            {
-                if (pokemon->tera_type_line)
-                    any_error = !set_show_parse_error(p, key.location, "duplicate 'Tera Type'");
-                pokemon->tera_type_line = value.location.line;
-                pokemon->tera_type = token_string(&value);
-            }
             else
             {
-                any_error = !set_show_parse_error(p, key.location, "expected one of 'EVs', 'IVs', 'Ability', 'Level', 'Ball', 'Happiness', 'Nature', 'Shiny', 'Dynamax Level', 'Gigantamax', or 'Tera Type'");
+                any_error = !set_show_parse_error(p, key.location, "expected one of 'EVs', 'IVs', 'Ability', 'Level', 'Ball', 'Happiness', 'Naturaleza' or 'Shiny'");
             }
         }
 
@@ -1802,12 +1770,12 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
             {
                 fprintf(f, "#line %d\n", pokemon->nature_line);
                 fprintf(f, "            .nature = ");
-                fprint_constant(f, "NATURE", pokemon->nature);
+                fprint_constant(f, "NATURALEZA", pokemon->nature);
                 fprintf(f, ",\n");
             }
             else
             {
-                fprintf(f, "            .nature = NATURE_OFENSIVA,\n");
+                fprintf(f, "            .nature = NATURALEZA_OFENSIVA,\n");
             }
 
             if (pokemon->shiny_line)
@@ -1815,36 +1783,6 @@ static void fprint_trainers(const char *output_path, FILE *f, struct Parsed *par
                 fprintf(f, "#line %d\n", pokemon->shiny_line);
                 fprintf(f, "            .isShiny = ");
                 fprint_bool(f, pokemon->shiny);
-                fprintf(f, ",\n");
-            }
-
-            if (pokemon->dynamax_level_line)
-            {
-                fprintf(f, "#line %d\n", pokemon->dynamax_level_line);
-                fprintf(f, "            .dynamaxLevel = %d,\n", pokemon->dynamax_level);
-            }
-            else
-            {
-                fprintf(f, "            .dynamaxLevel = MAX_DYNAMAX_LEVEL,\n");
-            }
-
-            if (pokemon->gigantamax_factor_line)
-            {
-                fprintf(f, "#line %d\n", pokemon->gigantamax_factor_line);
-                fprintf(f, "            .gigantamaxFactor = ");
-                fprint_bool(f, pokemon->gigantamax_factor);
-                fprintf(f, ",\n");
-            }
-
-            if (pokemon->dynamax_level_line || pokemon->gigantamax_factor_line)
-            {
-                fprintf(f, "            .shouldUseDynamax = TRUE,\n");
-            }
-            else if (pokemon->tera_type_line)
-            {
-                fprintf(f, "#line %d\n", pokemon->tera_type_line);
-                fprintf(f, "            .teraType = ");
-                fprint_constant(f, "TYPE", pokemon->tera_type);
                 fprintf(f, ",\n");
             }
 

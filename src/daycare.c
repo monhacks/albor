@@ -389,7 +389,7 @@ static u16 GetEggSpecies(u16 species)
             const struct Evolution *evolutions = GetSpeciesEvolutions(j);
             if (evolutions == NULL)
                 continue;
-            for (k = 0; evolutions[k].method != EVOLUTIONS_END; k++)
+            for (k = 0; evolutions[k].method != EVO_FIN; k++)
             {
                 if (SanitizeSpeciesId(evolutions[k].targetSpecies) == species)
                 {

@@ -387,17 +387,17 @@ u8 PickWildMonNature(void)
 {
     u8 i;
     struct Pokeblock *safariPokeblock;
-    u8 natures[NUM_NATURES];
+    u8 natures[NUMERO_NATURALEZAS];
 
     if (GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
     {
         safariPokeblock = SafariZoneGetActivePokeblock();
         if (safariPokeblock != NULL)
         {
-            for (i = 0; i < NUM_NATURES; i++)
+            for (i = 0; i < NUMERO_NATURALEZAS; i++)
                 natures[i] = i;
-            Shuffle(natures, NUM_NATURES, sizeof(natures[0]));
-            for (i = 0; i < NUM_NATURES; i++)
+            Shuffle(natures, NUMERO_NATURALEZAS, sizeof(natures[0]));
+            for (i = 0; i < NUMERO_NATURALEZAS; i++)
             {
                 if (PokeblockGetGain(natures[i], safariPokeblock) > 0)
                     return natures[i];
@@ -409,11 +409,11 @@ u8 PickWildMonNature(void)
         && GetMonAbility(&gPlayerParty[0]) == ABILITY_SYNCHRONIZE
         && (OW_SYNCHRONIZE_NATURE >= GEN_8 || Random() % 2 == 0))
     {
-        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUM_NATURES;
+        return GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY) % NUMERO_NATURALEZAS;
     }
 
     // random nature
-    return Random() % NUM_NATURES;
+    return Random() % NUMERO_NATURALEZAS;
 }
 
 static void CreateWildMon(u16 species, u8 level)

@@ -487,7 +487,6 @@ static bool8 SetUpFieldMove_Surf(void);
 static bool8 SetUpFieldMove_Fly(void);
 static bool8 SetUpFieldMove_Waterfall(void);
 static bool8 SetUpFieldMove_Dive(void);
-void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
 static void CB2_ReturnToTMCaseMenu(void);
@@ -1004,7 +1003,7 @@ static bool8 DisplayPartyPokemonDataForMoveTutorOrEvolutionItem(u8 slot)
             DisplayPartyPokemonDataToTeachMove(slot, ItemIdToBattleMoveId(item));
             break;
         case 2: // Evolution stone
-            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, EVO_MODE_ITEM_CHECK, item) != SPECIES_NONE)
+            if (!GetMonData(currentPokemon, MON_DATA_IS_EGG) && GetEvolutionTargetSpecies(currentPokemon, item) != SPECIES_NONE)
                 return FALSE;
             DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_NO_USE);
             break;
@@ -1819,7 +1818,6 @@ static void GiveItemToMon(struct Pokemon *mon, u16 item)
     itemBytes[0] = item;
     itemBytes[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
-    TryItemHoldFormChange(&gPlayerParty[gPartyMenu.slotId]);
 }
 
 static u8 TryTakeMonItem(struct Pokemon *mon)
@@ -1833,7 +1831,6 @@ static u8 TryTakeMonItem(struct Pokemon *mon)
 
     item = ITEM_NONE;
     SetMonData(mon, MON_DATA_HELD_ITEM, &item);
-    TryItemHoldFormChange(&gPlayerParty[gPartyMenu.slotId]);
     return 2;
 }
 
@@ -5166,7 +5163,6 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     if (cannotUseEffect)
     {
         u16 targetSpecies = SPECIES_NONE;
-        bool32 evoModeNormal = TRUE;
 
         // Resets values to 0 so other means of teaching moves doesn't overwrite levels
         sInitialLevel = 0;
@@ -5174,12 +5170,9 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
 
         if (holdEffectParam == 0)
         {
-            targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+            targetSpecies = GetEvolutionTargetSpecies(mon, ITEM_NONE);
             if (targetSpecies == SPECIES_NONE)
-            {
-                targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE);
-                evoModeNormal = FALSE;
-            }
+                targetSpecies = GetEvolutionTargetSpecies(mon, ITEM_NONE);
         }
 
         if (targetSpecies != SPECIES_NONE)
@@ -5187,7 +5180,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
             RemoveBagItem(gSpecialVar_ItemId, 1);
             FreePartyPointers();
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-            BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+            BeginEvolutionScene(mon, targetSpecies, gPartyMenu.slotId);
             DestroyTask(taskId);
         }
         else
@@ -5362,18 +5355,14 @@ static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 targetSpecies = SPECIES_NONE;
-    bool32 evoModeNormal = TRUE;
 
     // Resets values to 0 so other means of teaching moves doesn't overwrite levels
     sInitialLevel = 0;
     sFinalLevel = 0;
 
-    targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+    targetSpecies = GetEvolutionTargetSpecies(mon, ITEM_NONE);
     if (targetSpecies == SPECIES_NONE)
-    {
-        targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_CANT_STOP, ITEM_NONE);
-        evoModeNormal = FALSE;
-    }
+        targetSpecies = GetEvolutionTargetSpecies(mon, ITEM_NONE);
 
     if (targetSpecies != SPECIES_NONE)
     {
@@ -5382,7 +5371,7 @@ static void PartyMenuTryEvolution(u8 taskId)
             gCB2_AfterEvolution = CB2_ReturnToPartyMenuUsingRareCandy;
         else
             gCB2_AfterEvolution = gPartyMenu.exitCallback;
-        BeginEvolutionScene(mon, targetSpecies, evoModeNormal, gPartyMenu.slotId);
+        BeginEvolutionScene(mon, targetSpecies, gPartyMenu.slotId);
         DestroyTask(taskId);
     }
     else
@@ -5426,69 +5415,15 @@ static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)
     data[3] = GetMonData(mon, MON_DATA_SPEED);
 }
 
-#define tState        data[0]
-#define tMonId        data[1]
-#define tDynamaxLevel data[2]
-#define tOldFunc      4
-
 void Task_DynamaxCandy(u8 taskId)
 {
-    static const u8 doneText[] = _("{STR_VAR_1}'s Dynamax Level\nincreased by 1!{PAUSE_UNTIL_PRESS}");
-    s16 *data = gTasks[taskId].data;
 
-    switch (tState)
-    {
-    case 0:
-        // Can't use.
-        if (tDynamaxLevel == MAX_DYNAMAX_LEVEL)
-        {
-            gPartyMenuUseExitCallback = FALSE;
-            PlaySE(SE_SELECT);
-            DisplayPartyMenuMessage(gText_WontHaveEffect, 1);
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
-            return;
-        }
-        gPartyMenuUseExitCallback = TRUE;
-        GetMonNickname(&gPlayerParty[tMonId], gStringVar1);
-        CopyItemName(gSpecialVar_ItemId, gStringVar2);
-        tState++;
-        break;
-    case 1:
-        PlaySE(SE_USE_ITEM);
-        StringExpandPlaceholders(gStringVar4, doneText);
-        DisplayPartyMenuMessage(gStringVar4, 1);
-        ScheduleBgCopyTilemapToVram(2);
-        tState++;
-        break;
-    case 2:
-        if (!IsPartyMenuTextPrinterActive())
-            tState++;
-        break;
-    case 3:
-        tDynamaxLevel++;
-        SetMonData(&gPlayerParty[tMonId], MON_DATA_DYNAMAX_LEVEL, &tDynamaxLevel);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
-        gTasks[taskId].func = Task_ClosePartyMenu;
-        break;
-    }
 }
 
 void ItemUseCB_DynamaxCandy(u8 taskId, TaskFunc task)
 {
-    s16 *data = gTasks[taskId].data;
 
-    tState = 0;
-    tMonId = gPartyMenu.slotId;
-    tDynamaxLevel = GetMonData(&gPlayerParty[tMonId], MON_DATA_DYNAMAX_LEVEL);
-    SetWordTaskArg(taskId, tOldFunc, (uintptr_t)(gTasks[taskId].func));
-    gTasks[taskId].func = Task_DynamaxCandy;
 }
-
-#undef tState
-#undef tMonId
-#undef tDynamaxLevel
-#undef tOldFunc
 
 #define tUsedOnSlot   data[0]
 #define tHadEffect    data[1]
@@ -5778,28 +5713,7 @@ static void Task_TryItemUseFormChange(u8 taskId)
 
 bool32 TryItemUseFormChange(u8 taskId, TaskFunc task)
 {
-    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_USE, gSpecialVar_ItemId);
-
-    if (targetSpecies != SPECIES_NONE)
-    {
-        gPartyMenuUseExitCallback = TRUE;
-        SetWordTaskArg(taskId, tNextFunc, (u32)task);
-        gTasks[taskId].func = Task_TryItemUseFormChange;
-        gTasks[taskId].tState = 0;
-        gTasks[taskId].tTargetSpecies = targetSpecies;
-        gTasks[taskId].tAnimWait = 0;
-        return TRUE;
-    }
-    else
-    {
-        gPartyMenuUseExitCallback = FALSE;
-        PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
-        ScheduleBgCopyTilemapToVram(2);
-        gTasks[taskId].func = task;
-        return FALSE;
-    }
+    return FALSE;
 }
 
 void ItemUseCB_FormChange(u8 taskId, TaskFunc task)
@@ -5915,20 +5829,6 @@ static void CursorCb_ChangeAbility(u8 taskId)
 {
     gSpecialVar_Result = 1;
     TryMultichoiceFormChange(taskId);
-}
-
-void TryItemHoldFormChange(struct Pokemon *mon)
-{
-    u16 targetSpecies = GetFormChangeTargetSpecies(mon, FORM_CHANGE_ITEM_HOLD, 0);
-    if (targetSpecies != SPECIES_NONE)
-    {
-        PlayCry_NormalNoDucking(targetSpecies, 0, CRY_VOLUME_RS, CRY_VOLUME_RS);
-        SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
-        FreeAndDestroyMonIconSprite(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId]);
-        CreatePartyMonIconSpriteParameterized(targetSpecies, GetMonData(mon, MON_DATA_PERSONALITY, NULL), &sPartyMenuBoxes[gPartyMenu.slotId], 1);
-        CalculateMonStats(mon);
-        UpdatePartyMonHeldItemSprite(mon, &sPartyMenuBoxes[gPartyMenu.slotId]);
-    }
 }
 
 #undef tState

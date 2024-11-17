@@ -294,20 +294,7 @@ u16 GetMatchCallMapSec(int index)
 
 bool32 ShouldDrawRematchPokeballIcon(int index)
 {
-#if FREE_MATCH_CALL == FALSE
-    struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-    if (!state->matchCallEntries[index].isSpecialTrainer)
-        index = state->matchCallEntries[index].headerId;
-    else
-        index = MatchCall_GetRematchTableIdx(state->matchCallEntries[index].headerId);
-
-    if (index == REMATCH_TABLE_ENTRIES)
-        return FALSE;
-
-    return gSaveBlock1Ptr->trainerRematches[index] != 0;
-#else
     return FALSE;
-#endif //FREE_MATCH_CALL
 }
 
 int GetMatchCallTrainerPic(int index)
@@ -434,29 +421,5 @@ int GetIndexDeltaOfNextCheckPageUp(int index)
 
 static bool32 ShouldDoNearbyMessage(void)
 {
-#if FREE_MATCH_CALL == FALSE
-    struct Pokenav_MatchCallMenu *state = GetSubstructPtr(POKENAV_SUBSTRUCT_MATCH_CALL_MAIN);
-    int selection = PokenavList_GetSelectedIndex();
-    if (!state->matchCallEntries[selection].isSpecialTrainer)
-    {
-        if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId)
-        {
-            if (!gSaveBlock1Ptr->trainerRematches[state->matchCallEntries[selection].headerId])
-                return TRUE;
-        }
-    }
-    else
-    {
-        if (state->matchCallEntries[selection].headerId == MC_HEADER_WATTSON)
-        {
-            if (GetMatchCallMapSec(selection) == gMapHeader.regionMapSectionId
-             && FlagGet(FLAG_BADGE05_GET) == TRUE)
-            {
-                if (!FlagGet(FLAG_WATTSON_REMATCH_AVAILABLE))
-                    return TRUE;
-            }
-        }
-    }
-#endif //FREE_MATCH_CALL
     return FALSE;
 }

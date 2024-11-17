@@ -89,14 +89,15 @@ enum CampoExperiencia
     CAMPO_EXPERIENCIA_LEGENDARIO_MAYOR      = 250,
 };
 
-// Pokémon natures
-#define NATURE_OFENSIVA             0
-#define NATURE_DEFENSIVA            1
-#define NATURE_OFENSIVA_ESPECIAL    2
-#define NATURE_DEFENSIVA_ESPECIAL   3
-#define NATURE_RAPIDA               4
-
-#define NUM_NATURES                 5
+enum Naturalezas
+{
+    NATURALEZA_OFENSIVA,
+    NATURALEZA_DEFENSIVA,
+    NATURALEZA_OFENSIVA_ESPECIAL,
+    NATURALEZA_DEFENSIVA_ESPECIAL,
+    NATURALEZA_RAPIDA,
+    NUMERO_NATURALEZAS
+};
 
 // Pokémon Stats
 #define STAT_HP      0
@@ -246,10 +247,12 @@ enum Amistad
 #define MAX_PER_STAT_EVS 252
 #define MAX_TOTAL_EVS 504
 
-// Move category defines.
-#define DAMAGE_CATEGORY_PHYSICAL    0
-#define DAMAGE_CATEGORY_SPECIAL     1
-#define DAMAGE_CATEGORY_STATUS      2
+enum CategoriasAtaque
+{
+    CATEGORIA_FISICA,
+    CATEGORIA_ESPECIAL,
+    CATEGORIA_ESTADO,
+};
 
 enum Crecimiento
 {
@@ -261,55 +264,31 @@ enum Crecimiento
     TIPOS_DE_CRECIMIENTO
 };
 
-#define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
+#define F_SUMMARY_SCREEN_FLIP_SPRITE 128
 
-#define EVOLUTIONS_END                    0xFFFF // Not an actual evolution, used to mark the end of an evolution array.
-
-enum EvolutionMethods {
-    EVO_NONE,                            // Not an actual evolution, used to generate offspring that can't evolve into the specified species, like regional forms.
-    EVO_FRIENDSHIP,                      // Pokémon levels up with friendship ≥ 220
-    EVO_LEVEL,                           // Pokémon reaches the specified level
-    EVO_ITEM,                            // specified item is used on Pokémon
-    EVO_LEVEL_ATK_GT_DEF,                // Pokémon reaches the specified level with attack > defense
-    EVO_LEVEL_ATK_EQ_DEF,                // Pokémon reaches the specified level with attack = defense
-    EVO_LEVEL_ATK_LT_DEF,                // Pokémon reaches the specified level with attack < defense
-    EVO_LEVEL_SILCOON,                   // Pokémon reaches the specified level with a Silcoon personality value
-    EVO_LEVEL_CASCOON,                   // Pokémon reaches the specified level with a Cascoon personality value
-    EVO_LEVEL_NINJASK,                   // Pokémon reaches the specified level (special value for Ninjask)
-    EVO_LEVEL_SHEDINJA,                  // Pokémon reaches the specified level (special value for Shedinja)
-    EVO_BEAUTY,                          // Pokémon levels up with beauty ≥ specified value
-    EVO_LEVEL_FEMALE,                    // Pokémon reaches the specified level, is female
-    EVO_LEVEL_MALE,                      // Pokémon reaches the specified level, is male
-    EVO_LEVEL_NIGHT,                     // Pokémon reaches the specified level, is night
-    EVO_LEVEL_DAY,                       // Pokémon reaches the specified level, is day
-    EVO_LEVEL_DUSK,                      // Pokémon reaches the specified level, is dusk (5-6 P.M)
-    EVO_ITEM_HOLD_DAY,                   // Pokémon levels up, holds specified item at day
-    EVO_ITEM_HOLD_NIGHT,                 // Pokémon levels up, holds specified item at night
-    EVO_MOVE,                            // Pokémon levels up, knows specified move
-    EVO_MAPSEC,                          // Pokémon levels up on specified mapsec
-    EVO_ITEM_MALE,                       // specified item is used on a male Pokémon
-    EVO_ITEM_FEMALE,                     // specified item is used on a female Pokémon
-    EVO_LEVEL_RAIN,                      // Pokémon reaches the specified level during rain in the overworld
-    EVO_SPECIFIC_MON_IN_PARTY,           // Pokémon levels up with a specified Pokémon in party
-    EVO_LEVEL_DARK_TYPE_MON_IN_PARTY,    // Pokémon reaches the specified level with a Dark Type Pokémon in party
-    EVO_SPECIFIC_MAP,                    // Pokémon levels up on specified map
-    EVO_LEVEL_NATURE_AMPED,              // Pokémon reaches the specified level, it has a Hardy, Brave, Adamant, Naughty, Docile, Impish, Lax, Hasty, Jolly, Naive, Rash, Sassy, or Quirky nature.
-    EVO_LEVEL_NATURE_LOW_KEY,            // Pokémon reaches the specified level, it has a Lonely, Bold, Relaxed, Timid, Serious, Modest, Mild, Quiet, Bashful, Calm, Gentle, or Careful nature.
-    EVO_CRITICAL_HITS,                   // Pokémon performs specified number of critical hits in one battle
-    EVO_ITEM_NIGHT,                      // specified item is used on Pokémon, is night
-    EVO_ITEM_DAY,                        // specified item is used on Pokémon, is day
-    EVO_ITEM_HOLD,                       // Pokémon levels up, holds specified item
-    EVO_LEVEL_FOG,                       // Pokémon reaches the specified level during fog in the overworld
-    EVO_USE_MOVE_TWENTY_TIMES,           // Pokémon levels up after having used a move for at least 20 times
-};
-
-enum EvolutionMode {
-    EVO_MODE_NORMAL,
-    EVO_MODE_CANT_STOP,
-    EVO_MODE_ITEM_USE,
-    EVO_MODE_ITEM_CHECK,         // If an Everstone is being held, still want to show that the stone *could* be used on that Pokémon to evolve
-    EVO_MODE_BATTLE_SPECIAL,
-    EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
+enum MetodosEvolutivos {
+    EVO_NO,
+    EVO_AMISTAD,
+    EVO_NIVEL,
+    EVO_ITEM,
+    EVO_NIVEL_MAS_ATAQUE,
+    EVO_NIVEL_IGUAL_ATAQUE,
+    EVO_NIVEL_MENOS_ATAQUE,
+    EVO_NIVEL_SILCOON,
+    EVO_NIVEL_CASCOON,
+    EVO_NIVEL_NINJASK,
+    EVO_NIVEL_SHEDINJA,
+    EVO_NIVEL_HEMBRA,
+    EVO_NIVEL_MACHO,
+    EVO_NIVEL_NOCHE,
+    EVO_NIVEL_DIA,
+    EVO_MOVIMIENTO,
+    EVO_NIVEL_LLUVIA,
+    EVO_NIVEL_NIEBLA,
+    EVO_NIVEL_NIEVE,
+    EVO_NIVEL_SINIESTRO_EQUIPO,
+    EVO_MAPSEC,
+    EVO_FIN
 };
 
 #define MON_PIC_WIDTH 64
@@ -331,6 +310,14 @@ enum EvolutionMode {
 #define NUM_ABILITY_SLOTS (NUM_NORMAL_ABILITY_SLOTS + NUM_HIDDEN_ABILITY_SLOTS)
 #define NUM_NORMAL_ABILITY_SLOTS 2
 #define NUM_HIDDEN_ABILITY_SLOTS 1
+
+enum SlotsHabilidades
+{
+    SLOT_HABILIDAD_1,
+    SLOT_HABILIDAD_2,
+    SLOT_HABILIDAD_OCULTA,
+    SLOTS_HABILIDADES
+};
 
 // Used as a signal for givemon to generate a default ability by personality.
 #define NUM_ABILITY_PERSONALITY 0xFF

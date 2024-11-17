@@ -223,7 +223,6 @@ EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA u16 gBallToDisplay = 0;
 EWRAM_DATA bool8 gLastUsedBallMenuPresent = FALSE;
-EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 EWRAM_DATA u8 gCategoryIconSpriteId = 0;
 
@@ -532,10 +531,6 @@ static void CB2_InitBattleInternal(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         AdjustFriendship(&gPlayerParty[i], FRIENDSHIP_EVENT_LEAGUE_BATTLE);
-
-        // Apply party-wide start-of-battle form changes for both sides.
-        TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_BEGIN_BATTLE);
-        TryFormChange(i, B_SIDE_OPPONENT, FORM_CHANGE_BEGIN_BATTLE);
     }
 
     gBattleCommunication[MULTIUSE_STATE] = 0;
@@ -1224,9 +1219,9 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature)
     u32 nature = GetNatureFromPersonality(*personality);
     s32 diff = abs((s32)nature - (s32)newNature);
     s32 sign = (nature > newNature) ? 1 : -1;
-    if (diff > NUM_NATURES / 2)
+    if (diff > NUMERO_NATURALEZAS / 2)
     {
-        diff = NUM_NATURES - diff;
+        diff = NUMERO_NATURALEZAS - diff;
         sign *= -1;
     }
     *personality -= (diff * sign);
@@ -1369,21 +1364,6 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             {
                 u32 data = TRUE;
                 SetMonData(&party[i], MON_DATA_IS_SHINY, &data);
-            }
-            if (partyData[i].dynamaxLevel > 0)
-            {
-                u32 data = partyData[i].dynamaxLevel;
-                SetMonData(&party[i], MON_DATA_DYNAMAX_LEVEL, &data);
-            }
-            if (partyData[i].gigantamaxFactor)
-            {
-                u32 data = partyData[i].gigantamaxFactor;
-                SetMonData(&party[i], MON_DATA_GIGANTAMAX_FACTOR, &data);
-            }
-            if (partyData[i].teraType > 0)
-            {
-                u32 data = partyData[i].teraType;
-                SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
             }
             CalculateMonStats(&party[i]);
 
@@ -2399,7 +2379,6 @@ static void BattleStartClearSetData(void)
         gBattleStruct->usedHeldItems[i][B_SIDE_OPPONENT] = 0;
         gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
         gBattleStruct->itemLost[B_SIDE_OPPONENT][i].originalItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-        gPartyCriticalHits[i] = 0;
     }
 
     gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
@@ -4077,7 +4056,7 @@ s8 GetMovePriority(u32 battler, u16 move)
     priority = gMovesInfo[move].priority;
 
     // Max Guard check
-    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == DAMAGE_CATEGORY_STATUS)
+    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == CATEGORIA_ESTADO)
         return gMovesInfo[MOVE_MAX_GUARD].priority;
 
     if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TIPO_VOLADOR)
@@ -4855,10 +4834,6 @@ static void HandleEndTurn_FinishBattle(void)
         {
             bool8 changedForm = FALSE;
 
-            // Appeared in battle and didn't faint
-            if ((gBattleStruct->appearedInBattle & (1u << i)) && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
-                changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE_TERRAIN);
-
             if (!changedForm)
                 changedForm = TryFormChange(i, B_SIDE_PLAYER, FORM_CHANGE_END_BATTLE);
 
@@ -4938,33 +4913,18 @@ static void TryEvolvePokemon(void)
     {
         if (!(sTriedEvolving & (1u << i)))
         {
-            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_SPECIAL, i);
-            bool32 evoModeNormal = TRUE;
+            u16 species = GetEvolutionTargetSpecies(&gPlayerParty[i], ITEM_NONE);
             sTriedEvolving |= 1u << i;
-
-            if (species == SPECIES_NONE && (gLeveledUpInBattle & (1u << i)))
-            {
-                gLeveledUpInBattle &= ~(1u << i);
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_BATTLE_ONLY, gLeveledUpInBattle);
-            }
-
-            if (species == SPECIES_NONE)
-            {
-                species = GetEvolutionTargetSpecies(&gPlayerParty[i], EVO_MODE_CANT_STOP, ITEM_NONE);
-                evoModeNormal = FALSE;
-            }
 
             if (species != SPECIES_NONE)
             {
                 FreeAllWindowBuffers();
                 gBattleMainFunc = WaitForEvoSceneToFinish;
-                EvolutionScene(&gPlayerParty[i], species, evoModeNormal, i);
+                EvolutionScene(&gPlayerParty[i], species, i);
                 return;
             }
         }
     }
-    sTriedEvolving = 0;
-    gLeveledUpInBattle = 0;
     gBattleMainFunc = ReturnFromBattleToOverworld;
 }
 

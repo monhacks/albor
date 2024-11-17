@@ -241,60 +241,26 @@ void HyperTrain(struct ScriptContext *ctx)
     }
 }
 
-void HasGigantamaxFactor(struct ScriptContext *ctx)
-{
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
-    if (partyIndex < PARTY_SIZE)
-        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
-    else
-        gSpecialVar_Result = FALSE;
-}
-
-void ToggleGigantamaxFactor(struct ScriptContext *ctx)
-{
-
-}
-
-void CheckTeraType(struct ScriptContext *ctx)
-{
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = TIPO_NINGUNO;
-
-    if (partyIndex < PARTY_SIZE)
-        gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE);
-}
-
-void SetTeraType(struct ScriptContext *ctx)
-{
-    u32 type = ScriptReadByte(ctx);
-    u32 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    if (type < NUMERO_DE_TIPOS && partyIndex < PARTY_SIZE)
-        SetMonData(&gPlayerParty[partyIndex], MON_DATA_TERA_TYPE, &type);
-}
-
 /* Creates a Pokemon via script
  * if side/slot are assigned, it will create the mon at the assigned party location
  * if slot == PARTY_SIZE, it will give the mon to first available party or storage slot
  */
-static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny, bool8 ggMaxFactor, u8 teraType)
+static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 abilityNum, u8 gender, u8 *evs, u8 *ivs, u16 *moves, bool8 isShiny)
 {
     u16 nationalDexNum;
     int sentToPc;
     struct Pokemon mon;
     u32 i;
     u8 genderRatio = gSpeciesInfo[species].genderRatio;
-    u16 targetSpecies;
 
     // check whether to use a specific nature or a random one
-    if (nature >= NUM_NATURES)
+    if (nature >= NUMERO_NATURALEZAS)
     {
         if (OW_SYNCHRONIZE_NATURE >= GEN_6
          && (gSpeciesInfo[species].eggGroups[0] == GRUPO_HUEVO_BEBE || OW_SYNCHRONIZE_NATURE == GEN_7))
             nature = PickWildMonNature();
         else
-            nature = Random() % NUM_NATURES;
+            nature = Random() % NUMERO_NATURALEZAS;
     }
 
     // create a Pokémon with basic data
@@ -356,11 +322,6 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     // held item
     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
 
-    // In case a mon with a form changing item is given. Eg: SPECIES_ARCEUS_NORMAL with ITEM_SPLASH_PLATE will transform into SPECIES_ARCEUS_WATER upon gifted.
-    targetSpecies = GetFormChangeTargetSpecies(&mon, FORM_CHANGE_ITEM_HOLD, 0);
-    if (targetSpecies != SPECIES_NONE)
-        SetMonData(&mon, MON_DATA_SPECIES, &targetSpecies);
-
     // assign OT name and gender
     SetMonData(&mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
 
@@ -413,7 +374,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
-    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUM_NATURES, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE, FALSE, NUMERO_DE_TIPOS);
+    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUMERO_NATURALEZAS, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
@@ -430,7 +391,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u32 flags         = ScriptReadWord(ctx);
     u16 item          = PARSE_FLAG(0, ITEM_NONE);
     u8 ball           = PARSE_FLAG(1, ITEM_POKE_BALL);
-    u8 nature         = PARSE_FLAG(2, NUM_NATURES);
+    u8 nature         = PARSE_FLAG(2, NUMERO_NATURALEZAS);
     u8 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
     u8 gender         = PARSE_FLAG(4, MON_GENDERLESS); // TODO: Find a better way to assign a random gender.
     u8 hpEv           = PARSE_FLAG(5, 0);
@@ -450,14 +411,12 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u16 move3         = PARSE_FLAG(19, MOVE_NONE);
     u16 move4         = PARSE_FLAG(20, MOVE_NONE);
     bool8 isShiny     = PARSE_FLAG(21, FALSE);
-    bool8 ggMaxFactor = PARSE_FLAG(22, FALSE);
-    u8 teraType       = PARSE_FLAG(23, NUMERO_DE_TIPOS);
 
     u8 evs[NUM_STATS]        = {hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv};
     u8 ivs[NUM_STATS]        = {hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv};
     u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
 
-    gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny, ggMaxFactor, teraType);
+    gSpecialVar_Result = ScriptGiveMonParameterized(side, slot, species, level, item, ball, nature, abilityNum, gender, evs, ivs, moves, isShiny);
 }
 
 #undef PARSE_FLAG

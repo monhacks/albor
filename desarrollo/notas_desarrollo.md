@@ -88,3 +88,6 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Añadir caso de crianza para Latios/Latias y Nidoran.
 *¿Cómo criar a Tauros?
 *Decouple poké balls de item id
+*Jigglypuff evoluciona al aprender Vozarrón.
+
+¿Pangoro fuera?

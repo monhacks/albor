@@ -996,7 +996,7 @@
 
 	@ Gives the player a Pokémon of the specified species and level, and allows to customize extra parameters.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
+	.macro givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
 	callnative ScrCmd_createmon
 	.byte 0
 	.byte 6	@ PARTY_SIZE - assign to first empty slot
@@ -1025,8 +1025,6 @@
 	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 19); .endif
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 21); .endif
-	.ifnb \ggMaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
-	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.4byte givemon_flags
 	.ifnb \item; .2byte \item; .endif
 	.ifnb \ball; .2byte \ball; .endif
@@ -1050,13 +1048,11 @@
 	.ifnb \move3; .2byte \move3; .endif
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \isShiny; .2byte \isShiny; .endif
-	.ifnb \ggMaxFactor; .2byte \ggMaxFactor; .endif
-	.ifnb \teraType; .2byte \teraType; .endif
 	.endm
 
 	@ creates a mon for a given party and slot
 	@ otherwise
-	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
+	.macro createmon side:req, slot:req, species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny
 	callnative ScrCmd_createmon
 	.byte \side	 @ 0 - player, 1 - opponent
 	.byte \slot	 @ 0-5
@@ -1085,8 +1081,6 @@
 	.ifnb \move3; .set givemon_flags, givemon_flags | (1 << 19); .endif
 	.ifnb \move4; .set givemon_flags, givemon_flags | (1 << 20); .endif
 	.ifnb \isShiny; .set givemon_flags, givemon_flags | (1 << 21); .endif
-	.ifnb \ggMaxFactor; .set givemon_flags, givemon_flags | (1 << 22); .endif
-	.ifnb \teraType; .set givemon_flags, givemon_flags | (1 << 23); .endif
 	.4byte givemon_flags
 	.ifnb \item; .2byte \item; .endif
 	.ifnb \ball; .2byte \ball; .endif
@@ -1110,8 +1104,6 @@
 	.ifnb \move3; .2byte \move3; .endif
 	.ifnb \move4; .2byte \move4; .endif
 	.ifnb \isShiny; .2byte \isShiny; .endif
-	.ifnb \ggMaxFactor; .2byte \ggMaxFactor; .endif
-	.ifnb \teraType; .2byte \teraType; .endif
 	.endm
 
 	@ Gives the player an Egg of the specified species.
@@ -2178,21 +2170,6 @@
 	.2byte \slot
 	.endm
 
-	@ Sets VAR_RESULT to TRUE if the Pokemon has the Gigantamax Factor,
-	@ or to FALSE otherwise.
-	.macro hasgigantamaxfactor slot:req
-	callnative HasGigantamaxFactor
-	.2byte \slot
-	.endm
-
-	@ Toggles the Gigantamax Factor for a Pokemon.
-	@ Fails for Melmetal (vanilla behavior).
-	@ Sets VAR_RESULT to TRUE if it succeeds, and FALSE otherwise.
-	.macro togglegigantamaxfactor slot:req
-	callnative ToggleGigantamaxFactor
-	.2byte \slot
-	.endm
-
 	@ Sets VAR_RESULT to one of the arguments (via setorcopyvar).
 	.macro randomelement element:req, elements:vararg
 	.set _randomelement_n, 0
@@ -2229,19 +2206,6 @@
 	.macro setstatus1 status1:req, slot:req
 	callnative Script_SetStatus1
 	.2byte \status1
-	.2byte \slot
-	.endm
-
-	@ Sets VAR_RESULT to the Pokémon in \slot's Tera Type
-	.macro checkteratype slot:req
-	callnative CheckTeraType
-	.2byte \slot
-	.endm
-
-	@ Sets the Pokémon in \slot's Tera Type
-	.macro setteratype type:req, slot:req
-	callnative SetTeraType
-	.byte \type
 	.2byte \slot
 	.endm
 

@@ -52,8 +52,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 94
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -84,8 +83,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 107
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -116,8 +114,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 120
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 123
@@ -127,8 +124,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 124
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -159,8 +155,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 137
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -191,8 +186,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 150
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -223,8 +217,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 163
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -255,8 +248,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 176
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -287,8 +279,7 @@
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 189
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -321,8 +312,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 202
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 205
@@ -332,8 +322,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 206
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 209
@@ -343,8 +332,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 210
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 213
@@ -354,8 +342,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 214
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 217
@@ -365,8 +352,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 218
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 221
@@ -376,8 +362,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 222
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -408,8 +393,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 235
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -442,8 +426,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 249
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 252
@@ -453,8 +436,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 253
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -485,8 +467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 266
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 269
@@ -496,8 +477,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 270
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -528,8 +508,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 283
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 286
@@ -539,8 +518,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 287
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -573,8 +551,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 300
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -605,8 +582,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 313
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -637,8 +613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 326
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -669,8 +644,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 339
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 342
@@ -680,8 +654,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 343
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -712,8 +685,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 356
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 359
@@ -723,8 +695,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 360
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -755,8 +726,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 373
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 376
@@ -766,8 +736,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 377
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 380
@@ -777,8 +746,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 381
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -809,8 +777,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 394
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -841,8 +808,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 407
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 410
@@ -852,8 +818,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 411
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -884,8 +849,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 424
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -916,8 +880,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 437
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -948,8 +911,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 450
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -980,8 +942,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 463
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 466
@@ -991,8 +952,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 467
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1025,8 +985,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 480
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1059,8 +1018,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 493
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1093,8 +1051,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 506
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1125,8 +1082,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 519
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 522
@@ -1136,8 +1092,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 523
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1170,8 +1125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 537
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 540
@@ -1181,8 +1135,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 541
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1213,8 +1166,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 554
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1247,8 +1199,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 567
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 570
@@ -1258,8 +1209,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 571
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1292,8 +1242,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 584
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 587
@@ -1303,8 +1252,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 588
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1337,8 +1285,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 602
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 605
@@ -1348,8 +1295,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 606
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 609
@@ -1359,8 +1305,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 610
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1393,8 +1338,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 623
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1427,8 +1371,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 636
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 639
@@ -1438,8 +1381,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 640
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1472,8 +1414,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 653
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 656
@@ -1483,8 +1424,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 657
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 660
@@ -1494,8 +1434,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 661
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1528,8 +1467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 675
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 677
                 MOVE_PSYCHIC,
@@ -1543,8 +1481,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 680
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 682
                 MOVE_SKILL_SWAP,
@@ -1582,8 +1519,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 695
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 698
@@ -1593,8 +1529,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 699
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1627,8 +1562,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 712
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 715
@@ -1638,8 +1572,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 716
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1672,8 +1605,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 729
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 732
@@ -1683,8 +1615,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 733
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 736
@@ -1694,8 +1625,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 737
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1728,8 +1658,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 750
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 753
@@ -1739,8 +1668,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 754
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 757
@@ -1750,8 +1678,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 758
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1784,8 +1711,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 771
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 774
@@ -1795,8 +1721,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 775
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 778
@@ -1806,8 +1731,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 779
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -1838,8 +1762,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 792
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 794
                 MOVE_DIG,
@@ -1877,8 +1800,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 809
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 811
                 MOVE_PSYBEAM,
@@ -1895,8 +1817,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 817
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 819
                 MOVE_DIG,
@@ -1913,8 +1834,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 825
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 827
                 MOVE_DIG,
@@ -1952,8 +1872,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 842
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 844
                 MOVE_DIG,
@@ -1970,8 +1889,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 850
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 852
                 MOVE_DIG,
@@ -2009,8 +1927,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(7, 7, 7, 7, 7, 7),
 #line 867
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 869
                 MOVE_DIG,
@@ -2048,8 +1965,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
 #line 884
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 886
                 MOVE_DIG,
@@ -2087,8 +2003,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 901
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 903
                 MOVE_DIG,
@@ -2126,8 +2041,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 #line 918
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 920
                 MOVE_DIG,
@@ -2165,8 +2079,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 935
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 938
@@ -2176,8 +2089,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 939
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2208,8 +2120,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 952
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 955
@@ -2219,8 +2130,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 956
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2251,8 +2161,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 969
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 972
@@ -2262,8 +2171,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 973
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2294,8 +2202,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 986
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 989
@@ -2305,8 +2212,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 990
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2337,8 +2243,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 1003
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1006
@@ -2348,8 +2253,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 1007
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2380,8 +2284,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 1020
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1022
                 MOVE_SONIC_BOOM,
@@ -2398,8 +2301,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 1028
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1030
                 MOVE_ASTONISH,
@@ -2439,8 +2341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1045
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1048
@@ -2450,8 +2351,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1049
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2484,8 +2384,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1062
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2518,8 +2417,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1075
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2552,8 +2450,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1088
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1091
@@ -2563,8 +2460,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1092
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2597,8 +2493,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 1105
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1108
@@ -2608,8 +2503,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 1109
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2642,8 +2536,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 1122
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1125
@@ -2653,8 +2546,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 1126
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2687,8 +2579,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 1139
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1142
@@ -2698,8 +2589,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 1143
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2730,8 +2620,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1156
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1158
                 MOVE_SAND_ATTACK,
@@ -2769,8 +2658,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1173
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1176
@@ -2780,8 +2668,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1177
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2812,8 +2699,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1190
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -2844,8 +2730,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 1203
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1205
                 MOVE_SAND_ATTACK,
@@ -2883,8 +2768,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 1220
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1222
                 MOVE_SAND_ATTACK,
@@ -2922,8 +2806,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 1237
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1239
                 MOVE_SAND_ATTACK,
@@ -2961,8 +2844,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 1254
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1256
                 MOVE_SAND_ATTACK,
@@ -3002,8 +2884,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1272
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1274
                 MOVE_QUICK_ATTACK,
@@ -3042,8 +2923,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1289
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1291
                 MOVE_TEETER_DANCE,
@@ -3084,8 +2964,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1306
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1308
                 MOVE_SLACK_OFF,
@@ -3124,8 +3003,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1323
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1325
                 MOVE_FOCUS_ENERGY,
@@ -3163,8 +3041,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1339
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1341
                 MOVE_FOCUS_ENERGY,
@@ -3181,8 +3058,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1347
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1349
                 MOVE_BITE,
@@ -3199,8 +3075,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1355
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1357
                 MOVE_ROLLOUT,
@@ -3217,8 +3092,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1363
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1365
                 MOVE_THUNDERBOLT,
@@ -3235,8 +3109,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1371
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1373
                 MOVE_GIGA_DRAIN,
@@ -3276,8 +3149,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1389
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1392
@@ -3287,8 +3159,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1393
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1396
@@ -3298,8 +3169,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1397
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3332,8 +3202,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1411
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1414
@@ -3343,8 +3212,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1415
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3377,8 +3245,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1429
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1432
@@ -3388,8 +3255,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1433
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1436
@@ -3399,8 +3265,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1437
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3433,8 +3298,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1451
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1454
@@ -3444,8 +3308,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1455
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3478,8 +3341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1469
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1472
@@ -3489,8 +3351,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1473
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3523,8 +3384,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1487
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1490
@@ -3534,8 +3394,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1491
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1494
@@ -3545,8 +3404,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1495
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3579,8 +3437,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1509
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1512
@@ -3590,8 +3447,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1513
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1516
@@ -3601,8 +3457,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1517
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1520
@@ -3612,8 +3467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1521
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3646,8 +3500,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1535
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1538
@@ -3657,8 +3510,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1539
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1542
@@ -3668,8 +3520,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1543
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3702,8 +3553,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1557
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1560
@@ -3713,8 +3563,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1561
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1564
@@ -3724,8 +3573,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1565
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3758,8 +3606,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1579
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1582
@@ -3769,8 +3616,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1583
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1586
@@ -3780,8 +3626,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1587
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3814,8 +3659,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1601
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1604
@@ -3825,8 +3669,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1605
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1608
@@ -3836,8 +3679,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1609
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3870,8 +3712,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1623
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1626
@@ -3881,8 +3722,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1627
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1630
@@ -3892,8 +3732,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1631
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3926,8 +3765,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1645
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1648
@@ -3937,8 +3775,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1649
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -3973,8 +3810,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1663
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1665
                 MOVE_FEINT_ATTACK,
@@ -4014,8 +3850,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1679
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1681
                 MOVE_DEFENSE_CURL,
@@ -4056,8 +3891,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 1696
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1698
                 MOVE_SWORDS_DANCE,
@@ -4097,8 +3931,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1712
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1714
                 MOVE_BATON_PASS,
@@ -4115,8 +3948,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1720
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1722
                 MOVE_MEGA_DRAIN,
@@ -4133,8 +3965,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1728
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 1730
                 MOVE_FLY,
@@ -4176,8 +4007,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1746
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1749
@@ -4187,8 +4017,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1750
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4223,8 +4052,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1764
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1767
@@ -4234,8 +4062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1768
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1771
@@ -4245,8 +4072,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1772
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4281,8 +4107,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 1786
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4317,8 +4142,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1800
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4353,8 +4177,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1814
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4389,8 +4212,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1828
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1831
@@ -4400,8 +4222,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1832
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1835
@@ -4411,8 +4232,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1836
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4447,8 +4267,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1850
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1853
@@ -4458,8 +4277,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1854
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4494,8 +4312,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1868
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1871
@@ -4505,8 +4322,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1872
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1875
@@ -4516,8 +4332,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 1876
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4552,8 +4367,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1890
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1893
@@ -4563,8 +4377,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1894
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1897
@@ -4574,8 +4387,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 1898
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4610,8 +4422,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1912
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1915
@@ -4621,8 +4432,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1916
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1919
@@ -4632,8 +4442,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 1920
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4668,8 +4477,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1934
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1937
@@ -4679,8 +4487,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1938
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1941
@@ -4690,8 +4497,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 1942
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4726,8 +4532,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1956
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1959
@@ -4737,8 +4542,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1960
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1963
@@ -4748,8 +4552,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 1964
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4782,8 +4585,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1977
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1980
@@ -4793,8 +4595,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1981
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4827,8 +4628,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1994
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 1997
@@ -4838,8 +4638,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 1998
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4872,8 +4671,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2011
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2014
@@ -4883,8 +4681,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2015
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4917,8 +4714,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2028
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4951,8 +4747,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 2041
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -4985,8 +4780,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2054
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2057
@@ -4996,8 +4790,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2058
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5030,8 +4823,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2071
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2074
@@ -5041,8 +4833,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2075
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5075,8 +4866,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2088
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2091
@@ -5086,8 +4876,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2092
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5120,8 +4909,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2105
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2108
@@ -5131,8 +4919,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2109
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2112
@@ -5142,8 +4929,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2113
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5180,8 +4966,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2127
             .lvl = 7,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5218,8 +5003,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2141
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2143
                 MOVE_ATTRACT,
@@ -5238,8 +5022,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2149
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2151
                 MOVE_ATTRACT,
@@ -5277,8 +5060,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2166
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2169
@@ -5288,8 +5070,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2170
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2173
@@ -5299,8 +5080,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2174
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5337,8 +5117,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2188
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2190
                 MOVE_TACKLE,
@@ -5380,8 +5159,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 2204
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5418,8 +5196,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2218
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5456,8 +5233,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2232
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5494,8 +5270,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2246
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5532,8 +5307,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2260
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5570,8 +5344,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2274
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2276
                 MOVE_FURY_SWIPES,
@@ -5611,8 +5384,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2291
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5645,8 +5417,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2304
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5679,8 +5450,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2317
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5713,8 +5483,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2330
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2332
                 MOVE_BIND,
@@ -5731,8 +5500,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2338
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2340
                 MOVE_POISON_TAIL,
@@ -5772,8 +5540,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2355
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5806,8 +5573,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 2368
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5840,8 +5606,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2381
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2383
                 MOVE_IRON_DEFENSE,
@@ -5858,8 +5623,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2389
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2391
                 MOVE_TAUNT,
@@ -5875,8 +5639,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2396
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2398
                 MOVE_UPROAR,
@@ -5916,8 +5679,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2413
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2416
@@ -5927,8 +5689,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 2417
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -5961,8 +5722,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2430
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2432
                 MOVE_BIND,
@@ -5979,8 +5739,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2438
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2440
                 MOVE_POISON_TAIL,
@@ -6020,8 +5779,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2455
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2457
                 MOVE_BIND,
@@ -6038,8 +5796,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2463
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2465
                 MOVE_POISON_TAIL,
@@ -6079,8 +5836,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2480
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2482
                 MOVE_BIND,
@@ -6097,8 +5853,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2488
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2490
                 MOVE_POISON_TAIL,
@@ -6138,8 +5893,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2505
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2507
                 MOVE_BIND,
@@ -6156,8 +5910,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2513
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2515
                 MOVE_POISON_TAIL,
@@ -6199,8 +5952,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2531
             .lvl = 7,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6233,8 +5985,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2544
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2547
@@ -6244,8 +5995,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 2548
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6280,8 +6030,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2562
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6316,8 +6065,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2576
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6352,8 +6100,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2590
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6388,8 +6135,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2604
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6424,8 +6170,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2618
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 2620
                 MOVE_FURY_SWIPES,
@@ -6463,8 +6208,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2635
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6497,8 +6241,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2648
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2651
@@ -6508,8 +6251,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2652
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6540,8 +6282,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2665
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6574,8 +6315,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2678
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6606,8 +6346,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2691
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6638,8 +6377,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2704
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2707
@@ -6649,8 +6387,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 2708
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6681,8 +6418,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2721
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2724
@@ -6692,8 +6428,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 2725
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6724,8 +6459,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2738
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2741
@@ -6735,8 +6469,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 2742
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6767,8 +6500,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2755
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6799,8 +6531,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2768
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6831,8 +6562,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2781
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2784
@@ -6842,8 +6572,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2785
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6874,8 +6603,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2798
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2801
@@ -6885,8 +6613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2802
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2805
@@ -6896,8 +6623,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 2806
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6928,8 +6654,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2819
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6960,8 +6685,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2832
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -6992,8 +6716,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2845
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7024,8 +6747,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2858
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2861
@@ -7035,8 +6757,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2862
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7067,8 +6788,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2875
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2878
@@ -7078,8 +6798,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2879
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7110,8 +6829,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2892
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7142,8 +6860,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2905
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7174,8 +6891,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2918
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7206,8 +6922,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2931
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7238,8 +6953,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2944
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2947
@@ -7249,8 +6963,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2948
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2951
@@ -7260,8 +6973,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2952
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7292,8 +7004,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2965
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7324,8 +7035,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2978
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7356,8 +7066,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2991
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 2994
@@ -7367,8 +7076,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 2995
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7399,8 +7107,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3008
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3011
@@ -7410,8 +7117,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3012
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7442,8 +7148,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3025
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7474,8 +7179,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3038
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7506,8 +7210,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3051
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7538,8 +7241,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3064
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7570,8 +7272,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3077
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3080
@@ -7581,8 +7282,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3081
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3084
@@ -7592,8 +7292,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3085
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7624,8 +7323,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3098
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3101
@@ -7635,8 +7333,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3102
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7667,8 +7364,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3115
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7699,8 +7395,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3128
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7731,8 +7426,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3141
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3144
@@ -7742,8 +7436,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3145
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7774,8 +7467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3158
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3161
@@ -7785,8 +7477,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3162
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7817,8 +7508,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 3175
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7849,8 +7539,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 3188
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3191
@@ -7860,8 +7549,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 3192
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7892,8 +7580,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3205
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7924,8 +7611,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3218
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3221
@@ -7935,8 +7621,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 3222
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7967,8 +7652,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3235
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -7999,8 +7683,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 3248
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8031,8 +7714,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 3261
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3264
@@ -8042,8 +7724,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 3265
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8074,8 +7755,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 3278
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3281
@@ -8085,8 +7765,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 3282
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3285
@@ -8096,8 +7775,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 3286
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8128,8 +7806,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 3299
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3302
@@ -8139,8 +7816,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 3303
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3306
@@ -8150,8 +7826,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 3307
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3310
@@ -8163,8 +7838,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 3311
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8195,8 +7869,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3324
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3327
@@ -8206,8 +7879,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3328
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8238,8 +7910,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3341
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8270,8 +7941,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3354
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8302,8 +7972,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3367
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3369
                 MOVE_QUICK_ATTACK,
@@ -8320,8 +7989,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3375
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3377
                 MOVE_CHARGE,
@@ -8360,8 +8028,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3391
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3394
@@ -8371,8 +8038,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3395
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8403,8 +8069,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3408
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8435,8 +8100,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3421
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3424
@@ -8446,8 +8110,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3425
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8478,8 +8141,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3438
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3441
@@ -8489,8 +8151,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3442
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8521,8 +8182,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3455
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3458
@@ -8532,8 +8192,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3459
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8564,8 +8223,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3472
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3475
@@ -8575,8 +8233,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3476
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3479
@@ -8586,8 +8243,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3480
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8618,8 +8274,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3493
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3496
@@ -8629,8 +8284,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3497
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3500
@@ -8640,8 +8294,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3501
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8672,8 +8325,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3514
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3517
@@ -8683,8 +8335,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3518
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3521
@@ -8694,8 +8345,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3522
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8726,8 +8376,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3535
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3538
@@ -8737,8 +8386,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3539
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3542
@@ -8748,8 +8396,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3543
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8780,8 +8427,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3556
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8812,8 +8458,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3569
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3572
@@ -8823,8 +8468,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3573
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8855,8 +8499,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3586
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8887,8 +8530,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3599
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8919,8 +8561,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 3612
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8951,8 +8592,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3625
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3628
@@ -8962,8 +8602,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3629
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -8994,8 +8633,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3642
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3645
@@ -9005,8 +8643,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3646
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9037,8 +8674,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3659
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3662
@@ -9048,8 +8684,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3663
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9080,8 +8715,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3676
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3679
@@ -9091,8 +8725,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3680
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9123,8 +8756,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3693
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3696
@@ -9134,8 +8766,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3697
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9166,8 +8797,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3710
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3712
                 MOVE_DIG,
@@ -9205,8 +8835,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3727
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3729
                 MOVE_RAPID_SPIN,
@@ -9223,8 +8852,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3735
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3737
                 MOVE_POISON_STING,
@@ -9241,8 +8869,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3743
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 3745
                 MOVE_RAPID_SPIN,
@@ -9280,8 +8907,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3760
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9312,8 +8938,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3773
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3776
@@ -9323,8 +8948,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3777
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9355,8 +8979,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3790
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9387,8 +9010,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3803
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3806
@@ -9398,8 +9020,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3807
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9432,8 +9053,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3820
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9464,8 +9084,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3833
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9496,8 +9115,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3846
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3849
@@ -9507,8 +9125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 3850
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9539,8 +9156,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3863
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3866
@@ -9550,8 +9166,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 3867
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9582,8 +9197,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3880
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3883
@@ -9593,8 +9207,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3884
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3887
@@ -9604,8 +9217,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 3888
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9636,8 +9248,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3901
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3904
@@ -9647,8 +9258,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3905
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3908
@@ -9658,8 +9268,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 3909
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9690,8 +9299,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3922
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9722,8 +9330,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3935
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3938
@@ -9733,8 +9340,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3939
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3942
@@ -9744,8 +9350,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3943
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9776,8 +9381,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3956
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3959
@@ -9787,8 +9391,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3960
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3963
@@ -9798,8 +9401,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 3964
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9830,8 +9432,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3977
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3980
@@ -9841,8 +9442,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3981
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 3984
@@ -9852,8 +9452,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 3985
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9884,8 +9483,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 3998
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4001
@@ -9895,8 +9493,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 4002
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9927,8 +9524,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4015
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4018
@@ -9938,8 +9534,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4019
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4022
@@ -9949,8 +9544,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4023
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -9981,8 +9575,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4036
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4039
@@ -9992,8 +9585,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4040
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4043
@@ -10003,8 +9595,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4044
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10035,8 +9626,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4057
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4060
@@ -10046,8 +9636,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4061
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4064
@@ -10057,8 +9646,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4065
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4068
@@ -10068,8 +9656,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4069
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10100,8 +9687,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4082
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4085
@@ -10111,8 +9697,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4086
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4089
@@ -10122,8 +9707,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4090
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4093
@@ -10135,8 +9719,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4094
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4097
@@ -10146,8 +9729,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4098
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10178,8 +9760,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4111
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4113
                 MOVE_HIDDEN_POWER,
@@ -10214,8 +9795,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4125
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10246,8 +9826,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4138
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10278,8 +9857,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4151
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10310,8 +9888,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4164
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4167
@@ -10321,8 +9898,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4168
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4171
@@ -10332,8 +9908,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4172
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10364,8 +9939,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4185
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4188
@@ -10375,8 +9949,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4189
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10407,8 +9980,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4202
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10439,8 +10011,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4215
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4218
@@ -10450,8 +10021,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4219
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10482,8 +10052,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4232
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4235
@@ -10493,8 +10062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4236
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10525,8 +10093,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4249
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4252
@@ -10536,8 +10103,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4253
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10568,8 +10134,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4266
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4269
@@ -10579,8 +10144,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4270
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10613,8 +10177,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4283
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4285
                 MOVE_HIDDEN_POWER,
@@ -10651,8 +10214,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4297
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10685,8 +10247,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4310
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10719,8 +10280,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4323
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10753,8 +10313,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4336
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4339
@@ -10764,8 +10323,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4340
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4343
@@ -10775,8 +10333,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4344
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10809,8 +10366,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4357
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4360
@@ -10820,8 +10376,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4361
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10854,8 +10409,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4374
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4377
@@ -10865,8 +10419,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4378
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10899,8 +10452,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4391
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4394
@@ -10910,8 +10462,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4395
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10944,8 +10495,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4408
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4411
@@ -10955,8 +10505,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4412
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -10989,8 +10538,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4425
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4428
@@ -11000,8 +10548,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4429
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11034,8 +10581,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4442
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4445
@@ -11045,8 +10591,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4446
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11077,8 +10622,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4459
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11109,8 +10653,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4472
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 4475
@@ -11120,8 +10663,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4476
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11152,8 +10694,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 4489
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11184,8 +10725,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 4502
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -11216,8 +10756,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4515
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4517
                 MOVE_HEADBUTT,
@@ -11234,8 +10773,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 4523
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4525
                 MOVE_QUICK_ATTACK,
@@ -11273,8 +10811,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4540
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4542
                 MOVE_HEADBUTT,
@@ -11291,8 +10828,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 4548
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4550
                 MOVE_QUICK_ATTACK,
@@ -11329,8 +10865,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4564
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4566
                 MOVE_HEADBUTT,
@@ -11347,8 +10882,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4572
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4574
                 MOVE_FURY_SWIPES,
@@ -11365,8 +10899,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 4580
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4582
                 MOVE_QUICK_ATTACK,
@@ -11409,8 +10942,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4599
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4601
                 MOVE_ROAR,
@@ -11427,8 +10959,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4607
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4609
                 MOVE_TORMENT,
@@ -11445,8 +10976,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4615
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4617
                 MOVE_LEECH_SEED,
@@ -11463,8 +10993,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4623
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4625
                 MOVE_SURF,
@@ -11483,8 +11012,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 4631
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4633
                 MOVE_AERIAL_ACE,
@@ -11529,8 +11057,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4650
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4652
                 MOVE_SHADOW_PUNCH,
@@ -11547,8 +11074,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4658
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4660
                 MOVE_SHADOW_BALL,
@@ -11565,8 +11091,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4666
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4668
                 MOVE_SHADOW_BALL,
@@ -11583,8 +11108,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4674
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4676
                 MOVE_SHADOW_BALL,
@@ -11603,8 +11127,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 4682
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4684
                 MOVE_SHADOW_BALL,
@@ -11649,8 +11172,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4701
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4703
                 MOVE_ENCORE,
@@ -11667,8 +11189,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4709
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4711
                 MOVE_LIGHT_SCREEN,
@@ -11685,8 +11206,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4717
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4719
                 MOVE_ATTRACT,
@@ -11703,8 +11223,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4725
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4727
                 MOVE_SHADOW_BALL,
@@ -11723,8 +11242,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 4733
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4735
                 MOVE_SURF,
@@ -11767,8 +11285,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4752
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4754
                 MOVE_ROCK_TOMB,
@@ -11785,8 +11302,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4760
             .lvl = 54,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4762
                 MOVE_DOUBLE_EDGE,
@@ -11803,8 +11319,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4768
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4770
                 MOVE_SMOKESCREEN,
@@ -11821,8 +11336,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4776
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4778
                 MOVE_FLAMETHROWER,
@@ -11841,8 +11355,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 4784
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4786
                 MOVE_FLAMETHROWER,
@@ -11884,8 +11397,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4802
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4804
                 MOVE_TACKLE,
@@ -11902,8 +11414,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4810
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4812
                 MOVE_TACKLE,
@@ -11922,8 +11433,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4818
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4820
                 MOVE_BLOCK,
@@ -11963,8 +11473,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4836
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4838
                 MOVE_KARATE_CHOP,
@@ -11981,8 +11490,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 4844
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4846
                 MOVE_FOCUS_PUNCH,
@@ -12001,8 +11509,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4852
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4854
                 MOVE_ARM_THRUST,
@@ -12042,8 +11549,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4870
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4872
                 MOVE_ROLLOUT,
@@ -12060,8 +11566,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4878
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4880
                 MOVE_SHOCK_WAVE,
@@ -12078,8 +11583,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 4886
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4888
                 MOVE_SUPERSONIC,
@@ -12098,8 +11602,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4894
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4896
                 MOVE_QUICK_ATTACK,
@@ -12141,8 +11644,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4912
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4914
                 MOVE_OVERHEAT,
@@ -12159,8 +11661,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4920
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4922
                 MOVE_OVERHEAT,
@@ -12177,8 +11678,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4928
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4930
                 MOVE_OVERHEAT,
@@ -12197,8 +11697,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4936
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4938
                 MOVE_OVERHEAT,
@@ -12238,8 +11737,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4954
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4956
                 MOVE_TEETER_DANCE,
@@ -12256,8 +11754,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4962
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4964
                 MOVE_SLASH,
@@ -12274,8 +11771,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 4970
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4972
                 MOVE_SLASH,
@@ -12294,8 +11790,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 4978
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4980
                 MOVE_COUNTER,
@@ -12337,8 +11832,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 4996
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 4998
                 MOVE_PERISH_SONG,
@@ -12355,8 +11849,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 5004
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5006
                 MOVE_SUNNY_DAY,
@@ -12373,8 +11866,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 5012
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5014
                 MOVE_WATER_GUN,
@@ -12391,8 +11883,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 5020
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5022
                 MOVE_SAND_ATTACK,
@@ -12411,8 +11902,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 5028
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5030
                 MOVE_EARTHQUAKE,
@@ -12452,8 +11942,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 5046
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5048
                 MOVE_EARTHQUAKE,
@@ -12470,8 +11959,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 5054
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5056
                 MOVE_PSYCHIC,
@@ -12490,8 +11978,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 5062
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5064
                 MOVE_LIGHT_SCREEN,
@@ -12510,8 +11997,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 5070
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5072
                 MOVE_SUNNY_DAY,
@@ -12551,8 +12037,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5088
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5090
                 MOVE_WATER_PULSE,
@@ -12569,8 +12054,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5096
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5098
                 MOVE_RAIN_DANCE,
@@ -12587,8 +12071,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5104
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5106
                 MOVE_ENCORE,
@@ -12605,8 +12088,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5112
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5114
                 MOVE_WATER_PULSE,
@@ -12625,8 +12107,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 5120
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5122
                 MOVE_WATER_PULSE,
@@ -12664,8 +12145,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5137
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12696,8 +12176,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5150
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12728,8 +12207,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5163
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5166
@@ -12739,8 +12217,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5167
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5170
@@ -12750,8 +12227,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5171
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12782,8 +12258,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5184
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5187
@@ -12793,8 +12268,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5188
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12825,8 +12299,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5201
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5204
@@ -12836,8 +12309,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5205
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12868,8 +12340,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5218
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5221
@@ -12879,8 +12350,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5222
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12911,8 +12381,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5235
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5238
@@ -12922,8 +12391,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5239
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5242
@@ -12933,8 +12401,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5243
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -12967,8 +12434,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5256
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13001,8 +12467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5269
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5272
@@ -13012,8 +12477,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5273
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13046,8 +12510,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5286
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5289
@@ -13057,8 +12520,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5290
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13091,8 +12553,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5303
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5306
@@ -13102,8 +12563,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5307
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13136,8 +12596,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5320
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5323
@@ -13147,8 +12606,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5324
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13181,8 +12639,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5337
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5340
@@ -13192,8 +12649,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5341
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13224,8 +12680,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5354
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5356
                 MOVE_HYPNOSIS,
@@ -13242,8 +12697,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5362
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5364
                 MOVE_FOCUS_PUNCH,
@@ -13281,8 +12735,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5379
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5381
                 MOVE_GROWL,
@@ -13299,8 +12752,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5387
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5389
                 MOVE_TACKLE,
@@ -13337,8 +12789,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5403
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5405
                 MOVE_GROWL,
@@ -13355,8 +12806,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5411
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5413
                 MOVE_TACKLE,
@@ -13393,8 +12843,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5427
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5429
                 MOVE_GROWL,
@@ -13411,8 +12860,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5435
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5437
                 MOVE_TACKLE,
@@ -13449,8 +12897,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5451
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5453
                 MOVE_GROWL,
@@ -13467,8 +12914,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5459
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5461
                 MOVE_TACKLE,
@@ -13505,8 +12951,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5475
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5477
                 MOVE_GROWL,
@@ -13523,8 +12968,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5483
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5485
                 MOVE_TACKLE,
@@ -13563,8 +13007,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5499
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5502
@@ -13576,8 +13019,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5503
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13610,8 +13052,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5516
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13644,8 +13085,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5529
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5531
                 MOVE_ASSIST,
@@ -13664,8 +13104,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5537
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5539
                 MOVE_ASSIST,
@@ -13684,8 +13123,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5545
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5547
                 MOVE_ASSIST,
@@ -13704,8 +13142,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5553
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5555
                 MOVE_ASSIST,
@@ -13724,8 +13161,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5561
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5563
                 MOVE_ASSIST,
@@ -13744,8 +13180,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5569
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5571
                 MOVE_ASSIST,
@@ -13785,8 +13220,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5586
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13819,8 +13253,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5599
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13853,8 +13286,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5612
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13887,8 +13319,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5625
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13923,8 +13354,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 5638
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13959,8 +13389,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5651
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -13995,8 +13424,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 5664
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5667
@@ -14008,8 +13436,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 5668
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5671
@@ -14021,8 +13448,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 5672
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14057,8 +13483,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5685
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5688
@@ -14070,8 +13495,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5689
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14106,8 +13530,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5702
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5705
@@ -14119,8 +13542,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 5706
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14155,8 +13577,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5719
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5722
@@ -14168,8 +13589,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 5723
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14204,8 +13624,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5736
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5739
@@ -14217,8 +13636,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 5740
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14253,8 +13671,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5753
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5756
@@ -14266,8 +13683,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 5757
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14298,8 +13714,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5770
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14330,8 +13745,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 5783
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5785
                 MOVE_ARM_THRUST,
@@ -14369,8 +13783,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 5800
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5802
                 MOVE_ARM_THRUST,
@@ -14408,8 +13821,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(27, 27, 27, 27, 27, 27),
 #line 5817
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5819
                 MOVE_ARM_THRUST,
@@ -14447,8 +13859,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 5834
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5836
                 MOVE_ARM_THRUST,
@@ -14488,8 +13899,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5851
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5853
                 MOVE_HIGH_JUMP_KICK,
@@ -14529,8 +13939,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5868
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5871
@@ -14540,8 +13949,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 5872
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14574,8 +13982,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 5885
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5888
@@ -14585,8 +13992,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 5889
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14619,8 +14025,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 5902
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5905
@@ -14630,8 +14035,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 5906
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14664,8 +14068,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(27, 27, 27, 27, 27, 27),
 #line 5919
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5922
@@ -14675,8 +14078,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(27, 27, 27, 27, 27, 27),
 #line 5923
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14709,8 +14111,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 5936
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5939
@@ -14720,8 +14121,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 5940
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14752,8 +14152,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5953
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14784,8 +14183,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5966
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 5969
@@ -14795,8 +14193,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 5970
             .lvl = 7,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14827,8 +14224,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 5983
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 5985
                 MOVE_TACKLE,
@@ -14863,8 +14259,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 5997
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6000
@@ -14874,8 +14269,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 6001
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14906,8 +14300,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6014
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -14938,8 +14331,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 6027
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6029
                 MOVE_HEADBUTT,
@@ -14956,8 +14348,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 6035
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6037
                 MOVE_AMNESIA,
@@ -14997,8 +14388,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 6053
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6055
                 MOVE_ATTRACT,
@@ -15015,8 +14405,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 6061
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6063
                 MOVE_SKILL_SWAP,
@@ -15058,8 +14447,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 6079
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6081
                 MOVE_SKILL_SWAP,
@@ -15076,8 +14464,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 6087
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6089
                 MOVE_EARTHQUAKE,
@@ -15115,8 +14502,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6104
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15147,8 +14533,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6117
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15179,8 +14564,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6130
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15211,8 +14595,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6143
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6146
@@ -15222,8 +14605,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6147
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15254,8 +14636,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6160
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6163
@@ -15265,8 +14646,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6164
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6167
@@ -15276,8 +14656,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6168
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15308,8 +14687,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6181
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6184
@@ -15319,8 +14697,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6185
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6188
@@ -15330,8 +14707,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6189
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15362,8 +14738,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6202
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6205
@@ -15373,8 +14748,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6206
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15405,8 +14779,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6219
             .lvl = 4,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6222
@@ -15416,8 +14789,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6223
             .lvl = 3,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15448,8 +14820,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6236
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6239
@@ -15459,8 +14830,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6240
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15496,8 +14866,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6255
             .lvl = 57,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6257
                 MOVE_RAIN_DANCE,
@@ -15514,8 +14883,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6263
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6265
                 MOVE_TOXIC,
@@ -15532,8 +14900,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6271
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6273
                 MOVE_GIGA_DRAIN,
@@ -15550,8 +14917,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6279
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6281
                 MOVE_EARTHQUAKE,
@@ -15568,8 +14934,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6287
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6289
                 MOVE_DRAGON_DANCE,
@@ -15588,8 +14953,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 6295
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 6297
                 MOVE_RECOVER,
@@ -15627,8 +14991,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6312
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6315
@@ -15638,8 +15001,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6316
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6319
@@ -15649,8 +15011,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6320
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15681,8 +15042,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6333
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6336
@@ -15692,8 +15052,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6337
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6340
@@ -15703,8 +15062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6341
             .lvl = 7,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15735,8 +15093,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6354
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6357
@@ -15746,8 +15103,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6358
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6361
@@ -15757,8 +15113,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6362
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15789,8 +15144,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6375
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6378
@@ -15800,8 +15154,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6379
             .lvl = 7,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6382
@@ -15811,8 +15164,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6383
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15843,8 +15195,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6396
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15875,8 +15226,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6409
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6412
@@ -15886,8 +15236,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6413
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6416
@@ -15897,8 +15246,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6417
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6420
@@ -15908,8 +15256,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6421
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15940,8 +15287,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6434
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -15972,8 +15318,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6447
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6450
@@ -15983,8 +15328,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6451
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16015,8 +15359,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6464
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16047,8 +15390,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6477
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6480
@@ -16058,8 +15400,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6481
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16090,8 +15431,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6494
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6497
@@ -16101,8 +15441,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6498
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6501
@@ -16112,8 +15451,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6502
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16144,8 +15482,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6515
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6518
@@ -16155,8 +15492,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6519
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6522
@@ -16166,8 +15502,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6523
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6526
@@ -16177,8 +15512,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6527
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16209,8 +15543,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6540
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6543
@@ -16220,8 +15553,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6544
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6547
@@ -16231,8 +15563,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6548
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6551
@@ -16242,8 +15573,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6552
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16274,8 +15604,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6565
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6568
@@ -16285,8 +15614,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6569
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6572
@@ -16296,8 +15624,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6573
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6576
@@ -16307,8 +15634,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6577
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16339,8 +15665,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6590
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6593
@@ -16350,8 +15675,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6594
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6597
@@ -16361,8 +15685,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6598
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6601
@@ -16372,8 +15695,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6602
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6605
@@ -16383,8 +15705,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6606
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6609
@@ -16394,8 +15715,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6610
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16426,8 +15746,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6623
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6626
@@ -16437,8 +15756,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6627
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6630
@@ -16448,8 +15766,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 6631
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16480,8 +15797,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6644
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6647
@@ -16491,8 +15807,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6648
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16523,8 +15838,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6661
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16555,8 +15869,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6674
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16587,8 +15900,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6687
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16619,8 +15931,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6700
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16651,8 +15962,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6713
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16685,8 +15995,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6726
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16719,8 +16028,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 6739
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6742
@@ -16730,8 +16038,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 6743
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6746
@@ -16741,8 +16048,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6747
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16775,8 +16081,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6760
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16809,8 +16114,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6773
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16843,8 +16147,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6786
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16877,8 +16180,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6799
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16909,8 +16211,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6812
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16941,8 +16242,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6825
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -16973,8 +16273,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6838
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17005,8 +16304,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6851
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17037,8 +16335,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6864
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17071,8 +16368,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6877
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17105,8 +16401,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 6890
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17139,8 +16434,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 6903
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17173,8 +16467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 6916
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17207,8 +16500,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 6929
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17239,8 +16531,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6942
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6945
@@ -17250,8 +16541,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6946
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17282,8 +16572,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6959
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6962
@@ -17293,8 +16582,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6963
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17325,8 +16613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6976
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17357,8 +16644,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6989
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 6992
@@ -17368,8 +16654,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 6993
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17400,8 +16685,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7006
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7009
@@ -17411,8 +16695,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 7010
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17443,8 +16726,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 7023
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17475,8 +16757,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7036
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17507,8 +16788,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7049
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17539,8 +16819,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7062
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17573,8 +16852,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7075
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17607,8 +16885,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7088
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7091
@@ -17618,8 +16895,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(19, 19, 19, 19, 19, 19),
 #line 7092
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17652,8 +16928,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7105
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17686,8 +16961,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7118
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17720,8 +16994,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7131
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7134
@@ -17731,8 +17004,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 7135
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17765,8 +17037,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 7148
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17799,8 +17070,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7161
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17833,8 +17103,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7174
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17867,8 +17136,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7187
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17899,8 +17167,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7200
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7203
@@ -17910,8 +17177,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7204
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17942,8 +17208,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 7217
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7220
@@ -17953,8 +17218,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 7221
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -17985,8 +17249,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 7234
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7237
@@ -17996,8 +17259,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 7238
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18028,8 +17290,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7251
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7254
@@ -18039,8 +17300,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7255
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7258
@@ -18050,8 +17310,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7259
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18082,8 +17341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 7272
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7275
@@ -18093,8 +17351,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 7276
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7279
@@ -18106,8 +17363,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 7280
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18138,8 +17394,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 7293
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7295
                 MOVE_DRAGON_BREATH,
@@ -18177,8 +17432,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7310
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18209,8 +17463,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7323
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7326
@@ -18220,8 +17473,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7327
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18252,8 +17504,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7340
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18284,8 +17535,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7353
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7356
@@ -18295,8 +17545,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7357
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7360
@@ -18306,8 +17555,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7361
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18338,8 +17586,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 7374
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18370,8 +17617,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7387
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7390
@@ -18381,8 +17627,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7391
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18413,8 +17658,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 7404
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7407
@@ -18424,8 +17668,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 7408
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18456,8 +17699,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7421
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7424
@@ -18467,8 +17709,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7425
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18499,8 +17740,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7438
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18531,8 +17771,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7451
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7454
@@ -18542,8 +17781,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7455
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7458
@@ -18553,8 +17791,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7459
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18585,8 +17822,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7472
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7475
@@ -18596,8 +17832,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7476
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18628,8 +17863,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 7489
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7492
@@ -18639,8 +17873,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 7493
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18671,8 +17904,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7506
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7509
@@ -18682,8 +17914,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7510
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18714,8 +17945,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7523
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7526
@@ -18725,8 +17955,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7527
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18757,8 +17986,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7540
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7543
@@ -18768,8 +17996,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7544
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18800,8 +18027,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 7557
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7560
@@ -18811,8 +18037,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 7561
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18843,8 +18068,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7574
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18875,8 +18099,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7587
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18907,8 +18130,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7600
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7603
@@ -18918,8 +18140,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7604
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -18952,8 +18173,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7617
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7619
                 MOVE_SKILL_SWAP,
@@ -18968,8 +18188,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7623
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7625
                 MOVE_THUNDERBOLT,
@@ -19005,8 +18224,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7637
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19035,8 +18253,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7649
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7651
                 MOVE_POISON_GAS,
@@ -19053,8 +18270,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7657
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7659
                 MOVE_POISON_GAS,
@@ -19071,8 +18287,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7665
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7667
                 MOVE_POISON_GAS,
@@ -19108,8 +18323,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7681
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7684
@@ -19119,8 +18333,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7685
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19149,8 +18362,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7697
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7699
                 MOVE_POISON_GAS,
@@ -19167,8 +18379,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7705
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7707
                 MOVE_POISON_GAS,
@@ -19184,8 +18395,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7712
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7714
                 MOVE_POISON_GAS,
@@ -19202,8 +18412,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7720
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7722
                 MOVE_TACKLE,
@@ -19237,8 +18446,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7734
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7736
                 MOVE_POISON_GAS,
@@ -19255,8 +18463,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7742
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7744
                 MOVE_POISON_GAS,
@@ -19273,8 +18480,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7750
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7752
                 MOVE_POISON_GAS,
@@ -19290,8 +18496,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 7757
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7759
                 MOVE_TACKLE,
@@ -19325,8 +18530,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7771
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7773
                 MOVE_POISON_GAS,
@@ -19342,8 +18546,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7778
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7780
                 MOVE_POISON_GAS,
@@ -19359,8 +18562,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7785
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7787
                 MOVE_POISON_GAS,
@@ -19376,8 +18578,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 7792
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7794
                 MOVE_TACKLE,
@@ -19411,8 +18612,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7806
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7808
                 MOVE_POISON_GAS,
@@ -19428,8 +18628,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7813
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7815
                 MOVE_POISON_GAS,
@@ -19446,8 +18645,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7821
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7823
                 MOVE_POISON_GAS,
@@ -19466,8 +18664,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 7829
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7831
                 MOVE_TACKLE,
@@ -19505,8 +18702,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7844
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19539,8 +18735,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 7857
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19573,8 +18768,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7870
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7873
@@ -19584,8 +18778,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7874
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19618,8 +18811,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7887
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19652,8 +18844,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 7900
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19686,8 +18877,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 7913
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7916
@@ -19697,8 +18887,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 7917
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19731,8 +18920,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 7930
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7933
@@ -19742,8 +18930,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 7934
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19776,8 +18963,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7947
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7950
@@ -19787,8 +18973,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 7951
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19821,8 +19006,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 7964
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 7967
@@ -19832,8 +19016,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 7968
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19866,8 +19049,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7981
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 7983
                 MOVE_EMBER,
@@ -19907,8 +19089,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 7998
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8001
@@ -19918,8 +19099,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8002
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -19952,8 +19132,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 8015
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8017
                 MOVE_RAIN_DANCE,
@@ -19993,8 +19172,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8032
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8034
                 MOVE_EMBER,
@@ -20034,8 +19212,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8049
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8051
                 MOVE_EMBER,
@@ -20075,8 +19252,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8066
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8068
                 MOVE_LEECH_SEED,
@@ -20093,8 +19269,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8074
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8076
                 MOVE_FLAMETHROWER,
@@ -20134,8 +19309,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8091
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8093
                 MOVE_LEECH_SEED,
@@ -20152,8 +19326,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8099
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8101
                 MOVE_FLAMETHROWER,
@@ -20193,8 +19366,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8116
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8119
@@ -20204,8 +19376,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8120
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20238,8 +19409,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8133
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20272,8 +19442,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8146
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20306,8 +19475,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8159
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8162
@@ -20317,8 +19485,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8163
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20351,8 +19518,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8176
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20385,8 +19551,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8189
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8192
@@ -20396,8 +19561,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8193
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20430,8 +19594,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8206
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20464,8 +19627,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8219
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8222
@@ -20475,8 +19637,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8223
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8226
@@ -20486,8 +19647,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8227
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20520,8 +19680,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8240
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20554,8 +19713,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8253
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20588,8 +19746,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8266
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20622,8 +19779,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8279
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20656,8 +19812,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8292
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8295
@@ -20667,8 +19822,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8296
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20701,8 +19855,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8309
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20735,8 +19888,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8322
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8325
@@ -20746,8 +19898,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8326
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20780,8 +19931,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8339
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20814,8 +19964,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8352
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20848,8 +19997,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8365
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20882,8 +20030,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8378
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8381
@@ -20893,8 +20040,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8382
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20927,8 +20073,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8395
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -20961,8 +20106,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8408
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8411
@@ -20972,8 +20116,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8412
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21006,8 +20149,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8425
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8428
@@ -21017,8 +20159,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8429
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21051,8 +20192,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8442
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8445
@@ -21062,8 +20202,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8446
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21096,8 +20235,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8459
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21130,8 +20268,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8472
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21164,8 +20301,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8485
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21198,8 +20334,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8498
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8501
@@ -21209,8 +20344,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8502
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21243,8 +20377,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8515
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8518
@@ -21254,8 +20387,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8519
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8522
@@ -21265,8 +20397,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8523
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21299,8 +20430,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8536
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8538
                 MOVE_DIG,
@@ -21317,8 +20447,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8544
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8546
                 MOVE_RAPID_SPIN,
@@ -21358,8 +20487,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8561
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8563
                 MOVE_SAND_ATTACK,
@@ -21376,8 +20504,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8569
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8571
                 MOVE_ROLLOUT,
@@ -21417,8 +20544,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8586
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8589
@@ -21428,8 +20554,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8590
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21462,8 +20587,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8603
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8606
@@ -21473,8 +20597,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8607
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21507,8 +20630,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8620
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8623
@@ -21518,8 +20640,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8624
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21552,8 +20673,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8637
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8640
@@ -21563,8 +20683,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8641
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8644
@@ -21574,8 +20693,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8645
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21606,8 +20724,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8658
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8660
                 MOVE_DESTINY_BOND,
@@ -21647,8 +20764,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8675
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8678
@@ -21658,8 +20774,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8679
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21692,8 +20807,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8692
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8695
@@ -21703,8 +20817,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8696
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8699
@@ -21714,8 +20827,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8700
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21748,8 +20860,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8713
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8716
@@ -21759,8 +20870,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8717
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8720
@@ -21770,8 +20880,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8721
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21804,8 +20913,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8734
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8737
@@ -21815,8 +20923,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8738
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8741
@@ -21826,8 +20933,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8742
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21860,8 +20966,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8755
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8758
@@ -21871,8 +20976,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8759
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8762
@@ -21882,8 +20986,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8763
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21914,8 +21017,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8776
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8779
@@ -21925,8 +21027,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8780
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -21957,8 +21058,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8793
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8796
@@ -21968,8 +21068,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8797
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22000,8 +21099,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8810
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8813
@@ -22011,8 +21109,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8814
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22043,8 +21140,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8827
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8830
@@ -22054,8 +21150,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8831
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22086,8 +21181,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8844
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8847
@@ -22097,8 +21191,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8848
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22129,8 +21222,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8861
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8863
                 MOVE_NIGHT_SHADE,
@@ -22145,8 +21237,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8867
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8869
                 MOVE_ABSORB,
@@ -22182,8 +21273,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8882
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8885
@@ -22193,8 +21283,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 8886
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22225,8 +21314,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8899
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8901
                 MOVE_SPARK,
@@ -22243,8 +21331,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 8907
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8909
                 MOVE_SPARK,
@@ -22282,8 +21369,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8924
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8926
                 MOVE_THUNDER,
@@ -22300,8 +21386,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 8932
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 8934
                 MOVE_THUNDER,
@@ -22339,8 +21424,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8949
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8952
@@ -22350,8 +21434,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 8953
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22382,8 +21465,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8966
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22414,8 +21496,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8979
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8982
@@ -22425,8 +21506,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8983
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22457,8 +21537,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 8996
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 8999
@@ -22468,8 +21547,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9000
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9003
@@ -22479,8 +21557,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9004
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22511,8 +21588,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9017
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9020
@@ -22522,8 +21598,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9021
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22554,8 +21629,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9034
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9037
@@ -22565,8 +21639,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9038
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9041
@@ -22576,8 +21649,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9042
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22608,8 +21680,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9055
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9058
@@ -22619,8 +21690,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9059
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22651,8 +21721,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9072
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9075
@@ -22662,8 +21731,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9076
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9079
@@ -22673,8 +21741,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9080
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22705,8 +21772,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9093
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9096
@@ -22716,8 +21782,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9097
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9100
@@ -22727,8 +21792,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9101
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22759,8 +21823,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9114
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9117
@@ -22770,8 +21833,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9118
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9121
@@ -22781,8 +21843,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9122
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22813,8 +21874,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 9135
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9138
@@ -22824,8 +21884,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 9139
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9142
@@ -22835,8 +21894,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 9143
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22867,8 +21925,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9156
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22903,8 +21960,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9169
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9171
                 MOVE_FLAIL,
@@ -22923,8 +21979,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9177
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9179
                 MOVE_FLAIL,
@@ -22966,8 +22021,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9195
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -22998,8 +22052,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9208
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9210
                 MOVE_TOXIC,
@@ -23039,8 +22092,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9225
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9227
                 MOVE_SUNNY_DAY,
@@ -23078,8 +22130,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9242
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9245
@@ -23089,8 +22140,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9246
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23121,8 +22171,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9259
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9262
@@ -23132,8 +22181,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9263
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23168,8 +22216,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 9277
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9279
                 MOVE_BITE,
@@ -23209,8 +22256,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9294
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9297
@@ -23220,8 +22266,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 9298
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23252,8 +22297,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9311
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23284,8 +22328,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9324
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9327
@@ -23295,8 +22338,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 9328
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23327,8 +22369,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9341
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9344
@@ -23338,8 +22379,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9345
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23370,8 +22410,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9358
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9361
@@ -23381,8 +22420,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9362
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23413,8 +22451,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9375
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9378
@@ -23424,8 +22461,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9379
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9382
@@ -23435,8 +22471,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9383
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23467,8 +22502,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9396
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9399
@@ -23478,8 +22512,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9400
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23510,8 +22543,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9413
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9416
@@ -23521,8 +22553,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9417
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23553,8 +22584,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9430
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9433
@@ -23564,8 +22594,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9434
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23596,8 +22625,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9447
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9450
@@ -23607,8 +22635,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9451
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23641,8 +22668,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9465
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9467
                 MOVE_AERIAL_ACE,
@@ -23659,8 +22685,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9473
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9475
                 MOVE_SING,
@@ -23677,8 +22702,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9481
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9483
                 MOVE_MAGICAL_LEAF,
@@ -23695,8 +22719,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9489
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9491
                 MOVE_SUPERSONIC,
@@ -23713,8 +22736,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 9497
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9499
                 MOVE_DOUBLE_TEAM,
@@ -23752,8 +22774,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9514
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23784,8 +22805,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9527
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9530
@@ -23795,8 +22815,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9531
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9534
@@ -23806,8 +22825,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9535
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23838,8 +22856,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9548
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9551
@@ -23849,8 +22866,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9552
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9555
@@ -23860,8 +22876,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9556
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23892,8 +22907,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9569
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23924,8 +22938,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9582
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9585
@@ -23935,8 +22948,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9586
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9589
@@ -23946,8 +22958,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9590
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -23978,8 +22989,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9603
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9606
@@ -23989,8 +22999,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9607
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9610
@@ -24000,8 +23009,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9611
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24032,8 +23040,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9624
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24064,8 +23071,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9637
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9640
@@ -24075,8 +23081,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9641
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9644
@@ -24086,8 +23091,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9645
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24118,8 +23122,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9658
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9661
@@ -24129,8 +23132,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9662
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9665
@@ -24140,8 +23142,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9666
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24174,8 +23175,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9679
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24208,8 +23208,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9692
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9695
@@ -24219,8 +23218,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9696
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9699
@@ -24230,8 +23228,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9700
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24264,8 +23261,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9713
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9716
@@ -24275,8 +23271,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9717
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9720
@@ -24286,8 +23281,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9721
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24320,8 +23314,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9734
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24354,8 +23347,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9747
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9750
@@ -24365,8 +23357,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9751
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9754
@@ -24376,8 +23367,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9755
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24410,8 +23400,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9768
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9771
@@ -24421,8 +23410,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9772
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9775
@@ -24432,8 +23420,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9776
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24466,8 +23453,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9789
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24500,8 +23486,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9802
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9805
@@ -24511,8 +23496,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 9806
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9809
@@ -24522,8 +23506,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9810
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24556,8 +23539,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9823
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9826
@@ -24567,8 +23549,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 9827
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9830
@@ -24578,8 +23559,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 9831
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24610,8 +23590,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9844
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9847
@@ -24621,8 +23600,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9848
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9851
@@ -24632,8 +23610,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9852
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9855
@@ -24643,8 +23620,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9856
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9859
@@ -24654,8 +23630,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9860
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9863
@@ -24665,8 +23640,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9864
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24697,8 +23671,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9877
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24729,8 +23702,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9890
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9892
                 MOVE_EXPLOSION,
@@ -24747,8 +23719,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 9898
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 9900
                 MOVE_EXPLOSION,
@@ -24786,8 +23757,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9915
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9918
@@ -24797,8 +23767,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9919
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9922
@@ -24808,8 +23777,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9923
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9926
@@ -24819,8 +23787,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9927
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9930
@@ -24830,8 +23797,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9931
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9934
@@ -24841,8 +23807,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 9935
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24873,8 +23838,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9948
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9951
@@ -24884,8 +23848,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9952
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9955
@@ -24895,8 +23858,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9956
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9959
@@ -24906,8 +23868,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9960
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9963
@@ -24917,8 +23878,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9964
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9967
@@ -24928,8 +23888,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 9968
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -24960,8 +23919,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9981
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9984
@@ -24971,8 +23929,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9985
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9988
@@ -24982,8 +23939,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9989
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9992
@@ -24993,8 +23949,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9993
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 9996
@@ -25004,8 +23959,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 9997
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10000
@@ -25015,8 +23969,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10001
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25047,8 +24000,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10014
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10017
@@ -25058,8 +24010,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10018
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10021
@@ -25069,8 +24020,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10022
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10025
@@ -25080,8 +24030,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10026
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10029
@@ -25091,8 +24040,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10030
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10033
@@ -25102,8 +24050,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10034
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25136,8 +24083,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10047
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10050
@@ -25147,8 +24093,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10051
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10054
@@ -25158,8 +24103,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10055
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10058
@@ -25169,8 +24113,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10059
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10062
@@ -25180,8 +24123,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10063
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10066
@@ -25191,8 +24133,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10067
             .lvl = 11,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25227,8 +24168,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10081
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10084
@@ -25238,8 +24178,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10085
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25270,8 +24209,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10098
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25304,8 +24242,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10111
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10114
@@ -25315,8 +24252,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10115
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10118
@@ -25326,8 +24262,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10119
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10122
@@ -25337,8 +24272,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10123
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10126
@@ -25348,8 +24282,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10127
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10130
@@ -25359,8 +24292,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 10131
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25393,8 +24325,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10144
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10147
@@ -25404,8 +24335,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10148
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10151
@@ -25415,8 +24345,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10152
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10155
@@ -25426,8 +24355,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10156
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10159
@@ -25437,8 +24365,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10160
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10163
@@ -25448,8 +24375,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 10164
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25482,8 +24408,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10177
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10180
@@ -25493,8 +24418,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10181
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10184
@@ -25504,8 +24428,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10185
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10188
@@ -25515,8 +24438,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10189
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10192
@@ -25526,8 +24448,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10193
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10196
@@ -25537,8 +24458,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10197
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25571,8 +24491,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10210
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10213
@@ -25582,8 +24501,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10214
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10217
@@ -25593,8 +24511,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10218
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10221
@@ -25604,8 +24521,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10222
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10225
@@ -25615,8 +24531,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10226
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10229
@@ -25626,8 +24541,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 10230
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25660,8 +24574,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10244
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25694,8 +24607,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10258
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10261
@@ -25705,8 +24617,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10262
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10265
@@ -25716,8 +24627,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10266
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25750,8 +24660,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10280
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25784,8 +24693,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(7, 7, 7, 7, 7, 7),
 #line 10294
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25818,8 +24726,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
 #line 10308
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25852,8 +24759,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 10322
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25886,8 +24792,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 #line 10336
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10339
@@ -25897,8 +24802,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 #line 10340
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25933,8 +24837,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10354
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10357
@@ -25944,8 +24847,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10358
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -25980,8 +24882,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10372
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10375
@@ -25991,8 +24892,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10376
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10379
@@ -26002,8 +24902,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10380
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26038,8 +24937,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10394
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10397
@@ -26049,8 +24947,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10398
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26085,8 +24982,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(7, 7, 7, 7, 7, 7),
 #line 10412
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10415
@@ -26096,8 +24992,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(7, 7, 7, 7, 7, 7),
 #line 10416
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26132,8 +25027,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
 #line 10430
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10433
@@ -26143,8 +25037,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(8, 8, 8, 8, 8, 8),
 #line 10434
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26179,8 +25072,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 10448
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10451
@@ -26190,8 +25082,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 10452
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26226,8 +25117,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 #line 10466
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10469
@@ -26237,8 +25127,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(10, 10, 10, 10, 10, 10),
 #line 10470
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26269,8 +25158,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10483
             .lvl = 21,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26301,8 +25189,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10496
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10499
@@ -26312,8 +25199,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10500
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26346,8 +25232,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10513
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10516
@@ -26357,8 +25242,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10517
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26391,8 +25275,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10530
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10533
@@ -26402,8 +25285,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10534
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26434,8 +25316,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10547
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10550
@@ -26445,8 +25326,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10551
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26477,8 +25357,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 10564
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10567
@@ -26488,8 +25367,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 10568
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26520,8 +25398,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10581
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26554,8 +25431,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 10594
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26586,8 +25462,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 10607
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26620,8 +25495,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10620
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26652,8 +25526,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10633
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26688,8 +25561,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10647
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 10649
                 MOVE_THUNDER,
@@ -26705,8 +25577,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10654
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 10656
                 MOVE_SURF,
@@ -26742,8 +25613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10669
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26774,8 +25644,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10682
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26806,8 +25675,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10695
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26840,8 +25708,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10708
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26872,8 +25739,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10721
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26906,8 +25772,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 10734
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26938,8 +25803,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10747
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -26970,8 +25834,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10760
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27004,8 +25867,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10773
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10776
@@ -27015,8 +25877,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10777
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27047,8 +25908,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10790
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27079,8 +25939,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10803
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27111,8 +25970,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10816
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27143,8 +26001,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10829
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27177,8 +26034,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10842
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27209,8 +26065,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10855
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10858
@@ -27220,8 +26075,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10859
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27252,8 +26106,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10872
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10875
@@ -27263,8 +26116,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10876
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27295,8 +26147,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10889
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10892
@@ -27306,8 +26157,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10893
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27340,8 +26190,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10906
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27374,8 +26223,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10919
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10922
@@ -27385,8 +26233,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10923
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27417,8 +26264,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10936
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10939
@@ -27428,8 +26274,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10940
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10943
@@ -27439,8 +26284,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10944
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10947
@@ -27450,8 +26294,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10948
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27484,8 +26327,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10962
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10965
@@ -27495,8 +26337,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 10966
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27527,8 +26368,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10979
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10982
@@ -27538,8 +26378,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 10983
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27572,8 +26411,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 10996
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 10999
@@ -27583,8 +26421,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 11000
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27617,8 +26454,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11014
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11017
@@ -27628,8 +26464,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11018
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11021
@@ -27639,8 +26474,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11022
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27673,8 +26507,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11036
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11039
@@ -27684,8 +26517,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11040
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11043
@@ -27695,8 +26527,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 11044
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27729,8 +26560,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11057
             .lvl = 4,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11060
@@ -27740,8 +26570,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11061
             .lvl = 4,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27774,8 +26603,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11074
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11077
@@ -27785,8 +26613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11078
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27819,8 +26646,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11091
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27853,8 +26679,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11104
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11107
@@ -27864,8 +26689,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11108
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11111
@@ -27875,8 +26699,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11112
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27909,8 +26732,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11125
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11128
@@ -27920,8 +26742,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11129
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27954,8 +26775,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11142
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11145
@@ -27965,8 +26785,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11146
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -27999,8 +26818,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11159
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11162
@@ -28010,8 +26828,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11163
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28044,8 +26861,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11176
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11179
@@ -28055,8 +26871,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11180
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11183
@@ -28066,8 +26881,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11184
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28100,8 +26914,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11197
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28134,8 +26947,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11210
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11213
@@ -28145,8 +26957,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11214
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11217
@@ -28156,8 +26967,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11218
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28190,8 +27000,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11231
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28224,8 +27033,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11244
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11247
@@ -28235,8 +27043,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11248
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28267,8 +27074,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11261
             .lvl = 4,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11264
@@ -28278,8 +27084,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11265
             .lvl = 4,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28310,8 +27115,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11278
             .lvl = 3,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11281
@@ -28321,8 +27125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11282
             .lvl = 3,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11285
@@ -28332,8 +27135,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11286
             .lvl = 3,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11289
@@ -28343,8 +27145,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11290
             .lvl = 3,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28375,8 +27176,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 11303
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11306
@@ -28386,8 +27186,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 11307
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28418,8 +27217,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11320
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11323
@@ -28429,8 +27227,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11324
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28461,8 +27258,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11337
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11340
@@ -28472,8 +27268,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11341
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28504,8 +27299,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11354
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28536,8 +27330,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11367
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11370
@@ -28547,8 +27340,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11371
             .lvl = 6,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28579,8 +27371,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11384
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28611,8 +27402,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11397
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11400
@@ -28622,8 +27412,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11401
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28654,8 +27443,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11414
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11417
@@ -28665,8 +27453,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11418
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11421
@@ -28676,8 +27463,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11422
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28708,8 +27494,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11435
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11438
@@ -28719,8 +27504,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11439
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11442
@@ -28730,8 +27514,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11443
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11446
@@ -28741,8 +27524,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11447
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28773,8 +27555,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11460
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11463
@@ -28784,8 +27565,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11464
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28816,8 +27596,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11477
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11480
@@ -28827,8 +27606,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11481
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11484
@@ -28838,8 +27616,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11485
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28870,8 +27647,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11498
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11501
@@ -28881,8 +27657,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11502
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28913,8 +27688,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11515
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11518
@@ -28924,8 +27698,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11519
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -28956,8 +27729,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11532
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11535
@@ -28967,8 +27739,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11536
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11539
@@ -28978,8 +27749,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11540
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29010,8 +27780,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11553
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29042,8 +27811,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11566
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11569
@@ -29053,8 +27821,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11570
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29085,8 +27852,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11583
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11585
                 MOVE_SPLASH,
@@ -29122,8 +27888,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11598
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11600
                 MOVE_GUST,
@@ -29138,8 +27903,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11604
             .lvl = 10,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11606
                 MOVE_BITE,
@@ -29175,8 +27939,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11619
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11622
@@ -29186,8 +27949,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11623
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11626
@@ -29197,8 +27959,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11627
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29229,8 +27990,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11640
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11643
@@ -29240,8 +28000,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11644
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11647
@@ -29251,8 +28010,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11648
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11651
@@ -29262,8 +28020,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11652
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29294,8 +28051,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11665
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11668
@@ -29305,8 +28061,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11669
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11672
@@ -29316,8 +28071,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11673
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11676
@@ -29327,8 +28081,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11677
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29359,8 +28112,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11690
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11693
@@ -29370,8 +28122,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11694
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11697
@@ -29381,8 +28132,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11698
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11701
@@ -29392,8 +28142,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11702
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29424,8 +28173,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11715
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11718
@@ -29435,8 +28183,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11719
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11722
@@ -29446,8 +28193,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11723
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11726
@@ -29457,8 +28203,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11727
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29489,8 +28234,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11740
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11743
@@ -29500,8 +28244,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11744
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29532,8 +28275,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11757
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11760
@@ -29543,8 +28285,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11761
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29575,8 +28316,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11774
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11777
@@ -29586,8 +28326,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11778
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29618,8 +28357,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11791
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11794
@@ -29629,8 +28367,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 11795
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29661,8 +28398,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11808
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11811
@@ -29672,8 +28408,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 11812
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29704,8 +28439,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11825
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11828
@@ -29715,8 +28449,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 11829
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29747,8 +28480,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11842
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 11845
@@ -29758,8 +28490,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 11846
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29792,8 +28523,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11859
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -29826,8 +28556,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11873
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11875
                 MOVE_FLAMETHROWER,
@@ -29867,8 +28596,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11890
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11892
                 MOVE_BIDE,
@@ -29885,8 +28613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11898
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11900
                 MOVE_THUNDER_PUNCH,
@@ -29926,8 +28653,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 11915
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11917
                 MOVE_BIDE,
@@ -29965,8 +28691,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11932
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11934
                 MOVE_TACKLE,
@@ -29983,8 +28708,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11940
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11942
                 MOVE_TACKLE,
@@ -30022,8 +28746,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11957
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11959
                 MOVE_POISON_GAS,
@@ -30040,8 +28763,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11965
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11967
                 MOVE_SAND_ATTACK,
@@ -30079,8 +28801,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11982
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11984
                 MOVE_LEECH_LIFE,
@@ -30097,8 +28818,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 11990
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 11992
                 MOVE_TACKLE,
@@ -30136,8 +28856,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12007
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12010
@@ -30147,8 +28866,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12011
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30181,8 +28899,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12024
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12027
@@ -30192,8 +28909,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12028
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12031
@@ -30203,8 +28919,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12032
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30235,8 +28950,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 12045
             .lvl = 16,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30269,8 +28983,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12059
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12061
                 MOVE_AERIAL_ACE,
@@ -30287,8 +29000,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12067
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12069
                 MOVE_SING,
@@ -30305,8 +29017,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12075
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12077
                 MOVE_MAGICAL_LEAF,
@@ -30323,8 +29034,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12083
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12085
                 MOVE_SUPERSONIC,
@@ -30341,8 +29051,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 12091
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12093
                 MOVE_DOUBLE_TEAM,
@@ -30382,8 +29091,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12109
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12111
                 MOVE_AERIAL_ACE,
@@ -30400,8 +29108,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12117
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12119
                 MOVE_SING,
@@ -30418,8 +29125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12125
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12127
                 MOVE_MAGICAL_LEAF,
@@ -30436,8 +29142,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12133
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12135
                 MOVE_SUPERSONIC,
@@ -30454,8 +29159,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 12141
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12143
                 MOVE_DOUBLE_TEAM,
@@ -30495,8 +29199,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12159
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12161
                 MOVE_AERIAL_ACE,
@@ -30513,8 +29216,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12167
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12169
                 MOVE_SING,
@@ -30531,8 +29233,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12175
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12177
                 MOVE_MAGICAL_LEAF,
@@ -30549,8 +29250,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12183
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12185
                 MOVE_SUPERSONIC,
@@ -30567,8 +29267,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 12191
             .lvl = 54,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12193
                 MOVE_DOUBLE_TEAM,
@@ -30608,8 +29307,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12209
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12211
                 MOVE_AERIAL_ACE,
@@ -30626,8 +29324,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12217
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12219
                 MOVE_SING,
@@ -30644,8 +29341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12225
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12227
                 MOVE_MAGICAL_LEAF,
@@ -30662,8 +29358,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12233
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12235
                 MOVE_SUPERSONIC,
@@ -30680,8 +29375,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(30, 30, 30, 30, 30, 30),
 #line 12241
             .lvl = 57,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12243
                 MOVE_DOUBLE_TEAM,
@@ -30719,8 +29413,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12258
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12261
@@ -30730,8 +29423,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12262
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12265
@@ -30741,8 +29433,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12266
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12269
@@ -30752,8 +29443,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12270
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30784,8 +29474,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12283
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12286
@@ -30795,8 +29484,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12287
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12290
@@ -30806,8 +29494,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12291
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12294
@@ -30817,8 +29504,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12295
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30849,8 +29535,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12308
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12311
@@ -30860,8 +29545,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12312
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12315
@@ -30871,8 +29555,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12316
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12319
@@ -30882,8 +29565,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12320
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30916,8 +29598,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12333
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12336
@@ -30927,8 +29608,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12337
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12340
@@ -30938,8 +29618,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12341
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12344
@@ -30949,8 +29628,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12345
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -30983,8 +29661,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12358
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12361
@@ -30994,8 +29671,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12362
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12365
@@ -31005,8 +29681,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12366
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12369
@@ -31016,8 +29691,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12370
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31050,8 +29724,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12383
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12386
@@ -31061,8 +29734,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12387
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12390
@@ -31072,8 +29744,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 12391
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12394
@@ -31083,8 +29754,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12395
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31115,8 +29785,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12408
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12411
@@ -31126,8 +29795,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12412
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12415
@@ -31137,8 +29805,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12416
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31169,8 +29836,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12429
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12432
@@ -31180,8 +29846,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12433
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31212,8 +29877,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12446
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12449
@@ -31223,8 +29887,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12450
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12453
@@ -31234,8 +29897,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12454
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31270,8 +29932,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12468
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12471
@@ -31281,8 +29942,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12472
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31315,8 +29975,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12486
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12489
@@ -31326,8 +29985,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 12490
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31358,8 +30016,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12503
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31390,8 +30047,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12516
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12519
@@ -31401,8 +30057,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12520
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12523
@@ -31412,8 +30067,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12524
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31444,8 +30098,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12537
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12540
@@ -31455,8 +30108,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12541
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31487,8 +30139,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12554
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12557
@@ -31498,8 +30149,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12558
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31532,8 +30182,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12571
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31564,8 +30213,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12584
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12587
@@ -31575,8 +30223,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12588
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -31607,8 +30254,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12601
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12603
                 MOVE_SING,
@@ -31625,8 +30271,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12609
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12611
                 MOVE_FLAMETHROWER,
@@ -31664,8 +30309,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12626
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12628
                 MOVE_GROWTH,
@@ -31682,8 +30326,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12634
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12636
                 MOVE_DEFENSE_CURL,
@@ -31721,8 +30364,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12651
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12653
                 MOVE_GUST,
@@ -31739,8 +30381,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12659
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12661
                 MOVE_GUST,
@@ -31778,8 +30419,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12676
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12678
                 MOVE_PSYCHIC,
@@ -31796,8 +30436,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 12684
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12686
                 MOVE_FOCUS_PUNCH,
@@ -31835,8 +30474,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 12701
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12703
                 MOVE_PSYCHIC,
@@ -31853,8 +30491,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
 #line 12709
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12711
                 MOVE_FOCUS_PUNCH,
@@ -31892,8 +30529,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 12726
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12728
                 MOVE_PSYCHIC,
@@ -31910,8 +30546,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(26, 26, 26, 26, 26, 26),
 #line 12734
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12736
                 MOVE_FOCUS_PUNCH,
@@ -31949,8 +30584,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(27, 27, 27, 27, 27, 27),
 #line 12751
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12753
                 MOVE_PSYCHIC,
@@ -31967,8 +30601,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(27, 27, 27, 27, 27, 27),
 #line 12759
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12761
                 MOVE_FOCUS_PUNCH,
@@ -32006,8 +30639,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 12776
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12778
                 MOVE_PSYCHIC,
@@ -32024,8 +30656,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(29, 29, 29, 29, 29, 29),
 #line 12784
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 12786
                 MOVE_FOCUS_PUNCH,
@@ -32063,8 +30694,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12801
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12804
@@ -32074,8 +30704,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12805
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32106,8 +30735,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12818
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12821
@@ -32117,8 +30745,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12822
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32149,8 +30776,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12835
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12838
@@ -32160,8 +30786,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12839
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32192,8 +30817,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12852
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12855
@@ -32203,8 +30827,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12856
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32235,8 +30858,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12869
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12872
@@ -32246,8 +30868,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12873
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32278,8 +30899,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12886
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12889
@@ -32289,8 +30909,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12890
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32321,8 +30940,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12903
             .lvl = 27,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12906
@@ -32332,8 +30950,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12907
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32364,8 +30981,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12920
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12923
@@ -32375,8 +30991,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12924
             .lvl = 20,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12927
@@ -32386,8 +31001,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12928
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12931
@@ -32397,8 +31011,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12932
             .lvl = 23,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32431,8 +31044,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12945
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12948
@@ -32442,8 +31054,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12949
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32478,8 +31089,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12963
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 12966
@@ -32491,8 +31101,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12967
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32523,8 +31132,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12980
             .lvl = 9,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32557,8 +31165,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 12993
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32589,8 +31196,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13006
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13009
@@ -32600,8 +31206,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13010
             .lvl = 12,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32634,8 +31239,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13023
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13026
@@ -32647,8 +31251,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13027
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32679,8 +31282,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13040
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13043
@@ -32690,8 +31292,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13044
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32724,8 +31325,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13057
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32756,8 +31356,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 13070
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32788,8 +31387,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 13083
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32820,8 +31418,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13096
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32854,8 +31451,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13109
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32888,8 +31484,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13122
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32920,8 +31515,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13135
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32954,8 +31548,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13148
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13151
@@ -32965,8 +31558,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13152
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -32997,8 +31589,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13165
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13168
@@ -33008,8 +31599,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13169
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33040,8 +31630,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13182
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13185
@@ -33051,8 +31640,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13186
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33083,8 +31671,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13199
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13202
@@ -33094,8 +31681,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13203
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33128,8 +31714,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13216
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13219
@@ -33139,8 +31724,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13220
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33171,8 +31755,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13233
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33205,8 +31788,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13246
             .lvl = 19,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33237,8 +31819,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13259
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13262
@@ -33248,8 +31829,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13263
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13266
@@ -33259,8 +31839,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13267
             .lvl = 14,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33291,8 +31870,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13280
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33323,8 +31901,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13293
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33355,8 +31932,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13306
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33387,8 +31963,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13319
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13322
@@ -33398,8 +31973,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13323
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33430,8 +32004,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13336
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13339
@@ -33441,8 +32014,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13340
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33473,8 +32045,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13353
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33505,8 +32076,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13366
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33537,8 +32107,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13379
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33569,8 +32138,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13392
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33601,8 +32169,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13405
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33633,8 +32200,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13418
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33665,8 +32231,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13431
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33697,8 +32262,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13444
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33731,8 +32295,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13457
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33765,8 +32328,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13470
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33799,8 +32361,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13483
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33831,8 +32392,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 13496
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13499
@@ -33842,8 +32402,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 13500
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13503
@@ -33853,8 +32412,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 13504
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13507
@@ -33864,8 +32422,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(9, 9, 9, 9, 9, 9),
 #line 13508
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33900,8 +32457,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13522
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13525
@@ -33911,8 +32467,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13526
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33943,8 +32498,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 13539
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13542
@@ -33954,8 +32508,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 13543
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13546
@@ -33965,8 +32518,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(18, 18, 18, 18, 18, 18),
 #line 13547
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -33997,8 +32549,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13560
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34031,8 +32582,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13573
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34063,8 +32613,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13586
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13589
@@ -34074,8 +32623,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13590
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34106,8 +32654,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13603
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13606
@@ -34117,8 +32664,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13607
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34149,8 +32695,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13620
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34181,8 +32726,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13633
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13636
@@ -34192,8 +32736,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13637
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13640
@@ -34203,8 +32746,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13641
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34239,8 +32781,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13655
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13658
@@ -34250,8 +32791,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13659
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13662
@@ -34261,8 +32801,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 13663
             .lvl = 24,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34293,8 +32832,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13676
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13679
@@ -34304,8 +32842,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13680
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34338,8 +32875,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13693
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13696
@@ -34349,8 +32885,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13697
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34381,8 +32916,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13710
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13713
@@ -34392,8 +32926,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13714
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34424,8 +32957,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13727
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13730
@@ -34435,8 +32967,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13731
             .lvl = 22,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34467,8 +32998,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13744
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13747
@@ -34478,8 +33008,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13748
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34512,8 +33041,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13761
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13764
@@ -34523,8 +33051,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13765
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34557,8 +33084,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13778
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13781
@@ -34568,8 +33094,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13782
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34600,8 +33125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13795
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13798
@@ -34611,8 +33135,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13799
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34645,8 +33168,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13812
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13815
@@ -34656,8 +33178,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13816
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34690,8 +33211,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13829
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13832
@@ -34701,8 +33221,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13833
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34735,8 +33254,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13846
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13849
@@ -34746,8 +33264,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13850
             .lvl = 18,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34778,8 +33295,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13863
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13866
@@ -34789,8 +33305,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13867
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34821,8 +33336,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13880
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13883
@@ -34832,8 +33346,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13884
             .lvl = 8,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34866,8 +33379,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13897
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34900,8 +33412,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13910
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34934,8 +33445,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13923
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -34970,8 +33480,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13937
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13940
@@ -34981,8 +33490,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13941
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35013,8 +33521,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13954
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35045,8 +33552,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13967
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 13970
@@ -35056,8 +33562,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13971
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35090,8 +33595,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 13984
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35124,8 +33628,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 13998
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14000
                 MOVE_THUNDER,
@@ -35164,8 +33667,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 14014
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14017
@@ -35175,8 +33677,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 14018
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35207,8 +33708,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 14031
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14034
@@ -35218,8 +33718,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 14035
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35250,8 +33749,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14048
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14051
@@ -35261,8 +33759,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14052
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14055
@@ -35272,8 +33769,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14056
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14059
@@ -35283,8 +33779,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14060
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14063
@@ -35294,8 +33789,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14064
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14067
@@ -35305,8 +33799,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14068
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35339,8 +33832,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14081
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14084
@@ -35350,8 +33842,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14085
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14088
@@ -35361,8 +33852,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14089
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14092
@@ -35372,8 +33862,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14093
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14096
@@ -35383,8 +33872,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14097
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14100
@@ -35394,8 +33882,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 14101
             .lvl = 25,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35430,8 +33917,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 14115
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14118
@@ -35441,8 +33927,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 14119
             .lvl = 29,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35475,8 +33960,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 14132
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14135
@@ -35486,8 +33970,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 14136
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35520,8 +34003,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 14149
             .lvl = 13,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 14152
@@ -35531,8 +34013,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(6, 6, 6, 6, 6, 6),
 #line 14153
             .lvl = 15,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -35567,8 +34048,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14167
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14169
                 MOVE_PROTECT,
@@ -35587,8 +34067,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14175
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14177
                 MOVE_SWORDS_DANCE,
@@ -35605,8 +34084,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14183
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14185
                 MOVE_IRON_TAIL,
@@ -35625,8 +34103,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14191
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14193
                 MOVE_DOUBLE_TEAM,
@@ -35668,8 +34145,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14209
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14211
                 MOVE_PROTECT,
@@ -35686,8 +34162,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14217
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14219
                 MOVE_PROTECT,
@@ -35706,8 +34181,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14225
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14227
                 MOVE_SWORDS_DANCE,
@@ -35724,8 +34198,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14233
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14235
                 MOVE_IRON_TAIL,
@@ -35744,8 +34217,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14241
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14243
                 MOVE_DOUBLE_TEAM,
@@ -35787,8 +34259,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14259
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14261
                 MOVE_PROTECT,
@@ -35805,8 +34276,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14267
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14269
                 MOVE_PROTECT,
@@ -35825,8 +34295,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14275
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14277
                 MOVE_SWORDS_DANCE,
@@ -35843,8 +34312,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14283
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14285
                 MOVE_IRON_TAIL,
@@ -35863,8 +34331,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14291
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14293
                 MOVE_DOUBLE_TEAM,
@@ -35906,8 +34373,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14309
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14311
                 MOVE_ROCK_SLIDE,
@@ -35924,8 +34390,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14317
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14319
                 MOVE_FOCUS_PUNCH,
@@ -35942,8 +34407,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14325
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14327
                 MOVE_PROTECT,
@@ -35962,8 +34426,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14333
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14335
                 MOVE_SWORDS_DANCE,
@@ -35980,8 +34443,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14341
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14343
                 MOVE_IRON_TAIL,
@@ -36000,8 +34462,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14349
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14351
                 MOVE_DOUBLE_TEAM,
@@ -36043,8 +34504,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14367
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14369
                 MOVE_KARATE_CHOP,
@@ -36061,8 +34521,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14375
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14377
                 MOVE_PSYCHIC,
@@ -36079,8 +34538,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14383
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14385
                 MOVE_PURSUIT,
@@ -36099,8 +34557,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14391
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14393
                 MOVE_FAKE_OUT,
@@ -36142,8 +34599,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14409
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14411
                 MOVE_KARATE_CHOP,
@@ -36160,8 +34616,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14417
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14419
                 MOVE_PSYCHIC,
@@ -36178,8 +34633,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14425
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14427
                 MOVE_PURSUIT,
@@ -36198,8 +34652,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14433
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14435
                 MOVE_FAKE_OUT,
@@ -36239,8 +34692,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14451
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14453
                 MOVE_SKY_UPPERCUT,
@@ -36259,8 +34711,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14459
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14461
                 MOVE_KARATE_CHOP,
@@ -36277,8 +34728,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14467
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14469
                 MOVE_FOCUS_PUNCH,
@@ -36295,8 +34745,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14475
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14477
                 MOVE_PURSUIT,
@@ -36315,8 +34764,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14483
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14485
                 MOVE_FAKE_OUT,
@@ -36356,8 +34804,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14501
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14503
                 MOVE_MEGA_KICK,
@@ -36374,8 +34821,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14509
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14511
                 MOVE_SKY_UPPERCUT,
@@ -36394,8 +34840,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14517
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14519
                 MOVE_CROSS_CHOP,
@@ -36412,8 +34857,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14525
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14527
                 MOVE_FOCUS_PUNCH,
@@ -36430,8 +34874,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14533
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14535
                 MOVE_PURSUIT,
@@ -36450,8 +34893,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14541
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14543
                 MOVE_FAKE_OUT,
@@ -36491,8 +34933,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14559
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14561
                 MOVE_THUNDER,
@@ -36509,8 +34950,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14567
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14569
                 MOVE_ROLLOUT,
@@ -36529,8 +34969,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14575
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14577
                 MOVE_SUPERSONIC,
@@ -36549,8 +34988,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14583
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14585
                 MOVE_BITE,
@@ -36590,8 +35028,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14601
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14603
                 MOVE_THUNDER,
@@ -36608,8 +35045,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14609
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14611
                 MOVE_THUNDER,
@@ -36626,8 +35062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14617
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14619
                 MOVE_ROLLOUT,
@@ -36646,8 +35081,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14625
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14627
                 MOVE_SUPERSONIC,
@@ -36666,8 +35100,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14633
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14635
                 MOVE_BITE,
@@ -36707,8 +35140,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14651
             .lvl = 44,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14653
                 MOVE_THUNDER,
@@ -36725,8 +35157,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14659
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14661
                 MOVE_THUNDER,
@@ -36743,8 +35174,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14667
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14669
                 MOVE_ROLLOUT,
@@ -36763,8 +35193,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14675
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14677
                 MOVE_SUPERSONIC,
@@ -36783,8 +35212,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14683
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14685
                 MOVE_BITE,
@@ -36824,8 +35252,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14701
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14703
                 MOVE_SWIFT,
@@ -36842,8 +35269,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14709
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14711
                 MOVE_THUNDER,
@@ -36860,8 +35286,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14717
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14719
                 MOVE_THUNDER,
@@ -36878,8 +35303,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14725
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14727
                 MOVE_ROLLOUT,
@@ -36898,8 +35322,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14733
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14735
                 MOVE_SUPERSONIC,
@@ -36918,8 +35341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14741
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14743
                 MOVE_BITE,
@@ -36963,8 +35385,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14759
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14761
                 MOVE_OVERHEAT,
@@ -36981,8 +35402,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14767
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14769
                 MOVE_FLAMETHROWER,
@@ -37001,8 +35421,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14775
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14777
                 MOVE_OVERHEAT,
@@ -37021,8 +35440,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14783
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14785
                 MOVE_OVERHEAT,
@@ -37064,8 +35482,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14801
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14803
                 MOVE_HELPING_HAND,
@@ -37084,8 +35501,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14809
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14811
                 MOVE_OVERHEAT,
@@ -37102,8 +35518,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14817
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14819
                 MOVE_FLAMETHROWER,
@@ -37122,8 +35537,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14825
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14827
                 MOVE_OVERHEAT,
@@ -37142,8 +35556,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14833
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14835
                 MOVE_OVERHEAT,
@@ -37185,8 +35598,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14851
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14853
                 MOVE_ROAR,
@@ -37203,8 +35615,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14859
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14861
                 MOVE_HELPING_HAND,
@@ -37223,8 +35634,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14867
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14869
                 MOVE_OVERHEAT,
@@ -37241,8 +35651,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14875
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14877
                 MOVE_FLAMETHROWER,
@@ -37261,8 +35670,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14883
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14885
                 MOVE_OVERHEAT,
@@ -37281,8 +35689,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14891
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14893
                 MOVE_OVERHEAT,
@@ -37324,8 +35731,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14909
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14911
                 MOVE_HELPING_HAND,
@@ -37344,8 +35750,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14917
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14919
                 MOVE_OVERHEAT,
@@ -37362,8 +35767,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14925
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14927
                 MOVE_ROAR,
@@ -37380,8 +35784,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14933
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14935
                 MOVE_FLAMETHROWER,
@@ -37400,8 +35803,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14941
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14943
                 MOVE_OVERHEAT,
@@ -37420,8 +35822,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14949
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14951
                 MOVE_OVERHEAT,
@@ -37461,8 +35862,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14967
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14969
                 MOVE_LIGHT_SCREEN,
@@ -37481,8 +35881,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14975
             .lvl = 42,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14977
                 MOVE_BLIZZARD,
@@ -37499,8 +35898,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14983
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14985
                 MOVE_TEETER_DANCE,
@@ -37519,8 +35917,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 14991
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 14993
                 MOVE_HYPER_BEAM,
@@ -37562,8 +35959,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15009
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15011
                 MOVE_BLIZZARD,
@@ -37580,8 +35976,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15017
             .lvl = 47,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15019
                 MOVE_LIGHT_SCREEN,
@@ -37598,8 +35993,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15025
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15027
                 MOVE_FAKE_OUT,
@@ -37616,8 +36010,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15033
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15035
                 MOVE_TEETER_DANCE,
@@ -37636,8 +36029,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15041
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15043
                 MOVE_HYPER_BEAM,
@@ -37679,8 +36071,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15059
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15061
                 MOVE_BLIZZARD,
@@ -37697,8 +36088,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15067
             .lvl = 52,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15069
                 MOVE_LIGHT_SCREEN,
@@ -37715,8 +36105,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15075
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15077
                 MOVE_FAKE_OUT,
@@ -37733,8 +36122,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15083
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15085
                 MOVE_TEETER_DANCE,
@@ -37753,8 +36141,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15091
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15093
                 MOVE_HYPER_BEAM,
@@ -37796,8 +36183,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15109
             .lvl = 57,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15111
                 MOVE_BLIZZARD,
@@ -37814,8 +36200,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15117
             .lvl = 57,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15119
                 MOVE_PROTECT,
@@ -37832,8 +36217,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15125
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15127
                 MOVE_FAKE_OUT,
@@ -37850,8 +36234,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15133
             .lvl = 57,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15135
                 MOVE_TAKE_DOWN,
@@ -37868,8 +36251,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15141
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15143
                 MOVE_TEETER_DANCE,
@@ -37888,8 +36270,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15149
             .lvl = 60,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15151
                 MOVE_HYPER_BEAM,
@@ -37933,8 +36314,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15167
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15169
                 MOVE_THUNDER_WAVE,
@@ -37951,8 +36331,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15175
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15177
                 MOVE_SUNNY_DAY,
@@ -37969,8 +36348,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15183
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15185
                 MOVE_SURF,
@@ -37987,8 +36365,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15191
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15193
                 MOVE_WHIRLWIND,
@@ -38007,8 +36384,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15199
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15201
                 MOVE_AERIAL_ACE,
@@ -38050,8 +36426,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15217
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15219
                 MOVE_HYPNOSIS,
@@ -38068,8 +36443,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15225
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15227
                 MOVE_SUNNY_DAY,
@@ -38088,8 +36462,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15233
             .lvl = 45,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15235
                 MOVE_THUNDER_WAVE,
@@ -38106,8 +36479,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15241
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15243
                 MOVE_SURF,
@@ -38124,8 +36496,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15249
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15251
                 MOVE_WHIRLWIND,
@@ -38144,8 +36515,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15257
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15259
                 MOVE_AERIAL_ACE,
@@ -38187,8 +36557,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15275
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15277
                 MOVE_HYPNOSIS,
@@ -38205,8 +36574,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15283
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15285
                 MOVE_SUNNY_DAY,
@@ -38225,8 +36593,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15291
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15293
                 MOVE_THUNDER_WAVE,
@@ -38243,8 +36610,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15299
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15301
                 MOVE_SURF,
@@ -38261,8 +36627,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15307
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15309
                 MOVE_WHIRLWIND,
@@ -38281,8 +36646,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15315
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15317
                 MOVE_AERIAL_ACE,
@@ -38324,8 +36688,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15333
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15335
                 MOVE_HYPNOSIS,
@@ -38342,8 +36705,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15341
             .lvl = 54,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15343
                 MOVE_SUNNY_DAY,
@@ -38360,8 +36722,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15349
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15351
                 MOVE_SURF,
@@ -38380,8 +36741,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15357
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15359
                 MOVE_HYPER_BEAM,
@@ -38398,8 +36758,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15365
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15367
                 MOVE_WHIRLWIND,
@@ -38418,8 +36777,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15373
             .lvl = 60,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15375
                 MOVE_SKY_ATTACK,
@@ -38459,8 +36817,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15391
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15393
                 MOVE_YAWN,
@@ -38477,8 +36834,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15399
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15401
                 MOVE_EARTHQUAKE,
@@ -38497,8 +36853,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15407
             .lvl = 49,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15409
                 MOVE_PSYCHIC,
@@ -38517,8 +36872,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15415
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15417
                 MOVE_EARTHQUAKE,
@@ -38537,8 +36891,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15423
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15425
                 MOVE_SUNNY_DAY,
@@ -38578,8 +36931,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15441
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15443
                 MOVE_HYPNOSIS,
@@ -38596,8 +36948,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15449
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15451
                 MOVE_YAWN,
@@ -38614,8 +36965,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15457
             .lvl = 54,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15459
                 MOVE_EARTHQUAKE,
@@ -38634,8 +36984,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15465
             .lvl = 54,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15467
                 MOVE_PSYCHIC,
@@ -38654,8 +37003,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15473
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15475
                 MOVE_EARTHQUAKE,
@@ -38674,8 +37022,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15481
             .lvl = 55,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15483
                 MOVE_SUNNY_DAY,
@@ -38715,8 +37062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15499
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15501
                 MOVE_HYPNOSIS,
@@ -38733,8 +37079,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15507
             .lvl = 59,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15509
                 MOVE_EARTHQUAKE,
@@ -38751,8 +37096,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15515
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15517
                 MOVE_YAWN,
@@ -38771,8 +37115,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15523
             .lvl = 59,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15525
                 MOVE_PSYCHIC,
@@ -38791,8 +37134,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15531
             .lvl = 60,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15533
                 MOVE_EARTHQUAKE,
@@ -38811,8 +37153,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15539
             .lvl = 60,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15541
                 MOVE_SUNNY_DAY,
@@ -38852,8 +37193,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15557
             .lvl = 63,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15559
                 MOVE_HYPNOSIS,
@@ -38870,8 +37210,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15565
             .lvl = 64,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15567
                 MOVE_EARTHQUAKE,
@@ -38888,8 +37227,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15573
             .lvl = 63,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15575
                 MOVE_YAWN,
@@ -38908,8 +37246,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15581
             .lvl = 64,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15583
                 MOVE_PSYCHIC,
@@ -38928,8 +37265,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15589
             .lvl = 65,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15591
                 MOVE_EARTHQUAKE,
@@ -38948,8 +37284,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15597
             .lvl = 65,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15599
                 MOVE_SUNNY_DAY,
@@ -38989,8 +37324,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15615
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15617
                 MOVE_HYPNOSIS,
@@ -39007,8 +37341,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15623
             .lvl = 46,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15625
                 MOVE_RAIN_DANCE,
@@ -39025,8 +37358,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15631
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15633
                 MOVE_WATER_PULSE,
@@ -39045,8 +37377,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15639
             .lvl = 48,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15641
                 MOVE_REST,
@@ -39065,8 +37396,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15647
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15649
                 MOVE_WATER_PULSE,
@@ -39106,8 +37436,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15665
             .lvl = 50,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15667
                 MOVE_HYPNOSIS,
@@ -39124,8 +37453,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15673
             .lvl = 51,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15675
                 MOVE_RAIN_DANCE,
@@ -39142,8 +37470,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15681
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15683
                 MOVE_WATER_PULSE,
@@ -39162,8 +37489,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15689
             .lvl = 53,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15691
                 MOVE_REST,
@@ -39182,8 +37508,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15697
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15699
                 MOVE_WATER_PULSE,
@@ -39223,8 +37548,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15715
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15717
                 MOVE_HYDRO_PUMP,
@@ -39241,8 +37565,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15723
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15725
                 MOVE_RAIN_DANCE,
@@ -39259,8 +37582,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15731
             .lvl = 56,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15733
                 MOVE_HYPNOSIS,
@@ -39277,8 +37599,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15739
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15741
                 MOVE_WATER_PULSE,
@@ -39297,8 +37618,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15747
             .lvl = 58,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15749
                 MOVE_REST,
@@ -39317,8 +37637,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15755
             .lvl = 61,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15757
                 MOVE_WATER_PULSE,
@@ -39358,8 +37677,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15773
             .lvl = 61,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15775
                 MOVE_HYDRO_PUMP,
@@ -39376,8 +37694,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15781
             .lvl = 63,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15783
                 MOVE_RAIN_DANCE,
@@ -39394,8 +37711,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15789
             .lvl = 61,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15791
                 MOVE_HYPNOSIS,
@@ -39412,8 +37728,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15797
             .lvl = 63,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15799
                 MOVE_WATER_PULSE,
@@ -39432,8 +37747,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15805
             .lvl = 63,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15807
                 MOVE_REST,
@@ -39452,8 +37766,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15813
             .lvl = 66,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15815
                 MOVE_WATER_PULSE,
@@ -39491,8 +37804,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 15830
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15832
                 MOVE_SHOCK_WAVE,
@@ -39508,8 +37820,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 15837
             .lvl = 17,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15839
                 MOVE_SHOCK_WAVE,
@@ -39546,8 +37857,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
 #line 15853
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39580,8 +37890,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15867
             .lvl = 77,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15869
                 MOVE_TOXIC,
@@ -39598,8 +37907,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15875
             .lvl = 75,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15877
                 MOVE_REFLECT,
@@ -39616,8 +37924,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15883
             .lvl = 76,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15885
                 MOVE_THUNDER,
@@ -39634,8 +37941,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15891
             .lvl = 76,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15893
                 MOVE_GIGA_DRAIN,
@@ -39652,8 +37958,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15899
             .lvl = 76,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15901
                 MOVE_WATER_PULSE,
@@ -39672,8 +37977,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 15907
             .lvl = 78,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             .moves = {
 #line 15909
                 MOVE_EARTHQUAKE,
@@ -39713,8 +38017,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15924
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39745,8 +38048,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15937
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39777,8 +38079,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15950
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39811,8 +38112,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15963
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39843,8 +38143,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15976
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39877,8 +38176,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 15989
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39909,8 +38207,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16002
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39941,8 +38238,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16015
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16018
@@ -39952,8 +38248,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16019
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -39984,8 +38279,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16032
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16035
@@ -39995,8 +38289,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16036
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16039
@@ -40006,8 +38299,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16040
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40038,8 +38330,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16053
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16056
@@ -40049,8 +38340,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16057
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16060
@@ -40060,8 +38350,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16061
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40092,8 +38381,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16074
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16077
@@ -40103,8 +38391,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16078
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16081
@@ -40114,8 +38401,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16082
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40146,8 +38432,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16095
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16098
@@ -40157,8 +38442,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16099
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16102
@@ -40168,8 +38452,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16103
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40200,8 +38483,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16116
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16119
@@ -40211,8 +38493,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16120
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16123
@@ -40222,8 +38503,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16124
             .lvl = 32,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40254,8 +38534,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16137
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16140
@@ -40265,8 +38544,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16141
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16144
@@ -40276,8 +38554,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16145
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40308,8 +38585,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16158
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16161
@@ -40319,8 +38595,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16162
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16165
@@ -40330,8 +38605,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16166
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40362,8 +38636,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16179
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16182
@@ -40373,8 +38646,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16183
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40405,8 +38677,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16196
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16199
@@ -40416,8 +38687,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16200
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16203
@@ -40427,8 +38697,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16204
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40459,8 +38728,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16217
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16220
@@ -40470,8 +38738,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16221
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16224
@@ -40481,8 +38748,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16225
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40513,8 +38779,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16238
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16241
@@ -40524,8 +38789,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16242
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16245
@@ -40535,8 +38799,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16246
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40567,8 +38830,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16259
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16262
@@ -40578,8 +38840,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16263
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40610,8 +38871,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16276
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16279
@@ -40621,8 +38881,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16280
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16283
@@ -40632,8 +38891,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16284
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40664,8 +38922,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16297
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16300
@@ -40675,8 +38932,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16301
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16304
@@ -40686,8 +38942,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16305
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40718,8 +38973,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16318
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16321
@@ -40729,8 +38983,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16322
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16325
@@ -40740,8 +38993,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16326
             .lvl = 43,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40776,8 +39028,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 16340
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16343
@@ -40787,8 +39038,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(13, 13, 13, 13, 13, 13),
 #line 16344
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40823,8 +39073,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 16358
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16361
@@ -40834,8 +39083,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 16362
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16365
@@ -40845,8 +39093,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(14, 14, 14, 14, 14, 14),
 #line 16366
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40881,8 +39128,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 16380
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16383
@@ -40892,8 +39138,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(15, 15, 15, 15, 15, 15),
 #line 16384
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16387
@@ -40903,8 +39148,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
 #line 16388
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40939,8 +39183,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 16402
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16405
@@ -40950,8 +39193,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 16406
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16409
@@ -40961,8 +39203,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(17, 17, 17, 17, 17, 17),
 #line 16410
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -40993,8 +39234,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16423
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16426
@@ -41004,8 +39244,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16427
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16430
@@ -41015,8 +39254,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16431
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41047,8 +39285,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16444
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16447
@@ -41058,8 +39295,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16448
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16451
@@ -41069,8 +39305,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16452
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41101,8 +39336,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16465
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16468
@@ -41112,8 +39346,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16469
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16472
@@ -41123,8 +39356,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16473
             .lvl = 39,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41155,8 +39387,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16486
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16489
@@ -41166,8 +39397,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16490
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16493
@@ -41177,8 +39407,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16494
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41209,8 +39438,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16507
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16510
@@ -41220,8 +39448,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16511
             .lvl = 26,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41252,8 +39479,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16524
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16527
@@ -41263,8 +39489,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16528
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16531
@@ -41274,8 +39499,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16532
             .lvl = 28,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41306,8 +39530,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16545
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16548
@@ -41317,8 +39540,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16549
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16552
@@ -41328,8 +39550,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16553
             .lvl = 30,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41360,8 +39581,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16566
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16569
@@ -41371,8 +39591,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16570
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16573
@@ -41382,8 +39601,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16574
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41416,8 +39634,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16587
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16590
@@ -41427,8 +39644,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16591
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16594
@@ -41438,8 +39654,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16595
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16598
@@ -41449,8 +39664,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16599
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16602
@@ -41460,8 +39674,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16603
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16606
@@ -41471,8 +39684,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16607
             .lvl = 31,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41505,8 +39717,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16620
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16623
@@ -41516,8 +39727,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16624
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16627
@@ -41527,8 +39737,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16628
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16631
@@ -41538,8 +39747,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16632
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16635
@@ -41549,8 +39757,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16636
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16639
@@ -41560,8 +39767,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16640
             .lvl = 33,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41594,8 +39800,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16653
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16656
@@ -41605,8 +39810,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16657
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16660
@@ -41616,8 +39820,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16661
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16664
@@ -41627,8 +39830,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16665
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16668
@@ -41638,8 +39840,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16669
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16672
@@ -41649,8 +39850,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16673
             .lvl = 35,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41683,8 +39883,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16686
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16689
@@ -41694,8 +39893,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16690
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16693
@@ -41705,8 +39903,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16694
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16697
@@ -41716,8 +39913,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16698
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16701
@@ -41727,8 +39923,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16702
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16705
@@ -41738,8 +39933,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16706
             .lvl = 37,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41772,8 +39966,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16719
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16722
@@ -41783,8 +39976,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(1, 1, 1, 1, 1, 1),
 #line 16723
             .lvl = 34,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41817,8 +40009,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16736
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16739
@@ -41828,8 +40019,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16740
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16743
@@ -41839,8 +40029,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(2, 2, 2, 2, 2, 2),
 #line 16744
             .lvl = 36,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41873,8 +40062,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16757
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16760
@@ -41884,8 +40072,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16761
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16764
@@ -41895,8 +40082,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(3, 3, 3, 3, 3, 3),
 #line 16765
             .lvl = 38,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41929,8 +40115,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16778
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16781
@@ -41940,8 +40125,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16782
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16785
@@ -41951,8 +40135,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(4, 4, 4, 4, 4, 4),
 #line 16786
             .lvl = 40,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -41983,8 +40166,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16798
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42013,8 +40195,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16810
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
             {
 #line 16813
@@ -42024,8 +40205,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16814
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42054,8 +40234,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16826
             .lvl = 41,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42084,8 +40263,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16838
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42116,8 +40294,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16850
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42146,8 +40323,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16862
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
@@ -42178,8 +40354,7 @@ F_TRAINER_FEMALE |
             .iv = TRAINER_PARTY_IVS(0, 0, 0, 0, 0, 0),
 #line 16874
             .lvl = 5,
-            .nature = NATURE_OFENSIVA,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .nature = NATURALEZA_OFENSIVA,
             },
         },
     },
