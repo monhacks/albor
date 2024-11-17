@@ -123,7 +123,6 @@ static void WarpToTruck(void)
 
 void Sav2_ClearSetDefault(void)
 {
-    ClearSav2();
     SetDefaultOptions();
 }
 
@@ -147,7 +146,6 @@ void NewGameInitData(void)
     ZeroEnemyPartyMons();
     ResetPokedex();
     ClearFrontierRecord();
-    ClearSav1();
     ClearAllMail();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     InitPlayerTrainerId();

@@ -87,7 +87,6 @@ static void ShowPikeResultsWindow(void);
 static void ShowFactoryResultsWindow(u8);
 static void ShowArenaResultsWindow(void);
 static void ShowPyramidResultsWindow(void);
-static void CopyFrontierBrainText(bool8 playerWonText);
 
 // battledBit: Flags to change the conversation when the Frontier Brain is encountered for a battle
 // First bit is has battled them before and not won yet, second bit is has battled them and won (obtained a Symbol)
@@ -2127,34 +2126,6 @@ s32 GetFronterBrainSymbol(void)
             symbol = 1;
     }
     return symbol;
-}
-
-// Called for intro speech as well despite the fact that its handled in the map scripts files instead
-static void CopyFrontierBrainText(bool8 playerWonText)
-{
-    s32 facility;
-    s32 symbol;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-    {
-        facility = GetRecordedBattleFrontierFacility();
-        symbol = GetRecordedBattleFronterBrainSymbol();
-    }
-    else
-    {
-        facility = VarGet(VAR_FRONTIER_FACILITY);
-        symbol = GetFronterBrainSymbol();
-    }
-
-    switch (playerWonText)
-    {
-    case FALSE:
-        StringCopy(gStringVar4, gFrontierBrainInfo[facility].wonTexts[symbol]);
-        break;
-    case TRUE:
-        StringCopy(gStringVar4, gFrontierBrainInfo[facility].lostTexts[symbol]);
-        break;
-    }
 }
 
 void ClearEnemyPartyAfterChallenge()

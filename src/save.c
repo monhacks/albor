@@ -461,30 +461,5 @@ u8 LoadGameSave(u8 saveType)
     return status;
 }
 
-u16 GetSaveBlocksPointersBaseOffset(void)
-{
-    u16 i;
-    struct SaveSector* sector;
-
-    sector = gReadWriteSector = &gSaveDataBuffer;
-    if (gFlashMemoryPresent != TRUE)
-        return 0;
-    UpdateSaveAddresses();
-    GetSaveValidStatus(gRamSaveSectorLocations);
-    for (i = 0; i < SECTORS_COUNT; i++)
-    {
-        ReadFlashSector(i, gReadWriteSector);
-
-        // Base offset for SaveBlock2 is calculated using the trainer id
-        if (gReadWriteSector->id == SECTOR_ID_SAVEBLOCK2)
-            return sector->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[1])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[2])] +
-                   sector->data[offsetof(struct SaveBlock2, playerTrainerId[3])];
-    }
-    return 0;
-}
-
 #define tState         data[0]
 #define tTimer         data[1]
-#define tInBattleTower data[2]

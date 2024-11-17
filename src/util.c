@@ -244,7 +244,7 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
     }
 }
 
-#define CONSTANTE_DE_PALETAS_UNICAS 128
+#define CONSTANTE_DE_PALETAS_UNICAS 100
 
 void UniquePalette(u16 palOffset, u32 personality)
 {

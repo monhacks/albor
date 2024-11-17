@@ -61,7 +61,6 @@ static void LoadLinkMultiOpponentsData(void);
 static void TowerTryCloseLink(void);
 static void SetMultiPartnerGfx(void);
 static void SetTowerInterviewData(void);
-static void SaveCurrentWinStreak(void);
 static void ValidateApprenticesChecksums(void);
 static void SetNextBattleTentOpponent(void);
 static void CopyEReaderTrainerFarewellMessage(void);
@@ -1273,16 +1272,6 @@ void DoSpecialTrainerBattle(void)
             gBattleScripting.specialTrainerBattleType = 0xFF;
         break;
     }
-}
-
-static void SaveCurrentWinStreak(void)
-{
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u16 winStreak = GetCurrentBattleTowerWinStreak(lvlMode, battleMode);
-
-    if (gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] < winStreak)
-        gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode] = winStreak;
 }
 
 static void SaveTowerChallenge(void)

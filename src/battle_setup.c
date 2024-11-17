@@ -535,18 +535,6 @@ static void DoTrainerBattle(void)
     TryUpdateGymLeaderRematchFromTrainer();
 }
 
-static void DoBattlePyramidTrainerHillBattle(void)
-{
-    if (InBattlePyramid())
-        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID), 0);
-    else
-        CreateBattleStartTask(GetSpecialBattleTransition(B_TRANSITION_GROUP_TRAINER_HILL), 0);
-
-    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
-    IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
-    TryUpdateGymLeaderRematchFromTrainer();
-}
-
 // Initiates battle where Wally catches Ralts
 void StartWallyTutorialBattle(void)
 {
@@ -1313,51 +1301,13 @@ void BattleSetup_StartTrainerBattle(void)
     else
         gBattleTypeFlags = (BATTLE_TYPE_TRAINER);
 
-    if (InBattlePyramid())
-    {
-        VarSet(VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0);
-        gBattleTypeFlags |= BATTLE_TYPE_PYRAMID;
-
-        if (gNoOfApproachingTrainers == 2)
-        {
-            FillFrontierTrainersParties(1);
-            ZeroMonData(&gEnemyParty[1]);
-            ZeroMonData(&gEnemyParty[2]);
-            ZeroMonData(&gEnemyParty[4]);
-            ZeroMonData(&gEnemyParty[5]);
-        }
-        else
-        {
-            FillFrontierTrainerParty(1);
-            ZeroMonData(&gEnemyParty[1]);
-            ZeroMonData(&gEnemyParty[2]);
-        }
-
-        MarkApproachingPyramidTrainersAsBattled();
-    }
-    else if (InTrainerHillChallenge())
-    {
-        gBattleTypeFlags |= BATTLE_TYPE_TRAINER_HILL;
-
-        if (gNoOfApproachingTrainers == 2)
-            FillHillTrainersParties();
-        else
-            FillHillTrainerParty();
-
-        SetHillTrainerFlag();
-    }
-
     sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;
     gNoOfApproachingTrainers = 0;
     sShouldCheckTrainerBScript = FALSE;
     gWhichTrainerToFaceAfterBattle = 0;
     gMain.savedCallback = CB2_EndTrainerBattle;
 
-    if (InBattlePyramid() || InTrainerHillChallenge())
-        DoBattlePyramidTrainerHillBattle();
-    else
-        DoTrainerBattle();
-
+    DoTrainerBattle();
     ScriptContext_Stop();
 }
 
@@ -1408,7 +1358,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid() || InTrainerHillChallenge() || (!NoAliveMonsForPlayer()))
+        if (!NoAliveMonsForPlayer())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
@@ -1417,11 +1367,8 @@ static void CB2_EndTrainerBattle(void)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         DowngradeBadPoison();
-        if (!InBattlePyramid() && !InTrainerHillChallenge())
-        {
-            RegisterTrainerInMatchCall();
-            SetBattledTrainersFlags();
-        }
+        RegisterTrainerInMatchCall();
+        SetBattledTrainersFlags();
     }
 }
 
@@ -1456,28 +1403,7 @@ void BattleSetup_StartRematchBattle(void)
 
 void ShowTrainerIntroSpeech(void)
 {
-    if (InBattlePyramid())
-    {
-        if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gSpecialVar_LastTalked));
-        else
-            CopyPyramidTrainerSpeechBefore(LocalIdToPyramidTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
-
-        ShowFieldMessageFromBuffer();
-    }
-    else if (InTrainerHillChallenge())
-    {
-        if (gNoOfApproachingTrainers == 0 || gNoOfApproachingTrainers == 1)
-            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gSpecialVar_LastTalked));
-        else
-            CopyTrainerHillTrainerText(TRAINER_HILL_TEXT_INTRO, LocalIdToHillTrainerId(gObjectEvents[gApproachingTrainers[gApproachingTrainerId].objectEventId].localId));
-
-        ShowFieldMessageFromBuffer();
-    }
-    else
-    {
-        ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
-    }
+    ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
 }
 
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void)

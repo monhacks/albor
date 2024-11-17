@@ -83,7 +83,6 @@ void Save_ResetSaveCounters(void);
 u8 HandleSavingData(u8 saveType);
 u8 TrySavingData(u8 saveType);
 u8 LoadGameSave(u8 saveType);
-u16 GetSaveBlocksPointersBaseOffset(void);
 
 // save_failed_screen.c
 void DoSaveFailedScreen(u8 saveType);

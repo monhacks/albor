@@ -379,18 +379,14 @@ static void GetAllFloorsUsed(void)
     FreeDataStruct();
 }
 
-// May have been dummied. Every time this is called a conditional for var result occurs afterwards
-// Relation to E-Reader is an assumption, most dummied Trainer Hill code seems to be JP E-Reader mode related
 static void GetInEReaderMode(void)
 {
-    SetUpDataStruct();
-    gSpecialVar_Result = FALSE;
-    FreeDataStruct();
+
 }
 
 bool8 InTrainerHillChallenge(void)
 {
-
+    return FALSE;
 }
 
 static void IsTrainerHillChallengeActive(void)

@@ -1825,7 +1825,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         ICONO(Jigglypuff),
         FOLLOWER(Jigglypuff, TRACKS_FOOT),
         MOVIMIENTOS(Jigglypuff),
-        .evolutions = EVOLUTION({EVO_MOVE, MOVE_HYPER_VOICE, SPECIES_WIGGLYTUFF}),
+        .evolutions = EVOLUTION({EVO_MOVIMIENTO, MOVE_HYPER_VOICE, SPECIES_WIGGLYTUFF}),
     },
 
     [SPECIES_WIGGLYTUFF] =
@@ -5748,7 +5748,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         GRITO(PORYGON),
         POKEDEX(PORYGON),
         FRONT_PIC(Porygon, 40, 40),
-        ELEVACION_FRONT_PIC(14),
+        ELEVACION_FRONT_PIC(5),
         FRONT_ANIM(Porygon, V_JUMPS_SMALL),
         BACK_PIC(Porygon, 56, 40),
         ELEVACION_BACK_PIC(13),
@@ -8104,8 +8104,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Gligar, TRACKS_NONE),
         MOVIMIENTOS(Gligar),
         MOVIMIENTOS_HUEVO(Gligar),
-        .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_FANG, SPECIES_GLISCOR},
-                                {EVO_ITEM_NIGHT, ITEM_RAZOR_FANG, SPECIES_GLISCOR}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_RAZOR_FANG, SPECIES_GLISCOR}),
     },
 
     [SPECIES_GLISCOR] =
@@ -8289,8 +8288,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         FOLLOWER(Sneasel, TRACKS_FOOT),
         MOVIMIENTOS(Sneasel),
         MOVIMIENTOS_HUEVO(Sneasel),
-        .evolutions = EVOLUTION({EVO_ITEM_HOLD_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE},
-                                {EVO_ITEM_NIGHT, ITEM_RAZOR_CLAW, SPECIES_WEAVILE}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_RAZOR_CLAW, SPECIES_WEAVILE}),
     },
 
     [SPECIES_WEAVILE] =
@@ -12703,7 +12701,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         MOVIMIENTOS(Snorunt),
         MOVIMIENTOS_HUEVO(Snorunt),
         .evolutions = EVOLUTION({EVO_NIVEL, 30, SPECIES_GLALIE},
-                                {EVO_ITEM_FEMALE, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
+                                {EVO_NIVEL_HEMBRA, ITEM_DAWN_STONE, SPECIES_FROSLASS}),
     },
 
     [SPECIES_GLALIE] =
