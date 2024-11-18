@@ -90,4 +90,4 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *Decouple poké balls de item id
 *Jigglypuff evoluciona al aprender Vozarrón.
 
-¿Pangoro fuera?
+paletas: (\d+) (\d+) (\d+) \d+ --> $1 $2 $3
