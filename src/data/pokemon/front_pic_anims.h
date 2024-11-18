@@ -1043,8 +1043,16 @@ static const union AnimCmd sAnim_Marowak[] =
     ANIMCMD_FRAME(0, 14),
     ANIMCMD_END,
 };
-
-PLACEHOLDER_ANIM_SINGLE_FRAME(MarowakAlola);
+static const union AnimCmd sAnim_MarowakAlola[] =
+{
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(0, 14),
+    ANIMCMD_END,
+};
 
 static const union AnimCmd sAnim_Tyrogue[] =
 {
