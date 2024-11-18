@@ -42,14 +42,6 @@ struct BlockTransfer
     u8 multiplayerId;
 };
 
-struct LinkTestBGInfo
-{
-    u32 screenBaseBlock;
-    u32 paletteNum;
-    u32 baseChar;
-    u32 unused;
-};
-
 static struct BlockTransfer sBlockSend;
 static u32 sBlockSendDelayCounter;
 static u32 sPlayerDataExchangeStatus;
@@ -69,7 +61,6 @@ COMMON_DATA u32 gLinkStatus = 0;
 COMMON_DATA bool8 gReadyToExitStandby[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA bool8 gReadyToCloseLink[MAX_LINK_PLAYERS] = {0};
 COMMON_DATA u8 gSuppressLinkErrorMessage = 0;
-COMMON_DATA bool8 gWirelessCommType = 0;
 COMMON_DATA bool8 gSavedLinkPlayerCount = 0;
 COMMON_DATA u16 gSendCmd[CMD_LENGTH] = {0};
 COMMON_DATA u8 gSavedMultiplayerId = 0;
@@ -125,81 +116,11 @@ static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
 
-static const u16 sWirelessLinkDisplayPal[] = INCBIN_U16("graphics/link/wireless_display.gbapal");
-static const u32 sWirelessLinkDisplayGfx[] = INCBIN_U32("graphics/link/wireless_display.4bpp.lz");
-static const u32 sWirelessLinkDisplayTilemap[] = INCBIN_U32("graphics/link/wireless_display.bin.lz");
-static const u16 sLinkTestDigitsPal[] = INCBIN_U16("graphics/link/test_digits.gbapal");
-static const u16 sLinkTestDigitsGfx[] = INCBIN_U16("graphics/link/test_digits.4bpp");
-static const u16 sCommErrorBg_Gfx[] = INCBIN_U16("graphics/link/comm_error_bg.4bpp");
-static const struct BlockRequest sBlockRequests[] = {
-    [BLOCK_REQ_SIZE_NONE] = {gBlockSendBuffer, 200},
-    [BLOCK_REQ_SIZE_200]  = {gBlockSendBuffer, 200},
-    [BLOCK_REQ_SIZE_100]  = {gBlockSendBuffer, 100},
-    [BLOCK_REQ_SIZE_220]  = {gBlockSendBuffer, 220},
-    [BLOCK_REQ_SIZE_40]   = {gBlockSendBuffer,  40}
-};
-static const u8 sBGControlRegs[] = {
-    REG_OFFSET_BG0CNT,
-    REG_OFFSET_BG1CNT,
-    REG_OFFSET_BG2CNT,
-    REG_OFFSET_BG3CNT
-};
 static const char sASCIIGameFreakInc[] = "GameFreak inc.";
-static const char sASCIITestPrint[] = "TEST PRINT\nP0\nP1\nP2\nP3";
-static const struct BgTemplate sLinkErrorBgTemplates[] = {
-    {
-        .bg = 0,
-        .charBaseIndex = 2,
-        .mapBaseIndex = 31,
-        .priority = 0
-    }, {
-        .bg = 1,
-        .charBaseIndex = 0,
-        .mapBaseIndex = 8,
-        .priority = 1
-    }
-};
-
-static const struct WindowTemplate sLinkErrorWindowTemplates[] = {
-    [WIN_LINK_ERROR_TOP] = {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 0,
-        .width = DISPLAY_TILE_WIDTH,
-        .height = 5,
-        .paletteNum = 15,
-        .baseBlock = 0x002
-    },
-    [WIN_LINK_ERROR_MID] = {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 6,
-        .width = DISPLAY_TILE_WIDTH,
-        .height = 7,
-        .paletteNum = 15,
-        .baseBlock = 0x098
-    },
-    [WIN_LINK_ERROR_BOTTOM] = {
-        .bg = 0,
-        .tilemapLeft = 0,
-        .tilemapTop = 13,
-        .width = DISPLAY_TILE_WIDTH,
-        .height = 7,
-        .paletteNum = 15,
-        .baseBlock = 0x16A
-    }, DUMMY_WIN_TEMPLATE
-};
-
-static const u8 sTextColors[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
 void Task_DestroySelf(u8 taskId)
 {
     DestroyTask(taskId);
-}
-
-void SetLocalLinkPlayerId(u8 playerId)
-{
-    gLocalLinkPlayer.id = playerId;
 }
 
 static void InitLink(void)
@@ -300,30 +221,6 @@ void ClearLinkCallback_2(void)
 u8 GetLinkPlayerCount(void)
 {
     return EXTRACT_PLAYER_COUNT(gLinkStatus);
-}
-
-static int AreAnyLinkPlayersUsingVersions(u32 version1, u32 version2)
-{
-    int i;
-    u8 nPlayers;
-
-    nPlayers = GetLinkPlayerCount();
-    for (i = 0; i < nPlayers; i++)
-    {
-        if ((gLinkPlayers[i].version & 0xFF) == version1
-         || (gLinkPlayers[i].version & 0xFF) == version2)
-            return 1;
-    }
-    return -1;
-}
-
-bool32 Link_AnyPartnersPlayingRubyOrSapphire(void)
-{
-    if (AreAnyLinkPlayersUsingVersions(VERSION_RUBY, VERSION_SAPPHIRE) >= 0)
-    {
-        return TRUE;
-    }
-    return FALSE;
 }
 
 void OpenLinkTimed(void)

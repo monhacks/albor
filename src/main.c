@@ -65,7 +65,6 @@ COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u32 IntrMain_Buffer[512] = {0};
 COMMON_DATA s8 gPcmDmaCounter = 0;
-COMMON_DATA void *gAgbMainLoop_sp = NULL;
 
 static EWRAM_DATA u16 sTrainerId = 0;
 
@@ -100,7 +99,6 @@ void AgbMain()
     if (gFlashMemoryPresent != TRUE)
         SetMainCallback2((SAVE_TYPE_ERROR_SCREEN) ? CB2_FlashNotDetectedScreen : NULL);
 
-    gAgbMainLoop_sp = __builtin_frame_address(0);
     AgbMainLoop();
 }
 

@@ -301,8 +301,6 @@ extern u8 gLastRecvQueueCount;
 extern u16 gLinkSavedIme;
 extern struct LinkPlayer gLocalLinkPlayer;
 
-bool32 Link_AnyPartnersPlayingRubyOrSapphire(void);
-void SetLocalLinkPlayerId(u8);
 u8 GetSavedPlayerCount(void);
 bool8 SendBlockRequest(u8 type);
 u8 GetLinkPlayerCountAsBitFlags(void);

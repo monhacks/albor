@@ -78,7 +78,6 @@ SECTIONS {
         gflib/sprite.o(.text);
         gflib/string_util.o(.text);
         src/link.o(.text);
-        src/minigame_countdown.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
         src/battle_controllers.o(.text);
@@ -432,7 +431,6 @@ SECTIONS {
         gflib/string_util.o(.rodata);
         src/link.o(.rodata);
         src/link.o(.rodata.str1.4);
-        src/minigame_countdown.o(.rodata);
         src/rtc.o(.rodata);
         src/main_menu.o(.rodata);
         src/battle_controllers.o(.rodata);
