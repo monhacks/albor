@@ -37,8 +37,7 @@ struct GFRomHeader
     u8 trainerNameLength;
     u8 pokemonNameLength1;
     u8 pokemonNameLength2;
-    u32 saveBlock2Size;
-    u32 saveBlock1Size;
+    u32 saveBlockSize;
     u32 partyCountOffset;
     u32 partyOffset;
     u32 warpFlagsOffset;
@@ -73,26 +72,25 @@ static const struct GFRomHeader sGFRomHeader = {
     .language = GAME_LANGUAGE,
     .gameName = "pokemon emerald version",
     .decorations = gDecorations,
-    .flagsOffset = offsetof(struct SaveBlock1, flags),
-    .varsOffset = offsetof(struct SaveBlock1, vars),
-    .pokedexOffset = offsetof(struct SaveBlock2, pokedex),
-    .seenOffset = offsetof(struct SaveBlock1, dexSeen),
+    .flagsOffset = offsetof(struct SaveBlock, flags),
+    .varsOffset = offsetof(struct SaveBlock, vars),
+    .pokedexOffset = offsetof(struct SaveBlock, pokedexOrder),
+    .seenOffset = offsetof(struct SaveBlock, dexSeen),
     .pokedexFlag = FLAG_RECEIVED_POKEDEX_FROM_BIRCH,
     .pokedexCount = DEX_COUNT,
     .playerNameLength = PLAYER_NAME_LENGTH,
     .trainerNameLength = TRAINER_NAME_LENGTH,
     .pokemonNameLength1 = POKEMON_NAME_LENGTH,
     .pokemonNameLength2 = POKEMON_NAME_LENGTH,
-    .saveBlock2Size = sizeof(struct SaveBlock2),
-    .saveBlock1Size = sizeof(struct SaveBlock1),
-    .partyCountOffset = offsetof(struct SaveBlock1, playerPartyCount),
-    .partyOffset = offsetof(struct SaveBlock1, playerParty),
-    .warpFlagsOffset = offsetof(struct SaveBlock2, specialSaveWarpFlags),
-    .trainerIdOffset = offsetof(struct SaveBlock2, playerTrainerId),
-    .playerNameOffset = offsetof(struct SaveBlock2, playerName),
-    .playerGenderOffset = offsetof(struct SaveBlock2, playerGender),
-    .frontierStatusOffset = offsetof(struct SaveBlock2, frontier.challengeStatus),
-    .frontierStatusOffset2 = offsetof(struct SaveBlock2, frontier.challengeStatus),
+    .saveBlockSize = sizeof(struct SaveBlock),
+    .partyCountOffset = offsetof(struct SaveBlock, playerPartyCount),
+    .partyOffset = offsetof(struct SaveBlock, playerParty),
+    .warpFlagsOffset = offsetof(struct SaveBlock, specialSaveWarpFlags),
+    .trainerIdOffset = offsetof(struct SaveBlock, playerTrainerId),
+    .playerNameOffset = offsetof(struct SaveBlock, playerName),
+    .playerGenderOffset = offsetof(struct SaveBlock, playerGender),
+    .frontierStatusOffset = offsetof(struct SaveBlock, frontier.challengeStatus),
+    .frontierStatusOffset2 = offsetof(struct SaveBlock, frontier.challengeStatus),
     .speciesInfo = gSpeciesInfo,
     .items = gItemsInfo,
     .moves = gMovesInfo,
@@ -105,6 +103,6 @@ static const struct GFRomHeader sGFRomHeader = {
     .bagCountPokeballs = BAG_POKEBALLS_COUNT,
     .bagCountTMHMs = BAG_TMHM_COUNT,
     .bagCountBerries = BAG_BERRIES_COUNT,
-    .giftRibbonsOffset = offsetof(struct SaveBlock1, giftRibbons),
+    .giftRibbonsOffset = offsetof(struct SaveBlock, giftRibbons),
     .moveDescriptions = NULL,
 };

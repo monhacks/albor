@@ -1504,7 +1504,7 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
     case 3:
         GetMonData(mon, MON_DATA_OT_NAME, sum->OTName);
         sum->ailment = GetMonAilment(mon);
-        sum->OTGender = gSaveBlock2Ptr->playerGender;
+        sum->OTGender = gSaveBlockPtr->playerGender;
         sum->OTID = GetMonData(mon, MON_DATA_OT_ID);
         sum->metLocation = GetMonData(mon, MON_DATA_MET_LOCATION);
         sum->metLevel = GetMonData(mon, MON_DATA_MET_LEVEL);
@@ -3227,7 +3227,7 @@ static void GetMetLevelString(u8 *output)
 
 u32 GetPlayerIDAsU32(void)
 {
-    return (gSaveBlock2Ptr->playerTrainerId[3] << 24) | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+    return (gSaveBlockPtr->playerTrainerId[3] << 24) | (gSaveBlockPtr->playerTrainerId[2] << 16) | (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
 }
 
 static bool8 DoesMonOTMatchOwner(void)
@@ -3246,8 +3246,8 @@ static bool8 DoesMonOTMatchOwner(void)
     else
     {
         trainerId = GetPlayerIDAsU32() & 0xFFFF;
-        gender = gSaveBlock2Ptr->playerGender;
-        StringCopy(gStringVar1, gSaveBlock2Ptr->playerName);
+        gender = gSaveBlockPtr->playerGender;
+        StringCopy(gStringVar1, gSaveBlockPtr->playerName);
     }
 
     if (gender != sum->OTGender || trainerId != (sum->OTID & 0xFFFF) || StringCompareWithoutExtCtrlCodes(gStringVar1, sum->OTName))

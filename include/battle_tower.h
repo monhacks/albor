@@ -43,7 +43,6 @@ u16 GetRandomFrontierMonFromSet(u16 trainerId);
 void FrontierSpeechToString(const u16 *words);
 void DoSpecialTrainerBattle(void);
 u16 GetCurrentBattleTowerWinStreak(u8 lvlMode, u8 battleMode);
-void CalcApprenticeChecksum(struct Apprentice *apprentice);
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(u8 lvlMode);

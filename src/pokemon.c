@@ -1,6 +1,5 @@
 #include "global.h"
 #include "malloc.h"
-#include "apprentice.h"
 #include "battle.h"
 #include "battle_ai_switch_items.h"
 #include "battle_anim.h"
@@ -479,10 +478,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else // Player is the OT
     {
-        value = gSaveBlock2Ptr->playerTrainerId[0]
-              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+        value = gSaveBlockPtr->playerTrainerId[0]
+              | (gSaveBlockPtr->playerTrainerId[1] << 8)
+              | (gSaveBlockPtr->playerTrainerId[2] << 16)
+              | (gSaveBlockPtr->playerTrainerId[3] << 24);
 
         if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
         {
@@ -522,7 +521,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
     StringCopy(speciesName, GetSpeciesName(species));
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
-    SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
+    SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlockPtr->playerName);
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
     SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gSpeciesInfo[species].friendship);
@@ -715,8 +714,8 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     u8 level;
     u8 value;
 
-    if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_50)
-        level = GetFrontierEnemyMonLevel(gSaveBlock2Ptr->frontier.lvlMode);
+    if (gSaveBlockPtr->frontier.lvlMode != FRONTIER_LVL_50)
+        level = GetFrontierEnemyMonLevel(gSaveBlockPtr->frontier.lvlMode);
     else if (lvl50)
         level = FRONTIER_MAX_LEVEL_50;
     else
@@ -755,33 +754,6 @@ void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPok
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
     MonRestorePP(mon);
-    CalculateMonStats(mon);
-}
-
-void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId)
-{
-    s32 i;
-    u16 evAmount;
-    u32 otId = 0;
-    u32 personality = 0;
-
-    CreateMon(mon,
-              src->party[monId].species,
-              GetFrontierEnemyMonLevel(src->lvlMode - 1),
-              MAX_PER_STAT_IVS,
-              TRUE,
-              personality,
-              OT_ID_PRESET,
-              otId);
-
-    SetMonData(mon, MON_DATA_HELD_ITEM, &src->party[monId].item);
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(mon, src->party[monId].moves[i], i);
-
-    evAmount = MAX_TOTAL_EVS / NUM_STATS;
-    for (i = 0; i < NUM_STATS; i++)
-        SetMonData(mon, MON_DATA_HP_EV + i, &evAmount);
-
     CalculateMonStats(mon);
 }
 
@@ -1946,8 +1918,8 @@ u8 GiveMonToPlayer(struct Pokemon *mon)
 {
     s32 i;
 
-    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
-    SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2Ptr->playerTrainerId);
+    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlockPtr->playerName);
+    SetMonData(mon, MON_DATA_OT_ID, gSaveBlockPtr->playerTrainerId);
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -3938,14 +3910,14 @@ bool8 IsTradedMon(struct Pokemon *mon)
 bool8 IsOtherTrainer(u32 otId, u8 *otName)
 {
     if (otId ==
-        (gSaveBlock2Ptr->playerTrainerId[0]
-      | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-      | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-      | (gSaveBlock2Ptr->playerTrainerId[3] << 24)))
+        (gSaveBlockPtr->playerTrainerId[0]
+      | (gSaveBlockPtr->playerTrainerId[1] << 8)
+      | (gSaveBlockPtr->playerTrainerId[2] << 16)
+      | (gSaveBlockPtr->playerTrainerId[3] << 24)))
     {
         int i;
         for (i = 0; otName[i] != EOS; i++)
-            if (otName[i] != gSaveBlock2Ptr->playerName[i])
+            if (otName[i] != gSaveBlockPtr->playerName[i])
                 return TRUE;
         return FALSE;
     }

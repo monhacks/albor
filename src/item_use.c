@@ -1356,8 +1356,8 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 
 static bool32 IsValidLocationForVsSeeker(void)
 {
-    u16 mapGroup = gSaveBlock1Ptr->location.mapGroup;
-    u16 mapNum = gSaveBlock1Ptr->location.mapNum;
+    u16 mapGroup = gSaveBlockPtr->location.mapGroup;
+    u16 mapNum = gSaveBlockPtr->location.mapNum;
     u16 mapType = gMapHeader.mapType;
 
     typedef struct {

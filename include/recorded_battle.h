@@ -27,9 +27,7 @@ struct RecordedBattleSave
     u8 battleScene:1;
     u8 textSpeed:3;
     u32 AI_scripts;
-    u8 apprenticeId;
     u16 easyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT];
-    u8 apprenticeLanguage;
     u8 battleRecord[MAX_BATTLERS_COUNT][BATTLER_RECORD_SIZE];
     u32 checksum;
 };
@@ -77,8 +75,6 @@ void RecordedBattle_CheckMovesetChanges(u8 mode);
 u32 GetAiScriptsInRecordedBattle(void);
 void RecordedBattle_SetPlaybackFinished(void);
 bool8 RecordedBattle_CanStopPlayback(void);
-u8 GetRecordedBattleApprenticeId(void);
-u8 GetRecordedBattleApprenticeLanguage(void);
 void RecordedBattle_SaveBattleOutcome(void);
 u16 *GetRecordedBattleEasyChatSpeech(void);
 

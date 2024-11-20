@@ -10,14 +10,12 @@
 // If the sector's signature field is not this value then the sector is either invalid or empty.
 #define SECTOR_SIGNATURE 0x8012025
 
-#define SECTOR_ID_SAVEBLOCK2          0
-#define SECTOR_ID_SAVEBLOCK1_START    1
-#define SECTOR_ID_SAVEBLOCK1_END      3
-#define SECTOR_ID_PKMN_STORAGE_START  4
-#define SECTOR_ID_PKMN_STORAGE_END   16
-#define SECTOR_ID_HOF                17
+#define SECTOR_ID_SAVEBLOCK_START       0
+#define SECTOR_ID_SAVEBLOCK_END         2
+#define SECTOR_ID_PKMN_STORAGE_START    3
+#define SECTOR_ID_PKMN_STORAGE_END      15
 
-#define SECTORS_COUNT                18
+#define SECTORS_COUNT                   16
 
 #define SAVE_STATUS_EMPTY    0
 #define SAVE_STATUS_OK       1
@@ -34,14 +32,6 @@ enum
 {
     ENABLE,
     DISABLE
-};
-
-// Do save types
-enum
-{
-    SAVE_NORMAL,
-    SAVE_HALL_OF_FAME,
-    SAVE_OVERWRITE_DIFFERENT_FILE
 };
 
 // A save sector location holds a pointer to the data for a particular sector
@@ -62,16 +52,11 @@ struct SaveSector
     u32 counter;
 }; // size is SECTOR_SIZE (0x1000)
 
-#define SECTOR_SIGNATURE_OFFSET offsetof(struct SaveSector, signature)
-#define SECTOR_COUNTER_OFFSET   offsetof(struct SaveSector, counter)
-
 extern u16 gLastWrittenSector;
 extern u32 gLastSaveCounter;
 extern u16 gLastKnownGoodSector;
 extern u32 gDamagedSaveSectors;
 extern u32 gSaveCounter;
-extern struct SaveSector *gFastSaveSector;
-extern u16 gIncrementalSectorId;
 extern u16 gSaveFileStatus;
 extern void (*gGameContinueCallback)(void);
 extern struct SaveSectorLocation gRamSaveSectorLocations[];
@@ -80,11 +65,11 @@ extern struct SaveSector gSaveDataBuffer;
 
 void ClearSaveData(void);
 void Save_ResetSaveCounters(void);
-u8 HandleSavingData(u8 saveType);
-u8 TrySavingData(u8 saveType);
-u8 LoadGameSave(u8 saveType);
+void HandleSavingData(void);
+u8 TrySavingData(void);
+u8 LoadGameSave(void);
 
 // save_failed_screen.c
-void DoSaveFailedScreen(u8 saveType);
+void DoSaveFailedScreen(void);
 
 #endif // GUARD_SAVE_H

@@ -433,7 +433,7 @@ const struct WarpEvent* SetWarpDestinationTrainerHill4F(void)
 
 u16 LocalIdToHillTrainerId(u8 localId)
 {
-    return gSaveBlock2Ptr->frontier.trainerIds[localId - 1];
+    return gSaveBlockPtr->frontier.trainerIds[localId - 1];
 }
 
 bool8 GetHillTrainerFlag(u8 objectEventId)
@@ -441,7 +441,7 @@ bool8 GetHillTrainerFlag(u8 objectEventId)
     u32 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
     u8 bitId = gObjectEvents[objectEventId].localId - 1 + trainerIndexStart;
 
-    return gSaveBlock2Ptr->frontier.trainerFlags & (1u << bitId);
+    return gSaveBlockPtr->frontier.trainerFlags & (1u << bitId);
 }
 
 void SetHillTrainerFlag(void)
@@ -451,9 +451,9 @@ void SetHillTrainerFlag(void)
 
     for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
     {
-        if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_A)
+        if (gSaveBlockPtr->frontier.trainerIds[i] == gTrainerBattleOpponent_A)
         {
-            gSaveBlock2Ptr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
+            gSaveBlockPtr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
             break;
         }
     }
@@ -462,9 +462,9 @@ void SetHillTrainerFlag(void)
     {
         for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
         {
-            if (gSaveBlock2Ptr->frontier.trainerIds[i] == gTrainerBattleOpponent_B)
+            if (gSaveBlockPtr->frontier.trainerIds[i] == gTrainerBattleOpponent_B)
             {
-                gSaveBlock2Ptr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
+                gSaveBlockPtr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
                 break;
             }
         }
@@ -518,22 +518,22 @@ u8 GetNumFloorsInTrainerHillChallenge(void)
 
 static void SetAllTrainerFlags(void)
 {
-    gSaveBlock2Ptr->frontier.trainerFlags = 0xFF;
+    gSaveBlockPtr->frontier.trainerFlags = 0xFF;
 }
 
 static void GetGameSaved(void)
 {
-    gSpecialVar_Result = gSaveBlock2Ptr->frontier.savedGame;
+    gSpecialVar_Result = gSaveBlockPtr->frontier.savedGame;
 }
 
 static void SetGameSaved(void)
 {
-    gSaveBlock2Ptr->frontier.savedGame = TRUE;
+    gSaveBlockPtr->frontier.savedGame = TRUE;
 }
 
 static void ClearGameSaved(void)
 {
-    gSaveBlock2Ptr->frontier.savedGame = FALSE;
+    gSaveBlockPtr->frontier.savedGame = FALSE;
 }
 
 static void GetChallengeWon(void)

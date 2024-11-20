@@ -509,22 +509,22 @@ void SpawnLinkPartnerObjectEvent(void)
     {
     case DIR_WEST:
         j = 2;
-        x = gSaveBlock1Ptr->pos.x - 1;
-        y = gSaveBlock1Ptr->pos.y;
+        x = gSaveBlockPtr->pos.x - 1;
+        y = gSaveBlockPtr->pos.y;
         break;
     case DIR_NORTH:
         j = 1;
-        x = gSaveBlock1Ptr->pos.x;
-        y = gSaveBlock1Ptr->pos.y - 1;
+        x = gSaveBlockPtr->pos.x;
+        y = gSaveBlockPtr->pos.y - 1;
         break;
     case DIR_EAST:
-        x = gSaveBlock1Ptr->pos.x + 1;
-        y = gSaveBlock1Ptr->pos.y;
+        x = gSaveBlockPtr->pos.x + 1;
+        y = gSaveBlockPtr->pos.y;
         break;
     case DIR_SOUTH:
         j = 3;
-        x = gSaveBlock1Ptr->pos.x;
-        y = gSaveBlock1Ptr->pos.y + 1;
+        x = gSaveBlockPtr->pos.x;
+        y = gSaveBlockPtr->pos.y + 1;
     }
     for (i = 0; i < gSpecialVar_0x8004; i++)
     {
@@ -571,7 +571,7 @@ static void LoadLinkPartnerObjectEventSpritePalette(u16 graphicsId, u8 localEven
         graphicsId == OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL ||
         graphicsId == OBJ_EVENT_GFX_RIVAL_MAY_NORMAL)
     {
-        u8 obj = GetObjectEventIdByLocalIdAndMap(localEventId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        u8 obj = GetObjectEventIdByLocalIdAndMap(localEventId, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
         if (obj != OBJECT_EVENTS_COUNT)
         {
             u8 spriteId = gObjectEvents[obj].spriteId;
@@ -883,18 +883,18 @@ void ShowFieldMessageStringVar4(void)
 
 void StorePlayerCoordsInVars(void)
 {
-    gSpecialVar_0x8004 = gSaveBlock1Ptr->pos.x;
-    gSpecialVar_0x8005 = gSaveBlock1Ptr->pos.y;
+    gSpecialVar_0x8004 = gSaveBlockPtr->pos.x;
+    gSpecialVar_0x8005 = gSaveBlockPtr->pos.y;
 }
 
 u8 GetPlayerTrainerIdOnesDigit(void)
 {
-    return (u16)((gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0]) % 10;
+    return (u16)((gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0]) % 10;
 }
 
 void GetPlayerBigGuyGirlString(void)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MALE)
         StringCopy(gStringVar1, gText_BigGuy);
     else
         StringCopy(gStringVar1, gText_BigGirl);
@@ -902,7 +902,7 @@ void GetPlayerBigGuyGirlString(void)
 
 void GetRivalSonDaughterString(void)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MALE)
         StringCopy(gStringVar1, gText_Daughter);
     else
         StringCopy(gStringVar1, gText_Son);
@@ -1066,7 +1066,7 @@ static void PCTurnOnEffect_SetMetatile(s16 isScreenOn, s8 dx, s8 dy)
         else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
             metatileId = METATILE_BrendansMaysHouse_MayPC_On;
     }
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlockPtr->pos.x + dx + MAP_OFFSET, gSaveBlockPtr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
 }
 
 // For this special, gSpecialVar_0x8004 is expected to be some PC_LOCATION_* value.
@@ -1109,7 +1109,7 @@ static void PCTurnOffEffect(void)
     else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
         metatileId = METATILE_BrendansMaysHouse_MayPC_Off;
 
-    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
+    MapGridSetMetatileIdAt(gSaveBlockPtr->pos.x + dx + MAP_OFFSET, gSaveBlockPtr->pos.y + dy + MAP_OFFSET, metatileId | MAPGRID_COLLISION_MASK);
     DrawWholeMapView();
 }
 
@@ -1256,8 +1256,8 @@ void SpawnCameraObject(void)
     u8 obj = SpawnSpecialObjectEventParameterized(OBJ_EVENT_GFX_BOY_1,
                                                   MOVEMENT_TYPE_FACE_DOWN,
                                                   OBJ_EVENT_ID_CAMERA,
-                                                  gSaveBlock1Ptr->pos.x + MAP_OFFSET,
-                                                  gSaveBlock1Ptr->pos.y + MAP_OFFSET,
+                                                  gSaveBlockPtr->pos.x + MAP_OFFSET,
+                                                  gSaveBlockPtr->pos.y + MAP_OFFSET,
                                                   3); // elevation
     gObjectEvents[obj].invisible = TRUE;
     CameraObjectSetFollowedSpriteId(gObjectEvents[obj].spriteId);
@@ -1266,7 +1266,7 @@ void SpawnCameraObject(void)
 void RemoveCameraObject(void)
 {
     CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
-    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
 }
 
 u8 GetPokeblockNameByMonNature(void)
@@ -1302,7 +1302,7 @@ u16 GetSlotMachineId(void)
         SLOT_MACHINE_LUCKIEST
     };
 
-    u32 rnd = gSaveBlock1Ptr->dewfordTrends[0].trendiness + gSaveBlock1Ptr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
+    u32 rnd = gSaveBlockPtr->dewfordTrends[0].trendiness + gSaveBlockPtr->dewfordTrends[0].rand + sSlotMachineRandomSeeds[gSpecialVar_0x8004];
 
     return sSlotMachineIds[rnd % SLOT_MACHINE_COUNT];
 }
@@ -1378,8 +1378,8 @@ bool8 Special_AreLeadMonEVsMaxedOut(void)
 u8 TryUpdateRusturfTunnelState(void)
 {
     if (!FlagGet(FLAG_RUSTURF_TUNNEL_OPENED)
-        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
+        && gSaveBlockPtr->location.mapGroup == MAP_GROUP(RUSTURF_TUNNEL)
+        && gSaveBlockPtr->location.mapNum == MAP_NUM(RUSTURF_TUNNEL))
     {
         if (FlagGet(FLAG_HIDE_RUSTURF_TUNNEL_ROCK_1))
         {
@@ -1547,7 +1547,7 @@ bool8 MonOTNameNotPlayer(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_OT_NAME, gStringVar1);
 
-    if (!StringCompare(gSaveBlock2Ptr->playerName, gStringVar1))
+    if (!StringCompare(gSaveBlockPtr->playerName, gStringVar1))
         return FALSE;
 
     return TRUE;
@@ -1614,8 +1614,8 @@ bool8 IsBadEggInParty(void)
 
 bool8 InMultiPartnerRoom(void)
 {
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
+    if (gSaveBlockPtr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM)
+        && gSaveBlockPtr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM) &&
         VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_MULTIS)
         return TRUE;
     return FALSE;
@@ -1699,7 +1699,7 @@ static const u16 sElevatorWindowTiles_Descending[ELEVATOR_WINDOW_HEIGHT][ELEVATO
 void SetDeptStoreFloor(void)
 {
     u8 deptStoreFloor;
-    switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+    switch (gSaveBlockPtr->dynamicWarp.mapNum)
     {
     case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_1F):
         deptStoreFloor = DEPT_STORE_FLOORNUM_1F;
@@ -1730,9 +1730,9 @@ u16 GetDeptStoreDefaultFloorChoice(void)
 {
     sLilycoveDeptStore_DefaultFloorChoice = 0;
 
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
+    if (gSaveBlockPtr->dynamicWarp.mapGroup == MAP_GROUP(LILYCOVE_CITY_DEPARTMENT_STORE_1F))
     {
-        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
+        switch (gSaveBlockPtr->dynamicWarp.mapNum)
         {
         case MAP_NUM(LILYCOVE_CITY_DEPARTMENT_STORE_5F):
             sLilycoveDeptStore_DefaultFloorChoice = 0;
@@ -2084,53 +2084,53 @@ void ShowFrontierManiacMessage(void)
     case FRONTIER_MANIAC_TOWER_DOUBLES:
     case FRONTIER_MANIAC_TOWER_MULTIS:
     case FRONTIER_MANIAC_TOWER_LINK:
-        if (gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.towerWinStreaks[facility][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.towerWinStreaks[facility][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_DOME:
-        if (gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.domeWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_FACTORY:
-        if (gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.factoryWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_PALACE:
-        if (gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.palaceWinStreaks[FRONTIER_MODE_SINGLES][FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_ARENA:
-        if (gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.arenaWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.arenaWinStreaks[FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.arenaWinStreaks[FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_PIKE:
-        if (gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.pikeWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.pikeWinStreaks[FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.pikeWinStreaks[FRONTIER_LVL_OPEN];
         break;
     case FRONTIER_MANIAC_PYRAMID:
-        if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50]
-            >= gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
-            winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
+        if (gSaveBlockPtr->frontier.pyramidWinStreaks[FRONTIER_LVL_50]
+            >= gSaveBlockPtr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN])
+            winStreak = gSaveBlockPtr->frontier.pyramidWinStreaks[FRONTIER_LVL_50];
         else
-            winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
+            winStreak = gSaveBlockPtr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
         break;
     default:
         return;
@@ -2150,7 +2150,7 @@ void BufferBattleTowerElevatorFloors(void)
 
     u8 i;
     u16 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 lvlMode = gSaveBlockPtr->frontier.lvlMode;
 
     if (battleMode == FRONTIER_MODE_MULTIS && !FlagGet(FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER))
     {
@@ -2161,7 +2161,7 @@ void BufferBattleTowerElevatorFloors(void)
 
     for (i = 0; i < ARRAY_COUNT(sBattleTowerStreakThresholds) - 1; i++)
     {
-        if (sBattleTowerStreakThresholds[i] > gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][lvlMode])
+        if (sBattleTowerStreakThresholds[i] > gSaveBlockPtr->frontier.towerWinStreaks[battleMode][lvlMode])
         {
             gSpecialVar_0x8005 = 4;
             gSpecialVar_0x8006 = i + 5;
@@ -2812,7 +2812,7 @@ void UpdateBattlePointsWindow(void)
 {
     u8 string[32];
     u32 x;
-    StringCopy(ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
+    StringCopy(ConvertIntToDecimalStringN(string, gSaveBlockPtr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4), gText_BP);
     x = GetStringRightAlignXOffset(FONT_NORMAL, string, 48);
     AddTextPrinterParameterized(sBattlePointsWindowId, FONT_NORMAL, string, x, 1, 0, NULL);
 }
@@ -2844,23 +2844,23 @@ void CloseBattlePointsWindow(void)
 
 void TakeFrontierBattlePoints(void)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints < gSpecialVar_0x8004)
-        gSaveBlock2Ptr->frontier.battlePoints = 0;
+    if (gSaveBlockPtr->frontier.battlePoints < gSpecialVar_0x8004)
+        gSaveBlockPtr->frontier.battlePoints = 0;
     else
-        gSaveBlock2Ptr->frontier.battlePoints -= gSpecialVar_0x8004;
+        gSaveBlockPtr->frontier.battlePoints -= gSpecialVar_0x8004;
 }
 
 void GiveFrontierBattlePoints(void)
 {
-    if (gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
-        gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    if (gSaveBlockPtr->frontier.battlePoints + gSpecialVar_0x8004 > MAX_BATTLE_FRONTIER_POINTS)
+        gSaveBlockPtr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
     else
-        gSaveBlock2Ptr->frontier.battlePoints = gSaveBlock2Ptr->frontier.battlePoints + gSpecialVar_0x8004;
+        gSaveBlockPtr->frontier.battlePoints = gSaveBlockPtr->frontier.battlePoints + gSpecialVar_0x8004;
 }
 
 u16 GetFrontierBattlePoints(void)
 {
-    return gSaveBlock2Ptr->frontier.battlePoints;
+    return gSaveBlockPtr->frontier.battlePoints;
 }
 
 void ShowFrontierExchangeCornerItemIconWindow(void)
@@ -3217,7 +3217,7 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 void IncrementBirthIslandRockStepCount(void)
 {
     u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
-    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR))
+    if (gSaveBlockPtr->location.mapNum == MAP_NUM(BIRTH_ISLAND_EXTERIOR) && gSaveBlockPtr->location.mapGroup == MAP_GROUP(BIRTH_ISLAND_EXTERIOR))
     {
         if (++stepCount > 99)
             VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
@@ -3363,9 +3363,9 @@ bool8 AbnormalWeatherHasExpired(void)
     if (++steps > 999)
     {
         VarSet(VAR_ABNORMAL_WEATHER_STEP_COUNTER, 0);
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
+        if (gSaveBlockPtr->location.mapGroup == MAP_GROUP(UNDERWATER_MARINE_CAVE))
         {
-            switch (gSaveBlock1Ptr->location.mapNum)
+            switch (gSaveBlockPtr->location.mapNum)
             {
             case MAP_NUM(UNDERWATER_MARINE_CAVE):
             case MAP_NUM(MARINE_CAVE_ENTRANCE):
@@ -3379,9 +3379,9 @@ bool8 AbnormalWeatherHasExpired(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(UNDERWATER_ROUTE127))
+        if (gSaveBlockPtr->location.mapGroup == MAP_GROUP(UNDERWATER_ROUTE127))
         {
-            switch (gSaveBlock1Ptr->location.mapNum)
+            switch (gSaveBlockPtr->location.mapNum)
             {
             case MAP_NUM(UNDERWATER_ROUTE127):
             case MAP_NUM(UNDERWATER_ROUTE129):
@@ -3394,8 +3394,8 @@ bool8 AbnormalWeatherHasExpired(void)
             }
         }
 
-        if (gSaveBlock1Ptr->location.mapNum == sAbnormalWeatherMapNumbers[abnormalWeather - 1] &&
-            gSaveBlock1Ptr->location.mapGroup == 0)
+        if (gSaveBlockPtr->location.mapNum == sAbnormalWeatherMapNumbers[abnormalWeather - 1] &&
+            gSaveBlockPtr->location.mapGroup == 0)
         {
             return TRUE;
         }
@@ -3434,9 +3434,9 @@ u32 GetMartEmployeeObjectEventId(void)
     u8 i;
     for (i = 0; i < ARRAY_COUNT(sPokeMarts); i++)
     {
-        if (gSaveBlock1Ptr->location.mapGroup == sPokeMarts[i][0])
+        if (gSaveBlockPtr->location.mapGroup == sPokeMarts[i][0])
         {
-            if (gSaveBlock1Ptr->location.mapNum == sPokeMarts[i][1])
+            if (gSaveBlockPtr->location.mapNum == sPokeMarts[i][1])
                 return sPokeMarts[i][2];
         }
     }
@@ -3635,8 +3635,8 @@ static void Task_CloseBattlePikeCurtain(u8 taskId)
         {
             for (x = 0; x < CURTAIN_WIDTH; x++)
             {
-                MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + x + MAP_OFFSET - 1,
-                                       gSaveBlock1Ptr->pos.y + y + MAP_OFFSET - 3,
+                MapGridSetMetatileIdAt(gSaveBlockPtr->pos.x + x + MAP_OFFSET - 1,
+                                       gSaveBlockPtr->pos.y + y + MAP_OFFSET - 3,
                                        (x + METATILE_BattlePike_CurtainFrames_Start) + (y * METATILE_ROW_WIDTH) + (tCurrentFrame * CURTAIN_HEIGHT * METATILE_ROW_WIDTH));
             }
         }
@@ -3665,7 +3665,7 @@ void GetBattlePyramidHint(void)
 // Used to avoid a potential softlock if the player respawns on Dewford with no way off
 void ResetHealLocationFromDewford(void)
 {
-    if (gSaveBlock1Ptr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlock1Ptr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
+    if (gSaveBlockPtr->lastHealLocation.mapGroup == MAP_GROUP(DEWFORD_TOWN) && gSaveBlockPtr->lastHealLocation.mapNum == MAP_NUM(DEWFORD_TOWN))
         SetLastHealLocationWarp(HEAL_LOCATION_PETALBURG_CITY);
 }
 
@@ -3696,7 +3696,7 @@ bool8 InPokemonCenter(void)
     };
 
     int i;
-    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) + gSaveBlock1Ptr->location.mapNum;
+    u16 map = (gSaveBlockPtr->location.mapGroup << 8) + gSaveBlockPtr->location.mapNum;
 
     for (i = 0; sPokemonCenters[i] != MAP_UNDEFINED; i++)
     {
@@ -3737,7 +3737,7 @@ bool8 InPokemonCenter(void)
       2: Player has met their initial fans
 */
 
-#define FANCLUB_BITFIELD (gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
+#define FANCLUB_BITFIELD (gSaveBlockPtr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
 #define FANCLUB_COUNTER    0x007F
 
 #define GET_TRAINER_FAN_CLUB_FLAG(flag)  (FANCLUB_BITFIELD >> (flag) & 1)
@@ -3751,8 +3751,8 @@ bool8 InPokemonCenter(void)
 
 void ResetFanClub(void)
 {
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START] = 0;
-    gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = 0;
+    gSaveBlockPtr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START] = 0;
+    gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = 0;
 }
 
 void TryLoseFansFromPlayTimeAfterLinkBattle(void)
@@ -3760,7 +3760,7 @@ void TryLoseFansFromPlayTimeAfterLinkBattle(void)
     if (DidPlayerGetFirstFans())
     {
         TryLoseFansFromPlayTime();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
     }
 }
 
@@ -3770,7 +3770,7 @@ void UpdateTrainerFanClubGameClear(void)
     {
         SetPlayerGotFirstFans();
         SetInitialFansOfPlayer();
-        gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+        gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
         FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
         FlagClear(FLAG_HIDE_FANCLUB_BOY);
         FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
@@ -3914,25 +3914,25 @@ u16 GetNumFansOfPlayerInTrainerFanClub(void)
 void TryLoseFansFromPlayTime(void)
 {
     u8 i = 0;
-    if (gSaveBlock2Ptr->playTimeHours < 999)
+    if (gSaveBlockPtr->playTimeHours < 999)
     {
         while (TRUE)
         {
             if (GetNumFansOfPlayerInTrainerFanClub() < 5)
             {
-                gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlock2Ptr->playTimeHours;
+                gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
                 break;
             }
             else if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
             {
                 break;
             }
-            else if (gSaveBlock2Ptr->playTimeHours - gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
+            else if (gSaveBlockPtr->playTimeHours - gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
             {
                 return;
             }
             PlayerLoseRandomTrainerFan();
-            gSaveBlock1Ptr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
+            gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
             i++;
         }
     }
@@ -4093,7 +4093,7 @@ void GetObjectPosition(u16* xPointer, u16* yPointer, u32 localId, u32 useTemplat
 
     if (useTemplate)
     {
-        const struct ObjectEventTemplate *objTemplate = FindObjectEventTemplateByLocalId(localId, gSaveBlock1Ptr->objectEventTemplates, gMapHeader.events->objectEventCount);
+        const struct ObjectEventTemplate *objTemplate = FindObjectEventTemplateByLocalId(localId, gSaveBlockPtr->objectEventTemplates, gMapHeader.events->objectEventCount);
         *xPointer = objTemplate->x;
         *yPointer = objTemplate->y;
         return;

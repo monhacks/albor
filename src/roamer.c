@@ -14,7 +14,7 @@ enum
     MAP_NUM, // map number
 };
 
-#define ROAMER(index) (&gSaveBlock1Ptr->roamer[index])
+#define ROAMER(index) (&gSaveBlockPtr->roamer[index])
 EWRAM_DATA static u8 sLocationHistory[ROAMER_COUNT][3][2] = {0};
 EWRAM_DATA static u8 sRoamerLocation[ROAMER_COUNT][2] = {0};
 EWRAM_DATA u8 gEncounteredRoamerIndex = 0;
@@ -166,8 +166,8 @@ void UpdateLocationHistoryForRoamer(void)
         sLocationHistory[i][1][MAP_GRP] = sLocationHistory[i][0][MAP_GRP];
         sLocationHistory[i][1][MAP_NUM] = sLocationHistory[i][0][MAP_NUM];
 
-        sLocationHistory[i][0][MAP_GRP] = gSaveBlock1Ptr->location.mapGroup;
-        sLocationHistory[i][0][MAP_NUM] = gSaveBlock1Ptr->location.mapNum;
+        sLocationHistory[i][0][MAP_GRP] = gSaveBlockPtr->location.mapGroup;
+        sLocationHistory[i][0][MAP_NUM] = gSaveBlockPtr->location.mapNum;
     }
 }
 
@@ -260,7 +260,7 @@ bool8 TryStartRoamerEncounter(void)
 
     for (i = 0; i < ROAMER_COUNT; i++)
     {
-        if (IsRoamerAt(i, gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum) == TRUE && (Random() % 4) == 0)
+        if (IsRoamerAt(i, gSaveBlockPtr->location.mapGroup, gSaveBlockPtr->location.mapNum) == TRUE && (Random() % 4) == 0)
         {
             CreateRoamerMonInstance(i);
             gEncounteredRoamerIndex = i;

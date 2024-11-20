@@ -2575,9 +2575,9 @@ void CreateContestMonFromParty(u8 partyIndex)
     s16 smart;
     s16 tough;
 
-    StringCopy(name, gSaveBlock2Ptr->playerName);
+    StringCopy(name, gSaveBlockPtr->playerName);
     memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
-    if (gSaveBlock2Ptr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MALE)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_MAY;
@@ -5107,17 +5107,17 @@ bool8 SaveContestWinner(u8 rank)
         // Used to save any winner for the Contest Hall or the Museum
         // but excludes the temporary save used by the artist
         u8 id = GetContestWinnerSaveIdx(rank, TRUE);
-        gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
-        gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
-        gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
-        StringCopyN(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);
-        StringCopy(gSaveBlock1Ptr->contestWinners[id].trainerName, gContestMons[i].trainerName);
-        gSaveBlock1Ptr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
+        gSaveBlockPtr->contestWinners[id].personality = gContestMons[i].personality;
+        gSaveBlockPtr->contestWinners[id].species = gContestMons[i].species;
+        gSaveBlockPtr->contestWinners[id].trainerId = gContestMons[i].otId;
+        StringCopyN(gSaveBlockPtr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);
+        StringCopy(gSaveBlockPtr->contestWinners[id].trainerName, gContestMons[i].trainerName);
+        gSaveBlockPtr->contestWinners[id].contestRank = gSpecialVar_ContestRank;
 
         if (rank != CONTEST_SAVE_FOR_MUSEUM)
-            gSaveBlock1Ptr->contestWinners[id].contestCategory = gSpecialVar_ContestCategory;
+            gSaveBlockPtr->contestWinners[id].contestCategory = gSpecialVar_ContestCategory;
         else
-            gSaveBlock1Ptr->contestWinners[id].contestCategory = captionId;
+            gSaveBlockPtr->contestWinners[id].contestCategory = captionId;
     }
     else
     {
@@ -5150,7 +5150,7 @@ u8 GetContestWinnerSaveIdx(u8 rank, bool8 shift)
         if (shift)
         {
             for (i = NUM_CONTEST_HALL_WINNERS - 1; i > 0; i--)
-                memcpy(&gSaveBlock1Ptr->contestWinners[i], &gSaveBlock1Ptr->contestWinners[i - 1], sizeof(struct ContestWinner));
+                memcpy(&gSaveBlockPtr->contestWinners[i], &gSaveBlockPtr->contestWinners[i - 1], sizeof(struct ContestWinner));
         }
         return CONTEST_WINNER_HALL_1 - 1;
     default:
@@ -5178,7 +5178,7 @@ void ClearContestWinnerPicsInContestHall(void)
     s32 i;
 
     for (i = 0; i < MUSEUM_CONTEST_WINNERS_START; i++)
-        gSaveBlock1Ptr->contestWinners[i] = gDefaultContestWinners[i];
+        gSaveBlockPtr->contestWinners[i] = gDefaultContestWinners[i];
 }
 
 #define APPEAL_MOVES_END 0xFFFF

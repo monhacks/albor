@@ -73,7 +73,7 @@ static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
 static void SetupBard(void)
 {
     u16 i;
-    struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
 
     bard->id = MAUVILLE_MAN_BARD;
     bard->hasChangedSong = FALSE;
@@ -84,7 +84,7 @@ static void SetupBard(void)
 
 static void SetupHipster(void)
 {
-    struct MauvilleManHipster *hipster = &gSaveBlock1Ptr->oldMan.hipster;
+    struct MauvilleManHipster *hipster = &gSaveBlockPtr->oldMan.hipster;
 
     hipster->id = MAUVILLE_MAN_HIPSTER;
     hipster->taughtWord = FALSE;
@@ -98,7 +98,7 @@ static void SetupStoryteller(void)
 
 static void SetupGiddy(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlockPtr->oldMan.giddy;
 
     giddy->id = MAUVILLE_MAN_GIDDY;
     giddy->taleCounter = 0;
@@ -112,7 +112,7 @@ static void SetupTrader(void)
 
 void SetMauvilleOldMan(void)
 {
-    u16 trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
+    u16 trainerId = (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
 
 
     // Determine man based on the last digit of the player's trainer ID.
@@ -139,7 +139,7 @@ void SetMauvilleOldMan(void)
 
 u8 GetCurrentMauvilleOldMan(void)
 {
-    return gSaveBlock1Ptr->oldMan.common.id;
+    return gSaveBlockPtr->oldMan.common.id;
 }
 
 void Script_GetCurrentMauvilleMan(void)
@@ -149,18 +149,18 @@ void Script_GetCurrentMauvilleMan(void)
 
 void HasBardSongBeenChanged(void)
 {
-    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.bard)->hasChangedSong;
+    gSpecialVar_Result = (&gSaveBlockPtr->oldMan.bard)->hasChangedSong;
 }
 
 void SaveBardSongLyrics(void)
 {
     u16 i;
-    struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
 
-    StringCopy(bard->playerName, gSaveBlock2Ptr->playerName);
+    StringCopy(bard->playerName, gSaveBlockPtr->playerName);
 
     for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        bard->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+        bard->playerTrainerId[i] = gSaveBlockPtr->playerTrainerId[i];
 
     for (i = 0; i < BARD_SONG_LENGTH; i++)
         bard->songLyrics[i] = bard->temporaryLyrics[i];
@@ -171,7 +171,7 @@ void SaveBardSongLyrics(void)
 // Copies lyrics into gStringVar4
 static void PrepareSongText(void)
 {
-    struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
     u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
     u8 *wordEnd = gStringVar4;
     u8 *str = wordEnd;
@@ -226,12 +226,12 @@ void PlayBardSong(void)
 
 void HasHipsterTaughtWord(void)
 {
-    gSpecialVar_Result = (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord;
+    gSpecialVar_Result = (&gSaveBlockPtr->oldMan.hipster)->taughtWord;
 }
 
 void SetHipsterTaughtWord(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = TRUE;
+    (&gSaveBlockPtr->oldMan.hipster)->taughtWord = TRUE;
 }
 
 void HipsterTryTeachWord(void)
@@ -252,7 +252,7 @@ void HipsterTryTeachWord(void)
 
 void GiddyShouldTellAnotherTale(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlockPtr->oldMan.giddy;
 
     if (giddy->taleCounter == GIDDY_MAX_TALES)
     {
@@ -267,7 +267,7 @@ void GiddyShouldTellAnotherTale(void)
 
 void GenerateGiddyLine(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlockPtr->oldMan.giddy;
 
     if (giddy->taleCounter == 0)
         InitGiddyTaleList();
@@ -302,7 +302,7 @@ void GenerateGiddyLine(void)
 
 static void InitGiddyTaleList(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlock1Ptr->oldMan.giddy;
+    struct MauvilleManGiddy *giddy = &gSaveBlockPtr->oldMan.giddy;
     u16 wordGroupsAndCount[][2] = {
         {EC_GROUP_POKEMON,   0},
         {EC_GROUP_LIFESTYLE, 0},
@@ -360,12 +360,12 @@ static void InitGiddyTaleList(void)
 }
 static void ResetBardFlag(void)
 {
-    (&gSaveBlock1Ptr->oldMan.bard)->hasChangedSong = FALSE;
+    (&gSaveBlockPtr->oldMan.bard)->hasChangedSong = FALSE;
 }
 
 static void ResetHipsterFlag(void)
 {
-    (&gSaveBlock1Ptr->oldMan.hipster)->taughtWord = FALSE;
+    (&gSaveBlockPtr->oldMan.hipster)->taughtWord = FALSE;
 }
 
 static void ResetTraderFlag(void)
@@ -453,7 +453,7 @@ static void BardSing(struct Task *task, struct BardSong *song)
     {
     case BARD_STATE_INIT:
     {
-        struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
+        struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
         u16 *lyrics;
         s32 i;
 
@@ -1072,7 +1072,7 @@ static const s32 sNumStories = ARRAY_COUNT(sStorytellerStories);
 static void StorytellerSetup(void)
 {
     s32 i;
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
 
     sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
     sStorytellerPtr->alreadyRecorded = FALSE;
@@ -1085,7 +1085,7 @@ static void StorytellerSetup(void)
 
 static void Storyteller_ResetFlag(void)
 {
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
 
     sStorytellerPtr->id = MAUVILLE_MAN_STORYTELLER;
     sStorytellerPtr->alreadyRecorded = FALSE;
@@ -1181,7 +1181,7 @@ static void StorytellerSetPlayerName(u32 player, const u8 *src)
 static void StorytellerRecordNewStat(u32 player, u32 stat)
 {
     sStorytellerPtr->gameStatIDs[player] = stat;
-    StorytellerSetPlayerName(player, gSaveBlock2Ptr->playerName);
+    StorytellerSetPlayerName(player, gSaveBlockPtr->playerName);
     StorytellerSetRecordedTrainerStat(player, StorytellerGetGameStat(stat));
     ConvertIntToDecimalStringN(gStringVar1, StorytellerGetGameStat(stat), STR_CONV_MODE_LEFT_ALIGN, 10);
     StringCopy(gStringVar2, GetStoryActionByStat(stat));
@@ -1301,7 +1301,7 @@ void Script_StorytellerDisplayStory(void)
 
 u8 StorytellerGetFreeStorySlot(void)
 {
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
     return GetFreeStorySlot();
 }
 
@@ -1309,7 +1309,7 @@ u8 StorytellerGetFreeStorySlot(void)
 bool8 StorytellerUpdateStat(void)
 {
     u8 stat;
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
     stat = sStorytellerPtr->gameStatIDs[sSelectedStory];
 
     if (HasTrainerStatIncreased(sSelectedStory) == TRUE)
@@ -1322,7 +1322,7 @@ bool8 StorytellerUpdateStat(void)
 
 bool8 HasStorytellerAlreadyRecorded(void)
 {
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
 
     if (sStorytellerPtr->alreadyRecorded == FALSE)
         return FALSE;
@@ -1332,6 +1332,6 @@ bool8 HasStorytellerAlreadyRecorded(void)
 
 bool8 Script_StorytellerInitializeRandomStat(void)
 {
-    sStorytellerPtr = &gSaveBlock1Ptr->oldMan.storyteller;
+    sStorytellerPtr = &gSaveBlockPtr->oldMan.storyteller;
     return StorytellerInitializeRandomStat();
 }

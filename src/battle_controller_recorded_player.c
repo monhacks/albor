@@ -487,15 +487,9 @@ static void RecordedPlayerHandleStatusAnimation(u32 battler)
 
 static void RecordedPlayerHandleIntroTrainerBallThrow(u32 battler)
 {
-    u32 trainerPicId;
-    const u32 *trainerPal;
+    u32 trainerPicId = gSaveBlockPtr->playerGender + TRAINER_BACK_PIC_BRENDAN;
+    const u32 *trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
-        trainerPicId = gLinkPlayers[GetBattlerMultiplayerId(battler)].gender + TRAINER_BACK_PIC_BRENDAN;
-    else
-        trainerPicId = gSaveBlock2Ptr->playerGender + TRAINER_BACK_PIC_BRENDAN;
-
-    trainerPal = gTrainerBacksprites[trainerPicId].palette.data;
     BtlController_HandleIntroTrainerBallThrow(battler, 0xD6F9, trainerPal, 24, Intro_TryShinyAnimShowHealthbox);
 }
 

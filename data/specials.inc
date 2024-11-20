@@ -325,7 +325,6 @@ gSpecials::
 	def_special GetContestLadyMonSpecies
 	def_special GetContestLadyCategory
 	def_special CloseBattlePikeCurtain
-	def_special CallApprenticeFunction
 	def_special ShouldTryGetTrainerScript
 	def_special ShowMapNamePopup
 	def_special ShowMapNamePopup

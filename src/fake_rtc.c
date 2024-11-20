@@ -8,7 +8,7 @@
 
 struct Time *FakeRtc_GetCurrentTime(void)
 {
-    return &gSaveBlock2Ptr->fakeRTC;
+    return &gSaveBlockPtr->fakeRTC;
 }
 
 void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)

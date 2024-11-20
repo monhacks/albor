@@ -386,7 +386,7 @@ static bool8 _CheckDaycareMonReceivedMail(struct DayCare *daycare, u8 daycareId)
 
 bool8 CheckDaycareMonReceivedMail(void)
 {
-    return _CheckDaycareMonReceivedMail(&gSaveBlock1Ptr->daycare, gSpecialVar_0x8004);
+    return _CheckDaycareMonReceivedMail(&gSaveBlockPtr->daycare, gSpecialVar_0x8004);
 }
 
 static u8 EggHatchCreateMonSprite(u8 state, u8 partyId, u16 *speciesLoc)

@@ -39,7 +39,6 @@ enum
     CLOCK_WIN_ID
 };
 
-static EWRAM_DATA u16 sSaveFailedType = {0};
 static EWRAM_DATA u16 sClockInfo[2] = {0};
 static EWRAM_DATA u8 sWindowIds[2] = {0};
 
@@ -154,10 +153,9 @@ static void SaveFailedScreenTextPrint(const u8 *text, u8 x, u8 y)
     AddTextPrinterParameterized4(sWindowIds[TEXT_WIN_ID], FONT_NORMAL, x * 8, y * 8 + 1, 0, 0, color, 0, text);
 }
 
-void DoSaveFailedScreen(u8 saveType)
+void DoSaveFailedScreen(void)
 {
     SetMainCallback2(CB2_SaveFailedScreen);
-    sSaveFailedType = saveType;
     sClockInfo[CLOCK_RUNNING] = FALSE;
     sClockInfo[DEBUG_TIMER] = 0;
     sWindowIds[TEXT_WIN_ID] = 0;
@@ -260,7 +258,7 @@ static void CB2_WipeSave(void)
 
         FillWindowPixelBuffer(sWindowIds[TEXT_WIN_ID], PIXEL_FILL(1));
         SaveFailedScreenTextPrint(gText_CheckCompleted, 1, 0);
-        HandleSavingData(sSaveFailedType);
+        HandleSavingData();
 
         if (gDamagedSaveSectors != 0)
         {

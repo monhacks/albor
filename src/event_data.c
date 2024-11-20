@@ -30,15 +30,15 @@ extern u16 *const gSpecialVars[];
 
 void InitEventData(void)
 {
-    memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
-    memset(gSaveBlock1Ptr->vars, 0, sizeof(gSaveBlock1Ptr->vars));
+    memset(gSaveBlockPtr->flags, 0, sizeof(gSaveBlockPtr->flags));
+    memset(gSaveBlockPtr->vars, 0, sizeof(gSaveBlockPtr->vars));
     memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
 }
 
 void ClearTempFieldEventData(void)
 {
-    memset(&gSaveBlock1Ptr->flags[TEMP_FLAGS_START / 8], 0, TEMP_FLAGS_SIZE);
-    memset(&gSaveBlock1Ptr->vars[TEMP_VARS_START - VARS_START], 0, TEMP_VARS_SIZE);
+    memset(&gSaveBlockPtr->flags[TEMP_FLAGS_START / 8], 0, TEMP_FLAGS_SIZE);
+    memset(&gSaveBlockPtr->vars[TEMP_VARS_START - VARS_START], 0, TEMP_VARS_SIZE);
     FlagClear(FLAG_SYS_ENC_UP_ITEM);
     FlagClear(FLAG_SYS_ENC_DOWN_ITEM);
     FlagClear(FLAG_SYS_USE_STRENGTH);
@@ -47,7 +47,7 @@ void ClearTempFieldEventData(void)
 
 void ClearDailyFlags(void)
 {
-    memset(&gSaveBlock1Ptr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
+    memset(&gSaveBlockPtr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
 }
 
 void DisableResetRTC(void)
@@ -75,7 +75,7 @@ u16 *GetVarPointer(u16 id)
     if (id < VARS_START)
         return NULL;
     else if (id < SPECIAL_VARS_START)
-        return &gSaveBlock1Ptr->vars[id - VARS_START];
+        return &gSaveBlockPtr->vars[id - VARS_START];
     else
         return gSpecialVars[id - SPECIAL_VARS_START];
 }
@@ -115,7 +115,7 @@ u8 *GetFlagPointer(u16 id)
     if (id == 0)
         return NULL;
     else if (id < SPECIAL_FLAGS_START)
-        return &gSaveBlock1Ptr->flags[id / 8];
+        return &gSaveBlockPtr->flags[id / 8];
     else
         return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
 }

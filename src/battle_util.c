@@ -514,7 +514,7 @@ void HandleAction_Run(void)
         }
 
         gBattleOutcome |= B_OUTCOME_LINK_BATTLE_RAN;
-        gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
+        gSaveBlockPtr->frontier.disableRecordBattle = TRUE;
     }
     else
     {
@@ -11702,7 +11702,7 @@ void AllocateBattleResources(void)
     if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
     {
         u16 currSecretBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
-        CreateSecretBaseEnemyParty(&gSaveBlock1Ptr->secretBases[currSecretBaseId]);
+        CreateSecretBaseEnemyParty(&gSaveBlockPtr->secretBases[currSecretBaseId]);
     }
 }
 

@@ -3,12 +3,10 @@
 
 #include "pokemon_storage_system.h"
 
-extern struct SaveBlock1 gSaveblock1;
-extern struct SaveBlock2 gSaveblock2;
+extern struct SaveBlock gSaveblock;
 extern struct PokemonStorage gPokemonStorage;
 extern bool32 gFlashMemoryPresent;
-extern struct SaveBlock1 *gSaveBlock1Ptr;
-extern struct SaveBlock2 *gSaveBlock2Ptr;
+extern struct SaveBlock *gSaveBlockPtr;
 extern struct PokemonStorage *gPokemonStoragePtr;
 
 void CheckForFlashMemory(void);

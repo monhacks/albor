@@ -186,7 +186,7 @@ u16 VsSeekerConvertLocalIdToTableId(u16 localId)
 
 void VsSeekerResetObjectMovementAfterChargeComplete(void)
 {
-    struct ObjectEventTemplate * templates = gSaveBlock1Ptr->objectEventTemplates;
+    struct ObjectEventTemplate * templates = gSaveBlockPtr->objectEventTemplates;
     u32 i;
     u32 movementType;
     u8 objEventId;
@@ -202,7 +202,7 @@ void VsSeekerResetObjectMovementAfterChargeComplete(void)
             continue;
 
         movementType = GetRandomFaceDirectionMovementType();
-        TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+        TryGetObjectEventIdByLocalIdAndMap(templates[i].localId, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup, &objEventId);
         objectEvent = &gObjectEvents[objEventId];
 
         if (!ObjectEventIdIsSane(objEventId))
@@ -317,14 +317,14 @@ static void Task_VsSeeker_PlaySoundAndGetResponseCode(u8 taskId)
         data[2] = 0;
         VsSeekerResetInBagStepCounter();
         sVsSeeker->responseCode = GetVsSeekerResponseInArea();
-        ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, sMovementScript_Wait48);
+        ScriptMovement_StartObjectMovementScript(0xFF, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup, sMovementScript_Wait48);
         gTasks[taskId].func = Task_VsSeeker_ShowResponseToPlayer;
     }
 }
 
 static void GatherNearbyTrainerInfo(void)
 {
-    struct ObjectEventTemplate *templates = gSaveBlock1Ptr->objectEventTemplates;
+    struct ObjectEventTemplate *templates = gSaveBlockPtr->objectEventTemplates;
     u8 objectEventId = 0;
     u8 vsSeekerObjectIdx = 0;
     s32 objectEventIdx;
@@ -337,7 +337,7 @@ static void GatherNearbyTrainerInfo(void)
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].script = templates[objectEventIdx].script;
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].trainerIdx = GetTrainerFlagFromScript(templates[objectEventIdx].script);
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].localId = templates[objectEventIdx].localId;
-        TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
+        TryGetObjectEventIdByLocalIdAndMap(templates[objectEventIdx].localId, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup, &objectEventId);
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].objectEventId = objectEventId;
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].xCoord = gObjectEvents[objectEventId].currentCoords.x - 7;
         sVsSeeker->trainerInfo[vsSeekerObjectIdx].yCoord = gObjectEvents[objectEventId].currentCoords.y - 7;
@@ -349,7 +349,7 @@ static void GatherNearbyTrainerInfo(void)
 
 static void Task_VsSeeker_ShowResponseToPlayer(u8 taskId)
 {
-    if (!ScriptMovement_IsObjectMovementFinished(0xFF, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup))
+    if (!ScriptMovement_IsObjectMovementFinished(0xFF, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup))
         return;
 
     if (sVsSeeker->responseCode == VSSEEKER_RESPONSE_NO_RESPONSE)
@@ -383,7 +383,7 @@ void ClearRematchMovementByTrainerId(void)
 {
     s32 i;
     u8 objEventId = 0;
-    struct ObjectEventTemplate *objectEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
+    struct ObjectEventTemplate *objectEventTemplates = gSaveBlockPtr->objectEventTemplates;
     struct ObjectEvent *objectEvent;
 
     int vsSeekerDataIdx = TrainerIdToRematchTableId(gRematchTable, gTrainerBattleOpponent_A);
@@ -400,7 +400,7 @@ void ClearRematchMovementByTrainerId(void)
         || vsSeekerDataIdx != TrainerIdToRematchTableId(gRematchTable, GetTrainerFlagFromScript(objectEventTemplates[i].script)))
             continue;
 
-        TryGetObjectEventIdByLocalIdAndMap(objectEventTemplates[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objEventId);
+        TryGetObjectEventIdByLocalIdAndMap(objectEventTemplates[i].localId, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup, &objEventId);
         objectEvent = &gObjectEvents[objEventId];
         GetRandomFaceDirectionMovementType(&objectEventTemplates[i]);
         TryOverrideTemplateCoordsForObjectEvent(objectEvent, sFaceDirectionMovementTypeByFacingDirection[objectEvent->facingDirection]);

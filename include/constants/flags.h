@@ -755,7 +755,7 @@
 
 // Event Flags
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
-#define FLAG_HIDE_APPRENTICE                                        0x2BD
+#define FLAG_UNUSED_0x2BD                                           0x2BD
 #define FLAG_UNUSED_0x2BE                                           0x2BE
 #define FLAG_UNUSED_0x2BF                                           0x2BF
 #define FLAG_UNUSED_0x2C0                                           0x2C0
@@ -1513,7 +1513,7 @@
 #define FLAG_DAILY_FLOWER_SHOP_RECEIVED_BERRY       (DAILY_FLAGS_START + 0x10)
 #define FLAG_DAILY_BERRY_MASTERS_WIFE               (DAILY_FLAGS_START + 0x11)
 #define FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY        (DAILY_FLAGS_START + 0x12)
-#define FLAG_DAILY_APPRENTICE_LEAVES                (DAILY_FLAGS_START + 0x13)
+#define FLAG_DAILY_UNUSED_0x13                      (DAILY_FLAGS_START + 0x13)
 
 #define FLAG_DAILY_UNUSED_0x14                      (DAILY_FLAGS_START + 0x14)
 #define FLAG_DAILY_UNUSED_0x15                      (DAILY_FLAGS_START + 0x15)

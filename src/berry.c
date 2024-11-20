@@ -1651,7 +1651,7 @@ const struct Berry *GetBerryInfo(u8 berry)
 
 struct BerryTree *GetBerryTreeInfo(u8 id)
 {
-    return &gSaveBlock1Ptr->berryTrees[id];
+    return &gSaveBlockPtr->berryTrees[id];
 }
 
 bool32 ObjectEventInteractionWaterBerryTree(void)
@@ -1712,7 +1712,7 @@ void ClearBerryTrees(void)
     int i;
 
     for (i = 0; i < BERRY_TREES_COUNT; i++)
-        gSaveBlock1Ptr->berryTrees[i] = gBlankBerryTree;
+        gSaveBlockPtr->berryTrees[i] = gBlankBerryTree;
 }
 
 bool32 BerryTreeGrow(struct BerryTree *tree)
@@ -1774,7 +1774,7 @@ void BerryTreeTimeUpdate(s32 minutes)
 
     for (i = 0; i < BERRY_TREES_COUNT; i++)
     {
-        tree = &gSaveBlock1Ptr->berryTrees[i];
+        tree = &gSaveBlockPtr->berryTrees[i];
 
         if (tree->berry && tree->stage && !tree->stopGrowth && (!OW_BERRY_IMMORTAL || tree->stage != BERRY_STAGE_BERRIES))
         {
@@ -1876,22 +1876,22 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
 
 void RemoveBerryTree(u8 id)
 {
-    gSaveBlock1Ptr->berryTrees[id] = gBlankBerryTree;
+    gSaveBlockPtr->berryTrees[id] = gBlankBerryTree;
 }
 
 u8 GetBerryTypeByBerryTreeId(u8 id)
 {
-    return gSaveBlock1Ptr->berryTrees[id].berry;
+    return gSaveBlockPtr->berryTrees[id].berry;
 }
 
 u8 GetStageByBerryTreeId(u8 id)
 {
-    return gSaveBlock1Ptr->berryTrees[id].stage;
+    return gSaveBlockPtr->berryTrees[id].stage;
 }
 
 u8 GetMulchByBerryTreeId(u8 id)
 {
-    return gSaveBlock1Ptr->berryTrees[id].mulch;
+    return gSaveBlockPtr->berryTrees[id].mulch;
 }
 
 u8 ItemIdToBerryType(u16 item)
@@ -1998,7 +1998,7 @@ static u8 CalcBerryYield(struct BerryTree *tree)
 
 static u8 GetBerryCountByBerryTreeId(u8 id)
 {
-    return gSaveBlock1Ptr->berryTrees[id].berryYield;
+    return gSaveBlockPtr->berryTrees[id].berryYield;
 }
 
 static u16 GetStageDurationByBerryType(u8 berry)
@@ -2032,7 +2032,7 @@ bool8 CanWaterBerryPlot(void)
 {
     if (!OW_BERRY_MOISTURE || OW_BERRY_ALWAYS_WATERABLE)
         return TRUE;
-    return (gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].moistureLevel == 0);
+    return (gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].moistureLevel == 0);
 }
 
 void ObjectEventInteractionGetBerryTreeData(void)
@@ -2047,8 +2047,8 @@ void ObjectEventInteractionGetBerryTreeData(void)
     berry = GetBerryTypeByBerryTreeId(id);
     AllowBerryTreeGrowth(id);
     localId = gSpecialVar_LastTalked;
-    num = gSaveBlock1Ptr->location.mapNum;
-    group = gSaveBlock1Ptr->location.mapGroup;
+    num = gSaveBlockPtr->location.mapNum;
+    group = gSaveBlockPtr->location.mapGroup;
     if (IsBerryTreeSparkling(localId, num, group))
         gSpecialVar_0x8004 = BERRY_STAGE_SPARKLING;
     else
@@ -2105,7 +2105,7 @@ void ObjectEventInteractionApplyMulch(void)
 {
     u8 mulch = ITEM_TO_MULCH(gSpecialVar_ItemId);
 
-    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].mulch = mulch;
+    gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].mulch = mulch;
     StringExpandPlaceholders(gStringVar1, gItemsInfo[gSpecialVar_ItemId].name);
 }
 
@@ -2131,7 +2131,7 @@ void ObjectEventInteractionPickBerryTree(void)
 void ObjectEventInteractionRemoveBerryTree(void)
 {
     RemoveBerryTree(GetObjectEventBerryTreeId(gSelectedObjectEvent));
-    SetBerryTreeJustPicked(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    SetBerryTreeJustPicked(gSpecialVar_LastTalked, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
 }
 
 void ObjectEventInteractionPullBerryWeed(void)
@@ -2155,19 +2155,19 @@ bool8 PlayerHasBerries(void)
 
 bool8 ObjectEventInteractionBerryHasWeed(void)
 {
-    return gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds;
+    return gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].weeds;
 }
 
 bool8 ObjectEventInteractionBerryHasPests(void)
 {
     u16 species;
-    if (!OW_BERRY_PESTS || !gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
+    if (!OW_BERRY_PESTS || !gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests)
         return FALSE;
-    species = GetBerryPestSpecies(gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].berry);
+    species = GetBerryPestSpecies(gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].berry);
     if (species == SPECIES_NONE)
         return FALSE;
     CreateScriptedWildMon(species, 14 + Random() % 3, ITEM_NONE);
-    gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
+    gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(gSelectedObjectEvent)].pests = FALSE;
     return TRUE;
 }
 
@@ -2285,7 +2285,7 @@ static u8 TryForMutation(u8 berryTreeId, u8 berry)
                 (x1 == x2 && y1 == y2 + 1) ||
                 (x1 == x2 - 1 && y1 == y2) ||
                 (x1 == x2 + 1 && y1 == y2)))
-                return GetMutationOutcome(berry, gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(j)].berry);
+                return GetMutationOutcome(berry, gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(j)].berry);
         }
     }
     return 0;

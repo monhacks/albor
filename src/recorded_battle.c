@@ -36,7 +36,6 @@ EWRAM_DATA static u16 sBattlerRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerPrevRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u16 sBattlerSavedRecordSizes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static u8 sRecordMode = 0;
-EWRAM_DATA static u8 sLvlMode = 0;
 EWRAM_DATA static u8 sFrontierFacility = 0;
 EWRAM_DATA static u8 sFrontierBrainSymbol = 0;
 EWRAM_DATA u8 gRecordedBattleMultiplayerId = 0;
@@ -50,11 +49,8 @@ EWRAM_DATA static struct Pokemon sSavedOpponentParty[PARTY_SIZE] = {0};
 EWRAM_DATA static u16 sPlayerMonMoves[MAX_BATTLERS_COUNT / 2][MAX_MON_MOVES] = {0};
 EWRAM_DATA static struct PlayerInfo sPlayers[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA static bool8 sIsPlaybackFinished = 0;
-EWRAM_DATA static u8 sApprenticeId = 0;
 EWRAM_DATA static u16 sEasyChatSpeech[EASY_CHAT_BATTLE_WORDS_COUNT] = {0};
 EWRAM_DATA static u8 sBattleOutcome = 0;
-
-static u8 sApprenticeLanguage;
 
 static u8 GetNextRecordedDataByte(u8 *, u8 *, u8 *);
 
@@ -129,17 +125,17 @@ void RecordedBattle_SetTrainerInfo(void)
     else
     {
         // Local battle, just record own info
-        sPlayers[0].trainerId = (gSaveBlock2Ptr->playerTrainerId[0])
-                              | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
-                              | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
-                              | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+        sPlayers[0].trainerId = (gSaveBlockPtr->playerTrainerId[0])
+                              | (gSaveBlockPtr->playerTrainerId[1] << 8)
+                              | (gSaveBlockPtr->playerTrainerId[2] << 16)
+                              | (gSaveBlockPtr->playerTrainerId[3] << 24);
 
-        sPlayers[0].gender = gSaveBlock2Ptr->playerGender;
+        sPlayers[0].gender = gSaveBlockPtr->playerGender;
         sPlayers[0].battlerId = 0;
         sPlayers[0].language = gGameLanguage;
 
         for (i = 0; i < PLAYER_NAME_LENGTH + 1; i++)
-            sPlayers[0].name[i] = gSaveBlock2Ptr->playerName[i];
+            sPlayers[0].name[i] = gSaveBlockPtr->playerName[i];
     }
 }
 
@@ -252,51 +248,7 @@ void SetPartiesFromRecordedSave(struct RecordedBattleSave *src)
 
 void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 {
-    bool8 var;
-    s32 i, j;
 
-    SetPartiesFromRecordedSave(src);
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-    {
-        for (var = FALSE, j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
-        {
-            gLinkPlayers[i].name[j] = src->playersName[i][j];
-            if (src->playersName[i][j] == EOS)
-                var = TRUE;
-        }
-        gLinkPlayers[i].gender = src->playersGender[i];
-        gLinkPlayers[i].language = src->playersLanguage[i];
-        gLinkPlayers[i].id = src->playersBattlers[i];
-        gLinkPlayers[i].trainerId = src->playersTrainerId[i];
-
-        if (var)
-            ConvertInternationalString(gLinkPlayers[i].name, gLinkPlayers[i].language);
-    }
-
-    gRecordedBattleRngSeed = src->rngSeed;
-    gBattleTypeFlags = src->battleFlags | BATTLE_TYPE_RECORDED;
-    gTrainerBattleOpponent_A = src->opponentA;
-    gTrainerBattleOpponent_B = src->opponentB;
-    gPartnerTrainerId = src->partnerId;
-    gRecordedBattleMultiplayerId = src->multiplayerId;
-    sLvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    sFrontierFacility = src->frontierFacility;
-    sFrontierBrainSymbol = src->frontierBrainSymbol;
-    sBattleScene = src->battleScene;
-    sTextSpeed = src->textSpeed;
-    sAI_Scripts = src->AI_scripts;
-
-    sApprenticeId = src->apprenticeId;
-    sApprenticeLanguage = src->apprenticeLanguage;
-
-    for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
-        sEasyChatSpeech[i] = src->easyChatSpeech[i];
-
-    gSaveBlock2Ptr->frontier.lvlMode = src->lvlMode;
-
-    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        for (j = 0; j < BATTLER_RECORD_SIZE; j++)
-            sBattleRecords[i][j] = src->battleRecord[i][j];
 }
 
 #undef tFramesToWait
@@ -501,16 +453,6 @@ void RecordedBattle_SetPlaybackFinished(void)
 bool8 RecordedBattle_CanStopPlayback(void)
 {
     return (sIsPlaybackFinished == FALSE);
-}
-
-u8 GetRecordedBattleApprenticeId(void)
-{
-    return sApprenticeId;
-}
-
-u8 GetRecordedBattleApprenticeLanguage(void)
-{
-    return sApprenticeLanguage;
 }
 
 void RecordedBattle_SaveBattleOutcome(void)

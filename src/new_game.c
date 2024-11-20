@@ -26,7 +26,6 @@
 #include "battle_records.h"
 #include "item.h"
 #include "pokedex.h"
-#include "apprentice.h"
 #include "frontier_util.h"
 #include "pokedex.h"
 #include "save.h"
@@ -41,7 +40,6 @@
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
-static void ClearFrontierRecord(void);
 static void WarpToTruck(void);
 static void ResetItemFlags(void);
 
@@ -76,24 +74,24 @@ void CopyTrainerId(u8 *dst, u8 *src)
 static void InitPlayerTrainerId(void)
 {
     u32 trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
-    SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
+    SetTrainerId(trainerId, gSaveBlockPtr->playerTrainerId);
 }
 
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
-    gSaveBlock2Ptr->optionsWindowFrameType = 0;
-    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
-    gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
-    gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
-    gSaveBlock2Ptr->regionMapZoom = FALSE;
+    gSaveBlockPtr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    gSaveBlockPtr->optionsWindowFrameType = 0;
+    gSaveBlockPtr->optionsSound = OPTIONS_SOUND_STEREO;
+    gSaveBlockPtr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
+    gSaveBlockPtr->optionsBattleSceneOff = FALSE;
+    gSaveBlockPtr->regionMapZoom = FALSE;
 }
 
 static void ClearPokedexFlags(void)
 {
-    memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
-    memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+    memset(&gSaveBlockPtr->dexCaught, 0, sizeof(gSaveBlockPtr->dexCaught));
+    memset(&gSaveBlockPtr->dexSeen, 0, sizeof(gSaveBlockPtr->dexSeen));
 }
 
 void ClearAllContestWinnerPics(void)
@@ -104,15 +102,7 @@ void ClearAllContestWinnerPics(void)
 
     // Clear Museum paintings
     for (i = MUSEUM_CONTEST_WINNERS_START; i < NUM_CONTEST_WINNERS; i++)
-        gSaveBlock1Ptr->contestWinners[i] = sContestWinnerPicDummy;
-}
-
-static void ClearFrontierRecord(void)
-{
-    CpuFill32(0, &gSaveBlock2Ptr->frontier, sizeof(gSaveBlock2Ptr->frontier));
-
-    gSaveBlock2Ptr->frontier.opponentNames[0][0] = EOS;
-    gSaveBlock2Ptr->frontier.opponentNames[1][0] = EOS;
+        gSaveBlockPtr->contestWinners[i] = sContestWinnerPicDummy;
 }
 
 static void WarpToTruck(void)
@@ -145,16 +135,14 @@ void NewGameInitData(void)
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetPokedex();
-    ClearFrontierRecord();
-    ClearAllMail();
-    gSaveBlock2Ptr->specialSaveWarpFlags = 0;
+    gSaveBlockPtr->specialSaveWarpFlags = 0;
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 3000);
+    SetMoney(&gSaveBlockPtr->money, 3000);
     SetCoins(0);
     ResetGameStats();
     ClearAllContestWinnerPics();
@@ -165,7 +153,7 @@ void NewGameInitData(void)
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
     DeactivateAllRoamers();
-    gSaveBlock1Ptr->registeredItem = ITEM_NONE;
+    gSaveBlockPtr->registeredItem = ITEM_NONE;
     ClearBag();
     ClearPokeblocks();
     ClearDecorationInventories();
@@ -177,7 +165,6 @@ void NewGameInitData(void)
     WarpToTruck();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     InitLilycoveLady();
-    ResetAllApprenticeData();
     InitMatchCallCounters();
     ResetItemFlags();
 }
@@ -185,6 +172,6 @@ void NewGameInitData(void)
 static void ResetItemFlags(void)
 {
 #if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
-    memset(&gSaveBlock2Ptr->itemFlags, 0, sizeof(gSaveBlock2Ptr->itemFlags));
+    memset(&gSaveBlockPtr->itemFlags, 0, sizeof(gSaveBlockPtr->itemFlags));
 #endif
 }

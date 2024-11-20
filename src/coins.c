@@ -40,12 +40,12 @@ void HideCoinsWindow(void)
 
 u16 GetCoins(void)
 {
-    return gSaveBlock1Ptr->coins;
+    return gSaveBlockPtr->coins;
 }
 
 void SetCoins(u16 coinAmount)
 {
-    gSaveBlock1Ptr->coins = coinAmount;
+    gSaveBlockPtr->coins = coinAmount;
 }
 
 bool8 AddCoins(u16 toAdd)

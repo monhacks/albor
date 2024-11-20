@@ -2080,22 +2080,13 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
 #undef tMapNum
 #undef tWarp
 
-void CheckSaveBlock1Size(struct ScriptContext *ctx)
+void CheckSaveBlockSize(struct ScriptContext *ctx)
 {
-    u32 currSb1Size = sizeof(struct SaveBlock1);
-    u32 maxSb1Size = SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK1_END - SECTOR_ID_SAVEBLOCK1_START + 1);
-    ConvertIntToDecimalStringN(gStringVar1, currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar2, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar3, maxSb1Size - currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
-}
-
-void CheckSaveBlock2Size(struct ScriptContext *ctx)
-{
-    u32 currSb2Size = (sizeof(struct SaveBlock2));
-    u32 maxSb2Size = SECTOR_DATA_SIZE;
-    ConvertIntToDecimalStringN(gStringVar1, currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar2, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar3, maxSb2Size - currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    u32 currSbSize = sizeof(struct SaveBlock);
+    u32 maxSbSize = SECTOR_DATA_SIZE * (SECTOR_ID_SAVEBLOCK_END - SECTOR_ID_SAVEBLOCK_START + 1);
+    ConvertIntToDecimalStringN(gStringVar1, currSbSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, maxSbSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, maxSbSize - currSbSize, STR_CONV_MODE_LEFT_ALIGN, 6);
 }
 
 void CheckPokemonStorageSize(struct ScriptContext *ctx)
@@ -2289,15 +2280,15 @@ static void DebugAction_Util_WatchCredits(u8 taskId)
 
 static void DebugAction_Util_Player_Name(u8 taskId)
 {
-    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript, 0);
+    DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlockPtr->playerName, gSaveBlockPtr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript, 0);
 }
 
 static void DebugAction_Util_Player_Gender(u8 taskId)
 {
-    if (gSaveBlock2Ptr->playerGender == MALE)
-        gSaveBlock2Ptr->playerGender = FEMALE;
+    if (gSaveBlockPtr->playerGender == MALE)
+        gSaveBlockPtr->playerGender = FEMALE;
     else
-        gSaveBlock2Ptr->playerGender = MALE;
+        gSaveBlockPtr->playerGender = MALE;
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
@@ -2305,7 +2296,7 @@ static void DebugAction_Util_Player_Gender(u8 taskId)
 static void DebugAction_Util_Player_Id(u8 taskId)
 {
     u32 trainerId = Random32();
-    SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
+    SetTrainerId(trainerId, gSaveBlockPtr->playerTrainerId);
     Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
@@ -2664,8 +2655,8 @@ static void DebugAction_FlagsVars_PokedexFlags_Reset(u8 taskId)
     u16 species;
 
     // Reset Pokedex to emtpy
-    memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
-    memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+    memset(&gSaveBlockPtr->dexCaught, 0, sizeof(gSaveBlockPtr->dexCaught));
+    memset(&gSaveBlockPtr->dexSeen, 0, sizeof(gSaveBlockPtr->dexSeen));
 
     // Add party Pokemon to Pokedex
     for (partyId = 0; partyId < PARTY_SIZE; partyId++)
@@ -3971,7 +3962,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
     CalculateMonStats(&mon);
 
     // give player the mon
-    SetMonData(&mon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
+    SetMonData(&mon, MON_DATA_OT_NAME, gSaveBlockPtr->playerName);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
@@ -4013,7 +4004,7 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
 
 static void DebugAction_Give_MaxMoney(u8 taskId)
 {
-    SetMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
+    SetMoney(&gSaveBlockPtr->money, MAX_MONEY);
 }
 
 static void DebugAction_Give_MaxCoins(u8 taskId)
@@ -4023,17 +4014,17 @@ static void DebugAction_Give_MaxCoins(u8 taskId)
 
 static void DebugAction_Give_MaxBattlePoints(u8 taskId)
 {
-    gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    gSaveBlockPtr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
 }
 
 static void DebugAction_Give_DayCareEgg(u8 taskId)
 {
-    s32 emptySlot = Daycare_FindEmptySpot(&gSaveBlock1Ptr->daycare);
+    s32 emptySlot = Daycare_FindEmptySpot(&gSaveBlockPtr->daycare);
     if (emptySlot == 0) // no daycare mons
         Debug_DestroyMenu_Full_Script(taskId, DebugScript_ZeroDaycareMons);
     else if (emptySlot == 1) // 1 daycare mon
         Debug_DestroyMenu_Full_Script(taskId, DebugScript_OneDaycareMons);
-    else if (GetDaycareCompatibilityScore(&gSaveBlock1Ptr->daycare) == PARENTS_INCOMPATIBLE) // not compatible parents
+    else if (GetDaycareCompatibilityScore(&gSaveBlockPtr->daycare) == PARENTS_INCOMPATIBLE) // not compatible parents
         Debug_DestroyMenu_Full_Script(taskId, DebugScript_DaycareMonsNotCompatible);
     else // 2 pokemon which can have a pokemon baby together
         TriggerPendingDaycareEgg();
@@ -5302,7 +5293,7 @@ static void DebugAction_BerryFunctions_ClearAll(u8 taskId)
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
             RemoveBerryTree(GetObjectEventBerryTreeId(i));
-            SetBerryTreeJustPicked(gObjectEvents[i].localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            SetBerryTreeJustPicked(gObjectEvents[i].localId, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
         }
     }
 
@@ -5319,7 +5310,7 @@ static void DebugAction_BerryFunctions_Ready(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            tree = &gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(i)];
             if (tree->stage != BERRY_STAGE_NO_BERRY)
             {
                 tree->stage = BERRY_STAGE_BERRIES - 1;
@@ -5341,7 +5332,7 @@ static void DebugAction_BerryFunctions_NextStage(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            tree = &gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)];
+            tree = &gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(i)];
             BerryTreeGrow(tree);
         }
     }
@@ -5364,8 +5355,8 @@ static void DebugAction_BerryFunctions_Pests(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            if (gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
-                gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
+            if (gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(i)].stage != BERRY_STAGE_PLANTED)
+                gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(i)].pests = TRUE;
         }
     }
 
@@ -5387,7 +5378,7 @@ static void DebugAction_BerryFunctions_Weeds(u8 taskId)
     {
         if (gObjectEvents[i].movementType == MOVEMENT_TYPE_BERRY_TREE_GROWTH)
         {
-            gSaveBlock1Ptr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
+            gSaveBlockPtr->berryTrees[GetObjectEventBerryTreeId(i)].weeds = TRUE;
         }
     }
 
