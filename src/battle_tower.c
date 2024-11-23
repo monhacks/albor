@@ -63,7 +63,6 @@ static void SetMultiPartnerGfx(void);
 static void SetTowerInterviewData(void);
 static void ValidateApprenticesChecksums(void);
 static void SetNextBattleTentOpponent(void);
-static void CopyEReaderTrainerFarewellMessage(void);
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
 static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
 static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId);
@@ -880,11 +879,6 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     }
 }
 
-void SetEReaderTrainerGfxId(void)
-{
-    SetBattleFacilityTrainerGfxId(TRAINER_EREADER, 0);
-}
-
 u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
 {
     SetFacilityPtrsGetLevel();
@@ -1112,9 +1106,6 @@ static void HandleSpecialTrainerBattleEnd(void)
             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
         }
         break;
-    case SPECIAL_BATTLE_EREADER:
-        CopyEReaderTrainerFarewellMessage();
-        break;
     case SPECIAL_BATTLE_MULTI:
         for (i = 0; i < 3; i++)
         {
@@ -1179,8 +1170,6 @@ void DoSpecialTrainerBattle(void)
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
-        break;
-    case SPECIAL_BATTLE_EREADER:
         break;
     case SPECIAL_BATTLE_DOME:
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME;
@@ -1416,25 +1405,6 @@ static void LoadMultiPartnerCandidatesData(void)
     }
 }
 
-static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
-{
-    u16 move = 0;
-    u16 species = 0;
-    SetFacilityPtrsGetLevel();
-
-    if (trainerId != TRAINER_EREADER)
-    {
-        if (trainerId < FRONTIER_TRAINERS_COUNT)
-        {
-            move = gFacilityTrainerMons[monId].moves[0];
-            species = gFacilityTrainerMons[monId].species;
-        }
-    }
-
-    StringCopy(gStringVar1, GetMoveName(move));
-    StringCopy(gStringVar2, GetSpeciesName(species));
-}
-
 // For multi battles in the Battle Tower, the player may choose a partner by talking to them
 // These partners can be an NPC or a former/record-mixed Apprentice
 // When talked to, their response consists of:
@@ -1445,69 +1415,7 @@ static void GetPotentialPartnerMoveAndSpecies(u16 trainerId, u16 monId)
 // PARTNER_MSGID_REJECT - If the player declines to be their partner
 static void ShowPartnerCandidateMessage(void)
 {
-    s32 i, j;
-    s32 monId;
-    u16 winStreak = GetCurrentFacilityWinStreak();
-    s32 challengeNum = winStreak / FRONTIER_STAGES_PER_CHALLENGE;
-    s32 k = gSpecialVar_LastTalked - 2;
-    s32 trainerId = gSaveBlock2Ptr->frontier.trainerIds[k];
 
-    switch (gSpecialVar_0x8005)
-    {
-    case PARTNER_MSGID_INTRO:
-        if (trainerId == TRAINER_EREADER)
-            return;
-        if (trainerId < FRONTIER_TRAINERS_COUNT)
-        {
-            GetFrontierTrainerName(gStringVar1, trainerId);
-        }
-        break;
-    case PARTNER_MSGID_MON1:
-        monId = gSaveBlock2Ptr->frontier.trainerIds[8 + k * 2];
-        GetPotentialPartnerMoveAndSpecies(trainerId, monId);
-        break;
-    case PARTNER_MSGID_MON2_ASK:
-        monId = gSaveBlock2Ptr->frontier.trainerIds[9 + k * 2];
-        GetPotentialPartnerMoveAndSpecies(trainerId, monId);
-        break;
-    case PARTNER_MSGID_ACCEPT:
-        gPartnerTrainerId = trainerId;
-        if (trainerId < FRONTIER_TRAINERS_COUNT)
-        {
-            gSaveBlock2Ptr->frontier.trainerIds[18] = gSaveBlock2Ptr->frontier.trainerIds[8 + k * 2];
-            gSaveBlock2Ptr->frontier.trainerIds[19] = gSaveBlock2Ptr->frontier.trainerIds[9 + k * 2];
-        }
-        else
-        {
-            gSaveBlock2Ptr->frontier.trainerIds[18] = gFrontierTempParty[0];
-            gSaveBlock2Ptr->frontier.trainerIds[19] = gFrontierTempParty[1];
-        }
-        for (k = 0; k < FRONTIER_STAGES_PER_CHALLENGE * 2; k++)
-        {
-            while (1)
-            {
-                i = GetRandomScaledFrontierTrainerId(challengeNum, k / 2);
-                if (gPartnerTrainerId == i)
-                    continue;
-
-                for (j = 0; j < k; j++)
-                {
-                    if (gSaveBlock2Ptr->frontier.trainerIds[j] == i)
-                        break;
-                }
-                if (j == k)
-                    break;
-            }
-            gSaveBlock2Ptr->frontier.trainerIds[k] = i;
-        }
-        gSaveBlock2Ptr->frontier.trainerIds[17] = trainerId;
-        break;
-    case PARTNER_MSGID_REJECT:
-        break;
-    }
-
-    if (trainerId == TRAINER_EREADER)
-        return;
 }
 
 static void LoadLinkMultiOpponentsData(void)
@@ -1680,42 +1588,6 @@ static void AwardBattleTowerRibbons(void)
     }
 }
 
-u8 GetEreaderTrainerFrontSpriteId(void)
-{
-    return 0;
-}
-
-u8 GetEreaderTrainerClassId(void)
-{
-    return 0;
-}
-
-void GetEreaderTrainerName(u8 *dst)
-{
-
-}
-
-// Checks if the saved E-Reader trainer is valid.
-void ValidateEReaderTrainer(void)
-{
-
-}
-
-void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
-{
-
-}
-
-void CopyEReaderTrainerGreeting(void)
-{
-
-}
-
-static void CopyEReaderTrainerFarewellMessage(void)
-{
-
-}
-
 #define STEVEN_OTID 61226
 
 static void FillPartnerParty(u16 trainerId)
@@ -1812,11 +1684,6 @@ static void FillPartnerParty(u16 trainerId)
             SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
         }
     }
-    else if (trainerId == TRAINER_EREADER)
-    {
-        // Scrapped, lol.
-        trainerName[0] = gGameLanguage;
-    }
     else if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         level = SetFacilityPtrsGetLevel();
@@ -1868,11 +1735,7 @@ static void ValidateApprenticesChecksums(void)
 
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
 {
-    if (trainerId == TRAINER_EREADER)
-    {
-        *dst = gGameLanguage;
-    }
-    else if (trainerId < FRONTIER_TRAINERS_COUNT)
+    if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         *dst = gGameLanguage;
     }

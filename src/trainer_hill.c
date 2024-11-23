@@ -3,7 +3,6 @@
 #include "battle.h"
 #include "battle_tower.h"
 #include "battle_setup.h"
-#include "ereader_helpers.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
@@ -57,7 +56,6 @@ static void TrainerHillSetPlayerLost(void);
 static void TrainerHillGetChallengeStatus(void);
 static void BufferChallengeTime(void);
 static void GetAllFloorsUsed(void);
-static void GetInEReaderMode(void);
 static void IsTrainerHillChallengeActive(void);
 static void ShowTrainerHillPostBattleText(void);
 static void SetAllTrainerFlags(void);
@@ -191,7 +189,6 @@ static const u16 *const *const sPrizeListSets[] =
     sPrizeLists2
 };
 
-static const u16 sEReader_Pal[] = INCBIN_U16("graphics/trainer_hill/ereader.gbapal");
 static const u8 sRecordWinColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 
 static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_MODES] =
@@ -222,7 +219,6 @@ static void (* const sHillFunctions[])(void) =
     [TRAINER_HILL_FUNC_GET_CHALLENGE_STATUS]  = TrainerHillGetChallengeStatus,
     [TRAINER_HILL_FUNC_GET_CHALLENGE_TIME]    = BufferChallengeTime,
     [TRAINER_HILL_FUNC_GET_ALL_FLOORS_USED]   = GetAllFloorsUsed,
-    [TRAINER_HILL_FUNC_GET_IN_EREADER_MODE]   = GetInEReaderMode,
     [TRAINER_HILL_FUNC_IN_CHALLENGE]          = IsTrainerHillChallengeActive,
     [TRAINER_HILL_FUNC_POST_BATTLE_TEXT]      = ShowTrainerHillPostBattleText,
     [TRAINER_HILL_FUNC_SET_ALL_TRAINER_FLAGS] = SetAllTrainerFlags,
@@ -377,11 +373,6 @@ static void GetAllFloorsUsed(void)
     }
 
     FreeDataStruct();
-}
-
-static void GetInEReaderMode(void)
-{
-
 }
 
 bool8 InTrainerHillChallenge(void)
@@ -543,12 +534,6 @@ static void SetGameSaved(void)
 static void ClearGameSaved(void)
 {
     gSaveBlock2Ptr->frontier.savedGame = FALSE;
-}
-
-// Always FALSE
-bool32 OnTrainerHillEReaderChallengeFloor(void)
-{
-    return FALSE;
 }
 
 static void GetChallengeWon(void)
