@@ -4,7 +4,6 @@
 #include "trainer_card.h"
 #include "battle_anim.h"
 #include "event_data.h"
-#include "recorded_battle.h"
 #include "malloc.h"
 #include "sprite.h"
 #include "scanline_effect.h"
@@ -65,7 +64,6 @@ enum
     CURSOR_AREA_NOTHING,
     CURSOR_AREA_MAP,
     CURSOR_AREA_CARD,
-    CURSOR_AREA_RECORD,
     CURSOR_AREA_CANCEL,
     CURSOR_AREA_POINTS,
     CURSOR_AREA_EARNED_SYMBOLS, // The window containing the symbols
@@ -328,7 +326,6 @@ static const sPassAreasLayout[CURSOR_AREA_COUNT - 1] =
 {
     [CURSOR_AREA_MAP - 1]            = { 28,  76, 132, 220},
     [CURSOR_AREA_CARD - 1]           = { 84, 132, 132, 220},
-    [CURSOR_AREA_RECORD - 1]         = { 80, 102,  20, 108},
     [CURSOR_AREA_CANCEL - 1]         = {  0,  16, 152, 240},
     [CURSOR_AREA_POINTS - 1]         = {108, 134,  20, 108},
     [CURSOR_AREA_EARNED_SYMBOLS - 1] = { 24,  48,  20, 108},
@@ -502,7 +499,6 @@ static const u8 *const sPassAreaDescriptions[CURSOR_AREA_COUNT + 1] =
     [CURSOR_AREA_NOTHING]        = gText_ThereIsNoBattleRecord, // NOTHING is re-used for CURSOR_AREA_RECORD when no Record is present
     [CURSOR_AREA_MAP]            = gText_CheckFrontierMap,
     [CURSOR_AREA_CARD]           = gText_CheckTrainerCard,
-    [CURSOR_AREA_RECORD]         = gText_ViewRecordedBattle,
     [CURSOR_AREA_CANCEL]         = gText_PutAwayFrontierPass,
     [CURSOR_AREA_POINTS]         = gText_CurrentBattlePoints,
     [CURSOR_AREA_EARNED_SYMBOLS] = gText_CollectedSymbols,
@@ -853,7 +849,6 @@ void CB2_ReshowFrontierPass(void)
         taskId = CreateTask(Task_PassAreaZoom, 0);
         gTasks[taskId].tZoomOut = TRUE;
         break;
-    case CURSOR_AREA_RECORD:
     default:
         sPassData->areaToShow = CURSOR_AREA_NOTHING;
         taskId = CreateTask(Task_HandleFrontierPassInput, 0);
@@ -873,38 +868,10 @@ static void CB2_ShowFrontierPassFeature(void)
     case CURSOR_AREA_MAP:
         ShowFrontierMap(CB2_ReshowFrontierPass);
         break;
-    case CURSOR_AREA_RECORD:
-        break;
     case CURSOR_AREA_CARD:
         ShowPlayerTrainerCard(CB2_ReshowFrontierPass);
         break;
     }
-}
-
-static bool32 TryCallPassAreaFunction(u8 taskId, u8 cursorArea)
-{
-    switch (cursorArea)
-    {
-    case CURSOR_AREA_RECORD:
-        if (!sPassData->hasBattleRecord)
-            return FALSE;
-        sPassData->areaToShow = CURSOR_AREA_RECORD;
-        DestroyTask(taskId);
-        SetMainCallback2(CB2_ShowFrontierPassFeature);
-        break;
-    case CURSOR_AREA_MAP:
-    case CURSOR_AREA_CARD:
-        sPassData->areaToShow = cursorArea;
-        gTasks[taskId].func = Task_PassAreaZoom;
-        gTasks[taskId].tZoomOut = FALSE;
-        break;
-    default:
-        return FALSE;
-    }
-
-    sPassData->cursorX = sPassGfx->cursorSprite->x;
-    sPassData->cursorY = sPassGfx->cursorSprite->y;
-    return TRUE;
 }
 
 static void Task_HandleFrontierPassInput(u8 taskId)
@@ -945,13 +912,7 @@ static void Task_HandleFrontierPassInput(u8 taskId)
     {
         if (sPassData->cursorArea != CURSOR_AREA_NOTHING && JOY_NEW(A_BUTTON))
         {
-            if (sPassData->cursorArea <= CURSOR_AREA_RECORD) // Map, Card, Record
-            {
-                PlaySE(SE_SELECT);
-                if (TryCallPassAreaFunction(taskId, sPassData->cursorArea))
-                    return;
-            }
-            else if (sPassData->cursorArea == CURSOR_AREA_CANCEL)
+            if (sPassData->cursorArea == CURSOR_AREA_CANCEL)
             {
                 PlaySE(SE_PC_OFF);
                 SetMainCallback2(CB2_HideFrontierPass);
@@ -1110,9 +1071,7 @@ static void PrintAreaDescription(u8 cursorArea)
 {
     FillWindowPixelBuffer(WINDOW_DESCRIPTION, PIXEL_FILL(0));
 
-    if (cursorArea == CURSOR_AREA_RECORD && !sPassData->hasBattleRecord)
-        AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[CURSOR_AREA_NOTHING]);
-    else if (cursorArea != CURSOR_AREA_NOTHING)
+    if (cursorArea != CURSOR_AREA_NOTHING)
         AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
 
     CopyWindowToVram(WINDOW_DESCRIPTION, COPYWIN_FULL);
@@ -1177,12 +1136,6 @@ static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
     case CURSOR_AREA_CARD:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->mapAndCardTilemap + 336, 16, 10, 12, 7, 17);
         break;
-    case CURSOR_AREA_RECORD:
-        if (sPassData->hasBattleRecord)
-            CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->battleRecordTilemap, 2, 10, 12, 3, 17);
-        else if (NON_HIGHLIGHT_AREA(cursorArea))
-            return;
-        break;
     case CURSOR_AREA_CANCEL:
         CopyToBgTilemapBufferRect_ChangePalette(1, gFrontierPassCancelButton_Tilemap, 21, 0, 9, 2, 17);
         break;
@@ -1200,12 +1153,6 @@ static void UpdateAreaHighlight(u8 cursorArea, u8 previousCursorArea)
         break;
     case CURSOR_AREA_CARD:
         CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->mapAndCardTilemap + 504, 16, 10, 12, 7, 17);
-        break;
-    case CURSOR_AREA_RECORD:
-        if (sPassData->hasBattleRecord)
-            CopyToBgTilemapBufferRect_ChangePalette(1, sPassGfx->battleRecordTilemap + 72, 2, 10, 12, 3, 17);
-        else
-            return;
         break;
     case CURSOR_AREA_CANCEL:
         CopyToBgTilemapBufferRect_ChangePalette(1, gFrontierPassCancelButtonHighlighted_Tilemap, 21, 0, 9, 2, 17);

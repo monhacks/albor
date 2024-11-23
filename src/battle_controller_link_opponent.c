@@ -15,7 +15,6 @@
 #include "palette.h"
 #include "pokeball.h"
 #include "pokemon.h"
-#include "recorded_battle.h"
 #include "reshow_battle_screen.h"
 #include "sound.h"
 #include "string_util.h"
@@ -26,7 +25,6 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
-#include "recorded_battle.h"
 #include "random.h"
 
 static void LinkOpponentHandleLoadMonSprite(u32 battler);
@@ -410,5 +408,5 @@ static void LinkOpponentHandleBattleAnimation(u32 battler)
 
 static void LinkOpponentHandleLinkStandbyMsg(u32 battler)
 {
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][2]);
+
 }

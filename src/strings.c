@@ -987,7 +987,6 @@ const u8 gText_BattleRecord[] = _("Battle Record");
 const u8 gText_BattlePoints[] = _("Battle Points");
 const u8 gText_CheckFrontierMap[] = _("Check BATTLE FRONTIER MAP.");
 const u8 gText_CheckTrainerCard[] = _("Check TRAINER CARD.");
-const u8 gText_ViewRecordedBattle[] = _("View recorded battle.");
 const u8 gText_PutAwayFrontierPass[] = _("Put away the FRONTIER PASS.");
 const u8 gText_CurrentBattlePoints[] = _("Your current Battle Points.");
 const u8 gText_CollectedSymbols[] = _("Your collected Symbols.");

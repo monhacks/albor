@@ -10,7 +10,6 @@
 #include "battle.h"
 #include "frontier_util.h"
 #include "strings.h"
-#include "recorded_battle.h"
 #include "easy_chat.h"
 #include "gym_leader_rematch.h"
 #include "battle_transition.h"
@@ -959,7 +958,6 @@ static void HandleSpecialTrainerBattleEnd(void)
 {
     s32 i;
 
-    RecordedBattle_SaveBattleOutcome();
     switch (gBattleScripting.specialTrainerBattleType)
     {
     case SPECIAL_BATTLE_TOWER:
@@ -1678,7 +1676,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
 void TrySetLinkBattleTowerEnemyPartyLevel(void)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
     {
         s32 i;
         u8 enemyLevel = SetFacilityPtrsGetLevel();

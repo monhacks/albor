@@ -267,7 +267,6 @@ SECTIONS {
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
         src/pokemon_animation.o(.text);
-        src/recorded_battle.o(.text);
         src/battle_controller_recorded_opponent.o(.text);
         src/battle_controller_recorded_player.o(.text);
         src/trainer_pokemon_sprites.o(.text);

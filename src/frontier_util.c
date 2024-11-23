@@ -18,7 +18,6 @@
 #include "new_game.h"
 #include "link.h"
 #include "pokedex.h"
-#include "recorded_battle.h"
 #include "data.h"
 #include "strings.h"
 #include "malloc.h"
@@ -1960,10 +1959,7 @@ u8 GetFrontierBrainTrainerPicIndex(void)
 {
     s32 facility;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-        facility = GetRecordedBattleFrontierFacility();
-    else
-        facility = VarGet(VAR_FRONTIER_FACILITY);
+    facility = VarGet(VAR_FRONTIER_FACILITY);
 
     return GetTrainerPicFromId(gFrontierBrainInfo[facility].trainerId);
 }
@@ -1972,10 +1968,7 @@ u8 GetFrontierBrainTrainerClass(void)
 {
     s32 facility;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-        facility = GetRecordedBattleFrontierFacility();
-    else
-        facility = VarGet(VAR_FRONTIER_FACILITY);
+    facility = VarGet(VAR_FRONTIER_FACILITY);
 
     return GetTrainerClassFromId(gFrontierBrainInfo[facility].trainerId);
 }
@@ -1986,10 +1979,7 @@ void CopyFrontierBrainTrainerName(u8 *dst)
     s32 facility;
     const u8 *trainerName;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
-        facility = GetRecordedBattleFrontierFacility();
-    else
-        facility = VarGet(VAR_FRONTIER_FACILITY);
+    facility = VarGet(VAR_FRONTIER_FACILITY);
 
     trainerName = GetTrainerNameFromId(gFrontierBrainInfo[facility].trainerId);
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
