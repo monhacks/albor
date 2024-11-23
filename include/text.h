@@ -45,7 +45,6 @@ enum {
     FONTATTR_MAX_LETTER_HEIGHT,
     FONTATTR_LETTER_SPACING,
     FONTATTR_LINE_SPACING,
-    FONTATTR_UNKNOWN,   // dunno what this is yet
     FONTATTR_COLOR_FOREGROUND,
     FONTATTR_COLOR_BACKGROUND,
     FONTATTR_COLOR_SHADOW
@@ -55,7 +54,6 @@ struct TextPrinterSubStruct
 {
     u8 fontId:4;  // 0x14
     bool8 hasPrintBeenSpedUp:1;
-    u8 unk:3;
     u8 downArrowDelay:5;
     u8 downArrowYPosIdx:2;
     bool8 hasFontIdBeenSet:1;
@@ -73,7 +71,6 @@ struct TextPrinterTemplate
     u8 currentY;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;   // 0xC
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
@@ -102,7 +99,6 @@ struct FontInfo
     u8 maxLetterHeight;
     u8 letterSpacing;
     u8 lineSpacing;
-    u8 unk:4;
     u8 fgColor:4;
     u8 bgColor:4;
     u8 shadowColor:4;
