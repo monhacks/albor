@@ -76,22 +76,6 @@
 	.byte \function
 	.endm
 
-	@ Equivalent to the 'return' command for a RAM script.
-	.macro returnram
-	.byte 0x0c
-	.endm
-
-	@ Equivalent to the 'end' command for a RAM script.
-	.macro endram
-	.byte 0x0d
-	.endm
-
-	@ Sets the Mystery Event script status (MEVENT_STATUS_*).
-	.macro setmysteryeventstatus value:req
-	.byte 0x0e
-	.byte \value
-	.endm
-
 	@ Sets the value at the specified script data index to a fixed 4-byte value.
 	.macro loadword destIndex:req, value:req
 	.byte 0x0f

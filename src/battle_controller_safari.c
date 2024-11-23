@@ -36,7 +36,6 @@ static void SafariHandleStatusIconUpdate(u32 battler);
 static void SafariHandleFaintingCry(u32 battler);
 static void SafariHandleIntroTrainerBallThrow(u32 battler);
 static void SafariHandleBattleAnimation(u32 battler);
-static void SafariHandleEndLinkBattle(u32 battler);
 
 static void SafariBufferRunCommand(u32 battler);
 static void SafariBufferExecCompleted(u32 battler);
@@ -92,7 +91,6 @@ static void (*const sSafariBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_BATTLEANIMATION]          = SafariHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
-    [CONTROLLER_ENDLINKBATTLE]            = SafariHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
@@ -180,16 +178,6 @@ static void Controller_WaitForHealthbox(u32 battler)
 {
     if (gSprites[gHealthboxSpriteIds[battler]].callback == SpriteCallbackDummy)
         SafariBufferExecCompleted(battler);
-}
-
-static void SafariSetBattleEndCallbacks(u32 battler)
-{
-    if (!gPaletteFade.active)
-    {
-        gMain.inBattle = FALSE;
-        gMain.callback1 = gPreBattleCallback1;
-        SetMainCallback2(gMain.savedCallback);
-    }
 }
 
 static void SafariOpenPokeblockCase(u32 battler)
@@ -299,14 +287,4 @@ static void SafariHandleIntroTrainerBallThrow(u32 battler)
 static void SafariHandleBattleAnimation(u32 battler)
 {
     BtlController_HandleBattleAnimation(battler, FALSE);
-}
-
-static void SafariHandleEndLinkBattle(u32 battler)
-{
-    gBattleOutcome = gBattleResources->bufferA[battler][1];
-    FadeOutMapMusic(5);
-    BeginFastPaletteFade(3);
-    SafariBufferExecCompleted(battler);
-    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) && !(gBattleTypeFlags & BATTLE_TYPE_IS_MASTER))
-        gBattlerControllerFuncs[battler] = SafariSetBattleEndCallbacks;
 }

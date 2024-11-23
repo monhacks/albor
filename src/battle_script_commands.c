@@ -400,7 +400,6 @@ static void Cmd_return(void);
 static void Cmd_end(void);
 static void Cmd_end2(void);
 static void Cmd_end3(void);
-static void Cmd_unused5(void);
 static void Cmd_call(void);
 static void Cmd_setroost(void);
 static void Cmd_jumpifabilitypresent(void);
@@ -423,7 +422,6 @@ static void Cmd_trainerslidein(void);
 static void Cmd_playse(void);
 static void Cmd_fanfare(void);
 static void Cmd_playfaintcry(void);
-static void Cmd_endlinkbattle(void);
 static void Cmd_returntoball(void);
 static void Cmd_handlelearnnewmove(void);
 static void Cmd_yesnoboxlearnmove(void);
@@ -485,8 +483,6 @@ static void Cmd_givepaydaymoney(void);
 static void Cmd_setlightscreen(void);
 static void Cmd_tryKO(void);
 static void Cmd_damagetohalftargethp(void);
-static void Cmd_unused_95(void);
-static void Cmd_unused_96(void);
 static void Cmd_tryinfatuating(void);
 static void Cmd_updatestatusicon(void);
 static void Cmd_setmist(void);
@@ -523,7 +519,6 @@ static void Cmd_presentdamagecalculation(void);
 static void Cmd_setsafeguard(void);
 static void Cmd_magnitudedamagecalculation(void);
 static void Cmd_jumpifnopursuitswitchdmg(void);
-static void Cmd_unused_bb(void);
 static void Cmd_halvehp(void);
 static void Cmd_copyfoestats(void);
 static void Cmd_rapidspinfree(void);
@@ -536,7 +531,6 @@ static void Cmd_trydobeatup(void);
 static void Cmd_setsemiinvulnerablebit(void);
 static void Cmd_tryfiretwoturnmovenowbyeffect(void);
 static void Cmd_setminimize(void);
-static void Cmd_unused_c8(void);
 static void Cmd_trymemento(void);
 static void Cmd_setforcedtarget(void);
 static void Cmd_setcharge(void);
@@ -561,18 +555,14 @@ static void Cmd_setuserstatus3(void);
 static void Cmd_assistattackselect(void);
 static void Cmd_trysetmagiccoat(void);
 static void Cmd_trysetsnatch(void);
-static void Cmd_unused2(void);
 static void Cmd_switchoutabilities(void);
 static void Cmd_jumpifhasnohp(void);
 static void Cmd_jumpifnotcurrentmoveargtype(void);
 static void Cmd_pickup(void);
-static void Cmd_unused3(void);
-static void Cmd_unused4(void);
 static void Cmd_settypebasedhalvers(void);
 static void Cmd_jumpifsubstituteblocks(void);
 static void Cmd_tryrecycleitem(void);
 static void Cmd_settypetoterrain(void);
-static void Cmd_pursuitdoubles(void);
 static void Cmd_snatchsetbattlers(void);
 static void Cmd_removelightscreenreflect(void);
 static void Cmd_handleballthrow(void);
@@ -589,268 +579,256 @@ static void Cmd_settelekinesis(void);
 static void Cmd_swapstatstages(void);
 static void Cmd_averagestats(void);
 static void Cmd_jumpifoppositegenders(void);
-static void Cmd_unused(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
 
 void (* const gBattleScriptingCommandsTable[])(void) =
 {
-    Cmd_attackcanceler,                          //0x0
-    Cmd_accuracycheck,                           //0x1
-    Cmd_attackstring,                            //0x2
-    Cmd_ppreduce,                                //0x3
-    Cmd_critcalc,                                //0x4
-    Cmd_damagecalc,                              //0x5
-    Cmd_typecalc,                                //0x6
-    Cmd_adjustdamage,                            //0x7
-    Cmd_multihitresultmessage,                   //0x8
-    Cmd_attackanimation,                         //0x9
-    Cmd_waitanimation,                           //0xA
-    Cmd_healthbarupdate,                         //0xB
-    Cmd_datahpupdate,                            //0xC
-    Cmd_critmessage,                             //0xD
-    Cmd_effectivenesssound,                      //0xE
-    Cmd_resultmessage,                           //0xF
-    Cmd_printstring,                             //0x10
-    Cmd_printselectionstring,                    //0x11
-    Cmd_waitmessage,                             //0x12
-    Cmd_printfromtable,                          //0x13
-    Cmd_printselectionstringfromtable,           //0x14
-    Cmd_setadditionaleffects,                    //0x15
-    Cmd_seteffectprimary,                        //0x16
-    Cmd_seteffectsecondary,                      //0x17
-    Cmd_clearstatusfromeffect,                   //0x18
-    Cmd_tryfaintmon,                             //0x19
-    Cmd_dofaintanimation,                        //0x1A
-    Cmd_cleareffectsonfaint,                     //0x1B
-    Cmd_jumpifstatus,                            //0x1C
-    Cmd_jumpifstatus2,                           //0x1D
-    Cmd_jumpifability,                           //0x1E
-    Cmd_jumpifsideaffecting,                     //0x1F
-    Cmd_jumpifstat,                              //0x20
-    Cmd_jumpifstatus3condition,                  //0x21
-    Cmd_jumpbasedontype,                         //0x22
-    Cmd_getexp,                                  //0x23
-    Cmd_checkteamslost,                          //0x24
-    Cmd_movevaluescleanup,                       //0x25
-    Cmd_setmultihit,                             //0x26
-    Cmd_decrementmultihit,                       //0x27
-    Cmd_goto,                                    //0x28
-    Cmd_jumpifbyte,                              //0x29
-    Cmd_jumpifhalfword,                          //0x2A
-    Cmd_jumpifword,                              //0x2B
-    Cmd_jumpifarrayequal,                        //0x2C
-    Cmd_jumpifarraynotequal,                     //0x2D
-    Cmd_setbyte,                                 //0x2E
-    Cmd_addbyte,                                 //0x2F
-    Cmd_subbyte,                                 //0x30
-    Cmd_copyarray,                               //0x31
-    Cmd_copyarraywithindex,                      //0x32
-    Cmd_orbyte,                                  //0x33
-    Cmd_orhalfword,                              //0x34
-    Cmd_orword,                                  //0x35
-    Cmd_bicbyte,                                 //0x36
-    Cmd_bichalfword,                             //0x37
-    Cmd_bicword,                                 //0x38
-    Cmd_pause,                                   //0x39
-    Cmd_waitstate,                               //0x3A
-    Cmd_healthbar_update,                        //0x3B
-    Cmd_return,                                  //0x3C
-    Cmd_end,                                     //0x3D
-    Cmd_end2,                                    //0x3E
-    Cmd_end3,                                    //0x3F
-    Cmd_unused5,                                 //0x40
-    Cmd_call,                                    //0x41
-    Cmd_setroost,                                //0x42
-    Cmd_jumpifabilitypresent,                    //0x43
-    Cmd_endselectionscript,                      //0x44
-    Cmd_playanimation,                           //0x45
-    Cmd_playanimation_var,                       //0x46
-    Cmd_setgraphicalstatchangevalues,            //0x47
-    Cmd_playstatchangeanimation,                 //0x48
-    Cmd_moveend,                                 //0x49
-    Cmd_sethealblock,                            //0x4A
-    Cmd_returnatktoball,                         //0x4B
-    Cmd_getswitchedmondata,                      //0x4C
-    Cmd_switchindataupdate,                      //0x4D
-    Cmd_switchinanim,                            //0x4E
-    Cmd_jumpifcantswitch,                        //0x4F
-    Cmd_openpartyscreen,                         //0x50
-    Cmd_switchhandleorder,                       //0x51
-    Cmd_switchineffects,                         //0x52
-    Cmd_trainerslidein,                          //0x53
-    Cmd_playse,                                  //0x54
-    Cmd_fanfare,                                 //0x55
-    Cmd_playfaintcry,                            //0x56
-    Cmd_endlinkbattle,                           //0x57
-    Cmd_returntoball,                            //0x58
-    Cmd_handlelearnnewmove,                      //0x59
-    Cmd_yesnoboxlearnmove,                       //0x5A
-    Cmd_yesnoboxstoplearningmove,                //0x5B
-    Cmd_hitanimation,                            //0x5C
-    Cmd_getmoneyreward,                          //0x5D
-    Cmd_updatebattlermoves,                      //0x5E
-    Cmd_swapattackerwithtarget,                  //0x5F
-    Cmd_incrementgamestat,                       //0x60
-    Cmd_drawpartystatussummary,                  //0x61
-    Cmd_hidepartystatussummary,                  //0x62
-    Cmd_jumptocalledmove,                        //0x63
-    Cmd_statusanimation,                         //0x64
-    Cmd_status2animation,                        //0x65
-    Cmd_chosenstatusanimation,                   //0x66
-    Cmd_yesnobox,                                //0x67
-    Cmd_cancelallactions,                        //0x68
-    Cmd_setgravity,                              //0x69
-    Cmd_removeitem,                              //0x6A
-    Cmd_atknameinbuff1,                          //0x6B
-    Cmd_drawlvlupbox,                            //0x6C
-    Cmd_resetsentmonsvalue,                      //0x6D
-    Cmd_setatktoplayer0,                         //0x6E
-    Cmd_makevisible,                             //0x6F
-    Cmd_recordability,                           //0x70
-    Cmd_buffermovetolearn,                       //0x71
-    Cmd_jumpifplayerran,                         //0x72
-    Cmd_hpthresholds,                            //0x73
-    Cmd_hpthresholds2,                           //0x74
-    Cmd_useitemonopponent,                       //0x75
-    Cmd_various,                                 //0x76
-    Cmd_setprotectlike,                          //0x77
-    Cmd_tryexplosion,                            //0x78
-    Cmd_setatkhptozero,                          //0x79
-    Cmd_jumpifnexttargetvalid,                   //0x7A
-    Cmd_tryhealhalfhealth,                       //0x7B
-    Cmd_trymirrormove,                           //0x7C
-    Cmd_setfieldweather,                         //0x7D
-    Cmd_setreflect,                              //0x7E
-    Cmd_setseeded,                               //0x7F
-    Cmd_manipulatedamage,                        //0x80
-    Cmd_trysetrest,                              //0x81
-    Cmd_jumpifnotfirstturn,                      //0x82
-    Cmd_setmiracleeye,                           //0x83
-    Cmd_jumpifuproarwakes,                       //0x84
-    Cmd_stockpile,                               //0x85
-    Cmd_stockpiletobasedamage,                   //0x86
-    Cmd_stockpiletohpheal,                       //0x87
-    Cmd_setdrainedhp,                            //0x88
-    Cmd_statbuffchange,                          //0x89
-    Cmd_normalisebuffs,                          //0x8A
-    Cmd_setbide,                                 //0x8B
-    Cmd_twoturnmoveschargestringandanimation,    //0x8C
-    Cmd_setmultihitcounter,                      //0x8D
-    Cmd_initmultihitstring,                      //0x8E
-    Cmd_forcerandomswitch,                       //0x8F
-    Cmd_tryconversiontypechange,                 //0x90
-    Cmd_givepaydaymoney,                         //0x91
-    Cmd_setlightscreen,                          //0x92
-    Cmd_tryKO,                                   //0x93
-    Cmd_damagetohalftargethp,                    //0x94
-    Cmd_unused_95,                               //0x95
-    Cmd_unused_96,                               //0x96
-    Cmd_tryinfatuating,                          //0x97
-    Cmd_updatestatusicon,                        //0x98
-    Cmd_setmist,                                 //0x99
-    Cmd_setfocusenergy,                          //0x9A
-    Cmd_transformdataexecution,                  //0x9B
-    Cmd_setsubstitute,                           //0x9C
-    Cmd_mimicattackcopy,                         //0x9D
-    Cmd_metronome,                               //0x9E
-    Cmd_dmgtolevel,                              //0x9F
-    Cmd_psywavedamageeffect,                     //0xA0
-    Cmd_counterdamagecalculator,                 //0xA1
-    Cmd_mirrorcoatdamagecalculator,              //0xA2
-    Cmd_disablelastusedattack,                   //0xA3
-    Cmd_trysetencore,                            //0xA4
-    Cmd_painsplitdmgcalc,                        //0xA5
-    Cmd_settypetorandomresistance,               //0xA6
-    Cmd_setalwayshitflag,                        //0xA7
-    Cmd_copymovepermanently,                     //0xA8
-    Cmd_trychoosesleeptalkmove,                  //0xA9
-    Cmd_setdestinybond,                          //0xAA
-    Cmd_trysetdestinybondtohappen,               //0xAB
-    Cmd_settailwind,                             //0xAC
-    Cmd_tryspiteppreduce,                        //0xAD
-    Cmd_healpartystatus,                         //0xAE
-    Cmd_cursetarget,                             //0xAF
-    Cmd_trysetspikes,                            //0xB0
-    Cmd_setforesight,                            //0xB1
-    Cmd_trysetperishsong,                        //0xB2
-    Cmd_handlerollout,                           //0xB3
-    Cmd_jumpifconfusedandstatmaxed,              //0xB4
-    Cmd_handlefurycutter,                        //0xB5
-    Cmd_setembargo,                              //0xB6
-    Cmd_presentdamagecalculation,                //0xB7
-    Cmd_setsafeguard,                            //0xB8
-    Cmd_magnitudedamagecalculation,              //0xB9
-    Cmd_jumpifnopursuitswitchdmg,                //0xBA
-    Cmd_unused_bb,                               //0xBB
-    Cmd_halvehp,                                 //0xBC
-    Cmd_copyfoestats,                            //0xBD
-    Cmd_rapidspinfree,                           //0xBE
-    Cmd_setdefensecurlbit,                       //0xBF
-    Cmd_recoverbasedonsunlight,                  //0xC0
-    Cmd_setstickyweb,                            //0xC1
-    Cmd_selectfirstvalidtarget,                  //0xC2
-    Cmd_trysetfutureattack,                      //0xC3
-    Cmd_trydobeatup,                             //0xC4
-    Cmd_setsemiinvulnerablebit,                  //0xC5
-    Cmd_tryfiretwoturnmovenowbyeffect,           //0xC6
-    Cmd_setminimize,                             //0xC7
-    Cmd_unused_c8,                               //0xC8
-    Cmd_trymemento,                              //0xC9
-    Cmd_setforcedtarget,                         //0xCA
-    Cmd_setcharge,                               //0xCB
-    Cmd_callterrainattack,                       //0xCC
-    Cmd_cureifburnedparalysedorpoisoned,         //0xCD
-    Cmd_settorment,                              //0xCE
-    Cmd_jumpifnodamage,                          //0xCF
-    Cmd_settaunt,                                //0xD0
-    Cmd_trysethelpinghand,                       //0xD1
-    Cmd_tryswapitems,                            //0xD2
-    Cmd_trycopyability,                          //0xD3
-    Cmd_trywish,                                 //0xD4
-    Cmd_settoxicspikes,                          //0xD5
-    Cmd_setgastroacid,                           //0xD6
-    Cmd_setyawn,                                 //0xD7
-    Cmd_setdamagetohealthdifference,             //0xD8
-    Cmd_setroom,                                 //0xD9
-    Cmd_tryswapabilities,                        //0xDA
-    Cmd_tryimprison,                             //0xDB
-    Cmd_setstealthrock,                          //0xDC
-    Cmd_setuserstatus3,                          //0xDD
-    Cmd_assistattackselect,                      //0xDE
-    Cmd_trysetmagiccoat,                         //0xDF
-    Cmd_trysetsnatch,                            //0xE0
-    Cmd_unused2,                                 //0xE1
-    Cmd_switchoutabilities,                      //0xE2
-    Cmd_jumpifhasnohp,                           //0xE3
-    Cmd_jumpifnotcurrentmoveargtype,             //0xE4
-    Cmd_pickup,                                  //0xE5
-    Cmd_unused3,                                 //0xE6
-    Cmd_unused4,                                 //0xE7
-    Cmd_settypebasedhalvers,                     //0xE8
-    Cmd_jumpifsubstituteblocks,                  //0xE9
-    Cmd_tryrecycleitem,                          //0xEA
-    Cmd_settypetoterrain,                        //0xEB
-    Cmd_pursuitdoubles,                          //0xEC
-    Cmd_snatchsetbattlers,                       //0xED
-    Cmd_removelightscreenreflect,                //0xEE
-    Cmd_handleballthrow,                         //0xEF
-    Cmd_givecaughtmon,                           //0xF0
-    Cmd_trysetcaughtmondexflags,                 //0xF1
-    Cmd_displaydexinfo,                          //0xF2
-    Cmd_trygivecaughtmonnick,                    //0xF3
-    Cmd_subattackerhpbydmg,                      //0xF4
-    Cmd_removeattackerstatus1,                   //0xF5
-    Cmd_finishaction,                            //0xF6
-    Cmd_finishturn,                              //0xF7
-    Cmd_trainerslideout,                         //0xF8
-    Cmd_settelekinesis,                          //0xF9
-    Cmd_swapstatstages,                          //0xFA
-    Cmd_averagestats,                            //0xFB
-    Cmd_jumpifoppositegenders,                   //0xFC
-    Cmd_unused,                                  //0xFD
-    Cmd_tryworryseed,                            //0xFE
-    Cmd_callnative,                              //0xFF
+    Cmd_attackcanceler,                          //0
+    Cmd_accuracycheck,                           //1
+    Cmd_attackstring,                            //2
+    Cmd_ppreduce,                                //3
+    Cmd_critcalc,                                //4
+    Cmd_damagecalc,                              //5
+    Cmd_typecalc,                                //6
+    Cmd_adjustdamage,                            //7
+    Cmd_multihitresultmessage,                   //8
+    Cmd_attackanimation,                         //9
+    Cmd_waitanimation,                           //10
+    Cmd_healthbarupdate,                         //11
+    Cmd_datahpupdate,                            //12
+    Cmd_critmessage,                             //13
+    Cmd_effectivenesssound,                      //14
+    Cmd_resultmessage,                           //15
+    Cmd_printstring,                             //16
+    Cmd_printselectionstring,                    //17
+    Cmd_waitmessage,                             //18
+    Cmd_printfromtable,                          //19
+    Cmd_printselectionstringfromtable,           //20
+    Cmd_setadditionaleffects,                    //21
+    Cmd_seteffectprimary,                        //22
+    Cmd_seteffectsecondary,                      //23
+    Cmd_clearstatusfromeffect,                   //24
+    Cmd_tryfaintmon,                             //25
+    Cmd_dofaintanimation,                        //26
+    Cmd_cleareffectsonfaint,                     //27
+    Cmd_jumpifstatus,                            //28
+    Cmd_jumpifstatus2,                           //29
+    Cmd_jumpifability,                           //30
+    Cmd_jumpifsideaffecting,                     //31
+    Cmd_jumpifstat,                              //32
+    Cmd_jumpifstatus3condition,                  //33
+    Cmd_jumpbasedontype,                         //34
+    Cmd_getexp,                                  //35
+    Cmd_checkteamslost,                          //36
+    Cmd_movevaluescleanup,                       //37
+    Cmd_setmultihit,                             //38
+    Cmd_decrementmultihit,                       //39
+    Cmd_goto,                                    //40
+    Cmd_jumpifbyte,                              //41
+    Cmd_jumpifhalfword,                          //42
+    Cmd_jumpifword,                              //43
+    Cmd_jumpifarrayequal,                        //44
+    Cmd_jumpifarraynotequal,                     //45
+    Cmd_setbyte,                                 //46
+    Cmd_addbyte,                                 //47
+    Cmd_subbyte,                                 //48
+    Cmd_copyarray,                               //49
+    Cmd_copyarraywithindex,                      //50
+    Cmd_orbyte,                                  //51
+    Cmd_orhalfword,                              //52
+    Cmd_orword,                                  //53
+    Cmd_bicbyte,                                 //54
+    Cmd_bichalfword,                             //55
+    Cmd_bicword,                                 //56
+    Cmd_pause,                                   //57
+    Cmd_waitstate,                               //58
+    Cmd_healthbar_update,                        //59
+    Cmd_return,                                  //60
+    Cmd_end,                                     //61
+    Cmd_end2,                                    //62
+    Cmd_end3,                                    //63
+    Cmd_call,                                    //64
+    Cmd_setroost,                                //65
+    Cmd_jumpifabilitypresent,                    //66
+    Cmd_endselectionscript,                      //67
+    Cmd_playanimation,                           //68
+    Cmd_playanimation_var,                       //69
+    Cmd_setgraphicalstatchangevalues,            //70
+    Cmd_playstatchangeanimation,                 //71
+    Cmd_moveend,                                 //72
+    Cmd_sethealblock,                            //73
+    Cmd_returnatktoball,                         //74
+    Cmd_getswitchedmondata,                      //75
+    Cmd_switchindataupdate,                      //76
+    Cmd_switchinanim,                            //77
+    Cmd_jumpifcantswitch,                        //78
+    Cmd_openpartyscreen,                         //79
+    Cmd_switchhandleorder,                       //80
+    Cmd_switchineffects,                         //81
+    Cmd_trainerslidein,                          //82
+    Cmd_playse,                                  //83
+    Cmd_fanfare,                                 //84
+    Cmd_playfaintcry,                            //85
+    Cmd_returntoball,                            //86
+    Cmd_handlelearnnewmove,                      //87
+    Cmd_yesnoboxlearnmove,                       //88
+    Cmd_yesnoboxstoplearningmove,                //89
+    Cmd_hitanimation,                            //90
+    Cmd_getmoneyreward,                          //91
+    Cmd_updatebattlermoves,                      //92
+    Cmd_swapattackerwithtarget,                  //93
+    Cmd_incrementgamestat,                       //94
+    Cmd_drawpartystatussummary,                  //95
+    Cmd_hidepartystatussummary,                  //96
+    Cmd_jumptocalledmove,                        //97
+    Cmd_statusanimation,                         //98
+    Cmd_status2animation,                        //99
+    Cmd_chosenstatusanimation,                   //100
+    Cmd_yesnobox,                                //101
+    Cmd_cancelallactions,                        //102
+    Cmd_setgravity,                              //103
+    Cmd_removeitem,                              //104
+    Cmd_atknameinbuff1,                          //105
+    Cmd_drawlvlupbox,                            //106
+    Cmd_resetsentmonsvalue,                      //107
+    Cmd_setatktoplayer0,                         //108
+    Cmd_makevisible,                             //109
+    Cmd_recordability,                           //110
+    Cmd_buffermovetolearn,                       //111
+    Cmd_jumpifplayerran,                         //112
+    Cmd_hpthresholds,                            //113
+    Cmd_hpthresholds2,                           //114
+    Cmd_useitemonopponent,                       //115
+    Cmd_various,                                 //116
+    Cmd_setprotectlike,                          //117
+    Cmd_tryexplosion,                            //118
+    Cmd_setatkhptozero,                          //119
+    Cmd_jumpifnexttargetvalid,                   //120
+    Cmd_tryhealhalfhealth,                       //121
+    Cmd_trymirrormove,                           //122
+    Cmd_setfieldweather,                         //123
+    Cmd_setreflect,                              //124
+    Cmd_setseeded,                               //125
+    Cmd_manipulatedamage,                        //126
+    Cmd_trysetrest,                              //127
+    Cmd_jumpifnotfirstturn,                      //128
+    Cmd_setmiracleeye,                           //129
+    Cmd_jumpifuproarwakes,                       //130
+    Cmd_stockpile,                               //131
+    Cmd_stockpiletobasedamage,                   //132
+    Cmd_stockpiletohpheal,                       //133
+    Cmd_setdrainedhp,                            //134
+    Cmd_statbuffchange,                          //135
+    Cmd_normalisebuffs,                          //136
+    Cmd_setbide,                                 //137
+    Cmd_twoturnmoveschargestringandanimation,    //138
+    Cmd_setmultihitcounter,                      //139
+    Cmd_initmultihitstring,                      //140
+    Cmd_forcerandomswitch,                       //141
+    Cmd_tryconversiontypechange,                 //142
+    Cmd_givepaydaymoney,                         //143
+    Cmd_setlightscreen,                          //144
+    Cmd_tryKO,                                   //145
+    Cmd_damagetohalftargethp,                    //146
+    Cmd_tryinfatuating,                          //147
+    Cmd_updatestatusicon,                        //148
+    Cmd_setmist,                                 //149
+    Cmd_setfocusenergy,                          //150
+    Cmd_transformdataexecution,                  //151
+    Cmd_setsubstitute,                           //152
+    Cmd_mimicattackcopy,                         //153
+    Cmd_metronome,                               //154
+    Cmd_dmgtolevel,                              //155
+    Cmd_psywavedamageeffect,                     //156
+    Cmd_counterdamagecalculator,                 //157
+    Cmd_mirrorcoatdamagecalculator,              //158
+    Cmd_disablelastusedattack,                   //159
+    Cmd_trysetencore,                            //160
+    Cmd_painsplitdmgcalc,                        //161
+    Cmd_settypetorandomresistance,               //162
+    Cmd_setalwayshitflag,                        //163
+    Cmd_copymovepermanently,                     //164
+    Cmd_trychoosesleeptalkmove,                  //165
+    Cmd_setdestinybond,                          //166
+    Cmd_trysetdestinybondtohappen,               //167
+    Cmd_settailwind,                             //168
+    Cmd_tryspiteppreduce,                        //169
+    Cmd_healpartystatus,                         //170
+    Cmd_cursetarget,                             //171
+    Cmd_trysetspikes,                            //172
+    Cmd_setforesight,                            //173
+    Cmd_trysetperishsong,                        //174
+    Cmd_handlerollout,                           //175
+    Cmd_jumpifconfusedandstatmaxed,              //176
+    Cmd_handlefurycutter,                        //177
+    Cmd_setembargo,                              //178
+    Cmd_presentdamagecalculation,                //179
+    Cmd_setsafeguard,                            //180
+    Cmd_magnitudedamagecalculation,              //181
+    Cmd_jumpifnopursuitswitchdmg,                //182
+    Cmd_halvehp,                                 //183
+    Cmd_copyfoestats,                            //184
+    Cmd_rapidspinfree,                           //185
+    Cmd_setdefensecurlbit,                       //186
+    Cmd_recoverbasedonsunlight,                  //187
+    Cmd_setstickyweb,                            //188
+    Cmd_selectfirstvalidtarget,                  //189
+    Cmd_trysetfutureattack,                      //190
+    Cmd_trydobeatup,                             //191
+    Cmd_setsemiinvulnerablebit,                  //192
+    Cmd_tryfiretwoturnmovenowbyeffect,           //193
+    Cmd_setminimize,                             //194
+    Cmd_trymemento,                              //195
+    Cmd_setforcedtarget,                         //196
+    Cmd_setcharge,                               //197
+    Cmd_callterrainattack,                       //198
+    Cmd_cureifburnedparalysedorpoisoned,         //199
+    Cmd_settorment,                              //200
+    Cmd_jumpifnodamage,                          //201
+    Cmd_settaunt,                                //202
+    Cmd_trysethelpinghand,                       //203
+    Cmd_tryswapitems,                            //204
+    Cmd_trycopyability,                          //205
+    Cmd_trywish,                                 //206
+    Cmd_settoxicspikes,                          //207
+    Cmd_setgastroacid,                           //208
+    Cmd_setyawn,                                 //209
+    Cmd_setdamagetohealthdifference,             //210
+    Cmd_setroom,                                 //211
+    Cmd_tryswapabilities,                        //212
+    Cmd_tryimprison,                             //213
+    Cmd_setstealthrock,                          //214
+    Cmd_setuserstatus3,                          //215
+    Cmd_assistattackselect,                      //216
+    Cmd_trysetmagiccoat,                         //217
+    Cmd_trysetsnatch,                            //218
+    Cmd_switchoutabilities,                      //219
+    Cmd_jumpifhasnohp,                           //220
+    Cmd_jumpifnotcurrentmoveargtype,             //221
+    Cmd_pickup,                                  //222
+    Cmd_settypebasedhalvers,                     //223
+    Cmd_jumpifsubstituteblocks,                  //224
+    Cmd_tryrecycleitem,                          //225
+    Cmd_settypetoterrain,                        //226
+    Cmd_snatchsetbattlers,                       //227
+    Cmd_removelightscreenreflect,                //228
+    Cmd_handleballthrow,                         //229
+    Cmd_givecaughtmon,                           //230
+    Cmd_trysetcaughtmondexflags,                 //231
+    Cmd_displaydexinfo,                          //232
+    Cmd_trygivecaughtmonnick,                    //233
+    Cmd_subattackerhpbydmg,                      //234
+    Cmd_removeattackerstatus1,                   //235
+    Cmd_finishaction,                            //236
+    Cmd_finishturn,                              //237
+    Cmd_trainerslideout,                         //238
+    Cmd_settelekinesis,                          //239
+    Cmd_swapstatstages,                          //240
+    Cmd_averagestats,                            //241
+    Cmd_jumpifoppositegenders,                   //242
+    Cmd_tryworryseed,                            //243
+    Cmd_callnative,                              //244
 };
 
 const struct StatFractions gAccuracyStageRatios[] =
@@ -1486,22 +1464,6 @@ static bool32 JumpIfMoveFailed(u8 adder, u16 move)
     }
     gBattlescriptCurrInstr += adder;
     return FALSE;
-}
-
-static void Cmd_unused5(void)
-{
-    CMD_ARGS(const u8 *failInstr);
-
-    if (IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove))
-    {
-        gMoveResultFlags |= MOVE_RESULT_MISSED;
-        JumpIfMoveFailed(sizeof(*cmd), MOVE_NONE);
-        gBattleCommunication[MISS_TYPE] = B_MSG_PROTECTED;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->nextInstr;
-    }
 }
 
 static bool8 JumpIfMoveAffectedByProtect(u16 move)
@@ -7160,17 +7122,6 @@ static void Cmd_playfaintcry(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_endlinkbattle(void)
-{
-    CMD_ARGS();
-
-    u32 battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-    BtlController_EmitEndLinkBattle(battler, BUFFER_A, gBattleOutcome);
-    MarkBattlerForControllerExec(battler);
-
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
 static void Cmd_returntoball(void)
 {
     CMD_ARGS(u8 battler, bool8 changingForm);
@@ -11955,14 +11906,6 @@ static void Cmd_damagetohalftargethp(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_unused_95(void)
-{
-}
-
-static void Cmd_unused_96(void)
-{
-}
-
 static void Cmd_tryinfatuating(void)
 {
     CMD_ARGS(const u8 *failInstr);
@@ -13185,10 +13128,6 @@ static void Cmd_jumpifnopursuitswitchdmg(void)
     }
 }
 
-static void Cmd_unused_bb(void)
-{
-}
-
 // Belly Drum, Fillet Away
 static void Cmd_halvehp(void)
 {
@@ -13216,7 +13155,7 @@ static void Cmd_halvehp(void)
 // Psych Up
 static void Cmd_copyfoestats(void)
 {
-    CMD_ARGS(const u8 *unused);
+    CMD_ARGS();
 
     s32 i;
 
@@ -13224,8 +13163,6 @@ static void Cmd_copyfoestats(void)
     {
         gBattleMons[gBattlerAttacker].statStages[i] = gBattleMons[gBattlerTarget].statStages[i];
     }
-
-    gBattlescriptCurrInstr = cmd->nextInstr; // Has an unused jump ptr(possibly for a failed attempt) parameter.
 }
 
 static void Cmd_rapidspinfree(void)
@@ -13501,10 +13438,6 @@ static void Cmd_setminimize(void)
         gStatuses3[gBattlerAttacker] |= STATUS3_MINIMIZED;
 
     gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-static void Cmd_unused_c8(void)
-{
 }
 
 static void Cmd_trymemento(void)
@@ -14166,10 +14099,6 @@ static void Cmd_trysetsnatch(void)
     }
 }
 
-static void Cmd_unused2(void)
-{
-}
-
 static void Cmd_switchoutabilities(void)
 {
     CMD_ARGS(u8 battler);
@@ -14343,14 +14272,6 @@ static void Cmd_pickup(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_unused3(void)
-{
-}
-
-static void Cmd_unused4(void)
-{
-}
-
 // Water and Mud Sport
 static void Cmd_settypebasedhalvers(void)
 {
@@ -14500,31 +14421,6 @@ static void Cmd_settypetoterrain(void)
         PREPARE_TYPE_BUFFER(gBattleTextBuff1, terrainType);
 
         gBattlescriptCurrInstr = cmd->nextInstr;
-    }
-    else
-    {
-        gBattlescriptCurrInstr = cmd->failInstr;
-    }
-}
-
-// Unused
-static void Cmd_pursuitdoubles(void)
-{
-    CMD_ARGS(const u8 *failInstr);
-
-    u32 battler = GetBattlerAtPosition(BATTLE_PARTNER(GetBattlerPosition(gBattlerAttacker)));
-
-    if (IsDoubleBattle()
-        && !(gAbsentBattlerFlags & (1u << battler))
-        && gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
-        && gMovesInfo[gChosenMoveByBattler[battler]].effect == EFFECT_PURSUIT)
-    {
-        gActionsByTurnOrder[battler] = B_ACTION_TRY_FINISH;
-        gCurrentMove = gChosenMoveByBattler[battler];
-        gBattlescriptCurrInstr = cmd->nextInstr;
-        gBattleScripting.animTurn = 1;
-        gBattleScripting.savedBattler = gBattlerAttacker;
-        gBattlerAttacker = battler;
     }
     else
     {
@@ -15063,10 +14959,6 @@ static void Cmd_jumpifoppositegenders(void)
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-static void Cmd_unused(void)
-{
 }
 
 static void Cmd_tryworryseed(void)

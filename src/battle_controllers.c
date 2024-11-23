@@ -916,16 +916,6 @@ void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 ca
     PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, 2);
 }
 
-void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome)
-{
-    gBattleResources->transferBuffer[0] = CONTROLLER_ENDLINKBATTLE;
-    gBattleResources->transferBuffer[1] = battleOutcome;
-    gBattleResources->transferBuffer[2] = gSaveBlock2Ptr->frontier.disableRecordBattle;
-    gBattleResources->transferBuffer[3] = gSaveBlock2Ptr->frontier.disableRecordBattle;
-    gBattleResources->transferBuffer[5] = gBattleResources->transferBuffer[4] = RecordedBattle_BufferNewBattlerData(&gBattleResources->transferBuffer[6]);
-    PrepareBufferDataTransfer(battler, bufferId, gBattleResources->transferBuffer, gBattleResources->transferBuffer[4] + 6);
-}
-
 void BtlController_EmitDebugMenu(u32 battler, u32 bufferId)
 {
     gBattleResources->transferBuffer[0] = CONTROLLER_DEBUGMENU;

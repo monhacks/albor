@@ -4542,7 +4542,7 @@ BattleScript_EffectPsychUp::
 	attackcanceler
 	attackstring
 	ppreduce
-	copyfoestats BattleScript_ButItFailed
+	copyfoestats
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNCOPIEDSTATCHANGES
@@ -5640,50 +5640,15 @@ BattleScript_LocalBattleLostEnd_::
 	end2
 
 BattleScript_FrontierLinkBattleLost::
-	returnopponentmon1toball BS_ATTACKER
-	waitstate
-	returnopponentmon2toball BS_ATTACKER
-	waitstate
-	trainerslidein BS_OPPONENT1
-	waitstate
-	printstring STRINGID_TRAINER1WINTEXT
-	trainerslideout BS_OPPONENT1
-	waitstate
-	trainerslidein BS_OPPONENT2
-	waitstate
-	printstring STRINGID_TRAINER2WINTEXT
-	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_FrontierLinkBattleLostEnd
-	endlinkbattle
 BattleScript_FrontierLinkBattleLostEnd::
-	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_LinkBattleWonOrLost::
-	jumpifbattletype BATTLE_TYPE_BATTLE_TOWER, BattleScript_TowerLinkBattleWon
-	printstring STRINGID_BATTLEEND
-	waitmessage B_WAIT_TIME_LONG
-	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_LinkBattleWonOrLostWaitEnd
-	endlinkbattle
 BattleScript_LinkBattleWonOrLostWaitEnd::
-	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_TowerLinkBattleWon::
-	playtrainerdefeatbgm BS_ATTACKER
-	printstring STRINGID_BATTLEEND
-	waitmessage B_WAIT_TIME_LONG
-	trainerslidein BS_OPPONENT1
-	waitstate
-	printstring STRINGID_TRAINER1LOSETEXT
-	trainerslideout BS_OPPONENT1
-	waitstate
-	trainerslidein BS_OPPONENT2
-	waitstate
-	printstring STRINGID_TRAINER2LOSETEXT
-	jumpifbattletype BATTLE_TYPE_RECORDED, BattleScript_TowerLinkBattleWonEnd
-	endlinkbattle
 BattleScript_TowerLinkBattleWonEnd::
-	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_FrontierTrainerBattleWon::
@@ -9228,10 +9193,6 @@ BattleScript_PrintPlayerForfeited::
 	end2
 
 BattleScript_PrintPlayerForfeitedLinkBattle::
-	printstring STRINGID_FORFEITEDMATCH
-	waitmessage B_WAIT_TIME_LONG
-	endlinkbattle
-	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_TotemFlaredToLife::

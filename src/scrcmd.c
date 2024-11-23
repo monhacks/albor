@@ -291,14 +291,6 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
-{
-    u8 status = ScriptReadByte(ctx);
-
-    SetMysteryEventScriptStatus(status);
-    return FALSE;
-}
-
 bool8 ScrCmd_loadword(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);

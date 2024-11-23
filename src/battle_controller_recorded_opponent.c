@@ -46,7 +46,6 @@ static void RecordedOpponentHandleStatusAnimation(u32 battler);
 static void RecordedOpponentHandleIntroTrainerBallThrow(u32 battler);
 static void RecordedOpponentHandleDrawPartyStatusSummary(u32 battler);
 static void RecordedOpponentHandleBattleAnimation(u32 battler);
-static void RecordedOpponentHandleEndLinkBattle(u32 battler);
 
 static void RecordedOpponentBufferRunCommand(u32 battler);
 static void RecordedOpponentBufferExecCompleted(u32 battler);
@@ -102,7 +101,6 @@ static void (*const sRecordedOpponentBufferCommands[CONTROLLER_CMDS_COUNT])(u32 
     [CONTROLLER_BATTLEANIMATION]          = RecordedOpponentHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = BtlController_Empty,
     [CONTROLLER_RESETACTIONMOVESELECTION] = BtlController_Empty,
-    [CONTROLLER_ENDLINKBATTLE]            = RecordedOpponentHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = BtlController_Empty,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
@@ -494,17 +492,4 @@ static void RecordedOpponentHandleDrawPartyStatusSummary(u32 battler)
 static void RecordedOpponentHandleBattleAnimation(u32 battler)
 {
     BtlController_HandleBattleAnimation(battler, FALSE);
-}
-
-static void RecordedOpponentHandleEndLinkBattle(u32 battler)
-{
-    if (gBattleResources->bufferA[battler][1] == B_OUTCOME_DREW)
-        gBattleOutcome = gBattleResources->bufferA[battler][1];
-    else
-        gBattleOutcome = gBattleResources->bufferA[battler][1] ^ B_OUTCOME_DREW;
-
-    FadeOutMapMusic(5);
-    BeginFastPaletteFade(3);
-    RecordedOpponentBufferExecCompleted(battler);
-    gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
 }

@@ -79,7 +79,6 @@ static void PlayerHandleEndBounceEffect(u32 battler);
 static void PlayerHandleBattleAnimation(u32 battler);
 static void PlayerHandleLinkStandbyMsg(u32 battler);
 static void PlayerHandleResetActionMoveSelection(u32 battler);
-static void PlayerHandleEndLinkBattle(u32 battler);
 static void PlayerHandleBattleDebug(u32 battler);
 
 static void PlayerBufferRunCommand(u32 battler);
@@ -153,7 +152,6 @@ static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(u32 battler) =
     [CONTROLLER_BATTLEANIMATION]          = PlayerHandleBattleAnimation,
     [CONTROLLER_LINKSTANDBYMSG]           = PlayerHandleLinkStandbyMsg,
     [CONTROLLER_RESETACTIONMOVESELECTION] = PlayerHandleResetActionMoveSelection,
-    [CONTROLLER_ENDLINKBATTLE]            = PlayerHandleEndLinkBattle,
     [CONTROLLER_DEBUGMENU]                = PlayerHandleBattleDebug,
     [CONTROLLER_TERMINATOR_NOP]           = BtlController_TerminatorNop
 };
@@ -934,41 +932,6 @@ static void ReloadMoveNames(u32 battler)
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler]);
     MoveSelectionDisplayPpNumber(battler);
     MoveSelectionDisplayMoveType(battler);
-}
-
-static void SetLinkBattleEndCallbacks(u32 battler)
-{
-    if (gReceivedRemoteLinkPlayers == 0)
-    {
-        m4aSongNumStop(SE_LOW_HEALTH);
-        gMain.inBattle = FALSE;
-        gMain.callback1 = gPreBattleCallback1;
-        SetMainCallback2(CB2_InitEndLinkBattle);
-        FreeAllWindowBuffers();
-    }
-}
-
-// Despite handling link battles separately, this is only ever used by link battles
-void SetBattleEndCallbacks(u32 battler)
-{
-    if (!gPaletteFade.active)
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        {
-            if (IsLinkTaskFinished())
-            {
-                SetCloseLinkCallback();
-                gBattlerControllerFuncs[battler] = SetLinkBattleEndCallbacks;
-            }
-        }
-        else
-        {
-            m4aSongNumStop(SE_LOW_HEALTH);
-            gMain.inBattle = FALSE;
-            gMain.callback1 = gPreBattleCallback1;
-            SetMainCallback2(gMain.savedCallback);
-        }
-    }
 }
 
 static void Intro_DelayAndEnd(u32 battler)
@@ -2369,17 +2332,6 @@ static void PlayerHandleResetActionMoveSelection(u32 battler)
         break;
     }
     PlayerBufferExecCompleted(battler);
-}
-
-static void PlayerHandleEndLinkBattle(u32 battler)
-{
-    RecordedBattle_RecordAllBattlerData(&gBattleResources->bufferA[battler][4]);
-    gBattleOutcome = gBattleResources->bufferA[battler][1];
-    gSaveBlock2Ptr->frontier.disableRecordBattle = gBattleResources->bufferA[battler][2];
-    FadeOutMapMusic(5);
-    BeginFastPaletteFade(3);
-    PlayerBufferExecCompleted(battler);
-    gBattlerControllerFuncs[battler] = SetBattleEndCallbacks;
 }
 
 static void Controller_WaitForDebug(u32 battler)

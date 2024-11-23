@@ -168,7 +168,6 @@ enum
     CONTROLLER_BATTLEANIMATION,
     CONTROLLER_LINKSTANDBYMSG,
     CONTROLLER_RESETACTIONMOVESELECTION,
-    CONTROLLER_ENDLINKBATTLE,
     CONTROLLER_DEBUGMENU,
     /*new controllers should go here*/
     CONTROLLER_TERMINATOR_NOP,
@@ -227,7 +226,6 @@ void BtlController_EmitSpriteInvisibility(u32 battler, u32 bufferId, bool8 isInv
 void BtlController_EmitBattleAnimation(u32 battler, u32 bufferId, u8 animationId, struct DisableStruct* disableStructPtr, u16 argument);
 void BtlController_EmitLinkStandbyMsg(u32 battler, u32 bufferId, u8 mode, bool32 record);
 void BtlController_EmitResetActionMoveSelection(u32 battler, u32 bufferId, u8 caseId);
-void BtlController_EmitEndLinkBattle(u32 battler, u32 bufferId, u8 battleOutcome);
 void BtlController_EmitDebugMenu(u32 battler, u32 bufferId);
 
 void BattleControllerComplete(u32 battler); // Can be used for all the controllers.
@@ -273,7 +271,6 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
 
 // player controller
 void SetControllerToPlayer(u32 battler);
-void SetBattleEndCallbacks(u32 battler);
 void PlayerHandleBallThrowAnim(u32 battler);
 void PlayerHandleExpUpdate(u32 battler);
 u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
@@ -290,7 +287,6 @@ void HandleInputChooseMove(u32 battler);
 void HandleInputChooseTarget(u32 battler);
 void HandleInputShowEntireFieldTargets(u32 battler);
 void HandleInputShowTargets(u32 battler);
-void HandleMoveSwitching(u32 battler);
 void HandleChooseMoveAfterDma3(u32 battler);
 
 // recorded player controller
