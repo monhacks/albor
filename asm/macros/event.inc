@@ -1537,57 +1537,6 @@
 	.byte 0xb7
 	.endm
 
-	@ Sets a relative address to be used by the other vcommands as part of a Mystery Gift script.
-	.macro setvaddress pointer:req
-	.byte 0xb8
-	.4byte \pointer
-	.endm
-
-	@ Equivalent to goto using the relative address set by setvaddress.
-	.macro vgoto destination:req
-	.byte 0xb9
-	.4byte \destination
-	.endm
-
-	@ Equivalent to call using the relative address set by setvaddress.
-	.macro vcall destination:req
-	.byte 0xba
-	.4byte \destination
-	.endm
-
-	@ Equivalent to goto_if using the relative address set by setvaddress.
-	.macro vgoto_if condition:req, destination:req
-	.byte 0xbb
-	.byte \condition
-	.4byte \destination
-	.endm
-
-	@ Equivalent to call_if using the relative address set by setvaddress.
-	.macro vcall_if condition:req, destination:req
-	.byte 0xbc
-	.byte \condition
-	.4byte \destination
-	.endm
-
-	@ Equivalent to message using the relative address set by setvaddress.
-	.macro vmessage text:req
-	.byte 0xbd
-	.4byte \text
-	.endm
-
-	@ Expands the given text at the pointer (- the relative address set by setvaddress) into gStringVar4
-	.macro vbuffermessage text:req
-	.byte 0xbe
-	.4byte \text
-	.endm
-
-	@ Equivalent to bufferstring using the relative address set by setvaddress.
-	.macro vbufferstring stringVarIndex:req, text:req
-	.byte 0xbf
-	stringvar \stringVarIndex
-	.4byte \text
-	.endm
-
 	@ Create a window showing how many Coins the player has.
 	.macro showcoinsbox x:req, y:req
 	.byte 0xc0

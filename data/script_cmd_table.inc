@@ -184,14 +184,14 @@ gScriptCmdTable::
 	.4byte ScrCmd_removecoins                       @ 0xb5
 	.4byte ScrCmd_setwildbattle                     @ 0xb6
 	.4byte ScrCmd_dowildbattle                      @ 0xb7
-	.4byte ScrCmd_setvaddress                       @ 0xb8
-	.4byte ScrCmd_vgoto                             @ 0xb9
-	.4byte ScrCmd_vcall                             @ 0xba
-	.4byte ScrCmd_vgoto_if                          @ 0xbb
-	.4byte ScrCmd_vcall_if                          @ 0xbc
-	.4byte ScrCmd_vmessage                          @ 0xbd
-	.4byte ScrCmd_vbuffermessage                    @ 0xbe
-	.4byte ScrCmd_vbufferstring                     @ 0xbf
+	.4byte ScrCmd_nop1                       @ 0xb8
+	.4byte ScrCmd_nop1                             @ 0xb9
+	.4byte ScrCmd_nop1                             @ 0xba
+	.4byte ScrCmd_nop1                          @ 0xbb
+	.4byte ScrCmd_nop1                          @ 0xbc
+	.4byte ScrCmd_nop1                          @ 0xbd
+	.4byte ScrCmd_nop1                    @ 0xbe
+	.4byte ScrCmd_nop1                     @ 0xbf
 	.4byte ScrCmd_showcoinsbox                      @ 0xc0
 	.4byte ScrCmd_hidecoinsbox                      @ 0xc1
 	.4byte ScrCmd_updatecoinsbox                    @ 0xc2

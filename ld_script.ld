@@ -236,7 +236,6 @@ SECTIONS {
         src/palette_util.o(.text);
         src/confetti_util.o(.text);
         src/save.o(.text);
-        src/mystery_event_script.o(.text);
         src/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/battle_anim_sound_tasks.o(.text);
@@ -259,7 +258,6 @@ SECTIONS {
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         src/berry_tag_screen.o(.text);
-        src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         src/pokeblock_feed.o(.text);
@@ -336,7 +334,6 @@ SECTIONS {
         data/battle_scripts.o(script_data);
         data/field_effect_scripts.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/mystery_event_script_cmd_table.o(script_data);
     } > ROM =0
 
     lib_text :
@@ -586,7 +583,6 @@ SECTIONS {
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
         src/berry_tag_screen.o(.rodata);
-        src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         src/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
@@ -647,7 +643,6 @@ SECTIONS {
         src/text_input_strings.o(.rodata);
         src/fonts.o(.rodata);
         src/international_string_util.o(.rodata);
-        src/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
         src/pokemon_sprite_visualizer.o(.rodata);
