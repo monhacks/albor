@@ -394,7 +394,7 @@ const u8 *const gStatusConditionStringsTable[7] =
 
 void CB2_InitBattle(void)
 {
-    MoveSaveBlocks_ResetHeap();
+    ResetHeap();
     AllocateBattleResources();
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();

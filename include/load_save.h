@@ -13,7 +13,7 @@ extern struct PokemonStorage *gPokemonStoragePtr;
 
 void CheckForFlashMemory(void);
 void SetSaveBlocksPointers(void);
-void MoveSaveBlocks_ResetHeap(void);
+void ResetHeap(void);
 u32 UseContinueGameWarp(void);
 void ClearContinueGameWarpStatus(void);
 void SetContinueGameWarpStatus(void);

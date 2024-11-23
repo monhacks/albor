@@ -1861,7 +1861,7 @@ static void DoMapLoadLoop(u8 *state)
 static void ResetMirageTowerAndSaveBlockPtrs(void)
 {
     ClearMirageTowerPulseBlend();
-    MoveSaveBlocks_ResetHeap();
+    ResetHeap();
 }
 
 static void ResetScreenForMapLoad(void)

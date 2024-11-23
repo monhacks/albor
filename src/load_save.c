@@ -61,7 +61,7 @@ void SetSaveBlocksPointers(void)
     SetBagItemsPointers();
 }
 
-void MoveSaveBlocks_ResetHeap(void)
+void ResetHeap(void)
 {
     void *vblankCB, *hblankCB;
 
@@ -71,8 +71,6 @@ void MoveSaveBlocks_ResetHeap(void)
     gMain.vblankCallback = NULL;
     gMain.hblankCallback = NULL;
 
-    // change saveblocks' pointers
-    // argument is a sum of the individual trainerId bytes
     SetSaveBlocksPointers();
 
     // heap was destroyed in the copying process, so reset it
