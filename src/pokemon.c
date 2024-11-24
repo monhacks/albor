@@ -3108,7 +3108,9 @@ u16 SpeciesToNationalPokedexNum(u16 species)
 
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
 {
-
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    if (!StringCompare(GetSpeciesName(oldSpecies), gStringVar1))
+        SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
 }
 
 // The below two functions determine which side of a multi battle the trainer battles on
