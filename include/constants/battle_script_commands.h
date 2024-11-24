@@ -2,42 +2,42 @@
 #define GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H
 
 // The following correspond to the struct members of BattleScripting by adding their offset
-#define sPAINSPLIT_HP                (gBattleScripting + 0x00) // painSplitHp
-#define sBIDE_DMG                    (gBattleScripting + 0x04) // bideDmg
-#define sMULTIHIT_STRING             (gBattleScripting + 0x08) // multihitString
-#define sB_ANIM_ARG1                 (gBattleScripting + 0x10) // animArg1
-#define sB_ANIM_ARG2                 (gBattleScripting + 0x11) // animArg2
-#define sSAVED_STRINID               (gBattleScripting + 0x12) // savedStringId
-#define sMOVEEND_STATE               (gBattleScripting + 0x14) // moveendState
-#define sSAVED_STAT_CHANGER          (gBattleScripting + 0x15) // savedStatChanger
-#define sSHIFT_SWITCHED              (gBattleScripting + 0x16) // shiftSwitched
-#define sBATTLER                     (gBattleScripting + 0x17) // battler
-#define sB_ANIM_TURN                 (gBattleScripting + 0x18) // animTurn
-#define sB_ANIM_TARGETS_HIT          (gBattleScripting + 0x19) // animTargetsHit
-#define sSTATCHANGER                 (gBattleScripting + 0x1A) // statChanger
-#define sSTAT_ANIM_PLAYED            (gBattleScripting + 0x1B) // statAnimPlayed
-#define sGIVEEXP_STATE               (gBattleScripting + 0x1C) // getexpState
-#define sBATTLE_STYLE                (gBattleScripting + 0x1D) // battleStyle
-#define sLVLBOX_STATE                (gBattleScripting + 0x1E) // drawlvlupboxState
-#define sLEARNMOVE_STATE             (gBattleScripting + 0x1F) // learnMoveState
-#define sSAVED_BATTLER               (gBattleScripting + 0x20) // savedBattler
-#define sRESHOW_MAIN_STATE           (gBattleScripting + 0x21) // reshowMainState
-#define sRESHOW_HELPER_STATE         (gBattleScripting + 0x22) // reshowHelperState
-#define sLVLUP_HP                    (gBattleScripting + 0x23) // levelUpHP
-#define sWINDOWS_TYPE                (gBattleScripting + 0x24) // windowsType
-#define sMULTIPLAYER_ID              (gBattleScripting + 0x25) // multiplayerId
-#define sSPECIAL_TRAINER_BATTLE_TYPE (gBattleScripting + 0x26) // specialTrainerBattleType
-#define sMON_CAUGHT                  (gBattleScripting + 0x27) // monCaught
-#define sSAVED_DMG                   (gBattleScripting + 0x28) // savedDmg
-#define sSAVED_MOVE_EFFECT           (gBattleScripting + 0x2C) // savedMoveEffect
-#define sMOVE_EFFECT                 (gBattleScripting + 0x2E) // moveEffect
-#define sMULTIHIT_EFFECT             (gBattleScripting + 0x30) // multihitMoveEffect
-#define sILLUSION_NICK_HACK          (gBattleScripting + 0x32) // illusionNickHack
-#define sFIXED_ABILITY_POPUP         (gBattleScripting + 0x33) // fixedPopup
-#define sABILITY_OVERWRITE           (gBattleScripting + 0x34) // abilityPopupOverwrite
-#define sSWITCH_CASE                 (gBattleScripting + 0x36) // switchCase
-#define sBERRY_OVERRIDE              (gBattleScripting + 0x37) // overrideBerryRequirements
-#define sSTICKY_WEB_STAT_DROP        (gBattleScripting + 0x38) // stickyWebStatDrop
+#define sPAINSPLIT_HP                (gBattleScripting)                 // painSplitHp (s32) -> 4 bytes
+#define sBIDE_DMG                    (sPAINSPLIT_HP + 4)                // bideDmg (s32) -> 4 bytes
+#define sMULTIHIT_STRING             (sBIDE_DMG + 4)                    // multihitString (u8[6]) -> 6 bytes
+#define sB_ANIM_ARG1                 (sMULTIHIT_STRING + 6)             // animArg1 (u8) -> 1 byte
+#define sB_ANIM_ARG2                 (sB_ANIM_ARG1 + 1)                 // animArg2 (u8) -> 1 byte
+#define sSAVED_STRING_ID             (sB_ANIM_ARG2 + 1)                 // savedStringId (u16) -> 2 bytes
+#define sMOVEEND_STATE               (sSAVED_STRING_ID + 2)             // moveendState (u8) -> 1 byte
+#define sSAVED_STAT_CHANGER          (sMOVEEND_STATE + 1)               // savedStatChanger (u8) -> 1 byte
+#define sSHIFT_SWITCHED              (sSAVED_STAT_CHANGER + 1)          // shiftSwitched (u8) -> 1 byte
+#define sBATTLER                     (sSHIFT_SWITCHED + 1)              // battler (u8) -> 1 byte
+#define sB_ANIM_TURN                 (sBATTLER + 1)                     // animTurn (u8) -> 1 byte
+#define sB_ANIM_TARGETS_HIT          (sB_ANIM_TURN + 1)                 // animTargetsHit (u8) -> 1 byte
+#define sSTATCHANGER                 (sB_ANIM_TARGETS_HIT + 1)          // statChanger (u8) -> 1 byte
+#define sSTAT_ANIM_PLAYED            (sSTATCHANGER + 1)                 // statAnimPlayed (bool8) -> 1 byte
+#define sGIVEEXP_STATE               (sSTAT_ANIM_PLAYED + 1)            // getexpState (u8) -> 1 byte
+#define sBATTLE_STYLE                (sGIVEEXP_STATE + 1)               // battleStyle (u8) -> 1 byte
+#define sLVLBOX_STATE                (sBATTLE_STYLE + 1)                // drawlvlupboxState (u8) -> 1 byte
+#define sLEARNMOVE_STATE             (sLVLBOX_STATE + 1)                // learnMoveState (u8) -> 1 byte
+#define sSAVED_BATTLER               (sLEARNMOVE_STATE + 1)             // savedBattler (u8) -> 1 byte
+#define sRESHOW_MAIN_STATE           (sSAVED_BATTLER + 1)               // reshowMainState (u8) -> 1 byte
+#define sRESHOW_HELPER_STATE         (sRESHOW_MAIN_STATE + 1)           // reshowHelperState (u8) -> 1 byte
+#define sLVLUP_HP                    (sRESHOW_HELPER_STATE + 1)         // levelUpHP (u8) -> 1 byte
+#define sWINDOWS_TYPE                (sLVLUP_HP + 1)                    // windowsType (u8) -> 1 byte
+#define sMULTIPLAYER_ID              (sWINDOWS_TYPE + 1)                // multiplayerId (u8) -> 1 byte
+#define sSPECIAL_TRAINER_BATTLE_TYPE (sMULTIPLAYER_ID + 1)              // specialTrainerBattleType (u8) -> 1 byte
+#define sMON_CAUGHT                  (sSPECIAL_TRAINER_BATTLE_TYPE + 1) // monCaught (bool8) -> 1 byte
+#define sSAVED_DMG                   (sMON_CAUGHT + 1)                  // savedDmg (s32) -> 4 bytes
+#define sSAVED_MOVE_EFFECT           (sSAVED_DMG + 4)                   // savedMoveEffect (u16) -> 2 bytes
+#define sMOVE_EFFECT                 (sSAVED_MOVE_EFFECT + 2)           // moveEffect (u16) -> 2 bytes
+#define sMULTIHIT_EFFECT             (sMOVE_EFFECT + 2)                 // multihitMoveEffect (u16) -> 2 bytes
+#define sILLUSION_NICK_HACK          (sMULTIHIT_EFFECT + 2)             // illusionNickHack (u8) -> 1 byte
+#define sFIXED_ABILITY_POPUP         (sILLUSION_NICK_HACK + 1)          // fixedPopup (bool8) -> 1 byte
+#define sABILITY_OVERWRITE           (sFIXED_ABILITY_POPUP + 1)         // abilityPopupOverwrite (u16) -> 2 bytes
+#define sSWITCH_CASE                 (sABILITY_OVERWRITE + 2)           // switchCase (u8) -> 1 byte
+#define sBERRY_OVERRIDE              (sSWITCH_CASE + 1)                 // overrideBerryRequirements (u8) -> 1 byte
+#define sSTICKY_WEB_STAT_DROP        (sBERRY_OVERRIDE + 1)              // stickyWebStatDrop (u8) -> 1 byte
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
