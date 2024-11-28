@@ -4057,23 +4057,7 @@ bool8 IsMonShiny(struct Pokemon *mon)
 
 const u8 *GetTrainerPartnerName(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-    {
-        if (gPartnerTrainerId == TRAINER_PARTNER(PARTNER_STEVEN))
-        {
-            return GetTrainerNameFromId(TRAINER_STEVEN);
-        }
-        else
-        {
-            GetFrontierTrainerName(gStringVar1, gPartnerTrainerId);
-            return gStringVar1;
-        }
-    }
-    else
-    {
-        u8 id = GetMultiplayerId();
-        return gLinkPlayers[GetBattlerMultiplayerId(gLinkPlayers[id].id ^ 2)].name;
-    }
+    return 0;
 }
 
 #define READ_PTR_FROM_TASK(taskId, dataId)                      \

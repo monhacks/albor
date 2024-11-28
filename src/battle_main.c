@@ -433,31 +433,22 @@ static void CB2_InitBattleInternal(void)
 
     gBattle_WIN0H = DISPLAY_WIDTH;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
+    gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
+    ScanlineEffect_Clear();
+
+    for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
     {
-        gBattle_WIN0V = DISPLAY_HEIGHT - 1;
-        gBattle_WIN1H = DISPLAY_WIDTH;
-        gBattle_WIN1V = 32;
+        gScanlineEffectRegBuffers[0][i] = 0xF0;
+        gScanlineEffectRegBuffers[1][i] = 0xF0;
     }
-    else
+
+    for (; i < DISPLAY_HEIGHT; i++)
     {
-        gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
-        ScanlineEffect_Clear();
-
-        for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-        {
-            gScanlineEffectRegBuffers[0][i] = 0xF0;
-            gScanlineEffectRegBuffers[1][i] = 0xF0;
-        }
-
-        for (; i < DISPLAY_HEIGHT; i++)
-        {
-            gScanlineEffectRegBuffers[0][i] = 0xFF10;
-            gScanlineEffectRegBuffers[1][i] = 0xFF10;
-        }
-
-        ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
+        gScanlineEffectRegBuffers[0][i] = 0xFF10;
+        gScanlineEffectRegBuffers[1][i] = 0xFF10;
     }
+
+    ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
 
     ResetPaletteFade();
     gBattle_BG0_X = 0;

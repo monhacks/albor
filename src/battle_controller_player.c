@@ -1957,15 +1957,7 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
         else // First mon, on the left.
             xPos = 32;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
-        {
-            xPos = 90;
-            yPos = 80;
-        }
-        else
-        {
-            yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
-        }
+        yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
 
     }
     else
@@ -1974,16 +1966,7 @@ static void PlayerHandleDrawTrainerPic(u32 battler)
         yPos = (8 - gTrainerBacksprites[trainerPicId].coordinates.size) * 4 + 80;
     }
 
-    // Use front pic table for any tag battles unless your partner is Steven or a custom partner.
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
-    {
-        trainerPicId = PlayerGenderToFrontTrainerPicId(gSaveBlockPtr->playerGender);
-        isFrontPic = TRUE;
-    }
-    else // Use back pic in all the other usual circumstances.
-    {
-        isFrontPic = FALSE;
-    }
+    isFrontPic = FALSE;
 
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, isFrontPic, xPos, yPos, -1);
 }

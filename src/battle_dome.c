@@ -2340,7 +2340,6 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int mode)
     return typePower;
 }
 
-// Duplicate of GetFrontierTrainerFixedIvs
 // NOTE: In CreateDomeOpponentMon a tournament trainer ID (0-15) is passed instead, resulting in all IVs of 3
 //       To fix, see CreateDomeOpponentMon
 static u8 GetDomeTrainerMonIvs(u16 trainerId)

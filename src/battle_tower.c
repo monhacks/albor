@@ -60,11 +60,6 @@ static void SetMultiPartnerGfx(void);
 static void SetTowerInterviewData(void);
 static void SetNextBattleTentOpponent(void);
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
-static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
-static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId);
-static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId);
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId);
-static void FillPartnerParty(u16 trainerId);
 static u8 SetTentPtrsGetLevel(void);
 
 #include "data/battle_frontier/battle_frontier_trainer_mons.h"
@@ -794,12 +789,6 @@ void FillFrontierTrainersParties(u8 monsCount)
     FillTrainerParty(gTrainerBattleOpponent_B, 3, monsCount);
 }
 
-static void FillTentTrainerParty(u8 monsCount)
-{
-    ZeroEnemyPartyMons();
-    FillTentTrainerParty_(gTrainerBattleOpponent_A, 0, monsCount);
-}
-
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)
 {
     u8 ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
@@ -902,36 +891,6 @@ u16 GetRandomFrontierMonFromSet(u16 trainerId)
     return monId;
 }
 
-static void FillFactoryTrainerParty(void)
-{
-    ZeroEnemyPartyMons();
-    if (gSaveBlockPtr->frontier.lvlMode != FRONTIER_LVL_TENT)
-        FillFactoryFrontierTrainerParty(gTrainerBattleOpponent_A, 0);
-    else
-        FillFactoryTentTrainerParty(gTrainerBattleOpponent_A, 0);
-}
-
-static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
-{
-
-}
-
-static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
-{
-    u8 i;
-    u8 level = TENT_MIN_LEVEL;
-    u8 fixedIV = 0;
-    u32 otID = T1_READ_32(gSaveBlockPtr->playerTrainerId);
-
-    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-    {
-        u16 monId = gFrontierTempParty[i];
-        CreateFacilityMon(&gFacilityTrainerMons[monId],
-                level, fixedIV, otID, 0,
-                &gEnemyParty[firstMonId + i]);
-    }
-}
-
 void FrontierSpeechToString(const u16 *words)
 {
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
@@ -954,193 +913,9 @@ static void GetOpponentIntroSpeech(void)
 
 }
 
-static void HandleSpecialTrainerBattleEnd(void)
-{
-    s32 i;
-
-    switch (gBattleScripting.specialTrainerBattleType)
-    {
-    case SPECIAL_BATTLE_TOWER:
-    case SPECIAL_BATTLE_DOME:
-    case SPECIAL_BATTLE_PALACE:
-    case SPECIAL_BATTLE_ARENA:
-    case SPECIAL_BATTLE_FACTORY:
-    case SPECIAL_BATTLE_PIKE_SINGLE:
-    case SPECIAL_BATTLE_PIKE_DOUBLE:
-    case SPECIAL_BATTLE_PYRAMID:
-        if (gSaveBlockPtr->frontier.battlesCount < 0xFFFFFF)
-        {
-            gSaveBlockPtr->frontier.battlesCount++;
-            if (gSaveBlockPtr->frontier.battlesCount % 20 == 0)
-                UpdateGymLeaderRematch();
-        }
-        else
-        {
-            gSaveBlockPtr->frontier.battlesCount = 0xFFFFFF;
-        }
-        break;
-    case SPECIAL_BATTLE_SECRET_BASE:
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            u16 itemBefore = GetMonData(&gSaveBlockPtr->playerParty[i], MON_DATA_HELD_ITEM);
-            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
-        }
-        break;
-    case SPECIAL_BATTLE_MULTI:
-        for (i = 0; i < 3; i++)
-        {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
-                gSaveBlockPtr->playerParty[i] = gPlayerParty[i];
-        }
-        break;
-    }
-
-    SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-}
-
-static void Task_StartBattleAfterTransition(u8 taskId)
-{
-    if (IsBattleTransitionDone() == TRUE)
-    {
-        gMain.savedCallback = HandleSpecialTrainerBattleEnd;
-        SetMainCallback2(CB2_InitBattle);
-        DestroyTask(taskId);
-    }
-}
-
 void DoSpecialTrainerBattle(void)
 {
-    s32 i;
 
-    gBattleScripting.specialTrainerBattleType = gSpecialVar_0x8004;
-    switch (gSpecialVar_0x8004)
-    {
-    case SPECIAL_BATTLE_TOWER:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
-        switch (VarGet(VAR_FRONTIER_BATTLE_MODE))
-        {
-        case FRONTIER_MODE_SINGLES:
-            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-            break;
-        case FRONTIER_MODE_DOUBLES:
-            FillFrontierTrainerParty(FRONTIER_DOUBLES_PARTY_SIZE);
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-            break;
-        case FRONTIER_MODE_MULTIS:
-            FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
-            gPartnerTrainerId = gSaveBlockPtr->frontier.trainerIds[17];
-            FillPartnerParty(gPartnerTrainerId);
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS;
-            break;
-        case FRONTIER_MODE_LINK_MULTIS:
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE | BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_TOWER_LINK_MULTI;
-            FillFrontierTrainersParties(FRONTIER_MULTI_PARTY_SIZE);
-            break;
-        }
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_TOWER));
-        break;
-    case SPECIAL_BATTLE_SECRET_BASE:
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            u16 itemBefore = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            SetMonData(&gSaveBlockPtr->playerParty[i], MON_DATA_HELD_ITEM, &itemBefore);
-        }
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
-        break;
-    case SPECIAL_BATTLE_DOME:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOME;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-            FillFrontierTrainerParty(DOME_BATTLE_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        CreateTask_PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_DOME));
-        break;
-    case SPECIAL_BATTLE_PALACE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PALACE;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        if (gSaveBlockPtr->frontier.lvlMode != FRONTIER_LVL_TENT)
-            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        else
-            FillTentTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PALACE));
-        break;
-    case SPECIAL_BATTLE_ARENA:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_ARENA;
-        if (gSaveBlockPtr->frontier.lvlMode != FRONTIER_LVL_TENT)
-            FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        else
-            FillTentTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_ARENA));
-        break;
-    case SPECIAL_BATTLE_FACTORY:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_FACTORY;
-        if (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-            gBattleTypeFlags |= BATTLE_TYPE_DOUBLE;
-        FillFactoryTrainerParty();
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_FACTORY));
-        break;
-    case SPECIAL_BATTLE_PIKE_SINGLE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
-        break;
-    case SPECIAL_BATTLE_PYRAMID:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID;
-        FillFrontierTrainerParty(FRONTIER_PARTY_SIZE);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PYRAMID));
-        break;
-    case SPECIAL_BATTLE_PIKE_DOUBLE:
-        gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS;
-        FillFrontierTrainersParties(1);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_B_PIKE));
-        break;
-    case SPECIAL_BATTLE_MULTI:
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD) // Player + AI against wild mon
-        {
-            gBattleTypeFlags = BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
-        }
-        else if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_1) // Player + AI against one trainer
-        {
-            gTrainerBattleOpponent_B = 0xFFFF;
-            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
-        }
-        else // MULTI_BATTLE_2_VS_2
-        {
-            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
-        }
-
-        gPartnerTrainerId = VarGet(gSpecialVar_0x8006) + TRAINER_PARTNER(PARTNER_NONE);
-        FillPartnerParty(gPartnerTrainerId);
-        CreateTask(Task_StartBattleAfterTransition, 1);
-        PlayMapChosenOrBattleBGM(0);
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_2_VS_WILD)
-            BattleTransition_StartOnField(GetWildBattleTransition());
-        else
-            BattleTransition_StartOnField(GetTrainerBattleTransition());
-
-        if (gSpecialVar_0x8005 & MULTI_BATTLE_CHOOSE_MONS) // Skip mons restoring(done in the script)
-            gBattleScripting.specialTrainerBattleType = 0xFF;
-        break;
-    }
 }
 
 static void SaveTowerChallenge(void)
@@ -1339,118 +1114,6 @@ static void AwardBattleTowerRibbons(void)
     }
 }
 
-#define STEVEN_OTID 61226
-
-static void FillPartnerParty(u16 trainerId)
-{
-    s32 i, j, k;
-    u32 firstIdPart = 0, secondIdPart = 0, thirdIdPart = 0;
-    u32 ivs, level, personality;
-    u16 monId;
-    u32 otID;
-    u8 trainerName[(PLAYER_NAME_LENGTH * 3) + 1];
-    s32 ball = -1;
-    SetFacilityPtrsGetLevel();
-
-    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
-    {
-        for (i = 0; i < 3; i++)
-            ZeroMonData(&gPlayerParty[i + 3]);
-
-        for (i = 0; i < 3 && i < gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].partySize; i++)
-        {
-            const struct TrainerMon *partyData = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].party;
-            const u8 *partnerName = gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName;
-
-            for (k = 0; partnerName[k] != EOS && k < 3; k++)
-            {
-                if (k == 0)
-                {
-                    firstIdPart = partnerName[k];
-                    secondIdPart = partnerName[k];
-                    thirdIdPart = partnerName[k];
-                }
-                else if (k == 1)
-                {
-                    secondIdPart = partnerName[k];
-                    thirdIdPart = partnerName[k];
-                }
-                else if (k == 2)
-                {
-                    thirdIdPart = partnerName[k];
-                }
-            }
-            if (trainerId == TRAINER_PARTNER(PARTNER_STEVEN))
-                otID = STEVEN_OTID;
-            else
-                otID = ((firstIdPart % 72) * 1000) + ((secondIdPart % 23) * 10) + (thirdIdPart % 37) % 65536;
-
-            personality = Random32();
-            if (partyData[i].gender == TRAINER_MON_MALE)
-                personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
-            else if (partyData[i].gender == TRAINER_MON_FEMALE)
-                personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
-            ModifyPersonalityForNature(&personality, partyData[i].nature);
-            CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, OT_ID_PRESET, otID);
-            j = partyData[i].isShiny;
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_IS_SHINY, &j);
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
-            CustomTrainerPartyAssignMoves(&gPlayerParty[i + 3], &partyData[i]);
-
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_IVS, &(partyData[i].iv));
-            if (partyData[i].ev != NULL)
-            {
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_HP_EV, &(partyData[i].ev[0]));
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_ATK_EV, &(partyData[i].ev[1]));
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_DEF_EV, &(partyData[i].ev[2]));
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_SPATK_EV, &(partyData[i].ev[3]));
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_SPDEF_EV, &(partyData[i].ev[4]));
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_SPEED_EV, &(partyData[i].ev[5]));
-            }
-            if (partyData[i].ability != ABILITY_NONE)
-            {
-                const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[partyData[i].species];
-                u32 maxAbilities = ARRAY_COUNT(speciesInfo->abilities);
-                for (j = 0; j < maxAbilities; j++)
-                {
-                    if (speciesInfo->abilities[j] == partyData[i].ability)
-                        break;
-                }
-                if (j < maxAbilities)
-                    SetMonData(&gPlayerParty[i + 3], MON_DATA_ABILITY_NUM, &j);
-            }
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_FRIENDSHIP, &(partyData[i].friendship));
-            if (partyData[i].ball != ITEM_NONE)
-            {
-                ball = partyData[i].ball;
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_POKEBALL, &ball);
-            }
-            if (partyData[i].nickname != NULL)
-            {
-                SetMonData(&gPlayerParty[i + 3], MON_DATA_NICKNAME, partyData[i].nickname);
-            }
-            CalculateMonStats(&gPlayerParty[i + 3]);
-
-            StringCopy(trainerName, gBattlePartners[trainerId - TRAINER_PARTNER(PARTNER_NONE)].trainerName);
-            SetMonData(&gPlayerParty[i + 3], MON_DATA_OT_NAME, trainerName);
-        }
-    }
-    else if (trainerId < FRONTIER_TRAINERS_COUNT)
-    {
-        level = SetFacilityPtrsGetLevel();
-        ivs = GetFrontierTrainerFixedIvs(trainerId);
-        otID = Random32();
-        for (i = 0; i < FRONTIER_MULTI_PARTY_SIZE; i++)
-        {
-            monId = gSaveBlockPtr->frontier.trainerIds[i + 18];
-            CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otID, 0, &gPlayerParty[MULTI_PARTY_SIZE + i]);
-            for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
-                trainerName[j] = gFacilityTrainers[trainerId].trainerName[j];
-            SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_NAME, &trainerName);
-        }
-    }
-}
-
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
 {
 
@@ -1507,32 +1170,6 @@ s32 GetHighestLevelInPlayerParty(void)
     }
 
     return highestLevel;
-}
-
-// Frontier Trainer parties are roughly scaled in difficulty with higher trainer IDs, so scale IVs as well
-// Duplicated in Battle Dome as GetDomeTrainerMonIvs
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
-{
-    u8 fixedIv;
-
-    if (trainerId <= FRONTIER_TRAINER_JILL)         // 0 - 99
-        fixedIv = 3;
-    else if (trainerId <= FRONTIER_TRAINER_CHLOE)   // 100 - 119
-        fixedIv = 6;
-    else if (trainerId <= FRONTIER_TRAINER_SOFIA)   // 120 - 139
-        fixedIv = 9;
-    else if (trainerId <= FRONTIER_TRAINER_JAZLYN)  // 140 - 159
-        fixedIv = 12;
-    else if (trainerId <= FRONTIER_TRAINER_ALISON)  // 160 - 179
-        fixedIv = 15;
-    else if (trainerId <= FRONTIER_TRAINER_LAMAR)   // 180 - 199
-        fixedIv = 18;
-    else if (trainerId <= FRONTIER_TRAINER_TESS)    // 200 - 219
-        fixedIv = 21;
-    else                                            // 220+ (- 299)
-        fixedIv = MAX_PER_STAT_IVS;
-
-    return fixedIv;
 }
 
 static u16 GetBattleTentTrainerId(void)
@@ -1603,75 +1240,6 @@ static void SetNextBattleTentOpponent(void)
     SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
     if (gSaveBlockPtr->frontier.curChallengeBattleNum + 1 < TENT_STAGES_PER_CHALLENGE)
        gSaveBlockPtr->frontier.trainerIds[gSaveBlockPtr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
-}
-
-static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
-{
-    s32 i, j;
-    u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
-    u8 level = SetTentPtrsGetLevel();
-    u8 fixedIV = 0;
-    u8 bfMonCount;
-    const u16 *monSet = NULL;
-    u32 otID = 0;
-    u16 monId;
-
-    monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
-
-    bfMonCount = 0;
-    monId = monSet[bfMonCount];
-    while (monId != 0xFFFF)
-    {
-        bfMonCount++;
-        monId = monSet[bfMonCount];
-        if (monId == 0xFFFF)
-            break;
-    }
-
-    i = 0;
-    otID = Random32();
-    while (i != monCount)
-    {
-        u16 monId = monSet[Random() % bfMonCount];
-
-        // Ensure this Pokémon species isn't a duplicate.
-        for (j = 0; j < i + firstMonId; j++)
-        {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_SPECIES, NULL) == gFacilityTrainerMons[monId].species)
-                break;
-        }
-        if (j != i + firstMonId)
-            continue;
-
-        // Ensure this Pokemon's held item isn't a duplicate.
-        for (j = 0; j < i + firstMonId; j++)
-        {
-            if (GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) != ITEM_NONE
-             && GetMonData(&gEnemyParty[j], MON_DATA_HELD_ITEM, NULL) == gFacilityTrainerMons[monId].heldItem)
-                break;
-        }
-        if (j != i + firstMonId)
-            continue;
-
-        // Ensure this exact Pokémon index isn't a duplicate. This check doesn't seem necessary
-        // because the species and held items were already checked directly above.
-        for (j = 0; j < i; j++)
-        {
-            if (chosenMonIndices[j] == monId)
-                break;
-        }
-        if (j != i)
-            continue;
-
-        chosenMonIndices[i] = monId;
-        CreateFacilityMon(&gFacilityTrainerMons[monId],
-                level, fixedIV, otID, 0,
-                &gEnemyParty[i + firstMonId]);
-
-        // The Pokémon was successfully added to the trainer's party, so it's safe to move on to
-        // the next party slot.
-        i++;
-    }
 }
 
 void TrySetLinkBattleTowerEnemyPartyLevel(void)

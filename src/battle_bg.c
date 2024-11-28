@@ -1078,25 +1078,6 @@ void DrawBattleEntryBackground(void)
         gBattle_BG2_Y = 0xFF5C;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK))
-    {
-        if (!(gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER) || gPartnerTrainerId > TRAINER_PARTNER(PARTNER_NONE))
-        {
-            LZDecompressVram(gBattleTerrainAnimTiles_Building, (void *)(BG_CHAR_ADDR(1)));
-            LZDecompressVram(gBattleTerrainAnimTilemap_Building, (void *)(BG_SCREEN_ADDR(28)));
-        }
-        else
-        {
-            // Set up bg for the multi battle intro where both teams slide in facing the screen.
-            // Note Steven's multi battle (which has a dedicated back pic) is excluded above.
-            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
-            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
-            CopyToBgTilemapBuffer(1, gMultiBattleIntroBg_Opponent_Tilemap, 0, 0);
-            CopyToBgTilemapBuffer(2, gMultiBattleIntroBg_Player_Tilemap, 0, 0);
-            CopyBgTilemapBufferToVram(1);
-            CopyBgTilemapBufferToVram(2);
-        }
-    }
     else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))

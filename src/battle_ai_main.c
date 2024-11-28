@@ -214,11 +214,7 @@ void BattleAI_SetupFlags(void)
             AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT];
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-    {
-        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = GetAiFlags(gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE));
-    }
-    else if (IsDoubleBattle() && IsAiVsAiBattle())
+    if (IsDoubleBattle() && IsAiVsAiBattle())
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT];
     }
