@@ -1499,6 +1499,9 @@ void PlayTrainerEncounterMusic(void)
         case TRAINER_ENCOUNTER_MUSIC_CYNTHIA:
             music = MUS_DP_ENCOUNTER_CHAMPION;
             break;
+        case TRAINER_ENCOUNTER_MUSIC_LANCE:
+            music = MUS_HG_VS_CHAMPION;
+            break;
         default:
             music = MUS_ENCOUNTER_SUSPICIOUS;
         }

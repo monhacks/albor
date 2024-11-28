@@ -719,6 +719,21 @@ PetalburgCity_Text_CynthiaDerrota:
 PetalburgCity_Text_CynthiaPost:
 	.string "Jijiji.$"
 
+PetalburgCity_EventScript_Lance::
+	trainerbattle_double TRAINER_LANCE, PetalburgCity_Text_LanceIntro, PetalburgCity_Text_LanceDerrota, 0
+	msgbox PetalburgCity_Text_LancePost, MSGBOX_DEFAULT
+	release
+	end
+
+PetalburgCity_Text_LanceIntro:
+	.string "Te voy a quemar con fuego de dragón.$"
+
+PetalburgCity_Text_LanceDerrota:
+	.string "Te asusta mi Dragonite?.$"
+
+PetalburgCity_Text_LancePost:
+	.string "Con tipo Hada no vale.$"
+
 PetalburgCity_Text_WhereIsWally:
 	.string "Where has our WALLY gone?\p"
 	.string "We have to leave for VERDANTURF TOWN\n"

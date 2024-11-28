@@ -867,7 +867,7 @@
 #define MUS_HG_VS_SUICUNE                 814 // Battle! (Suicune)
 #define MUS_HG_VS_ENTEI                   815 // Battle! (Entei)
 #define MUS_HG_VS_RAIKOU                  816 // Battle! (Raikou)
-#define MUS_HG_VS_CHAMPION                817 // Battle! (Champion)
+#define MUS_HG_VS_CHAMPION                817 // Usada
 #define MUS_HG_VS_WILD_KANTO              818 // Battle! (Wild Pokémon - Kanto Version)
 #define MUS_HG_VS_TRAINER_KANTO           819 // Battle! (Trainer Battle - Kanto Version)
 #define MUS_HG_VS_GYM_LEADER_KANTO        820 // Battle! (Gym Leader - Kanto Version)
