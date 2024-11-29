@@ -41,29 +41,29 @@ static const struct OamData sMonIconOamData =
 
 static const union AnimCmd sAnim_0[] =
 {
-    ANIMCMD_FRAME(0, 6),
     ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 6),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_1[] =
 {
-    ANIMCMD_FRAME(0, 8),
     ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(2, 8),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_2[] =
 {
-    ANIMCMD_FRAME(0, 14),
     ANIMCMD_FRAME(1, 14),
+    ANIMCMD_FRAME(2, 14),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_3[] =
 {
-    ANIMCMD_FRAME(0, 22),
     ANIMCMD_FRAME(1, 22),
+    ANIMCMD_FRAME(2, 22),
     ANIMCMD_JUMP(0),
 };
 

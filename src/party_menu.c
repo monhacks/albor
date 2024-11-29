@@ -1144,7 +1144,7 @@ void AnimatePartySlot(u8 slot, u8 animNum)
         if (GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES) != SPECIES_NONE)
         {
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], GetPartyBoxPaletteFlags(slot, animNum));
-            AnimateSelectedPartyIcon(sPartyMenuBoxes[slot].monSpriteId, animNum);
+            //AnimateSelectedPartyIcon(sPartyMenuBoxes[slot].monSpriteId, 4);
             PartyMenuStartSpriteAnim(sPartyMenuBoxes[slot].pokeballSpriteId, animNum);
         }
         return;
@@ -3841,15 +3841,15 @@ static void AnimateSelectedPartyIcon(u8 spriteId, u8 animNum)
 
 static void SpriteCB_BouncePartyMonIcon(struct Sprite *sprite)
 {
-    u8 animCmd = UpdateMonIconFrame(sprite);
+    //u8 animCmd = UpdateMonIconFrame(sprite);
 
-    if (animCmd != 0)
-    {
-        if (animCmd & 1) // % 2 also matches
-            sprite->y2 = -3;
-        else
-            sprite->y2 = 1;
-    }
+    //if (animCmd != 0)
+    //{
+    //    if (animCmd & 1) // % 2 also matches
+    //        sprite->y2 = -3;
+    //    else
+    //        sprite->y2 = 1;
+    //}
 }
 
 static void SpriteCB_UpdatePartyMonIcon(struct Sprite *sprite)

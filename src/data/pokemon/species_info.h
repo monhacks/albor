@@ -109,7 +109,7 @@
 #define FORMAS(especie) .formSpeciesIdTable = s ## especie##FormSpeciesIdTable, .formChangeTable = s ## especie##FormChangeTable
 
 //Para indicar que un Follower no es asimétrico (Es decir, tiene dos frames adicionales mirando a la derecha, que no son solo espejados de mirando a la izquierda),
-//añadimos un parámetro extra en FOLLOWER, que es sAnimTable_Following_Asym.
+//añadimos un parámetro extra en FOLLOWER, que es sAnimTable_FollowingAsym.
 #define FOLLOWER(name, _tracks, ...)                                                                            \
 .followerData = {                                                                                               \
     .tileTag = TAG_NONE,                                                                                        \
@@ -7182,7 +7182,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(CONCAVE_ARC_LARGE),
         PALETAS(Togekiss),
         ICONO(Togekiss),
-        FOLLOWER(Togekiss, TRACKS_NONE, sAnimTable_Following_Asym),
+        FOLLOWER(Togekiss, TRACKS_NONE, sAnimTable_FollowingAsym),
         MOVIMIENTOS(Togekiss),
         MOVIMIENTOS_HUEVO(Togepi),
     },
