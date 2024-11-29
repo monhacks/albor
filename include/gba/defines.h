@@ -58,12 +58,9 @@
 
 // bitmap-mode BG
 #define OBJ_VRAM1      (VRAM + 0x14000)
-#define OBJ_VRAM1_SIZE 0x4000
 
 #define OAM      0x7000000
 #define OAM_SIZE 0x400
-
-#define ROM_HEADER_SIZE   0xC0
 
 // Dimensions of a tile in pixels
 #define TILE_WIDTH  8
