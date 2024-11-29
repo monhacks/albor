@@ -910,8 +910,6 @@ void CreateEnemyEventMon(void)
     u8 baseStat = gSpeciesInfo[species].base;                   \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
     n = ModifyStatByNature(nature, n, statIndex);               \
-    if (B_FRIENDSHIP_BOOST == TRUE)                             \
-        n = n + ((n * 10 * friendship) / (MAX_FRIENDSHIP * 100));\
     SetMonData(mon, field, &n);                                 \
 }
 
@@ -932,7 +930,6 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 spDefenseIV = GetMonData(mon, MON_DATA_HYPER_TRAINED_SPDEF) ? MAX_PER_STAT_IVS : GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
     s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
 
@@ -4562,24 +4559,6 @@ u32 GetMonFriendshipScore(struct Pokemon *pokemon)
         return FRIENDSHIP_1_TO_49;
 
     return FRIENDSHIP_NONE;
-}
-
-u32 GetMonAffectionHearts(struct Pokemon *pokemon)
-{
-    u32 friendship = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
-
-    if (friendship == MAX_FRIENDSHIP)
-        return AFFECTION_FIVE_HEARTS;
-    if (friendship >= 220)
-        return AFFECTION_FOUR_HEARTS;
-    if (friendship >= 180)
-        return AFFECTION_THREE_HEARTS;
-    if (friendship >= 130)
-        return AFFECTION_TWO_HEARTS;
-    if (friendship >= 80)
-        return AFFECTION_ONE_HEART;
-
-    return AFFECTION_NO_HEARTS;
 }
 
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)

@@ -525,60 +525,61 @@
 #define BG_RAINBOW 81
 #define BG_SWAMP 82
 
-// table ids for general animations (sBattleAnims_General)
-#define B_ANIM_STATS_CHANGE             0
-#define B_ANIM_SUBSTITUTE_FADE          1
-#define B_ANIM_SUBSTITUTE_APPEAR        2
-#define B_ANIM_POKEBLOCK_THROW          3
-#define B_ANIM_ITEM_KNOCKOFF            4
-#define B_ANIM_TURN_TRAP                5
-#define B_ANIM_HELD_ITEM_EFFECT         6
-#define B_ANIM_SMOKEBALL_ESCAPE         7
-#define B_ANIM_HANGED_ON                8
-#define B_ANIM_RAIN_CONTINUES           9
-#define B_ANIM_SUN_CONTINUES            10
-#define B_ANIM_SANDSTORM_CONTINUES      11
-#define B_ANIM_HAIL_CONTINUES           12
-#define B_ANIM_LEECH_SEED_DRAIN         13
-#define B_ANIM_MON_HIT                  14
-#define B_ANIM_ITEM_STEAL               15
-#define B_ANIM_SNATCH_MOVE              16
-#define B_ANIM_FUTURE_SIGHT_HIT         17
-#define B_ANIM_DOOM_DESIRE_HIT          18
-#define B_ANIM_FOCUS_PUNCH_SETUP        19
-#define B_ANIM_INGRAIN_HEAL             20
-#define B_ANIM_WISH_HEAL                21
-#define B_ANIM_MEGA_EVOLUTION           22
-#define B_ANIM_ILLUSION_OFF             23
-#define B_ANIM_FORM_CHANGE              24
-#define B_ANIM_SLIDE_OFFSCREEN          25 // for Emergency Exit
-#define B_ANIM_RESTORE_BG               26 // for Terrain Endings
-#define B_ANIM_TOTEM_FLARE              27 // Totem boosts aura flare
-#define B_ANIM_GULP_MISSILE             28
-#define B_ANIM_STRONG_WINDS             29
-#define B_ANIM_PRIMAL_REVERSION         30
-#define B_ANIM_AQUA_RING_HEAL           31
-#define B_ANIM_BEAK_BLAST_SETUP         32
-#define B_ANIM_SHELL_TRAP_SETUP         33
-#define B_ANIM_ZMOVE_ACTIVATE           34 // Using Z Moves
-#define B_ANIM_AFFECTION_HANGED_ON      35
-#define B_ANIM_SNOW_CONTINUES           36
-#define B_ANIM_ULTRA_BURST              37
-#define B_ANIM_SALT_CURE_DAMAGE         38
-#define B_ANIM_DYNAMAX_GROWTH           39
-#define B_ANIM_MAX_SET_WEATHER          40
-#define B_ANIM_SYRUP_BOMB_SPEED_DROP    41
-#define B_ANIM_RAINBOW                  42
-#define B_ANIM_SEA_OF_FIRE              43
-#define B_ANIM_TRICK_ROOM               44
-#define B_ANIM_WONDER_ROOM              45
-#define B_ANIM_MAGIC_ROOM               46
-#define B_ANIM_TAILWIND                 47
-#define B_ANIM_FOG_CONTINUES            48
-#define B_ANIM_TERA_CHARGE              49
-#define B_ANIM_TERA_ACTIVATE            50
-#define B_ANIM_SIMPLE_HEAL              51
-#define NUM_B_ANIMS_GENERAL             52
+enum IdsAnimacionesBatallaEspeciales //(sBattleAnims_Special)
+{
+    B_ANIM_STATS_CHANGE = 0,
+    B_ANIM_SUBSTITUTE_FADE,
+    B_ANIM_SUBSTITUTE_APPEAR,
+    B_ANIM_POKEBLOCK_THROW,
+    B_ANIM_ITEM_KNOCKOFF,
+    B_ANIM_TURN_TRAP,
+    B_ANIM_HELD_ITEM_EFFECT,
+    B_ANIM_SMOKEBALL_ESCAPE,
+    B_ANIM_HANGED_ON,
+    B_ANIM_RAIN_CONTINUES,
+    B_ANIM_SUN_CONTINUES,
+    B_ANIM_SANDSTORM_CONTINUES,
+    B_ANIM_HAIL_CONTINUES,
+    B_ANIM_LEECH_SEED_DRAIN,
+    B_ANIM_MON_HIT,
+    B_ANIM_ITEM_STEAL,
+    B_ANIM_SNATCH_MOVE,
+    B_ANIM_FUTURE_SIGHT_HIT,
+    B_ANIM_DOOM_DESIRE_HIT,
+    B_ANIM_FOCUS_PUNCH_SETUP,
+    B_ANIM_INGRAIN_HEAL,
+    B_ANIM_WISH_HEAL,
+    B_ANIM_MEGA_EVOLUTION,
+    B_ANIM_ILLUSION_OFF,
+    B_ANIM_FORM_CHANGE,
+    B_ANIM_SLIDE_OFFSCREEN, // for Emergency Exit
+    B_ANIM_RESTORE_BG, // for Terrain Endings
+    B_ANIM_TOTEM_FLARE, // Totem boosts aura flare
+    B_ANIM_GULP_MISSILE,
+    B_ANIM_STRONG_WINDS,
+    B_ANIM_PRIMAL_REVERSION,
+    B_ANIM_AQUA_RING_HEAL,
+    B_ANIM_BEAK_BLAST_SETUP,
+    B_ANIM_SHELL_TRAP_SETUP,
+    B_ANIM_ZMOVE_ACTIVATE, // Using Z Moves
+    B_ANIM_SNOW_CONTINUES,
+    B_ANIM_ULTRA_BURST,
+    B_ANIM_SALT_CURE_DAMAGE,
+    B_ANIM_DYNAMAX_GROWTH,
+    B_ANIM_MAX_SET_WEATHER,
+    B_ANIM_SYRUP_BOMB_SPEED_DROP,
+    B_ANIM_RAINBOW,
+    B_ANIM_SEA_OF_FIRE,
+    B_ANIM_TRICK_ROOM,
+    B_ANIM_WONDER_ROOM,
+    B_ANIM_MAGIC_ROOM,
+    B_ANIM_TAILWIND,
+    B_ANIM_FOG_CONTINUES,
+    B_ANIM_TERA_CHARGE,
+    B_ANIM_TERA_ACTIVATE,
+    B_ANIM_SIMPLE_HEAL,
+    NUM_B_ANIMS_GENERAL
+};
 
 enum AnimacionesEspecialesBatalla //(sBattleAnims_Special)
 {

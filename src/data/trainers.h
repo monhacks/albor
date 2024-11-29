@@ -40338,7 +40338,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_LANCE,
         .encounterMusic_gender = 
 #line 16866
-            TRAINER_ENCOUNTER_MUSIC_CYNTHIA,
+            TRAINER_ENCOUNTER_MUSIC_LANCE,
 #line 16867
         .doubleBattle = TRUE,
 #line 16868

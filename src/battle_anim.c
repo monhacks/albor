@@ -231,7 +231,6 @@ static const u8* const sBattleAnims_General[NUM_B_ANIMS_GENERAL] =
     [B_ANIM_BEAK_BLAST_SETUP]       = gBattleAnimGeneral_BeakBlastSetUp,
     [B_ANIM_SHELL_TRAP_SETUP]       = gBattleAnimGeneral_ShellTrapSetUp,
     [B_ANIM_ZMOVE_ACTIVATE]         = gBattleAnimGeneral_ZMoveActivate,
-    [B_ANIM_AFFECTION_HANGED_ON]    = gBattleAnimGeneral_AffectionHangedOn,
     [B_ANIM_SNOW_CONTINUES]         = gBattleAnimGeneral_Snow,
     [B_ANIM_ULTRA_BURST]            = gBattleAnimGeneral_UltraBurst,
     [B_ANIM_SALT_CURE_DAMAGE]       = gBattleAnimGeneral_SaltCureDamage,
@@ -397,7 +396,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         {
             if (animId == sMovesWithQuietBGM[i])
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MEDIO);
                 break;
             }
         }
@@ -857,7 +856,7 @@ static void Cmd_end(void)
         if (FuncIsActiveTask(Task_UpdateMonBg))
             DebugPrintf("Move %d animation still has Task_UpdateMonBg active at the end!", gAnimMoveIndex);
 
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         if (!IsContest())
         {
             InitPrioritiesForVisibleBattlers();

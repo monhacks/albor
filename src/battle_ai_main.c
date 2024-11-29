@@ -104,12 +104,7 @@ void BattleAI_SetupItems(void)
         data[i] = 0;
 
     // Items are allowed to use in ONLY trainer battles.
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER
-                               | BATTLE_TYPE_SECRET_BASE | BATTLE_TYPE_FRONTIER
-                               | BATTLE_TYPE_INGAME_PARTNER)
-            )
-       )
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
@@ -148,7 +143,7 @@ static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
         return 0;
     if (trainerId == 0xFFFF)
     {
@@ -199,7 +194,7 @@ void BattleAI_SetupFlags(void)
         return;
     }
 
-    if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)))
+    if (IsWildMonSmart() && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
     {
         // smart wild AI
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] = GetAiFlags(0xFFFF);
@@ -441,7 +436,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     u32 battlerAtk, battlersCount, weather;
 
     memset(aiData, 0, sizeof(struct AiLogicData));
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
         return;
 
     // Set delay timer to count how long it takes for AI to choose action/move

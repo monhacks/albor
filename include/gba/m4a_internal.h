@@ -405,6 +405,14 @@ extern char gMaxLines[];
 #define NUM_MUSIC_PLAYERS ((u16)gNumMusicPlayers)
 #define MAX_LINES ((u32)gMaxLines)
 
+enum VolumenMusica
+{
+    SIN_VOLUMEN     = 0,
+    VOLUMEN_BAJO    = 64,
+    VOLUMEN_MEDIO   = 128,
+    VOLUMEN_MAXIMO  = 256
+};
+
 u32 umul3232H32(u32 multiplier, u32 multiplicand);
 void SoundMain(void);
 void SoundMainBTM(void);

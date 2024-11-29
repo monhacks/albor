@@ -95,7 +95,6 @@ static void RunTurnActionsFunctions(void);
 static void SetActionsAndBattlersTurnOrder(void);
 static void UpdateBattlerPartyOrdersOnSwitch(u32 battler);
 static bool8 AllAtActionConfirmed(void);
-static void TryChangeTurnOrder(void);
 static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2);
 static void CheckChangingTurnOrderEffects(void);
 static void FreeResetData_ReturnToOvOrDoEvolutions(void);
@@ -2279,12 +2278,7 @@ static void DoBattleIntro(void)
             gBattleStruct->introState++;
         }
         else // Skip party summary since it is a wild battle.
-        {
-            if (B_FAST_INTRO == TRUE)
-                gBattleStruct->introState = BATTLE_INTRO_STATE_INTRO_TEXT; // Don't wait for sprite, print message at the same time.
-            else
-                gBattleStruct->introState++; // Wait for sprite to load.
-        }
+            gBattleStruct->introState = BATTLE_INTRO_STATE_INTRO_TEXT; // Don't wait for sprite, print message at the same time.
         break;
     case BATTLE_INTRO_STATE_DRAW_PARTY_SUMMARY:
         if (!gBattleControllerExecFlags)
@@ -2351,12 +2345,7 @@ static void DoBattleIntro(void)
                 gBattleStruct->introState++;
             }
             else
-            {
-                if (B_FAST_INTRO == TRUE)
-                    gBattleStruct->introState = BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT;
-                else
-                    gBattleStruct->introState = BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_2_SEND_OUT_ANIM;
-            }
+                gBattleStruct->introState = BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT;
         }
         break;
     case BATTLE_INTRO_STATE_TRAINER_SEND_OUT_TEXT:
@@ -2380,11 +2369,7 @@ static void DoBattleIntro(void)
             BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
             MarkBattlerForControllerExec(battler);
         }
-        if (B_FAST_INTRO == TRUE
-          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
-            gBattleStruct->introState = BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT; // Print at the same time as trainer sends out second mon.
-        else
-            gBattleStruct->introState++;
+        gBattleStruct->introState = BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT; // Print at the same time as trainer sends out second mon.;
         break;
     case BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_2_SEND_OUT_ANIM:
         if (!gBattleControllerExecFlags)
@@ -2400,13 +2385,8 @@ static void DoBattleIntro(void)
             battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
             // A hack that makes fast intro work in trainer battles too.
-            if (B_FAST_INTRO == TRUE
-                && gBattleTypeFlags & BATTLE_TYPE_TRAINER
-                && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-                && gSprites[gHealthboxSpriteIds[battler ^ BIT_SIDE]].callback == SpriteCallbackDummy)
-            {
+            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gSprites[gHealthboxSpriteIds[battler ^ BIT_SIDE]].callback == SpriteCallbackDummy)
                 return;
-            }
 
             PrepareStringBattle(STRINGID_INTROSENDOUT, battler);
         }
@@ -2870,7 +2850,7 @@ static void HandleTurnActionSelectionState(void)
             u32 isAiRisky = AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY; // Risky AI switches aggressively even mid battle
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
             {
                 AI_DATA->aiCalcInProgress = TRUE;
@@ -3851,9 +3831,6 @@ static bool32 TryDoGimmicksBeforeMoves(void)
             }
         }
     }
-
-    if (B_MEGA_EVO_TURN_ORDER >= GEN_7)
-        TryChangeTurnOrder(); // This will just do nothing if no mon has mega evolved.
     return FALSE;
 }
 
@@ -3892,27 +3869,6 @@ static bool32 TryDoMoveEffectsBeforeMoves(void)
     }
 
     return FALSE;
-}
-
-// In gen7, priority and speed are recalculated during the turn in which a pokemon mega evolves
-static void TryChangeTurnOrder(void)
-{
-    u32 i, j;
-    for (i = 0; i < gBattlersCount - 1; i++)
-    {
-        for (j = i + 1; j < gBattlersCount; j++)
-        {
-            u32 battler1 = gBattlerByTurnOrder[i];
-            u32 battler2 = gBattlerByTurnOrder[j];
-
-            if (gActionsByTurnOrder[i] == B_ACTION_USE_MOVE
-                && gActionsByTurnOrder[j] == B_ACTION_USE_MOVE)
-            {
-                if (GetWhichBattlerFaster(battler1, battler2, FALSE) == -1)
-                    SwapTurnOrder(i, j);
-            }
-        }
-    }
 }
 
 static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2)
@@ -4044,26 +4000,7 @@ static void HandleEndTurn_BattleWon(void)
 {
     gCurrentActionFuncId = 0;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-    {
-        gSpecialVar_Result = gBattleOutcome;
-        gBattleTextBuff1[0] = gBattleOutcome;
-        gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-        gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL))
-    {
-        BattleStopLowHpSound();
-        gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
-
-        if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-            PlayBGM(MUS_VICTORY_GYM_LEADER);
-        else
-            PlayBGM(MUS_VICTORY_TRAINER);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
@@ -4091,9 +4028,7 @@ static void HandleEndTurn_BattleWon(void)
         }
     }
     else
-    {
         gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
-    }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
@@ -4101,36 +4036,7 @@ static void HandleEndTurn_BattleWon(void)
 static void HandleEndTurn_BattleLost(void)
 {
     gCurrentActionFuncId = 0;
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-    {
-        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-        {
-            if (gBattleOutcome & B_OUTCOME_LINK_BATTLE_RAN)
-            {
-                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
-                gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-                gSaveBlockPtr->frontier.disableRecordBattle = TRUE;
-            }
-            else
-            {
-                gBattlescriptCurrInstr = BattleScript_FrontierLinkBattleLost;
-                gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-            }
-        }
-        else
-        {
-            gBattleTextBuff1[0] = gBattleOutcome;
-            gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
-            gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
-        }
-    }
-    else
-    {
-        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
-    }
-
+    gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 

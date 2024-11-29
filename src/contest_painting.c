@@ -223,7 +223,7 @@ static void ShowContestPainting(void)
         PrintContestPaintingCaption(gCurContestWinnerSaveIdx, gCurContestWinnerIsForArtist);
         SetBackdropFromPalette(sBgPalette);
         DmaClear32(3, PLTT, PLTT_SIZE);
-        BeginFastPaletteFade(2);
+        BeginFastPaletteFade(FAST_FADE_IN_FROM_BLACK);
         SetVBlankCallback(VBlankCB_ContestPainting);
         sHoldState = 0;
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON);

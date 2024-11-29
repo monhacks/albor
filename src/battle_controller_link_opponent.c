@@ -218,17 +218,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
         && !IsCryPlayingOrClearCrySongs())
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
-            {
-                if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT)
-                    m4aMPlayContinue(&gMPlayInfo_BGM);
-            }
-            else
-            {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-            }
-        }
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
 
         gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
         bgmRestored = TRUE;
@@ -301,7 +291,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     {
         if (gSprites[gBattlerSpriteIds[battler]].callback == SpriteCallbackDummy)
         {
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         }
     }
 }

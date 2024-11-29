@@ -95,7 +95,6 @@ static void SetBottomSliderHeartsInvisibility(bool8);
 static void CreateNextTurnSprites(void);
 static void CreateApplauseMeterSprite(void);
 static void CreateJudgeAttentionEyeTask(void);
-static void CreateUnusedBlendTask(void);
 static void DrawContestantWindows(void);
 static void ApplyNextTurnOrder(void);
 static void SlideApplauseMeterIn(void);
@@ -145,8 +144,6 @@ static void Task_UpdateAppealHearts(u8);
 static void SpriteCB_UpdateHeartSlider(struct Sprite *);
 static void Task_FlashJudgeAttentionEye(u8);
 static void Task_StopFlashJudgeAttentionEye(u8);
-static void Task_UnusedBlend(u8);
-static void InitUnusedBlendTaskData(u8);
 static void UpdateBlendTaskContestantData(u8);
 static void SpriteCB_BlinkContestantBox(struct Sprite *);
 static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite);
@@ -332,7 +329,6 @@ EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 // IWRAM common vars.
 COMMON_DATA rng_value_t gContestRngValue = {0};
 
-extern const u8 gText_LinkStandby4[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -1258,7 +1254,7 @@ void CB2_StartContest(void)
         SetBgForCurtainDrop();
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-        BeginFastPaletteFade(2);
+        BeginFastPaletteFade(FAST_FADE_IN_FROM_BLACK);
         gPaletteFade.bufferTransferDisabled = FALSE;
         SetVBlankCallback(VBlankCB_Contest);
         eContest.mainTaskId = CreateTask(Task_StartContestWaitFade, 10);
@@ -1323,7 +1319,6 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateNextTurnSprites();
         CreateApplauseMeterSprite();
         CreateJudgeAttentionEyeTask();
-        CreateUnusedBlendTask();
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
         gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
@@ -3690,28 +3685,6 @@ static void Task_FlashJudgeAttentionEye(u8 taskId)
     }
 }
 
-// Note: While the below task is run for the entire Appeals portion of the contest,
-//       because data[i * 4] is always 0xFF it never does anything
-//       If turned on by setting that data between 0 and 16, it blends
-//       an odd selection of palette colors (e.g. the text box, the appeal hearts
-//       for only one contestant, the heart outlines in the move selection box, etc)
-//       Given the similarities, it's possible this was an incorrect attempt
-//       at something similar to what CreateJudgeAttentionEyeTask does
-static void CreateUnusedBlendTask(void)
-{
-    s32 i;
-
-    eContest.blendTaskId = CreateTask(Task_UnusedBlend, 30);
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-        InitUnusedBlendTaskData(i);
-}
-
-static void InitUnusedBlendTaskData(u8 contestant)
-{
-    gTasks[eContest.blendTaskId].data[contestant * 4] = 0xFF;
-    gTasks[eContest.blendTaskId].data[contestant * 4 + 1] = 0;
-}
-
 static void UpdateBlendTaskContestantsData(void)
 {
     s32 i;
@@ -3725,8 +3698,6 @@ static void UpdateBlendTaskContestantData(u8 contestant)
     u32 palOffset1;
     u32 palOffset2;
 
-    InitUnusedBlendTaskData(contestant);
-
     palOffset1 = contestant + 5;
     DmaCopy16Defvars(3,
                      &gPlttBufferUnfaded[PLTT_ID(palOffset1) + 10],
@@ -3737,38 +3708,6 @@ static void UpdateBlendTaskContestantData(u8 contestant)
                      &gPlttBufferUnfaded[palOffset2],
                      &gPlttBufferFaded[palOffset2],
                      PLTT_SIZEOF(1));
-}
-
-// See comments on CreateUnusedBlendTask
-static void Task_UnusedBlend(u8 taskId)
-{
-    u8 i;
-
-    for (i = 0; i < CONTESTANT_COUNT; i++)
-    {
-        u8 idx = i * 4;
-
-        // Below is never true
-        if (gTasks[taskId].data[idx] != 0xFF)
-        {
-            if (++gTasks[taskId].data[idx + 2] > 2)
-            {
-                gTasks[taskId].data[idx + 2] = 0;
-
-                if (gTasks[taskId].data[idx + 1] == 0)
-                    gTasks[taskId].data[idx]++;
-                else
-                    gTasks[taskId].data[idx]--;
-
-                if (gTasks[taskId].data[idx] == 16
-                 || gTasks[taskId].data[idx] == 0)
-                    gTasks[taskId].data[idx + 1] ^= 1;
-
-                BlendPalette(BG_PLTT_ID(5 + i) + 10,     1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-                BlendPalette(BG_PLTT_ID(5 + i) + 12 + i, 1, gTasks[taskId].data[idx + 0], RGB(31, 31, 18));
-            }
-        }
-    }
 }
 
 static void StartStopFlashJudgeAttentionEye(u8 contestant)

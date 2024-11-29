@@ -92,7 +92,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8);
 static void Task_SetControllerToWaitForString(u8);
 static void Task_GiveExpWithExpBar(u8);
 static void Task_UpdateLvlInHealthbox(u8);
-static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(u32 battler);
 
@@ -1007,12 +1006,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
         && !IsCryPlayingOrClearCrySongs())
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored)
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
-                m4aMPlayContinue(&gMPlayInfo_BGM);
-            else
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        }
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
         bgmRestored = TRUE;
     }
@@ -1079,7 +1073,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         PlayerBufferExecCompleted(battler);
     }
@@ -1108,7 +1102,7 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId)
 {
     if (!IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         DestroyTask(taskId);
     }
 }
@@ -1301,9 +1295,6 @@ static void WaitForMonSelection(u32 battler)
             BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, gSelectedMonPartyId, gBattlePartyCurrentOrder);
         else
             BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, PARTY_SIZE, NULL);
-
-        if ((gBattleResources->bufferA[battler][1] & 0xF) == 1)
-            PrintLinkStandbyMsg();
 
         PlayerBufferExecCompleted(battler);
     }
@@ -1892,16 +1883,6 @@ void CB2_SetUpReshowBattleScreenAfterMenu2(void)
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 
-static void PrintLinkStandbyMsg(void)
-{
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 0;
-        BattlePutTextOnWindow(gText_LinkStandby, B_WIN_MSG);
-    }
-}
-
 static void PlayerHandleLoadMonSprite(u32 battler)
 {
     BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
@@ -2264,14 +2245,8 @@ static void PlayerHandleLinkStandbyMsg(u32 battler)
     switch (gBattleResources->bufferA[battler][1])
     {
     case LINK_STANDBY_MSG_STOP_BOUNCE:
-        PrintLinkStandbyMsg();
-        // fall through
-    case LINK_STANDBY_STOP_BOUNCE_ONLY:
-        EndBounceEffect(battler, BOUNCE_HEALTHBOX);
-        EndBounceEffect(battler, BOUNCE_MON);
-        break;
+    case LINK_STANDBY_STOP_BOUNCE_ONLY: 
     case LINK_STANDBY_MSG_ONLY:
-        PrintLinkStandbyMsg();
         break;
     }
     PlayerBufferExecCompleted(battler);

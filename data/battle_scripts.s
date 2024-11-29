@@ -586,45 +586,6 @@ BattleScript_TeatimeBuffer:
 	moveendcase MOVEEND_CLEAR_BITS
 	goto BattleScript_MoveEnd
 
-BattleScript_AffectionBasedEndurance::
-	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
-	printstring STRINGID_TARGETTOUGHEDITOUT
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_AffectionBasedStatusHeal::
-	jumpifstatus BS_ATTACKER, STATUS1_POISON | STATUS1_TOXIC_POISON, BattleScript_AffectionBasedStatus_HealPoisonString
-	jumpifstatus BS_ATTACKER, STATUS1_SLEEP, BattleScript_AffectionBasedStatus_HealSleepString
-	jumpifstatus BS_ATTACKER, STATUS1_PARALYSIS, BattleScript_AffectionBasedStatus_HealParalysisString
-	jumpifstatus BS_ATTACKER, STATUS1_BURN, BattleScript_AffectionBasedStatus_HealBurnString
-	jumpifstatus BS_ATTACKER, STATUS1_FREEZE, BattleScript_AffectionBasedStatus_HealFreezeString
-	jumpifstatus BS_ATTACKER, STATUS1_FROSTBITE, BattleScript_AffectionBasedStatus_HealFrostbiteString
-	end2
-BattleScript_AffectionBasedStatus_HealPoisonString:
-	printstring STRINGID_ATTACKEREXPELLEDTHEPOISON
-	goto BattleScript_AffectionBasedStatusHeal_Continue
-BattleScript_AffectionBasedStatus_HealSleepString:
-	printstring STRINGID_ATTACKERSHOOKITSELFAWAKE
-	goto BattleScript_AffectionBasedStatusHeal_Continue
-BattleScript_AffectionBasedStatus_HealParalysisString:
-	printstring STRINGID_ATTACKERBROKETHROUGHPARALYSIS
-	goto BattleScript_AffectionBasedStatusHeal_Continue
-BattleScript_AffectionBasedStatus_HealBurnString:
-	printstring STRINGID_ATTACKERHEALEDITSBURN
-	goto BattleScript_AffectionBasedStatusHeal_Continue
-BattleScript_AffectionBasedStatus_HealFreezeString:
-	printstring STRINGID_ATTACKERMELTEDTHEICE
-	goto BattleScript_AffectionBasedStatusHeal_Continue
-BattleScript_AffectionBasedStatus_HealFrostbiteString:
-	printstring STRINGID_ATTACKERMELTEDTHEICE
-BattleScript_AffectionBasedStatusHeal_Continue:
-	waitmessage B_WAIT_TIME_LONG
-	clearstatus BS_ATTACKER
-	waitstate
-	updatestatusicon BS_ATTACKER
-	waitstate
-	end2
-
 BattleScript_ShellTrapSetUp::
 	flushtextbox
 	playanimation BS_ATTACKER, B_ANIM_SHELL_TRAP_SETUP, NULL
@@ -5471,8 +5432,6 @@ BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_FAINTED, BattleScript_FaintedMonEnd
 	switchhandleorder BS_FAINTED, 2
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonSendOutNew
-	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonSendOutNew
-	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonSendOutNew
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
@@ -5622,7 +5581,6 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	trainerslidein BS_OPPONENT1
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
-	jumpifbattletype BATTLE_TYPE_TOWER_LINK_MULTI, BattleScript_LocalBattleLostDoTrainer2WinText
 	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostDoTrainer2WinText::
 	trainerslideout BS_OPPONENT1
@@ -5631,18 +5589,6 @@ BattleScript_LocalBattleLostDoTrainer2WinText::
 	waitstate
 	printstring STRINGID_TRAINER2WINTEXT
 BattleScript_LocalBattleLostEnd_::
-	end2
-
-BattleScript_FrontierLinkBattleLost::
-BattleScript_FrontierLinkBattleLostEnd::
-	end2
-
-BattleScript_LinkBattleWonOrLost::
-BattleScript_LinkBattleWonOrLostWaitEnd::
-	end2
-
-BattleScript_TowerLinkBattleWon::
-BattleScript_TowerLinkBattleWonEnd::
 	end2
 
 BattleScript_FrontierTrainerBattleWon::
