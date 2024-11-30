@@ -636,7 +636,7 @@ static const union AnimCmd *const sAnimTable_Standard[] = {
 
 static const union AnimCmd sAnim_FaceSouthFollower[] =
 {
-    ANIMCMD_FRAME(1, 16),
+    ANIMCMD_FRAME(0, 16),
     ANIMCMD_JUMP(0),
 };
 
