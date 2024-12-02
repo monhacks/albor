@@ -2867,7 +2867,7 @@ static void HandleTurnActionSelectionState(void)
             u32 isAiRisky = AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY; // Risky AI switches aggressively even mid battle
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
             {
                 AI_DATA->aiCalcInProgress = TRUE;

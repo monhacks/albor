@@ -148,7 +148,7 @@ static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
         return 0;
     if (trainerId == 0xFFFF)
     {
@@ -441,7 +441,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     u32 battlerAtk, battlersCount, weather;
 
     memset(aiData, 0, sizeof(struct AiLogicData));
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
         return;
 
     // Set delay timer to count how long it takes for AI to choose action/move
