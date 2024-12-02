@@ -808,11 +808,6 @@ u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)
     return ret;
 }
 
-u32 GetAiScriptsInBattleFactory(void)
-{
-    return 0;
-}
-
 void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 moveArg, u8 moveSlot)
 {
     u16 move = moveArg;

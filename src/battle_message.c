@@ -2640,11 +2640,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-                {
-                    stringPtr = sText_TwoTrainersWantToBattle;
-                }
-                else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                 {
                     stringPtr = sText_TwoLinkTrainersWantToBattle;
                 }
@@ -2704,8 +2700,6 @@ void BufferStringBattle(u16 stringID, u32 battler)
                     stringPtr = sText_Trainer1SentOutTwoPkmn;
                 else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                     stringPtr = sText_TwoTrainersSentPkmn;
-                else if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-                    stringPtr = sText_TwoTrainersSentPkmn;
                 else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_TwoLinkTrainersSentOutPkmn;
                 else if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
@@ -2755,20 +2749,10 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-                {
-                    if (gBattleScripting.battler == 1)
-                        stringPtr = sText_Trainer1SentOutPkmn2;
-                    else
-                        stringPtr = sText_Trainer2SentOutPkmn;
-                }
+                if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+                    stringPtr = sText_LinkTrainerMultiSentOutPkmn;
                 else
-                {
-                    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                        stringPtr = sText_LinkTrainerMultiSentOutPkmn;
-                    else
-                        stringPtr = sText_LinkTrainerSentOutPkmn2;
-                }
+                    stringPtr = sText_LinkTrainerSentOutPkmn2;
             }
             else
             {
@@ -2804,10 +2788,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
             switch (gBattleTextBuff1[0])
             {
             case B_OUTCOME_WON:
-                if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-                    stringPtr = sText_TwoInGameTrainersDefeated;
-                else
-                    stringPtr = sText_TwoLinkTrainersDefeated;
+                stringPtr = sText_TwoLinkTrainersDefeated;
                 break;
             case B_OUTCOME_LOST:
                 stringPtr = sText_PlayerLostToTwo;

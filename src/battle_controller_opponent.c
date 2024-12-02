@@ -415,7 +415,7 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
     {
-        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
+        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS))
         {
             if (battlerId == 1)
                 trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);

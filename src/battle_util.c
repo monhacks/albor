@@ -3740,29 +3740,9 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-        {
-            if (side == B_SIDE_PLAYER)
-            {
-                party = gPlayerParty;
-                flankId = GetBattlerMultiplayerId(battler);
-                playerId = GetLinkTrainerFlankId(flankId);
-            }
-            else
-            {
-                party = gEnemyParty;
-                if (battler == 1)
-                    playerId = 0;
-                else
-                    playerId = 1;
-            }
-        }
-        else
-        {
-            flankId = GetBattlerMultiplayerId(battler);
-            party = GetBattlerParty(battler);
-            playerId = GetLinkTrainerFlankId(flankId);
-        }
+        flankId = GetBattlerMultiplayerId(battler);
+        party = GetBattlerParty(battler);
+        playerId = GetLinkTrainerFlankId(flankId);
 
         for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
         {

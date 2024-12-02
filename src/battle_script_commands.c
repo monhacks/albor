@@ -6416,34 +6416,11 @@ bool32 CanBattlerSwitch(u32 battler)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-        {
-            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-            {
-                party = gPlayerParty;
+        party = GetBattlerParty(battler);
 
-                lastMonId = 0;
-                if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battler)) == TRUE)
-                    lastMonId = MULTI_PARTY_SIZE;
-            }
-            else
-            {
-                party = gEnemyParty;
-
-                if (battler == 1)
-                    lastMonId = 0;
-                else
-                    lastMonId = MULTI_PARTY_SIZE;
-            }
-        }
-        else
-        {
-            party = GetBattlerParty(battler);
-
-            lastMonId = 0;
-            if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battler)) == TRUE)
-                lastMonId = MULTI_PARTY_SIZE;
-        }
+        lastMonId = 0;
+        if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(battler)) == TRUE)
+            lastMonId = MULTI_PARTY_SIZE;
 
         for (i = lastMonId; i < lastMonId + MULTI_PARTY_SIZE; i++)
         {
