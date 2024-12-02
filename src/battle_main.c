@@ -3438,66 +3438,33 @@ s8 GetMovePriority(u32 battler, u16 move)
     s8 priority;
     u16 ability = GetBattlerAbility(battler);
 
-    if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE && gMovesInfo[move].power != 0)
-        move = GetUsableZMove(battler, move);
-
-    priority = gMovesInfo[move].priority;
-
-    // Max Guard check
-    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && gMovesInfo[move].category == CATEGORIA_ESTADO)
-        return gMovesInfo[MOVE_MAX_GUARD].priority;
-
     if (ability == ABILITY_GALE_WINGS && gMovesInfo[move].type == TIPO_VOLADOR)
-    {
         priority++;
-    }
     else if (ability == ABILITY_TIERRA_SUELTA && gMovesInfo[move].type == TIPO_TIERRA)
-    {
         priority++;
-    }
     else if (ability == ABILITY_PACIFICADOR && gMovesInfo[move].type == TIPO_HADA)
-    {
         priority++;
-    }
     else if (ability == ABILITY_SUPERORDENADOR && gMovesInfo[move].type == TIPO_PSIQUICO)
-    {
         priority++;
-    }
-    else if (ability == ABILITY_ENVIO_EXPRESS && move == MOVE_PRESENT)
-    {
+    else if (ability == ABILITY_ENVIO_EXPRESS  && gMovesInfo[move].type == TIPO_HADA)
         priority++;
-    }
     else if (ability == ABILITY_BAILARIN && gMovesInfo[move].danceMove)
-    {
         priority++;
-    }
     else if (ability == ABILITY_PRANKSTER && IS_MOVE_STATUS(move))
     {
         gProtectStructs[battler].pranksterElevated = 1;
         priority++;
     }
-    else if (gMovesInfo[move].effect == EFFECT_GRASSY_GLIDE && gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && IsBattlerGrounded(battler) && GetActiveGimmick(gBattlerAttacker) != GIMMICK_DYNAMAX && !IsGimmickSelected(battler, GIMMICK_DYNAMAX))
-    {
-        priority++;
-    }
     else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
         priority += 3;
     else if (ability == ABILITY_ATAQUE_RELAMPAGO && gMovesInfo[move].ballisticMove)
-    {
         priority++;
-    }
     else if (ability == ABILITY_OJOS_PRESTOS && gMovesInfo[move].eyesMove)
-    {
         priority++;
-    }
     else if (ability == ABILITY_RUN_AWAY && gMovesInfo[move].effect == EFFECT_HIT_ESCAPE)
-    {
         priority++;
-    }
     else if (ability == ABILITY_VOZ_CANTANTE && gMovesInfo[move].soundMove)
-    {
         priority++;
-    }
     if (gProtectStructs[battler].quash)
         priority = -8;
 
