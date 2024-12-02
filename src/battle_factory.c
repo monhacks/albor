@@ -810,26 +810,7 @@ u8 GetNumPastRentalsRank(u8 battleMode, u8 lvlMode)
 
 u32 GetAiScriptsInBattleFactory(void)
 {
-    int lvlMode = gSaveBlockPtr->frontier.lvlMode;
-
-    if (lvlMode == FRONTIER_LVL_TENT)
-    {
-        return 0;
-    }
-    else
-    {
-        int battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        int challengeNum = gSaveBlockPtr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-
-        if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-            return AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
-        else if (challengeNum < 2)
-            return 0;
-        else if (challengeNum < 4)
-            return AI_FLAG_CHECK_BAD_MOVE;
-        else
-            return AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY;
-    }
+    return 0;
 }
 
 void SetMonMoveAvoidReturn(struct Pokemon *mon, u16 moveArg, u8 moveSlot)

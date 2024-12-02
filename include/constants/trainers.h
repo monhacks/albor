@@ -4,14 +4,6 @@
 #include "constants/opponents.h"
 #include "constants/battle_frontier_trainers.h"
 
-// Special Trainer Ids.
-//      0-299 are frontier trainers
-#define TRAINER_FRONTIER_BRAIN              1022
-#define TRAINER_PLAYER                      1023
-#define TRAINER_SECRET_BASE                 1024
-#define TRAINER_LINK_OPPONENT               2048
-#define TRAINER_UNION_ROOM                  3072
-
 #define TRAINER_PIC_HIKER                  0
 #define TRAINER_PIC_AQUA_GRUNT_M           1
 #define TRAINER_PIC_POKEMON_BREEDER_F      2
@@ -205,6 +197,7 @@
 
 #define FACILITY_CLASSES_COUNT               0x52
 
+//Quitar todo y convertir el resto a enum
 #define RS_FACILITY_CLASS_AQUA_LEADER_ARCHIE    0x0
 #define RS_FACILITY_CLASS_AQUA_GRUNT_M          0x1
 #define RS_FACILITY_CLASS_AQUA_GRUNT_F          0x2

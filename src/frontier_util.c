@@ -1576,10 +1576,7 @@ void ResetFrontierTrainerIds(void)
 
 static void IsTrainerFrontierBrain(void)
 {
-    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-        gSpecialVar_Result = TRUE;
-    else
-        gSpecialVar_Result = FALSE;
+
 }
 
 u8 GetPlayerSymbolCountForFacility(u8 facility)
@@ -1590,59 +1587,7 @@ u8 GetPlayerSymbolCountForFacility(u8 facility)
 
 static void GiveBattlePoints(void)
 {
-    s32 challengeNum = 0;
-    s32 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    s32 points;
 
-    switch (facility)
-    {
-    case FRONTIER_FACILITY_TOWER:
-        challengeNum = gSaveBlockPtr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-        break;
-    case FRONTIER_FACILITY_DOME:
-        challengeNum = gSaveBlockPtr->frontier.domeWinStreaks[battleMode][lvlMode];
-        break;
-    case FRONTIER_FACILITY_PALACE:
-        challengeNum = gSaveBlockPtr->frontier.palaceWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-        break;
-    case FRONTIER_FACILITY_ARENA:
-        challengeNum = gSaveBlockPtr->frontier.arenaWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-        break;
-    case FRONTIER_FACILITY_FACTORY:
-        challengeNum = gSaveBlockPtr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-        break;
-    case FRONTIER_FACILITY_PIKE:
-        challengeNum = gSaveBlockPtr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
-        break;
-    case FRONTIER_FACILITY_PYRAMID:
-        challengeNum = gSaveBlockPtr->frontier.pyramidWinStreaks[lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-        break;
-    }
-
-    if (challengeNum != 0)
-        challengeNum--;
-    if (challengeNum >= ARRAY_COUNT(sBattlePointAwards[0][0]))
-        challengeNum = ARRAY_COUNT(sBattlePointAwards[0][0]) - 1;
-
-    points = sBattlePointAwards[facility][battleMode][challengeNum];
-    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-        points += 10;
-    gSaveBlockPtr->frontier.battlePoints += points;
-    ConvertIntToDecimalStringN(gStringVar1, points, STR_CONV_MODE_LEFT_ALIGN, 2);
-    if (gSaveBlockPtr->frontier.battlePoints > MAX_BATTLE_FRONTIER_POINTS)
-        gSaveBlockPtr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
-
-    points = gSaveBlockPtr->frontier.cardBattlePoints;
-    points += sBattlePointAwards[facility][battleMode][challengeNum];
-    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
-    {
-        points += 10;
-    }
-    if (points > 0xFFFF)
-        points = 0xFFFF;
-    gSaveBlockPtr->frontier.cardBattlePoints = points;
 }
 
 static void GetFacilitySymbolCount(void)
@@ -2004,53 +1949,7 @@ void SetFrontierBrainObjEventGfx_2(void)
 
 void CreateFrontierBrainPokemon(void)
 {
-    s32 i, j;
-    s32 selectedMonBits;
-    s32 monPartyId;
-    s32 monLevel = 0;
-    u8 friendship;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
 
-    if (facility == FRONTIER_FACILITY_DOME)
-        selectedMonBits = GetDomeTrainerSelectedMons(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
-    else
-        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1; // all 3 mons selected
-
-    ZeroEnemyPartyMons();
-    monPartyId = 0;
-    monLevel = SetFacilityPtrsGetLevel();
-    for (i = 0; i < FRONTIER_PARTY_SIZE; selectedMonBits >>= 1, i++)
-    {
-        if (!(selectedMonBits & 1))
-            continue;
-
-        do
-        {
-            j = Random32(); //should just be one while loop, but that doesn't match
-        } while (sFrontierBrainsMons[facility][symbol][i].nature != GetNatureFromPersonality(j));
-        CreateMon(&gEnemyParty[monPartyId],
-                  sFrontierBrainsMons[facility][symbol][i].species,
-                  monLevel,
-                  sFrontierBrainsMons[facility][symbol][i].fixedIV,
-                  TRUE, j,
-                  OT_ID_PRESET, FRONTIER_BRAIN_OTID);
-        SetMonData(&gEnemyParty[monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
-        for (j = 0; j < NUM_STATS; j++)
-            SetMonData(&gEnemyParty[monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
-        friendship = MAX_FRIENDSHIP;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-        {
-            SetMonMoveSlot(&gEnemyParty[monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
-            if (gMovesInfo[sFrontierBrainsMons[facility][symbol][i].moves[j]].effect == EFFECT_FRUSTRATION)
-                friendship = 0;
-        }
-        SetMonData(&gEnemyParty[monPartyId], MON_DATA_FRIENDSHIP, &friendship);
-        j = FALSE;
-        SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_IS_SHINY, &j);
-        CalculateMonStats(&gEnemyParty[monPartyId]);
-        monPartyId++;
-    }
 }
 
 u16 GetFrontierBrainMonSpecies(u8 monId)
@@ -2063,8 +1962,7 @@ u16 GetFrontierBrainMonSpecies(u8 monId)
 
 void SetFrontierBrainObjEventGfx(u8 facility)
 {
-    gTrainerBattleOpponent_A = TRAINER_FRONTIER_BRAIN;
-    VarSet(VAR_OBJ_GFX_ID_0, gFrontierBrainInfo[facility].objEventGfx);
+
 }
 
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)

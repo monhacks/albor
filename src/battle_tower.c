@@ -733,26 +733,7 @@ u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
 
 void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
 {
-    SetFacilityPtrsGetLevel();
-    if (trainerId == TRAINER_FRONTIER_BRAIN)
-    {
-        SetFrontierBrainObjEventGfx_2();
-        return;
-    }
 
-    switch (tempVarId)
-    {
-    case 0:
-    default:
-        VarSet(VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_BOY_1);
-        return;
-    case 1:
-        VarSet(VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_BOY_1);
-        return;
-    case 15:
-        VarSet(VAR_OBJ_GFX_ID_E, OBJ_EVENT_GFX_BOY_1);
-        return;
-    }
 }
 
 u16 GetBattleFacilityTrainerGfxId(u16 trainerId)

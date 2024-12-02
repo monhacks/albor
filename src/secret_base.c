@@ -902,9 +902,7 @@ const u8 *GetSecretBaseTrainerLoseText(void)
 
 void PrepSecretBaseBattleFlags(void)
 {
-    TryGainNewFanFromCounter(FANCOUNTER_BATTLED_AT_BASE);
-    gTrainerBattleOpponent_A = TRAINER_SECRET_BASE;
-    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+
 }
 
 void SetBattledOwnerFromResult(void)
