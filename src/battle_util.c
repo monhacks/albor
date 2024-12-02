@@ -492,29 +492,10 @@ bool32 TryRunFromBattle(u32 battler)
 
 void HandleAction_Run(void)
 {
-    s32 i;
-
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
     if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
     {
-        gCurrentTurnActionNumber = gBattlersCount;
 
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) == B_SIDE_PLAYER)
-            {
-                if (gChosenActionByBattler[i] == B_ACTION_RUN)
-                    gBattleOutcome |= B_OUTCOME_LOST;
-            }
-            else
-            {
-                if (gChosenActionByBattler[i] == B_ACTION_RUN)
-                    gBattleOutcome |= B_OUTCOME_WON;
-            }
-        }
-
-        gBattleOutcome |= B_OUTCOME_LINK_BATTLE_RAN;
-        gSaveBlockPtr->frontier.disableRecordBattle = TRUE;
     }
     else
     {

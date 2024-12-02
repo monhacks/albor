@@ -86,18 +86,19 @@ enum ModosBatalla
 #define WILD_DOUBLE_BATTLE ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER))))
 #define BATTLE_TWO_VS_ONE_OPPONENT ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && gTrainerBattleOpponent_B == 0xFFFF))
 
-// Battle Outcome defines
-#define B_OUTCOME_WON                  1
-#define B_OUTCOME_LOST                 2
-#define B_OUTCOME_DREW                 3
-#define B_OUTCOME_RAN                  4
-#define B_OUTCOME_PLAYER_TELEPORTED    5
-#define B_OUTCOME_MON_FLED             6
-#define B_OUTCOME_CAUGHT               7
-#define B_OUTCOME_NO_SAFARI_BALLS      8
-#define B_OUTCOME_FORFEITED            9
-#define B_OUTCOME_MON_TELEPORTED       10
-#define B_OUTCOME_LINK_BATTLE_RAN      (1 << 7) // 128
+enum ResultadosBatalla
+{
+    B_OUTCOME_WON = 1,
+    B_OUTCOME_LOST,
+    B_OUTCOME_DREW,
+    B_OUTCOME_RAN,
+    B_OUTCOME_PLAYER_TELEPORTED,
+    B_OUTCOME_MON_FLED,
+    B_OUTCOME_CAUGHT,
+    B_OUTCOME_NO_SAFARI_BALLS,
+    B_OUTCOME_FORFEITED,
+    B_OUTCOME_MON_TELEPORTED,
+};
 
 // Non-volatile status conditions
 // These remain outside of battle and after switching out.

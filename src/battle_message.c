@@ -2813,71 +2813,55 @@ void BufferStringBattle(u16 stringID, u32 battler)
         stringPtr = sText_AttackerUsedX;
         break;
     case STRINGID_BATTLEEND: // battle end
-        if (gBattleTextBuff1[0] & B_OUTCOME_LINK_BATTLE_RAN)
-        {
-            gBattleTextBuff1[0] &= ~(B_OUTCOME_LINK_BATTLE_RAN);
-            if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTextBuff1[0] != B_OUTCOME_DREW)
-                gBattleTextBuff1[0] ^= (B_OUTCOME_LOST | B_OUTCOME_WON);
+        if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTextBuff1[0] != B_OUTCOME_DREW)
+            gBattleTextBuff1[0] ^= (B_OUTCOME_LOST | B_OUTCOME_WON);
 
-            if (gBattleTextBuff1[0] == B_OUTCOME_LOST || gBattleTextBuff1[0] == B_OUTCOME_DREW)
-                stringPtr = sText_GotAwaySafely;
-            else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-                stringPtr = sText_TwoWildFled;
-            else
-                stringPtr = sText_WildFled;
+        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+        {
+            switch (gBattleTextBuff1[0])
+            {
+            case B_OUTCOME_WON:
+                if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
+                    stringPtr = sText_TwoInGameTrainersDefeated;
+                else
+                    stringPtr = sText_TwoLinkTrainersDefeated;
+                break;
+            case B_OUTCOME_LOST:
+                stringPtr = sText_PlayerLostToTwo;
+                break;
+            case B_OUTCOME_DREW:
+                stringPtr = sText_PlayerBattledToDrawVsTwo;
+                break;
+            }
+        }
+        else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
+        {
+            switch (gBattleTextBuff1[0])
+            {
+            case B_OUTCOME_WON:
+                stringPtr = sText_PlayerDefeatedLinkTrainerTrainer1;
+                break;
+            case B_OUTCOME_LOST:
+                stringPtr = sText_PlayerLostAgainstTrainer1;
+                break;
+            case B_OUTCOME_DREW:
+                stringPtr = sText_PlayerBattledToDrawTrainer1;
+                break;
+            }
         }
         else
         {
-            if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTextBuff1[0] != B_OUTCOME_DREW)
-                gBattleTextBuff1[0] ^= (B_OUTCOME_LOST | B_OUTCOME_WON);
-
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+            switch (gBattleTextBuff1[0])
             {
-                switch (gBattleTextBuff1[0])
-                {
-                case B_OUTCOME_WON:
-                    if (gBattleTypeFlags & BATTLE_TYPE_TOWER_LINK_MULTI)
-                        stringPtr = sText_TwoInGameTrainersDefeated;
-                    else
-                        stringPtr = sText_TwoLinkTrainersDefeated;
-                    break;
-                case B_OUTCOME_LOST:
-                    stringPtr = sText_PlayerLostToTwo;
-                    break;
-                case B_OUTCOME_DREW:
-                    stringPtr = sText_PlayerBattledToDrawVsTwo;
-                    break;
-                }
-            }
-            else if (gTrainerBattleOpponent_A == TRAINER_UNION_ROOM)
-            {
-                switch (gBattleTextBuff1[0])
-                {
-                case B_OUTCOME_WON:
-                    stringPtr = sText_PlayerDefeatedLinkTrainerTrainer1;
-                    break;
-                case B_OUTCOME_LOST:
-                    stringPtr = sText_PlayerLostAgainstTrainer1;
-                    break;
-                case B_OUTCOME_DREW:
-                    stringPtr = sText_PlayerBattledToDrawTrainer1;
-                    break;
-                }
-            }
-            else
-            {
-                switch (gBattleTextBuff1[0])
-                {
-                case B_OUTCOME_WON:
-                    stringPtr = sText_PlayerDefeatedLinkTrainer;
-                    break;
-                case B_OUTCOME_LOST:
-                    stringPtr = sText_PlayerLostAgainstLinkTrainer;
-                    break;
-                case B_OUTCOME_DREW:
-                    stringPtr = sText_PlayerBattledToDrawLinkTrainer;
-                    break;
-                }
+            case B_OUTCOME_WON:
+                stringPtr = sText_PlayerDefeatedLinkTrainer;
+                break;
+            case B_OUTCOME_LOST:
+                stringPtr = sText_PlayerLostAgainstLinkTrainer;
+                break;
+            case B_OUTCOME_DREW:
+                stringPtr = sText_PlayerBattledToDrawLinkTrainer;
+                break;
             }
         }
         break;
