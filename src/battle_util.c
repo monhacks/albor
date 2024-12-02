@@ -450,7 +450,7 @@ bool32 TryRunFromBattle(u32 battler)
             effect++;
         }
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL) && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER) && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         effect++;
     }
@@ -11158,9 +11158,6 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
 {
     u8 stealerSide = GetBattlerSide(battlerStealing);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        return FALSE;
-
     // Check if the battler trying to steal should be able to
     if (stealerSide == B_SIDE_OPPONENT
         && !(gBattleTypeFlags &
@@ -11630,15 +11627,7 @@ void RemoveBattlerType(u32 battler, u8 type)
 
 void AllocateBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        InitTrainerHillBattleStruct();
-
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
-
-#if B_FLAG_SKY_BATTLE
-    gBattleStruct->isSkyBattle = FlagGet(B_FLAG_SKY_BATTLE);
-#endif
-
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
     gBattleResources->flags = AllocZeroed(sizeof(*gBattleResources->flags));
@@ -11656,9 +11645,6 @@ void AllocateBattleResources(void)
 
 void FreeBattleResources(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        FreeTrainerHillBattleStruct();
-
     gFieldStatuses = 0;
     if (gBattleResources != NULL)
     {

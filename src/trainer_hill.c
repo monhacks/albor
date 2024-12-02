@@ -289,16 +289,6 @@ u8 GetTrainerHillTrainerFrontSpriteId(u16 trainerId)
     return 0;
 }
 
-void InitTrainerHillBattleStruct(void)
-{
-
-}
-
-void FreeTrainerHillBattleStruct(void)
-{
-    TRY_FREE_AND_SET_NULL(sFloorTrainers);
-}
-
 static void SetUpDataStruct(void)
 {
 

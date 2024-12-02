@@ -465,8 +465,7 @@ static void CB2_InitBattleInternal(void)
         gBattleTerrain = BattleSetup_GetTerrainId();
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)))
     {
         gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
     }
@@ -1179,8 +1178,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     u32 personalityValue;
     s32 i;
     u8 monsCount;
-    if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                                                        | BATTLE_TYPE_TRAINER_HILL)))
+    if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER)))
     {
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
@@ -2430,8 +2428,7 @@ static void DoBattleIntro(void)
             {
                 if (GetBattlerSide(battler) == B_SIDE_OPPONENT
                  && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                          | BATTLE_TYPE_LINK
-                                          | BATTLE_TYPE_TRAINER_HILL)))
+                                          | BATTLE_TYPE_LINK)))
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN);
                 }
@@ -3052,7 +3049,7 @@ static void HandleTurnActionSelectionState(void)
                 }
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-                    && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
+                    && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)
                     && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
@@ -4037,7 +4034,7 @@ static void HandleEndTurn_BattleWon(void)
 
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL))
+            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
@@ -4103,11 +4100,6 @@ static void HandleEndTurn_RanFromBattle(void)
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
         gSaveBlockPtr->frontier.disableRecordBattle = TRUE;
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-    {
-        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
-        gBattleOutcome = B_OUTCOME_FORFEITED;
     }
     else
     {
