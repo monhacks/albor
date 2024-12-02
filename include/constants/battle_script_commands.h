@@ -17,8 +17,7 @@
 #define sSTATCHANGER                 (sB_ANIM_TARGETS_HIT + 1)          // statChanger (u8) -> 1 byte
 #define sSTAT_ANIM_PLAYED            (sSTATCHANGER + 1)                 // statAnimPlayed (bool8) -> 1 byte
 #define sGIVEEXP_STATE               (sSTAT_ANIM_PLAYED + 1)            // getexpState (u8) -> 1 byte
-#define sBATTLE_STYLE                (sGIVEEXP_STATE + 1)               // battleStyle (u8) -> 1 byte
-#define sLVLBOX_STATE                (sBATTLE_STYLE + 1)                // drawlvlupboxState (u8) -> 1 byte
+#define sLVLBOX_STATE                (sGIVEEXP_STATE + 1)               // drawlvlupboxState (u8) -> 1 byte
 #define sLEARNMOVE_STATE             (sLVLBOX_STATE + 1)                // learnMoveState (u8) -> 1 byte
 #define sSAVED_BATTLER               (sLEARNMOVE_STATE + 1)             // savedBattler (u8) -> 1 byte
 #define sRESHOW_MAIN_STATE           (sSAVED_BATTLER + 1)               // reshowMainState (u8) -> 1 byte
@@ -26,8 +25,7 @@
 #define sLVLUP_HP                    (sRESHOW_HELPER_STATE + 1)         // levelUpHP (u8) -> 1 byte
 #define sWINDOWS_TYPE                (sLVLUP_HP + 1)                    // windowsType (u8) -> 1 byte
 #define sMULTIPLAYER_ID              (sWINDOWS_TYPE + 1)                // multiplayerId (u8) -> 1 byte
-#define sSPECIAL_TRAINER_BATTLE_TYPE (sMULTIPLAYER_ID + 1)              // specialTrainerBattleType (u8) -> 1 byte
-#define sMON_CAUGHT                  (sSPECIAL_TRAINER_BATTLE_TYPE + 1) // monCaught (bool8) -> 1 byte
+#define sMON_CAUGHT                  (sMULTIPLAYER_ID + 1)              // monCaught (bool8) -> 1 byte
 #define sSAVED_DMG                   (sMON_CAUGHT + 1)                  // savedDmg (s32) -> 4 bytes
 #define sSAVED_MOVE_EFFECT           (sSAVED_DMG + 4)                   // savedMoveEffect (u16) -> 2 bytes
 #define sMOVE_EFFECT                 (sSAVED_MOVE_EFFECT + 2)           // moveEffect (u16) -> 2 bytes
@@ -193,7 +191,7 @@
 #define VARIOUS_TRY_HEAL_QUARTER_HP                  103
 #define VARIOUS_REMOVE_TERRAIN                       104
 #define VARIOUS_JUMP_IF_PRANKSTER_BLOCKED            105
-#define VARIOUS_TRY_TO_CLEAR_PRIMAL_WEATHER          106
+#define VARIOUS_JUMP_IF_FLOWER_VEIL_PROTECTED          106
 #define VARIOUS_GET_ROTOTILLER_TARGETS               107
 #define VARIOUS_JUMP_IF_NOT_ROTOTILLER_AFFECTED      108
 #define VARIOUS_TRY_ACTIVATE_BATTLE_BOND             109
@@ -225,7 +223,6 @@
 #define VARIOUS_SWAP_SIDE_STATUSES                   135
 #define VARIOUS_SWAP_STATS                           136
 #define VARIOUS_TRY_ACTIVATE_CARNIVORO               137
-#define VARIOUS_JUMP_IF_FLOWER_VEIL_PROTECTED        138
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

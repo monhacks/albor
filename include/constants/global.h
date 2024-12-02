@@ -111,9 +111,12 @@
 #define ABILITY_NAME_LENGTH 16
 #define TRAINER_NAME_LENGTH 10
 
-#define MALE 0
-#define FEMALE 1
-#define GENDER_COUNT 2
+enum Generos
+{
+    MALE,
+    FEMALE,
+    GENDER_COUNT
+};
 
 #define BARD_SONG_LENGTH       6
 #define NUM_STORYTELLER_TALES  4
@@ -131,9 +134,6 @@
 
 #define OPTIONS_SOUND_MONO 0
 #define OPTIONS_SOUND_STEREO 1
-
-#define OPTIONS_BATTLE_STYLE_SHIFT 0
-#define OPTIONS_BATTLE_STYLE_SET 1
 
 #define DIR_NONE        0
 #define DIR_SOUTH       1

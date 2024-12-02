@@ -83,7 +83,6 @@ static void SetDefaultOptions(void)
     gSaveBlockPtr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
     gSaveBlockPtr->optionsWindowFrameType = 0;
     gSaveBlockPtr->optionsSound = OPTIONS_SOUND_STEREO;
-    gSaveBlockPtr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SET;
     gSaveBlockPtr->optionsBattleSceneOff = FALSE;
     gSaveBlockPtr->regionMapZoom = FALSE;
 }

@@ -818,7 +818,6 @@ struct BattleScripting
     u8 statChanger;
     bool8 statAnimPlayed;
     u8 getexpState;
-    u8 battleStyle;
     u8 drawlvlupboxState;
     u8 learnMoveState;
     u8 savedBattler;
@@ -827,7 +826,6 @@ struct BattleScripting
     u8 levelUpHP;
     u8 windowsType; // B_WIN_TYPE_*
     u8 multiplayerId;
-    u8 specialTrainerBattleType;
     bool8 monCaught;
     s32 savedDmg;
     u16 savedMoveEffect; // For moves hitting multiple targets.

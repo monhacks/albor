@@ -1732,12 +1732,9 @@ static void ClearSetBScriptingStruct(void)
 {
     // windowsType is set up earlier in BattleInitBgsAndWindows, so we need to save the value
     u32 temp = gBattleScripting.windowsType;
-    u32 specialBattleType = gBattleScripting.specialTrainerBattleType;
     memset(&gBattleScripting, 0, sizeof(gBattleScripting));
 
     gBattleScripting.windowsType                = temp;
-    gBattleScripting.battleStyle                = gSaveBlockPtr->optionsBattleStyle;
-    gBattleScripting.specialTrainerBattleType   = specialBattleType;
 }
 
 static void BattleStartClearSetData(void)

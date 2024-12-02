@@ -309,7 +309,6 @@ BattleScript_MoveSwitchOpenPartyScreen:
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
 	printstring STRINGID_EMPTYSTRING3
 	waitmessage 1
 	printstring STRINGID_SWITCHINMON
@@ -1243,7 +1242,6 @@ BattleScript_MoveEffectCoreEnforcer::
 	setgastroacid BattleScript_CoreEnforcerRet
 	printstring STRINGID_PKMNSABILITYSUPPRESSED
 	waitmessage B_WAIT_TIME_LONG
-	trytoclearprimalweather
 	tryrevertweatherform
 	flushtextbox
 BattleScript_CoreEnforcerRet:
@@ -2331,7 +2329,6 @@ BattleScript_EffectSimpleBeam::
 	recordability BS_TARGET
 	printstring STRINGID_PKMNACQUIREDSIMPLE
 	waitmessage B_WAIT_TIME_LONG
-	trytoclearprimalweather
 	tryrevertweatherform
 	flushtextbox
 	tryendneutralizinggas BS_TARGET
@@ -2385,7 +2382,6 @@ BattleScript_EffectHealingWish::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
 	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
@@ -2434,7 +2430,6 @@ BattleScript_EffectWorrySeed::
 	recordability BS_TARGET
 	printstring STRINGID_PKMNACQUIREDABILITY
 	waitmessage B_WAIT_TIME_LONG
-	trytoclearprimalweather
 	tryrevertweatherform
 	flushtextbox
 	tryendneutralizinggas BS_TARGET
@@ -2566,7 +2561,6 @@ BattleScript_EffectGastroAcid::
 	waitanimation
 	printstring STRINGID_PKMNSABILITYSUPPRESSED
 	waitmessage B_WAIT_TIME_LONG
-	trytoclearprimalweather
 	tryrevertweatherform
 	flushtextbox
 	tryendneutralizinggas BS_TARGET
@@ -3559,7 +3553,6 @@ BattleScript_EffectTransform::
 	attackcanceler
 	attackstring
 	ppreduce
-	trytoclearprimalweather
 	flushtextbox
 	transformdataexecution
 	attackanimation
@@ -4392,7 +4385,6 @@ BattleScript_EffectBatonPass::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
 	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	switchinanim BS_ATTACKER, TRUE
@@ -5470,45 +5462,13 @@ BattleScript_FaintedMonTryChoose:
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonSendOutNew
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
-	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
-	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonSendOutNew
-	setbyte sILLUSION_NICK_HACK, 1
-@ Yes/No for sending out a new Pokémon when the opponent is switching
-	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
-	setbyte gBattleCommunication, 0
-	yesnobox
-	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 1, BattleScript_FaintedMonSendOutNew
-@ Player said yes, go to party screen (note optional flag, player may exit the menu instead)
-	setatktoplayer0
-	openpartyscreen BS_ATTACKER | PARTY_SCREEN_OPTIONAL, BattleScript_FaintedMonSendOutNew
-	switchhandleorder BS_ATTACKER, 2
-	jumpifbyte CMP_EQUAL, gBattleCommunication, PARTY_SIZE, BattleScript_FaintedMonSendOutNew
-@ Switch Pokémon before opponent
-	atknameinbuff1
-	resetswitchinabilitybits BS_ATTACKER
-	hpthresholds2 BS_ATTACKER
-	printstring STRINGID_RETURNMON
-	switchoutabilities BS_ATTACKER
-	waitstate
-	returnatktoball
-	waitstate
-	drawpartystatussummary BS_ATTACKER
-	getswitchedmondata BS_ATTACKER
-	switchindataupdate BS_ATTACKER
-	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
-	flushtextbox
-	printstring STRINGID_SWITCHINMON
-	hidepartystatussummary BS_ATTACKER
-	switchinanim BS_ATTACKER, 0
-	waitstate
-	setbyte sSHIFT_SWITCHED, 1
+	goto BattleScript_FaintedMonSendOutNew
+
 BattleScript_FaintedMonSendOutNew:
 	drawpartystatussummary BS_FAINTED
 	getswitchedmondata BS_FAINTED
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
-	trytoclearprimalweather
 	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	hidepartystatussummary BS_FAINTED
@@ -5517,12 +5477,15 @@ BattleScript_FaintedMonSendOutNew:
 	resetplayerfainted
 	trytrainerslidelastonmsg BS_FAINTED
 	jumpifbytenotequal sSHIFT_SWITCHED, sZero, BattleScript_FaintedMonShiftSwitched
+
 BattleScript_FaintedMonSendOutNewEnd:
 	switchineffects BS_FAINTED
 	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
 	cancelallactions
+
 BattleScript_FaintedMonEnd::
 	end2
+
 BattleScript_FaintedMonShiftSwitched:
 	copybyte sSAVED_BATTLER, gBattlerTarget
 	switchineffects BS_ATTACKER
@@ -5542,7 +5505,6 @@ BattleScript_HandleFaintedMonLoop::
 	getswitchedmondata BS_FAINTED
 	switchindataupdate BS_FAINTED
 	hpthresholds BS_FAINTED
-	trytoclearprimalweather
 	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	hidepartystatussummary BS_FAINTED
@@ -5722,7 +5684,6 @@ BattleScript_DoSwitchOut::
 	getswitchedmondata BS_ATTACKER
 	switchindataupdate BS_ATTACKER
 	hpthresholds BS_ATTACKER
-	trytoclearprimalweather
 	flushtextbox
 	printstring STRINGID_SWITCHINMON
 	hidepartystatussummary BS_ATTACKER
@@ -6036,7 +5997,6 @@ BattleScript_RoarSuccessSwitch::
 	call BattleScript_RoarSuccessRet
 	getswitchedmondata BS_TARGET
 	switchindataupdate BS_TARGET
-	trytoclearprimalweather
 	flushtextbox
 	switchinanim BS_TARGET, FALSE
 	waitstate
@@ -9556,7 +9516,6 @@ BattleScript_EjectButtonActivates::
 	getswitchedmondata BS_SCRIPTING
 	switchindataupdate BS_SCRIPTING
 	hpthresholds BS_SCRIPTING
-	trytoclearprimalweather
 	flushtextbox
 	printstring 0x3
 	switchinanim BS_SCRIPTING 0x1
