@@ -609,7 +609,6 @@ static void CB2_HandleStartBattle(void)
         }
         else
         {
-            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 15;
         }
         break;
@@ -785,7 +784,6 @@ static void CB2_HandleStartMultiPartnerBattle(void)
         }
         else
         {
-            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 13;
         }
         break;
@@ -1028,7 +1026,6 @@ static void CB2_HandleStartMultiBattle(void)
         }
         else
         {
-            gBattleTypeFlags |= BATTLE_TYPE_IS_MASTER;
             gBattleCommunication[MULTIUSE_STATE] = 7;
         }
         break;
