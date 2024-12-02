@@ -11186,7 +11186,6 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
         && !(gBattleTypeFlags &
              (BATTLE_TYPE_FRONTIER
               | BATTLE_TYPE_LINK
-              | BATTLE_TYPE_SECRET_BASE
               | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
               )))
     {
@@ -11194,8 +11193,7 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     }
     else if (!(gBattleTypeFlags &
           (BATTLE_TYPE_FRONTIER
-           | BATTLE_TYPE_LINK
-           | BATTLE_TYPE_SECRET_BASE))
+           | BATTLE_TYPE_LINK))
         && (gWishFutureKnock.knockedOffMons[stealerSide] & (1u << gBattlerPartyIndexes[battlerStealing])))
     {
         return FALSE;
@@ -11674,12 +11672,6 @@ void AllocateBattleResources(void)
 
     gBattleAnimBgTileBuffer = AllocZeroed(0x2000);
     gBattleAnimBgTilemapBuffer = AllocZeroed(0x1000);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-    {
-        u16 currSecretBaseId = VarGet(VAR_CURRENT_SECRET_BASE);
-        CreateSecretBaseEnemyParty(&gSaveBlockPtr->secretBases[currSecretBaseId]);
-    }
 }
 
 void FreeBattleResources(void)

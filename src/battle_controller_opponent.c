@@ -399,11 +399,7 @@ static u32 OpponentGetTrainerPicId(u32 battlerId)
 {
     u32 trainerPicId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_SECRET_BASE)
-    {
-        trainerPicId = GetSecretBaseTrainerPicIndex();
-    }
-    else if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
+    if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
     {
         trainerPicId = GetFrontierBrainTrainerPicIndex();
     }
