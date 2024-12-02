@@ -642,18 +642,7 @@ void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, gBattleBgTemplates, ARRAY_COUNT(gBattleBgTemplates));
-
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-    {
-        gBattleScripting.windowsType = B_WIN_TYPE_ARENA;
-        SetBgTilemapBuffer(1, gBattleAnimBgTilemapBuffer);
-        SetBgTilemapBuffer(2, gBattleAnimBgTilemapBuffer);
-    }
-    else
-    {
-        gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
-    }
-
+    gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
     InitWindows(gBattleWindowTemplates[gBattleScripting.windowsType]);
     DeactivateAllTextPrinters();
 }
@@ -672,15 +661,6 @@ void InitBattleBgsVideo(void)
 void LoadBattleMenuWindowGfx(void)
 {
     LoadCompressedPalette(gBattleWindowTextPalette, BG_PLTT_ID(5), PLTT_SIZE_4BPP);
-
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-    {
-        // Load graphics for the Battle Arena referee's mid-battle messages.
-        Menu_LoadStdPalAt(BG_PLTT_ID(7));
-        LoadMessageBoxGfx(0, 0x30, BG_PLTT_ID(7));
-        gPlttBufferUnfaded[BG_PLTT_ID(7) + 6] = 0;
-        CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(7) + 6], &gPlttBufferFaded[BG_PLTT_ID(7) + 6], PLTT_SIZEOF(1));
-    }
 }
 
 void DrawMainBattleBackground(void)

@@ -932,8 +932,6 @@ bool32 ShouldSwitch(u32 battler)
         return FALSE;
     if (IsAbilityPreventingEscape(battler))
         return FALSE;
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        return FALSE;
 
     // Sequence Switching AI never switches mid-battle
     if (AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_SEQUENCE_SWITCHING)
@@ -1990,8 +1988,6 @@ u32 GetMostSuitableMonToSwitchInto(u32 battler, bool32 switchAfterMonKOd)
 
     if (*(gBattleStruct->monToSwitchIntoId + battler) != PARTY_SIZE)
         return *(gBattleStruct->monToSwitchIntoId + battler);
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
-        return gBattlerPartyIndexes[battler] + 1;
 
     if (IsDoubleBattle())
     {
