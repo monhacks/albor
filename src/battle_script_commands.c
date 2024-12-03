@@ -2168,9 +2168,7 @@ static void Cmd_attackanimation(void)
     if ((gHitMarker & (HITMARKER_NO_ANIMATIONS | HITMARKER_DISABLE_ANIMATION))
         && gCurrentMove != MOVE_TRANSFORM
         && gCurrentMove != MOVE_SUBSTITUTE
-        && gCurrentMove != MOVE_ALLY_SWITCH
-        // In a wild double battle gotta use the teleport animation if two wild pokemon are alive.
-        && !(gMovesInfo[gCurrentMove].effect == EFFECT_TELEPORT && WILD_DOUBLE_BATTLE && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT && IsBattlerAlive(BATTLE_PARTNER(gBattlerAttacker))))
+        && gCurrentMove != MOVE_ALLY_SWITCH)
     {
         BattleScriptPush(cmd->nextInstr);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
@@ -2179,7 +2177,7 @@ static void Cmd_attackanimation(void)
     }
     else
     {
-        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT) // No animation on second hit
+        if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_2ND_HIT)
         {
             gBattlescriptCurrInstr = cmd->nextInstr;
             return;
@@ -6370,24 +6368,7 @@ bool32 CanBattlerSwitch(u32 battler)
     bool32 ret = FALSE;
     struct Pokemon *party;
 
-    if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(battler) == B_SIDE_OPPONENT)
-    {
-        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        party = gEnemyParty;
-
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
-                break;
-        }
-
-        ret = (i != PARTY_SIZE);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         party = GetBattlerParty(battler);
 
@@ -8533,19 +8514,7 @@ static void Cmd_various(void)
     case VARIOUS_JUMP_IF_ROAR_FAILS:
     {
         VARIOUS_ARGS(const u8 *jumpInstr);
-        if (WILD_DOUBLE_BATTLE
-            && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
-            && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT
-            && IS_WHOLE_SIDE_ALIVE(gBattlerTarget))
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else if (WILD_DOUBLE_BATTLE
-                 && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
-                 && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT)
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else if (FlagGet(B_FLAG_NO_RUNNING))
-            gBattlescriptCurrInstr = cmd->jumpInstr;
-        else
-            gBattlescriptCurrInstr = cmd->nextInstr;
+        gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
     case VARIOUS_JUMP_IF_ABSENT:
@@ -11421,53 +11390,17 @@ static void Cmd_forcerandomswitch(void)
       && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
       && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)   // Check opponent's red card activating
     {
-        if (!WILD_DOUBLE_BATTLE)
-        {
-            // Wild mon with red card will end single battle
-            gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
-            return;
-        }
-        else
-        {
-            // Wild double battle, wild mon red card activation on player
-            if (IS_WHOLE_SIDE_ALIVE(gBattlerTarget))
-            {
-                // Both player's battlers are alive
-                redCardForcedSwitch = FALSE;
-            }
-            else
-            {
-                // Player has only one mon alive -> force red card switch before manually switching to other mon
-                redCardForcedSwitch = TRUE;
-            }
-        }
+        gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
+        return;
     }
 
     // Swapping pokemon happens in:
     // trainer battles
-    // wild double battles when an opposing pokemon uses it against one of the two alive player mons
-    // wild double battle when a player pokemon uses it against its partner
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        || (WILD_DOUBLE_BATTLE
-            && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT
-            && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER
-            && IS_WHOLE_SIDE_ALIVE(gBattlerTarget))
-        || (WILD_DOUBLE_BATTLE
-            && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
-            && GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-        || redCardForcedSwitch
-       )
+    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) || redCardForcedSwitch)
     {
         party = GetBattlerParty(gBattlerTarget);
 
-        if (BATTLE_TWO_VS_ONE_OPPONENT && GetBattlerSide(gBattlerTarget) == B_SIDE_OPPONENT)
-        {
-            firstMonId = 0;
-            lastMonId = 6;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
-        }
-        else if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
+        if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
             || (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
         {
             if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)

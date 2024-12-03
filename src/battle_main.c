@@ -494,7 +494,7 @@ static void CB2_InitBattleInternal(void)
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
         {
             CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
-            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+            if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                 CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
             SetWildMonHeldItem();
             CalculateEnemyPartyCount();
@@ -1392,10 +1392,7 @@ void SpriteCB_WildMon(struct Sprite *sprite)
 {
     sprite->callback = SpriteCB_MoveWildMonToRight;
     StartSpriteAnimIfDifferent(sprite, 0);
-    if (WILD_DOUBLE_BATTLE)
-        BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 10, RGB(8, 8, 8));
-    else
-        BeginNormalPaletteFade((0x10000 << sprite->sBattler), 0, 10, 10, RGB(8, 8, 8));
+    BeginNormalPaletteFade((0x10000 << sprite->sBattler), 0, 10, 10, RGB(8, 8, 8));
 }
 
 static void SpriteCB_MoveWildMonToRight(struct Sprite *sprite)
@@ -1418,10 +1415,7 @@ static void SpriteCB_WildMonShowHealthbox(struct Sprite *sprite)
         SetHealthboxSpriteVisible(gHealthboxSpriteIds[sprite->sBattler]);
         sprite->callback = SpriteCB_WildMonAnimate;
         StartSpriteAnimIfDifferent(sprite, 0);
-        if (WILD_DOUBLE_BATTLE)
-            BeginNormalPaletteFade((0x10000 << sprite->sBattler) | (0x10000 << BATTLE_PARTNER(sprite->sBattler)), 0, 10, 0, RGB(8, 8, 8));
-        else
-            BeginNormalPaletteFade((0x10000 << sprite->sBattler), 0, 10, 0, RGB(8, 8, 8));
+        BeginNormalPaletteFade((0x10000 << sprite->sBattler), 0, 10, 0, RGB(8, 8, 8));
     }
 }
 
@@ -2223,7 +2217,7 @@ static void DoBattleIntro(void)
             case B_POSITION_OPPONENT_RIGHT:
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                 {
-                    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT) // opponent 2 if exists
+                    if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS)) // opponent 2 if exists
                     {
                         BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
                         MarkBattlerForControllerExec(battler);
@@ -2339,7 +2333,7 @@ static void DoBattleIntro(void)
         gBattleStruct->introState++;
         break;
     case BATTLE_INTRO_STATE_TRAINER_2_SEND_OUT_ANIM:
-        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT)
+        if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_TWO_OPPONENTS))
         {
             battler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
             BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
@@ -2712,12 +2706,6 @@ u8 IsRunningFromBattleImpossible(u32 battler)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
         return BATTLE_RUN_FORBIDDEN;
     }
-    if (GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT && WILD_DOUBLE_BATTLE
-        && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))) // The second pokemon cannot run from a double wild battle, unless it's the only alive mon.
-    {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
-        return BATTLE_RUN_FORBIDDEN;
-    }
 
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return BATTLE_RUN_SUCCESS;
@@ -2860,15 +2848,6 @@ static void HandleTurnActionSelectionState(void)
                         || gBattleMons[battler].status2 & STATUS2_RECHARGE)
                     {
                         gChosenActionByBattler[battler] = B_ACTION_USE_MOVE;
-                        gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
-                    }
-                    else if (WILD_DOUBLE_BATTLE
-                             && position == B_POSITION_PLAYER_RIGHT
-                             && (gBattleStruct->throwingPokeBall || gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] == B_ACTION_RUN)
-                             && gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] != B_ACTION_NOTHING_FAINTED)
-                    {
-                        gBattleStruct->throwingPokeBall = FALSE;
-                        gChosenActionByBattler[battler] = B_ACTION_NOTHING_FAINTED; // Not fainted, but it cannot move, because of the throwing ball.
                         gBattleCommunication[battler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
                     }
                     else
@@ -3241,19 +3220,6 @@ static void HandleTurnActionSelectionState(void)
     // Check if everyone chose actions.
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
-        if (WILD_DOUBLE_BATTLE
-            && gBattleStruct->throwingPokeBall
-            && gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] != B_ACTION_NOTHING_FAINTED)
-        {
-            // if we choose to throw a ball with our second mon, skip the action of the first
-            // (if we have chosen throw ball with first, second's is already skipped)
-            // if throwing a ball in a wild battle with an in-game partner, skip partner's turn when throwing a ball
-            if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT)] = B_ACTION_NOTHING_FAINTED;
-            else
-                gChosenActionByBattler[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)] = B_ACTION_NOTHING_FAINTED;
-        }
-
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
 
         if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)

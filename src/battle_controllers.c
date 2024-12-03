@@ -100,16 +100,8 @@ static void InitSinglePlayerBtlControllers(void)
 
         gBattlerPartyIndexes[0] = 0;
         gBattlerPartyIndexes[1] = 0;
-        if (BATTLE_TWO_VS_ONE_OPPONENT || WILD_DOUBLE_BATTLE)
-        {
-            gBattlerPartyIndexes[2] = 3;
-            gBattlerPartyIndexes[3] = 1;
-        }
-        else
-        {
-            gBattlerPartyIndexes[2] = 3;
-            gBattlerPartyIndexes[3] = 3;
-        }
+        gBattlerPartyIndexes[2] = 3;
+        gBattlerPartyIndexes[3] = 3;
     }
     else if (!IsDoubleBattle())
     {
@@ -2026,9 +2018,9 @@ static bool32 TwoMonsAtSendOut(u32 battler)
     }
     else
     {
-        if ((!TwoOpponentIntroMons(battler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)) && !BATTLE_TWO_VS_ONE_OPPONENT)
+        if ((!TwoOpponentIntroMons(battler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
             return FALSE;
-        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (BATTLE_TWO_VS_ONE_OPPONENT && !TwoOpponentIntroMons(battler)))
+        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (!TwoOpponentIntroMons(battler)))
             return FALSE;
         else
             return TRUE;

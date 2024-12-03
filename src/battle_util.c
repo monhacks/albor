@@ -3666,58 +3666,16 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
 
     side = GetBattlerSide(battler);
 
-    if (BATTLE_TWO_VS_ONE_OPPONENT && side == B_SIDE_OPPONENT)
-    {
-        flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-        playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        party = gEnemyParty;
-
-        if (partyIdBattlerOn1 == PARTY_SIZE)
-            partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-        if (partyIdBattlerOn2 == PARTY_SIZE)
-            partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (IsValidForBattle(&party[i])
-             && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-             && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
-                break;
-        }
-        return (i == PARTY_SIZE);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         party = GetBattlerParty(battler);
-        if (side == B_SIDE_OPPONENT && WILD_DOUBLE_BATTLE)
+        playerId = ((battler & BIT_FLANK) / 2);
+        for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
         {
-            flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-
-            if (partyIdBattlerOn1 == PARTY_SIZE)
-                partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-            if (partyIdBattlerOn2 == PARTY_SIZE)
-                partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-            for (i = 0; i < PARTY_SIZE; i++)
-            {
-                if (IsValidForBattle(&party[i])
-                 && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-                 && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
-                    break;
-            }
-            return (i == PARTY_SIZE);
+            if (IsValidForBattle(&party[i]))
+                break;
         }
-        else
-        {
-            playerId = ((battler & BIT_FLANK) / 2);
-            for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
-            {
-                if (IsValidForBattle(&party[i]))
-                    break;
-            }
-            return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
-        }
+        return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
     {

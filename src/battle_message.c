@@ -2651,9 +2651,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
             }
             else
             {
-                if (BATTLE_TWO_VS_ONE_OPPONENT)
-                    stringPtr = sText_Trainer1WantsToBattle;
-                else if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
+                if (gBattleTypeFlags & (BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER))
                     stringPtr = sText_TwoTrainersWantToBattle;
                 else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                     stringPtr = sText_TwoTrainersWantToBattle;
@@ -2694,9 +2692,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
-                if (BATTLE_TWO_VS_ONE_OPPONENT)
-                    stringPtr = sText_Trainer1SentOutTwoPkmn;
-                else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                     stringPtr = sText_TwoTrainersSentPkmn;
                 else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
                     stringPtr = sText_TwoLinkTrainersSentOutPkmn;
@@ -2933,7 +2929,7 @@ static const u8 *BattleStringGetOpponentName(u8 *text, u8 multiplayerId, u8 batt
         toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
         break;
     case B_POSITION_OPPONENT_RIGHT:
-        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI) && !BATTLE_TWO_VS_ONE_OPPONENT)
+        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI))
             toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, battler);
         else
             toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_A, text, multiplayerId, battler);
@@ -3283,7 +3279,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
                     break;
                 case B_POSITION_OPPONENT_RIGHT:
-                    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
+                    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                         toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
                     else
                         toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);
