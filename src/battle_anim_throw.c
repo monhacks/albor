@@ -1015,21 +1015,11 @@ static void AnimTask_ThrowBall_Step(u8 taskId)
 // Safari Zone throw / Wally's throw
 void AnimTask_ThrowBall_StandingTrainer(u8 taskId)
 {
-    s16 x, y;
+    s16 x = 23;
+    s16 y = 5;
     u8 ballId;
     u8 subpriority;
     u8 spriteId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
-    {
-        x = 32;
-        y = 11;
-    }
-    else
-    {
-        x = 23;
-        y = 5;
-    }
 
     ballId = ItemIdToBallId(gLastUsedItem);
     subpriority = GetBattlerSpriteSubpriority(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)) + 1;
