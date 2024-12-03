@@ -115,9 +115,7 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            gBattlerControllerFuncs[0] = SetControllerToSafari;
-        else if (IsAiVsAiBattle())
+        if (IsAiVsAiBattle())
             gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
         else
             gBattlerControllerFuncs[0] = SetControllerToPlayer;
@@ -1239,7 +1237,7 @@ static bool8 ShouldDoSlideInAnim(void)
         return FALSE;
     if (gBattleTypeFlags & (
         BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_FIRST_BATTLE |
-        BATTLE_TYPE_SAFARI | BATTLE_TYPE_TWO_OPPONENTS |
+        BATTLE_TYPE_TWO_OPPONENTS |
         BATTLE_TYPE_INGAME_PARTNER)
     )
         return FALSE;

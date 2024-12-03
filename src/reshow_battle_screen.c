@@ -182,8 +182,6 @@ static bool8 LoadBattlerSpriteGfx(u32 battler)
             else
                 BattleLoadSubstituteOrMonSpriteGfx(battler, FALSE);
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT) // Should be checking position, not battler.
-            DecompressTrainerBackPic(gSaveBlockPtr->playerGender, battler);
         else if (!gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
             BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         else
@@ -221,16 +219,6 @@ void CreateBattlerSprite(u32 battler)
 
             StartSpriteAnim(&gSprites[gBattlerSpriteIds[battler]], 0);
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
-        {
-            SetMultiuseSpriteTemplateToTrainer(gSaveBlockPtr->playerGender, GetBattlerPosition(B_POSITION_PLAYER_LEFT));
-            gBattlerSpriteIds[battler] = CreateSprite(&gMultiuseSpriteTemplate, 0x50,
-                                                (8 - gTrainerBacksprites[gSaveBlockPtr->playerGender].coordinates.size) * 4 + 80,
-                                                 GetBattlerSpriteSubpriority(0));
-            gSprites[gBattlerSpriteIds[battler]].oam.paletteNum = battler;
-            gSprites[gBattlerSpriteIds[battler]].callback = SpriteCallbackDummy;
-            gSprites[gBattlerSpriteIds[battler]].data[0] = battler;
-        }
         else
         {
             if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
@@ -254,33 +242,22 @@ static void CreateHealthboxSprite(u32 battler)
 {
     if (battler < gBattlersCount)
     {
-        u8 healthboxSpriteId;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI && battler == B_POSITION_PLAYER_LEFT)
-            healthboxSpriteId = CreateSafariPlayerHealthboxSprites();
-        else
-            healthboxSpriteId = CreateBattlerHealthboxSprites(battler);
-
+        u8 healthboxSpriteId = CreateBattlerHealthboxSprites(battler);
         gHealthboxSpriteIds[battler] = healthboxSpriteId;
         InitBattlerHealthboxCoords(battler);
         SetHealthboxSpriteVisible(healthboxSpriteId);
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gEnemyParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
-        else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_SAFARI_ALL_TEXT);
-        else
-            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
-        else if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
-        {
-            if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
-                SetHealthboxSpriteInvisible(healthboxSpriteId);
-        }
+        if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
+            SetHealthboxSpriteInvisible(healthboxSpriteId);
     }
 }

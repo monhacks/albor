@@ -3019,8 +3019,6 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
 
 bool32 HandleFaintedMonActions(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        return FALSE;
     do
     {
         s32 i;
@@ -4111,9 +4109,6 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
     u32 side = 0;
     u32 i = 0, j = 0;
     u32 partner = 0;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
-        return 0;
 
     if (gBattlerAttacker >= gBattlersCount)
         gBattlerAttacker = battler;
