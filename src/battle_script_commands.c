@@ -11400,23 +11400,7 @@ static void Cmd_forcerandomswitch(void)
     {
         party = GetBattlerParty(gBattlerTarget);
 
-        if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
-            || (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
-        {
-            if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
-            {
-                firstMonId = PARTY_SIZE / 2;
-                lastMonId = PARTY_SIZE;
-            }
-            else
-            {
-                firstMonId = 0;
-                lastMonId = PARTY_SIZE / 2;
-            }
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
-        }
-        else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK))
+        if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK))
         {
             if (GetLinkTrainerFlankId(GetBattlerMultiplayerId(gBattlerTarget)) == B_FLANK_RIGHT)
             {
@@ -11495,8 +11479,7 @@ static void Cmd_forcerandomswitch(void)
             if (!IsMultiBattle())
                 SwitchPartyOrder(gBattlerTarget);
 
-            if ((gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                || (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI))
+            if (gBattleTypeFlags & BATTLE_TYPE_LINK && gBattleTypeFlags & BATTLE_TYPE_MULTI)
             {
                 SwitchPartyOrderLinkMulti(gBattlerTarget, i, 0);
                 SwitchPartyOrderLinkMulti(BATTLE_PARTNER(gBattlerTarget), i, 1);

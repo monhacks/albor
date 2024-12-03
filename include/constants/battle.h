@@ -43,11 +43,17 @@ enum BattlersSides
     NUM_BATTLE_SIDES
 };
 
-#define B_FLANK_LEFT  0
-#define B_FLANK_RIGHT 1
+enum FlancosBatalla
+{
+    B_FLANK_LEFT,
+    B_FLANK_RIGHT,
+};
 
-#define BIT_SIDE        1
-#define BIT_FLANK       2
+enum BitesLadosBatalla
+{
+    BIT_SIDE = 1,
+    BIT_FLANK,
+};
 
 enum ModosBatalla
 {
@@ -62,7 +68,6 @@ enum ModosBatalla
 #define BATTLE_TYPE_TRAINER            (1 << 3)
 #define BATTLE_TYPE_FIRST_BATTLE       (1 << 4)
 #define BATTLE_TYPE_MULTI              (1 << 6)
-#define BATTLE_TYPE_BATTLE_TOWER       (1 << 8)
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TIPO_FANTASMA.
 #define BATTLE_TYPE_DOME               (1 << 16) // Used in pokefirered as BATTLE_TYPE_POKEDUDE.
@@ -70,8 +75,8 @@ enum ModosBatalla
 #define BATTLE_TYPE_PIKE               (1 << 20)
 #define BATTLE_TYPE_PYRAMID            (1 << 21)
 #define BATTLE_TYPE_INGAME_PARTNER     (1 << 22)
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
-#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE)
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE | BATTLE_TYPE_PYRAMID)
+#define BATTLE_TYPE_FRONTIER_NO_PYRAMID     (BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_PIKE)
 
 enum ResultadosBatalla
 {

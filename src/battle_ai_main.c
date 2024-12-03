@@ -105,7 +105,7 @@ void BattleAI_SetupItems(void)
 
     // Items are allowed to use in ONLY trainer battles.
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_FRONTIER| BATTLE_TYPE_INGAME_PARTNER))
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER| BATTLE_TYPE_INGAME_PARTNER))
        )
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
