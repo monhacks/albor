@@ -591,25 +591,7 @@ static void LinkCB_ReadyCloseLink(void)
 
 static void LinkCB_WaitCloseLink(void)
 {
-    int i;
-    unsigned count;
 
-    // Wait for all players to be ready
-    u8 linkPlayerCount = GetLinkPlayerCount();
-    count = 0;
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        if (gReadyToCloseLink[i])
-            count++;
-    }
-
-    if (count == linkPlayerCount)
-    {
-        // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
-        CloseLink();
-        gLinkCallback = NULL;
-    }
 }
 
 // Used instead of SetCloseLinkCallback when disconnecting from an attempt to link with a foreign game
@@ -628,31 +610,7 @@ static void LinkCB_ReadyCloseLinkWithJP(void)
 
 static void LinkCB_WaitCloseLinkWithJP(void)
 {
-    int i;
-    unsigned count;
-    u8 linkPlayerCount;
 
-    linkPlayerCount = GetLinkPlayerCount();
-    count = 0;
-
-    // Wait for all non-foreign players to be ready
-    for (i = 0; i < linkPlayerCount; i++)
-    {
-        // Rather than communicate with the foreign game
-        // just assume they're ready to disconnect
-        if (gLinkPlayers[i].language == LANGUAGE_JAPANESE)
-            count++;
-        else if (gReadyToCloseLink[i])
-            count++;
-    }
-
-    if (count == linkPlayerCount)
-    {
-        // All ready, close link
-        gBattleTypeFlags &= ~BATTLE_TYPE_LINK_IN_BATTLE;
-        CloseLink();
-        gLinkCallback = NULL;
-    }
 }
 
 void SetLinkStandbyCallback(void)
