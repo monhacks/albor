@@ -1879,11 +1879,6 @@ static void DoBattleIntro(void)
                 }
                 break;
             case B_POSITION_PLAYER_RIGHT:
-                if (gBattleTypeFlags & (BATTLE_TYPE_INGAME_PARTNER)) // partner sprite
-                {
-                    BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
-                    MarkBattlerForControllerExec(battler);
-                }
                 break;
             case B_POSITION_OPPONENT_RIGHT:
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -2054,12 +2049,6 @@ static void DoBattleIntro(void)
         gBattleStruct->introState++;
         break;
     case BATTLE_INTRO_STATE_PRINT_PLAYER_2_SEND_OUT_TEXT:
-        if (gBattleTypeFlags & (BATTLE_TYPE_INGAME_PARTNER))
-        {
-            battler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            BtlController_EmitIntroTrainerBallThrow(battler, BUFFER_A);
-            MarkBattlerForControllerExec(battler);
-        }
         gBattleStruct->introState++;
         break;
     case BATTLE_INTRO_STATE_SET_DEX_AND_BATTLE_VARS:
@@ -2888,15 +2877,6 @@ static void HandleTurnActionSelectionState(void)
     if (gBattleCommunication[ACTIONS_CONFIRMED_COUNT] == gBattlersCount)
     {
         gBattleMainFunc = SetActionsAndBattlersTurnOrder;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-        {
-            for (i = 0; i < gBattlersCount; i++)
-            {
-                if (gChosenActionByBattler[i] == B_ACTION_SWITCH)
-                    SwitchPartyOrderInGameMulti(i, *(gBattleStruct->monToSwitchIntoId + i));
-            }
-        }
     }
 }
 

@@ -2644,9 +2644,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
             }
             else
             {
-                if (gBattleTypeFlags & (BATTLE_TYPE_INGAME_PARTNER))
-                    stringPtr = sText_TwoTrainersWantToBattle;
-                else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                     stringPtr = sText_TwoTrainersWantToBattle;
                 else
                     stringPtr = sText_Trainer1WantsToBattle;
@@ -2667,9 +2665,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (IsDoubleBattle() && IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                    stringPtr = sText_InGamePartnerSentOutZGoN;
-                else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+                if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
                     stringPtr = sText_GoTwoPkmn;
                 else
                     stringPtr = sText_GoTwoPkmn;
@@ -2907,35 +2903,10 @@ static const u8 *BattleStringGetOpponentName(u8 *text, u8 multiplayerId, u8 batt
     return toCpy;
 }
 
-static const u8 *BattleStringGetPlayerName(u8 *text, u8 battler)
-{
-    const u8 *toCpy = NULL;
-
-    switch (GetBattlerPosition(battler))
-    {
-    case B_POSITION_PLAYER_LEFT:
-        toCpy = gSaveBlockPtr->playerName;
-        break;
-    case B_POSITION_PLAYER_RIGHT:
-        if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-        {
-            GetFrontierTrainerName(text, gPartnerTrainerId);
-            toCpy = text;
-        }
-        else
-        {
-            toCpy = gSaveBlockPtr->playerName;
-        }
-        break;
-    }
-
-    return toCpy;
-}
-
 static const u8 *BattleStringGetTrainerName(u8 *text, u8 multiplayerId, u8 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
-        return BattleStringGetPlayerName(text, battler);
+        return gSaveBlockPtr->playerName;
     else
         return BattleStringGetOpponentName(text, multiplayerId, battler);
 }
@@ -3137,7 +3108,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 toCpy = gLinkPlayers[GetBattlerMultiplayerId(gBattleScripting.battler)].name;
                 break;
             case B_TXT_PLAYER_NAME: // player name
-                toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_LEFT));
+                toCpy = gSaveBlockPtr->playerName;
                 break;
             case B_TXT_TRAINER1_LOSE_TEXT: // trainerA lose text
                 if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -3227,7 +3198,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
                 break;
             case B_TXT_PARTNER_NAME:
-                toCpy = BattleStringGetPlayerName(text, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
+                toCpy = gSaveBlockPtr->playerName;
                 break;
             case B_TXT_ATK_TRAINER_NAME:
                 toCpy = BattleStringGetTrainerName(text, multiplayerId, gBattlerAttacker);
@@ -3236,8 +3207,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 switch (GetBattlerPosition(gBattlerAttacker))
                 {
                 case B_POSITION_PLAYER_RIGHT:
-                    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-                        toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
                     break;
                 case B_POSITION_OPPONENT_LEFT:
                     toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_A);

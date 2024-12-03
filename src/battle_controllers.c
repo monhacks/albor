@@ -72,35 +72,7 @@ void InitBattleControllers(void)
 
 static void InitSinglePlayerBtlControllers(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-    {
-        gBattleMainFunc = BeginBattleIntro;
-
-        gBattlerControllerFuncs[0] = SetControllerToPlayer;
-        gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-
-        gBattlerControllerFuncs[1] = SetControllerToOpponent;
-        gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
-
-        gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
-        gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-
-        gBattlerControllerFuncs[3] = SetControllerToOpponent;
-        gBattlerPositions[3] = B_POSITION_OPPONENT_RIGHT;
-
-        gBattlersCount = MAX_BATTLERS_COUNT;
-
-        BufferBattlePartyCurrentOrderBySide(0, 0);
-        BufferBattlePartyCurrentOrderBySide(1, 0);
-        BufferBattlePartyCurrentOrderBySide(2, 1);
-        BufferBattlePartyCurrentOrderBySide(3, 1);
-
-        gBattlerPartyIndexes[0] = 0;
-        gBattlerPartyIndexes[1] = 0;
-        gBattlerPartyIndexes[2] = 3;
-        gBattlerPartyIndexes[3] = 3;
-    }
-    else if (!IsDoubleBattle())
+    if (!IsDoubleBattle())
     {
         gBattleMainFunc = BeginBattleIntro;
 
@@ -1223,8 +1195,7 @@ static bool8 ShouldDoSlideInAnim(void)
         return FALSE;
     if (gBattleTypeFlags & (
         BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_FIRST_BATTLE |
-        BATTLE_TYPE_TWO_OPPONENTS |
-        BATTLE_TYPE_INGAME_PARTNER)
+        BATTLE_TYPE_TWO_OPPONENTS)
     )
         return FALSE;
     return TRUE;

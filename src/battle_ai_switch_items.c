@@ -48,7 +48,7 @@ static bool32 IsAceMon(u32 battler, u32 monPartyId)
 
 void GetAIPartyIndexes(u32 battler, s32 *firstId, s32 *lastId)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_INGAME_PARTNER))
+    if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS))
     {
         if ((battler & BIT_FLANK) == B_FLANK_LEFT)
             *firstId = 0, *lastId = PARTY_SIZE / 2;
@@ -2095,9 +2095,8 @@ static bool32 ShouldUseItem(u32 battler)
     if (IsAiVsAiBattle())
         return FALSE;
 
-    // If teaming up with player and Pokemon is on the right, or Pokemon is currently held by Sky Drop
-    if ((gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)
-       || gStatuses3[battler] & STATUS3_SKY_DROPPED)
+    // If Pokemon is currently held by Sky Drop
+    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
         return FALSE;
 
     if (gStatuses3[battler] & STATUS3_EMBARGO)
