@@ -3677,19 +3677,6 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
         }
         return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        flankId = GetBattlerMultiplayerId(battler);
-        party = GetBattlerParty(battler);
-        playerId = GetLinkTrainerFlankId(flankId);
-
-        for (i = playerId * MULTI_PARTY_SIZE; i < playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE; i++)
-        {
-            if (IsValidForBattle(&party[i]))
-                break;
-        }
-        return (i == playerId * MULTI_PARTY_SIZE + MULTI_PARTY_SIZE);
-    }
     else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && side == B_SIDE_OPPONENT)
     {
         party = gEnemyParty;
@@ -10653,8 +10640,6 @@ bool32 IsPartnerMonFromSameTrainer(u32 battler)
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         return FALSE;
     else if (GetBattlerSide(battler) == B_SIDE_PLAYER && gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
-        return FALSE;
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
         return FALSE;
     else
         return TRUE;

@@ -840,8 +840,6 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     default:
         return FALSE;
     case 1: // Player's side in battle
-        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            return FALSE;
         if (!gMain.inBattle)
             return FALSE;
         if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
@@ -850,8 +848,6 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
     case 2:
         break;
     case 3: // Summary Screen
-        if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-            return FALSE;
         if (!gMain.inBattle)
             return FALSE;
         if (battlerId == 1 || battlerId == 4 || battlerId == 5)
@@ -864,16 +860,8 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         {
             if (!gMain.inBattle)
                 return FALSE;
-            if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-            {
-                if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
-                    return FALSE;
-            }
-            else
-            {
-                if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                    return FALSE;
-            }
+            if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
+                return FALSE;
         }
         else
         {

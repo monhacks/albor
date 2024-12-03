@@ -790,64 +790,16 @@ static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 b
     u16 pokeballStatuses = 0;
     u16 tiles[6];
 
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if (gTasks[taskId].data[5] != 0)
-        {
-            switch (multiplayerId)
-            {
-            case 0:
-                pokeballStatuses = 0x3F & gTasks[taskId].data[3];
-                break;
-            case 1:
-                pokeballStatuses = (0xFC0 & gTasks[taskId].data[4]) >> 6;
-                break;
-            case 2:
-                pokeballStatuses = (0xFC0 & gTasks[taskId].data[3]) >> 6;
-                break;
-            case 3:
-                pokeballStatuses = 0x3F & gTasks[taskId].data[4];
-                break;
-            }
-        }
-        else
-        {
-            switch (multiplayerId)
-            {
-            case 0:
-                pokeballStatuses = 0x3F & gTasks[taskId].data[3];
-                break;
-            case 1:
-                pokeballStatuses = 0x3F & gTasks[taskId].data[4];
-                break;
-            case 2:
-                pokeballStatuses = (0xFC0 & gTasks[taskId].data[3]) >> 6;
-                break;
-            case 3:
-                pokeballStatuses = (0xFC0 & gTasks[taskId].data[4]) >> 6;
-                break;
-            }
-        }
-
-        for (i = 0; i < 3; i++)
-            tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
-
-        CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 3, 1, 0x11);
-        CopyBgTilemapBufferToVram(bgId);
-    }
+    if (multiplayerId == gBattleScripting.multiplayerId)
+        pokeballStatuses = gTasks[taskId].data[3];
     else
-    {
-        if (multiplayerId == gBattleScripting.multiplayerId)
-            pokeballStatuses = gTasks[taskId].data[3];
-        else
-            pokeballStatuses = gTasks[taskId].data[4];
+        pokeballStatuses = gTasks[taskId].data[4];
 
-        for (i = 0; i < 6; i++)
-            tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
+    for (i = 0; i < 6; i++)
+        tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
 
-        CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 6, 1, 0x11);
-        CopyBgTilemapBufferToVram(bgId);
-    }
+    CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 6, 1, 0x11);
+    CopyBgTilemapBufferToVram(bgId);
 }
 
 static void DrawLinkBattleVsScreenOutcomeText(void)
@@ -855,53 +807,6 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
     if (gBattleOutcome == B_OUTCOME_DREW)
     {
         BattlePutTextOnWindow(gText_Draw, B_WIN_VS_OUTCOME_DRAW);
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if (gBattleOutcome == B_OUTCOME_WON)
-        {
-            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
-            {
-            case 0:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-                break;
-            case 1:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-                break;
-            case 2:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-                break;
-            case 3:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-                break;
-            }
-        }
-        else
-        {
-            switch (gLinkPlayers[gBattleScripting.multiplayerId].id)
-            {
-            case 0:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-                break;
-            case 1:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-                break;
-            case 2:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-                break;
-            case 3:
-                BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-                BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-                break;
-            }
-        }
     }
     else if (gBattleOutcome == B_OUTCOME_WON)
     {
@@ -933,59 +838,27 @@ static void DrawLinkBattleVsScreenOutcomeText(void)
 
 void InitLinkBattleVsScreen(u8 taskId)
 {
-    struct LinkPlayer *linkPlayer;
     u8 *name;
-    s32 i, palId;
+    s32 palId;
 
     switch (gTasks[taskId].data[0])
     {
     case 0:
-        if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-        {
-            for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-            {
-                name = gLinkPlayers[i].name;
-                linkPlayer = &gLinkPlayers[i];
+        u8 playerId = gBattleScripting.multiplayerId;
+        u8 opponentId = playerId ^ BIT_SIDE;
+        u8 opponentId_copy = opponentId;
 
-                switch (linkPlayer->id)
-                {
-                case 0:
-                    BattlePutTextOnWindow(name, B_WIN_VS_MULTI_PLAYER_1);
-                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 4);
-                    break;
-                case 1:
-                    BattlePutTextOnWindow(name, B_WIN_VS_MULTI_PLAYER_2);
-                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 4);
-                    break;
-                case 2:
-                    BattlePutTextOnWindow(name, B_WIN_VS_MULTI_PLAYER_3);
-                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 1, 2, 8);
-                    break;
-                case 3:
-                    BattlePutTextOnWindow(name, B_WIN_VS_MULTI_PLAYER_4);
-                    DrawLinkBattleParticipantPokeballs(taskId, linkPlayer->id, 2, 2, 8);
-                    break;
-                }
-            }
-        }
-        else
-        {
-            u8 playerId = gBattleScripting.multiplayerId;
-            u8 opponentId = playerId ^ BIT_SIDE;
-            u8 opponentId_copy = opponentId;
+        if (gLinkPlayers[playerId].id != 0)
+            opponentId = playerId, playerId = opponentId_copy;
 
-            if (gLinkPlayers[playerId].id != 0)
-                opponentId = playerId, playerId = opponentId_copy;
+        name = gLinkPlayers[playerId].name;
+        BattlePutTextOnWindow(name, B_WIN_VS_PLAYER);
 
-            name = gLinkPlayers[playerId].name;
-            BattlePutTextOnWindow(name, B_WIN_VS_PLAYER);
+        name = gLinkPlayers[opponentId].name;
+        BattlePutTextOnWindow(name, B_WIN_VS_OPPONENT);
 
-            name = gLinkPlayers[opponentId].name;
-            BattlePutTextOnWindow(name, B_WIN_VS_OPPONENT);
-
-            DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
-            DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);
-        }
+        DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
+        DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);
         gTasks[taskId].data[0]++;
         break;
     case 1:

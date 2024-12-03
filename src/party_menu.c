@@ -1217,14 +1217,6 @@ static void DrawCancelConfirmButtons(void)
     ScheduleBgCopyTilemapToVram(1);
 }
 
-bool8 IsMultiBattle(void)
-{
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI && IsDoubleBattle() && gMain.inBattle)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 static void SwapPartyPokemon(struct Pokemon *mon1, struct Pokemon *mon2)
 {
     struct Pokemon *temp = Alloc(sizeof(struct Pokemon));
@@ -1364,8 +1356,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
         {
             u8 partyId = GetPartyIdFromBattleSlot((u8)*slotPtr);
             if (GetMonData(&gPlayerParty[*slotPtr], MON_DATA_HP) > 0
-                || GetMonData(&gPlayerParty[*slotPtr], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
-                || ((gBattleTypeFlags & BATTLE_TYPE_MULTI) && partyId >= (PARTY_SIZE / 2)))
+                || GetMonData(&gPlayerParty[*slotPtr], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 // Can't select if egg, alive, or doesn't belong to you
                 PlaySE(SE_FAILURE);
@@ -6295,8 +6286,6 @@ void ChooseMonForWirelessMinigame(void)
 
 static u8 GetPartyLayoutFromBattleType(void)
 {
-    if (IsMultiBattle() == TRUE)
-        return PARTY_LAYOUT_MULTI;
     if (!IsDoubleBattle() || gPlayerPartyCount == 1) // Draw the single layout in a double battle where the player has only one pokemon.
         return PARTY_LAYOUT_SINGLE;
     return PARTY_LAYOUT_DOUBLE;
@@ -6333,13 +6322,6 @@ static bool8 TrySwitchInPokemon(void)
     u8 newSlot;
     u8 i;
 
-    // In a multi battle, slots 1, 4, and 5 are the partner's Pokémon
-    if (IsMultiBattle() == TRUE && (slot == 1 || slot == 4 || slot == 5))
-    {
-        StringCopy(gStringVar1, GetTrainerPartnerName());
-        StringExpandPlaceholders(gStringVar4, gText_CantSwitchWithAlly);
-        return FALSE;
-    }
     if (GetMonData(&gPlayerParty[slot], MON_DATA_HP) == 0)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
@@ -6396,25 +6378,7 @@ static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
     u8 partyIds[PARTY_SIZE];
     int i, j;
 
-    if (IsMultiBattle() == TRUE)
-    {
-        // Party ids are packed in 4 bits at a time
-        // i.e. the party id order below would be 0, 3, 5, 4, 2, 1, and the two parties would be 0,5,4 and 3,2,1
-        if (flankId != 0)
-        {
-            partyBattleOrder[0] = 0 | (3 << 4);
-            partyBattleOrder[1] = 5 | (4 << 4);
-            partyBattleOrder[2] = 2 | (1 << 4);
-        }
-        else
-        {
-            partyBattleOrder[0] = 3 | (0 << 4);
-            partyBattleOrder[1] = 2 | (1 << 4);
-            partyBattleOrder[2] = 5 | (4 << 4);
-        }
-        return;
-    }
-    else if (IsDoubleBattle() == FALSE)
+    if (IsDoubleBattle() == FALSE)
     {
         j = 1;
         partyIds[0] = gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)];
@@ -6469,23 +6433,7 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 ba
         rightBattler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
 
-    if (IsMultiBattle() == TRUE)
-    {
-        if (flankId != 0)
-        {
-            partyBattleOrder[0] = 0 | (3 << 4);
-            partyBattleOrder[1] = 5 | (4 << 4);
-            partyBattleOrder[2] = 2 | (1 << 4);
-        }
-        else
-        {
-            partyBattleOrder[0] = 3 | (0 << 4);
-            partyBattleOrder[1] = 2 | (1 << 4);
-            partyBattleOrder[2] = 5 | (4 << 4);
-        }
-        return;
-    }
-    else if (IsDoubleBattle() == FALSE)
+    if (IsDoubleBattle() == FALSE)
     {
         j = 1;
         partyIndexes[0] = gBattlerPartyIndexes[leftBattler];
@@ -6519,39 +6467,7 @@ static void BufferBattlePartyOrderBySide(u8 *partyBattleOrder, u8 flankId, u8 ba
 
 void SwitchPartyOrderLinkMulti(u8 battlerId, u8 slot, u8 slot2)
 {
-    u8 partyIds[PARTY_SIZE];
-    u8 tempSlot = 0;
-    int i, j;
-    u8 *partyBattleOrder;
-    u8 partyIdBuffer;
 
-    if (IsMultiBattle())
-    {
-        partyBattleOrder = gBattleStruct->battlerPartyOrders[battlerId];
-        for (i = j = 0; i < PARTY_SIZE / 2; j++, i++)
-        {
-            partyIds[j] = partyBattleOrder[i] >> 4;
-            j++;
-            partyIds[j] = partyBattleOrder[i] & 0xF;
-        }
-        partyIdBuffer = partyIds[slot2];
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (partyIds[i] == slot)
-            {
-                tempSlot = partyIds[i];
-                partyIds[i] = partyIdBuffer;
-                break;
-            }
-        }
-        if (i != PARTY_SIZE)
-        {
-            partyIds[slot2] = tempSlot;
-            partyBattleOrder[0] = (partyIds[0] << 4) | partyIds[1];
-            partyBattleOrder[1] = (partyIds[2] << 4) | partyIds[3];
-            partyBattleOrder[2] = (partyIds[4] << 4) | partyIds[5];
-        }
-    }
 }
 
 static u8 GetPartyIdFromBattleSlot(u8 slot)

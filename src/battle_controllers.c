@@ -66,11 +66,8 @@ void InitBattleControllers(void)
     InitSinglePlayerBtlControllers();
     SetBattlePartyIds();
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
-    {
-        for (i = 0; i < gBattlersCount; i++)
-            BufferBattlePartyCurrentOrderBySide(i, 0);
-    }
+    for (i = 0; i < gBattlersCount; i++)
+        BufferBattlePartyCurrentOrderBySide(i, 0);
 }
 
 static void InitSinglePlayerBtlControllers(void)
@@ -158,62 +155,59 @@ static void SetBattlePartyIds(void)
 {
     s32 i, j;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+    for (i = 0; i < gBattlersCount; i++)
     {
-        for (i = 0; i < gBattlersCount; i++)
+        for (j = 0; j < PARTY_SIZE; j++)
         {
-            for (j = 0; j < PARTY_SIZE; j++)
+            if (i < 2)
             {
-                if (i < 2)
+                if (GetBattlerSide(i) == B_SIDE_PLAYER)
                 {
-                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
+                    if (IsValidForBattle(&gPlayerParty[j]))
                     {
-                        if (IsValidForBattle(&gPlayerParty[j]))
-                        {
-                            gBattlerPartyIndexes[i] = j;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        if (IsValidForBattle(&gEnemyParty[j]))
-                        {
-                            gBattlerPartyIndexes[i] = j;
-                            break;
-                        }
+                        gBattlerPartyIndexes[i] = j;
+                        break;
                     }
                 }
                 else
                 {
-                    if (GetBattlerSide(i) == B_SIDE_PLAYER)
+                    if (IsValidForBattle(&gEnemyParty[j]))
                     {
-                        if (IsValidForBattle(&gPlayerParty[j]) && gBattlerPartyIndexes[i - 2] != j)
-                        {
-                            gBattlerPartyIndexes[i] = j;
-                            break;
-                        }
+                        gBattlerPartyIndexes[i] = j;
+                        break;
                     }
-                    else
-                    {
-                        if (IsValidForBattle(&gEnemyParty[j]) && gBattlerPartyIndexes[i - 2] != j)
-                        {
-                            gBattlerPartyIndexes[i] = j;
-                            break;
-                        }
-                    }
-
-                    // No valid mons were found. Add the empty slot.
-                    if (gBattlerPartyIndexes[i - 2] == 0)
-                        gBattlerPartyIndexes[i] = 1;
-                    else
-                        gBattlerPartyIndexes[i] = 0;
                 }
             }
-        }
+            else
+            {
+                if (GetBattlerSide(i) == B_SIDE_PLAYER)
+                {
+                    if (IsValidForBattle(&gPlayerParty[j]) && gBattlerPartyIndexes[i - 2] != j)
+                    {
+                        gBattlerPartyIndexes[i] = j;
+                        break;
+                    }
+                }
+                else
+                {
+                    if (IsValidForBattle(&gEnemyParty[j]) && gBattlerPartyIndexes[i - 2] != j)
+                    {
+                        gBattlerPartyIndexes[i] = j;
+                        break;
+                    }
+                }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = 3;
+                // No valid mons were found. Add the empty slot.
+                if (gBattlerPartyIndexes[i - 2] == 0)
+                    gBattlerPartyIndexes[i] = 1;
+                else
+                    gBattlerPartyIndexes[i] = 0;
+            }
+        }
     }
+
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = 3;
 }
 
 static void PrepareBufferDataTransfer(u32 battler, u32 bufferId, u8 *data, u16 size)
@@ -2011,14 +2005,14 @@ static bool32 TwoMonsAtSendOut(u32 battler)
 {
     if (GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
-        if (TwoPlayerIntroMons(battler) && !(gBattleTypeFlags & BATTLE_TYPE_MULTI))
+        if (TwoPlayerIntroMons(battler))
             return TRUE;
         else
             return FALSE;
     }
     else
     {
-        if ((!TwoOpponentIntroMons(battler) || (gBattleTypeFlags & BATTLE_TYPE_MULTI)))
+        if ((!TwoOpponentIntroMons(battler)))
             return FALSE;
         else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (!TwoOpponentIntroMons(battler)))
             return FALSE;

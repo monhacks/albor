@@ -181,20 +181,8 @@ static void LinkPartnerHandleSwitchInAnim(u32 battler)
 
 static void LinkPartnerHandleDrawTrainerPic(u32 battler)
 {
-    s16 xPos;
+    s16 xPos = 80;
     u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
-    {
-        if ((GetBattlerPosition(battler) & BIT_FLANK) != 0) // second mon
-            xPos = 90;
-        else // first mon
-            xPos = 32;
-    }
-    else
-    {
-        xPos = 80;
-    }
 
     trainerPicId = LinkPlayerGetTrainerPicId(GetBattlerMultiplayerId(battler));
     BtlController_HandleDrawTrainerPic(battler, trainerPicId, FALSE,

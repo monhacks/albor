@@ -205,8 +205,6 @@ static void Task_HandleInput(u8);
 static void ChangeSummaryPokemon(u8, s8);
 static void Task_ChangeSummaryMon(u8);
 static s8 AdvanceMonIndex(s8);
-static s8 AdvanceMultiBattleMonIndex(s8);
-static bool8 IsValidToViewInMulti(struct Pokemon *);
 static void ChangePage(u8, s8);
 static void PssScrollRight(u8);
 static void PssScrollRightEnd(u8);
@@ -1703,10 +1701,6 @@ static void ChangeSummaryPokemon(u8 taskId, s8 delta)
             }
             monId = AdvanceStorageMonIndex(sMonSummaryScreen->monList.boxMons, sMonSummaryScreen->curMonIndex, sMonSummaryScreen->maxMonIndex, delta);
         }
-        else if (IsMultiBattle() == TRUE)
-        {
-            monId = AdvanceMultiBattleMonIndex(delta);
-        }
         else
         {
             monId = AdvanceMonIndex(delta);
@@ -1841,44 +1835,6 @@ static s8 AdvanceMonIndex(s8 delta)
         } while (GetMonData(&mon[index], MON_DATA_IS_EGG));
         return index;
     }
-}
-
-static s8 AdvanceMultiBattleMonIndex(s8 delta)
-{
-    struct Pokemon *mons = sMonSummaryScreen->monList.mons;
-    s8 index, arrId = 0;
-    u8 i;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (sMultiBattleOrder[i] == sMonSummaryScreen->curMonIndex)
-        {
-            arrId = i;
-            break;
-        }
-    }
-
-    while (TRUE)
-    {
-        const s8 *order = sMultiBattleOrder;
-
-        arrId += delta;
-        if (arrId < 0 || arrId >= PARTY_SIZE)
-            return -1;
-        index = order[arrId];
-        if (IsValidToViewInMulti(&mons[index]) == TRUE)
-            return index;
-    }
-}
-
-static bool8 IsValidToViewInMulti(struct Pokemon *mon)
-{
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
-        return FALSE;
-    else if (sMonSummaryScreen->curMonIndex != 0 || !GetMonData(mon, MON_DATA_IS_EGG))
-        return TRUE;
-    else
-        return FALSE;
 }
 
 static void ChangePage(u8 taskId, s8 delta)
