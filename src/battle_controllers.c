@@ -49,14 +49,6 @@ void SetUpBattleVarsAndBirchZigzagoon(void)
     ClearBattleAnimationVars();
     BattleAI_SetupItems();
     BattleAI_SetupFlags();
-
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
-    {
-        ZeroEnemyPartyMons();
-        CreateMon(&gEnemyParty[0], SPECIES_MEW, 2, USE_RANDOM_IVS, 0, 0, OT_ID_PLAYER_ID, 0);
-        i = 0;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &i);
-    }
 }
 
 void InitBattleControllers(void)
@@ -1193,10 +1185,7 @@ static bool8 ShouldDoSlideInAnim(void)
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
         return FALSE;
-    if (gBattleTypeFlags & (
-        BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_FIRST_BATTLE |
-        BATTLE_TYPE_TWO_OPPONENTS)
-    )
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TWO_OPPONENTS))
         return FALSE;
     return TRUE;
 }

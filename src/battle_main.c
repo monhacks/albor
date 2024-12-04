@@ -2361,12 +2361,6 @@ u8 IsRunningFromBattleImpossible(u32 battler)
 
     gPotentialItemEffectBattler = battler;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) // Cannot ever run from saving Birch's battle.
-    {
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
-        return BATTLE_RUN_FORBIDDEN;
-    }
-
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN)
         return BATTLE_RUN_SUCCESS;
     if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TIPO_FANTASMA))
@@ -3653,7 +3647,6 @@ static void HandleEndTurn_FinishBattle(void)
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_FIRST_BATTLE
                                   | BATTLE_TYPE_FRONTIER)))
         {
             for (battler = 0; battler < gBattlersCount; battler++)
@@ -3676,7 +3669,6 @@ static void HandleEndTurn_FinishBattle(void)
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_TRAINER
-                                  | BATTLE_TYPE_FIRST_BATTLE
                                   | BATTLE_TYPE_FRONTIER))
             && gBattleResults.shinyWildMon)
 
@@ -3732,7 +3724,6 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         gIsSurfingEncounter = FALSE;
         ResetSpriteData();
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_FIRST_BATTLE
                                   | BATTLE_TYPE_FRONTIER))
             && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
                 || gBattleOutcome == B_OUTCOME_WON
