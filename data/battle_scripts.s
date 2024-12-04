@@ -5583,18 +5583,6 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 BattleScript_LocalBattleLostEnd_::
 	end2
 
-BattleScript_FrontierLinkBattleLost::
-BattleScript_FrontierLinkBattleLostEnd::
-	end2
-
-BattleScript_LinkBattleWonOrLost::
-BattleScript_LinkBattleWonOrLostWaitEnd::
-	end2
-
-BattleScript_TowerLinkBattleWon::
-BattleScript_TowerLinkBattleWonEnd::
-	end2
-
 BattleScript_FrontierTrainerBattleWon::
 	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_PayDayMoneyAndPickUpItems
 	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_FrontierTrainerBattleWon_TwoDefeated
