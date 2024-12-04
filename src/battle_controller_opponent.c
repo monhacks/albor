@@ -463,40 +463,33 @@ static void OpponentHandleChooseMove(u32 battler)
 
     if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER) || IsWildMonSmart())
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        chosenMoveId = gBattleStruct->aiMoveOrAction[battler];
+        gBattlerTarget = gBattleStruct->aiChosenTarget[battler];
+        switch (chosenMoveId)
         {
-            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, ChooseMoveAndTargetInBattlePalace(battler));
-        }
-        else
-        {
-            chosenMoveId = gBattleStruct->aiMoveOrAction[battler];
-            gBattlerTarget = gBattleStruct->aiChosenTarget[battler];
-            switch (chosenMoveId)
+        case AI_CHOICE_WATCH:
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
+            break;
+        case AI_CHOICE_FLEE:
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
+            break;
+        case 6:
+            BtlController_EmitTwoReturnValues(battler, BUFFER_B, 15, gBattlerTarget);
+            break;
+        default:
             {
-            case AI_CHOICE_WATCH:
-                BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_SAFARI_WATCH_CAREFULLY, 0);
-                break;
-            case AI_CHOICE_FLEE:
-                BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
-                break;
-            case 6:
-                BtlController_EmitTwoReturnValues(battler, BUFFER_B, 15, gBattlerTarget);
-                break;
-            default:
+                u16 chosenMove = moveInfo->moves[chosenMoveId];
+                if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
+                    gBattlerTarget = battler;
+                if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
                 {
-                    u16 chosenMove = moveInfo->moves[chosenMoveId];
-                    if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
-                        gBattlerTarget = battler;
-                    if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
-                    {
-                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-                        if (gAbsentBattlerFlags & (1u << gBattlerTarget))
-                            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-                    }
-                    BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
+                    gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+                    if (gAbsentBattlerFlags & (1u << gBattlerTarget))
+                        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
                 }
-                break;
+                BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
             }
+            break;
         }
         OpponentBufferExecCompleted(battler);
     }

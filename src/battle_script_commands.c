@@ -6310,14 +6310,6 @@ static void Cmd_switchindataupdate(void)
 
     SwitchInClearSetData(battler);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE
-        && gBattleMons[battler].maxHP / 2 >= gBattleMons[battler].hp
-        && IsBattlerAlive(battler)
-        && !(gBattleMons[battler].status1 & STATUS1_SLEEP))
-    {
-        gBattleStruct->palaceFlags |= 1u << battler;
-    }
-
     gBattleScripting.battler = battler;
 
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
@@ -11877,7 +11869,7 @@ static void Cmd_mimicattackcopy(void)
 
 static bool32 InvalidMetronomeMove(u32 move)
 {
-    return gMovesInfo[move].effect == EFFECT_PLACEHOLDER
+    return gMovesInfo[move].effect == SIN_EFECTO
         || gMovesInfo[move].metronomeBanned;
 }
 

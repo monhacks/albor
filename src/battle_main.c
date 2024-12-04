@@ -2337,9 +2337,7 @@ void BattleTurnPassed(void)
     if (gSideTimers[B_SIDE_OPPONENT].retaliateTimer > 0)
         gSideTimers[B_SIDE_OPPONENT].retaliateTimer--;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-        BattleScriptExecute(BattleScript_PalacePrintFlavorText);
-    else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_LAST_LOW_HP)))
+    if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_LAST_LOW_HP)))
         BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
     else if ((i = ShouldDoTrainerSlide(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT), TRAINER_SLIDE_LAST_HALF_HP)))
         BattleScriptExecute(i == 1 ? BattleScript_TrainerASlideMsgEnd2 : BattleScript_TrainerBSlideMsgEnd2);
@@ -2462,8 +2460,7 @@ static void HandleTurnActionSelectionState(void)
             u32 isAiRisky = AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY; // Risky AI switches aggressively even mid battle
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER || IsWildMonSmart())
-                    && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER || IsWildMonSmart()) && (BattlerHasAi(battler)))
             {
                 AI_DATA->aiCalcInProgress = TRUE;
 

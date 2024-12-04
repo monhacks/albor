@@ -69,8 +69,7 @@ enum ModosBatalla
 #define BATTLE_TYPE_LEGENDARY          (1 << 13)
 #define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TIPO_FANTASMA.
 #define BATTLE_TYPE_DOME               (1 << 16) // Used in pokefirered as BATTLE_TYPE_POKEDUDE.
-#define BATTLE_TYPE_PALACE             (1 << 17) // Used in pokefirered as BATTLE_TYPE_WILD_SCRIPTED.
-#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE)
+#define BATTLE_TYPE_FRONTIER                (BATTLE_TYPE_DOME)
 
 enum ResultadosBatalla
 {

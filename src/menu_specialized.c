@@ -659,7 +659,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     }
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 106, 41, TEXT_SKIP_DRAW, NULL);
 
-    if (move->effect != EFFECT_PLACEHOLDER)
+    if (move->effect != SIN_EFECTO)
         str = gMovesInfo[chosenMove].description;
     else
         str = gNotDoneYetDescription;

@@ -531,13 +531,8 @@ static u32 ChooseMoveOrAction_Doubles(u32 battlerAi)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-                BattleAI_SetupAIData(gBattleStruct->palaceFlags >> 4, battlerAi);
-            else
-                BattleAI_SetupAIData(0xF, battlerAi);
-
+            BattleAI_SetupAIData(0xF, battlerAi);
             gBattlerTarget = i;
-
             AI_DATA->partnerMove = GetAllyChosenMove(battlerAi);
             AI_THINKING_STRUCT->aiLogicId = 0;
             AI_THINKING_STRUCT->movesetIndex = 0;
@@ -2541,7 +2536,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             if (predictedMove == MOVE_NONE || IS_MOVE_STATUS(predictedMove) || AI_IsSlower(battlerAtk, battlerDef, move) || GetMovePriority(battlerDef, predictedMove) < 1 || GetMovePriority(battlerDef, predictedMove) > 3) // Opponent going first or not using priority move
                 ADJUST_SCORE(-10);
             break;
-        case EFFECT_PLACEHOLDER:
+        case SIN_EFECTO:
             return 0;   // cannot even select
     } // move effect checks
 
