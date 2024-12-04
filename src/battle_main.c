@@ -446,7 +446,7 @@ static void CB2_InitBattleInternal(void)
         gBattleTerrain = BattleSetup_GetTerrainId();
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)))
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
     }
@@ -841,7 +841,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     u32 personalityValue;
     s32 i;
     u8 monsCount;
-    if (battleTypeFlags & BATTLE_TYPE_TRAINER && !(battleTypeFlags & (BATTLE_TYPE_FRONTIER)))
+    if (battleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
@@ -968,7 +968,7 @@ void CreateTrainerPartyForPlayer(void)
 void VBlankCB_Battle(void)
 {
     // Change gRngSeed every vblank unless the battle could be recorded.
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER)))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
         AdvanceRandom();
 
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
@@ -2057,8 +2057,7 @@ static void DoBattleIntro(void)
             for (battler = 0; battler < gBattlersCount; battler++)
             {
                 if (GetBattlerSide(battler) == B_SIDE_OPPONENT
-                 && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
-                                          | BATTLE_TYPE_LINK)))
+                 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN);
                 }
@@ -2634,16 +2633,6 @@ static void HandleTurnActionSelectionState(void)
                 }
 
                 if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-                    && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER)
-                    && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
-                {
-                    gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
-                    gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
-                    *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
-                    *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_BEFORE_ACTION_CHOSEN;
-                    return;
-                }
-                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
                          && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
@@ -2934,7 +2923,7 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
 
     // player's badge boost
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
         && ShouldGetStatBadgeBoost(FLAG_BADGE03_GET, battler)
         && GetBattlerSide(battler) == B_SIDE_PLAYER)
     {
@@ -3540,13 +3529,6 @@ static void HandleEndTurn_BattleWon(void)
     {
 
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-            && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
-    {
-        BattleStopLowHpSound();
-        gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
-        PlayBGM(MUS_VICTORY_TRAINER);
-    }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         BattleStopLowHpSound();
@@ -3602,26 +3584,17 @@ static void HandleEndTurn_RanFromBattle(void)
 {
     gCurrentActionFuncId = 0;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    switch (gProtectStructs[gBattlerAttacker].fleeType)
     {
-        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
-        gBattleOutcome = B_OUTCOME_FORFEITED;
-        gSaveBlockPtr->frontier.disableRecordBattle = TRUE;
-    }
-    else
-    {
-        switch (gProtectStructs[gBattlerAttacker].fleeType)
-        {
-        default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
-            break;
-        case FLEE_ITEM:
-            gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
-            break;
-        case FLEE_ABILITY:
-            gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
-            break;
-        }
+    default:
+        gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
+        break;
+    case FLEE_ITEM:
+        gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
+        break;
+    case FLEE_ABILITY:
+        gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+        break;
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
@@ -3643,8 +3616,7 @@ static void HandleEndTurn_FinishBattle(void)
 
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_FRONTIER)))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
         {
             for (battler = 0; battler < gBattlersCount; battler++)
             {
@@ -3665,8 +3637,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_TRAINER
-                                  | BATTLE_TYPE_FRONTIER))
+                                  | BATTLE_TYPE_TRAINER))
             && gBattleResults.shinyWildMon)
 
         BeginFastPaletteFade(3);
@@ -3720,8 +3691,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         ResetSpriteData();
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_FRONTIER))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
             && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
                 || gBattleOutcome == B_OUTCOME_WON
                 || gBattleOutcome == B_OUTCOME_CAUGHT))
@@ -3738,12 +3708,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     FreeAllWindowBuffers();
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-        // To account for Battle Factory and Slateport Battle Tent, enemy parties are zeroed out in the facilitites respective src/xxx.c files
-        // The ZeroEnemyPartyMons() call happens in SaveXXXChallenge function (eg. SaveFactoryChallenge)
-        if (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER))
-        {
-            ZeroEnemyPartyMons();
-        }
+        ZeroEnemyPartyMons();
         ResetDynamicAiFunc();
         FreeMonSpritesGfx();
         FreeBattleResources();

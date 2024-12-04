@@ -2875,7 +2875,7 @@ bool32 CanThrowLastUsedBall(void)
         return FALSE;
     if (!CanThrowBall())
         return FALSE;
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER))
+    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER))
         return FALSE;
     if (!CheckBagHasItem(gBallToDisplay, 1))
         return FALSE;

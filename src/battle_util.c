@@ -426,10 +426,6 @@ bool32 TryRunFromBattle(u32 battler)
             effect++;
         }
     }
-    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER) && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-    {
-        effect++;
-    }
     else
     {
         u8 runningFromBattler = BATTLE_OPPOSITE(battler);
@@ -9193,10 +9189,6 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
             modifier = uq4_12_multiply(modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_SOUL_DEW:
-        if ((gBattleMons[battlerAtk].species == SPECIES_LATIAS || gBattleMons[battlerAtk].species == SPECIES_LATIOS)
-            && ((B_SOUL_DEW_BOOST >= GEN_7 && (moveType == TIPO_PSIQUICO || moveType == TIPO_DRAGON))
-             || (B_SOUL_DEW_BOOST < GEN_7 && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && IS_MOVE_SPECIAL(move))))
-            modifier = uq4_12_multiply(modifier, holdEffectModifier);
         break;
     case HOLD_EFFECT_BUG_POWER:
     case HOLD_EFFECT_STEEL_POWER:
@@ -9647,7 +9639,6 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
     case HOLD_EFFECT_SOUL_DEW:
         if (B_SOUL_DEW_BOOST < GEN_7
          && (gBattleMons[battlerDef].species == SPECIES_LATIAS || gBattleMons[battlerDef].species == SPECIES_LATIOS)
-         && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
          && !usesDefStat)
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(1.5));
         break;
@@ -10903,17 +10894,13 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     // Check if the battler trying to steal should be able to
     if (stealerSide == B_SIDE_OPPONENT
         && !(gBattleTypeFlags &
-             (BATTLE_TYPE_FRONTIER
-              | BATTLE_TYPE_LINK
+             (BATTLE_TYPE_LINK
               | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
               )))
     {
         return FALSE;
     }
-    else if (!(gBattleTypeFlags &
-          (BATTLE_TYPE_FRONTIER
-           | BATTLE_TYPE_LINK))
-        && (gWishFutureKnock.knockedOffMons[stealerSide] & (1u << gBattlerPartyIndexes[battlerStealing])))
+    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)) && (gWishFutureKnock.knockedOffMons[stealerSide] & (1u << gBattlerPartyIndexes[battlerStealing])))
     {
         return FALSE;
     }
@@ -10929,7 +10916,6 @@ void TrySaveExchangedItem(u32 battler, u16 stolenItem)
         return;
     // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
-      && !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
       && GetBattlerSide(battler) == B_SIDE_PLAYER
       && stolenItem == gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].originalItem)
         gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen = TRUE;

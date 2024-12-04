@@ -105,7 +105,7 @@ void BattleAI_SetupItems(void)
 
     // Items are allowed to use in ONLY trainer battles.
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER))
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
        )
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
@@ -153,10 +153,7 @@ static u32 GetAiFlags(u16 trainerId)
     }
     else
     {
-        if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
-            flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
-        else
-            flags = GetTrainerAIFlagsFromId(trainerId);
+        flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
     if (IsDoubleBattle())
@@ -4569,7 +4566,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
 
                         if (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE)
                             canSteal = TRUE;
-                        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER || GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
+                        if (GetBattlerSide(battlerAtk) == B_SIDE_PLAYER)
                             canSteal = TRUE;
 
                         if (canSteal && aiData->items[battlerAtk] == ITEM_NONE

@@ -3686,12 +3686,7 @@ u16 GetBattleBGM(void)
         return MUS_VS_TRAINER;
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        u8 trainerClass;
-
-        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-            trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
-        else
-            trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
+        u8 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
 
         switch (trainerClass)
         {
@@ -3708,8 +3703,6 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_CHAMPION:
             return MUS_VS_CHAMPION;
         case TRAINER_CLASS_RIVAL:
-            if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                return MUS_VS_RIVAL;
             if (!StringCompare(GetTrainerNameFromId(gTrainerBattleOpponent_A), gText_BattleWallyName))
                 return MUS_VS_TRAINER;
             return MUS_VS_RIVAL;
@@ -4178,10 +4171,6 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId)
 
 static bool8 ShouldSkipFriendshipChange(void)
 {
-    if (gMain.inBattle && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
-        return TRUE;
-    if (!gMain.inBattle && (InBattlePike() || InBattlePyramid()))
-        return TRUE;
     return FALSE;
 }
 

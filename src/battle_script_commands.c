@@ -6329,8 +6329,7 @@ static void Cmd_switchinanim(void)
     battler = GetBattlerForBattleScript(cmd->battler);
 
     if (GetBattlerSide(battler) == B_SIDE_OPPONENT
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                 | BATTLE_TYPE_FRONTIER)))
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
         HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN);
 
     gAbsentBattlerFlags &= ~(1u << battler);

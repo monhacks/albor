@@ -107,10 +107,6 @@ void HandleIntroSlide(u8 terrain)
     {
         taskId = CreateTask(BattleIntroSlideLink, 0);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-    {
-        taskId = CreateTask(BattleIntroSlide3, 0);
-    }
     else if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_KYOGRE)
     {
         terrain = BATTLE_TERRAIN_UNDERWATER;
