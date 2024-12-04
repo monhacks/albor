@@ -3558,7 +3558,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
-    BattleStopLowHpSound();
+        BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
 
         switch (GetTrainerClassFromId(gTrainerBattleOpponent_A))
