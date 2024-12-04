@@ -497,7 +497,7 @@ static void DoBattlePikeWildBattle(void)
     FreezeObjectEvents();
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
-    gBattleTypeFlags = BATTLE_TYPE_PIKE;
+    gBattleTypeFlags = 0;
     CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
