@@ -243,14 +243,15 @@ static void CreateHealthboxSprite(u32 battler)
     if (battler < gBattlersCount)
     {
         u8 healthboxSpriteId = CreateBattlerHealthboxSprites(battler);
+
         gHealthboxSpriteIds[battler] = healthboxSpriteId;
         InitBattlerHealthboxCoords(battler);
         SetHealthboxSpriteVisible(healthboxSpriteId);
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gEnemyParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
-
-        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
+        else
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[gBattlerPartyIndexes[battler]], HEALTHBOX_ALL);
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {

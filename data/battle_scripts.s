@@ -10156,11 +10156,6 @@ BattleScript_WallyBallThrow::
 BattleScript_ShakeBallThrow::
 	printfromtable gBallEscapeStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_NOT_EQUAL, gNumSafariBalls, 0, BattleScript_ShakeBallThrowEnd
-	printstring STRINGID_OUTOFSAFARIBALLS
-	waitmessage B_WAIT_TIME_LONG
-	setbyte gBattleOutcome, B_OUTCOME_NO_SAFARI_BALLS
-BattleScript_ShakeBallThrowEnd::
 	finishaction
 
 BattleScript_TrainerBallBlock::
