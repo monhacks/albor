@@ -239,7 +239,6 @@ SECTIONS {
         src/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/battle_anim_sound_tasks.o(.text);
-        src/battle_controller_safari.o(.text);
         src/fldeff_sweetscent.o(.text);
         src/battle_anim_effects_3.o(.text);
         src/move_relearner.o(.text);
@@ -248,7 +247,6 @@ SECTIONS {
         src/roamer.o(.text);
         src/battle_tower.o(.text);
         src/use_pokeblock.o(.text);
-        src/battle_controller_wally.o(.text);
         src/intro.o(.text);
         src/reload_save.o(.text);
         src/field_region_map.o(.text);
@@ -267,8 +265,6 @@ SECTIONS {
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
         src/pokemon_animation.o(.text);
-        src/battle_controller_recorded_opponent.o(.text);
-        src/battle_controller_recorded_player.o(.text);
         src/trainer_pokemon_sprites.o(.text);
         src/lilycove_lady.o(.text);
         src/battle_dome.o(.text);
@@ -290,7 +286,6 @@ SECTIONS {
         src/party_menu.o(.text);
         src/battle_tent.o(.text);
         src/braille.o(.text);
-        src/battle_controller_player_partner.o(.text);
         src/mirage_tower.o(.text);
         src/pokemon_summary_screen.o(.text);
         src/pokedex_area_region_map.o(.text);
@@ -563,13 +558,11 @@ SECTIONS {
         src/field_effect_helpers.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle_anim_sound_tasks.o(.rodata);
-        src/battle_controller_safari.o(.rodata);
         src/battle_anim_effects_3.o(.rodata);
         src/move_relearner.o(.rodata);
         src/roamer.o(.rodata);
         src/battle_tower.o(.rodata);
         src/use_pokeblock.o(.rodata);
-        src/battle_controller_wally.o(.rodata);
         src/intro.o(.rodata);
         src/field_region_map.o(.rodata);
         src/battle_anim_throw.o(.rodata);
@@ -587,8 +580,6 @@ SECTIONS {
         src/evolution_graphics.o(.rodata);
         src/bard_music.o(.rodata);
         src/pokemon_animation.o(.rodata);
-        src/battle_controller_recorded_opponent.o(.rodata);
-        src/battle_controller_recorded_player.o(.rodata);
         src/trainer_pokemon_sprites.o(.rodata);
         src/lilycove_lady.o(.rodata);
         src/battle_dome.o(.rodata);
@@ -609,7 +600,6 @@ SECTIONS {
         src/party_menu.o(.rodata);
         src/battle_tent.o(.rodata);
         src/braille.o(.rodata);
-        src/battle_controller_player_partner.o(.rodata);
         src/mirage_tower.o(.rodata);
         src/pokemon_summary_screen.o(.rodata);
         src/pokedex_area_region_map.o(.rodata);

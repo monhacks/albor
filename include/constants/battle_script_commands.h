@@ -180,7 +180,6 @@
 #define VARIOUS_PARALYZE_TYPE_IMMUNITY               92
 #define VARIOUS_JUMP_IF_ABSENT                       93
 #define VARIOUS_DESTROY_ABILITY_POPUP                94
-#define VARIOUS_TOTEM_BOOST                          95
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH              96
 #define VARIOUS_MOVEEND_ITEM_EFFECTS                 97
 #define VARIOUS_TERRAIN_SEED                         98

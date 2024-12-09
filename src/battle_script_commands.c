@@ -9616,44 +9616,6 @@ static void Cmd_various(void)
         DestroyAbilityPopUp(battler);
         break;
     }
-    case VARIOUS_TOTEM_BOOST:
-    {
-        VARIOUS_ARGS(const u8 *jumpInstr);
-        battler = gBattlerAttacker;
-        if (gQueuedStatBoosts[battler].stats == 0)
-        {
-            gBattlescriptCurrInstr = cmd->nextInstr;    // stats done, exit
-        }
-        else
-        {
-            for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-            {
-                if (gQueuedStatBoosts[battler].stats & (1 << i))
-                {
-                    if (gQueuedStatBoosts[battler].statChanges[i] <= -1)
-                        SET_STATCHANGER(i + 1, abs(gQueuedStatBoosts[battler].statChanges[i]), TRUE);
-                    else
-                        SET_STATCHANGER(i + 1, gQueuedStatBoosts[battler].statChanges[i], FALSE);
-
-                    gQueuedStatBoosts[battler].stats &= ~(1 << i);
-                    gBattleScripting.battler = battler;
-                    gBattlerTarget = battler;
-                    if (gQueuedStatBoosts[battler].stats & 0x80)
-                    {
-                        gQueuedStatBoosts[battler].stats &= ~0x80; // set 'aura flared to life' flag
-                        gBattlescriptCurrInstr = BattleScript_TotemFlaredToLife;
-                    }
-                    else
-                    {
-                        gBattlescriptCurrInstr = cmd->jumpInstr;   // do boost
-                    }
-                    return;
-                }
-            }
-            gBattlescriptCurrInstr = cmd->nextInstr;    // exit if loop failed (failsafe)
-        }
-        return;
-    }
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
     {
         VARIOUS_ARGS();

@@ -9122,13 +9122,6 @@ BattleScript_PrintPlayerForfeited::
 BattleScript_PrintPlayerForfeitedLinkBattle::
 	end2
 
-BattleScript_TotemFlaredToLife::
-	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
-	printstring STRINGID_AURAFLAREDTOLIFE
-	waitmessage B_WAIT_TIME_LONG
-	call BattleScript_ApplyTotemVarBoost
-	end2
-
 BattleScript_MirrorHerbCopyStatChangeEnd2::
 	call BattleScript_MirrorHerbCopyStatChange
 	end2
@@ -9157,23 +9150,6 @@ BattleScript_OpportunistStartCopyStats:
 	goto BattleScript_OpportunistStartCopyStats
 BattleScript_OpportunistCopyStatChangeEnd:
 	end3
-
-BattleScript_TotemVar::
-	call BattleScript_TotemVar_Ret
-	end2
-
-BattleScript_TotemVar_Ret::
-	gettotemboost BattleScript_ApplyTotemVarBoost
-BattleScript_TotemVarEnd:
-	return
-BattleScript_ApplyTotemVarBoost:
-	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_TotemVarEnd
-	setgraphicalstatchangevalues
-	playanimation BS_SCRIPTING, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_TotemVar_Ret  @loop until stats bitfield is empty
-
 
 BattleScript_AnnounceAirLockCloudNine::
 	call BattleScript_AbilityPopUp

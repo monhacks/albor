@@ -2092,9 +2092,6 @@ static bool32 ShouldUseItem(u32 battler)
     u8 validMons = 0;
     bool32 shouldUse = FALSE;
 
-    if (IsAiVsAiBattle())
-        return FALSE;
-
     // If Pokemon is currently held by Sky Drop
     if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
         return FALSE;

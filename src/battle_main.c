@@ -2147,19 +2147,6 @@ static void TryDoEventsBeforeFirstTurn(void)
         }
         gBattleStruct->eventsBeforeFirstTurnState++;
         break;
-    case FIRST_TURN_EVENTS_TOTEM_BOOST:
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (gQueuedStatBoosts[i].stats != 0 && !gProtectStructs[i].eatMirrorHerb && gProtectStructs[i].activateOpportunist == 0)
-            {
-                gBattlerAttacker = i;
-                BattleScriptExecute(BattleScript_TotemVar);
-                return;
-            }
-        }
-        memset(gQueuedStatBoosts, 0, sizeof(gQueuedStatBoosts)); // erase all totem boosts for Mirror Herb and Opportunist
-        gBattleStruct->eventsBeforeFirstTurnState++;
-        break;
     case FIRST_TURN_EVENTS_NEUTRALIZING_GAS:
         if (AbilityBattleEffects(ABILITYEFFECT_NEUTRALIZINGGAS, 0, 0, 0, 0) != 0)
             return;
@@ -3927,25 +3914,6 @@ void SetTypeBeforeUsingMove(u32 move, u32 battler)
     {
         gSpecialStatuses[battler].gemParam = GetBattlerHoldEffectParam(battler);
         gSpecialStatuses[battler].gemBoost = TRUE;
-    }
-}
-
-// Queues stat boosts for a given battler for totem battles
-void ScriptSetTotemBoost(struct ScriptContext *ctx)
-{
-    u32 battler = VarGet(ScriptReadHalfword(ctx));
-    u32 stat;
-    u32 i;
-
-    for (i = 0; i < (NUM_BATTLE_STATS - 1); i++)
-    {
-        stat = VarGet(ScriptReadHalfword(ctx));
-        if (stat)
-        {
-            gQueuedStatBoosts[battler].stats |= (1 << i);
-            gQueuedStatBoosts[battler].statChanges[i] = stat;
-            gQueuedStatBoosts[battler].stats |= 0x80;  // used as a flag for the "totem flared to life" script
-        }
     }
 }
 

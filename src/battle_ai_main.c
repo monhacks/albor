@@ -173,10 +173,7 @@ static u32 GetAiFlags(u16 trainerId)
 
 void BattleAI_SetupFlags(void)
 {
-    if (IsAiVsAiBattle())
-        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = GetAiFlags(gPartnerTrainerId);
-    else
-        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
+    AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
 
     if (DEBUG_OVERWORLD_MENU && gIsDebugBattle)
     {
@@ -200,14 +197,7 @@ void BattleAI_SetupFlags(void)
             AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT];
     }
 
-    if (IsDoubleBattle() && IsAiVsAiBattle())
-    {
-        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT];
-    }
-    else
-    {
-        AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = 0; // player
-    }
+    AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = 0; // player
 }
 
 void BattleAI_SetupAIData(u8 defaultScoreMoves, u32 battler)

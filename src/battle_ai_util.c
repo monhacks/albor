@@ -66,11 +66,6 @@ bool32 AI_RandLessThan(u32 val)
     return FALSE;
 }
 
-bool32 IsAiVsAiBattle(void)
-{
-    return (B_FLAG_AI_VS_AI_BATTLE && FlagGet(B_FLAG_AI_VS_AI_BATTLE));
-}
-
 bool32 BattlerHasAi(u32 battlerId)
 {
     switch (GetBattlerPosition(battlerId))

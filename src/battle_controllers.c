@@ -68,10 +68,7 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        if (IsAiVsAiBattle())
-            gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
-        else
-            gBattlerControllerFuncs[0] = SetControllerToPlayer;
+        gBattlerControllerFuncs[0] = SetControllerToPlayer;
 
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
 
@@ -84,19 +81,13 @@ static void InitSinglePlayerBtlControllers(void)
     {
         gBattleMainFunc = BeginBattleIntro;
 
-        if (IsAiVsAiBattle())
-            gBattlerControllerFuncs[0] = SetControllerToPlayerPartner;
-        else
-            gBattlerControllerFuncs[0] = SetControllerToPlayer;
+        gBattlerControllerFuncs[0] = SetControllerToPlayer;
         gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
 
         gBattlerControllerFuncs[1] = SetControllerToOpponent;
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
 
-        if (IsAiVsAiBattle())
-            gBattlerControllerFuncs[2] = SetControllerToPlayerPartner;
-        else
-            gBattlerControllerFuncs[2] = SetControllerToPlayer;
+        gBattlerControllerFuncs[2] = SetControllerToPlayer;
         gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
 
         gBattlerControllerFuncs[3] = SetControllerToOpponent;

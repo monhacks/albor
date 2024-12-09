@@ -289,24 +289,8 @@ void HandleInputShowEntireFieldTargets(u32 battler);
 void HandleInputShowTargets(u32 battler);
 void HandleChooseMoveAfterDma3(u32 battler);
 
-// recorded player controller
-void SetControllerToRecordedPlayer(u32 battler);
-
 // opponent controller
 void SetControllerToOpponent(u32 battler);
-
-// player partner controller
-void Controller_PlayerPartnerShowIntroHealthbox(u32 battler); // Also used by the link partner.
-void SetControllerToPlayerPartner(u32 battler);
-
-// safari controller
-void SetControllerToSafari(u32 battler);
-
-// wally controller
-void SetControllerToWally(u32 battler);
-
-// recorded opponent controller
-void SetControllerToRecordedOpponent(u32 battler);
 
 // link opponent
 void SetControllerToLinkOpponent(u32 battler);
