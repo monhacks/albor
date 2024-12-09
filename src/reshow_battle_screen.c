@@ -258,7 +258,10 @@ static void CreateHealthboxSprite(u32 battler)
             if (GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_HP) == 0)
                 SetHealthboxSpriteInvisible(healthboxSpriteId);
         }
-        if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
-            SetHealthboxSpriteInvisible(healthboxSpriteId);
+        else
+        {
+            if (!IsValidForBattle(&gPlayerParty[gBattlerPartyIndexes[battler]]))
+                SetHealthboxSpriteInvisible(healthboxSpriteId);
+        }
     }
 }
