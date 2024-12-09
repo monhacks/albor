@@ -4560,10 +4560,10 @@ BattleScript_EffectFutureSight::
 
 BattleScript_EffectTeleport::
 .if B_TELEPORT_BEHAVIOR >= GEN_8
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_EffectBatonPass
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_EffectBatonPass
 	jumpifside BS_ATTACKER, B_SIDE_PLAYER, BattleScript_EffectBatonPass
 .else
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_FailedFromAtkCanceler
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_FailedFromAtkCanceler
 .endif
 	attackcanceler
 	attackstring
@@ -4933,7 +4933,7 @@ BattleScript_EffectFollowMe::
 	attackstring
 	ppreduce
 	.if B_UPDATED_MOVE_DATA >= GEN_8
-	jumpifnotbattletype BATTLE_TYPE_DOUBLE, BattleScript_ButItFailed
+	jumpifnotbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_ButItFailed
 	.endif
 	setforcedtarget
 	attackanimation
@@ -5444,7 +5444,7 @@ BattleScript_HandleFaintedMon::
 	setbyte sSHIFT_SWITCHED, 0
 	checkteamslost BattleScript_HandleFaintedMonMultiple
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
-	jumpifbattletype BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonTryChoose
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_FaintedMonTryChoose
 	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonTryChoose
 @ Yes/No for sending out a new Pokémon if one is defeated in a wild battle
 	printstring STRINGID_USENEXTPKMN
@@ -5457,9 +5457,8 @@ BattleScript_HandleFaintedMon::
 BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_FAINTED, BattleScript_FaintedMonEnd
 	switchhandleorder BS_FAINTED, 2
-	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_FaintedMonSendOutNew
 	jumpifbattletype BATTLE_TYPE_LINK, BattleScript_FaintedMonSendOutNew
-	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonSendOutNew
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_FaintedMonSendOutNew
 	jumpifword CMP_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonSendOutNew
 	goto BattleScript_FaintedMonSendOutNew
 
@@ -5479,7 +5478,7 @@ BattleScript_FaintedMonSendOutNew:
 
 BattleScript_FaintedMonSendOutNewEnd:
 	switchineffects BS_FAINTED
-	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonEnd
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_FaintedMonEnd
 	cancelallactions
 
 BattleScript_FaintedMonEnd::
@@ -5544,7 +5543,7 @@ BattleScript_LocalBattleLost::
 	goto BattleScript_LocalBattleLostPrintWhiteOut
 BattleScript_LocalBattleLostPrintWhiteOut::
 .if B_WHITEOUT_MONEY >= GEN_4
-	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostEnd
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_LocalBattleLostEnd
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
 	getmoneyreward
@@ -5570,7 +5569,7 @@ BattleScript_LocalBattleLostEnd::
 BattleScript_CheckDomeDrew::
 	jumpifbyte CMP_EQUAL, gBattleOutcome, B_OUTCOME_DREW, BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostPrintTrainersWinText::
-	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_LocalBattleLostPrintWhiteOut
+	jumpifnotbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_LocalBattleLostPrintWhiteOut
 	returnopponentmon1toball BS_ATTACKER
 	waitstate
 	returnopponentmon2toball BS_ATTACKER
@@ -5583,7 +5582,7 @@ BattleScript_LocalBattleLostEnd_::
 	end2
 
 BattleScript_FrontierTrainerBattleWon::
-	jumpifnotbattletype BATTLE_TYPE_TRAINER, BattleScript_PayDayMoneyAndPickUpItems
+	jumpifnotbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_PayDayMoneyAndPickUpItems
 	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_FrontierTrainerBattleWon_TwoDefeated
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
 	goto BattleScript_FrontierTrainerBattleWon_LoseTexts
@@ -5646,7 +5645,7 @@ BattleScript_ActionSwitch::
 	hpthresholds2 BS_ATTACKER
 	saveattacker
 	printstring STRINGID_RETURNMON
-	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_PursuitSwitchDmgSetMultihit
+	jumpifbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_PursuitSwitchDmgSetMultihit
 	setmultihit 1
 	goto BattleScript_PursuitSwitchDmgLoop
 BattleScript_PursuitSwitchDmgSetMultihit::

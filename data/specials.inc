@@ -30,8 +30,6 @@ gSpecials::
 	def_special PutAwayDecorationIteration
 	def_special SetBattledOwnerFromResult
 	def_special DoSecretBasePCTurnOffEffect
-	def_special GetLinkPartnerNames
-	def_special SpawnLinkPartnerObjectEvent
 	def_special SavePlayerParty
 	def_special LoadPlayerParty
 	def_special ChooseHalfPartyForBattle
@@ -120,7 +118,6 @@ gSpecials::
 	def_special IsFanClubMemberFanOfPlayer
 	def_special GetNumFansOfPlayerInTrainerFanClub
 	def_special BufferFanClubTrainerName
-	def_special TryLoseFansFromPlayTimeAfterLinkBattle
 	def_special TryLoseFansFromPlayTime
 	def_special SetPlayerGotFirstFans
 	def_special UpdateTrainerFanClubGameClear
@@ -346,7 +343,6 @@ gSpecials::
 	def_special ChooseItemsToTossFromPyramidBag
 	def_special DoBattlePyramidMonsHaveHeldItem
 	def_special BattlePyramidChooseMonHeldItems
-	def_special SetBattleTowerLinkPlayerGfx
 	def_special ShowNatureGirlMessage
 	def_special ShowBattlePointsWindow
 	def_special UpdateBattlePointsWindow
@@ -386,8 +382,6 @@ gSpecials::
 	def_special GetLilycoveSSTidalSelection
 	def_special SetMewAboveGrass
 	def_special ShouldDistributeEonTicket
-	def_special LinkRetireStatusWithBattleTowerPartner
-	def_special BattleTowerReconnectLink
 	def_special CallTrainerHillFunction
 	def_special LoopWingFlapSE
 	def_special DestroyMewEmergingGrassSprite

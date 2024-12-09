@@ -1756,7 +1756,7 @@ static void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
 {
     u8 battlerId, healthBarSpriteId;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         return;
 
     battlerId = gSprites[healthboxSpriteId].hMain_Battler;
@@ -2875,7 +2875,7 @@ bool32 CanThrowLastUsedBall(void)
         return FALSE;
     if (!CanThrowBall())
         return FALSE;
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER))
+    if (gBattleTypeFlags & (TIPO_BATALLA_ENTRENADOR))
         return FALSE;
     if (!CheckBagHasItem(gBallToDisplay, 1))
         return FALSE;

@@ -446,11 +446,6 @@ static void CB2_InitBattleInternal(void)
         gBattleTerrain = BattleSetup_GetTerrainId();
     }
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-    {
-        gBattleTypeFlags |= (IsTrainerDoubleBattle(gTrainerBattleOpponent_A) ? BATTLE_TYPE_DOUBLE : 0);
-    }
-
     InitBattleBgsVideo();
     LoadBattleTextboxAndBackground();
     ResetSpriteData();
@@ -841,7 +836,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
     u32 personalityValue;
     s32 i;
     u8 monsCount;
-    if (battleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (battleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
@@ -962,7 +957,7 @@ void CreateTrainerPartyForPlayer(void)
 {
     ZeroPlayerPartyMons();
     gPartnerTrainerId = gSpecialVar_0x8004;
-    CreateNPCTrainerPartyFromTrainer(gPlayerParty, GetTrainerStructFromId(gSpecialVar_0x8004), TRUE, BATTLE_TYPE_TRAINER);
+    CreateNPCTrainerPartyFromTrainer(gPlayerParty, GetTrainerStructFromId(gSpecialVar_0x8004), TRUE, TIPO_BATALLA_ENTRENADOR);
 }
 
 void VBlankCB_Battle(void)
@@ -1866,7 +1861,7 @@ static void DoBattleIntro(void)
                 MarkBattlerForControllerExec(battler);
                 break;
             case B_POSITION_OPPONENT_LEFT:
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER) // opponent 1 sprite
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) // opponent 1 sprite
                 {
                     BtlController_EmitDrawTrainerPic(battler, BUFFER_A);
                     MarkBattlerForControllerExec(battler);
@@ -1881,7 +1876,7 @@ static void DoBattleIntro(void)
             case B_POSITION_PLAYER_RIGHT:
                 break;
             case B_POSITION_OPPONENT_RIGHT:
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
                 {
                     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS)) // opponent 2 if exists
                     {
@@ -1899,7 +1894,7 @@ static void DoBattleIntro(void)
             }
         }
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         {
             gBattleStruct->introState++;
         }
@@ -1971,7 +1966,7 @@ static void DoBattleIntro(void)
     case BATTLE_INTRO_STATE_WAIT_FOR_INTRO_TEXT:
         if (!IsBattlerMarkedForControllerExec(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)))
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
             {
                 gBattleStruct->introState++;
             }
@@ -2024,7 +2019,7 @@ static void DoBattleIntro(void)
 
         // A hack that makes fast intro work in trainer battles too.
         if (B_FAST_INTRO == TRUE
-            && gBattleTypeFlags & BATTLE_TYPE_TRAINER
+            && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
             && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
             && gSprites[gHealthboxSpriteIds[battler ^ BIT_SIDE]].callback == SpriteCallbackDummy)
         {
@@ -2075,7 +2070,7 @@ static void DoBattleIntro(void)
                 gBattleStruct->startingStatus = GetTrainerStartingStatusFromId(gTrainerBattleOpponent_B);
                 gBattleStruct->startingStatusTimer = 0; // infinite
             }
-            else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && GetTrainerStartingStatusFromId(gTrainerBattleOpponent_A))
+            else if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR && GetTrainerStartingStatusFromId(gTrainerBattleOpponent_A))
             {
                 gBattleStruct->startingStatus = GetTrainerStartingStatusFromId(gTrainerBattleOpponent_A);
                 gBattleStruct->startingStatusTimer = 0; // infinite
@@ -2459,7 +2454,7 @@ static void HandleTurnActionSelectionState(void)
             u32 isAiRisky = AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_RISKY; // Risky AI switches aggressively even mid battle
 
             // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
-            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER || IsWildMonSmart()) && (BattlerHasAi(battler)))
+            if ((gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR || IsWildMonSmart()) && (BattlerHasAi(battler)))
             {
                 AI_DATA->aiCalcInProgress = TRUE;
 
@@ -2632,7 +2627,7 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 }
 
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
                          && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
@@ -3529,7 +3524,7 @@ static void HandleEndTurn_BattleWon(void)
     {
 
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    else if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
@@ -3637,7 +3632,7 @@ static void HandleEndTurn_FinishBattle(void)
         }
 
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | BATTLE_TYPE_TRAINER))
+                                  | TIPO_BATALLA_ENTRENADOR))
             && gBattleResults.shinyWildMon)
 
         BeginFastPaletteFade(3);

@@ -62,11 +62,14 @@ enum ModosBatalla
     NUMERO_DE_MODOS
 };
 
-// Battle Type Flags
-#define BATTLE_TYPE_DOUBLE             (1 << 0)
-#define BATTLE_TYPE_LINK               (1 << 1)
-#define BATTLE_TYPE_TRAINER            (1 << 3)
-#define BATTLE_TYPE_LEGENDARY          (1 << 13)
+enum TiposBatalla
+{
+    TIPO_BATALLA_SALVAJE,
+    TIPO_BATALLA_ENTRENADOR,
+    TIPO_BATALLA_LEGENDARIO,
+};
+
+#define BATTLE_TYPE_LINK               (1 << 14)
 #define BATTLE_TYPE_TWO_OPPONENTS      (1 << 15) // Used in pokefirered as BATTLE_TIPO_FANTASMA.
 
 enum ResultadosBatalla

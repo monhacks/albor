@@ -671,7 +671,7 @@ void DrawMainBattleBackground(void)
         LZDecompressVram(gBattleTerrainTilemap_Building, (void *)(BG_SCREEN_ADDR(26)));
         LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+    else if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
@@ -699,7 +699,7 @@ void DrawMainBattleBackground(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         {
             u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
             if (trainerClass == TRAINER_CLASS_LEADER)
@@ -784,132 +784,9 @@ void LoadBattleTextboxAndBackground(void)
         DrawMainBattleBackground();
 }
 
-static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)
-{
-    s32 i;
-    u16 pokeballStatuses = 0;
-    u16 tiles[6];
-
-    if (multiplayerId == gBattleScripting.multiplayerId)
-        pokeballStatuses = gTasks[taskId].data[3];
-    else
-        pokeballStatuses = gTasks[taskId].data[4];
-
-    for (i = 0; i < 6; i++)
-        tiles[i] = ((pokeballStatuses & (3 << (i * 2))) >> (i * 2)) + 0x6001;
-
-    CopyToBgTilemapBufferRect_ChangePalette(bgId, tiles, destX, destY, 6, 1, 0x11);
-    CopyBgTilemapBufferToVram(bgId);
-}
-
-static void DrawLinkBattleVsScreenOutcomeText(void)
-{
-    if (gBattleOutcome == B_OUTCOME_DREW)
-    {
-        BattlePutTextOnWindow(gText_Draw, B_WIN_VS_OUTCOME_DRAW);
-    }
-    else if (gBattleOutcome == B_OUTCOME_WON)
-    {
-        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
-        {
-            BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-            BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-            BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-        }
-    }
-    else
-    {
-        if (gLinkPlayers[gBattleScripting.multiplayerId].id != 0)
-        {
-            BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_LEFT);
-            BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_RIGHT);
-        }
-        else
-        {
-            BattlePutTextOnWindow(gText_Win, B_WIN_VS_OUTCOME_RIGHT);
-            BattlePutTextOnWindow(gText_Loss, B_WIN_VS_OUTCOME_LEFT);
-        }
-    }
-}
-
 void InitLinkBattleVsScreen(u8 taskId)
 {
-    u8 *name;
-    s32 palId;
 
-    switch (gTasks[taskId].data[0])
-    {
-    case 0:
-        u8 playerId = gBattleScripting.multiplayerId;
-        u8 opponentId = playerId ^ BIT_SIDE;
-        u8 opponentId_copy = opponentId;
-
-        if (gLinkPlayers[playerId].id != 0)
-            opponentId = playerId, playerId = opponentId_copy;
-
-        name = gLinkPlayers[playerId].name;
-        BattlePutTextOnWindow(name, B_WIN_VS_PLAYER);
-
-        name = gLinkPlayers[opponentId].name;
-        BattlePutTextOnWindow(name, B_WIN_VS_OPPONENT);
-
-        DrawLinkBattleParticipantPokeballs(taskId, playerId, 1, 2, 7);
-        DrawLinkBattleParticipantPokeballs(taskId, opponentId, 2, 2, 7);
-        gTasks[taskId].data[0]++;
-        break;
-    case 1:
-        palId = AllocSpritePalette(TAG_VS_LETTERS);
-        gPlttBufferUnfaded[OBJ_PLTT_ID(palId) + 15] = gPlttBufferFaded[OBJ_PLTT_ID(palId) + 15] = RGB_WHITE;
-        gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&sVsLetter_V_SpriteTemplate, 111, 80, 0);
-        gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&sVsLetter_S_SpriteTemplate, 129, 80, 0);
-        gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;
-        gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = TRUE;
-        gTasks[taskId].data[0]++;
-        break;
-    case 2:
-        if (gTasks[taskId].data[5] != 0)
-        {
-            gBattle_BG1_X = -(20) - (Sin2(gTasks[taskId].data[1]) / 32);
-            gBattle_BG2_X = -(140) - (Sin2(gTasks[taskId].data[2]) / 32);
-            gBattle_BG1_Y = -36;
-            gBattle_BG2_Y = -36;
-        }
-        else
-        {
-            gBattle_BG1_X = -(20) - (Sin2(gTasks[taskId].data[1]) / 32);
-            gBattle_BG1_Y = (Cos2(gTasks[taskId].data[1]) / 32) - 164;
-            gBattle_BG2_X = -(140) - (Sin2(gTasks[taskId].data[2]) / 32);
-            gBattle_BG2_Y = (Cos2(gTasks[taskId].data[2]) / 32) - 164;
-        }
-
-        if (gTasks[taskId].data[2] != 0)
-        {
-            gTasks[taskId].data[2] -= 2;
-            gTasks[taskId].data[1] += 2;
-        }
-        else
-        {
-            if (gTasks[taskId].data[5] != 0)
-                DrawLinkBattleVsScreenOutcomeText();
-
-            PlaySE(SE_M_HARDEN);
-            DestroyTask(taskId);
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = FALSE;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].invisible = FALSE;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].oam.tileNum += 0x40;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[0] = 0;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[0] = 1;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_V].x;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[1] = gSprites[gBattleStruct->linkBattleVsSpriteId_S].x;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_V].data[2] = 0;
-            gSprites[gBattleStruct->linkBattleVsSpriteId_S].data[2] = 0;
-        }
-        break;
-    }
 }
 
 void DrawBattleEntryBackground(void)
@@ -931,7 +808,7 @@ void DrawBattleEntryBackground(void)
         gBattle_BG2_Y = 0xFF5C;
         LoadCompressedSpriteSheetUsingHeap(&sVsLettersSpriteSheet);
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+    else if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
@@ -955,7 +832,7 @@ void DrawBattleEntryBackground(void)
     }
     else
     {
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         {
             u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
             if (trainerClass == TRAINER_CLASS_LEADER)
@@ -1007,7 +884,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         {
             LZDecompressVram(gBattleTerrainTiles_Building, (void *)(BG_CHAR_ADDR(2)));
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+        else if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
         {
             switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
             {
@@ -1021,7 +898,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)
@@ -1074,7 +951,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         {
             LZDecompressVram(gBattleTerrainTilemap_Building, (void *)(BG_SCREEN_ADDR(26)));
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+        else if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
         {
             if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_GROUDON)
                 LZDecompressVram(gBattleTerrainTilemap_Cave, (void*)(BG_SCREEN_ADDR(26)));
@@ -1083,7 +960,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)
@@ -1136,7 +1013,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         {
             LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         }
-        else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+        else if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
         {
             if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL) == SPECIES_GROUDON)
                 LoadCompressedPalette(gBattleTerrainPalette_Groudon, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
@@ -1145,7 +1022,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)

@@ -50,7 +50,7 @@ BattleFrontier_BattlePyramidFloor_OnResume:
 	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 	goto_if_eq VAR_RESULT, B_OUTCOME_FORFEITED, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	frontier_isbattletype BATTLE_TYPE_TRAINER  @ VAR_RESULT seems to be ignored here
+	frontier_isbattletype TIPO_BATALLA_ENTRENADOR  @ VAR_RESULT seems to be ignored here
 	setvar VAR_TEMP_D, 1
 BattleFrontier_BattlePyramidFloor_EventScript_ResetParty::
 	pyramid_resetparty

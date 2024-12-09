@@ -1185,7 +1185,7 @@ static bool8 ShouldDoSlideInAnim(void)
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
         return FALSE;
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_TWO_OPPONENTS))
         return FALSE;
     return TRUE;
 }

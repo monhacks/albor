@@ -32,7 +32,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetPlayerGfxFemale::
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx::
-	special SetBattleTowerLinkPlayerGfx
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnWarp:
@@ -331,14 +330,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskReadyForOpponentsLinkNo
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ContinueChallengeLink::
-	setvar VAR_0x8004, BATTLE_TOWER_LINK_CONTINUE
-	setvar VAR_0x8005, 0
-	message gText_LinkStandby3
-	waitmessage
-	special LinkRetireStatusWithBattleTowerPartner
-	waitstate
-	goto_if_ne VAR_RESULT, BATTLE_TOWER_LINKSTAT_CONTINUE, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
-	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_LinkDelayForMsg
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRecordBattleLink::
@@ -362,17 +353,9 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_AskRetireChallengeLink::
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_RetireChallengeLink::
-	setvar VAR_0x8004, BATTLE_TOWER_LINK_RETIRE
-	setvar VAR_0x8005, 0
-	message gText_LinkStandby3
-	waitmessage
-	special LinkRetireStatusWithBattleTowerPartner
-	waitstate
-	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_WarpToLobbyLost
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_ReconnectLink::
-	special BattleTowerReconnectLink
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_Movement_PlayerEnterRoom:

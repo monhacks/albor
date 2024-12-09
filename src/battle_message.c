@@ -2636,7 +2636,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
     switch (stringID)
     {
     case STRINGID_INTROMSG: // first battle msg
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         {
             if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
             {
@@ -2652,7 +2652,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         else
         {
-            if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+            if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
                 stringPtr = sText_LegendaryPkmnAppeared;
             else if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT)]]))
                 stringPtr = sText_TwoWildPkmnAppeared;
@@ -2860,7 +2860,7 @@ static void GetBattlerNick(u32 battler, u8 *dst)
         }                                                             \
     if (GetBattlerSide(battler) != B_SIDE_PLAYER)                     \
     {                                                                 \
-        if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)                   \
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)                   \
             toCpy = sText_FoePkmnPrefix;                              \
         else                                                          \
             toCpy = sText_WildPkmnPrefix;                             \
@@ -3344,7 +3344,7 @@ void ExpandBattleTextBuffPlaceholders(const u8 *src, u8 *dst)
             }
             else
             {
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
                     StringAppend(dst, sText_FoePkmnPrefix);
                 else
                     StringAppend(dst, sText_WildPkmnPrefix);
@@ -3608,7 +3608,7 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
 {
     u32 i, firstId, lastId, trainerId, retValue = 1;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battler) != B_SIDE_OPPONENT)
+    if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) || GetBattlerSide(battler) != B_SIDE_OPPONENT)
         return 0;
 
     // Two opponents support.

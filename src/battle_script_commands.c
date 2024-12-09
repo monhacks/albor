@@ -4189,7 +4189,7 @@ static void Cmd_getexp(void)
 
             calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level;
 
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
                 calculatedExp = (calculatedExp * 150) / 100;
 
             *exp = calculatedExp;
@@ -4220,7 +4220,7 @@ static void Cmd_getexp(void)
             else
             {
                 // Music change in a wild battle after fainting opposing pokemon.
-                if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
                     && (gBattleMons[0].hp || (IsDoubleBattle() && gBattleMons[2].hp))
                     && !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
                     && !IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))
@@ -4298,7 +4298,7 @@ static void Cmd_getexp(void)
             if (gBattleResources->bufferB[expBattler][0] == CONTROLLER_TWORETURNVALUES && gBattleResources->bufferB[expBattler][1] == RET_VALUE_LEVELED_UP)
             {
                 u16 temp, battler = 0xFF;
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && gBattlerPartyIndexes[expBattler] == *expMonId)
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR && gBattlerPartyIndexes[expBattler] == *expMonId)
                     HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[expBattler]], expBattler);
 
                 PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff1, expBattler, *expMonId);
@@ -4428,7 +4428,7 @@ static void Cmd_checkteamslost(void)
     // For battles that haven't ended, count number of empty battler spots
     // In multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)))
+    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR)))
     {
         s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
@@ -6091,7 +6091,7 @@ static void Cmd_moveend(void)
                     gSpecialStatuses[i].emergencyExited = TRUE;
                     gBattlerTarget = gBattlerAbility = i;
                     BattleScriptPushCursor();
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER || GetBattlerSide(i) == B_SIDE_PLAYER)
+                    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR || GetBattlerSide(i) == B_SIDE_PLAYER)
                     {
                         if (B_ABILITY_POP_UP == TRUE)
                             gBattlescriptCurrInstr = BattleScript_EmergencyExit;
@@ -8742,8 +8742,8 @@ static void Cmd_various(void)
     case VARIOUS_RESET_PLAYER_FAINTED:
     {
         VARIOUS_ARGS();
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE))
-            && gBattleTypeFlags & BATTLE_TYPE_TRAINER
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
+            && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
             && IsBattlerAlive(B_POSITION_PLAYER_LEFT)
             && IsBattlerAlive(B_POSITION_OPPONENT_LEFT))
         {
@@ -11286,7 +11286,7 @@ static void Cmd_forcerandomswitch(void)
     // Red card checks against wild pokemon. If we have reached here, the player has a mon to switch into
     // Red card swaps attacker with target to get the animation correct, so here we check attacker which is really the target. Thanks GF...
     if (gBattleScripting.switchCase == B_SWITCH_RED_CARD
-      && !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+      && !(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
       && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT)   // Check opponent's red card activating
     {
         gBattlescriptCurrInstr = BattleScript_RoarSuccessEndBattle;
@@ -11295,7 +11295,7 @@ static void Cmd_forcerandomswitch(void)
 
     // Swapping pokemon happens in:
     // trainer battles
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) || redCardForcedSwitch)
+    if ((gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) || redCardForcedSwitch)
     {
         party = GetBattlerParty(gBattlerTarget);
 
@@ -14238,7 +14238,7 @@ static void Cmd_handleballthrow(void)
 
     gBattlerTarget = GetCatchingBattler();
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         BtlController_EmitBallThrowAnim(gBattlerAttacker, BUFFER_A, BALL_TRAINER_BLOCK);
         MarkBattlerForControllerExec(gBattlerAttacker);

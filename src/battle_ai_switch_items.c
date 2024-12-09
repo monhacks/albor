@@ -1067,7 +1067,7 @@ void AI_TrySwitchOrUseItem(u32 battler)
     u8 battlerPosition = GetBattlerPosition(battler);
     party = GetBattlerParty(battler);
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         if (AI_DATA->shouldSwitch & (1u << battler) && IsSwitchinValid(battler))
         {

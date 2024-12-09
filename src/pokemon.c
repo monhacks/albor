@@ -3191,7 +3191,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
         if (event == FRIENDSHIP_EVENT_LEAGUE_BATTLE)
         {
             // Only if it's a trainer battle with league progression significance
-            if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+            if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR))
                 return;
             if (!(opponentTrainerClass == TRAINER_CLASS_LEADER
                 || opponentTrainerClass == TRAINER_CLASS_ELITE_FOUR
@@ -3664,7 +3664,7 @@ u16 SpeciesToPokedexNum(u16 species)
 
 u16 GetBattleBGM(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
+    if (gBattleTypeFlags & TIPO_BATALLA_LEGENDARIO)
     {
         switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
         {
@@ -3684,7 +3684,7 @@ u16 GetBattleBGM(void)
     }
     else if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
         return MUS_VS_TRAINER;
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    else if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         u8 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
 
@@ -3956,7 +3956,7 @@ static inline bool32 CanFirstMonBoostHeldItemRarity(void)
 
 void SetWildMonHeldItem(void)
 {
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER)))
+    if (!(gBattleTypeFlags & (TIPO_BATALLA_LEGENDARIO | TIPO_BATALLA_ENTRENADOR)))
     {
         u16 rnd;
         u16 species;

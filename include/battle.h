@@ -1080,7 +1080,7 @@ static inline struct Pokemon *GetBattlerParty(u32 battler)
 
 static inline bool32 IsDoubleBattle(void)
 {
-    return gBattleTypeFlags & BATTLE_TYPE_DOUBLE;
+    return gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR;
 }
 
 #endif // GUARD_BATTLE_H

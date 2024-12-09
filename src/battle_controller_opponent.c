@@ -447,7 +447,7 @@ static void OpponentHandleChooseMove(u32 battler)
     u8 chosenMoveId;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_TRAINER) || IsWildMonSmart())
+    if (gBattleTypeFlags & (TIPO_BATALLA_ENTRENADOR) || IsWildMonSmart())
     {
         chosenMoveId = gBattleStruct->aiMoveOrAction[battler];
         gBattlerTarget = gBattleStruct->aiChosenTarget[battler];

@@ -10867,7 +10867,7 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 void TryRestoreHeldItems(void)
 {
     u32 i;
-    bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & BATTLE_TYPE_TRAINER;
+    bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR;
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -10895,7 +10895,7 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     if (stealerSide == B_SIDE_OPPONENT
         && !(gBattleTypeFlags &
              (BATTLE_TYPE_LINK
-              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? BATTLE_TYPE_TRAINER : 0)
+              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? TIPO_BATALLA_ENTRENADOR : 0)
               )))
     {
         return FALSE;
@@ -10915,7 +10915,7 @@ void TrySaveExchangedItem(u32 battler, u16 stolenItem)
     if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
         return;
     // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
-    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
       && GetBattlerSide(battler) == B_SIDE_PLAYER
       && stolenItem == gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].originalItem)
         gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen = TRUE;
@@ -11064,7 +11064,7 @@ u16 GetUsedHeldItem(u32 battler)
 bool32 CantPickupItem(u32 battler)
 {
     // Used by RandomUniformExcept() for RNG_PICKUP
-    if (battler == gBattlerAttacker && gBattleTypeFlags & (BATTLE_TYPE_TRAINER | BATTLE_TYPE_LINK))
+    if (battler == gBattlerAttacker && gBattleTypeFlags & (TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_LINK))
         return TRUE;
     return !(IsBattlerAlive(battler) && GetUsedHeldItem(battler) && gBattleStruct->canPickupItem & (1u << battler));
 }

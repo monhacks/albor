@@ -104,7 +104,7 @@ void BattleAI_SetupItems(void)
         data[i] = 0;
 
     // Items are allowed to use in ONLY trainer battles.
-    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    if ((gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
        )
     {
@@ -145,7 +145,7 @@ static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) && !IsWildMonSmart())
         return 0;
     if (trainerId == 0xFFFF)
     {
@@ -185,7 +185,7 @@ void BattleAI_SetupFlags(void)
         return;
     }
 
-    if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)))
+    if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR)))
     {
         // smart wild AI
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] = GetAiFlags(0xFFFF);
@@ -420,7 +420,7 @@ void SetAiLogicDataForTurn(struct AiLogicData *aiData)
     u32 battlerAtk, battlersCount, weather;
 
     memset(aiData, 0, sizeof(struct AiLogicData));
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) && !IsWildMonSmart())
+    if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) && !IsWildMonSmart())
         return;
 
     // Set delay timer to count how long it takes for AI to choose action/move
@@ -3491,7 +3491,7 @@ static u32 AI_CalcMoveEffectScore(u32 battlerAtk, u32 battlerDef, u32 move)
         //todo - check z splash, z celebrate, z happy hour (lol)
         break;
     case EFFECT_TELEPORT: // Either remove or add better logic
-        if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || GetBattlerSide(battlerAtk) != B_SIDE_PLAYER)
+        if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR) || GetBattlerSide(battlerAtk) != B_SIDE_PLAYER)
             break;
         //fallthrough
     case EFFECT_HIT_ESCAPE:

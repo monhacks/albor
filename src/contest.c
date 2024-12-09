@@ -1328,7 +1328,7 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         gBattlerPositions[1] = B_POSITION_OPPONENT_LEFT;
         gBattlerPositions[2] = B_POSITION_OPPONENT_RIGHT;
         gBattlerPositions[3] = B_POSITION_PLAYER_RIGHT;
-        gBattleTypeFlags = 0;
+        gBattleTypeFlags = TIPO_BATALLA_SALVAJE;
         gBattlerAttacker = B_POSITION_PLAYER_RIGHT;
         gBattlerTarget = B_POSITION_OPPONENT_RIGHT;
         // Unclear why judge sprite is assigned here

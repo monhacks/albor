@@ -649,7 +649,7 @@ void BS_SetMaxMoveEffect(void)
             effect++;
             break;
         case MAX_EFFECT_CONFUSE_FOES_PAY_DAY:
-            if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
             {
                 u16 payday = gPaydayMoney;
                 gPaydayMoney += (gBattleMons[gBattlerAttacker].level * 100);
