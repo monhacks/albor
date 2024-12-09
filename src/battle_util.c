@@ -3512,51 +3512,32 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
 
     side = GetBattlerSide(battler);
 
-    if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && side == B_SIDE_OPPONENT)
+    if (side == B_SIDE_OPPONENT)
     {
+        flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
         party = gEnemyParty;
-
-        if (battler == 1)
-            playerId = 0;
-        else
-            playerId = MULTI_PARTY_SIZE;
-
-        for (i = playerId; i < playerId + MULTI_PARTY_SIZE; i++)
-        {
-            if (IsValidForBattle(&party[i]))
-                break;
-        }
-        return (i == playerId + 3);
     }
     else
     {
-        if (side == B_SIDE_OPPONENT)
-        {
-            flankId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-            party = gEnemyParty;
-        }
-        else
-        {
-            flankId = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            playerId = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            party = gPlayerParty;
-        }
-
-        if (partyIdBattlerOn1 == PARTY_SIZE)
-            partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
-        if (partyIdBattlerOn2 == PARTY_SIZE)
-            partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
-
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (IsValidForBattle(&party[i])
-             && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
-             && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
-                break;
-        }
-        return (i == PARTY_SIZE);
+        flankId = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        playerId = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+        party = gPlayerParty;
     }
+
+    if (partyIdBattlerOn1 == PARTY_SIZE)
+        partyIdBattlerOn1 = gBattlerPartyIndexes[flankId];
+    if (partyIdBattlerOn2 == PARTY_SIZE)
+        partyIdBattlerOn2 = gBattlerPartyIndexes[playerId];
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (IsValidForBattle(&party[i])
+            && i != partyIdBattlerOn1 && i != partyIdBattlerOn2
+            && i != *(gBattleStruct->monToSwitchIntoId + flankId) && i != playerId[gBattleStruct->monToSwitchIntoId])
+            break;
+    }
+    return (i == PARTY_SIZE);
 }
 
 static const u16 sWeatherFlagsInfo[][3] =
@@ -10467,10 +10448,7 @@ s32 GetStealthHazardDamage(u8 hazardType, u32 battler)
 
 bool32 IsPartnerMonFromSameTrainer(u32 battler)
 {
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        return FALSE;
-    else
-        return TRUE;
+    return TRUE;
 }
 
 bool32 DoesSpeciesUseHoldItemToChangeForm(u16 species, u16 heldItemId)

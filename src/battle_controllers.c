@@ -160,9 +160,6 @@ static void SetBattlePartyIds(void)
             }
         }
     }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        gBattlerPartyIndexes[1] = 0, gBattlerPartyIndexes[3] = 3;
 }
 
 static void PrepareBufferDataTransfer(u32 battler, u32 bufferId, u8 *data, u16 size)
@@ -1176,7 +1173,7 @@ static bool8 ShouldDoSlideInAnim(void)
     struct ObjectEvent *followerObj = GetFollowerObject();
     if (!followerObj || followerObj->invisible)
         return FALSE;
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_TWO_OPPONENTS))
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR))
         return FALSE;
     return TRUE;
 }
@@ -1964,8 +1961,6 @@ static bool32 TwoMonsAtSendOut(u32 battler)
     else
     {
         if ((!TwoOpponentIntroMons(battler)))
-            return FALSE;
-        else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) || (!TwoOpponentIntroMons(battler)))
             return FALSE;
         else
             return TRUE;

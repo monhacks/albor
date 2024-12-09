@@ -5515,21 +5515,13 @@ BattleScript_HandleFaintedMonMultipleEnd::
 	end2
 
 BattleScript_LocalTrainerBattleWon::
-	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalTwoTrainersDefeated
 	printstring STRINGID_PLAYERDEFEATEDTRAINER1
 	goto BattleScript_LocalBattleWonLoseTexts
-BattleScript_LocalTwoTrainersDefeated::
-	printstring STRINGID_TWOENEMIESDEFEATED
 BattleScript_LocalBattleWonLoseTexts::
 	trainerslidein BS_OPPONENT1
 	waitstate
 	printstring STRINGID_TRAINER1LOSETEXT
-	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleWonReward
-	trainerslideout BS_OPPONENT1
-	waitstate
-	trainerslidein BS_OPPONENT2
-	waitstate
-	printstring STRINGID_TRAINER2LOSETEXT
+	goto BattleScript_LocalBattleWonReward
 BattleScript_LocalBattleWonReward::
 	getmoneyreward
 	printstring STRINGID_PLAYERGOTMONEY
@@ -5577,30 +5569,8 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	trainerslidein BS_OPPONENT1
 	waitstate
 	printstring STRINGID_TRAINER1WINTEXT
-	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_LocalBattleLostEnd_
+	goto BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostEnd_::
-	end2
-
-BattleScript_FrontierTrainerBattleWon::
-	jumpifnotbattletype TIPO_BATALLA_ENTRENADOR, BattleScript_PayDayMoneyAndPickUpItems
-	jumpifbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_FrontierTrainerBattleWon_TwoDefeated
-	printstring STRINGID_PLAYERDEFEATEDTRAINER1
-	goto BattleScript_FrontierTrainerBattleWon_LoseTexts
-BattleScript_FrontierTrainerBattleWon_TwoDefeated:
-	printstring STRINGID_TWOENEMIESDEFEATED
-BattleScript_FrontierTrainerBattleWon_LoseTexts:
-	trainerslidein BS_OPPONENT1
-	waitstate
-	printstring STRINGID_TRAINER1LOSETEXT
-	jumpifnotbattletype BATTLE_TYPE_TWO_OPPONENTS, BattleScript_TryPickUpItems
-	trainerslideout BS_OPPONENT1
-	waitstate
-	trainerslidein BS_OPPONENT2
-	waitstate
-	printstring STRINGID_TRAINER2LOSETEXT
-BattleScript_TryPickUpItems:
-	pickup
-BattleScript_FrontierTrainerBattleWon_End:
 	end2
 
 BattleScript_SmokeBallEscape::
@@ -5659,7 +5629,6 @@ BattleScript_PursuitSwitchDmgLoop::
 BattleScript_DoSwitchOut::
 	decrementmultihit BattleScript_PursuitSwitchDmgLoop
 	switchoutabilities BS_ATTACKER
-	updatedynamax
 	waitstate
 	restoreattacker
 	returnatktoball
@@ -9836,22 +9805,9 @@ BattleScript_EffectSteelsurge::
 @@@ END MAX MOVES @@@
 
 BattleScript_DynamaxBegins::
-	flushtextbox
-	trytrainerslidedynamaxmsg
-	returnatktoball
-	pause B_WAIT_TIME_SHORT
-	returntoball BS_SCRIPTING, TRUE
-	switchinanim BS_SCRIPTING, TRUE
-	updatedynamax
-	playanimation BS_SCRIPTING, B_ANIM_DYNAMAX_GROWTH
-	waitanimation
 	end3
 
 BattleScript_DynamaxEnds::
-	flushtextbox
-	updatedynamax
-	playanimation BS_SCRIPTING, B_ANIM_FORM_CHANGE
-	waitanimation
 	end2
 
 BattleScript_MoveBlockedByDynamax::

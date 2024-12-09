@@ -1517,10 +1517,6 @@
 	.4byte \ptr
 	.endm
 
-	.macro updatedynamax
-	callnative BS_UpdateDynamax
-	.endm
-
 	.macro jumpiftargetdynamaxed, ptr:req
 	callnative BS_JumpIfDynamaxed
 	.4byte \ptr

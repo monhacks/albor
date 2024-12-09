@@ -517,11 +517,6 @@ struct LostItem
     u16 stolen:1;
 };
 
-struct BattleVideo {
-    u32 battleTypeFlags;
-    rng_value_t rngSeed;
-};
-
 enum BattleIntroStates
 {
     BATTLE_INTRO_STATE_GET_MON_DATA,
@@ -535,14 +530,10 @@ enum BattleIntroStates
     BATTLE_INTRO_STATE_WAIT_FOR_INTRO_TEXT,
     BATTLE_INTRO_STATE_TRAINER_SEND_OUT_TEXT,
     BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_SEND_OUT_TEXT,
-    BATTLE_INTRO_STATE_TRAINER_1_SEND_OUT_ANIM,
-    BATTLE_INTRO_STATE_TRAINER_2_SEND_OUT_ANIM,
-    BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_2_SEND_OUT_ANIM,
+    BATTLE_INTRO_STATE_TRAINER_SEND_OUT_ANIM,
     BATTLE_INTRO_STATE_WAIT_FOR_WILD_BATTLE_TEXT,
     BATTLE_INTRO_STATE_PRINT_PLAYER_SEND_OUT_TEXT,
     BATTLE_INTRO_STATE_WAIT_FOR_PLAYER_SEND_OUT_TEXT,
-    BATTLE_INTRO_STATE_PRINT_PLAYER_1_SEND_OUT_TEXT,
-    BATTLE_INTRO_STATE_PRINT_PLAYER_2_SEND_OUT_TEXT,
     BATTLE_INTRO_STATE_SET_DEX_AND_BATTLE_VARS
 };
 
@@ -620,10 +611,6 @@ struct BattleStruct
     u8 arenaTurnCounter;
     u8 turnSideTracker;
     u16 lastTakenMoveFrom[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT]; // a 2-D array [target][attacker]
-    union {
-        struct LinkBattlerHeader linkBattlerHeader;
-        struct BattleVideo battleVideo;
-    } multiBuffer;
     u8 wishPerishSongState;
     u8 wishPerishSongBattlerId;
     u8 startingStatus:6; // status to apply at battle start. defined in constants/battle.h

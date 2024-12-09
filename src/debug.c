@@ -1731,13 +1731,9 @@ static void Debug_InitializeBattle(u8 taskId)
     case DEBUG_BATTLE_0_MENU_ITEM_WILD:
         break;
     case DEBUG_BATTLE_0_MENU_ITEM_SINGLE:
-        gBattleTypeFlags = TIPO_BATALLA_ENTRENADOR;
-        break;
     case DEBUG_BATTLE_0_MENU_ITEM_DOUBLE:
-        gBattleTypeFlags = (TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_TWO_OPPONENTS);
-        break;
     case DEBUG_BATTLE_0_MENU_ITEM_MULTI:
-        gBattleTypeFlags = (TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_TWO_OPPONENTS);
+        gBattleTypeFlags = TIPO_BATALLA_ENTRENADOR;
         break;
     }
 

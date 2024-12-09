@@ -57,7 +57,6 @@ enum MaxMoveEffect
 };
 
 bool32 CanDynamax(u32 battler);
-bool32 IsGigantamaxed(u32 battler);
 void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon);
 void ActivateDynamax(u32 battler);
 u16 GetNonDynamaxHP(u32 battler);
@@ -71,7 +70,6 @@ u8 GetMaxMovePower(u32 move);
 bool32 IsMaxMove(u32 move);
 void ChooseDamageNonTypesString(u8 type);
 
-void BS_UpdateDynamax(void);
 void BS_SetMaxMoveEffect(void);
 void BS_SetSteelsurge(void);
 void BS_TrySetStatus1(void);

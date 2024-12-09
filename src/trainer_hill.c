@@ -436,29 +436,7 @@ bool8 GetHillTrainerFlag(u8 objectEventId)
 
 void SetHillTrainerFlag(void)
 {
-    u8 i;
-    u8 trainerIndexStart = GetFloorId() * HILL_TRAINERS_PER_FLOOR;
 
-    for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
-    {
-        if (gSaveBlockPtr->frontier.trainerIds[i] == gTrainerBattleOpponent_A)
-        {
-            gSaveBlockPtr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
-            break;
-        }
-    }
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-    {
-        for (i = 0; i < HILL_TRAINERS_PER_FLOOR; i++)
-        {
-            if (gSaveBlockPtr->frontier.trainerIds[i] == gTrainerBattleOpponent_B)
-            {
-                gSaveBlockPtr->frontier.trainerFlags |= 1u << (trainerIndexStart + i);
-                break;
-            }
-        }
-    }
 }
 
 const u8 *GetTrainerHillTrainerScript(void)

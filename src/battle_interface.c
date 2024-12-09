@@ -768,8 +768,7 @@ u32 WhichBattleCoords(u32 battlerId)
         && gPlayerPartyCount == 1)
         return MODO_INDIVIDUAL;
     else if (GetBattlerPosition(battlerId) == B_POSITION_OPPONENT_LEFT
-             && gEnemyPartyCount == 1
-             && !(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
+             && gEnemyPartyCount == 1)
         return MODO_INDIVIDUAL;
     else
         return IsDoubleBattle();
@@ -1387,53 +1386,27 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
     }
     else
     {
-        if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS))
+        for (var = 0, i = 0, j = 0; j < PARTY_SIZE; j++)
         {
-            for (var = PARTY_SIZE - 1, i = 0; i < PARTY_SIZE; i++)
+            if (partyInfo[j].hp == HP_EMPTY_SLOT)
             {
-                if (partyInfo[i].hp == HP_EMPTY_SLOT)
-                {
-                    // empty slot or an egg
-                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 1;
-                    gSprites[ballIconSpritesIds[var]].data[7] = 1;
-                }
-                else if (partyInfo[i].hp == 0)
-                {
+                // empty slot or an egg
+                gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
+                gSprites[ballIconSpritesIds[i]].data[7] = 1;
+                i++;
+                continue;
+            }
+            else if (partyInfo[j].hp == 0)
+            {
                     // fainted mon
-                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 3;
-                }
-                else if (partyInfo[i].status != 0)
-                {
-                    // mon with primary status
-                    gSprites[ballIconSpritesIds[var]].oam.tileNum += 2;
-                }
-                var--;
+                gSprites[ballIconSpritesIds[PARTY_SIZE - 1 - var]].oam.tileNum += 3;
             }
-        }
-        else
-        {
-            for (var = 0, i = 0, j = 0; j < PARTY_SIZE; j++)
+            else if (partyInfo[j].status != 0)
             {
-                if (partyInfo[j].hp == HP_EMPTY_SLOT)
-                {
-                    // empty slot or an egg
-                    gSprites[ballIconSpritesIds[i]].oam.tileNum += 1;
-                    gSprites[ballIconSpritesIds[i]].data[7] = 1;
-                    i++;
-                    continue;
-                }
-                else if (partyInfo[j].hp == 0)
-                {
-                     // fainted mon
-                    gSprites[ballIconSpritesIds[PARTY_SIZE - 1 - var]].oam.tileNum += 3;
-                }
-                else if (partyInfo[j].status != 0)
-                {
-                     // mon with primary status
-                    gSprites[ballIconSpritesIds[PARTY_SIZE - 1 - var]].oam.tileNum += 2;
-                }
-                var++;
+                    // mon with primary status
+                gSprites[ballIconSpritesIds[PARTY_SIZE - 1 - var]].oam.tileNum += 2;
             }
+            var++;
         }
     }
 

@@ -38,12 +38,6 @@ bool32 CanDynamax(u32 battler)
     return FALSE;
 }
 
-// Returns whether a battler is transformed into a Gigantamax form.
-bool32 IsGigantamaxed(u32 battler)
-{
-    return FALSE;
-}
-
 // Applies the HP Multiplier for Dynamaxed Pokemon and Raid Bosses.
 void ApplyDynamaxHPMultiplier(u32 battler, struct Pokemon* mon)
 {
@@ -101,10 +95,6 @@ void UndoDynamax(u32 battler)
     // Makes sure there are no Dynamax flags set, including on switch / faint.
     SetActiveGimmick(battler, GIMMICK_NONE);
     gBattleStruct->dynamax.dynamaxTurns[battler] = 0;
-
-    // Undo form change if needed.
-    if (IsGigantamaxed(battler))
-        TryBattleFormChange(battler, FORM_CHANGE_END_BATTLE);
 }
 
 // Certain moves are blocked by Max Guard that normally ignore protection.
@@ -363,20 +353,6 @@ static u32 GetMaxMoveStatusEffect(u32 move)
         default:
             return STATUS1_NONE;
     }
-}
-
-// Updates Dynamax HP multipliers and healthboxes.
-void BS_UpdateDynamax(void)
-{
-    NATIVE_ARGS();
-    u32 battler = gBattleScripting.battler;
-    struct Pokemon *mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
-
-    if (!IsGigantamaxed(battler)) // RecalcBattlerStats will get called on form change.
-        RecalcBattlerStats(battler, mon);
-
-    UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
-    gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
 // Activates the secondary effect of a Max Move.

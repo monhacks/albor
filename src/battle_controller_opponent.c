@@ -221,8 +221,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
         TryShinyAnimation(battler, &gEnemyParty[gBattlerPartyIndexes[battler]]);
 
     twoMons = TwoOpponentIntroMons(battler);
-    if (!(gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-     && twoMons
+    if (twoMons
      && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].triedShinyMonAnim
      && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].ballAnimActive
      && !gBattleSpritesDataPtr->healthBoxesData[BATTLE_PARTNER(battler)].finishedShinyMonAnim)
@@ -390,20 +389,7 @@ static void OpponentHandleSwitchInAnim(u32 battler)
 
 static u32 OpponentGetTrainerPicId(u32 battlerId)
 {
-    u32 trainerPicId;
-
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-    {
-        if (battlerId != 1)
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_B);
-        else
-            trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
-    }
-    else
-    {
-        trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
-    }
-
+    u32 trainerPicId = GetTrainerPicFromId(gTrainerBattleOpponent_A);
     return trainerPicId;
 }
 
@@ -423,7 +409,7 @@ static void OpponentHandleTrainerSlide(u32 battler)
 
 static void OpponentHandleTrainerSlideBack(u32 battler)
 {
-    BtlController_HandleTrainerSlideBack(battler, 35, FALSE);
+    BtlController_HandleTrainerSlideBack(battler, 35, TRUE);
 }
 
 static void OpponentHandleMoveAnimation(u32 battler)

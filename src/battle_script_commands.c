@@ -6342,66 +6342,44 @@ static void Cmd_switchinanim(void)
 
 bool32 CanBattlerSwitch(u32 battler)
 {
-    s32 i, lastMonId, battlerIn1, battlerIn2;
+    s32 i, battlerIn1, battlerIn2;
     bool32 ret = FALSE;
     struct Pokemon *party;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && GetBattlerSide(battler) == B_SIDE_OPPONENT)
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
     {
+        battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
+        if (IsDoubleBattle())
+            battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        else
+            battlerIn2 = battlerIn1;
+
         party = gEnemyParty;
-
-        lastMonId = 0;
-        if (battler == B_POSITION_OPPONENT_RIGHT)
-            lastMonId = PARTY_SIZE / 2;
-
-        for (i = lastMonId; i < lastMonId + (PARTY_SIZE / 2); i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && GetMonData(&party[i], MON_DATA_HP) != 0
-             && gBattlerPartyIndexes[battler] != i)
-                break;
-        }
-
-        ret = (i != lastMonId + (PARTY_SIZE / 2));
     }
     else
     {
-        if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
-        {
-            battlerIn1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        // Check if attacker side has mon to switch into
+        battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
 
-            if (IsDoubleBattle())
-                battlerIn2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-            else
-                battlerIn2 = battlerIn1;
-
-            party = gEnemyParty;
-        }
+        if (IsDoubleBattle())
+            battlerIn2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
         else
-        {
-            // Check if attacker side has mon to switch into
-            battlerIn1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+            battlerIn2 = battlerIn1;
 
-            if (IsDoubleBattle())
-                battlerIn2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-            else
-                battlerIn2 = battlerIn1;
-
-            party = gPlayerParty;
-        }
-
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (GetMonData(&party[i], MON_DATA_HP) != 0
-             && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
-                break;
-        }
-
-        ret = (i != PARTY_SIZE);
+        party = gPlayerParty;
     }
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&party[i], MON_DATA_HP) != 0
+            && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
+            && !GetMonData(&party[i], MON_DATA_IS_EGG)
+            && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
+            break;
+    }
+
+    ret = (i != PARTY_SIZE);
     return ret;
 }
 
@@ -7211,9 +7189,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     lastMonLevel = party[GetTrainerPartySizeFromId(trainerId) - 1].lvl;
     trainerMoney = gTrainerClasses[GetTrainerClassFromId(trainerId)].money;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
-    else if (IsDoubleBattle())
+    if (IsDoubleBattle())
         moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * 2 * trainerMoney;
     else
         moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
@@ -7231,8 +7207,6 @@ static void Cmd_getmoneyreward(void)
     if (gBattleOutcome == B_OUTCOME_WON)
     {
         money = GetTrainerMoneyToGive(gTrainerBattleOpponent_A);
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-            money += GetTrainerMoneyToGive(gTrainerBattleOpponent_B);
         AddMoney(&gSaveBlockPtr->money, money);
     }
     else
@@ -11261,30 +11235,7 @@ static void Cmd_forcerandomswitch(void)
     {
         party = GetBattlerParty(gBattlerTarget);
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        {
-            if (GetBattlerSide(gBattlerTarget) == B_SIDE_PLAYER)
-            {
-                firstMonId = 0;
-                lastMonId = PARTY_SIZE;
-            }
-            else
-            {
-                if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
-                {
-                    firstMonId = PARTY_SIZE / 2;
-                    lastMonId = PARTY_SIZE;
-                }
-                else
-                {
-                    firstMonId = 0;
-                    lastMonId = PARTY_SIZE / 2;
-                }
-            }
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[BATTLE_PARTNER(gBattlerTarget)];
-        }
-        else if (IsDoubleBattle())
+        if (IsDoubleBattle())
         {
             firstMonId = 0;
             lastMonId = PARTY_SIZE;
@@ -13224,8 +13175,7 @@ static void Cmd_settorment(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT
-        || (GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX))
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_TORMENT)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
@@ -14977,20 +14927,6 @@ u8 GetFirstFaintedPartyIndex(u8 battler)
     u32 start = 0;
     u32 end = PARTY_SIZE;
     struct Pokemon *party = GetBattlerParty(battler);
-
-    // Check whether partner is separate trainer.
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT && gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-    {
-        if (GetBattlerPosition(battler) == B_POSITION_OPPONENT_LEFT
-            || GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT)
-        {
-            end = PARTY_SIZE / 2;
-        }
-        else
-        {
-            start = PARTY_SIZE / 2;
-        }
-    }
 
     // Loop through to find fainted battler.
     for (i = start; i < end; ++i)
