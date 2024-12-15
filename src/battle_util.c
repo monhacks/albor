@@ -465,35 +465,28 @@ bool32 TryRunFromBattle(u32 battler)
 void HandleAction_Run(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
+    if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
     {
-
+        if (!TryRunFromBattle(gBattlerAttacker)) // failed to run away
+        {
+            ClearVariousBattlerFlags(gBattlerAttacker);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE_2;
+            gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+            gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        }
     }
     else
     {
-        if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
+        if (!CanBattlerEscape(gBattlerAttacker))
         {
-            if (!TryRunFromBattle(gBattlerAttacker)) // failed to run away
-            {
-                ClearVariousBattlerFlags(gBattlerAttacker);
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE_2;
-                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
-                gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
-            }
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ATTACKER_CANT_ESCAPE;
+            gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
+            gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
         }
         else
         {
-            if (!CanBattlerEscape(gBattlerAttacker))
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_ATTACKER_CANT_ESCAPE;
-                gBattlescriptCurrInstr = BattleScript_PrintFailedToRunString;
-                gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
-            }
-            else
-            {
-                gCurrentTurnActionNumber = gBattlersCount;
-                gBattleOutcome = B_OUTCOME_MON_FLED;
-            }
+            gCurrentTurnActionNumber = gBattlersCount;
+            gBattleOutcome = B_OUTCOME_MON_FLED;
         }
     }
 }
@@ -865,18 +858,12 @@ u8 GetBattlerForBattleScript(u8 caseId)
 
 bool32 IsBattlerMarkedForControllerExec(u32 battler)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return (gBattleControllerExecFlags & (1 << (battler + 28))) != 0;
-    else
-        return (gBattleControllerExecFlags & (1 << battler)) != 0;
+    return (gBattleControllerExecFlags & (1 << battler)) != 0;
 }
 
 void MarkBattlerForControllerExec(u32 battler)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        gBattleControllerExecFlags |= 1u << (32 - MAX_BATTLERS_COUNT);
-    else
-        gBattleControllerExecFlags |= 1u << battler;
+    gBattleControllerExecFlags |= 1u << battler;
 }
 
 void MarkBattlerReceivedLinkData(u32 battler)
@@ -10870,15 +10857,11 @@ bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item)
     u8 stealerSide = GetBattlerSide(battlerStealing);
 
     // Check if the battler trying to steal should be able to
-    if (stealerSide == B_SIDE_OPPONENT
-        && !(gBattleTypeFlags &
-             (BATTLE_TYPE_LINK
-              | (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? TIPO_BATALLA_ENTRENADOR : 0)
-              )))
+    if (stealerSide == B_SIDE_OPPONENT && (B_TRAINERS_KNOCK_OFF_ITEMS == TRUE ? TIPO_BATALLA_ENTRENADOR : 0))
     {
         return FALSE;
     }
-    else if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)) && (gWishFutureKnock.knockedOffMons[stealerSide] & (1u << gBattlerPartyIndexes[battlerStealing])))
+    else if (gWishFutureKnock.knockedOffMons[stealerSide] & (1u << gBattlerPartyIndexes[battlerStealing]))
     {
         return FALSE;
     }
@@ -11042,7 +11025,7 @@ u16 GetUsedHeldItem(u32 battler)
 bool32 CantPickupItem(u32 battler)
 {
     // Used by RandomUniformExcept() for RNG_PICKUP
-    if (battler == gBattlerAttacker && gBattleTypeFlags & (TIPO_BATALLA_ENTRENADOR | BATTLE_TYPE_LINK))
+    if (battler == gBattlerAttacker && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         return TRUE;
     return !(IsBattlerAlive(battler) && GetUsedHeldItem(battler) && gBattleStruct->canPickupItem & (1u << battler));
 }

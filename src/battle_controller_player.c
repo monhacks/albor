@@ -1890,12 +1890,7 @@ void CB2_SetUpReshowBattleScreenAfterMenu2(void)
 
 static void PrintLinkStandbyMsg(void)
 {
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-    {
-        gBattle_BG0_X = 0;
-        gBattle_BG0_Y = 0;
-        BattlePutTextOnWindow(gText_LinkStandby, B_WIN_MSG);
-    }
+
 }
 
 static void PlayerHandleLoadMonSprite(u32 battler)

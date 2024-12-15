@@ -104,9 +104,7 @@ void BattleAI_SetupItems(void)
         data[i] = 0;
 
     // Items are allowed to use in ONLY trainer battles.
-    if ((gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-       )
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         for (i = 0; i < MAX_TRAINER_ITEMS; i++)
         {
@@ -182,7 +180,7 @@ void BattleAI_SetupFlags(void)
         return;
     }
 
-    if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR)))
+    if (IsWildMonSmart() && !(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR))
     {
         // smart wild AI
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] = GetAiFlags(0xFFFF);

@@ -69,8 +69,6 @@ enum TiposBatalla
     TIPO_BATALLA_LEGENDARIO,
 };
 
-#define BATTLE_TYPE_LINK               (1 << 14)
-
 enum ResultadosBatalla
 {
     B_OUTCOME_WON = 1,

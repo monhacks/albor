@@ -456,12 +456,9 @@ static void CB2_InitBattleInternal(void)
 
     if (!DEBUG_OVERWORLD_MENU || (DEBUG_OVERWORLD_MENU && !gIsDebugBattle))
     {
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
-        {
-            CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
-            SetWildMonHeldItem();
-            CalculateEnemyPartyCount();
-        }
+        CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
+        SetWildMonHeldItem();
+        CalculateEnemyPartyCount();
     }
 
     gMain.inBattle = TRUE;
@@ -577,23 +574,7 @@ static void CB2_HandleStartBattle(void)
         InitBattleControllers();
         gBattleCommunication[SPRITES_INIT_STATE1] = 0;
         gBattleCommunication[SPRITES_INIT_STATE2] = 0;
-        if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        {
-            // Check if both players are using Emerald
-            // to determine if the recorded battle rng
-            // seed needs to be sent
-            s32 i;
-            for (i = 0; i < 2 && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
-
-            if (i == 2)
-                gBattleCommunication[MULTIUSE_STATE] = 16;
-            else
-                gBattleCommunication[MULTIUSE_STATE] = 18;
-        }
-        else
-        {
-            gBattleCommunication[MULTIUSE_STATE] = 18;
-        }
+        gBattleCommunication[MULTIUSE_STATE] = 18;
         break;
     case 16:
         break;
@@ -886,10 +867,7 @@ void CreateTrainerPartyForPlayer(void)
 
 void VBlankCB_Battle(void)
 {
-    // Change gRngSeed every vblank unless the battle could be recorded.
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
-        AdvanceRandom();
-
+    AdvanceRandom();
     SetGpuReg(REG_OFFSET_BG0HOFS, gBattle_BG0_X);
     SetGpuReg(REG_OFFSET_BG0VOFS, gBattle_BG0_Y);
     SetGpuReg(REG_OFFSET_BG1HOFS, gBattle_BG1_X);
@@ -1089,7 +1067,7 @@ void SpriteCB_OpponentMonFromBall(struct Sprite *sprite)
 {
     if (sprite->affineAnimEnded)
     {
-        if (!(gHitMarker & HITMARKER_NO_ANIMATIONS) || gBattleTypeFlags & (BATTLE_TYPE_LINK))
+        if (!(gHitMarker & HITMARKER_NO_ANIMATIONS))
             StartSpriteAnim(sprite, 1);
         BattleAnimateFrontSprite(sprite, sprite->sSpeciesId, TRUE, 1);
     }
@@ -1367,7 +1345,7 @@ static void BattleStartClearSetData(void)
     gBattleWeather = 0;
     gHitMarker = 0;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) && gSaveBlockPtr->optionsBattleSceneOff == TRUE)
+    if (gSaveBlockPtr->optionsBattleSceneOff == TRUE)
         gHitMarker |= HITMARKER_NO_ANIMATIONS;
 
     gMultiHitCounter = 0;
@@ -1910,8 +1888,7 @@ static void DoBattleIntro(void)
         {
             for (battler = 0; battler < gBattlersCount; battler++)
             {
-                if (GetBattlerSide(battler) == B_SIDE_OPPONENT
-                 && !(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
+                if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
                 {
                     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN);
                 }
@@ -2198,8 +2175,6 @@ u8 IsRunningFromBattleImpossible(u32 battler)
         return BATTLE_RUN_SUCCESS;
     if (B_GHOSTS_ESCAPE >= GEN_6 && IS_BATTLER_OF_TYPE(battler, TIPO_FANTASMA))
         return BATTLE_RUN_SUCCESS;
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
-        return BATTLE_RUN_SUCCESS;
     if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
         return BATTLE_RUN_SUCCESS;
 
@@ -2399,9 +2374,7 @@ static void HandleTurnActionSelectionState(void)
                         return;
                     }
 
-                    if ((gBattleTypeFlags & (BATTLE_TYPE_LINK))
-                                            // Or if currently held by Sky Drop
-                                            || gStatuses3[battler] & STATUS3_SKY_DROPPED)
+                    if (gStatuses3[battler] & STATUS3_SKY_DROPPED)
                     {
                         gSelectionBattleScripts[battler] = BattleScript_ActionSelectionItemsCantBeUsed;
                         gBattleCommunication[battler] = STATE_SELECTION_SCRIPT;
@@ -2467,9 +2440,7 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 }
 
-                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
-                         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-                         && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
+                if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
                     BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
                     gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -2746,14 +2717,6 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
     speed *= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0];
     speed /= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][1];
 
-    // player's badge boost
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-        && ShouldGetStatBadgeBoost(FLAG_BADGE03_GET, battler)
-        && GetBattlerSide(battler) == B_SIDE_PLAYER)
-    {
-        speed = (speed * 110) / 100;
-    }
-
     // item effects
     if (holdEffect == HOLD_EFFECT_MACHO_BRACE || holdEffect == HOLD_EFFECT_POWER_ITEM)
         speed /= 2;
@@ -2979,29 +2942,15 @@ static void SetActionsAndBattlersTurnOrder(void)
     s32 turnOrderId = 0;
     s32 i, j, battler;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
+    if (gChosenActionByBattler[0] == B_ACTION_RUN)
     {
-        for (battler = 0; battler < gBattlersCount; battler++)
-        {
-            if (gChosenActionByBattler[battler] == B_ACTION_RUN)
-            {
-                turnOrderId = 5;
-                break;
-            }
-        }
+        battler = 0;
+        turnOrderId = 5;
     }
-    else
+    if (gChosenActionByBattler[2] == B_ACTION_RUN)
     {
-        if (gChosenActionByBattler[0] == B_ACTION_RUN)
-        {
-            battler = 0;
-            turnOrderId = 5;
-        }
-        if (gChosenActionByBattler[2] == B_ACTION_RUN)
-        {
-            battler = 2;
-            turnOrderId = 5;
-        }
+        battler = 2;
+        turnOrderId = 5;
     }
 
     if (turnOrderId == 5) // One of battlers wants to run.
@@ -3296,11 +3245,7 @@ static void HandleEndTurn_BattleWon(void)
 {
     gCurrentActionFuncId = 0;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-    {
-
-    }
-    else if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
     {
         BattleStopLowHpSound();
         gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
@@ -3338,16 +3283,7 @@ static void HandleEndTurn_BattleWon(void)
 static void HandleEndTurn_BattleLost(void)
 {
     gCurrentActionFuncId = 0;
-
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-    {
-
-    }
-    else
-    {
-        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
-    }
-
+    gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
@@ -3387,28 +3323,24 @@ static void HandleEndTurn_FinishBattle(void)
 
     if (gCurrentActionFuncId == B_ACTION_TRY_FINISH || gCurrentActionFuncId == B_ACTION_FINISHED)
     {
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
+        for (battler = 0; battler < gBattlersCount; battler++)
         {
-            for (battler = 0; battler < gBattlersCount; battler++)
+            if (GetBattlerSide(battler) == B_SIDE_PLAYER)
             {
-                if (GetBattlerSide(battler) == B_SIDE_PLAYER)
+                if (gBattleResults.playerMon1Species == SPECIES_NONE)
                 {
-                    if (gBattleResults.playerMon1Species == SPECIES_NONE)
-                    {
-                        gBattleResults.playerMon1Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
-                        GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_NICKNAME, gBattleResults.playerMon1Name);
-                    }
-                    else
-                    {
-                        gBattleResults.playerMon2Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
-                        GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_NICKNAME, gBattleResults.playerMon2Name);
-                    }
+                    gBattleResults.playerMon1Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_NICKNAME, gBattleResults.playerMon1Name);
+                }
+                else
+                {
+                    gBattleResults.playerMon2Species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES, NULL);
+                    GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_NICKNAME, gBattleResults.playerMon2Name);
                 }
             }
         }
 
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
-                                  | TIPO_BATALLA_ENTRENADOR))
+        if (!(gBattleTypeFlags & (TIPO_BATALLA_ENTRENADOR))
             && gBattleResults.shinyWildMon)
 
         BeginFastPaletteFade(3);
@@ -3455,10 +3387,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         ResetSpriteData();
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-            && (B_EVOLUTION_AFTER_WHITEOUT >= GEN_6
-                || gBattleOutcome == B_OUTCOME_WON
-                || gBattleOutcome == B_OUTCOME_CAUGHT))
+        if ((B_EVOLUTION_AFTER_WHITEOUT >= GEN_6 || gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
         {
             gBattleMainFunc = TryEvolvePokemon;
         }
@@ -3470,14 +3399,11 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     }
 
     FreeAllWindowBuffers();
-    if (!(gBattleTypeFlags & BATTLE_TYPE_LINK))
-    {
-        ZeroEnemyPartyMons();
-        ResetDynamicAiFunc();
-        FreeMonSpritesGfx();
-        FreeBattleResources();
-        FreeBattleSpritesData();
-    }
+    ZeroEnemyPartyMons();
+    ResetDynamicAiFunc();
+    FreeMonSpritesGfx();
+    FreeBattleResources();
+    FreeBattleSpritesData();
 }
 
 static void TryEvolvePokemon(void)

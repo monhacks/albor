@@ -92,7 +92,6 @@ SECTIONS {
         src/battle_gfx_sfx_util.o(.text);
         src/battle_controller_opponent.o(.text);
         src/battle_ai_switch_items.o(.text);
-        src/battle_controller_link_opponent.o(.text);
         src/battle_debug.o(.text);
         src/pokemon.o(.text);
         src/trig.o(.text);
@@ -229,7 +228,6 @@ SECTIONS {
         src/landmark.o(.text);
         src/fldeff_strength.o(.text);
         src/battle_transition.o(.text);
-        src/battle_controller_link_partner.o(.text);
         src/battle_message.o(.text);
         src/cable_car.o(.text);
         src/math_util.o(.text);
@@ -433,7 +431,6 @@ SECTIONS {
         src/battle_anim_smokescreen.o(.rodata);
         src/battle_controller_opponent.o(.rodata);
         src/battle_ai_switch_items.o(.rodata);
-        src/battle_controller_link_opponent.o(.rodata);
         src/battle_debug.o(.rodata);
         src/pokemon.o(.rodata);
         src/trig.o(.rodata);
@@ -551,7 +548,6 @@ SECTIONS {
         src/roulette.o(.rodata);
         src/landmark.o(.rodata);
         src/battle_transition.o(.rodata);
-        src/battle_controller_link_partner.o(.rodata);
         src/battle_message.o(.rodata);
         src/cable_car.o(.rodata);
         src/save.o(.rodata);

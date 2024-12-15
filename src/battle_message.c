@@ -2638,14 +2638,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
     case STRINGID_INTROMSG: // first battle msg
         if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
         {
-            if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-            {
-                stringPtr = sText_LinkTrainerWantsToBattle;
-            }
-            else
-            {
-                stringPtr = sText_Trainer1WantsToBattle;
-            }
+            stringPtr = sText_Trainer1WantsToBattle;
         }
         else
         {
@@ -2673,17 +2666,11 @@ void BufferStringBattle(u16 stringID, u32 battler)
         {
             if (IsDoubleBattle() && IsValidForBattle(&gEnemyParty[gBattlerPartyIndexes[BATTLE_PARTNER(battler)]]))
             {
-                if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-                    stringPtr = sText_LinkTrainerSentOutTwoPkmn;
-                else
-                    stringPtr = sText_Trainer1SentOutTwoPkmn;
+                stringPtr = sText_Trainer1SentOutTwoPkmn;
             }
             else
             {
-                if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
-                    stringPtr = sText_Trainer1SentOutPkmn;
-                else
-                    stringPtr = sText_LinkTrainerSentOutPkmn;
+                stringPtr = sText_Trainer1SentOutPkmn;
             }
         }
         break;
@@ -2718,14 +2705,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         else
         {
-            if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-            {
-                stringPtr = sText_LinkTrainerSentOutPkmn2;
-            }
-            else
-            {
-                stringPtr = sText_Trainer1SentOutPkmn2;
-            }
+            stringPtr = sText_Trainer1SentOutPkmn2;
         }
         break;
     case STRINGID_USEDMOVE: // Pokémon used a move msg
@@ -3422,23 +3402,12 @@ void BattlePutTextOnWindow(const u8 *text, u8 windowId)
         printerTemplate.x = printerTemplate.currentX = alignX;
     }
 
-    if (windowId == ARENA_WIN_JUDGMENT_TEXT)
-        gTextFlags.useAlternateDownArrow = FALSE;
-    else
-        gTextFlags.useAlternateDownArrow = TRUE;
+    gTextFlags.useAlternateDownArrow = TRUE;
+    gTextFlags.autoScroll = FALSE;
 
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-        gTextFlags.autoScroll = TRUE;
-    else
-        gTextFlags.autoScroll = FALSE;
-
-    if (windowId == B_WIN_MSG || windowId == ARENA_WIN_JUDGMENT_TEXT)
+    if (windowId == B_WIN_MSG)
     {
-        if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-            speed = 1;
-        else
-            speed = GetPlayerTextSpeedDelay();
-
+        speed = GetPlayerTextSpeedDelay();
         gTextFlags.canABSpeedUpPrint = 1;
     }
     else

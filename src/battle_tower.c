@@ -1225,19 +1225,5 @@ static void SetNextBattleTentOpponent(void)
 
 void TrySetLinkBattleTowerEnemyPartyLevel(void)
 {
-    if (gBattleTypeFlags & (BATTLE_TYPE_LINK))
-    {
-        s32 i;
-        u8 enemyLevel = SetFacilityPtrsGetLevel();
 
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            u32 species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES, NULL);
-            if (species)
-            {
-                SetMonData(&gEnemyParty[i], MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][enemyLevel]);
-                CalculateMonStats(&gEnemyParty[i]);
-            }
-        }
-    }
 }

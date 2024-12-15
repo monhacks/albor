@@ -4407,9 +4407,8 @@ bool32 NoAliveMonsForEitherParty(void)
     return (NoAliveMonsForPlayer() || NoAliveMonsForOpponent());
 }
 
-// For battles that aren't BATTLE_TYPE_LINK or BATTLE_TYPE_RECORDED_LINK or trainer battles, the only thing this
-// command does is check whether the player has won/lost by totaling each team's HP. It then
-// sets gBattleOutcome accordingly, if necessary.
+// The only thing this command does is check whether the player has won/lost by totaling each team's HP.
+// It then sets gBattleOutcome accordingly, if necessary.
 static void Cmd_checkteamslost(void)
 {
     CMD_ARGS(const u8 *jumpInstr);
@@ -4428,7 +4427,7 @@ static void Cmd_checkteamslost(void)
     // For battles that haven't ended, count number of empty battler spots
     // In multi battles, jump to pointer if more than 1 spot empty
     // In non-multi battles, jump to pointer if 1 spot is missing on both sides
-    if (gBattleOutcome == 0 && (gBattleTypeFlags & (BATTLE_TYPE_LINK | TIPO_BATALLA_ENTRENADOR)))
+    if (gBattleOutcome == 0 && (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR))
     {
         s32 i, emptyPlayerSpots, emptyOpponentSpots;
 
@@ -6328,8 +6327,7 @@ static void Cmd_switchinanim(void)
 
     battler = GetBattlerForBattleScript(cmd->battler);
 
-    if (GetBattlerSide(battler) == B_SIDE_OPPONENT
-        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK)))
+    if (GetBattlerSide(battler) == B_SIDE_OPPONENT)
         HandleSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[battler].species), FLAG_SET_SEEN);
 
     gAbsentBattlerFlags &= ~(1u << battler);
@@ -8716,8 +8714,7 @@ static void Cmd_various(void)
     case VARIOUS_RESET_PLAYER_FAINTED:
     {
         VARIOUS_ARGS();
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK))
-            && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
+        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
             && IsBattlerAlive(B_POSITION_PLAYER_LEFT)
             && IsBattlerAlive(B_POSITION_OPPONENT_LEFT))
         {
@@ -11385,7 +11382,7 @@ static void Cmd_givepaydaymoney(void)
 {
     CMD_ARGS();
 
-    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK)) && gPaydayMoney != 0)
+    if (gPaydayMoney != 0)
     {
         u32 bonusMoney = gPaydayMoney * gBattleStruct->moneyMultiplier;
         AddMoney(&gSaveBlockPtr->money, bonusMoney);
