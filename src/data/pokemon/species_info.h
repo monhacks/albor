@@ -5317,7 +5317,9 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(CONCAVE_ARC_LARGE),
         PALETAS(Magikarp),
         ICONO(Magikarp),
+        ICONO_HEMBRA(Magikarp),
         FOLLOWER(Magikarp, TRACKS_SPOT),
+        FOLLOWER_HEMBRA(Magikarp, TRACKS_SPOT),
         MOVIMIENTOS(Magikarp),
         MOVIMIENTOS_HUEVO(Magikarp),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_DRAGON_FANG, SPECIES_GYARADOS}),
@@ -5357,8 +5359,10 @@ const struct SpeciesInfo gSpeciesInfo[] =
         BACK_ANIM(V_SHAKE),
         PALETAS(Gyarados),
         ICONO(Gyarados),
+        ICONO_HEMBRA(Gyarados),
         MOVIMIENTOS_HUEVO(Magikarp),
         FOLLOWER(Gyarados, TRACKS_SLITHER),
+        FOLLOWER_HEMBRA(Gyarados, TRACKS_SLITHER),
     },
 
     [SPECIES_LAPRAS] =
