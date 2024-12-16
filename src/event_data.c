@@ -5,6 +5,7 @@
 #define SPECIAL_FLAGS_SIZE  (NUM_SPECIAL_FLAGS / 8)  // 8 flags per byte
 #define TEMP_FLAGS_SIZE     (NUM_TEMP_FLAGS / 8)
 #define DAILY_FLAGS_SIZE    (NUM_DAILY_FLAGS / 8)
+#define TRAINER_FLAGS_SIZE  (TRAINERS_COUNT / 8)
 #define TEMP_VARS_SIZE      (NUM_TEMP_VARS * 2)      // 1/2 var per byte
 
 EWRAM_DATA u16 gSpecialVar_0x8000 = 0;
@@ -31,6 +32,7 @@ extern u16 *const gSpecialVars[];
 void InitEventData(void)
 {
     memset(gSaveBlockPtr->flags, 0, sizeof(gSaveBlockPtr->flags));
+    memset(gSaveBlockPtr->trainerFlags, 0, sizeof(gSaveBlockPtr->trainerFlags));
     memset(gSaveBlockPtr->vars, 0, sizeof(gSaveBlockPtr->vars));
     memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
 }
@@ -48,6 +50,7 @@ void ClearTempFieldEventData(void)
 void ClearDailyFlags(void)
 {
     memset(&gSaveBlockPtr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
+    memset(&gSaveBlockPtr->trainerFlags[0], 0, TRAINER_FLAGS_SIZE);
 }
 
 void DisableResetRTC(void)
@@ -120,11 +123,27 @@ u8 *GetFlagPointer(u16 id)
         return &sSpecialFlags[(id - SPECIAL_FLAGS_START) / 8];
 }
 
+u8 *GetTrainerFlagPointer(u16 id)
+{
+    if (id == 0 || id >= TRAINERS_COUNT)
+        return NULL;
+
+    return &gSaveBlockPtr->trainerFlags[id / 8];
+}
+
 u8 FlagSet(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
     if (ptr)
         *ptr |= 1 << (id & 7);
+    return 0;
+}
+
+u8 TrainerFlagSet(u16 id)
+{
+    u8 *ptr = GetTrainerFlagPointer(id);
+    if (ptr)
+        *ptr |= 1 << (id % 8);
     return 0;
 }
 
@@ -144,6 +163,14 @@ u8 FlagClear(u16 id)
     return 0;
 }
 
+u8 TrainerFlagClear(u16 id)
+{
+    u8 *ptr = GetTrainerFlagPointer(id);
+    if (ptr)
+        *ptr &= ~(1 << (id % 8));
+    return 0;
+}
+
 bool8 FlagGet(u16 id)
 {
     u8 *ptr = GetFlagPointer(id);
@@ -152,6 +179,19 @@ bool8 FlagGet(u16 id)
         return FALSE;
 
     if (!(((*ptr) >> (id & 7)) & 1))
+        return FALSE;
+
+    return TRUE;
+}
+
+bool8 TrainerFlagGet(u16 id)
+{
+    u8 *ptr = GetTrainerFlagPointer(id);
+
+    if (!ptr)
+        return FALSE;
+
+    if (!(((*ptr) >> (id % 8)) & 1))
         return FALSE;
 
     return TRUE;

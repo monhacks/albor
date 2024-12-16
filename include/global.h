@@ -120,6 +120,7 @@
 
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(DEX_COUNT)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
+#define NUM_TRAINER_FLAG_BYTES ROUND_BITS_TO_BYTES(TRAINERS_COUNT)
 #define NUM_TRENDY_SAYING_BYTES ROUND_BITS_TO_BYTES(NUM_TRENDY_SAYINGS)
 
 // This produces an error at compile-time if expr is zero.
@@ -627,6 +628,7 @@ struct SaveBlock
     struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
     struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
     u8 flags[NUM_FLAG_BYTES];
+    u8 trainerFlags[NUM_TRAINER_FLAG_BYTES];
     u16 vars[VARS_COUNT];
     u32 gameStats[NUM_GAME_STATS];
     struct BerryTree berryTrees[BERRY_TREES_COUNT];

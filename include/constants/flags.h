@@ -1259,16 +1259,7 @@
 #define FLAG_DEFEATED_ELITE_4_GLACIA                                0x49E
 #define FLAG_DEFEATED_ELITE_4_DRAKE                                 0x49F
 
-// Trainer Flags
-// Trainer flags occupy 0x4A0 - 0x85F, the last 9 of which are unused
-// See constants/opponents.h. The values there + FLAG_TRAINER_FLAG_START are the flag IDs
-
-#define TRAINER_FLAGS_START                                         0x4A0
-#define TRAINER_FLAGS_END                                           (TRAINER_FLAGS_START + TRAINERS_COUNT)
-
-// System Flags
-
-#define SYSTEM_FLAGS                                   (TRAINER_FLAGS_END + 1) // 0x860
+#define SYSTEM_FLAGS                                   (FLAG_DEFEATED_ELITE_4_DRAKE + 1) // 0x860
 
 #define FLAG_SYS_POKEMON_GET                         (SYSTEM_FLAGS + 0x0) // FLAG_0x860
 #define FLAG_SYS_POKEDEX_GET                         (SYSTEM_FLAGS + 0x1)
