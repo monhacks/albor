@@ -137,24 +137,6 @@ void DrawTextBorderOuter(u8 windowId, u16 tileNum, u8 palNum)
     FillBgTilemapBufferRect(bgLayer, tileNum + 8, tilemapLeft + width,  tilemapTop + height,    1,      1,      palNum);
 }
 
-void DrawTextBorderInner(u8 windowId, u16 tileNum, u8 palNum)
-{
-    u8 bgLayer = GetWindowAttribute(windowId, WINDOW_BG);
-    u16 tilemapLeft = GetWindowAttribute(windowId, WINDOW_TILEMAP_LEFT);
-    u16 tilemapTop = GetWindowAttribute(windowId, WINDOW_TILEMAP_TOP);
-    u16 width = GetWindowAttribute(windowId, WINDOW_WIDTH);
-    u16 height = GetWindowAttribute(windowId, WINDOW_HEIGHT);
-
-    FillBgTilemapBufferRect(bgLayer, tileNum + 0, tilemapLeft,              tilemapTop,                 1,          1,          palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 1, tilemapLeft + 1,          tilemapTop,                 width - 2,  1,          palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 2, tilemapLeft + width - 1,  tilemapTop,                 1,          1,          palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 3, tilemapLeft,              tilemapTop + 1,             1,          height - 2, palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 5, tilemapLeft + width - 1,  tilemapTop + 1,             1,          height - 2, palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 6, tilemapLeft,              tilemapTop + height - 1,    1,          1,          palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 7, tilemapLeft + 1,          tilemapTop + height - 1,    width -     2,  1,      palNum);
-    FillBgTilemapBufferRect(bgLayer, tileNum + 8, tilemapLeft + width - 1,  tilemapTop + height - 1,    1,          1,          palNum);
-}
-
 void rbox_fill_rectangle(u8 windowId)
 {
     u8 bgLayer = GetWindowAttribute(windowId, WINDOW_BG);
@@ -194,11 +176,4 @@ const u16 *GetTextWindowPalette(u8 id)
 const u16 *GetOverworldTextboxPalettePtr(void)
 {
     return gMessageBox_Pal;
-}
-
-// Effectively LoadUserWindowBorderGfx but specifying the bg directly instead of a window from that bg
-void LoadUserWindowBorderGfxOnBg(u8 bg, u16 destOffset, u8 palOffset)
-{
-    LoadBgTiles(bg, sWindowFrames[gSaveBlockPtr->optionsWindowFrameType].tiles, 0x120, destOffset);
-    LoadPalette(GetWindowFrameTilesPal(gSaveBlockPtr->optionsWindowFrameType)->pal, palOffset, PLTT_SIZE_4BPP);
 }

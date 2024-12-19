@@ -176,7 +176,6 @@ void LoadMessageBoxAndBorderGfx(void)
     LoadMessageBoxGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
     LoadUserWindowBorderGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL);
-    //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 8));
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
 }
 
@@ -1858,8 +1857,6 @@ void HBlankCB_DoublePopupWindow(void)
     if (scanline < 80 || scanline > 160)
     {
         REG_BG0VOFS = offset;
-        if(OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-            REG_BLDALPHA = BLDALPHA_BLEND(12, 8);
     }
     else
     {

@@ -92,9 +92,7 @@ void ShowMapNamePopup(void)
             if (OW_POPUP_GENERATION == GEN_5)
             {
                 gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
-
-                if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-                    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
             }
             else
             {
@@ -211,13 +209,8 @@ void HideMapNamePopUpWindow(void)
 
             DisableInterrupts(INTR_FLAG_HBLANK);
             SetHBlankCallback(NULL);
-
-            if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-            {
-                SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
-                //SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 8));
-            }
+            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
         }
 
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
@@ -255,9 +248,7 @@ static void ShowMapNamePopUpWindow(void)
 
     if (OW_POPUP_GENERATION == GEN_5)
     {
-        if (OW_POPUP_BW_ALPHA_BLEND && !IsWeatherAlphaBlend())
-            SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
-
+        SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
         mapNamePopUpWindowId = AddMapNamePopUpWindow();
         secondaryPopUpWindowId = AddSecondaryPopUpWindow();
     }
