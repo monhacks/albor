@@ -48,26 +48,19 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#define TAG_SAVING_ANIMATION 0x1000
+#define TAG_SAVING_ANIMATION 4096
 static const u16 sSavingAnimation_Pal[] = INCBIN_U16("graphics/text_window/saving_animation.gbapal");
 const u32 gSavingAnimation_Gfx[] = INCBIN_U32("graphics/text_window/saving_animation.4bpp.lz");
-static u8 spriteId;
+static u8 savingSpriteId;
 
 static const struct OamData sOam_SavingAnimation =
 {
+    .objMode = ST_OAM_OBJ_BLEND,
     .y = DISPLAY_HEIGHT,
-    .affineMode = ST_OAM_AFFINE_OFF,
-    .objMode = ST_OAM_OBJ_NORMAL,
-    .mosaic = FALSE,
-    .bpp = ST_OAM_4BPP,
     .shape = SPRITE_SHAPE(16x16),
-    .x = 0,
-    .matrixNum = 0,
     .size = SPRITE_SIZE(16x16),
-    .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
-    .affineParam = 0,
 };
 
 static const union AnimCmd sAnim_SavingAnimation[] =
@@ -120,7 +113,7 @@ void ShowSavingAnimation(void)
     LoadCompressedSpriteSheet(&sSpriteSheet_SavingAnimation[0]);
     LoadSpritePalettes(sSpritePalettes_SavingAnimation);
 
-    spriteId = CreateSprite(&sSpriteTemplate_SavingAnimation, 232, 145, 2);
+    savingSpriteId = CreateSprite(&sSpriteTemplate_SavingAnimation, 232, 145, 2);
 };
 
 // Menu actions
@@ -995,7 +988,7 @@ static u8 SaveDoSaveCallback(void)
     else
         TrySavingData();
 
-    DestroySprite(&gSprites[spriteId]);
+    DestroySprite(&gSprites[savingSpriteId]);
     sSaveDialogCallback = SaveSuccessCallback;
 
     return SAVE_IN_PROGRESS;

@@ -91,12 +91,10 @@ struct Weather
     u8 fogHSpritesCreated;
     // Ash
     u16 ashBaseSpritesX;
-    u16 ashUnused;
     u8 ashSpritesCreated;
     // Sandstorm
     u32 sandstormXOffset;
     u32 sandstormYOffset;
-    u16 sandstormUnused;
     u16 sandstormBaseSpritesX;
     u16 sandstormPosY;
     u16 sandstormWaveIndex;
@@ -117,20 +115,12 @@ struct Weather
     u16 bubblesCoordsIndex;
     u16 bubblesSpriteCount;
     u8 bubblesSpritesCreated;
-
-    u16 currBlendEVA;
-    u16 currBlendEVB;
-    u16 targetBlendEVA;
-    u16 targetBlendEVB;
-    u8 blendUpdateCounter;
-    u8 blendFrameCounter;
     u8 blendDelay;
     // Drought
     s16 droughtBrightnessStage;
     s16 droughtLastBrightnessStage;
     s16 droughtTimer;
     s16 droughtState;
-    u8 droughtUnused[9];
     u8 loadDroughtPalsIndex;
     u8 loadDroughtPalsOffset;
 };
@@ -158,9 +148,6 @@ void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 void DroughtStateInit(void);
 void DroughtStateRun(void);
-void Weather_SetBlendCoeffs(u8 eva, u8 evb);
-void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
-bool8 Weather_UpdateBlend(void);
 u8 GetCurrentWeather(void);
 void SetRainStrengthFromSoundEffect(u16 soundEffect);
 void PlayRainStoppingSoundEffect(void);
@@ -193,7 +180,6 @@ void Thunderstorm_Main(void);
 void Thunderstorm_InitAll(void);
 bool8 Thunderstorm_Finish(void);
 void FogHorizontal_InitVars(void);
-u8 UpdateShadowColor(u16 color);
 void FogHorizontal_Main(void);
 void FogHorizontal_InitAll(void);
 bool8 FogHorizontal_Finish(void);

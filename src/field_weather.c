@@ -219,7 +219,6 @@ void StartWeather(void)
         gWeatherPtr->sandstormSwirlSpritesCreated = 0;
         gWeatherPtr->bubblesSpritesCreated = 0;
         gWeatherPtr->lightenedFogSpritePalsCount = 0;
-        Weather_SetBlendCoeffs(16, 0);
         gWeatherPtr->currWeather = 0;
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_IDLE;
         gWeatherPtr->readyForInit = FALSE;
@@ -298,7 +297,6 @@ static void Task_WeatherMain(u8 taskId)
 
 static void None_Init(void)
 {
-    Weather_SetBlendCoeffs(8, 12); // Indoor shadows
     gWeatherPtr->noShadows = FALSE;
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 0;
@@ -787,7 +785,6 @@ void FadeScreen(u8 mode, s8 delay)
         gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_SCREEN_FADING_IN;
         gWeatherPtr->fadeInFirstFrame = TRUE;
         gWeatherPtr->fadeInTimer = 0;
-        Weather_SetBlendCoeffs(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB);
         gWeatherPtr->readyForInit = TRUE;
     }
 }
@@ -940,61 +937,6 @@ void DroughtStateRun(void)
         }
         break;
     }
-}
-
-void Weather_SetBlendCoeffs(u8 eva, u8 evb)
-{
-    gWeatherPtr->currBlendEVA = eva;
-    gWeatherPtr->currBlendEVB = evb;
-    gWeatherPtr->targetBlendEVA = eva;
-    gWeatherPtr->targetBlendEVB = evb;
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(eva, evb));
-}
-
-void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay)
-{
-    gWeatherPtr->targetBlendEVA = eva;
-    gWeatherPtr->targetBlendEVB = evb;
-    gWeatherPtr->blendDelay = delay;
-    gWeatherPtr->blendFrameCounter = 0;
-    gWeatherPtr->blendUpdateCounter = 0;
-}
-
-bool8 Weather_UpdateBlend(void)
-{
-    if (gWeatherPtr->currBlendEVA == gWeatherPtr->targetBlendEVA
-     && gWeatherPtr->currBlendEVB == gWeatherPtr->targetBlendEVB)
-        return TRUE;
-
-    if (++gWeatherPtr->blendFrameCounter > gWeatherPtr->blendDelay)
-    {
-        gWeatherPtr->blendFrameCounter = 0;
-        gWeatherPtr->blendUpdateCounter++;
-
-        // Update currBlendEVA and currBlendEVB on alternate frames
-        if (gWeatherPtr->blendUpdateCounter & 1)
-        {
-            if (gWeatherPtr->currBlendEVA < gWeatherPtr->targetBlendEVA)
-                gWeatherPtr->currBlendEVA++;
-            else if (gWeatherPtr->currBlendEVA > gWeatherPtr->targetBlendEVA)
-                gWeatherPtr->currBlendEVA--;
-        }
-        else
-        {
-            if (gWeatherPtr->currBlendEVB < gWeatherPtr->targetBlendEVB)
-                gWeatherPtr->currBlendEVB++;
-            else if (gWeatherPtr->currBlendEVB > gWeatherPtr->targetBlendEVB)
-                gWeatherPtr->currBlendEVB--;
-        }
-    }
-
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(gWeatherPtr->currBlendEVA, gWeatherPtr->currBlendEVB));
-
-    if (gWeatherPtr->currBlendEVA == gWeatherPtr->targetBlendEVA
-     && gWeatherPtr->currBlendEVB == gWeatherPtr->targetBlendEVB)
-        return TRUE;
-
-    return FALSE;
 }
 
 u8 GetCurrentWeather(void)
