@@ -373,10 +373,8 @@ void UpdateShadowFieldEffect(struct Sprite *sprite)
         sprite->y = linkedSprite->y + sprite->sYOffset;
         sprite->invisible = linkedSprite->invisible;
         if (!objectEvent->active
-         || objectEvent->noShadow
          || objectEvent->inHotSprings
          || objectEvent->inSandPile
-         || gWeatherPtr->noShadows
          || MetatileBehavior_IsPokeGrass(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsPuddle(objectEvent->currentMetatileBehavior)
          || MetatileBehavior_IsSurfableWaterOrUnderwater(objectEvent->currentMetatileBehavior)

@@ -95,7 +95,6 @@ static const struct SpriteTemplate sCloudSpriteTemplate =
 
 void Clouds_InitVars(void)
 {
-    gWeatherPtr->noShadows = FALSE;
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;
@@ -144,7 +143,6 @@ void Sunny_InitVars(void)
 {
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 20;
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Sunny_InitAll(void)
@@ -228,7 +226,6 @@ void Drought_InitVars(void)
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 0;
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Drought_InitAll(void)
@@ -471,7 +468,6 @@ void Rain_InitVars(void)
     gWeatherPtr->targetColorMapIndex = 3;
     gWeatherPtr->colorMapStepDelay = 20;
     SetRainStrengthFromSoundEffect(SE_RAIN);
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Rain_InitAll(void)
@@ -765,7 +761,6 @@ void Snow_InitVars(void)
     gWeatherPtr->colorMapStepDelay = 20;
     gWeatherPtr->targetSnowflakeSpriteCount = NUM_SNOWFLAKE_SPRITES;
     gWeatherPtr->snowflakeVisibleCounter = 0;
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Snow_InitAll(void)
@@ -998,10 +993,8 @@ void Thunderstorm_InitVars(void)
     gWeatherPtr->targetRainSpriteCount = 16;
     gWeatherPtr->targetColorMapIndex = 3;
     gWeatherPtr->colorMapStepDelay = 20;
-    gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     gWeatherPtr->thunderEnqueued = FALSE;
     SetRainStrengthFromSoundEffect(SE_THUNDERSTORM);
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Thunderstorm_InitAll(void)
@@ -1028,9 +1021,7 @@ void Downpour_InitVars(void)
     gWeatherPtr->targetRainSpriteCount = 24;
     gWeatherPtr->targetColorMapIndex = 3;
     gWeatherPtr->colorMapStepDelay = 20;
-    gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
     SetRainStrengthFromSoundEffect(SE_DOWNPOUR);
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Downpour_InitAll(void)
@@ -1333,7 +1324,6 @@ void FogHorizontal_InitVars(void)
         gWeatherPtr->fogHScrollOffset = 0;
         gWeatherPtr->fogHScrollPosX = 0;
     }
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void FogHorizontal_InitAll(void)
@@ -1473,7 +1463,6 @@ void Ash_InitVars(void)
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->targetColorMapIndex = 0;
     gWeatherPtr->colorMapStepDelay = 20;
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Ash_InitAll(void)
@@ -1679,7 +1668,6 @@ void FogDiagonal_InitVars(void)
         gWeatherPtr->fogDBaseSpritesX = 0;
         gWeatherPtr->fogDPosY = 0;
     }
-    gWeatherPtr->noShadows = TRUE;
 }
 
 void FogDiagonal_InitAll(void)
@@ -1885,7 +1873,6 @@ void Sandstorm_InitVars(void)
         if (gWeatherPtr->sandstormWaveIndex >= 0x80 - MIN_SANDSTORM_WAVE_INDEX)
             gWeatherPtr->sandstormWaveIndex = 0x80 - gWeatherPtr->sandstormWaveIndex;
     }
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Sandstorm_InitAll(void)
@@ -2165,7 +2152,6 @@ void Shade_InitVars(void)
     gWeatherPtr->initStep = 0;
     gWeatherPtr->targetColorMapIndex = 3;
     gWeatherPtr->colorMapStepDelay = 20;
-    gWeatherPtr->noShadows = FALSE;
 }
 
 void Shade_InitAll(void)
@@ -2227,7 +2213,6 @@ void Bubbles_InitVars(void)
         gWeatherPtr->bubblesCoordsIndex = 0;
         gWeatherPtr->bubblesSpriteCount = 0;
     }
-    gWeatherPtr->noShadows = TRUE;
 }
 
 void Bubbles_InitAll(void)
