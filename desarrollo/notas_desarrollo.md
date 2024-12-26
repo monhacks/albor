@@ -89,5 +89,6 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/Decompilación/p
 *¿Cómo criar a Tauros?
 *Decouple poké balls de item id
 *Jigglypuff evoluciona al aprender Vozarrón.
+*Cloyster/Slowking/Slowbro aprenden ataques Veneno (+Ataque custom tipo Control Mental?)
 
 paletas: (\d+) (\d+) (\d+) \d+ --> $1 $2 $3
