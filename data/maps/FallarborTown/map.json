@@ -115,7 +115,9 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+
+  ],
   "bg_events": [
     {
       "type": "sign",
@@ -181,5 +183,6 @@
       "item": "ITEM_NUGGET",
       "flag": "FLAG_HIDDEN_ITEM_FALLARBOR_TOWN_NUGGET"
     }
-  ]
+  ],
+  "night_music": "MUS_NONE"
 }

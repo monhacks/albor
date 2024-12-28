@@ -275,12 +275,6 @@ bool32 IsInvalidBg(u32 bg)
         return FALSE;
 }
 
-// From FRLG. Dummied out.
-int BgTileAllocOp(int bg, int offset, int count, int mode)
-{
-    return 0;
-}
-
 void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
 {
     int i;
@@ -380,9 +374,6 @@ u16 LoadBgTiles(u32 bg, const void *src, u16 size, u16 destOffset)
     }
 
     sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
-
-    if (gWindowTileAutoAllocEnabled == TRUE)
-        BgTileAllocOp(bg, tileOffset / 0x20, size / 0x20, 1);
 
     return cursor;
 }

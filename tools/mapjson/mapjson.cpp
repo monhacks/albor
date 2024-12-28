@@ -141,22 +141,14 @@ string generate_map_header_text(Json map_data, Json layouts_data) {
          << "\t.byte "  << json_to_string(map_data, "region_map_section") << "\n"
          << "\t.byte "  << json_to_string(map_data, "requires_flash") << "\n"
          << "\t.byte "  << json_to_string(map_data, "weather") << "\n"
-         << "\t.byte "  << json_to_string(map_data, "map_type") << "\n";
+         << "\t.byte "  << json_to_string(map_data, "map_type") << "\n"
+         << "\t.2byte " << json_to_string(map_data, "night_music") << "\n";
 
-    if (version != "firered")
-        text << "\t.2byte 0\n";
-
-    if (version == "ruby")
-        text << "\t.byte " << json_to_string(map_data, "show_map_name") << "\n";
-    else if (version == "emerald" || version == "firered")
-        text << "\tmap_header_flags "
-             << "allow_cycling=" << json_to_string(map_data, "allow_cycling") << ", "
-             << "allow_escaping=" << json_to_string(map_data, "allow_escaping") << ", "
-             << "allow_running=" << json_to_string(map_data, "allow_running") << ", "
-             << "show_map_name=" << json_to_string(map_data, "show_map_name") << "\n";
-
-    if (version == "firered")
-        text << "\t.byte " << json_to_string(map_data, "floor_number") << "\n";
+    text << "\tmap_header_flags "
+         << "allow_cycling=" << json_to_string(map_data, "allow_cycling") << ", "
+         << "allow_escaping=" << json_to_string(map_data, "allow_escaping") << ", "
+         << "allow_running=" << json_to_string(map_data, "allow_running") << ", "
+         << "show_map_name=" << json_to_string(map_data, "show_map_name") << "\n";
 
      text << "\t.byte " << json_to_string(map_data, "battle_scene") << "\n\n";
 
@@ -303,11 +295,6 @@ string generate_map_events_text(Json map_data) {
                      << json_to_string(bg_event, "elevation") << ", "
                      << json_to_string(bg_event, "item") << ", "
                      << json_to_string(bg_event, "flag");
-                if (version == "firered") {
-                    text << ", "
-                         << json_to_string(bg_event, "quantity") << ", "
-                         << json_to_string(bg_event, "underfoot");
-                }
                 text << "\n";
             } else {
                 FATAL_ERROR("Unknown bg event type '%s'. Expected 'sign', or 'hidden_item'.\n", type.c_str());
@@ -556,11 +543,6 @@ string generate_layout_headers_text(Json layouts_data) {
              << "\t.4byte " << blockdata_label << "\n"
              << "\t.4byte " << json_to_string(layout, "primary_tileset") << "\n"
              << "\t.4byte " << json_to_string(layout, "secondary_tileset") << "\n";
-        if (version == "firered") {
-            text << "\t.byte " << json_to_string(layout, "border_width") << "\n"
-                 << "\t.byte " << json_to_string(layout, "border_height") << "\n"
-                 << "\t.2byte 0\n";
-        }
         text << "\n";
     }
 

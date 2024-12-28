@@ -352,5 +352,6 @@
       "item": "ITEM_RARE_CANDY",
       "flag": "FLAG_HIDDEN_ITEM_PETALBURG_CITY_RARE_CANDY"
     }
-  ]
+  ],
+  "night_music": "MUS_NONE"
 }

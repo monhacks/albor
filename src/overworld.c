@@ -674,14 +674,20 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
     return SetDiveWarp(CONNECTION_DIVE, x, y);
 }
 
+static void SetBg2Transparent(void)
+{
+    //if (gMapHeader.bg2Transparente)
+    if (gMapHeader.regionMapSectionId == MAPSEC_OLDALE_TOWN)
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT1_BG2 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+    else
+        SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
+}
+
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     SetWarpDestination(mapGroup, mapNum, WARP_ID_NONE, -1, -1);
 
-    // Dont transition map music between BF Outside West/East
-    if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER)
-        TransitionMapMusic();
-
+    TransitionMapMusic();
     ApplyCurrentWarp();
     LoadCurrentMapData();
     LoadObjEventTemplatesFromHeader();
@@ -689,6 +695,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     RestartWildEncounterImmunitySteps();
+    SetBg2Transparent();
 
 if (I_VS_SEEKER_CHARGING != 0)
     MapResetTrainerRematches(mapGroup, mapNum);
@@ -755,6 +762,7 @@ static void LoadMapFromWarp(void)
     RunOnTransitionMapScript();
     gChainFishingDexNavStreak = 0;
     InitMap();
+    SetBg2Transparent();
 }
 
 void ResetInitialPlayerAvatarState(void)
@@ -857,7 +865,7 @@ bool32 Overworld_IsBikingAllowed(void)
 // Flash level of 8 is fully black
 void SetDefaultFlashLevel(void)
 {
-    if (!gMapHeader.cave)
+    if (!gMapHeader.requiresFlash)
         gSaveBlockPtr->flashLevel = 0;
     else if (FlagGet(FLAG_SYS_USE_FLASH))
         gSaveBlockPtr->flashLevel = 1;
@@ -888,90 +896,14 @@ void SetObjectEventLoadFlag(u8 flag)
     sObjectEventLoadFlag = flag;
 }
 
-static bool16 ShouldLegendaryMusicPlayAtLocation(struct WarpData *warp)
-{
-    if (!FlagGet(FLAG_SYS_WEATHER_CTRL))
-        return FALSE;
-    if (warp->mapGroup == 0)
-    {
-        switch (warp->mapNum)
-        {
-        case MAP_NUM(LILYCOVE_CITY):
-        case MAP_NUM(MOSSDEEP_CITY):
-        case MAP_NUM(SOOTOPOLIS_CITY):
-        case MAP_NUM(EVER_GRANDE_CITY):
-        case MAP_NUM(ROUTE124):
-        case MAP_NUM(ROUTE125):
-        case MAP_NUM(ROUTE126):
-        case MAP_NUM(ROUTE127):
-        case MAP_NUM(ROUTE128):
-            return TRUE;
-        default:
-            if (VarGet(VAR_SOOTOPOLIS_CITY_STATE) < 4)
-                return FALSE;
-            switch (warp->mapNum)
-            {
-            case MAP_NUM(ROUTE129):
-            case MAP_NUM(ROUTE130):
-            case MAP_NUM(ROUTE131):
-                return TRUE;
-            }
-        }
-    }
-    return FALSE;
-}
-
-static bool16 NoMusicInSotopolisWithLegendaries(struct WarpData *warp)
-{
-    if (VarGet(VAR_SKY_PILLAR_STATE) != 1)
-        return FALSE;
-    else if (warp->mapGroup != MAP_GROUP(SOOTOPOLIS_CITY))
-        return FALSE;
-    else if (warp->mapNum == MAP_NUM(SOOTOPOLIS_CITY))
-        return TRUE;
-    else
-        return FALSE;
-}
-
-static bool16 IsInfiltratedWeatherInstitute(struct WarpData *warp)
-{
-    if (VarGet(VAR_WEATHER_INSTITUTE_STATE))
-        return FALSE;
-    else if (warp->mapGroup != MAP_GROUP(ROUTE119_WEATHER_INSTITUTE_1F))
-        return FALSE;
-    else if (warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_1F)
-     || warp->mapNum == MAP_NUM(ROUTE119_WEATHER_INSTITUTE_2F))
-        return TRUE;
-    else
-        return FALSE;
-}
-
-static bool16 IsInflitratedSpaceCenter(struct WarpData *warp)
-{
-    if (VarGet(VAR_MOSSDEEP_CITY_STATE) == 0)
-        return FALSE;
-    else if (VarGet(VAR_MOSSDEEP_CITY_STATE) > 2)
-        return FALSE;
-    else if (warp->mapGroup != MAP_GROUP(MOSSDEEP_CITY_SPACE_CENTER_1F))
-        return FALSE;
-    else if (warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_1F)
-     || warp->mapNum == MAP_NUM(MOSSDEEP_CITY_SPACE_CENTER_2F))
-        return TRUE;
-    return FALSE;
-}
-
 u16 GetLocationMusic(struct WarpData *warp)
 {
-    if (NoMusicInSotopolisWithLegendaries(warp) == TRUE)
-        return MUS_NONE;
-    else if (ShouldLegendaryMusicPlayAtLocation(warp) == TRUE)
-        return MUS_ABNORMAL_WEATHER;
-    else if (IsInflitratedSpaceCenter(warp) == TRUE)
-        return MUS_ENCOUNTER_MAGMA;
-    else if (IsInfiltratedWeatherInstitute(warp) == TRUE)
-        return MUS_MT_CHIMNEY;
+    const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
+
+    if (GetTimeOfDay() == TIEMPO_NOCHE && mapHeader->nightMusic != MUS_NONE)
+        return mapHeader->nightMusic;
     else
-        return Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum)->music;
+        return mapHeader->music;
 }
 
 u16 GetCurrLocationDefaultMusic(void)
@@ -1275,7 +1207,7 @@ u8 GetCurrentRegionMapSectionId(void)
 
 u8 GetCurrentMapBattleScene(void)
 {
-    return Overworld_GetMapHeaderByGroupAndId(gSaveBlockPtr->location.mapGroup, gSaveBlockPtr->location.mapNum)->battleType;
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlockPtr->location.mapGroup, gSaveBlockPtr->location.mapNum)->battleScene;
 }
 
 static void InitOverworldBgs(void)
@@ -1884,8 +1816,8 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_WIN0V, 0xFF);
     SetGpuReg(REG_OFFSET_WIN1H, 0xFFFF);
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
-    SetGpuReg(REG_OFFSET_BLDCNT, gOverworldBackgroundLayerFlags[1] | gOverworldBackgroundLayerFlags[2] | gOverworldBackgroundLayerFlags[3]
-                               | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
+    SetBg2Transparent();
+    SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
     InitOverworldBgs();
     ScheduleBgCopyTilemapToVram(1);

@@ -49,12 +49,12 @@ struct Tileset
 
 struct MapLayout
 {
-    /*0x00*/ s32 width;
-    /*0x04*/ s32 height;
-    /*0x08*/ const u16 *border;
-    /*0x0C*/ const u16 *map;
-    /*0x10*/ const struct Tileset *primaryTileset;
-    /*0x14*/ const struct Tileset *secondaryTileset;
+    s32 width;
+    s32 height;
+    const u16 *border;
+    const u16 *map;
+    const struct Tileset *primaryTileset;
+    const struct Tileset *secondaryTileset;
 };
 
 struct BackupMapLayout
@@ -66,22 +66,21 @@ struct BackupMapLayout
 
 struct __attribute__((packed, aligned(4))) ObjectEventTemplate
 {
-    /*0x00*/ u8 localId;
-    /*0x01*/ u16 graphicsId;
-    /*0x03*/ u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
-    /*0x04*/ s16 x;
-    /*0x06*/ s16 y;
-    /*0x08*/ u8 elevation;
-    /*0x09*/ u8 movementType;
-    /*0x0A*/ u16 movementRangeX:4;
-             u16 movementRangeY:4;
-             u16 unused:8;
-    /*0x0C*/ u16 trainerType;
-    /*0x0E*/ u16 trainerRange_berryTreeId;
-    /*0x10*/ const u8 *script;
-    /*0x14*/ u16 flagId;
-    /*0x16*/ u16 filler;
-}; // size = 0x18
+    u8 localId;
+    u16 graphicsId;
+    u8 kind; // Always OBJ_KIND_NORMAL in Emerald.
+    s16 x;
+    s16 y;
+    u8 elevation;
+    u8 movementType;
+    u16 movementRangeX:4;
+    u16 movementRangeY:4;
+    u16 unused:8;
+    u16 trainerType;
+    u16 trainerRange_berryTreeId;
+    const u8 *script;
+    u16 flagId;
+};
 
 struct WarpEvent
 {
@@ -144,26 +143,25 @@ struct MapConnections
 
 struct MapHeader
 {
-    /* 0x00 */ const struct MapLayout *mapLayout;
-    /* 0x04 */ const struct MapEvents *events;
-    /* 0x08 */ const u8 *mapScripts;
-    /* 0x0C */ const struct MapConnections *connections;
-    /* 0x10 */ u16 music;
-    /* 0x12 */ u16 mapLayoutId;
-    /* 0x14 */ u8 regionMapSectionId;
-    /* 0x15 */ u8 cave;
-    /* 0x16 */ u8 weather;
-    /* 0x17 */ u8 mapType;
-    /* 0x18 */ u8 filler_18[2];
-               // fields correspond to the arguments in the map_header_flags macro
-    /* 0x1A */ bool8 allowCycling:1;
-               bool8 allowEscaping:1; // Escape Rope and Dig
-               bool8 allowRunning:1;
-               bool8 showMapName:5; // the last 4 bits are unused
-                                    // but the 5 bit sized bitfield is required to match
-    /* 0x1B */ u8 battleType;
-};
+    const struct MapLayout *mapLayout;
+    const struct MapEvents *events;
+    const u8 *mapScripts;
+    const struct MapConnections *connections;
+    u16 music;
+    u16 mapLayoutId;
+    u8 regionMapSectionId;
+    bool8 requiresFlash;
+    u8 weather;
+    u8 mapType;
+    u16 nightMusic;
+        // map_header_flags macro
+        bool8 allowCycling:1;
+        bool8 allowEscaping:1;
+        bool8 allowRunning:1;
+        bool8 showMapName:5;
 
+    u8 battleScene;
+};
 
 struct ObjectEvent
 {

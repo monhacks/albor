@@ -50,7 +50,6 @@ bool32 InitWindows(const struct WindowTemplate *templates)
     {
         if (gWindowTileAutoAllocEnabled == TRUE)
         {
-            allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, templates[i].width * templates[i].height, 0);
             if (allocatedBaseBlock == -1)
                 return FALSE;
         }
@@ -96,7 +95,6 @@ bool32 InitWindows(const struct WindowTemplate *templates)
         if (gWindowTileAutoAllocEnabled == TRUE)
         {
             gWindows[i].window.baseBlock = allocatedBaseBlock;
-            BgTileAllocOp(bgLayer, allocatedBaseBlock, templates[i].width * templates[i].height, 1);
         }
     }
 
@@ -126,8 +124,6 @@ u32 AddWindow(const struct WindowTemplate *template)
 
     if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, template->width * template->height, 0);
-
         if (allocatedBaseBlock == -1)
             return WINDOW_NONE;
     }
@@ -169,7 +165,6 @@ u32 AddWindow(const struct WindowTemplate *template)
     if (gWindowTileAutoAllocEnabled == TRUE)
     {
         gWindows[win].window.baseBlock = allocatedBaseBlock;
-        BgTileAllocOp(bgLayer, allocatedBaseBlock, gWindows[win].window.width * gWindows[win].window.height, 1);
     }
 
     return win;
@@ -178,7 +173,6 @@ u32 AddWindow(const struct WindowTemplate *template)
 int AddWindowWithoutTileMap(const struct WindowTemplate *template)
 {
     int win;
-    u32 bgLayer;
     int allocatedBaseBlock;
 
     for (win = 0; win < WINDOWS_MAX; ++win)
@@ -190,13 +184,10 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
     if (win == WINDOWS_MAX)
         return WINDOW_NONE;
 
-    bgLayer = template->bg;
     allocatedBaseBlock = 0;
 
     if (gWindowTileAutoAllocEnabled == TRUE)
     {
-        allocatedBaseBlock = BgTileAllocOp(bgLayer, 0, template->width * template->height, 0);
-
         if (allocatedBaseBlock == -1)
             return WINDOW_NONE;
     }
@@ -206,7 +197,6 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
     if (gWindowTileAutoAllocEnabled == TRUE)
     {
         gWindows[win].window.baseBlock = allocatedBaseBlock;
-        BgTileAllocOp(bgLayer, allocatedBaseBlock, gWindows[win].window.width * gWindows[win].window.height, 1);
     }
 
     return win;
@@ -215,9 +205,6 @@ int AddWindowWithoutTileMap(const struct WindowTemplate *template)
 void RemoveWindow(u32 windowId)
 {
     u32 bgLayer = gWindows[windowId].window.bg;
-
-    if (gWindowTileAutoAllocEnabled == TRUE)
-        BgTileAllocOp(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, 2);
 
     gWindows[windowId].window = sDummyWindowTemplate;
 

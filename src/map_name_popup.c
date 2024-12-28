@@ -88,18 +88,7 @@ void ShowMapNamePopup(void)
     {
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
-            // New pop up window
-            if (OW_POPUP_GENERATION == GEN_5)
-            {
-                gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
-                SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG0 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-            }
-            else
-            {
-                gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 90);
-                SetGpuReg(REG_OFFSET_BG0VOFS, POPUP_OFFSCREEN_Y);
-            }
-
+            gPopupTaskId = CreateTask(Task_MapNamePopUpWindow, 100);
             gTasks[gPopupTaskId].tState = STATE_PRINT;
             gTasks[gPopupTaskId].tYOffset = POPUP_OFFSCREEN_Y;
         }
@@ -183,8 +172,6 @@ static void Task_MapNamePopUpWindow(u8 taskId)
         HideMapNamePopUpWindow();
         return;
     }
-    if (OW_POPUP_GENERATION != GEN_5)
-        SetGpuReg(REG_OFFSET_BG0VOFS, task->tYOffset);
 }
 
 void HideMapNamePopUpWindow(void)
@@ -209,8 +196,6 @@ void HideMapNamePopUpWindow(void)
 
             DisableInterrupts(INTR_FLAG_HBLANK);
             SetHBlankCallback(NULL);
-            SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND);
         }
 
         SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, 0);
@@ -223,38 +208,15 @@ static void ShowMapNamePopUpWindow(void)
     u8 mapDisplayHeader[24];
     u8 *withoutPrefixPtr;
     u8 x;
-    const u8 *mapDisplayHeaderSource;
     u8 mapNamePopUpWindowId, secondaryPopUpWindowId;
 
-    if (InBattlePyramid())
-    {
-        if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP)
-        {
-            withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[FRONTIER_STAGES_PER_CHALLENGE];
-        }
-        else
-        {
-            withoutPrefixPtr = &(mapDisplayHeader[3]);
-            mapDisplayHeaderSource = sBattlePyramid_MapHeaderStrings[gSaveBlockPtr->frontier.curChallengeBattleNum];
-        }
-        StringCopy(withoutPrefixPtr, mapDisplayHeaderSource);
-    }
-    else
-    {
-        withoutPrefixPtr = &(mapDisplayHeader[3]);
-        GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
-    }
+    withoutPrefixPtr = &(mapDisplayHeader[3]);
+    GetMapName(withoutPrefixPtr, gMapHeader.regionMapSectionId, 0);
 
     if (OW_POPUP_GENERATION == GEN_5)
     {
-        SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
         mapNamePopUpWindowId = AddMapNamePopUpWindow();
         secondaryPopUpWindowId = AddSecondaryPopUpWindow();
-    }
-    else
-    {
-        AddMapNamePopUpWindow();
     }
 
     LoadMapNamePopUpWindowBg();
