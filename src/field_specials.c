@@ -145,13 +145,6 @@ void Special_ViewWallClock(void)
     LockPlayerFieldControls();
 }
 
-void ResetCyclingRoadChallengeData(void)
-{
-    gBikeCyclingChallenge = FALSE;
-    gBikeCollisions = 0;
-    sBikeCyclingTimer = 0;
-}
-
 void Special_BeginCyclingRoadChallenge(void)
 {
     gBikeCyclingChallenge = TRUE;

@@ -194,56 +194,48 @@ struct SpriteTemplate
 // icon palette to flicker when changing items in the bag.
 struct Sprite
 {
-    /*0x00*/ struct OamData oam;
-    /*0x08*/ const union AnimCmd *const *anims;
-    /*0x0C*/ const struct SpriteFrameImage *images;
-    /*0x10*/ const union AffineAnimCmd *const *affineAnims;
-    /*0x14*/ const struct SpriteTemplate *template;
-    /*0x18*/ const struct SubspriteTable *subspriteTables;
-    /*0x1C*/ SpriteCallback callback;
+    struct OamData oam;
+    const union AnimCmd *const *anims;
+    const struct SpriteFrameImage *images;
+    const union AffineAnimCmd *const *affineAnims;
+    const struct SpriteTemplate *template;
+    const struct SubspriteTable *subspriteTables;
+    SpriteCallback callback;
 
-    /*0x20*/ s16 x, y;
-    /*0x24*/ s16 x2, y2;
-    /*0x28*/ s8 centerToCornerVecX;
-    /*0x29*/ s8 centerToCornerVecY;
+    s16 x, y;
+    s16 x2, y2;
+    s8 centerToCornerVecX;
+    s8 centerToCornerVecY;
 
-    /*0x2A*/ u8 animNum;
-    /*0x2B*/ u8 animCmdIndex;
-    /*0x2C*/ u8 animDelayCounter:6;
-             bool8 animPaused:1;
-             bool8 affineAnimPaused:1;
-    /*0x2D*/ u8 animLoopCounter;
+    u8 animNum;
+    u8 animCmdIndex;
+    u8 animDelayCounter:6;
+    bool8 animPaused:1;
+    bool8 affineAnimPaused:1;
+    u8 animLoopCounter;
 
-    // general purpose data fields
-    /*0x2E*/ s16 data[8];
+    s16 data[8];
 
-    /*0x3E*/ u16 inUse:1;                   //1
-             u16 coordOffsetEnabled:1;      //2
-             u16 invisible:1;               //4
-             u16 flags_3:1;                 //8
-             // if nonzero, tile offset for usingSheet sprites
-             // is (offset + 1) << sheetSpan;
-             // (This allows using frame-based anim tables for sheet sprites)
-             u16 sheetSpan:3;
-             //  u16 flags_4:1;             //0x10
-             //  u16 flags_5:1;             //0x20
-             //  u16 flags_6:1;             //0x40
-             u16 flags_7:1;                 //0x80
-    /*0x3F*/ u16 hFlip:1;                   //1
-             u16 vFlip:1;                   //2
-             u16 animBeginning:1;           //4
-             u16 affineAnimBeginning:1;     //8
-             u16 animEnded:1;               //0x10
-             u16 affineAnimEnded:1;         //0x20
-             u16 usingSheet:1;              //0x40
-             u16 anchored:1;                //0x80
+    u16 inUse:1;
+    u16 coordOffsetEnabled:1;
+    u16 invisible:1;
+    u16 sheetSpan:3;
 
-    /*0x40*/ u16 sheetTileStart;
+    u16 hFlip:1;
+    u16 vFlip:1;
+    u16 animBeginning:1;
+    u16 affineAnimBeginning:1;
+    u16 animEnded:1;
+    u16 affineAnimEnded:1;
+    u16 usingSheet:1;
+    u16 anchored:1;
 
-    /*0x42*/ u8 subspriteTableNum:6;
-             u8 subspriteMode:2;
+    u16 sheetTileStart;
 
-    /*0x43*/ u8 subpriority;
+    u8 subspriteTableNum:6;
+    u8 subspriteMode:2;
+
+    u8 subpriority;
 };
 
 struct OamMatrix
@@ -305,16 +297,10 @@ u16 LoadSpriteSheet(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetByTemplate(const struct SpriteTemplate *template, u32 frame, s32 offset);
 void LoadSpriteSheets(const struct SpriteSheet *sheets);
 s16 AllocSpriteTiles(u16 tileCount);
-u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet);
-void AllocTilesForSpriteSheets(struct SpriteSheet *sheets);
-void LoadTilesForSpriteSheet(const struct SpriteSheet *sheet);
-void LoadTilesForSpriteSheets(struct SpriteSheet *sheets);
 void FreeSpriteTilesByTag(u16 tag);
 void FreeSpriteTileRanges(void);
 u16 GetSpriteTileStartByTag(u16 tag);
 u16 GetSpriteTileTagByTileStart(u16 start);
-void RequestSpriteSheetCopy(const struct SpriteSheet *sheet);
-u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
 void FreeAllSpritePalettes(void);
 u8 LoadSpritePalette(const struct SpritePalette *palette);
 u8 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct SpritePalette *palette2);

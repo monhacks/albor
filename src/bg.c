@@ -351,8 +351,8 @@ void SetBgMode(u32 bgMode)
 
 u16 LoadBgTiles(u32 bg, const void *src, u16 size, u16 destOffset)
 {
-    u16 tileOffset;
-    u8 cursor;
+    u32 tileOffset;
+    u32 cursor;
 
     if (bg > 3)
         return -1;
@@ -380,14 +380,14 @@ u16 LoadBgTiles(u32 bg, const void *src, u16 size, u16 destOffset)
 
 u16 LoadBgTilemap(u32 bg, const void *src, u16 size, u16 destOffset)
 {
-    u8 cursor = LoadBgVram(bg, src, size, destOffset * 2, DISPCNT_MODE_2);
+    u32 cursor = LoadBgVram(bg, src, size, destOffset * 2, DISPCNT_MODE_2);
 
     if (cursor == 0xFF)
     {
         return -1;
     }
 
-    sDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
+    sDmaBusyBitfield[cursor / 32] |= (1 << (cursor % 32));
 
     return cursor;
 }
@@ -396,10 +396,10 @@ bool32 IsDma3ManagerBusyWithBgCopy(void)
 {
     int i;
 
-    for (i = 0; i < 0x80; i++)
+    for (i = 0; i < 128; i++)
     {
-        u8 div = i / 0x20;
-        u8 mod = i % 0x20;
+        u32 div = i / 32;
+        u32 mod = i % 32;
 
         if ((sDmaBusyBitfield[div] & (1 << mod)))
         {
