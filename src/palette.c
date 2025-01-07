@@ -97,63 +97,63 @@ u32 UpdatePaletteFade(void)
     if (sPlttBufferTransferPending)
         return PALETTE_FADE_STATUS_LOADING;
 
-    if (gPaletteFade.mode == NORMAL_FADE)
-        result = UpdateNormalPaletteFade();
-    else if (gPaletteFade.mode == FAST_FADE)
-        result = UpdateFastPaletteFade();
-    else if (gPaletteFade.mode == TIME_OF_DAY_FADE)
-        result = UpdateTimeOfDayPaletteFade();
-    else
-        result = UpdateHardwarePaletteFade();
+    switch (gPaletteFade.mode)
+    {
+        case NORMAL_FADE:
+            result = UpdateNormalPaletteFade();
+            break;
+        case FAST_FADE:
+            result = UpdateFastPaletteFade();
+            break;
+        case TIME_OF_DAY_FADE:
+            result = UpdateTimeOfDayPaletteFade();
+            break;
+        default:
+            result = UpdateHardwarePaletteFade();
+            break;
+    }
 
     sPlttBufferTransferPending = gPaletteFade.multipurpose1;
-
     return result;
 }
 
 bool32 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targetY, u32 blendColor)
 {
-    u8 temp;
+    u8 bufferTransferState;
 
     if (gPaletteFade.active)
     {
         return FALSE;
     }
-    else
+
+    gPaletteFade.deltaY = 2;
+
+    if (delay < 0)
     {
-        gPaletteFade.deltaY = 2;
-
-        if (delay < 0)
-        {
-            gPaletteFade.deltaY += (delay * -1);
-            delay = 0;
-        }
-
-        gPaletteFade_selectedPalettes = selectedPalettes;
-        gPaletteFade.delayCounter = delay;
-        gPaletteFade_delay = delay;
-        gPaletteFade.y = startY;
-        gPaletteFade.targetY = targetY;
-        gPaletteFade.blendColor = blendColor;
-        gPaletteFade.active = TRUE;
-        gPaletteFade.mode = NORMAL_FADE;
-
-        if (startY < targetY)
-            gPaletteFade.yDec = 0;
-        else
-            gPaletteFade.yDec = 1;
-
-        UpdatePaletteFade();
-
-        temp = gPaletteFade.bufferTransferDisabled;
-        gPaletteFade.bufferTransferDisabled = FALSE;
-        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        sPlttBufferTransferPending = FALSE;
-        if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
-            UpdateBlendRegisters();
-        gPaletteFade.bufferTransferDisabled = temp;
-        return TRUE;
+        gPaletteFade.deltaY += (delay * -1);
+        delay = 0;
     }
+
+    gPaletteFade_selectedPalettes = selectedPalettes;
+    gPaletteFade.delayCounter = delay;
+    gPaletteFade_delay = delay;
+    gPaletteFade.y = startY;
+    gPaletteFade.targetY = targetY;
+    gPaletteFade.blendColor = blendColor;
+    gPaletteFade.active = 1;
+    gPaletteFade.mode = NORMAL_FADE;
+    gPaletteFade.yDec = startY >= targetY;
+
+    UpdatePaletteFade();
+
+    bufferTransferState = gPaletteFade.bufferTransferDisabled;
+    gPaletteFade.bufferTransferDisabled = 0;
+    CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+    sPlttBufferTransferPending = 0;
+    if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
+        UpdateBlendRegisters();
+    gPaletteFade.bufferTransferDisabled = bufferTransferState;
+    return TRUE;
 }
 
 // Like normal palette fade but respects sprite/tile palettes immune to time of day fading
@@ -748,6 +748,7 @@ static bool32 IsSoftwarePaletteFadeFinishing(void)
             gPaletteFade.active = FALSE;
             gPaletteFade.softwareFadeFinishing = FALSE;
             gPaletteFade.softwareFadeFinishingCounter = 0;
+            return TRUE;
         }
         else
         {
@@ -760,6 +761,7 @@ static bool32 IsSoftwarePaletteFadeFinishing(void)
     {
         return FALSE;
     }
+    return FALSE;
 }
 
 // optimized based on lucktyphlosion's BlendPalettesFine

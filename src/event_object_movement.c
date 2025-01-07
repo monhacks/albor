@@ -1052,7 +1052,7 @@ static void ClearObjectEvent(struct ObjectEvent *objectEvent)
 
 static void ClearAllObjectEvents(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         ClearObjectEvent(&gObjectEvents[i]);
@@ -1460,7 +1460,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
     struct SpriteTemplate *spriteTemplate;
     const struct SubspriteTable *subspriteTables;
     struct Sprite *sprite;
-    u8 spriteId;
+    u32 spriteId;
     bool32 isShiny = graphicsId >= SPECIES_SHINY_TAG + OBJ_EVENT_GFX_MON_BASE;
 
     spriteTemplate = Alloc(sizeof(struct SpriteTemplate));
@@ -1502,7 +1502,7 @@ u8 CreateObjectGraphicsSprite(u16 graphicsId, void (*callback)(struct Sprite *),
 // or any of the other data normally associated with object events.
 u8 CreateVirtualObject(u16 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevation, u8 direction)
 {
-    u8 spriteId;
+    u32 spriteId;
     struct Sprite *sprite;
     struct SpriteTemplate spriteTemplate;
     const struct SubspriteTable *subspriteTables;
@@ -2245,28 +2245,21 @@ bool8 FollowerFly(struct ScriptContext *ctx)
 
 void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 {
-    u8 i;
-    u8 objectCount;
+    u32 i;
+    u32 objectCount = gMapHeader.events->objectEventCount;
 
     if (gMapHeader.events != NULL)
     {
-        s16 left = gSaveBlockPtr->pos.x - 2;
-        s16 right = gSaveBlockPtr->pos.x + MAP_OFFSET_W + 2;
-        s16 top = gSaveBlockPtr->pos.y;
-        s16 bottom = gSaveBlockPtr->pos.y + MAP_OFFSET_H + 2;
-
-        if (InBattlePyramid())
-            objectCount = GetNumBattlePyramidObjectEvents();
-        else if (InTrainerHill())
-            objectCount = HILL_TRAINERS_PER_FLOOR;
-        else
-            objectCount = gMapHeader.events->objectEventCount;
+        s32 left = gSaveBlockPtr->pos.x - 2;
+        s32 right = gSaveBlockPtr->pos.x + MAP_OFFSET_W + 2;
+        s32 top = gSaveBlockPtr->pos.y;
+        s32 bottom = gSaveBlockPtr->pos.y + MAP_OFFSET_H + 2;
 
         for (i = 0; i < objectCount; i++)
         {
             struct ObjectEventTemplate *template = &gSaveBlockPtr->objectEventTemplates[i];
-            s16 npcX = template->x + MAP_OFFSET;
-            s16 npcY = template->y + MAP_OFFSET;
+            s32 npcX = template->x + MAP_OFFSET;
+            s32 npcY = template->y + MAP_OFFSET;
 
             if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX && !FlagGet(template->flagId)) 
             {
@@ -2283,7 +2276,7 @@ void TrySpawnObjectEvents(s16 cameraX, s16 cameraY)
 
 void RemoveObjectEventsOutsideView(void)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
@@ -2743,9 +2736,9 @@ void ShiftStillObjectEventCoords(struct ObjectEvent *objectEvent)
 
 void UpdateObjectEventCoordsForCameraUpdate(void)
 {
-    u8 i;
-    s16 dx;
-    s16 dy;
+    u32 i;
+    s32 dx;
+    s32 dy;
 
     if (gCamera.active)
     {
@@ -2768,7 +2761,7 @@ void UpdateObjectEventCoordsForCameraUpdate(void)
 
 u8 GetObjectEventIdByPosition(u16 x, u16 y, u8 elevation)
 {
-    u8 i;
+    u32 i;
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
@@ -9555,7 +9548,7 @@ bool8 FreezeObjectEvent(struct ObjectEvent *objectEvent)
 
 void FreezeObjectEvents(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
             FreezeObjectEvent(&gObjectEvents[i]);
@@ -9563,7 +9556,7 @@ void FreezeObjectEvents(void)
 
 void FreezeObjectEventsExceptOne(u8 objectEventId)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (i != objectEventId && gObjectEvents[i].active && i != gPlayerAvatar.objectEventId)
             FreezeObjectEvent(&gObjectEvents[i]);
@@ -9581,7 +9574,7 @@ void UnfreezeObjectEvent(struct ObjectEvent *objectEvent)
 
 void UnfreezeObjectEvents(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
         if (gObjectEvents[i].active)
             UnfreezeObjectEvent(&gObjectEvents[i]);

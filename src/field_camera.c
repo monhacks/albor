@@ -97,23 +97,18 @@ void DrawWholeMapView(void)
 
 static void DrawWholeMapViewInternal(int x, int y, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 j;
-    u32 r6;
-    u8 temp;
+    u32 i, j, offsetFila, offsetColumna, temp;
 
     for (i = 0; i < 32; i += 2)
     {
-        temp = sFieldCameraOffset.yTileOffset + i;
-        if (temp >= 32)
-            temp -= 32;
-        r6 = temp * 32;
+        temp = (sFieldCameraOffset.yTileOffset + i) & 31;
+        offsetFila = temp * 32;
+
         for (j = 0; j < 32; j += 2)
         {
-            temp = sFieldCameraOffset.xTileOffset + j;
-            if (temp >= 32)
-                temp -= 32;
-            DrawMetatileAt(mapLayout, r6 + temp, x + j / 2, y + i / 2);
+            temp = (sFieldCameraOffset.xTileOffset + j) & 31;
+            offsetColumna = offsetFila + temp;
+            DrawMetatileAt(mapLayout, offsetColumna, x + j / 2, y + i / 2);
         }
     }
 }
@@ -135,8 +130,8 @@ static void RedrawMapSlicesForCameraUpdate(struct FieldCameraOffset *cameraOffse
 
 static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r7;
 
     temp = cameraOffset->yTileOffset + 28;
@@ -154,8 +149,8 @@ static void RedrawMapSliceNorth(struct FieldCameraOffset *cameraOffset, const st
 
 static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r7 = cameraOffset->yTileOffset * 32;
 
     for (i = 0; i < 32; i += 2)
@@ -169,8 +164,8 @@ static void RedrawMapSliceSouth(struct FieldCameraOffset *cameraOffset, const st
 
 static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u32 r6 = cameraOffset->xTileOffset;
 
     for (i = 0; i < 32; i += 2)
@@ -184,8 +179,8 @@ static void RedrawMapSliceEast(struct FieldCameraOffset *cameraOffset, const str
 
 static void RedrawMapSliceWest(struct FieldCameraOffset *cameraOffset, const struct MapLayout *mapLayout)
 {
-    u8 i;
-    u8 temp;
+    u32 i;
+    u32 temp;
     u8 r5 = cameraOffset->xTileOffset + 28;
 
     if (r5 >= 32)
@@ -289,19 +284,12 @@ static void DrawMetatile(s32 metatileLayerType, const u16 *tiles, u16 offset)
 static s32 MapPosToBgTilemapOffset(struct FieldCameraOffset *cameraOffset, s32 x, s32 y)
 {
     x -= gSaveBlockPtr->pos.x;
-    x *= 2;
-    if (x >= 32 || x < 0)
-        return -1;
-    x = x + cameraOffset->xTileOffset;
-    if (x >= 32)
-        x -= 32;
+    x = (x << 1) & 31;
+    x = (x + cameraOffset->xTileOffset) & 31;
 
-    y = (y - gSaveBlockPtr->pos.y) * 2;
-    if (y >= 32 || y < 0)
-        return -1;
-    y = y + cameraOffset->yTileOffset;
-    if (y >= 32)
-        y -= 32;
+    y -= gSaveBlockPtr->pos.y;
+    y = (y << 1) & 31;
+    y = (y + cameraOffset->yTileOffset) & 31;
 
     return y * 32 + x;
 }

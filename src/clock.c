@@ -14,7 +14,6 @@
 
 static void UpdatePerDay(struct Time *localTime);
 static void UpdatePerMinute(struct Time *localTime);
-static void FormChangeTimeUpdate();
 
 void InitTimeBasedEvents(void)
 {
@@ -43,14 +42,9 @@ static void UpdatePerDay(struct Time *localTime)
     {
         daysSince = localTime->days - *days;
         ClearDailyFlags();
-        UpdateDewfordTrendPerDay(daysSince);
         UpdateWeatherPerDay(daysSince);
         UpdatePartyPokerusTime(daysSince);
         UpdateMirageRnd(daysSince);
-        UpdateBirchState(daysSince);
-        UpdateFrontierManiac(daysSince);
-        UpdateFrontierGambler(daysSince);
-        SetShoalItemFlag(daysSince);
         SetRandomLotteryNumber(daysSince);
         *days = localTime->days;
     }
@@ -62,21 +56,12 @@ static void UpdatePerMinute(struct Time *localTime)
     int minutes;
 
     CalcTimeDifference(&difference, &gSaveBlockPtr->lastBerryTreeUpdate, localTime);
-    minutes = 24 * 60 * difference.days + 60 * difference.hours + difference.minutes;
-    if (minutes != 0)
+    minutes = HORAS_POR_DIA * MINUTOS_POR_HORA * difference.days + SEGUNDOS_POR_MINUTO * difference.hours + difference.minutes;
+    if (minutes > 0)
     {
-        if (minutes >= 0)
-        {
-            BerryTreeTimeUpdate(minutes);
-            gSaveBlockPtr->lastBerryTreeUpdate = *localTime;
-            FormChangeTimeUpdate();
-        }
+        BerryTreeTimeUpdate(minutes);
+        gSaveBlockPtr->lastBerryTreeUpdate = *localTime;
     }
-}
-
-static void FormChangeTimeUpdate()
-{
-
 }
 
 static void ReturnFromStartWallClock(void)

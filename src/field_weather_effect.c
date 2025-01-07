@@ -2451,19 +2451,6 @@ void DoCurrentWeather(void)
 void ResumePausedWeather(void)
 {
     u8 weather = GetSavedWeather();
-
-    if (weather == WEATHER_ABNORMAL)
-    {
-        if (!FuncIsActiveTask(Task_DoAbnormalWeather))
-            CreateAbnormalWeatherTask();
-        weather = sCurrentAbnormalWeather;
-    }
-    else
-    {
-        if (FuncIsActiveTask(Task_DoAbnormalWeather))
-            DestroyTask(FindTaskIdByFunc(Task_DoAbnormalWeather));
-        sCurrentAbnormalWeather = WEATHER_DOWNPOUR;
-    }
     SetCurrentAndNextWeather(weather);
 }
 

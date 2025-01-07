@@ -626,7 +626,7 @@ static void SetPositionFromConnection(const struct MapConnection *connection, in
     }
 }
 
-bool8 CameraMove(int x, int y)
+bool32 CameraMove(int x, int y)
 {
     int direction;
     const struct MapConnection *connection;

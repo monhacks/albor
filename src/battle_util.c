@@ -1896,18 +1896,6 @@ u8 DoFieldEndTurnEffects(void)
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_STATUS_HEAL:
-            for (gBattlerAttacker = 0; gBattlerAttacker < gBattlersCount; gBattlerAttacker++)
-            {
-                if (B_AFFECTION_MECHANICS == TRUE
-                 && GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER
-                 && GetBattlerAffectionHearts(gBattlerAttacker) >= AFFECTION_FOUR_HEARTS
-                 && (Random() % 100 < 20))
-                {
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                    BattleScriptExecute(BattleScript_AffectionBasedStatusHeal);
-                    break;
-                }
-            }
             gBattleStruct->turnCountersTracker++;
             break;
         case ENDTURN_RAINBOW:
