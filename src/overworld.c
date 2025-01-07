@@ -701,17 +701,8 @@ if (I_VS_SEEKER_CHARGING != 0)
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
 
-    if (OW_HIDE_REPEAT_MAP_POPUP)
-    {
-        if (gMapHeader.regionMapSectionId != sLastMapSectionId)
-            ShowMapNamePopup();
-    }
-    else
-    {
-        if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
-         || gMapHeader.regionMapSectionId != sLastMapSectionId)
-            ShowMapNamePopup();
-    }
+    if (gMapHeader.regionMapSectionId != sLastMapSectionId)
+        ShowMapNamePopup();
 }
 
 static void LoadMapFromWarp(void)
@@ -1791,7 +1782,7 @@ static void InitOverworldGraphicsRegisters(void)
     SetGpuReg(REG_OFFSET_WIN1V, 0xFFFF);
     SetBg2Transparent();
     SetGpuRegBits(REG_OFFSET_WININ, WININ_WIN0_CLR);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(12, 6));
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(16, 8));
     InitOverworldBgs();
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);

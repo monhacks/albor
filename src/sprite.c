@@ -636,52 +636,41 @@ void CalcCenterToCornerVec(struct Sprite *sprite, u8 shape, u8 size, u8 affineMo
 
 s16 AllocSpriteTiles(u16 tileCount)
 {
-    u16 i;
-    s16 start;
-    u16 numTilesFound;
+    u16 i = gReservedSpriteTileCount;
+    u16 numTilesFound = 0;
+    s16 start = -1;
 
     if (tileCount == 0)
     {
-        // Free all unreserved tiles if the tile count is 0.
         for (i = gReservedSpriteTileCount; i < TOTAL_OBJ_TILE_COUNT; i++)
             FREE_SPRITE_TILE(i);
-
         return 0;
     }
 
-    i = gReservedSpriteTileCount;
-
     for (;;)
     {
-        while (SPRITE_TILE_IS_ALLOCATED(i))
+        if (!SPRITE_TILE_IS_ALLOCATED(i))
         {
-            i++;
+            if (numTilesFound == 0)
+                start = i;
 
-            if (i == TOTAL_OBJ_TILE_COUNT)
-                return -1;
-        }
+            numTilesFound++;
 
-        start = i;
-        numTilesFound = 1;
-
-        while (numTilesFound != tileCount)
-        {
-            i++;
-
-            if (i == TOTAL_OBJ_TILE_COUNT)
-                return -1;
-
-            if (!SPRITE_TILE_IS_ALLOCATED(i))
-                numTilesFound++;
-            else
+            if (numTilesFound == tileCount)
                 break;
         }
+        else
+        {
+            numTilesFound = 0;
+        }
 
-        if (numTilesFound == tileCount)
-            break;
+        i++;
+
+        if (i == TOTAL_OBJ_TILE_COUNT)
+            return -1;
     }
 
-    for (i = start; i < tileCount + start; i++)
+    for (i = start; i < start + tileCount; i++)
         ALLOC_SPRITE_TILE(i);
 
     return start;
