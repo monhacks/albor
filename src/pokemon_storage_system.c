@@ -317,7 +317,6 @@ struct PokemonStorageSystemData
     u16 boxTitlePalOffset;
     struct Sprite *curBoxTitleSprites[2];
     struct Sprite *nextBoxTitleSprites[2];
-    u16 ALIGNED(4) chooseBoxSwapPal[16]; // Holds dynamic palette to swap into choose box gfx
     u16 swapInPal[16];
     void *swapInPalDst;
     s8 transferWholePlttFrames; // if >0, number of frames to transfer whole palette buffer
@@ -1333,7 +1332,6 @@ static void LoadChooseBoxMenuGfx(struct ChooseBoxMenu *menu)
         {}
     };
 
-    CpuFastCopy(sHandCursor_Pal, sStorage->chooseBoxSwapPal, PLTT_SIZE_4BPP);
     LoadSpriteSheets(sheets);
     sChooseBoxMenu = menu;
 }
@@ -1343,7 +1341,6 @@ static void FreeChooseBoxMenu(void)
     FreeSpritePaletteByTag(PALTAG_MISC);
     FreeSpriteTilesByTag(GFXTAG_CHOOSE_BOX_MENU);
     FreeSpriteTilesByTag(GFXTAG_CHOOSE_BOX_MENU_SIDES);
-    sStorage->chooseBoxSwapPal[0] = 0; // Stop dynamically loading choose box palette
 }
 
 static void CreateChooseBoxMenuSprites(u8 curBox)
@@ -1559,7 +1556,6 @@ void EnterPokeStorage(u8 boxOption)
     else
     {
         sStorage->transferWholePlttFrames = 0;
-        sStorage->chooseBoxSwapPal[0] = 0;
         sStorage->boxOption = boxOption;
         sStorage->isReopening = FALSE;
         sMovingItemId = ITEM_NONE;
@@ -1665,12 +1661,6 @@ static void HBlankCB_PokeStorage(void)
             }
             break;
         }
-    }
-    if (vCount == 63 && sStorage && sStorage->chooseBoxSwapPal[0])
-    // copy choose box palette
-    {
-        u16 *dst = (u16*) (OBJ_PLTT + PLTT_ID(0) * 2);
-        CpuFastCopy(sStorage->chooseBoxSwapPal, dst, PLTT_SIZE_4BPP);
     }
 }
 
