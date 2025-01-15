@@ -267,7 +267,6 @@ EWRAM_DATA static u8 sSpriteOrder[MAX_SPRITES] = {0};
 EWRAM_DATA static bool8 sShouldProcessSpriteCopyRequests = 0;
 EWRAM_DATA static u8 sSpriteCopyRequestCount = 0;
 EWRAM_DATA static struct SpriteCopyRequest sSpriteCopyRequests[MAX_SPRITES] = {0};
-EWRAM_DATA u8 gOamLimit = 0;
 static EWRAM_DATA u8 sOamDummyIndex = 0;
 EWRAM_DATA u16 gReservedSpriteTileCount = 0;
 EWRAM_DATA static u8 sSpriteTileAllocBitmap[128] = {0};
@@ -284,7 +283,6 @@ void ResetSpriteData(void)
     ClearSpriteCopyRequests();
     ResetAffineAnimData();
     FreeSpriteTileRanges();
-    gOamLimit = 64;
     gReservedSpriteTileCount = 0;
     AllocSpriteTiles(0);
     gSpriteCoordOffsetX = 0;
@@ -1667,7 +1665,7 @@ void SetSubspriteTables(struct Sprite *sprite, const struct SubspriteTable *subs
 
 bool8 AddSpriteToOamBuffer(struct Sprite *sprite, u8 *oamIndex)
 {
-    if (*oamIndex >= gOamLimit)
+    if (*oamIndex >= 64)
         return 1;
 
     if (!sprite->subspriteTables || sprite->subspriteMode == SUBSPRITES_OFF)
@@ -1687,7 +1685,7 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
     const struct SubspriteTable *subspriteTable;
     struct OamData *oam;
 
-    if (*oamIndex >= gOamLimit)
+    if (*oamIndex >= 64)
         return 1;
 
     subspriteTable = &sprite->subspriteTables[sprite->subspriteTableNum];
@@ -1721,7 +1719,7 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
             u16 x;
             u16 y;
 
-            if (*oamIndex >= gOamLimit)
+            if (*oamIndex >= 64)
                 return 1;
 
             x = subspriteTable->subsprites[i].x;
