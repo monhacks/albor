@@ -9067,7 +9067,7 @@ u8 ElevationToPriority(u8 elevation)
     return sElevationToPriority[elevation];
 }
 
-// Returns current elevation, or 15 for bridges
+// Returns current elevation, or MAX_ELEVATION_LEVEL for bridges
 void ObjectEventUpdateElevation(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     u8 curElevation = MapGridGetElevationAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
