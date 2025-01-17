@@ -784,7 +784,7 @@ void CopyBgTilemapBufferToVram(u32 bg)
             sizeToLoad = 0;
             break;
         }
-        LoadBgVram(bg, sGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, 2);
+        LoadBgVram(bg, sGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, DISPCNT_MODE_2);
     }
 }
 
