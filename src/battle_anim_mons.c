@@ -1543,7 +1543,7 @@ static void AnimTask_BlendMonInAndOut_Step(u8 taskId)
 // See AnimTask_BlendMonInAndOut. Same, but ANIM_TAG_* instead of mon
 void AnimTask_BlendPalInAndOutByTag(u8 task)
 {
-    u8 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
+    u32 palette = IndexOfSpritePaletteTag(gBattleAnimArgs[0]);
 
     if (palette == 0xff)
     {

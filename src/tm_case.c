@@ -20,6 +20,7 @@
 #include "pokemon_summary_screen.h"
 #include "pokemon_storage_system.h"
 #include "party_menu.h"
+#include "util.h"
 #include "data.h"
 #include "scanline_effect.h"
 #include "shop.h"
@@ -919,13 +920,14 @@ static void SpriteCb_MonIcon(struct Sprite *sprite)
 static void DrawPartyMonIcons(void)
 {
     u8 i;
-    u16 species;
     u8 icon_x = 0;
     u8 icon_y = 0;
 
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        //calc icon position (centered)
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        bool32 isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
+        u32 personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
         if (gPlayerPartyCount == 1)
         {
             icon_x = MON_ICON_START_X + MON_ICON_PADDING * 0.5;
@@ -951,10 +953,11 @@ static void DrawPartyMonIcons(void)
             icon_x = i < 3 ? MON_ICON_START_X : MON_ICON_START_X + MON_ICON_PADDING;
             icon_y = i < 3 ? MON_ICON_START_Y + MON_ICON_PADDING * i : MON_ICON_START_Y + MON_ICON_PADDING * (i - 3);
         }
-        species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
         spriteIdData[i] = CreateMonIcon(species, SpriteCb_MonIcon, icon_x, icon_y, 1, GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY));
-        u8 index = i < gPlayerPartyCount ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + i) : 0xFF;
-        SetMonIconPalette(&gPlayerParty[i], &gSprites[spriteIdData[i]], index);
+        u32 index = i < gPlayerPartyCount ? IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG + i) : 0xFF;
+        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+        UniquePalette(OBJ_PLTT_ID(index), personality);
+        CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(index)], &gPlttBufferUnfaded[OBJ_PLTT_ID(index)], PLTT_SIZE_4BPP);
         gSprites[spriteIdData[i]].oam.priority = 0;
         StartSpriteAnim(&gSprites[spriteIdData[i]], 0);
     }

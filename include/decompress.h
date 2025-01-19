@@ -4,7 +4,6 @@
 #include "sprite.h"
 
 extern u8 ALIGNED(4) gDecompressionBuffer[16384];
-extern u8 ALIGNED(4) gEggDecompressionBuffer[16];
 
 void LZDecompressWram(const u32 *src, void *dest);
 void LZDecompressVram(const u32 *src, void *dest);

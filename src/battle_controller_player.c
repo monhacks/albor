@@ -2029,8 +2029,8 @@ static void PlayerHandleChooseAction(u32 battler)
     u16 species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     u32 personality = GetMonData(&gPlayerParty[gBattlerPartyIndexes[battler]], MON_DATA_PERSONALITY);
     monIconData = CreateMonIcon(species, SpriteCb_MonIcon, 20, 132, 1, personality);
-    u8 index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
-    SetMonIconPalette(&gPlayerParty[gBattlerPartyIndexes[battler]], &gSprites[monIconData], index);
+    //u32 index = IndexOfSpritePaletteTag(POKE_ICON_BASE_PAL_TAG);
+    //SetMonIconPalette(&gPlayerParty[gBattlerPartyIndexes[battler]], &gSprites[monIconData], index);
     gSprites[monIconData].oam.priority = 0;
     StartSpriteAnim(&gSprites[monIconData], 0);
 }

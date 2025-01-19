@@ -78,7 +78,7 @@ static void InitPlayerTrainerId(void)
 }
 
 // L=A isnt set here for some reason.
-static void SetDefaultOptions(void)
+void SetDefaultOptions(void)
 {
     gSaveBlockPtr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
     gSaveBlockPtr->optionsWindowFrameType = 0;
@@ -106,13 +106,8 @@ void ClearAllContestWinnerPics(void)
 
 static void WarpToTruck(void)
 {
-    SetWarpDestination(MAP_GROUP(INSIDE_OF_TRUCK), MAP_NUM(INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+    SetWarpDestination(MAP_GROUP(TEST), MAP_NUM(TEST), WARP_ID_NONE, -1, -1);
     WarpIntoMap();
-}
-
-void Sav2_ClearSetDefault(void)
-{
-    SetDefaultOptions();
 }
 
 void ResetMenuAndMonGlobals(void)

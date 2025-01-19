@@ -1266,7 +1266,7 @@ static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId)
 void AnimTask_TransparentCloneGrowAndShrink(u8 taskId)
 {
     s16 spriteId;
-    s16 matrixNum;
+    s32 matrixNum;
     struct Task *task = &gTasks[taskId];
 
     matrixNum = AllocOamMatrix();

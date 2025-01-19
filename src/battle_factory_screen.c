@@ -1413,7 +1413,7 @@ static void Select_UpdateYesNoCursorPosition(s8 direction)
 
 static void Select_HandleMonSelectionChange(void)
 {
-    u8 i, paletteNum;
+    u32 i, paletteNum;
     u8 cursorPos = sFactorySelectScreen->cursorPos;
     if (sFactorySelectScreen->mons[cursorPos].selectedId) // Deselect a mon.
     {
@@ -1446,7 +1446,7 @@ static void Select_HandleMonSelectionChange(void)
 
 static void Select_SetBallSpritePaletteNum(u8 id)
 {
-    u8 palNum;
+    u32 palNum;
 
     if (sFactorySelectScreen->mons[id].selectedId)
         palNum = IndexOfSpritePaletteTag(PALTAG_BALL_SELECTED);

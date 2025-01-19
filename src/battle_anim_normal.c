@@ -639,7 +639,7 @@ void AnimTask_BlendColorCycleByTag(u8 taskId)
 
 static void BlendColorCycleByTag(u8 taskId, u8 startBlendAmount, u8 targetBlendAmount)
 {
-    u8 paletteIndex = IndexOfSpritePaletteTag(gTasks[taskId].tPalTag);
+    u32 paletteIndex = IndexOfSpritePaletteTag(gTasks[taskId].tPalTag);
     BeginNormalPaletteFade(
         1 << (paletteIndex + 16),
         gTasks[taskId].tDelay,
@@ -807,7 +807,7 @@ void AnimTask_TintPalettes(u8 taskId)
 {
     u8 attackerBattler;
     u8 targetBattler;
-    u8 paletteIndex;
+    u32 paletteIndex;
     u32 selectedPalettes = 0;
 
     if (gTasks[taskId].tTimer == 0)

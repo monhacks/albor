@@ -158,7 +158,7 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent *objectEvent, 
     const struct Sprite *mainSprite = &gSprites[objectEvent->spriteId];
     u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
     u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
-    u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+    u32 paletteNum = IndexOfSpritePaletteTag(paletteTag);
     if (paletteNum <= 16)
     {
         // Load filtered palette
@@ -204,7 +204,7 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
     {
         u16 baseTag = GetSpritePaletteTagByPaletteNum(mainSprite->oam.paletteNum);
         u16 paletteTag = REFLECTION_PAL_TAG(baseTag, mainSprite->oam.paletteNum);
-        u8 paletteNum = IndexOfSpritePaletteTag(paletteTag);
+        u32 paletteNum = IndexOfSpritePaletteTag(paletteTag);
         if (paletteNum >= 16)
         {
             // Build filtered palette

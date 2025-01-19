@@ -1949,7 +1949,7 @@ static void AnimTask_Minimize_Step(u8 taskId)
 
 static void CreateMinimizeSprite(struct Task *task, u8 taskId)
 {
-    u16 matrixNum;
+    u32 matrixNum;
     s16 spriteId = CloneBattlerSpriteWithBlend(ANIM_ATTACKER);
     if (spriteId >= 0)
     {
@@ -2516,7 +2516,7 @@ void AnimHyperVoiceRing(struct Sprite *sprite)
 
 void AnimUproarRing(struct Sprite *sprite)
 {
-    u8 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
+    u32 index = IndexOfSpritePaletteTag(ANIM_TAG_THIN_RING);
     if (index != 0xFF)
     {
         BlendPalette((OBJ_PLTT_ID(index) + 1), 15, gBattleAnimArgs[5], gBattleAnimArgs[4]);

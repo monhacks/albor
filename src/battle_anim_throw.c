@@ -769,7 +769,7 @@ static void FreeHealthboxPalsForLevelUp(u8 battler)
 {
     u8 healthBoxSpriteId;
     u8 spriteId1, spriteId2;
-    u8 paletteId1, paletteId2;
+    u32 paletteId1, paletteId2;
 
     healthBoxSpriteId = gHealthboxSpriteIds[battler];
     spriteId1 = gSprites[healthBoxSpriteId].oam.affineParam;
@@ -799,7 +799,7 @@ void AnimTask_FlashHealthboxOnLevelUp(u8 taskId)
 
 static void AnimTask_FlashHealthboxOnLevelUp_Step(u8 taskId)
 {
-    u8 paletteNum;
+    u32 paletteNum;
     u32 paletteOffset, colorOffset;
 
     gTasks[taskId].data[0]++;

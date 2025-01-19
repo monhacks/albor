@@ -170,7 +170,7 @@ static void SpawnObjectEventOnReturnToField(u8, s16, s16);
 static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct Sprite *sprite);
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
+static u32 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
 static void SpriteCB_CameraObject(struct Sprite *);
@@ -2661,9 +2661,9 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
 }
 
 // Really just loads the palette and applies weather fade
-static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
+static u32 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette)
 {
-    u8 paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
+    u32 paletteNum = IndexOfSpritePaletteTag(spritePalette->tag);
     if (paletteNum != 0xFF) // don't load twice; return
         return paletteNum;
     paletteNum = LoadSpritePalette(spritePalette);

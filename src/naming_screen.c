@@ -1067,7 +1067,7 @@ static void SpriteCB_Cursor(struct Sprite *sprite)
     {
         s8 gb = sprite->sColor;
         s8 r = sprite->sColor >> 1;
-        u16 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_CURSOR)) + 1;
+        u32 index = OBJ_PLTT_ID(IndexOfSpritePaletteTag(PALTAG_CURSOR)) + 1;
 
         MultiplyInvertedPaletteRGBComponents(index, r, gb, gb);
     }

@@ -1362,9 +1362,9 @@ void ResetAffineAnimData(void)
         AffineAnimStateReset(i);
 }
 
-u8 AllocOamMatrix(void)
+u32 AllocOamMatrix(void)
 {
-    u8 i = 0;
+    u32 i = 0;
     u32 bit = 1;
     u32 bitmap = gOamMatrixAllocBitmap;
 
@@ -1385,7 +1385,7 @@ u8 AllocOamMatrix(void)
 
 void FreeOamMatrix(u8 matrixNum)
 {
-    u8 i = 0;
+    u32 i = 0;
     u32 bit = 1;
 
     while (i < matrixNum)
@@ -1395,12 +1395,12 @@ void FreeOamMatrix(u8 matrixNum)
     }
 
     gOamMatrixAllocBitmap &= ~bit;
-    SetOamMatrix(matrixNum, 0x100, 0, 0, 0x100);
+    SetOamMatrix(matrixNum, 256, 0, 0, 256);
 }
 
 void InitSpriteAffineAnim(struct Sprite *sprite)
 {
-    u8 matrixNum = AllocOamMatrix();
+    u32 matrixNum = AllocOamMatrix();
     if (matrixNum != 0xFF)
     {
         CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
@@ -1556,47 +1556,40 @@ void FreeAllSpritePalettes(void)
         sSpritePaletteTags[i] = TAG_NONE;
 }
 
-u8 LoadSpritePalette(const struct SpritePalette *palette)
+u32 LoadSpritePalette(const struct SpritePalette *palette)
 {
-    u8 index = IndexOfSpritePaletteTag(palette->tag);
-
+    u32 index = IndexOfSpritePaletteTag(palette->tag);
+    
     if (index != 0xFF)
         return index;
 
     index = IndexOfSpritePaletteTag(TAG_NONE);
 
     if (index == 0xFF)
-    {
         return 0xFF;
-    }
-    else
-    {
-        sSpritePaletteTags[index] = palette->tag;
-        DoLoadSpritePalette(palette->data, PLTT_ID(index));
-        return index;
-    }
+
+    sSpritePaletteTags[index] = palette->tag;
+    DoLoadSpritePalette(palette->data, PLTT_ID(index));
+    return index;
 }
 
-u8 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct SpritePalette *palette2)
+u32 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct SpritePalette *palette2)
 {
-    u8 index = IndexOfSpritePaletteTag(palette1->tag);
-
+    u32 index = IndexOfSpritePaletteTag(palette1->tag);
+    
     if (index != 0xFF)
         return index;
 
-    index = IndexOfSpritePaletteTag(0xFFFF);
+    index = IndexOfSpritePaletteTag(TAG_NONE);
 
     if (index == 0xFF)
-    {
         return 0xFF;
-    }
-    else
-    {
-        sSpritePaletteTags[index] = palette1->tag;
-        DoLoadSpritePalette(palette1->data, PLTT_ID(index));
-        DoLoadSpritePalette(palette2->data, PLTT_ID(index) + 8);
-        return index;
-    }
+
+    sSpritePaletteTags[index] = palette1->tag;
+    DoLoadSpritePalette(palette1->data, PLTT_ID(index));
+    DoLoadSpritePalette(palette2->data, PLTT_ID(index) + 8);
+
+    return index;
 }
 
 void LoadSpritePalettes(const struct SpritePalette *palettes)
@@ -1607,7 +1600,7 @@ void LoadSpritePalettes(const struct SpritePalette *palettes)
             break;
 }
 
-u8 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum) 
+u32 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum) 
 {
     paletteNum = min(15, paletteNum);
     sSpritePaletteTags[paletteNum] = palette->tag;
@@ -1620,21 +1613,18 @@ void DoLoadSpritePalette(const u16 *src, u16 paletteOffset)
     LoadPaletteFast(src, paletteOffset + OBJ_PLTT_OFFSET, PLTT_SIZE_4BPP);
 }
 
-u8 AllocSpritePalette(u16 tag)
+u32 AllocSpritePalette(u16 tag)
 {
-    u8 index = IndexOfSpritePaletteTag(TAG_NONE);
-    if (index == 0xFF)
-    {
-        return 0xFF;
-    }
-    else
+    u32 index = IndexOfSpritePaletteTag(TAG_NONE);
+    if (index != 0xFF)
     {
         sSpritePaletteTags[index] = tag;
         return index;
     }
+    return 0xFF;
 }
 
-u8 IndexOfSpritePaletteTag(u16 tag)
+u32 IndexOfSpritePaletteTag(u16 tag)
 {
     u32 i;
     for (i = gReservedSpritePaletteCount; i < 16; i++)
@@ -1651,7 +1641,7 @@ u16 GetSpritePaletteTagByPaletteNum(u8 paletteNum)
 
 void FreeSpritePaletteByTag(u16 tag)
 {
-    u8 index = IndexOfSpritePaletteTag(tag);
+    u32 index = IndexOfSpritePaletteTag(tag);
     if (index != 0xFF)
         sSpritePaletteTags[index] = TAG_NONE;
 }
@@ -1784,9 +1774,9 @@ u32 GetSpanPerImage(u32 shape, u32 size)
     return sSpanPerImage[shape][size];
 }
 
-u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, u32 personality)
+u32 LoadUniqueSpritePalette(const struct SpritePalette *palette, u32 personality)
 {
-    u8 index = IndexOfSpritePaletteTag(0xFFFF);
+    u32 index = IndexOfSpritePaletteTag(0xFFFF);
 
     if (index == 0xFF)
         return 0xFF;

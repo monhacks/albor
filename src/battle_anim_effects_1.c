@@ -6347,9 +6347,9 @@ static void AnimSuperFang(struct Sprite *sprite)
 
 void AnimTask_MusicNotesRainbowBlend(u8 taskId)
 {
-    u16 i;
-    u16 j;
-    u16 index;
+    u32 i;
+    u32 j;
+    u32 index;
 
     index = IndexOfSpritePaletteTag(gParticlesColorBlendTable[0][0]);
     if (index != 0xFF)
@@ -6393,7 +6393,7 @@ void AnimTask_MusicNotesClearRainbowBlend(u8 taskId)
 
 static void AnimWavyMusicNotes(struct Sprite *sprite)
 {
-    u8 index;
+    u32 index;
     u8 x, y;
     SetSpriteCoordsToAnimAttackerCoords(sprite);
     StartSpriteAnim(sprite, gBattleAnimArgs[0]);
@@ -6403,16 +6403,8 @@ static void AnimWavyMusicNotes(struct Sprite *sprite)
     sprite->sBlendTableIdx = gBattleAnimArgs[1];
     sprite->sBlendTimer = 0;
     sprite->sBlendCycleTime = gBattleAnimArgs[2];
-    if (IsContest())
-    {
-        x = 48;
-        y = 40;
-    }
-    else
-    {
-        x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
-        y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    }
+    x = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
 
     sprite->sX = sprite->x << 4;
     sprite->sY = sprite->y << 4;

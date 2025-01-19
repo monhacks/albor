@@ -218,7 +218,7 @@ static void AnimTask_FrozenIceCube_Step1(u8 taskId)
 
 static void AnimTask_FrozenIceCube_Step2(u8 taskId)
 {
-    u8 palIndex = IndexOfSpritePaletteTag(ANIM_TAG_ICE_CUBE);
+    u32 palIndex = IndexOfSpritePaletteTag(ANIM_TAG_ICE_CUBE);
 
     if (gTasks[taskId].data[1]++ > 13)
     {
