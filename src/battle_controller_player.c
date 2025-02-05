@@ -92,7 +92,6 @@ static void Task_PrepareToGiveExpWithExpBar(u8);
 static void Task_SetControllerToWaitForString(u8);
 static void Task_GiveExpWithExpBar(u8);
 static void Task_UpdateLvlInHealthbox(u8);
-static void PrintLinkStandbyMsg(void);
 
 static void ReloadMoveNames(u32 battler);
 
@@ -1298,9 +1297,6 @@ static void WaitForMonSelection(u32 battler)
         else
             BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, PARTY_SIZE, NULL);
 
-        if ((gBattleResources->bufferA[battler][1] & 0xF) == 1)
-            PrintLinkStandbyMsg();
-
         PlayerBufferExecCompleted(battler);
     }
 }
@@ -1888,11 +1884,6 @@ void CB2_SetUpReshowBattleScreenAfterMenu2(void)
     SetMainCallback2(ReshowBattleScreenAfterMenu);
 }
 
-static void PrintLinkStandbyMsg(void)
-{
-
-}
-
 static void PlayerHandleLoadMonSprite(u32 battler)
 {
     BattleLoadMonSpriteGfx(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
@@ -2227,14 +2218,11 @@ static void PlayerHandleLinkStandbyMsg(u32 battler)
     switch (gBattleResources->bufferA[battler][1])
     {
     case LINK_STANDBY_MSG_STOP_BOUNCE:
-        PrintLinkStandbyMsg();
-        // fall through
     case LINK_STANDBY_STOP_BOUNCE_ONLY:
         EndBounceEffect(battler, BOUNCE_HEALTHBOX);
         EndBounceEffect(battler, BOUNCE_MON);
         break;
     case LINK_STANDBY_MSG_ONLY:
-        PrintLinkStandbyMsg();
         break;
     }
     PlayerBufferExecCompleted(battler);

@@ -205,7 +205,7 @@ void CB2_StartSoundCheckMenu(void)
         gMain.state++;
         break;
     case 2:
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags();
         InitBgsFromTemplates(0, sSoundCheckMenuBgTemplates, ARRAY_COUNT(sSoundCheckMenuBgTemplates));
         ResetBgPositions();
         gMain.state++;
@@ -495,7 +495,7 @@ static void Task_DrawSubmenu(u8 taskId) // sub_080E89EC
             DestroyWindow(windowId);
         }
         FreeAllWindowBuffers();
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags();
         InitBgsFromTemplates(0, sSoundCheckMenuBgTemplates, ARRAY_COUNT(sSoundCheckMenuBgTemplates));
         gTasks[taskId].tState++;
         break;
@@ -903,7 +903,7 @@ static void Task_InitSoundCheckMenu(u8 taskId) // sub_080E9410
     case 0:
         DestroyWindow(WIN_INFO);
         FreeAllWindowBuffers();
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags();
         InitBgsFromTemplates(0, sSoundCheckMenuBgTemplates, ARRAY_COUNT(sSoundCheckMenuBgTemplates));
         gTasks[taskId].tState++;
         break;

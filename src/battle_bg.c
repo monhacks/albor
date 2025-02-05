@@ -640,7 +640,7 @@ const struct BattleBackground sBattleTerrainTable[] =
 
 void BattleInitBgsAndWindows(void)
 {
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags();
     InitBgsFromTemplates(0, gBattleBgTemplates, ARRAY_COUNT(gBattleBgTemplates));
     gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
     InitWindows(gBattleWindowTemplates[gBattleScripting.windowsType]);
@@ -776,11 +776,6 @@ void LoadBattleTextboxAndBackground(void)
         DrawTerrainTypeBattleBackground();
     else
         DrawMainBattleBackground();
-}
-
-void InitLinkBattleVsScreen(u8 taskId)
-{
-
 }
 
 void DrawBattleEntryBackground(void)

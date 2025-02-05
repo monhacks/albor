@@ -196,7 +196,7 @@ static void CB2_SaveFailedScreen(void)
         LZ77UnCompVram(gBirchBagTilemap, (void *)(BG_SCREEN_ADDR(14)));
         LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(15)));
         LZ77UnCompVram(sSaveFailedClockGfx, (void *)(OBJ_VRAM0 + 0x20));
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags();
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(0, (void *)&gDecompressionBuffer[0x2000]);
         CpuFill32(0, &gDecompressionBuffer[0x2000], 0x800);
@@ -424,7 +424,7 @@ void CB2_FlashNotDetectedScreen(void)
     DmaFill16(3, 0, VRAM, VRAM_SIZE);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags();
     InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     LoadBgTiles(0, gTextWindowFrame1_Gfx, 0x120, 0x214);
     DeactivateAllTextPrinters();

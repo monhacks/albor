@@ -38,8 +38,6 @@ static struct BgControl sGpuBgConfigs;
 static struct BgConfig2 sGpuBgConfigs2[NUM_BACKGROUNDS];
 static u32 sDmaBusyBitfield[NUM_BACKGROUNDS];
 
-COMMON_DATA u32 gWindowTileAutoAllocEnabled = 0;
-
 static const struct BgConfig sZeroedBgControlStruct = { 0 };
 
 static u32 GetBgType(u32 bg);
@@ -275,7 +273,7 @@ bool32 IsInvalidBg(u32 bg)
         return FALSE;
 }
 
-void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
+void ResetBgsAndClearDma3BusyFlags(void)
 {
     int i;
     ResetBgs();
@@ -284,8 +282,6 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
     {
         sDmaBusyBitfield[i] = 0;
     }
-
-    gWindowTileAutoAllocEnabled = leftoverFireRedLeafGreenVariable;
 }
 
 void InitBgsFromTemplates(u32 bgMode, const struct BgTemplate *templates, u8 numTemplates)

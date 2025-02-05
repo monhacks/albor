@@ -84,7 +84,6 @@ static void CB2_CableCar(void);
 static void AnimateGroundGoingUp(void);
 static void AnimateGroundGoingDown(void);
 static void SpriteCB_CableCar(struct Sprite *);
-static void SpriteCB_Cable(struct Sprite *);
 static void DrawNextGroundSegmentGoingUp(void);
 static void DrawNextGroundSegmentGoingDown(void);
 
@@ -217,7 +216,7 @@ static const struct SpriteTemplate sSpriteTemplate_Cable =
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
-    .callback = SpriteCB_Cable,
+    .callback = 0,
 };
 
 static void Task_LoadCableCar(u8 taskId)
@@ -267,7 +266,7 @@ static void CB2_LoadCableCar(void)
 
         InitMapMusic();
         ResetMapMusic();
-        ResetBgsAndClearDma3BusyFlags(0);
+        ResetBgsAndClearDma3BusyFlags();
         InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(0, sCableCar->bgTilemapBuffers[0]);
         SetBgTilemapBuffer(1, sCableCar->bgTilemapBuffers[1]);
@@ -388,7 +387,7 @@ static void CB2_EndCableCar(void)
     UnsetBgTilemapBuffer(1);
     UnsetBgTilemapBuffer(2);
     UnsetBgTilemapBuffer(3);
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags();
     sCableCar->pylonTopTilemap = NULL;
     FREE_AND_SET_NULL(sCableCar->pylonPoleTilemap);
     FREE_AND_SET_NULL(sCableCar->bgMountainsTilemap);
@@ -567,11 +566,6 @@ static void VBlankCB_CableCar(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-}
-
-static void SpriteCB_Cable(struct Sprite *sprite)
-{
-
 }
 
 #define sXPos  data[0]

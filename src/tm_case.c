@@ -411,7 +411,7 @@ static void LoadBGTemplates(void)
     ResetAllBgsCoordinates();
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(2048);
-    ResetBgsAndClearDma3BusyFlags(0);
+    ResetBgsAndClearDma3BusyFlags();
     InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
     ScheduleBgCopyTilemapToVram(1);
