@@ -263,9 +263,9 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, u16 species, u8 level, u
     }
 
     // create a Pokémon with basic data
-    if ((gender == MON_MALE && genderRatio != MON_FEMALE && genderRatio != MON_GENDERLESS)
-     || (gender == MON_FEMALE && genderRatio != MON_MALE && genderRatio != MON_GENDERLESS)
-     || (gender == MON_GENDERLESS && genderRatio == MON_GENDERLESS))
+    if ((gender == SIEMPRE_MACHO && genderRatio != SIEMPRE_HEMBRA && genderRatio != SIN_GENERO)
+     || (gender == SIEMPRE_HEMBRA && genderRatio != SIEMPRE_MACHO && genderRatio != SIN_GENERO)
+     || (gender == SIN_GENERO && genderRatio == SIN_GENERO))
         CreateMonWithGenderNatureLetter(&mon, species, level, 32, gender, nature);
     else
         CreateMonWithNature(&mon, species, level, 32, nature);
@@ -373,7 +373,7 @@ u32 ScriptGiveMon(u16 species, u8 level, u16 item)
                                 MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1, MAX_PER_STAT_IVS + 1};  // ScriptGiveMonParameterized won't touch the stats' IV.
     u16 moves[MAX_MON_MOVES] = {MOVE_NONE, MOVE_NONE, MOVE_NONE, MOVE_NONE};
 
-    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUMERO_NATURALEZAS, NUM_ABILITY_PERSONALITY, MON_GENDERLESS, evs, ivs, moves, FALSE);
+    return ScriptGiveMonParameterized(0, PARTY_SIZE, species, level, item, ITEM_POKE_BALL, NUMERO_NATURALEZAS, NUM_ABILITY_PERSONALITY, SIN_GENERO, evs, ivs, moves, FALSE);
 }
 
 #define PARSE_FLAG(n, default_) (flags & (1 << (n))) ? VarGet(ScriptReadHalfword(ctx)) : (default_)
@@ -392,7 +392,7 @@ void ScrCmd_createmon(struct ScriptContext *ctx)
     u8 ball           = PARSE_FLAG(1, ITEM_POKE_BALL);
     u8 nature         = PARSE_FLAG(2, NUMERO_NATURALEZAS);
     u8 abilityNum     = PARSE_FLAG(3, NUM_ABILITY_PERSONALITY);
-    u8 gender         = PARSE_FLAG(4, MON_GENDERLESS); // TODO: Find a better way to assign a random gender.
+    u8 gender         = PARSE_FLAG(4, SIN_GENERO); // TODO: Find a better way to assign a random gender.
     u8 hpEv           = PARSE_FLAG(5, 0);
     u8 atkEv          = PARSE_FLAG(6, 0);
     u8 defEv          = PARSE_FLAG(7, 0);

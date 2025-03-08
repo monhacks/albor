@@ -86,7 +86,6 @@ SECTIONS {
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
-        src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
@@ -424,7 +423,6 @@ SECTIONS {
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
-        src/battle_z_move.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);

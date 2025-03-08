@@ -765,8 +765,8 @@ void BS_TrySetStatus2(void)
                 && gBattleMons[gBattlerTarget].ability != ABILITY_OBLIVIOUS
                 && !IsAbilityOnSide(gBattlerTarget, ABILITY_AROMA_VEIL)
                 && atkGender != defGender
-                && atkGender != MON_GENDERLESS
-                && defGender != MON_GENDERLESS)
+                && atkGender != SIN_GENERO
+                && defGender != SIN_GENERO)
             {
                 gBattleMons[gBattlerTarget].status2 |= STATUS2_INFATUATED_WITH(gBattlerAttacker);
                 gBattleCommunication[MULTISTRING_CHOOSER] = 1;

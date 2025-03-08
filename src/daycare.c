@@ -419,7 +419,7 @@ static s32 GetParentToInheritNature(struct DayCare *daycare)
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         if (ItemId_GetHoldEffect(GetBoxMonData(&daycare->mons[i].mon, MON_DATA_HELD_ITEM)) == HOLD_EFFECT_PREVENT_EVOLVE
-            && (P_NATURE_INHERITANCE != GEN_3 || GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE))
+            && (P_NATURE_INHERITANCE != GEN_3 || GetBoxMonGender(&daycare->mons[i].mon) == SIEMPRE_HEMBRA))
         {
             slot = i;
             numWithEverstone++;
@@ -829,7 +829,7 @@ static u16 DetermineEggSpeciesAndParentSlots(struct DayCare *daycare, u8 *parent
     for (i = 0; i < DAYCARE_MON_COUNT; i++)
     {
         species[i] = GetBoxMonData(&daycare->mons[i].mon, MON_DATA_SPECIES);
-        if (GetBoxMonGender(&daycare->mons[i].mon) == MON_FEMALE)
+        if (GetBoxMonGender(&daycare->mons[i].mon) == SIEMPRE_HEMBRA)
         {
             parentSlots[0] = i;
             parentSlots[1] = i ^ 1;
@@ -1060,11 +1060,11 @@ u8 GetDaycareCompatibilityScore(struct DayCare *daycare)
     if (eggGroups[0][0] == GRUPO_HUEVO_BEBE || eggGroups[1][0] == GRUPO_HUEVO_BEBE)
         return PARENTS_INCOMPATIBLE;
 
-    if (genders[0] == genders[1] && genders[0] != MON_GENDERLESS)
+    if (genders[0] == genders[1] && genders[0] != SIN_GENERO)
         return PARENTS_INCOMPATIBLE;
     if (!EggGroupsOverlap(eggGroups[0], eggGroups[1]))
         return PARENTS_INCOMPATIBLE;
-    if (genders[0] == MON_GENDERLESS && genders[1] == MON_GENDERLESS)
+    if (genders[0] == SIN_GENERO && genders[1] == SIN_GENERO)
         return PARENTS_LOW_COMPATIBILITY;
     if (species[0] == species[1])
         return PARENTS_MAX_COMPATIBILITY;
@@ -1112,9 +1112,9 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
             symbolsCount[FEMALE]++;
     }
 
-    if (genderRatio == MON_MALE   && symbolsCount[MALE] != 0 && symbolsCount[FEMALE] == 0)
+    if (genderRatio == SIEMPRE_MACHO   && symbolsCount[MALE] != 0 && symbolsCount[FEMALE] == 0)
         return TRUE;
-    if (genderRatio == MON_FEMALE && symbolsCount[FEMALE] != 0 && symbolsCount[MALE] == 0)
+    if (genderRatio == SIEMPRE_HEMBRA && symbolsCount[FEMALE] != 0 && symbolsCount[MALE] == 0)
         return TRUE;
 
     return FALSE;
@@ -1122,14 +1122,14 @@ bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
 
 static u8 *AppendGenderSymbol(u8 *name, u8 gender)
 {
-    if (gender == MON_MALE)
+    if (gender == SIEMPRE_MACHO)
     {
-        if (!NameHasGenderSymbol(name, MON_MALE))
+        if (!NameHasGenderSymbol(name, SIEMPRE_MACHO))
             return StringAppend(name, gText_MaleSymbol4);
     }
-    else if (gender == MON_FEMALE)
+    else if (gender == SIEMPRE_HEMBRA)
     {
-        if (!NameHasGenderSymbol(name, MON_FEMALE))
+        if (!NameHasGenderSymbol(name, SIEMPRE_HEMBRA))
             return StringAppend(name, gText_FemaleSymbol4);
     }
 
@@ -1152,7 +1152,7 @@ static void DaycareAddTextPrinter(u8 windowId, const u8 *text, u32 x, u32 y)
     printer.y = y;
     printer.currentX = x;
     printer.currentY = y;
-    gTextFlags.useAlternateDownArrow = 0;
+    gTextFlags.useAlternateDownArrow = FALSE;
     printer.letterSpacing = 0;
     printer.lineSpacing = 1;
     printer.fgColor = 2;

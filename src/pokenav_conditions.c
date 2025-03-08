@@ -366,7 +366,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
     }
 
     if ((species == SPECIES_NIDORAN_F || species == SPECIES_NIDORAN_M) && !StringCompare(str, GetSpeciesName(species)))
-        gender = MON_GENDERLESS;
+        gender = SIN_GENERO;
 
     str_ = str; // For some reason, a variable is needed to match.
     while (*str_ != EOS)
@@ -382,7 +382,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
     default:
         *(str_++) = CHAR_SPACER; // Genderless
         break;
-    case MON_MALE:
+    case SIEMPRE_MACHO:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
         *(str_++) = TEXT_COLOR_RED;
@@ -391,7 +391,7 @@ static u8 *CopyConditionMonNameGender(u8 *str, u16 listId, bool8 skipPadding)
         *(str_++) = TEXT_COLOR_LIGHT_RED;
         *(str_++) = CHAR_MALE;
         break;
-    case MON_FEMALE:
+    case SIEMPRE_HEMBRA:
         *(str_++) = EXT_CTRL_CODE_BEGIN;
         *(str_++) = EXT_CTRL_CODE_COLOR;
         *(str_++) = TEXT_COLOR_GREEN;

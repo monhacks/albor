@@ -690,10 +690,10 @@ static void BufferRibbonMonInfoText(struct PokenavListItem * listItem, u8 *dest)
     default:
         genderStr = sText_NoGenderSymbol;
         break;
-    case MON_MALE:
+    case SIEMPRE_MACHO:
         genderStr = sText_MaleSymbol;
         break;
-    case MON_FEMALE:
+    case SIEMPRE_HEMBRA:
         genderStr = sText_FemaleSymbol;
         break;
     }

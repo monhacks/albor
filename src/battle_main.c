@@ -676,9 +676,9 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature)
 u32 GeneratePersonalityForGender(u32 gender, u32 species)
 {
     const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
-    if (gender == MON_GENDERLESS)
+    if (gender == SIN_GENERO)
         return 0;
-    else if (gender == MON_MALE)
+    else if (gender == SIEMPRE_MACHO)
         return ((255 - speciesInfo->genderRatio) / 2) + speciesInfo->genderRatio;
     else
         return speciesInfo->genderRatio / 2;
@@ -731,11 +731,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             personalityValue += personalityHash << 8;
             if (partyData[i].gender == TRAINER_MON_MALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(SIEMPRE_MACHO, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(SIEMPRE_HEMBRA, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_RANDOM_GENDER)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? MON_MALE : MON_FEMALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? SIEMPRE_MACHO : SIEMPRE_HEMBRA, partyData[i].species);
             ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
             if (partyData[i].isShiny)
             {
@@ -2299,7 +2299,6 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
-                        moveInfo.zmove = gBattleStruct->zmove;
                         moveInfo.species = gBattleMons[battler].species;
                         moveInfo.monTypes[0] = gBattleMons[battler].types[0];
                         moveInfo.monTypes[1] = gBattleMons[battler].types[1];

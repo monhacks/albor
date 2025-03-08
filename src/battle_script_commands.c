@@ -5,7 +5,6 @@
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_scripts.h"
-#include "battle_z_move.h"
 #include "constants/moves.h"
 #include "constants/abilities.h"
 #include "item.h"
@@ -1120,12 +1119,9 @@ static bool32 TryAegiFormChange(void)
 
 bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
 {
-      if ((ability == ABILITY_PROTEAN || ability == ABILITY_LIBERO)
-         && !gDisableStructs[gBattlerAttacker].usedProteanLibero
+      if ((ability == ABILITY_CAMBIACOLOR)
          && (gBattleMons[battler].types[0] != moveType || gBattleMons[battler].types[1] != moveType
-             || (gBattleMons[battler].types[2] != moveType && gBattleMons[battler].types[2] != TIPO_MISTERIO))
-         && move != MOVE_STRUGGLE
-         && GetActiveGimmick(battler) != GIMMICK_TERA)
+             || (gBattleMons[battler].types[2] != moveType && gBattleMons[battler].types[2] != TIPO_MISTERIO)))
     {
         SET_BATTLER_TYPE(battler, moveType);
         return TRUE;
@@ -1148,7 +1144,6 @@ static void Cmd_attackcanceler(void)
     CMD_ARGS();
 
     s32 i;
-    u16 attackerAbility = GetBattlerAbility(gBattlerAttacker);
     u32 moveType = GetMoveType(gCurrentMove);
 
     if (gBattleStruct->usedEjectItem & (1u << gBattlerAttacker))
@@ -1196,8 +1191,7 @@ static void Cmd_attackcanceler(void)
     if (gSpecialStatuses[gBattlerAttacker].parentalBondState == PARENTAL_BOND_OFF
     && GetBattlerAbility(gBattlerAttacker) == ABILITY_PARENTAL_BOND
     && IsMoveAffectedByParentalBond(gCurrentMove, gBattlerAttacker)
-    && !(gAbsentBattlerFlags & (1u << gBattlerTarget))
-    && GetActiveGimmick(gBattlerAttacker) != GIMMICK_Z_MOVE)
+    && !(gAbsentBattlerFlags & (1u << gBattlerTarget)))
     {
         gSpecialStatuses[gBattlerAttacker].parentalBondState = PARENTAL_BOND_1ST_HIT;
         gMultiHitCounter = 2;
@@ -1205,51 +1199,19 @@ static void Cmd_attackcanceler(void)
         return;
     }
 
-    // Check Protean activation.
-    if (ProteanTryChangeType(gBattlerAttacker, attackerAbility, gCurrentMove, moveType))
+    if ((GetBattlerAbility(gBattlerTarget) == ABILITY_CAMBIACOLOR) && (gBattlerAttacker != gBattlerTarget)) 
     {
-        if (B_PROTEAN_LIBERO == GEN_9)
-            gDisableStructs[gBattlerAttacker].usedProteanLibero = TRUE;
-        PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
-        gBattlerAbility = gBattlerAttacker;
-        BattleScriptPushCursor();
-        PrepareStringBattle(STRINGID_EMPTYSTRING3, gBattlerAttacker);
-        gBattleCommunication[MSG_DISPLAY] = 1;
-        gBattlescriptCurrInstr = BattleScript_ProteanActivates;
-        return;
-    }
-
-    if ((GetBattlerAbility(gBattlerTarget) == ABILITY_COLOR_CHANGE) && (gBattlerAttacker != gBattlerTarget)) 
-    {
-        u32 currentType;
-        u32 bestType = gBattleMons[gBattlerTarget].types[0];
-        u16 bestModifier = GetTypeModifier(moveType, bestType);
-
-        for (currentType = TIPO_NORMAL; currentType < NUMERO_DE_TIPOS; ++currentType) 
+        if (!IS_BATTLER_OF_TYPE(gBattlerTarget, moveType)) 
         {
-            u16 currentModifier = GetTypeModifier(moveType, currentType);
-            if (currentModifier < bestModifier) 
-            {
-                bestModifier = currentModifier;
-                bestType = currentType;
-            }
-            if (bestModifier == UQ_4_12(0.0))
-                break;
-        }
-
-        if (gBattleMons[gBattlerTarget].types[0] != bestType) 
-        {
-            SET_BATTLER_TYPE(gBattlerTarget, bestType);
-            PREPARE_TYPE_BUFFER(gBattleTextBuff1, bestType);
+            SET_BATTLER_TYPE(gBattlerTarget, moveType);
+            PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
             gBattlerAbility = gBattlerTarget;
             BattleScriptPushCursor();
-            gBattlescriptCurrInstr = BattleScript_ColorChangeActivates;
+            gBattlescriptCurrInstr = BattleScript_CambiaColorActivacion;
             return;
         }
     }
 
-    if (AtkCanceller_UnableToUseMove2())
-        return;
     if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBattlerTarget, 0, 0, 0))
         return;
     if (!gBattleMons[gBattlerAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE
@@ -1373,15 +1335,6 @@ static void Cmd_attackcanceler(void)
             gBattlerAbility = battler;
             return;
         }
-    }
-
-    // Z-moves and Max Moves bypass protection, but deal reduced damage (factored in AccumulateOtherModifiers)
-    if ((IsZMove(gCurrentMove) || IsMaxMove(gCurrentMove))
-     && IS_BATTLER_PROTECTED(gBattlerTarget))
-    {
-        BattleScriptPush(cmd->nextInstr);
-        gBattlescriptCurrInstr = BattleScript_CouldntFullyProtect;
-        return;
     }
 
     for (i = 0; i < gBattlersCount; i++)
@@ -1508,12 +1461,6 @@ static bool32 AccuracyCalcHelper(u16 move)
     else if (gStatuses3[gBattlerTarget] & STATUS3_TELEKINESIS
           && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE)
           && gMovesInfo[move].effect != EFFECT_OHKO)
-    {
-        JumpIfMoveFailed(7, move);
-        return TRUE;
-    }
-
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !(gStatuses3[gBattlerTarget] & STATUS3_SEMI_INVULNERABLE))
     {
         JumpIfMoveFailed(7, move);
         return TRUE;
@@ -6170,8 +6117,6 @@ static void Cmd_moveend(void)
             gBattleStruct->usedMicleBerry &= ~(1u << gBattlerAttacker);
             if (gHitMarker & HITMARKER_UNABLE_TO_USE_MOVE)
                 gBattleStruct->pledgeMove = FALSE;
-            if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE)
-                SetActiveGimmick(gBattlerAttacker, GIMMICK_NONE);
             if (B_CHARGE <= GEN_8 || moveType == TIPO_ELECTRICO)
                 gStatuses3[gBattlerAttacker] &= ~(STATUS3_CHARGED_UP);
             memset(gQueuedStatBoosts, 0, sizeof(gQueuedStatBoosts));
@@ -6771,16 +6716,6 @@ static bool32 DoSwitchInEffectsForBattler(u32 battler)
         SET_STATCHANGER(STAT_SPEED, 1, TRUE);
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_StickyWebOnSwitchIn;
-    }
-    else if (gBattleMons[battler].hp != gBattleMons[battler].maxHP && gBattleStruct->zmove.healReplacement)
-    {
-        gBattleStruct->zmove.healReplacement = FALSE;
-        gBattleMoveDamage = -1 * (gBattleMons[battler].maxHP);
-        gBattleScripting.battler = battler;
-        BattleScriptPushCursor();
-        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_Z_HP_TRAP;
-        gBattlescriptCurrInstr = BattleScript_HealReplacementZMove;
-        return TRUE;
     }
     else
     {
@@ -7761,9 +7696,9 @@ static void DrawLevelUpBannerText(void)
     var = (u32)(txtPtr) - var;
     txtPtr = StringFill(txtPtr, CHAR_SPACER, 4 - var);
 
-    if (monGender != MON_GENDERLESS)
+    if (monGender != SIN_GENERO)
     {
-        if (monGender == MON_MALE)
+        if (monGender == SIEMPRE_MACHO)
         {
             txtPtr = WriteColorChangeControlCode(txtPtr, 0, TEXT_DYNAMIC_COLOR_3);
             txtPtr = WriteColorChangeControlCode(txtPtr, 1, TEXT_DYNAMIC_COLOR_4);
@@ -9213,15 +9148,7 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = cmd->failInstr;
         else
         {
-            if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !IS_MOVE_STATUS(move))
-            {
-                gBattleStruct->zmove.baseMoves[gBattlerAttacker] = move;
-                gCalledMove = GetTypeBasedZMove(move);
-            }
-            else
-            {
-                gCalledMove = move;
-            }
+            gCalledMove = move;
             gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
             gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
             gStatuses3[gBattlerAttacker] |= STATUS3_ME_FIRST;
@@ -9331,10 +9258,7 @@ static void Cmd_various(void)
         u16 move = gLastPrintedMoves[gBattlerTarget];
         if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || MoveHasAdditionalEffectSelf(move, MOVE_EFFECT_RECHARGE)
          || gMovesInfo[move].instructBanned
-         || gBattleMoveEffects[gMovesInfo[move].effect].twoTurnEffect
-         || (GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX)
-         || IsZMove(move)
-         || IsMaxMove(move))
+         || gBattleMoveEffects[gMovesInfo[move].effect].twoTurnEffect)
         {
             gBattlescriptCurrInstr = cmd->failInstr;
         }
@@ -10342,17 +10266,7 @@ static void Cmd_tryhealhalfhealth(void)
 static void SetMoveForMirrorMove(u32 move)
 {
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
-    // Edge case, we used Z Mirror Move, got the stat boost and now need to use the Z-move
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !IS_MOVE_STATUS(move))
-    {
-        gBattleStruct->zmove.baseMoves[gBattlerAttacker] = move;
-        gCurrentMove = GetTypeBasedZMove(move);
-    }
-    else
-    {
-        gCurrentMove = move;
-    }
-
+    gCurrentMove = move;
     SetAtkCancellerForCalledMove();
     gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
     gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
@@ -12184,16 +12098,7 @@ static void Cmd_trychoosesleeptalkmove(void)
         {
             movePosition = MOD(Random(), MAX_MON_MOVES);
         } while ((1u << movePosition) & unusableMovesBits);
-
-        if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !IS_MOVE_STATUS(gBattleMons[gBattlerAttacker].moves[movePosition]))
-        {
-            gBattleStruct->zmove.baseMoves[gBattlerAttacker] = gBattleMons[gBattlerAttacker].moves[movePosition];
-            gCalledMove = GetTypeBasedZMove(gBattleMons[gBattlerAttacker].moves[movePosition]);
-        }
-        else
-        {
-            gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
-        }
+        gCalledMove = gBattleMons[gBattlerAttacker].moves[movePosition];
         gCurrMovePos = movePosition;
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
@@ -13139,12 +13044,6 @@ u32 GetNaturePowerMove(u32 battler)
         move = MOVE_PSYCHIC;
     else if (sNaturePowerMoves[gBattleTerrain] == MOVE_NONE)
         move = MOVE_TRI_ATTACK;
-
-    if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE)
-    {
-        gBattleStruct->zmove.baseMoves[gBattlerAttacker] = move;
-        move = GetTypeBasedZMove(move);
-    }
 
     return move;
 }
@@ -14867,11 +14766,6 @@ void BS_TrySymbiosis(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-void BS_SetZEffect(void)
-{
-    SetZEffect();   // Handles battle script jumping internally
-}
-
 static void TryUpdateRoundTurnOrder(void)
 {
     if (IsDoubleBattle())
@@ -15434,21 +15328,6 @@ void BS_SetPledgeStatus(void)
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
 }
 
-void BS_TryTrainerSlideZMoveMsg(void)
-{
-    NATIVE_ARGS();
-    s32 shouldSlide;
-
-    if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_Z_MOVE)))
-    {
-        gBattleScripting.battler = gBattlerAttacker;
-        BattleScriptPush(cmd->nextInstr);
-        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    }
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
 void BS_TryTrainerSlideMegaEvolutionMsg(void)
 {
     NATIVE_ARGS();
@@ -15505,26 +15384,13 @@ void BS_TryCopycat(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
 
-    if (gLastUsedMove == MOVE_NONE || gLastUsedMove == MOVE_UNAVAILABLE || gMovesInfo[gLastUsedMove].copycatBanned || IsZMove(gLastUsedMove))
+    if (gLastUsedMove == MOVE_NONE || gLastUsedMove == MOVE_UNAVAILABLE || gMovesInfo[gLastUsedMove].copycatBanned)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !IS_MOVE_STATUS(gLastUsedMove))
-        {
-            gBattleStruct->zmove.baseMoves[gBattlerAttacker] = gLastUsedMove;
-            gCalledMove = GetTypeBasedZMove(gLastUsedMove);
-        }
-        else if (IsMaxMove(gLastUsedMove))
-        {
-            gCalledMove = gBattleStruct->dynamax.lastUsedBaseMove;
-        }
-        else
-        {
-            gCalledMove = gLastUsedMove;
-        }
-
+        gCalledMove = gLastUsedMove;
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
         gBattlescriptCurrInstr = cmd->nextInstr;

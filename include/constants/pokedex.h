@@ -82,7 +82,6 @@ enum DexOrder
     DEX_GEODUDE,
     DEX_GRAVELER,
     DEX_GOLEM,
-    //por aquí
     DEX_PONYTA,
     DEX_RAPIDASH,
     DEX_MAGNEMITE,

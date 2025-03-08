@@ -123,10 +123,10 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .breakable = TRUE,
     },
 
-    [ABILITY_COLOR_CHANGE] =
+    [ABILITY_CAMBIACOLOR] =
     {
-        .name = _("Mimetismo"),
-        .description = COMPOUND_STRING("Cambia tipo antes de defender."),
+        .name = _("Cambiacolor"),
+        .description = COMPOUND_STRING("Añade tipo tras recibir ataque."),
         .aiRating = 8,
     },
 
@@ -1260,13 +1260,6 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 4,
     },
 
-    [ABILITY_PROTEAN] =
-    {
-        .name = _("Protean"),
-        .description = COMPOUND_STRING("Changes type to used move."),
-        .aiRating = 8,
-    },
-
     [ABILITY_FUR_COAT] =
     {
         .name = _("Fur Coat"),
@@ -1779,12 +1772,6 @@ const struct Ability gAbilitiesInfo[ABILITIES_COUNT] =
         .name = _("Dauntless Shield"),
         .description = COMPOUND_STRING("Ups Defense on entry."),
         .aiRating = 3,
-    },
-
-    [ABILITY_LIBERO] =
-    {
-        .name = _("Libero"),
-        .description = COMPOUND_STRING("Changes type to move's."),
     },
 
     [ABILITY_BALL_FETCH] =

@@ -1418,10 +1418,6 @@
 	.4byte \failInstr
 	.endm
 
-	.macro setzeffect
-	callnative BS_SetZEffect
-	.endm
-
 	@ Used by effects that may proc Symbiosis but do not call removeitem.
 	.macro trysymbiosis
 	callnative BS_TrySymbiosis
@@ -1520,10 +1516,6 @@
 	.macro jumpiftargetdynamaxed, ptr:req
 	callnative BS_JumpIfDynamaxed
 	.4byte \ptr
-	.endm
-
-	.macro trytrainerslidezmovemsg
-	callnative BS_TryTrainerSlideZMoveMsg
 	.endm
 
 	.macro trytrainerslidemegaevolutionmsg

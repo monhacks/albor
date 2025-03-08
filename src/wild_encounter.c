@@ -423,9 +423,9 @@ static void CreateWildMon(u16 species, u8 level)
 
     switch (gSpeciesInfo[species].genderRatio)
     {
-    case MON_MALE:
-    case MON_FEMALE:
-    case MON_GENDERLESS:
+    case SIEMPRE_MACHO:
+    case SIEMPRE_HEMBRA:
+    case SIN_GENERO:
         checkCuteCharm = FALSE;
         break;
     }
@@ -440,10 +440,10 @@ static void CreateWildMon(u16 species, u8 level)
         u8 gender = GetGenderFromSpeciesAndPersonality(leadingMonSpecies, leadingMonPersonality);
 
         // misses mon is genderless check, although no genderless mon can have cute charm as ability
-        if (gender == MON_FEMALE)
-            gender = MON_MALE;
+        if (gender == SIEMPRE_HEMBRA)
+            gender = SIEMPRE_MACHO;
         else
-            gender = MON_FEMALE;
+            gender = SIEMPRE_HEMBRA;
 
         CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature());
         return;

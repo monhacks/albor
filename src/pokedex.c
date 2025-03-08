@@ -3779,7 +3779,7 @@ static void PrintStatsScreen_NameGender(u8 taskId, u32 num)
     ConvertIntToDecimalStringN(StringCopy(str, gText_NumberClear01), num, STR_CONV_MODE_LEADING_ZEROS, 3);
     PrintStatsScreenTextSmall(WIN_STATS_NAME_GENDER, str, base_x, base_y + 10);
 
-    //Gender ratio //MON_GENDERLESS == 0xFF
+    //Gender ratio //SIN_GENERO == 0xFF
     gender_x = base_x;
     gender_y = base_y + 20;
     switch (sPokedexView->sPokemonStats.genderRatio)

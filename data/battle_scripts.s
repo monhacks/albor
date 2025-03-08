@@ -8173,16 +8173,10 @@ BattleScript_StickyHoldActivates::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_ColorChangeActivates::
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNCHANGEDTYPEWITH
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_ProteanActivates::
+BattleScript_CambiaColorActivacion::
 	pause B_WAIT_TIME_SHORTEST
 	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNCHANGEDTYPE
+	printstring STRINGID_CAMBIACOLOR
 	waitmessage B_WAIT_TIME_LONG
 	return
 
@@ -9170,65 +9164,25 @@ BattleScript_JabocaRowapBerryActivate_Dmg:
 
 @ z moves / effects
 BattleScript_ZMoveActivateDamaging::
-	flushtextbox
-	trytrainerslidezmovemsg
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	printstring STRINGID_ZMOVEUNLEASHED
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_ZMoveActivateStatus::
-	flushtextbox
-	trytrainerslidezmovemsg
-	savetarget
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	setzeffect
-	restoretarget
-	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
 	return
 
 BattleScript_ZMoveActivatePowder::
-	flushtextbox
-	trytrainerslidezmovemsg
-	savetarget
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	setzeffect
-	restoretarget
-	goto BattleScript_MoveUsedPowder
+	return
 
 BattleScript_ZEffectPrintString::
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_RecoverHPZMove::
-	healthbarupdate BS_SCRIPTING
-	datahpupdate BS_SCRIPTING
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_StatUpZMove::
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StatUpZMoveEnd
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_StatUpZMoveEnd
-	setgraphicalstatchangevalues
-	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_ZMOVESTATUP
-	waitmessage B_WAIT_TIME_LONG
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
 BattleScript_StatUpZMoveEnd:
 	return
 
 BattleScript_HealReplacementZMove::
-	playanimation BS_SCRIPTING B_ANIM_WISH_HEAL 0x0
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
-	healthbarupdate BS_SCRIPTING
-	datahpupdate BS_SCRIPTING
 	return
 
 BattleScript_EffectExtremeEvoboost::

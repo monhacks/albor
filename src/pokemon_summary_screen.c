@@ -2795,10 +2795,10 @@ static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
     {
         switch (GetMonGender(mon))
         {
-        case MON_MALE:
+        case SIEMPRE_MACHO:
             PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gText_MaleSymbol, 57, 17, 0, 3);
             break;
-        case MON_FEMALE:
+        case SIEMPRE_HEMBRA:
             PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gText_FemaleSymbol, 57, 17, 0, 4);
             break;
         }

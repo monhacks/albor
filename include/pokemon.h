@@ -300,10 +300,6 @@ struct MoveInfo
     u16 accuracy:7;
     u16 target:9;
     u8 pp;
-    union {
-        u8 effect;
-        u8 powerOverride;
-    } zMove;
 
     s32 priority:4;
     u32 recoil:7;
@@ -330,7 +326,7 @@ struct MoveInfo
     u32 powderMove:1;
     u32 danceMove:1;
     u32 windMove:1;
-    u32 slicingMove:1; // end of word
+    u32 slicingMove:1;
     u32 healingMove:1;
     u32 minimizeDoubleDamage:1;
     u32 ignoresTargetAbility:1;
@@ -362,7 +358,6 @@ struct MoveInfo
     u32 parentalBondBanned:1;
     u32 skyBattleBanned:1;
     u32 sketchBanned:1;
-    u32 padding:5; // end of word
 
     u32 argument;
 
