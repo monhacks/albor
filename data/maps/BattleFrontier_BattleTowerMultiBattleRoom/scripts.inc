@@ -16,8 +16,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_MapScripts::
 	@ The multi partner is represented by LOCALID_PARTNER, which has the gfx id VAR_OBJ_GFX_ID_E
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnTransition:
-	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx
-	call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx
 	end
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx::
@@ -29,9 +27,6 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetObjGfx::
 
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetPlayerGfxFemale::
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
-	return
-
-BattleFrontier_BattleTowerMultiBattleRoom_EventScript_SetLinkPlayerGfx::
 	return
 
 BattleFrontier_BattleTowerMultiBattleRoom_OnWarp:

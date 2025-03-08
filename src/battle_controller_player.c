@@ -17,7 +17,6 @@
 #include "graphics.h"
 #include "item.h"
 #include "item_menu.h"
-#include "link.h"
 #include "main.h"
 #include "m4a.h"
 #include "palette.h"
@@ -1896,23 +1895,6 @@ static void PlayerHandleSwitchInAnim(u32 battler)
     gActionSelectionCursor[battler] = 0;
     gMoveSelectionCursor[battler] = 0;
     BtlController_HandleSwitchInAnim(battler, TRUE, SwitchIn_TryShinyAnimShowHealthbox);
-}
-
-u32 LinkPlayerGetTrainerPicId(u32 multiplayerId)
-{
-    u32 trainerPicId;
-
-    u8 gender = gLinkPlayers[multiplayerId].gender;
-    u8 version = gLinkPlayers[multiplayerId].version & 0xFF;
-
-    if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
-        trainerPicId = gender + TRAINER_BACK_PIC_RED;
-    else if (version == VERSION_RUBY || version == VERSION_SAPPHIRE)
-        trainerPicId = gender + TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN;
-    else
-        trainerPicId = gender + TRAINER_BACK_PIC_BRENDAN;
-
-    return trainerPicId;
 }
 
 static u32 PlayerGetTrainerBackPicId(void)

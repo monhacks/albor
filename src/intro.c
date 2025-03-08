@@ -6,7 +6,6 @@
 #include "title_screen.h"
 #include "malloc.h"
 #include "gpu_regs.h"
-#include "link.h"
 #include "load_save.h"
 #include "save.h"
 #include "new_game.h"

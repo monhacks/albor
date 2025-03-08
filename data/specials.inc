@@ -9,7 +9,6 @@
 		.align 2
 gSpecials::
 	def_special HealPlayerParty
-	def_special ReturnFromLinkRoom
 	def_special SetPlayerSecretBase
 	def_special CheckPlayerHasSecretBase
 	def_special EnterSecretBase

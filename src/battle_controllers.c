@@ -10,7 +10,6 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "event_object_movement.h"
-#include "link.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "string_util.h"

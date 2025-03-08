@@ -1,7 +1,6 @@
 #include "global.h"
 #include "gpu_regs.h"
 #include "main.h"
-#include "trainer_card.h"
 #include "battle_anim.h"
 #include "event_data.h"
 #include "malloc.h"

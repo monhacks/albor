@@ -86,7 +86,6 @@ SECTIONS {
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
         *libnosys.a:*.o(.text*);
-        src/libisagbprn.o(.text);
     } > ROM =0
 
     .rodata :
@@ -114,7 +113,6 @@ SECTIONS {
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);
-        src/libisagbprn.o(.rodata);
     } > ROM =0
 
     gfx_data :

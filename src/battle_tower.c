@@ -17,7 +17,6 @@
 #include "new_game.h"
 #include "string_util.h"
 #include "data.h"
-#include "link.h"
 #include "field_message_box.h"
 #include "battle_factory.h"
 #include "constants/abilities.h"
@@ -927,64 +926,7 @@ static void ShowPartnerCandidateMessage(void)
 
 static void LoadLinkMultiOpponentsData(void)
 {
-    s32 challengeNum;
-    u32 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u32 battleNum = gSaveBlockPtr->frontier.curChallengeBattleNum;
-    GetMultiplayerId(); // Yet another pointless function call.
 
-    switch (gSpecialVar_Result)
-    {
-    case 0:
-        if (battleMode == FRONTIER_MODE_LINK_MULTIS)
-        {
-            challengeNum = gSaveBlockPtr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-            if (IsLinkTaskFinished())
-            {
-                SendBlock(BitmaskAllOtherLinkPlayers(), &challengeNum, sizeof(challengeNum));
-                gSpecialVar_Result = 1;
-            }
-        }
-        else
-        {
-            gSpecialVar_Result = 6;
-        }
-        break;
-    case 1:
-        break;
-    case 2:
-        if (IsLinkTaskFinished())
-        {
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gSaveBlockPtr->frontier.trainerIds, sizeof(gSaveBlockPtr->frontier.trainerIds));
-            gSpecialVar_Result = 3;
-        }
-        break;
-    case 3:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            gTrainerBattleOpponent_A = gSaveBlockPtr->frontier.trainerIds[battleNum * 2];
-            gTrainerBattleOpponent_B = gSaveBlockPtr->frontier.trainerIds[battleNum * 2 + 1];
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-            if (gReceivedRemoteLinkPlayers)
-                gSpecialVar_Result = 4;
-            else
-                gSpecialVar_Result = 6;
-        }
-        break;
-    case 4:
-        SetCloseLinkCallback();
-        gSpecialVar_Result = 5;
-        break;
-    case 5:
-        if (gReceivedRemoteLinkPlayers == 0)
-        {
-            gSpecialVar_Result = 6;
-        }
-        break;
-    case 6:
-        return;
-    }
 }
 
 static void TowerTryCloseLink(void)

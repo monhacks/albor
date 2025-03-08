@@ -16,7 +16,6 @@
 #include "international_string_util.h"
 #include "string_util.h"
 #include "new_game.h"
-#include "link.h"
 #include "pokedex.h"
 #include "data.h"
 #include "strings.h"

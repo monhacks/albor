@@ -26,7 +26,6 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -497,14 +496,9 @@ static void CB2_InitBattleInternal(void)
 
 static void CB2_HandleStartBattle(void)
 {
-    u8 playerMultiplayerId;
-
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-
-    playerMultiplayerId = GetMultiplayerId();
-    gBattleScripting.multiplayerId = playerMultiplayerId;
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -525,50 +519,16 @@ static void CB2_HandleStartBattle(void)
     case 2:
         break;
     case 3:
-        // Link battle, send/receive party Pokémon 2 at a time
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 1-2
-            SendBlock(BitmaskAllOtherLinkPlayers(), gPlayerParty, sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 1-2
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 7:
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 3-4
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gPlayerParty[2], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 8:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 3-4
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 11:
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 5-6
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gPlayerParty[4], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 12:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 5-6
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 15:
         InitBattleControllers();
@@ -579,11 +539,6 @@ static void CB2_HandleStartBattle(void)
     case 16:
         break;
     case 17:
-        // Receive rng seed for recorded battle (only read it if partner is the link master)
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 18:
         // Finish, start battle

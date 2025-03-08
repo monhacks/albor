@@ -32,7 +32,6 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "link.h"
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
@@ -59,7 +58,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "tm_case.h"
-#include "trade.h"
 #include "util.h"
 #include "window.h"
 #include "constants/battle.h"
@@ -6370,7 +6368,7 @@ static bool8 TrySwitchInPokemon(void)
 
 void BufferBattlePartyCurrentOrder(void)
 {
-    BufferBattlePartyOrder(gBattlePartyCurrentOrder, GetPlayerFlankId());
+    BufferBattlePartyOrder(gBattlePartyCurrentOrder, 0);
 }
 
 static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)

@@ -17,26 +17,22 @@
 
 struct LoadedSaveData
 {
- /*0x0000*/ struct ItemSlot items[BAG_ITEMS_COUNT];
- /*0x0078*/ struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
- /*0x00F0*/ struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
- /*0x0130*/ struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
- /*0x0230*/ struct ItemSlot berries[BAG_BERRIES_COUNT];
- /*0x02E8*/ struct Mail mail[MAIL_COUNT];
+    struct ItemSlot items[BAG_ITEMS_COUNT];
+    struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
+    struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
+    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
+    struct ItemSlot berries[BAG_BERRIES_COUNT];
+    struct Mail mail[MAIL_COUNT];
 };
 
-// EWRAM DATA
 EWRAM_DATA struct SaveBlock gSaveblock = {0};
 EWRAM_DATA struct PokemonStorage gPokemonStorage = {0};
-
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 
-// IWRAM common
 COMMON_DATA bool32 gFlashMemoryPresent = 0;
 COMMON_DATA struct SaveBlock *gSaveBlockPtr = NULL;
 COMMON_DATA struct PokemonStorage *gPokemonStoragePtr = NULL;
 
-// code
 void CheckForFlashMemory(void)
 {
     if (!IdentifyFlash())

@@ -11,7 +11,6 @@
 #include "pokeblock.h"
 #include "battle_setup.h"
 #include "roamer.h"
-#include "link.h"
 #include "script.h"
 #include "battle_debug.h"
 #include "battle_pike.h"

@@ -1,7 +1,6 @@
 #include "global.h"
 #include "crt0.h"
 #include "malloc.h"
-#include "link.h"
 #include "m4a.h"
 #include "bg.h"
 #include "rtc.h"

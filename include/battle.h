@@ -812,7 +812,6 @@ struct BattleScripting
     u8 reshowHelperState;
     u8 levelUpHP;
     u8 windowsType; // B_WIN_TYPE_*
-    u8 multiplayerId;
     bool8 monCaught;
     s32 savedDmg;
     u16 savedMoveEffect; // For moves hitting multiple targets.

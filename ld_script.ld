@@ -334,7 +334,6 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
-        src/libisagbprn.o(.text);
         *libagbsyscall.a:ArcTan2.o(.text);
         *libagbsyscall.a:BgAffineSet.o(.text);
         *libagbsyscall.a:CpuFastSet.o(.text);
@@ -1573,7 +1572,6 @@ SECTIONS {
         *libc.a:libcfunc.o(.rodata);
         *libc.a:lseekr.o(.rodata);
         *libc.a:readr.o(.rodata);
-        src/libisagbprn.o(.rodata);
     } > ROM =0
 
     gfx_data :

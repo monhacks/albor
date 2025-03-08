@@ -11,7 +11,6 @@
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "international_string_util.h"
-#include "link.h"
 #include "main.h"
 #include "main_menu.h"
 #include "menu.h"

@@ -24,8 +24,7 @@
 #define sRESHOW_HELPER_STATE         (sRESHOW_MAIN_STATE + 1)           // reshowHelperState (u8) -> 1 byte
 #define sLVLUP_HP                    (sRESHOW_HELPER_STATE + 1)         // levelUpHP (u8) -> 1 byte
 #define sWINDOWS_TYPE                (sLVLUP_HP + 1)                    // windowsType (u8) -> 1 byte
-#define sMULTIPLAYER_ID              (sWINDOWS_TYPE + 1)                // multiplayerId (u8) -> 1 byte
-#define sMON_CAUGHT                  (sMULTIPLAYER_ID + 1)              // monCaught (bool8) -> 1 byte
+#define sMON_CAUGHT                  (sWINDOWS_TYPE + 1)                // monCaught (bool8) -> 1 byte
 #define sSAVED_DMG                   (sMON_CAUGHT + 1)                  // savedDmg (s32) -> 4 bytes
 #define sSAVED_MOVE_EFFECT           (sSAVED_DMG + 4)                   // savedMoveEffect (u16) -> 2 bytes
 #define sMOVE_EFFECT                 (sSAVED_MOVE_EFFECT + 2)           // moveEffect (u16) -> 2 bytes
