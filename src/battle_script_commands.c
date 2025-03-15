@@ -5168,7 +5168,7 @@ static void Cmd_moveend(void)
                  && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
                 {
                     gProtectStructs[gBattlerAttacker].touchedProtectLike = FALSE;
-                    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 8;
+                    gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 8;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SPIKY_SHIELD);
@@ -5321,7 +5321,7 @@ static void Cmd_moveend(void)
                   && !(gMoveResultFlags & MOVE_RESULT_FAILED)
                   && GetBattlerAbility(gBattlerAttacker) != ABILITY_MAGIC_GUARD)
             {
-                gBattleMoveDamage = (GetNonDynamaxMaxHP(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
+                gBattleMoveDamage = (MaximosPS(gBattlerAttacker) + 1) / 2; // Half of Max HP Rounded UP
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_MaxHp50Recoil;
                 effect = TRUE;
@@ -5614,8 +5614,6 @@ static void Cmd_moveend(void)
                 {
                     gLastPrintedMoves[gBattlerAttacker] = gChosenMove;
                     gLastUsedMove = gCurrentMove;
-                    if (IsMaxMove(gCurrentMove))
-                        gBattleStruct->dynamax.lastUsedBaseMove = gBattleStruct->dynamax.baseMoves[gBattlerAttacker];
                 }
             }
             if (!(gAbsentBattlerFlags & (1u << gBattlerAttacker))
@@ -6653,7 +6651,7 @@ static bool32 DoSwitchInEffectsForBattler(u32 battler)
         && IsBattlerGrounded(battler))
     {
         u8 spikesDmg = (5 - gSideTimers[GetBattlerSide(battler)].spikesAmount) * 2;
-        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / (spikesDmg);
+        gBattleMoveDamage = MaximosPS(battler) / (spikesDmg);
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -7416,7 +7414,7 @@ static bool32 TryCheekPouch(u32 battler, u32 itemId)
         && gBattleStruct->ateBerry[GetBattlerSide(battler)] & (1u << gBattlerPartyIndexes[battler])
         && !BATTLER_MAX_HP(battler))
     {
-        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 3;
+        gBattleMoveDamage = MaximosPS(battler) / 3;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
@@ -7917,7 +7915,7 @@ static bool32 HasAttackerFaintedTarget(void)
         && gBattleStruct->moveTarget[gBattlerAttacker] == gBattlerTarget
         && gBattlerTarget != gBattlerAttacker
         && gCurrentTurnActionNumber == GetBattlerTurnOrderNum(gBattlerAttacker)
-        && (gChosenMove == gChosenMoveByBattler[gBattlerAttacker] || gChosenMove == gBattleMons[gBattlerAttacker].moves[gChosenMovePos] || gChosenMove == GetMaxMove(gBattlerAttacker, gChosenMoveByBattler[gBattlerAttacker])))
+        && (gChosenMove == gChosenMoveByBattler[gBattlerAttacker] || gChosenMove == gBattleMons[gBattlerAttacker].moves[gChosenMovePos]))
         return TRUE;
     else
         return FALSE;
@@ -8515,7 +8513,7 @@ static void Cmd_various(void)
         }
         else
         {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 16;
+            gBattleMoveDamage = MaximosPS(battler) / 16;
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
             gBattleMoveDamage *= -1;
@@ -8918,7 +8916,7 @@ static void Cmd_various(void)
           && HasAttackerFaintedTarget()
           && !NoAliveMonsForEitherParty())
         {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 3;
+            gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 3;
             gBattleMoveDamage += gBattleMons[battler].hp;
             if (gBattleMoveDamage > gBattleMons[battler].maxHP)
                 gBattleMoveDamage = gBattleMons[battler].maxHP;
@@ -9641,7 +9639,7 @@ static void Cmd_various(void)
     case VARIOUS_TRY_HEAL_QUARTER_HP:
     {
         VARIOUS_ARGS(const u8 *failInstr);
-        gBattleMoveDamage = GetNonDynamaxMaxHP(battler) / 4;
+        gBattleMoveDamage = MaximosPS(battler) / 4;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         gBattleMoveDamage *= -1;
@@ -9878,7 +9876,7 @@ static void Cmd_various(void)
             VARIOUS_ARGS(const u8 *failInstr);
 
             bool8 atLeastOneStatBoosted = FALSE;
-            u16 hpFraction = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 3);
+            u16 hpFraction = max(1, MaximosPS(gBattlerAttacker) / 3);
 
             for (i = 1; i < NUM_STATS; i++)
             {
@@ -10252,7 +10250,7 @@ static void Cmd_tryhealhalfhealth(void)
     if (cmd->battler == BS_ATTACKER)
         gBattlerTarget = gBattlerAttacker;
 
-    gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+    gBattleMoveDamage = MaximosPS(gBattlerTarget) / 2;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
     gBattleMoveDamage *= -1;
@@ -10406,12 +10404,12 @@ static void Cmd_manipulatedamage(void)
     case DMG_RECOIL_FROM_MISS:
         if (B_RECOIL_IF_MISS_DMG >= GEN_5)
         {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+            gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 2;
         }
         else if (B_RECOIL_IF_MISS_DMG == GEN_4)
         {
             if ((gBattleMons[gBattlerTarget].maxHP / 2) < gBattleMoveDamage)
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+                gBattleMoveDamage = MaximosPS(gBattlerTarget) / 2;
         }
         else
         {
@@ -10424,21 +10422,21 @@ static void Cmd_manipulatedamage(void)
         gBattleMoveDamage *= 2;
         break;
     case DMG_1_8_TARGET_HP:
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 8;
+        gBattleMoveDamage = MaximosPS(gBattlerTarget) / 8;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
         break;
     case DMG_FULL_ATTACKER_HP:
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker);
+        gBattleMoveDamage = MaximosPS(gBattlerAttacker);
         break;
     case DMG_CURR_ATTACKER_HP:
-        gBattleMoveDamage = GetNonDynamaxHP(gBattlerAttacker);
+        gBattleMoveDamage = ActualesPS(gBattlerAttacker);
         break;
     case DMG_BIG_ROOT:
         gBattleMoveDamage = GetDrainedBigRootHp(gBattlerAttacker, gBattleMoveDamage);
         break;
     case DMG_RECOIL_FROM_IMMUNE:
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 2;
+        gBattleMoveDamage = MaximosPS(gBattlerTarget) / 2;
         break;
     }
 
@@ -10623,13 +10621,13 @@ static void Cmd_stockpiletohpheal(void)
         {
             if (gDisableStructs[gBattlerAttacker].stockpileCounter > 0)
             {
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
+                gBattleMoveDamage = MaximosPS(gBattlerAttacker) / (1 << (3 - gDisableStructs[gBattlerAttacker].stockpileCounter));
                 gBattleScripting.animTurn = gDisableStructs[gBattlerAttacker].stockpileCounter;
                 gBattleStruct->moveEffect2 = MOVE_EFFECT_STOCKPILE_WORE_OFF;
             }
             else // Snatched move
             {
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+                gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 4;
                 gBattleScripting.animTurn = 1;
             }
 
@@ -11431,7 +11429,7 @@ static void Cmd_damagetohalftargethp(void)
 {
     CMD_ARGS();
 
-    gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) / 2;
+    gBattleMoveDamage = ActualesPS(gBattlerTarget) / 2;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
 
@@ -11619,9 +11617,9 @@ static void Cmd_setsubstitute(void)
     u32 hp;
 
     if (factor == 2)
-        hp = (GetNonDynamaxMaxHP(gBattlerAttacker)+1) / factor; // shed tail rounds up
+        hp = (MaximosPS(gBattlerAttacker)+1) / factor; // shed tail rounds up
     else
-        hp = GetNonDynamaxMaxHP(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
+        hp = MaximosPS(gBattlerAttacker) / factor; // one bit value will only work for Pokémon which max hp can go to 1020(which is more than possible in games)
 
     if (hp == 0)
         hp = 1;
@@ -11815,21 +11813,10 @@ static void Cmd_trysetencore(void)
 
     s32 i;
 
-    if (IsMaxMove(gLastMoves[gBattlerTarget]) && !(GetActiveGimmick(gBattlerTarget) == GIMMICK_DYNAMAX))
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            if (gBattleMons[gBattlerTarget].moves[i] == gBattleStruct->dynamax.baseMoves[gBattlerTarget])
-                break;
-        }
-    }
-    else
-    {
-        for (i = 0; i < MAX_MON_MOVES; i++)
-        {
-            if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
-                break;
-        }
+        if (gBattleMons[gBattlerTarget].moves[i] == gLastMoves[gBattlerTarget])
+            break;
     }
 
     if ((gMovesInfo[gLastMoves[gBattlerTarget]].encoreBanned)
@@ -11863,8 +11850,8 @@ static void Cmd_painsplitdmgcalc(void)
 
     if (!(DoesSubstituteBlockMove(gBattlerAttacker, gBattlerTarget, gCurrentMove)))
     {
-        s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + GetNonDynamaxHP(gBattlerTarget)) / 2;
-        s32 painSplitHp = gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - hpDiff;
+        s32 hpDiff = (gBattleMons[gBattlerAttacker].hp + ActualesPS(gBattlerTarget)) / 2;
+        s32 painSplitHp = gBattleMoveDamage = ActualesPS(gBattlerTarget) - hpDiff;
         u8 *storeLoc = (void *)(&gBattleScripting.painSplitHp);
 
         storeLoc[0] = (painSplitHp);
@@ -12163,30 +12150,15 @@ static void Cmd_tryspiteppreduce(void)
         s32 i;
 
         // Get move slot to reduce PP.
-        if (IsMaxMove(gLastMoves[gBattlerTarget]))
+        for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (gBattleStruct->dynamax.baseMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                    break;
-            }
-        }
-        else
-        {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
-                    break;
-            }
+            if (gLastMoves[gBattlerTarget] == gBattleMons[gBattlerTarget].moves[i])
+                break;
         }
 
         if (i != MAX_MON_MOVES && gBattleMons[gBattlerTarget].pp[i] > (B_CAN_SPITE_FAIL >= GEN_4 ? 0 : 1))
         {
             s32 ppToDeduct = B_PP_REDUCED_BY_SPITE >= GEN_4 ? 4 : (Random() & 3) + 2;
-            // G-Max Depletion only deducts 2 PP.
-            if (IsMaxMove(gCurrentMove) && gMovesInfo[gCurrentMove].argument == MAX_EFFECT_SPITE)
-                ppToDeduct = 2;
-
             if (gBattleMons[gBattlerTarget].pp[i] < ppToDeduct)
                 ppToDeduct = gBattleMons[gBattlerTarget].pp[i];
 
@@ -12334,7 +12306,7 @@ static void Cmd_cursetarget(void)
     else
     {
         gBattleMons[gBattlerTarget].status2 |= STATUS2_CURSED;
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+        gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -12507,7 +12479,7 @@ static void Cmd_presentdamagecalculation(void)
         }
         else
         {
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerTarget) / 4;
+            gBattleMoveDamage = MaximosPS(gBattlerTarget) / 4;
             if (gBattleMoveDamage == 0)
                 gBattleMoveDamage = 1;
             gBattleMoveDamage *= -1;
@@ -12656,14 +12628,14 @@ static void Cmd_halvehp(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    u32 halfHp = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+    u32 halfHp = MaximosPS(gBattlerAttacker) / 2;
 
-    if (!(GetNonDynamaxMaxHP(gBattlerAttacker) / 2))
+    if (!(MaximosPS(gBattlerAttacker) / 2))
         halfHp = 1;
 
     if (gBattleMons[gBattlerAttacker].hp > halfHp)
     {
-        gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+        gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 2;
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = 1;
 
@@ -12769,18 +12741,18 @@ static void Cmd_recoverbasedonsunlight(void)
         if (gCurrentMove == MOVE_SHORE_UP)
         {
             if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SANDSTORM)
-                gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
+                gBattleMoveDamage = 20 * MaximosPS(gBattlerAttacker) / 30;
             else
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+                gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 2;
         }
         else
         {
             if (!(gBattleWeather & B_WEATHER_ANY) || !WEATHER_HAS_EFFECT || GetBattlerHoldEffect(gBattlerAttacker, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 2;
+                gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 2;
             else if (gBattleWeather & B_WEATHER_SUN)
-                gBattleMoveDamage = 20 * GetNonDynamaxMaxHP(gBattlerAttacker) / 30;
+                gBattleMoveDamage = 20 * MaximosPS(gBattlerAttacker) / 30;
             else // not sunny weather
-                gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 4;
+                gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 4;
         }
 
         if (gBattleMoveDamage == 0)
@@ -13285,7 +13257,7 @@ static void Cmd_trywish(void)
         }
         else
         {
-            gBattleMoveDamage = max(1, GetNonDynamaxMaxHP(gBattlerAttacker) / 2);
+            gBattleMoveDamage = max(1, MaximosPS(gBattlerAttacker) / 2);
         }
 
         gBattleMoveDamage *= -1;
@@ -13365,13 +13337,13 @@ static void Cmd_setdamagetohealthdifference(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (GetNonDynamaxHP(gBattlerTarget) <= gBattleMons[gBattlerAttacker].hp)
+    if (ActualesPS(gBattlerTarget) <= gBattleMons[gBattlerAttacker].hp)
     {
         gBattlescriptCurrInstr = cmd->failInstr;
     }
     else
     {
-        gBattleMoveDamage = GetNonDynamaxHP(gBattlerTarget) - gBattleMons[gBattlerAttacker].hp;
+        gBattleMoveDamage = ActualesPS(gBattlerTarget) - gBattleMons[gBattlerAttacker].hp;
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -13639,7 +13611,7 @@ static void Cmd_switchoutabilities(void)
             MarkBattlerForControllerExec(battler);
             break;
         case ABILITY_REGENERATOR:
-            gBattleMoveDamage = GetNonDynamaxMaxHP(gBattlerAttacker) / 3;
+            gBattleMoveDamage = MaximosPS(gBattlerAttacker) / 3;
             gBattleMoveDamage += gBattleMons[battler].hp;
             if (gBattleMoveDamage > gBattleMons[battler].maxHP)
                 gBattleMoveDamage = gBattleMons[battler].maxHP;
@@ -15328,35 +15300,6 @@ void BS_SetPledgeStatus(void)
         gBattlescriptCurrInstr = BattleScript_MoveEnd;
 }
 
-void BS_TryTrainerSlideMegaEvolutionMsg(void)
-{
-    NATIVE_ARGS();
-    s32 shouldSlide;
-
-    if ((shouldSlide = ShouldDoTrainerSlide(gBattlerAttacker, TRAINER_SLIDE_MEGA_EVOLUTION)))
-    {
-        gBattleScripting.battler = gBattlerAttacker;
-        BattleScriptPush(cmd->nextInstr);
-        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    }
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_TryTrainerSlideDynamaxMsg(void)
-{
-    NATIVE_ARGS();
-    s32 shouldSlide;
-
-    if ((shouldSlide = ShouldDoTrainerSlide(gBattleScripting.battler, TRAINER_SLIDE_DYNAMAX)))
-    {
-        BattleScriptPush(cmd->nextInstr);
-        gBattlescriptCurrInstr = (shouldSlide == 1 ? BattleScript_TrainerASlideMsgRet : BattleScript_TrainerBSlideMsgRet);
-    }
-    else
-        gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
 void BS_TryHealPulse(void)
 {
     NATIVE_ARGS(const u8 *failInstr);
@@ -15368,11 +15311,11 @@ void BS_TryHealPulse(void)
     else
     {
         if (GetBattlerAbility(gBattlerAttacker) == ABILITY_MEGA_LAUNCHER && gMovesInfo[gCurrentMove].ballisticMove)
-            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 75 / 100);
+            gBattleMoveDamage = -(MaximosPS(gBattlerTarget) * 75 / 100);
         else if (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN && gMovesInfo[gCurrentMove].argument == MOVE_EFFECT_FLORAL_HEALING)
-            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) * 2 / 3);
+            gBattleMoveDamage = -(MaximosPS(gBattlerTarget) * 2 / 3);
         else
-            gBattleMoveDamage = -(GetNonDynamaxMaxHP(gBattlerTarget) / 2);
+            gBattleMoveDamage = -(MaximosPS(gBattlerTarget) / 2);
 
         if (gBattleMoveDamage == 0)
             gBattleMoveDamage = -1;
@@ -15589,7 +15532,7 @@ void BS_ApplyTerastallization(void)
 void BS_DamageToQuarterTargetHP(void)
 {
     NATIVE_ARGS();
-    gBattleMoveDamage = (3 * GetNonDynamaxHP(gBattlerTarget)) / 4;
+    gBattleMoveDamage = (3 * ActualesPS(gBattlerTarget)) / 4;
     if (gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
 

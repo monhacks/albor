@@ -1709,7 +1709,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_EXTREME_EVOBOOST] =
     {
-        .battleScript = BattleScript_EffectExtremeEvoboost,
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_HIT_SET_REMOVE_TERRAIN] =
@@ -1796,7 +1796,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
 
     [EFFECT_MAX_MOVE] =
     {
-        .battleScript = BattleScript_EffectMaxMove,
+        .battleScript = BattleScript_EffectHit,
     },
 
     [EFFECT_GLAIVE_RUSH] =

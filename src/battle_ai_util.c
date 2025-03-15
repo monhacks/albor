@@ -359,21 +359,6 @@ bool32 MovesWithCategoryUnusable(u32 attacker, u32 target, u32 category)
     return (usable == 0);
 }
 
-// To save computation time this function has 2 variants. One saves, sets and restores battlers, while the other doesn't.
-struct SimulatedDamage AI_CalcDamageSaveBattlers(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, enum DamageRollType rollType)
-{
-    struct SimulatedDamage dmg;
-
-    SaveBattlerData(battlerAtk);
-    SaveBattlerData(battlerDef);
-    SetBattlerData(battlerAtk);
-    SetBattlerData(battlerDef);
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef,  typeEffectiveness, considerZPower, AI_GetWeather(AI_DATA), rollType);
-    RestoreBattlerData(battlerAtk);
-    RestoreBattlerData(battlerDef);
-    return dmg;
-}
-
 static inline s32 LowestRollDmg(s32 dmg)
 {
     dmg *= MIN_ROLL_PERCENTAGE;
@@ -484,7 +469,7 @@ static inline s32 GetDamageByRollType(s32 dmg, enum DamageRollType rollType)
         return DmgRoll(dmg);
 }
 
-struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, bool32 considerZPower, u32 weather, enum DamageRollType rollType)
+struct SimulatedDamage AI_CalcDamage(u32 move, u32 battlerAtk, u32 battlerDef, u8 *typeEffectiveness, u32 weather, enum DamageRollType rollType)
 {
     struct SimulatedDamage simDamage;
     s32 moveType;
@@ -2395,7 +2380,7 @@ static u32 GetLeechSeedDamage(u32 battlerId)
     if ((gStatuses3[battlerId] & STATUS3_LEECHSEED)
      && gBattleMons[gStatuses3[battlerId] & STATUS3_LEECHSEED_BATTLER].hp != 0)
      {
-        damage = GetNonDynamaxMaxHP(battlerId) / 8;
+        damage = MaximosPS(battlerId) / 8;
         if (damage == 0)
             damage = 1;
      }
@@ -2407,7 +2392,7 @@ static u32 GetNightmareDamage(u32 battlerId)
     u32 damage = 0;
     if ((gBattleMons[battlerId].status2 & STATUS2_NIGHTMARE) && gBattleMons[battlerId].status1 & STATUS1_SLEEP)
     {
-        damage = GetNonDynamaxMaxHP(battlerId) / 4;
+        damage = MaximosPS(battlerId) / 4;
         if (damage == 0)
             damage = 1;
     }
@@ -2419,7 +2404,7 @@ static u32 GetCurseDamage(u32 battlerId)
     u32 damage = 0;
     if (gBattleMons[battlerId].status2 & STATUS2_CURSED)
     {
-        damage = GetNonDynamaxMaxHP(battlerId) / 4;
+        damage = MaximosPS(battlerId) / 4;
         if (damage == 0)
             damage = 1;
     }
@@ -2434,9 +2419,9 @@ static u32 GetTrapDamage(u32 battlerId)
     if (gBattleMons[battlerId].status2 & STATUS2_WRAPPED)
     {
         if (holdEffect == HOLD_EFFECT_BINDING_BAND)
-            damage = GetNonDynamaxMaxHP(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
+            damage = MaximosPS(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 6 : 8);
         else
-            damage = GetNonDynamaxMaxHP(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
+            damage = MaximosPS(battlerId) / (B_BINDING_DAMAGE >= GEN_6 ? 8 : 16);
 
         if (damage == 0)
             damage = 1;
@@ -2506,7 +2491,7 @@ static u32 GetWeatherDamage(u32 battlerId)
           && !(gStatuses3[battlerId] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
           && holdEffect != HOLD_EFFECT_SAFETY_GOGGLES)
         {
-            damage = GetNonDynamaxMaxHP(battlerId) / 16;
+            damage = MaximosPS(battlerId) / 16;
             if (damage == 0)
                 damage = 1;
         }
@@ -2517,7 +2502,7 @@ static u32 GetWeatherDamage(u32 battlerId)
           && !(gStatuses3[battlerId] & (STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
           && holdEffect != HOLD_EFFECT_SAFETY_GOGGLES)
         {
-            damage = GetNonDynamaxMaxHP(battlerId) / 16;
+            damage = MaximosPS(battlerId) / 16;
             if (damage == 0)
                 damage = 1;
         }
@@ -3403,7 +3388,7 @@ s32 AI_CalcPartyMonDamage(u32 move, u32 battlerAtk, u32 battlerDef, struct Battl
         AI_THINKING_STRUCT->saved[battlerAtk].saved = FALSE;
     }
 
-    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, FALSE, AI_GetWeather(AI_DATA), rollType);
+    dmg = AI_CalcDamage(move, battlerAtk, battlerDef, &effectiveness, AI_GetWeather(AI_DATA), rollType);
     // restores original gBattleMon struct
     FreeRestoreBattleMons(savedBattleMons);
 
@@ -3840,12 +3825,6 @@ bool32 AI_MoveMakesContact(u32 ability, u32 holdEffect, u32 move)
       && ability != ABILITY_NINJA
       && holdEffect != HOLD_EFFECT_PROTECTIVE_PADS)
         return TRUE;
-    return FALSE;
-}
-
-//TODO - this could use some more sophisticated logic
-bool32 ShouldUseZMove(u32 battlerAtk, u32 battlerDef, u32 chosenMove)
-{
     return FALSE;
 }
 

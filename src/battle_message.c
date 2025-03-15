@@ -711,14 +711,6 @@ static const u8 sText_CanActFaster[] = _("{B_ATK_NAME_WITH_PREFIX} can act faste
 static const u8 sText_MicleBerryActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted the accuracy of its next move using {B_LAST_ITEM}!");
 static const u8 sText_PkmnShookOffTheTaunt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} shook off the taunt!");
 static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} got over its infatuation!");
-static const u8 sText_ZPowerSurrounds[] = _("{B_ATK_NAME_WITH_PREFIX} surrounded itself with its Z-Power!");
-static const u8 sText_ZPowerUnleashed[] = _("{B_ATK_NAME_WITH_PREFIX} unleashes its full-force Z-Move!");
-static const u8 sText_ZMoveResetsStats[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} returned its decreased stats to normal using its Z-Power!");
-static const u8 sText_ZMoveAllStatsUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted its stats using its Z-Power!");
-static const u8 sText_ZMoveBoostCrit[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted its critical-hit ratio using its Z-Power!");
-static const u8 sText_ZMoveRestoreHp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} restored its HP using its Z-Power!");
-static const u8 sText_ZMoveStatUp[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} boosted its stats using its Z-Power!");
-static const u8 sText_ZMoveHpSwitchInTrap[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s HP was restored by the Z-Power!");
 static const u8 sText_TerrainReturnedToNormal[] = _("The terrain returned to normal!");
 static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}'s item cannot be removed!");
 static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itself to {B_ATK_NAME_WITH_PREFIX}!");
@@ -810,7 +802,6 @@ static const u8 sText_TeamGainedEXP[] = _("The rest of your team gained Exp. Poi
 static const u8 sText_CurrentMoveCantSelect[] = _("{B_BUFF1} cannot be used!\p");
 static const u8 sText_TargetIsBeingSaltCured[] = _("{B_DEF_NAME_WITH_PREFIX} is being salt cured!");
 static const u8 sText_TargetIsHurtBySaltCure[] = _("{B_DEF_NAME_WITH_PREFIX} is hurt by {B_BUFF1}!");
-static const u8 sText_TargetCoveredInStickyCandySyrup[] = _("{B_DEF_NAME_WITH_PREFIX} got covered in sticky candy syrup!");
 static const u8 sText_PkmnTellChillingReceptionJoke[] = _("{B_ATK_NAME_WITH_PREFIX} is preparing to tell a chillingly bad joke!");
 static const u8 sText_ZeroToHeroTransformation[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} underwent a heroic transformation!");
 static const u8 sText_CommanderActivates[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} was swallowed by Dondozo and became Dondozo's commander!");
@@ -828,7 +819,6 @@ static const u8 sText_ElectroShotCharging[] = _("{B_ATK_NAME_WITH_PREFIX} absorb
 static const u8 sText_ItemWasUsedUp[] = _("The {B_LAST_ITEM} was used up…");
 static const u8 sText_AttackerLostItsType[] = _("{B_ATK_NAME_WITH_PREFIX} lost its {B_BUFF1} type!");
 static const u8 sText_ShedItsTail[] = _("{B_ATK_NAME_WITH_PREFIX} shed its tail to create a decoy!");
-static const u8 sText_PkmnTerastallizedInto[] = _("{B_ATK_NAME_WITH_PREFIX} terastallized into the {B_BUFF1} type!");
 static const u8 sText_SupersweetAromaWafts[] = _("A supersweet aroma is wafting from the syrup covering {B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_TidyingUpComplete[] = _("Tidying up complete!");
 static const u8 sText_FickleBeamDoubled[] = _("{B_ATK_NAME_WITH_PREFIX} is going all out for this attack!");
@@ -837,7 +827,6 @@ static const u8 sText_WagglingAFinger[] = _("Waggling a finger let it use {B_CUR
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
     [STRINGID_FICKLEBEAMDOUBLED] = sText_FickleBeamDoubled,
-    [STRINGID_PKMNTERASTALLIZEDINTO] = sText_PkmnTerastallizedInto,
     [STRINGID_TIDYINGUPCOMPLETE] = sText_TidyingUpComplete,
     [STRINGID_SUPERSWEETAROMAWAFTS] = sText_SupersweetAromaWafts,
     [STRINGID_SHEDITSTAIL] = sText_ShedItsTail,
@@ -893,14 +882,6 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ATTACKERBROKETHROUGHPARALYSIS] = sText_AttackerBrokeThroughParalysis,
     [STRINGID_ATTACKERSHOOKITSELFAWAKE] = sText_AttackerShookItselfAwake,
     [STRINGID_ATTACKEREXPELLEDTHEPOISON] = sText_AttackerExpelledThePoison,
-    [STRINGID_ZPOWERSURROUNDS] = sText_ZPowerSurrounds,
-    [STRINGID_ZMOVEUNLEASHED] = sText_ZPowerUnleashed,
-    [STRINGID_ZMOVERESETSSTATS] = sText_ZMoveResetsStats,
-    [STRINGID_ZMOVEALLSTATSUP] = sText_ZMoveAllStatsUp,
-    [STRINGID_ZMOVEZBOOSTCRIT] = sText_ZMoveBoostCrit,
-    [STRINGID_ZMOVERESTOREHP] = sText_ZMoveRestoreHp,
-    [STRINGID_ZMOVESTATUP] = sText_ZMoveStatUp,
-    [STRINGID_ZMOVEHPTRAP] = sText_ZMoveHpSwitchInTrap,
     [STRINGID_PLAYERLOSTTOENEMYTRAINER] = sText_PlayerLostToEnemyTrainer,
     [STRINGID_PLAYERPAIDPRIZEMONEY] = sText_PlayerPaidPrizeMoney,
     [STRINGID_SHELLTRAPDIDNTWORK] = sText_ShellTrapDidntWork,
@@ -1535,7 +1516,6 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_ULTRABURSTREACTING] = sText_UltraBurstReacting,
     [STRINGID_ULTRABURSTCOMPLETED] = sText_UltraBurstCompleted,
     [STRINGID_TEAMGAINEDEXP] = sText_TeamGainedEXP,
-    [STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP] = sText_TargetCoveredInStickyCandySyrup,
     [STRINGID_ITEMWASUSEDUP] = sText_ItemWasUsedUp,
     [STRINGID_ATTACKERLOSTITSTYPE] = sText_AttackerLostItsType,
     [STRINGID_CLOAKEDINAHARSHLIGHT] = sText_PkmnIsCloakedInAHarshLight,
@@ -1546,17 +1526,6 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 const u16 gTrainerUsedItemStringIds[] =
 {
     STRINGID_PLAYERUSEDITEM, STRINGID_TRAINER1USEDITEM
-};
-
-const u16 gZEffectStringIds[] =
-{
-    [B_MSG_Z_RESET_STATS] = STRINGID_ZMOVERESETSSTATS,
-    [B_MSG_Z_ALL_STATS_UP]= STRINGID_ZMOVEALLSTATSUP,
-    [B_MSG_Z_BOOST_CRITS] = STRINGID_ZMOVEZBOOSTCRIT,
-    [B_MSG_Z_FOLLOW_ME]   = STRINGID_PKMNCENTERATTENTION,
-    [B_MSG_Z_RECOVER_HP]  = STRINGID_ZMOVERESTOREHP,
-    [B_MSG_Z_STAT_UP]     = STRINGID_ZMOVESTATUP,
-    [B_MSG_Z_HP_TRAP]     = STRINGID_ZMOVEHPTRAP,
 };
 
 const u16 gMentalHerbCureStringIds[] =
@@ -3437,10 +3406,7 @@ struct TrainerSlide
     const u8 *msgFirstSuperEffectiveHit;
     const u8 *msgFirstSTABMove;
     const u8 *msgPlayerMonUnaffected;
-    const u8 *msgMegaEvolution;
-    const u8 *msgZMove;
     const u8 *msgBeforeFirstTurn;
-    const u8 *msgDynamax;
 };
 
 static const struct TrainerSlide sTrainerSlides[] =
@@ -3458,10 +3424,7 @@ static const struct TrainerSlide sTrainerSlides[] =
         .msgFirstSuperEffectiveHit = sText_SuperEffective,
         .msgFirstSTABMove = sText_ABoosted,
         .msgPlayerMonUnaffected = sText_ButNoEffect,
-        .msgMegaEvolution = sText_PowderExplodes,
-        .msgZMove = sText_Electromagnetism,
         .msgBeforeFirstTurn = sText_GravityIntensified,
-        .msgDynamax = sText_TargetWokeUp,
     },
     */
 };
@@ -3603,27 +3566,11 @@ u32 ShouldDoTrainerSlide(u32 battler, u32 which)
                     return TRUE;
                 }
                 break;
-            case TRAINER_SLIDE_MEGA_EVOLUTION:
-                if (sTrainerSlides[i].msgMegaEvolution != NULL && !gBattleStruct->trainerSlideMegaEvolutionMsgDone)
-                {
-                    gBattleStruct->trainerSlideMegaEvolutionMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgMegaEvolution;
-                    return TRUE;
-                }
-                break;
             case TRAINER_SLIDE_BEFORE_FIRST_TURN:
                 if (sTrainerSlides[i].msgBeforeFirstTurn != NULL && !gBattleStruct->trainerSlideBeforeFirstTurnMsgDone)
                 {
                     gBattleStruct->trainerSlideBeforeFirstTurnMsgDone = TRUE;
                     gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgBeforeFirstTurn;
-                    return TRUE;
-                }
-                break;
-            case TRAINER_SLIDE_DYNAMAX:
-                if (sTrainerSlides[i].msgDynamax != NULL && !gBattleStruct->trainerSlideDynamaxMsgDone)
-                {
-                    gBattleStruct->trainerSlideDynamaxMsgDone = TRUE;
-                    gBattleStruct->trainerSlideMsg = sTrainerSlides[i].msgDynamax;
                     return TRUE;
                 }
                 break;
