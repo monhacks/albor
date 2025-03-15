@@ -2650,10 +2650,10 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     switch (gender)
     {
         default:
-        case MALE:
+        case MACHO:
             paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN;
             break;
-        case FEMALE:
+        case HEMBRA:
             paletteTag = OBJ_EVENT_PAL_TAG_MAY;
             break;
     }

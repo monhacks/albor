@@ -1139,7 +1139,7 @@ void CB2_InitCopyrightScreenAfterTitleScreen(void)
 void Task_Scene1_Load(u8 taskId)
 {
     SetVBlankCallback(NULL);
-    sIntroCharacterGender = MOD(Random(), GENDER_COUNT);
+    sIntroCharacterGender = MOD(Random(), NUMERO_GENEROS);
     IntroResetGpuRegs();
     SetGpuReg(REG_OFFSET_BG3VOFS, 0);
     SetGpuReg(REG_OFFSET_BG2VOFS, 80);
@@ -1184,7 +1184,6 @@ static void Task_Scene1_FadeIn(u8 taskId)
     gTasks[taskId].func = Task_Scene1_WaterDrops;
     gIntroFrameCounter = 0;
     m4aSongNumStart(MUS_INTRO);
-    ResetSerial();
 }
 
 // Task data for Task_Scene1_PanUp
@@ -1347,7 +1346,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     u8 spriteId;
 
     // Load sprite sheets
-    if (sIntroCharacterGender == MALE)
+    if (sIntroCharacterGender == MACHO)
         LoadCompressedSpriteSheet(gSpriteSheet_IntroBrendan);
     else
         LoadCompressedSpriteSheet(gSpriteSheet_IntroMay);
@@ -1366,7 +1365,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     CreateSprite(&sSpriteTemplate_Manectric, DISPLAY_WIDTH + 32, 128, 0);
     CreateSprite(&sSpriteTemplate_Torchic, DISPLAY_WIDTH + 48, 110, 1);
 
-    if (sIntroCharacterGender == MALE)
+    if (sIntroCharacterGender == MACHO)
         spriteId = CreateIntroBrendanSprite(DISPLAY_WIDTH + 32, 100);
     else
         spriteId = CreateIntroMaySprite(DISPLAY_WIDTH + 32, 100);

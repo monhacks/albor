@@ -307,16 +307,16 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 };
 
 #define NUM_SECRET_BASE_CLASSES 5
-static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
+static const u8 sSecretBaseFacilityClasses[NUMERO_GENEROS][NUM_SECRET_BASE_CLASSES] =
 {
-    [MALE] = {
+    [MACHO] = {
         FACILITY_CLASS_YOUNGSTER,
         FACILITY_CLASS_BUG_CATCHER,
         FACILITY_CLASS_RICH_BOY,
         FACILITY_CLASS_CAMPER,
         FACILITY_CLASS_COOLTRAINER_M
     },
-    [FEMALE] = {
+    [HEMBRA] = {
         FACILITY_CLASS_LASS,
         FACILITY_CLASS_SCHOOL_KID_F,
         FACILITY_CLASS_LADY,
@@ -4075,7 +4075,7 @@ void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
 
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
-    if (playerGender != MALE)
+    if (playerGender != MACHO)
         return TRAINER_PIC_MAY;
     else
         return TRAINER_PIC_BRENDAN;

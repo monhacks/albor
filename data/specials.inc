@@ -190,10 +190,6 @@ gSpecials::
 	def_special GetBattleTowerSinglesStreak
 	def_special ReducePlayerPartyToSelectedMons
 	def_special FieldShowRegionMap
-	def_special GetInGameTradeSpeciesInfo
-	def_special CreateInGameTradePokemon
-	def_special DoInGameTradeScene
-	def_special GetTradeSpecies
 	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
@@ -356,7 +352,6 @@ gSpecials::
 	def_special Script_DoRayquazaScene
 	def_special OpenPokenavForTutorial
 	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
-	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special ScrollableMultichoice_RedrawPersistentMenu

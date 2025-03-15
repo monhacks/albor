@@ -21,8 +21,8 @@ BattleFrontier_BattlePalaceBattleRoom_OnTransition:
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfx::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxMale
-	goto_if_eq VAR_RESULT, FEMALE, BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale
+	goto_if_eq VAR_RESULT, MACHO, BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxMale
+	goto_if_eq VAR_RESULT, HEMBRA, BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale
 	return
 
 @ The opponent's gfx are set to the players by default

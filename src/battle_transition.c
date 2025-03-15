@@ -801,10 +801,10 @@ static const u16 *const sOpponentMugshotsPals[MUGSHOT_COLOR_COUNT] =
     [MUGSHOT_COLOR_GREY]   = sMugshotPal_Grey
 };
 
-static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
+static const u16 *const sPlayerMugshotsPals[NUMERO_GENEROS] =
 {
-    [MALE] = sMugshotPal_Brendan,
-    [FEMALE] = sMugshotPal_May
+    [MACHO] = sMugshotPal_Brendan,
+    [HEMBRA] = sMugshotPal_May
 };
 
 static const u16 sBigPokeball_Tilemap[] = INCBIN_U16("graphics/battle_transitions/big_pokeball_map.bin");

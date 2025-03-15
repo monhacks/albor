@@ -4951,7 +4951,7 @@ static void TryAddInterviewObjectEvents(void)
 
     // Add object for player (facing right)
     spriteId = CreateObjectGraphicsSprite(
-        gSaveBlockPtr->playerGender == MALE ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
+        gSaveBlockPtr->playerGender == MACHO ? OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL : OBJ_EVENT_GFX_RIVAL_MAY_NORMAL,
         SpriteCallbackDummy,
         52,
         40,

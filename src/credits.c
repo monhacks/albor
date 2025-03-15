@@ -1198,7 +1198,7 @@ static bool8 LoadBikeScene(u8 scene, u8 taskId)
         gMain.state++;
         break;
     case 2:
-        if (gSaveBlockPtr->playerGender == MALE)
+        if (gSaveBlockPtr->playerGender == MACHO)
         {
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsBrendan);
             LoadCompressedSpriteSheet(gSpriteSheet_CreditsRivalMay);

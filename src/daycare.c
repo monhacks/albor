@@ -1101,20 +1101,20 @@ void SetDaycareCompatibilityString(void)
 bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio)
 {
     u8 i;
-    u8 symbolsCount[GENDER_COUNT];
-    symbolsCount[MALE] = symbolsCount[FEMALE] = 0;
+    u8 symbolsCount[NUMERO_GENEROS];
+    symbolsCount[MACHO] = symbolsCount[HEMBRA] = 0;
 
     for (i = 0; name[i] != EOS; i++)
     {
         if (name[i] == CHAR_MALE)
-            symbolsCount[MALE]++;
+            symbolsCount[MACHO]++;
         if (name[i] == CHAR_FEMALE)
-            symbolsCount[FEMALE]++;
+            symbolsCount[HEMBRA]++;
     }
 
-    if (genderRatio == SIEMPRE_MACHO   && symbolsCount[MALE] != 0 && symbolsCount[FEMALE] == 0)
+    if (genderRatio == SIEMPRE_MACHO   && symbolsCount[MACHO] != 0 && symbolsCount[HEMBRA] == 0)
         return TRUE;
-    if (genderRatio == SIEMPRE_HEMBRA && symbolsCount[FEMALE] != 0 && symbolsCount[MALE] == 0)
+    if (genderRatio == SIEMPRE_HEMBRA && symbolsCount[HEMBRA] != 0 && symbolsCount[MACHO] == 0)
         return TRUE;
 
     return FALSE;
@@ -1125,15 +1125,15 @@ static u8 *AppendGenderSymbol(u8 *name, u8 gender)
     if (gender == SIEMPRE_MACHO)
     {
         if (!NameHasGenderSymbol(name, SIEMPRE_MACHO))
-            return StringAppend(name, gText_MaleSymbol4);
+            return StringAppend(name, gText_MaleSymbol);
     }
     else if (gender == SIEMPRE_HEMBRA)
     {
         if (!NameHasGenderSymbol(name, SIEMPRE_HEMBRA))
-            return StringAppend(name, gText_FemaleSymbol4);
+            return StringAppend(name, gText_FemaleSymbol);
     }
 
-    return StringAppend(name, gText_GenderlessSymbol);
+    return StringAppend(name, gText_Blank);
 }
 
 static u8 *AppendMonGenderSymbol(u8 *name, struct BoxPokemon *boxMon)
