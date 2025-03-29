@@ -1200,43 +1200,7 @@ static void PrepareOneTrainer(bool8 difficult)
 
 static void PrepareTwoTrainers(void)
 {
-    int i;
-    u16 trainerId;
-    u8 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    u16 challengeNum = gSaveBlockPtr->frontier.pikeWinStreaks[lvlMode] / NUM_PIKE_ROOMS;
 
-    gFacilityTrainers = gBattleFrontierTrainers;
-    do
-    {
-        // Pick the 1st trainer, making sure it's not one that's been encountered yet in this challenge.
-        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
-        for (i = 0; i < gSaveBlockPtr->frontier.curChallengeBattleNum - 1; i++)
-        {
-            if (gSaveBlockPtr->frontier.trainerIds[i] == trainerId)
-                break;
-        }
-    } while (i != gSaveBlockPtr->frontier.curChallengeBattleNum - 1);
-
-    gTrainerBattleOpponent_A = trainerId;
-    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-    if (gSaveBlockPtr->frontier.curChallengeBattleNum <= NUM_PIKE_ROOMS)
-        gSaveBlockPtr->frontier.trainerIds[gSaveBlockPtr->frontier.curChallengeBattleNum - 1] = gTrainerBattleOpponent_A;
-
-    do
-    {
-        // Pick the 2nd trainer, making sure it's not one that's been encountered yet in this challenge.
-        trainerId = GetRandomScaledFrontierTrainerId(challengeNum, 1);
-        for (i = 0; i < gSaveBlockPtr->frontier.curChallengeBattleNum; i++)
-        {
-            if (gSaveBlockPtr->frontier.trainerIds[i] == trainerId)
-                break;
-        }
-    } while (i != gSaveBlockPtr->frontier.curChallengeBattleNum);
-
-    gTrainerBattleOpponent_B = trainerId;
-    SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-    if (gSaveBlockPtr->frontier.curChallengeBattleNum < NUM_PIKE_ROOMS)
-        gSaveBlockPtr->frontier.trainerIds[gSaveBlockPtr->frontier.curChallengeBattleNum - 2] = gTrainerBattleOpponent_B;
 }
 
 static void ClearPikeTrainerIds(void)
@@ -1249,16 +1213,7 @@ static void ClearPikeTrainerIds(void)
 
 static void BufferTrainerIntro(void)
 {
-    if (gSpecialVar_0x8005 == 0)
-    {
-        if (gTrainerBattleOpponent_A < FRONTIER_TRAINERS_COUNT)
-            FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_A].speechBefore);
-    }
-    else if (gSpecialVar_0x8005 == 1)
-    {
-        if (gTrainerBattleOpponent_B < FRONTIER_TRAINERS_COUNT)
-            FrontierSpeechToString(gFacilityTrainers[gTrainerBattleOpponent_B].speechBefore);
-    }
+
 }
 
 static bool8 AtLeastTwoAliveMons(void)

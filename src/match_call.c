@@ -1795,29 +1795,6 @@ static int GetNumOwnedBadges(void)
 // Whether or not a trainer calling the player from a different route should request a battle
 static bool32 ShouldTrainerRequestBattle(int matchCallId)
 {
-    int dayCount;
-    int otId;
-    u16 dewfordRand;
-    int numRematchTrainersFought;
-    int max, rand, n;
-
-    if (GetNumOwnedBadges() < 5)
-        return FALSE;
-
-    dayCount = RtcGetLocalDayCount();
-    otId = GetTrainerId(gSaveBlockPtr->playerTrainerId) & 0xFFFF;
-
-    dewfordRand = gSaveBlockPtr->dewfordTrends[0].rand;
-    numRematchTrainersFought = GetNumRematchTrainersFought();
-    max = (numRematchTrainersFought * 13) / 10;
-    rand = ((dayCount ^ dewfordRand) + (dewfordRand ^ GetGameStat(GAME_STAT_TRAINER_BATTLES))) ^ otId;
-    n = rand % max;
-    if (n < numRematchTrainersFought)
-    {
-        if (GetNthRematchTrainerFought(n) == matchCallId)
-            return TRUE;
-    }
-
     return FALSE;
 }
 

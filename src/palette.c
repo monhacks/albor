@@ -229,7 +229,7 @@ static u32 UpdateTimeOfDayPaletteFade(void)
         if (gFundidoPaletas.contadorRetraso < gFundidoPaletas.retraso)
         {
             gFundidoPaletas.contadorRetraso++;
-            return 2;
+            return FUNDIDO_HARDWARE;
         }
         gFundidoPaletas.contadorRetraso = 0;
     }
@@ -338,7 +338,7 @@ static u32 UpdateNormalPaletteFade(void)
             if (gFundidoPaletas.contadorRetraso < gFundidoPaletas.retraso)
             {
                 gFundidoPaletas.contadorRetraso++;
-                return 2;
+                return FUNDIDO_HARDWARE;
             }
             gFundidoPaletas.contadorRetraso = 0;
         }
@@ -646,7 +646,7 @@ static void UpdateBlendRegisters(void)
     if (gFundidoPaletas.fundidoHardwareAcabado)
     {
         gFundidoPaletas.fundidoHardwareAcabado = FALSE;
-        gFundidoPaletas.modo = 0;
+        gFundidoPaletas.modo = FUNDIDO_NORMAL;
         gFundidoPaletas.controlBlend = 0;
         gFundidoPaletas.y = 0;
         gFundidoPaletas.activo = FALSE;
@@ -724,8 +724,8 @@ void BlendPalettes(u32 palettes, u8 coeff, u32 color)
     BlendPalettesFine(palettes, gPlttBufferUnfaded, gPlttBufferFaded, coeff, color);
 }
 
-// Mezcla colores del DNS según hora del día, si el bit 0 está activado (en .pla), se mezcla con ese color y no con el color por defecto.
-void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend *blend0, struct ConfiguracionBlend *blend1, u16 weight0)
+// Mezcla los colores de una paleta marcados en su .pla con el color por defecto si el color 0 no está marcado, y con este color si sí lo está.
+void BlendColoresExterior(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend *blend0, struct ConfiguracionBlend *blend1, u16 weight0)
 {
     s32 r0, g0, b0, r1, g1, b1, defR, defG, defB, altR, altG, altB;
     u32 color0, coeff0, color1, coeff1;
@@ -776,7 +776,7 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend
                 if (srcColor >> 15)
                 {
                     if (altBlendColor)
-                    { // Use alternate blend color
+                    {
                         r2 = r + (((altR - r) * (s32)coeff1) >> 5);
                         g2 = g + (((altG - g) * (s32)coeff1) >> 5);
                         b2 = b + (((altB - b) * (s32)coeff1) >> 5);
@@ -785,7 +785,7 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend
                         b  = b + (((altB - b) * (s32)coeff0) >> 5);
                     }
                     else
-                    { // Use default blend color
+                    {
                         r2 = r + (((defR - r) * (s32)coeff1) >> 5);
                         g2 = g + (((defG - g) * (s32)coeff1) >> 5);
                         b2 = b + (((defB - b) * (s32)coeff1) >> 5);
@@ -795,7 +795,7 @@ void TimeMixPalettes(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend
                     }
                 }
                 else
-                { // Use provided blend colors
+                {
                         r2 = (r + (((r1 - r) * (s32)coeff1) >> 5));
                         g2 = (g + (((g1 - g) * (s32)coeff1) >> 5));
                         b2 = (b + (((b1 - b) * (s32)coeff1) >> 5));

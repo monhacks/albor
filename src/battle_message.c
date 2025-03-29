@@ -490,8 +490,6 @@ static const u8 sText_LostToOpponentByReferee[];
 static const u8 sText_TiedOpponentByReferee[];
 static const u8 sText_QuestionForfeitMatch[];
 static const u8 sText_ForfeitedMatch[];
-static const u8 sText_Trainer1WinText[];
-static const u8 sText_Trainer2WinText[];
 static const u8 sText_TwoInGameTrainersDefeated[];
 static const u8 sText_Trainer2LoseText[];
 
@@ -1337,8 +1335,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_QUESTIONFORFEITMATCH] = sText_QuestionForfeitMatch,
     [STRINGID_FORFEITEDMATCH] = sText_ForfeitedMatch,
     [STRINGID_PKMNTRANSFERREDSOMEONESPC] = gText_PkmnFueTransferidoAlPC,
-    [STRINGID_TRAINER1WINTEXT] = sText_Trainer1WinText,
-    [STRINGID_TRAINER2WINTEXT] = sText_Trainer2WinText,
+    [TEXTO_BATALLA_VICTORIA_ENTRENADOR] = COMPOUND_STRING("¡Bien, qué guay!\p"),
     [STRINGID_ENDUREDSTURDY] = sText_EnduredViaSturdy,
     [STRINGID_POWERHERB] = sText_PowerHerbActivation,
     [STRINGID_HURTBYITEM] = sText_HurtByItem,
@@ -2136,8 +2133,6 @@ const u8 *const gRefereeStringsTable[] =
 
 static const u8 sText_QuestionForfeitMatch[] = _("Would you like to forfeit the match and quit now?");
 static const u8 sText_ForfeitedMatch[] = _("The match was forfeited.");
-static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
-static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
 static const u8 sText_Trainer1Fled[] = _( "{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!");
 static const u8 sText_PlayerLostAgainstTrainer1[] = _("You lost to {B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
 static const u8 sText_PlayerBattledToDrawTrainer1[] = _("You battled to a draw against {B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
@@ -2760,21 +2755,21 @@ static void GetBattlerNick(u32 battler, u8 *dst)
     StringGet_Nickname(dst);
 }
 
-#define HANDLE_NICKNAME_STRING_CASE(battler)                          \
-    GetBattlerNick(battler, text);                                    \
-    toCpy = text;                                                     \
-        while (*toCpy != EOS)                                         \
-        {                                                             \
-            dst[dstID] = *toCpy;                                      \
-            dstID++;                                                  \
-            toCpy++;                                                  \
-        }                                                             \
-    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                     \
-    {                                                                 \
-        if (EsContraEntrenador())               \
-            toCpy = sText_FoePkmnPrefix;                              \
-        else                                                          \
-            toCpy = sText_WildPkmnPrefix;                             \
+#define HANDLE_NICKNAME_STRING_CASE(battler)                            \
+    GetBattlerNick(battler, text);                                      \
+    toCpy = text;                                                       \
+        while (*toCpy != EOS)                                           \
+        {                                                               \
+            dst[dstID] = *toCpy;                                        \
+            dstID++;                                                    \
+            toCpy++;                                                    \
+        }                                                               \
+    if (GetBattlerSide(battler) != B_SIDE_PLAYER)                       \
+    {                                                                   \
+        if (EsContraEntrenador())                                       \
+            toCpy = sText_FoePkmnPrefix;                                \
+        else                                                            \
+            toCpy = sText_WildPkmnPrefix;                               \
     }
 
 static const u8 *BattleStringGetOpponentNameByTrainerId(u16 trainerId, u8 *text, u8 multiplayerId, u8 battler)
@@ -3015,17 +3010,6 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 else
                     toCpy = sText_FoePkmnPrefix4;
                 break;
-            case B_TXT_TRAINER2_CLASS:
-                toCpy = BattleStringGetOpponentClassByTrainerId(gTrainerBattleOpponent_B);
-                break;
-            case B_TXT_TRAINER2_NAME:
-                toCpy = BattleStringGetOpponentNameByTrainerId(gTrainerBattleOpponent_B, text, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
-                break;
-            case B_TXT_TRAINER2_LOSE_TEXT:
-                toCpy = GetTrainerBLoseText();
-                break;
-            case B_TXT_TRAINER2_WIN_TEXT:
-                break;
             case B_TXT_PARTNER_CLASS:
                 toCpy = gTrainerClasses[GetFrontierOpponentClass(gPartnerTrainerId)].name;
                 break;
@@ -3090,8 +3074,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 }
             }
 
-            if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER2_LOSE_TEXT
-                || *src == B_TXT_TRAINER1_WIN_TEXT || *src == B_TXT_TRAINER2_WIN_TEXT)
+            if (*src == B_TXT_TRAINER1_LOSE_TEXT || *src == B_TXT_TRAINER1_WIN_TEXT)
             {
                 dst[dstID] = EXT_CTRL_CODE_BEGIN;
                 dstID++;

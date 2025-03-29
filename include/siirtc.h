@@ -13,12 +13,12 @@
 #define MINUTOS_POR_HORA    60
 #define SEGUNDOS_POR_MINUTO  60
 
-enum
+enum Meses
 {
-    MONTH_JAN = 1,
-    MONTH_FEB,
-    MONTH_MAR,
-    MONTH_APR,
+    ENERO = 1,
+    FEBRERO,
+    MARZO,
+    ABRIL,
     MONTH_MAY,
     MONTH_JUN,
     MONTH_JUL,

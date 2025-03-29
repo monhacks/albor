@@ -1510,7 +1510,7 @@ static void VBlankCB_PokeStorage(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     // Instead of transferring the entire palette buffer, transfer bg and non-dynamic palettes
-    if (sPaletteSwapBuffer && !gFundidoPaletas.transferenciaBufferDeshabilitada && !gFundidoPaletas.activo&& !sStorage->transferWholePlttFrames)
+    if (sPaletteSwapBuffer && !gFundidoPaletas.transferenciaBufferDeshabilitada && !gFundidoPaletas.activo && !sStorage->transferWholePlttFrames)
     {
         RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
         // Skip the 12-1 palettes that are being dynamically swapped anyway
@@ -1641,7 +1641,7 @@ static void HBlankCB_PokeStorage(void)
 {
     u8 vCount = REG_VCOUNT;
     u32 i;
-    if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gFundidoPaletas.activo&& gFundidoPaletas.y == 16 && gFundidoPaletas.modo == 2)) // FUNDIDO_HARDWARE
+    if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gFundidoPaletas.activo && gFundidoPaletas.y == 16 && gFundidoPaletas.modo == FUNDIDO_HARDWARE))
         return;
     // For each row in the pc box
     for (i = 0; i < IN_BOX_ROWS; i++)
@@ -2951,7 +2951,7 @@ static void Task_NameBox(u8 taskId)
     {
     case 0:
         SaveMovingMon();
-        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:
@@ -2974,7 +2974,7 @@ static void Task_ShowMonSummary(u8 taskId)
     {
     case 0:
         InitSummaryScreenData();
-        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:
@@ -2996,7 +2996,7 @@ static void Task_GiveItemFromBag(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:

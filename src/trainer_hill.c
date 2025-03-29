@@ -463,9 +463,7 @@ void FillHillTrainerParty(void)
 
 void FillHillTrainersParties(void)
 {
-    ZeroEnemyPartyMons();
-    CreateNPCTrainerHillParty(gTrainerBattleOpponent_A, 0);
-    CreateNPCTrainerHillParty(gTrainerBattleOpponent_B, PARTY_SIZE / 2);
+
 }
 
 u8 GetTrainerEncounterMusicIdInTrainerHill(u16 trainerId)

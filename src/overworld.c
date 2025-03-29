@@ -96,7 +96,7 @@ COMMON_DATA u16 *gOverworldTilemapBuffer_Bg3 = NULL;
 COMMON_DATA void (*gFieldCallback)(void) = NULL;
 COMMON_DATA bool8 (*gFieldCallback2)(void) = NULL;
 
-u8 gTimeOfDay;
+u32 gHoraDelDia;
 struct ConfiguracionBlendHora blendHoraActual;
 u16 gTimeUpdateCounter; // playTimeVBlanks will eventually overflow, so this is used to update TOD
 
@@ -1242,62 +1242,53 @@ const struct ConfiguracionBlend gBlendHoraDia[] =
     [TIEMPO_NOCHE]      = {.coeficiente = 10, .colorBlend = RGB_AZUL_MARINO},
 };
 
-u8 UpdateTimeOfDay(void) 
+void UpdateTimeOfDay(void) 
 {
-    s32 hours, minutes;
     RtcCalcLocalTime();
-    hours = gLocalTime.hours;
-    minutes = gLocalTime.minutes;
-    if (hours < HORA_INICIO_MANANA)
+    s32 horas = gLocalTime.hours;
+    s32 minutos = gLocalTime.minutes;
+    s32 tiempoMin = horas * MINUTOS_POR_HORA + minutos;
+
+    if (horas < HORA_INICIO_MANANA || horas >= HORA_FINAL_TARDE)
     {
         blendHoraActual.intensidad = 256;
         blendHoraActual.intensidadRelativa = 0;
-        gTimeOfDay = blendHoraActual.tiempoInicial = blendHoraActual.tiempoFinal = TIEMPO_NOCHE;
+        gHoraDelDia = blendHoraActual.tiempoInicial = blendHoraActual.tiempoFinal = TIEMPO_NOCHE;
     }
-    else if (hours < HORA_MEDIA_MANANA)
+    else if (horas < HORA_MEDIA_MANANA)
     {
         blendHoraActual.tiempoInicial = TIEMPO_NOCHE;
         blendHoraActual.tiempoFinal = TIEMPO_MANANA;
-        blendHoraActual.intensidad = 256 - 256 * ((hours - HORA_INICIO_MANANA) * MINUTOS_POR_HORA + (minutes / 2)) / ((HORA_MEDIA_MANANA - HORA_INICIO_MANANA) * MINUTOS_POR_HORA);
-        blendHoraActual.intensidadRelativa = (256 - blendHoraActual.intensidad) / 2;
-        gTimeOfDay = TIEMPO_MANANA;
+        blendHoraActual.intensidad = 256 - 256 * (tiempoMin - HORA_INICIO_MANANA * MINUTOS_POR_HORA) / ((HORA_MEDIA_MANANA - HORA_INICIO_MANANA) * MINUTOS_POR_HORA);
+        gHoraDelDia = TIEMPO_MANANA;
     }
-    else if (hours < HORA_FINAL_MANANA)
+    else if (horas < HORA_FINAL_MANANA)
     {
         blendHoraActual.tiempoInicial = TIEMPO_MANANA;
         blendHoraActual.tiempoFinal = TIEMPO_DIA;
-        blendHoraActual.intensidad = 256 - 256 * ((hours - HORA_MEDIA_MANANA) * MINUTOS_POR_HORA + minutes) / ((HORA_FINAL_MANANA - HORA_MEDIA_MANANA) * MINUTOS_POR_HORA);
-        blendHoraActual.intensidadRelativa = (256 - blendHoraActual.intensidad) / 2;
-        gTimeOfDay = TIEMPO_MANANA;
+        blendHoraActual.intensidad = 256 - 256 * (tiempoMin - HORA_MEDIA_MANANA * MINUTOS_POR_HORA) / ((HORA_FINAL_MANANA - HORA_MEDIA_MANANA) * MINUTOS_POR_HORA);
+        gHoraDelDia = TIEMPO_MANANA;
     }
-    else if (hours < HORA_FINAL_DIA)
+    else if (horas < HORA_FINAL_DIA)
     {
         blendHoraActual.intensidad = blendHoraActual.intensidadRelativa = 256;
-        gTimeOfDay = blendHoraActual.tiempoInicial = blendHoraActual.tiempoFinal = TIEMPO_DIA;
+        gHoraDelDia = blendHoraActual.tiempoInicial = blendHoraActual.tiempoFinal = TIEMPO_DIA;
     }
-    else if (hours < HORA_MEDIA_TARDE)
+    else if (horas < HORA_MEDIA_TARDE)
     {
         blendHoraActual.tiempoInicial = TIEMPO_DIA;
         blendHoraActual.tiempoFinal = TIEMPO_TARDE;
-        blendHoraActual.intensidad = 256 - 256 * ((hours - HORA_FINAL_DIA) * MINUTOS_POR_HORA + minutes) / ((HORA_MEDIA_TARDE - HORA_FINAL_DIA) * MINUTOS_POR_HORA);
-        blendHoraActual.intensidadRelativa = (256 - blendHoraActual.intensidad) / 2;
-        gTimeOfDay = TIEMPO_TARDE;
+        blendHoraActual.intensidad = 256 - 256 * (tiempoMin - HORA_FINAL_DIA * MINUTOS_POR_HORA) / ((HORA_MEDIA_TARDE - HORA_FINAL_DIA) * MINUTOS_POR_HORA);
+        gHoraDelDia = TIEMPO_TARDE;
     }
-    else if (hours < HORA_FINAL_TARDE)
+    else
     {
         blendHoraActual.tiempoInicial = TIEMPO_TARDE;
         blendHoraActual.tiempoFinal = TIEMPO_NOCHE;
-        blendHoraActual.intensidad = 256 - 256 * ((hours - HORA_MEDIA_TARDE) * MINUTOS_POR_HORA + minutes) / ((HORA_FINAL_TARDE - HORA_MEDIA_TARDE) * MINUTOS_POR_HORA);
-        blendHoraActual.intensidadRelativa = (256 - blendHoraActual.intensidad) / 2;
-        gTimeOfDay = TIEMPO_TARDE;
+        blendHoraActual.intensidad = 256 - 256 * (tiempoMin - HORA_MEDIA_TARDE * MINUTOS_POR_HORA) / ((HORA_FINAL_TARDE - HORA_MEDIA_TARDE) * MINUTOS_POR_HORA);
+        gHoraDelDia = TIEMPO_TARDE;
     }
-    else 
-    {
-        blendHoraActual.intensidad = 256;
-        blendHoraActual.intensidadRelativa = 0;
-        gTimeOfDay = blendHoraActual.tiempoInicial = blendHoraActual.tiempoFinal = TIEMPO_NOCHE;
-    }
-    return gTimeOfDay;
+    blendHoraActual.intensidadRelativa = (256 - blendHoraActual.intensidad) / 2;
 }
 
 bool32 MapaTieneLuzNatural(u8 mapType) 
@@ -1341,17 +1332,17 @@ void UpdatePalettesWithTime(u32 palettes)
 {
     if (MapaTieneLuzNatural(gMapHeader.mapType)) 
     {
-    u32 i;
-    u32 mask = 1 << 16;
-    if (palettes >= 65536)
-        for (i = 0; i < 16; i++, mask <<= 1)
-            if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
-                palettes &= ~(mask);
+        u32 i;
+        u32 mask = 1 << 16;
+        if (palettes >= 65536)
+            for (i = 0; i < 16; i++, mask <<= 1)
+                if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
+                    palettes &= ~(mask);
 
-    palettes &= 4294909951; // Don't blend UI BG palettes [13,15]
-    if (!palettes)
-        return;
-    TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
+        palettes &= 4294909951; // Don't blend UI BG palettes [13,15]
+        if (!palettes)
+            return;
+        TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
     }
 }
 
@@ -1380,7 +1371,7 @@ void OverworldBasic(void)
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
     // Every minute if no palette fade is active, update TOD blending as needed
-    if (!gFundidoPaletas.activo&& ++gTimeUpdateCounter >= 180) 
+    if (!gFundidoPaletas.activo && ++gTimeUpdateCounter >= 180) 
     {
         struct ConfiguracionBlendHora configuracionBlendGuardada = 
         {
@@ -1451,7 +1442,7 @@ void CB2_NewGame(void)
     StopMapMusic();
     NewGameInitData();
     ResetInitialPlayerAvatarState();
-    PlayTimeCounter_Start();
+    ContadorTiempoJuego_Empezar();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gFieldCallback = ExecuteTruckSequence;
@@ -1576,7 +1567,7 @@ void CB2_ContinueSavedGame(void)
     DoTimeBasedEvents();
     ChooseAmbientCrySpecies();
     InitMapFromSavedGame();
-    PlayTimeCounter_Start();
+    ContadorTiempoJuego_Empezar();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;

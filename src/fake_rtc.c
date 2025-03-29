@@ -3,17 +3,16 @@
 #include "strings.h"
 #include "text.h"
 #include "rtc.h"
-#include "fake_rtc.h"
 #include "event_data.h"
 
-struct Time *FakeRtc_GetCurrentTime(void)
+struct Time *HoraActual(void)
 {
     return &gSaveBlockPtr->fakeRTC;
 }
 
 void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)
 {
-    struct Time* time = FakeRtc_GetCurrentTime();
+    struct Time* time = HoraActual();
     rtc->second = time->seconds;
     rtc->minute = time->minutes;
     rtc->hour = time->hours;
@@ -22,18 +21,12 @@ void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)
 
 void FakeRtc_TickTimeForward(void)
 {
-    if (!OW_USE_FAKE_RTC)
-        return;
-
-    if (FlagGet(OW_FLAG_PAUSE_TIME))
-        return;
-
     FakeRtc_AdvanceTimeBy(0, 0, FakeRtc_GetSecondsRatio());
 }
 
 void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
 {
-    struct Time* time = FakeRtc_GetCurrentTime();
+    struct Time* time = HoraActual();
     seconds += time->seconds;
     minutes += time->minutes;
     hours += time->hours;
@@ -61,36 +54,7 @@ void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
     time->hours = hours;
 }
 
-void FakeRtc_ManuallySetTime(u32 hour, u32 minute, u32 second)
-{
-    struct Time diff, target;
-    RtcCalcLocalTime();
-
-    target.hours = hour;
-    target.minutes = minute;
-    target.seconds = second;
-    target.days = gLocalTime.days;
-
-    CalcTimeDifference(&diff, &gLocalTime, &target);
-    FakeRtc_AdvanceTimeBy(diff.hours, diff.minutes, diff.seconds);
-}
-
 u32 FakeRtc_GetSecondsRatio(void)
 {
     return 20;
-}
-
-void Script_PauseFakeRtc(void)
-{
-    FlagSet(OW_FLAG_PAUSE_TIME);
-}
-
-void Script_ResumeFakeRtc(void)
-{
-    FlagClear(OW_FLAG_PAUSE_TIME);
-}
-
-void Script_ToggleFakeRtc(void)
-{
-    FlagToggle(OW_FLAG_PAUSE_TIME);
 }

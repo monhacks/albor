@@ -6,8 +6,6 @@
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
-#define OAM_MATRIX_COUNT 32
-
 #define sAnchorX data[6]
 #define sAnchorY data[7]
 
@@ -252,13 +250,11 @@ static const struct OamDimensions sOamDimensions[3][4] =
     },
 };
 
-// iwram bss
 static u16 sSpriteTileRangeTags[MAX_SPRITES];
 static u16 sSpriteTileRanges[MAX_SPRITES * 2];
 static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
 static u16 sSpritePaletteTags[16];
 
-// iwram common
 COMMON_DATA u32 gOamMatrixAllocBitmap = 0;
 COMMON_DATA u8 gReservedSpritePaletteCount = 0;
 
@@ -674,32 +670,6 @@ s16 AllocSpriteTiles(u16 tileCount)
     return start;
 }
 
-u8 SpriteTileAllocBitmapOp(u16 bit, u8 op)
-{
-    u8 index = bit / 8;
-    u8 shift = bit % 8;
-    u8 val = bit % 8;
-    u8 retVal = 0;
-
-    if (op == 0)
-    {
-        val = ~(1 << val);
-        sSpriteTileAllocBitmap[index] &= val;
-    }
-    else if (op == 1)
-    {
-        val = (1 << val);
-        sSpriteTileAllocBitmap[index] |= val;
-    }
-    else
-    {
-        retVal = 1 << shift;
-        retVal &= sSpriteTileAllocBitmap[index];
-    }
-
-    return retVal;
-}
-
 void SpriteCallbackDummy(struct Sprite *sprite)
 {
 }
@@ -748,30 +718,6 @@ void RequestSpriteCopy(const u8 *src, u8 *dest, u16 size)
         sSpriteCopyRequests[sSpriteCopyRequestCount].dest = dest;
         sSpriteCopyRequests[sSpriteCopyRequestCount].size = size;
         sSpriteCopyRequestCount++;
-    }
-}
-
-void CopyFromSprites(u8 *dest)
-{
-    u32 i;
-    u8 *src = (u8 *)gSprites;
-    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
-    {
-        *dest = *src;
-        dest++;
-        src++;
-    }
-}
-
-void CopyToSprites(u8 *src)
-{
-    u32 i;
-    u8 *dest = (u8 *)gSprites;
-    for (i = 0; i < sizeof(struct Sprite) * MAX_SPRITES; i++)
-    {
-        *dest = *src;
-        src++;
-        dest++;
     }
 }
 

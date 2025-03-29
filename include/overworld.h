@@ -9,15 +9,6 @@ struct InitialPlayerAvatarState
   u8 direction;
 };
 
-struct ConfiguracionBlendHora
-{
-  u16 intensidad:9; //0-256, 9 bits
-  u16 tiempoFinal:3;
-  u16 tiempoInicial:3;
-  u16 sinUso:1;
-  u16 intensidadRelativa;
-};
-
 extern struct WarpData gLastUsedWarp;
 
 extern u16 *gOverworldTilemapBuffer_Bg2;
@@ -25,7 +16,7 @@ extern u16 *gOverworldTilemapBuffer_Bg1;
 extern u16 *gOverworldTilemapBuffer_Bg3;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
-extern u8 gTimeOfDay;
+extern u32 gHoraDelDia;
 extern u16 gTimeUpdateCounter;
 
 extern struct ConfiguracionBlendHora blendHoraActual;
@@ -106,7 +97,7 @@ u8 GetCurrentMapBattleScene(void);
 void CleanupOverworldWindowsAndTilemaps(void);
 void CB1_Overworld(void);
 void OverworldBasic(void);
-u8 UpdateTimeOfDay(void);
+void UpdateTimeOfDay(void);
 bool32 MapaTieneLuzNatural(u8 mapType);
 void UpdateAltBgPalettes(u16 palettes);
 void UpdatePalettesWithTime(u32);
@@ -124,12 +115,12 @@ void CB2_ReturnToFieldContinueScriptPlayMapMusic(void);
 void CB2_ReturnToFieldFadeFromBlack(void);
 void CB2_ContinueSavedGame(void);
 
-// Item Description Headers
 enum ItemObtainFlags
 {
   FLAG_GET_ITEM_OBTAINED,
   FLAG_SET_ITEM_OBTAINED,
 };
+
 bool8 GetSetItemObtained(u16 item, enum ItemObtainFlags caseId);
 
 #endif // GUARD_OVERWORLD_H

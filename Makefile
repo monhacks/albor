@@ -11,9 +11,9 @@ BUILD_DIR := build
 # Default make rule
 all: rom
 
-TOOLCHAIN := /usr/local/Cellar/arm-none-eabi-gcc
+TOOLCHAIN := /usr/local/bin
 
-PREFIX := arm-none-eabi-
+PREFIX := $(TOOLCHAIN)/
 OBJCOPY := $(PREFIX)objcopy
 OBJDUMP := $(PREFIX)objdump
 AS := $(PREFIX)as

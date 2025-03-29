@@ -1287,17 +1287,6 @@ static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
     }
 }
 
-void RemoveAllObjectEventsExceptPlayer(void)
-{
-    u8 i;
-
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-    {
-        if (i != gPlayerAvatar.objectEventId)
-            RemoveObjectEvent(&gObjectEvents[i]);
-    }
-}
-
 static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;
@@ -1887,7 +1876,7 @@ bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u
     case MSG_COND_TIME_OF_DAY:
         // Must match time of day, have natural light on the map,
         // and not have weather that obscures the sky
-        return (cond->data.raw == gTimeOfDay && MapaTieneLuzNatural(gMapHeader.mapType) && GetCurrentWeather() < WEATHER_RAIN);
+        return (cond->data.raw == gHoraDelDia && MapaTieneLuzNatural(gMapHeader.mapType) && GetCurrentWeather() < WEATHER_RAIN);
     case MSG_COND_NEAR_MB:
         multi = FindMetatileBehaviorWithinRange(obj->currentCoords.x,
                                                 obj->currentCoords.y,
@@ -2130,7 +2119,7 @@ void UpdateLightSprite(struct Sprite *sprite)
         return;
     }
 
-    if (gTimeOfDay != TIEMPO_NOCHE) 
+    if (gHoraDelDia != TIEMPO_NOCHE) 
     {
         sprite->invisible = TRUE;
         return;

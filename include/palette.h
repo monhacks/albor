@@ -25,6 +25,14 @@ struct ConfiguracionBlend
   u32 coeficiente:5;
 };
 
+struct ConfiguracionBlendHora
+{
+  struct ConfiguracionBlend hora1;
+  struct ConfiguracionBlend hora2;
+  u16 intensidad;
+  u16 altWeight;
+};
+
 enum Fundidos
 {
   FUNDIDO_DESDE_NEGRO,

@@ -5517,7 +5517,7 @@ BattleScript_LocalBattleLostPrintTrainersWinText::
 	waitstate
 	trainerslidein BS_OPPONENT1
 	waitstate
-	printstring STRINGID_TRAINER1WINTEXT
+	printstring TEXTO_BATALLA_VICTORIA_ENTRENADOR
 	goto BattleScript_LocalBattleLostEnd_
 BattleScript_LocalBattleLostEnd_::
 	end2

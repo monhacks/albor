@@ -643,7 +643,7 @@ static void ApplyDroughtColorMapWithBlend(s8 colorMapIndex, u8 blendCoeff, u32 b
 static void ApplyFogBlend(u8 blendCoeff, u32 blendColor)
 {
     u32 curPalIndex;
-    u16 fogCoeff = min((gTimeOfDay + 1) * 4, 12);
+    u16 fogCoeff = min((gHoraDelDia + 1) * 4, 12);
 
     // First blend all palettes with time
     UpdateAltBgPalettes(PALETTES_BG);
@@ -771,8 +771,8 @@ void FadeScreen(u8 mode, s8 delay)
             {
                 UpdateAltBgPalettes(PALETTES_BG);
                 BeginTimeOfDayPaletteFade(PALETTES_ALL, delay, 16, 0,
-                (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial],
-                (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal],
+                &blendHoraActual.hora1,
+                &blendHoraActual.hora2,
                 blendHoraActual.intensidad, fadeColor);
             } 
             else 
@@ -828,7 +828,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex, bool8 allowFog)
         { // In horizontal fog, only specific palettes should be fog-blended
             if (allowFog) 
             {
-                i = min((gTimeOfDay + 1) * 4, 12); // fog coeff, highest in day and lowest at night
+                i = min((gHoraDelDia + 1) * 4, 12); // fog coeff, highest in day and lowest at night
                 paletteIndex = PLTT_ID(paletteIndex);
                 // First blend with time
                 CpuFastCopy(gPlttBufferUnfaded + paletteIndex, gPlttBufferFaded + paletteIndex, PLTT_SIZE_4BPP);

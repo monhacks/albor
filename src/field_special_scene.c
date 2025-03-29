@@ -214,7 +214,7 @@ static void Task_HandleTruckSequence(u8 taskId)
         break;
     case 2:
         tTimer++;
-        if (!gFundidoPaletas.activo&& tTimer > 300)
+        if (!gFundidoPaletas.activo && tTimer > 300)
         {
             tTimer = 0;
             DestroyTask(tTaskId1);

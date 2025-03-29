@@ -191,16 +191,6 @@ bool8 ScrCmd_call_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotostd(struct ScriptContext *ctx)
-{
-    u8 index = ScriptReadByte(ctx);
-    const u8 **ptr = &gStdScripts[index];
-
-    if (ptr < gStdScripts_End)
-        ScriptJump(ctx, *ptr);
-    return FALSE;
-}
-
 bool8 ScrCmd_callstd(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
@@ -208,34 +198,6 @@ bool8 ScrCmd_callstd(struct ScriptContext *ctx)
 
     if (ptr < gStdScripts_End)
         ScriptCall(ctx, *ptr);
-    return FALSE;
-}
-
-bool8 ScrCmd_gotostd_if(struct ScriptContext *ctx)
-{
-    u8 condition = ScriptReadByte(ctx);
-    u8 index = ScriptReadByte(ctx);
-
-    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
-    {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScripts_End)
-            ScriptJump(ctx, *ptr);
-    }
-    return FALSE;
-}
-
-bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
-{
-    u8 condition = ScriptReadByte(ctx);
-    u8 index = ScriptReadByte(ctx);
-
-    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
-    {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScripts_End)
-            ScriptCall(ctx, *ptr);
-    }
     return FALSE;
 }
 

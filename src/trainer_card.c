@@ -1677,16 +1677,7 @@ void ShowTrainerCardInLink(u8 cardId, void (*callback)(void))
 
 static void InitTrainerCardData(void)
 {
-    u8 i;
 
-    sData->mainState = 0;
-    sData->timeColonBlinkTimer = gSaveBlockPtr->playTimeVBlanks;
-    sData->timeColonInvisible = FALSE;
-    sData->onBack = FALSE;
-    sData->flipBlendY = 0;
-    sData->cardType = GetSetCardType();
-    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
-        CopyEasyChatWord(sData->easyChatProfile[i], sData->trainerCard.easyChatProfile[i]);
 }
 
 static u8 GetSetCardType(void)

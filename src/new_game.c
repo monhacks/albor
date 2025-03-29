@@ -131,7 +131,7 @@ void NewGameInitData(void)
     ResetPokedex();
     gSaveBlockPtr->specialSaveWarpFlags = 0;
     InitPlayerTrainerId();
-    PlayTimeCounter_Reset();
+    ContadorTiempoJuego_Reset();
     ClearPokedexFlags();
     InitEventData();
     ClearSecretBases();

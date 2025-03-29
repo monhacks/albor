@@ -1,19 +1,17 @@
 #include "global.h"
 #include "play_time.h"
-#include "fake_rtc.h"
 
-enum
+enum EstadosTiempoJuego
 {
-    STOPPED,
-    RUNNING,
-    MAXED_OUT
+    TIEMPO_JUEGO_PARADO,
+    TIEMPO_JUEGO_EN_MARCHA
 };
 
-static u8 sPlayTimeCounterState;
+static u8 sEstadoContadorTiempoJuego;
 
-void PlayTimeCounter_Reset(void)
+void ContadorTiempoJuego_Reset(void)
 {
-    sPlayTimeCounterState = STOPPED;
+    sEstadoContadorTiempoJuego = TIEMPO_JUEGO_PARADO;
 
     gSaveBlockPtr->playTimeHours = 0;
     gSaveBlockPtr->playTimeMinutes = 0;
@@ -21,22 +19,17 @@ void PlayTimeCounter_Reset(void)
     gSaveBlockPtr->playTimeVBlanks = 0;
 }
 
-void PlayTimeCounter_Start(void)
+void ContadorTiempoJuego_Empezar(void)
 {
-    sPlayTimeCounterState = RUNNING;
+    sEstadoContadorTiempoJuego = TIEMPO_JUEGO_EN_MARCHA;
 
     if (gSaveBlockPtr->playTimeHours > 999)
-        PlayTimeCounter_SetToMax();
+        ContadorTiempoJuego_PonerMaximo();
 }
 
-void PlayTimeCounter_Stop(void)
+void ContadorTiempoJuego_Actualizar(void)
 {
-    sPlayTimeCounterState = STOPPED;
-}
-
-void PlayTimeCounter_Update(void)
-{
-    if (sPlayTimeCounterState != RUNNING)
+    if (sEstadoContadorTiempoJuego != TIEMPO_JUEGO_EN_MARCHA)
         return;
 
     gSaveBlockPtr->playTimeVBlanks++;
@@ -61,13 +54,11 @@ void PlayTimeCounter_Update(void)
     gSaveBlockPtr->playTimeHours++;
 
     if (gSaveBlockPtr->playTimeHours > 999)
-        PlayTimeCounter_SetToMax();
+        ContadorTiempoJuego_PonerMaximo();
 }
 
-void PlayTimeCounter_SetToMax(void)
+void ContadorTiempoJuego_PonerMaximo(void)
 {
-    sPlayTimeCounterState = MAXED_OUT;
-
     gSaveBlockPtr->playTimeHours = 999;
     gSaveBlockPtr->playTimeMinutes = 59;
     gSaveBlockPtr->playTimeSeconds = 59;

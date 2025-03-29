@@ -86,7 +86,6 @@ void AgbMain()
     InitIntrHandlers();
     m4aSoundInit();
     EnableVCountIntrAtLine150();
-    RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
@@ -108,7 +107,7 @@ void AgbMainLoop(void)
     {
         ReadKeys();
         CallCallbacks();
-        PlayTimeCounter_Update();
+        ContadorTiempoJuego_Actualizar();
         MapMusicMain();
         VBlankIntrWait();
     }
@@ -176,7 +175,7 @@ static void SeedRngWithRtc(void)
     struct SiiRtcInfo rtc;
     RtcGetInfo(&rtc);
     seconds =
-        ((HORAS_POR_DIA * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+        ((HORAS_POR_DIA * rtc->day + BCD8(rtc.hour))
         * MINUTOS_POR_HORA + BCD8(rtc.minute))
         * SEGUNDOS_POR_MINUTO + BCD8(rtc.second);
     SeedRng(seconds);

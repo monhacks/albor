@@ -1,10 +1,9 @@
 #ifndef GUARD_PLAY_TIME_H
 #define GUARD_PLAY_TIME_H
 
-void PlayTimeCounter_Reset(void);
-void PlayTimeCounter_Start(void);
-void PlayTimeCounter_Stop(void);
-void PlayTimeCounter_Update(void);
-void PlayTimeCounter_SetToMax(void);
+void ContadorTiempoJuego_Reset(void);
+void ContadorTiempoJuego_Empezar(void);
+void ContadorTiempoJuego_Actualizar(void);
+void ContadorTiempoJuego_PonerMaximo(void);
 
 #endif // GUARD_PLAY_TIME_H

@@ -6978,13 +6978,13 @@ static void Cmd_yesnoboxlearnmove(void)
         }
         break;
     case 3:
-        if (!gFundidoPaletas.activo&& gMain.callback2 == BattleMainCB2)
+        if (!gFundidoPaletas.activo && gMain.callback2 == BattleMainCB2)
         {
             gBattleScripting.learnMoveState++;
         }
         break;
     case 4:
-        if (!gFundidoPaletas.activo&& gMain.callback2 == BattleMainCB2)
+        if (!gFundidoPaletas.activo && gMain.callback2 == BattleMainCB2)
         {
             u8 movePosition = GetMoveSlotToReplace();
             if (movePosition == MAX_MON_MOVES)

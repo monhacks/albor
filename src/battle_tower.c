@@ -657,50 +657,7 @@ static void SetTowerBattleWon(void)
 
 static void SetNextFacilityOpponent(void)
 {
-    u32 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    if (lvlMode == FRONTIER_LVL_TENT)
-    {
-        SetNextBattleTentOpponent();
-    }
-    else
-    {
-        u16 id;
-        u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u16 winStreak = GetCurrentFacilityWinStreak();
-        u32 challengeNum = winStreak / FRONTIER_STAGES_PER_CHALLENGE;
-        SetFacilityPtrsGetLevel();
 
-        if (battleMode == FRONTIER_MODE_MULTIS || battleMode == FRONTIER_MODE_LINK_MULTIS)
-        {
-            id = gSaveBlockPtr->frontier.curChallengeBattleNum;
-            gTrainerBattleOpponent_A = gSaveBlockPtr->frontier.trainerIds[id * 2];
-            gTrainerBattleOpponent_B = gSaveBlockPtr->frontier.trainerIds[id * 2 + 1];
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-        }
-        else
-        {
-            s32 i;
-            while(1)
-            {
-                id = GetRandomScaledFrontierTrainerId(challengeNum, gSaveBlockPtr->frontier.curChallengeBattleNum);
-
-                // Ensure trainer wasn't previously fought in this challenge.
-                for (i = 0; i < gSaveBlockPtr->frontier.curChallengeBattleNum; i++)
-                {
-                    if (gSaveBlockPtr->frontier.trainerIds[i] == id)
-                        break;
-                }
-                if (i == gSaveBlockPtr->frontier.curChallengeBattleNum)
-                    break;
-            }
-
-            gTrainerBattleOpponent_A = id;
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            if (gSaveBlockPtr->frontier.curChallengeBattleNum + 1 < FRONTIER_STAGES_PER_CHALLENGE)
-                gSaveBlockPtr->frontier.trainerIds[gSaveBlockPtr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
-        }
-    }
 }
 
 u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
@@ -765,9 +722,7 @@ void FillFrontierTrainerParty(u8 monsCount)
 
 void FillFrontierTrainersParties(u8 monsCount)
 {
-    ZeroEnemyPartyMons();
-    FillTrainerParty(gTrainerBattleOpponent_A, 0, monsCount);
-    FillTrainerParty(gTrainerBattleOpponent_B, 3, monsCount);
+
 }
 
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)
@@ -927,64 +882,7 @@ static void ShowPartnerCandidateMessage(void)
 
 static void LoadLinkMultiOpponentsData(void)
 {
-    s32 challengeNum;
-    u32 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u32 battleNum = gSaveBlockPtr->frontier.curChallengeBattleNum;
-    GetMultiplayerId(); // Yet another pointless function call.
 
-    switch (gSpecialVar_Result)
-    {
-    case 0:
-        if (battleMode == FRONTIER_MODE_LINK_MULTIS)
-        {
-            challengeNum = gSaveBlockPtr->frontier.towerWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-            if (IsLinkTaskFinished())
-            {
-                SendBlock(BitmaskAllOtherLinkPlayers(), &challengeNum, sizeof(challengeNum));
-                gSpecialVar_Result = 1;
-            }
-        }
-        else
-        {
-            gSpecialVar_Result = 6;
-        }
-        break;
-    case 1:
-        break;
-    case 2:
-        if (IsLinkTaskFinished())
-        {
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gSaveBlockPtr->frontier.trainerIds, sizeof(gSaveBlockPtr->frontier.trainerIds));
-            gSpecialVar_Result = 3;
-        }
-        break;
-    case 3:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            gTrainerBattleOpponent_A = gSaveBlockPtr->frontier.trainerIds[battleNum * 2];
-            gTrainerBattleOpponent_B = gSaveBlockPtr->frontier.trainerIds[battleNum * 2 + 1];
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-            if (gReceivedRemoteLinkPlayers)
-                gSpecialVar_Result = 4;
-            else
-                gSpecialVar_Result = 6;
-        }
-        break;
-    case 4:
-        SetCloseLinkCallback();
-        gSpecialVar_Result = 5;
-        break;
-    case 5:
-        if (gReceivedRemoteLinkPlayers == 0)
-        {
-            gSpecialVar_Result = 6;
-        }
-        break;
-    case 6:
-        return;
-    }
 }
 
 static void TowerTryCloseLink(void)

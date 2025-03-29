@@ -84,15 +84,6 @@
 #define MOVE_CARD_UP        (1 << 4)
 #define MOVE_CARD           (MOVE_CARD_RIGHT | MOVE_CARD_DOWN | MOVE_CARD_LEFT | MOVE_CARD_UP)
 
-// Text IDs for sBattleDomeWinTexts
-#define DOME_TEXT_NO_WINNER_YET     0
-#define DOME_TEXT_WON_USING_MOVE    1
-#define DOME_TEXT_CHAMP_USING_MOVE  2
-#define DOME_TEXT_WON_ON_FORFEIT    3
-#define DOME_TEXT_CHAMP_ON_FORFEIT  4
-#define DOME_TEXT_WON_NO_MOVES      5
-#define DOME_TEXT_CHAMP_NO_MOVES    6
-
 // Offsets/start positions within sBattleDomeOpponentStatsTexts
 #define DOME_TEXT_TWO_GOOD_STATS   0
 #define DOME_TEXT_ONE_GOOD_STAT    15

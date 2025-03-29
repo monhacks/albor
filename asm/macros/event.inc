@@ -26,22 +26,16 @@
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to destination and continues script execution from there.
 	.macro goto_if condition:req, destination:req
-	.byte 0x06
+	.byte 5
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
 	.macro call_if condition:req, destination:req
-	.byte 0x07
+	.byte 6
 	.byte \condition
 	.4byte \destination
-	.endm
-
-	@ Jumps to the script in gStdScripts at index function.
-	.macro gotostd function:req
-	.byte 0x08
-	.byte \function
 	.endm
 
 	@ callstd function names
@@ -53,20 +47,6 @@
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
 	.byte 0x09
-	.byte \function
-	.endm
-
-	@ If the result of the last comparison matches condition (see Comparison operators), jumps to the script in gStdScripts at index function.
-	.macro gotostd_if condition:req, function:req
-	.byte 0x0a
-	.byte \condition
-	.byte \function
-	.endm
-
-	@ If the result of the last comparison matches condition (see Comparison operators), calls the script in gStdScripts at index function.
-	.macro callstd_if condition:req, function:req
-	.byte 0x0b
-	.byte \condition
 	.byte \function
 	.endm
 
@@ -2033,21 +2013,6 @@
 	@ can be used in conjunection with createmon to set up a wild battle with 2 player mons vs. 1 enemy mon
 	.macro setwilddoubleflag
 	callnative ScriptSetDoubleBattleFlag
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will stop the flow of time.
-	.macro pausefakertc
-	callnative Script_PauseFakeRtc
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time.
-	.macro resumefakertc
-	callnative Script_ResumeFakeRtc
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time if paused, and stop the flow of time otherwise.
-	.macro togglefakertc
-	callnative Script_ToggleFakeRtc
 	.endm
 
 	@ ============================ @
