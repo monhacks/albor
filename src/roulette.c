@@ -1225,7 +1225,7 @@ static void Task_InitBallRoll(u8 taskId)
     // BALL_STATE_ROLLING set below
     sRoulette->ballState = sRoulette->hitSlot = sRoulette->stuckHitSlot = 0;
 
-    if (gLocalTime.hours < 13)
+    if (gHoraJuego.hours < 13)
         startAngleId = 0;
     else
         startAngleId = 1;

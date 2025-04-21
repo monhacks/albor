@@ -76,7 +76,7 @@ EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
-EWRAM_DATA u16 gFollowerSteps = 0;
+EWRAM_DATA u16 gPasosPokemon = 0;
 
 #include "data/moves_info.h"
 #include "data/abilities.h"
@@ -404,9 +404,8 @@ void ZeroBoxMonData(struct BoxPokemon *boxMon)
 
 void ZeroMonData(struct Pokemon *mon)
 {
-    u32 arg;
+    u32 arg = 0;
     ZeroBoxMonData(&mon->box);
-    arg = 0;
     SetMonData(mon, MON_DATA_STATUS, &arg);
     SetMonData(mon, MON_DATA_LEVEL, &arg);
     SetMonData(mon, MON_DATA_HP, &arg);
@@ -416,8 +415,6 @@ void ZeroMonData(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_SPEED, &arg);
     SetMonData(mon, MON_DATA_SPATK, &arg);
     SetMonData(mon, MON_DATA_SPDEF, &arg);
-    arg = MAIL_NONE;
-    SetMonData(mon, MON_DATA_MAIL, &arg);
 }
 
 void ZeroPlayerPartyMons(void)
@@ -436,12 +433,9 @@ void ZeroEnemyPartyMons(void)
 
 void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    u32 mail;
     ZeroMonData(mon);
     CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
-    mail = MAIL_NONE;
-    SetMonData(mon, MON_DATA_MAIL, &mail);
     CalculateMonStats(mon);
 }
 
@@ -477,20 +471,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlockPtr->playerTrainerId[2] << 16)
               | (gSaveBlockPtr->playerTrainerId[3] << 24);
 
-        if (P_FLAG_FORCE_NO_SHINY != 0 && FlagGet(P_FLAG_FORCE_NO_SHINY))
-        {
-            isShiny = FALSE;
-        }
-        else if (P_FLAG_FORCE_SHINY != 0 && FlagGet(P_FLAG_FORCE_SHINY))
-        {
-            isShiny = TRUE;
-        }
-        else if (P_NO_SHINIES_WITHOUT_POKEBALLS && !HasAtLeastOnePokeBall())
-        {
-            isShiny = FALSE;
-        }
-        else
-        {
             u32 totalRerolls = 0;
             if (CheckBagHasItem(ITEM_SHINY_CHARM, 1))
                 totalRerolls += I_SHINY_CHARM_ADDITIONAL_ROLLS;
@@ -506,7 +486,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             }
 
             isShiny = GET_SHINY_VALUE(value, personality) < SHINY_ODDS;
-        }
     }
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
@@ -787,35 +766,7 @@ void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level,
 
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest)
 {
-    s32 i;
-    u16 heldItem;
 
-    dest->species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
-    dest->heldItem = heldItem;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        dest->moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-
-    dest->level = GetMonData(mon, MON_DATA_LEVEL, NULL);
-    dest->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
-    dest->otId = GetMonData(mon, MON_DATA_OT_ID, NULL);
-    dest->hpEV = GetMonData(mon, MON_DATA_HP_EV, NULL);
-    dest->attackEV = GetMonData(mon, MON_DATA_ATK_EV, NULL);
-    dest->defenseEV = GetMonData(mon, MON_DATA_DEF_EV, NULL);
-    dest->speedEV = GetMonData(mon, MON_DATA_SPEED_EV, NULL);
-    dest->spAttackEV = GetMonData(mon, MON_DATA_SPATK_EV, NULL);
-    dest->spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
-    dest->friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
-    dest->hpIV = GetMonData(mon, MON_DATA_HP_IV, NULL);
-    dest->attackIV = GetMonData(mon, MON_DATA_ATK_IV, NULL);
-    dest->defenseIV = GetMonData(mon, MON_DATA_DEF_IV, NULL);
-    dest->speedIV  = GetMonData(mon, MON_DATA_SPEED_IV, NULL);
-    dest->spAttackIV  = GetMonData(mon, MON_DATA_SPATK_IV, NULL);
-    dest->spDefenseIV  = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
-    dest->abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
-    dest->personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
-    GetMonData(mon, MON_DATA_NICKNAME10, dest->nickname);
 }
 
 #define CALC_STAT(base, iv, ev, statIndex, field)               \
@@ -1309,9 +1260,6 @@ u32 GetMonData3(struct Pokemon *mon, s32 field, u8 *data)
     case MON_DATA_SPDEF:
         ret = mon->spDefense;
         break;
-    case MON_DATA_MAIL:
-        ret = 0;
-        break;
     default:
         ret = GetBoxMonData(&mon->box, field, data);
         break;
@@ -1516,9 +1464,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_PERSONALITY:
             retVal = boxMon->personality;
             break;
-        case MON_DATA_OT_ID:
-            retVal = boxMon->otId;
-            break;
         case MON_DATA_LANGUAGE:
             retVal = 0;
             break;
@@ -1607,8 +1552,6 @@ void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg)
         break;
     case MON_DATA_SPDEF:
         SET16(mon->spDefense);
-        break;
-    case MON_DATA_MAIL:
         break;
     case MON_DATA_SPECIES_OR_EGG:
         break;
@@ -2870,11 +2813,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u16 evolutionItem)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL_DIA:
-            if (GetTimeOfDay() != TIEMPO_NOCHE && evolutions[i].param <= level)
+            if (QueParteDeDiaEs() != TIEMPO_NOCHE && evolutions[i].param <= level)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL_NOCHE:
-            if (GetTimeOfDay() == TIEMPO_NOCHE && evolutions[i].param <= level)
+            if (QueParteDeDiaEs() == TIEMPO_NOCHE && evolutions[i].param <= level)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL:
@@ -3778,33 +3721,6 @@ s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
 {
     u8 nature = GetNatureFromPersonality(personality);
     return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
-}
-
-bool8 IsTradedMon(struct Pokemon *mon)
-{
-    u8 otName[PLAYER_NAME_LENGTH + 1];
-    u32 otId;
-    GetMonData(mon, MON_DATA_OT_NAME, otName);
-    otId = GetMonData(mon, MON_DATA_OT_ID, 0);
-    return IsOtherTrainer(otId, otName);
-}
-
-bool8 IsOtherTrainer(u32 otId, u8 *otName)
-{
-    if (otId ==
-        (gSaveBlockPtr->playerTrainerId[0]
-      | (gSaveBlockPtr->playerTrainerId[1] << 8)
-      | (gSaveBlockPtr->playerTrainerId[2] << 16)
-      | (gSaveBlockPtr->playerTrainerId[3] << 24)))
-    {
-        int i;
-        for (i = 0; otName[i] != EOS; i++)
-            if (otName[i] != gSaveBlockPtr->playerName[i])
-                return TRUE;
-        return FALSE;
-    }
-
-    return TRUE;
 }
 
 void MonRestorePP(struct Pokemon *mon)

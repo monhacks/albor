@@ -14,7 +14,6 @@
 enum {
     MON_DATA_PERSONALITY,
     MON_DATA_STATUS,
-    MON_DATA_OT_ID,
     MON_DATA_LANGUAGE,
     MON_DATA_SANITY_IS_BAD_EGG,
     MON_DATA_SANITY_HAS_SPECIES,
@@ -77,7 +76,6 @@ enum {
     MON_DATA_SPEED,
     MON_DATA_SPATK,
     MON_DATA_SPDEF,
-    MON_DATA_MAIL,
     MON_DATA_SPECIES_OR_EGG,
     MON_DATA_IVS,
     MON_DATA_CHAMPION_RIBBON,
@@ -202,7 +200,6 @@ struct BattlePokemon
     u32 personality;
     u32 status1;
     u32 status2;
-    u32 otId;
     u8 metLevel;
     bool8 isShiny;
 };
@@ -477,7 +474,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-extern u16 gFollowerSteps;
+extern u16 gPasosPokemon;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const struct SpeciesInfo gSpeciesInfo[];
@@ -610,8 +607,6 @@ const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFema
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor);
-bool8 IsTradedMon(struct Pokemon *mon);
-bool8 IsOtherTrainer(u32 otId, u8 *otName);
 void MonRestorePP(struct Pokemon *mon);
 void BoxMonRestorePP(struct BoxPokemon *boxMon);
 void SetMonPreventsSwitchingString(void);

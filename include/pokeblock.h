@@ -59,7 +59,6 @@ extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
 void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);
 void OpenPokeblockCaseOnFeeder(void);
-void ResetPokeblockScrollPositions(void);
 u8 CreatePokeblockCaseSprite(s16 x, s16 y, u8 subpriority);
 void ClearPokeblocks(void);
 u8 GetHighestPokeblocksFlavorLevel(const struct Pokeblock *pokeblock);

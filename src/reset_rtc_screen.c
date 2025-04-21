@@ -478,10 +478,10 @@ static void Task_ResetRtc_HandleInput(u8 taskId)
     {
         if (JOY_NEW(A_BUTTON))
         {
-            gLocalTime.days = tDays;
-            gLocalTime.hours = tHours;
-            gLocalTime.minutes = tMinutes;
-            gLocalTime.seconds = tSeconds;
+            gHoraJuego.days = tDays;
+            gHoraJuego.hours = tHours;
+            gHoraJuego.minutes = tMinutes;
+            gHoraJuego.seconds = tSeconds;
             PlaySE(SE_SELECT);
             gTasks[taskId].func = Task_ResetRtc_Exit;
             tSetTime = TRUE;
@@ -500,10 +500,10 @@ static void Task_ResetRtc_Init(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     tFinished = FALSE;
-    tDays = gLocalTime.days;
-    tHours = gLocalTime.hours;
-    tMinutes = gLocalTime.minutes;
-    tSeconds = gLocalTime.seconds;
+    tDays = gHoraJuego.days;
+    tHours = gHoraJuego.hours;
+    tMinutes = gHoraJuego.minutes;
+    tSeconds = gHoraJuego.seconds;
     tWindowId = AddWindow(&sInputTimeWindow);
     ShowChooseTimeWindow(tWindowId, tDays, tHours, tMinutes, tSeconds);
     CreateCursor(taskId);
@@ -582,10 +582,10 @@ static void Task_ShowResetRtcPrompt(u8 taskId)
             WIN_TIME,
             0,
             17,
-            gLocalTime.days,
-            gLocalTime.hours,
-            gLocalTime.minutes,
-            gLocalTime.seconds);
+            gHoraJuego.days,
+            gHoraJuego.hours,
+            gHoraJuego.minutes,
+            gHoraJuego.seconds);
 
         AddTextPrinterParameterized(WIN_TIME, FONT_NORMAL, gText_PreviousTime, 0, 33, TEXT_SKIP_DRAW, 0);
         PrintTime(
@@ -667,7 +667,7 @@ static void Task_ResetRtcScreen(u8 taskId)
         {
             ClearStdWindowAndFrameToTransparent(WIN_TIME, FALSE);
             ShowMessage(gText_PleaseResetTime);
-            gLocalTime = gSaveBlockPtr->lastBerryTreeUpdate;
+            gHoraJuego = gSaveBlockPtr->lastBerryTreeUpdate;
             tSubTaskId = CreateTask(Task_ResetRtc_Init, 80);
             tState = MAINSTATE_WAIT_SET_TIME;
         }
@@ -683,16 +683,15 @@ static void Task_ResetRtcScreen(u8 taskId)
             }
             else
             {
-                // Time has been chosen, reset rtc and save
                 DestroyTask(tSubTaskId);
-                RtcReset();
-                RtcCalcLocalTimeOffset(
-                    gLocalTime.days,
-                    gLocalTime.hours,
-                    gLocalTime.minutes,
-                    gLocalTime.seconds);
-                gSaveBlockPtr->lastBerryTreeUpdate = gLocalTime;
-                VarSet(VAR_DAYS, gLocalTime.days);
+                ReinicioTiempo();
+                CalculaHoraReferenciaJuego(
+                    gHoraJuego.days,
+                    gHoraJuego.hours,
+                    gHoraJuego.minutes,
+                    gHoraJuego.seconds);
+                gSaveBlockPtr->lastBerryTreeUpdate = gHoraJuego;
+                VarSet(VAR_DAYS, gHoraJuego.days);
                 DisableResetRTC();
                 ShowMessage(gText_ClockHasBeenReset);
                 tState = MAINSTATE_SAVE;

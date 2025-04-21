@@ -645,65 +645,7 @@ static u8 GetRubyTrainerStars(struct TrainerCard *trainerCard)
 
 static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 {
-    u32 playTime;
-    u8 i;
 
-    trainerCard->gender = gSaveBlockPtr->playerGender;
-    trainerCard->playTimeHours = gSaveBlockPtr->playTimeHours;
-    trainerCard->playTimeMinutes = gSaveBlockPtr->playTimeMinutes;
-
-    playTime = GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME);
-    if (!GetGameStat(GAME_STAT_ENTERED_HOF))
-        playTime = 0;
-
-    trainerCard->hofDebutHours = playTime >> 16;
-    trainerCard->hofDebutMinutes = (playTime >> 8) & 0xFF;
-    trainerCard->hofDebutSeconds = playTime & 0xFF;
-    if ((playTime >> 16) > 999)
-    {
-        trainerCard->hofDebutHours = 999;
-        trainerCard->hofDebutMinutes = 59;
-        trainerCard->hofDebutSeconds = 59;
-    }
-
-    trainerCard->hasPokedex = FlagGet(FLAG_SYS_POKEDEX_GET);
-    trainerCard->caughtAllHoenn = HasAllMons();
-    trainerCard->caughtMonsCount = GetCaughtMonsCount();
-
-    trainerCard->trainerId = (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
-
-    trainerCard->linkBattleWins = GetCappedGameStat(GAME_STAT_LINK_BATTLE_WINS, 9999);
-    trainerCard->linkBattleLosses = GetCappedGameStat(GAME_STAT_LINK_BATTLE_LOSSES, 9999);
-
-    trainerCard->pokemonTrades = GetCappedGameStat(GAME_STAT_POKEMON_TRADES, 0xFFFF);
-
-    trainerCard->money = GetMoney(&gSaveBlockPtr->money);
-
-    for (i = 0; i < TRAINER_CARD_PROFILE_LENGTH; i++)
-        trainerCard->easyChatProfile[i] = gSaveBlockPtr->easyChatProfile[i];
-
-    StringCopy(trainerCard->playerName, gSaveBlockPtr->playerName);
-
-    switch (cardType)
-    {
-    case CARD_TYPE_EMERALD:
-        trainerCard->battleTowerWins = 0;
-        trainerCard->battleTowerStraightWins = 0;
-    // Seems like GF got CARD_TYPE_FRLG and CARD_TYPE_RS wrong.
-    case CARD_TYPE_FRLG:
-        trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
-        trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
-        trainerCard->stars = GetRubyTrainerStars(trainerCard);
-        break;
-    case CARD_TYPE_RS:
-        trainerCard->battleTowerWins = 0;
-        trainerCard->battleTowerStraightWins = 0;
-        trainerCard->contestsWithFriends = 0;
-        trainerCard->pokeblocksWithFriends = 0;
-        trainerCard->hasAllPaintings = 0;
-        trainerCard->stars = 0;
-        break;
-    }
 }
 
 static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)

@@ -326,11 +326,6 @@ bool8 IsLinkPlayerDataExchangeComplete(void)
     return retval;
 }
 
-u32 GetLinkPlayerTrainerId(u8 who)
-{
-    return gLinkPlayers[who].trainerId;
-}
-
 void ResetLinkPlayers(void)
 {
     int i;

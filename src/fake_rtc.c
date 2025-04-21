@@ -5,56 +5,33 @@
 #include "rtc.h"
 #include "event_data.h"
 
-struct Time *HoraActual(void)
+struct Tiempo *HoraActual(void)
 {
-    return &gSaveBlockPtr->fakeRTC;
+    return &gSaveBlockPtr->horaActual;
 }
 
-void FakeRtc_GetRawInfo(struct SiiRtcInfo *rtc)
+void AvanzaSegundos(void)
 {
-    struct Time* time = HoraActual();
-    rtc->second = time->seconds;
-    rtc->minute = time->minutes;
-    rtc->hour = time->hours;
-    rtc->day = time->days;
-}
+    struct Tiempo* tiempo = HoraActual();
+    u32 segundos = tiempo->seconds + FRAMES_POR_SEGUNDO;
 
-void FakeRtc_TickTimeForward(void)
-{
-    FakeRtc_AdvanceTimeBy(0, 0, FakeRtc_GetSecondsRatio());
-}
-
-void FakeRtc_AdvanceTimeBy(u32 hours, u32 minutes, u32 seconds)
-{
-    struct Time* time = HoraActual();
-    seconds += time->seconds;
-    minutes += time->minutes;
-    hours += time->hours;
-
-    while(seconds >= SEGUNDOS_POR_MINUTO)
+    while (segundos >= SEGUNDOS_POR_MINUTO)
     {
-        minutes++;
-        seconds -= SEGUNDOS_POR_MINUTO;
+        tiempo->minutes++;
+        segundos -= SEGUNDOS_POR_MINUTO;
     }
 
-    while(minutes >= MINUTOS_POR_HORA)
+    while (tiempo->minutes >= MINUTOS_POR_HORA)
     {
-        hours++;
-        minutes -= MINUTOS_POR_HORA;
+        tiempo->hours++;
+        tiempo->minutes -= MINUTOS_POR_HORA;
     }
 
-    while(hours >= HORAS_POR_DIA)
+    while (tiempo->hours >= HORAS_POR_DIA)
     {
-        time->days++;
-        hours -= HORAS_POR_DIA;
+        tiempo->days++;
+        tiempo->hours -= HORAS_POR_DIA;
     }
 
-    time->seconds = seconds;
-    time->minutes = minutes;
-    time->hours = hours;
-}
-
-u32 FakeRtc_GetSecondsRatio(void)
-{
-    return 20;
+    tiempo->seconds = segundos;
 }

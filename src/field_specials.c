@@ -752,11 +752,6 @@ void StorePlayerCoordsInVars(void)
     gSpecialVar_0x8005 = gSaveBlockPtr->pos.y;
 }
 
-u8 GetPlayerTrainerIdOnesDigit(void)
-{
-    return (u16)((gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0]) % 10;
-}
-
 void GetPlayerBigGuyGirlString(void)
 {
     if (gSaveBlockPtr->playerGender == MALE)
@@ -793,7 +788,7 @@ void SetHiddenItemFlag(void)
 
 u16 GetWeekCount(void)
 {
-    u16 weekCount = gLocalTime.days / 7;
+    u16 weekCount = gHoraJuego.days / 7;
     if (weekCount > 9999)
         weekCount = 9999;
 
@@ -1394,18 +1389,18 @@ u16 ScriptGetPartyMonSpecies(void)
 u16 GetDaysUntilPacifidlogTMAvailable(void)
 {
     u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
-    if (gLocalTime.days - tmReceivedDay >= 7)
+    if (gHoraJuego.days - tmReceivedDay >= 7)
         return 0;
-    else if (gLocalTime.days < 0)
+    else if (gHoraJuego.days < 0)
         return 8;
 
-    return 7 - (gLocalTime.days - tmReceivedDay);
+    return 7 - (gHoraJuego.days - tmReceivedDay);
 }
 
 u16 SetPacifidlogTMReceivedDay(void)
 {
-    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
-    return gLocalTime.days;
+    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gHoraJuego.days);
+    return gHoraJuego.days;
 }
 
 bool8 MonOTNameNotPlayer(void)

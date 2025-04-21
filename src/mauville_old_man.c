@@ -112,29 +112,7 @@ static void SetupTrader(void)
 
 void SetMauvilleOldMan(void)
 {
-    u16 trainerId = (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
 
-
-    // Determine man based on the last digit of the player's trainer ID.
-    switch ((trainerId % 10) / 2)
-    {
-    case MAUVILLE_MAN_BARD:
-        SetupBard();
-        break;
-    case MAUVILLE_MAN_HIPSTER:
-        SetupHipster();
-        break;
-    case MAUVILLE_MAN_TRADER:
-        SetupTrader();
-        break;
-    case MAUVILLE_MAN_STORYTELLER:
-        SetupStoryteller();
-        break;
-    case MAUVILLE_MAN_GIDDY:
-        SetupGiddy();
-        break;
-    }
-    SetMauvilleOldManObjEventGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -154,18 +132,7 @@ void HasBardSongBeenChanged(void)
 
 void SaveBardSongLyrics(void)
 {
-    u16 i;
-    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
 
-    StringCopy(bard->playerName, gSaveBlockPtr->playerName);
-
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        bard->playerTrainerId[i] = gSaveBlockPtr->playerTrainerId[i];
-
-    for (i = 0; i < BARD_SONG_LENGTH; i++)
-        bard->songLyrics[i] = bard->temporaryLyrics[i];
-
-    bard->hasChangedSong = TRUE;
 }
 
 // Copies lyrics into gStringVar4

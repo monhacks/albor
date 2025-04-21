@@ -250,7 +250,6 @@ u8 GetLinkPlayerCount(void);
 void OpenLinkTimed(void);
 u8 GetLinkPlayerDataExchangeStatusTimed(int lower, int upper);
 bool8 IsLinkPlayerDataExchangeComplete(void);
-u32 GetLinkPlayerTrainerId(u8);
 void ResetLinkPlayers(void);
 u8 GetMultiplayerId(void);
 u8 BitmaskAllOtherLinkPlayers(void);

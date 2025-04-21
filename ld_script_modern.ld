@@ -1,8 +1,5 @@
 ENTRY(Start)
 
-gNumMusicPlayers = 4;
-gMaxLines = 0;
-
 MEMORY
 {
     EWRAM (rwx) : ORIGIN = 0x2000000, LENGTH = 256K
@@ -58,9 +55,6 @@ SECTIONS {
     .text ORIGIN(ROM) :
     ALIGN(4)
     {
-        src/rom_header.o(.text*);
-        src/rom_header_gf.o(.text.*);
-        src/rom_header_rhh.o(.text.*);
         src/crt0.o(.text);
         src/main.o(.text);
         src/*.o(.text*);
@@ -81,7 +75,6 @@ SECTIONS {
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
-        src/siirtc.o(.text);
         *libagbsyscall.a:*.o(.text*);
         *libgcc.a:*.o(.text*);
         *libc.a:*.o(.text*);
@@ -110,7 +103,6 @@ SECTIONS {
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);
         src/agb_flash_le.o(.rodata);
-        src/siirtc.o(.rodata);
         *libgcc.a:*.o(.rodata*);
         *libc.a:*.o(.rodata*);
         *libc.a:*.o(.data*);

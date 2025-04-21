@@ -858,7 +858,7 @@ static void Task_SetClock_HandleConfirmInput(u8 taskId)
 
 static void Task_SetClock_Confirmed(u8 taskId)
 {
-    RtcInitLocalTimeOffset(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
+    IniciaHoraReferenciaJuego(gTasks[taskId].tHours, gTasks[taskId].tMinutes);
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_SetClock_Exit;
 }
@@ -1005,12 +1005,12 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
 static void InitClockWithRtc(u8 taskId)
 {
     RtcCalcLocalTime();
-    gTasks[taskId].tHours = gLocalTime.hours;
-    gTasks[taskId].tMinutes = gLocalTime.minutes;
+    gTasks[taskId].tHours = gHoraJuego.hours;
+    gTasks[taskId].tMinutes = gHoraJuego.minutes;
     gTasks[taskId].tMinuteHandAngle = gTasks[taskId].tMinutes * 6;
     gTasks[taskId].tHourHandAngle = (gTasks[taskId].tHours % 12) * 30 + (gTasks[taskId].tMinutes / 10) * 5;
 
-    if (gLocalTime.hours < 12)
+    if (gHoraJuego.hours < 12)
         gTasks[taskId].tPeriod = PERIOD_AM;
     else
         gTasks[taskId].tPeriod = PERIOD_PM;

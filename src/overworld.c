@@ -872,7 +872,7 @@ u16 GetLocationMusic(struct WarpData *warp)
 {
     const struct MapHeader *mapHeader = Overworld_GetMapHeaderByGroupAndId(warp->mapGroup, warp->mapNum);
 
-    if (GetTimeOfDay() == TIEMPO_NOCHE && mapHeader->nightMusic != MUS_NONE)
+    if (QueParteDeDiaEs() == TIEMPO_NOCHE && mapHeader->nightMusic != MUS_NONE)
         return mapHeader->nightMusic;
     else
         return mapHeader->music;
@@ -1245,8 +1245,8 @@ const struct ConfiguracionBlend gBlendHoraDia[] =
 void UpdateTimeOfDay(void) 
 {
     RtcCalcLocalTime();
-    s32 horas = gLocalTime.hours;
-    s32 minutos = gLocalTime.minutes;
+    s32 horas = gHoraJuego.hours;
+    s32 minutos = gHoraJuego.minutes;
     s32 tiempoMin = horas * MINUTOS_POR_HORA + minutos;
 
     if (horas < HORA_INICIO_MANANA || horas >= HORA_FINAL_TARDE)
@@ -1442,7 +1442,6 @@ void CB2_NewGame(void)
     StopMapMusic();
     NewGameInitData();
     ResetInitialPlayerAvatarState();
-    ContadorTiempoJuego_Empezar();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gFieldCallback = ExecuteTruckSequence;
@@ -1567,7 +1566,6 @@ void CB2_ContinueSavedGame(void)
     DoTimeBasedEvents();
     ChooseAmbientCrySpecies();
     InitMapFromSavedGame();
-    ContadorTiempoJuego_Empezar();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gExitStairsMovementDisabled = TRUE;

@@ -56,7 +56,6 @@ bool32 PokenavCallback_Init_ConditionGraph_Party(void)
 
     ConditionGraph_Init(&menu->graph);
     InitPartyConditionListParameters();
-    gKeyRepeatStartDelay = 20;
     menu->callback = HandleConditionMenuInput;
     return TRUE;
 }
@@ -70,7 +69,6 @@ bool32 PokenavCallback_Init_ConditionGraph_Search(void)
 
     ConditionGraph_Init(&menu->graph);
     InitSearchResultsConditionList();
-    gKeyRepeatStartDelay = 20;
     menu->callback = HandleConditionMenuInput;
     return TRUE;
 }

@@ -2472,30 +2472,7 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
 
 static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 {
-    u8 friendship;
 
-    struct Pokemon *playerMon = &gPlayerParty[playerPartyIdx];
-    u16 playerMail = GetMonData(playerMon, MON_DATA_MAIL);
-
-    struct Pokemon *partnerMon = &gEnemyParty[partnerPartyIdx];
-    u16 partnerMail = GetMonData(partnerMon, MON_DATA_MAIL);
-
-    // The mail attached to the sent Pokémon no longer exists in your file.
-    if (playerMail != MAIL_NONE)
-        ClearMail(&gSaveBlockPtr->mail[playerMail]);
-
-    SWAP(*playerMon, *partnerMon, sTradeAnim->tempMon);
-
-    // By default, a Pokémon received from a trade will have 70 Friendship.
-    // Eggs use Friendship to track egg cycles, so don't set this on Eggs.
-    friendship = 70;
-    if (!GetMonData(playerMon, MON_DATA_IS_EGG))
-        SetMonData(playerMon, MON_DATA_FRIENDSHIP, &friendship);
-
-    if (partnerMail != MAIL_NONE)
-        GiveMailToMon(playerMon, &gTradeMail[partnerMail]);
-
-    UpdatePokedexForReceivedMon(playerPartyIdx);
 }
 
 static void HandleLinkDataSend(void)
@@ -2857,49 +2834,7 @@ u16 GetInGameTradeSpeciesInfo(void)
 
 static void CreateInGameTradePokemonInternal(u8 whichPlayerMon, u8 whichInGameTrade)
 {
-    const struct InGameTrade *inGameTrade = &sIngameTrades[whichInGameTrade];
-    u8 level = GetMonData(&gPlayerParty[whichPlayerMon], MON_DATA_LEVEL);
 
-    struct Mail mail;
-    u8 metLocation = METLOC_IN_GAME_TRADE;
-    u8 mailNum;
-    struct Pokemon *pokemon = &gEnemyParty[0];
-
-    CreateMon(pokemon, inGameTrade->species, level, USE_RANDOM_IVS, TRUE, inGameTrade->personality, OT_ID_PRESET, inGameTrade->otId);
-
-    SetMonData(pokemon, MON_DATA_HP_IV, &inGameTrade->ivs[0]);
-    SetMonData(pokemon, MON_DATA_ATK_IV, &inGameTrade->ivs[1]);
-    SetMonData(pokemon, MON_DATA_DEF_IV, &inGameTrade->ivs[2]);
-    SetMonData(pokemon, MON_DATA_SPEED_IV, &inGameTrade->ivs[3]);
-    SetMonData(pokemon, MON_DATA_SPATK_IV, &inGameTrade->ivs[4]);
-    SetMonData(pokemon, MON_DATA_SPDEF_IV, &inGameTrade->ivs[5]);
-    SetMonData(pokemon, MON_DATA_NICKNAME, inGameTrade->nickname);
-    SetMonData(pokemon, MON_DATA_OT_NAME, inGameTrade->otName);
-    SetMonData(pokemon, MON_DATA_ABILITY_NUM, &inGameTrade->abilityNum);
-    SetMonData(pokemon, MON_DATA_BEAUTY, &inGameTrade->conditions[1]);
-    SetMonData(pokemon, MON_DATA_CUTE, &inGameTrade->conditions[2]);
-    SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->conditions[0]);
-    SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->conditions[3]);
-    SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
-    SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
-    SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
-
-    mailNum = 0;
-    if (inGameTrade->heldItem != ITEM_NONE)
-    {
-        if (ItemIsMail(inGameTrade->heldItem))
-        {
-            GetInGameTradeMail(&mail, inGameTrade);
-            gTradeMail[0] = mail;
-            SetMonData(pokemon, MON_DATA_MAIL, &mailNum);
-            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
-        }
-        else
-        {
-            SetMonData(pokemon, MON_DATA_HELD_ITEM, &inGameTrade->heldItem);
-        }
-    }
-    CalculateMonStats(&gEnemyParty[0]);
 }
 
 static void GetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trade)

@@ -842,12 +842,6 @@ static void SwapPokeblockMenuItems(u32 id1, u32 id2)
     Free(copyPokeblock1);
 }
 
-void ResetPokeblockScrollPositions(void)
-{
-    sSavedPokeblockData.selectedRow = 0;
-    sSavedPokeblockData.scrollOffset = 0;
-}
-
 static void SetMenuItemsCountAndMaxShowed(void)
 {
     u16 i;

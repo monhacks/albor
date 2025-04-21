@@ -693,59 +693,7 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 
 void FillFactoryBrainParty(void)
 {
-    int i, j, k;
-    u16 species[FRONTIER_PARTY_SIZE];
-    u16 heldItems[FRONTIER_PARTY_SIZE];
-    int monLevel;
-    u8 fixedIV;
-    u32 otId;
 
-    u8 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlockPtr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
-    fixedIV = GetFactoryMonFixedIV(challengeNum + 2, FALSE);
-    monLevel = SetFacilityPtrsGetLevel();
-    i = 0;
-    otId = T1_READ_32(gSaveBlockPtr->playerTrainerId);
-
-    while (i != FRONTIER_PARTY_SIZE)
-    {
-        u16 monId = GetFactoryMonId(lvlMode, challengeNum, FALSE);
-
-        if (monLevel == FRONTIER_MAX_LEVEL_50 && monId > FRONTIER_MONS_HIGH_TIER)
-            continue;
-
-        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlockPtr->frontier.rentalMons); j++)
-        {
-            if (monId == gSaveBlockPtr->frontier.rentalMons[j].monId)
-                break;
-        }
-        if (j != (int)ARRAY_COUNT(gSaveBlockPtr->frontier.rentalMons))
-            continue;
-
-        for (k = 0; k < i; k++)
-        {
-            if (species[k] == gFacilityTrainerMons[monId].species)
-                break;
-        }
-        if (k != i)
-            continue;
-
-        for (k = 0; k < i; k++)
-        {
-            if (heldItems[k] != ITEM_NONE && heldItems[k] == gFacilityTrainerMons[monId].heldItem)
-                break;
-        }
-        if (k != i)
-            continue;
-
-        species[i] = gFacilityTrainerMons[monId].species;
-        heldItems[i] = gFacilityTrainerMons[monId].heldItem;
-        CreateFacilityMon(&gFacilityTrainerMons[monId],
-                monLevel, fixedIV, otId, FLAG_FRONTIER_MON_FACTORY,
-                &gEnemyParty[i]);
-        i++;
-    }
 }
 
 static u16 GetFactoryMonId(u8 lvlMode, u8 challengeNum, bool8 useBetterRange)

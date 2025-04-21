@@ -57,21 +57,7 @@ void SetLilycoveLadyGfx(void)
 
 void InitLilycoveLady(void)
 {
-    u16 id = ((gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0]);
-    id %= 6;
-    id >>= 1;
-    switch (id)
-    {
-    case LILYCOVE_LADY_QUIZ:
-        InitLilycoveQuizLady();
-        break;
-    case LILYCOVE_LADY_FAVOR:
-        InitLilycoveFavorLady();
-        break;
-    case LILYCOVE_LADY_CONTEST:
-        InitLilycoveContestLady();
-        break;
-    }
+
 }
 
 // Unused
@@ -287,26 +273,7 @@ static void QuizLadyPickQuestion(void)
 
 static void InitLilycoveQuizLady(void)
 {
-    u8 i;
 
-    sQuizLadyPtr = &gSaveBlockPtr->lilycoveLady.quiz;
-    sQuizLadyPtr->id = LILYCOVE_LADY_QUIZ;
-    sQuizLadyPtr->state = LILYCOVE_LADY_STATE_READY;
-
-    for (i = 0; i < QUIZ_QUESTION_LEN; i ++)
-        sQuizLadyPtr->question[i] = EC_EMPTY_WORD;
-
-    sQuizLadyPtr->correctAnswer = EC_EMPTY_WORD;
-    sQuizLadyPtr->playerAnswer = EC_EMPTY_WORD;
-
-    for (i = 0; i < TRAINER_ID_LENGTH; i ++)
-        sQuizLadyPtr->playerTrainerId[i] = 0;
-
-    sQuizLadyPtr->prize = ITEM_NONE;
-    sQuizLadyPtr->waitingForChallenger = FALSE;
-    sQuizLadyPtr->prevQuestionId = ARRAY_COUNT(sQuizLadyQuizQuestions);
-    sQuizLadyPtr->language = gGameLanguage;
-    QuizLadyPickQuestion();
 }
 
 u8 GetQuizLadyState(void)
@@ -389,20 +356,7 @@ static u8 BufferQuizAuthorName(void)
 
 static bool8 IsQuizTrainerIdNotPlayer(void)
 {
-    bool8 notPlayer;
-    u8 i;
 
-    sQuizLadyPtr = &gSaveBlockPtr->lilycoveLady.quiz;
-    notPlayer = FALSE;
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-    {
-        if (sQuizLadyPtr->playerTrainerId[i] != gSaveBlockPtr->playerTrainerId[i])
-        {
-            notPlayer = TRUE;
-            break;
-        }
-    }
-    return notPlayer;
 }
 
 static u8 GetPlayerNameLength(const u8 *playerName)
@@ -511,14 +465,7 @@ void QuizLadyTakePrizeForCustomQuiz(void)
 
 void QuizLadyRecordCustomQuizData(void)
 {
-    u8 i;
 
-    sQuizLadyPtr = &gSaveBlockPtr->lilycoveLady.quiz;
-    sQuizLadyPtr->prize = gSpecialVar_ItemId;
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        sQuizLadyPtr->playerTrainerId[i] = gSaveBlockPtr->playerTrainerId[i];
-    StringCopy_PlayerName(sQuizLadyPtr->playerName, gSaveBlockPtr->playerName);
-    sQuizLadyPtr->language = gGameLanguage;
 }
 
 void QuizLadySetWaitingForChallenger(void)

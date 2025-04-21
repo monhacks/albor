@@ -745,13 +745,6 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
         dst[0] = GetMonData(&party[monId], MON_DATA_PP1 + gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE);
         size = 1;
         break;
-    case REQUEST_OTID_BATTLE:
-        data32 = GetMonData(&party[monId], MON_DATA_OT_ID);
-        dst[0] = (data32 & 0x000000FF);
-        dst[1] = (data32 & 0x0000FF00) >> 8;
-        dst[2] = (data32 & 0x00FF0000) >> 16;
-        size = 3;
-        break;
     case REQUEST_EXP_BATTLE:
         data32 = GetMonData(&party[monId], MON_DATA_EXP);
         dst[0] = (data32 & 0x000000FF);
@@ -1029,9 +1022,6 @@ static void SetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId)
     case REQUEST_PPMOVE3_BATTLE:
     case REQUEST_PPMOVE4_BATTLE:
         SetMonData(&party[monId], MON_DATA_PP1 + gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE, &gBattleResources->bufferA[battler][3]);
-        break;
-    case REQUEST_OTID_BATTLE:
-        SetMonData(&party[monId], MON_DATA_OT_ID, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_EXP_BATTLE:
         SetMonData(&party[monId], MON_DATA_EXP, &gBattleResources->bufferA[battler][3]);

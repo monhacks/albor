@@ -1579,7 +1579,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
     struct Pokemon *mon = GetFirstLiveMon();
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
-        if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
+        if (gSpeciesInfo[species].brilla && QueParteDeDiaEs() == TIEMPO_NOCHE)
             LoadCompressedSpritePaletteWithTag(palette, species);
         else
             LoadCompressedSpritePaletteWithTagHueShifted(palette, species, GetMonData(mon, MON_DATA_PERSONALITY));
@@ -4843,11 +4843,11 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
         PlaySE(SE_M_MINIMIZE);
         return TRUE;
     }
-    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() == TIEMPO_NOCHE)
+    else if (gSpeciesInfo[species].transparente && QueParteDeDiaEs() == TIEMPO_NOCHE)
     {
         sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
     }
-    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
+    else if (gSpeciesInfo[species].transparente && QueParteDeDiaEs() != TIEMPO_NOCHE)
     {
         sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     }

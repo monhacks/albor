@@ -58,9 +58,7 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-COMMON_DATA u16 gKeyRepeatStartDelay = 0;
 COMMON_DATA struct Main gMain = {0};
-COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
 COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u32 IntrMain_Buffer[512] = {0};
@@ -89,7 +87,7 @@ void AgbMain()
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
-    SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
+    SeedRngWithRtc();
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
@@ -156,11 +154,6 @@ void SeedRngAndSetTrainerId(void)
     sTrainerId = Random();
 }
 
-u16 GetGeneratedTrainerIdLower(void)
-{
-    return sTrainerId;
-}
-
 void EnableVCountIntrAtLine150(void)
 {
     u16 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
@@ -173,7 +166,7 @@ static void SeedRngWithRtc(void)
     #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
     u32 seconds;
     struct SiiRtcInfo rtc;
-    RtcGetInfo(&rtc);
+    QueFechaEs(&rtc);
     seconds =
         ((HORAS_POR_DIA * rtc->day + BCD8(rtc.hour))
         * MINUTOS_POR_HORA + BCD8(rtc.minute))
@@ -184,9 +177,6 @@ static void SeedRngWithRtc(void)
 
 void InitKeys(void)
 {
-    gKeyRepeatContinueDelay = 3;
-    gKeyRepeatStartDelay = 30;
-
     gMain.heldKeys = 0;
     gMain.newKeys = 0;
     gMain.newAndRepeatedKeys = 0;
@@ -212,13 +202,13 @@ static void ReadKeys(void)
         if (gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
-            gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
+            gMain.keyRepeatCounter = INTERVALO_REPETICION_TECLA;
         }
     }
     else
     {
         // If there is no input or the input has changed, reset the counter.
-        gMain.keyRepeatCounter = gKeyRepeatStartDelay;
+        gMain.keyRepeatCounter = RETRASO_REPETICION_TECLA;
     }
 
     gMain.heldKeysRaw = keyInput;
@@ -252,6 +242,7 @@ void InitIntrHandlers(void)
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
     SetSerialCallback(NULL);
+    SetVCountCallback(NULL);
 
     REG_IME = 1;
 
@@ -268,20 +259,14 @@ void SetHBlankCallback(IntrCallback callback)
     gMain.hblankCallback = callback;
 }
 
-void SetVCountCallback(IntrCallback callback)
-{
-    gMain.vcountCallback = callback;
-}
-
-void RestoreSerialTimer3IntrHandlers(void)
-{
-    gIntrTable[1] = SerialIntr;
-    gIntrTable[2] = Timer3Intr;
-}
-
 void SetSerialCallback(IntrCallback callback)
 {
     gMain.serialCallback = callback;
+}
+
+void SetVCountCallback(IntrCallback callback)
+{
+    gMain.vcountCallback = callback;
 }
 
 static void VBlankIntr(void)
@@ -349,7 +334,6 @@ void DoSoftReset(void)
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);
-    SiiRtcProtect();
     SoftReset(RESET_ALL);
 }
 

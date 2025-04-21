@@ -2557,72 +2557,7 @@ static void TryPutPlayerLast(void)
 
 void CreateContestMonFromParty(u8 partyIndex)
 {
-    u8 name[max(PLAYER_NAME_LENGTH + 1, POKEMON_NAME_BUFFER_SIZE)];
-    u16 heldItem;
-    s16 cool;
-    s16 beauty;
-    s16 cute;
-    s16 smart;
-    s16 tough;
 
-    StringCopy(name, gSaveBlockPtr->playerName);
-    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
-    if (gSaveBlockPtr->playerGender == MALE)
-        gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
-    else
-        gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_MAY;
-    gContestMons[gContestPlayerMonIndex].aiFlags = 0;
-    gContestMons[gContestPlayerMonIndex].highestRank = 0;
-    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
-    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
-    StringGet_Nickname(name);
-    memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, POKEMON_NAME_LENGTH + 1);
-    StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
-    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
-    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
-    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE);
-    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
-    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
-    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
-    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
-    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
-    gContestMons[gContestPlayerMonIndex].isShiny = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_SHINY);
-
-    heldItem = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
-    cool   = gContestMons[gContestPlayerMonIndex].cool;
-    beauty = gContestMons[gContestPlayerMonIndex].beauty;
-    cute   = gContestMons[gContestPlayerMonIndex].cute;
-    smart  = gContestMons[gContestPlayerMonIndex].smart;
-    tough  = gContestMons[gContestPlayerMonIndex].tough;
-    if      (heldItem == ITEM_RED_SCARF)
-        cool += 20;
-    else if (heldItem == ITEM_BLUE_SCARF)
-        beauty += 20;
-    else if (heldItem == ITEM_PINK_SCARF)
-        cute += 20;
-    else if (heldItem == ITEM_GREEN_SCARF)
-        smart += 20;
-    else if (heldItem == ITEM_YELLOW_SCARF)
-        tough += 20;
-    if (cool > 255)
-        cool = 255;
-    if (beauty > 255)
-        beauty = 255;
-    if (cute > 255)
-        cute = 255;
-    if (smart > 255)
-        smart = 255;
-    if (tough > 255)
-        tough = 255;
-    gContestMons[gContestPlayerMonIndex].cool = cool;
-    gContestMons[gContestPlayerMonIndex].beauty = beauty;
-    gContestMons[gContestPlayerMonIndex].cute = cute;
-    gContestMons[gContestPlayerMonIndex].smart = smart;
-    gContestMons[gContestPlayerMonIndex].tough = tough;
 }
 
 void SetContestants(u8 contestType, u8 rank)

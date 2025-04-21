@@ -60,7 +60,7 @@
 #define OBJ_VRAM1      (VRAM + 0x14000)
 
 #define OAM      0x7000000
-#define OAM_SIZE 0x400
+#define OAM_SIZE 1024
 
 // Dimensions of a tile in pixels
 #define TILE_WIDTH  8

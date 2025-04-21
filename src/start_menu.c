@@ -980,10 +980,10 @@ static u8 SaveDoSaveCallback(void)
 {
     IncrementGameStat(GAME_STAT_SAVED_GAME);
 
-    if (gDifferentSaveFile == TRUE)
+    if (gDiferentePartidaGuardada == TRUE)
     {
         TrySavingData();
-        gDifferentSaveFile = FALSE;
+        gDiferentePartidaGuardada = FALSE;
     }
     else
         TrySavingData();

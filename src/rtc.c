@@ -7,196 +7,116 @@
 static struct SiiRtcInfo sRtc;
 static u16 sSavedIme;
 
-COMMON_DATA struct Time gLocalTime = {0};
+COMMON_DATA struct Tiempo gHoraJuego = {0};
 
-static const s32 sNumDaysInMonths[MONTH_COUNT] =
+static const s32 sDiasPorMes[NUMERO_MESES] =
 {
-    [ENERO - 1] = 31,
-    [FEBRERO - 1] = 28,
-    [MARZO - 1] = 31,
-    [ABRIL - 1] = 30,
-    [MONTH_MAY - 1] = 31,
-    [MONTH_JUN - 1] = 30,
-    [MONTH_JUL - 1] = 31,
-    [MONTH_AUG - 1] = 31,
-    [MONTH_SEP - 1] = 30,
-    [MONTH_OCT - 1] = 31,
-    [MONTH_NOV - 1] = 30,
-    [MONTH_DEC - 1] = 31,
+    [ENERO] = 31,
+    [FEBRERO] = 28,
+    [MARZO] = 31,
+    [ABRIL] = 30,
+    [MAYO] = 31,
+    [JUNIO] = 30,
+    [JULIO] = 31,
+    [AGOSTO] = 31,
+    [SEPTIEMBRE] = 30,
+    [OCTUBRE] = 31,
+    [NOVIEMBRE] = 30,
+    [DICIEMBRE] = 31,
 };
 
-void RtcDisableInterrupts(void)
+bool32 EsAnioBisiesto(u32 anio)
 {
-    sSavedIme = REG_IME;
-    REG_IME = 0;
-}
-
-void RtcRestoreInterrupts(void)
-{
-    REG_IME = sSavedIme;
-}
-
-bool8 IsLeapYear(u32 year)
-{
-    if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
+    if ((anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0))
         return TRUE;
 
     return FALSE;
 }
 
-void RtcGetInfo(struct SiiRtcInfo *rtc)
+void QueFechaEs(struct SiiRtcInfo *rtc)
 {
-    FakeRtc_GetRawInfo(rtc);
+    struct Tiempo* tiempo = HoraActual();
+    rtc->second = tiempo->segundos;
+    rtc->minute = tiempo->minutos;
+    rtc->hour = tiempo->horas;
+    rtc->day = tiempo->dias;
 }
 
-void RtcGetDateTime(struct SiiRtcInfo *rtc)
+void ReinicioTiempo(void)
 {
-    RtcDisableInterrupts();
-    SiiRtcGetDateTime(rtc);
-    RtcRestoreInterrupts();
+    memset(HoraActual(), 0, sizeof(struct Tiempo));
+    return;
 }
 
-void RtcGetStatus(struct SiiRtcInfo *rtc)
+void CalculaDiferenciaTiempo(struct SiiRtcInfo *rtc, struct Tiempo *resultado, struct Tiempo *t)
 {
-    RtcDisableInterrupts();
-    SiiRtcGetStatus(rtc);
-    RtcRestoreInterrupts();
-}
+    u16 dias = rtc->day;
+    resultado->segundos = rtc->second - t->segundos;
+    resultado->minutos = rtc->minute - t->minutos;
+    resultado->horas = rtc->hour - t->horas;
+    resultado->dias = dias - t->dias;
 
-void RtcReset(void)
-{
-    if (OW_USE_FAKE_RTC)
+    if (resultado->segundos < 0)
     {
-        memset(HoraActual(), 0, sizeof(struct Time));
-        return;
+        result->segundos += SEGUNDOS_POR_MINUTO;
+        --result->minutos;
     }
 
-    RtcDisableInterrupts();
-    SiiRtcReset();
-    RtcRestoreInterrupts();
-}
-
-void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second)
-{
-    dest = ConvertIntToDecimalStringN(dest, hour, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToDecimalStringN(dest, minute, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_COLON;
-    dest = ConvertIntToDecimalStringN(dest, second, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
-void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
-{
-    dest = ConvertIntToDecimalStringN(dest, year, STR_CONV_MODE_LEADING_ZEROS, 4);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToDecimalStringN(dest, month, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest++ = CHAR_HYPHEN;
-    dest = ConvertIntToDecimalStringN(dest, day, STR_CONV_MODE_LEADING_ZEROS, 2);
-    *dest = EOS;
-}
-
-void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t)
-{
-    u16 days = rtc->day;
-    result->seconds = rtc->second - t->seconds;
-    result->minutes = rtc->minute - t->minutes;
-    result->hours = rtc->hour - t->hours;
-    result->days = days - t->days;
-
-    if (result->seconds < 0)
+    if (resultado->minutos < 0)
     {
-        result->seconds += SEGUNDOS_POR_MINUTO;
-        --result->minutes;
+        result->minutos += MINUTOS_POR_HORA;
+        --result->horas;
     }
 
-    if (result->minutes < 0)
+    if (resultado->horas < 0)
     {
-        result->minutes += MINUTOS_POR_HORA;
-        --result->hours;
-    }
-
-    if (result->hours < 0)
-    {
-        result->hours += HORAS_POR_DIA;
-        --result->days;
+        resultado->horas += HORAS_POR_DIA;
+        --resultado->dias;
     }
 }
 
 void RtcCalcLocalTime(void)
 {
-    RtcGetInfo(&sRtc);
-    RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlockPtr->localTimeOffset);
+    QueFechaEs(&sRtc);
+    CalculaDiferenciaTiempo(&sRtc, &gHoraJuego, &gSaveBlockPtr->horaReferenciaJuego);
 }
 
-bool8 IsBetweenHours(s32 hours, s32 begin, s32 end)
+bool32 EsEntreHoras(s32 horas, s32 inicio, s32 fin)
 {
-    if (end < begin)
-        return hours >= begin || hours < end;
+    if (fin < inicio)
+        return horas >= inicio || horas < fin;
     else
-        return hours >= begin && hours < end;
+        return horas >= inicio && horas < fin;
 }
 
-u8 GetTimeOfDay(void)
+u32 QueParteDeDiaEs(void)
 {
     RtcCalcLocalTime();
-    if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_MANANA, HORA_FINAL_MANANA))
+    if (EsEntreHoras(gHoraJuego.hours, HORA_INICIO_MANANA, HORA_FINAL_MANANA))
         return TIEMPO_MANANA;
-    else if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_TARDE, HORA_FINAL_TARDE))
+    else if (EsEntreHoras(gHoraJuego.hours, HORA_INICIO_TARDE, HORA_FINAL_TARDE))
         return TIEMPO_TARDE;
-    else if (IsBetweenHours(gLocalTime.hours, HORA_INICIO_NOCHE, HORA_FINAL_NOCHE))
+    else if (EsEntreHoras(gHoraJuego.hours, HORA_INICIO_NOCHE, HORA_FINAL_NOCHE))
         return TIEMPO_NOCHE;
     return TIEMPO_DIA;
 }
 
-void RtcInitLocalTimeOffset(s32 hour, s32 minute)
+void IniciaHoraReferenciaJuego(s32 horas, s32 minutos)
 {
-    RtcCalcLocalTimeOffset(0, hour, minute, 0);
+    CalculaHoraReferenciaJuego(0, horas, minutos, 0);
 }
 
-void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
+void CalculaHoraReferenciaJuego(s32 dias, s32 horas, s32 minutos, s32 segundos)
 {
-    gLocalTime.days = days;
-    gLocalTime.hours = hours;
-    gLocalTime.minutes = minutes;
-    gLocalTime.seconds = seconds;
-    RtcGetInfo(&sRtc);
-    RtcCalcTimeDifference(&sRtc, &gSaveBlockPtr->localTimeOffset, &gLocalTime);
+    gHoraJuego.days = dias;
+    gHoraJuego.hours = horas;
+    gHoraJuego.minutes = minutos;
+    gHoraJuego.seconds = segundos;
+    QueFechaEs(&sRtc);
+    CalculaDiferenciaTiempo(&sRtc, &gSaveBlockPtr->horaReferenciaJuego, &gHoraJuego);
 }
 
-void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
-{
-    result->seconds = t2->seconds - t1->seconds;
-    result->minutes = t2->minutes - t1->minutes;
-    result->hours = t2->hours - t1->hours;
-    result->days = t2->days - t1->days;
-
-    if (result->seconds < 0)
-    {
-        result->seconds += SEGUNDOS_POR_MINUTO;
-        --result->minutes;
-    }
-
-    if (result->minutes < 0)
-    {
-        result->minutes += MINUTOS_POR_HORA;
-        --result->hours;
-    }
-
-    if (result->hours < 0)
-    {
-        result->hours += HORAS_POR_DIA;
-        --result->days;
-    }
-}
-
-u32 RtcGetMinuteCount(void)
-{
-    RtcGetInfo(&sRtc);
-    return (HORAS_POR_DIA * MINUTOS_POR_HORA) * sRtc.day + MINUTOS_POR_HORA * sRtc.hour + sRtc.minute;
-}
-
-void FormatDecimalTimeWithoutSeconds(u8 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
+void ConvierteTiempoDecimalSinSegundos(u8 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
 {
     if (is24Hour)
     {

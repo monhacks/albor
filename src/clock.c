@@ -4,23 +4,21 @@
 #include "time_events.h"
 #include "field_specials.h"
 #include "lottery_corner.h"
-#include "dewford_trend.h"
 #include "field_weather.h"
 #include "berry.h"
 #include "main.h"
 #include "overworld.h"
 #include "wallclock.h"
-#include "constants/form_change_types.h"
 
-static void UpdatePerDay(struct Time *localTime);
-static void UpdatePerMinute(struct Time *localTime);
+static void UpdatePerDay(struct Tiempo *localTime);
+static void ActualizaPorMinuto(struct Tiempo *localTime);
 
 void InitTimeBasedEvents(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();
-    gSaveBlockPtr->lastBerryTreeUpdate = gLocalTime;
-    VarSet(VAR_DAYS, gLocalTime.days);
+    gSaveBlockPtr->lastBerryTreeUpdate = gHoraJuego;
+    VarSet(VAR_DAYS, gHoraJuego.days);
 }
 
 void DoTimeBasedEvents(void)
@@ -28,12 +26,12 @@ void DoTimeBasedEvents(void)
     if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter())
     {
         RtcCalcLocalTime();
-        UpdatePerDay(&gLocalTime);
-        UpdatePerMinute(&gLocalTime);
+        UpdatePerDay(&gHoraJuego);
+        ActualizaPorMinuto(&gHoraJuego);
     }
 }
 
-static void UpdatePerDay(struct Time *localTime)
+static void UpdatePerDay(struct Tiempo *localTime)
 {
     u16 *days = GetVarPointer(VAR_DAYS);
     u16 daysSince;
@@ -43,20 +41,26 @@ static void UpdatePerDay(struct Time *localTime)
         daysSince = localTime->days - *days;
         ClearDailyFlags();
         UpdateWeatherPerDay(daysSince);
-        UpdatePartyPokerusTime(daysSince);
-        UpdateMirageRnd(daysSince);
         SetRandomLotteryNumber(daysSince);
         *days = localTime->days;
     }
 }
 
-static void UpdatePerMinute(struct Time *localTime)
+static void ActualizaPorMinuto(struct Tiempo *localTime)
 {
-    struct Time difference;
+    struct Tiempo difference;
     int minutes;
+    struct SiiRtcInfo currentRtc;
 
-    CalcTimeDifference(&difference, &gSaveBlockPtr->lastBerryTreeUpdate, localTime);
+    currentRtc.day = localTime->days;
+    currentRtc.hour = localTime->hours;
+    currentRtc.minute = localTime->minutes;
+    currentRtc.second = localTime->seconds;
+
+    CalculaDiferenciaTiempo(&currentRtc, &difference, &gSaveBlockPtr->lastBerryTreeUpdate);
+
     minutes = HORAS_POR_DIA * MINUTOS_POR_HORA * difference.days + SEGUNDOS_POR_MINUTO * difference.hours + difference.minutes;
+
     if (minutes > 0)
     {
         BerryTreeTimeUpdate(minutes);

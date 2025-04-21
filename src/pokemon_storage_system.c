@@ -1606,7 +1606,6 @@ static void ResetForPokeStorage(void)
     FreeAllSpritePalettes();
     ClearDma3Requests();
     gReservedSpriteTileCount = 640;
-    gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     TilemapUtil_Init(TILEMAPID_COUNT);
     TilemapUtil_SetMap(TILEMAPID_PKMN_DATA, 1, sPkmnData_Tilemap, 8, 4);
@@ -5208,7 +5207,7 @@ static void SetMovingMonData(u8 boxId, u8 position)
     {
         sStorage->movingMon = gPlayerParty[sCursorPosition];
         if (&gPlayerParty[sCursorPosition] == GetFirstLiveMon())
-            gFollowerSteps = 0;
+            gPasosPokemon = 0;
     }
     else
     {
@@ -5229,7 +5228,7 @@ static void SetPlacedMonData(u8 boxId, u8 position)
     {
         gPlayerParty[position] = sStorage->movingMon;
         if (&gPlayerParty[position] == GetFirstLiveMon())
-            gFollowerSteps = 0;
+            gPasosPokemon = 0;
     }
     else
     {

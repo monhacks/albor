@@ -514,7 +514,6 @@ static void LoadUsePokeblockMenu(void)
             sInfo->mainState++;
         break;
     case 6:
-        gKeyRepeatStartDelay = 20;
         LoadPartyInfo();
         sInfo->mainState++;
         break;

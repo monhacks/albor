@@ -187,19 +187,7 @@ static const LoopedTask sRibbonsSummaryMenuLoopTaskFuncs[] =
 
 bool32 PokenavCallback_Init_RibbonsSummaryMenu(void)
 {
-    struct Pokenav_RibbonsSummaryList *list = AllocSubstruct(POKENAV_SUBSTRUCT_RIBBONS_SUMMARY_LIST, sizeof(struct Pokenav_RibbonsSummaryList));
-    if (list == NULL)
-        return FALSE;
-
-    list->monList = GetSubstructPtr(POKENAV_SUBSTRUCT_MON_LIST);
-    if (list->monList == NULL)
-        return FALSE;
-
-    GetMonRibbons(list);
-    list->callback = RibbonsSummaryHandleInput;
-    gKeyRepeatContinueDelay = 3;
-    gKeyRepeatStartDelay = 10;
-    return TRUE;
+    return FALSE;
 }
 
 u32 GetRibbonsSummaryMenuCallback(void)

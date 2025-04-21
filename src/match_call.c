@@ -130,7 +130,6 @@ struct BattleFrontierStreakInfo
 static EWRAM_DATA struct MatchCallState sMatchCallState = {0};
 static EWRAM_DATA struct BattleFrontierStreakInfo sBattleFrontierStreakInfo = {0};
 
-static u32 GetCurrentTotalMinutes(struct Time *);
 static u32 GetNumRegisteredTrainers(void);
 static u32 GetActiveMatchCallTrainerId(u32);
 static int GetTrainerMatchCallId(int);
@@ -964,28 +963,12 @@ extern const u8 gBirchDexRatingText_OnANationwideBasis[];
 
 void InitMatchCallCounters(void)
 {
-    RtcCalcLocalTime();
-    sMatchCallState.minutes = GetCurrentTotalMinutes(&gLocalTime) + 10;
-    sMatchCallState.stepCounter = 0;
-}
 
-static u32 GetCurrentTotalMinutes(struct Time *time)
-{
-    return time->days * 24 * 60 + time->hours * 60 + time->minutes;
 }
 
 static bool32 UpdateMatchCallMinutesCounter(void)
 {
-    int curMinutes;
-    RtcCalcLocalTime();
-    curMinutes = GetCurrentTotalMinutes(&gLocalTime);
-    if (sMatchCallState.minutes > curMinutes || curMinutes - sMatchCallState.minutes > 9)
-    {
-        sMatchCallState.minutes = curMinutes;
-        return TRUE;
-    }
 
-    return FALSE;
 }
 
 static bool32 CheckMatchCallChance(void)

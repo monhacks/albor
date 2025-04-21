@@ -1,7 +1,41 @@
 #ifndef GUARD_RTC_UTIL_H
 #define GUARD_RTC_UTIL_H
 
-#include "siirtc.h"
+enum Meses
+{
+    ENERO,
+    FEBRERO,
+    MARZO,
+    ABRIL,
+    MAYO,
+    JUNIO,
+    JULIO,
+    AGOSTO,
+    SEPTIEMBRE,
+    OCTUBRE,
+    NOVIEMBRE,
+    DICIEMBRE,
+    NUMERO_MESES
+};
+
+struct SiiRtcInfo
+{
+    u8 year;
+    u8 month;
+    u8 day;
+    u8 dayOfWeek;
+    u8 hour;
+    u8 minute;
+    u8 second;
+    u8 status;
+    u8 alarmHour;
+    u8 alarmMinute;
+};
+
+#define HORAS_POR_DIA               24
+#define MINUTOS_POR_HORA            60
+#define SEGUNDOS_POR_MINUTO         60
+#define FRAMES_POR_SEGUNDO          20
 
 #define HORA_INICIO_MANANA          6
 #define HORA_MEDIA_MANANA           8
@@ -25,25 +59,16 @@ enum TiemposDia
     TIEMPO_NOCHE
 };
 
-extern struct Time gLocalTime;
+extern struct Tiempo gHoraJuego;
 
-void RtcDisableInterrupts(void);
-void RtcRestoreInterrupts(void);
-bool8 IsLeapYear(u32 year);
-void RtcGetInfo(struct SiiRtcInfo *rtc);
-void RtcGetDateTime(struct SiiRtcInfo *rtc);
-void RtcGetStatus(struct SiiRtcInfo *rtc);
-void RtcReset(void);
-void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second);
-void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day);
-void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t);
+bool32 EsAnioBisiesto(u32 anio);
+void ReinicioTiempo(void);
+void CalculaDiferenciaTiempo(struct SiiRtcInfo *rtc, struct Tiempo *result, struct Tiempo *t);
 void RtcCalcLocalTime(void);
-bool8 IsBetweenHours(s32 hours, s32 begin, s32 end);
-u8 GetTimeOfDay(void);
-void RtcInitLocalTimeOffset(s32 hour, s32 minute);
-void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
-void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
-u32 RtcGetMinuteCount(void);
-void FormatDecimalTimeWithoutSeconds(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
+bool32 EsEntreHoras(s32 horas, s32 inicio, s32 fin);
+u32 QueParteDeDiaEs(void);
+void IniciaHoraReferenciaJuego(s32 horas, s32 minutos);
+void CalculaHoraReferenciaJuego(s32 dias, s32 horas, s32 minutos, s32 segundos);
+void ConvierteTiempoDecimalSinSegundos(u8 *dest, s8 hour, s8 minute, bool32 is24Hour);
 
 #endif // GUARD_RTC_UTIL_H
