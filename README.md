@@ -105,19 +105,16 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
     *Los pasos por ciclo de huevo son 255. Los Pokémon con habilidades Cuerpo llama o Armadura magma reducen los pasos a la mitad. La cantidad de ciclos es característica de cada familia Pokémon y va desde 40 a 200 de legendarios mayores.
 
 ## Cambios a tabla de tipos:
-    * Roca x0,5 a roca.
-    * Normal x1 a acero.
-    * Psíquico x2 a acero.
-    * Bicho x2 a hada.
-    * Bicho x2 a fantasma.
-    * Veneno x2 a bicho.
-    * Planta x1 a dragón.
-    * Fuego x0 a dragón.
-    * Agua x0,5 a hielo.
-    * Eléctrico x2 a acero.
-    * Tierra x0,5 a normal.
-    * Planta x1 a acero.
-    * Volador x0,5 a acero.
+    * Roca x0,5 a Roca.
+    * Normal x1 a Acero.
+    * Psíquico x2 a Acero.
+    * Bicho x2 a Hada.
+    * Bicho x2 a Fantasma.
+    * Veneno x2 a Bicho.
+    * Planta x1 a Dragón.
+    * Fuego x0 a Dragón.
+    * Agua x0,5 a Hielo.
+    * Planta x1 a Acero.
 
 ## Cambios a Pokémon:
     *Se han cambiado las paletas shiny de muchos Pokémon.
@@ -135,4 +132,4 @@ Es un hackrom en castellano que está en desarrollo, que usa la pokeemerald-expa
 
 ## Cambios de calidad de vida:
     *En batalla, puedes pulsar B para ir rápidamente a la opción de huir.
-    *Los Pokémon varían su color en función de su personalidad, y se aplica a sus iconos/minis.
+    *Los Pokémon varían su color en función de su personalidad, y se aplica a sus iconos.

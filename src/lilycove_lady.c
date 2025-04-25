@@ -105,15 +105,7 @@ static void FavorLadyPickFavorAndBestItem(void)
 
 static void InitLilycoveFavorLady(void)
 {
-    sFavorLadyPtr = &gSaveBlockPtr->lilycoveLady.favor;
-    sFavorLadyPtr->id = LILYCOVE_LADY_FAVOR;
-    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_READY;
-    sFavorLadyPtr->playerName[0] = EOS;
-    sFavorLadyPtr->likedItem = FALSE;
-    sFavorLadyPtr->numItemsGiven = 0;
-    sFavorLadyPtr->itemId = ITEM_NONE;
-    sFavorLadyPtr->language = gGameLanguage;
-    FavorLadyPickFavorAndBestItem();
+
 }
 
 u8 GetFavorLadyState(void)
@@ -140,13 +132,6 @@ void BufferFavorLadyRequest(void)
 
 bool8 HasAnotherPlayerGivenFavorLadyItem(void)
 {
-    sFavorLadyPtr = &gSaveBlockPtr->lilycoveLady.favor;
-    if (sFavorLadyPtr->playerName[0] != EOS)
-    {
-        StringCopy_PlayerName(gStringVar3, sFavorLadyPtr->playerName);
-        ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
-        return TRUE;
-    }
     return FALSE;
 }
 
@@ -169,9 +154,7 @@ static void SetFavorLadyPlayerName(const u8 *src, u8 *dest)
 
 void BufferFavorLadyPlayerName(void)
 {
-    sFavorLadyPtr = &gSaveBlockPtr->lilycoveLady.favor;
-    SetFavorLadyPlayerName(sFavorLadyPtr->playerName, gStringVar3);
-    ConvertInternationalString(gStringVar3, sFavorLadyPtr->language);
+
 }
 
 // Only used to determine if a record-mixed player had given her an item she liked
@@ -188,32 +171,7 @@ void Script_FavorLadyOpenBagMenu(void)
 
 static bool8 DoesFavorLadyLikeItem(u16 itemId)
 {
-    u8 numItems;
-    u8 i;
-    bool8 likedItem;
-
-    sFavorLadyPtr = &gSaveBlockPtr->lilycoveLady.favor;
-    numItems = GetNumAcceptedItems(sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId]);
-    sFavorLadyPtr->state = LILYCOVE_LADY_STATE_COMPLETED;
-    BufferItemName(gStringVar2, itemId);
-    sFavorLadyPtr->itemId = itemId;
-    SetFavorLadyPlayerName(gSaveBlockPtr->playerName, sFavorLadyPtr->playerName);
-    sFavorLadyPtr->language = gGameLanguage;
-    likedItem = FALSE;
-    for (i = 0; i < numItems; i ++)
-    {
-        if (sFavorLadyAcceptedItemLists[sFavorLadyPtr->favorId][i] == itemId)
-        {
-            likedItem = TRUE;
-            sFavorLadyPtr->numItemsGiven++;
-            sFavorLadyPtr->likedItem = TRUE;
-            if (sFavorLadyPtr->bestItem == itemId)
-                sFavorLadyPtr->numItemsGiven = LILYCOVE_LADY_GIFT_THRESHOLD;
-            break;
-        }
-        sFavorLadyPtr->likedItem = FALSE;
-    }
-    return likedItem;
+    return FALSE;
 }
 
 bool8 Script_DoesFavorLadyLikeItem(void)
@@ -320,38 +278,7 @@ u8 GetQuizAuthor(void)
 
 static u8 BufferQuizAuthorName(void)
 {
-    u8 authorNameId;
-    u8 nameLen;
-    u8 i;
-
-    authorNameId = QUIZ_AUTHOR_NAME_PLAYER;
-    sQuizLadyPtr = &gSaveBlockPtr->lilycoveLady.quiz;
-    if (sQuizLadyPtr->playerName[0] == EOS)
-    {
-        StringCopy_PlayerName(gStringVar1, COMPOUND_STRING("Lady"));
-        authorNameId = QUIZ_AUTHOR_NAME_LADY;
-    }
-    else
-    {
-        StringCopy_PlayerName(gStringVar1, sQuizLadyPtr->playerName);
-        ConvertInternationalString(gStringVar1, sQuizLadyPtr->language);
-        nameLen = GetPlayerNameLength(sQuizLadyPtr->playerName);
-        if (nameLen == GetPlayerNameLength(gSaveBlockPtr->playerName))
-        {
-            u8 *name = sQuizLadyPtr->playerName;
-            for (i = 0; i < nameLen; i++)
-            {
-                name = sQuizLadyPtr->playerName;
-                if (name[i] != gSaveBlockPtr->playerName[i])
-                {
-                    authorNameId = QUIZ_AUTHOR_NAME_OTHER_PLAYER;
-                    break;
-                }
-            }
-        }
-
-    }
-    return authorNameId;
+    return 0;
 }
 
 static bool8 IsQuizTrainerIdNotPlayer(void)
@@ -375,13 +302,7 @@ void BufferQuizPrizeName(void)
 
 bool8 BufferQuizAuthorNameAndCheckIfLady(void)
 {
-    sQuizLadyPtr = &gSaveBlockPtr->lilycoveLady.quiz;
-    if (BufferQuizAuthorName() == QUIZ_AUTHOR_NAME_LADY)
-    {
-        sQuizLadyPtr->language = gGameLanguage;
-        return TRUE;
-    }
-    return FALSE;
+
 }
 
 bool8 IsQuizLadyWaitingForChallenger(void)
@@ -497,23 +418,12 @@ static void ResetContestLadyContestData(void)
 
 static void InitLilycoveContestLady(void)
 {
-    sContestLadyPtr = &gSaveBlockPtr->lilycoveLady.contest;
-    sContestLadyPtr->id = LILYCOVE_LADY_CONTEST;
-    sContestLadyPtr->givenPokeblock = FALSE;
-    ResetContestLadyContestData();
-    sContestLadyPtr->language = gGameLanguage;
+
 }
 
 static void ContestLadySavePlayerNameIfHighSheen(u8 sheen)
 {
-    sContestLadyPtr = &gSaveBlockPtr->lilycoveLady.contest;
-    if (sContestLadyPtr->maxSheen <= sheen)
-    {
-        sContestLadyPtr->maxSheen = sheen;
-        memset(sContestLadyPtr->playerName, EOS, sizeof(sContestLadyPtr->playerName));
-        memcpy(sContestLadyPtr->playerName, gSaveBlockPtr->playerName, sizeof(sContestLadyPtr->playerName));
-        sContestLadyPtr->language = gGameLanguage;
-    }
+
 }
 
 bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)

@@ -32,10 +32,6 @@ static void IntrDummy(void);
 // Defined in the linker script so that the test build can override it.
 extern void CB2_FlashNotDetectedScreen(void);
 
-const u8 gGameVersion = GAME_VERSION;
-
-const u8 gGameLanguage = GAME_LANGUAGE; // English
-
 const char BuildDateTime[] = "2005 02 21 11:10";
 
 const IntrFunc gIntrTableTemplate[] =
@@ -59,7 +55,6 @@ const IntrFunc gIntrTableTemplate[] =
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
 COMMON_DATA struct Main gMain = {0};
-COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u32 IntrMain_Buffer[512] = {0};
 COMMON_DATA s8 gPcmDmaCounter = 0;

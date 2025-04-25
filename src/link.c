@@ -711,8 +711,7 @@ u32 GetLinkRecvQueueLength(void)
 
 void ConvertLinkPlayerName(struct LinkPlayer *player)
 {
-    player->progressFlagsCopy = player->progressFlags; // ? Perhaps relocating for a longer name field
-    ConvertInternationalString(player->name, player->language);
+
 }
 
 static void DisableSerial(void)

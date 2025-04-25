@@ -39,11 +39,7 @@ struct Main
     u8 inBattle:1;
 };
 
-extern const u8 gGameVersion;
-extern const u8 gGameLanguage;
-
 extern struct Main gMain;
-extern bool8 gSoftResetDisabled;
 extern IntrFunc gIntrTable[];
 extern u32 IntrMain_Buffer[];
 extern s8 gPcmDmaCounter;

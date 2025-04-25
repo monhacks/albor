@@ -429,9 +429,7 @@ void IsCurSecretBaseOwnedByAnotherPlayer(void)
 
 static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
-    *StringCopyN(dest, gSaveBlockPtr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlockPtr->secretBases[secretBaseIdx].trainerName)) = EOS;
-    ConvertInternationalString(dest, gSaveBlockPtr->secretBases[secretBaseIdx].language);
-    return StringAppend(dest, gText_ApostropheSBase);
+    return 0;
 }
 
 u8 *GetSecretBaseMapName(u8 *dest)
@@ -441,13 +439,7 @@ u8 *GetSecretBaseMapName(u8 *dest)
 
 void CopyCurSecretBaseOwnerName_StrVar1(void)
 {
-    u8 secretBaseIdx;
-    const u8 *name;
 
-    secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
-    name = gSaveBlockPtr->secretBases[secretBaseIdx].trainerName;
-    *StringCopyN(gStringVar1, name, GetNameLength(name)) = EOS;
-    ConvertInternationalString(gStringVar1, gSaveBlockPtr->secretBases[secretBaseIdx].language);
 }
 
 static bool8 IsSecretBaseRegistered(u8 secretBaseIdx)

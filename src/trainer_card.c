@@ -650,46 +650,17 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 
 static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
 {
-    memset(trainerCard, 0, sizeof(struct TrainerCard));
-    trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
-    trainerCard->hasAllFrontierSymbols = HasAllFrontierSymbols();
-    trainerCard->frontierBP = gSaveBlockPtr->frontier.cardBattlePoints;
-    if (trainerCard->hasAllFrontierSymbols)
-        trainerCard->stars++;
+
 }
 
 void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 {
-    memset(trainerCard, 0, 0x60);
-    trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
-    trainerCard->linkHasAllFrontierSymbols = HasAllFrontierSymbols();
-    *((u16 *)&trainerCard->linkPoints.frontier) = gSaveBlockPtr->frontier.cardBattlePoints;
-    if (trainerCard->linkHasAllFrontierSymbols)
-        trainerCard->stars++;
+
 }
 
 void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion)
 {
-    memset(dst, 0, sizeof(struct TrainerCard));
-    dst->version = gameVersion;
 
-    switch (VersionToCardType(gameVersion))
-    {
-    case CARD_TYPE_FRLG:
-        memcpy(dst, src, 0x60);
-        break;
-    case CARD_TYPE_RS:
-        memcpy(dst, src, 0x38);
-        break;
-    case CARD_TYPE_EMERALD:
-        memcpy(dst, src, 0x60);
-        dst->linkPoints.frontier = 0;
-        dst->hasAllFrontierSymbols = src->linkHasAllFrontierSymbols;
-        dst->frontierBP = *((u16 *)&src->linkPoints.frontier);
-        break;
-    }
 }
 
 static void SetDataFromTrainerCard(void)
@@ -877,15 +848,7 @@ static void BufferTextsVarsForCardPage2(void)
 
 static void PrintNameOnCardFront(void)
 {
-    u8 buffer[32];
-    u8 *txtPtr;
-    txtPtr = StringCopy(buffer, gText_TrainerCardName);
-    StringCopy(txtPtr, sData->trainerCard.playerName);
-    ConvertInternationalString(txtPtr, sData->language);
-    if (sData->cardType == CARD_TYPE_FRLG)
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 28, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
-    else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 16, 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+
 }
 
 static void PrintIdOnCard(void)
@@ -1035,13 +998,7 @@ static void PrintProfilePhraseOnCard(void)
 
 static void BufferNameForCardBack(void)
 {
-    StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
-    ConvertInternationalString(sData->textPlayersCard, sData->language);
-    if (sData->cardType != CARD_TYPE_FRLG)
-    {
-        StringCopy(gStringVar1, sData->textPlayersCard);
-        StringExpandPlaceholders(sData->textPlayersCard, gText_Var1sTrainerCard);
-    }
+
 }
 
 static void PrintNameOnCardBack(void)
@@ -1593,18 +1550,7 @@ static bool8 Task_EndCardFlip(struct Task *task)
 
 void ShowPlayerTrainerCard(void (*callback)(void))
 {
-    sData = AllocZeroed(sizeof(*sData));
-    sData->callback2 = callback;
-    if (callback == CB2_ReshowFrontierPass)
-        sData->blendColor = RGB_WHITE;
-    else
-        sData->blendColor = RGB_BLACK;
 
-    sData->isLink = FALSE;
-
-    sData->language = GAME_LANGUAGE;
-    TrainerCard_GenerateCardForPlayer(&sData->trainerCard);
-    SetMainCallback2(CB2_InitTrainerCard);
 }
 
 void ShowTrainerCardInLink(u8 cardId, void (*callback)(void))
@@ -1624,43 +1570,12 @@ static void InitTrainerCardData(void)
 
 static u8 GetSetCardType(void)
 {
-    if (sData == NULL)
-    {
-        if (gGameVersion == VERSION_FIRE_RED || gGameVersion == VERSION_LEAF_GREEN)
-            return CARD_TYPE_FRLG;
-        else if (gGameVersion == VERSION_EMERALD)
-            return CARD_TYPE_EMERALD;
-        else
-            return CARD_TYPE_RS;
-    }
-    else
-    {
-        if (sData->trainerCard.version == VERSION_FIRE_RED || sData->trainerCard.version == VERSION_LEAF_GREEN)
-        {
-            sData->isHoenn = FALSE;
-            return CARD_TYPE_FRLG;
-        }
-        else if (sData->trainerCard.version == VERSION_EMERALD)
-        {
-            sData->isHoenn = TRUE;
-            return CARD_TYPE_EMERALD;
-        }
-        else
-        {
-            sData->isHoenn = TRUE;
-            return CARD_TYPE_RS;
-        }
-    }
+
 }
 
 static u8 VersionToCardType(u8 version)
 {
-    if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
-        return CARD_TYPE_FRLG;
-    else if (version == VERSION_EMERALD)
-        return CARD_TYPE_EMERALD;
-    else
-        return CARD_TYPE_RS;
+    return 0;
 }
 
 static void CreateTrainerCardTrainerPic(void)

@@ -12,9 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     container: devkitpro/devkitarm
     env:
-      GAME_VERSION: EMERALD
       GAME_REVISION: 0
-      GAME_LANGUAGE: ENGLISH
       COMPARE: 0
       UNUSED_ERROR: 1
     steps:

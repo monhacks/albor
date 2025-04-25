@@ -174,7 +174,6 @@ static void ContinueDecorating(u8 taskId);
 static void CantPlaceDecorationPrompt(u8 taskId);
 static void InitializePuttingAwayCursorSprite(struct Sprite *sprite);
 static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite);
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
 static const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 static bool8 HasDecorationsInUse(u8 taskId);
 static void Task_ContinuePuttingAwayDecorations(u8 taskId);
@@ -1287,12 +1286,7 @@ static void Task_PlaceDecoration(u8 taskId)
 
 static void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
-    gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
-    gSprites[gFieldCamera.spriteId].oam.priority = 1;
-    gSprites[gFieldCamera.spriteId].callback = InitializePuttingAwayCursorSprite;
-    gSprites[gFieldCamera.spriteId].x = sDecorationMovementInfo[data->decoration->shape].cameraX;
-    gSprites[gFieldCamera.spriteId].y = sDecorationMovementInfo[data->decoration->shape].cameraY;
+
 }
 
 static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
@@ -1775,11 +1769,6 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
     {
         sprite->invisible = FALSE;
     }
-}
-
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
-{
-    return 0;
 }
 
 static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
