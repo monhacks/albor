@@ -1935,7 +1935,7 @@ static void PlayerHandleTrainerSlideBack(u32 battler)
 
 static void PlayerHandlePaletteFade(u32 battler)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 2, 0, 16, RGB_BLACK);
     PlayerBufferExecCompleted(battler);
 }
 
@@ -2061,7 +2061,7 @@ static void PlayerHandleChooseItem(u32 battler)
 {
     s32 i;
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenBagAndChooseItem;
     gBattlerInMenuId = battler;
 
@@ -2081,7 +2081,7 @@ static void PlayerHandleChoosePokemon(u32 battler)
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][1] >> 4;
     *(&gBattleStruct->prevSelectedPartySlot) = gBattleResources->bufferA[battler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[battler][3] & 0xFF) | (gBattleResources->bufferA[battler][7] << 8);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenPartyMenuToChooseMon;
     gBattlerInMenuId = battler;
 }

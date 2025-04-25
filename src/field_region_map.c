@@ -156,7 +156,7 @@ static void FieldUpdateRegionMap(void)
             ScheduleBgCopyTilemapToVram(0);
             DrawStdFrameWithCustomTileAndPalette(WIN_MAPSEC_NAME, FALSE, 0x27, 0xd);
             PrintRegionMapSecName();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
             sFieldRegionMapHandler->state++;
             break;
         case 2:
@@ -184,7 +184,7 @@ static void FieldUpdateRegionMap(void)
             }
             break;
         case 5:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             sFieldRegionMapHandler->state++;
             break;
         case 6:

@@ -83,8 +83,8 @@ void CB2_ShowDiploma(void)
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
@@ -109,7 +109,7 @@ static void Task_DiplomaWaitForKeyPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_DiplomaFadeOut;
     }
 }

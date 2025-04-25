@@ -240,7 +240,7 @@ void CB2_InitOptionMenu(void)
         break;
     }
     case 11:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(MainCB2);
         return;
@@ -341,7 +341,7 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlockPtr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlockPtr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 

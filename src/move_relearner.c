@@ -346,7 +346,7 @@ void TeachMoveRelearnerMove(void)
     LockPlayerFieldControls();
     CreateTask(Task_WaitForFadeOut, 10);
     // Fade to black
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
 }
 
 static void Task_WaitForFadeOut(u8 taskId)
@@ -452,7 +452,7 @@ static void DoMoveRelearnerMain(void)
         HideHeartSpritesAndShowTeachMoveText(FALSE);
         if (gOriginSummaryScreenPage == PSS_PAGE_CONTEST_MOVES)
             MoveRelearnerShowHideHearts(GetCurrentSelectedMove());
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_WAIT_FOR_FADE:
         if (!gFundidoPaletas.activo)
@@ -628,7 +628,7 @@ static void DoMoveRelearnerMain(void)
         if (!MoveRelearnerRunTextPrinters())
         {
             sMoveRelearnerStruct->state = MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         }
         break;
     case MENU_STATE_SHOW_MOVE_SUMMARY_SCREEN:
@@ -645,10 +645,10 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case 22:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         break;
     case MENU_STATE_FADE_AND_RETURN:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sMoveRelearnerStruct->state++;
         break;
     case MENU_STATE_RETURN_TO_FIELD:
@@ -679,7 +679,7 @@ static void DoMoveRelearnerMain(void)
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sMoveRelearnerStruct->state++;
         if (sMoveRelearnerMenuSate.showContestInfo == FALSE)
         {

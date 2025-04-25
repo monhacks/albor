@@ -20,7 +20,7 @@ EWRAM_DATA static bool8 sShouldStopWaveTask = FALSE;
 
 void ScanlineEffect_Stop(void)
 {
-    gScanlineEffect.state = 0;
+    gScanlineEffect.estado = EFECTO_BARRIDO_PARADO;
     DmaStop(0);
     if (gScanlineEffect.waveTaskId != TASK_NONE)
     {
@@ -37,7 +37,7 @@ void ScanlineEffect_Clear(void)
     gScanlineEffect.dmaDest = NULL;
     gScanlineEffect.dmaControl = 0;
     gScanlineEffect.srcBuffer = 0;
-    gScanlineEffect.state = 0;
+    gScanlineEffect.estado = EFECTO_BARRIDO_PARADO;
     gScanlineEffect.waveTaskId = TASK_NONE;
 }
 
@@ -62,18 +62,18 @@ void ScanlineEffect_SetParams(struct ScanlineEffectParams params)
 
     gScanlineEffect.dmaControl = params.dmaControl;
     gScanlineEffect.dmaDest    = params.dmaDest;
-    gScanlineEffect.state      = params.initState;
+    gScanlineEffect.estado      = EFECTO_BARRIDO_ACTIVADO;
 }
 
 void ScanlineEffect_InitHBlankDmaTransfer(void)
 {
-    if (gScanlineEffect.state == 0)
+    if (gScanlineEffect.estado == EFECTO_BARRIDO_PARADO)
     {
         return;
     }
-    else if (gScanlineEffect.state == 3)
+    else if (gScanlineEffect.estado == EFECTO_BARRIDO_PETICION_PARAR)
     {
-        gScanlineEffect.state = 0;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PARADO;
         DmaStop(0);
         sShouldStopWaveTask = TRUE;
     }
@@ -218,7 +218,6 @@ u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude,
 
     params.dmaDest = (void *)(REG_ADDR_BG0HOFS + regOffset);
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    params.initState = 1;
     ScanlineEffect_SetParams(params);
 
     taskId = CreateTask(TaskFunc_UpdateWavePerFrame, 0);

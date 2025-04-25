@@ -2526,7 +2526,7 @@ static void Task_TryCommunicateFinalStandings(u8 taskId)
     if (gTasks[taskId].data[0]++ >= 50)
     {
         gTasks[taskId].data[0] = 0;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ContestReturnToField;
     }
 }

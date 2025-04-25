@@ -360,7 +360,6 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 {
     .dmaDest = &REG_WIN0H,
     .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    .initState = 1,
 };
 
 static bool32 AreAnyTrainerRematchesNearby(void)

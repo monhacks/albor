@@ -313,7 +313,7 @@ u32 PokenavMainMenuLoopedTaskIsActive(void)
 void ShutdownPokenav(void)
 {
     PlaySE(SE_POKENAV_OFF);
-    BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_BLACK);
 }
 
 bool32 WaitForPokenavShutdownFade(void)
@@ -519,10 +519,10 @@ void PokenavFadeScreen(s32 fadeType)
         BeginNormalPaletteFade(menu->palettes, -2, 16, 0, RGB_BLACK);
         break;
     case POKENAV_FADE_TO_BLACK_ALL:
-        BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
         break;
     case POKENAV_FADE_FROM_BLACK_ALL:
-        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 16, 0, RGB_BLACK);
         break;
     }
 }
@@ -535,7 +535,7 @@ bool32 IsPaletteFadeActive(void)
 // Excludes the first obj and bg palettes
 void FadeToBlackExceptPrimary(void)
 {
-    BlendPalettes(PALETTES_ALL & ~(1 << 16 | 1), 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS & ~(1 << 16 | 1), 16, RGB_BLACK);
 }
 
 void InitBgTemplates(const struct BgTemplate *templates, int count)

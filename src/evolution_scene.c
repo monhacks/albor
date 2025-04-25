@@ -165,7 +165,7 @@ static void Task_BeginEvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -369,7 +369,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     SetVBlankCallback(VBlankCB_EvolutionScene);
     SetMainCallback2(CB2_EvolutionSceneUpdate);
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
 
     ShowBg(0);
     ShowBg(1);
@@ -443,11 +443,11 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
         }
         break;
     case 6:
-        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 7:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         InitTradeSequenceBgGpuRegs();
         ShowBg(0);
         ShowBg(1);
@@ -643,7 +643,7 @@ static void Task_EvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case EVOSTATE_FADE_IN:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         gSprites[sEvoStructPtr->preEvoSpriteId].invisible = FALSE;
         gTasks[taskId].tState++;
         ShowBg(0);
@@ -791,7 +791,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
             else // no move to learn, or evolution was canceled
             {
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
                 gTasks[taskId].tState++;
             }
         }
@@ -934,7 +934,7 @@ static void Task_EvolutionScene(u8 taskId)
                     // YES
                     gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                     if (gTasks[taskId].tLearnMoveState == MVSTATE_SHOW_MOVE_SELECT)
-                        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+                        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
                 }
             }
             if (JOY_NEW(B_BUTTON))
@@ -1299,7 +1299,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
                 DrawTextOnTradeWindow(0, gDisplayedStringBattle, 1);
                 gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                 if (gTasks[taskId].tLearnMoveState == T_MVSTATE_SHOW_MOVE_SELECT)
-                    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+                    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
                 break;
             case 1: // NO
             case MENU_B_PRESSED:

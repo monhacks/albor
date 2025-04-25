@@ -566,7 +566,7 @@ static void ShowUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
         ShowBg(0);
         ShowBg(1);
@@ -692,7 +692,7 @@ static void FeedPokeblockToMon(void)
         gPokeblockMonId = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         sExitCallback = sInfo->exitCallback;
         sPokeblock = sInfo->pokeblock;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
@@ -736,7 +736,7 @@ static void ShowUsePokeblockMenuForResults(void)
     case 2:
         break;
     case 3:
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 4:
@@ -748,7 +748,7 @@ static void ShowUsePokeblockMenuForResults(void)
         break;
     case 5:
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 6:
@@ -821,7 +821,7 @@ static void CloseUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
@@ -829,7 +829,7 @@ static void CloseUsePokeblockMenu(void)
             sInfo->mainState = 2;
         break;
     case 2:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         ScanlineEffect_InitHBlankDmaTransfer();
         sInfo->mainState++;
         break;

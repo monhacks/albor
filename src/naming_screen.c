@@ -653,8 +653,8 @@ static bool8 MainState_FadeIn(void)
     CopyBgTilemapBufferToVram(1);
     CopyBgTilemapBufferToVram(2);
     CopyBgTilemapBufferToVram(3);
-    BlendPalettes(PALETTES_ALL, 16, 0);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, 0);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }
@@ -708,7 +708,7 @@ static bool8 MainState_PressedOKButton(void)
 
 static bool8 MainState_FadeOut(void)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     sNamingScreen->state++;
     return FALSE;
 }

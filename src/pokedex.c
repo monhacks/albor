@@ -1245,7 +1245,7 @@ static void Task_HandlePokedexInput(u8 taskId)
         else if (JOY_NEW(B_BUTTON))
         {
             TryDestroyStatBars();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Task_ClosePokedex;
             PlaySE(SE_PC_OFF);
         }
@@ -1402,7 +1402,7 @@ static bool8 LoadPokedexListPage(u8 page)
         gMain.state++;
         break;
     case 4:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_Pokedex);
         gMain.state++;
         break;
@@ -2594,14 +2594,14 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     if (gTasks[taskId].tScrolling)
     {
         // Scroll up/down
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         PlaySE(SE_DEX_SCROLL);
         return;
     }
     if (JOY_NEW(B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ExitInfoScreen;
         PlaySE(SE_PC_OFF);
         return;
@@ -2802,7 +2802,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
     case 4:
         spriteId = CreateMonSpriteFromNationalDexNumberHGSS(dexNum, MON_PAGE_X, MON_PAGE_Y, 0);
         gSprites[spriteId].oam.priority = 0;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(gPokedexVBlankCB);
         gTasks[taskId].tMonSpriteId = spriteId;
         gTasks[taskId].tState++;
@@ -2831,7 +2831,7 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_FONDOS, 0, 0, 16, RGB_BLACK);
         SetSpriteInvisibility(0, TRUE);
         SetSpriteInvisibility(1, TRUE);
         gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
@@ -4538,7 +4538,7 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
 
             sPokedexView->sEvoScreenData.fromEvoPage = TRUE;
             PlaySE(SE_PIN);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         }
     }
@@ -5107,7 +5107,7 @@ static void Task_HandleFormsScreenInput(u8 taskId)
             sPokedexView->sEvoScreenData.fromEvoPage = TRUE;
             sPokedexView->sFormScreenData.inSubmenu = FALSE;
             PlaySE(SE_PIN);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         }
 

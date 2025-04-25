@@ -279,11 +279,11 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 14:
-        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 15:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
@@ -520,7 +520,7 @@ static void DestroyFlavorCircleSprites(void)
 static void PrepareToCloseBerryTagScreen(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_CloseBerryTagScreen;
 }
 

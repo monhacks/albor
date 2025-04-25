@@ -561,7 +561,7 @@ static void CB2_CreateTradeMenu(void)
         gMain.state++;
         break;
     case 18:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 19:
@@ -740,8 +740,8 @@ static void CB2_ReturnToTradeMenu(void)
         break;
     case 18:
         gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 19:
@@ -779,7 +779,7 @@ static void CB_FadeToStartTrade(void)
 {
     if (++sTradeMenu->timer > 15)
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sTradeMenu->callbackId = CB_WAIT_TO_START_TRADE;
     }
 }
@@ -1061,7 +1061,7 @@ static void Leader_HandleCommunication(void)
             sTradeMenu->linkData[0] = LINKCMD_BOTH_CANCEL_TRADE;
             sTradeMenu->linkData[1] = 0;
             QueueAction(QUEUE_DELAY_DATA, QUEUE_SEND_DATA);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             sTradeMenu->playerSelectStatus = sTradeMenu->partnerSelectStatus = STATUS_NONE;
             sTradeMenu->callbackId = CB_INIT_EXIT_CANCELED_TRADE;
         }
@@ -1213,7 +1213,7 @@ static void CB_ProcessMenuInput(void)
         else if (sTradeMenu->cursorPosition < PARTY_SIZE * 2)
         {
             // Selected Pokémon in partner's party
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             sTradeMenu->callbackId = CB_SHOW_MON_SUMMARY;
         }
         else if (sTradeMenu->cursorPosition == PARTY_SIZE * 2)
@@ -1245,7 +1245,7 @@ static void CB_ProcessSelectedMonInput(void)
     case MENU_NOTHING_CHOSEN:
         break;
     case 0: // Summary
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sTradeMenu->callbackId = CB_SHOW_MON_SUMMARY;
         break;
     case 1: // Trade
@@ -2283,7 +2283,7 @@ void CB2_LinkTrade(void)
         gMain.state++;
         break;
     case 10:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         ShowBg(0);
         gMain.state++;
         break;
@@ -2884,7 +2884,7 @@ void DoInGameTradeScene(void)
 {
     LockPlayerFieldControls();
     CreateTask(Task_InGameTrade, 10);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
 }
 
 static void Task_InGameTrade(u8 taskId)

@@ -1865,7 +1865,6 @@ void AnimTask_RapinSpinMonElevation(u8 taskId)
         scanlineParams.dmaDest = &REG_BG2HOFS;
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    scanlineParams.initState = 1;
     ScanlineEffect_SetParams(scanlineParams);
 
     task->func = RapinSpinMonElevation_Step;
@@ -1924,7 +1923,7 @@ static void RapinSpinMonElevation_Step(u8 taskId)
     if (task->data[15])
     {
         if (task->data[10])
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
 
         DestroyAnimVisualTask(taskId);
     }
@@ -3345,7 +3344,6 @@ void AnimTask_AcidArmor(u8 taskId)
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_32BIT;
-    scanlineParams.initState = 1;
     ScanlineEffect_SetParams(scanlineParams);
     task->func = AnimTask_AcidArmor_Step;
 }
@@ -3438,7 +3436,7 @@ static void AnimTask_AcidArmor_Step(u8 taskId)
     case 1:
         if (++task->data[2] > 12)
         {
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
             task->data[2] = 0;
             task->data[0]++;
         }

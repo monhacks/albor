@@ -467,7 +467,6 @@ void AnimTask_MoveAttackerMementoShadow(u8 taskId)
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    scanlineParams.initState = 1;
     task->data[11] = 0;
     task->data[12] = 16;
     task->data[0] = 0;
@@ -538,7 +537,7 @@ static void AnimTask_MoveAttackerMementoShadow_Step(u8 taskId)
             task->data[0]++;
         break;
     case 3:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[0]++;
         break;
     case 4:
@@ -620,7 +619,6 @@ void AnimTask_MoveTargetMementoShadow(u8 taskId)
         }
 
         scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-        scanlineParams.initState = 1;
         ScanlineEffect_SetParams(scanlineParams);
         task->data[0]++;
         break;
@@ -703,7 +701,7 @@ static void AnimTask_MoveTargetMementoShadow_Step(u8 taskId)
         }
         break;
     case 3:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[0]++;
         break;
     case 4:

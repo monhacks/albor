@@ -256,7 +256,7 @@ void Task_HandleExpansionIntro(u8 taskId)
         if (tFrameCounter == 208)
         {
             tState++;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         }
         else if (gMain.newKeys != 0)
         {

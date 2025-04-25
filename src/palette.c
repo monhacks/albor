@@ -219,10 +219,10 @@ static u32 UpdateTimeOfDayPaletteFade(void)
     u16 *dst;
 
     if (!gFundidoPaletas.activo)
-        return PALETTE_FADE_STATUS_DONE;
+        return FUNDIDO_PALETAS_HECHO;
 
     if (IsSoftwarePaletteFadeFinishing())
-        return gFundidoPaletas.activo? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gFundidoPaletas.activo? FUNDIDO_PALETAS_ACTIVO : FUNDIDO_PALETAS_HECHO;
 
     if (!gFundidoPaletas.interruptorPaletasObjetos)
     {
@@ -255,16 +255,18 @@ static u32 UpdateTimeOfDayPaletteFade(void)
         u32 i;
         u32 j = 1;
         for (i = 0; i < 16; i++, j <<= 1) 
-        { // Mask out palettes that should not be light blended
-            if ((selectedPalettes & j) && !(GetSpritePaletteTagByPaletteNum(i) >> 15))
-            timePalettes |= j;
+        {
+            if ((selectedPalettes & j) && !(ES_INMUNE_BLEND(GetSpritePaletteTagByPaletteNum(i))))
+            {
+                timePalettes |= j;
+            }
         }
     } 
     else 
-    { // tile palettes, don't blend [13, 15]
-        timePalettes = selectedPalettes & 8191;
+    {
+        timePalettes = selectedPalettes & PALETAS_MAPA;
     }
-    TimeMixPalettes(timePalettes, src, dst, gFundidoPaletas.bld0, gFundidoPaletas.bld1, gFundidoPaletas.intensidad);
+    BlendColoresExterior(timePalettes, src, dst, gFundidoPaletas.bld0, gFundidoPaletas.bld1, gFundidoPaletas.intensidad);
 
     // palettes that were not blended above must be copied through
     if ((copyPalettes = ~timePalettes))
@@ -316,7 +318,7 @@ static u32 UpdateTimeOfDayPaletteFade(void)
         }
     }
 
-    return PALETTE_FADE_STATUS_ACTIVE;
+    return FUNDIDO_PALETAS_ACTIVO;
 }
 
 static u32 UpdateNormalPaletteFade(void)
@@ -325,11 +327,11 @@ static u32 UpdateNormalPaletteFade(void)
     u16 selectedPalettes;
 
     if (!gFundidoPaletas.activo)
-        return PALETTE_FADE_STATUS_DONE;
+        return FUNDIDO_PALETAS_HECHO;
 
     if (IsSoftwarePaletteFadeFinishing())
     {
-        return gFundidoPaletas.activo? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gFundidoPaletas.activo? FUNDIDO_PALETAS_ACTIVO : FUNDIDO_PALETAS_HECHO;
     }
     else
     {
@@ -399,7 +401,7 @@ static u32 UpdateNormalPaletteFade(void)
             }
         }
 
-        return PALETTE_FADE_STATUS_ACTIVE;
+        return FUNDIDO_PALETAS_ACTIVO;
     }
 }
 
@@ -486,10 +488,10 @@ static u32 UpdateFastPaletteFade(void)
     s8 b;
 
     if (!gFundidoPaletas.activo)
-        return PALETTE_FADE_STATUS_DONE;
+        return FUNDIDO_PALETAS_HECHO;
 
     if (IsSoftwarePaletteFadeFinishing())
-        return gFundidoPaletas.activo? PALETTE_FADE_STATUS_ACTIVE : PALETTE_FADE_STATUS_DONE;
+        return gFundidoPaletas.activo? FUNDIDO_PALETAS_ACTIVO : FUNDIDO_PALETAS_HECHO;
 
 
     if (gFundidoPaletas.interruptorPaletasObjetos)
@@ -573,7 +575,7 @@ static u32 UpdateFastPaletteFade(void)
         gFundidoPaletas.fundidoSoftwareAcabado = TRUE;
     }
 
-    return PALETTE_FADE_STATUS_ACTIVE;
+    return FUNDIDO_PALETAS_ACTIVO;
 }
 
 void EmpiezaFundidoPaletasHardware(u32 controlBlend, u32 retraso, u32 y, u32 targetY, u32 reseteoRegistroBlend)
@@ -597,12 +599,12 @@ void EmpiezaFundidoPaletasHardware(u32 controlBlend, u32 retraso, u32 y, u32 tar
 static u32 ActualizaFundidoPaletasHardware(void)
 {
     if (!gFundidoPaletas.activo)
-        return PALETTE_FADE_STATUS_DONE;
+        return FUNDIDO_PALETAS_HECHO;
 
     if (gFundidoPaletas.contadorRetraso < gFundidoPaletas.retraso)
     {
         gFundidoPaletas.contadorRetraso++;
-        return PALETTE_FADE_STATUS_DELAY;
+        return FUNDIDO_PALETAS_RETRASO;
     }
 
     gFundidoPaletas.contadorRetraso = 0;
@@ -636,7 +638,7 @@ static u32 ActualizaFundidoPaletasHardware(void)
         gFundidoPaletas.reseteoRegistroBlend = FALSE;
     }
 
-    return PALETTE_FADE_STATUS_ACTIVE;
+    return FUNDIDO_PALETAS_ACTIVO;
 }
 
 static void UpdateBlendRegisters(void)
@@ -725,13 +727,13 @@ void BlendPalettes(u32 palettes, u8 coeff, u32 color)
 }
 
 // Mezcla los colores de una paleta marcados en su .pla con el color por defecto si el color 0 no está marcado, y con este color si sí lo está.
-void BlendColoresExterior(u32 palettes, u16 *src, u16 *dst, struct ConfiguracionBlend *blend0, struct ConfiguracionBlend *blend1, u16 weight0)
+void BlendColoresExterior(u32 mascaraPaletas, u16 *src, u16 *dst, struct ConfiguracionBlend *blend0, struct ConfiguracionBlend *blend1, u16 weight0)
 {
     s32 r0, g0, b0, r1, g1, b1, defR, defG, defB, altR, altG, altB;
     u32 color0, coeff0, color1, coeff1;
     u32 defaultColor = RGB_AMARILLO_CLARO;
 
-    if (!palettes)
+    if (!mascaraPaletas)
     return;
 
     color0 = blend0->colorBlend;
@@ -751,10 +753,11 @@ void BlendColoresExterior(u32 palettes, u16 *src, u16 *dst, struct Configuracion
 
     do
     {
-        if (palettes & 1)
+        if (mascaraPaletas & 1)
         {
             u16 *srcEnd = src + 16;
-            u32 altBlendColor = *dst++ = *src++; // color 0 is copied through
+            u32 altBlendColor = *src;
+            *dst++ = *src++; //Se copia color 0
             if (altBlendColor >> 15)
             { // Transparency high bit set; alt blend color
                 altR = (altBlendColor << 27) >> 27;
@@ -815,9 +818,9 @@ void BlendColoresExterior(u32 palettes, u16 *src, u16 *dst, struct Configuracion
             src += 16;
             dst += 16;
         }
-        palettes >>= 1;
+        mascaraPaletas >>= 1;
     }
-    while (palettes);
+    while (mascaraPaletas);
 }
 
 // Apply weighted average to palettes, preserving high bits of dst throughout

@@ -1691,7 +1691,7 @@ void CB2_OpenFlyMap(void)
         gMain.state++;
         break;
     case 9:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         SetVBlankCallback(VBlankCB_FlyMap);
         gMain.state++;
         break;
@@ -1908,7 +1908,7 @@ static void CB_FadeInFlyMap(void)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sFlyMap->state++;
         break;
     case 1:
@@ -1955,7 +1955,7 @@ static void CB_ExitFlyMap(void)
     switch (sFlyMap->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sFlyMap->state++;
         break;
     case 1:

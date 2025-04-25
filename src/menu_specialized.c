@@ -46,7 +46,6 @@ static const struct ScanlineEffectParams sConditionGraphScanline =
 {
     .dmaDest = &REG_WIN0H,
     .dmaControl = SCANLINE_EFFECT_DMACNT_32BIT,
-    .initState = 1,
 };
 
 static const u8 sConditionToLineLength[MAX_CONDITION + 1] =

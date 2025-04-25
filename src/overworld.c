@@ -98,7 +98,6 @@ COMMON_DATA bool8 (*gFieldCallback2)(void) = NULL;
 
 u32 gHoraDelDia;
 struct ConfiguracionBlendHora blendHoraActual;
-u16 gTimeUpdateCounter; // playTimeVBlanks will eventually overflow, so this is used to update TOD
 
 // EWRAM vars
 EWRAM_DATA static u8 sObjectEventLoadFlag = 0;
@@ -214,7 +213,6 @@ static const struct ScanlineEffectParams sFlashEffectParams =
 {
     .dmaDest = &REG_WIN0H,
     .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    .initState = 1,
 };
 
 // code
@@ -1306,7 +1304,7 @@ void UpdateAltBgPalettes(u16 palettes)
         return;
     palettes &= ~((1 << NUM_PALS_IN_PRIMARY) - 1) | primary->swapPalettes;
     palettes &= ((1 << NUM_PALS_IN_PRIMARY) - 1) | (secondary->swapPalettes << NUM_PALS_IN_PRIMARY);
-    palettes &= 8190; // don't blend palette 0, [13,15]
+    palettes &= PALETAS_MAPA ^ (1 << 0); // don't blend palette 0, [13,15]
     palettes >>= 1; // start at palette 1
     if (!palettes)
         return;
@@ -1334,30 +1332,30 @@ void UpdatePalettesWithTime(u32 palettes)
     {
         u32 i;
         u32 mask = 1 << 16;
-        if (palettes >= 65536)
+        if (palettes & PALETAS_OBJETOS)
             for (i = 0; i < 16; i++, mask <<= 1)
-                if (GetSpritePaletteTagByPaletteNum(i) >> 15) // Don't blend special sprite palette tags
+                if (ES_INMUNE_BLEND(GetSpritePaletteTagByPaletteNum(i)))
                     palettes &= ~(mask);
 
-        palettes &= 4294909951; // Don't blend UI BG palettes [13,15]
+        palettes &= PALETAS_MAPA | PALETAS_OBJETOS;
         if (!palettes)
             return;
-        TimeMixPalettes(palettes, gPlttBufferUnfaded, gPlttBufferFaded, (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
+        BlendColoresExterior(palettes, gPlttBufferUnfaded, gPlttBufferFaded, (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
     }
 }
 
-u8 UpdateSpritePaletteWithTime(u8 paletteNum) 
+u32 UpdateSpritePaletteWithTime(u8 paletteNum) 
 {
     if (MapaTieneLuzNatural(gMapHeader.mapType)) 
     {
-        u16 offset;
-        if (GetSpritePaletteTagByPaletteNum(paletteNum) >> 15)
+        if (ES_INMUNE_BLEND(GetSpritePaletteTagByPaletteNum(paletteNum)))
             return paletteNum;
-        offset = (paletteNum + 16) << 4;
-        TimeMixPalettes(1, gPlttBufferUnfaded + offset, gPlttBufferFaded + offset, (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
+        BlendColoresExterior(PALETA(1), &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoInicial], (struct ConfiguracionBlend *)&gBlendHoraDia[blendHoraActual.tiempoFinal], blendHoraActual.intensidad);
     }
   return paletteNum;
 }
+
+static u8 sUltimoMinuto = 0;
 
 void OverworldBasic(void)
 {
@@ -1370,38 +1368,43 @@ void OverworldBasic(void)
     UpdatePaletteFade();
     UpdateTilesetAnimations();
     DoScheduledBgTilemapCopiesToVram();
-    // Every minute if no palette fade is active, update TOD blending as needed
-    if (!gFundidoPaletas.activo && ++gTimeUpdateCounter >= 180) 
+
+    const struct Tiempo* hora = HoraActual();
+    if (!gFundidoPaletas.activo && hora->minutes != sUltimoMinuto)
     {
+        sUltimoMinuto = hora->minutes;
+
         struct ConfiguracionBlendHora configuracionBlendGuardada = 
         {
             .tiempoInicial = blendHoraActual.tiempoInicial,
             .tiempoFinal = blendHoraActual.tiempoFinal,
             .intensidad = blendHoraActual.intensidad,
         };
-        gTimeUpdateCounter = 0;
         UpdateTimeOfDay();
         if (configuracionBlendGuardada.tiempoInicial != blendHoraActual.tiempoInicial
         || configuracionBlendGuardada.tiempoFinal != blendHoraActual.tiempoFinal
         || configuracionBlendGuardada.intensidad != blendHoraActual.intensidad) 
         {
-            UpdateAltBgPalettes(PALETTES_BG);
-            UpdatePalettesWithTime(PALETTES_ALL);
+            UpdateAltBgPalettes(PALETAS_FONDOS);
+            UpdatePalettesWithTime(PALETAS_COMPLETAS);
         }
     }
 }
 
 void CB2_Overworld(void)
 {
-    bool32 fading = (gFundidoPaletas.activo!= 0);
+    bool32 fading = (gFundidoPaletas.activo != 0);
     if (fading)
         SetVBlankCallback(NULL);
+
     OverworldBasic();
+
     if (fading)
     {
         SetFieldVBlankCallback();
         return;
     }
+    return;
 }
 
 void SetMainCallback1(MainCallback cb)

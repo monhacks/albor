@@ -17,7 +17,6 @@ extern u16 *gOverworldTilemapBuffer_Bg3;
 extern void (*gFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 extern u32 gHoraDelDia;
-extern u16 gTimeUpdateCounter;
 
 extern struct ConfiguracionBlendHora blendHoraActual;
 

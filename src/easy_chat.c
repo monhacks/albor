@@ -1317,8 +1317,8 @@ static void Task_EasyChatScreen(u8 taskId)
     {
     case MAINSTATE_FADE_IN:
         SetVBlankCallback(VBlankCB_EasyChatScreen);
-        BlendPalettes(PALETTES_ALL, 16, 0);
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 16, 0, RGB_BLACK);
         tState = MAINSTATE_WAIT_FADE_IN;
         break;
     case MAINSTATE_HANDLE_INPUT:
@@ -1326,14 +1326,14 @@ static void Task_EasyChatScreen(u8 taskId)
         if (IsFuncIdForQuizLadyScreen(funcId))
         {
             // Fade to Quiz Lady screen
-            BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
             tState = MAINSTATE_TO_QUIZ_LADY;
             tFuncId = funcId;
         }
         else if (funcId == ECFUNC_EXIT)
         {
             // Fade and exit Easy Chat
-            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_BLACK);
             tState = MAINSTATE_EXIT;
         }
         else if (funcId != ECFUNC_NONE)

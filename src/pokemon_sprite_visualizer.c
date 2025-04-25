@@ -1168,7 +1168,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             LoadPalette(GetTextWindowPalette(0), PLTT_ID(15), 64);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
@@ -1637,7 +1637,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Exit_PokemonSpriteVisualizer;
             PlaySE(SE_PC_OFF);
         }

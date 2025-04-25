@@ -1024,7 +1024,7 @@ static bool8 Blur_Main(struct Task *task)
     {
         task->tDelay = 4;
         if (++task->tCounter == 10)
-            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_BLACK);
         SetGpuReg(REG_OFFSET_MOSAIC, (task->tCounter & 15) * 17);
         if (task->tCounter > 14)
             task->tState++;
@@ -1061,7 +1061,7 @@ static bool8 Swirl_Init(struct Task *task)
 {
     InitTransitionData();
     ScanlineEffect_Clear();
-    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 4, 0, 16, RGB_BLACK);
     SetSinWave((s16*)gScanlineEffectRegBuffers[1], sTransitionData->cameraX, 0, 2, 0, DISPLAY_HEIGHT);
 
     SetVBlankCallback(VBlankCB_Swirl);
@@ -1126,7 +1126,7 @@ static bool8 Shuffle_Init(struct Task *task)
     InitTransitionData();
     ScanlineEffect_Clear();
 
-    BeginNormalPaletteFade(PALETTES_ALL, 4, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 4, 0, 16, RGB_BLACK);
     memset(gScanlineEffectRegBuffers[1], sTransitionData->cameraY, DISPLAY_HEIGHT * 2);
 
     SetVBlankCallback(VBlankCB_Shuffle);
@@ -1454,7 +1454,7 @@ static bool8 Kyogre_PaletteBrighten(struct Task *task)
 
 static bool8 WeatherDuo_FadeOut(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_OBJECTS | (1 << 15), 1, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_OBJETOS | (1 << 15), 1, 0, 16, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1544,7 +1544,7 @@ static bool8 FramesCountdown(struct Task *task)
 
 static bool8 WeatherTrio_BgFadeBlack(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_BG, 1, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_FONDOS, 1, 0, 16, RGB_BLACK);
     task->tState++;
     return FALSE;
 }
@@ -1989,7 +1989,7 @@ static bool8 Ripple_Main(struct Task *task)
     if (++task->tTimer == 81)
     {
         task->tFadeStarted++;
-        BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
     }
 
     if (task->tFadeStarted && !gFundidoPaletas.activo)
@@ -2355,7 +2355,7 @@ static bool8 Mugshot_GradualWhiteFade(struct Task *task)
 static bool8 Mugshot_InitFadeWhiteToBlack(struct Task *task)
 {
     sTransitionData->VBlank_DMA = FALSE;
-    BlendPalettes(PALETTES_ALL, 16, RGB_WHITE);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_WHITE);
     sTransitionData->BLDCNT = 0xFF;
     task->tTimer = 0;
 
@@ -3317,7 +3317,7 @@ static bool8 Rayquaza_FadeToBlack(struct Task *task)
     {
         task->tState++;
         task->tTimer = 0;
-        BeginNormalPaletteFade(PALETTES_OBJECTS | (1 << 15), 2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_OBJETOS | (1 << 15), 2, 0, 16, RGB_BLACK);
     }
 
     return FALSE;
@@ -3335,8 +3335,8 @@ static bool8 Rayquaza_WaitFade(struct Task *task)
 
 static bool8 Rayquaza_SetBlack(struct Task *task)
 {
-    BlendPalettes(PALETTES_BG & ~(1 << 15), 8, RGB_BLACK);
-    BlendPalettes(PALETTES_OBJECTS | (1 << 15), 0, RGB_BLACK);
+    BlendPalettes(PALETAS_FONDOS & ~(1 << 15), 8, RGB_BLACK);
+    BlendPalettes(PALETAS_OBJETOS | (1 << 15), 0, RGB_BLACK);
 
     task->tState++;
     return FALSE;
@@ -3465,7 +3465,7 @@ static bool8 WhiteBarsFade_WaitBars(struct Task *task)
     sTransitionData->VBlank_DMA = 0;
     if (sTransitionData->counter >= NUM_WHITE_BARS)
     {
-        BlendPalettes(PALETTES_ALL, 16, RGB_WHITE);
+        BlendPalettes(PALETAS_COMPLETAS, 16, RGB_WHITE);
         task->tState++;
     }
     return FALSE;
@@ -3825,7 +3825,7 @@ static bool8 TransitionIntro_FadeToGray(struct Task *task)
             task->tBlend = 16;
         if (paletteNum < 16)
             task->tShadowColor = gPlttBufferFaded[index];
-        BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
+        BlendPalettes(PALETAS_COMPLETAS, task->tBlend, RGB(11, 11, 11));
         if (paletteNum < 16)
             gPlttBufferFaded[index] = task->tShadowColor;
     }
@@ -3852,7 +3852,7 @@ static bool8 TransitionIntro_FadeFromGray(struct Task *task)
         task->tBlend -= task->tFadeFromGrayIncrement;
         if (task->tBlend < 0)
             task->tBlend = 0;
-        BlendPalettes(PALETTES_ALL, task->tBlend, RGB(11, 11, 11));
+        BlendPalettes(PALETAS_COMPLETAS, task->tBlend, RGB(11, 11, 11));
         // Restore BLDCNT
         SetGpuReg(REG_OFFSET_BLDCNT, task->tBldCntSaved);
         if (paletteNum < 16) 
@@ -3924,7 +3924,7 @@ void GetBg0TilesDst(u16 **tilemap, u16 **tileset)
 
 static void FadeScreenBlack(void)
 {
-    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
 }
 
 static void SetSinWave(s16 *array, s16 sinAdd, s16 index, s16 indexIncrementer, s16 amplitude, s16 arrSize)
@@ -4227,7 +4227,7 @@ static bool8 FrontierLogoWave_Main(struct Task *task)
     if (++task->tTimer == 101)
     {
         task->tStartedFade++;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     }
 
     if (task->tStartedFade && !gFundidoPaletas.activo)
@@ -4351,7 +4351,7 @@ static bool8 FrontierSquares_Shrink(struct Task *task)
             }
             break;
         case 1:
-            BlendPalettes(PALETTES_ALL & ~(1 << 15), 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS & ~(1 << 15), 16, RGB_BLACK);
             LZ77UnCompVram(sFrontierSquares_EmptyBg_Tileset, tileset);
             break;
         case 2:
@@ -4428,7 +4428,7 @@ static bool8 FrontierSquaresSpiral_Outward(struct Task *task)
 static bool8 FrontierSquaresSpiral_SetBlack(struct Task *task)
 {
     BlendPalette(BG_PLTT_ID(14), 16, 3, RGB_BLACK);
-    BlendPalettes(PALETTES_ALL & ~(1 << 15 | 1 << 14), 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS & ~(1 << 15 | 1 << 14), 16, RGB_BLACK);
 
     task->tSquareNum = 0;
     task->tFadeFlag = 0;
@@ -4476,7 +4476,7 @@ static bool8 FrontierSquares_End(struct Task *task)
 {
     FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
-    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
     DestroyTask(FindTaskIdByFunc(task->func));
     return FALSE;
 }
@@ -4567,7 +4567,7 @@ static bool8 FrontierSquaresScroll_Draw(struct Task *task)
 // set it to black so it's not revealed when the squares are removed.
 static bool8 FrontierSquaresScroll_SetBlack(struct Task *task)
 {
-    BlendPalettes(PALETTES_ALL & ~(1 << 15), 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS & ~(1 << 15), 16, RGB_BLACK);
 
     task->tSquareNum = 0;
 
@@ -4605,7 +4605,7 @@ static bool8 FrontierSquaresScroll_End(struct Task *task)
 
     FillBgTilemapBufferRect_Palette0(0, 1, 0, 0, 32, 32);
     CopyBgTilemapBufferToVram(0);
-    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
 
     DestroyTask(FindTaskIdByFunc(task->func));
     task->tState++; // Changing value of a destroyed task

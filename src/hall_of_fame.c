@@ -389,7 +389,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!LoadHofBgs())
         {
             SetVBlankCallback(VBlankCB_HallOfFame);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
             gMain.state++;
         }
         break;
@@ -638,7 +638,7 @@ static void Task_Hof_PaletteFadeAndPrintWelcomeText(u8 taskId)
 {
     u16 i;
 
-    BeginNormalPaletteFade(PALETTES_OBJECTS, 0, 0, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_OBJETOS, 0, 0, 0, RGB_BLACK);
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (gTasks[taskId].tMonSpriteId(i) != SPRITE_NONE)
@@ -738,7 +738,7 @@ static void Task_Hof_ExitOnKeyPressed(u8 taskId)
 static void Task_Hof_HandlePaletteOnExit(u8 taskId)
 {
     CpuCopy16(gPlttBufferFaded, gPlttBufferUnfaded, PLTT_SIZE);
-    BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 8, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_Hof_HandleExit;
 }
 
@@ -938,7 +938,7 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
         }
     }
 
-    BlendPalettes(PALETTES_OBJECTS, 0xC, RGB(16, 29, 24));
+    BlendPalettes(PALETAS_OBJETOS, 0xC, RGB(16, 29, 24));
 
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tCurrPageNo, STR_CONV_MODE_RIGHT_ALIGN, 3);
     StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
@@ -970,7 +970,7 @@ static void Task_HofPC_PrintMonInfo(u8 taskId)
 
     currMonID = gTasks[taskId].tMonSpriteId(gTasks[taskId].tCurrMonId);
     gSprites[currMonID].oam.priority = 0;
-    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ PALETTES_OBJECTS;
+    sHofFadePalettes = (0x10000 << gSprites[currMonID].oam.paletteNum) ^ PALETAS_OBJETOS;
     BlendPalettesUnfaded(sHofFadePalettes, 0xC, RGB(16, 29, 24));
 
     currMon = &savedTeams->mon[gTasks[taskId].tCurrMonId];

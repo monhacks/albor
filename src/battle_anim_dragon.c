@@ -528,7 +528,6 @@ void AnimTask_DragonDanceWaver(u8 taskId)
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    scanlineParams.initState = 1;
     y = GetBattlerYCoordWithElevation(gBattleAnimAttacker);
     task->data[3] = y - 32;
     task->data[4] = y + 32;
@@ -574,7 +573,7 @@ static void AnimTask_DragonDanceWaver_Step(u8 taskId)
         UpdateDragonDanceScanlineEffect(task);
         break;
     case 3:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[0]++;
         break;
     case 4:

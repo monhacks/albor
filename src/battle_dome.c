@@ -479,7 +479,6 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 {
     .dmaDest = &REG_BG3CNT,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
-    .initState = 1,
 };
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
@@ -2397,7 +2396,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
     case STATE_FADE_IN:
         if (!gFundidoPaletas.activo)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].tState = STATE_WAIT_FADE;
         }
         break;
@@ -2410,7 +2409,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
         switch (i)
         {
         case INFOCARD_INPUT_AB:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_CARD;
             break;
         case TRAINERCARD_INPUT_UP ... TRAINERCARD_INPUT_RIGHT:

@@ -376,7 +376,7 @@ static void AnimTask_DigBounceMovement(u8 taskId)
         }
         break;
     case 3:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[0]++;
         break;
     case 4:
@@ -463,7 +463,7 @@ static void AnimTask_DigRiseUpFromHole(u8 taskId)
         gSprites[task->data[10]].y2 -= 8;
         if (gSprites[task->data[10]].y2 == 0)
         {
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
             task->data[0]++;
         }
         break;
@@ -507,7 +507,6 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    scanlineParams.initState = 1;
     ScanlineEffect_SetParams(scanlineParams);
 }
 

@@ -826,7 +826,7 @@ void AnimTask_TintPalettes(u8 taskId)
     targetBattler = gBattleAnimTarget;
 
     if (gTasks[taskId].tFlagsScenery & (1 << 8))
-        selectedPalettes = PALETTES_BG;
+        selectedPalettes = PALETAS_FONDOS;
 
     if (gTasks[taskId].tFlagsScenery & 1)
     {

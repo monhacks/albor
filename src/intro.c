@@ -1078,7 +1078,7 @@ static u8 SetUpCopyrightScreen(void)
         ResetTasks();
         ResetSpriteData();
         FreeAllSpritePalettes();
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_WHITEALPHA);
         SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0)
                                    | BGCNT_CHARBASE(0)
                                    | BGCNT_SCREENBASE(7)
@@ -1096,7 +1096,7 @@ static u8 SetUpCopyrightScreen(void)
         gMain.state++;
         break;
     case COPYRIGHT_START_FADE:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK); //ojo
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK); //ojo
         gMain.state++;
         break;
     case COPYRIGHT_START_INTRO:
@@ -1179,7 +1179,7 @@ void Task_Scene1_Load(u8 taskId)
 
 static void Task_Scene1_FadeIn(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_Intro);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_Scene1_WaterDrops;
@@ -1313,7 +1313,7 @@ static void Task_Scene1_PanUp(u8 taskId)
         if (gIntroFrameCounter > TIMER_END_SCENE_1)
         {
             // Fade to white
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_WHITEALPHA);
             gTasks[taskId].func = Task_Scene1_End;
         }
     }
@@ -1381,7 +1381,7 @@ static void Task_Scene2_CreateSprites(u8 taskId)
     gTasks[taskId].tFlygonSpriteId = spriteId;
 
     // Fade in and start bike ride
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_WHITEALPHA);
     SetVBlankCallback(VBlankCB_Intro);
     gTasks[taskId].tBgAnimTaskId = CreateBicycleBgAnimationTask(1, 0x4000, 0x400, 0x10);
     SetIntroPart2BgCnt(1);
@@ -1402,7 +1402,7 @@ static void Task_Scene2_BikeRide(u8 taskId)
     if (gIntroFrameCounter > TIMER_END_SCENE_2)
     {
         // Fade out to next scene
-        BeginNormalPaletteFade(PALETTES_ALL, 8, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 8, 0, 16, RGB_WHITEALPHA);
         gTasks[taskId].func = Task_Scene2_End;
     }
 
@@ -1702,7 +1702,7 @@ static void Task_Scene3_Load(u8 taskId)
     PanFadeAndZoomScreen(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, 0, 0);
     ResetSpriteData();
     FreeAllSpritePalettes();
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_WHITEALPHA);
     SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(3) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(8) | BGCNT_256COLOR | BGCNT_AFF256x256);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON);
     gTasks[taskId].func = Task_Scene3_SpinPokeball;
@@ -1726,7 +1726,7 @@ static void Task_Scene3_SpinPokeball(u8 taskId)
     PanFadeAndZoomScreen(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, SAFE_DIV(0x10000, gTasks[taskId].tZoomDiv), gTasks[taskId].tAlpha);
 
     if (gIntroFrameCounter == TIMER_POKEBALL_FADE)
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_WHITEALPHA);
 }
 
 #undef tAlpha
@@ -1786,7 +1786,7 @@ static void Task_Scene3_InitGroudonBg(u8 taskId)
                                 | DISPCNT_BG2_ON
                                 | DISPCNT_OBJ_ON
                                 | DISPCNT_WIN0_ON);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITEALPHA);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_WHITEALPHA);
     gTasks[taskId].tWinPos = 0;
     gTasks[taskId].tScreenX = 0xFFA0;
     gTasks[taskId].tScreenY = 0xFF51;
@@ -1921,7 +1921,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         tZoom = Sin((tTrigIdx & 0xFF00) >> 8, 64) + 256;
         if (tScreenX == 120)
         {
-            BeginNormalPaletteFade(PALETTES_ALL & ~1, 3, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS & ~1, 3, 0, 16, RGB_WHITE);
             tZoom = 256;
             tYShake = 0;
             tState++;
@@ -1937,7 +1937,7 @@ static void Task_Scene3_Groudon(u8 taskId)
         if (!gFundidoPaletas.activo)
         {
             gTasks[taskId].func = Task_Scene3_LoadKyogre;
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         }
         break;
     }
@@ -2027,7 +2027,7 @@ static void Task_Scene3_LoadKyogre(u8 taskId)
     LZDecompressVram(gIntroKyogreBg_Tilemap, (void *)(BG_SCREEN_ADDR(28)));
     LoadCompressedSpriteSheet(sSpriteSheet_Bubbles);
     LoadSpritePalette(sSpritePalette_Bubbles);
-    BeginNormalPaletteFade(PALETTES_ALL & ~1, 0, 16, 0, RGB_WHITEALPHA);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS & ~1, 0, 16, 0, RGB_WHITEALPHA);
     gTasks[taskId].func = Task_Scene3_Kyogre;
     gTasks[taskId].tState = 0;
     gTasks[taskId].tScreenX = 336;
@@ -2161,7 +2161,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         gTasks[taskId].tScreenX = Sin(tTrigIdx, 0x3C) + 88;
         if (tTrigIdx == 64)
         {
-            BeginNormalPaletteFade(PALETTES_ALL & ~1, 3, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS & ~1, 3, 0, 16, RGB_WHITE);
             tState++;
         }
         break;
@@ -2176,7 +2176,7 @@ static void Task_Scene3_Kyogre(u8 taskId)
         if (!gFundidoPaletas.activo)
         {
             gTasks[taskId].func = Task_Scene3_LoadClouds1;
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         }
         break;
     }
@@ -2369,7 +2369,7 @@ static void Task_Scene3_Clouds(u8 taskId)
         if (--tCloudPos == 0)
         {
             // Start fade in from white, set cloud starting positions
-            BeginNormalPaletteFade(PALETTES_ALL & ~1, 0, 16, 0, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS & ~1, 0, 16, 0, RGB_WHITEALPHA);
             tCloudPos = 80 << 8;
             tState++;
         }
@@ -2377,7 +2377,7 @@ static void Task_Scene3_Clouds(u8 taskId)
     case 1:
         // Start fading out
         if (tCloudPos == 40 << 8)
-            BeginNormalPaletteFade(PALETTES_BG & ~1, 3, 0, 16, RGB(9, 10, 10));
+            BeginNormalPaletteFade(PALETAS_FONDOS & ~1, 3, 0, 16, RGB(9, 10, 10));
 
         // Move clouds inward toward each other
         if (tCloudPos != 0)
@@ -2504,7 +2504,7 @@ static void Task_Scene3_LoadRayquazaAttack(u8 taskId)
                                 | DISPCNT_OBJ_ON
                                 | DISPCNT_WIN0_ON);
     gTasks[taskId].func = Task_Scene3_Rayquaza;
-    BeginNormalPaletteFade(PALETTES_BG & ~(0x21), 0, 16, 0, RGB(9, 10, 10));
+    BeginNormalPaletteFade(PALETAS_FONDOS & ~(0x21), 0, 16, 0, RGB(9, 10, 10));
     gTasks[taskId].tState = 0;
     gTasks[taskId].data[1] = 0xA8;
     gTasks[taskId].data[2] = -0x10;
@@ -2652,7 +2652,7 @@ static void Task_RayquazaAttack(u8 taskId)
     case 4:
         if (--data[3] == 0)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_WHITE);
             tState++;
         }
         break;

@@ -2246,7 +2246,6 @@ void AnimTask_SketchDrawMon(u8 taskId)
     }
 
     params.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    params.initState = 1;
     ScanlineEffect_SetParams(params);
     task->func = AnimTask_SketchDrawMon_Step;
 }
@@ -2290,7 +2289,7 @@ static void AnimTask_SketchDrawMon_Step(u8 taskId)
 
             if (++task->data[3] >= task->data[15])
             {
-                gScanlineEffect.state = 3;
+                gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
                 DestroyAnimVisualTask(taskId);
             }
         }

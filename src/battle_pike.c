@@ -973,7 +973,7 @@ static bool8 StatusInflictionFadeOut(struct Task *task)
         task->data[7] += task->data[4];
         if (task->data[7] > 16)
             task->data[7] = 16;
-        BlendPalettes(PALETTES_ALL, task->data[7], RGB(11, 11, 11));
+        BlendPalettes(PALETAS_COMPLETAS, task->data[7], RGB(11, 11, 11));
     }
 
     if (task->data[7] >= 16)
@@ -992,7 +992,7 @@ static bool8 StatusInflictionFadeIn(struct Task *task)
         task->data[7] -= task->data[5];
         if (task->data[7] < 0)
             task->data[7] = 0;
-        BlendPalettes(PALETTES_ALL, task->data[7], RGB(11, 11, 11));
+        BlendPalettes(PALETAS_COMPLETAS, task->data[7], RGB(11, 11, 11));
     }
 
     if (task->data[7] == 0)

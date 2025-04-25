@@ -3,14 +3,22 @@
 
 #define PLTT_BUFFER_SIZE (PLTT_SIZE / sizeof(u16))
 
-#define PALETTE_FADE_STATUS_DELAY 2
-#define PALETTE_FADE_STATUS_ACTIVE 1
-#define PALETTE_FADE_STATUS_DONE 0
-#define PALETTE_FADE_STATUS_LOADING 255
+enum EstadosFundidoPaletas
+{
+  FUNDIDO_PALETAS_HECHO,
+  FUNDIDO_PALETAS_ACTIVO,
+  FUNDIDO_PALETAS_RETRASO,
+};
 
-#define PALETTES_BG      65535
-#define PALETTES_OBJECTS 0xFFFF0000
-#define PALETTES_ALL     (PALETTES_BG | PALETTES_OBJECTS)
+#define PALETA(n) (1 << (n))
+
+#define RANGO_MASCARA_PALETAS(inicio, fin) (((1 << ((fin) - (inicio) + 1)) - 1) << (inicio)) //desde paleta inicial a final
+
+#define PALETAS_FONDOS    RANGO_MASCARA_PALETAS(0, 15)
+#define PALETAS_OBJETOS   RANGO_MASCARA_PALETAS(16, 31)
+#define PALETAS_COMPLETAS (PALETAS_FONDOS | PALETAS_OBJETOS)
+
+#define PALETAS_MAPA      RANGO_MASCARA_PALETAS(0, 12) //modificar, probablemente
 
 #define PLTT_ID(n) ((n) * 16)
 #define BG_PLTT_OFFSET 0
@@ -18,6 +26,9 @@
 #define BG_PLTT_ID(n) (BG_PLTT_OFFSET + PLTT_ID(n))
 #define OBJ_PLTT_ID(n) (OBJ_PLTT_OFFSET + PLTT_ID(n))
 #define OBJ_PLTT_ID2(n) (PLTT_ID((n) + 16))
+
+#define FLAG_INMUNE_BLEND     (1 << 15)
+#define ES_INMUNE_BLEND(tag)  ((tag) & FLAG_INMUNE_BLEND)
 
 struct ConfiguracionBlend 
 {
@@ -33,7 +44,7 @@ struct ConfiguracionBlendHora
   u16 altWeight;
 };
 
-enum Fundidos
+enum TiposFundido
 {
   FUNDIDO_DESDE_NEGRO,
   FUNDIDO_A_NEGRO,
@@ -93,7 +104,7 @@ void BlendPalettes(u32 selectedPalettes, u8 coeff, u32 color);
 void BlendPalettesFine(u32 palettes, u16 *src, u16 *dst, u32 coeff, u32 color);
 void BlendPalettesUnfaded(u32 selectedPalettes, u8 coeff, u32 color);
 void BlendPalettesGradually(u32 selectedPalettes, s8 delay, u8 coeff, u8 coeffTarget, u16 color, u8 priority, u8 id);
-void TimeMixPalettes(u32, u16 *, u16 *, struct ConfiguracionBlend *, struct ConfiguracionBlend *, u16);
+void BlendColoresExterior(u32 mascaraPaletas, u16 *src, u16 *dst, struct ConfiguracionBlend *blend0, struct ConfiguracionBlend *blend1, u16 weight0);
 void AvgPaletteWeighted(u16 *src0, u16 *src1, u16 *dst, u16 intensidadRelativa);
 
 static inline void CambiaColorBackdrop(u32 color)

@@ -753,7 +753,7 @@ static void AnimTask_SpiteTargetShadow_Step3(u8 taskId)
     switch (task->data[15])
     {
     case 0:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[14] = GetAnimBattlerSpriteId(ANIM_TARGET);
         if (rank == 1)
             ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG1_ON);

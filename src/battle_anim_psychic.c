@@ -1148,7 +1148,6 @@ void AnimTask_ExtrasensoryDistortion(u8 taskId)
     }
 
     scanlineParams.dmaControl = SCANLINE_EFFECT_DMACNT_16BIT;
-    scanlineParams.initState = 1;
     ScanlineEffect_SetParams(scanlineParams);
     task->func = AnimTask_ExtrasensoryDistortion_Step;
 }
@@ -1181,7 +1180,7 @@ static void AnimTask_ExtrasensoryDistortion_Step(u8 taskId)
             task->data[0]++;
         break;
     case 1:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         task->data[0]++;
         break;
     case 2:

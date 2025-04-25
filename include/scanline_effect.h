@@ -14,11 +14,17 @@
 #define SCANLINE_EFFECT_REG_BG3HOFS (REG_ADDR_BG3HOFS - REG_ADDR_BG0HOFS)
 #define SCANLINE_EFFECT_REG_BG3VOFS (REG_ADDR_BG3VOFS - REG_ADDR_BG0HOFS)
 
+enum EstadosEfectoBarrido
+{
+    EFECTO_BARRIDO_PARADO,
+    EFECTO_BARRIDO_PETICION_PARAR,
+    EFECTO_BARRIDO_ACTIVADO,
+};
+
 struct ScanlineEffectParams
 {
     volatile void *dmaDest;
     u32 dmaControl;
-    u8 initState;
 };
 
 struct ScanlineEffect
@@ -28,7 +34,7 @@ struct ScanlineEffect
     u32 dmaControl;
     void (*setFirstScanlineReg)(void);
     u8 srcBuffer;
-    u8 state;
+    u8 estado;
     u8 waveTaskId;
 };
 

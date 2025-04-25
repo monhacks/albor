@@ -6955,7 +6955,7 @@ static void Cmd_yesnoboxlearnmove(void)
             if (gBattleCommunication[1] == 0)
             {
                 HandleBattleWindow(YESNOBOX_X_Y, WINDOW_CLEAR);
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+                BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
                 gBattleScripting.learnMoveState++;
             }
             else
@@ -14159,7 +14159,7 @@ static void Cmd_displaydexinfo(void)
     switch (gBattleCommunication[0])
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gBattleCommunication[0]++;
         break;
     case 1:
@@ -14191,7 +14191,7 @@ static void Cmd_displaydexinfo(void)
     case 4:
         if (!IsDma3ManagerBusyWithBgCopy())
         {
-            BeginNormalPaletteFade(PALETTES_BG, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_FONDOS, 0, 16, 0, RGB_BLACK);
             ShowBg(0);
             ShowBg(3);
             gBattleCommunication[0]++;

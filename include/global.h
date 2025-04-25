@@ -311,7 +311,7 @@ struct BattleFrontier
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
-extern u8 UpdateSpritePaletteWithTime(u8);
+extern u32 UpdateSpritePaletteWithTime(u8);
 
 struct SecretBaseParty
 {

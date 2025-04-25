@@ -578,7 +578,7 @@ static void CB2_EggHatch(void)
     switch (sEggHatchData->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sEggHatchData->eggSpriteId = CreateSprite(&sSpriteTemplate_Egg, EGG_X, EGG_Y, 5);
         ShowBg(0);
         ShowBg(1);
@@ -668,7 +668,7 @@ static void CB2_EggHatch(void)
         }
         break;
     case 11:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sEggHatchData->state++;
         break;
     case 12:
@@ -793,7 +793,7 @@ static void SpriteCB_Egg_Hatch(struct Sprite *sprite)
 
     // Fade to white to hide transition from egg to Pokémon
     if (sprite->sTimer == 0)
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_WHITEALPHA);
 
     // Create a shower of 16 egg shards in 4 groups of 4
     if ((u32)sprite->sTimer < 4)
@@ -825,7 +825,7 @@ static void SpriteCB_Egg_Reveal(struct Sprite *sprite)
 
     // Fade back from white for reveal
     if (sprite->sTimer == 8)
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 16, 0, RGB_WHITEALPHA);
 
     if (sprite->sTimer <= 9)
         gSprites[sEggHatchData->monSpriteId].y--;

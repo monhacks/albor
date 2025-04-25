@@ -519,11 +519,11 @@ static bool8 LoadPyramidBagMenu(void)
             gMain.state++;
             break;
         case 15:
-            BlendPalettes(PALETTES_ALL, 16, 0);
+            BlendPalettes(PALETAS_COMPLETAS, 16, 0);
             gMain.state++;
             break;
         case 16:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
             gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
             gMain.state++;
             break;
@@ -859,7 +859,7 @@ static void PrintSelectorArrowAtPos(u8 y, u8 colorId)
 
 void CloseBattlePyramidBag(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ClosePyramidBag;
 }
 

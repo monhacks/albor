@@ -1760,12 +1760,12 @@ static void Task_InitPokeStorage(u8 taskId)
         SetMonIconTransparency();
         if (!sStorage->isReopening)
         {
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             SetPokeStorageTask(Task_ShowPokeStorage);
         }
         else
         {
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             SetPokeStorageTask(Task_ReshowPokeStorage);
         }
         SetVBlankCallback(VBlankCB_PokeStorage);
@@ -1800,7 +1800,7 @@ static void Task_ReshowPokeStorage(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 0, RGB_BLACK);
         EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_EFFECT_BLEND, 0, 16, 0, TRUE);
         EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
         SetHBlankCallback(HBlankCB_PokeStorage);
@@ -2955,7 +2955,7 @@ static void Task_NameBox(u8 taskId)
         break;
     case 1:
         if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering
@@ -2978,7 +2978,7 @@ static void Task_ShowMonSummary(u8 taskId)
         break;
     case 1:
         if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering
@@ -3000,7 +3000,7 @@ static void Task_GiveItemFromBag(u8 taskId)
         break;
     case 1:
         if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering

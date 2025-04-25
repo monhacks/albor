@@ -401,8 +401,8 @@ static void Task_TrainerCard(u8 taskId)
         break;
     // Fade in
     case 7:
-        BlendPalettes(PALETTES_ALL, 16, sData->blendColor);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, sData->blendColor);
+        BlendPalettes(PALETAS_COMPLETAS, 16, sData->blendColor);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, sData->blendColor);
         SetVBlankCallback(VblankCb_TrainerCard);
         sData->mainState++;
         break;
@@ -433,7 +433,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, sData->blendColor);
             sData->mainState = STATE_CLOSE_CARD;
         }
         break;
@@ -444,7 +444,7 @@ static void Task_TrainerCard(u8 taskId)
         {
             if (gReceivedRemoteLinkPlayers)
             {
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
+                BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, sData->blendColor);
                 sData->mainState = STATE_CLOSE_CARD;
             }
             else
@@ -456,7 +456,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, sData->blendColor);
             sData->mainState = STATE_CLOSE_CARD;
         }
         break;
@@ -470,7 +470,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_CLOSE_CARD_LINK:
         if (!gReceivedRemoteLinkPlayers)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, sData->blendColor);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, sData->blendColor);
             sData->mainState = STATE_CLOSE_CARD;
         }
         break;

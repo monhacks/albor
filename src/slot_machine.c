@@ -1003,7 +1003,7 @@ static void Task_FadeToSlotMachine(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -1282,7 +1282,7 @@ static void Task_SlotMachine(u8 taskId)
 // SLOTTASK_UNFADE
 static bool8 SlotTask_UnfadeScreen(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
     sSlotMachine->state++; // SLOTTASK_WAIT_FADE
     return FALSE;
@@ -1725,7 +1725,7 @@ static bool8 SlotTask_WaitMsg_NoMoreCoins(struct Task *task)
 static bool8 SlotTask_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     sSlotMachine->state++; // SLOTTASK_FREE
     return FALSE;
 }
@@ -3899,7 +3899,7 @@ static void Task_InfoBox(u8 taskId)
 
 static void InfoBox_FadeIn(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     task->tState++;
 }
 
@@ -3923,7 +3923,7 @@ static void InfoBox_AddText(struct Task *task)
 {
     AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
     CopyWindowToVram(1, COPYWIN_FULL);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 
@@ -3935,7 +3935,7 @@ static void InfoBox_WaitInput(struct Task *task)
         ClearWindowTilemap(1);
         CopyWindowToVram(1, COPYWIN_MAP);
         RemoveWindow(1);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         task->tState++;
     }
 }
@@ -3956,7 +3956,7 @@ static void InfoBox_CreateDigitalDisplay(struct Task *task)
 static void InfoBox_LoadPikaPowerMeter(struct Task *task)
 {
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 

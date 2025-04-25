@@ -109,32 +109,17 @@ void NewGameInitData(void)
     ContadorTiempoJuego_Reset();
     ClearPokedexFlags();
     InitEventData();
-    ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlockPtr->money, 3000);
     SetCoins(0);
     ResetGameStats();
-    ClearAllContestWinnerPics();
-    ClearPlayerLinkBattleRecords();
-    InitSeedotSizeRecord();
-    InitLotadSizeRecord();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
-    DeactivateAllRoamers();
     gSaveBlockPtr->registeredItem = ITEM_NONE;
     ClearBag();
-    ClearPokeblocks();
-    ClearDecorationInventories();
-    InitEasyChatPhrases();
-    SetMauvilleOldMan();
-    InitDewfordTrend();
-    ResetFanClub();
-    ResetLotteryCorner();
     WarpToTruck();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
-    InitLilycoveLady();
-    InitMatchCallCounters();
     ResetItemFlags();
 }
 

@@ -380,11 +380,11 @@ static bool8 DoSetUpTMCaseUI(void)
         gMain.state++;
         break;
     case 16:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 17:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     default:
@@ -705,7 +705,7 @@ static void DestroyTMCaseBuffers(void)
 
 static void Task_BeginFadeOutFromTMCase(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_FadeOutAndCloseTMCase;
 }
 

@@ -1342,11 +1342,11 @@ static bool8 LoadGraphics(void)
         gMain.state++;
         break;
     case 23:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 24:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
@@ -1583,7 +1583,7 @@ static void FreeSummaryScreen(void)
 
 static void BeginCloseSummaryScreen(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = CloseSummaryScreen;
 }
 
