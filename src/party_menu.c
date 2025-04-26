@@ -842,7 +842,7 @@ static void RenderPartyMenuBox(u8 slot)
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
         else
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_MULTI_ALT);
-        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
+        CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPIA_TILES_VENTANA);
         PutWindowTilemap(sPartyMenuBoxes[slot].windowId);
         ScheduleBgCopyTilemapToVram(2);
     }
@@ -852,7 +852,7 @@ static void RenderPartyMenuBox(u8 slot)
         {
             DrawEmptySlot(sPartyMenuBoxes[slot].windowId);
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], PARTY_PAL_NO_MON);
-            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPYWIN_GFX);
+            CopyWindowToVram(sPartyMenuBoxes[slot].windowId, COPIA_TILES_VENTANA);
         }
         else
         {
@@ -2072,7 +2072,7 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
             mainOffset = GetStringCenterAlignXOffset(FONT_SMALL, gMenuText_Confirm, 48);
             AddTextPrinterParameterized4(confirmWindowId, FONT_SMALL, mainOffset, 1, 0, 0, sFontColorTable[0], TEXT_SKIP_DRAW, gMenuText_Confirm);
             PutWindowTilemap(confirmWindowId);
-            CopyWindowToVram(confirmWindowId, COPYWIN_GFX);
+            CopyWindowToVram(confirmWindowId, COPIA_TILES_VENTANA);
             cancelWindowId = AddWindow(&sMultiCancelButtonWindowTemplate);
             offset = 0;
         }
@@ -2095,7 +2095,7 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
             AddTextPrinterParameterized3(cancelWindowId, FONT_SMALL, mainOffset + offset, 1, sFontColorTable[0], TEXT_SKIP_DRAW, gText_Salir);
         }
         PutWindowTilemap(cancelWindowId);
-        CopyWindowToVram(cancelWindowId, COPYWIN_GFX);
+        CopyWindowToVram(cancelWindowId, COPIA_TILES_VENTANA);
         ScheduleBgCopyTilemapToVram(0);
     }
 }
@@ -2412,7 +2412,7 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
         FillWindowPixelRect(menuBox->windowId, 0x0D, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21], menuBox->infoRects->dimensions[22] - hpFraction, 1);
         FillWindowPixelRect(menuBox->windowId, 0x02, menuBox->infoRects->dimensions[20] + hpFraction, menuBox->infoRects->dimensions[21] + 1, menuBox->infoRects->dimensions[22] - hpFraction, 2);
     }
-    CopyWindowToVram(menuBox->windowId, COPYWIN_GFX);
+    CopyWindowToVram(menuBox->windowId, COPIA_TILES_VENTANA);
 }
 
 static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox *menuBox, u8 c)
@@ -5251,7 +5251,7 @@ static void DisplayLevelUpStatsPg1(u8 taskId)
 
     arrayPtr[12] = CreateLevelUpStatsWindow();
     DrawLevelUpWindowPg1(arrayPtr[12], arrayPtr, &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
+    CopyWindowToVram(arrayPtr[12], COPIA_TILES_VENTANA);
     ScheduleBgCopyTilemapToVram(2);
 }
 
@@ -5260,7 +5260,7 @@ static void DisplayLevelUpStatsPg2(u8 taskId)
     u16 *arrayPtr = (u16*) sPartyMenuInternal->data;
 
     DrawLevelUpWindowPg2(arrayPtr[12], &arrayPtr[6], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(arrayPtr[12], COPYWIN_GFX);
+    CopyWindowToVram(arrayPtr[12], COPIA_TILES_VENTANA);
     ScheduleBgCopyTilemapToVram(2);
 }
 

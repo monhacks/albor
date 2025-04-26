@@ -615,7 +615,7 @@ static void AddRibbonsMonListWindow(struct Pokenav_RibbonsMonMenu *menu)
     PutWindowTilemap(menu->winid);
     listCount = GetRibbonsMonListCount();
     DrawListIndexNumber(menu->winid, 0, listCount);
-    CopyWindowToVram(menu->winid, COPYWIN_MAP);
+    CopyWindowToVram(menu->winid, COPIA_TILEMAP_VENTANA);
     UpdateIndexNumberDisplay(menu);
 }
 
@@ -624,7 +624,7 @@ static void UpdateIndexNumberDisplay(struct Pokenav_RibbonsMonMenu *menu)
     s32 listIndex = PokenavList_GetSelectedIndex();
     s32 listCount = GetRibbonsMonListCount();
     DrawListIndexNumber(menu->winid, listIndex + 1, listCount);
-    CopyWindowToVram(menu->winid, COPYWIN_GFX);
+    CopyWindowToVram(menu->winid, COPIA_TILES_VENTANA);
 }
 
 static void DrawListIndexNumber(s32 windowId, s32 index, s32 max)

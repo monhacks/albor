@@ -67,7 +67,6 @@ enum {
     STATE_SLIDE_IN,
     STATE_WAIT,
     STATE_SLIDE_OUT,
-    STATE_UNUSED,
     STATE_ERASE,
     STATE_END,
     STATE_PRINT, // For some reason the first state is numerically last.
@@ -236,14 +235,14 @@ static void ShowMapNamePopUpWindow(void)
             AddTextPrinterParameterized(secondaryPopUpWindowId, FONT_SMALL, mapDisplayHeader, GetStringRightAlignXOffset(FONT_SMALL, mapDisplayHeader, DISPLAY_WIDTH) - 5, 8, TEXT_SKIP_DRAW, NULL);
         }
 
-        CopyWindowToVram(mapNamePopUpWindowId, COPYWIN_FULL);
-        CopyWindowToVram(secondaryPopUpWindowId, COPYWIN_FULL);
+        CopyWindowToVram(mapNamePopUpWindowId, COPIA_COMPLETA_VENTANA);
+        CopyWindowToVram(secondaryPopUpWindowId, COPIA_COMPLETA_VENTANA);
     }
     else
     {
         x = GetStringCenterAlignXOffset(FONT_NARROW, withoutPrefixPtr, 80);
         AddTextPrinterParameterized(GetMapNamePopUpWindowId(), FONT_NARROW, mapDisplayHeader, x, 3, TEXT_SKIP_DRAW, NULL);
-        CopyWindowToVram(GetMapNamePopUpWindowId(), COPYWIN_FULL);
+        CopyWindowToVram(GetMapNamePopUpWindowId(), COPIA_COMPLETA_VENTANA);
     }
 }
 

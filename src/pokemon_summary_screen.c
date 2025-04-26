@@ -3689,7 +3689,7 @@ static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
     FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
 }
 
 static void SwapMovesNamesPP(u8 moveIndex1, u8 moveIndex2)

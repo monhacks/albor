@@ -313,7 +313,7 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 
         // All the text is rendered to the window but don't draw it yet.
         if (speed != TEXT_SKIP_DRAW)
-            CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, COPYWIN_GFX);
+            CopyWindowToVram(sTempTextPrinter.printerTemplate.windowId, COPIA_TILES_VENTANA);
         sTextPrinters[printerTemplate->windowId].active = FALSE;
     }
     gDisableTextPrinters = FALSE;
@@ -334,7 +334,7 @@ void RunTextPrinters(void)
                 switch (renderCmd)
                 {
                 case RENDER_PRINT:
-                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPYWIN_GFX);
+                    CopyWindowToVram(sTextPrinters[i].printerTemplate.windowId, COPIA_TILES_VENTANA);
                 case RENDER_UPDATE:
                     if (sTextPrinters[i].callback != NULL)
                         sTextPrinters[i].callback(&sTextPrinters[i].printerTemplate, renderCmd);
@@ -828,7 +828,7 @@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
                 textPrinter->printerTemplate.currentY,
                 8,
                 16);
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPIA_TILES_VENTANA);
 
             subStruct->downArrowDelay = 8;
             subStruct->downArrowYPosIdx++;
@@ -845,7 +845,7 @@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
         textPrinter->printerTemplate.currentY,
         8,
         16);
-    CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
+    CopyWindowToVram(textPrinter->printerTemplate.windowId, COPIA_TILES_VENTANA);
 }
 
 bool32 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
@@ -933,7 +933,7 @@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool32 drawArrow, u8 *
             }
 
             BlitBitmapRectToWindow(windowId, arrowTiles, 0, sDownArrowYCoords[*yCoordIndex & 3], 8, 16, x, y - 2, 8, 16);
-            CopyWindowToVram(windowId, COPYWIN_GFX);
+            CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
             *counter = 8;
             ++*yCoordIndex;
         }
@@ -1210,7 +1210,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= speed;
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPIA_TILES_VENTANA);
         }
         else
         {

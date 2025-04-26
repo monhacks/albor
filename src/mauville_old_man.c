@@ -396,7 +396,7 @@ static void DrawSongTextWindow(const u8 *str)
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static void BardSing(struct Task *task, struct BardSong *song)
@@ -1061,7 +1061,7 @@ static void PrintStoryList(void)
     }
     AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Salir, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
-    CopyWindowToVram(sStorytellerWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sStorytellerWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void Task_StoryListMenu(u8 taskId)

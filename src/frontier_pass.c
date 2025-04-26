@@ -1062,7 +1062,7 @@ static void ShowAndPrintWindows(void)
     PrintAreaDescription(sPassData->cursorArea);
 
     for (i = 0; i < WINDOW_COUNT; i++)
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1074,7 +1074,7 @@ static void PrintAreaDescription(u8 cursorArea)
     if (cursorArea != CURSOR_AREA_NOTHING)
         AddTextPrinterParameterized3(WINDOW_DESCRIPTION, FONT_NORMAL, 2, 0, sTextColors[1], 0, sPassAreaDescriptions[cursorArea]);
 
-    CopyWindowToVram(WINDOW_DESCRIPTION, COPYWIN_FULL);
+    CopyWindowToVram(WINDOW_DESCRIPTION, COPIA_COMPLETA_VENTANA);
     CopyBgTilemapBufferToVram(0);
 }
 
@@ -1605,7 +1605,7 @@ static void PrintOnFrontierMap(void)
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
 
     CopyBgTilemapBufferToVram(0);
 }
@@ -1637,7 +1637,7 @@ static void HandleFrontierMapCursorMove(u8 direction)
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
 
     CopyBgTilemapBufferToVram(0);
     PlaySE(SE_DEX_SCROLL);

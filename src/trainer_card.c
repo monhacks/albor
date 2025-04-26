@@ -464,7 +464,7 @@ static void Task_TrainerCard(u8 taskId)
         SetCloseLinkCallback();
         DrawDialogueFrame(WIN_MSG, TRUE);
         AddTextPrinterParameterized(WIN_MSG, FONT_NORMAL, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
-        CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
+        CopyWindowToVram(WIN_MSG, COPIA_COMPLETA_VENTANA);
         sData->mainState = STATE_CLOSE_CARD_LINK;
         break;
     case STATE_CLOSE_CARD_LINK:
@@ -1189,7 +1189,7 @@ static void LoadStickerGfx(void)
 static void DrawTrainerCardWindow(u8 windowId)
 {
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static u8 SetCardBgsAndPals(void)

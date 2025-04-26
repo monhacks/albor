@@ -1703,7 +1703,7 @@ void ShowDeptStoreElevatorFloorSelect(void)
     AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 void CloseDeptStoreElevatorWindow(void)
@@ -2471,7 +2471,7 @@ static void CloseScrollableMultichoice(u8 taskId)
     Free(sScrollableMultichoice_ListMenuItem);
     ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
     FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
-    CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+    CopyWindowToVram(task->tWindowId, COPIA_TILES_VENTANA);
     RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
     ScriptContext_Enable();
@@ -2673,7 +2673,7 @@ void ShowBattlePointsWindow(void)
     sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
     SetStandardWindowBorderStyle(sBattlePointsWindowId, FALSE);
     UpdateBattlePointsWindow();
-    CopyWindowToVram(sBattlePointsWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sBattlePointsWindowId, COPIA_TILES_VENTANA);
 }
 
 void CloseBattlePointsWindow(void)
@@ -2718,7 +2718,7 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
 
     sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
     SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, FALSE);
-    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPIA_TILES_VENTANA);
 }
 
 void CloseFrontierExchangeCornerItemIconWindow(void)
@@ -2900,7 +2900,7 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
 
         AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
+        CopyWindowToVram(task->tWindowId, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -2917,7 +2917,7 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
         ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
         FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+        CopyWindowToVram(task->tWindowId, COPIA_TILES_VENTANA);
         RemoveWindow(task->tWindowId);
         DestroyTask(taskId);
     }

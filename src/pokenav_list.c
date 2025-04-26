@@ -184,7 +184,7 @@ static void InitPokenavListWindow(struct PokenavListMenuWindow *listWindow)
 {
     FillWindowPixelBuffer(listWindow->windowId, PIXEL_FILL(1));
     PutWindowTilemap(listWindow->windowId);
-    CopyWindowToVram(listWindow->windowId, COPYWIN_MAP);
+    CopyWindowToVram(listWindow->windowId, COPIA_TILEMAP_VENTANA);
 }
 
 static void InitListItems(struct PokenavListWindowState *windowState, struct PokenavListSub *subPtr)
@@ -234,9 +234,9 @@ static u32 LoopedTask_PrintListItems(s32 state)
             // Finished printing items. If icons were being drawn, draw the
             // window tilemap and graphics. Otherwise just do the graphics
             if (listSub->iconDrawFunc != NULL)
-                CopyWindowToVram(listSub->listWindow.windowId, COPYWIN_FULL);
+                CopyWindowToVram(listSub->listWindow.windowId, COPIA_COMPLETA_VENTANA);
             else
-                CopyWindowToVram(listSub->listWindow.windowId, COPYWIN_GFX);
+                CopyWindowToVram(listSub->listWindow.windowId, COPIA_TILES_VENTANA);
             return LT_INC_AND_PAUSE;
         }
         else
@@ -497,7 +497,7 @@ void PokenavList_DrawCurrentItemIcon(void)
     struct PokenavList *list = GetSubstructPtr(POKENAV_SUBSTRUCT_LIST);
     struct PokenavListWindowState *windowState = &list->windowState;
     list->sub.iconDrawFunc(list->sub.listWindow.windowId, windowState->windowTopIndex + windowState->selectedIndexOffset, (list->sub.listWindow.unkA + windowState->selectedIndexOffset) & 0xF);
-    CopyWindowToVram(list->sub.listWindow.windowId, COPYWIN_MAP);
+    CopyWindowToVram(list->sub.listWindow.windowId, COPIA_TILEMAP_VENTANA);
 }
 
 static u32 LoopedTask_EraseListForCheckPage(s32 state)
@@ -676,7 +676,7 @@ static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset,
     if (offset + entries <= 16)
     {
         CpuFastFill8(PIXEL_FILL(1), tileData + offset * width, entries * width);
-        CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
+        CopyWindowToVram(listWindow->windowId, COPIA_TILES_VENTANA);
     }
     else
     {
@@ -685,13 +685,13 @@ static void EraseListEntry(struct PokenavListMenuWindow *listWindow, s32 offset,
 
         CpuFastFill8(PIXEL_FILL(1), tileData + offset * width, v3 * width);
         CpuFastFill8(PIXEL_FILL(1), tileData, v4 * width);
-        CopyWindowToVram(listWindow->windowId, COPYWIN_GFX);
+        CopyWindowToVram(listWindow->windowId, COPIA_TILES_VENTANA);
     }
 
     for (entries--; entries != -1; offset = (offset + 1) & 0xF, entries--)
         ClearRematchPokeballIcon(listWindow->windowId, offset);
 
-    CopyWindowToVram(listWindow->windowId, COPYWIN_MAP);
+    CopyWindowToVram(listWindow->windowId, COPIA_TILEMAP_VENTANA);
 }
 
 // Pointless
@@ -713,14 +713,7 @@ static void SetListMarginTile(struct PokenavListMenuWindow *listWindow, bool32 d
 // Print the trainer's name and title at the top of their check page
 static void PrintCheckPageTrainerName(struct PokenavListWindowState *state, struct PokenavListSub *list)
 {
-    u8 colors[3] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_RED};
 
-    list->bufferItemFunc(state->listPtr + state->listItemSize * state->windowTopIndex, list->itemTextBuffer);
-    list->iconDrawFunc(list->listWindow.windowId, state->windowTopIndex, list->listWindow.unkA);
-    FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(4), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, list->listWindow.fontId, 8, (list->listWindow.unkA * 16) + 1, colors, TEXT_SKIP_DRAW, list->itemTextBuffer);
-    SetListMarginTile(&list->listWindow, TRUE);
-    CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_FULL, 0, list->listWindow.unkA * 2, list->listWindow.width, 2);
 }
 
 // Print the trainer's name and title for the list (to replace the check page name and title, which has a red background)
@@ -730,43 +723,17 @@ static void PrintMatchCallListTrainerName(struct PokenavListWindowState *state, 
     FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, list->listWindow.unkA * 16, list->listWindow.width * 8, 16);
     AddTextPrinterParameterized(list->listWindow.windowId, list->listWindow.fontId, list->itemTextBuffer, 8, list->listWindow.unkA * 16 + 1, TEXT_SKIP_DRAW, NULL);
     SetListMarginTile(&list->listWindow, FALSE);
-    CopyWindowToVram(list->listWindow.windowId, COPYWIN_FULL);
+    CopyWindowToVram(list->listWindow.windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintMatchCallFieldNames(struct PokenavListSub *list, u32 fieldId)
 {
-    const u8 *fieldNames[] = {
-        gText_PokenavMatchCall_Strategy,
-        gText_PokenavMatchCall_TrainerPokemon,
-        gText_PokenavMatchCall_SelfIntroduction
-    };
-    u8 colors[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};
-    u32 top = (list->listWindow.unkA + 1 + (fieldId * 2)) & 0xF;
 
-    FillWindowPixelRect(list->listWindow.windowId, PIXEL_FILL(1), 0, top << 4, list->listWindow.width, 16);
-    AddTextPrinterParameterized3(list->listWindow.windowId, FONT_NARROW, 2, (top << 4) + 1, colors, TEXT_SKIP_DRAW, fieldNames[fieldId]);
-    CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_GFX, 0, top << 1, list->listWindow.width, 2);
 }
 
 static void PrintMatchCallFlavorText(struct PokenavListWindowState *windowState, struct PokenavListSub *list, u32 checkPageEntry)
 {
-    // lines 1, 3, and 5 are the field names printed by PrintMatchCallFieldNames
-    static const u8 lineOffsets[CHECK_PAGE_ENTRY_COUNT] = {
-        [CHECK_PAGE_STRATEGY] = 2,
-        [CHECK_PAGE_POKEMON]  = 4,
-        [CHECK_PAGE_INTRO_1]  = 6,
-        [CHECK_PAGE_INTRO_2]  = 7
-    };
 
-    u32 r6 = (list->listWindow.unkA + lineOffsets[checkPageEntry]) & 0xF;
-    const u8 *str = GetMatchCallFlavorText(windowState->windowTopIndex, checkPageEntry);
-
-    if (str != NULL)
-    {
-        FillWindowTilesByRow(list->listWindow.windowId, 1, r6 * 2, list->listWindow.width - 1, 2);
-        AddTextPrinterParameterized(list->listWindow.windowId, FONT_NARROW, str, 2, (r6 << 4) + 1, TEXT_SKIP_DRAW, NULL);
-        CopyWindowRectToVram(list->listWindow.windowId, COPYWIN_GFX, 0, r6 * 2, list->listWindow.width, 2);
-    }
 }
 
 static const struct CompressedSpriteSheet sListArrowSpriteSheets[] =

@@ -1946,7 +1946,7 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     sHeaderBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sHeaderBoxWindowId);
-    CopyWindowToVram(sHeaderBoxWindowId, 3);
+    CopyWindowToVram(sHeaderBoxWindowId, COPIA_COMPLETA_VENTANA);
     SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
     DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
 
@@ -1968,7 +1968,7 @@ void ScriptHideItemDescription(struct ScriptContext *ctx)
         //header box only exists if haven't seen item before
         GetSetItemObtained(gSpecialVar_0x8006, FLAG_SET_ITEM_OBTAINED);
         ClearStdWindowAndFrameToTransparent(sHeaderBoxWindowId, FALSE);
-        CopyWindowToVram(sHeaderBoxWindowId, 3);
+        CopyWindowToVram(sHeaderBoxWindowId, COPIA_COMPLETA_VENTANA);
         RemoveWindow(sHeaderBoxWindowId);
     }
 }

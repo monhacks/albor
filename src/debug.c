@@ -1187,7 +1187,7 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
     Debug_RefreshListMenu(inputTaskId);
 
     // draw everything
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void Debug_DestroyMenu(u8 taskId)
@@ -1897,7 +1897,7 @@ static void DebugAction_Util_Warp_Warp(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, 3);
     ConvertIntToDecimalStringN(gStringVar2, LAST_MAP_GROUP, STR_CONV_MODE_LEADING_ZEROS, 3);
@@ -2187,7 +2187,7 @@ static void DebugAction_Util_Weather(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateWeather);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     //Display initial ID
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
@@ -2383,7 +2383,7 @@ static void DebugAction_FlagsVars_Flags(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial flag
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
@@ -2474,7 +2474,7 @@ static void DebugAction_FlagsVars_Vars(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial var
     ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
@@ -2891,7 +2891,7 @@ static void DebugAction_Give_Item(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial item
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
@@ -3090,7 +3090,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial Pokémon
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
@@ -3130,7 +3130,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateExtra);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial Pokémon
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
@@ -4188,7 +4188,7 @@ static void DebugAction_Sound_SE(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateSound);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial sound effect
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
@@ -4270,7 +4270,7 @@ static void DebugAction_Sound_MUS(u8 taskId)
     windowId = AddWindow(&sDebugMenuWindowTemplateSound);
     DrawStdWindowFrame(windowId, FALSE);
 
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
     // Display initial song
     StringCopy(gStringVar2, gText_DigitIndicator[0]);

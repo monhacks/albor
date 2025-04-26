@@ -8,12 +8,10 @@
 static void CopyValue16Bit(void);
 static void CopyValue32Bit(void);
 
-// EWRAM vars
+#define NUMERO_BUFFERS_SCANLINE 2
+#define TAMANIO_BUFFER_SCANLINE 228 // Líneas horizontales (160) + Posible tamaño de REG_VCOUNT (Hasta 227)
 
-// Per-scanline register values.
-// This is double buffered so that it can be safely written to at any time
-// without overwriting the buffer that the DMA is currently reading
-EWRAM_DATA u16 ALIGNED(4) gScanlineEffectRegBuffers[2][0x3C0] = {0};
+EWRAM_DATA u16 ALIGNED(4) gScanlineEffectRegBuffers[NUMERO_BUFFERS_SCANLINE][TAMANIO_BUFFER_SCANLINE] = {0};
 
 EWRAM_DATA struct ScanlineEffect gScanlineEffect = {0};
 EWRAM_DATA static bool8 sShouldStopWaveTask = FALSE;
@@ -190,7 +188,7 @@ static void TaskFunc_UpdateWavePerFrame(u8 taskId)
     }
 }
 
-static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude, u8 unused)
+static void GenerateWave(u16 *buffer, u8 frequency, u8 amplitude)
 {
     u16 i = 0;
     u8 theta = 0;
@@ -234,7 +232,7 @@ u8 ScanlineEffect_InitWave(u8 startLine, u8 endLine, u8 frequency, u8 amplitude,
     gScanlineEffect.waveTaskId = taskId;
     sShouldStopWaveTask = FALSE;
 
-    GenerateWave(&gScanlineEffectRegBuffers[0][320], frequency, amplitude, endLine - startLine);
+    GenerateWave(&gScanlineEffectRegBuffers[0][320], frequency, amplitude);
 
     offset = 320;
     for (i = startLine; i < endLine; i++)

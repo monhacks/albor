@@ -1389,7 +1389,7 @@ static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NEED_3_COINS;
     return FALSE;
 }
@@ -1652,7 +1652,7 @@ static bool8 SlotTask_AskQuit(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = SLOTTASK_HANDLE_QUIT_INPUT;
     return FALSE;
@@ -1684,7 +1684,7 @@ static bool8 SlotTask_PrintMsg_MaxCoins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_MAX_COINS;
     return FALSE;
 }
@@ -1705,7 +1705,7 @@ static bool8 SlotTask_PrintMsg_NoMoreCoins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NO_MORE_COINS;
     return FALSE;
 }
@@ -3922,7 +3922,7 @@ static void InfoBox_DrawWindow(struct Task *task)
 static void InfoBox_AddText(struct Task *task)
 {
     AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
-    CopyWindowToVram(1, COPYWIN_FULL);
+    CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
     BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
@@ -3933,7 +3933,7 @@ static void InfoBox_WaitInput(struct Task *task)
     {
         FillWindowPixelBuffer(1, PIXEL_FILL(0));
         ClearWindowTilemap(1);
-        CopyWindowToVram(1, COPYWIN_MAP);
+        CopyWindowToVram(1, COPIA_TILEMAP_VENTANA);
         RemoveWindow(1);
         BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         task->tState++;

@@ -513,7 +513,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
 
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_Guardando, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     gTasks[taskId].func = Task_Hof_TrySaveData;
 }
 
@@ -672,7 +672,7 @@ static void Task_Hof_DoConfetti(u8 taskId)
         }
         BeginNormalPaletteFade(sHofFadePalettes, 0, 12, 12, RGB(16, 29, 24));
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
         gTasks[taskId].tFrameCount = 7;
         gTasks[taskId].func = Task_Hof_WaitToDisplayPlayer;
     }
@@ -721,7 +721,7 @@ static void Task_Hof_WaitAndPrintPlayerInfo(u8 taskId)
         HallOfFame_PrintPlayerInfo(1, 2);
         DrawDialogueFrame(0, FALSE);
         AddTextPrinterParameterized2(0, FONT_NORMAL, gText_LeagueChamp, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
         gTasks[taskId].func = Task_Hof_ExitOnKeyPressed;
     }
 }
@@ -1086,7 +1086,7 @@ static void Task_HofPC_PrintDataIsCorrupted(u8 taskId)
     HofPCTopBar_Print(gText_AButtonExit, 8, TRUE);
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_HOFCorrupted, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     gTasks[taskId].func = Task_HofPC_ExitOnButtonPress;
 }
 
@@ -1107,7 +1107,7 @@ static void HallOfFame_PrintWelcomeText(u8 unusedPossiblyWindowId, u8 unused2)
     FillWindowPixelBuffer(0, PIXEL_FILL(0));
     PutWindowTilemap(0);
     AddTextPrinterParameterized3(0, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, gText_WelcomeToHOF, 0xD0), 1, sMonInfoTextColors, 0, gText_WelcomeToHOF);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u8 unused2)
@@ -1155,7 +1155,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
     {
         width = GetStringCenterAlignXOffset(FONT_NORMAL, text, 0xD0);
         AddTextPrinterParameterized3(0, FONT_NORMAL, width, 1, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
-        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     }
     else
     {
@@ -1191,7 +1191,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         ConvertIntToDecimalStringN(stringPtr, currMon->lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         AddTextPrinterParameterized3(0, FONT_NORMAL, 0x24, 0x11, sMonInfoTextColors, TEXT_SKIP_DRAW, text);
 
-        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -1226,7 +1226,7 @@ static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
     width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x70);
     AddTextPrinterParameterized3(1, FONT_NORMAL, width, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, text);
 
-    CopyWindowToVram(1, COPYWIN_FULL);
+    CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
 }
 
 static void ClearVramOamPltt_LoadHofPal(void)

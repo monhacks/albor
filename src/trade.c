@@ -1207,7 +1207,7 @@ static void CB_ProcessMenuInput(void)
             PrintMenuTable(1, ARRAY_COUNT(sSelectTradeMonActions), sSelectTradeMonActions);
             InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sSelectTradeMonActions), 0);
             PutWindowTilemap(1);
-            CopyWindowToVram(1, COPYWIN_FULL);
+            CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
             sTradeMenu->callbackId = CB_SELECTED_MON;
         }
         else if (sTradeMenu->cursorPosition < PARTY_SIZE * 2)
@@ -1360,7 +1360,7 @@ static void RestoreNicknamesCoveredByYesNo(void)
     for (i = 0; i < sTradeMenu->partyCounts[1] - 4; i++)
     {
         PutWindowTilemap(i + PARTY_SIZE * 2);
-        CopyWindowToVram(i + PARTY_SIZE * 2, COPYWIN_MAP);
+        CopyWindowToVram(i + PARTY_SIZE * 2, COPIA_TILEMAP_VENTANA);
     }
 }
 
@@ -1595,9 +1595,9 @@ static void DrawSelectedMonScreen(u8 whichParty)
         BufferMovesString(movesString, selectedMonParty, partyIdx);
         AddTextPrinterParameterized4((whichParty * 2) + 15, FONT_NORMAL, 0, 0, 0, 0, sTradeTextColors, 0, movesString);
         PutWindowTilemap((whichParty * 2) + 14);
-        CopyWindowToVram((whichParty * 2) + 14, COPYWIN_FULL);
+        CopyWindowToVram((whichParty * 2) + 14, COPIA_COMPLETA_VENTANA);
         PutWindowTilemap((whichParty * 2) + 15);
-        CopyWindowToVram((whichParty * 2) + 15, COPYWIN_FULL);
+        CopyWindowToVram((whichParty * 2) + 15, COPIA_COMPLETA_VENTANA);
 
         sTradeMenu->drawSelectedMonState[whichParty]++;
         break;
@@ -1664,7 +1664,7 @@ static void PrintPartyMonNickname(u8 whichParty, u8 windowId, u8 *nickname)
     xPos = GetStringCenterAlignXOffset(FONT_SMALL, nickname, 64);
     AddTextPrinterParameterized3(windowId, FONT_SMALL, xPos, 4, sTradeTextColors, 0, nickname);
     PutWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintPartyNicknames(u8 whichParty)
@@ -1874,7 +1874,7 @@ static void PrintTradeMessage(u8 messageId)
     AddTextPrinterParameterized(0, FONT_NORMAL, sMessages[messageId], 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(0, 20, 12);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static bool8 LoadUISpriteGfx(void)
@@ -2316,7 +2316,7 @@ void LinkTradeDrawWindow(void)
 {
     FillWindowPixelBuffer(0, PIXEL_FILL(15));
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static void TradeAnimInit_LoadGfx(void)
@@ -2390,7 +2390,7 @@ static void CB2_InitInGameTrade(void)
         LoadTradeMonPic(TRADE_PARTNER, 1);
         FillWindowPixelBuffer(0, PIXEL_FILL(15));
         PutWindowTilemap(0);
-        CopyWindowToVram(0, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
         gMain.state++;
         break;
     case 9:
@@ -2713,7 +2713,6 @@ enum {
     STATE_LINK_MON_ARRIVED_DELAY,
     STATE_MOVE_GBA_TO_CENTER,
     STATE_GBA_FLASH_RECV,
-    STATE_UNUSED,
     STATE_GBA_STOP_FLASH_RECV,
     STATE_GBA_ZOOM_IN,
     STATE_FADE_OUT_TO_NEW_MON,
@@ -2909,5 +2908,5 @@ void DrawTextOnTradeWindow(u8 windowId, const u8 *str, u8 speed)
     sTradeAnim->textColors[1] = TEXT_COLOR_WHITE;
     sTradeAnim->textColors[2] = TEXT_COLOR_GREEN;
     AddTextPrinterParameterized4(windowId, FONT_NORMAL, 0, 2, 0, 0, sTradeAnim->textColors, speed, str);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }

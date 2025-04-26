@@ -799,7 +799,7 @@ static void PrintCurrentMonRibbonCount(struct Pokenav_RibbonsSummaryMenu *menu)
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
     FillWindowPixelBuffer(menu->ribbonCountWindowId, PIXEL_FILL(4));
     AddTextPrinterParameterized3(menu->ribbonCountWindowId, FONT_NORMAL, 0, 1, color, TEXT_SKIP_DRAW, gStringVar4);
-    CopyWindowToVram(menu->ribbonCountWindowId, COPYWIN_GFX);
+    CopyWindowToVram(menu->ribbonCountWindowId, COPIA_TILES_VENTANA);
 }
 
 static void PrintRibbonNameAndDescription(struct Pokenav_RibbonsSummaryMenu *menu)
@@ -832,7 +832,7 @@ static void PrintRibbonNameAndDescription(struct Pokenav_RibbonsSummaryMenu *men
             AddTextPrinterParameterized3(menu->ribbonCountWindowId, FONT_NORMAL, 0, (i * 16) + 1, color, TEXT_SKIP_DRAW, gGiftRibbonDescriptionPointers[ribbonId][i]);
     }
 
-    CopyWindowToVram(menu->ribbonCountWindowId, COPYWIN_GFX);
+    CopyWindowToVram(menu->ribbonCountWindowId, COPIA_TILES_VENTANA);
 }
 
 static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
@@ -886,7 +886,7 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, 60, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
 }
 
 static const struct WindowTemplate sRibbonMonListIndexWindowTemplate[] =
@@ -923,7 +923,7 @@ static void PrintRibbonsMonListIndex(struct Pokenav_RibbonsSummaryMenu *menu)
     ConvertIntToDecimalStringN(txtPtr, count, STR_CONV_MODE_RIGHT_ALIGN, 3);
     x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar1, 56);
     AddTextPrinterParameterized(menu->listIdxWindowId, FONT_NORMAL, gStringVar1, x, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(menu->listIdxWindowId, COPYWIN_GFX);
+    CopyWindowToVram(menu->listIdxWindowId, COPIA_TILES_VENTANA);
 }
 
 static void ResetSpritesAndDrawMonFrontPic(struct Pokenav_RibbonsSummaryMenu *menu)

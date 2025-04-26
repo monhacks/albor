@@ -147,7 +147,7 @@ static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
     RemoveWindow(windowId);
 }
 

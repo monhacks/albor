@@ -889,7 +889,7 @@ void CB2_BattleDebugMenu(void)
         data->currentMainListItemId = 0;
         data->activeWindow = ACTIVE_WIN_MAIN;
         data->secondaryListTaskId = 0xFF;
-        CopyWindowToVram(data->mainListWindowId, COPYWIN_FULL);
+        CopyWindowToVram(data->mainListWindowId, COPIA_COMPLETA_VENTANA);
         gMain.state++;
         break;
     case 5:
@@ -930,7 +930,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1081,7 +1081,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1128,7 +1128,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
         AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + (j + 1) * 15, 0, NULL, 0, 0);
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1383,7 +1383,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
             data->currentSecondaryListItemId = listItemId;
             data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
             PutWindowTilemap(data->modifyWindowId);
-            CopyWindowToVram(data->modifyWindowId, COPYWIN_FULL);
+            CopyWindowToVram(data->modifyWindowId, COPIA_COMPLETA_VENTANA);
             SetUpModifyArrows(data);
             PrintDigitChars(data);
             data->activeWindow = ACTIVE_WIN_MODIFY;
@@ -1468,7 +1468,7 @@ static void PrintOnBattlerWindow(u8 windowId, u8 battlerId)
 
     FillWindowPixelBuffer(windowId, 0x11);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 0, 0, 0, NULL);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void UpdateWindowsOnChangedBattler(struct BattleDebugMenu *data)
@@ -1572,7 +1572,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
     listTemplate.windowId = data->secondaryListWindowId;
 
     data->secondaryListTaskId = ListMenuInit(&listTemplate, 0, 0);
-    CopyWindowToVram(data->secondaryListWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->secondaryListWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void PadString(const u8 *src, u8 *dst)

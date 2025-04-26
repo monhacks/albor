@@ -625,7 +625,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     if (chosenMove == LIST_CANCEL)
     {
         // On "Cancel", skip printing move data
-        CopyWindowToVram(RELEARNERWIN_DESC_BATTLE, COPYWIN_GFX);
+        CopyWindowToVram(RELEARNERWIN_DESC_BATTLE, COPIA_TILES_VENTANA);
         return;
     }
     move = &gMovesInfo[chosenMove];
@@ -688,7 +688,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
 
     if (chosenMove == MENU_NOTHING_CHOSEN)
     {
-        CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPYWIN_GFX);
+        CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPIA_TILES_VENTANA);
         return;
     }
 
@@ -699,7 +699,7 @@ static void MoveRelearnerMenuLoadContestMoveDescription(u32 chosenMove)
     str = gContestEffectDescriptionPointers[move->contestEffect];
     AddTextPrinterParameterized(RELEARNERWIN_DESC_CONTEST, FONT_NARROW, str, 0, 65, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPYWIN_GFX);
+    CopyWindowToVram(RELEARNERWIN_DESC_CONTEST, COPIA_TILES_VENTANA);
 }
 
 static void MoveRelearnerCursorCallback(s32 itemIndex, bool8 onInit, struct ListMenu *list)

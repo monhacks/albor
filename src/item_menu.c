@@ -2232,7 +2232,7 @@ static void CopyPocketNameToWindow(u32 a)
     CpuCopy32(&tileDataBuffer[0][a], windowTileData, 0x100); // Top half of pocket name
     b = a + 16;
     CpuCopy32(&tileDataBuffer[0][b], windowTileData + 0x100, 0x100); // Bottom half of pocket name
-    CopyWindowToVram(WIN_POCKET_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_POCKET_NAME, COPIA_TILES_VENTANA);
 }
 
 static void LoadBagMenuTextWindows(void)

@@ -756,8 +756,8 @@ static void Task_DisplayMainMenu(u8 taskId)
                 AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 1, sTextColor_Headers, TEXT_SKIP_DRAW, gText_MainMenuOption);
                 PutWindowTilemap(0);
                 PutWindowTilemap(1);
-                CopyWindowToVram(0, COPYWIN_GFX);
-                CopyWindowToVram(1, COPYWIN_GFX);
+                CopyWindowToVram(0, COPIA_TILES_VENTANA);
+                CopyWindowToVram(1, COPIA_TILES_VENTANA);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[0], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[1], MAIN_MENU_BORDER_TILE);
                 break;
@@ -772,9 +772,9 @@ static void Task_DisplayMainMenu(u8 taskId)
                 PutWindowTilemap(2);
                 PutWindowTilemap(3);
                 PutWindowTilemap(4);
-                CopyWindowToVram(2, COPYWIN_GFX);
-                CopyWindowToVram(3, COPYWIN_GFX);
-                CopyWindowToVram(4, COPYWIN_GFX);
+                CopyWindowToVram(2, COPIA_TILES_VENTANA);
+                CopyWindowToVram(3, COPIA_TILES_VENTANA);
+                CopyWindowToVram(4, COPIA_TILES_VENTANA);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[2], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[3], MAIN_MENU_BORDER_TILE);
                 DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[4], MAIN_MENU_BORDER_TILE);
@@ -1082,7 +1082,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(15));
             NewGameBirchSpeech_ShowDialogueWindow(0, 1);
             PutWindowTilemap(0);
-            CopyWindowToVram(0, COPYWIN_GFX);
+            CopyWindowToVram(0, COPIA_TILES_VENTANA);
             NewGameBirchSpeech_ClearWindow(0);
             StringExpandPlaceholders(gStringVar4, gText_Birch_Welcome);
             AddTextPrinterForMessage(TRUE);
@@ -1607,7 +1607,7 @@ static void CB2_NewGameBirchSpeech_ReturnFromNamingScreen(void)
     LoadMainMenuWindowFrameTiles(0, 0xF3);
     LoadMessageBoxGfx(0, 0xFC, BG_PLTT_ID(15));
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static void SpriteCB_Null(struct Sprite *sprite)
@@ -1844,7 +1844,7 @@ static void NewGameBirchSpeech_ShowGenderMenu(void)
     PrintMenuTable(1, ARRAY_COUNT(sMenuActions_Gender), sMenuActions_Gender);
     InitMenuInUpperLeftCornerNormal(1, ARRAY_COUNT(sMenuActions_Gender), 0);
     PutWindowTilemap(1);
-    CopyWindowToVram(1, COPYWIN_FULL);
+    CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
 }
 
 static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
@@ -1871,7 +1871,7 @@ static void CreateMainMenuErrorWindow(const u8 *str)
     FillWindowPixelBuffer(7, PIXEL_FILL(1));
     AddTextPrinterParameterized(7, FONT_NORMAL, str, 0, 1, 2, 0);
     PutWindowTilemap(7);
-    CopyWindowToVram(7, COPYWIN_GFX);
+    CopyWindowToVram(7, COPIA_TILES_VENTANA);
     DrawMainMenuWindowBorder(&sWindowTemplates_MainMenu[7], MAIN_MENU_BORDER_TILE);
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(9, DISPLAY_WIDTH - 9));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(113, DISPLAY_HEIGHT - 1));
@@ -1981,7 +1981,7 @@ static void NewGameBirchSpeech_ClearGenderWindow(u8 windowId, bool8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     ClearWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_FULL);
+        CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void NewGameBirchSpeech_ClearWindow(u8 windowId)
@@ -1993,7 +1993,7 @@ static void NewGameBirchSpeech_ClearWindow(u8 windowId)
     u8 winHeight = GetWindowAttribute(windowId, WINDOW_HEIGHT);
 
     FillWindowPixelRect(windowId, bgColor, 0, 0, maxCharWidth * winWidth, maxCharHeight * winHeight);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
 }
 
 static void NewGameBirchSpeech_WaitForThisIsPokemonText(struct TextPrinterTemplate *printer, u16 renderCmd)
@@ -2019,7 +2019,7 @@ static void NewGameBirchSpeech_ShowDialogueWindow(u8 windowId, u8 copyToVram)
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     PutWindowTilemap(windowId);
     if (copyToVram == TRUE)
-        CopyWindowToVram(windowId, COPYWIN_FULL);
+        CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void NewGameBirchSpeech_CreateDialogueWindowBorder(u8 bg, u8 x, u8 y, u8 width, u8 height, u8 palNum)

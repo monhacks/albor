@@ -460,7 +460,7 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
         else
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuThree, x, 0, 0, NULL);
     }
-    CopyWindowToVram(WIN_INSTRUCTIONS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_INSTRUCTIONS, COPIA_COMPLETA_VENTANA);
 
     //Bottom left text
     FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
@@ -1131,7 +1131,7 @@ static void ResetPokemonSpriteVisualizerWindows(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
     }
 }
 

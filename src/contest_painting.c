@@ -205,7 +205,7 @@ static void InitContestPaintingWindow(void)
     DeactivateAllTextPrinters();
     FillWindowPixelBuffer(sWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sWindowId);
-    CopyWindowToVram(sWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sWindowId, COPIA_COMPLETA_VENTANA);
     ShowBg(1);
 }
 

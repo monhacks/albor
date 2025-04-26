@@ -162,10 +162,4 @@ struct SioMultiCnt
     u16 data;          // data
 };
 
-// baud rate
-#define ST_SIO_9600_BPS   0 //   9600 bps
-#define ST_SIO_38400_BPS  1 //  38400 bps
-#define ST_SIO_57600_BPS  2 //  57600 bps
-#define ST_SIO_115200_BPS 3 // 115200 bps
-
 #endif // GUARD_GBA_TYPES_H

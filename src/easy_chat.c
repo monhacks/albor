@@ -3865,7 +3865,7 @@ static void PrintTitle(void)
     FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
     PrintEasyChatTextWithColors(WIN_TITLE, FONT_NORMAL, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(WIN_TITLE);
-    CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TITLE, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -3939,7 +3939,7 @@ static void PrintEasyChatStdMessage(u8 msgId)
     if (text2)
         PrintEasyChatText(WIN_MSG, FONT_NORMAL, text2, 0, 17, TEXT_SKIP_DRAW, 0);
 
-    CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
+    CopyWindowToVram(WIN_MSG, COPIA_COMPLETA_VENTANA);
 }
 
 static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
@@ -4033,7 +4033,7 @@ static void PrintCurrentPhrase(void)
         PrintEasyChatText(sScreenControl->windowId, FONT_NORMAL, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SKIP_DRAW, 0);
     }
 
-    CopyWindowToVram(sScreenControl->windowId, COPYWIN_FULL);
+    CopyWindowToVram(sScreenControl->windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void BufferFrameTilemap(u16 *tilemap)
@@ -4147,7 +4147,7 @@ static void InitLowerWindowText(u32 whichText)
         break;
     }
 
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void PrintKeyboardText(void)
@@ -4268,7 +4268,7 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
         y += 16;
     }
 
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
@@ -4300,7 +4300,7 @@ static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
 static void ClearWordSelectWindow(void)
 {
     FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void InitLowerWindowAnim(int winAnimType)

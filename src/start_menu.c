@@ -439,7 +439,7 @@ static void ShowSafariBallsWindow(void)
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sSafariBallsWindowId, COPIA_TILES_VENTANA);
 }
 
 static void ShowPyramidFloorWindow(void)
@@ -454,7 +454,7 @@ static void ShowPyramidFloorWindow(void)
     StringCopy(gStringVar1, sPyramidFloorNames[gSaveBlockPtr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     AddTextPrinterParameterized(sBattlePyramidFloorWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sBattlePyramidFloorWindowId, COPIA_TILES_VENTANA);
 }
 
 static void RemoveExtraStartMenuWindows(void)
@@ -462,7 +462,7 @@ static void RemoveExtraStartMenuWindows(void)
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
-        CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+        CopyWindowToVram(sSafariBallsWindowId, COPIA_TILES_VENTANA);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
@@ -535,7 +535,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 5:
         sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
+        CopyWindowToVram(GetStartMenuWindowId(), COPIA_TILEMAP_VENTANA);
         return TRUE;
     }
 
@@ -1116,7 +1116,7 @@ static void ShowSaveInfoWindow(void)
     xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
     AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
 
-    CopyWindowToVram(sSaveInfoWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sSaveInfoWindowId, COPIA_TILES_VENTANA);
 }
 
 static void RemoveSaveInfoWindow(void)

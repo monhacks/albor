@@ -1365,7 +1365,7 @@ static bool8 LoadPokedexListPage(u8 page)
         //InitWindows(sPokemonList_WindowTemplate);
         DeactivateAllTextPrinters();
         //PutWindowTilemap(WIN_POKEMON_LIST);
-        //CopyWindowToVram(WIN_POKEMON_LIST, COPYWIN_FULL);
+        //CopyWindowToVram(WIN_POKEMON_LIST, COPIA_COMPLETA_VENTANA);
         //PutWindowTilemap(WIN_TITLE);
         //PutWindowTilemap(WIN_SEEN);
         //PutWindowTilemap(WIN_OWN);
@@ -1564,7 +1564,7 @@ static void CreateMonListEntry(u8 position, u16 b)
         }
         break;
     }
-    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(0, COPIA_TILES_VENTANA);
 }
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top)
@@ -2512,7 +2512,7 @@ static void Task_LoadInfoScreen(u8 taskId)
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexListItem->owned, 0);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(16 - 1));
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -2794,7 +2794,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
         break;
     case 3:
         PrintMonInfo(dexNum, 1, 1);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
         gTasks[taskId].tState++;
@@ -3220,7 +3220,7 @@ static void StatsPage_PrintNavigationButtons(void)
         AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons_Decapped);
 
     PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
-    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
+    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void ResetStatsWindows(void)
@@ -3234,7 +3234,7 @@ static void ResetStatsWindows(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -4337,7 +4337,7 @@ static void EvoFormsPage_PrintNavigationButtons(void)
         }
 
     PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-    CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void ResetEvoScreenDataStruct(void)
@@ -4396,10 +4396,10 @@ static void Task_LoadEvolutionScreen(u8 taskId)
         LoadTilesetTilemapHGSS(EVO_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0));
         PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -4951,10 +4951,10 @@ static void Task_LoadFormsScreen(u8 taskId)
         LoadTilesetTilemapHGSS(FORMS_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0));
         PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);

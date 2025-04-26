@@ -1537,7 +1537,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     PutWindowTilemap(sBrailleWindowId);
     FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(sBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sBrailleWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sBrailleWindowId, COPIA_COMPLETA_VENTANA);
     return FALSE;
 }
 

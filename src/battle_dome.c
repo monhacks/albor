@@ -2422,7 +2422,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
 
             for (i = windowId; i < windowId + NUM_INFO_CARD_WINDOWS; i++)
             {
-                CopyWindowToVram(i, COPYWIN_GFX);
+                CopyWindowToVram(i, COPIA_TILES_VENTANA);
                 FillWindowPixelBuffer(i, PIXEL_FILL(0));
             }
             gTasks[taskId].tState = STATE_REACT_INPUT;
