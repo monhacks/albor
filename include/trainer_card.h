@@ -31,8 +31,6 @@ struct TrainerCard
     /*0x0A*/ u16 hofDebutSeconds;
     /*0x0C*/ u16 caughtMonsCount;
     /*0x0E*/ u16 trainerId;
-    /*0x10*/ u16 playTimeHours;
-    /*0x12*/ u16 playTimeMinutes;
     /*0x14*/ u16 linkBattleWins;
     /*0x16*/ u16 linkBattleLosses;
     /*0x18*/ u16 battleTowerWins;

@@ -98,7 +98,6 @@ SECTIONS {
         src/pokeball.o(.text);
         src/load_save.o(.text);
         src/trade.o(.text);
-        src/play_time.o(.text);
         src/new_game.o(.text);
         src/overworld.o(.text);
         src/fieldmap.o(.text);

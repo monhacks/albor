@@ -1,42 +1,42 @@
 	.align 2
 gScriptCmdTable::
-	.4byte ScrCmd_no								// 0
-	.4byte ScrCmd_end      	                        // 1
-	.4byte ScrCmd_return                            // 2
-	.4byte ScrCmd_call                              // 3
-	.4byte ScrCmd_goto                              // 4
-	.4byte ScrCmd_goto_if                          	// 5
-	.4byte ScrCmd_call_if                           // 6
-	.4byte ScrCmd_callstd                           // 
-	.4byte ScrCmd_loadword                          // 
-	.4byte ScrCmd_loadbyte                          // 
-	.4byte ScrCmd_setptr                            // 
-	.4byte ScrCmd_loadbytefromptr                   // 
-	.4byte ScrCmd_setptrbyte                        // 
-	.4byte ScrCmd_copylocal                         // 
-	.4byte ScrCmd_copybyte                          // 
-	.4byte ScrCmd_setvar                            // 
-	.4byte ScrCmd_addvar                            // 
-	.4byte ScrCmd_subvar                            // 
-	.4byte ScrCmd_copyvar                           // 
-	.4byte ScrCmd_setorcopyvar                      // 
-	.4byte ScrCmd_compare_local_to_local            // 
-	.4byte ScrCmd_compare_local_to_value            // 
-	.4byte ScrCmd_compare_local_to_ptr              // 
-	.4byte ScrCmd_compare_ptr_to_local              // 
-	.4byte ScrCmd_compare_ptr_to_value             	// 
-	.4byte ScrCmd_compare_ptr_to_ptr                // 
-	.4byte ScrCmd_compare_var_to_value              // 
-	.4byte ScrCmd_compare_var_to_var                // 
-	.4byte ScrCmd_callnative                        // 
-	.4byte ScrCmd_gotonative                        // 
-	.4byte ScrCmd_special                           // 
-	.4byte ScrCmd_specialvar                        // 
-	.4byte ScrCmd_waitstate                         // 
-	.4byte ScrCmd_delay                             // 
-	.4byte ScrCmd_setflag                           // 
-	.4byte ScrCmd_clearflag                         // 
-	.4byte ScrCmd_checkflag                         // 
+	.4byte ScrCmd_no								@ 0
+	.4byte ScrCmd_end      	                        @ 1
+	.4byte ScrCmd_return                            @ 2
+	.4byte ScrCmd_call                              @ 3
+	.4byte ScrCmd_goto                              @ 4
+	.4byte ScrCmd_goto_if                          	@ 5
+	.4byte ScrCmd_call_if                           @ 6
+	.4byte ScrCmd_callstd                           @ 
+	.4byte ScrCmd_loadword                          @ 
+	.4byte ScrCmd_loadbyte                          @ 
+	.4byte ScrCmd_setptr                            @ 
+	.4byte ScrCmd_loadbytefromptr                   @ 
+	.4byte ScrCmd_setptrbyte                        @ 
+	.4byte ScrCmd_copylocal                         @ 
+	.4byte ScrCmd_copybyte                          @ 
+	.4byte ScrCmd_setvar                            @ 
+	.4byte ScrCmd_addvar                            @ 
+	.4byte ScrCmd_subvar                            @ 
+	.4byte ScrCmd_copyvar                           @ 
+	.4byte ScrCmd_setorcopyvar                      @ 
+	.4byte ScrCmd_compare_local_to_local            @ 
+	.4byte ScrCmd_compare_local_to_value            @ 
+	.4byte ScrCmd_compare_local_to_ptr              @ 
+	.4byte ScrCmd_compare_ptr_to_local              @ 
+	.4byte ScrCmd_compare_ptr_to_value             	@ 
+	.4byte ScrCmd_compare_ptr_to_ptr                @ 
+	.4byte ScrCmd_compare_var_to_value              @ 
+	.4byte ScrCmd_compare_var_to_var                @ 
+	.4byte ScrCmd_callnative                        @ 
+	.4byte ScrCmd_gotonative                        @ 
+	.4byte ScrCmd_special                           @ 
+	.4byte ScrCmd_specialvar                        @ 
+	.4byte ScrCmd_waitstate                         @ 
+	.4byte ScrCmd_delay                             @ 
+	.4byte ScrCmd_setflag                           @ 
+	.4byte ScrCmd_clearflag                         @ 
+	.4byte ScrCmd_checkflag                         @ 
 	.4byte ScrCmd_initclock                         @ 0x2c
 	.4byte ScrCmd_dotimebasedevents                 @ 0x2d
 	.4byte ScrCmd_gettime                           @ 0x2e

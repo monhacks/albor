@@ -932,68 +932,7 @@ static const u8 *const sTimeColonTextColors[] = {sTrainerCardTextColors, sTimeCo
 
 static void PrintTimeOnCard(void)
 {
-    u16 hours;
-    u16 minutes;
-    s32 width;
-    u32 x, y, totalWidth;
 
-    if (!sData->isHoenn)
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 20, 88, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
-    else
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 16, 89, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardTime);
-
-    if (sData->isLink)
-    {
-        hours = sData->trainerCard.playTimeHours;
-        minutes = sData->trainerCard.playTimeMinutes;
-    }
-    else
-    {
-        hours = gSaveBlockPtr->playTimeHours;
-        minutes = gSaveBlockPtr->playTimeMinutes;
-    }
-
-    if (hours > 999)
-        hours = 999;
-    if (minutes > 59)
-        minutes = 59;
-    width = GetStringWidth(FONT_NORMAL, gText_Colon2, 0);
-
-    if (!sData->isHoenn)
-    {
-        x = 144;
-        y = 88;
-    }
-    else
-    {
-        x = 128;
-        y = 89;
-    }
-    totalWidth = width + 30;
-    x -= totalWidth;
-
-    FillWindowPixelRect(WIN_CARD_TEXT, PIXEL_FILL(0), x, y, totalWidth, 15);
-    ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
-    x += 18;
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon2);
-    x += width;
-    ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
-}
-
-static void PrintProfilePhraseOnCard(void)
-{
-    static const u8 yOffsetsLine1[] = {113, 104};
-    static const u8 yOffsetsLine2[] = {129, 120};
-
-    if (sData->isLink)
-    {
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 8, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[0]);
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringWidth(FONT_NORMAL, sData->easyChatProfile[0], 0) + 14, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[1]);
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, 8, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[2]);
-        AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringWidth(FONT_NORMAL, sData->easyChatProfile[2], 0) + 14, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SKIP_DRAW, sData->easyChatProfile[3]);
-    }
 }
 
 static void BufferNameForCardBack(void)

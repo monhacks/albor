@@ -36,7 +36,6 @@
 #include "money.h"
 #include "new_game.h"
 #include "palette.h"
-#include "play_time.h"
 #include "random.h"
 #include "rotating_gate.h"
 #include "rtc.h"

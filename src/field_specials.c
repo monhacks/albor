@@ -3442,37 +3442,6 @@ bool8 InPokemonCenter(void)
     return FALSE;
 }
 
-/*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
-
-    ## The Fan Club room itself
-    There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
-    After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
-    After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
-    If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
-
-    ## Gaining/losing fans
-    After every link battle the player will gain a fan if they won, or lose a fan if they lost
-    If the player has at least 3 fans, this is the only way to gain fans
-    If the player has fewer than 3 fans, they may also gain fans by completing certain tasks enough times (see TryGainNewFanFromCounter)
-    If the player has at least 5 fans, they can lose a fan every 12 real-time hours, or more often if the timer variable is reset (see TryLoseFansFromPlayTime)
-    If the player has only 1 fan left it cannot be lost
-
-    ## Variables
-    VAR_FANCLUB_FAN_COUNTER, a bitfield for tracking the fans
-      Bits  1-7: Counter for when to add new fans
-      Bit     8: Flag set after receiving the initial 3 fans
-      Bits 9-16: Flags for each of the 8 club members, set to 1 when theyre a fan of the player and 0 when theyre not
-
-    VAR_FANCLUB_LOSE_FAN_TIMER, a timer for when to lose fans
-      Compared against playTimeHours. When theyre equal, a fan is ready to be lost
-      For every fan thats lost this way 12 hours are added to the timer
-
-    VAR_LILYCOVE_FAN_CLUB_STATE
-      0: Player is not the champion yet
-      1: Player is the champion, ready to meet their initial fans
-      2: Player has met their initial fans
-*/
-
 #define FANCLUB_BITFIELD (gSaveBlockPtr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
 #define FANCLUB_COUNTER    0x007F
 
@@ -3493,18 +3462,7 @@ void ResetFanClub(void)
 
 void UpdateTrainerFanClubGameClear(void)
 {
-    if (!GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS))
-    {
-        SetPlayerGotFirstFans();
-        SetInitialFansOfPlayer();
-        gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
-        FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
-        FlagClear(FLAG_HIDE_FANCLUB_BOY);
-        FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
-        FlagClear(FLAG_HIDE_FANCLUB_LADY);
-        FlagClear(FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER);
-        VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
-    }
+
 }
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
@@ -3640,29 +3598,7 @@ u16 GetNumFansOfPlayerInTrainerFanClub(void)
 // If the player has > 5 fans in the Trainer Fan Club, then lose 1 fan for every 12 hours since the last fan loss / timer reset
 void TryLoseFansFromPlayTime(void)
 {
-    u8 i = 0;
-    if (gSaveBlockPtr->playTimeHours < 999)
-    {
-        while (TRUE)
-        {
-            if (GetNumFansOfPlayerInTrainerFanClub() < 5)
-            {
-                gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
-                break;
-            }
-            else if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
-            {
-                break;
-            }
-            else if (gSaveBlockPtr->playTimeHours - gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
-            {
-                return;
-            }
-            PlayerLoseRandomTrainerFan();
-            gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
-            i++;
-        }
-    }
+
 }
 
 bool8 IsFanClubMemberFanOfPlayer(void)

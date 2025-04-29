@@ -1197,36 +1197,7 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
 
 static void HallOfFame_PrintPlayerInfo(u8 unused1, u8 unused2)
 {
-    u8 text[20];
-    u32 width;
 
-    FillWindowPixelBuffer(1, PIXEL_FILL(1));
-    PutWindowTilemap(1);
-    DrawStdFrameWithCustomTileAndPalette(1, FALSE, 0x21D, 0xD);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 1, sPlayerInfoTextColors, TEXT_SKIP_DRAW, gText_Name);
-
-    width = GetStringRightAlignXOffset(FONT_NORMAL, gSaveBlockPtr->playerName, 0x70);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, width, 1, sPlayerInfoTextColors, TEXT_SKIP_DRAW, gSaveBlockPtr->playerName);
-
-    AddTextPrinterParameterized3(1, FONT_NORMAL, 0, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, gText_Time);
-    text[0] = (gSaveBlockPtr->playTimeHours / 100) + CHAR_0;
-    text[1] = (gSaveBlockPtr->playTimeHours % 100) / 10 + CHAR_0;
-    text[2] = (gSaveBlockPtr->playTimeHours % 10) + CHAR_0;
-
-    if (text[0] == CHAR_0)
-        text[0] = CHAR_SPACE;
-    if (text[0] == CHAR_SPACE && text[1] == CHAR_0)
-        text[8] = CHAR_SPACE;
-
-    text[3] = CHAR_COLON;
-    text[4] = (gSaveBlockPtr->playTimeMinutes % 100) / 10 + CHAR_0;
-    text[5] = (gSaveBlockPtr->playTimeMinutes % 10) + CHAR_0;
-    text[6] = EOS;
-
-    width = GetStringRightAlignXOffset(FONT_NORMAL, text, 0x70);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, width, 0x21, sPlayerInfoTextColors, TEXT_SKIP_DRAW, text);
-
-    CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
 }
 
 static void ClearVramOamPltt_LoadHofPal(void)

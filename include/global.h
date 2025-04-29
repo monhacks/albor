@@ -67,8 +67,6 @@
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
-#define IS_POW_OF_TWO(n) (((n) & ((n)-1)) == 0)
-
 // The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
 // There are cases where GF does a&(n-1) where we would really like to have a%n, because
 // if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
@@ -556,17 +554,12 @@ struct SaveBlock
     u8 playerName[PLAYER_NAME_LENGTH + 1];
     u8 playerGender; // MALE, FEMALE
     u8 specialSaveWarpFlags;
-    u16 playTimeHours;
-    u8 playTimeMinutes;
-    u8 playTimeSeconds;
-    u8 playTimeVBlanks;
     u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A] //modificar
     u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-    u32 pokedexOrder;
     struct Tiempo horaReferenciaJuego;
     struct Tiempo lastBerryTreeUpdate;
     struct BattleFrontier frontier; //eliminar

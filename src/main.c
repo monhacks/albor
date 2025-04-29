@@ -7,7 +7,6 @@
 #include "rtc.h"
 #include "scanline_effect.h"
 #include "overworld.h"
-#include "play_time.h"
 #include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
@@ -100,7 +99,7 @@ void AgbMainLoop(void)
     {
         ReadKeys();
         CallCallbacks();
-        ContadorTiempoJuego_Actualizar();
+        AvanzaSegundos();
         MapMusicMain();
         VBlankIntrWait();
     }

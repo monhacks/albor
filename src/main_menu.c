@@ -1894,15 +1894,7 @@ static void MainMenu_FormatSavegamePlayer(void)
 
 static void MainMenu_FormatSavegameTime(void)
 {
-    u8 str[0x20];
-    u8 *ptr;
 
-    StringExpandPlaceholders(gStringVar4, gText_ContinueMenuTime);
-    AddTextPrinterParameterized3(2, FONT_NORMAL, 0x6C, 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, gStringVar4);
-    ptr = ConvertIntToDecimalStringN(str, gSaveBlockPtr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
-    *ptr = 0xF0;
-    ConvertIntToDecimalStringN(ptr + 1, gSaveBlockPtr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(2, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, str, 0xD0), 17, sTextColor_MenuInfo, TEXT_SKIP_DRAW, str);
 }
 
 static void MainMenu_FormatSavegamePokedex(void)

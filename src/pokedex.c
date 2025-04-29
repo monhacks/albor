@@ -1587,7 +1587,6 @@ void ResetPokedex(void)
 
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
-    gSaveBlockPtr->pokedexOrder = 0;
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         gSaveBlockPtr->dexCaught[i] = 0;
