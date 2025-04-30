@@ -178,7 +178,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        gStringVar2[2] = CHAR_DEC_SEPARATOR;
+        gStringVar2[2] = CHAR_COMMA;
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gText_SpaceSeconds);
     }
@@ -784,15 +784,6 @@ void CableCarWarp(void)
 void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
-}
-
-u16 GetWeekCount(void)
-{
-    u16 weekCount = gHoraJuego.days / 7;
-    if (weekCount > 9999)
-        weekCount = 9999;
-
-    return weekCount;
 }
 
 u8 GetLeadMonFriendshipScore(void)

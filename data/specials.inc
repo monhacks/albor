@@ -194,7 +194,6 @@ gSpecials::
 	def_special CreateInGameTradePokemon
 	def_special DoInGameTradeScene
 	def_special GetTradeSpecies
-	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
 	def_special ResetTrickHouseNuggetFlag

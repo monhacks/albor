@@ -581,7 +581,7 @@ bool8 ScrCmd_initclock(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 {
-    DoTimeBasedEvents();
+    HaceEventosTemporales();
     return FALSE;
 }
 

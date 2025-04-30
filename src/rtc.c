@@ -4,9 +4,6 @@
 #include "strings.h"
 #include "text.h"
 
-static struct SiiRtcInfo sRtc;
-static u16 sSavedIme;
-
 COMMON_DATA struct Tiempo gHoraJuego = {0};
 
 static const s32 sDiasPorMes[NUMERO_MESES] =
@@ -33,13 +30,35 @@ bool32 EsAnioBisiesto(u32 anio)
     return FALSE;
 }
 
-void QueFechaEs(struct SiiRtcInfo *rtc)
+struct Tiempo *HoraActual(void)
+{
+    return &gSaveBlockPtr->horaActual;
+}
+
+void AvanzaSegundos(void)
 {
     struct Tiempo* tiempo = HoraActual();
-    rtc->second = tiempo->segundos;
-    rtc->minute = tiempo->minutos;
-    rtc->hour = tiempo->horas;
-    rtc->day = tiempo->dias;
+    u32 segundos = tiempo->seconds + FRAMES_POR_SEGUNDO;
+
+    while (segundos >= SEGUNDOS_POR_MINUTO)
+    {
+        tiempo->minutes++;
+        segundos -= SEGUNDOS_POR_MINUTO;
+    }
+
+    while (tiempo->minutes >= MINUTOS_POR_HORA)
+    {
+        tiempo->hours++;
+        tiempo->minutes -= MINUTOS_POR_HORA;
+    }
+
+    while (tiempo->hours >= HORAS_POR_DIA)
+    {
+        tiempo->days++;
+        tiempo->hours -= HORAS_POR_DIA;
+    }
+
+    tiempo->seconds = segundos;
 }
 
 void ReinicioTiempo(void)
@@ -77,7 +96,7 @@ void CalculaDiferenciaTiempo(struct SiiRtcInfo *rtc, struct Tiempo *resultado, s
 
 void RtcCalcLocalTime(void)
 {
-    QueFechaEs(&sRtc);
+    HoraActual();
     CalculaDiferenciaTiempo(&sRtc, &gHoraJuego, &gSaveBlockPtr->horaReferenciaJuego);
 }
 
@@ -112,11 +131,11 @@ void CalculaHoraReferenciaJuego(s32 dias, s32 horas, s32 minutos, s32 segundos)
     gHoraJuego.hours = horas;
     gHoraJuego.minutes = minutos;
     gHoraJuego.seconds = segundos;
-    QueFechaEs(&sRtc);
+    HoraActual();
     CalculaDiferenciaTiempo(&sRtc, &gSaveBlockPtr->horaReferenciaJuego, &gHoraJuego);
 }
 
-void ConvierteTiempoDecimalSinSegundos(u8 *txtPtr, s8 hour, s8 minute, bool32 is24Hour)
+void ConvierteTiempoDecimalSinSegundos(u8 *txtPtr, s8 hour, s8 minute)
 {
     if (is24Hour)
     {

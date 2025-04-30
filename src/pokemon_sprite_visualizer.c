@@ -25,7 +25,6 @@
 #include "pokemon_animation.h"
 #include "pokemon_sprite_visualizer.h"
 #include "pokemon_icon.h"
-#include "reset_rtc_screen.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"

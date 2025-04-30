@@ -1,6 +1,19 @@
 #ifndef GUARD_RTC_UTIL_H
 #define GUARD_RTC_UTIL_H
 
+enum DiasSemana
+{
+    LUNES,
+    MARTES,
+    MIERCOLES,
+    JUEVES,
+    VIERNES,
+    SABADO,
+    DOMINGO,
+
+    DIAS_SEMANA
+};
+
 enum Meses
 {
     ENERO,
@@ -18,20 +31,25 @@ enum Meses
     NUMERO_MESES
 };
 
-struct SiiRtcInfo
+enum TiemposDia
 {
-    u8 year;
-    u8 month;
-    u8 day;
-    u8 dayOfWeek;
-    u8 hour;
-    u8 minute;
-    u8 second;
-    u8 status;
-    u8 alarmHour;
-    u8 alarmMinute;
+    TIEMPO_MANANA,
+    TIEMPO_DIA,
+    TIEMPO_TARDE,
+    TIEMPO_NOCHE,
+
+    NUMERO_TIEMPOS_DIA
 };
 
+enum Estaciones
+{
+    PRIMAVERA,
+    VERANO,
+    OTONO,
+    INVIERNO,
+
+    NUMERO_ESTACIONES
+}
 #define HORAS_POR_DIA               24
 #define MINUTOS_POR_HORA            60
 #define SEGUNDOS_POR_MINUTO         60
@@ -51,16 +69,10 @@ struct SiiRtcInfo
 #define HORA_INICIO_NOCHE           22
 #define HORA_FINAL_NOCHE            6
 
-enum TiemposDia
-{
-    TIEMPO_MANANA,
-    TIEMPO_DIA,
-    TIEMPO_TARDE,
-    TIEMPO_NOCHE
-};
-
 extern struct Tiempo gHoraJuego;
 
+struct Tiempo *HoraActual(void);
+void AvanzaSegundos(void);
 bool32 EsAnioBisiesto(u32 anio);
 void ReinicioTiempo(void);
 void CalculaDiferenciaTiempo(struct SiiRtcInfo *rtc, struct Tiempo *result, struct Tiempo *t);

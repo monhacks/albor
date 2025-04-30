@@ -681,7 +681,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 if (I_VS_SEEKER_CHARGING != 0)
     MapResetTrainerRematches(mapGroup, mapNum);
 
-    DoTimeBasedEvents();
+    HaceEventosTemporales();
     SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
@@ -721,7 +721,7 @@ static void LoadMapFromWarp(void)
     if (I_VS_SEEKER_CHARGING != 0)
         MapResetTrainerRematches(gSaveBlockPtr->location.mapGroup, gSaveBlockPtr->location.mapNum);
 
-    DoTimeBasedEvents();
+    HaceEventosTemporales();
     SetSavedWeatherFromCurrMapHeader();
     ChooseAmbientCrySpecies();
     if (isOutdoors)
@@ -1565,7 +1565,7 @@ void CB2_ContinueSavedGame(void)
     ClearDiveAndHoleWarps();
     LoadSaveblockObjEventScripts();
     UnfreezeObjectEvents();
-    DoTimeBasedEvents();
+    HaceEventosTemporales();
     ChooseAmbientCrySpecies();
     InitMapFromSavedGame();
     ScriptContext_Init();

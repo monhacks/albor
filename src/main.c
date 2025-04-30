@@ -160,7 +160,7 @@ static void SeedRngWithRtc(void)
     #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
     u32 seconds;
     struct SiiRtcInfo rtc;
-    QueFechaEs(&rtc);
+    HoraActual();
     seconds =
         ((HORAS_POR_DIA * rtc->day + BCD8(rtc.hour))
         * MINUTOS_POR_HORA + BCD8(rtc.minute))

@@ -157,10 +157,11 @@ struct UCoords32
 
 struct Tiempo
 {
-    u16 dias;
-    u8 horas;
-    u8 minutos;
-    u8 segundos;
+    s16 dias;
+    s8 horas;
+    s8 minutos;
+    s8 segundos;
+    s8 diaSemana;
 };
 
 struct PyramidBag
@@ -561,7 +562,7 @@ struct SaveBlock
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
     struct Tiempo horaReferenciaJuego;
-    struct Tiempo lastBerryTreeUpdate;
+    struct Tiempo ultimaActualizacionBaya;
     struct BattleFrontier frontier; //eliminar
     struct Tiempo horaActual;
     u8 itemFlags[ITEM_FLAGS_COUNT];

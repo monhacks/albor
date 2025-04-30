@@ -25,7 +25,6 @@
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
 #include "pokemon.h"
-#include "reset_rtc_screen.h"
 #include "scanline_effect.h"
 #include "shop.h"
 #include "sound.h"

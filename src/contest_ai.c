@@ -9,7 +9,6 @@
 #define AI_ACTION_DONE (1 << 0)
 
 extern const u8 *gAIScriptPtr;
-extern const u8 *gContestAI_ScriptsTable[];
 
 static void ContestAICmd_score(void);
 static void ContestAICmd_get_appeal_num(void);
@@ -348,13 +347,6 @@ static void ContestAI_DoAIProcessing(void)
             case CONTESTAI_DO_NOT_PROCESS:
                 break;
             case CONTESTAI_SETTING_UP:
-                gAIScriptPtr = gContestAI_ScriptsTable[eContestAI.currentAIFlag];
-
-                if (gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex] == MOVE_NONE)
-                    eContestAI.nextMove = MOVE_NONE; // don't process a move that doesn't exist.
-                else
-                    eContestAI.nextMove = gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex];
-                eContestAI.aiState++;
                 break;
             case CONTESTAI_PROCESSING:
                 if (eContestAI.nextMove != MOVE_NONE)

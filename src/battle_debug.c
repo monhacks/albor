@@ -28,7 +28,6 @@
 #include "string_util.h"
 #include "util.h"
 #include "data.h"
-#include "reset_rtc_screen.h"
 #include "reshow_battle_screen.h"
 #include "constants/abilities.h"
 #include "constants/party_menu.h"

@@ -154,7 +154,7 @@ static void RunTimeBasedEvents(s16 *data)
     case 0:
         if (gMain.vblankCounter1 & TIME_UPDATE_INTERVAL)
         {
-            DoTimeBasedEvents();
+            HaceEventosTemporales();
             tState++;
         }
         break;

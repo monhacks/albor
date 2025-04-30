@@ -284,7 +284,7 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
 # Linker script
-LD_SCRIPT := ld_script_modern.ld
+LD_SCRIPT := ld_script.ld
 LD_SCRIPT_DEPS :=
 
 # Final rules

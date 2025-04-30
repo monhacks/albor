@@ -2299,7 +2299,7 @@ static void DebugAction_Util_CheatStart(u8 taskId)
     if (!FlagGet(FLAG_SYS_CLOCK_SET))
         IniciaHoraReferenciaJuego(0, 0);
 
-    InitTimeBasedEvents();
+    IniciaEventosTemporales();
     Debug_DestroyMenu_Full_Script(taskId, Debug_CheatStart);
 }
 
