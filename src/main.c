@@ -31,8 +31,6 @@ static void IntrDummy(void);
 // Defined in the linker script so that the test build can override it.
 extern void CB2_FlashNotDetectedScreen(void);
 
-const char BuildDateTime[] = "2005 02 21 11:10";
-
 const IntrFunc gIntrTableTemplate[] =
 {
     VCountIntr, // V-count interrupt
@@ -69,7 +67,7 @@ void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
-void AgbMain()
+void AgbMain(void)
 {
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
