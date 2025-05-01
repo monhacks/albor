@@ -699,7 +699,7 @@ static bool32 InitFrontierPass(void)
         break;
     case 4:
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(1, sPassBgTemplates, ARRAY_COUNT(sPassBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_1, sPassBgTemplates, ARRAY_COUNT(sPassBgTemplates));
         SetBgTilemapBuffer(1, sPassGfx->tilemapBuff1);
         SetBgTilemapBuffer(2, sPassGfx->tilemapBuff2);
         SetBgTilemapBuffer(3, sPassGfx->tilemapBuff3);
@@ -1275,7 +1275,7 @@ static bool32 InitFrontierMap(void)
         break;
     case 3:
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sMapBgTemplates, ARRAY_COUNT(sMapBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sMapBgTemplates, ARRAY_COUNT(sMapBgTemplates));
         SetBgTilemapBuffer(0, sMapData->tilemapBuff0);
         SetBgTilemapBuffer(1, sMapData->tilemapBuff1);
         SetBgTilemapBuffer(2, sMapData->tilemapBuff2);

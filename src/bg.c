@@ -4,13 +4,14 @@
 #include "dma3.h"
 #include "gpu_regs.h"
 
-#define DISPCNT_ALL_BG_AND_MODE_BITS    (DISPCNT_BG_ALL_ON | 0x7)
+#define DISPCNT_MASCARA_MODOS 7
+#define DISPCNT_ALL_BG_AND_MODE_BITS    (DISPCNT_BG_ALL_ON | DISPCNT_MASCARA_MODOS)
 
 struct BgControl
 {
-    struct BgConfig {
+    struct BgConfig
+    {
         u8 visible:1;
-        u8 unknown_1:1;
         u8 screenSize:2;
         u8 priority:2;
         u8 mosaic:1;
@@ -45,19 +46,19 @@ static u32 GetBgType(u32 bg);
 void ResetBgs(void)
 {
     ResetBgControlStructs();
-    sGpuBgConfigs.bgVisibilityAndMode = 0;
+    sGpuBgConfigs.bgVisibilityAndMode = DISPCNT_MODE_0;
     SetTextModeAndHideBgs();
 }
 
 static void SetBgModeInternal(u32 bgMode)
 {
-    sGpuBgConfigs.bgVisibilityAndMode &= ~0x7;
+    sGpuBgConfigs.bgVisibilityAndMode &= ~DISPCNT_MASCARA_MODOS;
     sGpuBgConfigs.bgVisibilityAndMode |= bgMode;
 }
 
 u32 GetBgMode(void)
 {
-    return sGpuBgConfigs.bgVisibilityAndMode & 0x7;
+    return sGpuBgConfigs.bgVisibilityAndMode & DISPCNT_MASCARA_MODOS;
 }
 
 void ResetBgControlStructs(void)
@@ -153,31 +154,31 @@ static u16 GetBgControlAttribute(u32 bg, u32 attributeId)
     return 0xFF;
 }
 
-u8 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode)
+u32 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode)
 {
     u16 offset;
-    s8 cursor;
+    u32 cursor;
 
     if (IsInvalidBg(bg) || !sGpuBgConfigs.configs[bg].visible)
         return -1;
 
     switch (mode)
     {
-    case 0x1:
+    case DISPCNT_MODE_1:
         offset = sGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
         offset = destOffset + offset;
         cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
-    case 0x2:
+    case DISPCNT_MODE_2:
         offset = sGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
         offset = destOffset + offset;
         cursor = RequestDma3Copy(src, (void *)(offset + BG_VRAM), size, 0);
         if (cursor == -1)
             return -1;
         break;
-    default:
+    default: //DISPCNT_MODE_0
         cursor = -1;
         break;
     }
@@ -229,16 +230,16 @@ static void SetBgAffineInternal(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 disp
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
 
-    switch (sGpuBgConfigs.bgVisibilityAndMode & 0x7)
+    switch (sGpuBgConfigs.bgVisibilityAndMode & DISPCNT_MASCARA_MODOS)
     {
     default:
-    case 0:
+    case DISPCNT_MODE_0:
         return;
-    case 1:
+    case DISPCNT_MODE_1:
         if (bg != 2)
             return;
         break;
-    case 2:
+    case DISPCNT_MODE_2:
         if (bg != 2 && bg != 3)
             return;
         break;
@@ -1079,28 +1080,28 @@ static u32 GetBgType(u32 bg)
     case 1:
         switch (mode)
         {
-        case 0:
-        case 1:
-            return BG_TYPE_NORMAL;
+            case DISPCNT_MODE_0:
+            case DISPCNT_MODE_1:
+                return BG_TYPE_NORMAL;
         }
         break;
     case 2:
         switch (mode)
         {
-        case 0:
-            return BG_TYPE_NORMAL;
-        case 1:
-        case 2:
-            return BG_TYPE_AFFINE;
+            case DISPCNT_MODE_0:
+                return BG_TYPE_NORMAL;
+            case DISPCNT_MODE_1:
+            case DISPCNT_MODE_2:
+                return BG_TYPE_AFFINE;
         }
         break;
     case 3:
         switch (mode)
         {
-        case 0:
-            return BG_TYPE_NORMAL;
-        case 2:
-            return BG_TYPE_AFFINE;
+            case DISPCNT_MODE_0:
+                return BG_TYPE_NORMAL;
+            case DISPCNT_MODE_2:
+                return BG_TYPE_AFFINE;
         }
         break;
     }

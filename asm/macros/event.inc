@@ -1631,13 +1631,13 @@
 	.4byte \text
 	.endm
 
-	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out
-	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
+	@ Como fadescreen pero copia gPlttBufferUnfaded a un buffer en el fundido a negro,
+	@ y a la inversa, guardando gPlttBufferUnfaded para restaurarlo.
   	@ If nowait set, does not wait for the fade to complete
-	.macro fadescreenswapbuffers mode:req, nowait=0
+	.macro fadescreenswapbuffers modo:req, inmediato=FALSE
 	.byte 0xdc
-	.byte \mode
-  	.byte \nowait
+	.byte \modo
+  	.byte \inmediato
 	.endm
 
 	@ Buffers the specified trainer's class name to the given string var.

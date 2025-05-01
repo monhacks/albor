@@ -168,7 +168,7 @@ static const struct BgTemplate sDiplomaBgTemplates[2] =
 static void InitDiplomaBg(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sDiplomaBgTemplates, ARRAY_COUNT(sDiplomaBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sDiplomaBgTemplates, ARRAY_COUNT(sDiplomaBgTemplates));
     SetBgTilemapBuffer(1, sDiplomaTilemapPtr);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);

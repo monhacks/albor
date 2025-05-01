@@ -1773,31 +1773,7 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
 
 static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
 {
-    struct SpriteSheet sheet;
-    struct CompressedSpritePalette palette;
-    struct SpriteTemplate *template;
-    u8 spriteId;
-
-    if (!AllocItemIconTemporaryBuffers())
-        return MAX_SPRITES;
-
-    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gItemIconDecompressionBuffer);
-    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
-    sheet.data = gItemIcon4x4Buffer;
-    sheet.size = 0x200;
-    sheet.tag = tilesTag;
-    LoadSpriteSheet(&sheet);
-    palette.data = GetDecorationIconPicOrPalette(decor, 1);
-    palette.tag = paletteTag;
-    LoadCompressedSpritePalette(&palette);
-    template = Alloc(sizeof(struct SpriteTemplate));
-    *template = gItemIconSpriteTemplate;
-    template->tileTag = tilesTag;
-    template->paletteTag = paletteTag;
-    spriteId = CreateSprite(template, 0, 0, 0);
-    FreeItemIconTemporaryBuffers();
-    Free(template);
-    return spriteId;
+    return 0;
 }
 
 static const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)

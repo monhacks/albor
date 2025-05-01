@@ -1989,7 +1989,7 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         EnableInterrupts(INTR_FLAG_VBLANK);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sInfoCardBgTemplates, ARRAY_COUNT(sInfoCardBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sInfoCardBgTemplates, ARRAY_COUNT(sInfoCardBgTemplates));
         InitWindows(sInfoCardWindowTemplates);
         DeactivateAllTextPrinters();
         gBattle_BG0_X = 0;

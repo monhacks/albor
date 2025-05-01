@@ -1247,7 +1247,7 @@ static void LoadHofGfx(void)
 static void InitHofBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sHof_BgTemplates, ARRAY_COUNT(sHof_BgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sHof_BgTemplates, ARRAY_COUNT(sHof_BgTemplates));
     SetBgTilemapBuffer(1, sHofGfxPtr->tilemap1);
     SetBgTilemapBuffer(3, sHofGfxPtr->tilemap2);
     ChangeBgX(0, 0, BG_COORD_SET);

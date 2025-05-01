@@ -467,7 +467,7 @@ static void CB2_LoadEggHatch(void)
 
         ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 
         ChangeBgX(1, 0, BG_COORD_SET);
         ChangeBgY(1, 0, BG_COORD_SET);

@@ -270,11 +270,11 @@ static const union AnimCmd *const sAnims_Rival[] =
 
 #define MONBG_OFFSET (MON_PIC_SIZE * 3)
 static const struct SpriteSheet sSpriteSheet_MonBg[] = {
-    { gDecompressionBuffer, MONBG_OFFSET, TAG_MON_BG},
+    { 0, MONBG_OFFSET, TAG_MON_BG},
     {},
 };
 static const struct SpritePalette sSpritePalette_MonBg[] = {
-    { (const u16 *)&gDecompressionBuffer[MONBG_OFFSET], TAG_MON_BG},
+    { 0, TAG_MON_BG},
     {},
 };
 
@@ -359,7 +359,7 @@ static void CB2_Credits(void)
 static void InitCreditsBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(0, AllocZeroed(BG_SCREEN_SIZE));
     LoadPalette(sCredits_Pal, BG_PLTT_ID(8), 2 * PLTT_SIZE_4BPP);
     InitWindows(sWindowTemplates);
@@ -529,65 +529,7 @@ static void Task_ReadyShowMons(u8 taskId)
 
 static void Task_LoadShowMons(u8 taskId)
 {
-    switch (gMain.state)
-    {
-    default:
-    case 0:
-    {
-        u16 i;
-        u16 *temp;
 
-        ResetSpriteData();
-        ResetAllPicSprites();
-        FreeAllSpritePalettes();
-        gReservedSpritePaletteCount = 8;
-        LZ77UnCompVram(gBirchBagGrass_Gfx, (void *)VRAM);
-        LZ77UnCompVram(gBirchGrassTilemap, (void *)(BG_SCREEN_ADDR(7)));
-        LoadPalette(gBirchBagGrass_Pal + 1, BG_PLTT_ID(0) + 1, PLTT_SIZEOF(2 * 16 - 1));
-
-        for (i = 0; i < MON_PIC_SIZE; i++)
-            gDecompressionBuffer[i] = 0x11;
-        for (i = 0; i < MON_PIC_SIZE; i++)
-            (gDecompressionBuffer + MON_PIC_SIZE)[i] = 0x22;
-        for (i = 0; i < MON_PIC_SIZE; i++)
-            (gDecompressionBuffer + MON_PIC_SIZE * 2)[i] = 0x33;
-
-        temp = (u16 *)(&gDecompressionBuffer[MONBG_OFFSET]);
-        temp[0] = RGB_BLACK;
-        temp[1] = RGB(31, 31, 20); // light yellow
-        temp[2] = RGB(31, 20, 20); // light red
-        temp[3] = RGB(20, 20, 31); // light blue
-
-        LoadSpriteSheet(sSpriteSheet_MonBg);
-        LoadSpritePalette(sSpritePalette_MonBg);
-
-        gMain.state++;
-        break;
-    }
-    case 1:
-        gTasks[taskId].tTaskId_ShowMons = CreateTask(Task_ShowMons, 0);
-        gTasks[gTasks[taskId].tTaskId_ShowMons].tState = 1;
-        gTasks[gTasks[taskId].tTaskId_ShowMons].tMainTaskId = taskId;
-
-        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
-        SetGpuReg(REG_OFFSET_BG3HOFS, 0);
-        SetGpuReg(REG_OFFSET_BG3VOFS, 32);
-        SetGpuReg(REG_OFFSET_BG3CNT, BGCNT_PRIORITY(3)
-                                   | BGCNT_CHARBASE(0)
-                                   | BGCNT_SCREENBASE(7)
-                                   | BGCNT_16COLOR
-                                   | BGCNT_TXT256x256);
-        SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0
-                                    | DISPCNT_OBJ_1D_MAP
-                                    | DISPCNT_BG0_ON
-                                    | DISPCNT_BG3_ON
-                                    | DISPCNT_OBJ_ON);
-
-        gMain.state = 0;
-        gIntroCredits_MovingSceneryState = INTROCRED_SCENERY_NORMAL;
-        gTasks[taskId].func = Task_WaitPaletteFade;
-        break;
-    }
 }
 
 static void Task_CreditsTheEnd1(u8 taskId)

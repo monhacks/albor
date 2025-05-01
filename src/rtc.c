@@ -22,14 +22,6 @@ static const s32 sDiasPorMes[NUMERO_MESES] =
     [DICIEMBRE] = 31,
 };
 
-bool32 EsAnioBisiesto(u32 anio)
-{
-    if ((anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0))
-        return TRUE;
-
-    return FALSE;
-}
-
 struct Tiempo *HoraActual(void)
 {
     return &gSaveBlockPtr->horaActual;

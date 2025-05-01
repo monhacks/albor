@@ -624,7 +624,7 @@ static void HandleInitBackgrounds(void)
     ResetVramOamAndBgCntRegs();
 
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(1, sPokeblockFeed->tilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);

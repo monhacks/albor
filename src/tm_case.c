@@ -412,7 +412,7 @@ static void LoadBGTemplates(void)
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(2048);
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);

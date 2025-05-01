@@ -539,7 +539,7 @@ static void InitPyramidBagBgs(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(2, gPyramidBagMenu->tilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(2);

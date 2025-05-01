@@ -1147,7 +1147,7 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sSelect_BgTemplates, ARRAY_COUNT(sSelect_BgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sSelect_BgTemplates, ARRAY_COUNT(sSelect_BgTemplates));
         InitWindows(sSelect_WindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
@@ -3208,7 +3208,7 @@ static void CB2_InitSwapScreen(void)
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sSwap_BgTemplates, ARRAY_COUNT(sSwap_BgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sSwap_BgTemplates, ARRAY_COUNT(sSwap_BgTemplates));
         InitWindows(sSwap_WindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;

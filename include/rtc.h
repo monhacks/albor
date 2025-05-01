@@ -49,7 +49,8 @@ enum Estaciones
     INVIERNO,
 
     NUMERO_ESTACIONES
-}
+};
+
 #define HORAS_POR_DIA               24
 #define MINUTOS_POR_HORA            60
 #define SEGUNDOS_POR_MINUTO         60
@@ -73,7 +74,6 @@ extern struct Tiempo gHoraJuego;
 
 struct Tiempo *HoraActual(void);
 void AvanzaSegundos(void);
-bool32 EsAnioBisiesto(u32 anio);
 void ReinicioTiempo(void);
 void CalculaDiferenciaTiempo(struct SiiRtcInfo *rtc, struct Tiempo *result, struct Tiempo *t);
 void RtcCalcLocalTime(void);

@@ -249,7 +249,7 @@ static void CB2_ShowTrainerHillRecords(void)
     case 2:
         sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
         SetBgTilemapBuffer(3, sTilemapBuffer);
         ResetBgCoordinates();
         gMain.state++;

@@ -1139,7 +1139,7 @@ static void SlotMachineSetup_InitBgsWindows(void)
     SetHBlankCallback(NULL);
     CpuFill32(0, (void *)VRAM, VRAM_SIZE);
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
 }

@@ -197,7 +197,7 @@ static void ShowContestPainting(void)
 static void InitContestPaintingWindow(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
     SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
