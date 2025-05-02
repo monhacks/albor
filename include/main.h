@@ -19,8 +19,7 @@ struct Main
 
     vu16 intrCheck;
 
-    u32 vblankCounter1;
-    u32 vblankCounter2;
+    u32 vblankCounter;
 
     u16 heldKeysRaw;           // held keys without L=A remapping
     u16 newKeysRaw;            // newly pressed keys without L=A remapping

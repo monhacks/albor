@@ -503,7 +503,7 @@ static const struct BgTemplate sBgTemplates_DuoFight[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -512,7 +512,7 @@ static const struct BgTemplate sBgTemplates_DuoFight[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -521,7 +521,7 @@ static const struct BgTemplate sBgTemplates_DuoFight[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 29,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -776,7 +776,7 @@ static const struct BgTemplate sBgTemplates_TakesFlight[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -785,7 +785,7 @@ static const struct BgTemplate sBgTemplates_TakesFlight[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -794,7 +794,7 @@ static const struct BgTemplate sBgTemplates_TakesFlight[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 29,
         .screenSize = 1,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     }
@@ -866,7 +866,7 @@ static const struct BgTemplate sBgTemplates_Descends[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -875,7 +875,7 @@ static const struct BgTemplate sBgTemplates_Descends[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -884,7 +884,7 @@ static const struct BgTemplate sBgTemplates_Descends[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -893,7 +893,7 @@ static const struct BgTemplate sBgTemplates_Descends[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 28,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }
@@ -967,7 +967,7 @@ static const struct BgTemplate sBgTemplates_Charges[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -976,7 +976,7 @@ static const struct BgTemplate sBgTemplates_Charges[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -985,7 +985,7 @@ static const struct BgTemplate sBgTemplates_Charges[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 29,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -994,7 +994,7 @@ static const struct BgTemplate sBgTemplates_Charges[] =
         .charBaseIndex = 3,
         .mapBaseIndex = 28,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }
@@ -1260,7 +1260,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -1269,7 +1269,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -1278,7 +1278,7 @@ static const struct BgTemplate sBgTemplates_ChasesAway[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 29,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     }

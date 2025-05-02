@@ -708,7 +708,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
 static void ResetPokedexAreaMapBg(void)
 {
     SetBgAttribute(3, BG_ATTR_CHARBASEINDEX, 0);
-    SetBgAttribute(3, BG_ATTR_PALETTEMODE, 0);
+    SetBgAttribute(3, BG_ATTR_PALETTEMODE, PALETTE_MODE_16_COLORS);
 }
 
 // Creates the circular sprites to highlight special areas (like caves) where a Pokémon can be found

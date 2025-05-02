@@ -7,8 +7,6 @@
 #include "pokemon_sprite_visualizer.h"
 #include "text.h"
 
-EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[16384] = {0};
-
 void LZDecompressWram(const u32 *src, void *dest)
 {
     LZ77UnCompWram(src, dest);
@@ -50,26 +48,6 @@ u16 LoadCompressedSpriteSheet(const struct CompressedSpriteSheet *src)
     dest.size = src->size;
     dest.tag = src->tag;
     return LoadSpriteSheet(&dest);
-}
-
-// This can be used for either compressed or uncompressed sprite sheets
-u16 LoadCompressedSpriteSheetByTemplate(const struct SpriteTemplate *template, s32 offset)
-{
-    struct SpriteTemplate myTemplate;
-    struct SpriteFrameImage myImage;
-    u32 size;
-
-    // Check for LZ77 header and read uncompressed size, or fallback if not compressed (zero size)
-    if ((size = IsLZ77Data(template->images->data, TILE_SIZE_4BPP, sizeof(gDecompressionBuffer))) == 0)
-        return LoadSpriteSheetByTemplate(template, 0, offset);
-
-    LZ77UnCompWram(template->images->data, gDecompressionBuffer);
-    myImage.data = gDecompressionBuffer;
-    myImage.size = size + offset;
-    myTemplate.images = &myImage;
-    myTemplate.tileTag = template->tileTag;
-
-    return LoadSpriteSheetByTemplate(&myTemplate, 0, offset);
 }
 
 void LoadCompressedSpriteSheetOverrideBuffer(const struct CompressedSpriteSheet *src, void *buffer)

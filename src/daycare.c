@@ -440,7 +440,7 @@ static void _TriggerPendingDaycareEgg(struct DayCare *daycare)
     s32 parent;
     s32 natureTries = 0;
 
-    SeedRng2(gMain.vblankCounter2);
+    SeedRng2(gMain.vblankCounter);
     parent = GetParentToInheritNature(daycare);
 
     // don't inherit nature

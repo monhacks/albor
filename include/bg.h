@@ -28,16 +28,21 @@ enum {
     BG_COORD_SUB,
 };
 
-
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3
     u16 charBaseIndex:2;        // 0x4, 0x8 -> 0xC
     u16 mapBaseIndex:5;         // 0x10, 0x20, 0x40, 0x80, 0x100 -> 0x1F0
     u16 screenSize:2;           // 0x200, 0x400 -> 0x600
-    u16 paletteMode:1;          // 0x800
+    u16 paletteMode:1;          // 0: 16 colores, 1: 256 colores
     u16 priority:2;             // 0x1000, 0x2000 > 0x3000
     u16 baseTile:10;
+};
+
+enum ModosPaletas
+{
+    PALETTE_MODE_16_COLORS,
+    PALETTE_MODE_256_COLORS,
 };
 
 void ResetBgs(void);

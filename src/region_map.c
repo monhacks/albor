@@ -361,7 +361,7 @@ static const struct BgTemplate sFlyMapBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0
     },
     {
@@ -369,7 +369,7 @@ static const struct BgTemplate sFlyMapBgTemplates[] =
         .charBaseIndex = 3,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1
     },
     {
@@ -377,7 +377,7 @@ static const struct BgTemplate sFlyMapBgTemplates[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 28,
         .screenSize = 2,
-        .paletteMode = 1,
+        .paletteMode = PALETTE_MODE_256_COLORS,
         .priority = 2
     }
 };
@@ -605,8 +605,8 @@ bool8 LoadRegionMapGfx(void)
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_SCREENSIZE, 2);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_CHARBASEINDEX, sRegionMap->charBaseIdx);
             SetBgAttribute(sRegionMap->bgNum, BG_ATTR_MAPBASEINDEX, sRegionMap->mapBaseIdx);
-            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND, 1);
-            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_PALETTEMODE, 1);
+            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_WRAPAROUND, TRUE);
+            SetBgAttribute(sRegionMap->bgNum, BG_ATTR_PALETTEMODE, PALETTE_MODE_256_COLORS);
         }
         sRegionMap->initStep++;
         return FALSE;

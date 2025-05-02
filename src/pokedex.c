@@ -791,7 +791,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 12,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -801,7 +801,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 13,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -811,7 +811,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 14,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -821,7 +821,7 @@ static const struct BgTemplate sPokedex_BgTemplate[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 15,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }
@@ -879,7 +879,7 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 12,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     },
@@ -888,7 +888,7 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 13,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -897,7 +897,7 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 14,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -906,7 +906,7 @@ static const struct BgTemplate sInfoScreen_BgTemplate[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 15,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     }
@@ -1065,7 +1065,7 @@ static const struct BgTemplate sNewEntryInfoScreen_BgTemplate[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 14,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -1074,7 +1074,7 @@ static const struct BgTemplate sNewEntryInfoScreen_BgTemplate[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 15,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     },

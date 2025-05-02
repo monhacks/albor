@@ -31,8 +31,6 @@ struct TrainerHillChallenge
     u32 checksum; // A byte array sum of the floor data
 };
 
-extern u32 *gTrainerHillVBlankCounter;
-
 void CallTrainerHillFunction(void);
 void ResetTrainerHillResults(void);
 u8 GetTrainerHillOpponentClass(u16 trainerId);

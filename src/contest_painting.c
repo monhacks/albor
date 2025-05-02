@@ -93,7 +93,7 @@ static const struct BgTemplate sBgTemplates[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 10,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0,
     },
@@ -180,7 +180,7 @@ static void ShowContestPainting(void)
         gMain.state++;
         break;
     case 2:
-        SeedRng(gMain.vblankCounter1);
+        SeedRng(gMain.vblankCounter);
         InitKeys();
         InitContestPaintingWindow();
         gMain.state++;

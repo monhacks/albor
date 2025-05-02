@@ -117,7 +117,7 @@ const struct BgTemplate gBattleBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 24,
         .screenSize = 2,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -126,7 +126,7 @@ const struct BgTemplate gBattleBgTemplates[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 28,
         .screenSize = 2,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -135,7 +135,7 @@ const struct BgTemplate gBattleBgTemplates[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 30,
         .screenSize = 1,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -144,7 +144,7 @@ const struct BgTemplate gBattleBgTemplates[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 26,
         .screenSize = 1,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     },

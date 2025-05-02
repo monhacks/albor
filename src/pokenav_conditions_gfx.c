@@ -37,7 +37,7 @@ static const struct BgTemplate sMenuBgTemplates[3] =
         .charBaseIndex = 1,
         .mapBaseIndex = 0x1F,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -46,7 +46,7 @@ static const struct BgTemplate sMenuBgTemplates[3] =
         .charBaseIndex = 3,
         .mapBaseIndex = 0x1D,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },
@@ -55,7 +55,7 @@ static const struct BgTemplate sMenuBgTemplates[3] =
         .charBaseIndex = 2,
         .mapBaseIndex = 0x1E,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }

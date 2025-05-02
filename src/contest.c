@@ -749,7 +749,7 @@ static const struct BgTemplate sContestBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 0x18,
         .screenSize = 2,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -758,7 +758,7 @@ static const struct BgTemplate sContestBgTemplates[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 0x1E,
         .screenSize = 2,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     },
@@ -767,7 +767,7 @@ static const struct BgTemplate sContestBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 0x1C,
         .screenSize = 2,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -776,7 +776,7 @@ static const struct BgTemplate sContestBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 0x1A,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }
@@ -1108,7 +1108,7 @@ static void InitContestInfoBgs(void)
 
     ResetBgsAndClearDma3BusyFlags();
     InitBgsFromTemplates(DISPCNT_MODE_0, sContestBgTemplates, ARRAY_COUNT(sContestBgTemplates));
-    SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
+    SetBgAttribute(3, BG_ATTR_WRAPAROUND, TRUE);
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
         SetBgTilemapBuffer(i, gContestResources->contestBgTilemaps[i]);

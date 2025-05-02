@@ -66,7 +66,7 @@ static const struct BgTemplate sBgTemplates[3] =
         .charBaseIndex = 2,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0,
     },
@@ -75,7 +75,7 @@ static const struct BgTemplate sBgTemplates[3] =
         .charBaseIndex = 0,
         .mapBaseIndex = 14,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0,
     },
@@ -84,7 +84,7 @@ static const struct BgTemplate sBgTemplates[3] =
         .charBaseIndex = 0,
         .mapBaseIndex = 15,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0,
     },
@@ -330,7 +330,7 @@ static void CB2_ReturnToTitleScreen(void)
 
 static void VBlankCB_UpdateClockGraphics(void)
 {
-    u32 n = (gMain.vblankCounter2 >> 3) & 7;
+    u32 n = (gMain.vblankCounter >> 3) & 7;
 
     gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;

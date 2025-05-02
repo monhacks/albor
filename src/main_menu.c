@@ -411,7 +411,7 @@ static const struct BgTemplate sMainMenuBgTemplates[] = {
         .charBaseIndex = 2,
         .mapBaseIndex = 30,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -420,7 +420,7 @@ static const struct BgTemplate sMainMenuBgTemplates[] = {
         .charBaseIndex = 0,
         .mapBaseIndex = 7,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }
@@ -431,7 +431,7 @@ static const struct BgTemplate sBirchBgTemplate = {
     .charBaseIndex = 3,
     .mapBaseIndex = 30,
     .screenSize = 0,
-    .paletteMode = 0,
+    .paletteMode = PALETTE_MODE_16_COLORS,
     .priority = 0,
     .baseTile = 0
 };

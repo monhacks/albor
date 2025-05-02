@@ -208,7 +208,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .charBaseIndex = 2,
         .mapBaseIndex = 0x1F,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -217,7 +217,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .charBaseIndex = 0,
         .mapBaseIndex = 0x1E,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     },
@@ -226,7 +226,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .charBaseIndex = 3,
         .mapBaseIndex = 0x1D,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0x100
     },
@@ -235,7 +235,7 @@ static const struct BgTemplate sBgTemplates[4] =
         .charBaseIndex = 0,
         .mapBaseIndex = 0x17,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0
     }

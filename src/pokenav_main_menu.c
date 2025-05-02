@@ -64,7 +64,7 @@ const struct BgTemplate gPokenavMainMenuBgTemplates[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 5,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0,
     }

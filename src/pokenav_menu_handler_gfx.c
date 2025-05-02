@@ -115,7 +115,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
         .charBaseIndex = 1,
         .mapBaseIndex = 15,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 1,
         .baseTile = 0x000
     }, {
@@ -123,7 +123,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
         .charBaseIndex = 2,
         .mapBaseIndex = 23,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0x000
     }, {
@@ -131,7 +131,7 @@ static const struct BgTemplate sPokenavMainMenuBgTemplates[] = {
         .charBaseIndex = 3,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0x000
     }

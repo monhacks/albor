@@ -91,7 +91,7 @@ static const struct BgTemplate sConditionSearchResultBgTemplates[] =
         .charBaseIndex = 1,
         .mapBaseIndex = 0x06,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     }, {
@@ -99,7 +99,7 @@ static const struct BgTemplate sConditionSearchResultBgTemplates[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 0x07,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 3,
         .baseTile = 0
     }

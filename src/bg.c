@@ -11,11 +11,11 @@ struct BgControl
 {
     struct BgConfig
     {
-        u8 visible:1;
+        bool8 visible:1;
         u8 screenSize:2;
         u8 priority:2;
-        u8 mosaic:1;
-        u8 wraparound:1;
+        bool8 mosaic:1;
+        bool8 wraparound:1; // Si es TRUE, se repite el fondo si se sale de pantalla. Si es FALSE, muestra transparencia. (Solo para afines)
 
         u8 charBaseIndex:2;
         u8 mapBaseIndex:5;
@@ -122,7 +122,7 @@ static void SetBgControlAttributes(u32 bg, u8 charBaseIndex, u8 mapBaseIndex, u8
             sGpuBgConfigs.configs[bg].wraparound = wraparound;
         }
 
-        sGpuBgConfigs.configs[bg].visible = 1;
+        sGpuBgConfigs.configs[bg].visible = TRUE;
     }
 }
 
@@ -475,9 +475,9 @@ u16 GetBgAttribute(u32 bg, u32 attributeId)
         switch (GetBgType(bg))
         {
         case BG_TYPE_NORMAL:
-            return GetBgMetricTextMode(bg, 0) * 0x800;
+            return GetBgMetricTextMode(bg, 0) * 2048;
         case BG_TYPE_AFFINE:
-            return GetBgMetricAffineMode(bg, 0) * 0x100;
+            return GetBgMetricAffineMode(bg, 0) * 256;
         default:
             return 0;
         }

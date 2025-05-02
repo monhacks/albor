@@ -1758,9 +1758,9 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
     if (sprite->data[7] == 0)
     {
         if (sprite->data[6] < 15)
-            sprite->invisible = 0;
+            sprite->invisible = FALSE;
         else
-            sprite->invisible = 1;
+            sprite->invisible = TRUE;
 
         sprite->data[6]++;
         sprite->data[6] &= 0x1F;

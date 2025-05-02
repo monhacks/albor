@@ -237,7 +237,7 @@ static const struct BgTemplate sBgTemplates_EggHatch[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 24,
         .screenSize = 3,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     },
@@ -247,7 +247,7 @@ static const struct BgTemplate sBgTemplates_EggHatch[] =
         .charBaseIndex = 0,
         .mapBaseIndex = 8,
         .screenSize = 1,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 2,
         .baseTile = 0
     },

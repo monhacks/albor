@@ -259,7 +259,7 @@ static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
         .charBaseIndex = 2,
         .mapBaseIndex = 31,
         .screenSize = 0,
-        .paletteMode = 0,
+        .paletteMode = PALETTE_MODE_16_COLORS,
         .priority = 0,
         .baseTile = 0
     }
