@@ -34,7 +34,7 @@ int GameClear(void)
 
     SetContinueGameWarpStatus();
 
-    if (gSaveBlockPtr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MACHO)
         SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
     else
         SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);

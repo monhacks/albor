@@ -147,7 +147,7 @@ u16 AddTextPrinterParameterized2(u8 windowId, u8 fontId, const u8 *str, u8 speed
     printer.bgColor = bgColor;
     printer.shadowColor = shadowColor;
 
-    gTextFlags.useAlternateDownArrow = 0;
+    gTextFlags.useAlternateDownArrow = FALSE;
     return AddTextPrinter(&printer, speed, callback);
 }
 

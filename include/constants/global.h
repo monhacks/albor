@@ -113,9 +113,9 @@
 
 enum Generos
 {
-    MALE,
-    FEMALE,
-    GENDER_COUNT
+    MACHO,
+    HEMBRA,
+    NUMERO_GENEROS
 };
 
 #define BARD_SONG_LENGTH       6

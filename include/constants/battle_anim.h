@@ -560,7 +560,7 @@
 #define B_ANIM_AQUA_RING_HEAL           31
 #define B_ANIM_BEAK_BLAST_SETUP         32
 #define B_ANIM_SHELL_TRAP_SETUP         33
-#define B_ANIM_ZMOVE_ACTIVATE           34 // Using Z Moves
+#define B_ANIM_UNUSED_34           34
 #define B_ANIM_UNUSED_35      35
 #define B_ANIM_SNOW_CONTINUES           36
 #define B_ANIM_ULTRA_BURST              37

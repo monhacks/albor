@@ -26,7 +26,6 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -494,14 +493,9 @@ static void CB2_InitBattleInternal(void)
 
 static void CB2_HandleStartBattle(void)
 {
-    u8 playerMultiplayerId;
-
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-
-    playerMultiplayerId = GetMultiplayerId();
-    gBattleScripting.multiplayerId = playerMultiplayerId;
 
     switch (gBattleCommunication[MULTIUSE_STATE])
     {
@@ -522,50 +516,16 @@ static void CB2_HandleStartBattle(void)
     case 2:
         break;
     case 3:
-        // Link battle, send/receive party Pokémon 2 at a time
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 1-2
-            SendBlock(BitmaskAllOtherLinkPlayers(), gPlayerParty, sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 4:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 1-2
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 7:
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 3-4
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gPlayerParty[2], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 8:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 3-4
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 11:
-        if (IsLinkTaskFinished())
-        {
-            // Send Pokémon 5-6
-            SendBlock(BitmaskAllOtherLinkPlayers(), &gPlayerParty[4], sizeof(struct Pokemon) * 2);
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 12:
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            // Recv Pokémon 5-6
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 15:
         InitBattleControllers();
@@ -576,11 +536,6 @@ static void CB2_HandleStartBattle(void)
     case 16:
         break;
     case 17:
-        // Receive rng seed for recorded battle (only read it if partner is the link master)
-        if ((GetBlockReceivedStatus() & 3) == 3)
-        {
-            gBattleCommunication[MULTIUSE_STATE]++;
-        }
         break;
     case 18:
         // Finish, start battle
@@ -661,9 +616,9 @@ void ModifyPersonalityForNature(u32 *personality, u32 newNature)
 u32 GeneratePersonalityForGender(u32 gender, u32 species)
 {
     const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[species];
-    if (gender == MON_GENDERLESS)
+    if (gender == SIN_GENERO)
         return 0;
-    else if (gender == MON_MALE)
+    else if (gender == SIEMPRE_MACHO)
         return ((255 - speciesInfo->genderRatio) / 2) + speciesInfo->genderRatio;
     else
         return speciesInfo->genderRatio / 2;
@@ -716,11 +671,11 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             personalityValue += personalityHash << 8;
             if (partyData[i].gender == TRAINER_MON_MALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(SIEMPRE_MACHO, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(SIEMPRE_HEMBRA, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_RANDOM_GENDER)
-                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? MON_MALE : MON_FEMALE, partyData[i].species);
+                personalityValue = (personalityValue & 0xFFFFFF00) | GeneratePersonalityForGender(Random() & 1 ? SIEMPRE_MACHO : SIEMPRE_HEMBRA, partyData[i].species);
             ModifyPersonalityForNature(&personalityValue, partyData[i].nature);
             if (partyData[i].isShiny)
             {
@@ -2284,7 +2239,6 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
-                        moveInfo.zmove = gBattleStruct->zmove;
                         moveInfo.species = gBattleMons[battler].species;
                         moveInfo.monTypes[0] = gBattleMons[battler].types[0];
                         moveInfo.monTypes[1] = gBattleMons[battler].types[1];
@@ -2648,10 +2602,6 @@ u32 GetBattlerTotalSpeedStatArgs(u32 battler, u32 ability, u32 holdEffect)
         speed *= 2;
     else if (ability == ABILITY_SLOW_START && gDisableStructs[battler].slowStartTimer != 0)
         speed /= 2;
-    else if (ability == ABILITY_PROTOSYNTHESIS && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED) && ((gBattleWeather & B_WEATHER_SUN && WEATHER_HAS_EFFECT) || gBattleStruct->boosterEnergyActivates & (1u << battler)))
-        speed = (GetHighestStatId(battler) == STAT_SPEED) ? (speed * 150) / 100 : speed;
-    else if (ability == ABILITY_QUARK_DRIVE && !(gBattleMons[battler].status2 & STATUS2_TRANSFORMED) && (gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN || gBattleStruct->boosterEnergyActivates & (1u << battler)))
-        speed = (GetHighestStatId(battler) == STAT_SPEED) ? (speed * 150) / 100 : speed;
 
     // stat stages
     speed *= gStatStageRatios[gBattleMons[battler].statStages[STAT_SPEED]][0];

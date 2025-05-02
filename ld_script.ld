@@ -86,7 +86,6 @@ SECTIONS {
         src/battle_bg.o(.text);
         src/battle_main.o(.text);
         src/battle_util.o(.text);
-        src/battle_z_move.o(.text);
         src/battle_script_commands.o(.text);
         src/battle_controller_player.o(.text);
         src/battle_gfx_sfx_util.o(.text);
@@ -145,8 +144,6 @@ SECTIONS {
         src/scanline_effect.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
-        src/trainer_card.o(.text);
-        src/frontier_pass.o(.text);
         src/pokemon_storage_system.o(.text);
         src/pokemon_icon.o(.text);
         src/script_movement.o(.text);
@@ -334,7 +331,6 @@ SECTIONS {
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
-        src/libisagbprn.o(.text);
         *libagbsyscall.a:ArcTan2.o(.text);
         *libagbsyscall.a:BgAffineSet.o(.text);
         *libagbsyscall.a:CpuFastSet.o(.text);
@@ -425,7 +421,6 @@ SECTIONS {
         src/battle_bg.o(.rodata);
         src/battle_main.o(.rodata);
         src/battle_util.o(.rodata);
-        src/battle_z_move.o(.rodata);
         src/battle_script_commands.o(.rodata);
         src/battle_controller_player.o(.rodata);
         src/battle_anim_smokescreen.o(.rodata);
@@ -477,8 +472,6 @@ SECTIONS {
         src/scanline_effect.o(.rodata);
         src/option_menu.o(.rodata);
         src/pokedex.o(.rodata);
-        src/trainer_card.o(.rodata);
-        src/frontier_pass.o(.rodata);
         src/pokemon_storage_system.o(.rodata);
         src/pokemon_icon.o(.rodata);
         src/fldeff_cut.o(.rodata);
@@ -1573,7 +1566,6 @@ SECTIONS {
         *libc.a:libcfunc.o(.rodata);
         *libc.a:lseekr.o(.rodata);
         *libc.a:readr.o(.rodata);
-        src/libisagbprn.o(.rodata);
     } > ROM =0
 
     gfx_data :

@@ -1787,9 +1787,9 @@ static void DrawGenderIcon(void)
     bool8 isFemale = FALSE;
 
     StringCopy(text, gText_MaleSymbol);
-    if (sNamingScreen->monGender != MON_GENDERLESS)
+    if (sNamingScreen->monGender != SIN_GENERO)
     {
-        if (sNamingScreen->monGender == MON_FEMALE)
+        if (sNamingScreen->monGender == SIEMPRE_HEMBRA)
         {
             StringCopy(text, gText_FemaleSymbol);
             isFemale = TRUE;

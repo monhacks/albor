@@ -18,7 +18,6 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
-#include "link.h"
 #include "m4a.h"
 #include "malloc.h"
 #include "menu.h"
@@ -2762,10 +2761,10 @@ static void PrintGenderSymbol(struct Pokemon *mon, u16 species)
     {
         switch (GetMonGender(mon))
         {
-        case MON_MALE:
+        case SIEMPRE_MACHO:
             PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gText_MaleSymbol, 57, 17, 0, 3);
             break;
-        case MON_FEMALE:
+        case SIEMPRE_HEMBRA:
             PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gText_FemaleSymbol, 57, 17, 0, 4);
             break;
         }
@@ -3154,28 +3153,7 @@ u32 GetPlayerIDAsU32(void)
 
 static bool8 DoesMonOTMatchOwner(void)
 {
-    struct PokeSummary *sum = &sMonSummaryScreen->summary;
-    u32 trainerId;
-    u8 gender;
-
-    if (sMonSummaryScreen->monList.mons == gEnemyParty)
-    {
-        u8 multiID = GetMultiplayerId() ^ 1;
-        trainerId = gLinkPlayers[multiID].trainerId & 0xFFFF;
-        gender = gLinkPlayers[multiID].gender;
-        StringCopy(gStringVar1, gLinkPlayers[multiID].name);
-    }
-    else
-    {
-        trainerId = GetPlayerIDAsU32() & 0xFFFF;
-        gender = gSaveBlockPtr->playerGender;
-        StringCopy(gStringVar1, gSaveBlockPtr->playerName);
-    }
-
-    if (gender != sum->OTGender || trainerId != (sum->OTID & 0xFFFF) || StringCompareWithoutExtCtrlCodes(gStringVar1, sum->OTName))
-        return FALSE;
-    else
-        return TRUE;
+    return TRUE;
 }
 
 static bool8 DidMonComeFromGBAGames(void)

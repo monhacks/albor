@@ -44,31 +44,9 @@ BattleScript_FickleBeamDoubled::
 	goto BattleScript_HitFromCritCalc
 
 BattleScript_Terastallization::
-	@ TODO: no string prints in S/V, but right now this helps with clarity
-	printstring STRINGID_PKMNSTORINGENERGY
-	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
-	waitanimation
-	applyterastallization
-	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
-	waitanimation
-	printstring STRINGID_PKMNTERASTALLIZEDINTO
-	waitmessage B_WAIT_TIME_LONG
 	end3
 
 BattleScript_TeraFormChange::
-	@ TODO: no string prints in S/V, but right now this helps with clarity
-	printstring STRINGID_PKMNSTORINGENERGY
-	handleformchange BS_ATTACKER, 0
-	handleformchange BS_ATTACKER, 1
-	playanimation BS_ATTACKER, B_ANIM_TERA_CHARGE
-	waitanimation
-	applyterastallization
-	playanimation BS_ATTACKER, B_ANIM_TERA_ACTIVATE
-	waitanimation
-	handleformchange BS_ATTACKER, 2
-	printstring STRINGID_PKMNTERASTALLIZEDINTO
-	waitmessage B_WAIT_TIME_LONG
-	switchinabilities BS_ATTACKER
 	end3
 
 BattleScript_LowerAtkSpAtk::
@@ -242,8 +220,6 @@ BattleScript_EffectGlaiveRush::
 	goto BattleScript_TryFaintMon
 
 BattleScript_SyrupBombActivates::
-	printstring STRINGID_TARGETCOVEREDINSTICKYCANDYSYRUP
-	waitmessage B_WAIT_TIME_LONG
 	return
 
 BattleScript_SyrupBombEndTurn::
@@ -6313,9 +6289,6 @@ BattleScript_PerishSongCountGoesDown::
 	waitmessage B_WAIT_TIME_LONG
 	end2
 
-BattleScript_AllStatsUpZMove::
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
 BattleScript_AllStatsUp::
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_AllStatsUpAtk
 	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_AllStatsUpAtk
@@ -8173,16 +8146,10 @@ BattleScript_StickyHoldActivates::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
-BattleScript_ColorChangeActivates::
-	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNCHANGEDTYPEWITH
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_ProteanActivates::
+BattleScript_CambiaColorActivacion::
 	pause B_WAIT_TIME_SHORTEST
 	call BattleScript_AbilityPopUp
-	printstring STRINGID_PKMNCHANGEDTYPE
+	printstring STRINGID_CAMBIACOLOR
 	waitmessage B_WAIT_TIME_LONG
 	return
 
@@ -9168,111 +9135,6 @@ BattleScript_JabocaRowapBerryActivate_Dmg:
 	removeitem BS_TARGET
 	return
 
-@ z moves / effects
-BattleScript_ZMoveActivateDamaging::
-	flushtextbox
-	trytrainerslidezmovemsg
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	printstring STRINGID_ZMOVEUNLEASHED
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_ZMoveActivateStatus::
-	flushtextbox
-	trytrainerslidezmovemsg
-	savetarget
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	setzeffect
-	restoretarget
-	copybyte sSTATCHANGER, sSAVED_STAT_CHANGER
-	return
-
-BattleScript_ZMoveActivatePowder::
-	flushtextbox
-	trytrainerslidezmovemsg
-	savetarget
-	printstring STRINGID_ZPOWERSURROUNDS
-	playanimation BS_ATTACKER, B_ANIM_ZMOVE_ACTIVATE, NULL
-	setzeffect
-	restoretarget
-	goto BattleScript_MoveUsedPowder
-
-BattleScript_ZEffectPrintString::
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_RecoverHPZMove::
-	healthbarupdate BS_SCRIPTING
-	datahpupdate BS_SCRIPTING
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
-	return
-
-BattleScript_StatUpZMove::
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_StatUpZMoveEnd
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_StatUpZMoveEnd
-	setgraphicalstatchangevalues
-	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
-	printstring STRINGID_ZMOVESTATUP
-	waitmessage B_WAIT_TIME_LONG
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_StatUpZMoveEnd:
-	return
-
-BattleScript_HealReplacementZMove::
-	playanimation BS_SCRIPTING B_ANIM_WISH_HEAL 0x0
-	printfromtable gZEffectStringIds
-	waitmessage B_WAIT_TIME_LONG
-	healthbarupdate BS_SCRIPTING
-	datahpupdate BS_SCRIPTING
-	return
-
-BattleScript_EffectExtremeEvoboost::
-	attackcanceler
-	attackstring
-	ppreduce
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_ATK, MAX_STAT_STAGE, BattleScript_ExtremeEvoboostAnim
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_DEF, MAX_STAT_STAGE, BattleScript_ExtremeEvoboostAnim
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPEED, MAX_STAT_STAGE, BattleScript_ExtremeEvoboostAnim
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPATK, MAX_STAT_STAGE, BattleScript_ExtremeEvoboostAnim
-	jumpifstat BS_ATTACKER, CMP_LESS_THAN, STAT_SPDEF, MAX_STAT_STAGE, BattleScript_ExtremeEvoboostAnim
-	goto BattleScript_ButItFailed
-BattleScript_ExtremeEvoboostAnim:
-	attackanimation
-	waitanimation
-	setbyte sSTAT_ANIM_PLAYED, FALSE
-	playstatchangeanimation BS_ATTACKER, BIT_ATK | BIT_DEF | BIT_SPEED | BIT_SPATK | BIT_SPDEF, 0x0
-	setstatchanger STAT_ATK, 2, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ExtremeEvoboostDef
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ExtremeEvoboostDef::
-	setstatchanger STAT_DEF, 2, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ExtremeEvoboostSpeed
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ExtremeEvoboostSpeed::
-	setstatchanger STAT_SPEED, 2, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ExtremeEvoboostSpAtk
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ExtremeEvoboostSpAtk::
-	setstatchanger STAT_SPATK, 2, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ExtremeEvoboostSpDef
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ExtremeEvoboostSpDef::
-	setstatchanger STAT_SPDEF, 2, FALSE
-	statbuffchange MOVE_EFFECT_AFFECTS_USER | STAT_CHANGE_ALLOW_PTR, BattleScript_ExtremeEvoboostEnd
-	printfromtable gStatUpStringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_ExtremeEvoboostEnd::
-	goto BattleScript_MoveEnd
-
 BattleScript_EffectHitSetRemoveTerrain::
 	attackcanceler
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
@@ -9524,30 +9386,6 @@ BattleScript_TargetAbilityStatRaiseRet_End:
 	return
 
 @@@ MAX MOVES @@@
-BattleScript_EffectMaxMove::
-	attackcanceler
-	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	attackstring
-	ppreduce
-	critcalc
-	damagecalc
-	adjustdamage
-	attackanimation
-	waitanimation
-	effectivenesssound
-	hitanimation BS_TARGET
-	waitstate
-	healthbarupdate BS_TARGET
-	datahpupdate BS_TARGET
-	critmessage
-	waitmessage B_WAIT_TIME_LONG
-	resultmessage
-	waitmessage B_WAIT_TIME_LONG
-	tryfaintmon BS_TARGET
-	setmaxmoveeffect
-	moveendall
-	end
-
 BattleScript_EffectRaiseStatAllies::
 	savetarget
 	copybyte gBattlerTarget, gBattlerAttacker
@@ -9617,52 +9455,6 @@ BattleScript_EffectTryReducePP::
 	printstring STRINGID_PKMNREDUCEDPP
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
-
-BattleScript_EffectStatus1Foes::
-	savetarget
-	copybyte sBATTLER, gBattlerTarget
-BattleScript_Status1FoesLoop:
-	jumpifabsent BS_TARGET, BattleScript_Status1FoesIncrement
-	trysetstatus1 BattleScript_Status1FoesIncrement
-	statusanimation BS_TARGET
-	updatestatusicon BS_TARGET
-	printfromtable gStatusConditionsStringIds
-	waitmessage B_WAIT_TIME_LONG
-	updatestatusicon BS_EFFECT_BATTLER
-	waitstate
-BattleScript_Status1FoesIncrement:
-	jumpifbytenotequal gBattlerTarget, sBATTLER, BattleScript_Status1FoesEnd
-	setallytonexttarget BattleScript_Status1FoesLoop
-BattleScript_Status1FoesEnd:
-	restoretarget
-	goto BattleScript_MoveEnd
-
-BattleScript_EffectStatus2Foes::
-	savetarget
-	copybyte sBATTLER, gBattlerTarget
-BattleScript_Status2FoesLoop:
-	jumpifabsent BS_TARGET, BattleScript_Status2FoesIncrement
-	trysetstatus2 BattleScript_Status2FoesIncrement
-	jumpifbyte CMP_EQUAL, gBattleCommunication, 1, BattleScript_DoConfuseAnim
-	jumpifbyte CMP_EQUAL, gBattleCommunication, 2, BattleScript_DoInfatuationAnim
-BattleScript_Status2FoesPrintMessage:
-	printfromtable gStatus2StringIds
-	waitmessage B_WAIT_TIME_LONG
-BattleScript_Status2FoesIncrement:
-	jumpifbytenotequal gBattlerTarget, sBATTLER, BattleScript_Status2FoesEnd
-	setallytonexttarget BattleScript_Status2FoesLoop
-BattleScript_Status2FoesEnd:
-	restoretarget
-	jumpifbyte CMP_EQUAL, gBattleCommunication + 1, 1, BattleScript_PrintCoinsScattered @ Gold Rush
-	goto BattleScript_MoveEnd
-
-BattleScript_DoConfuseAnim:
-	status2animation BS_EFFECT_BATTLER, STATUS2_CONFUSION
-	goto BattleScript_Status2FoesPrintMessage
-
-BattleScript_DoInfatuationAnim:
-	status2animation BS_EFFECT_BATTLER, STATUS2_INFATUATION
-	goto BattleScript_Status2FoesPrintMessage
 
 BattleScript_PrintCoinsScattered:
 	printstring STRINGID_COINSSCATTERED

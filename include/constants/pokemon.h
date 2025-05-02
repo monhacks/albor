@@ -196,9 +196,9 @@ enum Naturalezas
 
 #define MAX_LEVEL_UP_MOVES       20
 
-#define MON_MALE       0x00
-#define MON_FEMALE     0xFE
-#define MON_GENDERLESS 0xFF
+#define SIEMPRE_MACHO       0x00
+#define SIEMPRE_HEMBRA      0xFE
+#define SIN_GENERO 0xFF
 
 // Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL       0

@@ -4,7 +4,6 @@
 #include "pokemon.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
-#include "battle_z_move.h"
 #include "graphics.h"
 #include "sprite.h"
 #include "window.h"
@@ -1697,10 +1696,10 @@ static void UpdateNickInHealthbox(u8 healthboxSpriteId, struct Pokemon *mon)
     default:
         StringCopy(ptr, gText_HealthboxGender_None);
         break;
-    case MON_MALE:
+    case SIEMPRE_MACHO:
         StringCopy(ptr, gText_HealthboxGender_Male);
         break;
-    case MON_FEMALE:
+    case SIEMPRE_HEMBRA:
         StringCopy(ptr, gText_HealthboxGender_Female);
         break;
     }

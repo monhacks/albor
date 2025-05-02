@@ -9,7 +9,6 @@
 #include "battle_pyramid.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
-#include "battle_z_move.h"
 #include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -18,7 +17,6 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "item.h"
-#include "link.h"
 #include "main.h"
 #include "overworld.h"
 #include "m4a.h"
@@ -309,16 +307,16 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplates[] =
 };
 
 #define NUM_SECRET_BASE_CLASSES 5
-static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
+static const u8 sSecretBaseFacilityClasses[NUMERO_GENEROS][NUM_SECRET_BASE_CLASSES] =
 {
-    [MALE] = {
+    [MACHO] = {
         FACILITY_CLASS_YOUNGSTER,
         FACILITY_CLASS_BUG_CATCHER,
         FACILITY_CLASS_RICH_BOY,
         FACILITY_CLASS_CAMPER,
         FACILITY_CLASS_COOLTRAINER_M
     },
-    [FEMALE] = {
+    [HEMBRA] = {
         FACILITY_CLASS_LASS,
         FACILITY_CLASS_SCHOOL_KID_F,
         FACILITY_CLASS_LADY,
@@ -604,7 +602,7 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
         otId = Random32();
         personality = Random32();
     }
-    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
+    while (GetGenderFromSpeciesAndPersonality(species, personality) != SIEMPRE_MACHO);
     CreateMon(mon, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PRESET, otId);
 }
 
@@ -836,8 +834,6 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         return FALSE;
     case 1: // Player's side in battle
         if (!gMain.inBattle)
-            return FALSE;
-        if (gLinkPlayers[GetMultiplayerId()].id == battlerId)
             return FALSE;
         break;
     case 2:
@@ -1255,37 +1251,37 @@ u8 GetBoxMonGender(struct BoxPokemon *boxMon)
 
     switch (gSpeciesInfo[species].genderRatio)
     {
-    case MON_MALE:
-    case MON_FEMALE:
-    case MON_GENDERLESS:
+    case SIEMPRE_MACHO:
+    case SIEMPRE_HEMBRA:
+    case SIN_GENERO:
         return gSpeciesInfo[species].genderRatio;
     }
 
     if (gSpeciesInfo[species].genderRatio > (personality & 255))
-        return MON_FEMALE;
+        return SIEMPRE_HEMBRA;
     else
-        return MON_MALE;
+        return SIEMPRE_MACHO;
 }
 
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
 {
     switch (gSpeciesInfo[species].genderRatio)
     {
-    case MON_MALE:
-    case MON_FEMALE:
-    case MON_GENDERLESS:
+    case SIEMPRE_MACHO:
+    case SIEMPRE_HEMBRA:
+    case SIN_GENERO:
         return gSpeciesInfo[species].genderRatio;
     }
 
     if (gSpeciesInfo[species].genderRatio > (personality & 255))
-        return MON_FEMALE;
+        return SIEMPRE_HEMBRA;
     else
-        return MON_MALE;
+        return SIEMPRE_MACHO;
 }
 
 bool32 IsPersonalityFemale(u16 species, u32 personality)
 {
-    return GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+    return GetGenderFromSpeciesAndPersonality(species, personality) == SIEMPRE_HEMBRA;
 }
 
 void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
@@ -2960,11 +2956,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u16 evolutionItem)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL_HEMBRA:
-            if (evolutions[i].param <= level && GetMonGender(mon) == MON_FEMALE)
+            if (evolutions[i].param <= level && GetMonGender(mon) == SIEMPRE_HEMBRA)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL_MACHO:
-            if (evolutions[i].param <= level && GetMonGender(mon) == MON_MALE)
+            if (evolutions[i].param <= level && GetMonGender(mon) == SIEMPRE_MACHO)
                 targetSpecies = evolutions[i].targetSpecies;
             break;
         case EVO_NIVEL_MAS_ATAQUE:
@@ -3086,49 +3082,9 @@ void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies)
         SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
 }
 
-// The below two functions determine which side of a multi battle the trainer battles on
-// 0 is the left (top in  party menu), 1 is right (bottom in party menu)
 u8 GetPlayerFlankId(void)
 {
-    u8 flankId = 0;
-    switch (gLinkPlayers[GetMultiplayerId()].id)
-    {
-    case 0:
-    case 3:
-        flankId = 0;
-        break;
-    case 1:
-    case 2:
-        flankId = 1;
-        break;
-    }
-    return flankId;
-}
-
-u16 GetLinkTrainerFlankId(u8 linkPlayerId)
-{
-    u16 flankId = 0;
-    switch (gLinkPlayers[linkPlayerId].id)
-    {
-    case 0:
-    case 3:
-        flankId = 0;
-        break;
-    case 1:
-    case 2:
-        flankId = 1;
-        break;
-    }
-    return flankId;
-}
-
-s32 GetBattlerMultiplayerId(u16 id)
-{
-    s32 multiplayerId;
-    for (multiplayerId = 0; multiplayerId < MAX_LINK_PLAYERS; multiplayerId++)
-        if (gLinkPlayers[multiplayerId].id == id)
-            break;
-    return multiplayerId;
+    return 0;
 }
 
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId)
@@ -4111,32 +4067,9 @@ void BattleAnimateBackSprite(struct Sprite *sprite, u16 species)
     }
 }
 
-u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId)
-{
-    s32 i;
-    s32 battlerId = 0;
-    switch (gLinkPlayers[multiplayerId].id)
-    {
-    case 0:
-    case 2:
-        battlerId = rightSide ? 1 : 3;
-        break;
-    case 1:
-    case 3:
-        battlerId = rightSide ? 2 : 0;
-        break;
-    }
-    for (i = 0; i < MAX_LINK_PLAYERS; i++)
-    {
-        if (gLinkPlayers[i].id == (s16)battlerId)
-            break;
-    }
-    return i;
-}
-
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender)
 {
-    if (playerGender != MALE)
+    if (playerGender != MACHO)
         return TRAINER_PIC_MAY;
     else
         return TRAINER_PIC_BRENDAN;

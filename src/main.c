@@ -1,7 +1,6 @@
 #include "global.h"
 #include "crt0.h"
 #include "malloc.h"
-#include "link.h"
 #include "m4a.h"
 #include "bg.h"
 #include "rtc.h"
@@ -42,7 +41,7 @@ const IntrFunc gIntrTableTemplate[] =
 {
     VCountIntr, // V-count interrupt
     SerialIntr, // Serial interrupt
-    Timer3Intr, // Timer 3 interrupt
+    IntrDummy,  // Timer 3 interrupt
     HBlankIntr, // H-blank interrupt
     VBlankIntr, // V-blank interrupt
     IntrDummy,  // Timer 0 interrupt
@@ -277,7 +276,6 @@ void SetVCountCallback(IntrCallback callback)
 void RestoreSerialTimer3IntrHandlers(void)
 {
     gIntrTable[1] = SerialIntr;
-    gIntrTable[2] = Timer3Intr;
 }
 
 void SetSerialCallback(IntrCallback callback)

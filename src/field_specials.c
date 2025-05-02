@@ -759,7 +759,7 @@ u8 GetPlayerTrainerIdOnesDigit(void)
 
 void GetPlayerBigGuyGirlString(void)
 {
-    if (gSaveBlockPtr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MACHO)
         StringCopy(gStringVar1, gText_BigGuy);
     else
         StringCopy(gStringVar1, gText_BigGirl);
@@ -767,7 +767,7 @@ void GetPlayerBigGuyGirlString(void)
 
 void GetRivalSonDaughterString(void)
 {
-    if (gSaveBlockPtr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MACHO)
         StringCopy(gStringVar1, gText_Daughter);
     else
         StringCopy(gStringVar1, gText_Son);

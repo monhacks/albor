@@ -2,7 +2,6 @@
 #include "dewford_trend.h"
 #include "easy_chat.h"
 #include "event_data.h"
-#include "link.h"
 #include "malloc.h"
 #include "random.h"
 #include "text.h"
@@ -65,7 +64,6 @@ static bool8 CompareTrends(struct DewfordTrend *, struct DewfordTrend *, u8);
 static void SeedTrendRng(struct DewfordTrend *);
 static bool8 IsPhraseInSavedTrends(u16 *);
 static bool8 IsEasyChatPairEqual(u16 *, u16 *);
-static s16 GetSavedTrendIndex(struct DewfordTrend *, struct DewfordTrend *, u16);
 
 void InitDewfordTrend(void)
 {
@@ -223,63 +221,7 @@ static void SortTrends(struct DewfordTrend *trends, u16 numTrends, u8 mode)
 
 void ReceiveDewfordTrendData(struct DewfordTrend *linkedTrends, size_t size, u8 unused)
 {
-    u16 i, j, numTrends, players;
-    struct DewfordTrend *linkedTrendsBuffer, *savedTrendsBuffer, *src, *dst, *temp;
 
-    // Exit if alloc fails
-    if (!(linkedTrendsBuffer = Alloc(BUFFER_SIZE)))
-        return;
-
-    // Exit if alloc fails
-    if (!(savedTrendsBuffer = Alloc(BUFFER_SIZE)))
-    {
-        Free(linkedTrendsBuffer);
-        return;
-    }
-
-    // Buffer the new trends being received via Record Mixing
-    players = GetLinkPlayerCount();
-    for (i = 0; i < players; i++)
-        memcpy(&linkedTrendsBuffer[i * SAVED_TRENDS_COUNT], (u8 *)linkedTrends + i * size, SAVED_TRENDS_SIZE);
-
-    // Determine which of the received trends should be saved.
-    // savedTrendsBuffer starts empty, and when finished will contain
-    // which of the linked trends to save in the saveblock.
-    src = linkedTrendsBuffer;
-    dst = savedTrendsBuffer;
-    numTrends = 0;
-    for (i = 0; i < players; i++)
-    {
-        for (j = 0; j < SAVED_TRENDS_COUNT; j++)
-        {
-            s16 idx = GetSavedTrendIndex(savedTrendsBuffer, src, numTrends);
-            if (idx < 0)
-            {
-                // This phrase is not a currently saved trend, save it
-                *(dst++) = *src;
-                numTrends++;
-            }
-            else
-            {
-                // This phrase already exists as a saved phrase
-                // Only overwrrite it if it's "trendier"
-                temp = &savedTrendsBuffer[idx];
-                if (temp->trendiness < src->trendiness)
-                    *temp = *src;
-            }
-            src++;
-        }
-    }
-    SortTrends(savedTrendsBuffer, numTrends, SORT_MODE_FULL);
-
-    // Overwrite current saved trends with new saved trends
-    src = savedTrendsBuffer;
-    dst = gSaveBlockPtr->dewfordTrends;
-    for (i = 0; i < SAVED_TRENDS_COUNT; i++)
-        *(dst++) = *(src++);
-
-    Free(linkedTrendsBuffer);
-    Free(savedTrendsBuffer);
 }
 
 void BufferTrendyPhraseString(void)
@@ -399,16 +341,4 @@ static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
             return FALSE;
     }
     return TRUE;
-}
-
-static s16 GetSavedTrendIndex(struct DewfordTrend *savedTrends, struct DewfordTrend *trend, u16 numSaved)
-{
-    s16 i;
-    for (i = 0; i < numSaved; i++)
-    {
-        if (IsEasyChatPairEqual(trend->words, savedTrends->words))
-            return i;
-        savedTrends++;
-    }
-    return -1;
 }

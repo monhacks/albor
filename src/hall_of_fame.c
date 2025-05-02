@@ -1177,11 +1177,11 @@ static void HallOfFame_PrintMonInfo(struct HallofFameMon* currMon, u8 unused1, u
         {
             switch (GetGenderFromSpeciesAndPersonality(currMon->species, currMon->personality))
             {
-            case MON_MALE:
+            case SIEMPRE_MACHO:
                 stringPtr[0] = CHAR_MALE;
                 stringPtr++;
                 break;
-            case MON_FEMALE:
+            case SIEMPRE_HEMBRA:
                 stringPtr[0] = CHAR_FEMALE;
                 stringPtr++;
                 break;

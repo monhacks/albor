@@ -583,7 +583,7 @@ typedef union // 3b58
 struct SaveBlock
 {
     u8 playerName[PLAYER_NAME_LENGTH + 1];
-    u8 playerGender; // MALE, FEMALE
+    u8 playerGender; // MACHO, HEMBRA
     u8 specialSaveWarpFlags;
     u8 playerTrainerId[TRAINER_ID_LENGTH];
     u16 playTimeHours;

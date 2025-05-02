@@ -9,7 +9,6 @@
 		.align 2
 gSpecials::
 	def_special HealPlayerParty
-	def_special ReturnFromLinkRoom
 	def_special SetPlayerSecretBase
 	def_special CheckPlayerHasSecretBase
 	def_special EnterSecretBase
@@ -191,10 +190,6 @@ gSpecials::
 	def_special GetBattleTowerSinglesStreak
 	def_special ReducePlayerPartyToSelectedMons
 	def_special FieldShowRegionMap
-	def_special GetInGameTradeSpeciesInfo
-	def_special CreateInGameTradePokemon
-	def_special DoInGameTradeScene
-	def_special GetTradeSpecies
 	def_special GetWeekCount
 	def_special RetrieveLotteryNumber
 	def_special PickLotteryCornerTicket
@@ -357,7 +352,6 @@ gSpecials::
 	def_special Script_DoRayquazaScene
 	def_special OpenPokenavForTutorial
 	def_special ScriptMenu_CreateStartMenuForPokenavTutorial
-	def_special CountPlayerTrainerStars
 	def_special BufferBattleFrontierTutorMoveName
 	def_special CloseBattleFrontierTutorWindow
 	def_special ScrollableMultichoice_RedrawPersistentMenu

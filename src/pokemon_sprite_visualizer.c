@@ -1134,8 +1134,8 @@ static void ResetPokemonSpriteVisualizerWindows(void)
     }
 }
 
-#define MALE_PERSONALITY 254
-#define FEMALE_PERSONALITY 0
+#define PERSONALIDAD_MACHO 254
+#define PERSONALIDAD_HEMBRA 0
 
 void CB2_Pokemon_Sprite_Visualizer(void)
 {
@@ -1208,7 +1208,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             LoadSpritePaletteWithTag(palette, species);
             LoadPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
             //Front
-            HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+            HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? PERSONALIDAD_HEMBRA : PERSONALIDAD_MACHO));
             data->isShiny = FALSE;
             data->isFemale = FALSE;
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
@@ -1223,7 +1223,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             LoadAndCreateEnemyShadowSpriteCustom(data, species);
 
             //Back
-            HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->spritesGfx[2], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+            HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->spritesGfx[2], species, (data->isFemale ? PERSONALIDAD_HEMBRA : PERSONALIDAD_MACHO));
             BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 4);
             SetMultiuseSpriteTemplateToPokemon(species, 2);
             offset_y = gSpeciesInfo[species].backPicYOffset;
@@ -1880,7 +1880,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     LoadSpritePaletteWithTag(palette, species);
     LoadPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
     //Front
-    HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+    HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? PERSONALIDAD_HEMBRA : PERSONALIDAD_MACHO));
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);
     SetMultiuseSpriteTemplateToPokemon(species, 1);
     gMultiuseSpriteTemplate.paletteTag = species;
@@ -1896,7 +1896,7 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     LoadAndCreateEnemyShadowSpriteCustom(data, species);
 
     //Back
-    HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->spritesGfx[2], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
+    HandleLoadSpecialPokePic(FALSE, gMonSpritesGfxPtr->spritesGfx[2], species, (data->isFemale ? PERSONALIDAD_HEMBRA : PERSONALIDAD_MACHO));
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 5);
     SetMultiuseSpriteTemplateToPokemon(species, 2);
     offset_y = gSpeciesInfo[species].backPicYOffset;

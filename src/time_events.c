@@ -22,12 +22,6 @@ static void SetMirageRnd(u32 rnd)
     VarSet(VAR_MIRAGE_RND_L, rnd);
 }
 
-// unused
-void InitMirageRnd(void)
-{
-    SetMirageRnd(Random32());
-}
-
 void UpdateMirageRnd(u16 days)
 {
     s32 rnd = GetMirageRnd();
@@ -108,11 +102,4 @@ void WaitWeather(void)
 void InitBirchState(void)
 {
     *GetVarPointer(VAR_BIRCH_STATE) = 0;
-}
-
-void UpdateBirchState(u16 days)
-{
-    u16 *state = GetVarPointer(VAR_BIRCH_STATE);
-    *state += days;
-    *state %= 7;
 }

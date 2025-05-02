@@ -145,7 +145,6 @@ struct DisableStruct
     u8 steelSurgeDone:1;
     u8 weatherAbilityDone:1;
     u8 terrainAbilityDone:1;
-    u8 usedProteanLibero:1;
 };
 
 struct ProtectStruct
@@ -483,15 +482,6 @@ struct Illusion
     struct Pokemon *mon;
 };
 
-struct ZMoveData
-{
-    u8 viable:1;   // current move can become a z move
-    u8 viewing:1;  // if player is viewing the z move name instead of regular moves
-    u8 healReplacement:6;
-    u8 possibleZMoves[MAX_BATTLERS_COUNT];
-    u16 baseMoves[MAX_BATTLERS_COUNT];
-};
-
 struct DynamaxData
 {
     u8 dynamaxTurns[MAX_BATTLERS_COUNT];
@@ -642,7 +632,6 @@ struct BattleStruct
     bool8 ateBoost[MAX_BATTLERS_COUNT];
     u8 activeAbilityPopUps; // as bits for each battler
     u8 abilityPopUpSpriteIds[MAX_BATTLERS_COUNT][2];    // two per battler
-    struct ZMoveData zmove;
     struct DynamaxData dynamax;
     struct BattleGimmickData gimmick;
     const u8 *trainerSlideMsg;
@@ -697,7 +686,6 @@ struct BattleStruct
     u8 trainerSlidePlayerMonUnaffectedMsgState:2;
     u8 trainerSlideHalfHpMsgDone:1;
     u8 trainerSlideMegaEvolutionMsgDone:1;
-    u8 trainerSlideZMoveMsgDone:1;
     u8 trainerSlideBeforeFirstTurnMsgDone:1;
     u8 trainerSlideDynamaxMsgDone:1;
     u8 trainerSlideLowHpMsgDone:1;
@@ -747,7 +735,6 @@ STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLER
 #define BATTLER_TURN_DAMAGED(battlerId) ((gSpecialStatuses[battlerId].physicalDmg != 0 || gSpecialStatuses[battlerId].specialDmg != 0) || (gBattleStruct->enduredDamage & (1u << battler)))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TIPO_MISTERIO && GetBattlerType(battlerId, 2) == type)))
-#define IS_BATTLER_OF_BASE_TYPE(battlerId, type)((GetBattlerType(battlerId, 0) == type || GetBattlerType(battlerId, 1) == type || (GetBattlerType(battlerId, 2) != TIPO_MISTERIO && GetBattlerType(battlerId, 2) == type)))
 #define IS_BATTLER_TYPELESS(battlerId)(GetBattlerType(battlerId, 0) == TIPO_MISTERIO && GetBattlerType(battlerId, 1) == TIPO_MISTERIO && GetBattlerType(battlerId, 2) == TIPO_MISTERIO)
 
 #define SET_BATTLER_TYPE(battlerId, type)              \
@@ -812,7 +799,6 @@ struct BattleScripting
     u8 reshowHelperState;
     u8 levelUpHP;
     u8 windowsType; // B_WIN_TYPE_*
-    u8 multiplayerId;
     bool8 monCaught;
     s32 savedDmg;
     u16 savedMoveEffect; // For moves hitting multiple targets.

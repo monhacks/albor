@@ -334,7 +334,7 @@ u16 PlayerGenderToFrontTrainerPicId_Debug(u8 gender, bool8 getClass)
 {
     if (getClass == TRUE)
     {
-        if (gender != MALE)
+        if (gender != MACHO)
             return TRAINER_PIC_MAY;
         else
             return TRAINER_PIC_BRENDAN;

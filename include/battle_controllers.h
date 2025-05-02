@@ -115,7 +115,6 @@ struct ChooseMoveStruct
     u8 maxPp[MAX_MON_MOVES];
     u16 species;
     u8 monTypes[3];
-    struct ZMoveData zmove;
 };
 
 enum
@@ -273,7 +272,6 @@ void BtlController_HandleBattleAnimation(u32 battler, bool32 ignoreSE);
 void SetControllerToPlayer(u32 battler);
 void PlayerHandleBallThrowAnim(u32 battler);
 void PlayerHandleExpUpdate(u32 battler);
-u32 LinkPlayerGetTrainerPicId(u32 multiplayerId);
 void CB2_SetUpReshowBattleScreenAfterMenu(void);
 void CB2_SetUpReshowBattleScreenAfterMenu2(void);
 void Task_PlayerController_RestoreBgmAfterCry(u8 taskId);

@@ -78,7 +78,6 @@
 porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/pokeemerald/data/tilesets/primary/principal /Users/ivanmartinez/Desktop/pokeemerald/desarrollo/graficos /Users/ivanmartinez/Desktop/pokeemerald/include/constants/metatile_behaviors.h
 
 *Cada roedor (Furret, Linoone, Diggersby, Raticate, Bidoof) tiene un stat más dominante (PS-Raticate, At-Diggersby, Df-Bidoof, Df. Esp-Furret, Vel-Linoone)
-*Porygon Elect-Normal??
 *Recordatorio de que el primer color de la paleta del Pokémon no puede ser negro (se bugea el almacenamiento).
 *Recordatorio de deserializar las pokeballs.
 *Recordatorio de revisar learnsets (encanto, especialmente).
@@ -90,5 +89,6 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/pokeemerald/data/
 *Decouple poké balls de item id
 *Jigglypuff evoluciona al aprender Vozarrón.
 *Cloyster/Slowking/Slowbro aprenden ataques Veneno (+Ataque custom tipo Control Mental?)
+*Cambio a la habilidad exclusiva de Kecleon, Cambia color, que le hace cambiar de tipo, pero antes de recibir el ataque. Ahora, no es su única habilidad. Además, es de tipo Normal y Fantasma.
 
 paletas: (\d+) (\d+) (\d+) \d+ --> $1 $2 $3

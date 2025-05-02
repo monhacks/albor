@@ -187,14 +187,12 @@ bool32 HandleFaintedMonActions(void);
 void TryClearRageAndFuryCutter(void);
 u8 AtkCanceller_UnableToUseMove(u32 moveType);
 void SetAtkCancellerForCalledMove(void);
-u8 AtkCanceller_UnableToUseMove2(void);
 bool32 HasNoMonsToSwitch(u32 battler, u8 r1, u8 r2);
 bool32 TryChangeBattleWeather(u32 battler, u32 weatherEnumId, bool32 viaAbility);
 u32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 abilityDef);
 u32 CanPartnerAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 abilityDef);
 u32 CanAbilityAbsorbMove(u32 battlerAtk, u32 battlerDef, u32 abilityDef, u32 move, u32 moveType);
 u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 moveArg);
-bool32 TryPrimalReversion(u32 battler);
 bool32 IsNeutralizingGasOnField(void);
 bool32 IsMoldBreakerTypeAbility(u32 battler, u32 ability);
 u32 GetBattlerAbility(u32 battler);
@@ -313,5 +311,7 @@ void AdjustFriendshipOnBattleFaint(u8 battler);
 void SwitchPartyOrderInGameMulti(u8 battler, u8 arg1);
 u32 BattlePalace_TryEscapeStatus(u8 battler);
 u32 GetMoveType(u32 move);
+u16 MaximosPS(u32 battler);
+u16 ActualesPS(u32 battler);
 
 #endif // GUARD_BATTLE_UTIL_H

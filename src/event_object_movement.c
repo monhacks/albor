@@ -1687,7 +1687,7 @@ static bool8 GetMonInfo(struct Pokemon *mon, u16 *species, u8 *form, u8 *shiny)
         return FALSE;
     }
     *species = GetMonData(mon, MON_DATA_SPECIES);
-    *form = GetMonGender(mon) == MON_FEMALE;
+    *form = GetMonGender(mon) == SIEMPRE_HEMBRA;
     *shiny = IsMonShiny(mon);
     if (gSpeciesInfo[*species].iconSpriteFemale != NULL)
     {
@@ -2650,10 +2650,10 @@ u8 LoadPlayerObjectEventPalette(u8 gender)
     switch (gender)
     {
         default:
-        case MALE:
+        case MACHO:
             paletteTag = OBJ_EVENT_PAL_TAG_BRENDAN;
             break;
-        case FEMALE:
+        case HEMBRA:
             paletteTag = OBJ_EVENT_PAL_TAG_MAY;
             break;
     }

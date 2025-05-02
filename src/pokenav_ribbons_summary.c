@@ -880,10 +880,10 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
     switch (gender)
     {
-    case MON_MALE:
+    case SIEMPRE_MACHO:
         genderTxt = sMaleIconString;
         break;
-    case MON_FEMALE:
+    case SIEMPRE_HEMBRA:
         genderTxt = sFemaleIconString;
         break;
     default:

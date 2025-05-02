@@ -8,7 +8,6 @@
 #include "data.h"
 #include "decompress.h"
 #include "graphics.h"
-#include "link.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -2577,7 +2576,7 @@ void CreateContestMonFromParty(u8 partyIndex)
 
     StringCopy(name, gSaveBlockPtr->playerName);
     memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
-    if (gSaveBlockPtr->playerGender == MALE)
+    if (gSaveBlockPtr->playerGender == MACHO)
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
     else
         gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_MAY;

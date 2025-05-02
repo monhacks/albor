@@ -5750,7 +5750,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     u16 gender;
 
     sStorage->displayMonItemId = ITEM_NONE;
-    gender = MON_MALE;
+    gender = SIEMPRE_MACHO;
 
     if (mode == MODE_PARTY)
     {
@@ -5819,7 +5819,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     else
     {
         if (sStorage->displayMonSpecies == SPECIES_NIDORAN_F || sStorage->displayMonSpecies == SPECIES_NIDORAN_M)
-            gender = MON_GENDERLESS;
+            gender = SIN_GENERO;
 
         StringCopyPadded(sStorage->displayMonNameText, sStorage->displayMonName, CHAR_SPACE, 5);
 
@@ -5832,13 +5832,13 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
         *(txtPtr)++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
         switch (gender)
         {
-        case MON_MALE:
+        case SIEMPRE_MACHO:
             *(txtPtr)++ = TEXT_COLOR_RED;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_RED;
             *(txtPtr)++ = CHAR_MALE;
             break;
-        case MON_FEMALE:
+        case SIEMPRE_HEMBRA:
             *(txtPtr)++ = TEXT_COLOR_GREEN;
             *(txtPtr)++ = TEXT_COLOR_WHITE;
             *(txtPtr)++ = TEXT_COLOR_LIGHT_GREEN;

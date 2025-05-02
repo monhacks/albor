@@ -114,9 +114,6 @@ struct TypeInfo
     u8 name[TYPE_NAME_LENGTH + 1];
     u8 generic[21];
     u8 palette;
-    u16 zMove;
-    u16 maxMove;
-    u16 damageCategory:2;    // Used for B_PHYSICAL_SPECIAL_SPLIT <= GEN_3
     u16 useSecondTypeIconPalette:1;
     u16 isSpecialCaseType:1;
     u16 padding:12;

@@ -18,7 +18,7 @@ LittlerootTown_MaysHouse_2F_EventScript_CheckShouldUpdateMayPos::
 
 LittlerootTown_MaysHouse_2F_EventScript_TryUpdateMayPos::
 	checkplayergender
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_Ret
+	goto_if_eq VAR_RESULT, HEMBRA, LittlerootTown_MaysHouse_2F_EventScript_Ret
 	goto_if_ge VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_MaysHouse_2F_EventScript_Ret
 	setobjectxyperm LOCALID_RIVAL, 8, 2
 	setobjectmovementtype LOCALID_RIVAL, MOVEMENT_TYPE_FACE_UP
@@ -29,7 +29,7 @@ LittlerootTown_MaysHouse_2F_EventScript_Ret::
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckSetReadyToMeetMay::
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
+	goto_if_eq VAR_RESULT, MACHO, LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay
 	return
 
 LittlerootTown_MaysHouse_2F_EventScript_SetReadyToMeetMay::
@@ -235,8 +235,8 @@ RivalsHouse_2F_EventScript_Rival::
 	lockall
 	goto_if_set FLAG_MET_RIVAL_LILYCOVE, RivalsHouse_2F_EventScript_RivalPostLilycove
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_May
-	goto_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_Brendan
+	goto_if_eq VAR_RESULT, MACHO, RivalsHouse_2F_EventScript_May
+	goto_if_eq VAR_RESULT, HEMBRA, RivalsHouse_2F_EventScript_Brendan
 	end
 
 RivalsHouse_2F_EventScript_May::
@@ -253,8 +253,8 @@ RivalsHouse_2F_EventScript_RivalPostLilycove::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	checkplayergender
-	call_if_eq VAR_RESULT, MALE, RivalsHouse_2F_EventScript_MayPostLilycove
-	call_if_eq VAR_RESULT, FEMALE, RivalsHouse_2F_EventScript_BrendanPostLilycove
+	call_if_eq VAR_RESULT, MACHO, RivalsHouse_2F_EventScript_MayPostLilycove
+	call_if_eq VAR_RESULT, HEMBRA, RivalsHouse_2F_EventScript_BrendanPostLilycove
 	setflag FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE
 	releaseall
 	end
@@ -280,8 +280,8 @@ RivalsHouse_2F_EventScript_BrendanWhereShouldIGoNext::
 LittlerootTown_MaysHouse_2F_EventScript_PC::
 	lockall
 	checkplayergender
-	goto_if_eq VAR_RESULT, MALE, LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
-	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
+	goto_if_eq VAR_RESULT, MACHO, LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC
+	goto_if_eq VAR_RESULT, HEMBRA, LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC::

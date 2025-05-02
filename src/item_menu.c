@@ -22,7 +22,6 @@
 #include "item_use.h"
 #include "lilycove_lady.h"
 #include "list_menu.h"
-#include "link.h"
 #include "mail.h"
 #include "main.h"
 #include "malloc.h"
@@ -759,14 +758,14 @@ static bool8 LoadBagMenu_Graphics(void)
         }
         break;
     case 2:
-        if (!IsWallysBag() && gSaveBlockPtr->playerGender != MALE)
+        if (!IsWallysBag() && gSaveBlockPtr->playerGender != MACHO)
             LoadCompressedPalette(gBagScreenFemale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         else
             LoadCompressedPalette(gBagScreenMale_Pal, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         gBagMenu->graphicsLoadState++;
         break;
     case 3:
-        if (IsWallysBag() == TRUE || gSaveBlockPtr->playerGender == MALE)
+        if (IsWallysBag() == TRUE || gSaveBlockPtr->playerGender == MACHO)
             LoadCompressedSpriteSheet(&gBagMaleSpriteSheet);
         else
             LoadCompressedSpriteSheet(&gBagFemaleSpriteSheet);

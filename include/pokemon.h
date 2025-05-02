@@ -300,10 +300,6 @@ struct MoveInfo
     u16 accuracy:7;
     u16 target:9;
     u8 pp;
-    union {
-        u8 effect;
-        u8 powerOverride;
-    } zMove;
 
     s32 priority:4;
     u32 recoil:7;
@@ -330,7 +326,7 @@ struct MoveInfo
     u32 powderMove:1;
     u32 danceMove:1;
     u32 windMove:1;
-    u32 slicingMove:1; // end of word
+    u32 slicingMove:1;
     u32 healingMove:1;
     u32 minimizeDoubleDamage:1;
     u32 ignoresTargetAbility:1;
@@ -362,7 +358,6 @@ struct MoveInfo
     u32 parentalBondBanned:1;
     u32 skyBattleBanned:1;
     u32 sketchBanned:1;
-    u32 padding:5; // end of word
 
     u32 argument;
 
@@ -591,8 +586,6 @@ u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 SpeciesToNationalPokedexNum(u16 species);
 void EvolutionRenameMon(struct Pokemon *mon, u16 oldSpecies, u16 newSpecies);
 u8 GetPlayerFlankId(void);
-u16 GetLinkTrainerFlankId(u8 id);
-s32 GetBattlerMultiplayerId(u16 id);
 u8 GetTrainerEncounterMusicId(u16 trainerOpponentId);
 u16 ModifyStatByNature(u8 nature, u16 n, u8 statIndex);
 void AdjustFriendship(struct Pokemon *mon, u8 event);
@@ -631,7 +624,6 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, u16 species, bool8 noCry, 
 void PokemonSummaryDoMonAnimation(struct Sprite *sprite, u16 species, bool8 oneFrame);
 void StopPokemonAnimationDelayTask(void);
 void BattleAnimateBackSprite(struct Sprite *sprite, u16 species);
-u8 GetOpposingLinkMultiBattlerId(bool8 rightSide, u8 multiplayerId);
 u16 PlayerGenderToFrontTrainerPicId(u8 playerGender);
 void HandleSetPokedexFlag(u16 nationalNum, u8 caseId);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void);

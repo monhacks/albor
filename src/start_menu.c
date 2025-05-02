@@ -15,12 +15,10 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "field_screen_effect.h"
-#include "frontier_pass.h"
 #include "frontier_util.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item_menu.h"
-#include "link.h"
 #include "load_save.h"
 #include "main.h"
 #include "menu.h"
@@ -42,7 +40,6 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
-#include "trainer_card.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
@@ -725,12 +722,6 @@ static bool8 StartMenuPlayerNameCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-
-        if (FlagGet(FLAG_SYS_FRONTIER_PASS))
-            ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
-        else
-            ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
-
         return TRUE;
     }
 
@@ -739,9 +730,6 @@ static bool8 StartMenuPlayerNameCallback(void)
 
 static bool8 StartMenuSaveCallback(void)
 {
-    if (InBattlePyramid())
-        RemoveExtraStartMenuWindows();
-
     gMenuCallback = SaveStartCallback; // Display save menu
 
     return FALSE;
@@ -1075,7 +1063,7 @@ static void ShowSaveInfoWindow(void)
     gender = gSaveBlockPtr->playerGender;
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
-    if (gender == MALE)
+    if (gender == MACHO)
     {
         color = TEXT_COLOR_BLUE;
     }

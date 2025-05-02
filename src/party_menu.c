@@ -32,7 +32,6 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
-#include "link.h"
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
@@ -59,7 +58,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "tm_case.h"
-#include "trade.h"
 #include "util.h"
 #include "window.h"
 #include "constants/battle.h"
@@ -372,8 +370,6 @@ static void Task_FieldMoveWaitForFade(u8);
 static u16 GetFieldMoveMonSpecies(void);
 static void UpdatePartyMonHPBar(u8, struct Pokemon *);
 static void ShowOrHideHeldItemSprite(u16, struct PartyMenuBox *);
-static void CreateHeldItemSpriteForTrade(u8, bool8);
-static void SpriteCB_HeldItem(struct Sprite *);
 static void SetPartyMonAilmentGfx(struct Pokemon *, struct PartyMenuBox *);
 static void UpdatePartyMonAilmentGfx(u8, struct PartyMenuBox *);
 static u8 GetPartyLayoutFromBattleType(void);
@@ -2182,12 +2178,12 @@ static void DisplayPartyPokemonGender(u8 gender, u16 species, u8 *nickname, stru
         return;
     switch (gender)
     {
-    case MON_MALE:
+    case SIEMPRE_MACHO:
         LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[0]), sGenderPalOffsets[0] + palOffset, PLTT_SIZEOF(1));
         LoadPalette(GetPartyMenuPalBufferPtr(sGenderMalePalIds[1]), sGenderPalOffsets[1] + palOffset, PLTT_SIZEOF(1));
         DisplayPartyPokemonBarDetail(menuBox->windowId, gText_MaleSymbol, 2, &menuBox->infoRects->dimensions[8]);
         break;
-    case MON_FEMALE:
+    case SIEMPRE_HEMBRA:
         LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[0]), sGenderPalOffsets[0] + palOffset, PLTT_SIZEOF(1));
         LoadPalette(GetPartyMenuPalBufferPtr(sGenderFemalePalIds[1]), sGenderPalOffsets[1] + palOffset, PLTT_SIZEOF(1));
         DisplayPartyPokemonBarDetail(menuBox->windowId, gText_FemaleSymbol, 2, &menuBox->infoRects->dimensions[8]);
@@ -3725,61 +3721,6 @@ void LoadHeldItemIcons(void)
 {
     LoadSpriteSheet(&sSpriteSheet_HeldItem);
     LoadSpritePalette(&sSpritePalette_HeldItem);
-}
-
-void DrawHeldItemIconsForTrade(u8 *partyCounts, u8 *partySpriteIds, u8 whichParty)
-{
-    u16 i;
-    u16 item;
-
-    switch (whichParty)
-    {
-    case TRADE_PLAYER:
-        for (i = 0; i < partyCounts[TRADE_PLAYER]; i++)
-        {
-            item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-            if (item != ITEM_NONE)
-                CreateHeldItemSpriteForTrade(partySpriteIds[i], ItemIsMail(item));
-        }
-        break;
-    case TRADE_PARTNER:
-        for (i = 0; i < partyCounts[TRADE_PARTNER]; i++)
-        {
-            item = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-            if (item != ITEM_NONE)
-                CreateHeldItemSpriteForTrade(partySpriteIds[i + PARTY_SIZE], ItemIsMail(item));
-        }
-        break;
-    }
-}
-
-static void CreateHeldItemSpriteForTrade(u8 spriteId, bool8 isMail)
-{
-    u8 subpriority = gSprites[spriteId].subpriority;
-    u8 newSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, 250, 170, subpriority - 1);
-
-    gSprites[newSpriteId].x2 = 4;
-    gSprites[newSpriteId].y2 = 10;
-    gSprites[newSpriteId].callback = SpriteCB_HeldItem;
-    gSprites[newSpriteId].data[7] = spriteId;
-    StartSpriteAnim(&gSprites[newSpriteId], isMail);
-    gSprites[newSpriteId].callback(&gSprites[newSpriteId]);
-}
-
-static void SpriteCB_HeldItem(struct Sprite *sprite)
-{
-    u8 otherSpriteId = sprite->data[7];
-
-    if (gSprites[otherSpriteId].invisible)
-    {
-        sprite->invisible = TRUE;
-    }
-    else
-    {
-        sprite->invisible = FALSE;
-        sprite->x = gSprites[otherSpriteId].x + gSprites[otherSpriteId].x2;
-        sprite->y = gSprites[otherSpriteId].y + gSprites[otherSpriteId].y2;
-    }
 }
 
 static void CreatePartyMonPokeballSprite(struct Pokemon *mon, struct PartyMenuBox *menuBox)
@@ -6079,7 +6020,7 @@ static bool8 TrySwitchInPokemon(void)
 
 void BufferBattlePartyCurrentOrder(void)
 {
-    BufferBattlePartyOrder(gBattlePartyCurrentOrder, GetPlayerFlankId());
+    BufferBattlePartyOrder(gBattlePartyCurrentOrder, 0);
 }
 
 static void BufferBattlePartyOrder(u8 *partyBattleOrder, u8 flankId)
