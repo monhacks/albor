@@ -1036,33 +1036,7 @@ static void CalculateConditionEnhancements(void)
 
 static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct Pokemon *mon)
 {
-    s8 i, direction, flavor;
 
-    sInfo->pokeblockStatBoosts[CONDITION_COOL] = pokeblock->spicy;
-    sInfo->pokeblockStatBoosts[CONDITION_TOUGH] = pokeblock->sour;
-    sInfo->pokeblockStatBoosts[CONDITION_SMART] = pokeblock->bitter;
-    sInfo->pokeblockStatBoosts[CONDITION_CUTE] = pokeblock->sweet;
-    sInfo->pokeblockStatBoosts[CONDITION_BEAUTY] = pokeblock->dry;
-
-    if (gPokeblockGain > 0)
-        direction = 1;
-    else if (gPokeblockGain < 0)
-        direction = -1;
-    else
-        return;
-
-    for (i = 0; i < CONDITION_COUNT; i++)
-    {
-        s16 amount = sInfo->pokeblockStatBoosts[i];
-        s8 boost = amount / 10;
-
-        if (amount % 10 >= 5) // round to the nearest
-            boost++;
-
-        flavor = GetMonFlavorRelation(mon, sConditionToFlavor[i]);
-        if (flavor == direction)
-            sInfo->pokeblockStatBoosts[i] += boost * flavor;
-    }
 }
 
 static bool8 IsSheenMaxed(void)

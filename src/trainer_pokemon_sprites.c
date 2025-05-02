@@ -81,14 +81,14 @@ static void LoadPicPaletteByTagOrSlot(u16 species, bool8 isShiny, u32 personalit
         if (paletteTag == TAG_NONE)
         {
             sCreatingSpriteTemplate.paletteTag = TAG_NONE;
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+            LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
             UniquePalette(OBJ_PLTT_ID(paletteSlot), personality);
             CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(paletteSlot)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteSlot)], PLTT_SIZE_4BPP);
         }
         else
         {
             sCreatingSpriteTemplate.paletteTag = paletteTag;
-            LoadCompressedSpritePaletteWithTagHueShifted(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species, personality);
+            LoadSpritePaletteHueShifted(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species, personality);
         }
     }
     else
@@ -110,7 +110,7 @@ static void LoadPicPaletteBySlot(u16 species, bool8 isShiny, u32 personality, u8
 {
     if (!isTrainer)
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+        LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
         UniquePalette(PLTT_ID(paletteSlot), personality);
         CpuCopy32(&gPlttBufferFaded[PLTT_ID(paletteSlot)], &gPlttBufferUnfaded[PLTT_ID(paletteSlot)], PLTT_SIZE_4BPP);
     }

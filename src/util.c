@@ -243,192 +243,99 @@ void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u32 blendColor)
                                       b + (((data2->b - b) * coeff) >> 4));
     }
 }
+#define CONSTANTE_PALETAS_UNICAS 30
 
-#define CONSTANTE_DE_PALETAS_UNICAS 100
+// Macro para convertir de RGB5 (0-31) a RGB8 (0-255)
+#define RGB5_TO_RGB8(c) ((c) * 255 / 31)
+
+// Macro para convertir de RGB8 (0-255) a RGB5 (0-31)
+#define RGB8_TO_RGB5(c) ((c) * 31 / 255)
+
+// Macro para convertir de RGB a HSV (H en [0, 360], S y V en [0, 255])
+#define RGB_TO_HSV(r, g, b, h, s, v) \
+{ \
+    u8 maxv = (r > g) ? ((r > b) ? r : b) : ((g > b) ? g : b); \
+    u8 minv = (r < g) ? ((r < b) ? r : b) : ((g < b) ? g : b); \
+    u8 delta = maxv - minv; \
+    v = maxv; \
+    s = (maxv == 0) ? 0 : (255 * delta / maxv); \
+    if (delta == 0) h = 0; \
+    else if (maxv == r) h = (43 * (g - b) / delta + 256) % 256; \
+    else if (maxv == g) h = (43 * (b - r) / delta + 85) % 256; \
+    else h = (43 * (r - g) / delta + 171) % 256; \
+    h = (h * 360) / 256; \
+}
+
+// Macro para convertir de HSV a RGB
+#define HSV_TO_RGB(h, s, v, r, g, b) \
+{ \
+    u8 region = h / 60; \
+    u8 remainder = (h % 60) * 255 / 60; \
+    u8 p = (v * (255 - s)) / 255; \
+    u8 q = (v * (255 - (s * remainder) / 255)) / 255; \
+    u8 t = (v * (255 - (s * (255 - remainder)) / 255)) / 255; \
+    if (region == 0)      { r = v; g = t; b = p; } \
+    else if (region == 1) { r = q; g = v; b = p; } \
+    else if (region == 2) { r = p; g = v; b = t; } \
+    else if (region == 3) { r = p; g = q; b = v; } \
+    else if (region == 4) { r = t; g = p; b = v; } \
+    else                  { r = v; g = p; b = q; } \
+}
 
 void UniquePalette(u16 palOffset, u32 personality)
 {
     u32 i;
-    u32 value = ((personality >> 8) & 65535) % CONSTANTE_DE_PALETAS_UNICAS;
+    s32 hueShift = (personality % (2 * CONSTANTE_PALETAS_UNICAS)) - CONSTANTE_PALETAS_UNICAS;
 
     for (i = 0; i < 16; i++)
     {
         u32 index = i + palOffset;
         struct PlttData *data = (struct PlttData *)&gPlttBufferUnfaded[index];
         
-        s32 r = (data->r * 1000) / 31;
-        s32 g = (data->g * 1000) / 31;
-        s32 b = (data->b * 1000) / 31;
-        s32 maxv, minv, d, h, s, l, o, p, q;
+        u8 r = RGB5_TO_RGB8(data->r);
+        u8 g = RGB5_TO_RGB8(data->g);
+        u8 b = RGB5_TO_RGB8(data->b);
+        
+        u16 h, s, v;
+        RGB_TO_HSV(r, g, b, h, s, v);
 
-        maxv = r;
-        if (g > maxv) maxv = g;
-        if (b > maxv) maxv = b;
+        // Aplicar el desplazamiento de tono
+        h = (h + hueShift + 360) % 360;
+        
+        HSV_TO_RGB(h, s, v, r, g, b);
+        
+        data->r = RGB8_TO_RGB5(r);
+        data->g = RGB8_TO_RGB5(g);
+        data->b = RGB8_TO_RGB5(b);
 
-        minv = r;
-        if (g < minv) minv = g;
-        if (b < minv) minv = b;
-
-        d = maxv - minv;
-        l = (maxv + minv) / 2;
-        s = (maxv == minv) ? 0 : ((l > 500) ? (1000 * d / (2000 - maxv - minv)) : (1000 * d / (maxv + minv)));
-
-        if (maxv != minv)
-        {
-            if (maxv == r)
-                h = (g < b) ? (1000 * (g - b) / d + 6000) : (1000 * (g - b) / d);
-            else if (maxv == g)
-                h = 1000 * (b - r) / d + 2000;
-            else
-                h = 1000 * (r - g) / d + 4000;
-
-            h /= 6;
-        }
-        else
-            h = 0;
-
-        if (personality % 2 == 0)
-            h = (h + value + 1000) % 1000;
-        else 
-            h = (h - value + 1000) % 1000;
-
-        if (s != 0)
-        {
-            o = (h + 333) % 1000;
-
-            p = (l < 500) ? (l * (s + 1000) / 1000) : (l + s - l * s / 1000);
-            q = l * 2 - p;
-
-            if (o < 167)
-                r = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                r = p;
-            else if (o < 667)
-                r = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                r = q;
-
-            o = h;
-
-            if (o < 167)
-                g = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                g = p;
-            else if (o < 667)
-                g = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                g = q;
-
-            o = (h + 1000 - 333) % 1000;
-
-            if (o < 167)
-                b = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                b = p;
-            else if (o < 667)
-                b = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                b = q;
-        }
-        else
-        {
-            r = l;
-            g = l;
-            b = l;
-        }
-        gPlttBufferFaded[index] = RGB((u8)(r * 31 / 1000), (u8)(g * 31 / 1000), (u8)(b * 31 / 1000));
+        gPlttBufferFaded[index] = RGB(data->r, data->g, data->b);
     }
 }
 
-void UniquePaletteBuffered(u16 * buffer, u32 personality)
+void UniquePaletteBuffered(u16 *buffer, u32 personality)
 {
     u32 i;
-    u32 value = ((personality >> 8) & 65535) % CONSTANTE_DE_PALETAS_UNICAS;
+    s32 hueShift = (personality % (2 * CONSTANTE_PALETAS_UNICAS)) - CONSTANTE_PALETAS_UNICAS;
 
     for (i = 0; i < 16; i++)
     {
         struct PlttData *data = (struct PlttData *)&buffer[i];
+        
+        u8 r = RGB5_TO_RGB8(data->r);
+        u8 g = RGB5_TO_RGB8(data->g);
+        u8 b = RGB5_TO_RGB8(data->b);
+        
+        u16 h, s, v;
+        RGB_TO_HSV(r, g, b, h, s, v);
+        
+        h = (h + hueShift + 360) % 360;
+        
+        HSV_TO_RGB(h, s, v, r, g, b);
+        
+        data->r = RGB8_TO_RGB5(r);
+        data->g = RGB8_TO_RGB5(g);
+        data->b = RGB8_TO_RGB5(b);
 
-        s32 r = (data->r * 1000) / 31;
-        s32 g = (data->g * 1000) / 31;
-        s32 b = (data->b * 1000) / 31;
-        s32 maxv, minv, d, h, s, l, o, p, q;
-
-        maxv = r;
-        if (g > maxv) maxv = g;
-        if (b > maxv) maxv = b;
-
-        minv = r;
-        if (g < minv) minv = g;
-        if (b < minv) minv = b;
-
-        d = maxv - minv;
-        l = (maxv + minv) / 2;
-        s = (maxv == minv) ? 0 : ((l > 500) ? (1000 * d / (2000 - maxv - minv)) : (1000 * d / (maxv + minv)));
-
-        if (maxv != minv)
-        {
-            if (maxv == r)
-                h = (g < b) ? (1000 * (g - b) / d + 6000) : (1000 * (g - b) / d);
-            else if (maxv == g)
-                h = 1000 * (b - r) / d + 2000;
-            else
-                h = 1000 * (r - g) / d + 4000;
-            h /= 6;
-        }
-        else
-            h = 0;
-
-        if (personality % 2 == 0)
-            h = (h + value + 1000) % 1000;
-        else 
-            h = (h - value + 1000) % 1000;
-
-        if (s != 0)
-        {
-            o = (h + 333) % 1000;
-
-            p = (l < 500) ? (l * (s + 1000) / 1000) : (l + s - l * s / 1000);
-            q = l * 2 - p;
-
-            if (o < 167)
-                r = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                r = p;
-            else if (o < 667)
-                r = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                r = q;
-
-            o = h;
-
-            if (o < 167)
-                g = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                g = p;
-            else if (o < 667)
-                g = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                g = q;
-
-            o = (h + 1000 - 333) % 1000;
-
-            if (o < 167)
-                b = q + (p - q) * o * 6 / 1000;
-            else if (o < 500)
-                b = p;
-            else if (o < 667)
-                b = q + (p - q) * (667 - o) * 6 / 1000;
-            else
-                b = q;
-        }
-        else
-        {
-            r = l;
-            g = l;
-            b = l;
-        }
-
-        buffer[i] = RGB((u8)(r * 31 / 1000), (u8)(g * 31 / 1000), (u8)(b * 31 / 1000));
+        buffer[i] = RGB(data->r, data->g, data->b);
     }
 }

@@ -3350,7 +3350,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
     {
         LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         CpuFastCopy(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
-        LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+        LoadPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
         UniquePalette(sStorage->displayMonPalOffset, pid);
         CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
         sStorage->displayMonSprite->invisible = FALSE;
@@ -3713,32 +3713,28 @@ static void SetBoxMonDynamicPalette(u8 boxId, u8 position)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     bool8 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
-    const u32 *palette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
-    const struct CompressedSpritePalette *pal1, *pal2;
+    const u16 *palette = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
+    const struct SpritePalette *pal1, *pal2;
 
     if (GetMonData(mon, MON_DATA_IS_EGG))
     {
         pal1 = &gEgg1PaletteTable[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[0]];
         pal2 = &gEgg2PaletteTable[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].types[1]];
 
-        LZ77UnCompWram(pal1->data, gDecompressionBuffer);
-        CpuCopy16(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
-        CpuCopy16(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+        CpuCopy16(pal1->data, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+        CpuCopy16(pal1->data, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
 
-        LZ77UnCompWram(pal2->data, gDecompressionBuffer + PLTT_SIZE_4BPP / 2);
-        CpuCopy16(gDecompressionBuffer + PLTT_SIZE_4BPP / 2, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
-        CpuCopy16(gDecompressionBuffer + PLTT_SIZE_4BPP / 2, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
+        CpuCopy16(pal2->data + PLTT_SIZE_4BPP / 2, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
+        CpuCopy16(pal2->data + PLTT_SIZE_4BPP / 2, &sPaletteSwapBuffer[PLTT_ID(position) + 8], PLTT_SIZE_4BPP / 2);
     }
     else
     {
         if (species == SPECIES_CASTFORM_NORMAL) 
         {
-            LZ77UnCompWram(palette, gDecompressionBuffer);
-            CpuFastCopy(gDecompressionBuffer, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
+            CpuFastCopy(palette, &sPaletteSwapBuffer[PLTT_ID(position)], PLTT_SIZE_4BPP);
         }
         else
         {
-            LZ77UnCompWram(palette, &sPaletteSwapBuffer[PLTT_ID(position)]);
             UniquePaletteBuffered(&sPaletteSwapBuffer[PLTT_ID(position)], GetMonData(mon, MON_DATA_PERSONALITY));
         }
     }
@@ -3956,7 +3952,7 @@ static void CreatePartyMonsSprites(bool8 visible)
     }
     else
     {
-        LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
+        LoadPaletteFast(GetMonFrontSpritePal(&gPlayerParty[0]), OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
         UniquePalette(OBJ_PLTT_ID(1), personality);
         CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(1)], &gPlttBufferUnfaded[OBJ_PLTT_ID(1)], PLTT_SIZE_4BPP);
     }
@@ -3995,7 +3991,7 @@ static void CreatePartyMonsSprites(bool8 visible)
                 personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
                 sStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152, 8 * (3 * (i - 1)) + 16, 1, 12);
                 
-                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                LoaddPaletteFast(GetMonFrontSpritePal(&gPlayerParty[i]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
                 UniquePalette(OBJ_PLTT_ID(paletteNum), personality);
                 CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
                 
@@ -4245,7 +4241,7 @@ static void SetPlacedMonSprite(u8 boxId, u8 position)
             if (sStorage->partySprites[position]->oam.paletteNum == IndexOfSpritePaletteTag(PALTAG_DISPLAY_MON)) 
             {
                 paletteNum = FindFreePartyPaletteSlot();
-                LoadCompressedPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+                LoadPaletteFast(GetMonFrontSpritePal(&gPlayerParty[position]), OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
                 UniquePalette(OBJ_PLTT_ID(paletteNum), GetMonData(&gPlayerParty[position], MON_DATA_PERSONALITY));
                 CpuFastCopy(&gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
                 sStorage->partySprites[position]->oam.paletteNum = paletteNum;
@@ -5280,7 +5276,7 @@ static void SetShiftedMonSprites(u8 boxId, u8 position)
     SetDisplayMonData(&sStorage->movingMon, MODE_PARTY);
     // Set moving sprite palette to currently displayed pokemon's palette
     sStorage->displayMonSprite->invisible = TRUE;
-    LoadCompressedPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
+    LoadPaletteFast(sStorage->displayMonPalette, sStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
     UniquePalette(sStorage->displayMonPalOffset, GetBoxMonData(GetBoxedMonPtr(boxId, position), MON_DATA_PERSONALITY));
     CpuFastCopy(&gPlttBufferFaded[sStorage->displayMonPalOffset], &gPlttBufferUnfaded[sStorage->displayMonPalOffset], PLTT_SIZE_4BPP);
     sStorage->movingMonSprite->oam.paletteNum = displayIndex;

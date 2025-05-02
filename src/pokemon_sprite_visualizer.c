@@ -710,11 +710,10 @@ static void UpdateBattlerValue(struct PokemonSpriteVisualizer *data)
 
 static void BattleLoadOpponentMonSpriteGfxCustom(u16 species, bool8 isFemale, bool8 isShiny, u8 battlerId)
 {
-    const u32 *lzPaletteData = GetMonSpritePalFromSpecies(species, isShiny, isFemale);
+    const u16 *paletteData; = GetMonSpritePalFromSpecies(species, isShiny, isFemale);
     u16 paletteOffset = OBJ_PLTT_ID(battlerId);
 
-    LZDecompressWram(lzPaletteData, gDecompressionBuffer);
-    LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(paletteData, paletteOffset, PLTT_SIZE_4BPP);
 }
 
 static void SetConstSpriteValues(struct PokemonSpriteVisualizer *data)
@@ -1141,7 +1140,7 @@ static void ResetPokemonSpriteVisualizerWindows(void)
 void CB2_Pokemon_Sprite_Visualizer(void)
 {
     u8 taskId;
-    const u32 *palette;
+    const u16 *palette;
     struct PokemonSpriteVisualizer *data;
     u16 species;
     s16 offset_y;
@@ -1206,8 +1205,8 @@ void CB2_Pokemon_Sprite_Visualizer(void)
 
             //Palettes
             palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
-            LoadCompressedSpritePaletteWithTag(palette, species);
-            LoadCompressedPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+            LoadSpritePaletteWithTag(palette, species);
+            LoadPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
             //Front
             HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
             data->isShiny = FALSE;
@@ -1851,7 +1850,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
 
 static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 {
-    const u32 *palette;
+    const u16 *palette;
     u16 species = data->currentmonId;
     s16 offset_y;
     u8 front_x = sBattlerCoords[0][1].x;
@@ -1878,8 +1877,8 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 
     //Palettes
     palette = GetMonSpritePalFromSpecies(species, data->isShiny, data->isFemale);
-    LoadCompressedSpritePaletteWithTag(palette, species);
-    LoadCompressedPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+    LoadSpritePaletteWithTag(palette, species);
+    LoadPalette(palette, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
     //Front
     HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[1], species, (data->isFemale ? FEMALE_PERSONALITY : MALE_PERSONALITY));
     BattleLoadOpponentMonSpriteGfxCustom(species, data->isFemale, data->isShiny, 1);

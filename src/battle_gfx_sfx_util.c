@@ -585,7 +585,7 @@ bool8 IsBattleSEPlaying(u8 battler)
 void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
 {
     u32 monsPersonality, currentPersonality, isShiny, species, paletteOffset, position;
-    const void *lzPaletteData;
+    const void *paletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
         mon = illusionMon;
@@ -632,13 +632,12 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     paletteOffset = OBJ_PLTT_ID(battler);
 
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_NONE)
-        lzPaletteData = GetMonFrontSpritePal(mon);
+        paletteData = GetMonFrontSpritePal(mon);
     else
-        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, currentPersonality);
+        paletteData = GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, currentPersonality);
 
-    LZDecompressWram(lzPaletteData, gDecompressionBuffer);
-    LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
-    LoadPalette(gDecompressionBuffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    LoadPalette(paletteData, paletteOffset, PLTT_SIZE_4BPP);
+    LoadPalette(paletteData, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
     UniquePalette(paletteOffset, currentPersonality);
     CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
     UniquePalette(BG_PLTT_ID(8) + BG_PLTT_ID(battler), currentPersonality);
@@ -837,7 +836,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
 {
     u32 personalityValue, position, paletteOffset, targetSpecies, otId;
     bool8 isShiny;
-    const void *lzPaletteData, *src;
+    const void *paletteData, *src;
     void *dst;
     struct BoxPokemon boxMon;
 
@@ -892,9 +891,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, bool32 megaEvo, bo
     dst = (void *)(OBJ_VRAM0 + gSprites[gBattlerSpriteIds[battlerAtk]].oam.tileNum * 32);
     DmaCopy32(3, src, dst, MON_PIC_SIZE);
     paletteOffset = OBJ_PLTT_ID(battlerAtk);
-    lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, isShiny, personalityValue);
-    LZDecompressWram(lzPaletteData, gDecompressionBuffer);
-    LoadPalette(gDecompressionBuffer, paletteOffset, PLTT_SIZE_4BPP);
+    paletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, isShiny, personalityValue);
+    LoadPalette(paletteData, paletteOffset, PLTT_SIZE_4BPP);
     CreateBoxMon(&boxMon, targetSpecies, 5, USE_RANDOM_IVS, TRUE, personalityValue, OT_ID_PRESET, otId);
 
     UniquePalette(paletteOffset, personalityValue);

@@ -1586,14 +1586,14 @@ static const struct ObjectEventGraphicsInfo *SpeciesToGraphicsInfo(u16 species, 
 static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
 {
     u32 paletteNum;
-    const u32 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //¿Qué pasa si es hembra?
+    const u16 *palette = GetMonSpritePalFromSpecies(species, shiny, FALSE); //¿Qué pasa si es hembra?
     struct Pokemon *mon = GetFirstLiveMon();
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
         if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
-            LoadCompressedSpritePaletteWithTag(palette, species);
+            LoadSpritePaletteWithTag(palette, species);
         else
-            LoadCompressedSpritePaletteWithTagHueShifted(palette, species, GetMonData(mon, MON_DATA_PERSONALITY));
+            LoadSpritePaletteHueShifted(palette, species, GetMonData(mon, MON_DATA_PERSONALITY));
 
         paletteNum = IndexOfSpritePaletteTag(species);
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);

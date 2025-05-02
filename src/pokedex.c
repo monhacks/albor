@@ -2847,7 +2847,7 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         u32 otId;
         u32 personality;
         u8 paletteNum;
-        const u32 *lzPaletteData;
+        const u16 *paletteData;
         void *buffer;
 
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
@@ -2863,8 +2863,8 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         otId = ((u16)gTasks[taskId].tOtIdHi << 16) | (u16)gTasks[taskId].tOtIdLo;
         personality = ((u16)gTasks[taskId].tPersonalityHi << 16) | (u16)gTasks[taskId].tPersonalityLo;
         paletteNum = gSprites[gTasks[taskId].tMonSpriteId].oam.paletteNum;
-        lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
-        LoadCompressedPalette(lzPaletteData, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
+        paletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, personality);
+        LoadPalette(paletteData, OBJ_PLTT_ID(paletteNum), PLTT_SIZE_4BPP);
         DestroyTask(taskId);
     }
 }
@@ -3350,7 +3350,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         {
             //Icon
             //FreeMonIconPalettes(); //Free space for new pallete
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
+            LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
             gSprites[gTasks[taskId].data[4]].oam.paletteNum = 4;
@@ -4417,7 +4417,7 @@ static void Task_LoadEvolutionScreen(u8 taskId)
             ResetEvoScreenDataStruct();
             //Icon
             //FreeMonIconPalettes(); //Free space for new pallete
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
+            LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             PrintPreEvolutions(taskId, NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum));
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18 + 32*sPokedexView->numPreEvolutions, 31, 4); //Create pokemon sprite
             EvoFormsPage_PrintNavigationButtons(); // Navigation buttons
@@ -4589,7 +4589,7 @@ static void HandleTargetSpeciesPrint(u8 taskId, u16 targetSpecies, u16 previousT
 
     if (base_i < iterations)
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, 0, 0), OBJ_PLTT_ID(5 + base_i), PLTT_SIZE_4BPP);
+        LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, 0, 0), OBJ_PLTT_ID(5 + base_i), PLTT_SIZE_4BPP);
             if (isEevee)
                 gTasks[taskId].data[5 + base_i] = CreateMonIconNoPersonality(targetSpecies, SpriteCB_MonIcon, 45 + 26*base_i, 31, 4); //Create pokemon sprite
             else
@@ -4634,7 +4634,7 @@ static void HandlePreEvolutionSpeciesPrint(u8 taskId, u16 preSpecies, u16 specie
 
     if (base_i < 3)
     {
-        LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(preSpecies, 0, 0), OBJ_PLTT_ID(5 + base_i), PLTT_SIZE_4BPP);
+        LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(preSpecies, 0, 0), OBJ_PLTT_ID(5 + base_i), PLTT_SIZE_4BPP);
         gTasks[taskId].data[5 + base_i] = CreateMonIconNoPersonality(preSpecies, SpriteCB_MonIcon, 18 + 32*base_i, 31, 4); //Create pokemon sprite
         gSprites[gTasks[taskId].data[5 + base_i]].oam.priority = 0;
         gSprites[gTasks[taskId].data[5 + base_i]].oam.paletteNum = 5 + base_i;
@@ -4970,7 +4970,7 @@ static void Task_LoadFormsScreen(u8 taskId)
         {
             //Icon
             //FreeMonIconPalettes(); //Free space for new pallete
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
+            LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), 0, 0), OBJ_PLTT_ID(4), PLTT_SIZE_4BPP);
             gTasks[taskId].data[4] = CreateMonIconNoPersonality(NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum), SpriteCB_MonIcon, 18, 31, 4); //Create pokemon sprite
             gSprites[gTasks[taskId].data[4]].oam.priority = 0;
             gSprites[gTasks[taskId].data[4]].oam.paletteNum = 4;
@@ -5146,7 +5146,7 @@ static void PrintForms(u8 taskId, u16 species)
         {
             sPokedexView->sFormScreenData.formIds[j++] = i;
             times += 1;
-            LoadCompressedPalette(GetMonSpritePalFromSpeciesAndPersonality(speciesForm, 0, 0), OBJ_PLTT_ID(5 + times), PLTT_SIZE_4BPP);
+            LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(speciesForm, 0, 0), OBJ_PLTT_ID(5 + times), PLTT_SIZE_4BPP);
             if (times < 7)
                 gTasks[taskId].data[5 + times] = CreateMonIconNoPersonality(speciesForm, SpriteCB_MonIcon, 52 + 34 * (times - 1), 31, 4); //Create pokemon sprite
             else if (times < 14)

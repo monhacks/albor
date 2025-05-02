@@ -69,7 +69,6 @@ extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
 static void CB2_InitBattleInternal(void);
-static void CB2_PreInitIngamePlayerPartnerBattle(void);
 static void CB2_HandleStartBattle(void);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
 static void BattleMainCB1(void);
@@ -124,8 +123,6 @@ EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleTerrain = 0;
-EWRAM_DATA struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE + 1] = {0};
-EWRAM_DATA static struct MultiPartnerMenuPokemon* sMultiPartnerPartyBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
@@ -605,63 +602,6 @@ static void CB2_HandleStartBattle(void)
     case 14:
         if (--gBattleCommunication[1] == 0)
             gBattleCommunication[MULTIUSE_STATE]++;
-        break;
-    }
-}
-
-static void SetMultiPartnerMenuParty(u8 offset)
-{
-    s32 i;
-
-    for (i = 0; i < MULTI_PARTY_SIZE; i++)
-    {
-        gMultiPartnerParty[i].species     = GetMonData(&gPlayerParty[offset + i], MON_DATA_SPECIES);
-        gMultiPartnerParty[i].heldItem    = GetMonData(&gPlayerParty[offset + i], MON_DATA_HELD_ITEM);
-        GetMonData(&gPlayerParty[offset + i], MON_DATA_NICKNAME, gMultiPartnerParty[i].nickname);
-        gMultiPartnerParty[i].level       = GetMonData(&gPlayerParty[offset + i], MON_DATA_LEVEL);
-        gMultiPartnerParty[i].hp          = GetMonData(&gPlayerParty[offset + i], MON_DATA_HP);
-        gMultiPartnerParty[i].maxhp       = GetMonData(&gPlayerParty[offset + i], MON_DATA_MAX_HP);
-        gMultiPartnerParty[i].status      = GetMonData(&gPlayerParty[offset + i], MON_DATA_STATUS);
-        gMultiPartnerParty[i].personality = GetMonData(&gPlayerParty[offset + i], MON_DATA_PERSONALITY);
-        gMultiPartnerParty[i].gender      = GetMonGender(&gPlayerParty[offset + i]);
-        StripExtCtrlCodes(gMultiPartnerParty[i].nickname);
-        PadNameString(gMultiPartnerParty[i].nickname, CHAR_SPACE);
-    }
-    memcpy(sMultiPartnerPartyBuffer, gMultiPartnerParty, sizeof(gMultiPartnerParty));
-}
-
-static void CB2_PreInitIngamePlayerPartnerBattle(void)
-{
-    u32 *savedBattleTypeFlags;
-    void (**savedCallback)(void);
-
-    savedCallback = &gBattleStruct->savedCallback;
-    savedBattleTypeFlags = &gBattleStruct->savedBattleTypeFlags;
-
-    RunTasks();
-    AnimateSprites();
-    BuildOamBuffer();
-
-    switch (gBattleCommunication[MULTIUSE_STATE])
-    {
-    case 0:
-        sMultiPartnerPartyBuffer = Alloc(sizeof(gMultiPartnerParty));
-        SetMultiPartnerMenuParty(MULTI_PARTY_SIZE);
-        gBattleCommunication[MULTIUSE_STATE]++;
-        *savedCallback = gMain.savedCallback;
-        *savedBattleTypeFlags = gBattleTypeFlags;
-        gMain.savedCallback = CB2_PreInitIngamePlayerPartnerBattle;
-        ShowPartyMenuToShowcaseMultiBattleParty();
-        break;
-    case 1:
-        if (!gPaletteFade.active)
-        {
-            gBattleCommunication[MULTIUSE_STATE] = 2;
-            gBattleTypeFlags = *savedBattleTypeFlags;
-            gMain.savedCallback = *savedCallback;
-            SetMainCallback2(CB2_InitBattleInternal);
-            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
-        }
         break;
     }
 }

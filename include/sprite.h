@@ -304,6 +304,8 @@ void FreeAllSpritePalettes(void);
 u32 LoadSpritePalette(const struct SpritePalette *palette);
 u32 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct SpritePalette *palette2);
 u32 LoadSpritePaletteInSlot(const struct SpritePalette *palette, u8 paletteNum);
+u32 LoadSpritePaletteWithTag(const struct SpritePalette *palette);
+u32 LoadSpritePaletteHueShifted(const struct SpritePalette *palette, u32 personality);
 void LoadSpritePalettes(const struct SpritePalette *palettes);
 u32 AllocSpritePalette(u16 tag);
 u32 IndexOfSpritePaletteTag(u16 tag);

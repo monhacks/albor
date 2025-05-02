@@ -3807,7 +3807,7 @@ static void Task_PlayMapChosenOrBattleBGM(u8 taskId)
 
 #undef tSongId
 
-const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
+const u16 *GetMonFrontSpritePal(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY, NULL);
@@ -3815,12 +3815,12 @@ const u32 *GetMonFrontSpritePal(struct Pokemon *mon)
     return GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality);
 }
 
-const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
+const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny, u32 personality)
 {
     return GetMonSpritePalFromSpecies(species, isShiny, IsPersonalityFemale(species, personality));
 }
 
-const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
+const u16 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale)
 {
     species = SanitizeSpeciesId(species);
 
@@ -3847,12 +3847,6 @@ const u32 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFema
 bool8 IsMonSpriteNotFlipped(u16 species)
 {
     return gSpeciesInfo[species].noFlip;
-}
-
-s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
-{
-    u8 nature = GetNature(mon);
-    return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor)
