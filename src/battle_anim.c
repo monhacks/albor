@@ -1005,17 +1005,8 @@ u8 GetAnimBattlerId(u8 wantedBattler)
 
 bool8 IsBattlerSpriteVisible(u8 battlerId)
 {
-    if (IsContest())
-    {
-        if (battlerId == gBattleAnimAttacker)
-            return TRUE;
-        else
-            return FALSE;
-    }
     if (!IsBattlerSpritePresent(battlerId))
         return FALSE;
-    if (IsContest())
-        return TRUE; // This line won't ever be reached.
     if (!gBattleSpritesDataPtr->battlerData[battlerId].invisible || !gSprites[gBattlerSpriteIds[battlerId]].invisible)
         return TRUE;
 
@@ -1072,9 +1063,6 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
             battlerPosition = GetBattlerPosition(battlerId);
 
         DrawBattlerOnBg(1, 0, 0, battlerPosition, animBg.paletteId, animBg.bgTiles, animBg.bgTilemap, animBg.tilesOffset);
-
-        if (IsContest())
-            FlipBattlerBgTiles();
     }
     else
     {
@@ -1663,7 +1651,7 @@ s8 BattleAnimAdjustPanning(s8 pan)
 
 s8 BattleAnimAdjustPanning2(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
+    if (gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
@@ -1672,7 +1660,7 @@ s8 BattleAnimAdjustPanning2(s8 pan)
     }
     else
     {
-        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER || IsContest())
+        if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = -pan;
     }
     return pan;
@@ -2170,7 +2158,7 @@ static void Cmd_teamattack_movefwd(void)
     sBattleAnimScriptPtr += 2;
 
     // Apply to double battles when attacking own side
-    if (!IsContest() && IsDoubleBattle()
+    if (IsDoubleBattle()
      && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
     {
         if (wantedBattler == ANIM_ATTACKER)

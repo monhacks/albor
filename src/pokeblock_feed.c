@@ -639,64 +639,7 @@ static void HandleInitBackgrounds(void)
 
 static bool8 LoadMonAndSceneGfx(struct Pokemon *mon)
 {
-    u16 species;
-    u32 personality;
-    bool32 isShiny;
 
-    switch (sPokeblockFeed->loadGfxState)
-    {
-    case 0:
-        // Load mon gfx
-        species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 1:
-        // Load mon palette
-        species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        personality = GetMonData(mon, MON_DATA_PERSONALITY);
-        isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
-        LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
-        SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 2:
-        LoadCompressedSpriteSheet(&gPokeblockCase_SpriteSheet);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 3:
-        LoadCompressedSpritePalette(&gPokeblockCase_SpritePal);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 4:
-        LoadCompressedSpriteSheet(&sSpriteSheet_Pokeblock);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 5:
-        SetPokeblockSpritePal(gSpecialVar_ItemId);
-        LoadCompressedSpritePalette(&sPokeblockSpritePal);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 6:
-        ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, gBattleTerrainTiles_Building, 0, 0, 0);
-        sPokeblockFeed->loadGfxState++;
-        break;
-    case 7:
-        if (FreeTempTileDataBuffersIfPossible() != TRUE)
-        {
-            LZDecompressWram(gPokeblockFeedBg_Tilemap, sPokeblockFeed->tilemapBuffer);
-            sPokeblockFeed->loadGfxState++;
-        }
-        break;
-    case 8:
-        LoadCompressedPalette(gBattleTerrainPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
-        sPokeblockFeed->loadGfxState = 0;
-        return TRUE;
-    }
-
-    return FALSE;
 }
 
 static void HandleInitWindows(void)

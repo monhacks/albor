@@ -36,13 +36,13 @@ struct BgCnt
 {
     u16 priority:2;
     u16 charBaseBlock:2;
-    u16 dsCharBaseBlock:2;
-    u16 mosaic:1;
+    bool16 mosaic:1;
     u16 palettes:1;
     u16 screenBaseBlock:5;
     u16 areaOverflowMode:1;
     u16 screenSize:2;
-} PACKED;
+    u16 sinUso:2;
+}
 typedef volatile struct BgCnt vBgCnt;
 
 struct PlttData
