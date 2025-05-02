@@ -160,11 +160,11 @@ static void Task_BeginEvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             u16 postEvoSpecies;
             u8 partyId;
@@ -364,7 +364,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
     SetVBlankCallback(VBlankCB_EvolutionScene);
     SetMainCallback2(CB2_EvolutionSceneUpdate);
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
 
     ShowBg(0);
     ShowBg(1);
@@ -411,8 +411,6 @@ static void CreateShedinja(u16 preEvoSpecies, struct Pokemon *mon)
             SetMonData(&gPlayerParty[gPlayerPartyCount], i, &data);
 
         SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_STATUS, &data);
-        data = MAIL_NONE;
-        SetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_MAIL, &data);
 
         CalculateMonStats(&gPlayerParty[gPlayerPartyCount]);
         CalculatePlayerPartyCount();
@@ -489,7 +487,7 @@ static void Task_EvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case EVOSTATE_FADE_IN:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         gSprites[sEvoStructPtr->preEvoSpriteId].invisible = FALSE;
         gTasks[taskId].tState++;
         ShowBg(0);
@@ -498,7 +496,7 @@ static void Task_EvolutionScene(u8 taskId)
         ShowBg(3);
         break;
     case EVOSTATE_INTRO_MSG:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
@@ -529,7 +527,7 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_START_BG_AND_SPARKLE_SPIRAL:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             StartBgAnimation(FALSE);
             sEvoGraphicsTaskId = EvolutionSparkles_SpiralUpward(17);
@@ -588,7 +586,7 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_EVO_MON_ANIM:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             EvoScene_DoMonAnimAndCry(sEvoStructPtr->postEvoSpriteId, gTasks[taskId].tPostEvoSpecies);
             gTasks[taskId].tState++;
@@ -637,13 +635,13 @@ static void Task_EvolutionScene(u8 taskId)
             }
             else // no move to learn, or evolution was canceled
             {
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+                BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
                 gTasks[taskId].tState++;
             }
         }
         break;
     case EVOSTATE_END:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             if (!(gTasks[taskId].tBits & TASK_BIT_LEARN_MOVE))
             {
@@ -669,7 +667,7 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_CANCEL_MON_ANIM:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             EvoScene_DoMonAnimAndCry(sEvoStructPtr->preEvoSpriteId, gTasks[taskId].tPreEvoSpecies);
             gTasks[taskId].tState++;
@@ -780,7 +778,7 @@ static void Task_EvolutionScene(u8 taskId)
                     // YES
                     gTasks[taskId].tLearnMoveState = gTasks[taskId].tLearnMoveYesState;
                     if (gTasks[taskId].tLearnMoveState == MVSTATE_SHOW_MOVE_SELECT)
-                        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+                        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
                 }
             }
             if (JOY_NEW(B_BUTTON))
@@ -792,7 +790,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
             break;
         case MVSTATE_SHOW_MOVE_SELECT:
-            if (!gPaletteFade.active)
+            if (!gFundidoPaletas.activo)
             {
                 FreeAllWindowBuffers();
                 ShowSelectMovePokemonSummaryScreen(gPlayerParty, gTasks[taskId].tPartyId,
@@ -802,7 +800,7 @@ static void Task_EvolutionScene(u8 taskId)
             }
             break;
         case MVSTATE_HANDLE_MOVE_SELECT:
-            if (!gPaletteFade.active && gMain.callback2 == CB2_EvolutionSceneUpdate)
+            if (!gFundidoPaletas.activo && gMain.callback2 == CB2_EvolutionSceneUpdate)
             {
                 var = GetMoveSlotToReplace();
                 if (var == MAX_MON_MOVES)

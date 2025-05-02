@@ -1212,7 +1212,7 @@ static bool8 LoadGraphics(void)
         break;
     case 2:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = 1;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         gMain.state++;
         break;
     case 3:
@@ -1307,12 +1307,12 @@ static bool8 LoadGraphics(void)
         gMain.state++;
         break;
     case 23:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 24:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = 0;
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
     default:
@@ -1326,7 +1326,7 @@ static bool8 LoadGraphics(void)
 static void InitBGs(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     SetBgTilemapBuffer(1, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_BATTLE_MOVES][0]);
     SetBgTilemapBuffer(2, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_SKILLS][0]);
     SetBgTilemapBuffer(3, sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0]);
@@ -1548,13 +1548,13 @@ static void FreeSummaryScreen(void)
 
 static void BeginCloseSummaryScreen(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = CloseSummaryScreen;
 }
 
 static void CloseSummaryScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         if (sMonSummaryScreen->callback == gInitialSummaryScreenCallback)
             gInitialSummaryScreenCallback = NULL;
@@ -1564,7 +1564,7 @@ static void CloseSummaryScreen(u8 taskId)
         ResetSpriteData();
         FreeAllSpritePalettes();
         StopCryAndClearCrySongs();
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         if (gMonSpritesGfxPtr == NULL)
             DestroyMonSpritesGfxManager();
         FreeSummaryScreen();
@@ -1574,7 +1574,7 @@ static void CloseSummaryScreen(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -2237,7 +2237,7 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (gPaletteFade.active != TRUE)
+    if (gFundidoPaletas.activo!= TRUE)
     {
         if (JOY_NEW(DPAD_UP))
         {
@@ -3146,11 +3146,6 @@ static void GetMetLevelString(u8 *output)
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(3, output);
 }
 
-u32 GetPlayerIDAsU32(void)
-{
-    return (gSaveBlockPtr->playerTrainerId[3] << 24) | (gSaveBlockPtr->playerTrainerId[2] << 16) | (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
-}
-
 static bool8 DoesMonOTMatchOwner(void)
 {
     return TRUE;
@@ -3344,8 +3339,8 @@ static void BufferLeftColumnStats(void)
     DynamicPlaceholderTextUtil_Reset();
     BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
     BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
-    BufferStat(attackString, STAT_ATK, sMonSummaryScreen->summary.atk, 2, 7);
-    BufferStat(defenseString, STAT_DEF, sMonSummaryScreen->summary.def, 3, 7);
+    BufferStat(attackString, ESTADISTICA_ATAQUE, sMonSummaryScreen->summary.atk, 2, 7);
+    BufferStat(defenseString, ESTADISTICA_DEFENSA, sMonSummaryScreen->summary.def, 3, 7);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
 
     Free(currentHPString);
@@ -3362,9 +3357,9 @@ static void PrintLeftColumnStats(void)
 static void BufferRightColumnStats(void)
 {
     DynamicPlaceholderTextUtil_Reset();
-    BufferStat(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
-    BufferStat(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
-    BufferStat(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
+    BufferStat(gStringVar1, ESTADISTICA_ATAQUE_ESPECIAL, sMonSummaryScreen->summary.spatk, 0, 3);
+    BufferStat(gStringVar2, ESTADISTICA_DEFENSA_ESPECIAL, sMonSummaryScreen->summary.spdef, 1, 3);
+    BufferStat(gStringVar3, ESTADISTICA_VELOCIDAD, sMonSummaryScreen->summary.speed, 2, 3);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
 }
 
@@ -3659,7 +3654,7 @@ static void AddAndFillMoveNamesWindow(void)
 {
     u8 windowId = AddWindowFromTemplateList(sPageMovesTemplate, PSS_DATA_WINDOW_MOVE_NAMES);
     FillWindowPixelRect(windowId, PIXEL_FILL(0), 0, 66, 72, 16);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
 }
 
 static void SwapMovesNamesPP(u8 moveIndex1, u8 moveIndex2)
@@ -3919,7 +3914,7 @@ static void SpriteCB_Pokemon(struct Sprite *sprite)
 {
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
 
-    if (!gPaletteFade.active && sprite->data[2] != 1)
+    if (!gFundidoPaletas.activo && sprite->data[2] != 1)
     {
         sprite->data[1] = IsMonSpriteNotFlipped(sprite->data[0]);
         PlayMonCry();
@@ -4115,10 +4110,7 @@ static inline bool32 ShouldShowRename(void)
          && !sMonSummaryScreen->lockMovesFlag
          && !sMonSummaryScreen->summary.isEgg
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX
-         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
-         && !InBattleFactory() 
-         && !InSlateportBattleTent()
-         && GetPlayerIDAsU32() == sMonSummaryScreen->summary.OTID);
+         && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR;
 }
 
 static void ShowCancelOrRenamePrompt(void)

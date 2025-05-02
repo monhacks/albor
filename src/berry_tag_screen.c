@@ -206,7 +206,7 @@ static void VblankCB(void)
 
 static void CB2_InitBerryTagScreen(void)
 {
-    while (1)
+    while(1)
     {
         if (InitBerryTagScreen() == TRUE)
             break;
@@ -229,7 +229,7 @@ static bool8 InitBerryTagScreen(void)
         break;
     case 2:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = 1;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         gMain.state++;
         break;
     case 3:
@@ -279,12 +279,12 @@ static bool8 InitBerryTagScreen(void)
         gMain.state++;
         break;
     case 14:
-        BlendPalettes(PALETTES_ALL, 0x10, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 0x10, RGB_BLACK);
         gMain.state++;
         break;
     case 15:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = 0;
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
     default: // done
@@ -299,7 +299,7 @@ static bool8 InitBerryTagScreen(void)
 static void HandleInitBackgrounds(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(2, sBerryTag->tilemapBuffers[0]);
     SetBgTilemapBuffer(3, sBerryTag->tilemapBuffers[1]);
     ResetAllBgsCoordinates();
@@ -520,13 +520,13 @@ static void DestroyFlavorCircleSprites(void)
 static void PrepareToCloseBerryTagScreen(u8 taskId)
 {
     PlaySE(SE_SELECT);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_CloseBerryTagScreen;
 }
 
 static void Task_CloseBerryTagScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyBerrySprite();
         DestroyFlavorCircleSprites();
@@ -539,7 +539,7 @@ static void Task_CloseBerryTagScreen(u8 taskId)
 
 static void Task_HandleInput(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         u16 arrowKeys = JOY_REPEAT(DPAD_ANY);
         if (arrowKeys == DPAD_UP)

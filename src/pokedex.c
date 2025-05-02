@@ -25,7 +25,6 @@
 #include "pokemon_summary_screen.h"
 #include "region_map.h"
 #include "pokemon.h"
-#include "reset_rtc_screen.h"
 #include "scanline_effect.h"
 #include "shop.h"
 #include "sound.h"
@@ -1245,7 +1244,7 @@ static void Task_HandlePokedexInput(u8 taskId)
         else if (JOY_NEW(B_BUTTON))
         {
             TryDestroyStatBars();
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Task_ClosePokedex;
             PlaySE(SE_PC_OFF);
         }
@@ -1315,7 +1314,7 @@ static void Task_ClosePokedex(u8 taskId)
 {
     u16 music = GetCurrLocationDefaultMusic();
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         ClearMonSprites();
         FreeWindowAndBgBuffers();
@@ -1345,14 +1344,14 @@ static bool8 LoadPokedexListPage(u8 page)
     {
     case 0:
     default:
-        if (gPaletteFade.active)
+        if (gFundidoPaletas.activo)
             return 0;
         SetVBlankCallback(NULL);
         sPokedexView->currentPage = page;
         ResetOtherVideoRegisters(0);
         SetGpuReg(REG_OFFSET_BG2VOFS, sPokedexView->initialVOffset);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sPokedex_BgTemplate, ARRAY_COUNT(sPokedex_BgTemplate));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sPokedex_BgTemplate, ARRAY_COUNT(sPokedex_BgTemplate));
         SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
         SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
@@ -1365,7 +1364,7 @@ static bool8 LoadPokedexListPage(u8 page)
         //InitWindows(sPokemonList_WindowTemplate);
         DeactivateAllTextPrinters();
         //PutWindowTilemap(WIN_POKEMON_LIST);
-        //CopyWindowToVram(WIN_POKEMON_LIST, COPYWIN_FULL);
+        //CopyWindowToVram(WIN_POKEMON_LIST, COPIA_COMPLETA_VENTANA);
         //PutWindowTilemap(WIN_TITLE);
         //PutWindowTilemap(WIN_SEEN);
         //PutWindowTilemap(WIN_OWN);
@@ -1402,7 +1401,7 @@ static bool8 LoadPokedexListPage(u8 page)
         gMain.state++;
         break;
     case 4:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_Pokedex);
         gMain.state++;
         break;
@@ -1424,7 +1423,7 @@ static bool8 LoadPokedexListPage(u8 page)
         gMain.state++;
         break;
     case 6:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             gMain.state = 0;
             return TRUE;
@@ -1564,7 +1563,7 @@ static void CreateMonListEntry(u8 position, u16 b)
         }
         break;
     }
-    CopyWindowToVram(0, COPYWIN_GFX);
+    CopyWindowToVram(0, COPIA_TILES_VENTANA);
 }
 
 static void CreateMonDexNum(u16 entryNum, u8 left, u8 top)
@@ -1587,7 +1586,6 @@ void ResetPokedex(void)
 
     sLastSelectedPokemon = 0;
     sPokeBallRotation = POKEBALL_ROTATION_TOP;
-    gSaveBlockPtr->pokedexOrder = 0;
     for (i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
         gSaveBlockPtr->dexCaught[i] = 0;
@@ -1720,7 +1718,7 @@ static void CreateMonSpritesAtPos(u16 selectedMon)
     u16 dexNum;
     u8 spriteId;
 
-    gPaletteFade.bufferTransferDisabled = TRUE;
+    gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
 
     for (i = 0; i < MAX_MONS_ON_SCREEN; i++)
         sPokedexView->monSpriteIds[i] = 0xFFFF;
@@ -1759,7 +1757,7 @@ static void CreateMonSpritesAtPos(u16 selectedMon)
     sPokedexView->listVOffset = 0;
     sPokedexView->listMovingVOffset = 0;
 
-    gPaletteFade.bufferTransferDisabled = FALSE;
+    gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
 }
 
 static bool8 UpdateDexListScroll(u8 direction, u8 monMoveIncrement, u8 scrollTimerMax)
@@ -2337,7 +2335,7 @@ static void CreateStatBars(struct PokedexListItem *dexMon)
         u32 species = NationalPokedexNumToSpecies(dexMon->dexNum);
 
         memcpy(gfx, sStatBarsGfx, sizeof(sStatBarsGfx));
-        for (i = 0; i < NUM_STATS; i++)
+        for (i = 0; i < NUMERO_ESTADISTICAS; i++)
         {
             statValue = *((u8*)(&gSpeciesInfo[species]) + sBaseStatOffsets[i]);
             if (statValue <= 100)
@@ -2440,7 +2438,7 @@ static u8 LoadInfoScreen(struct PokedexListItem *item, u8 monSpriteId)
     gTasks[taskId].tMonSpriteId = monSpriteId;
     gTasks[taskId].tTrainerSpriteId = SPRITE_NONE;
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sInfoScreen_BgTemplate, ARRAY_COUNT(sInfoScreen_BgTemplate));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sInfoScreen_BgTemplate, ARRAY_COUNT(sInfoScreen_BgTemplate));
     SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
     SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
     SetBgTilemapBuffer(1, AllocZeroed(BG_SCREEN_SIZE));
@@ -2475,7 +2473,7 @@ static void Task_LoadInfoScreen(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             u16 r2;
 
@@ -2512,7 +2510,7 @@ static void Task_LoadInfoScreen(u8 taskId)
         PrintMonInfo(sPokedexListItem->dexNum, sPokedexListItem->owned, 0);
         if (!sPokedexListItem->owned)
             LoadPalette(gPlttBufferUnfaded + 1, BG_PLTT_ID(3) + 1, PLTT_SIZEOF(16 - 1));
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -2551,7 +2549,7 @@ static void Task_LoadInfoScreen(u8 taskId)
         gMain.state++;
         break;
     case 8:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             gMain.state++;
         }
@@ -2594,14 +2592,14 @@ static void Task_HandleInfoScreenInput(u8 taskId)
     if (gTasks[taskId].tScrolling)
     {
         // Scroll up/down
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         PlaySE(SE_DEX_SCROLL);
         return;
     }
     if (JOY_NEW(B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ExitInfoScreen;
         PlaySE(SE_PC_OFF);
         return;
@@ -2620,7 +2618,7 @@ static void Task_HandleInfoScreenInput(u8 taskId)
 
 static void Task_SwitchScreensFromInfoScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         switch (sPokedexView->screenSwitchState)
@@ -2635,7 +2633,7 @@ static void Task_SwitchScreensFromInfoScreen(u8 taskId)
 
 static void Task_LoadInfoScreenWaitForFade(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         gTasks[taskId].func = Task_LoadInfoScreen;
@@ -2644,7 +2642,7 @@ static void Task_LoadInfoScreenWaitForFade(u8 taskId)
 
 static void Task_ExitInfoScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
         FreeInfoScreenWindowAndBgBuffers();
@@ -2665,7 +2663,7 @@ static void Task_LoadAreaScreen(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             sPokedexView->currentPage = PAGE_AREA;
             gPokedexVBlankCB = gMain.vblankCallback;
@@ -2699,7 +2697,7 @@ static void Task_WaitForAreaScreenInput(u8 taskId)
 
 static void Task_SwitchScreensFromAreaScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         switch (sPokedexView->screenSwitchState)
         {
@@ -2756,13 +2754,13 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             gPokedexVBlankCB = gMain.vblankCallback;
             SetVBlankCallback(NULL);
             ResetOtherVideoRegisters(DISPCNT_BG0_ON);
             ResetBgsAndClearDma3BusyFlags();
-            InitBgsFromTemplates(0, sNewEntryInfoScreen_BgTemplate, ARRAY_COUNT(sNewEntryInfoScreen_BgTemplate));
+            InitBgsFromTemplates(DISPCNT_MODE_0, sNewEntryInfoScreen_BgTemplate, ARRAY_COUNT(sNewEntryInfoScreen_BgTemplate));
             SetBgTilemapBuffer(3, AllocZeroed(BG_SCREEN_SIZE));
             SetBgTilemapBuffer(2, AllocZeroed(BG_SCREEN_SIZE));
             InitWindows(sNewEntryInfoScreen_WindowTemplates);
@@ -2794,7 +2792,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
         break;
     case 3:
         PrintMonInfo(dexNum, 1, 1);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
         gTasks[taskId].tState++;
@@ -2802,7 +2800,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
     case 4:
         spriteId = CreateMonSpriteFromNationalDexNumberHGSS(dexNum, MON_PAGE_X, MON_PAGE_Y, 0);
         gSprites[spriteId].oam.priority = 0;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         SetVBlankCallback(gPokedexVBlankCB);
         gTasks[taskId].tMonSpriteId = spriteId;
         gTasks[taskId].tState++;
@@ -2817,7 +2815,7 @@ void Task_DisplayCaughtMonDexPageHGSS(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 6:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             PlayCry_Normal(species, 0);
             gTasks[taskId].tPalTimer = 0;
@@ -2831,7 +2829,7 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_FONDOS, 0, 0, 16, RGB_BLACK);
         SetSpriteInvisibility(0, TRUE);
         SetSpriteInvisibility(1, TRUE);
         gSprites[gTasks[taskId].tMonSpriteId].callback = SpriteCB_SlideCaughtMonToCenter;
@@ -2841,7 +2839,7 @@ static void Task_HandleCaughtMonPageInput(u8 taskId)
 
 static void Task_ExitCaughtMonPage(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         u16 species;
         u32 otId;
@@ -3220,7 +3218,7 @@ static void StatsPage_PrintNavigationButtons(void)
         AddTextPrinterParameterized3(WIN_STATS_NAVIGATION_BUTTONS, 0, x, y, sStatsPageNavigationTextColor, 0, sText_Stats_Buttons_Decapped);
 
     PutWindowTilemap(WIN_STATS_NAVIGATION_BUTTONS);
-    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, 3);
+    CopyWindowToVram(WIN_STATS_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void ResetStatsWindows(void)
@@ -3234,27 +3232,27 @@ static void ResetStatsWindows(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
     }
 }
 
 static void SaveMonDataInStruct(void)
 {
     u16 species = NationalPokedexNumToSpeciesHGSS(sPokedexListItem->dexNum);
-    u8 evs[NUM_STATS] =
+    u8 evs[NUMERO_ESTADISTICAS] =
     {
-        [STAT_HP]    = gSpeciesInfo[species].evYield_HP,
-        [STAT_ATK]   = gSpeciesInfo[species].evYield_Speed,
-        [STAT_DEF]   = gSpeciesInfo[species].evYield_Attack,
-        [STAT_SPEED] = gSpeciesInfo[species].evYield_SpAttack,
-        [STAT_SPATK] = gSpeciesInfo[species].evYield_Defense,
-        [STAT_SPDEF] = gSpeciesInfo[species].evYield_SpDefense
+        [ESTADISTICA_PS]    = gSpeciesInfo[species].evYield_HP,
+        [ESTADISTICA_ATAQUE]   = gSpeciesInfo[species].evYield_Speed,
+        [ESTADISTICA_DEFENSA]   = gSpeciesInfo[species].evYield_Attack,
+        [ESTADISTICA_VELOCIDAD] = gSpeciesInfo[species].evYield_SpAttack,
+        [ESTADISTICA_ATAQUE_ESPECIAL] = gSpeciesInfo[species].evYield_Defense,
+        [ESTADISTICA_DEFENSA_ESPECIAL] = gSpeciesInfo[species].evYield_SpDefense
     };
     u8 differentEVs = 0;
     u8 i;
 
     //Count how many different EVs
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS; i++)
     {
         if (evs[i] > 0) //HP//Speed//Attack//Special Attack//Defense//Special Defense
             differentEVs++;
@@ -3269,12 +3267,12 @@ static void SaveMonDataInStruct(void)
     sPokedexView->sPokemonStats.baseDefense         = gSpeciesInfo[species].baseDefense;
     sPokedexView->sPokemonStats.baseSpDefense       = gSpeciesInfo[species].baseSpDefense;
     sPokedexView->sPokemonStats.differentEVs        = differentEVs;
-    sPokedexView->sPokemonStats.evYield_HP          = evs[STAT_HP];
-    sPokedexView->sPokemonStats.evYield_Speed       = evs[STAT_ATK];
-    sPokedexView->sPokemonStats.evYield_Attack      = evs[STAT_DEF];
-    sPokedexView->sPokemonStats.evYield_SpAttack    = evs[STAT_SPEED];
-    sPokedexView->sPokemonStats.evYield_Defense     = evs[STAT_SPATK];
-    sPokedexView->sPokemonStats.evYield_SpDefense   = evs[STAT_SPDEF];
+    sPokedexView->sPokemonStats.evYield_HP          = evs[ESTADISTICA_PS];
+    sPokedexView->sPokemonStats.evYield_Speed       = evs[ESTADISTICA_ATAQUE];
+    sPokedexView->sPokemonStats.evYield_Attack      = evs[ESTADISTICA_DEFENSA];
+    sPokedexView->sPokemonStats.evYield_SpAttack    = evs[ESTADISTICA_VELOCIDAD];
+    sPokedexView->sPokemonStats.evYield_Defense     = evs[ESTADISTICA_ATAQUE_ESPECIAL];
+    sPokedexView->sPokemonStats.evYield_SpDefense   = evs[ESTADISTICA_DEFENSA_ESPECIAL];
     sPokedexView->sPokemonStats.growthRate          = gSpeciesInfo[species].growthRate;
     sPokedexView->sPokemonStats.eggGroup1           = gSpeciesInfo[species].eggGroups[0];
     sPokedexView->sPokemonStats.eggGroup2           = gSpeciesInfo[species].eggGroups[1];
@@ -3294,7 +3292,7 @@ static void Task_LoadStatsScreen(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             u16 r2;
 
@@ -3396,7 +3394,7 @@ static void Task_LoadStatsScreen(u8 taskId)
         gMain.state++;
         break;
     case 9:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gMain.state++;
         break;
     case 10:
@@ -4250,7 +4248,7 @@ static void PrintStatsScreen_Abilities(u8 taskId)
 
 static void Task_SwitchScreensFromStatsScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
@@ -4281,7 +4279,7 @@ static void Task_SwitchScreensFromStatsScreen(u8 taskId)
 
 static void Task_ExitStatsScreen(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
         FreeSpritePaletteByTag(ITEM_TAG);                       //Destroy item icon
@@ -4337,7 +4335,7 @@ static void EvoFormsPage_PrintNavigationButtons(void)
         }
 
     PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-    CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void ResetEvoScreenDataStruct(void)
@@ -4376,7 +4374,7 @@ static void Task_LoadEvolutionScreen(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             u16 r2;
 
@@ -4396,10 +4394,10 @@ static void Task_LoadEvolutionScreen(u8 taskId)
         LoadTilesetTilemapHGSS(EVO_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0));
         PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -4464,7 +4462,7 @@ static void Task_LoadEvolutionScreen(u8 taskId)
         gMain.state++;
         break;
     case 7:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gMain.state++;
         break;
     case 8:
@@ -4538,7 +4536,7 @@ static void Task_HandleEvolutionScreenInput(u8 taskId)
 
             sPokedexView->sEvoScreenData.fromEvoPage = TRUE;
             PlaySE(SE_PIN);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         }
     }
@@ -4875,7 +4873,7 @@ static u8 PrintEvolutionTargetSpeciesAndMethod(u8 taskId, u16 species, u8 depth,
 static void Task_SwitchScreensFromEvolutionScreen(u8 taskId)
 {
     u8 i;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
@@ -4903,7 +4901,7 @@ static void Task_SwitchScreensFromEvolutionScreen(u8 taskId)
 static void Task_ExitEvolutionScreen(u8 taskId)
 {
     u8 i;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
@@ -4931,7 +4929,7 @@ static void Task_LoadFormsScreen(u8 taskId)
     {
     case 0:
     default:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             u16 r2;
 
@@ -4951,10 +4949,10 @@ static void Task_LoadFormsScreen(u8 taskId)
         LoadTilesetTilemapHGSS(FORMS_SCREEN);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
-        CopyWindowToVram(WIN_INFO, COPYWIN_FULL);
+        CopyWindowToVram(WIN_INFO, COPIA_COMPLETA_VENTANA);
         FillWindowPixelBuffer(WIN_NAVIGATION_BUTTONS, PIXEL_FILL(0));
         PutWindowTilemap(WIN_NAVIGATION_BUTTONS);
-        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NAVIGATION_BUTTONS, COPIA_COMPLETA_VENTANA);
         CopyBgTilemapBufferToVram(1);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(3);
@@ -5011,7 +5009,7 @@ static void Task_LoadFormsScreen(u8 taskId)
         gMain.state++;
         break;
     case 7:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gMain.state++;
         break;
     case 8:
@@ -5107,7 +5105,7 @@ static void Task_HandleFormsScreenInput(u8 taskId)
             sPokedexView->sEvoScreenData.fromEvoPage = TRUE;
             sPokedexView->sFormScreenData.inSubmenu = FALSE;
             PlaySE(SE_PIN);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].func = Task_LoadInfoScreenWaitForFade;
         }
 
@@ -5169,7 +5167,7 @@ static void PrintForms(u8 taskId, u16 species)
 static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 {
     u8 i;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite
@@ -5194,7 +5192,7 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 static void Task_ExitFormsScreen(u8 taskId)
 {
     u8 i;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         //FreeMonIconPalettes();                                          //Destroy pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy pokemon icon sprite

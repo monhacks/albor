@@ -35,49 +35,12 @@ void ClearMail(struct Mail *mail)
 
 bool8 MonHasMail(struct Pokemon *mon)
 {
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
-    if (ItemIsMail(heldItem) && GetMonData(mon, MON_DATA_MAIL) != MAIL_NONE)
-        return TRUE;
-    else
-        return FALSE;
+    return FALSE;
 }
 
 u8 GiveMailToMonByItemId(struct Pokemon *mon, u16 itemId)
 {
-    u8 heldItem[2];
-    u8 id, i;
-    u16 species;
-    u32 personality;
-
-    heldItem[0] = itemId;
-    heldItem[1] = itemId >> 8;
-
-    for (id = 0; id < PARTY_SIZE; id++)
-    {
-        if (gSaveBlockPtr->mail[id].itemId == ITEM_NONE)
-        {
-            for (i = 0; i < MAIL_WORDS_COUNT; i++)
-                gSaveBlockPtr->mail[id].words[i] = EC_EMPTY_WORD;
-
-            for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-                gSaveBlockPtr->mail[id].playerName[i] = gSaveBlockPtr->playerName[i];
-            gSaveBlockPtr->mail[id].playerName[i] = EOS;
-            PadNameString(gSaveBlockPtr->mail[id].playerName, CHAR_SPACE);
-
-            for (i = 0; i < TRAINER_ID_LENGTH; i++)
-                gSaveBlockPtr->mail[id].trainerId[i] = gSaveBlockPtr->playerTrainerId[i];
-
-            species = GetBoxMonData(&mon->box, MON_DATA_SPECIES);
-            personality = GetBoxMonData(&mon->box, MON_DATA_PERSONALITY);
-            gSaveBlockPtr->mail[id].species = SpeciesToMailSpecies(species, personality);
-            gSaveBlockPtr->mail[id].itemId = itemId;
-            SetMonData(mon, MON_DATA_MAIL, &id);
-            SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
-            return id;
-        }
-    }
-
-    return MAIL_NONE;
+    return 0;
 }
 
 u16 SpeciesToMailSpecies(u16 species, u32 personality)
@@ -87,49 +50,17 @@ u16 SpeciesToMailSpecies(u16 species, u32 personality)
 
 u16 MailSpeciesToSpecies(u16 mailSpecies, u16 *buffer)
 {
-    u16 result;
-
-    result = mailSpecies;
-
-    return result;
+    return 0;
 }
 
 u8 GiveMailToMon(struct Pokemon *mon, struct Mail *mail)
 {
-    u8 heldItem[2];
-    u16 itemId = mail->itemId;
-    u8 mailId = GiveMailToMonByItemId(mon, itemId);
-
-    if (mailId == MAIL_NONE)
-        return MAIL_NONE;
-
-    gSaveBlockPtr->mail[mailId] = *mail;
-
-    SetMonData(mon, MON_DATA_MAIL, &mailId);
-
-    heldItem[0] = itemId;
-    heldItem[1] = itemId >> 8;
-
-    SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
-
-    return mailId;
+    return 0;
 }
 
 void TakeMailFromMon(struct Pokemon *mon)
 {
-    u8 heldItem[2];
-    u8 mailId;
 
-    if (MonHasMail(mon))
-    {
-        mailId = GetMonData(mon, MON_DATA_MAIL);
-        gSaveBlockPtr->mail[mailId].itemId = ITEM_NONE;
-        mailId = MAIL_NONE;
-        heldItem[0] = ITEM_NONE;
-        heldItem[1] = ITEM_NONE << 8;
-        SetMonData(mon, MON_DATA_MAIL, &mailId);
-        SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);
-    }
 }
 
 void ClearMailItemId(u8 mailId)
@@ -139,48 +70,10 @@ void ClearMailItemId(u8 mailId)
 
 u8 TakeMailFromMonAndSave(struct Pokemon *mon)
 {
-    u8 i;
-    u8 newHeldItem[2];
-    u8 newMailId;
-
-    newHeldItem[0] = ITEM_NONE;
-    newHeldItem[1] = ITEM_NONE << 8;
-    newMailId = MAIL_NONE;
-
-    for (i = PARTY_SIZE; i < MAIL_COUNT; i++)
-    {
-        if (gSaveBlockPtr->mail[i].itemId == ITEM_NONE)
-        {
-            memcpy(&gSaveBlockPtr->mail[i], &gSaveBlockPtr->mail[GetMonData(mon, MON_DATA_MAIL)], sizeof(struct Mail));
-            gSaveBlockPtr->mail[GetMonData(mon, MON_DATA_MAIL)].itemId = ITEM_NONE;
-            SetMonData(mon, MON_DATA_MAIL, &newMailId);
-            SetMonData(mon, MON_DATA_HELD_ITEM, newHeldItem);
-            return i;
-        }
-    }
-
-    // No space to save mail
     return MAIL_NONE;
 }
 
 bool8 ItemIsMail(u16 itemId)
 {
-    switch (itemId)
-    {
-    case ITEM_ORANGE_MAIL:
-    case ITEM_HARBOR_MAIL:
-    case ITEM_GLITTER_MAIL:
-    case ITEM_MECH_MAIL:
-    case ITEM_WOOD_MAIL:
-    case ITEM_WAVE_MAIL:
-    case ITEM_BEAD_MAIL:
-    case ITEM_SHADOW_MAIL:
-    case ITEM_TROPIC_MAIL:
-    case ITEM_DREAM_MAIL:
-    case ITEM_FAB_MAIL:
-    case ITEM_RETRO_MAIL:
-        return TRUE;
-    default:
-        return FALSE;
-    }
+    return FALSE;
 }

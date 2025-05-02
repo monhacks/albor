@@ -500,7 +500,7 @@ static void LoadUsePokeblockMenu(void)
         break;
     case 3:
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         InitWindows(sWindowTemplates);
         DeactivateAllTextPrinters();
         LoadUserWindowBorderGfx(0, 0x97, BG_PLTT_ID(14));
@@ -514,7 +514,6 @@ static void LoadUsePokeblockMenu(void)
             sInfo->mainState++;
         break;
     case 6:
-        gKeyRepeatStartDelay = 20;
         LoadPartyInfo();
         sInfo->mainState++;
         break;
@@ -567,7 +566,7 @@ static void ShowUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
         ShowBg(0);
         ShowBg(1);
@@ -576,7 +575,7 @@ static void ShowUsePokeblockMenu(void)
         sInfo->mainState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             ResetConditionSparkleSprites(sMenu->sparkles);
             if (sMenu->info.curSelection != sMenu->info.numSelections - 1)
@@ -693,11 +692,11 @@ static void FeedPokeblockToMon(void)
         gPokeblockMonId = GetPartyIdFromSelectionId(sMenu->info.curSelection);
         sExitCallback = sInfo->exitCallback;
         sPokeblock = sInfo->pokeblock;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             SetVBlankCallback(NULL);
             FREE_AND_SET_NULL(sGraph_Tilemap);
@@ -737,7 +736,7 @@ static void ShowUsePokeblockMenuForResults(void)
     case 2:
         break;
     case 3:
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 4:
@@ -749,11 +748,11 @@ static void ShowUsePokeblockMenuForResults(void)
         break;
     case 5:
         SetVBlankCallback(VBlankCB_UsePokeblockMenu);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 6:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             ResetConditionSparkleSprites(sMenu->sparkles);
             SetUsePokeblockCallback(ShowPokeblockResults);
@@ -822,15 +821,15 @@ static void CloseUsePokeblockMenu(void)
     switch (sInfo->mainState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sInfo->mainState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             sInfo->mainState = 2;
         break;
     case 2:
-        gScanlineEffect.state = 3;
+        gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
         ScanlineEffect_InitHBlankDmaTransfer();
         sInfo->mainState++;
         break;
@@ -873,7 +872,7 @@ static void AskUsePokeblock(void)
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
     AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TEXT, COPIA_COMPLETA_VENTANA);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
 }
 
@@ -914,14 +913,14 @@ static void PrintFirstEnhancement(void)
 
     PrintMenuWindowText(gStringVar4);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TEXT, COPIA_COMPLETA_VENTANA);
 }
 
 static bool8 TryPrintNextEnhancement(void)
 {
     FillWindowPixelBuffer(WIN_TEXT, 17);
 
-    while (1)
+    while(1)
     {
         sInfo->condition++;
         if (sInfo->condition < CONDITION_COUNT)
@@ -938,7 +937,7 @@ static bool8 TryPrintNextEnhancement(void)
 
     BufferEnhancedText(gStringVar4, sInfo->condition, sInfo->enhancements[sInfo->condition]);
     PrintMenuWindowText(gStringVar4);
-    CopyWindowToVram(WIN_TEXT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_TEXT, COPIA_TILES_VENTANA);
 
     return TRUE;
 }
@@ -949,14 +948,14 @@ static void PrintWontEatAnymore(void)
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
     AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gText_WontEatAnymore, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TEXT, COPIA_COMPLETA_VENTANA);
 }
 
 static void EraseMenuWindow(void)
 {
     rbox_fill_rectangle(WIN_TEXT);
     ClearWindowTilemap(WIN_TEXT);
-    CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TEXT, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintMenuWindowText(const u8 *message)
@@ -1365,13 +1364,13 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
 
     if (firstPrint)
     {
-        CopyWindowToVram(WIN_NAME, COPYWIN_FULL);
-        CopyWindowToVram(WIN_NATURE, COPYWIN_FULL);
+        CopyWindowToVram(WIN_NAME, COPIA_COMPLETA_VENTANA);
+        CopyWindowToVram(WIN_NATURE, COPIA_COMPLETA_VENTANA);
     }
     else
     {
-        CopyWindowToVram(WIN_NAME, COPYWIN_GFX);
-        CopyWindowToVram(WIN_NATURE, COPYWIN_GFX);
+        CopyWindowToVram(WIN_NAME, COPIA_TILES_VENTANA);
+        CopyWindowToVram(WIN_NATURE, COPIA_TILES_VENTANA);
     }
 }
 

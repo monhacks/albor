@@ -29,9 +29,6 @@ int GameClear(void)
         FlagSet(FLAG_SYS_GAME_CLEAR);
     }
 
-    if (GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME) == 0)
-        SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlockPtr->playTimeHours << 16) | (gSaveBlockPtr->playTimeMinutes << 8) | gSaveBlockPtr->playTimeSeconds);
-
     SetContinueGameWarpStatus();
 
     if (gSaveBlockPtr->playerGender == MACHO)

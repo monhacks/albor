@@ -311,7 +311,7 @@ u8 ListMenuInit(struct ListMenuTemplate *listMenuTemplate, u16 scrollOffset, u16
 {
     u8 taskId = ListMenuInitInternal(listMenuTemplate, scrollOffset, selectedRow);
     PutWindowTilemap(listMenuTemplate->windowId);
-    CopyWindowToVram(listMenuTemplate->windowId, COPYWIN_GFX);
+    CopyWindowToVram(listMenuTemplate->windowId, COPIA_TILES_VENTANA);
 
     return taskId;
 }
@@ -331,7 +331,7 @@ u8 ListMenuInitInRect(struct ListMenuTemplate *listMenuTemplate, struct ListMenu
                                             rect[i].height,
                                             rect[i].palNum);
     }
-    CopyWindowToVram(listMenuTemplate->windowId, COPYWIN_GFX);
+    CopyWindowToVram(listMenuTemplate->windowId, COPIA_TILES_VENTANA);
 
     return taskId;
 }
@@ -419,7 +419,7 @@ void RedrawListMenu(u8 listTaskId)
     FillWindowPixelBuffer(list->template.windowId, PIXEL_FILL(list->template.fillValue));
     ListMenuPrintEntries(list, list->scrollOffset, 0, list->template.maxShowed);
     ListMenuDrawCursor(list);
-    CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
+    CopyWindowToVram(list->template.windowId, COPIA_TILES_VENTANA);
 }
 
 // unused
@@ -801,7 +801,7 @@ bool8 ListMenuChangeSelectionFull(struct ListMenu *list, bool32 updateCursor, bo
             ListMenuDrawCursor(list);
             if (callCallback)
                 ListMenuCallSelectionChangedCallback(list, FALSE);
-            CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
+            CopyWindowToVram(list->template.windowId, COPIA_TILES_VENTANA);
             break;
         case 2:
         case 3:
@@ -810,7 +810,7 @@ bool8 ListMenuChangeSelectionFull(struct ListMenu *list, bool32 updateCursor, bo
             ListMenuDrawCursor(list);
             if (callCallback)
                 ListMenuCallSelectionChangedCallback(list, FALSE);
-            CopyWindowToVram(list->template.windowId, COPYWIN_GFX);
+            CopyWindowToVram(list->template.windowId, COPIA_TILES_VENTANA);
             break;
         }
     }

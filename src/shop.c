@@ -362,7 +362,7 @@ static u8 CreateShopMenu(u8 martType)
     PrintMenuTable(sMartInfo.windowId, numMenuItems, sMartInfo.menuActions);
     InitMenuInUpperLeftCornerNormal(sMartInfo.windowId, numMenuItems, 0);
     PutWindowTilemap(sMartInfo.windowId);
-    CopyWindowToVram(sMartInfo.windowId, COPYWIN_MAP);
+    CopyWindowToVram(sMartInfo.windowId, COPIA_TILEMAP_VENTANA);
 
     return CreateTask(Task_ShopMenu, 8);
 }
@@ -448,7 +448,7 @@ static void Task_HandleShopMenuQuit(u8 taskId)
 static void Task_GoToBuyOrSellMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyTask(taskId);
         SetMainCallback2((void *)((u16)tCallbackHi << 16 | (u16)tCallbackLo));
@@ -533,8 +533,8 @@ static void CB2_InitBuyMenu(void)
         BuyMenuAddScrollIndicatorArrows();
         taskId = CreateTask(Task_BuyMenu, 8);
         gTasks[taskId].tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);
-        BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB_BuyMenu);
         SetMainCallback2(CB2_BuyMenu);
         break;
@@ -716,7 +716,7 @@ static void BuyMenuRemoveItemIcon(u16 item, u8 iconSlot)
 static void BuyMenuInitBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sShopBuyMenuBgTemplates, ARRAY_COUNT(sShopBuyMenuBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sShopBuyMenuBgTemplates, ARRAY_COUNT(sShopBuyMenuBgTemplates));
     SetBgTilemapBuffer(1, sShopData->tilemapBuffers[1]);
     SetBgTilemapBuffer(2, sShopData->tilemapBuffers[3]);
     SetBgTilemapBuffer(3, sShopData->tilemapBuffers[2]);
@@ -993,7 +993,7 @@ static void Task_BuyMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         s32 itemId = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &sShopData->scrollOffset, &sShopData->selectedRow);
@@ -1246,13 +1246,13 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
 static void ExitBuyMenu(u8 taskId)
 {
     gFieldCallback = MapPostLoadHook_ReturnToShopMenu;
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ExitBuyMenu;
 }
 
 static void Task_ExitBuyMenu(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         RemoveMoneyLabelObject();
         BuyMenuFreeMemory();

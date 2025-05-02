@@ -276,17 +276,7 @@ static u8 GetNameLength(const u8 *secretBaseOwnerName)
 
 void SetPlayerSecretBase(void)
 {
-    u16 i;
 
-    gSaveBlockPtr->secretBases[0].secretBaseId = sCurSecretBaseId;
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        gSaveBlockPtr->secretBases[0].trainerId[i] = gSaveBlockPtr->playerTrainerId[i];
-
-    VarSet(VAR_CURRENT_SECRET_BASE, 0);
-    StringCopyN(gSaveBlockPtr->secretBases[0].trainerName, gSaveBlockPtr->playerName, GetNameLength(gSaveBlockPtr->playerName));
-    gSaveBlockPtr->secretBases[0].gender = gSaveBlockPtr->playerGender;
-    gSaveBlockPtr->secretBases[0].language = GAME_LANGUAGE;
-    VarSet(VAR_SECRET_BASE_MAP, gMapHeader.regionMapSectionId);
 }
 
 // Set the 'open' entrance metatile for any occupied secret base on this map
@@ -309,7 +299,7 @@ static void Task_EnterSecretBase(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gTasks[taskId].tState = 1;
         break;
     case 1:
@@ -352,85 +342,7 @@ void InitSecretBaseAppearance(bool8 hidePC)
 
 void InitSecretBaseDecorationSprites(void)
 {
-    u8 i;
-    u8 *decorations;
-    u8 *decorationPositions;
-    u8 objectEventId;
-    u8 metatileBehavior;
-    u8 category;
-    u8 permission;
-    u8 numDecorations;
 
-    objectEventId = 0;
-    if (!CurMapIsSecretBase())
-    {
-        decorations = gSaveBlockPtr->playerRoomDecorations;
-        decorationPositions = gSaveBlockPtr->playerRoomDecorationPositions;
-        numDecorations = DECOR_MAX_PLAYERS_HOUSE;
-    }
-    else
-    {
-        u16 secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
-        decorations = gSaveBlockPtr->secretBases[secretBaseIdx].decorations;
-        decorationPositions = gSaveBlockPtr->secretBases[secretBaseIdx].decorationPositions;
-        numDecorations = DECOR_MAX_SECRET_BASE;
-    }
-
-    for (i = 0; i < numDecorations; i++)
-    {
-        if (decorations[i] == DECOR_NONE)
-            continue;
-
-        permission = gDecorations[decorations[i]].permission;
-        category = gDecorations[decorations[i]].category;
-        if (permission == DECORPERM_SPRITE)
-        {
-            for (objectEventId = 0; objectEventId < gMapHeader.events->objectEventCount; objectEventId++)
-            {
-                if (gMapHeader.events->objectEvents[objectEventId].flagId == FLAG_DECORATION_1 + gSpecialVar_0x8004)
-                    break;
-            }
-
-            if (objectEventId == gMapHeader.events->objectEventCount)
-                continue;
-
-            gSpecialVar_0x8006 = decorationPositions[i] >> 4;
-            gSpecialVar_0x8007 = decorationPositions[i] & 0xF;
-            metatileBehavior = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + MAP_OFFSET, gSpecialVar_0x8007 + MAP_OFFSET);
-            if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE
-             || MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
-            {
-                gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[objectEventId].graphicsId - OBJ_EVENT_GFX_VAR_0);
-                VarSet(gSpecialVar_Result, gDecorations[decorations[i]].tiles[0]);
-                gSpecialVar_Result = gMapHeader.events->objectEvents[objectEventId].localId;
-                FlagClear(FLAG_DECORATION_1 + gSpecialVar_0x8004);
-                TrySpawnObjectEvent(gSpecialVar_Result, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
-                TryMoveObjectEventToMapCoords(gSpecialVar_Result, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup, gSpecialVar_0x8006, gSpecialVar_0x8007);
-                TryOverrideObjectEventTemplateCoords(gSpecialVar_Result, gSaveBlockPtr->location.mapNum, gSaveBlockPtr->location.mapGroup);
-                if (CurMapIsSecretBase() == TRUE && VarGet(VAR_CURRENT_SECRET_BASE) != 0)
-                {
-                    if (category == DECORCAT_DOLL)
-                    {
-                        OverrideSecretBaseDecorationSpriteScript(
-                            gSpecialVar_Result,
-                            gSaveBlockPtr->location.mapNum,
-                            gSaveBlockPtr->location.mapGroup,
-                            DECORCAT_DOLL);
-                    }
-                    else if (category == DECORCAT_CUSHION)
-                    {
-                        OverrideSecretBaseDecorationSpriteScript(
-                            gSpecialVar_Result,
-                            gSaveBlockPtr->location.mapNum,
-                            gSaveBlockPtr->location.mapGroup,
-                            DECORCAT_CUSHION);
-                    }
-                }
-
-                gSpecialVar_0x8004++;
-            }
-        }
-    }
 }
 
 void HideSecretBaseDecorationSprites(void)
@@ -486,7 +398,7 @@ static void Task_WarpOutOfSecretBase(u8 taskId)
         gTasks[taskId].data[0] = 1;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gTasks[taskId].data[0] = 2;
         break;
     case 2:
@@ -516,9 +428,7 @@ void IsCurSecretBaseOwnedByAnotherPlayer(void)
 
 static u8 *GetSecretBaseName(u8 *dest, u8 secretBaseIdx)
 {
-    *StringCopyN(dest, gSaveBlockPtr->secretBases[secretBaseIdx].trainerName, GetNameLength(gSaveBlockPtr->secretBases[secretBaseIdx].trainerName)) = EOS;
-    ConvertInternationalString(dest, gSaveBlockPtr->secretBases[secretBaseIdx].language);
-    return StringAppend(dest, gText_ApostropheSBase);
+    return 0;
 }
 
 u8 *GetSecretBaseMapName(u8 *dest)
@@ -528,13 +438,7 @@ u8 *GetSecretBaseMapName(u8 *dest)
 
 void CopyCurSecretBaseOwnerName_StrVar1(void)
 {
-    u8 secretBaseIdx;
-    const u8 *name;
 
-    secretBaseIdx = VarGet(VAR_CURRENT_SECRET_BASE);
-    name = gSaveBlockPtr->secretBases[secretBaseIdx].trainerName;
-    *StringCopyN(gStringVar1, name, GetNameLength(name)) = EOS;
-    ConvertInternationalString(gStringVar1, gSaveBlockPtr->secretBases[secretBaseIdx].language);
 }
 
 static bool8 IsSecretBaseRegistered(u8 secretBaseIdx)

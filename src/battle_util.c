@@ -219,7 +219,7 @@ void HandleAction_UseMove(void)
     {
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
     }
-    else if (IsDoubleBattle()
+    else if (EsContraEntrenador()
            && gSideTimers[side].followmeTimer == 0
            && (gMovesInfo[gCurrentMove].power != 0 || (moveTarget != MOVE_TARGET_USER && moveTarget != MOVE_TARGET_ALL_BATTLERS))
            && ((GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_LIGHTNING_ROD && moveType == TIPO_ELECTRICO)
@@ -281,7 +281,7 @@ void HandleAction_UseMove(void)
             gBattlerTarget = battler;
         }
     }
-	else if (IsDoubleBattle() && moveTarget & MOVE_TARGET_RANDOM)
+	else if (EsContraEntrenador() && moveTarget & MOVE_TARGET_RANDOM)
     {
         gBattlerTarget = SetRandomTarget(gBattlerAttacker);
         if (gAbsentBattlerFlags & (1u << gBattlerTarget)
@@ -297,7 +297,7 @@ void HandleAction_UseMove(void)
         else
             gBattlerTarget = gBattlerAttacker;
     }
-	else if (IsDoubleBattle() && moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+	else if (EsContraEntrenador() && moveTarget == MOVE_TARGET_FOES_AND_ALLY)
     {
         for (gBattlerTarget = 0; gBattlerTarget < gBattlersCount; gBattlerTarget++)
         {
@@ -331,7 +331,6 @@ void HandleAction_UseMove(void)
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
-        gSpecialStatuses[i].emergencyExited = FALSE;
     }
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
@@ -988,8 +987,8 @@ void PrepareStringBattle(u16 stringId, u32 battler)
 
     // Check Defiant and Competitive stat raise whenever a stat is lowered.
     else if ((stringId == STRINGID_DEFENDERSSTATFELL || stringId == STRINGID_PKMNCUTSATTACKWITH)
-              && ((targetAbility == ABILITY_DEFIANT && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
-                 || (targetAbility == ABILITY_COMPETITIVE && CompareStat(gBattlerTarget, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN)))
+              && ((targetAbility == ABILITY_DEFIANT && CompareStat(gBattlerTarget, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR))
+                 || (targetAbility == ABILITY_COMPETITIVE && CompareStat(gBattlerTarget, ESTADISTICA_ATAQUE_ESPECIAL, ESTADISTICA_MAS_6, COMPARACION_MENOR)))
               && gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != BATTLE_PARTNER(gBattlerTarget)
               && ((gSpecialStatuses[gBattlerTarget].changedStatsBattlerId != gBattlerTarget) || gBattleScripting.stickyWebStatDrop == 1)
               && !(gBattleScripting.stickyWebStatDrop == 1 && gSideTimers[targetSide].stickyWebBattlerSide == targetSide)) // Sticky Web must have been set by the foe
@@ -998,17 +997,17 @@ void PrepareStringBattle(u16 stringId, u32 battler)
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
         if (targetAbility == ABILITY_DEFIANT)
-            SET_STATCHANGER(STAT_ATK, 2, FALSE);
+            SET_STATCHANGER(ESTADISTICA_ATAQUE, 2, FALSE);
         else
-            SET_STATCHANGER(STAT_SPATK, 2, FALSE);
+            SET_STATCHANGER(ESTADISTICA_ATAQUE_ESPECIAL, 2, FALSE);
     }
     else if (B_UPDATED_INTIMIDATE >= GEN_8 && stringId == STRINGID_PKMNCUTSATTACKWITH && targetAbility == ABILITY_RATTLED
-            && CompareStat(gBattlerTarget, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+            && CompareStat(gBattlerTarget, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR))
     {
         gBattlerAbility = gBattlerTarget;
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_AbilityRaisesDefenderStat;
-        SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+        SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, FALSE);
     }
 
     // Signal for the trainer slide-in system.
@@ -3151,12 +3150,10 @@ u8 AtkCanceller_UnableToUseMove(u32 moveType)
             }
             gBattleStruct->atkCancellerTracker++;
             break;
-        case CANCELLER_PARALYSED: // paralysis
-            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS) && !RandomPercentage(RNG_PARALYSIS, 75))
+        case CANCELLER_PARALYSED:
+            if (!gBattleStruct->isAtkCancelerForCalledMove && (gBattleMons[gBattlerAttacker].status1 & STATUS1_PARALYSIS) && !RandomPercentage(RNG_PARALYSIS, 10))
             {
                 gProtectStructs[gBattlerAttacker].prlzImmobility = TRUE;
-                // This is removed in FRLG and Emerald for some reason
-                //CancelMultiTurnMoves(gBattlerAttacker);
                 gBattlescriptCurrInstr = BattleScript_MoveUsedIsParalyzed;
                 gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
                 effect = 1;
@@ -3396,7 +3393,7 @@ bool32 HasNoMonsToSwitch(u32 battler, u8 partyIdBattlerOn1, u8 partyIdBattlerOn2
     u32 i, side, playerId, flankId;
     struct Pokemon *party;
 
-    if (!IsDoubleBattle())
+    if (!EsContraEntrenador())
         return FALSE;
 
     side = GetBattlerSide(battler);
@@ -3591,32 +3588,32 @@ static inline bool32 HadMoreThanHalfHpNowDoesnt(u32 battler)
              && gBattleMons[battler].hp <= cutoff);
 }
 
-#define ANIM_STAT_HP      0
-#define ANIM_STAT_ATK     1
-#define ANIM_STAT_DEF     2
-#define ANIM_STAT_SPATK   3
-#define ANIM_STAT_SPDEF   4
-#define ANIM_STAT_SPEED   5
-#define ANIM_STAT_ACC     6
-#define ANIM_STAT_EVASION 7
+#define ANIM_ESTADISTICA_PS      0
+#define ANIM_ESTADISTICA_ATAQUE     1
+#define ANIM_ESTADISTICA_DEFENSA     2
+#define ANIM_ESTADISTICA_ATAQUE_ESPECIAL   3
+#define ANIM_ESTADISTICA_DEFENSA_ESPECIAL   4
+#define ANIM_ESTADISTICA_VELOCIDAD   5
+#define ANIM_ESTADISTICA_PRECISION     6
+#define ANIM_ESTADISTICA_EVASION 7
 static void ChooseStatBoostAnimation(u32 battler)
 {
     u32 stat;
     bool32 statBuffMoreThan1 = FALSE;
-    u32 static const statsOrder[NUM_BATTLE_STATS] =
+    u32 static const statsOrder[NUMERO_ESTADISTICAS_BATALLA] =
     {
-        [ANIM_STAT_HP]      = STAT_HP,
-        [ANIM_STAT_ATK]     = STAT_ATK,
-        [ANIM_STAT_DEF]     = STAT_DEF,
-        [ANIM_STAT_SPATK]   = STAT_SPATK,
-        [ANIM_STAT_SPDEF]   = STAT_SPDEF,
-        [ANIM_STAT_SPEED]   = STAT_SPEED,
-        [ANIM_STAT_ACC]     = STAT_ACC,
-        [ANIM_STAT_EVASION] = STAT_EVASION,
+        [ANIM_ESTADISTICA_PS]      = ESTADISTICA_PS,
+        [ANIM_ESTADISTICA_ATAQUE]     = ESTADISTICA_ATAQUE,
+        [ANIM_ESTADISTICA_DEFENSA]     = ESTADISTICA_DEFENSA,
+        [ANIM_ESTADISTICA_ATAQUE_ESPECIAL]   = ESTADISTICA_ATAQUE_ESPECIAL,
+        [ANIM_ESTADISTICA_DEFENSA_ESPECIAL]   = ESTADISTICA_DEFENSA_ESPECIAL,
+        [ANIM_ESTADISTICA_VELOCIDAD]   = ESTADISTICA_VELOCIDAD,
+        [ANIM_ESTADISTICA_PRECISION]     = ESTADISTICA_PRECISION,
+        [ANIM_ESTADISTICA_EVASION] = ESTADISTICA_EVASION,
     };
     gBattleScripting.animArg1 = 0;
 
-    for (stat = 1; stat < NUM_BATTLE_STATS; stat++) // Start loop at 1 to avoid STAT_HP
+    for (stat = 1; stat < NUMERO_ESTADISTICAS_BATALLA; stat++) // Start loop at 1 to avoid ESTADISTICA_PS
     {
         if ((gQueuedStatBoosts[battler].stats & (1 << statsOrder[stat])) == 0)
             continue;
@@ -3630,14 +3627,14 @@ static void ChooseStatBoostAnimation(u32 battler)
             gBattleScripting.animArg1 = GET_STAT_BUFF_ID((statsOrder[stat] + 1)) + (statBuffMoreThan1 ? STAT_ANIM_PLUS2 : STAT_ANIM_PLUS1);
     }
 }
-#undef ANIM_STAT_HP
-#undef ANIM_STAT_ATK
-#undef ANIM_STAT_DEF
-#undef ANIM_STAT_SPATK
-#undef ANIM_STAT_SPDEF
-#undef ANIM_STAT_SPEED
-#undef ANIM_STAT_ACC
-#undef ANIM_STAT_EVASION
+#undef ANIM_ESTADISTICA_PS
+#undef ANIM_ESTADISTICA_ATAQUE
+#undef ANIM_ESTADISTICA_DEFENSA
+#undef ANIM_ESTADISTICA_ATAQUE_ESPECIAL
+#undef ANIM_ESTADISTICA_DEFENSA_ESPECIAL
+#undef ANIM_ESTADISTICA_VELOCIDAD
+#undef ANIM_ESTADISTICA_PRECISION
+#undef ANIM_ESTADISTICA_EVASION
 
 u32 CanAbilityBlockMove(u32 battlerAtk, u32 battlerDef, u32 move, u32 abilityDef)
 {
@@ -3988,7 +3985,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 side = (BATTLE_OPPOSITE(GetBattlerPosition(battler))) & BIT_SIDE;
                 target1 = GetBattlerAtPosition(side);
                 target2 = GetBattlerAtPosition(side + BIT_FLANK);
-                if (IsDoubleBattle())
+                if (EsContraEntrenador())
                 {
                     if (!gAbilitiesInfo[gBattleMons[target1].ability].cantBeTraced && gBattleMons[target1].hp != 0
                         && !gAbilitiesInfo[gBattleMons[target2].ability].cantBeTraced && gBattleMons[target2].hp != 0)
@@ -4032,7 +4029,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 target1 = GetBattlerAtPosition(side);
                 target2 = GetBattlerAtPosition(side + BIT_FLANK);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                if (IsDoubleBattle())
+                if (EsContraEntrenador())
                 {
                     if (gBattleMons[target1].item != ITEM_NONE && gBattleMons[target1].hp != 0
                         && gBattleMons[target2].item != ITEM_NONE && gBattleMons[target2].hp != 0)
@@ -4175,34 +4172,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             break;
         case ABILITY_AS_ONE_ICE_RIDER:
         case ABILITY_AS_ONE_SHADOW_RIDER:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
-            {
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_ASONE;
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                BattleScriptPushCursorAndCallback(BattleScript_ActivateAsOne);
-                effect++;
-            }
-            break;
         case ABILITY_CURIOUS_MEDICINE:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && IsDoubleBattle()
-              && IsBattlerAlive(BATTLE_PARTNER(battler)) && TryResetBattlerStatChanges(BATTLE_PARTNER(battler)))
-            {
-                gEffectBattler = BATTLE_PARTNER(battler);
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_CURIOUS_MEDICINE;
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                BattleScriptPushCursorAndCallback(BattleScript_SwitchInAbilityMsg);
-                effect++;
-            }
-            break;
         case ABILITY_PASTEL_VEIL:
-            if (!gSpecialStatuses[battler].switchInAbilityDone)
-            {
-                gBattlerTarget = battler;
-                gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SWITCHIN_PASTEL_VEIL;
-                BattleScriptPushCursorAndCallback(BattleScript_PastelVeilActivates);
-                effect++;
-                gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-            }
             break;
         case ABILITY_ANTICIPATION:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
@@ -4265,22 +4236,20 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     if (IsBattlerAlive(opposingBattler))
                     {
                         opposingDef += gBattleMons[opposingBattler].defense
-                                    * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][0]
-                                    / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_DEF]][1];
+                                    * gMultiplicadoresEstadisticas[gBattleMons[opposingBattler].statStages[ESTADISTICA_DEFENSA]] >> 8;
                         opposingSpDef += gBattleMons[opposingBattler].spDefense
-                                      * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][0]
-                                      / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPDEF]][1];
+                                        * gMultiplicadoresEstadisticas[gBattleMons[opposingBattler].statStages[ESTADISTICA_DEFENSA_ESPECIAL]] >> 8;
                     }
                 }
 
                 if (opposingDef < opposingSpDef)
-                    statId = STAT_ATK;
+                    statId = ESTADISTICA_ATAQUE;
                 else
-                    statId = STAT_SPATK;
+                    statId = ESTADISTICA_ATAQUE_ESPECIAL;
 
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
 
-                if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
+                if (CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR))
                 {
                     SET_STATCHANGER(statId, 1, FALSE);
                     gBattlerAttacker = battler;
@@ -4303,22 +4272,22 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                     if (IsBattlerAlive(opposingBattler))
                     {
                         opposingAtk += gBattleMons[opposingBattler].attack
-                                    * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_ATK]][0]
-                                    / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_ATK]][1];
+                                    * gMultiplicadoresEstadisticas[gBattleMons[opposingBattler].statStages[ESTADISTICA_ATAQUE]] 
+                                    >> 8;
                         opposingSpAtk += gBattleMons[opposingBattler].spAttack
-                                      * gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPATK]][0]
-                                      / gStatStageRatios[gBattleMons[opposingBattler].statStages[STAT_SPATK]][1];
+                                        * gMultiplicadoresEstadisticas[gBattleMons[opposingBattler].statStages[ESTADISTICA_ATAQUE_ESPECIAL]] 
+                                        >> 8;
                     }
                 }
 
                 if (opposingAtk < opposingSpAtk)
-                    statId = STAT_SPDEF;
+                    statId = ESTADISTICA_DEFENSA_ESPECIAL;
                 else
-                    statId = STAT_DEF;
+                    statId = ESTADISTICA_DEFENSA;
 
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
 
-                if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
+                if (CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR))
                 {
                     SET_STATCHANGER(statId, 1, FALSE);
                     gBattlerAttacker = battler;
@@ -4482,7 +4451,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             {
                 gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                SET_STATCHANGER(STAT_ATK, 1, TRUE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, TRUE);
                 BattleScriptPushCursorAndCallback(BattleScript_IntimidateActivates);
                 effect++;
             }
@@ -4521,7 +4490,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             }
             break;
         case ABILITY_INTREPID_SWORD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR)
                  && !(gBattleStruct->intrepidSwordBoost[GetBattlerSide(battler)] & (1u << gBattlerPartyIndexes[battler])))
             {
                 gBattleScripting.savedBattler = gBattlerAttacker;
@@ -4529,13 +4498,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (B_INTREPID_SWORD == GEN_9)
                     gBattleStruct->intrepidSwordBoost[GetBattlerSide(battler)] |= 1u << gBattlerPartyIndexes[battler];
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
                 effect++;
             }
             break;
         case ABILITY_DAUNTLESS_SHIELD:
-            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN)
+            if (!gSpecialStatuses[battler].switchInAbilityDone && CompareStat(battler, ESTADISTICA_DEFENSA, ESTADISTICA_MAS_6, COMPARACION_MENOR)
                  && !(gBattleStruct->dauntlessShieldBoost[GetBattlerSide(battler)] & (1u << gBattlerPartyIndexes[battler])))
             {
                 gBattleScripting.savedBattler = gBattlerAttacker;
@@ -4543,20 +4512,20 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (B_DAUNTLESS_SHIELD == GEN_9)
                     gBattleStruct->dauntlessShieldBoost[GetBattlerSide(battler)] |= 1u << gBattlerPartyIndexes[battler];
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                SET_STATCHANGER(STAT_DEF, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_DEFENSA, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
                 effect++;
             }
             break;
         case ABILITY_WIND_RIDER:
             if (!gSpecialStatuses[battler].switchInAbilityDone
-             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+             && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR)
              && gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_TAILWIND)
             {
                 gBattleScripting.savedBattler = gBattlerAttacker;
                 gBattlerAttacker = battler;
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursorAndCallback(BattleScript_BattlerAbilityStatRaiseOnSwitchIn);
                 effect++;
             }
@@ -4585,7 +4554,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_VESSEL_OF_RUIN:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPATK);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, ESTADISTICA_ATAQUE_ESPECIAL);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
                 effect++;
@@ -4594,7 +4563,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_SWORD_OF_RUIN:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_DEF);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, ESTADISTICA_DEFENSA);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
                 effect++;
@@ -4603,7 +4572,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_TABLETS_OF_RUIN:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_ATK);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, ESTADISTICA_ATAQUE);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
                 effect++;
@@ -4612,7 +4581,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_BEADS_OF_RUIN:
             if (!gSpecialStatuses[battler].switchInAbilityDone)
             {
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, STAT_SPDEF);
+                PREPARE_STAT_BUFFER(gBattleTextBuff1, ESTADISTICA_DEFENSA_ESPECIAL);
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 BattleScriptPushCursorAndCallback(BattleScript_RuinAbilityActivates);
                 effect++;
@@ -4640,13 +4609,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_COSTAR:
         case ABILITY_REY_DEL_MAR:
             if (!gSpecialStatuses[battler].switchInAbilityDone
-             && IsDoubleBattle()
+             && EsContraEntrenador()
              && IsBattlerAlive(BATTLE_PARTNER(battler))
              && CountBattlerStatIncreases(BATTLE_PARTNER(battler), FALSE))
             {
                 gSpecialStatuses[battler].switchInAbilityDone = TRUE;
                 gBattlerAttacker = gBattlerAbility = battler;
-                for (i = 0; i < NUM_BATTLE_STATS; i++)
+                for (i = 0; i < NUMERO_ESTADISTICAS_BATALLA; i++)
                     gBattleMons[battler].statStages[i] = gBattleMons[BATTLE_PARTNER(battler)].statStages[i];
                 gBattleScripting.battler = BATTLE_PARTNER(battler);
                 BattleScriptPushCursorAndCallback(BattleScript_CostarActivates);
@@ -4657,7 +4626,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             partner = BATTLE_PARTNER(battler);
 
             if (!gSpecialStatuses[battler].switchInAbilityDone
-             && IsDoubleBattle()
+             && EsContraEntrenador()
              && gBattleMons[partner].hp < gBattleMons[partner].maxHP
              && IsBattlerAlive(partner))
             {
@@ -4759,9 +4728,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 }
                 break;
             case ABILITY_SPEED_BOOST:
-                if (CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN) && gDisableStructs[battler].isFirstTurn != 2)
+                if (CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR) && gDisableStructs[battler].isFirstTurn != 2)
                 {
-                    SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+                    SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, FALSE);
                     BattleScriptPushCursorAndCallback(BattleScript_SpeedBoostActivates);
                     gBattleScripting.battler = battler;
                     effect++;
@@ -4771,13 +4740,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 if (gDisableStructs[battler].isFirstTurn != 2)
                 {
                     u32 validToRaise = 0, validToLower = 0;
-                    u32 statsNum = B_MOODY_ACC_EVASION >= GEN_8 ? NUM_STATS : NUM_BATTLE_STATS;
+                    u32 statsNum = B_MOODY_ACC_EVASION >= GEN_8 ? NUMERO_ESTADISTICAS : NUMERO_ESTADISTICAS_BATALLA;
 
-                    for (i = STAT_ATK; i < statsNum; i++)
+                    for (i = ESTADISTICA_ATAQUE; i < statsNum; i++)
                     {
-                        if (CompareStat(battler, i, MIN_STAT_STAGE, CMP_GREATER_THAN))
+                        if (CompareStat(battler, i, ESTADISTICA_MENOS_6, COMPARACION_MAYOR))
                             validToLower |= 1u << i;
-                        if (CompareStat(battler, i, MAX_STAT_STAGE, CMP_LESS_THAN))
+                        if (CompareStat(battler, i, ESTADISTICA_MAS_6, COMPARACION_MENOR))
                             validToRaise |= 1u << i;
                     }
 
@@ -4788,7 +4757,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                         {
                             do
                             {
-                                i = (Random() % statsNum) + STAT_ATK;
+                                i = (Random() % statsNum) + ESTADISTICA_ATAQUE;
                             } while (!(validToRaise & (1u << i)));
                             SET_STATCHANGER(i, 2, FALSE);
                             validToLower &= ~(1u << i); // Can't lower the same stat as raising.
@@ -4797,7 +4766,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                         {
                             do
                             {
-                                i = (Random() % statsNum) + STAT_ATK;
+                                i = (Random() % statsNum) + ESTADISTICA_ATAQUE;
                             } while (!(validToLower & (1u << i)));
                             SET_STATCHANGER2(gBattleScripting.savedStatChanger, i, 1, TRUE);
                         }
@@ -4869,7 +4838,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                  && BlocksPrankster(move, gBattlerAttacker, gBattlerTarget, TRUE)
                  && !(IS_MOVE_STATUS(move) && (gLastUsedAbility == ABILITY_MAGIC_BOUNCE || gProtectStructs[gBattlerTarget].bounceMove)))
                 {
-                    if (!IsDoubleBattle()
+                    if (!EsContraEntrenador()
                     || !(GetBattlerMoveTargetType(gBattlerAttacker, move) & (MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY)))
                         CancelMultiTurnMoves(gBattlerAttacker); // Don't cancel moves that can hit two targets bc one target might not be protected
                     gBattleScripting.battler = gBattlerAbility = gBattlerTarget;
@@ -4897,19 +4866,19 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 switch(gLastUsedAbility)
                 {
                 case ABILITY_MOTOR_DRIVE:
-                    statId = STAT_SPEED;
+                    statId = ESTADISTICA_VELOCIDAD;
                     break;
                 case ABILITY_LIGHTNING_ROD:
                 case ABILITY_STORM_DRAIN:
-                    statId = STAT_SPATK;
+                    statId = ESTADISTICA_ATAQUE_ESPECIAL;
                     break;
                 case ABILITY_SAP_SIPPER:
                 case ABILITY_WIND_RIDER:
-                    statId = STAT_ATK;
+                    statId = ESTADISTICA_ATAQUE;
                     break;
                 case ABILITY_WELL_BAKED_BODY:
                     statAmount = 2;
-                    statId = STAT_DEF;
+                    statId = ESTADISTICA_DEFENSA;
                     break;
                 }
             }
@@ -4939,7 +4908,7 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                 break;
             case MOVE_ABSORBED_BY_STAT_INCREASE_ABILITY:
                 gBattleStruct->pledgeMove = FALSE;
-                if (!CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
+                if (!CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR))
                 {
                     if ((gProtectStructs[gBattlerAttacker].notFirstStrike))
                         gBattlescriptCurrInstr = BattleScript_MonMadeMoveUseless;
@@ -4992,10 +4961,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && (moveType == TIPO_SINIESTRO || moveType == TIPO_DRAGON || moveType == TIPO_FANTASMA)
-             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5006,10 +4975,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && (moveType == TIPO_SINIESTRO || moveType == TIPO_BICHO || moveType == TIPO_FANTASMA)
-             && CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5020,10 +4989,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && moveType == TIPO_AGUA
-             && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_DEFENSA, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_DEF, 2, FALSE);
+                SET_STATCHANGER(ESTADISTICA_DEFENSA, 2, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5034,10 +5003,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattlerAttacker != gBattlerTarget
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && CompareStat(battler, STAT_DEF, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_DEFENSA, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_DEF, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_DEFENSA, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5048,10 +5017,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattlerAttacker != gBattlerTarget
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_SPEED, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5062,10 +5031,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gBattlerAttacker != gBattlerTarget
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5078,10 +5047,10 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && HadMoreThanHalfHpNowDoesnt(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
-             && CompareStat(battler, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_ATAQUE_ESPECIAL, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_SPATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE_ESPECIAL, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5094,25 +5063,22 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && HadMoreThanHalfHpNowDoesnt(battler)
              && (gMultiHitCounter == 0 || gMultiHitCounter == 1)
              && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove))
-             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
             }
-            break;
-        case ABILITY_EMERGENCY_EXIT:
-        case ABILITY_WIMP_OUT:
             break;
         case ABILITY_WEAK_ARMOR:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
              && IS_MOVE_PHYSICAL(gCurrentMove)
-             && (CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN) // Don't activate if both Speed and Defense cannot be raised.
-               || CompareStat(battler, STAT_DEF, MIN_STAT_STAGE, CMP_GREATER_THAN)))
+             && (CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR) // Don't activate if both Speed and Defense cannot be raised.
+               || CompareStat(battler, ESTADISTICA_DEFENSA, ESTADISTICA_MENOS_6, COMPARACION_MAYOR)))
             {
                 if (gMovesInfo[gCurrentMove].effect == EFFECT_HIT_ESCAPE && CanBattlerSwitch(gBattlerAttacker))
                     gProtectStructs[battler].disableEjectPack = TRUE;  // Set flag for target
@@ -5195,9 +5161,9 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && gIsCriticalHit
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(battler, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
-                SET_STATCHANGER(STAT_ATK, MAX_STAT_STAGE - gBattleMons[battler].statStages[STAT_ATK], FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6 - gBattleMons[battler].statStages[ESTADISTICA_ATAQUE], FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetsStatWasMaxedOut;
                 effect++;
@@ -5207,13 +5173,13 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
         case ABILITY_TANGLING_HAIR:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && IsBattlerAlive(gBattlerAttacker)
-             && (CompareStat(gBattlerAttacker, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN) || GetBattlerAbility(gBattlerAttacker) == ABILITY_MIRROR_ARMOR)
+             && (CompareStat(gBattlerAttacker, ESTADISTICA_VELOCIDAD, ESTADISTICA_MENOS_6, COMPARACION_MAYOR) || GetBattlerAbility(gBattlerAttacker) == ABILITY_MIRROR_ARMOR)
              && !gProtectStructs[gBattlerAttacker].confusionSelfDmg
              && TARGET_TURN_DAMAGED
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker))
             {
-                SET_STATCHANGER(STAT_SPEED, 1, TRUE);
+                SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, TRUE);
                 PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_GooeyActivates;
@@ -5510,11 +5476,11 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(battler)
-             && CompareStat(battler, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN)
+             && CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR)
              && (moveType == TIPO_FUEGO || moveType == TIPO_AGUA))
             {
                 gEffectBattler = battler;
-                SET_STATCHANGER(STAT_SPEED, 6, FALSE);
+                SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 6, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -5578,11 +5544,11 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
              && TARGET_TURN_DAMAGED
              && IsBattlerAlive(gBattlerTarget)
-             && CompareStat(gBattlerTarget, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+             && CompareStat(gBattlerTarget, ESTADISTICA_ATAQUE, ESTADISTICA_MAS_6, COMPARACION_MENOR)
              && moveType == TIPO_FUEGO)
             {
                 gEffectBattler = gBattlerTarget;
-                SET_STATCHANGER(STAT_ATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 1, FALSE);
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_TargetAbilityStatRaiseRet;
                 effect++;
@@ -6451,7 +6417,7 @@ static u8 HealConfuseBerry(u32 battler, u32 itemId, u32 flavorId, bool32 end2)
 
 static u8 StatRaiseBerry(u32 battler, u32 itemId, u32 statId, bool32 end2)
 {
-    if (CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN) && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId))
+    if (CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR) && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId))
     {
         BufferStatChange(battler, statId, STRINGID_STATROSE);
         gEffectBattler = battler;
@@ -6482,18 +6448,18 @@ static u8 RandomStatRaiseBerry(u32 battler, u32 itemId, bool32 end2)
     s32 i;
     u16 stringId;
 
-    for (i = 0; i < NUM_STATS - 1; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS - 1; i++)
     {
-        if (CompareStat(battler, STAT_ATK + i, MAX_STAT_STAGE, CMP_LESS_THAN))
+        if (CompareStat(battler, ESTADISTICA_ATAQUE + i, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             break;
     }
-    if (i != NUM_STATS - 1 && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId))
+    if (i != NUMERO_ESTADISTICAS - 1 && HasEnoughHpToEatBerry(battler, GetBattlerItemHoldEffectParam(battler, itemId), itemId))
     {
         u16 battlerAbility = GetBattlerAbility(battler);
         do
         {
-            i = Random() % (NUM_STATS - 1);
-        } while (!CompareStat(battler, STAT_ATK + i, MAX_STAT_STAGE, CMP_LESS_THAN));
+            i = Random() % (NUMERO_ESTADISTICAS - 1);
+        } while (!CompareStat(battler, ESTADISTICA_ATAQUE + i, ESTADISTICA_MAS_6, COMPARACION_MENOR));
 
         PREPARE_STAT_BUFFER(gBattleTextBuff1, i + 1);
         stringId = (battlerAbility == ABILITY_CONTRARY) ? STRINGID_STATFELL : STRINGID_STATROSE;
@@ -6550,7 +6516,7 @@ static u8 TrySetMicleBerry(u32 battler, u32 itemId, bool32 end2)
 static u8 DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 category)
 {
     if (IsBattlerAlive(battler)
-     && CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN)
+     && CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR)
      && (gBattleScripting.overrideBerryRequirements
          || (!DoesSubstituteBlockMove(gBattlerAttacker, battler, gCurrentMove)
              && GetBattleMoveCategory(gCurrentMove) == category
@@ -6578,7 +6544,7 @@ static u8 DamagedStatBoostBerryEffect(u32 battler, u8 statId, u8 category)
 
 u8 TryHandleSeed(u32 battler, u32 terrainFlag, u8 statId, u16 itemId, bool32 execute)
 {
-    if (gFieldStatuses & terrainFlag && CompareStat(battler, statId, MAX_STAT_STAGE, CMP_LESS_THAN))
+    if (gFieldStatuses & terrainFlag && CompareStat(battler, statId, ESTADISTICA_MAS_6, COMPARACION_MENOR))
     {
         BufferStatChange(battler, statId, STRINGID_STATROSE);
         gLastUsedItem = itemId; // For surge abilities
@@ -6672,9 +6638,6 @@ static u8 ItemHealHp(u32 battler, u32 itemId, bool32 end2, bool32 percentHeal)
             BattleScriptPushCursor();
             gBattlescriptCurrInstr = BattleScript_ItemHealHP_RemoveItemRet;
         }
-        if (gBattleResources->flags->flags[battler] & RESOURCE_FLAG_EMERGENCY_EXIT
-         && ActualesPS(battler) >= MaximosPS(battler)  / 2)
-            gBattleResources->flags->flags[battler] &= ~RESOURCE_FLAG_EMERGENCY_EXIT;
 
         return ITEM_HP_CHANGE;
     }
@@ -6773,11 +6736,11 @@ static u32 RestoreWhiteHerbStats(u32 battler)
 {
     u32 i, effect = 0;
 
-    for (i = 0; i < NUM_BATTLE_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS_BATALLA; i++)
     {
-        if (gBattleMons[battler].statStages[i] < DEFAULT_STAT_STAGE)
+        if (gBattleMons[battler].statStages[i] < ESTADISTICA_NEUTRA)
         {
-            gBattleMons[battler].statStages[i] = DEFAULT_STAT_STAGE;
+            gBattleMons[battler].statStages[i] = ESTADISTICA_NEUTRA;
             effect = ITEM_STATS_CHANGE;
         }
     }
@@ -6833,33 +6796,33 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         break;
     case HOLD_EFFECT_ATTACK_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, FALSE);
+            effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE, FALSE);
         break;
     case HOLD_EFFECT_DEFENSE_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, FALSE);
+            effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA, FALSE);
         break;
     case HOLD_EFFECT_SPEED_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, FALSE);
+            effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_VELOCIDAD, FALSE);
         break;
     case HOLD_EFFECT_SP_ATTACK_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, FALSE);
+            effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE_ESPECIAL, FALSE);
         break;
     case HOLD_EFFECT_SP_DEFENSE_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, FALSE);
+            effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA_ESPECIAL, FALSE);
         break;
     case HOLD_EFFECT_ENIGMA_BERRY:
         break;
     case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, CATEGORIA_FISICA);
+            effect = DamagedStatBoostBerryEffect(battler, ESTADISTICA_DEFENSA, CATEGORIA_FISICA);
         break;
     case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
         if (B_BERRIES_INSTANT >= GEN_4)
-            effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, CATEGORIA_ESPECIAL);
+            effect = DamagedStatBoostBerryEffect(battler, ESTADISTICA_DEFENSA_ESPECIAL, CATEGORIA_ESPECIAL);
         break;
     case HOLD_EFFECT_RANDOM_STAT_UP:
         if (B_BERRIES_INSTANT >= GEN_4)
@@ -6983,15 +6946,15 @@ static u8 ItemEffectMoveEnd(u32 battler, u16 holdEffect)
         }
         break;
     case HOLD_EFFECT_BERSERK_GENE:
-        BufferStatChange(battler, STAT_ATK, STRINGID_STATROSE);
+        BufferStatChange(battler, ESTADISTICA_ATAQUE, STRINGID_STATROSE);
         gEffectBattler = battler;
         if (CanBeInfinitelyConfused(gEffectBattler))
         {
             gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
         }
-        SET_STATCHANGER(STAT_ATK, 2, FALSE);
+        SET_STATCHANGER(ESTADISTICA_ATAQUE, 2, FALSE);
 
-        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + ESTADISTICA_ATAQUE;
         gBattleScripting.animArg2 = 0;
 
         BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -7067,23 +7030,23 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 break;
             case HOLD_EFFECT_ATTACK_UP:
                 if (B_BERRIES_INSTANT >= GEN_4)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE, TRUE);
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
                 if (B_BERRIES_INSTANT >= GEN_4)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA, TRUE);
                 break;
             case HOLD_EFFECT_SPEED_UP:
                 if (B_BERRIES_INSTANT >= GEN_4)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_VELOCIDAD, TRUE);
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
                 if (B_BERRIES_INSTANT >= GEN_4)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE_ESPECIAL, TRUE);
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
                 if (B_BERRIES_INSTANT >= GEN_4)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA_ESPECIAL, TRUE);
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
                 if (B_BERRIES_INSTANT >= GEN_4
@@ -7231,16 +7194,16 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 switch (GetBattlerHoldEffectParam(battler))
                 {
                 case HOLD_EFFECT_PARAM_ELECTRIC_TERRAIN:
-                    effect = TryHandleSeed(battler, STATUS_FIELD_ELECTRIC_TERRAIN, STAT_DEF, gLastUsedItem, TRUE);
+                    effect = TryHandleSeed(battler, STATUS_FIELD_ELECTRIC_TERRAIN, ESTADISTICA_DEFENSA, gLastUsedItem, TRUE);
                     break;
                 case HOLD_EFFECT_PARAM_GRASSY_TERRAIN:
-                    effect = TryHandleSeed(battler, STATUS_FIELD_GRASSY_TERRAIN, STAT_DEF, gLastUsedItem, TRUE);
+                    effect = TryHandleSeed(battler, STATUS_FIELD_GRASSY_TERRAIN, ESTADISTICA_DEFENSA, gLastUsedItem, TRUE);
                     break;
                 case HOLD_EFFECT_PARAM_MISTY_TERRAIN:
-                    effect = TryHandleSeed(battler, STATUS_FIELD_MISTY_TERRAIN, STAT_SPDEF, gLastUsedItem, TRUE);
+                    effect = TryHandleSeed(battler, STATUS_FIELD_MISTY_TERRAIN, ESTADISTICA_DEFENSA_ESPECIAL, gLastUsedItem, TRUE);
                     break;
                 case HOLD_EFFECT_PARAM_PSYCHIC_TERRAIN:
-                    effect = TryHandleSeed(battler, STATUS_FIELD_PSYCHIC_TERRAIN, STAT_SPDEF, gLastUsedItem, TRUE);
+                    effect = TryHandleSeed(battler, STATUS_FIELD_PSYCHIC_TERRAIN, ESTADISTICA_DEFENSA_ESPECIAL, gLastUsedItem, TRUE);
                     break;
                 }
                 break;
@@ -7265,15 +7228,15 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_BERSERK_GENE:
-                BufferStatChange(battler, STAT_ATK, STRINGID_STATROSE);
+                BufferStatChange(battler, ESTADISTICA_ATAQUE, STRINGID_STATROSE);
                 gEffectBattler = battler;
                 if (CanBeInfinitelyConfused(gEffectBattler))
                 {
                     gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
                 }
-                SET_STATCHANGER(STAT_ATK, 2, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 2, FALSE);
 
-                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
+                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + ESTADISTICA_ATAQUE;
                 gBattleScripting.animArg2 = 0;
 
                 BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -7376,23 +7339,23 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 break;
             case HOLD_EFFECT_ATTACK_UP:
                 if (!moveTurn)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_ATK, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE, TRUE);
                 break;
             case HOLD_EFFECT_DEFENSE_UP:
                 if (!moveTurn)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_DEF, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA, TRUE);
                 break;
             case HOLD_EFFECT_SPEED_UP:
                 if (!moveTurn)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPEED, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_VELOCIDAD, TRUE);
                 break;
             case HOLD_EFFECT_SP_ATTACK_UP:
                 if (!moveTurn)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPATK, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_ATAQUE_ESPECIAL, TRUE);
                 break;
             case HOLD_EFFECT_SP_DEFENSE_UP:
                 if (!moveTurn)
-                    effect = StatRaiseBerry(battler, gLastUsedItem, STAT_SPDEF, TRUE);
+                    effect = StatRaiseBerry(battler, gLastUsedItem, ESTADISTICA_DEFENSA_ESPECIAL, TRUE);
                 break;
             case HOLD_EFFECT_CRITICAL_UP:
                 if (!moveTurn && !(gBattleMons[battler].status2 & STATUS2_FOCUS_ENERGY_ANY)
@@ -7522,15 +7485,15 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = TrySetMicleBerry(battler, gLastUsedItem, TRUE);
                 break;
             case HOLD_EFFECT_BERSERK_GENE:
-                BufferStatChange(battler, STAT_ATK, STRINGID_STATROSE);
+                BufferStatChange(battler, ESTADISTICA_ATAQUE, STRINGID_STATROSE);
                 gEffectBattler = battler;
                 if (CanBeInfinitelyConfused(gEffectBattler))
                 {
                     gStatuses4[gEffectBattler] |= STATUS4_INFINITE_CONFUSION;
                 }
-                SET_STATCHANGER(STAT_ATK, 2, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE, 2, FALSE);
 
-                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_ATK;
+                gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + ESTADISTICA_ATAQUE;
                 gBattleScripting.animArg2 = 0;
 
                 BattleScriptPushCursorAndCallback(BattleScript_BerserkGeneRet);
@@ -7616,11 +7579,11 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
         case HOLD_EFFECT_BLUNDER_POLICY:
             if (gBattleStruct->blunderPolicy
              && IsBattlerAlive(gBattlerAttacker)
-             && CompareStat(gBattlerAttacker, STAT_SPEED, MAX_STAT_STAGE, CMP_LESS_THAN))
+             && CompareStat(gBattlerAttacker, ESTADISTICA_VELOCIDAD, ESTADISTICA_MAS_6, COMPARACION_MENOR))
             {
                 gBattleStruct->blunderPolicy = FALSE;
                 gLastUsedItem = atkItem;
-                SET_STATCHANGER(STAT_SPEED, 2, FALSE);
+                SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 2, FALSE);
                 effect = ITEM_STATS_CHANGE;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AttackerItemStatRaise;
@@ -7672,12 +7635,12 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
             if (gProtectStructs[gBattlerAttacker].targetAffected
              && IsBattlerAlive(gBattlerAttacker)
              && gMovesInfo[gCurrentMove].soundMove
-             && CompareStat(gBattlerAttacker, STAT_SPATK, MAX_STAT_STAGE, CMP_LESS_THAN)
+             && CompareStat(gBattlerAttacker, ESTADISTICA_ATAQUE_ESPECIAL, ESTADISTICA_MAS_6, COMPARACION_MENOR)
              && !NoAliveMonsForEitherParty())   // Don't activate if battle will end
             {
                 gLastUsedItem = atkItem;
                 gBattleScripting.battler = gBattlerAttacker;
-                SET_STATCHANGER(STAT_SPATK, 1, FALSE);
+                SET_STATCHANGER(ESTADISTICA_ATAQUE_ESPECIAL, 1, FALSE);
                 effect = ITEM_STATS_CHANGE;
                 BattleScriptPushCursor();
                 gBattlescriptCurrInstr = BattleScript_AttackerItemStatRaise;
@@ -7734,7 +7697,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = ITEM_STATS_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
-                    SET_STATCHANGER(STAT_DEF, 2, FALSE);
+                    SET_STATCHANGER(ESTADISTICA_DEFENSA, 2, FALSE);
                 }
                 break;
             case HOLD_EFFECT_LUMINOUS_MOSS:
@@ -7745,7 +7708,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = ITEM_STATS_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
-                    SET_STATCHANGER(STAT_SPDEF, 2, FALSE);
+                    SET_STATCHANGER(ESTADISTICA_DEFENSA_ESPECIAL, 2, FALSE);
                 }
                 break;
             case HOLD_EFFECT_CELL_BATTERY:
@@ -7756,7 +7719,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = ITEM_STATS_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
-                    SET_STATCHANGER(STAT_SPEED, 2, FALSE);
+                    SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 2, FALSE);
                 }
                 break;
             case HOLD_EFFECT_ABSORB_BULB:
@@ -7767,7 +7730,7 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                     effect = ITEM_STATS_CHANGE;
                     BattleScriptPushCursor();
                     gBattlescriptCurrInstr = BattleScript_TargetItemStatRaise;
-                    SET_STATCHANGER(STAT_SPATK, 2, FALSE);
+                    SET_STATCHANGER(ESTADISTICA_ATAQUE_ESPECIAL, 2, FALSE);
                 }
                 break;
             case HOLD_EFFECT_ENIGMA_BERRY:
@@ -7813,10 +7776,10 @@ u8 ItemBattleEffects(u8 caseID, u32 battler, bool32 moveTurn)
                 }
                 break;
             case HOLD_EFFECT_KEE_BERRY:  // consume and boost defense if used physical move
-                effect = DamagedStatBoostBerryEffect(battler, STAT_DEF, CATEGORIA_FISICA);
+                effect = DamagedStatBoostBerryEffect(battler, ESTADISTICA_DEFENSA, CATEGORIA_FISICA);
                 break;
             case HOLD_EFFECT_MARANGA_BERRY:  // consume and boost sp. defense if used special move
-                effect = DamagedStatBoostBerryEffect(battler, STAT_SPDEF, CATEGORIA_ESPECIAL);
+                effect = DamagedStatBoostBerryEffect(battler, ESTADISTICA_DEFENSA_ESPECIAL, CATEGORIA_ESPECIAL);
                 break;
             case HOLD_EFFECT_CURE_STATUS: // only Toxic Chain's interaction with Knock Off
             case HOLD_EFFECT_CURE_PSN:
@@ -7940,7 +7903,7 @@ u32 SetRandomTarget(u32 battlerAtk)
         [B_SIDE_OPPONENT] = {B_POSITION_PLAYER_LEFT, B_POSITION_PLAYER_RIGHT},
     };
 
-    if (IsDoubleBattle())
+    if (EsContraEntrenador())
     {
         target = GetBattlerAtPosition(targets[GetBattlerSide(battlerAtk)][RandomUniform(RNG_RANDOM_TARGET, 0, 1)]);
         if (!IsBattlerAlive(target))
@@ -8008,7 +7971,7 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
         if (IsAffectedByFollowMe(gBattlerAttacker, side, move))
             targetBattler = gSideTimers[side].followmeTarget;
-        else if (IsDoubleBattle() && moveTarget & MOVE_TARGET_RANDOM)
+        else if (EsContraEntrenador() && moveTarget & MOVE_TARGET_RANDOM)
             targetBattler = SetRandomTarget(gBattlerAttacker);
         else
             targetBattler = GetBattlerAtPosition(BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker)));
@@ -8204,12 +8167,12 @@ u32 CountBattlerStatIncreases(u32 battler, bool32 countEvasionAcc)
     u32 i;
     u32 count = 0;
 
-    for (i = 0; i < NUM_BATTLE_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS_BATALLA; i++)
     {
-        if ((i == STAT_ACC || i == STAT_EVASION) && !countEvasionAcc)
+        if ((i == ESTADISTICA_PRECISION || i == ESTADISTICA_EVASION) && !countEvasionAcc)
             continue;
-        if (gBattleMons[battler].statStages[i] > DEFAULT_STAT_STAGE) // Stat is increased.
-            count += gBattleMons[battler].statStages[i] - DEFAULT_STAT_STAGE;
+        if (gBattleMons[battler].statStages[i] > ESTADISTICA_NEUTRA) // Stat is increased.
+            count += gBattleMons[battler].statStages[i] - ESTADISTICA_NEUTRA;
     }
 
     return count;
@@ -8546,20 +8509,7 @@ static inline u32 CalcMoveBasePower(struct DamageCalculationData *damageCalcData
             basePower *= 2;
         break;
     case EFFECT_HIDDEN_POWER:
-    {
-        if (B_HIDDEN_POWER_DMG < GEN_6)
-        {
-            u8 powerBits = ((gBattleMons[battlerAtk].hpIV & 2) >> 1)
-                         | ((gBattleMons[battlerAtk].attackIV & 2) << 0)
-                         | ((gBattleMons[battlerAtk].defenseIV & 2) << 1)
-                         | ((gBattleMons[battlerAtk].speedIV & 2) << 2)
-                         | ((gBattleMons[battlerAtk].spAttackIV & 2) << 3)
-                         | ((gBattleMons[battlerAtk].spDefenseIV & 2) << 4);
-
-            basePower = (40 * powerBits) / 63 + 30;
-        }
         break;
-    }
     case EFFECT_GRAV_APPLE:
         if (gFieldStatuses & STATUS_FIELD_GRAVITY)
             basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
@@ -8922,7 +8872,7 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageCalculationData *
         {
             u8 defHighestStat = GetHighestStatId(battlerDef);
             if ((gFieldStatuses & STATUS_FIELD_ELECTRIC_TERRAIN || gBattleStruct->boosterEnergyActivates & (1u << battlerDef))
-             && ((IS_MOVE_PHYSICAL(move) && defHighestStat == STAT_DEF) || (IS_MOVE_SPECIAL(move) && defHighestStat == STAT_SPDEF))
+             && ((IS_MOVE_PHYSICAL(move) && defHighestStat == ESTADISTICA_DEFENSA) || (IS_MOVE_SPECIAL(move) && defHighestStat == ESTADISTICA_DEFENSA_ESPECIAL))
              && !(gBattleMons[battlerDef].status2 & STATUS2_TRANSFORMED))
                 modifier = uq4_12_multiply(modifier, UQ_4_12(0.7));
         }
@@ -9009,12 +8959,12 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         if (IS_MOVE_PHYSICAL(move))
         {
             atkStat = gBattleMons[battlerDef].attack;
-            atkStage = gBattleMons[battlerDef].statStages[STAT_ATK];
+            atkStage = gBattleMons[battlerDef].statStages[ESTADISTICA_ATAQUE];
         }
         else
         {
             atkStat = gBattleMons[battlerDef].spAttack;
-            atkStage = gBattleMons[battlerDef].statStages[STAT_SPATK];
+            atkStage = gBattleMons[battlerDef].statStages[ESTADISTICA_ATAQUE_ESPECIAL];
         }
     }
     else if (gMovesInfo[move].effect == EFFECT_BODY_PRESS)
@@ -9024,14 +8974,14 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
             atkStat = gBattleMons[battlerAtk].defense;
             // Edge case: Body Press used during Wonder Room. For some reason, it still uses Defense over Sp.Def, but uses Sp.Def stat changes
             if (gFieldStatuses & STATUS_FIELD_WONDER_ROOM)
-                atkStage = gBattleMons[battlerAtk].statStages[STAT_SPDEF];
+                atkStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_DEFENSA_ESPECIAL];
             else
-                atkStage = gBattleMons[battlerAtk].statStages[STAT_DEF];
+                atkStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_DEFENSA];
         }
         else
         {
             atkStat = gBattleMons[battlerAtk].spDefense;
-            atkStage = gBattleMons[battlerAtk].statStages[STAT_SPDEF];
+            atkStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_DEFENSA_ESPECIAL];
         }
     }
     else
@@ -9039,24 +8989,22 @@ static inline u32 CalcAttackStat(struct DamageCalculationData *damageCalcData, u
         if (IS_MOVE_PHYSICAL(move))
         {
             atkStat = gBattleMons[battlerAtk].attack;
-            atkStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
+            atkStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_ATAQUE];
         }
         else
         {
             atkStat = gBattleMons[battlerAtk].spAttack;
-            atkStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
+            atkStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_ATAQUE_ESPECIAL];
         }
     }
 
-    // critical hits ignore attack stat's stage drops
-    if (damageCalcData->isCrit && atkStage < DEFAULT_STAT_STAGE)
-        atkStage = DEFAULT_STAT_STAGE;
-    // pokemon with unaware ignore attack stat changes while taking damage
-    if (defAbility == ABILITY_UNAWARE)
-        atkStage = DEFAULT_STAT_STAGE;
+    if (damageCalcData->isCrit && atkStage < ESTADISTICA_NEUTRA)
+        atkStage = ESTADISTICA_NEUTRA;
 
-    atkStat *= gStatStageRatios[atkStage][0];
-    atkStat /= gStatStageRatios[atkStage][1];
+    if (defAbility == ABILITY_UNAWARE)
+        atkStage = ESTADISTICA_NEUTRA;
+
+    atkStat *= gMultiplicadoresEstadisticas[atkStage] >> 8;
 
     // apply attack stat modifiers
     modifier = UQ_4_12(1.0);
@@ -9290,35 +9238,29 @@ static inline u32 CalcDefenseStat(struct DamageCalculationData *damageCalcData, 
         spDef = gBattleMons[battlerDef].spDefense;
     }
 
-    if (gMovesInfo[move].effect == EFFECT_PSYSHOCK || IS_MOVE_PHYSICAL(move)) // uses defense stat instead of sp.def
+    if (gMovesInfo[move].effect == EFFECT_PSYSHOCK || IS_MOVE_PHYSICAL(move))
     {
         defStat = def;
-        defStage = gBattleMons[battlerDef].statStages[STAT_DEF];
+        defStage = gBattleMons[battlerDef].statStages[ESTADISTICA_DEFENSA];
         usesDefStat = TRUE;
     }
-    else // is special
+    else
     {
         defStat = spDef;
-        defStage = gBattleMons[battlerDef].statStages[STAT_SPDEF];
+        defStage = gBattleMons[battlerDef].statStages[ESTADISTICA_DEFENSA_ESPECIAL];
         usesDefStat = FALSE;
     }
 
-    // Self-destruct / Explosion cut defense in half
-    if (B_EXPLOSION_DEFENSE < GEN_5 && gMovesInfo[gCurrentMove].effect == EFFECT_EXPLOSION)
-        defStat /= 2;
+    if (damageCalcData->isCrit && defStage > ESTADISTICA_NEUTRA)
+        defStage = ESTADISTICA_NEUTRA;
 
-    // critical hits ignore positive stat changes
-    if (damageCalcData->isCrit && defStage > DEFAULT_STAT_STAGE)
-        defStage = DEFAULT_STAT_STAGE;
-    // pokemon with unaware ignore defense stat changes while dealing damage
     if (atkAbility == ABILITY_UNAWARE)
-        defStage = DEFAULT_STAT_STAGE;
-    // certain moves also ignore stat changes
-    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
-        defStage = DEFAULT_STAT_STAGE;
+        defStage = ESTADISTICA_NEUTRA;
 
-    defStat *= gStatStageRatios[defStage][0];
-    defStat /= gStatStageRatios[defStage][1];
+    if (gMovesInfo[move].ignoresTargetDefenseEvasionStages)
+        defStage = ESTADISTICA_NEUTRA;
+
+    defStat *= gMultiplicadoresEstadisticas[defStage] >> 8;
 
     // apply defense stat modifiers
     modifier = UQ_4_12(1.0);
@@ -9431,7 +9373,7 @@ static inline s32 CalculateBaseDamage(u32 power, u32 userFinalAttack, u32 level,
 
 static inline uq4_12_t GetTargetDamageModifier(struct DamageCalculationData *damageCalcData)
 {
-    if (IsDoubleBattle() && GetMoveTargetCount(damageCalcData) >= 2)
+    if (EsContraEntrenador() && GetMoveTargetCount(damageCalcData) >= 2)
         return B_MULTIPLE_TARGETS_DMG >= GEN_4 ? UQ_4_12(0.75) : UQ_4_12(0.5);
     return UQ_4_12(1.0);
 }
@@ -9564,7 +9506,7 @@ static inline uq4_12_t GetScreensModifier(u32 move, u32 battlerAtk, u32 battlerD
     if (isCrit || abilityAtk == ABILITY_INFILTRATOR || gProtectStructs[battlerAtk].confusionSelfDmg)
         return UQ_4_12(1.0);
     if (reflect || lightScreen || auroraVeil)
-        return (IsDoubleBattle()) ? UQ_4_12(0.667) : UQ_4_12(0.5);
+        return (EsContraEntrenador()) ? UQ_4_12(0.667) : UQ_4_12(0.5);
     return UQ_4_12(1.0);
 }
 
@@ -9688,7 +9630,7 @@ static inline uq4_12_t GetDefenderItemsModifier(struct DamageCalculationData *da
 
 #define DAMAGE_MULTIPLY_MODIFIER(modifier) do {                     \
     finalModifier = uq4_12_multiply_half_down(modifier, finalModifier); \
-} while (0)
+} while(0)
 
 // Calculates the "other" modifier which accounts for held items, abilities,
 // or very specific interactions of moves that are not handled in the basic
@@ -9740,7 +9682,7 @@ static inline uq4_12_t GetOtherModifiers(struct DamageCalculationData *damageCal
 
 #define DAMAGE_APPLY_MODIFIER(modifier) do {               \
     dmg = uq4_12_multiply_by_int_half_down(modifier, dmg); \
-} while (0)
+} while(0)
 
 static inline s32 DoMoveDamageCalcVars(struct DamageCalculationData *damageCalcData, u32 fixedBasePower, uq4_12_t typeEffectivenessModifier, u32 weather,
                                        u32 holdEffectAtk, u32 holdEffectDef, u32 abilityAtk, u32 abilityDef)
@@ -10526,16 +10468,10 @@ u8 GetCategoryBasedOnStats(u32 battler)
     u32 attack = gBattleMons[battler].attack;
     u32 spAttack = gBattleMons[battler].spAttack;
 
-    attack = attack * gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][0];
-    attack = attack / gStatStageRatios[gBattleMons[battler].statStages[STAT_ATK]][1];
+    attack = (attack * gMultiplicadoresEstadisticas[gBattleMons[battler].statStages[ESTADISTICA_ATAQUE]]) >> 8;
+    spAttack = (spAttack * gMultiplicadoresEstadisticas[gBattleMons[battler].statStages[ESTADISTICA_ATAQUE_ESPECIAL]]) >> 8;
 
-    spAttack = spAttack * gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][0];
-    spAttack = spAttack / gStatStageRatios[gBattleMons[battler].statStages[STAT_SPATK]][1];
-
-    if (spAttack >= attack)
-        return CATEGORIA_ESPECIAL;
-    else
-        return CATEGORIA_FISICA;
+    return (spAttack >= attack) ? CATEGORIA_ESPECIAL : CATEGORIA_FISICA;
 }
 
 static u32 GetFlingPowerFromItemId(u32 itemId)
@@ -10608,7 +10544,7 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 void TryRestoreHeldItems(void)
 {
     u32 i;
-    bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR;
+    bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && EsContraEntrenador();
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -10652,7 +10588,7 @@ void TrySaveExchangedItem(u32 battler, u16 stolenItem)
     if (B_TRAINERS_KNOCK_OFF_ITEMS == FALSE)
         return;
     // If regular trainer battle and mon's original item matches what is being stolen, save it to be restored at end of battle
-    if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR
+    if (EsContraEntrenador()
       && GetBattlerSide(battler) == B_SIDE_PLAYER
       && stolenItem == gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].originalItem)
         gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen = TRUE;
@@ -10690,40 +10626,40 @@ bool32 CompareStat(u32 battler, u8 statId, u8 cmpTo, u8 cmpKind)
     // we need to do some modification at run-time.
     if (GetBattlerAbility(battler) == ABILITY_CONTRARY)
     {
-        if (cmpKind == CMP_GREATER_THAN)
-            cmpKind = CMP_LESS_THAN;
-        else if (cmpKind == CMP_LESS_THAN)
-            cmpKind = CMP_GREATER_THAN;
+        if (cmpKind == COMPARACION_MAYOR)
+            cmpKind = COMPARACION_MENOR;
+        else if (cmpKind == COMPARACION_MENOR)
+            cmpKind = COMPARACION_MAYOR;
 
-        if (cmpTo == MIN_STAT_STAGE)
-            cmpTo = MAX_STAT_STAGE;
-        else if (cmpTo == MAX_STAT_STAGE)
-            cmpTo = MIN_STAT_STAGE;
+        if (cmpTo == ESTADISTICA_MENOS_6)
+            cmpTo = ESTADISTICA_MAS_6;
+        else if (cmpTo == ESTADISTICA_MAS_6)
+            cmpTo = ESTADISTICA_MENOS_6;
     }
 
     switch (cmpKind)
     {
-    case CMP_EQUAL:
+    case COMPARACION_IGUAL:
         if (statValue == cmpTo)
             ret = TRUE;
         break;
-    case CMP_NOT_EQUAL:
+    case COMPARACION_DESIGUAL:
         if (statValue != cmpTo)
             ret = TRUE;
         break;
-    case CMP_GREATER_THAN:
+    case COMPARACION_MAYOR:
         if (statValue > cmpTo)
             ret = TRUE;
         break;
-    case CMP_LESS_THAN:
+    case COMPARACION_MENOR:
         if (statValue < cmpTo)
             ret = TRUE;
         break;
-    case CMP_COMMON_BITS:
+    case COMPARACION_BITS_COMUNES:
         if (statValue & cmpTo)
             ret = TRUE;
         break;
-    case CMP_NO_COMMON_BITS:
+    case COMPARACION_BITS_DISTINTOS:
         if (!(statValue & cmpTo))
             ret = TRUE;
         break;
@@ -10759,12 +10695,12 @@ void BufferStatChange(u32 battler, u8 statId, u8 stringId)
 
 bool32 TryRoomService(u32 battler)
 {
-    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battler, STAT_SPEED, MIN_STAT_STAGE, CMP_GREATER_THAN))
+    if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM && CompareStat(battler, ESTADISTICA_VELOCIDAD, ESTADISTICA_MENOS_6, COMPARACION_MAYOR))
     {
-        BufferStatChange(battler, STAT_SPEED, STRINGID_STATFELL);
+        BufferStatChange(battler, ESTADISTICA_VELOCIDAD, STRINGID_STATFELL);
         gEffectBattler = gBattleScripting.battler = battler;
-        SET_STATCHANGER(STAT_SPEED, 1, TRUE);
-        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + STAT_SPEED;
+        SET_STATCHANGER(ESTADISTICA_VELOCIDAD, 1, TRUE);
+        gBattleScripting.animArg1 = STAT_ANIM_PLUS1 + ESTADISTICA_VELOCIDAD;
         gBattleScripting.animArg2 = 0;
         gLastUsedItem = gBattleMons[battler].item;
         return TRUE;
@@ -10801,7 +10737,7 @@ u16 GetUsedHeldItem(u32 battler)
 bool32 CantPickupItem(u32 battler)
 {
     // Used by RandomUniformExcept() for RNG_PICKUP
-    if (battler == gBattlerAttacker && gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+    if (battler == gBattlerAttacker && EsContraEntrenador())
         return TRUE;
     return !(IsBattlerAlive(battler) && GetUsedHeldItem(battler) && gBattleStruct->canPickupItem & (1u << battler));
 }
@@ -11135,7 +11071,7 @@ void AdjustFriendshipOnBattleFaint(u8 battler)
 {
     u8 opposingBattlerId;
 
-    if (IsDoubleBattle())
+    if (EsContraEntrenador())
     {
         u8 opposingBattlerId2;
 
@@ -11269,6 +11205,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battler)
 
     return effect;
 }
+
 void SetShellSideArmCategory(void)
 {
     u32 battlerAtk, battlerDef;
@@ -11283,14 +11220,12 @@ void SetShellSideArmCategory(void)
     for (battlerAtk = 0; battlerAtk < gBattlersCount; battlerAtk++)
     {
         attackerAtkStat = gBattleMons[battlerAtk].attack;
-        statStage = gBattleMons[battlerAtk].statStages[STAT_ATK];
-        attackerAtkStat *= gStatStageRatios[statStage][0];
-        attackerAtkStat /= gStatStageRatios[statStage][1];
+        statStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_ATAQUE];
+        attackerAtkStat = (attackerAtkStat * gMultiplicadoresEstadisticas[statStage]) >> 8;
 
         attackerSpAtkStat = gBattleMons[battlerAtk].spAttack;
-        statStage = gBattleMons[battlerAtk].statStages[STAT_SPATK];
-        attackerSpAtkStat *= gStatStageRatios[statStage][0];
-        attackerSpAtkStat /= gStatStageRatios[statStage][1];
+        statStage = gBattleMons[battlerAtk].statStages[ESTADISTICA_ATAQUE_ESPECIAL];
+        attackerSpAtkStat = (attackerSpAtkStat * gMultiplicadoresEstadisticas[statStage]) >> 8;
 
         for (battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
         {
@@ -11298,16 +11233,14 @@ void SetShellSideArmCategory(void)
                 continue;
 
             targetDefStat = gBattleMons[battlerDef].defense;
-            statStage = gBattleMons[battlerDef].statStages[STAT_DEF];
-            targetDefStat *= gStatStageRatios[statStage][0];
-            targetDefStat /= gStatStageRatios[statStage][1];
+            statStage = gBattleMons[battlerDef].statStages[ESTADISTICA_DEFENSA];
+            targetDefStat = (targetDefStat * gMultiplicadoresEstadisticas[statStage]) >> 8;
 
             physical = ((((2 * gBattleMons[battlerAtk].level / 5 + 2) * gMovesInfo[MOVE_SHELL_SIDE_ARM].power * attackerAtkStat) / targetDefStat) / 50);
 
             targetSpDefStat = gBattleMons[battlerDef].spDefense;
-            statStage = gBattleMons[battlerDef].statStages[STAT_SPDEF];
-            targetSpDefStat *= gStatStageRatios[statStage][0];
-            targetSpDefStat /= gStatStageRatios[statStage][1];
+            statStage = gBattleMons[battlerDef].statStages[ESTADISTICA_DEFENSA_ESPECIAL];
+            targetSpDefStat = (targetSpDefStat * gMultiplicadoresEstadisticas[statStage]) >> 8;
 
             special = ((((2 * gBattleMons[battlerAtk].level / 5 + 2) * gMovesInfo[MOVE_SHELL_SIDE_ARM].power * attackerSpAtkStat) / targetSpDefStat) / 50);
 
@@ -11321,7 +11254,7 @@ void SetShellSideArmCategory(void)
 
 bool32 CanTargetPartner(u32 battlerAtk, u32 battlerDef)
 {
-    return (IsDoubleBattle()
+    return (EsContraEntrenador()
          && IsBattlerAlive(BATTLE_PARTNER(battlerDef))
          && battlerDef != BATTLE_PARTNER(battlerAtk));
 }
@@ -11345,10 +11278,5 @@ u32 GetMoveType(u32 move)
 {
     if (gMain.inBattle && gBattleStruct->dynamicMoveType)
         return gBattleStruct->dynamicMoveType & DYNAMIC_TYPE_MASK;
-    else if (B_UPDATED_MOVE_TYPES < GEN_5
-         && (move == MOVE_BEAT_UP
-          || move == MOVE_FUTURE_SIGHT
-          || move == MOVE_DOOM_DESIRE))
-          return TIPO_MISTERIO;
     return gMovesInfo[move].type;
 }

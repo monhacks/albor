@@ -662,7 +662,7 @@ static void CB2_OpenPokeblockFromBag(void)
 
 static void Task_OpenRegisteredPokeblockCase(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         CleanupOverworldWindowsAndTilemaps();
         OpenPokeblockCase(PBLOCK_CASE_FIELD, CB2_ReturnToField);
@@ -1151,7 +1151,7 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
     switch (battleUsage)
     {
     case EFFECT_ITEM_INCREASE_STAT:
-        if (gBattleMons[gBattlerInMenuId].statStages[ItemId_GetEffect(itemId)[1]] == MAX_STAT_STAGE)
+        if (gBattleMons[gBattlerInMenuId].statStages[ItemId_GetEffect(itemId)[1]] == ESTADISTICA_MAS_6)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_SET_FOCUS_ENERGY:
@@ -1163,7 +1163,7 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_ESCAPE:
-        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+        if (EsContraEntrenador())
             cannotUse = TRUE;
         break;
     case EFFECT_ITEM_THROW_BALL:
@@ -1188,9 +1188,9 @@ bool32 CannotUseItemsInBattle(u16 itemId, struct Pokemon *mon)
         }
         break;
     case EFFECT_ITEM_INCREASE_ALL_STATS:
-        for (i = STAT_ATK; i < NUM_STATS; i++)
+        for (i = ESTADISTICA_ATAQUE; i < NUMERO_ESTADISTICAS; i++)
         {
-            if (CompareStat(gBattlerInMenuId, i, MAX_STAT_STAGE, CMP_EQUAL))
+            if (CompareStat(gBattlerInMenuId, i, ESTADISTICA_MAS_6, COMPARACION_IGUAL))
             {
                 cannotUse = TRUE;
                 break;
@@ -1254,7 +1254,7 @@ void ItemUseInBattle_BagMenu(u8 taskId)
     else
     {
         PlaySE(SE_SELECT);
-        if (!ItemId_GetImportance(gSpecialVar_ItemId) && !(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (ItemId_GetBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)))
+        if (!ItemId_GetImportance(gSpecialVar_ItemId) && !(B_TRY_CATCH_TRAINER_BALL >= GEN_4 && (ItemId_GetBattleUsage(gSpecialVar_ItemId) == EFFECT_ITEM_THROW_BALL) && (EsContraEntrenador())))
             RemoveUsedItem();
         ScheduleBgCopyTilemapToVram(2);
         if (!InBattlePyramid())
@@ -1442,7 +1442,7 @@ static void InitTMCaseFromBag(void)
 
 static void Task_InitTMCaseFromField(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         CleanupOverworldWindowsAndTilemaps();
         InitTMCase(TMCASE_FIELD, CB2_ReturnToField, TRUE);

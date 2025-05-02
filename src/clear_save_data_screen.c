@@ -157,20 +157,20 @@ static bool8 SetupClearSaveDataScreen(void)
         ResetTasks();
         ResetSpriteData();
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sClearSaveBgTemplates, ARRAY_COUNT(sClearSaveBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sClearSaveBgTemplates, ARRAY_COUNT(sClearSaveBgTemplates));
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         ShowBg(0);
         ShowBg(3);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
         InitClearSaveDataScreenWindows();
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0x10, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_FONDOS, 0, 0x10, 0, RGB_WHITEALPHA);
         EnableInterrupts(INTR_FLAG_VBLANK);
         SetVBlankCallback(VBlankCB);
         gMain.state = 1;
         break;
     case 1:
         UpdatePaletteFade();
-        if(!gPaletteFade.active)
+        if(!gFundidoPaletas.activo)
         {
             SetMainCallback2(MainCB);
             return TRUE;
@@ -185,12 +185,12 @@ static void CB2_FadeAndDoReset(void)
     {
     case 0:
     default:
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0, 0x10, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_FONDOS, 0, 0, 0x10, RGB_WHITEALPHA);
         gMain.state = 1;
         break;
     case 1:
         UpdatePaletteFade();
-        if(!gPaletteFade.active)
+        if(!gFundidoPaletas.activo)
         {
             FreeAllWindowBuffers();
             DoSoftReset();

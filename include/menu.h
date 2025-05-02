@@ -20,19 +20,10 @@
 #define MENU_CURSOR_DELTA_LEFT  -1
 #define MENU_CURSOR_DELTA_RIGHT  1
 
-#define MENU_INFO_ICON_TYPE      (NUMERO_DE_TIPOS + 1)
-#define MENU_INFO_ICON_POWER     (NUMERO_DE_TIPOS + 2)
-#define MENU_INFO_ICON_ACCURACY  (NUMERO_DE_TIPOS + 3)
-#define MENU_INFO_ICON_PP        (NUMERO_DE_TIPOS + 4)
-#define MENU_INFO_ICON_EFFECT    (NUMERO_DE_TIPOS + 5)
-#define MENU_INFO_ICON_BALL_RED  (NUMERO_DE_TIPOS + 6)
-#define MENU_INFO_ICON_BALL_BLUE (NUMERO_DE_TIPOS + 7)
-
 enum
 {
     SAVE_MENU_NAME,
     SAVE_MENU_CAUGHT,
-    SAVE_MENU_PLAY_TIME,
     SAVE_MENU_LOCATION,
     SAVE_MENU_BADGES,
 };
@@ -90,8 +81,8 @@ void AddTextPrinterParameterized4(u8 windowId, u8 fontId, u8 x, u8 y, u8 letterS
 void DrawDialogFrameWithCustomTileAndPalette(u8 windowId, bool8 copyToVram, u16 tileNum, u8 paletteNum);
 void PrintMenuActionTextsInUpperLeftCorner(u8 windowId, u8 optionsNo, const struct MenuAction *actions, const u8 *actionIds);
 void ClearDialogWindowAndFrameToTransparent(u8 windowId, bool8 copyToVram);
-void *malloc_and_decompress(const void *src, u32 *sizeOut);
-u16 copy_decompressed_tile_data_to_vram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
+void *MallocAndDecompress(const void *src, u32 *sizeOut);
+u16 CopyDecompressedTileDataToVram(u8 bgId, const void *src, u16 size, u16 offset, u8 mode);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void PrintMenuActionTexts(u8 windowId, u8 fontId, u8 left, u8 top, u8 letterSpacing, u8 lineHeight, u8 itemCount, const struct MenuAction *menuActions, const u8 *actionIds);
 void PrintMenuActionGrid(u8 windowId, u8 fontId, u8 left, u8 top, u8 optionWidth, u8 horizontalCount, u8 verticalCount, const struct MenuAction *menuActions, const u8 *actionIds);

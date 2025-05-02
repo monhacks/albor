@@ -488,7 +488,7 @@ static void VBlankCB_PokeblockMenu(void)
 
 static void CB2_InitPokeblockMenu(void)
 {
-    while (1)
+    while(1)
     {
         if (InitPokeblockMenu() == TRUE)
             break;
@@ -520,7 +520,7 @@ static bool8 InitPokeblockMenu(void)
         break;
     case 3:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = TRUE;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         gMain.state++;
         break;
     case 4:
@@ -582,12 +582,12 @@ static bool8 InitPokeblockMenu(void)
         gMain.state++;
         break;
     case 17:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 18:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = FALSE;
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
     default:
@@ -603,7 +603,7 @@ static void HandleInitBackgrounds(void)
 {
     ResetVramOamAndBgCntRegs();
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplatesForPokeblockMenu, ARRAY_COUNT(sBgTemplatesForPokeblockMenu));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplatesForPokeblockMenu, ARRAY_COUNT(sBgTemplatesForPokeblockMenu));
     SetBgTilemapBuffer(2, sPokeblockMenu->tilemap);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(2);
@@ -783,7 +783,7 @@ static void DrawPokeblockInfo(s32 pkblId)
         for (i = 0; i < FLAVOR_COUNT; i++)
             CopyToBgTilemapBufferRect(2, rectTilemapSrc, (i / 3 * 6) + 1, (i % 3 * 2) + 13, 1, 2);
 
-        CopyWindowToVram(WIN_FEEL, COPYWIN_GFX);
+        CopyWindowToVram(WIN_FEEL, COPIA_TILES_VENTANA);
     }
 
     ScheduleBgCopyTilemapToVram(0);
@@ -840,12 +840,6 @@ static void SwapPokeblockMenuItems(u32 id1, u32 id2)
 
     pokeblocks[id2] = *copyPokeblock1;
     Free(copyPokeblock1);
-}
-
-void ResetPokeblockScrollPositions(void)
-{
-    sSavedPokeblockData.selectedRow = 0;
-    sSavedPokeblockData.scrollOffset = 0;
 }
 
 static void SetMenuItemsCountAndMaxShowed(void)
@@ -952,7 +946,7 @@ static void SpriteCB_ShakePokeblockCase(struct Sprite *sprite)
 
 static void FadePaletteAndSetTaskToClosePokeblockCase(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_FreeDataAndExitPokeblockCase;
 }
 
@@ -960,7 +954,7 @@ static void Task_FreeDataAndExitPokeblockCase(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         if (sPokeblockMenu->caseId == PBLOCK_CASE_FEEDER || sPokeblockMenu->caseId == PBLOCK_CASE_GIVE)
             gFieldCallback = FieldCB_ContinueScriptHandleMusic;
@@ -985,7 +979,7 @@ static void Task_HandlePokeblockMenuInput(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         if (JOY_NEW(SELECT_BUTTON))
         {

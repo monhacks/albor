@@ -130,7 +130,6 @@ struct BattleFrontierStreakInfo
 static EWRAM_DATA struct MatchCallState sMatchCallState = {0};
 static EWRAM_DATA struct BattleFrontierStreakInfo sBattleFrontierStreakInfo = {0};
 
-static u32 GetCurrentTotalMinutes(struct Time *);
 static u32 GetNumRegisteredTrainers(void);
 static u32 GetActiveMatchCallTrainerId(u32);
 static int GetTrainerMatchCallId(int);
@@ -964,28 +963,12 @@ extern const u8 gBirchDexRatingText_OnANationwideBasis[];
 
 void InitMatchCallCounters(void)
 {
-    RtcCalcLocalTime();
-    sMatchCallState.minutes = GetCurrentTotalMinutes(&gLocalTime) + 10;
-    sMatchCallState.stepCounter = 0;
-}
 
-static u32 GetCurrentTotalMinutes(struct Time *time)
-{
-    return time->days * 24 * 60 + time->hours * 60 + time->minutes;
 }
 
 static bool32 UpdateMatchCallMinutesCounter(void)
 {
-    int curMinutes;
-    RtcCalcLocalTime();
-    curMinutes = GetCurrentTotalMinutes(&gLocalTime);
-    if (sMatchCallState.minutes > curMinutes || curMinutes - sMatchCallState.minutes > 9)
-    {
-        sMatchCallState.minutes = curMinutes;
-        return TRUE;
-    }
 
-    return FALSE;
 }
 
 static bool32 CheckMatchCallChance(void)
@@ -1218,7 +1201,7 @@ static bool32 MatchCall_DrawWindow(u8 taskId)
     DrawMatchCallTextBoxBorder_Internal(tWindowId, TILE_MC_WINDOW, 14);
     WriteSequenceToBgTilemapBuffer(0, (0xF << 12) | TILE_POKENAV_ICON, 1, 15, 4, 4, 17, 1);
     tIconTaskId = CreateTask(Task_SpinPokenavIcon, 10);
-    CopyWindowToVram(tWindowId, COPYWIN_GFX);
+    CopyWindowToVram(tWindowId, COPIA_TILES_VENTANA);
     CopyBgTilemapBufferToVram(0);
     return TRUE;
 }
@@ -1270,7 +1253,7 @@ static bool32 MatchCall_PrintMessage(u8 taskId)
     if (!RunMatchCallTextPrinter(tWindowId) && !IsSEPlaying() && JOY_NEW(A_BUTTON | B_BUTTON))
     {
         FillWindowPixelBuffer(tWindowId, PIXEL_FILL(8));
-        CopyWindowToVram(tWindowId, COPYWIN_GFX);
+        CopyWindowToVram(tWindowId, COPIA_TILES_VENTANA);
         PlaySE(SE_POKENAV_HANG_UP);
         return TRUE;
     }
@@ -1478,7 +1461,7 @@ bool32 SelectMatchCallMessage(int trainerId, u8 *str)
 static int GetTrainerMatchCallId(int trainerId)
 {
     int i = 0;
-    while (1)
+    while(1)
     {
         if (sMatchCallTrainers[i].trainerId == trainerId)
             return i;
@@ -1795,29 +1778,6 @@ static int GetNumOwnedBadges(void)
 // Whether or not a trainer calling the player from a different route should request a battle
 static bool32 ShouldTrainerRequestBattle(int matchCallId)
 {
-    int dayCount;
-    int otId;
-    u16 dewfordRand;
-    int numRematchTrainersFought;
-    int max, rand, n;
-
-    if (GetNumOwnedBadges() < 5)
-        return FALSE;
-
-    dayCount = RtcGetLocalDayCount();
-    otId = GetTrainerId(gSaveBlockPtr->playerTrainerId) & 0xFFFF;
-
-    dewfordRand = gSaveBlockPtr->dewfordTrends[0].rand;
-    numRematchTrainersFought = GetNumRematchTrainersFought();
-    max = (numRematchTrainersFought * 13) / 10;
-    rand = ((dayCount ^ dewfordRand) + (dewfordRand ^ GetGameStat(GAME_STAT_TRAINER_BATTLES))) ^ otId;
-    n = rand % max;
-    if (n < numRematchTrainersFought)
-    {
-        if (GetNthRematchTrainerFought(n) == matchCallId)
-            return TRUE;
-    }
-
     return FALSE;
 }
 

@@ -70,7 +70,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *, u16);
 static bool8 TryStartMiscWalkingScripts(u16);
 static bool8 TryStartStepCountScript(u16);
 static void UpdateFriendshipStepCounter(void);
-static void UpdateFollowerStepCounter(void);
+static void ActualizaPasosPokemon(void);
 #if OW_POISON_DAMAGE < GEN_5
 static bool8 UpdatePoisonStepCounter(void);
 #endif // OW_POISON_DAMAGE
@@ -558,7 +558,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     IncrementRematchStepCounter();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
-    UpdateFollowerStepCounter();
+    ActualizaPasosPokemon();
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {
@@ -647,10 +647,10 @@ static void UpdateFriendshipStepCounter(void)
     }
 }
 
-static void UpdateFollowerStepCounter(void)
+static void ActualizaPasosPokemon(void)
 {
-    if (gPlayerPartyCount > 0 && gFollowerSteps < (u16)-1)
-        gFollowerSteps++;
+    if (gPlayerPartyCount > 0 && gPasosPokemon < (u16)-1)
+        gPasosPokemon++;
 }
 
 void ClearPoisonStepCounter(void)

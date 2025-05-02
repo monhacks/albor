@@ -640,7 +640,7 @@ const struct BattleBackground sBattleTerrainTable[] =
 void BattleInitBgsAndWindows(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, gBattleBgTemplates, ARRAY_COUNT(gBattleBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, gBattleBgTemplates, ARRAY_COUNT(gBattleBgTemplates));
     gBattleScripting.windowsType = B_WIN_TYPE_NORMAL;
     InitWindows(gBattleWindowTemplates[gBattleScripting.windowsType]);
     DeactivateAllTextPrinters();
@@ -649,7 +649,7 @@ void BattleInitBgsAndWindows(void)
 void InitBattleBgsVideo(void)
 {
     DisableInterrupts(INTR_FLAG_HBLANK);
-    EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
+    EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3);
     BattleInitBgsAndWindows();
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     SetGpuReg(REG_OFFSET_BLDALPHA, 0);
@@ -692,7 +692,7 @@ void DrawMainBattleBackground(void)
     }
     else
     {
-        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+        if (EsContraEntrenador())
         {
             u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
             if (trainerClass == TRAINER_CLASS_LEADER)
@@ -803,7 +803,7 @@ void DrawBattleEntryBackground(void)
     }
     else
     {
-        if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+        if (EsContraEntrenador())
         {
             u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
             if (trainerClass == TRAINER_CLASS_LEADER)
@@ -865,7 +865,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+            if (EsContraEntrenador())
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)
@@ -923,7 +923,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+            if (EsContraEntrenador())
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)
@@ -981,7 +981,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
         }
         else
         {
-            if (gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)
+            if (EsContraEntrenador())
             {
                 u32 trainerClass = GetTrainerClassFromId(gTrainerBattleOpponent_A);
                 if (trainerClass == TRAINER_CLASS_LEADER)

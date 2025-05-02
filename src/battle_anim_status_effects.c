@@ -139,8 +139,6 @@ void AnimTask_FrozenIceCubeAttacker(u8 taskId)
     s16 y = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
 
-    if (IsContest())
-        x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&sFrozenIceCubeSpriteTemplate, x, y, 4);
@@ -159,7 +157,7 @@ void AnimTask_CentredFrozenIceCube(u8 taskId)
     u8 battler1 = gBattleAnimTarget;
     u8 battler2 = BATTLE_PARTNER(battler1);
 
-    if (!IsDoubleBattle() || IsAlly(gBattleAnimAttacker, gBattleAnimTarget))
+    if (!EsContraEntrenador() || IsAlly(gBattleAnimAttacker, gBattleAnimTarget))
     {
         x = GetBattlerSpriteCoord(battler1, BATTLER_COORD_X_2);
         y = GetBattlerSpriteCoord(battler1, BATTLER_COORD_Y_PIC_OFFSET);
@@ -188,8 +186,6 @@ void AnimTask_FrozenIceCube(u8 taskId)
     s16 y = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - 36;
     u8 spriteId;
 
-    if (IsContest())
-        x -= 6;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     spriteId = CreateSprite(&sFrozenIceCubeSpriteTemplate, x, y, 4);
@@ -291,37 +287,37 @@ void AnimTask_StatsChange(u8 taskId)
 
     switch (gBattleSpritesDataPtr->animationData->animArg)
     {
-    case STAT_ANIM_PLUS1 + STAT_ATK:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ATK;      break;
-    case STAT_ANIM_PLUS1 + STAT_DEF:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_DEF;      break;
-    case STAT_ANIM_PLUS1 + STAT_SPEED:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPEED;    break;
-    case STAT_ANIM_PLUS1 + STAT_SPATK:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPATK;    break;
-    case STAT_ANIM_PLUS1 + STAT_SPDEF:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPDEF;    break;
-    case STAT_ANIM_PLUS1 + STAT_ACC:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ACC;      break;
-    case STAT_ANIM_PLUS1 + STAT_EVASION: goesDown = FALSE;  animStatId = STAT_ANIM_PAL_EVASION;  break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_ATAQUE:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ATK;      break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_DEFENSA:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_DEF;      break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_VELOCIDAD:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPEED;    break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_ATAQUE_ESPECIAL:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPATK;    break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_DEFENSA_ESPECIAL:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPDEF;    break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_PRECISION:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ACC;      break;
+    case STAT_ANIM_PLUS1 + ESTADISTICA_EVASION: goesDown = FALSE;  animStatId = STAT_ANIM_PAL_EVASION;  break;
 
-    case STAT_ANIM_MINUS1 + STAT_ATK:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ATK;      break;
-    case STAT_ANIM_MINUS1 + STAT_DEF:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_DEF;      break;
-    case STAT_ANIM_MINUS1 + STAT_SPEED:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPEED;    break;
-    case STAT_ANIM_MINUS1 + STAT_SPATK:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPATK;    break;
-    case STAT_ANIM_MINUS1 + STAT_SPDEF:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPDEF;    break;
-    case STAT_ANIM_MINUS1 + STAT_ACC:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ACC;      break;
-    case STAT_ANIM_MINUS1 + STAT_EVASION: goesDown = TRUE;  animStatId = STAT_ANIM_PAL_EVASION;  break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_ATAQUE:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ATK;      break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_DEFENSA:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_DEF;      break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_VELOCIDAD:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPEED;    break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_ATAQUE_ESPECIAL:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPATK;    break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_DEFENSA_ESPECIAL:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPDEF;    break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_PRECISION:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ACC;      break;
+    case STAT_ANIM_MINUS1 + ESTADISTICA_EVASION: goesDown = TRUE;  animStatId = STAT_ANIM_PAL_EVASION;  break;
 
-    case STAT_ANIM_PLUS2 + STAT_ATK:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ATK;      sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_DEF:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_DEF;      sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_SPEED:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPEED;    sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_SPATK:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPATK;    sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_SPDEF:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPDEF;    sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_ACC:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ACC;      sharply = TRUE;  break;
-    case STAT_ANIM_PLUS2 + STAT_EVASION: goesDown = FALSE;  animStatId = STAT_ANIM_PAL_EVASION;  sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_ATAQUE:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ATK;      sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_DEFENSA:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_DEF;      sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_VELOCIDAD:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPEED;    sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_ATAQUE_ESPECIAL:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPATK;    sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_DEFENSA_ESPECIAL:   goesDown = FALSE;  animStatId = STAT_ANIM_PAL_SPDEF;    sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_PRECISION:     goesDown = FALSE;  animStatId = STAT_ANIM_PAL_ACC;      sharply = TRUE;  break;
+    case STAT_ANIM_PLUS2 + ESTADISTICA_EVASION: goesDown = FALSE;  animStatId = STAT_ANIM_PAL_EVASION;  sharply = TRUE;  break;
 
-    case STAT_ANIM_MINUS2 + STAT_ATK:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ATK;      sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_DEF:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_DEF;      sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_SPEED:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPEED;    sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_SPATK:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPATK;    sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_SPDEF:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPDEF;    sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_ACC:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ACC;      sharply = TRUE;  break;
-    case STAT_ANIM_MINUS2 + STAT_EVASION: goesDown = TRUE;  animStatId = STAT_ANIM_PAL_EVASION;  sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_ATAQUE:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ATK;      sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_DEFENSA:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_DEF;      sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_VELOCIDAD:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPEED;    sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_ATAQUE_ESPECIAL:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPATK;    sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_DEFENSA_ESPECIAL:   goesDown = TRUE;  animStatId = STAT_ANIM_PAL_SPDEF;    sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_PRECISION:     goesDown = TRUE;  animStatId = STAT_ANIM_PAL_ACC;      sharply = TRUE;  break;
+    case STAT_ANIM_MINUS2 + ESTADISTICA_EVASION: goesDown = TRUE;  animStatId = STAT_ANIM_PAL_EVASION;  sharply = TRUE;  break;
 
     case STAT_ANIM_MULTIPLE_PLUS1:  goesDown = FALSE;  animStatId = STAT_ANIM_PAL_MULTIPLE;  sharply = FALSE;  break;
     case STAT_ANIM_MULTIPLE_PLUS2:  goesDown = FALSE;  animStatId = STAT_ANIM_PAL_MULTIPLE;  sharply = TRUE;   break;

@@ -1149,8 +1149,8 @@ static void Task_PCMainMenu(u8 taskId)
         DrawDialogueFrame(0, FALSE);
         FillWindowPixelBuffer(0, PIXEL_FILL(1));
         AddTextPrinterParameterized2(0, FONT_NORMAL, sMainMenuTexts[task->tSelectedOption].desc, TEXT_SKIP_DRAW, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-        CopyWindowToVram(0, COPYWIN_FULL);
-        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
+        CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
+        CopyWindowToVram(task->tWindowId, COPIA_COMPLETA_VENTANA);
         task->tState++;
         break;
     case STATE_FADE_IN:
@@ -1237,7 +1237,7 @@ static void Task_PCMainMenu(u8 taskId)
         }
         break;
     case STATE_ENTER_PC:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             CleanupOverworldWindowsAndTilemaps();
             EnterPokeStorage(task->tInput);
@@ -1510,7 +1510,7 @@ static void VBlankCB_PokeStorage(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     // Instead of transferring the entire palette buffer, transfer bg and non-dynamic palettes
-    if (sPaletteSwapBuffer && !gPaletteFade.bufferTransferDisabled && !gPaletteFade.active && !sStorage->transferWholePlttFrames)
+    if (sPaletteSwapBuffer && !gFundidoPaletas.transferenciaBufferDeshabilitada && !gFundidoPaletas.activo && !sStorage->transferWholePlttFrames)
     {
         RequestDma3Copy(gPlttBufferFaded, (void*)PLTT, 32*17, 0);
         // Skip the 12-1 palettes that are being dynamically swapped anyway
@@ -1606,7 +1606,6 @@ static void ResetForPokeStorage(void)
     FreeAllSpritePalettes();
     ClearDma3Requests();
     gReservedSpriteTileCount = 640;
-    gKeyRepeatStartDelay = 20;
     ClearScheduledBgCopiesToVram();
     TilemapUtil_Init(TILEMAPID_COUNT);
     TilemapUtil_SetMap(TILEMAPID_PKMN_DATA, 1, sPkmnData_Tilemap, 8, 4);
@@ -1641,7 +1640,7 @@ static void HBlankCB_PokeStorage(void)
 {
     u8 vCount = REG_VCOUNT;
     u32 i;
-    if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gPaletteFade.active && gPaletteFade.y == 16 && gPaletteFade.mode == 2)) // HARDWARE_FADE
+    if (vCount >= DISPLAY_HEIGHT || !sPaletteSwapBuffer || (gFundidoPaletas.activo && gFundidoPaletas.y == 16 && gFundidoPaletas.modo == FUNDIDO_HARDWARE))
         return;
     // For each row in the pc box
     for (i = 0; i < IN_BOX_ROWS; i++)
@@ -1761,12 +1760,12 @@ static void Task_InitPokeStorage(u8 taskId)
         SetMonIconTransparency();
         if (!sStorage->isReopening)
         {
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             SetPokeStorageTask(Task_ShowPokeStorage);
         }
         else
         {
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             SetPokeStorageTask(Task_ReshowPokeStorage);
         }
         SetVBlankCallback(VBlankCB_PokeStorage);
@@ -1801,8 +1800,8 @@ static void Task_ReshowPokeStorage(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        BlendPalettes(PALETTES_ALL, 0, RGB_BLACK);
-        BeginHardwarePaletteFade(0xFF, 0, 16, 0, TRUE);
+        BlendPalettes(PALETAS_COMPLETAS, 0, RGB_BLACK);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_EFFECT_BLEND, 0, 16, 0, TRUE);
         EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_HBLANK);
         SetHBlankCallback(HBlankCB_PokeStorage);
         sStorage->state++;
@@ -2457,7 +2456,7 @@ static void Task_ReleaseMon(u8 taskId)
         RunCanReleaseMon();
         if (!TryHideReleaseMon())
         {
-            while (1)
+            while(1)
             {
                 s8 canRelease = RunCanReleaseMon();
                 if (canRelease == TRUE)
@@ -2951,12 +2950,12 @@ static void Task_NameBox(u8 taskId)
     {
     case 0:
         SaveMovingMon();
-        BeginHardwarePaletteFade(0xFF, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:
-        if (gPaletteFade.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering
@@ -2974,12 +2973,12 @@ static void Task_ShowMonSummary(u8 taskId)
     {
     case 0:
         InitSummaryScreenData();
-        BeginHardwarePaletteFade(0xFF, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:
-        if (gPaletteFade.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering
@@ -2996,12 +2995,12 @@ static void Task_GiveItemFromBag(u8 taskId)
     switch (sStorage->state)
     {
     case 0:
-        BeginHardwarePaletteFade(0xFF, 0, 0, 16, TRUE);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_ALL | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND, 0, 0, 16, TRUE);
         sStorage->state++;
         break;
     case 1:
-        if (gPaletteFade.y == 16) // blend last frame of hardware fade
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+        if (gFundidoPaletas.y == 16) // blend last frame of hardware fade
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
         if (!UpdatePaletteFade())
         {
             SetHBlankCallback(NULL); // avoid palette flickering
@@ -3217,7 +3216,7 @@ static void TintBackground(void)
 
 static void LoadPokeStorageMenuGfx(void)
 {
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     DecompressAndLoadBgGfxUsingHeap(1, gStorageSystemMenu_Gfx, 0, 0, 0);
     LZ77UnCompWram(sDisplayMenu_Tilemap, sStorage->displayMenuTilemapBuffer);
     SetBgTilemapBuffer(1, sStorage->displayMenuTilemapBuffer);
@@ -3319,7 +3318,7 @@ static void CreateDisplayMonSprite(void)
         sStorage->displayMonSprite = &gSprites[spriteId];
         sStorage->displayMonPalOffset = OBJ_PLTT_ID(palSlot);
         sStorage->displayMonTilePtr = (void *) OBJ_VRAM0 + tileStart * TILE_SIZE_4BPP;
-    } while (0);
+    } while(0);
 
     if (sStorage->displayMonSprite == NULL)
     {
@@ -3379,7 +3378,7 @@ static void PrintDisplayMonInfo(void)
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
     }
 
-    CopyWindowToVram(WIN_DISPLAY_INFO, COPYWIN_GFX);
+    CopyWindowToVram(WIN_DISPLAY_INFO, COPIA_TILES_VENTANA);
 }
 
 static void InitSupplementalTilemaps(void)
@@ -3625,7 +3624,7 @@ static void PrintMessage(u8 id)
     AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
     PutWindowTilemap(WIN_MESSAGE);
-    CopyWindowToVram(WIN_MESSAGE, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MESSAGE, COPIA_TILES_VENTANA);
     ScheduleBgCopyTilemapToVram(0);
 }
 
@@ -5204,7 +5203,7 @@ static void SetMovingMonData(u8 boxId, u8 position)
     {
         sStorage->movingMon = gPlayerParty[sCursorPosition];
         if (&gPlayerParty[sCursorPosition] == GetFirstLiveMon())
-            gFollowerSteps = 0;
+            gPasosPokemon = 0;
     }
     else
     {
@@ -5225,7 +5224,7 @@ static void SetPlacedMonData(u8 boxId, u8 position)
     {
         gPlayerParty[position] = sStorage->movingMon;
         if (&gPlayerParty[position] == GetFirstLiveMon())
-            gFollowerSteps = 0;
+            gPasosPokemon = 0;
     }
     else
     {
@@ -5991,7 +5990,7 @@ static u8 HandleInput_InBox(void)
 
         retVal = INPUT_NONE;
 
-    } while (0);
+    } while(0);
 
     if (retVal)
         SetCursorPosition(cursorArea, cursorPosition);
@@ -6101,7 +6100,7 @@ static u8 HandleInput_InParty(void)
             cursorPosition = 0;
         }
 
-    } while (0);
+    } while(0);
 
     if (retVal != INPUT_NONE)
     {
@@ -6154,7 +6153,7 @@ static u8 HandleInput_OnBox(void)
 
         retVal = INPUT_NONE;
 
-    } while (0);
+    } while(0);
 
     if (retVal != INPUT_NONE)
     {
@@ -6204,7 +6203,7 @@ static u8 HandleInput_OnButtons(void)
             return INPUT_PRESSED_B;
 
         retVal = INPUT_NONE;
-    } while (0);
+    } while(0);
 
     if (retVal != INPUT_NONE)
         SetCursorPosition(cursorArea, cursorPosition);
@@ -6573,7 +6572,7 @@ static s16 HandleMenuInput(void)
             PlaySE(SE_SELECT);
             Menu_MoveCursor(1);
         }
-    } while (0);
+    } while(0);
 
     if (input != MENU_NOTHING_CHOSEN)
         RemoveMenu();

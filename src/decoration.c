@@ -174,7 +174,6 @@ static void ContinueDecorating(u8 taskId);
 static void CantPlaceDecorationPrompt(u8 taskId);
 static void InitializePuttingAwayCursorSprite(struct Sprite *sprite);
 static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite);
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
 static const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode);
 static bool8 HasDecorationsInUse(u8 taskId);
 static void Task_ContinuePuttingAwayDecorations(u8 taskId);
@@ -508,20 +507,7 @@ static const struct YesNoFuncTable sTossDecorationYesNoFunctions =
 
 void InitDecorationContextItems(void)
 {
-    if (sCurDecorationCategory < DECORCAT_COUNT)
-        gCurDecorationItems = gDecorationInventories[sCurDecorationCategory].items;
 
-    if (sDecorationContext.isPlayerRoom == FALSE)
-    {
-        sDecorationContext.items = gSaveBlockPtr->secretBases[0].decorations;
-        sDecorationContext.pos = gSaveBlockPtr->secretBases[0].decorationPositions;
-    }
-
-    if (sDecorationContext.isPlayerRoom == TRUE)
-    {
-        sDecorationContext.items = gSaveBlockPtr->playerRoomDecorations;
-        sDecorationContext.pos = gSaveBlockPtr->playerRoomDecorationPositions;
-    }
 }
 
 static u8 AddDecorationWindow(u8 windowIndex)
@@ -584,17 +570,12 @@ void DoSecretBaseDecorationMenu(u8 taskId)
 
 void DoPlayerRoomDecorationMenu(u8 taskId)
 {
-    InitDecorationActionsWindow();
-    sDecorationContext.items = gSaveBlockPtr->playerRoomDecorations;
-    sDecorationContext.pos = gSaveBlockPtr->playerRoomDecorationPositions;
-    sDecorationContext.size = DECOR_MAX_PLAYERS_HOUSE;
-    sDecorationContext.isPlayerRoom = TRUE;
-    gTasks[taskId].func = HandleDecorationActionsMenuInput;
+
 }
 
 static void HandleDecorationActionsMenuInput(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         s8 menuPos = Menu_GetCursorPos();
         switch (Menu_ProcessInput())
@@ -762,7 +743,7 @@ static void ColorMenuItemString(u8 *str, bool8 disabled)
 
 static void HandleDecorationCategoriesMenuInput(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         s8 input = Menu_ProcessInput();
         switch (input)
@@ -965,7 +946,7 @@ static void HandleDecorationItemsMenuInput(u8 taskId)
     s32 input;
 
     data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         input = ListMenu_ProcessInput(tMenuTaskId);
         ListMenuGetScrollAndRow(tMenuTaskId, &sDecorationsScrollOffset, &sDecorationsCursorPos);
@@ -1031,55 +1012,7 @@ static bool8 IsDecorationIndexInSecretBase(u8 idx)
 
 static void IdentifyOwnedDecorationsCurrentlyInUseInternal(u8 taskId)
 {
-    u16 i, j, k;
-    u16 count;
 
-    count = 0;
-    memset(sSecretBaseItemsIndicesBuffer, 0, sizeof(sSecretBaseItemsIndicesBuffer));
-    memset(sPlayerRoomItemsIndicesBuffer, 0, sizeof(sPlayerRoomItemsIndicesBuffer));
-
-    for (i = 0; i < ARRAY_COUNT(sSecretBaseItemsIndicesBuffer); i++)
-    {
-        if (gSaveBlockPtr->secretBases[0].decorations[i] != DECOR_NONE)
-        {
-            for (j = 0; j < gDecorationInventories[sCurDecorationCategory].size; j++)
-            {
-                if (gCurDecorationItems[j] == gSaveBlockPtr->secretBases[0].decorations[i])
-                {
-                    for (k = 0; k < count && sSecretBaseItemsIndicesBuffer[k] != j + 1; k++)
-                        ;
-
-                    if (k == count)
-                    {
-                        sSecretBaseItemsIndicesBuffer[count] = j + 1;
-                        count++;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-    count = 0;
-    for (i = 0; i < ARRAY_COUNT(sPlayerRoomItemsIndicesBuffer); i++)
-    {
-        if (gSaveBlockPtr->playerRoomDecorations[i] != DECOR_NONE)
-        {
-            for (j = 0; j < gDecorationInventories[sCurDecorationCategory].size; j++)
-            {
-                if (gCurDecorationItems[j] == gSaveBlockPtr->playerRoomDecorations[i] && IsDecorationIndexInSecretBase(j + 1) != TRUE)
-                {
-                    for (k = 0; k < count && sPlayerRoomItemsIndicesBuffer[k] != j + 1; k++);
-                    if (k == count)
-                    {
-                        sPlayerRoomItemsIndicesBuffer[count] = j + 1;
-                        count++;
-                        break;
-                    }
-                }
-            }
-        }
-    }
 }
 
 static void IdentifyOwnedDecorationsCurrentlyInUse(u8 taskId)
@@ -1325,7 +1258,7 @@ static void Task_PlaceDecoration(u8 taskId)
     switch (gTasks[taskId].tState)
     {
         case 0:
-            if (!gPaletteFade.active)
+            if (!gFundidoPaletas.activo)
             {
                 SetInitialPositions(taskId);
                 gTasks[taskId].tState = 1;
@@ -1333,12 +1266,12 @@ static void Task_PlaceDecoration(u8 taskId)
             break;
         case 1:
             RemoveFollowingPokemon();
-            gPaletteFade.bufferTransferDisabled = TRUE;
+            gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
             ConfigureCameraObjectForPlacingDecoration(&sPlaceDecorationGraphicsDataBuffer, gCurDecorationItems[gCurDecorationIndex]);
             SetUpDecorationShape(taskId);
             SetUpPlacingDecorationPlayerAvatar(taskId, &sPlaceDecorationGraphicsDataBuffer);
             FadeInFromBlack();
-            gPaletteFade.bufferTransferDisabled = FALSE;
+            gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
             gTasks[taskId].tState = 2;
             break;
         case 2:
@@ -1353,12 +1286,7 @@ static void Task_PlaceDecoration(u8 taskId)
 
 static void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
 {
-    sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
-    gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
-    gSprites[gFieldCamera.spriteId].oam.priority = 1;
-    gSprites[gFieldCamera.spriteId].callback = InitializePuttingAwayCursorSprite;
-    gSprites[gFieldCamera.spriteId].x = sDecorationMovementInfo[data->decoration->shape].cameraX;
-    gSprites[gFieldCamera.spriteId].y = sDecorationMovementInfo[data->decoration->shape].cameraY;
+
 }
 
 static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
@@ -1653,7 +1581,7 @@ static void c1_overworld_prev_quest(u8 taskId)
     {
     case 0:
         LockPlayerFieldControls();
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             WarpToInitialPosition(taskId);
             gTasks[taskId].tState = 1;
@@ -1843,38 +1771,9 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
     }
 }
 
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
-{
-    return 0;
-}
-
 static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
 {
-    struct SpriteSheet sheet;
-    struct CompressedSpritePalette palette;
-    struct SpriteTemplate *template;
-    u8 spriteId;
-
-    if (!AllocItemIconTemporaryBuffers())
-        return MAX_SPRITES;
-
-    LZDecompressWram(GetDecorationIconPicOrPalette(decor, 0), gItemIconDecompressionBuffer);
-    CopyItemIconPicTo4x4Buffer(gItemIconDecompressionBuffer, gItemIcon4x4Buffer);
-    sheet.data = gItemIcon4x4Buffer;
-    sheet.size = 0x200;
-    sheet.tag = tilesTag;
-    LoadSpriteSheet(&sheet);
-    palette.data = GetDecorationIconPicOrPalette(decor, 1);
-    palette.tag = paletteTag;
-    LoadCompressedSpritePalette(&palette);
-    template = Alloc(sizeof(struct SpriteTemplate));
-    *template = gItemIconSpriteTemplate;
-    template->tileTag = tilesTag;
-    template->paletteTag = paletteTag;
-    spriteId = CreateSprite(template, 0, 0, 0);
-    FreeItemIconTemporaryBuffers();
-    Free(template);
-    return spriteId;
+    return 0;
 }
 
 static const u32 *GetDecorationIconPicOrPalette(u16 decor, u8 mode)
@@ -2024,7 +1923,7 @@ static void Task_ContinuePuttingAwayDecorations(u8 taskId)
     switch (tState)
     {
     case 0:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             SetInitialPositions(taskId);
             tState = 1;
@@ -2339,7 +2238,7 @@ static void Task_StopPuttingAwayDecorations(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             WarpToInitialPosition(taskId);
             gTasks[taskId].tState = 1;

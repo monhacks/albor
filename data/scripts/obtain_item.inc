@@ -21,7 +21,7 @@ EventScript_BufferPocketNameAndTryFanfare::
 	case POCKET_ITEMS,      EventScript_BufferItemsPocket
 	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
-	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
+	case POCKET_TM_HM,      ScriptEvento_GuardaMTMOMochila
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
 	end
 
@@ -40,7 +40,7 @@ EventScript_BufferPokeballsPocket::
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferTMHMsPocket::
+ScriptEvento_GuardaMTMOMochila::
 	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
 	return
@@ -126,7 +126,7 @@ EventScript_PickUpItem::
 	copyvar VAR_0x8006 VAR_0x8004
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
-	call_if_eq VAR_0x8008, TRUE, EventScript_FoundTMHM
+	call_if_eq VAR_0x8008, TRUE, ScriptEvento_HasEncontradoMTMO
 	call_if_eq VAR_0x8008, FALSE, EventScript_FoundItem
 	delay 10
 	showitemdescription
@@ -144,16 +144,10 @@ EventScript_PutBattlePyramidItemInBag::
 	hideitemdescription
 	return
 
-EventScript_FoundTMHM::
-	bufferitemnameplural STR_VAR_1, VAR_0x8004, VAR_0x8005
-	compare VAR_0x8005, 2
-	goto_if_lt EventScript_FoundTMHMMessage
-	buffernumberstring STR_VAR_3, VAR_0x8005
-	message gText_PlayerFoundTMHMs
-	goto EventScript_BufferTMHMsPocket
-	return
-EventScript_FoundTMHMMessage::
-	message gText_PlayerFoundOneTMHM
+ScriptEvento_HasEncontradoMTMO::
+	bufferitemname STR_VAR_1, VAR_0x8004
+	message gTexto_HasEncontradoMTMO
+	goto ScriptEvento_GuardaMTMOMochila
 	return
 
 EventScript_FoundItem::

@@ -33,18 +33,7 @@ static const u8 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
 
 void TraderSetup(void)
 {
-    u8 i;
-    struct MauvilleOldManTrader *trader = &gSaveBlockPtr->oldMan.trader;
 
-    trader->id = MAUVILLE_MAN_TRADER;
-    trader->alreadyTraded = FALSE;
-
-    for (i = 0; i < NUM_TRADER_ITEMS; i++)
-    {
-        StringCopy(trader->playerNames[i], sDefaultTraderNames[i]);
-        trader->decorations[i] = sDefaultTraderDecorations[i];
-        trader->language[i] = GAME_LANGUAGE;
-    }
 }
 
 void Trader_ResetFlag(void)
@@ -114,26 +103,7 @@ void Task_BufferDecorSelectionAndCloseWindow(u8 taskId, u8 decorationId)
 
 void Task_HandleGetDecorationMenuInput(u8 taskId)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlockPtr->oldMan.trader;
-    s8 input = Menu_ProcessInput();
 
-    switch (input)
-    {
-        case MENU_NOTHING_CHOSEN:
-            break;
-        case MENU_B_PRESSED:
-        case NUM_TRADER_ITEMS: // EXIT
-            PlaySE(SE_SELECT);
-            Task_BufferDecorSelectionAndCloseWindow(taskId, 0);
-            break;
-        default:
-            PlaySE(SE_SELECT);
-            gSpecialVar_0x8005 = input;
-            StringCopy(gStringVar1, trader->playerNames[input]);
-            ConvertInternationalString(gStringVar1, trader->language[input]);
-            Task_BufferDecorSelectionAndCloseWindow(taskId, trader->decorations[input]);
-            break;
-    }
 }
 
 void GetTraderTradedFlag(void)
@@ -198,14 +168,7 @@ void ExitTraderMenu(u8 taskId)
 
 void TraderDoDecorationTrade(void)
 {
-    struct MauvilleOldManTrader *trader = &gSaveBlockPtr->oldMan.trader;
 
-    DecorationRemove(gSpecialVar_0x8006);
-    DecorationAdd(gSpecialVar_0x8004);
-    StringCopy(trader->playerNames[gSpecialVar_0x8005], gSaveBlockPtr->playerName);
-    trader->decorations[gSpecialVar_0x8005] = gSpecialVar_0x8006;
-    trader->language[gSpecialVar_0x8005] = GAME_LANGUAGE;
-    trader->alreadyTraded = TRUE;
 }
 
 void TraderMenuGetDecoration(void)

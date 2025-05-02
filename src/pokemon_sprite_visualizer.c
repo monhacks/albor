@@ -25,7 +25,6 @@
 #include "pokemon_animation.h"
 #include "pokemon_sprite_visualizer.h"
 #include "pokemon_icon.h"
-#include "reset_rtc_screen.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "script_pokemon_util.h"
@@ -460,7 +459,7 @@ static void PrintInstructionsOnWindow(struct PokemonSpriteVisualizer *data)
         else
             AddTextPrinterParameterized(WIN_INSTRUCTIONS, fontId, textInstructionsSubmenuThree, x, 0, 0, NULL);
     }
-    CopyWindowToVram(WIN_INSTRUCTIONS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_INSTRUCTIONS, COPIA_COMPLETA_VENTANA);
 
     //Bottom left text
     FillWindowPixelBuffer(WIN_BOTTOM_LEFT, PIXEL_FILL(0));
@@ -1130,7 +1129,7 @@ static void ResetPokemonSpriteVisualizerWindows(void)
     {
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
         PutWindowTilemap(i);
-        CopyWindowToVram(i, COPYWIN_FULL);
+        CopyWindowToVram(i, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -1167,11 +1166,11 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
             ResetAllPicSprites();
-            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
             LoadPalette(GetTextWindowPalette(0), PLTT_ID(15), 64);
 
             FillBgTilemapBufferRect(0, 0, 0, 0, 32, 20, 15);
-            InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+            InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
             LoadBattleBg(0, BATTLE_TERRAIN_GRASS);
 
             gMain.state++;
@@ -1261,7 +1260,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
             EnableInterrupts(1);
             SetVBlankCallback(VBlankCB);
             SetMainCallback2(CB2_PokemonSpriteVisualizerRunner);
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, 128);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFFFF, VOLUMEN_MEDIO);
             break;
     }
 }
@@ -1636,7 +1635,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].func = Exit_PokemonSpriteVisualizer;
             PlaySE(SE_PC_OFF);
         }
@@ -1936,13 +1935,13 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
 
 static void Exit_PokemonSpriteVisualizer(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
         Free(data);
         FreeMonSpritesGfx();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
     }
 }

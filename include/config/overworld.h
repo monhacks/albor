@@ -47,34 +47,11 @@
 #define OW_SUPER_LUCK               GEN_LATEST // In Gen8+, if a Pokémon with Super Luck is leading the party, the wild held item rate is increased to 60%/20%.
 #define OW_INFILTRATOR              GEN_LATEST // In Gen8+, if a Pokémon with Infiltrator is leading the party, the wild encounter rate is halved.
 
-//Time
-#define OW_TIMES_OF_DAY                 GEN_LATEST // Different generations have the times of day change at different times.
-#define OW_USE_FAKE_RTC                 TRUE      // When TRUE, seconds on the in-game clock will only advance once every 60 playTimeVBlanks (every 60 frames).
-
 // Overworld flags
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define OW_FLAG_PAUSE_TIME          0  // If this flag is set and OW_USE_FAKE_RTC is enabled, seconds on the in-game clock will not advance.
 #define OW_FLAG_NO_ENCOUNTER        0  // If this flag is set, wild encounters will be disabled.
 #define OW_FLAG_NO_TRAINER_SEE      0  // If this flag is set, trainers will not battle the player unless they're talked to.
 #define OW_FLAG_NO_COLLISION        0  // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
-
-// Map pop-up config
-#define OW_POPUP_GENERATION        GEN_5    // Different generations display location names in overworld pop-ups differently.
-                                            // Only choies are currently GEN_3 and GEN_5, all others will default to Gen3 pop-ups.
-
-// Gen5 map pop-up config
-// Constants
-#define OW_POPUP_BW_TIME_NONE      0   // Don't show the time
-#define OW_POPUP_BW_TIME_12_HR     1   // Use 12 hour (AM/PM) time
-#define OW_POPUP_BW_TIME_24_HR     2   // Use 24 hour time
-
-#define OW_POPUP_BW_COLOR_BLACK    0   // Black pop-up from B2
-#define OW_POPUP_BW_COLOR_WHITE    1   // White pop-up from W2
-
-// Configuration
-#define OW_POPUP_BW_COLOR          OW_POPUP_BW_COLOR_BLACK  // B2W2 use different colors for their map pop-ups.       
-#define OW_POPUP_BW_TIME_MODE      OW_POPUP_BW_TIME_24_HR   // Determines what type of time is shown.
-#define OW_POPUP_BW_ALPHA_BLEND    FALSE                    // Enables alpha blending/transparency for the pop-ups. Mainly intended to be used with the black color option.
 
 #endif // GUARD_CONFIG_OVERWORLD_H

@@ -14,7 +14,6 @@
 enum {
     MON_DATA_PERSONALITY,
     MON_DATA_STATUS,
-    MON_DATA_OT_ID,
     MON_DATA_LANGUAGE,
     MON_DATA_SANITY_IS_BAD_EGG,
     MON_DATA_SANITY_HAS_SPECIES,
@@ -77,7 +76,6 @@ enum {
     MON_DATA_SPEED,
     MON_DATA_SPATK,
     MON_DATA_SPDEF,
-    MON_DATA_MAIL,
     MON_DATA_SPECIES_OR_EGG,
     MON_DATA_IVS,
     MON_DATA_CHAMPION_RIBBON,
@@ -92,16 +90,9 @@ enum {
     MON_DATA_NATIONAL_RIBBON,
     MON_DATA_EARTH_RIBBON,
     MON_DATA_WORLD_RIBBON,
-    MON_DATA_MODERN_FATEFUL_ENCOUNTER,
     MON_DATA_KNOWN_MOVES,
     MON_DATA_RIBBON_COUNT,
     MON_DATA_RIBBONS,
-    MON_DATA_HYPER_TRAINED_HP,
-    MON_DATA_HYPER_TRAINED_ATK,
-    MON_DATA_HYPER_TRAINED_DEF,
-    MON_DATA_HYPER_TRAINED_SPEED,
-    MON_DATA_HYPER_TRAINED_SPATK,
-    MON_DATA_HYPER_TRAINED_SPDEF,
 };
 
 struct __attribute__((packed)) BoxPokemon
@@ -179,39 +170,38 @@ struct MonSpritesGfxManager
 
 struct BattlePokemon
 {
-    /*0x00*/ u16 species;
-    /*0x02*/ u16 attack;
-    /*0x04*/ u16 defense;
-    /*0x06*/ u16 speed;
-    /*0x08*/ u16 spAttack;
-    /*0x0A*/ u16 spDefense;
-    /*0x0C*/ u16 moves[MAX_MON_MOVES];
-    /*0x14*/ u32 hpIV:5;
-    /*0x14*/ u32 attackIV:5;
-    /*0x15*/ u32 defenseIV:5;
-    /*0x15*/ u32 speedIV:5;
-    /*0x16*/ u32 spAttackIV:5;
-    /*0x17*/ u32 spDefenseIV:5;
-    /*0x17*/ u32 abilityNum:2;
-    /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
-    /*0x20*/ u16 ability;
-    /*0x22*/ u8 types[3];
-    /*0x25*/ u8 pp[MAX_MON_MOVES];
-    /*0x29*/ u16 hp;
-    /*0x2B*/ u8 level;
-    /*0x2C*/ u8 friendship;
-    /*0x2D*/ u16 maxHP;
-    /*0x2F*/ u16 item;
-    /*0x31*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
-    /*0x3C*/ u8 ppBonuses;
-    /*0x3D*/ u8 otName[PLAYER_NAME_LENGTH + 1];
-    /*0x45*/ u32 experience;
-    /*0x49*/ u32 personality;
-    /*0x4D*/ u32 status1;
-    /*0x51*/ u32 status2;
-    /*0x55*/ u32 otId;
-    /*0x59*/ u8 metLevel;
-    /*0x5A*/ bool8 isShiny;
+    u16 species;
+    u16 attack;
+    u16 defense;
+    u16 speed;
+    u16 spAttack;
+    u16 spDefense;
+    u16 moves[MAX_MON_MOVES];
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 abilityNum:2;
+    s8 statStages[NUMERO_ESTADISTICAS_BATALLA];
+    u16 ability;
+    u8 types[3];
+    u8 pp[MAX_MON_MOVES];
+    u16 hp;
+    u8 level;
+    u8 friendship;
+    u16 maxHP;
+    u16 item;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 ppBonuses;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    u32 experience;
+    u32 personality;
+    u32 status1;
+    u32 status2;
+    u8 metLevel;
+    bool8 isShiny;
 };
 
 struct Evolution
@@ -479,7 +469,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
-extern u16 gFollowerSteps;
+extern u16 gPasosPokemon;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const struct SpeciesInfo gSpeciesInfo[];
@@ -487,7 +477,7 @@ extern const u32 gExperienceTables[TIPOS_DE_CRECIMIENTO][MAX_LEVEL + 1];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];
-extern const u8 gStatStageRatios[MAX_STAT_STAGE + 1][2];
+extern const u16 gMultiplicadoresEstadisticas[NUMERO_CAMBIOS_ESTADISTICAS];
 extern const struct SpriteTemplate gBattlerSpriteTemplates[];
 extern const u32 sExpCandyExperienceTable[];
 extern const struct Ability gAbilitiesInfo[];
@@ -509,8 +499,6 @@ void CreateBattleTowerMon(struct Pokemon *mon, struct BattleTowerPokemon *src);
 void CreateBattleTowerMon_HandleLevel(struct Pokemon *mon, struct BattleTowerPokemon *src, bool8 lvl50);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
-bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
-void CreateEnemyEventMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);
@@ -611,8 +599,6 @@ const u16 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, bool32 isShiny,
 const u16 *GetMonSpritePalFromSpecies(u16 species, bool32 isShiny, bool32 isFemale);
 bool8 IsMonSpriteNotFlipped(u16 species);
 s8 GetFlavorRelationByPersonality(u32 personality, u8 flavor);
-bool8 IsTradedMon(struct Pokemon *mon);
-bool8 IsOtherTrainer(u32 otId, u8 *otName);
 void MonRestorePP(struct Pokemon *mon);
 void BoxMonRestorePP(struct BoxPokemon *boxMon);
 void SetMonPreventsSwitchingString(void);

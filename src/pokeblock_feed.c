@@ -550,7 +550,7 @@ static bool8 LoadPokeblockFeedScene(void)
         break;
     case 1:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = TRUE;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         gMain.state++;
         break;
     case 2:
@@ -594,12 +594,12 @@ static bool8 LoadPokeblockFeedScene(void)
         gMain.state++;
         break;
     case 12:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 13:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = FALSE;
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
     default:
@@ -612,7 +612,7 @@ static bool8 LoadPokeblockFeedScene(void)
 
 void PreparePokeblockFeedScene(void)
 {
-    while (1)
+    while(1)
     {
         if (LoadPokeblockFeedScene() == TRUE)
             break;
@@ -624,7 +624,7 @@ static void HandleInitBackgrounds(void)
     ResetVramOamAndBgCntRegs();
 
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBackgroundTemplates, ARRAY_COUNT(sBackgroundTemplates));
     SetBgTilemapBuffer(1, sPokeblockFeed->tilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
@@ -672,7 +672,7 @@ static void SetPokeblockSpritePal(u8 pokeblockCaseId)
 
 static void Task_HandlePokeblockFeed(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         switch (gTasks[taskId].tState)
         {
@@ -741,11 +741,11 @@ static void Task_PrintAtePokeblockMessage(u8 taskId)
 
 static void Task_ExitPokeblockFeed(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         ResetSpriteData();
         FreeAllSpritePalettes();
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         SetMainCallback2(gMain.savedCallback);
         DestroyTask(taskId);
         FreeAllWindowBuffers();
@@ -756,7 +756,7 @@ static void Task_ExitPokeblockFeed(u8 taskId)
 
 static void Task_FadeOutPokeblockFeed(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_ExitPokeblockFeed;
 }
 
@@ -1016,7 +1016,7 @@ static void CalculateMonAnimMovement(void)
     s16 x = pokeblockFeed->monX - pokeblockFeed->monInitX;
     s16 y = pokeblockFeed->monY - pokeblockFeed->monInitY;
 
-    while (1)
+    while(1)
     {
         u16 amplitude;
         u16 time;

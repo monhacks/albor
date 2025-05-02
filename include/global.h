@@ -67,8 +67,6 @@
 #define SAFE_DIV(a, b) ((a) / (b))
 #endif
 
-#define IS_POW_OF_TWO(n) (((n) & ((n)-1)) == 0)
-
 // The below macro does a%n, but (to match) will switch to a&(n-1) if n is a power of 2.
 // There are cases where GF does a&(n-1) where we would really like to have a%n, because
 // if n is changed to a value that isn't a power of 2 then a&(n-1) is unlikely to work as
@@ -127,33 +125,6 @@
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
 
-#define FEATURE_FLAG_ASSERT(flag, id) STATIC_ASSERT(flag > TEMP_FLAGS_END || flag == 0, id)
-
-#ifndef NDEBUG
-static inline void CycleCountStart()
-{
-    REG_TM2CNT_H = 0;
-    REG_TM3CNT_H = 0;
-
-    REG_TM2CNT_L = 0;
-    REG_TM3CNT_L = 0;
-
-    // init timers (tim3 count up mode, tim2 every clock cycle)
-    REG_TM3CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
-    REG_TM2CNT_H = TIMER_1CLK | TIMER_ENABLE;
-}
-
-static inline u32 CycleCountEnd()
-{
-    // stop timers
-    REG_TM2CNT_H = 0;
-    REG_TM3CNT_H = 0;
-
-    // return result
-    return REG_TM2CNT_L | (REG_TM3CNT_L << 16u);
-}
-#endif
-
 struct Coords8
 {
     s8 x;
@@ -184,12 +155,13 @@ struct UCoords32
     u32 y;
 };
 
-struct Time
+struct Tiempo
 {
-    /*0x00*/ s16 days;
-    /*0x02*/ s8 hours;
-    /*0x03*/ s8 minutes;
-    /*0x04*/ s8 seconds;
+    s16 dias;
+    s8 horas;
+    s8 minutos;
+    s8 segundos;
+    s8 diaSemana;
 };
 
 struct PyramidBag
@@ -242,7 +214,7 @@ struct BattleTowerInterview
 struct DomeMonData
 {
     u16 moves[MAX_MON_MOVES];
-    u8 evs[NUM_STATS];
+    u8 evs[NUMERO_ESTADISTICAS];
     u8 nature;
 };
 
@@ -338,7 +310,7 @@ struct BattleFrontier
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
-extern u8 UpdateSpritePaletteWithTime(u8);
+extern u32 UpdateSpritePaletteWithTime(u8);
 
 struct SecretBaseParty
 {
@@ -436,7 +408,6 @@ struct MauvilleManBard
     /*0x02*/ u16 songLyrics[BARD_SONG_LENGTH];
     /*0x0E*/ u16 temporaryLyrics[BARD_SONG_LENGTH];
     /*0x1A*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x25*/ u8 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x29*/ bool8 hasChangedSong;
     /*0x2A*/ u8 language;
 }; /*size = 0x2C*/
@@ -539,7 +510,6 @@ struct LilycoveLadyQuiz
     /*0x014*/ u16 correctAnswer;
     /*0x016*/ u16 playerAnswer;
     /*0x018*/ u8 playerName[PLAYER_NAME_LENGTH + 1];
-    /*0x020*/ u16 playerTrainerId[TRAINER_ID_LENGTH];
     /*0x028*/ u16 prize;
     /*0x02A*/ bool8 waitingForChallenger;
     /*0x02B*/ u8 questionId;
@@ -585,22 +555,16 @@ struct SaveBlock
     u8 playerName[PLAYER_NAME_LENGTH + 1];
     u8 playerGender; // MACHO, HEMBRA
     u8 specialSaveWarpFlags;
-    u8 playerTrainerId[TRAINER_ID_LENGTH];
-    u16 playTimeHours;
-    u8 playTimeMinutes;
-    u8 playTimeSeconds;
-    u8 playTimeVBlanks;
     u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A] //modificar
     u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
              u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
-    u32 pokedexOrder;
-    struct Time localTimeOffset;
-    struct Time lastBerryTreeUpdate;
+    struct Tiempo horaReferenciaJuego;
+    struct Tiempo ultimaActualizacionBaya;
     struct BattleFrontier frontier; //eliminar
-    struct Time fakeRTC;
+    struct Tiempo horaActual;
     u8 itemFlags[ITEM_FLAGS_COUNT];
     struct Coords16 pos;
     struct WarpData location;
@@ -633,16 +597,6 @@ struct SaveBlock
     u32 gameStats[NUM_GAME_STATS];
     struct BerryTree berryTrees[BERRY_TREES_COUNT];
     struct SecretBase secretBases[SECRET_BASES_COUNT]; //eliminar
-    u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
-    u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE]; //eliminar
-    u8 decorationDesks[10]; //eliminar
-    u8 decorationChairs[10]; //eliminar
-    u8 decorationPlants[10]; //eliminar
-    u8 decorationOrnaments[30]; //eliminar
-    u8 decorationMats[30]; //eliminar
-    u8 decorationPosters[10]; //eliminar
-    u8 decorationDolls[40]; //eliminar
-    u8 decorationCushions[10]; //eliminar
     u16 outbreakPokemonSpecies;
     u8 outbreakLocationMapNum;
     u8 outbreakLocationMapGroup;

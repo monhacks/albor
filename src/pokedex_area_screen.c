@@ -632,7 +632,7 @@ static void Task_ShowPokedexAreaScreen(u8 taskId)
         CreateAreaUnknownSprites();
         break;
     case 9:
-        BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS & ~(0x14), 0, 16, 0, RGB_BLACK);
         break;
     case 10:
         LoadHGSSScreenSelectBarSubmenu();
@@ -660,7 +660,7 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
         gTasks[taskId].tState = 0;
         // fall through
     case 0:
-        if (gPaletteFade.active)
+        if (gFundidoPaletas.activo)
             return;
         break;
     case 1:
@@ -688,10 +688,10 @@ static void Task_HandlePokedexAreaScreenInput(u8 taskId)
             return;
         break;
     case 2:
-        BeginNormalPaletteFade(PALETTES_ALL & ~(0x14), 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS & ~(0x14), 0, 0, 16, RGB_BLACK);
         break;
     case 3:
-        if (gPaletteFade.active)
+        if (gFundidoPaletas.activo)
             return;
         DestroyAreaScreenSprites();
         sPokedexAreaScreen->screenSwitchState[0] = gTasks[taskId].data[1];

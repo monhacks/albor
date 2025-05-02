@@ -28,7 +28,6 @@
 #include "string_util.h"
 #include "util.h"
 #include "data.h"
-#include "reset_rtc_screen.h"
 #include "reshow_battle_screen.h"
 #include "constants/abilities.h"
 #include "constants/party_menu.h"
@@ -118,11 +117,11 @@ enum
 
 enum
 {
-    LIST_STAT_HP_CURRENT,
-    LIST_STAT_HP_MAX,
+    LIST_ESTADISTICA_PS_CURRENT,
+    LIST_ESTADISTICA_PS_MAX,
     LIST_STAT_ATTACK,
-    LIST_STAT_DEFENSE,
-    LIST_STAT_SPEED,
+    LIST_ESTADISTICA_DEFENSAENSE,
+    LIST_ESTADISTICA_VELOCIDAD,
     LIST_STAT_SP_ATK,
     LIST_STAT_SP_DEF,
 };
@@ -502,11 +501,11 @@ static const struct ListMenuItem sMainListItems[] =
 
 static const struct ListMenuItem sStatsListItems[] =
 {
-    {gText_PS, LIST_STAT_HP_CURRENT},
-    {gText_MaxPS, LIST_STAT_HP_MAX},
+    {gText_PS, LIST_ESTADISTICA_PS_CURRENT},
+    {gText_MaxPS, LIST_ESTADISTICA_PS_MAX},
     {gText_Ataque, LIST_STAT_ATTACK},
-    {gText_Defensa, LIST_STAT_DEFENSE},
-    {gText_Velocidad, LIST_STAT_SPEED},
+    {gText_Defensa, LIST_ESTADISTICA_DEFENSAENSE},
+    {gText_Velocidad, LIST_ESTADISTICA_VELOCIDAD},
     {gText_AtEsp, LIST_STAT_SP_ATK},
     {gText_DefEsp, LIST_STAT_SP_DEF},
 };
@@ -849,7 +848,7 @@ void CB2_BattleDebugMenu(void)
         ResetVramOamAndBgCntRegs();
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         ResetAllBgsCoordinates();
         FreeAllWindowBuffers();
         DeactivateAllTextPrinters();
@@ -889,7 +888,7 @@ void CB2_BattleDebugMenu(void)
         data->currentMainListItemId = 0;
         data->activeWindow = ACTIVE_WIN_MAIN;
         data->secondaryListTaskId = 0xFF;
-        CopyWindowToVram(data->mainListWindowId, COPYWIN_FULL);
+        CopyWindowToVram(data->mainListWindowId, COPIA_COMPLETA_VENTANA);
         gMain.state++;
         break;
     case 5:
@@ -930,7 +929,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1009,7 +1008,7 @@ static void Task_ShowAiPoints(u8 taskId)
         break;
     // Input
     case 2:
-        if (JOY_NEW(R_BUTTON) && IsDoubleBattle())
+        if (JOY_NEW(R_BUTTON) && EsContraEntrenador())
         {
             CleanUpAiInfoWindow(taskId);
             do {
@@ -1018,7 +1017,7 @@ static void Task_ShowAiPoints(u8 taskId)
             } while (!IsBattlerAlive(data->battlerId));
             data->aiViewState = 0;
         }
-        else if (JOY_NEW(L_BUTTON) && IsDoubleBattle())
+        else if (JOY_NEW(L_BUTTON) && EsContraEntrenador())
         {
             CleanUpAiInfoWindow(taskId);
             do {
@@ -1081,7 +1080,7 @@ static void PutAiInfoText(struct BattleDebugMenu *data)
         }
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1128,7 +1127,7 @@ static void PutAiPartyText(struct BattleDebugMenu *data)
         AddTextPrinterParameterized5(data->aiMovesWindowId, FONT_SMALL_NARROW, text, i * 41, 35 + (j + 1) * 15, 0, NULL, 0, 0);
     }
 
-    CopyWindowToVram(data->aiMovesWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->aiMovesWindowId, COPIA_COMPLETA_VENTANA);
     Free(text);
 }
 
@@ -1306,7 +1305,7 @@ static void SwitchToDebugView(u8 taskId)
 
 static void Task_DebugMenuFadeIn(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         gTasks[taskId].func = Task_DebugMenuProcessInput;
 }
 
@@ -1383,7 +1382,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
             data->currentSecondaryListItemId = listItemId;
             data->modifyWindowId = AddWindow(&sModifyWindowTemplate);
             PutWindowTilemap(data->modifyWindowId);
-            CopyWindowToVram(data->modifyWindowId, COPYWIN_FULL);
+            CopyWindowToVram(data->modifyWindowId, COPIA_COMPLETA_VENTANA);
             SetUpModifyArrows(data);
             PrintDigitChars(data);
             data->activeWindow = ACTIVE_WIN_MODIFY;
@@ -1440,7 +1439,7 @@ static void Task_DebugMenuProcessInput(u8 taskId)
 
 static void Task_DebugMenuFadeOut(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         struct BattleDebugMenu *data = GetStructPtr(taskId);
         DestroyListMenuTask(data->mainListTaskId, 0, 0);
@@ -1468,7 +1467,7 @@ static void PrintOnBattlerWindow(u8 windowId, u8 battlerId)
 
     FillWindowPixelBuffer(windowId, 0x11);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 0, 0, 0, NULL);
-    CopyWindowToVram(windowId, COPYWIN_FULL);
+    CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void UpdateWindowsOnChangedBattler(struct BattleDebugMenu *data)
@@ -1572,7 +1571,7 @@ static void CreateSecondaryListMenu(struct BattleDebugMenu *data)
     listTemplate.windowId = data->secondaryListWindowId;
 
     data->secondaryListTaskId = ListMenuInit(&listTemplate, 0, 0);
-    CopyWindowToVram(data->secondaryListWindowId, COPYWIN_FULL);
+    CopyWindowToVram(data->secondaryListWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void PadString(const u8 *src, u8 *dst)
@@ -1653,19 +1652,19 @@ static void PrintSecondaryEntries(struct BattleDebugMenu *data)
         }
         break;
     case LIST_ITEM_STAT_STAGES:
-        for (i = 0; i < NUM_BATTLE_STATS - 1; i++)
+        for (i = 0; i < NUMERO_ESTADISTICAS_BATALLA - 1; i++)
         {
-            u8 *txtPtr = StringCopy(text, gStatNamesTable[STAT_ATK + i]);
+            u8 *txtPtr = StringCopy(text, gStatNamesTable[ESTADISTICA_ATAQUE + i]);
             txtPtr[0] = CHAR_SPACE;
-            if (gBattleMons[data->battlerId].statStages[STAT_ATK + i] >= DEFAULT_STAT_STAGE)
+            if (gBattleMons[data->battlerId].statStages[ESTADISTICA_ATAQUE + i] >= ESTADISTICA_NEUTRA)
             {
                 txtPtr[1] = CHAR_PLUS;
-                txtPtr[2] = CHAR_0 + (gBattleMons[data->battlerId].statStages[STAT_ATK + i] - DEFAULT_STAT_STAGE);
+                txtPtr[2] = CHAR_0 + (gBattleMons[data->battlerId].statStages[ESTADISTICA_ATAQUE + i] - ESTADISTICA_NEUTRA);
             }
             else
             {
                 txtPtr[1] = CHAR_HYPHEN;
-                txtPtr[2] = CHAR_6 - (gBattleMons[data->battlerId].statStages[STAT_ATK + i]);
+                txtPtr[2] = CHAR_6 - (gBattleMons[data->battlerId].statStages[ESTADISTICA_ATAQUE + i]);
             }
             txtPtr[3] = EOS;
 
@@ -1740,7 +1739,7 @@ static void UpdateBattlerValue(struct BattleDebugMenu *data)
         ((u16 *)(data->modifyArrows.modifiedValPtr))[3] = data->modifyArrows.currValue;
         break;
     case VAL_ALL_STAT_STAGES:
-        for (i = 0; i < NUM_BATTLE_STATS; i++)
+        for (i = 0; i < NUMERO_ESTADISTICAS_BATALLA; i++)
             gBattleMons[data->battlerId].statStages[i] = data->modifyArrows.currValue;
         break;
     case VAL_U32:
@@ -2054,14 +2053,14 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.maxValue = 9999;
         data->modifyArrows.maxDigits = 4;
         data->modifyArrows.typeOfVal = VAL_U16;
-        if (data->currentSecondaryListItemId == LIST_STAT_HP_CURRENT)
+        if (data->currentSecondaryListItemId == LIST_ESTADISTICA_PS_CURRENT)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].hp;
             data->modifyArrows.currValue = gBattleMons[data->battlerId].hp;
             data->modifyArrows.minValue = 1;
             data->modifyArrows.maxValue = gBattleMons[data->battlerId].maxHP;
         }
-        else if (data->currentSecondaryListItemId == LIST_STAT_HP_MAX)
+        else if (data->currentSecondaryListItemId == LIST_ESTADISTICA_PS_MAX)
         {
             data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].maxHP;
             data->modifyArrows.minValue = gBattleMons[data->battlerId].hp;
@@ -2077,17 +2076,17 @@ static void SetUpModifyArrows(struct BattleDebugMenu *data)
         data->modifyArrows.minValue = 0;
         data->modifyArrows.maxValue = 12;
         data->modifyArrows.maxDigits = 2;
-        if (data->currentSecondaryListItemId == NUM_BATTLE_STATS - 1) // Change all stats
+        if (data->currentSecondaryListItemId == NUMERO_ESTADISTICAS_BATALLA - 1) // Change all stats
         {
-            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[STAT_ATK];
-            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[STAT_ATK];
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[ESTADISTICA_ATAQUE];
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[ESTADISTICA_ATAQUE];
             data->modifyArrows.typeOfVal = VAL_ALL_STAT_STAGES;
         }
         else
         {
-            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+            data->modifyArrows.modifiedValPtr = &gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + ESTADISTICA_ATAQUE];
             data->modifyArrows.typeOfVal = VAL_U8;
-            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + STAT_ATK];
+            data->modifyArrows.currValue = gBattleMons[data->battlerId].statStages[data->currentSecondaryListItemId + ESTADISTICA_ATAQUE];
         }
         break;
     case LIST_ITEM_VARIOUS:

@@ -111,8 +111,6 @@ static void Contest_SetBgCopyFlags(u32 flagIndex);
 static void CalculateFinalScores(void);
 static void CalculateAppealMoveImpact(u8);
 static void SetMoveAnimAttackerData(u8);
-static void BlinkContestantBox(u8, u8);
-static u8 CreateContestantBoxBlinkSprites(u8);
 static u16 SanitizeMove(u16);
 static void SetMoveSpecificAnimData(u8);
 static void SetMoveTargetPosition(u16);
@@ -147,8 +145,6 @@ static void Task_StopFlashJudgeAttentionEye(u8);
 static void Task_UnusedBlend(u8);
 static void InitUnusedBlendTaskData(u8);
 static void UpdateBlendTaskContestantData(u8);
-static void SpriteCB_BlinkContestantBox(struct Sprite *);
-static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite);
 static u8 StartApplauseOverflowAnimation(void);
 static void Task_ApplauseOverflowAnimation(u8);
 static void Task_SlideApplauseMeterIn(u8);
@@ -328,10 +324,6 @@ EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
 EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 
-// IWRAM common vars.
-COMMON_DATA rng_value_t gContestRngValue = {0};
-
-extern const u8 gText_LinkStandby4[];
 extern const u8 gText_BDot[];
 extern const u8 gText_CDot[];
 extern void (*const gContestEffectFuncs[])(void);
@@ -1115,7 +1107,7 @@ static void InitContestInfoBgs(void)
     s32 i;
 
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sContestBgTemplates, ARRAY_COUNT(sContestBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sContestBgTemplates, ARRAY_COUNT(sContestBgTemplates));
     SetBgAttribute(3, BG_ATTR_WRAPAROUND, 1);
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -1135,7 +1127,7 @@ static void LoadContestPalettes(void)
     s32 i;
 
     LoadPalette(sText_Pal, BG_PLTT_ID(15), sizeof(sText_Pal));
-    SetBackdropFromColor(RGB_BLACK);
+    CambiaColorBackdrop(RGB_BLACK);
     for (i = 10; i < 14; i++)
         LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(15) + 1], BG_PLTT_ID(15) + i, PLTT_SIZEOF(1));
     FillPalette(RGB(31, 17, 31), BG_PLTT_ID(15) + 3, PLTT_SIZEOF(1));
@@ -1234,7 +1226,7 @@ void CB2_StartContest(void)
         SetupContestGpuRegs();
         ScanlineEffect_Clear();
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = TRUE;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         ResetSpriteData();
         ResetTasks();
         FreeAllSpritePalettes();
@@ -1257,8 +1249,8 @@ void CB2_StartContest(void)
         SetBgForCurtainDrop();
         gBattle_BG1_X = 0;
         gBattle_BG1_Y = 0;
-        BeginFastPaletteFade(2);
-        gPaletteFade.bufferTransferDisabled = FALSE;
+        EmpiezaFundidoPaletasRapido(FUNDIDO_DESDE_NEGRO);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         SetVBlankCallback(VBlankCB_Contest);
         eContest.mainTaskId = CreateTask(Task_StartContestWaitFade, 10);
         SetMainCallback2(CB2_ContestMain);
@@ -1268,7 +1260,7 @@ void CB2_StartContest(void)
 
 static void Task_StartContestWaitFade(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         gTasks[taskId].data[0] = 0;
     }
@@ -1282,7 +1274,7 @@ static bool8 SetupContestGraphics(u8 *stateVar)
     switch (*stateVar)
     {
     case 0:
-        gPaletteFade.bufferTransferDisabled = TRUE;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         RequestDma3Fill(0, (void *)VRAM, 0x8000, 1);
         RequestDma3Fill(0, (void *)VRAM + 0x8000, 0x8000, 1);
         RequestDma3Fill(0, (void *)VRAM + 0x10000, 0x8000, 1);
@@ -1568,7 +1560,7 @@ static void Task_HideMoveSelectScreen(u8 taskId)
     {
         FillWindowPixelBuffer(MOVE_WINDOWS_START + i, PIXEL_FILL(0));
         PutWindowTilemap(MOVE_WINDOWS_START + i);
-        CopyWindowToVram(MOVE_WINDOWS_START + i, COPYWIN_GFX);
+        CopyWindowToVram(MOVE_WINDOWS_START + i, COPIA_TILES_VENTANA);
     }
     Contest_SetBgCopyFlags(0);
     // This seems to be a bug; it should have just copied PLTT_BUFFER_SIZE.
@@ -1648,7 +1640,6 @@ static void Task_DoAppeals(u8 taskId)
         gSprites[spriteId].callback = SpriteCB_MonSlideIn;
         gTasks[taskId].tMonSpriteId = spriteId;
         gBattlerSpriteIds[gBattlerAttacker] = spriteId;
-        BlinkContestantBox(CreateContestantBoxBlinkSprites(eContest.currentContestant), FALSE);
         gTasks[taskId].tState = APPEALSTATE_WAIT_SLIDE_MON;
         return;
     case APPEALSTATE_WAIT_SLIDE_MON:
@@ -2127,7 +2118,7 @@ static void Task_DoAppeals(u8 taskId)
             }
             break;
         case 3:
-            if (!gPaletteFade.active)
+            if (!gFundidoPaletas.activo)
             {
                 gTasks[taskId].tCounter = 0;
                 gTasks[taskId].data[11] = 0;
@@ -2178,7 +2169,7 @@ static void Task_DoAppeals(u8 taskId)
             }
             break;
         case 4:
-            if (!gPaletteFade.active)
+            if (!gFundidoPaletas.activo)
             {
                 gTasks[taskId].tCounter = 0;
                 gTasks[taskId].data[11] = 0;
@@ -2498,7 +2489,6 @@ static void Task_EndAppeals(u8 taskId)
         gContestMonAppealPointTotals[i] = eContestantStatus[i].pointTotal;
     CalculateFinalScores();
     ContestClearGeneralTextWindow();
-    gContestRngValue = gRngValue;
     StringExpandPlaceholders(gStringVar4, gText_AllOutOfAppealTime);
     Contest_StartTextPrinter(gStringVar4, TRUE);
     gTasks[taskId].data[2] = 0;
@@ -2535,14 +2525,14 @@ static void Task_TryCommunicateFinalStandings(u8 taskId)
     if (gTasks[taskId].data[0]++ >= 50)
     {
         gTasks[taskId].data[0] = 0;
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_ContestReturnToField;
     }
 }
 
 static void Task_ContestReturnToField(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyTask(taskId);
         gFieldCallback = FieldCB_ContestReturnToField;
@@ -2566,72 +2556,7 @@ static void TryPutPlayerLast(void)
 
 void CreateContestMonFromParty(u8 partyIndex)
 {
-    u8 name[max(PLAYER_NAME_LENGTH + 1, POKEMON_NAME_BUFFER_SIZE)];
-    u16 heldItem;
-    s16 cool;
-    s16 beauty;
-    s16 cute;
-    s16 smart;
-    s16 tough;
 
-    StringCopy(name, gSaveBlockPtr->playerName);
-    memcpy(gContestMons[gContestPlayerMonIndex].trainerName, name, PLAYER_NAME_LENGTH + 1);
-    if (gSaveBlockPtr->playerGender == MACHO)
-        gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_BRENDAN;
-    else
-        gContestMons[gContestPlayerMonIndex].trainerGfxId = OBJ_EVENT_GFX_LINK_MAY;
-    gContestMons[gContestPlayerMonIndex].aiFlags = 0;
-    gContestMons[gContestPlayerMonIndex].highestRank = 0;
-    gContestMons[gContestPlayerMonIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
-    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, name);
-    StringGet_Nickname(name);
-    memcpy(gContestMons[gContestPlayerMonIndex].nickname, name, POKEMON_NAME_LENGTH + 1);
-    StringCopy(gContestMons[gContestPlayerMonIndex].nickname, name);
-    gContestMons[gContestPlayerMonIndex].cool = GetMonData(&gPlayerParty[partyIndex], MON_DATA_COOL);
-    gContestMons[gContestPlayerMonIndex].beauty = GetMonData(&gPlayerParty[partyIndex], MON_DATA_BEAUTY);
-    gContestMons[gContestPlayerMonIndex].cute = GetMonData(&gPlayerParty[partyIndex], MON_DATA_CUTE);
-    gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SMART);
-    gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gPlayerParty[partyIndex], MON_DATA_TOUGH);
-    gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE4);
-    gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY);
-    gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID);
-    gContestMons[gContestPlayerMonIndex].isShiny = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_SHINY);
-
-    heldItem = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM);
-    cool   = gContestMons[gContestPlayerMonIndex].cool;
-    beauty = gContestMons[gContestPlayerMonIndex].beauty;
-    cute   = gContestMons[gContestPlayerMonIndex].cute;
-    smart  = gContestMons[gContestPlayerMonIndex].smart;
-    tough  = gContestMons[gContestPlayerMonIndex].tough;
-    if      (heldItem == ITEM_RED_SCARF)
-        cool += 20;
-    else if (heldItem == ITEM_BLUE_SCARF)
-        beauty += 20;
-    else if (heldItem == ITEM_PINK_SCARF)
-        cute += 20;
-    else if (heldItem == ITEM_GREEN_SCARF)
-        smart += 20;
-    else if (heldItem == ITEM_YELLOW_SCARF)
-        tough += 20;
-    if (cool > 255)
-        cool = 255;
-    if (beauty > 255)
-        beauty = 255;
-    if (cute > 255)
-        cute = 255;
-    if (smart > 255)
-        smart = 255;
-    if (tough > 255)
-        tough = 255;
-    gContestMons[gContestPlayerMonIndex].cool = cool;
-    gContestMons[gContestPlayerMonIndex].beauty = beauty;
-    gContestMons[gContestPlayerMonIndex].cute = cute;
-    gContestMons[gContestPlayerMonIndex].smart = smart;
-    gContestMons[gContestPlayerMonIndex].tough = tough;
 }
 
 void SetContestants(u8 contestType, u8 rank)
@@ -3060,7 +2985,7 @@ static void DrawStatusSymbols(void)
 static void ContestClearGeneralTextWindow(void)
 {
     FillWindowPixelBuffer(WIN_GENERAL_TEXT, PIXEL_FILL(0));
-    CopyWindowToVram(WIN_GENERAL_TEXT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_GENERAL_TEXT, COPIA_TILES_VENTANA);
     Contest_SetBgCopyFlags(0);
 }
 
@@ -3778,111 +3703,6 @@ static void StartStopFlashJudgeAttentionEye(u8 contestant)
         StopFlashJudgeAttentionEye(contestant);
 }
 
-static u8 CreateContestantBoxBlinkSprites(u8 contestant)
-{
-    u8 spriteId1, spriteId2;
-    u8 x = gContestantTurnOrder[contestant] * 40 + 32;
-
-    LoadCompressedSpriteSheet(&sSpriteSheets_ContestantsTurnBlinkEffect[contestant]);
-    LoadSpritePalette(&sSpritePalettes_ContestantsTurnBlinkEffect[contestant]);
-    spriteId1 = CreateSprite(&sSpriteTemplates_ContestantsTurnBlinkEffect[contestant], 184, x, 29);
-    spriteId2 = CreateSprite(&sSpriteTemplates_ContestantsTurnBlinkEffect[contestant], 248, x, 29);
-    gSprites[spriteId2].oam.tileNum += 64;
-
-    CopySpriteTiles(0,
-                    3,
-                    (void *)VRAM,
-                    (u16 *)(BG_SCREEN_ADDR(28) + gContestantTurnOrder[contestant] * 5 * 64 + 0x26),
-                    gContestResources->boxBlinkTiles1);
-
-    CopySpriteTiles(0,
-                    3, (void *)VRAM,
-                    (u16 *)(BG_SCREEN_ADDR(28) + gContestantTurnOrder[contestant] * 5 * 64 + 0x36),
-                    gContestResources->boxBlinkTiles2);
-
-    CpuFill32(0, gContestResources->boxBlinkTiles1 + 0x500, 0x300);
-    CpuFill32(0, gContestResources->boxBlinkTiles2 + 0x500, 0x300);
-
-    RequestDma3Copy(gContestResources->boxBlinkTiles1,
-                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId1].oam.tileNum * 32),
-                    0x800,
-                    1);
-
-    RequestDma3Copy(gContestResources->boxBlinkTiles2,
-                    (u8 *)(OBJ_VRAM0 + gSprites[spriteId2].oam.tileNum * 32),
-                    0x800,
-                    1);
-
-    gSprites[spriteId1].data[0] = spriteId2;
-    gSprites[spriteId2].data[0] = spriteId1;
-
-    gSprites[spriteId1].data[1] = contestant;
-    gSprites[spriteId2].data[1] = contestant;
-
-    return spriteId1;
-}
-
-static void DestroyContestantBoxBlinkSprites(u8 spriteId)
-{
-    u8 spriteId2 = gSprites[spriteId].data[0];
-
-    FreeSpriteOamMatrix(&gSprites[spriteId2]);
-    DestroySprite(&gSprites[spriteId2]);
-    DestroySpriteAndFreeResources(&gSprites[spriteId]);
-}
-
-static void SetBlendForContestantBoxBlink(void)
-{
-    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
-    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(7, 9));
-}
-
-static void ResetBlendForContestantBoxBlink(void)
-{
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-}
-
-// To indicate whose turn is up
-static void BlinkContestantBox(u8 spriteId, bool8 b)
-{
-    u8 spriteId2;
-
-    SetBlendForContestantBoxBlink();
-    eContestGfxState[gSprites[spriteId].data[1]].boxBlinking = TRUE;
-    spriteId2 = gSprites[spriteId].data[0];
-    StartSpriteAffineAnim(&gSprites[spriteId], 1);
-    StartSpriteAffineAnim(&gSprites[spriteId2], 1);
-    gSprites[spriteId].callback = SpriteCB_BlinkContestantBox;
-    gSprites[spriteId2].callback = SpriteCallbackDummy;
-    if (b == FALSE)
-        PlaySE(SE_CONTEST_MONS_TURN);
-    else
-        PlaySE(SE_PC_LOGIN);
-}
-
-static void SpriteCB_BlinkContestantBox(struct Sprite *sprite)
-{
-    if (sprite->affineAnimEnded)
-    {
-        u8 spriteId2 = sprite->data[0];
-
-        if (gSprites[spriteId2].affineAnimEnded)
-        {
-            sprite->invisible = TRUE;
-            gSprites[spriteId2].invisible = TRUE;
-            sprite->callback = SpriteCB_EndBlinkContestantBox;
-        }
-    }
-}
-
-static void SpriteCB_EndBlinkContestantBox(struct Sprite *sprite)
-{
-    eContestGfxState[sprite->data[1]].boxBlinking = FALSE;
-    DestroyContestantBoxBlinkSprites(sprite->data[0]);
-    ResetBlendForContestantBoxBlink();
-}
-
 void SortContestants(bool8 useRanking)
 {
     u8 scratch[CONTESTANT_COUNT];
@@ -3963,7 +3783,7 @@ void SortContestants(bool8 useRanking)
         {
             u8 j = eContestantStatus[i].ranking;
 
-            while (1)
+            while(1)
             {
                 u8 *ptr = &scratch[j];
                 if (*ptr == CONTESTANT_NONE)

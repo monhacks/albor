@@ -67,7 +67,6 @@ static const struct ScanlineEffectParams sFlashEffectParams =
 {
     .dmaDest = &REG_WIN0H,
     .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    .initState = 1,
 };
 
 // code
@@ -370,7 +369,7 @@ void FieldCB_ReturnToFieldNoScriptCheckMusic(void)
 
 static bool32 PaletteFadeActive(void)
 {
-    return gPaletteFade.active;
+    return gFundidoPaletas.activo;
 }
 
 static bool32 WaitForWeatherFadeIn(void)
@@ -1164,7 +1163,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
         Menu_LoadStdPalAt(BG_PLTT_ID(15));
         FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
         PutWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_FULL);
+        CopyWindowToVram(windowId, COPIA_COMPLETA_VENTANA);
 
         gTasks[taskId].tIsPlayerHouse = IsLastHealLocationPlayerHouse();
         gTasks[taskId].tState = FRLG_WHITEOUT_PRINT_MSG;
@@ -1182,7 +1181,7 @@ static void Task_RushInjuredPokemonToCenter(u8 taskId)
     case FRLG_WHITEOUT_LEAVE_MSG_SCREEN:
         windowId = gTasks[taskId].tWindowId;
         ClearWindowTilemap(windowId);
-        CopyWindowToVram(windowId, COPYWIN_MAP);
+        CopyWindowToVram(windowId, COPIA_TILEMAP_VENTANA);
         RemoveWindow(windowId);
         FillPalBufferBlack();
         FadeInFromBlack();

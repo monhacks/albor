@@ -40,7 +40,7 @@ struct FrontierBrainMon
     u16 heldItem;
     u8 fixedIV;
     u8 nature;
-    u8 evs[NUM_STATS];
+    u8 evs[NUMERO_ESTADISTICAS];
     u16 moves[MAX_MON_MOVES];
 };
 
@@ -1041,7 +1041,7 @@ static void ShowTowerResultsWindow(u8 battleMode)
     TowerPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 97);
     TowerPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 132, 113);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Dome records.
@@ -1110,7 +1110,7 @@ static void ShowDomeResultsWindow(u8 battleMode)
     PrintTwoStrings(gText_Record, gText_ClearStreak, gSaveBlockPtr->frontier.domeRecordWinStreaks[battleMode][FRONTIER_LVL_OPEN], 64, 121, 113);
     PrintTwoStrings(gText_Total, gText_Championships, gSaveBlockPtr->frontier.domeTotalChampionships[battleMode][FRONTIER_LVL_OPEN], 64, 112, 129);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Palace records.
@@ -1184,7 +1184,7 @@ static void ShowPalaceResultsWindow(u8 battleMode)
     PalacePrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 97);
     PalacePrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 72, 131, 113);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Pike records.
@@ -1238,7 +1238,7 @@ static void ShowPikeResultsWindow(void)
     PikePrintCleared(gText_Record, gText_RoomsCleared, gSaveBlockPtr->frontier.pikeRecordStreaks[FRONTIER_LVL_OPEN], 64, 114, 113);
     PikePrintCleared(gText_Total, gText_TimesCleared, gSaveBlockPtr->frontier.pikeTotalStreaks[FRONTIER_LVL_OPEN], 64, 114, 129);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Arena records.
@@ -1298,7 +1298,7 @@ static void ShowArenaResultsWindow(void)
     ArenaPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 72, 126, 97);
     ArenaPrintRecordStreak(FRONTIER_LVL_OPEN, 72, 126, 113);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Factory records.
@@ -1389,7 +1389,7 @@ static void ShowFactoryResultsWindow(u8 battleMode)
     FactoryPrintPrevOrCurrentStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 113);
     FactoryPrintRecordStreak(battleMode, FRONTIER_LVL_OPEN, 8, 64, 158, 129);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 // Battle Pyramid records.
@@ -1449,7 +1449,7 @@ static void ShowPyramidResultsWindow(void)
     PyramidPrintPrevOrCurrentStreak(FRONTIER_LVL_OPEN, 64, 111, 97);
     PyramidPrintRecordStreak(FRONTIER_LVL_OPEN, 64, 111, 113);
     PutWindowTilemap(gRecordsWindowId);
-    CopyWindowToVram(gRecordsWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gRecordsWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void Script_GetFrontierBrainStatus(void)

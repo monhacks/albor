@@ -21,11 +21,6 @@
 #define B_TXT_OPPONENT_MON1_NAME 0x6
 #define B_TXT_PLAYER_MON2_NAME 0x7
 #define B_TXT_OPPONENT_MON2_NAME 0x8
-#define B_TXT_LINK_PLAYER_MON1_NAME 0x9
-#define B_TXT_LINK_OPPONENT_MON1_NAME 0xA
-#define B_TXT_LINK_PLAYER_MON2_NAME 0xB
-#define B_TXT_LINK_OPPONENT_MON2_NAME 0xC
-#define B_TXT_ATK_NAME_WITH_PREFIX_MON1 0xD
 #define B_TXT_ATK_PARTNER_NAME 0xE
 #define B_TXT_ATK_NAME_WITH_PREFIX 0xF
 #define B_TXT_DEF_NAME_WITH_PREFIX 0x10
@@ -42,11 +37,6 @@
 #define B_TXT_EFF_ABILITY 0x1B
 #define B_TXT_TRAINER1_CLASS 0x1C
 #define B_TXT_TRAINER1_NAME 0x1D
-#define B_TXT_LINK_PLAYER_NAME 0x1E
-#define B_TXT_LINK_PARTNER_NAME 0x1F
-#define B_TXT_LINK_OPPONENT1_NAME 0x20
-#define B_TXT_LINK_OPPONENT2_NAME 0x21
-#define B_TXT_LINK_SCR_TRAINER_NAME 0x22
 #define B_TXT_PLAYER_NAME 0x23
 #define B_TXT_TRAINER1_LOSE_TEXT 0x24
 #define B_TXT_TRAINER1_WIN_TEXT 0x25
@@ -57,10 +47,6 @@
 #define B_TXT_DEF_PREFIX2 0x2B
 #define B_TXT_ATK_PREFIX3 0x2C
 #define B_TXT_DEF_PREFIX3 0x2D
-#define B_TXT_TRAINER2_CLASS 0x2E
-#define B_TXT_TRAINER2_NAME 0x2F
-#define B_TXT_TRAINER2_LOSE_TEXT 0x30
-#define B_TXT_TRAINER2_WIN_TEXT 0x31
 #define B_TXT_PARTNER_CLASS 0x32
 #define B_TXT_PARTNER_NAME 0x33
 #define B_TXT_BUFF3 0x34
@@ -266,7 +252,6 @@ extern const u8 gText_PkmnIsEvolving[];
 extern const u8 gText_CongratsPkmnEvolved[];
 extern const u8 gText_PkmnStoppedEvolving[];
 extern const u8 gText_EllipsisQuestionMark[];
-extern const u8 gText_LinkStandby[];
 extern const u8 gText_SafariZoneMenu[];
 extern const u8 gText_MoveInterfacePP[];;
 extern const u8 gText_MoveInterfaceDynamicColors[];

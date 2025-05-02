@@ -158,7 +158,7 @@ void CB2_InitOptionMenu(void)
         DmaClear16(3, PLTT, PLTT_SIZE);
         SetGpuReg(REG_OFFSET_DISPCNT, 0);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sOptionMenuBgTemplates, ARRAY_COUNT(sOptionMenuBgTemplates));
         ChangeBgX(0, 0, BG_COORD_SET);
         ChangeBgY(0, 0, BG_COORD_SET);
         ChangeBgX(1, 0, BG_COORD_SET);
@@ -235,12 +235,12 @@ void CB2_InitOptionMenu(void)
         FrameType_DrawChoices(gTasks[taskId].tWindowFrameType);
         HighlightOptionMenuItem(gTasks[taskId].tMenuSelection);
 
-        CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
+        CopyWindowToVram(WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
         gMain.state++;
         break;
     }
     case 11:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetVBlankCallback(VBlankCB);
         SetMainCallback2(MainCB2);
         return;
@@ -249,7 +249,7 @@ void CB2_InitOptionMenu(void)
 
 static void Task_OptionMenuFadeIn(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         gTasks[taskId].func = Task_OptionMenuProcessInput;
 }
 
@@ -328,7 +328,7 @@ static void Task_OptionMenuProcessInput(u8 taskId)
         if (sArrowPressed)
         {
             sArrowPressed = FALSE;
-            CopyWindowToVram(WIN_OPTIONS, COPYWIN_GFX);
+            CopyWindowToVram(WIN_OPTIONS, COPIA_TILES_VENTANA);
         }
     }
 }
@@ -341,13 +341,13 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlockPtr->optionsButtonMode = gTasks[taskId].tButtonMode;
     gSaveBlockPtr->optionsWindowFrameType = gTasks[taskId].tWindowFrameType;
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
 
 static void Task_OptionMenuFadeOut(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyTask(taskId);
         FreeAllWindowBuffers();
@@ -580,7 +580,7 @@ static void DrawHeaderText(void)
 {
     FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_HEADER, FONT_NORMAL, gText_Option, 8, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
+    CopyWindowToVram(WIN_HEADER, COPIA_COMPLETA_VENTANA);
 }
 
 static void DrawOptionMenuTexts(void)
@@ -590,7 +590,7 @@ static void DrawOptionMenuTexts(void)
     FillWindowPixelBuffer(WIN_OPTIONS, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
         AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(WIN_OPTIONS, COPYWIN_FULL);
+    CopyWindowToVram(WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
 }
 
 #define TILE_TOP_CORNER_L 0x1A2

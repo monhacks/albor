@@ -28,6 +28,7 @@ enum {
     BG_COORD_SUB,
 };
 
+
 struct BgTemplate
 {
     u16 bg:2;                   // 0x1, 0x2 -> 0x3
@@ -42,7 +43,7 @@ struct BgTemplate
 void ResetBgs(void);
 u32 GetBgMode(void);
 void ResetBgControlStructs(void);
-u8 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode);
+u32 LoadBgVram(u32 bg, const void *src, u16 size, u16 destOffset, u32 mode);
 void SetTextModeAndHideBgs(void);
 bool32 IsInvalidBg(u32 bg);
 void ResetBgsAndClearDma3BusyFlags(void);
@@ -65,7 +66,8 @@ void SetBgAffine(u32 bg, s32 srcCenterX, s32 srcCenterY, s16 dispCenterX, s16 di
 void SetBgTilemapBuffer(u32 bg, void *tilemap);
 void UnsetBgTilemapBuffer(u32 bg);
 void *GetBgTilemapBuffer(u32 bg);
-void CopyToBgTilemapBuffer(u32 bg, const void *src, u16 mode, u16 destOffset);
+void CopyToBgTilemapBuffer(u32 bg, const void *src, u32 mode, u32 destOffset);
+void DecompressAndCopyToBgTilemapBuffer(u32 bg, const u32 *src, u32 mode, u32 destOffset);
 void CopyBgTilemapBufferToVram(u32 bg);
 void CopyToBgTilemapBufferRect(u32 bg, const void *src, u8 destX, u8 destY, u8 width, u8 height);
 void CopyToBgTilemapBufferRect_ChangePalette(u32 bg, const void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette);

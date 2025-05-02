@@ -44,15 +44,9 @@ struct MemBlock
 #define HEAP_SIZE 0x1C000
 extern u8 gHeap[HEAP_SIZE];
 
-#define Alloc(size) Alloc_(size, NULL)
-#define AllocZeroed(size) AllocZeroed_(size, NULL)
-
-void *Alloc_(u32 size, const char *location);
-void *AllocZeroed_(u32 size, const char *location);
+void *Alloc(u32 size);
+void *AllocZeroed(u32 size);
 void Free(void *pointer);
 void InitHeap(void *pointer, u32 size);
-
-const struct MemBlock *HeapHead(void);
-const char *MemBlockLocation(const struct MemBlock *block);
 
 #endif // GUARD_ALLOC_H

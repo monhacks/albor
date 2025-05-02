@@ -221,7 +221,7 @@ static const struct SpriteTemplate sSpriteTemplate_Cable =
 
 static void Task_LoadCableCar(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         SetMainCallback2(CB2_LoadCableCar);
         DestroyTask(taskId);
@@ -232,7 +232,7 @@ void CableCar(void)
 {
     LockPlayerFieldControls();
     CreateTask(Task_LoadCableCar, 1);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
 }
 
 static void CB2_LoadCableCar(void)
@@ -267,7 +267,7 @@ static void CB2_LoadCableCar(void)
         InitMapMusic();
         ResetMapMusic();
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
         SetBgTilemapBuffer(0, sCableCar->bgTilemapBuffers[0]);
         SetBgTilemapBuffer(1, sCableCar->bgTilemapBuffers[1]);
         SetBgTilemapBuffer(2, sCableCar->bgTilemapBuffers[2]);
@@ -280,10 +280,10 @@ static void CB2_LoadCableCar(void)
             LoadCompressedSpriteSheet(&sSpriteSheets[i]);
 
         LoadSpritePalettes(sSpritePalettes);
-        sCableCar->groundTilemap = malloc_and_decompress(sGround_Tilemap, &sizeOut);
-        sCableCar->treesTilemap = malloc_and_decompress(sTrees_Tilemap, &sizeOut);
-        sCableCar->bgMountainsTilemap = malloc_and_decompress(sBgMountains_Tilemap, &sizeOut);
-        sCableCar->pylonPoleTilemap = malloc_and_decompress(sPylonPole_Tilemap, &sizeOut);
+        sCableCar->groundTilemap = MallocAndDecompress(sGround_Tilemap, &sizeOut);
+        sCableCar->treesTilemap = MallocAndDecompress(sTrees_Tilemap, &sizeOut);
+        sCableCar->bgMountainsTilemap = MallocAndDecompress(sBgMountains_Tilemap, &sizeOut);
+        sCableCar->pylonPoleTilemap = MallocAndDecompress(sPylonPole_Tilemap, &sizeOut);
         sCableCar->pylonTopTilemap = sPylonTop_Tilemap;
         DecompressAndCopyTileDataToVram(0, gCableCarBg_Gfx, 0, 0, 0);
         gMain.state++;
@@ -336,7 +336,7 @@ static void CB2_LoadCableCar(void)
         gMain.state++;
         break;
     case 8:
-        BeginNormalPaletteFade(PALETTES_ALL, 3, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 3, 16, 0, RGB_BLACK);
         FadeInNewBGM(MUS_CABLE_CAR, 1);
         SetBgRegs(TRUE);
         gMain.state++;
@@ -454,13 +454,13 @@ static void Task_CableCar(u8 taskId)
         if (sCableCar->timer == 570)
         {
             sCableCar->state = 3;
-            BeginNormalPaletteFade(PALETTES_ALL, 3, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 3, 0, 16, RGB_BLACK);
             FadeOutBGM(4);
         }
         break;
     case 3:
         // Wait for fade out
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             sCableCar->state = STATE_END;
         break;
     case STATE_END:

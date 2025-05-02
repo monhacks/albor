@@ -1317,8 +1317,8 @@ static void Task_EasyChatScreen(u8 taskId)
     {
     case MAINSTATE_FADE_IN:
         SetVBlankCallback(VBlankCB_EasyChatScreen);
-        BlendPalettes(PALETTES_ALL, 16, 0);
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 16, 0, RGB_BLACK);
         tState = MAINSTATE_WAIT_FADE_IN;
         break;
     case MAINSTATE_HANDLE_INPUT:
@@ -1326,14 +1326,14 @@ static void Task_EasyChatScreen(u8 taskId)
         if (IsFuncIdForQuizLadyScreen(funcId))
         {
             // Fade to Quiz Lady screen
-            BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
             tState = MAINSTATE_TO_QUIZ_LADY;
             tFuncId = funcId;
         }
         else if (funcId == ECFUNC_EXIT)
         {
             // Fade and exit Easy Chat
-            BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_BLACK);
             tState = MAINSTATE_EXIT;
         }
         else if (funcId != ECFUNC_NONE)
@@ -1348,15 +1348,15 @@ static void Task_EasyChatScreen(u8 taskId)
             tState = MAINSTATE_HANDLE_INPUT;
         break;
     case MAINSTATE_TO_QUIZ_LADY:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             EnterQuizLadyScreen(tFuncId);
         break;
     case MAINSTATE_EXIT:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             ExitEasyChatScreen((MainCallback)GetWordTaskArg(taskId, TASKIDX_EXIT_CALLBACK));
         break;
     case MAINSTATE_WAIT_FADE_IN:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             tState = MAINSTATE_HANDLE_INPUT;
         break;
     }
@@ -1503,7 +1503,7 @@ static void CB2_QuizLadyQuestion(void)
         FadeScreen(FADE_TO_BLACK, 0);
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             lilycoveLady = &gSaveBlockPtr->lilycoveLady;
             lilycoveLady->quiz.playerAnswer = EC_EMPTY_WORD;
@@ -1724,7 +1724,7 @@ static u16 HandleEasyChatInput_Phrase(void)
         }
 
         return ECFUNC_NONE;
-    } while (0);
+    } while(0);
 
     // Handle D-Pad input
 
@@ -1807,7 +1807,7 @@ static u16 HandleEasyChatInput_MainScreenButtons(void)
         }
 
         return ECFUNC_NONE;
-    } while (0);
+    } while(0);
 
     if (sEasyChatScreen->mainCursorRow == sEasyChatScreenTemplates[sEasyChatScreen->templateId].numRows)
     {
@@ -2943,7 +2943,7 @@ static bool8 LoadEasyChatScreen(void)
     {
     case 0:
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sEasyChatBgTemplates, ARRAY_COUNT(sEasyChatBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sEasyChatBgTemplates, ARRAY_COUNT(sEasyChatBgTemplates));
         SetBgTilemapBuffer(3, sScreenControl->bg3TilemapBuffer);
         SetBgTilemapBuffer(1, sScreenControl->bg1TilemapBuffer);
         InitWindows(sEasyChatWindowTemplates);
@@ -3865,7 +3865,7 @@ static void PrintTitle(void)
     FillWindowPixelBuffer(WIN_TITLE, PIXEL_FILL(0));
     PrintEasyChatTextWithColors(WIN_TITLE, FONT_NORMAL, titleText, xOffset, 1, TEXT_SKIP_DRAW, TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
     PutWindowTilemap(WIN_TITLE);
-    CopyWindowToVram(WIN_TITLE, COPYWIN_FULL);
+    CopyWindowToVram(WIN_TITLE, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintEasyChatText(u8 windowId, u8 fontId, const u8 *str, u8 x, u8 y, u8 speed, void (*callback)(struct TextPrinterTemplate *, u16))
@@ -3939,7 +3939,7 @@ static void PrintEasyChatStdMessage(u8 msgId)
     if (text2)
         PrintEasyChatText(WIN_MSG, FONT_NORMAL, text2, 0, 17, TEXT_SKIP_DRAW, 0);
 
-    CopyWindowToVram(WIN_MSG, COPYWIN_FULL);
+    CopyWindowToVram(WIN_MSG, COPIA_COMPLETA_VENTANA);
 }
 
 static void CreateEasyChatYesNoMenu(u8 initialCursorPos)
@@ -4033,7 +4033,7 @@ static void PrintCurrentPhrase(void)
         PrintEasyChatText(sScreenControl->windowId, FONT_NORMAL, sScreenControl->phrasePrintBuffer, 0, i * 16 + 1, TEXT_SKIP_DRAW, 0);
     }
 
-    CopyWindowToVram(sScreenControl->windowId, COPYWIN_FULL);
+    CopyWindowToVram(sScreenControl->windowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void BufferFrameTilemap(u16 *tilemap)
@@ -4147,7 +4147,7 @@ static void InitLowerWindowText(u32 whichText)
         break;
     }
 
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void PrintKeyboardText(void)
@@ -4165,7 +4165,7 @@ static void PrintKeyboardGroupNames(void)
 
     i = 0;
     y = 97;
-    while (1)
+    while(1)
     {
         for (x = 0; x < 2; x++)
         {
@@ -4268,7 +4268,7 @@ static void PrintWordSelectText(u8 scrollOffset, u8 numRows)
         y += 16;
     }
 
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
@@ -4300,7 +4300,7 @@ static void EraseWordSelectRows(u8 scrollOffset, u8 numRows)
 static void ClearWordSelectWindow(void)
 {
     FillWindowPixelBuffer(WIN_INPUT_SELECT, PIXEL_FILL(1));
-    CopyWindowToVram(WIN_INPUT_SELECT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_INPUT_SELECT, COPIA_TILES_VENTANA);
 }
 
 static void InitLowerWindowAnim(int winAnimType)

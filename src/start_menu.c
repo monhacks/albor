@@ -436,7 +436,7 @@ static void ShowSafariBallsWindow(void)
     ConvertIntToDecimalStringN(gStringVar1, gNumSafariBalls, STR_CONV_MODE_RIGHT_ALIGN, 2);
     StringExpandPlaceholders(gStringVar4, gText_SafariBallStock);
     AddTextPrinterParameterized(sSafariBallsWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sSafariBallsWindowId, COPIA_TILES_VENTANA);
 }
 
 static void ShowPyramidFloorWindow(void)
@@ -451,7 +451,7 @@ static void ShowPyramidFloorWindow(void)
     StringCopy(gStringVar1, sPyramidFloorNames[gSaveBlockPtr->frontier.curChallengeBattleNum]);
     StringExpandPlaceholders(gStringVar4, gText_BattlePyramidFloor);
     AddTextPrinterParameterized(sBattlePyramidFloorWindowId, FONT_NORMAL, gStringVar4, 0, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sBattlePyramidFloorWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sBattlePyramidFloorWindowId, COPIA_TILES_VENTANA);
 }
 
 static void RemoveExtraStartMenuWindows(void)
@@ -459,7 +459,7 @@ static void RemoveExtraStartMenuWindows(void)
     if (GetSafariZoneFlag())
     {
         ClearStdWindowAndFrameToTransparent(sSafariBallsWindowId, FALSE);
-        CopyWindowToVram(sSafariBallsWindowId, COPYWIN_GFX);
+        CopyWindowToVram(sSafariBallsWindowId, COPIA_TILES_VENTANA);
         RemoveWindow(sSafariBallsWindowId);
     }
     if (InBattlePyramid())
@@ -532,7 +532,7 @@ static bool32 InitStartMenuStep(void)
         break;
     case 5:
         sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
-        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
+        CopyWindowToVram(GetStartMenuWindowId(), COPIA_TILEMAP_VENTANA);
         return TRUE;
     }
 
@@ -656,7 +656,7 @@ static bool8 HandleStartMenuInput(void)
 
 static bool8 StartMenuPokedexCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         IncrementGameStat(GAME_STAT_CHECKED_POKEDEX);
         PlayRainStoppingSoundEffect();
@@ -672,7 +672,7 @@ static bool8 StartMenuPokedexCallback(void)
 
 static bool8 StartMenuPokemonCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -687,7 +687,7 @@ static bool8 StartMenuPokemonCallback(void)
 
 static bool8 StartMenuBagCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -702,7 +702,7 @@ static bool8 StartMenuBagCallback(void)
 
 static bool8 StartMenuPokeNavCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -717,7 +717,7 @@ static bool8 StartMenuPokeNavCallback(void)
 
 static bool8 StartMenuPlayerNameCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -737,7 +737,7 @@ static bool8 StartMenuSaveCallback(void)
 
 static bool8 StartMenuOptionCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -807,7 +807,7 @@ void ShowBattlePyramidStartMenu(void)
 
 static bool8 StartMenuBattlePyramidBagCallback(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
@@ -968,10 +968,10 @@ static u8 SaveDoSaveCallback(void)
 {
     IncrementGameStat(GAME_STAT_SAVED_GAME);
 
-    if (gDifferentSaveFile == TRUE)
+    if (gDiferentePartidaGuardada == TRUE)
     {
         TrySavingData();
-        gDifferentSaveFile = FALSE;
+        gDiferentePartidaGuardada = FALSE;
     }
     else
         TrySavingData();
@@ -1097,14 +1097,7 @@ static void ShowSaveInfoWindow(void)
         AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
     }
 
-    // Print play time
-    yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gText_SavingTime, 0, yOffset, TEXT_SKIP_DRAW, NULL);
-    BufferSaveMenuText(SAVE_MENU_PLAY_TIME, gStringVar4, color);
-    xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 0x70);
-    AddTextPrinterParameterized(sSaveInfoWindowId, FONT_NORMAL, gStringVar4, xOffset, yOffset, TEXT_SKIP_DRAW, NULL);
-
-    CopyWindowToVram(sSaveInfoWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sSaveInfoWindowId, COPIA_TILES_VENTANA);
 }
 
 static void RemoveSaveInfoWindow(void)

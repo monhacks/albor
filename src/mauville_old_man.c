@@ -72,23 +72,12 @@ static const u8 *const sGiddyQuestions[GIDDY_MAX_QUESTIONS] = {
 
 static void SetupBard(void)
 {
-    u16 i;
-    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
 
-    bard->id = MAUVILLE_MAN_BARD;
-    bard->hasChangedSong = FALSE;
-    bard->language = gGameLanguage;
-    for (i = 0; i < BARD_SONG_LENGTH; i++)
-        bard->songLyrics[i] = sDefaultBardSongLyrics[i];
 }
 
 static void SetupHipster(void)
 {
-    struct MauvilleManHipster *hipster = &gSaveBlockPtr->oldMan.hipster;
 
-    hipster->id = MAUVILLE_MAN_HIPSTER;
-    hipster->taughtWord = FALSE;
-    hipster->language = gGameLanguage;
 }
 
 static void SetupStoryteller(void)
@@ -98,11 +87,7 @@ static void SetupStoryteller(void)
 
 static void SetupGiddy(void)
 {
-    struct MauvilleManGiddy *giddy = &gSaveBlockPtr->oldMan.giddy;
 
-    giddy->id = MAUVILLE_MAN_GIDDY;
-    giddy->taleCounter = 0;
-    giddy->language = gGameLanguage;
 }
 
 static void SetupTrader(void)
@@ -112,29 +97,7 @@ static void SetupTrader(void)
 
 void SetMauvilleOldMan(void)
 {
-    u16 trainerId = (gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0];
 
-
-    // Determine man based on the last digit of the player's trainer ID.
-    switch ((trainerId % 10) / 2)
-    {
-    case MAUVILLE_MAN_BARD:
-        SetupBard();
-        break;
-    case MAUVILLE_MAN_HIPSTER:
-        SetupHipster();
-        break;
-    case MAUVILLE_MAN_TRADER:
-        SetupTrader();
-        break;
-    case MAUVILLE_MAN_STORYTELLER:
-        SetupStoryteller();
-        break;
-    case MAUVILLE_MAN_GIDDY:
-        SetupGiddy();
-        break;
-    }
-    SetMauvilleOldManObjEventGfx();
 }
 
 u8 GetCurrentMauvilleOldMan(void)
@@ -154,18 +117,7 @@ void HasBardSongBeenChanged(void)
 
 void SaveBardSongLyrics(void)
 {
-    u16 i;
-    struct MauvilleManBard *bard = &gSaveBlockPtr->oldMan.bard;
 
-    StringCopy(bard->playerName, gSaveBlockPtr->playerName);
-
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        bard->playerTrainerId[i] = gSaveBlockPtr->playerTrainerId[i];
-
-    for (i = 0; i < BARD_SONG_LENGTH; i++)
-        bard->songLyrics[i] = bard->temporaryLyrics[i];
-
-    bard->hasChangedSong = TRUE;
 }
 
 // Copies lyrics into gStringVar4
@@ -444,7 +396,7 @@ static void DrawSongTextWindow(const u8 *str)
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, str, 0, 1, 1, DisableTextPrinters);
     gDisableTextPrinters = TRUE;
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static void BardSing(struct Task *task, struct BardSong *song)
@@ -691,151 +643,17 @@ void SetMauvilleOldManObjEventGfx(void)
 
 void SanitizeMauvilleOldManForRuby(union OldMan * oldMan)
 {
-    s32 i;
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
 
-    switch (oldMan->common.id)
-    {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        for (i = 0; i < NUM_TRADER_ITEMS; i++)
-        {
-            if (trader->language[i] == LANGUAGE_JAPANESE)
-                ConvertInternationalString(trader->playerNames[i], LANGUAGE_JAPANESE);
-        }
-        break;
-    }
-    case MAUVILLE_MAN_STORYTELLER:
-    {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
-        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
-        {
-            if (storyteller->gameStatIDs[i] != 0)
-            {
-                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                playerName[PLAYER_NAME_LENGTH] = EOS;
-                if (IsStringJapanese(playerName))
-                {
-                    memset(playerName, CHAR_SPACE, PLAYER_NAME_LENGTH + 1);
-                    StringCopy(playerName, gText_Friend);
-                    memcpy(storyteller->trainerNames[i], playerName, PLAYER_NAME_LENGTH);
-                    storyteller->language[i] = GAME_LANGUAGE;
-                }
-            }
-        }
-        break;
-    }
-    }
 }
 
 void SanitizeReceivedEmeraldOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    u8 playerName[PLAYER_NAME_LENGTH + 1];
-    s32 i;
-    if (oldMan->common.id == MAUVILLE_MAN_STORYTELLER && language == LANGUAGE_JAPANESE)
-    {
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
 
-        for (i = 0; i < NUM_STORYTELLER_TALES; i++)
-        {
-            if (storyteller->gameStatIDs[i] != 0)
-            {
-                memcpy(playerName, storyteller->trainerNames[i], PLAYER_NAME_LENGTH);
-                playerName[PLAYER_NAME_LENGTH] = EOS;
-                if (IsStringJapanese(playerName))
-                    storyteller->language[i] = LANGUAGE_JAPANESE;
-                else
-                    storyteller->language[i] = GAME_LANGUAGE;
-            }
-        }
-    }
 }
 
 void SanitizeReceivedRubyOldMan(union OldMan * oldMan, u32 version, u32 language)
 {
-    bool32 isRuby = (version == VERSION_SAPPHIRE || version == VERSION_RUBY);
 
-    switch (oldMan->common.id)
-    {
-    case MAUVILLE_MAN_TRADER:
-    {
-        struct MauvilleOldManTrader * trader = &oldMan->trader;
-        s32 i;
-
-        if (isRuby)
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                u8 *str = trader->playerNames[i];
-                if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_JPN)
-                {
-                    StripExtCtrlCodes(str);
-                    trader->language[i] = LANGUAGE_JAPANESE;
-                }
-                else
-                    trader->language[i] = language;
-            }
-        }
-        else
-        {
-            for (i = 0; i < NUM_TRADER_ITEMS; i++)
-            {
-                if (trader->language[i] == LANGUAGE_JAPANESE)
-                {
-                    StripExtCtrlCodes(trader->playerNames[i]);
-                }
-            }
-        }
-    }
-    break;
-    case MAUVILLE_MAN_STORYTELLER:
-    {
-
-        struct MauvilleManStoryteller * storyteller = &oldMan->storyteller;
-        s32 i;
-
-        if (isRuby)
-        {
-            for (i = 0; i < NUM_STORYTELLER_TALES; i++)
-            {
-                if (storyteller->gameStatIDs[i] != 0)
-                    storyteller->language[i] = language;
-            }
-        }
-    }
-    break;
-    case MAUVILLE_MAN_BARD:
-    {
-        struct MauvilleManBard * bard = &oldMan->bard;
-
-        if (isRuby)
-        {
-            bard->language = language;
-        }
-    }
-    break;
-    case MAUVILLE_MAN_HIPSTER:
-    {
-        struct MauvilleManHipster * hipster = &oldMan->hipster;
-
-        if (isRuby)
-        {
-            hipster->language = language;
-        }
-    }
-    break;
-    case MAUVILLE_MAN_GIDDY:
-    {
-        struct MauvilleManGiddy * giddy = &oldMan->giddy;
-
-        if (isRuby)
-        {
-            giddy->language = language;
-        }
-    }
-    break;
-    }
 }
 
 struct Story
@@ -1180,12 +998,7 @@ static void StorytellerSetPlayerName(u32 player, const u8 *src)
 
 static void StorytellerRecordNewStat(u32 player, u32 stat)
 {
-    sStorytellerPtr->gameStatIDs[player] = stat;
-    StorytellerSetPlayerName(player, gSaveBlockPtr->playerName);
-    StorytellerSetRecordedTrainerStat(player, StorytellerGetGameStat(stat));
-    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetGameStat(stat), STR_CONV_MODE_LEFT_ALIGN, 10);
-    StringCopy(gStringVar2, GetStoryActionByStat(stat));
-    sStorytellerPtr->language[player] = gGameLanguage;
+
 }
 
 static bool8 StorytellerInitializeRandomStat(void)
@@ -1219,13 +1032,7 @@ static bool8 StorytellerInitializeRandomStat(void)
 
 static void StorytellerDisplayStory(u32 player)
 {
-    u8 stat = sStorytellerPtr->gameStatIDs[player];
 
-    ConvertIntToDecimalStringN(gStringVar1, StorytellerGetRecordedTrainerStat(player), STR_CONV_MODE_LEFT_ALIGN, 10);
-    StringCopy(gStringVar2, GetStoryActionByStat(stat));
-    GetStoryByStattellerPlayerName(player, gStringVar3);
-    ConvertInternationalString(gStringVar3, sStorytellerPtr->language[player]);
-    ShowFieldMessage(GetStoryTextByStat(stat));
 }
 
 static void PrintStoryList(void)
@@ -1254,7 +1061,7 @@ static void PrintStoryList(void)
     }
     AddTextPrinterParameterized(sStorytellerWindowId, FONT_NORMAL, gText_Salir, 8, 16 * i + 1, TEXT_SKIP_DRAW, NULL);
     InitMenuInUpperLeftCornerNormal(sStorytellerWindowId, GetFreeStorySlot() + 1, 0);
-    CopyWindowToVram(sStorytellerWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sStorytellerWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void Task_StoryListMenu(u8 taskId)

@@ -66,7 +66,7 @@ bool32 ShouldTrainerBattlerUseGimmick(u32 battler, enum Gimmick gimmick)
 bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick)
 {
     // Check whether partner battler has used gimmick or plans to during turn.
-    if (IsDoubleBattle()
+    if (EsContraEntrenador()
         && IsPartnerMonFromSameTrainer(battler)
         && (gBattleStruct->gimmick.activated[BATTLE_PARTNER(battler)][gimmick]
         || ((gBattleStruct->gimmick.toActivate & (1u << BATTLE_PARTNER(battler))
@@ -85,7 +85,7 @@ bool32 HasTrainerUsedGimmick(u32 battler, enum Gimmick gimmick)
 void SetGimmickAsActivated(u32 battler, enum Gimmick gimmick)
 {
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
-    if (IsDoubleBattle() && IsPartnerMonFromSameTrainer(battler))
+    if (EsContraEntrenador() && IsPartnerMonFromSameTrainer(battler))
         gBattleStruct->gimmick.activated[BATTLE_PARTNER(battler)][gimmick] = TRUE;
 }
 
@@ -140,7 +140,7 @@ static void SpriteCb_GimmickTrigger(struct Sprite *sprite)
     s32 xSlide, xPriority, xOptimal;
     s32 yDiff;
 
-    if (IsDoubleBattle())
+    if (EsContraEntrenador())
     {
         xSlide = DOUBLES_GIMMICK_TRIGGER_POS_X_SLIDE;
         xPriority = DOUBLES_GIMMICK_TRIGGER_POS_X_PRIORITY;

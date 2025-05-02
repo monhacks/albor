@@ -367,9 +367,6 @@ extern const struct Song gSongTable[];
 
 extern u8 gMPlayMemAccArea[];
 
-//u8 gPokemonCrySong[52];
-//u8 gPokemonCrySongs[52 * MAX_POKEMON_CRIES];
-
 #define MAX_POKEMON_CRIES 2
 
 extern struct PokemonCrySong gPokemonCrySong;
@@ -399,11 +396,8 @@ extern const struct PokemonCrySong gPokemonCrySongTemplate;
 
 extern const struct ToneData voicegroup000;
 
-extern char gNumMusicPlayers[];
-extern char gMaxLines[];
-
-#define NUM_MUSIC_PLAYERS ((u16)gNumMusicPlayers)
-#define MAX_LINES ((u32)gMaxLines)
+#define NUM_MUSIC_PLAYERS 4
+#define MAX_LINES 0
 
 u32 umul3232H32(u32 multiplier, u32 multiplicand);
 void SoundMain(void);
@@ -493,5 +487,13 @@ void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0C(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+
+enum VolumenesMusica
+{
+    SIN_VOLUMEN = 0,
+    VOLUMEN_BAJO = 85,
+    VOLUMEN_MEDIO = 128,
+    VOLUMEN_MAXIMO = 256,
+};
 
 #endif // GUARD_GBA_M4A_INTERNAL_H

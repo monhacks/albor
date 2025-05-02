@@ -40,8 +40,6 @@
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
-// Static type declarations
-
 static void Task_PokecenterHeal(u8 taskId);
 static void PokecenterHealEffect_Init(struct Task *);
 static void PokecenterHealEffect_WaitForBallPlacement(struct Task *);
@@ -240,11 +238,8 @@ static void UseVsSeeker_DoPlayerAnimation(struct Task *task);
 static void UseVsSeeker_ResetPlayerGraphics(struct Task *task);
 static void UseVsSeeker_CleanUpFieldEffect(struct Task *task);
 
-// Static RAM declarations
-
 static u8 sActiveList[32];
 
-// External declarations
 extern u8 *gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
@@ -1394,7 +1389,7 @@ static void Task_FlyIntoMap(u8 taskId)
     task = &gTasks[taskId];
     if (task->data[0] == 0)
     {
-        if (gPaletteFade.active)
+        if (gFundidoPaletas.activo)
         {
             return;
         }
@@ -1681,7 +1676,7 @@ static void FadeOutAtEndOfEscalator(void)
 
 static void WarpAtEndOfEscalator(void)
 {
-    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
+    if (!gFundidoPaletas.activo && BGMusicStopped() == TRUE)
     {
         StopEscalator();
         WarpIntoMap();
@@ -2055,7 +2050,7 @@ static bool8 LavaridgeGymB1FWarpEffect_FadeOut(struct Task *task, struct ObjectE
 
 static bool8 LavaridgeGymB1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
+    if (!gFundidoPaletas.activo && BGMusicStopped() == TRUE)
     {
         WarpIntoMap();
         gFieldCallback = FieldCB_LavaridgeGymB1FWarpExit;
@@ -2213,7 +2208,7 @@ static bool8 LavaridgeGym1FWarpEffect_FadeOut(struct Task *task, struct ObjectEv
 
 static bool8 LavaridgeGym1FWarpEffect_Warp(struct Task *task, struct ObjectEvent *objectEvent, struct Sprite *sprite)
 {
-    if (!gPaletteFade.active && BGMusicStopped() == TRUE)
+    if (!gFundidoPaletas.activo && BGMusicStopped() == TRUE)
     {
         WarpIntoMap();
         gFieldCallback = FieldCB_FallWarpExit;
@@ -2278,7 +2273,7 @@ static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
     objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(objectEvent) || ObjectEventClearHeldMovementIfFinished(objectEvent))
     {
-        if (task->tTimer == 0 && !gPaletteFade.active && BGMusicStopped() == TRUE)
+        if (task->tTimer == 0 && !gFundidoPaletas.activo && BGMusicStopped() == TRUE)
         {
             SetObjectEventDirection(objectEvent, task->tStartDir);
             SetWarpDestinationToEscapeWarp();
@@ -2437,7 +2432,7 @@ static void TeleportWarpOutFieldEffect_SpinExit(struct Task *task)
 
 static void TeleportWarpOutFieldEffect_End(struct Task *task)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         if (task->data[5] == FALSE)
         {
@@ -3298,7 +3293,7 @@ static void FlyOutFieldEffect_WaitFlyOff(struct Task *task)
 
 static void FlyOutFieldEffect_End(struct Task *task)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FieldEffectActiveListRemove(FLDEFF_USE_FLY);
         DestroyTask(FindTaskIdByFunc(Task_FlyOut));
@@ -3725,8 +3720,8 @@ static void DestroyDeoxysRockEffect_RockFragments(s16 *data, u8 taskId)
     {
         struct Sprite *sprite = &gSprites[gObjectEvents[tObjectEventId].spriteId];
         gObjectEvents[tObjectEventId].invisible = TRUE;
-        BlendPalettes(PALETTES_BG, 0x10, RGB_WHITE);
-        BeginNormalPaletteFade(PALETTES_BG, 0, 0x10, 0, RGB_WHITE);
+        BlendPalettes(PALETAS_FONDOS, 0x10, RGB_WHITE);
+        BeginNormalPaletteFade(PALETAS_FONDOS, 0, 0x10, 0, RGB_WHITE);
         CreateDeoxysRockFragments(sprite);
         PlaySE(SE_THUNDER);
         StartEndingDeoxysRockCameraShake(tCameraTaskId);
@@ -3737,7 +3732,7 @@ static void DestroyDeoxysRockEffect_RockFragments(s16 *data, u8 taskId)
 
 static void DestroyDeoxysRockEffect_WaitAndEnd(s16 *data, u8 taskId)
 {
-    if (!gPaletteFade.active && !FuncIsActiveTask(Task_DeoxysRockCameraShake))
+    if (!gFundidoPaletas.activo && !FuncIsActiveTask(Task_DeoxysRockCameraShake))
     {
         InstallCameraPanAheadCallback();
         RemoveObjectEventByLocalIdAndMap(tLocalId, tMapNum, tMapGroup);

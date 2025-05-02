@@ -211,49 +211,16 @@ void CopyWindowToVram(u32 windowId, u32 mode)
 
     switch (mode)
     {
-    case COPYWIN_MAP:
+    case COPIA_TILEMAP_VENTANA:
         CopyBgTilemapBufferToVram(windowLocal.window.bg);
         break;
-    case COPYWIN_GFX:
+    case COPIA_TILES_VENTANA:
         LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
         break;
-    case COPYWIN_FULL:
+    case COPIA_COMPLETA_VENTANA:
         LoadBgTiles(windowLocal.window.bg, windowLocal.tileData, windowSize, windowLocal.window.baseBlock);
         CopyBgTilemapBufferToVram(windowLocal.window.bg);
         break;
-    }
-}
-
-void CopyWindowRectToVram(u32 windowId, u32 mode, u32 x, u32 y, u32 w, u32 h)
-{
-    struct Window windowLocal;
-    int rectSize;
-    int rectPos;
-
-    if (w != 0 && h != 0)
-    {
-        windowLocal = gWindows[windowId];
-
-        rectSize = ((h - 1) * windowLocal.window.width);
-        rectSize += (windowLocal.window.width - x);
-        rectSize -= (windowLocal.window.width - (x + w));
-        rectSize *= 32;
-
-        rectPos = (y * windowLocal.window.width) + x;
-
-        switch (mode)
-        {
-        case COPYWIN_MAP:
-            CopyBgTilemapBufferToVram(windowLocal.window.bg);
-            break;
-        case COPYWIN_GFX:
-            LoadBgTiles(windowLocal.window.bg, windowLocal.tileData + (rectPos * 32), rectSize, windowLocal.window.baseBlock + rectPos);
-            break;
-        case COPYWIN_FULL:
-            LoadBgTiles(windowLocal.window.bg, windowLocal.tileData + (rectPos * 32), rectSize, windowLocal.window.baseBlock + rectPos);
-            CopyBgTilemapBufferToVram(windowLocal.window.bg);
-            break;
-        }
     }
 }
 

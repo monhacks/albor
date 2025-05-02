@@ -377,7 +377,7 @@ static void HandleInputChooseAction(u32 battler)
     }
     else if (JOY_NEW(B_BUTTON) || gPlayerDpadHoldFrames > 59)
     {
-        if (IsDoubleBattle()
+        if (EsContraEntrenador()
          && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT
          && !(gAbsentBattlerFlags & (1u << GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))))
         {
@@ -389,7 +389,7 @@ static void HandleInputChooseAction(u32 battler)
         }
         else if (B_QUICK_MOVE_CURSOR_TO_RUN)
         {
-            if (!(gBattleTypeFlags & TIPO_BATALLA_ENTRENADOR)) // If wild battle, pressing B moves cursor to "Run".
+            if (!(EsContraEntrenador())) // If wild battle, pressing B moves cursor to "Run".
             {
                 PlaySE(SE_SELECT);
                 gActionSelectionCursor[battler] = 2;
@@ -975,7 +975,7 @@ static void Intro_TryShinyAnimShowHealthbox(u32 battler)
     {
         if (!gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored)
         {
-            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+            m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         }
         gBattleSpritesDataPtr->healthBoxesData[battler].bgmRestored = TRUE;
         bgmRestored = TRUE;
@@ -1043,7 +1043,7 @@ static void SwitchIn_HandleSoundAndEnd(u32 battler)
     if (!gBattleSpritesDataPtr->healthBoxesData[battler].specialAnimActive
         && !IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         HandleLowHpMusicChange(&gPlayerParty[gBattlerPartyIndexes[battler]], battler);
         PlayerBufferExecCompleted(battler);
     }
@@ -1072,7 +1072,7 @@ void Task_PlayerController_RestoreBgmAfterCry(u8 taskId)
 {
     if (!IsCryPlayingOrClearCrySongs())
     {
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
         DestroyTask(taskId);
     }
 }
@@ -1112,7 +1112,7 @@ static void Task_GiveExpToMon(u8 taskId)
             gainedExp -= nextLvlExp - currExp;
             BtlController_EmitTwoReturnValues(battler, BUFFER_B, RET_VALUE_LEVELED_UP, gainedExp);
 
-            if (IsDoubleBattle() == TRUE
+            if (EsContraEntrenador() == TRUE
              && (monId == gBattlerPartyIndexes[battler] || monId == gBattlerPartyIndexes[BATTLE_PARTNER(battler)]))
                 gTasks[taskId].func = Task_LaunchLvlUpAnim;
             else
@@ -1212,7 +1212,7 @@ static void Task_LaunchLvlUpAnim(u8 taskId)
     u8 battler = gTasks[taskId].tExpTask_battler;
     u8 monIndex = gTasks[taskId].tExpTask_monId;
 
-    if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
+    if (EsContraEntrenador() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
         battler ^= BIT_FLANK;
 
     InitAndLaunchSpecialAnimation(battler, battler, battler, B_ANIM_LVL_UP);
@@ -1227,7 +1227,7 @@ static void Task_UpdateLvlInHealthbox(u8 taskId)
     {
         u8 monIndex = gTasks[taskId].tExpTask_monId;
 
-        if (IsDoubleBattle() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
+        if (EsContraEntrenador() == TRUE && monIndex == gBattlerPartyIndexes[BATTLE_PARTNER(battler)])
             UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(battler)], &gPlayerParty[monIndex], HEALTHBOX_ALL);
         else
             UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &gPlayerParty[monIndex], HEALTHBOX_ALL);
@@ -1245,7 +1245,7 @@ static void Task_SetControllerToWaitForString(u8 taskId)
 
 static void OpenPartyMenuToChooseMon(u32 battler)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         u8 caseId;
 
@@ -1259,7 +1259,7 @@ static void OpenPartyMenuToChooseMon(u32 battler)
 
 static void WaitForMonSelection(u32 battler)
 {
-    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gFundidoPaletas.activo)
     {
         if (gPartyMenuUseExitCallback == TRUE)
             BtlController_EmitChosenMonReturnValue(battler, BUFFER_B, gSelectedMonPartyId, gBattlePartyCurrentOrder);
@@ -1272,7 +1272,7 @@ static void WaitForMonSelection(u32 battler)
 
 static void OpenBagAndChooseItem(u32 battler)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         gBattlerControllerFuncs[battler] = CompleteWhenChoseItem;
         ReshowBattleScreenDummy();
@@ -1283,7 +1283,7 @@ static void OpenBagAndChooseItem(u32 battler)
 
 static void CompleteWhenChoseItem(u32 battler)
 {
-    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gFundidoPaletas.activo)
     {
         BtlController_EmitOneReturnValue(battler, BUFFER_B, gSpecialVar_ItemId);
         PlayerBufferExecCompleted(battler);
@@ -1899,7 +1899,7 @@ static void PlayerHandleTrainerSlideBack(u32 battler)
 
 static void PlayerHandlePaletteFade(u32 battler)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 2, 0, 16, RGB_BLACK);
     PlayerBufferExecCompleted(battler);
 }
 
@@ -2025,7 +2025,7 @@ static void PlayerHandleChooseItem(u32 battler)
 {
     s32 i;
 
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenBagAndChooseItem;
     gBattlerInMenuId = battler;
 
@@ -2045,7 +2045,7 @@ static void PlayerHandleChoosePokemon(u32 battler)
     *(&gBattleStruct->battlerPreventingSwitchout) = gBattleResources->bufferA[battler][1] >> 4;
     *(&gBattleStruct->prevSelectedPartySlot) = gBattleResources->bufferA[battler][2];
     *(&gBattleStruct->abilityPreventingSwitchout) = (gBattleResources->bufferA[battler][3] & 0xFF) | (gBattleResources->bufferA[battler][7] << 8);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[battler] = OpenPartyMenuToChooseMon;
     gBattlerInMenuId = battler;
 }
@@ -2103,7 +2103,7 @@ static void PlayerHandleDMA3Transfer(u32 battler)
     u8 *dst = (u8 *)(dstArg);
     u32 size = sizeArg;
 
-    while (1)
+    while(1)
     {
         if (size <= 0x1000)
         {
@@ -2200,7 +2200,7 @@ static void PlayerHandleResetActionMoveSelection(u32 battler)
 
 static void Controller_WaitForDebug(u32 battler)
 {
-    if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+    if (gMain.callback2 == BattleMainCB2 && !gFundidoPaletas.activo)
     {
         PlayerBufferExecCompleted(battler);
     }

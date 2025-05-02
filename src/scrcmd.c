@@ -93,12 +93,7 @@ static u8 *const sScriptStringVars[] =
     gStringVar3,
 };
 
-bool8 ScrCmd_nop(struct ScriptContext *ctx)
-{
-    return FALSE;
-}
-
-bool8 ScrCmd_nop1(struct ScriptContext *ctx)
+bool8 ScrCmd_no(struct ScriptContext *ctx)
 {
     return FALSE;
 }
@@ -196,16 +191,6 @@ bool8 ScrCmd_call_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_gotostd(struct ScriptContext *ctx)
-{
-    u8 index = ScriptReadByte(ctx);
-    const u8 **ptr = &gStdScripts[index];
-
-    if (ptr < gStdScripts_End)
-        ScriptJump(ctx, *ptr);
-    return FALSE;
-}
-
 bool8 ScrCmd_callstd(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);
@@ -213,34 +198,6 @@ bool8 ScrCmd_callstd(struct ScriptContext *ctx)
 
     if (ptr < gStdScripts_End)
         ScriptCall(ctx, *ptr);
-    return FALSE;
-}
-
-bool8 ScrCmd_gotostd_if(struct ScriptContext *ctx)
-{
-    u8 condition = ScriptReadByte(ctx);
-    u8 index = ScriptReadByte(ctx);
-
-    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
-    {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScripts_End)
-            ScriptJump(ctx, *ptr);
-    }
-    return FALSE;
-}
-
-bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
-{
-    u8 condition = ScriptReadByte(ctx);
-    u8 index = ScriptReadByte(ctx);
-
-    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
-    {
-        const u8 **ptr = &gStdScripts[index];
-        if (ptr < gStdScripts_End)
-            ScriptCall(ctx, *ptr);
-    }
     return FALSE;
 }
 
@@ -542,7 +499,7 @@ bool8 ScrCmd_setflashlevel(struct ScriptContext *ctx)
 
 static bool8 IsPaletteNotActive(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         return TRUE;
     else
         return FALSE;
@@ -574,25 +531,25 @@ bool8 ScrCmd_fadescreenspeed(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
 {
-    u8 mode = ScriptReadByte(ctx);
-    u8 nowait = ScriptReadByte(ctx);
+    u8 modo = ScriptReadByte(ctx);
+    u8 inmediato = ScriptReadByte(ctx);
 
-    switch (mode)
+    switch (modo)
     {
     case FADE_TO_BLACK:
     case FADE_TO_WHITE:
     default:
         CpuCopy32(gPlttBufferUnfaded, gDecompressionBuffer, PLTT_SIZE);
-        FadeScreen(mode, 0);
+        FadeScreen(modo, 0);
         break;
     case FADE_FROM_BLACK:
     case FADE_FROM_WHITE:
         CpuCopy32(gDecompressionBuffer, gPlttBufferUnfaded, PLTT_SIZE);
-        FadeScreen(mode, 0);
+        FadeScreen(modo, 0);
         break;
     }
 
-    if (nowait)
+    if (inmediato)
         return FALSE;
     SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
@@ -615,25 +572,25 @@ bool8 ScrCmd_delay(struct ScriptContext *ctx)
 
 bool8 ScrCmd_initclock(struct ScriptContext *ctx)
 {
-    u8 hour = VarGet(ScriptReadHalfword(ctx));
-    u8 minute = VarGet(ScriptReadHalfword(ctx));
+    u32 horas = VarGet(ScriptReadHalfword(ctx));
+    u32 minutos = VarGet(ScriptReadHalfword(ctx));
 
-    RtcInitLocalTimeOffset(hour, minute);
+    IniciaHoraReferenciaJuego(horas, minutos);
     return FALSE;
 }
 
 bool8 ScrCmd_dotimebasedevents(struct ScriptContext *ctx)
 {
-    DoTimeBasedEvents();
+    HaceEventosTemporales();
     return FALSE;
 }
 
 bool8 ScrCmd_gettime(struct ScriptContext *ctx)
 {
     RtcCalcLocalTime();
-    gSpecialVar_0x8000 = gLocalTime.hours;
-    gSpecialVar_0x8001 = gLocalTime.minutes;
-    gSpecialVar_0x8002 = gLocalTime.seconds;
+    gSpecialVar_0x8000 = gHoraJuego.hours;
+    gSpecialVar_0x8001 = gHoraJuego.minutes;
+    gSpecialVar_0x8002 = gHoraJuego.seconds;
     return FALSE;
 }
 
@@ -1580,7 +1537,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     PutWindowTilemap(sBrailleWindowId);
     FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(sBrailleWindowId, FONT_BRAILLE, gStringVar4, xText, yText, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sBrailleWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sBrailleWindowId, COPIA_COMPLETA_VENTANA);
     return FALSE;
 }
 
@@ -2210,24 +2167,6 @@ bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
         SetupNativeScript(ctx, IsFreezeObjectAndPlayerFinished);
     }
     return TRUE;
-}
-
-// This command will set a Pokémon's modernFatefulEncounter bit; there is no similar command to clear it.
-bool8 ScrCmd_setmodernfatefulencounter(struct ScriptContext *ctx)
-{
-    bool8 isModernFatefulEncounter = TRUE;
-    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    SetMonData(&gPlayerParty[partyIndex], MON_DATA_MODERN_FATEFUL_ENCOUNTER, &isModernFatefulEncounter);
-    return FALSE;
-}
-
-bool8 ScrCmd_checkmodernfatefulencounter(struct ScriptContext *ctx)
-{
-    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MODERN_FATEFUL_ENCOUNTER, NULL);
-    return FALSE;
 }
 
 // This warp is only used by the Union Room.

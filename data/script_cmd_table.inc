@@ -1,49 +1,42 @@
 	.align 2
 gScriptCmdTable::
-	.4byte ScrCmd_nop      	                        @ 0x00
-	.4byte ScrCmd_nop1                              @ 0x01
-	.4byte ScrCmd_end      	                        @ 0x02
-	.4byte ScrCmd_return                            @ 0x03
-	.4byte ScrCmd_call                              @ 0x04
-	.4byte ScrCmd_goto                              @ 0x05
-	.4byte ScrCmd_goto_if                           @ 0x06
-	.4byte ScrCmd_call_if                           @ 0x07
-	.4byte ScrCmd_gotostd                           @ 0x08
-	.4byte ScrCmd_callstd                           @ 0x09
-	.4byte ScrCmd_gotostd_if                        @ 0x0a
-	.4byte ScrCmd_callstd_if                        @ 0x0b
-	.4byte ScrCmd_nop1                         		@ 0x0c
-	.4byte ScrCmd_nop1                            	@ 0x0d
-	.4byte ScrCmd_nop1             					@ 0x0e
-	.4byte ScrCmd_loadword                          @ 0x0f
-	.4byte ScrCmd_loadbyte                          @ 0x10
-	.4byte ScrCmd_setptr                            @ 0x11
-	.4byte ScrCmd_loadbytefromptr                   @ 0x12
-	.4byte ScrCmd_setptrbyte                        @ 0x13
-	.4byte ScrCmd_copylocal                         @ 0x14
-	.4byte ScrCmd_copybyte                          @ 0x15
-	.4byte ScrCmd_setvar                            @ 0x16
-	.4byte ScrCmd_addvar                            @ 0x17
-	.4byte ScrCmd_subvar                            @ 0x18
-	.4byte ScrCmd_copyvar                           @ 0x19
-	.4byte ScrCmd_setorcopyvar                      @ 0x1a
-	.4byte ScrCmd_compare_local_to_local            @ 0x1b
-	.4byte ScrCmd_compare_local_to_value            @ 0x1c
-	.4byte ScrCmd_compare_local_to_ptr              @ 0x1d
-	.4byte ScrCmd_compare_ptr_to_local              @ 0x1e
-	.4byte ScrCmd_compare_ptr_to_value              @ 0x1f
-	.4byte ScrCmd_compare_ptr_to_ptr                @ 0x20
-	.4byte ScrCmd_compare_var_to_value              @ 0x21
-	.4byte ScrCmd_compare_var_to_var                @ 0x22
-	.4byte ScrCmd_callnative                        @ 0x23
-	.4byte ScrCmd_gotonative                        @ 0x24
-	.4byte ScrCmd_special                           @ 0x25
-	.4byte ScrCmd_specialvar                        @ 0x26
-	.4byte ScrCmd_waitstate                         @ 0x27
-	.4byte ScrCmd_delay                             @ 0x28
-	.4byte ScrCmd_setflag                           @ 0x29
-	.4byte ScrCmd_clearflag                         @ 0x2a
-	.4byte ScrCmd_checkflag                         @ 0x2b
+	.4byte ScrCmd_no								@ 0
+	.4byte ScrCmd_end      	                        @ 1
+	.4byte ScrCmd_return                            @ 2
+	.4byte ScrCmd_call                              @ 3
+	.4byte ScrCmd_goto                              @ 4
+	.4byte ScrCmd_goto_if                          	@ 5
+	.4byte ScrCmd_call_if                           @ 6
+	.4byte ScrCmd_callstd                           @ 
+	.4byte ScrCmd_loadword                          @ 
+	.4byte ScrCmd_loadbyte                          @ 
+	.4byte ScrCmd_setptr                            @ 
+	.4byte ScrCmd_loadbytefromptr                   @ 
+	.4byte ScrCmd_setptrbyte                        @ 
+	.4byte ScrCmd_copylocal                         @ 
+	.4byte ScrCmd_copybyte                          @ 
+	.4byte ScrCmd_setvar                            @ 
+	.4byte ScrCmd_addvar                            @ 
+	.4byte ScrCmd_subvar                            @ 
+	.4byte ScrCmd_copyvar                           @ 
+	.4byte ScrCmd_setorcopyvar                      @ 
+	.4byte ScrCmd_compare_local_to_local            @ 
+	.4byte ScrCmd_compare_local_to_value            @ 
+	.4byte ScrCmd_compare_local_to_ptr              @ 
+	.4byte ScrCmd_compare_ptr_to_local              @ 
+	.4byte ScrCmd_compare_ptr_to_value             	@ 
+	.4byte ScrCmd_compare_ptr_to_ptr                @ 
+	.4byte ScrCmd_compare_var_to_value              @ 
+	.4byte ScrCmd_compare_var_to_var                @ 
+	.4byte ScrCmd_callnative                        @ 
+	.4byte ScrCmd_gotonative                        @ 
+	.4byte ScrCmd_special                           @ 
+	.4byte ScrCmd_specialvar                        @ 
+	.4byte ScrCmd_waitstate                         @ 
+	.4byte ScrCmd_delay                             @ 
+	.4byte ScrCmd_setflag                           @ 
+	.4byte ScrCmd_clearflag                         @ 
+	.4byte ScrCmd_checkflag                         @ 
 	.4byte ScrCmd_initclock                         @ 0x2c
 	.4byte ScrCmd_dotimebasedevents                 @ 0x2d
 	.4byte ScrCmd_gettime                           @ 0x2e
@@ -73,8 +66,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkitemspace                    @ 0x46
 	.4byte ScrCmd_checkitem                         @ 0x47
 	.4byte ScrCmd_checkitemtype                     @ 0x48
-	.4byte ScrCmd_nop                               @ 0x49
-	.4byte ScrCmd_nop                               @ 0x4a
 	.4byte ScrCmd_adddecoration                     @ 0x4b
 	.4byte ScrCmd_removedecoration                  @ 0x4c
 	.4byte ScrCmd_checkdecor                        @ 0x4d
@@ -121,7 +112,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_hidemonpic                        @ 0x76
 	.4byte ScrCmd_showcontestpainting               @ 0x77
 	.4byte ScrCmd_braillemessage                    @ 0x78
-	.4byte ScrCmd_nop1                              @ 0x79
 	.4byte ScrCmd_giveegg                           @ 0x7a
 	.4byte ScrCmd_setmonmove                        @ 0x7b
 	.4byte ScrCmd_checkpartymove                    @ 0x7c
@@ -142,7 +132,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_choosecontestmon                  @ 0x8b
 	.4byte ScrCmd_startcontest                      @ 0x8c
 	.4byte ScrCmd_showcontestresults                @ 0x8d
-	.4byte ScrCmd_nop1               				@ 0x8e
 	.4byte ScrCmd_random                            @ 0x8f
 	.4byte ScrCmd_addmoney                          @ 0x90
 	.4byte ScrCmd_removemoney                       @ 0x91
@@ -150,7 +139,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_showmoneybox                      @ 0x93
 	.4byte ScrCmd_hidemoneybox                      @ 0x94
 	.4byte ScrCmd_updatemoneybox                    @ 0x95
-	.4byte ScrCmd_nop1                 				@ 0x96
 	.4byte ScrCmd_fadescreen                        @ 0x97
 	.4byte ScrCmd_fadescreenspeed                   @ 0x98
 	.4byte ScrCmd_setflashlevel                     @ 0x99
@@ -184,14 +172,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_removecoins                       @ 0xb5
 	.4byte ScrCmd_setwildbattle                     @ 0xb6
 	.4byte ScrCmd_dowildbattle                      @ 0xb7
-	.4byte ScrCmd_nop1                       @ 0xb8
-	.4byte ScrCmd_nop1                             @ 0xb9
-	.4byte ScrCmd_nop1                             @ 0xba
-	.4byte ScrCmd_nop1                          @ 0xbb
-	.4byte ScrCmd_nop1                          @ 0xbc
-	.4byte ScrCmd_nop1                          @ 0xbd
-	.4byte ScrCmd_nop1                    @ 0xbe
-	.4byte ScrCmd_nop1                     @ 0xbf
 	.4byte ScrCmd_showcoinsbox                      @ 0xc0
 	.4byte ScrCmd_hidecoinsbox                      @ 0xc1
 	.4byte ScrCmd_updatecoinsbox                    @ 0xc2
@@ -199,16 +179,6 @@ gScriptCmdTable::
 	.4byte ScrCmd_setescapewarp                     @ 0xc4
 	.4byte ScrCmd_waitmoncry                        @ 0xc5
 	.4byte ScrCmd_bufferboxname                     @ 0xc6
-	.4byte ScrCmd_nop1                              @ 0xc7
-	.4byte ScrCmd_nop1                              @ 0xc8
-	.4byte ScrCmd_nop1                              @ 0xc9
-	.4byte ScrCmd_nop1                              @ 0xca
-	.4byte ScrCmd_nop1                              @ 0xcb
-	.4byte ScrCmd_nop1                              @ 0xcc
-	.4byte ScrCmd_setmodernfatefulencounter         @ 0xcd
-	.4byte ScrCmd_checkmodernfatefulencounter       @ 0xce
-	.4byte ScrCmd_nop1               				@ 0xcf
-	.4byte ScrCmd_nop1                              @ 0xd0
 	.4byte ScrCmd_warpspinenter                     @ 0xd1
 	.4byte ScrCmd_setmonmetlocation                 @ 0xd2
 	.4byte ScrCmd_moverotatingtileobjects           @ 0xd3
@@ -232,4 +202,4 @@ gScriptCmdTable::
 	.4byte ScrCmd_callfunc                          @ 0xe5
 
 gScriptCmdTableEnd::
-	.4byte ScrCmd_nop
+	.4byte ScrCmd_no

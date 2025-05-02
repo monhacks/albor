@@ -11,7 +11,6 @@
 #include "main.h"
 #include "main_menu.h"
 #include "palette.h"
-#include "reset_rtc_screen.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -21,7 +20,6 @@
 #include "graphics.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "sound_check_menu.h"
 
 enum {
     TAG_VERSION = 1000,
@@ -37,8 +35,6 @@ enum {
 #define START_BANNER_X 128
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
-#define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
-#define SOUND_TEST_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_RIGHT)
 #define A_B_START_SELECT (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
 static void MainCB2(void);
@@ -47,9 +43,7 @@ static void Task_TitleScreenPhase2(u8);
 static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
 static void CB2_GoToClearSaveDataScreen(void);
-static void CB2_GoToResetRtcScreen(void);
 static void CB2_GoToCopyrightScreen(void);
-static void CB2_GoToSoundCheckScreen(void);
 static void UpdateLegendaryMarkingColor(u8);
 
 static void SpriteCB_VersionBannerLeft(struct Sprite *sprite);
@@ -629,7 +623,7 @@ void CB2_InitTitleScreen(void)
         break;
     }
     case 3:
-        BeginNormalPaletteFade(PALETTES_ALL, 1, 16, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 1, 16, 0, RGB_WHITEALPHA);
         SetVBlankCallback(VBlankCB);
         gMain.state = 4;
         break;
@@ -782,25 +776,12 @@ static void Task_TitleScreenPhase3(u8 taskId)
     if (JOY_NEW(A_BUTTON) || JOY_NEW(START_BUTTON))
     {
         FadeOutBGM(4);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_WHITEALPHA);
         SetMainCallback2(CB2_GoToMainMenu);
     }
     else if (JOY_HELD(CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
     {
         SetMainCallback2(CB2_GoToClearSaveDataScreen);
-    }
-    else if (JOY_HELD(RESET_RTC_BUTTON_COMBO) == RESET_RTC_BUTTON_COMBO
-      && CanResetRTC() == TRUE)
-    {
-        FadeOutBGM(4);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-        SetMainCallback2(CB2_GoToResetRtcScreen);
-    }
-    else if (JOY_HELD(SOUND_TEST_BUTTON_COMBO) == SOUND_TEST_BUTTON_COMBO)
-    {
-        FadeOutBGM(4);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-        SetMainCallback2(CB2_GoToSoundCheckScreen);
     }
     else
     {
@@ -815,7 +796,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
         UpdateLegendaryMarkingColor(gTasks[taskId].tCounter);
         if ((gMPlayInfo_BGM.status & 0xFFFF) == 0)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_WHITEALPHA);
             SetMainCallback2(CB2_GoToCopyrightScreen);
         }
     }
@@ -837,20 +818,6 @@ static void CB2_GoToClearSaveDataScreen(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitClearSaveDataScreen);
-}
-
-static void CB2_GoToResetRtcScreen(void)
-{
-    if (!UpdatePaletteFade())
-        SetMainCallback2(CB2_InitResetRtcScreen);
-}
-
-static void CB2_GoToSoundCheckScreen(void)
-{
-    if (!UpdatePaletteFade())
-        SetMainCallback2(CB2_StartSoundCheckMenu);
-    AnimateSprites();
-    BuildOamBuffer();
 }
 
 static void UpdateLegendaryMarkingColor(u8 frameNum)

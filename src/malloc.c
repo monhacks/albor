@@ -142,32 +142,6 @@ void *AllocZeroedInternal(void *heapStart, u32 size, const char *location)
     return mem;
 }
 
-bool32 CheckMemBlockInternal(void *heapStart, void *pointer)
-{
-    struct MemBlock *head = (struct MemBlock *)heapStart;
-    struct MemBlock *block = (struct MemBlock *)((u8 *)pointer - sizeof(struct MemBlock));
-
-    if (block->magic != MALLOC_SYSTEM_ID)
-        return FALSE;
-
-    if (block->next->magic != MALLOC_SYSTEM_ID)
-        return FALSE;
-
-    if (block->next != head && block->next->prev != block)
-        return FALSE;
-
-    if (block->prev->magic != MALLOC_SYSTEM_ID)
-        return FALSE;
-
-    if (block->prev != head && block->prev->next != block)
-        return FALSE;
-
-    if (block->next != head && block->next != (struct MemBlock *)(block->data + block->size))
-        return FALSE;
-
-    return TRUE;
-}
-
 void InitHeap(void *heapStart, u32 heapSize)
 {
     sHeapStart = heapStart;
@@ -175,48 +149,17 @@ void InitHeap(void *heapStart, u32 heapSize)
     PutFirstMemBlockHeader(heapStart, heapSize);
 }
 
-void *Alloc_(u32 size, const char *location)
+void *Alloc(u32 size)
 {
-    return AllocInternal(sHeapStart, size, location);
+    return AllocInternal(sHeapStart, size, NULL);
 }
 
-void *AllocZeroed_(u32 size, const char *location)
+void *AllocZeroed(u32 size)
 {
-    return AllocZeroedInternal(sHeapStart, size, location);
+    return AllocZeroedInternal(sHeapStart, size, NULL);
 }
 
 void Free(void *pointer)
 {
     FreeInternal(sHeapStart, pointer);
-}
-
-bool32 CheckMemBlock(void *pointer)
-{
-    return CheckMemBlockInternal(sHeapStart, pointer);
-}
-
-bool32 CheckHeap()
-{
-    struct MemBlock *pos = (struct MemBlock *)sHeapStart;
-
-    do {
-        if (!CheckMemBlockInternal(sHeapStart, pos->data))
-            return FALSE;
-        pos = pos->next;
-    } while (pos != (struct MemBlock *)sHeapStart);
-
-    return TRUE;
-}
-
-const struct MemBlock *HeapHead(void)
-{
-    return (const struct MemBlock *)sHeapStart;
-}
-
-const char *MemBlockLocation(const struct MemBlock *block)
-{
-    if (!block->allocated)
-        return NULL;
-
-    return (const char *)(ROM_START | (block->locationHi << 14) | block->locationLo);
 }

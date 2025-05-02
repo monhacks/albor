@@ -14,8 +14,6 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
-#if EXPANSION_INTRO == TRUE
-
 #define TAG_DIZZY   20000
 #define TAG_PORYGON 20001
 
@@ -249,14 +247,14 @@ void Task_HandleExpansionIntro(u8 taskId)
         tState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             tState++;
         break;
     case 2:
         if (tFrameCounter == 208)
         {
             tState++;
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         }
         else if (gMain.newKeys != 0)
         {
@@ -273,7 +271,7 @@ void Task_HandleExpansionIntro(u8 taskId)
         }
         break;
     case 3:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             ResetSpriteData();
             FreeAllSpritePalettes();
@@ -296,7 +294,7 @@ static void VBlankCB_ExpansionIntro(void)
 static void ExpansionIntro_InitBgs(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates_RhhCopyrightScreen, ARRAY_COUNT(sBgTemplates_RhhCopyrightScreen));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates_RhhCopyrightScreen, ARRAY_COUNT(sBgTemplates_RhhCopyrightScreen));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON);
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_EFFECT_DARKEN);
     SetGpuReg(REG_OFFSET_BLDY, 0x1F);
@@ -413,5 +411,3 @@ static void SpriteCallback_PorygonFlying(struct Sprite* sprite)
     sprite->sTimer++;
 }
 #undef sTimer
-
-#endif //EXPANSION_INTRO

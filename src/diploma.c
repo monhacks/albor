@@ -83,8 +83,8 @@ void CB2_ShowDiploma(void)
     LZDecompressWram(sDiplomaTilemap, sDiplomaTilemapPtr);
     CopyBgTilemapBufferToVram(1);
     DisplayDiplomaText();
-    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     EnableInterrupts(1);
     SetVBlankCallback(VBlankCB);
     SetMainCallback2(MainCB2);
@@ -101,7 +101,7 @@ static void MainCB2(void)
 
 static void Task_DiplomaFadeIn(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         gTasks[taskId].func = Task_DiplomaWaitForKeyPress;
 }
 
@@ -109,14 +109,14 @@ static void Task_DiplomaWaitForKeyPress(u8 taskId)
 {
     if (JOY_NEW(A_BUTTON | B_BUTTON))
     {
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].func = Task_DiplomaFadeOut;
     }
 }
 
 static void Task_DiplomaFadeOut(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         Free(sDiplomaTilemapPtr);
         FreeAllWindowBuffers();
@@ -140,7 +140,7 @@ static void DisplayDiplomaText(void)
     StringExpandPlaceholders(gStringVar4, gText_PokedexDiploma);
     PrintDiplomaText(gStringVar4, 0, 1);
     PutWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
 }
 
 static const struct BgTemplate sDiplomaBgTemplates[2] =
@@ -168,7 +168,7 @@ static const struct BgTemplate sDiplomaBgTemplates[2] =
 static void InitDiplomaBg(void)
 {
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sDiplomaBgTemplates, ARRAY_COUNT(sDiplomaBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sDiplomaBgTemplates, ARRAY_COUNT(sDiplomaBgTemplates));
     SetBgTilemapBuffer(1, sDiplomaTilemapPtr);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     ShowBg(0);

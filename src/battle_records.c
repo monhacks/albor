@@ -108,7 +108,7 @@ void RemoveRecordsWindow(void)
 
 static void Task_TrainerHillWaitForPaletteFade(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         gTasks[taskId].func = Task_CloseTrainerHillRecordsOnButton;
 }
 
@@ -125,13 +125,13 @@ static void Task_CloseTrainerHillRecordsOnButton(u8 taskId)
 
 static void Task_BeginPaletteFade(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_ExitTrainerHillRecords;
 }
 
 static void Task_ExitTrainerHillRecords(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         Free(sTilemapBuffer);
@@ -145,7 +145,7 @@ static void RemoveTrainerHillRecordsWindow(u8 windowId)
 {
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
     ClearWindowTilemap(windowId);
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
     RemoveWindow(windowId);
 }
 
@@ -247,7 +247,7 @@ static void CB2_ShowTrainerHillRecords(void)
     case 2:
         sTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sTrainerHillRecordsBgTemplates, ARRAY_COUNT(sTrainerHillRecordsBgTemplates));
         SetBgTilemapBuffer(3, sTilemapBuffer);
         ResetBgCoordinates();
         gMain.state++;
@@ -272,7 +272,7 @@ static void CB2_ShowTrainerHillRecords(void)
         gMain.state++;
         break;
     case 6:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
         gMain.state++;
         break;
     case 7:

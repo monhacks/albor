@@ -313,13 +313,12 @@ u32 PokenavMainMenuLoopedTaskIsActive(void)
 void ShutdownPokenav(void)
 {
     PlaySE(SE_POKENAV_OFF);
-    ResetBldCnt_();
-    BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_BLACK);
 }
 
 bool32 WaitForPokenavShutdownFade(void)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         FreeMenuHandlerSubstruct2();
         CleanupPokenavMainMenuResources();
@@ -340,7 +339,7 @@ static u32 LoopedTask_InitPokenavMenu(s32 state)
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         FreeAllWindowBuffers();
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, gPokenavMainMenuBgTemplates, ARRAY_COUNT(gPokenavMainMenuBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, gPokenavMainMenuBgTemplates, ARRAY_COUNT(gPokenavMainMenuBgTemplates));
         ResetBgPositions();
         ResetTempTileDataBuffers();
         return LT_INC_AND_CONTINUE;
@@ -520,23 +519,23 @@ void PokenavFadeScreen(s32 fadeType)
         BeginNormalPaletteFade(menu->palettes, -2, 16, 0, RGB_BLACK);
         break;
     case POKENAV_FADE_TO_BLACK_ALL:
-        BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
         break;
     case POKENAV_FADE_FROM_BLACK_ALL:
-        BeginNormalPaletteFade(PALETTES_ALL, -2, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 16, 0, RGB_BLACK);
         break;
     }
 }
 
 bool32 IsPaletteFadeActive(void)
 {
-    return gPaletteFade.active;
+    return gFundidoPaletas.activo;
 }
 
 // Excludes the first obj and bg palettes
 void FadeToBlackExceptPrimary(void)
 {
-    BlendPalettes(PALETTES_ALL & ~(1 << 16 | 1), 16, RGB_BLACK);
+    BlendPalettes(PALETAS_COMPLETAS & ~(1 << 16 | 1), 16, RGB_BLACK);
 }
 
 void InitBgTemplates(const struct BgTemplate *templates, int count)
@@ -555,7 +554,7 @@ static void InitHelpBar(void)
     menu->helpBarWindowId = 0;
     DrawHelpBar(menu->helpBarWindowId);
     PutWindowTilemap(menu->helpBarWindowId);
-    CopyWindowToVram(menu->helpBarWindowId, COPYWIN_FULL);
+    CopyWindowToVram(menu->helpBarWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 void PrintHelpBarText(u32 textId)
@@ -674,38 +673,12 @@ void UpdateRegionMapRightHeaderTiles(u32 menuGfxId)
 
 static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 {
-    struct Pokenav_MainMenu *menu;
-    u32 size, tag;
 
-    if (menuGfxId >= POKENAV_GFX_SUBMENUS_START)
-        return;
-
-    menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
-    tag = sMenuLeftHeaderSpriteSheets[menuGfxId].tag;
-    size = GetDecompressedDataSize(sMenuLeftHeaderSpriteSheets[menuGfxId].data);
-    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], OBJ_PLTT_ID(IndexOfSpritePaletteTag(1)), PLTT_SIZE_4BPP);
-    LZ77UnCompWram(sMenuLeftHeaderSpriteSheets[menuGfxId].data, gDecompressionBuffer);
-    RequestDma3Copy(gDecompressionBuffer, (void *)OBJ_VRAM0 + (GetSpriteTileStartByTag(2) * 32), size, 1);
-    menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + sMenuLeftHeaderSpriteSheets[menuGfxId].size;
-
-    if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT || menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_IN)
-        menu->leftHeaderSprites[1]->x2 = 56;
-    else
-        menu->leftHeaderSprites[1]->x2 = 64;
 }
 
 static void LoadLeftHeaderGfxForSubMenu(u32 menuGfxId)
 {
-    u32 size, tag;
 
-    if (menuGfxId >= POKENAV_GFX_MENUS_END - POKENAV_GFX_SUBMENUS_START)
-        return;
-
-    tag = sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].tag;
-    size = GetDecompressedDataSize(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data);
-    LoadPalette(&gPokenavLeftHeader_Pal[tag * 16], OBJ_PLTT_ID(IndexOfSpritePaletteTag(2)), PLTT_SIZE_4BPP);
-    LZ77UnCompWram(sPokenavSubMenuLeftHeaderSpriteSheets[menuGfxId].data, &gDecompressionBuffer[0x1000]);
-    RequestDma3Copy(&gDecompressionBuffer[0x1000], (void *)OBJ_VRAM0 + 0x800 + (GetSpriteTileStartByTag(2) * 32), size, 1);
 }
 
 void ShowLeftHeaderGfx(u32 menuGfxId, bool32 isMain, bool32 isOnRightSide)

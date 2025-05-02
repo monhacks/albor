@@ -4,69 +4,68 @@
 #include "time_events.h"
 #include "field_specials.h"
 #include "lottery_corner.h"
-#include "dewford_trend.h"
 #include "field_weather.h"
 #include "berry.h"
 #include "main.h"
 #include "overworld.h"
 #include "wallclock.h"
-#include "constants/form_change_types.h"
 
-static void UpdatePerDay(struct Time *localTime);
-static void UpdatePerMinute(struct Time *localTime);
+static void ActualizaPorDia(struct Tiempo *horaJuego);
+static void ActualizaPorMinuto(struct Tiempo *horaJuego);
 
-void InitTimeBasedEvents(void)
+void IniciaEventosTemporales(void)
 {
     FlagSet(FLAG_SYS_CLOCK_SET);
     RtcCalcLocalTime();
-    gSaveBlockPtr->lastBerryTreeUpdate = gLocalTime;
-    VarSet(VAR_DAYS, gLocalTime.days);
+    gSaveBlockPtr->ultimaActualizacionBaya = gHoraJuego;
 }
 
-void DoTimeBasedEvents(void)
+void HaceEventosTemporales(void)
 {
     if (FlagGet(FLAG_SYS_CLOCK_SET) && !InPokemonCenter())
     {
         RtcCalcLocalTime();
-        UpdatePerDay(&gLocalTime);
-        UpdatePerMinute(&gLocalTime);
+        ActualizaPorDia(&gHoraJuego);
+        ActualizaPorMinuto(&gHoraJuego);
     }
 }
 
-static void UpdatePerDay(struct Time *localTime)
+static void ActualizaPorDia(struct Tiempo *horaJuego)
 {
-    u16 *days = GetVarPointer(VAR_DAYS);
-    u16 daysSince;
+    u16 *dias = gHoraJuego.days;
+    u16 diasDesde;
 
-    if (*days != localTime->days && *days <= localTime->days)
+    if (*dias != horaJuego->dias && *dias <= horaJuego->dias)
     {
-        daysSince = localTime->days - *days;
-        ClearDailyFlags();
-        UpdateWeatherPerDay(daysSince);
-        UpdatePartyPokerusTime(daysSince);
-        UpdateMirageRnd(daysSince);
-        SetRandomLotteryNumber(daysSince);
-        *days = localTime->days;
+        diasDesde = horaJuego->dias - *dias;
+        LimpiaFlagsDiarias();
+        UpdateWeatherPerDay(diasDesde);
+        SetRandomLotteryNumber(diasDesde);
+        *dias = horaJuego->dias;
     }
 }
 
-static void UpdatePerMinute(struct Time *localTime)
+static void ActualizaPorMinuto(struct Tiempo *horaJuego)
 {
-    struct Time difference;
-    int minutes;
+    struct Tiempo diferencia;
+    int minutos;
 
-    CalcTimeDifference(&difference, &gSaveBlockPtr->lastBerryTreeUpdate, localTime);
-    minutes = HORAS_POR_DIA * MINUTOS_POR_HORA * difference.days + SEGUNDOS_POR_MINUTO * difference.hours + difference.minutes;
-    if (minutes > 0)
+    CalculaDiferenciaTiempo(horaJuego, &diferencia, &gSaveBlockPtr->ultimaActualizacionBaya);
+
+    minutos = HORAS_POR_DIA * MINUTOS_POR_HORA * diferencia.dias
+            + MINUTOS_POR_HORA * diferencia.horas
+            + diferencia.minutos;
+
+    if (minutos > 0)
     {
-        BerryTreeTimeUpdate(minutes);
-        gSaveBlockPtr->lastBerryTreeUpdate = *localTime;
+        BerryTreeTimeUpdate(minutos);
+        gSaveBlockPtr->ultimaActualizacionBaya = *horaJuego;
     }
 }
 
 static void ReturnFromStartWallClock(void)
 {
-    InitTimeBasedEvents();
+    IniciaEventosTemporales();
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 

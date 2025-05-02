@@ -1003,11 +1003,11 @@ static void Task_FadeToSlotMachine(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             SetMainCallback2(CB2_SlotMachineSetup);
             DestroyTask(taskId);
@@ -1139,7 +1139,7 @@ static void SlotMachineSetup_InitBgsWindows(void)
     SetHBlankCallback(NULL);
     CpuFill32(0, (void *)VRAM, VRAM_SIZE);
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates, ARRAY_COUNT(sBgTemplates));
     InitWindows(sWindowTemplates);
     DeactivateAllTextPrinters();
 }
@@ -1282,7 +1282,7 @@ static void Task_SlotMachine(u8 taskId)
 // SLOTTASK_UNFADE
 static bool8 SlotTask_UnfadeScreen(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
     sSlotMachine->state++; // SLOTTASK_WAIT_FADE
     return FALSE;
@@ -1291,7 +1291,7 @@ static bool8 SlotTask_UnfadeScreen(struct Task *task)
 // SLOTTASK_WAIT_FADE
 static bool8 SlotTask_WaitUnfade(struct Task *task)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         sSlotMachine->state++;
     return FALSE;
 }
@@ -1389,7 +1389,7 @@ static bool8 SlotTask_PrintMsg_Need3Coins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouDontHaveThreeCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NEED_3_COINS;
     return FALSE;
 }
@@ -1652,7 +1652,7 @@ static bool8 SlotTask_AskQuit(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_QuitTheGame, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     CreateYesNoMenuParameterized(0x15, 7, 0x214, 0x180, 0xE, 0xF);
     sSlotMachine->state = SLOTTASK_HANDLE_QUIT_INPUT;
     return FALSE;
@@ -1684,7 +1684,7 @@ static bool8 SlotTask_PrintMsg_MaxCoins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveGot9999Coins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_MAX_COINS;
     return FALSE;
 }
@@ -1705,7 +1705,7 @@ static bool8 SlotTask_PrintMsg_NoMoreCoins(struct Task *task)
 {
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized(0, FONT_NORMAL, gText_YouveRunOutOfCoins, 0, 1, 0, 0);
-    CopyWindowToVram(0, COPYWIN_FULL);
+    CopyWindowToVram(0, COPIA_COMPLETA_VENTANA);
     sSlotMachine->state = SLOTTASK_WAIT_MSG_NO_MORE_COINS;
     return FALSE;
 }
@@ -1725,7 +1725,7 @@ static bool8 SlotTask_WaitMsg_NoMoreCoins(struct Task *task)
 static bool8 SlotTask_EndGame(struct Task *task)
 {
     SetCoins(sSlotMachine->coins);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     sSlotMachine->state++; // SLOTTASK_FREE
     return FALSE;
 }
@@ -1733,7 +1733,7 @@ static bool8 SlotTask_EndGame(struct Task *task)
 // SLOTTASK_FREE
 static bool8 SlotTask_FreeDataStructures(struct Task *task)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         SetMainCallback2(sSlotMachine->prevMainCb);
         FREE_AND_SET_NULL(sImageTable_DigitalDisplay_Reel);
@@ -3899,13 +3899,13 @@ static void Task_InfoBox(u8 taskId)
 
 static void InfoBox_FadeIn(struct Task *task)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     task->tState++;
 }
 
 static void InfoBox_WaitFade(struct Task *task)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         task->tState++;
 }
 
@@ -3922,8 +3922,8 @@ static void InfoBox_DrawWindow(struct Task *task)
 static void InfoBox_AddText(struct Task *task)
 {
     AddTextPrinterParameterized3(1, FONT_NORMAL, 2, 5, sColors_ReeltimeHelp, 0, gText_ReelTimeHelp);
-    CopyWindowToVram(1, COPYWIN_FULL);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    CopyWindowToVram(1, COPIA_COMPLETA_VENTANA);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 
@@ -3933,9 +3933,9 @@ static void InfoBox_WaitInput(struct Task *task)
     {
         FillWindowPixelBuffer(1, PIXEL_FILL(0));
         ClearWindowTilemap(1);
-        CopyWindowToVram(1, COPYWIN_MAP);
+        CopyWindowToVram(1, COPIA_TILEMAP_VENTANA);
         RemoveWindow(1);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         task->tState++;
     }
 }
@@ -3956,7 +3956,7 @@ static void InfoBox_CreateDigitalDisplay(struct Task *task)
 static void InfoBox_LoadPikaPowerMeter(struct Task *task)
 {
     LoadPikaPowerMeter(sSlotMachine->pikaPowerBolts);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
     task->tState++;
 }
 

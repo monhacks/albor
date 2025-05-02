@@ -178,7 +178,7 @@ static void DetermineCyclingRoadResults(u32 numFrames, u8 numBikeCollisions)
     if (numFrames < 3600)
     {
         ConvertIntToDecimalStringN(gStringVar2, numFrames / 60, STR_CONV_MODE_RIGHT_ALIGN, 2);
-        gStringVar2[2] = CHAR_DEC_SEPARATOR;
+        gStringVar2[2] = CHAR_COMMA;
         ConvertIntToDecimalStringN(&gStringVar2[3], ((numFrames % 60) * 100) / 60, STR_CONV_MODE_LEADING_ZEROS, 2);
         StringAppend(gStringVar2, gText_SpaceSeconds);
     }
@@ -752,11 +752,6 @@ void StorePlayerCoordsInVars(void)
     gSpecialVar_0x8005 = gSaveBlockPtr->pos.y;
 }
 
-u8 GetPlayerTrainerIdOnesDigit(void)
-{
-    return (u16)((gSaveBlockPtr->playerTrainerId[1] << 8) | gSaveBlockPtr->playerTrainerId[0]) % 10;
-}
-
 void GetPlayerBigGuyGirlString(void)
 {
     if (gSaveBlockPtr->playerGender == MACHO)
@@ -789,15 +784,6 @@ void CableCarWarp(void)
 void SetHiddenItemFlag(void)
 {
     FlagSet(gSpecialVar_0x8004);
-}
-
-u16 GetWeekCount(void)
-{
-    u16 weekCount = gLocalTime.days / 7;
-    if (weekCount > 9999)
-        weekCount = 9999;
-
-    return weekCount;
 }
 
 u8 GetLeadMonFriendshipScore(void)
@@ -1394,18 +1380,18 @@ u16 ScriptGetPartyMonSpecies(void)
 u16 GetDaysUntilPacifidlogTMAvailable(void)
 {
     u16 tmReceivedDay = VarGet(VAR_PACIFIDLOG_TM_RECEIVED_DAY);
-    if (gLocalTime.days - tmReceivedDay >= 7)
+    if (gHoraJuego.days - tmReceivedDay >= 7)
         return 0;
-    else if (gLocalTime.days < 0)
+    else if (gHoraJuego.days < 0)
         return 8;
 
-    return 7 - (gLocalTime.days - tmReceivedDay);
+    return 7 - (gHoraJuego.days - tmReceivedDay);
 }
 
 u16 SetPacifidlogTMReceivedDay(void)
 {
-    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gLocalTime.days);
-    return gLocalTime.days;
+    VarSet(VAR_PACIFIDLOG_TM_RECEIVED_DAY, gHoraJuego.days);
+    return gHoraJuego.days;
 }
 
 bool8 MonOTNameNotPlayer(void)
@@ -1708,7 +1694,7 @@ void ShowDeptStoreElevatorFloorSelect(void)
     AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sDeptStoreFloorNames[gSpecialVar_0x8005], xPos, 17, TEXT_SKIP_DRAW, NULL);
 
     PutWindowTilemap(sTutorMoveAndElevatorWindowId);
-    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPYWIN_FULL);
+    CopyWindowToVram(sTutorMoveAndElevatorWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 void CloseDeptStoreElevatorWindow(void)
@@ -1780,24 +1766,24 @@ static void Task_MoveElevatorWindowLights(u8 taskId)
 void BufferVarsForIVRater(void)
 {
     u8 i;
-    u32 ivStorage[NUM_STATS];
+    u32 ivStorage[NUMERO_ESTADISTICAS];
 
-    ivStorage[STAT_HP] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
-    ivStorage[STAT_ATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
-    ivStorage[STAT_DEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
-    ivStorage[STAT_SPEED] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
-    ivStorage[STAT_SPATK] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
-    ivStorage[STAT_SPDEF] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
+    ivStorage[ESTADISTICA_PS] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_HP_IV);
+    ivStorage[ESTADISTICA_ATAQUE] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_ATK_IV);
+    ivStorage[ESTADISTICA_DEFENSA] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_DEF_IV);
+    ivStorage[ESTADISTICA_VELOCIDAD] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPEED_IV);
+    ivStorage[ESTADISTICA_ATAQUE_ESPECIAL] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPATK_IV);
+    ivStorage[ESTADISTICA_DEFENSA_ESPECIAL] = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPDEF_IV);
 
     gSpecialVar_0x8005 = 0;
 
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS; i++)
         gSpecialVar_0x8005 += ivStorage[i];
 
     gSpecialVar_0x8006 = 0;
-    gSpecialVar_0x8007 = ivStorage[STAT_HP];
+    gSpecialVar_0x8007 = ivStorage[ESTADISTICA_PS];
 
-    for (i = 1; i < NUM_STATS; i++)
+    for (i = 1; i < NUMERO_ESTADISTICAS; i++)
     {
         if (ivStorage[gSpecialVar_0x8006] < ivStorage[i])
         {
@@ -2476,7 +2462,7 @@ static void CloseScrollableMultichoice(u8 taskId)
     Free(sScrollableMultichoice_ListMenuItem);
     ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
     FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
-    CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+    CopyWindowToVram(task->tWindowId, COPIA_TILES_VENTANA);
     RemoveWindow(task->tWindowId);
     DestroyTask(taskId);
     ScriptContext_Enable();
@@ -2678,7 +2664,7 @@ void ShowBattlePointsWindow(void)
     sBattlePointsWindowId = AddWindow(&sBattlePoints_WindowTemplate);
     SetStandardWindowBorderStyle(sBattlePointsWindowId, FALSE);
     UpdateBattlePointsWindow();
-    CopyWindowToVram(sBattlePointsWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sBattlePointsWindowId, COPIA_TILES_VENTANA);
 }
 
 void CloseBattlePointsWindow(void)
@@ -2723,7 +2709,7 @@ void ShowFrontierExchangeCornerItemIconWindow(void)
 
     sFrontierExchangeCorner_ItemIconWindowId = AddWindow(&sFrontierExchangeCorner_ItemIconWindowTemplate);
     SetStandardWindowBorderStyle(sFrontierExchangeCorner_ItemIconWindowId, FALSE);
-    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPYWIN_GFX);
+    CopyWindowToVram(sFrontierExchangeCorner_ItemIconWindowId, COPIA_TILES_VENTANA);
 }
 
 void CloseFrontierExchangeCornerItemIconWindow(void)
@@ -2905,7 +2891,7 @@ void ScrollableMultichoice_RedrawPersistentMenu(void)
 
         AddTextPrinterParameterized(task->tWindowId, FONT_NORMAL, gText_SelectorArrow, 0, selectedRow * 16, TEXT_SKIP_DRAW, NULL);
         PutWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, COPYWIN_FULL);
+        CopyWindowToVram(task->tWindowId, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -2922,7 +2908,7 @@ void ScrollableMultichoice_ClosePersistentMenu(void)
         ClearStdWindowAndFrameToTransparent(task->tWindowId, TRUE);
         FillWindowPixelBuffer(task->tWindowId, PIXEL_FILL(0));
         ClearWindowTilemap(task->tWindowId);
-        CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+        CopyWindowToVram(task->tWindowId, COPIA_TILES_VENTANA);
         RemoveWindow(task->tWindowId);
         DestroyTask(taskId);
     }
@@ -3447,37 +3433,6 @@ bool8 InPokemonCenter(void)
     return FALSE;
 }
 
-/*  Summary of the Lilycove Trainer Fan Club, because it's a little messy
-
-    ## The Fan Club room itself
-    There are initially 4 members of the Fan Club (+ an interviewer), none of whom are fans of the player
-    After becoming the champion there will be 8 members of the Fan Club, 3 of whom are automatically fans of the player
-    After this point, if a club member is a fan of the player they will sit at the front table and comment on the player
-    If they are not fans of the player, they will sit at the far table and can make comments about a different trainer (see BufferFanClubTrainerName)
-
-    ## Gaining/losing fans
-    After every link battle the player will gain a fan if they won, or lose a fan if they lost
-    If the player has at least 3 fans, this is the only way to gain fans
-    If the player has fewer than 3 fans, they may also gain fans by completing certain tasks enough times (see TryGainNewFanFromCounter)
-    If the player has at least 5 fans, they can lose a fan every 12 real-time hours, or more often if the timer variable is reset (see TryLoseFansFromPlayTime)
-    If the player has only 1 fan left it cannot be lost
-
-    ## Variables
-    VAR_FANCLUB_FAN_COUNTER, a bitfield for tracking the fans
-      Bits  1-7: Counter for when to add new fans
-      Bit     8: Flag set after receiving the initial 3 fans
-      Bits 9-16: Flags for each of the 8 club members, set to 1 when theyre a fan of the player and 0 when theyre not
-
-    VAR_FANCLUB_LOSE_FAN_TIMER, a timer for when to lose fans
-      Compared against playTimeHours. When theyre equal, a fan is ready to be lost
-      For every fan thats lost this way 12 hours are added to the timer
-
-    VAR_LILYCOVE_FAN_CLUB_STATE
-      0: Player is not the champion yet
-      1: Player is the champion, ready to meet their initial fans
-      2: Player has met their initial fans
-*/
-
 #define FANCLUB_BITFIELD (gSaveBlockPtr->vars[VAR_FANCLUB_FAN_COUNTER - VARS_START])
 #define FANCLUB_COUNTER    0x007F
 
@@ -3498,18 +3453,7 @@ void ResetFanClub(void)
 
 void UpdateTrainerFanClubGameClear(void)
 {
-    if (!GET_TRAINER_FAN_CLUB_FLAG(FANCLUB_GOT_FIRST_FANS))
-    {
-        SetPlayerGotFirstFans();
-        SetInitialFansOfPlayer();
-        gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
-        FlagClear(FLAG_HIDE_FANCLUB_OLD_LADY);
-        FlagClear(FLAG_HIDE_FANCLUB_BOY);
-        FlagClear(FLAG_HIDE_FANCLUB_LITTLE_BOY);
-        FlagClear(FLAG_HIDE_FANCLUB_LADY);
-        FlagClear(FLAG_HIDE_LILYCOVE_FAN_CLUB_INTERVIEWER);
-        VarSet(VAR_LILYCOVE_FAN_CLUB_STATE, 1);
-    }
+
 }
 
 // If the player has < 3 fans, gain a new fan whenever the counter reaches 20+
@@ -3645,29 +3589,7 @@ u16 GetNumFansOfPlayerInTrainerFanClub(void)
 // If the player has > 5 fans in the Trainer Fan Club, then lose 1 fan for every 12 hours since the last fan loss / timer reset
 void TryLoseFansFromPlayTime(void)
 {
-    u8 i = 0;
-    if (gSaveBlockPtr->playTimeHours < 999)
-    {
-        while (TRUE)
-        {
-            if (GetNumFansOfPlayerInTrainerFanClub() < 5)
-            {
-                gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] = gSaveBlockPtr->playTimeHours;
-                break;
-            }
-            else if (i == NUM_TRAINER_FAN_CLUB_MEMBERS)
-            {
-                break;
-            }
-            else if (gSaveBlockPtr->playTimeHours - gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] < 12)
-            {
-                return;
-            }
-            PlayerLoseRandomTrainerFan();
-            gSaveBlockPtr->vars[VAR_FANCLUB_LOSE_FAN_TIMER - VARS_START] += 12;
-            i++;
-        }
-    }
+
 }
 
 bool8 IsFanClubMemberFanOfPlayer(void)

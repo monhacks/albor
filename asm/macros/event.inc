@@ -1,53 +1,41 @@
-	@ Does nothing.
-	.macro nop
-	.byte 0x00
+	.macro no
+	.byte 0
 	.endm
-
-	@ Does nothing.
-	.macro nop1
-	.byte 0x01
-	.endm
-
+	
 	@ Terminates script execution.
 	.macro end
-	.byte 0x02
+	.byte 1
 	.endm
 
 	@ Jumps back to after the last-executed call statement, and continues script execution from there.
 	.macro return
-	.byte 0x03
+	.byte 2
 	.endm
 
 	@ Jumps to destination and continues script execution from there. The location of the calling script is remembered and can be returned to later.
 	.macro call destination:req
-	.byte 0x04
+	.byte 3
 	.4byte \destination
 	.endm
 
 	@ Jumps to destination and continues script execution from there.
 	.macro goto destination:req
-	.byte 0x05
+	.byte 4
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), jumps to destination and continues script execution from there.
 	.macro goto_if condition:req, destination:req
-	.byte 0x06
+	.byte 5
 	.byte \condition
 	.4byte \destination
 	.endm
 
 	@ If the result of the last comparison matches condition (see Comparison operators), calls destination.
 	.macro call_if condition:req, destination:req
-	.byte 0x07
+	.byte 6
 	.byte \condition
 	.4byte \destination
-	.endm
-
-	@ Jumps to the script in gStdScripts at index function.
-	.macro gotostd function:req
-	.byte 0x08
-	.byte \function
 	.endm
 
 	@ callstd function names
@@ -59,20 +47,6 @@
 	@ Calls the script in gStdScripts at index function.
 	.macro callstd function:req
 	.byte 0x09
-	.byte \function
-	.endm
-
-	@ If the result of the last comparison matches condition (see Comparison operators), jumps to the script in gStdScripts at index function.
-	.macro gotostd_if condition:req, function:req
-	.byte 0x0a
-	.byte \condition
-	.byte \function
-	.endm
-
-	@ If the result of the last comparison matches condition (see Comparison operators), calls the script in gStdScripts at index function.
-	.macro callstd_if condition:req, function:req
-	.byte 0x0b
-	.byte \condition
 	.byte \function
 	.endm
 
@@ -1584,65 +1558,6 @@
 	.2byte \box
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro textcolor color:req
-	.byte 0xc7
-	.byte \color
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp text:req
-	.byte 0xc8
-	.4byte \text
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro unloadhelp
-	.byte 0xc9
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro signmsg
-	.byte 0xca
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro normalmsg
-	.byte 0xcb
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro comparehiddenvar a:req, value:req
-	.byte 0xcc
-	.byte \a
-	.4byte \value
-	.endm
-
-	@ Sets the modernFatefulEncounter bit for the Pokemon in the specified slot of the player's party.
-	.macro setmodernfatefulencounter slot:req
-	.byte 0xcd
-	.2byte \slot
-	.endm
-
-	@ Checks if the modernFatefulEncounter bit is set for the Pokemon in the specified slot of the player's party. If it isn't set,
-	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
-	.macro checkmodernfatefulencounter slot:req
-	.byte 0xce
-	.2byte \slot
-	.endm
-
-	@ Jumps to the ram script saved from a Wonder Card. If there is no valid saved Wonder Card or if the
-	@ ram script is invalid then this does nothing.
-	.macro trywondercardscript
-	.byte 0xcf
-	.endm
-
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro setworldmapflag worldmapflag:req
-	.byte 0xd0
-	.2byte \worldmapflag
-	.endm
-
 	@ Warps the player to the specified map using a teleport effect. Effect is similar to warpteleport, but
 	@ this warp has no fade out and maintains the original facing direction.
 	@ Warp commands can be given either the id of which warp location to go to on the destination map
@@ -1716,13 +1631,13 @@
 	.4byte \text
 	.endm
 
-	@ Equivalent to fadescreen but copies gPlttBufferUnfaded to gDecompressionBuffer on the fade out
-	@ and the reverse on the fade in, in effect saving gPlttBufferUnfaded to restore it.
+	@ Como fadescreen pero copia gPlttBufferUnfaded a un buffer en el fundido a negro,
+	@ y a la inversa, guardando gPlttBufferUnfaded para restaurarlo.
   	@ If nowait set, does not wait for the fade to complete
-	.macro fadescreenswapbuffers mode:req, nowait=0
+	.macro fadescreenswapbuffers modo:req, inmediato=FALSE
 	.byte 0xdc
-	.byte \mode
-  	.byte \nowait
+	.byte \modo
+  	.byte \inmediato
 	.endm
 
 	@ Buffers the specified trainer's class name to the given string var.
@@ -2007,32 +1922,9 @@
 	closebraillemessage
 	.endm
 
-	@ Creates a Pokémon with the modernFatefulEncounter bit set for an encounter
-	.macro seteventmon species:req, level:req, item=ITEM_NONE
-	setvar VAR_0x8004, \species
-	setvar VAR_0x8005, \level
-	setvar VAR_0x8006, \item
-	special CreateEnemyEventMon
-	.endm
-
 	.macro setdynamicaifunc func:req
 	callnative ScriptSetDynamicAiFunc
 	.4byte \func
-	.endm
-
-	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
-	@ FALSE otherwise.
-	.macro canhypertrain stat:req, slot:req
-	callnative CanHyperTrain
-	.byte \stat
-	.2byte \slot
-	.endm
-
-	@ Hyper Trains a stat.
-	.macro hypertrain stat:req, slot:req
-	callnative HyperTrain
-	.byte \stat
-	.2byte \slot
 	.endm
 
 	@ Sets VAR_RESULT to one of the arguments (via setorcopyvar).
@@ -2121,21 +2013,6 @@
 	@ can be used in conjunection with createmon to set up a wild battle with 2 player mons vs. 1 enemy mon
 	.macro setwilddoubleflag
 	callnative ScriptSetDoubleBattleFlag
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will stop the flow of time.
-	.macro pausefakertc
-	callnative Script_PauseFakeRtc
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time.
-	.macro resumefakertc
-	callnative Script_ResumeFakeRtc
-	.endm
-
-	@ When OW_USE_FAKE_RTC and OW_FLAG_PAUSE_TIME is assigned, this macro will resume the flow of time if paused, and stop the flow of time otherwise.
-	.macro togglefakertc
-	callnative Script_ToggleFakeRtc
 	.endm
 
 	@ ============================ @

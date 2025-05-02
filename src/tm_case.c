@@ -292,7 +292,7 @@ static void VBlankCB_Idle(void)
 
 static void CB2_SetUpTMCaseUI_Blocking(void)
 {
-    while (1)
+    while(1)
     {
         if (DoSetUpTMCaseUI() == TRUE)
             break;
@@ -379,11 +379,11 @@ static bool8 DoSetUpTMCaseUI(void)
         gMain.state++;
         break;
     case 16:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 17:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         gMain.state++;
         break;
     default:
@@ -411,7 +411,7 @@ static void LoadBGTemplates(void)
     ptr = &sTilemapBuffer;
     *ptr = AllocZeroed(2048);
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBGTemplates, ARRAY_COUNT(sBGTemplates));
     SetBgTilemapBuffer(2, *ptr);
     ScheduleBgCopyTilemapToVram(1);
     ScheduleBgCopyTilemapToVram(2);
@@ -682,7 +682,7 @@ static void TMCaseSetup_UpdateVisualMenuOffset(void)
     {
         for (i = 0; i <= sTMCaseStaticResources.selectedRow - 3 && sTMCaseStaticResources.scrollOffset + sTMCaseDynamicResources->maxTMsShown != sTMCaseDynamicResources->numTMs; i++)
         {
-            do {} while (0);
+            do {} while(0);
             sTMCaseStaticResources.selectedRow--;
             sTMCaseStaticResources.scrollOffset++;
         }
@@ -704,7 +704,7 @@ static void DestroyTMCaseBuffers(void)
 
 static void Task_BeginFadeOutFromTMCase(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, -2, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, -2, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_FadeOutAndCloseTMCase;
 }
 
@@ -713,7 +713,7 @@ static void Task_FadeOutAndCloseTMCase(u8 taskId)
     s16 * data = gTasks[taskId].data;
     u16 music = GetCurrLocationDefaultMusic();
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyListMenuTask(tListTaskId, &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
         if (sTMCaseDynamicResources->nextScreenCallback != NULL)
@@ -732,7 +732,7 @@ static void Task_HandleListInput(u8 taskId)
     s16 * data = gTasks[taskId].data;
     s32 input;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         input = ListMenu_ProcessInput(tListTaskId);
         ListMenuGetScrollAndRow(tListTaskId, &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);

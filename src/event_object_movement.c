@@ -1287,17 +1287,6 @@ static void RemoveObjectEventInternal(struct ObjectEvent *objectEvent)
     }
 }
 
-void RemoveAllObjectEventsExceptPlayer(void)
-{
-    u8 i;
-
-    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
-    {
-        if (i != gPlayerAvatar.objectEventId)
-            RemoveObjectEvent(&gObjectEvents[i]);
-    }
-}
-
 static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;
@@ -1590,7 +1579,7 @@ static u8 LoadDynamicFollowerPalette(u16 species, u8 form, bool32 shiny)
     struct Pokemon *mon = GetFirstLiveMon();
     if ((paletteNum = IndexOfSpritePaletteTag(species)) == 0xFF)
     {
-        if (gSpeciesInfo[species].brilla && GetTimeOfDay() == TIEMPO_NOCHE)
+        if (gSpeciesInfo[species].brilla && QueParteDeDiaEs() == TIEMPO_NOCHE)
             LoadSpritePaletteWithTag(palette, species);
         else
             LoadSpritePaletteHueShifted(palette, species, GetMonData(mon, MON_DATA_PERSONALITY));
@@ -1887,7 +1876,7 @@ bool32 CheckMsgCondition(const struct MsgCondition *cond, struct Pokemon *mon, u
     case MSG_COND_TIME_OF_DAY:
         // Must match time of day, have natural light on the map,
         // and not have weather that obscures the sky
-        return (cond->data.raw == gTimeOfDay && MapHasNaturalLight(gMapHeader.mapType) && GetCurrentWeather() < WEATHER_RAIN);
+        return (cond->data.raw == gHoraDelDia && MapaTieneLuzNatural(gMapHeader.mapType) && GetCurrentWeather() < WEATHER_RAIN);
     case MSG_COND_NEAR_MB:
         multi = FindMetatileBehaviorWithinRange(obj->currentCoords.x,
                                                 obj->currentCoords.y,
@@ -2130,7 +2119,7 @@ void UpdateLightSprite(struct Sprite *sprite)
         return;
     }
 
-    if (gTimeOfDay != TIEMPO_NOCHE) 
+    if (gHoraDelDia != TIEMPO_NOCHE) 
     {
         sprite->invisible = TRUE;
         return;
@@ -2139,7 +2128,7 @@ void UpdateLightSprite(struct Sprite *sprite)
     switch (sprite->data[5]) 
     { // lightType
     case 0:
-        if (gPaletteFade.active) 
+        if (gFundidoPaletas.activo) 
         {
             sprite->invisible = FALSE;
         } 
@@ -2957,17 +2946,6 @@ static u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGrou
 static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
 {
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
-}
-
-// Unused
-u8 GetObjectEventBerryTreeIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
-{
-    u8 objectEventId;
-
-    if (TryGetObjectEventIdByLocalIdAndMap(localId, mapNum, mapGroup, &objectEventId))
-        return 0xFF;
-
-    return gObjectEvents[objectEventId].trainerRange_berryTreeId;
 }
 
 u8 GetObjectEventBerryTreeId(u8 objectEventId)
@@ -4854,11 +4832,11 @@ static bool32 TryStartFollowerTransformEffect(struct ObjectEvent *objectEvent, s
         PlaySE(SE_M_MINIMIZE);
         return TRUE;
     }
-    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() == TIEMPO_NOCHE)
+    else if (gSpeciesInfo[species].transparente && QueParteDeDiaEs() == TIEMPO_NOCHE)
     {
         sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
     }
-    else if (gSpeciesInfo[species].transparente && GetTimeOfDay() != TIEMPO_NOCHE)
+    else if (gSpeciesInfo[species].transparente && QueParteDeDiaEs() != TIEMPO_NOCHE)
     {
         sprite->oam.objMode = ST_OAM_OBJ_BLEND;
     }

@@ -312,7 +312,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     u32 personality;
     u8 i, friendship, ball;
     u16 moves[MAX_MON_MOVES];
-    u32 ivs[NUM_STATS];
+    u32 ivs[NUMERO_ESTADISTICAS];
 
     species = GetMonData(egg, MON_DATA_SPECIES);
 
@@ -321,7 +321,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
     personality = GetMonData(egg, MON_DATA_PERSONALITY);
 
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS; i++)
         ivs[i] = GetMonData(egg, MON_DATA_HP_IV + i);
 
     ball = GetMonData(egg, MON_DATA_POKEBALL);
@@ -331,7 +331,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonData(temp, MON_DATA_MOVE1 + i,  &moves[i]);
 
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS; i++)
         SetMonData(temp, MON_DATA_HP_IV + i,  &ivs[i]);
 
     friendship = 120;
@@ -439,7 +439,7 @@ void EggHatch(void)
 
 static void Task_EggHatch(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         CleanupOverworldWindowsAndTilemaps();
         SetMainCallback2(CB2_LoadEggHatch);
@@ -467,7 +467,7 @@ static void CB2_LoadEggHatch(void)
 
         ResetTempTileDataBuffers();
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates_EggHatch, ARRAY_COUNT(sBgTemplates_EggHatch));
 
         ChangeBgX(1, 0, BG_COORD_SET);
         ChangeBgY(1, 0, BG_COORD_SET);
@@ -573,7 +573,7 @@ static void CB2_EggHatch(void)
     switch (sEggHatchData->state)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         sEggHatchData->eggSpriteId = CreateSprite(&sSpriteTemplate_Egg, EGG_X, EGG_Y, 5);
         ShowBg(0);
         ShowBg(1);
@@ -581,7 +581,7 @@ static void CB2_EggHatch(void)
         CreateTask(Task_EggHatchPlayBGM, 5);
         break;
     case 1:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             FillWindowPixelBuffer(sEggHatchData->windowId, PIXEL_FILL(0));
             sEggHatchData->delayTimer = 0;
@@ -618,7 +618,7 @@ static void CB2_EggHatch(void)
         PlayFanfare(MUS_EVOLVED);
         sEggHatchData->state++;
         PutWindowTilemap(sEggHatchData->windowId);
-        CopyWindowToVram(sEggHatchData->windowId, COPYWIN_FULL);
+        CopyWindowToVram(sEggHatchData->windowId, COPIA_COMPLETA_VENTANA);
         break;
     case 6:
         if (IsFanfareTaskInactive())
@@ -663,11 +663,11 @@ static void CB2_EggHatch(void)
         }
         break;
     case 11:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         sEggHatchData->state++;
         break;
     case 12:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             FreeMonSpritesGfx();
             RemoveWindow(sEggHatchData->windowId);
@@ -788,7 +788,7 @@ static void SpriteCB_Egg_Hatch(struct Sprite *sprite)
 
     // Fade to white to hide transition from egg to Pokémon
     if (sprite->sTimer == 0)
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 0, 16, RGB_WHITEALPHA);
 
     // Create a shower of 16 egg shards in 4 groups of 4
     if ((u32)sprite->sTimer < 4)
@@ -799,7 +799,7 @@ static void SpriteCB_Egg_Hatch(struct Sprite *sprite)
 
     sprite->sTimer++;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         // Screen is hidden by the fade to white, hide egg
         PlaySE(SE_EGG_HATCH);
@@ -820,7 +820,7 @@ static void SpriteCB_Egg_Reveal(struct Sprite *sprite)
 
     // Fade back from white for reveal
     if (sprite->sTimer == 8)
-        BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_WHITEALPHA);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, -1, 16, 0, RGB_WHITEALPHA);
 
     if (sprite->sTimer <= 9)
         gSprites[sEggHatchData->monSpriteId].y--;

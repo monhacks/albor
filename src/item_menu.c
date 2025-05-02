@@ -641,7 +641,7 @@ static bool8 SetupBagMenu(void)
         break;
     case 3:
         ResetPaletteFade();
-        gPaletteFade.bufferTransferDisabled = TRUE;
+        gFundidoPaletas.transferenciaBufferDeshabilitada = TRUE;
         gMain.state++;
         break;
     case 4:
@@ -709,12 +709,12 @@ static bool8 SetupBagMenu(void)
         gMain.state++;
         break;
     case 18:
-        BlendPalettes(PALETTES_ALL, 16, 0);
+        BlendPalettes(PALETAS_COMPLETAS, 16, 0);
         gMain.state++;
         break;
     case 19:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
-        gPaletteFade.bufferTransferDisabled = FALSE;
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
+        gFundidoPaletas.transferenciaBufferDeshabilitada = FALSE;
         gMain.state++;
         break;
     default:
@@ -730,7 +730,7 @@ static void BagMenu_InitBGs(void)
     ResetVramOamAndBgCntRegs();
     memset(gBagMenu->tilemapBuffer, 0, sizeof(gBagMenu->tilemapBuffer));
     ResetBgsAndClearDma3BusyFlags();
-    InitBgsFromTemplates(0, sBgTemplates_ItemMenu, ARRAY_COUNT(sBgTemplates_ItemMenu));
+    InitBgsFromTemplates(DISPCNT_MODE_0, sBgTemplates_ItemMenu, ARRAY_COUNT(sBgTemplates_ItemMenu));
     SetBgTilemapBuffer(2, gBagMenu->tilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(2);
@@ -996,7 +996,7 @@ static void FreeBagMenu(void)
 
 void Task_FadeAndCloseBagMenu(u8 taskId)
 {
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
     gTasks[taskId].func = Task_CloseBagMenu;
 }
 
@@ -1020,7 +1020,7 @@ static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId)
 static void Task_CloseBagMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         DestroyListMenuTask(tListTaskId, &gBagPosition.scrollPosition[gBagPosition.pocket], &gBagPosition.cursorPosition[gBagPosition.pocket]);
 
@@ -1152,7 +1152,7 @@ static void Task_BagMenu_HandleInput(u8 taskId)
     u16 *cursorPos = &gBagPosition.cursorPosition[gBagPosition.pocket];
     s32 listPosition;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         switch (GetSwitchBagPocketDirection())
         {
@@ -2137,7 +2137,7 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
     {
         switch (tTimer)
         {
@@ -2231,7 +2231,7 @@ static void CopyPocketNameToWindow(u32 a)
     CpuCopy32(&tileDataBuffer[0][a], windowTileData, 0x100); // Top half of pocket name
     b = a + 16;
     CpuCopy32(&tileDataBuffer[0][b], windowTileData + 0x100, 0x100); // Bottom half of pocket name
-    CopyWindowToVram(WIN_POCKET_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_POCKET_NAME, COPIA_TILES_VENTANA);
 }
 
 static void LoadBagMenuTextWindows(void)

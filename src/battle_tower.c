@@ -656,50 +656,7 @@ static void SetTowerBattleWon(void)
 
 static void SetNextFacilityOpponent(void)
 {
-    u32 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    if (lvlMode == FRONTIER_LVL_TENT)
-    {
-        SetNextBattleTentOpponent();
-    }
-    else
-    {
-        u16 id;
-        u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u16 winStreak = GetCurrentFacilityWinStreak();
-        u32 challengeNum = winStreak / FRONTIER_STAGES_PER_CHALLENGE;
-        SetFacilityPtrsGetLevel();
 
-        if (battleMode == FRONTIER_MODE_MULTIS || battleMode == FRONTIER_MODE_LINK_MULTIS)
-        {
-            id = gSaveBlockPtr->frontier.curChallengeBattleNum;
-            gTrainerBattleOpponent_A = gSaveBlockPtr->frontier.trainerIds[id * 2];
-            gTrainerBattleOpponent_B = gSaveBlockPtr->frontier.trainerIds[id * 2 + 1];
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_B, 1);
-        }
-        else
-        {
-            s32 i;
-            while (1)
-            {
-                id = GetRandomScaledFrontierTrainerId(challengeNum, gSaveBlockPtr->frontier.curChallengeBattleNum);
-
-                // Ensure trainer wasn't previously fought in this challenge.
-                for (i = 0; i < gSaveBlockPtr->frontier.curChallengeBattleNum; i++)
-                {
-                    if (gSaveBlockPtr->frontier.trainerIds[i] == id)
-                        break;
-                }
-                if (i == gSaveBlockPtr->frontier.curChallengeBattleNum)
-                    break;
-            }
-
-            gTrainerBattleOpponent_A = id;
-            SetBattleFacilityTrainerGfxId(gTrainerBattleOpponent_A, 0);
-            if (gSaveBlockPtr->frontier.curChallengeBattleNum + 1 < FRONTIER_STAGES_PER_CHALLENGE)
-                gSaveBlockPtr->frontier.trainerIds[gSaveBlockPtr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
-        }
-    }
 }
 
 u16 GetRandomScaledFrontierTrainerId(u8 challengeNum, u8 battleNum)
@@ -764,9 +721,7 @@ void FillFrontierTrainerParty(u8 monsCount)
 
 void FillFrontierTrainersParties(u8 monsCount)
 {
-    ZeroEnemyPartyMons();
-    FillTrainerParty(gTrainerBattleOpponent_A, 0, monsCount);
-    FillTrainerParty(gTrainerBattleOpponent_B, 3, monsCount);
+
 }
 
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)

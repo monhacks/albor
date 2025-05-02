@@ -479,7 +479,6 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
 {
     .dmaDest = &REG_BG3CNT,
     .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
-    .initState = 1,
 };
 
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
@@ -828,17 +827,6 @@ static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT
     BattleDome_Text_SemifinalMatch1,
     BattleDome_Text_SemifinalMatch2,
     BattleDome_Text_FinalMatch,
-};
-
-static const u8 *const sBattleDomeWinTexts[] =
-{
-    [DOME_TEXT_NO_WINNER_YET]    = BattleDome_Text_LetTheBattleBegin,
-    [DOME_TEXT_WON_USING_MOVE]   = BattleDome_Text_TrainerWonUsingMove,
-    [DOME_TEXT_CHAMP_USING_MOVE] = BattleDome_Text_TrainerBecameChamp,
-    [DOME_TEXT_WON_ON_FORFEIT]   = BattleDome_Text_TrainerWonByDefault,
-    [DOME_TEXT_CHAMP_ON_FORFEIT] = BattleDome_Text_TrainerWonOutrightByDefault,
-    [DOME_TEXT_WON_NO_MOVES]     = BattleDome_Text_TrainerWonNoMoves,
-    [DOME_TEXT_CHAMP_NO_MOVES]   = BattleDome_Text_TrainerWonOutrightNoMoves,
 };
 
 static const u8 sLeftTrainerMonX[FRONTIER_PARTY_SIZE]  = { 96,  96,  96};
@@ -1749,17 +1737,17 @@ static void InitDomeTrainers(void)
 
 #define CALC_STAT(base, statIndex)                                                          \
 {                                                                                           \
-    u8 baseStat = gSpeciesInfo[fmon->species].base;                                                 \
+    u8 baseStat = gSpeciesInfo[fmon->species].base;                                         \
     stats[statIndex] = (((2 * baseStat + ivs + evs[statIndex] / 4) * level) / 100) + 5;     \
-    stats[statIndex] = (u8) ModifyStatByNature(fmon->nature, stats[statIndex], statIndex);        \
+    stats[statIndex] = (u8) ModifyStatByNature(fmon->nature, stats[statIndex], statIndex);  \
 }
 
 static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, int *stats)
 {
-    int evs[NUM_STATS];
+    int evs[NUMERO_ESTADISTICAS];
     int i;
 
-    for (i = 0; i < NUM_STATS; i++)
+    for (i = 0; i < NUMERO_ESTADISTICAS; i++)
     {
         if (fmon->ev != NULL)
             evs[i] = fmon->ev[i];
@@ -1769,19 +1757,19 @@ static void CalcDomeMonStats(const struct TrainerMon *fmon, int level, u8 ivs, i
 
     if (fmon->species == SPECIES_SHEDINJA)
     {
-        stats[STAT_HP] = 1;
+        stats[ESTADISTICA_PS] = 1;
     }
     else
     {
         int n = 2 * gSpeciesInfo[fmon->species].baseHP;
-        stats[STAT_HP] = (((n + ivs + evs[STAT_HP] / 4) * level) / 100) + level + 10;
+        stats[ESTADISTICA_PS] = (((n + ivs + evs[ESTADISTICA_PS] / 4) * level) / 100) + level + 10;
     }
 
-    CALC_STAT(baseAttack, STAT_ATK);
-    CALC_STAT(baseDefense, STAT_DEF);
-    CALC_STAT(baseSpeed, STAT_SPEED);
-    CALC_STAT(baseSpAttack, STAT_SPATK);
-    CALC_STAT(baseSpDefense, STAT_SPDEF);
+    CALC_STAT(baseAttack, ESTADISTICA_ATAQUE);
+    CALC_STAT(baseDefense, ESTADISTICA_DEFENSA);
+    CALC_STAT(baseSpeed, ESTADISTICA_VELOCIDAD);
+    CALC_STAT(baseSpAttack, ESTADISTICA_ATAQUE_ESPECIAL);
+    CALC_STAT(baseSpDefense, ESTADISTICA_DEFENSA_ESPECIAL);
 }
 
 static void SwapDomeTrainers(int id1, int id2, u16 *statsArray)
@@ -2001,7 +1989,7 @@ static void Task_ShowTourneyInfoCard(u8 taskId)
         EnableInterrupts(INTR_FLAG_VBLANK);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sInfoCardBgTemplates, ARRAY_COUNT(sInfoCardBgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sInfoCardBgTemplates, ARRAY_COUNT(sInfoCardBgTemplates));
         InitWindows(sInfoCardWindowTemplates);
         DeactivateAllTextPrinters();
         gBattle_BG0_X = 0;
@@ -2406,14 +2394,14 @@ static void Task_HandleInfoCardInput(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_FADE_IN:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
             gTasks[taskId].tState = STATE_WAIT_FADE;
         }
         break;
     case STATE_WAIT_FADE:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
             gTasks[taskId].tState = STATE_GET_INPUT;
         break;
     case STATE_GET_INPUT:
@@ -2421,7 +2409,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
         switch (i)
         {
         case INFOCARD_INPUT_AB:
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 0x10, RGB_BLACK);
             gTasks[taskId].tState = STATE_CLOSE_CARD;
             break;
         case TRAINERCARD_INPUT_UP ... TRAINERCARD_INPUT_RIGHT:
@@ -2434,7 +2422,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
 
             for (i = windowId; i < windowId + NUM_INFO_CARD_WINDOWS; i++)
             {
-                CopyWindowToVram(i, COPYWIN_GFX);
+                CopyWindowToVram(i, COPIA_TILES_VENTANA);
                 FillWindowPixelBuffer(i, PIXEL_FILL(0));
             }
             gTasks[taskId].tState = STATE_REACT_INPUT;
@@ -3060,7 +3048,7 @@ static void Task_HandleInfoCardInput(u8 taskId)
         }
         break;
     case STATE_CLOSE_CARD:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             for (i = 0; i < NUM_INFOCARD_SPRITES / 2; i++)
             {
@@ -3245,7 +3233,7 @@ static u8 Task_GetInfoCardInput(u8 taskId)
 #undef tUsingAlternateSlot
 
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
-#define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
+#define ALLOC_ARRAY_SIZE max(NUMERO_ESTADISTICAS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
 static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
 {
@@ -3423,7 +3411,7 @@ static void InitRandomTourneyTreeResults(void)
         return;
 
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
-    statValues = AllocZeroed(sizeof(int) * NUM_STATS);
+    statValues = AllocZeroed(sizeof(int) * NUMERO_ESTADISTICAS);
     lvlMode = gSaveBlockPtr->frontier.lvlMode;
     gSaveBlockPtr->frontier.lvlMode = FRONTIER_LVL_50;
     zero1 = 0;
@@ -3487,12 +3475,12 @@ static void InitRandomTourneyTreeResults(void)
             CalcDomeMonStats(&gFacilityTrainerMons[DOME_MONS[i][j]],
                              monLevel, ivs, statValues);
 
-            statSums[i] += statValues[STAT_ATK];
-            statSums[i] += statValues[STAT_DEF];
-            statSums[i] += statValues[STAT_SPATK];
-            statSums[i] += statValues[STAT_SPDEF];
-            statSums[i] += statValues[STAT_SPEED];
-            statSums[i] += statValues[STAT_HP];
+            statSums[i] += statValues[ESTADISTICA_ATAQUE];
+            statSums[i] += statValues[ESTADISTICA_DEFENSA];
+            statSums[i] += statValues[ESTADISTICA_ATAQUE_ESPECIAL];
+            statSums[i] += statValues[ESTADISTICA_DEFENSA_ESPECIAL];
+            statSums[i] += statValues[ESTADISTICA_VELOCIDAD];
+            statSums[i] += statValues[ESTADISTICA_PS];
             monTypesBits |= 1u << gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[0];
             monTypesBits |= 1u << gSpeciesInfo[gFacilityTrainerMons[DOME_MONS[i][j]].species].types[1];
         }

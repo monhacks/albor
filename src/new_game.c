@@ -6,7 +6,6 @@
 #include "pokemon_size_record.h"
 #include "script.h"
 #include "lottery_corner.h"
-#include "play_time.h"
 #include "mauville_old_man.h"
 #include "match_call.h"
 #include "lilycove_lady.h"
@@ -43,13 +42,7 @@ extern const u8 EventScript_ResetAllMapFlags[];
 static void WarpToTruck(void);
 static void ResetItemFlags(void);
 
-EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
-
-static const struct ContestWinner sContestWinnerPicDummy =
-{
-    .monName = _(""),
-    .trainerName = _("")
-};
+EWRAM_DATA bool8 gDiferentePartidaGuardada = FALSE;
 
 void SetTrainerId(u32 trainerId, u8 *dst)
 {
@@ -59,21 +52,9 @@ void SetTrainerId(u32 trainerId, u8 *dst)
     dst[3] = trainerId >> 24;
 }
 
-u32 GetTrainerId(u8 *trainerId)
-{
-    return (trainerId[3] << 24) | (trainerId[2] << 16) | (trainerId[1] << 8) | (trainerId[0]);
-}
-
-void CopyTrainerId(u8 *dst, u8 *src)
-{
-    s32 i;
-    for (i = 0; i < TRAINER_ID_LENGTH; i++)
-        dst[i] = src[i];
-}
-
 static void InitPlayerTrainerId(void)
 {
-    u32 trainerId = (Random() << 16) | GetGeneratedTrainerIdLower();
+    u32 trainerId = (Random() << 16) | sTrainerId;
     SetTrainerId(trainerId, gSaveBlockPtr->playerTrainerId);
 }
 
@@ -95,13 +76,7 @@ static void ClearPokedexFlags(void)
 
 void ClearAllContestWinnerPics(void)
 {
-    s32 i;
 
-    ClearContestWinnerPicsInContestHall();
-
-    // Clear Museum paintings
-    for (i = MUSEUM_CONTEST_WINNERS_START; i < NUM_CONTEST_WINNERS; i++)
-        gSaveBlockPtr->contestWinners[i] = sContestWinnerPicDummy;
 }
 
 static void WarpToTruck(void)
@@ -112,54 +87,38 @@ static void WarpToTruck(void)
 
 void ResetMenuAndMonGlobals(void)
 {
-    gDifferentSaveFile = FALSE;
+    gDiferentePartidaGuardada = FALSE;
     ResetPokedexScrollPositions();
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetBagScrollPositions();
-    ResetPokeblockScrollPositions();
 }
 
 void NewGameInitData(void)
 {
     if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_CORRUPT)
-        RtcReset();
+        ReinicioTiempo();
 
-    gDifferentSaveFile = TRUE;
+    gDiferentePartidaGuardada = TRUE;
     ZeroPlayerPartyMons();
     ZeroEnemyPartyMons();
     ResetPokedex();
     gSaveBlockPtr->specialSaveWarpFlags = 0;
     InitPlayerTrainerId();
-    PlayTimeCounter_Reset();
+    ContadorTiempoJuego_Reset();
     ClearPokedexFlags();
     InitEventData();
-    ClearSecretBases();
     ClearBerryTrees();
     SetMoney(&gSaveBlockPtr->money, 3000);
     SetCoins(0);
     ResetGameStats();
-    ClearAllContestWinnerPics();
-    ClearPlayerLinkBattleRecords();
-    InitSeedotSizeRecord();
-    InitLotadSizeRecord();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
-    DeactivateAllRoamers();
     gSaveBlockPtr->registeredItem = ITEM_NONE;
     ClearBag();
-    ClearPokeblocks();
-    ClearDecorationInventories();
-    InitEasyChatPhrases();
-    SetMauvilleOldMan();
-    InitDewfordTrend();
-    ResetFanClub();
-    ResetLotteryCorner();
     WarpToTruck();
     RunScriptImmediately(EventScript_ResetAllMapFlags);
-    InitLilycoveLady();
-    InitMatchCallCounters();
     ResetItemFlags();
 }
 

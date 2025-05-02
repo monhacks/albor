@@ -27,12 +27,12 @@ static void ReshowPCMenuAfterHallOfFamePC(void)
 {
     LockPlayerFieldControls();
     Overworld_PlaySpecialMapMusic();
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0x10, 0, RGB_BLACK);
+    BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0x10, 0, RGB_BLACK);
     CreateTask(Task_WaitForPaletteFade, 10);
 }
 
 static void Task_WaitForPaletteFade(u8 taskId)
 {
-    if (!gPaletteFade.active)
+    if (!gFundidoPaletas.activo)
         DestroyTask(taskId);
 }

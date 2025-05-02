@@ -25,7 +25,7 @@ static EWRAM_DATA struct AnimStatsChangeData *sAnimStatsChangeData = {0};
 
 static void StartBlendAnimSpriteColor(u8, u32);
 static void AnimTask_BlendSpriteColor_Step2(u8);
-static void AnimTask_HardwarePaletteFade_Step(u8);
+static void TareaAnimacion_FundidoPaletasHardware_Paso(u8 idTarea);
 static void AnimTask_TraceMonBlended_Step(u8);
 static void AnimMonTrace(struct Sprite *);
 static void AnimTask_DrawFallingWhiteLinesOnAttacker_Step(u8);
@@ -192,22 +192,22 @@ static void AnimTask_BlendSpriteColor_Step2(u8 taskId)
     }
 }
 
-void AnimTask_HardwarePaletteFade(u8 taskId)
+void TareaAnimacion_FundidoPaletasHardware(u8 idTarea)
 {
-    BeginHardwarePaletteFade(
+    EmpiezaFundidoPaletasHardware(
         gBattleAnimArgs[0],
         gBattleAnimArgs[1],
         gBattleAnimArgs[2],
         gBattleAnimArgs[3],
         gBattleAnimArgs[4]);
 
-    gTasks[taskId].func = AnimTask_HardwarePaletteFade_Step;
+    gTasks[idTarea].func = TareaAnimacion_FundidoPaletasHardware_Paso;
 }
 
-static void AnimTask_HardwarePaletteFade_Step(u8 taskId)
+static void TareaAnimacion_FundidoPaletasHardware_Paso(u8 idTarea)
 {
-    if (!gPaletteFade.active)
-        DestroyAnimVisualTask(taskId);
+    if (!gFundidoPaletas.activo)
+        DestroyAnimVisualTask(idTarea);
 }
 
 // Used to leave blended traces of a mon, usually to imply speed as in Agility or Aerial Ace
@@ -298,7 +298,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     bg1CntStruct->charBaseBlock = 1; // Cambiar el bloque base de caracteres
     SetGpuReg(REG_OFFSET_BG1CNT, bg1Cnt); // Guardar el valor actualizado
 
-    if (IsDoubleBattle())
+    if (EsContraEntrenador())
     {
         if (GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_OPPONENT_RIGHT
          || GetBattlerPosition(gBattleAnimAttacker) == B_POSITION_PLAYER_LEFT)
@@ -325,7 +325,7 @@ void AnimTask_DrawFallingWhiteLinesOnAttacker(u8 taskId)
     spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
     newSpriteId = CreateInvisibleSpriteCopy(gBattleAnimAttacker, spriteId, species);
     GetBattleAnimBg1Data(&animBgData);
-    AnimLoadCompressedBgTilemapHandleContest(&animBgData, gBattleAnimMaskTilemap_Curse, FALSE);
+    AnimLoadCompressedBgTilemap(animBgData.bgId, gBattleAnimMaskTilemap_Curse);
     AnimLoadCompressedBgGfx(animBgData.bgId, gBattleAnimMaskImage_Curse, animBgData.tilesOffset);
     LoadPalette(sCurseLinesPalette, BG_PLTT_ID(animBgData.paletteId) + 1, PLTT_SIZEOF(1));
 
@@ -423,7 +423,7 @@ static void StatsChangeAnimation_Step1(u8 taskId)
         sAnimStatsChangeData->battler1 = gBattleAnimTarget;
 
     sAnimStatsChangeData->battler2 = BATTLE_PARTNER(sAnimStatsChangeData->battler1);
-    if (IsContest() || (sAnimStatsChangeData->aMultipleBattlers && !IsBattlerSpriteVisible(sAnimStatsChangeData->battler2)))
+    if (sAnimStatsChangeData->aMultipleBattlers && !IsBattlerSpriteVisible(sAnimStatsChangeData->battler2))
         sAnimStatsChangeData->aMultipleBattlers = FALSE;
 
     gBattle_WIN0H = 0;
@@ -435,10 +435,9 @@ static void StatsChangeAnimation_Step1(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 0);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 0);
-    if (!IsContest())
-        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
+    SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
 
-    if (IsDoubleBattle() && !sAnimStatsChangeData->aMultipleBattlers)
+    if (EsContraEntrenador() && !sAnimStatsChangeData->aMultipleBattlers)
     {
         if (GetBattlerPosition(sAnimStatsChangeData->battler1) == B_POSITION_OPPONENT_RIGHT
          || GetBattlerPosition(sAnimStatsChangeData->battler1) == B_POSITION_PLAYER_LEFT)
@@ -453,17 +452,10 @@ static void StatsChangeAnimation_Step1(u8 taskId)
         }
     }
 
-    if (IsContest())
-    {
-        sAnimStatsChangeData->species = gContestResources->moveAnim->species;
-    }
+    if (GetBattlerSide(sAnimStatsChangeData->battler1) != B_SIDE_PLAYER)
+        sAnimStatsChangeData->species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
     else
-    {
-        if (GetBattlerSide(sAnimStatsChangeData->battler1) != B_SIDE_PLAYER)
-            sAnimStatsChangeData->species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
-        else
-            sAnimStatsChangeData->species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
-    }
+        sAnimStatsChangeData->species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[sAnimStatsChangeData->battler1]], MON_DATA_SPECIES);
 
     gTasks[taskId].func = StatsChangeAnimation_Step2;
 }
@@ -485,9 +477,9 @@ static void StatsChangeAnimation_Step2(u8 taskId)
 
     GetBattleAnimBg1Data(&animBgData);
     if (!sAnimStatsChangeData->aDecrease)
-        AnimLoadCompressedBgTilemapHandleContest(&animBgData, gStatAnim_Increase_Tilemap, FALSE);
+        AnimLoadCompressedBgTilemap(animBgData.bgId, gStatAnim_Increase_Tilemap);
     else
-        AnimLoadCompressedBgTilemapHandleContest(&animBgData, gStatAnim_Decrease_Tilemap, FALSE);
+        AnimLoadCompressedBgTilemap(animBgData.bgId, gStatAnim_Decrease_Tilemap);
 
     AnimLoadCompressedBgGfx(animBgData.bgId, gStatAnim_Gfx, animBgData.tilesOffset);
     switch (sAnimStatsChangeData->aAnimStatId)
@@ -599,8 +591,7 @@ static void StatsChangeAnimation_Step3(u8 taskId)
         SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_ALL | WININ_WIN1_ALL);
         SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_ALL | WINOUT_WINOBJ_ALL);
 
-        if (!IsContest())
-            SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
+        SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
 
         SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) ^ DISPCNT_OBJWIN_ON);
         SetGpuReg(REG_OFFSET_BLDCNT, 0);
@@ -805,7 +796,7 @@ void StartMonScrollingBgMask(u8 taskId, u16 scrollSpeed, u8 battler, bool8 inclu
 {
     u16 species;
     u8 spriteId, spriteId2;
-    u32 bg1CntValue; // Cambiado a u32
+    u32 bg1CntValue;
     struct BattleAnimBgData animBgData;
     u8 battler2;
 
@@ -825,16 +816,15 @@ void StartMonScrollingBgMask(u8 taskId, u16 scrollSpeed, u8 battler, bool8 inclu
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG1 | BLDCNT_TGT2_ALL | BLDCNT_EFFECT_BLEND);
     SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
     
-    bg1CntValue = GetGpuReg(REG_OFFSET_BG1CNT); // Obtener el valor de BG1CNT
-    struct BgCnt *bg1CntStruct = (struct BgCnt *)&bg1CntValue; // Convertir a puntero de BgCnt
+    bg1CntValue = GetGpuReg(REG_OFFSET_BG1CNT);
+    struct BgCnt *bg1CntStruct = (struct BgCnt *)&bg1CntValue;
     bg1CntStruct->priority = 0;
     bg1CntStruct->screenSize = 0;
     bg1CntStruct->areaOverflowMode = 1;
-    bg1CntStruct->charBaseBlock = 1; // Siempre será verdadero en este caso
+    bg1CntStruct->charBaseBlock = 1;
 
-    SetGpuReg(REG_OFFSET_BG1CNT, bg1CntValue); // Guardar el valor actualizado
+    SetGpuReg(REG_OFFSET_BG1CNT, bg1CntValue);
 
-    // Obtener el species del Pokémon
     if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES);
     else
@@ -845,7 +835,7 @@ void StartMonScrollingBgMask(u8 taskId, u16 scrollSpeed, u8 battler, bool8 inclu
         spriteId2 = CreateInvisibleSpriteCopy(battler2, gBattlerSpriteIds[battler2], species);
 
     GetBattleAnimBg1Data(&animBgData);
-    AnimLoadCompressedBgTilemapHandleContest(&animBgData, tilemap, FALSE);
+    AnimLoadCompressedBgTilemap(animBgData.bgId, tilemap);
     AnimLoadCompressedBgGfx(animBgData.bgId, gfx, animBgData.tilesOffset);
     LoadCompressedPalette(palette, BG_PLTT_ID(animBgData.paletteId), PLTT_SIZE_4BPP);
 
@@ -1027,11 +1017,7 @@ void AnimTask_CopyPalFadedToUnfaded(u8 taskId)
 
 void AnimTask_IsContest(u8 taskId)
 {
-    if (IsContest())
-        gBattleAnimArgs[ARG_RET_ID] = TRUE;
-    else
-        gBattleAnimArgs[ARG_RET_ID] = FALSE;
-
+    gBattleAnimArgs[ARG_RET_ID] = FALSE;
     DestroyAnimVisualTask(taskId);
 }
 
@@ -1067,17 +1053,10 @@ void AnimTask_SetAnimAttackerAndTargetForEffectAtk(u8 taskId)
 
 void AnimTask_SetAttackerInvisibleWaitForSignal(u8 taskId)
 {
-    if (IsContest())
-    {
-        DestroyAnimVisualTask(taskId);
-    }
-    else
-    {
-        gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
-        gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = TRUE;
-        gTasks[taskId].func = AnimTask_WaitAndRestoreVisibility;
-        gAnimVisualTaskCount--;
-    }
+    gTasks[taskId].data[0] = gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible;
+    gBattleSpritesDataPtr->battlerData[gBattleAnimAttacker].invisible = TRUE;
+    gTasks[taskId].func = AnimTask_WaitAndRestoreVisibility;
+    gAnimVisualTaskCount--;
 }
 
 static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
@@ -1089,9 +1068,9 @@ static void AnimTask_WaitAndRestoreVisibility(u8 taskId)
     }
 }
 
-void AnimTask_IsDoubleBattle(u8 taskId)
+void AnimTask_EsContraEntrenador(u8 taskId)
 {
-    gBattleAnimArgs[7] = (IsDoubleBattle() && !IsContest());
+    gBattleAnimArgs[7] = (EsContraEntrenador());
     DestroyAnimVisualTask(taskId);
 }
 

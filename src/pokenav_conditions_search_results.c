@@ -654,7 +654,7 @@ static void AddSearchResultListMenuWindow(struct Pokenav_SearchResultsGfx *gfx)
 {
     gfx->winid = AddWindow(&sSearchResultListMenuWindowTemplate);
     PutWindowTilemap(gfx->winid);
-    CopyWindowToVram(gfx->winid, COPYWIN_MAP);
+    CopyWindowToVram(gfx->winid, COPIA_TILEMAP_VENTANA);
     PrintSearchResultListMenuItems(gfx);
 }
 
@@ -668,7 +668,7 @@ static void PrintSearchResultListMenuItems(struct Pokenav_SearchResultsGfx *gfx)
     AddTextPrinterParameterized(gfx->winid, FONT_NORMAL, gStringVar2, 4, 1, TEXT_SKIP_DRAW, NULL);
     ConvertIntToDecimalStringN(gStringVar1, rank, STR_CONV_MODE_RIGHT_ALIGN, 3);
     AddTextPrinterParameterized(gfx->winid, FONT_NORMAL, gStringVar1, 34, 1, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(gfx->winid, COPYWIN_GFX);
+    CopyWindowToVram(gfx->winid, COPIA_TILES_VENTANA);
 }
 
 static void CreateSearchResultsList(void)

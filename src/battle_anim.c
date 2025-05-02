@@ -6,12 +6,12 @@
 #include "battle_interface.h"
 #include "battle_util.h"
 #include "bg.h"
-#include "contest.h"
 #include "decompress.h"
 #include "dma3.h"
 #include "gpu_regs.h"
 #include "graphics.h"
 #include "main.h"
+#include "malloc.h"
 #include "m4a.h"
 #include "palette.h"
 #include "pokemon.h"
@@ -34,8 +34,6 @@ static void Cmd_createsprite(void);
 static void Cmd_createvisualtask(void);
 static void Cmd_delay(void);
 static void Cmd_waitforvisualfinish(void);
-static void Cmd_nop(void);
-static void Cmd_nop2(void);
 static void Cmd_end(void);
 static void Cmd_playse(void);
 static void Cmd_monbg(void);
@@ -58,13 +56,11 @@ static void Cmd_setpan(void);
 static void Cmd_panse(void);
 static void Cmd_loopsewithpan(void);
 static void Cmd_waitplaysewithpan(void);
-static void Cmd_setbldcnt(void);
 static void Cmd_createsoundtask(void);
 static void Cmd_waitsound(void);
 static void Cmd_jumpargeq(void);
 static void Cmd_monbg_static(void);
 static void Cmd_clearmonbg_static(void);
-static void Cmd_jumpifcontest(void);
 static void Cmd_fadetobgfromset(void);
 static void Cmd_panse_adjustnone(void);
 static void Cmd_panse_adjustall(void);
@@ -73,24 +69,19 @@ static void Cmd_splitbgprio_all(void);
 static void Cmd_splitbgprio_foes(void);
 static void Cmd_invisible(void);
 static void Cmd_visible(void);
-static void Cmd_teamattack_moveback(void);
-static void Cmd_teamattack_movefwd(void);
 static void Cmd_stopsound(void);
 static void Cmd_createvisualtaskontargets(void);
 static void Cmd_createspriteontargets(void);
 static void Cmd_createspriteontargets_onpos(void);
-static void Cmd_jumpifmovetypeequal(void);
 static void Cmd_createdragondartsprite(void);
 static void RunAnimScriptCommand(void);
 static void Task_UpdateMonBg(u8 taskId);
-static void FlipBattlerBgTiles(void);
 static void Task_ClearMonBg(u8 taskId);
 static void Task_ClearMonBgStatic(u8 taskId);
 static void Task_FadeToBg(u8 taskId);
 static void Task_PanFromInitialToTarget(u8 taskId);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
-static void LoadDefaultBg(void);
 
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
@@ -110,7 +101,7 @@ EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA u16 gAnimMoveIndex = 0; // Set but unused.
+EWRAM_DATA u16 gAnimMoveIndex = 0;
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
@@ -121,59 +112,52 @@ EWRAM_DATA static bool8 sAnimHideHpBoxes = FALSE;
 
 static void (* const sScriptCmdTable[])(void) =
 {
-    Cmd_loadspritegfx,        // 0x00
-    Cmd_unloadspritegfx,      // 0x01
-    Cmd_createsprite,         // 0x02
-    Cmd_createvisualtask,     // 0x03
-    Cmd_delay,                // 0x04
-    Cmd_waitforvisualfinish,  // 0x05
-    Cmd_nop,                  // 0x06
-    Cmd_nop2,                 // 0x07
-    Cmd_end,                  // 0x08
-    Cmd_playse,               // 0x09
-    Cmd_monbg,                // 0x0A
-    Cmd_clearmonbg,           // 0x0B
-    Cmd_setalpha,             // 0x0C
-    Cmd_blendoff,             // 0x0D
-    Cmd_call,                 // 0x0E
-    Cmd_return,               // 0x0F
-    Cmd_setarg,               // 0x10
-    Cmd_choosetwoturnanim,    // 0x11
-    Cmd_jumpifmoveturn,       // 0x12
-    Cmd_goto,                 // 0x13
-    Cmd_fadetobg,             // 0x14
-    Cmd_restorebg,            // 0x15
-    Cmd_waitbgfadeout,        // 0x16
-    Cmd_waitbgfadein,         // 0x17
-    Cmd_changebg,             // 0x18
-    Cmd_playsewithpan,        // 0x19
-    Cmd_setpan,               // 0x1A
-    Cmd_panse,                // 0x1B
-    Cmd_loopsewithpan,        // 0x1C
-    Cmd_waitplaysewithpan,    // 0x1D
-    Cmd_setbldcnt,            // 0x1E
-    Cmd_createsoundtask,      // 0x1F
-    Cmd_waitsound,            // 0x20
-    Cmd_jumpargeq,            // 0x21
-    Cmd_monbg_static,         // 0x22
-    Cmd_clearmonbg_static,    // 0x23
-    Cmd_jumpifcontest,        // 0x24
-    Cmd_fadetobgfromset,      // 0x25
-    Cmd_panse_adjustnone,     // 0x26
-    Cmd_panse_adjustall,      // 0x27
-    Cmd_splitbgprio,          // 0x28
-    Cmd_splitbgprio_all,      // 0x29
-    Cmd_splitbgprio_foes,     // 0x2A
-    Cmd_invisible,            // 0x2B
-    Cmd_visible,              // 0x2C
-    Cmd_teamattack_moveback,  // 0x2D
-    Cmd_teamattack_movefwd,   // 0x2E
-    Cmd_stopsound,            // 0x2F
-    Cmd_createvisualtaskontargets,  // 0x30
-    Cmd_createspriteontargets,      // 0x31
-    Cmd_createspriteontargets_onpos, // 0x32
-    Cmd_jumpifmovetypeequal,         // 0x33
-    Cmd_createdragondartsprite,      // 0x34
+    Cmd_loadspritegfx,                  // 0
+    Cmd_unloadspritegfx,                // 1
+    Cmd_createsprite,                   // 2
+    Cmd_createvisualtask,               // 3
+    Cmd_delay,                          // 4
+    Cmd_waitforvisualfinish,            // 5
+    Cmd_end,                            // 6
+    Cmd_playse,                         // 7
+    Cmd_monbg,                          // 8
+    Cmd_clearmonbg,                     // 9
+    Cmd_setalpha,                       // 10
+    Cmd_blendoff,                       // 11
+    Cmd_call,                           // 12
+    Cmd_return,                         // 13
+    Cmd_setarg,                         // 14
+    Cmd_choosetwoturnanim,              // 15
+    Cmd_jumpifmoveturn,                 // 16
+    Cmd_goto,                           // 17
+    Cmd_fadetobg,                       // 18
+    Cmd_restorebg,                      // 19
+    Cmd_waitbgfadeout,                  // 20
+    Cmd_waitbgfadein,                   // 21
+    Cmd_changebg,                       // 22
+    Cmd_playsewithpan,                  // 23
+    Cmd_setpan,                         // 24
+    Cmd_panse,                          // 25
+    Cmd_loopsewithpan,                  // 26
+    Cmd_waitplaysewithpan,              // 27
+    Cmd_createsoundtask,                // 28
+    Cmd_waitsound,                      // 29
+    Cmd_jumpargeq,                      // 30
+    Cmd_monbg_static,                   // 31
+    Cmd_clearmonbg_static,              // 32
+    Cmd_fadetobgfromset,                // 33
+    Cmd_panse_adjustnone,               // 34
+    Cmd_panse_adjustall,                // 35
+    Cmd_splitbgprio,                    // 36
+    Cmd_splitbgprio_all,                // 37
+    Cmd_splitbgprio_foes,               // 38
+    Cmd_invisible,                      // 39
+    Cmd_visible,                        // 40
+    Cmd_stopsound,                      // 41
+    Cmd_createvisualtaskontargets,      // 42
+    Cmd_createspriteontargets,          // 43
+    Cmd_createspriteontargets_onpos,    // 44
+    Cmd_createdragondartsprite,         // 45
 };
 
 static const u16 sMovesWithQuietBGM[] =
@@ -295,7 +279,7 @@ void DoMoveAnim(u16 move)
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
     // Make sure the anim target of moves hitting everyone is at the opposite side.
-    if (GetBattlerMoveTargetType(gBattlerAttacker, move) & MOVE_TARGET_FOES_AND_ALLY && IsDoubleBattle())
+    if (GetBattlerMoveTargetType(gBattlerAttacker, move) & MOVE_TARGET_FOES_AND_ALLY && EsContraEntrenador())
     {
         while (GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
         {
@@ -337,22 +321,14 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         }
     }
 
-    if (!IsContest())
+    InitPrioritiesForVisibleBattlers();
+    UpdateOamPriorityInAllHealthboxes(0, sAnimHideHpBoxes);
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        InitPrioritiesForVisibleBattlers();
-        UpdateOamPriorityInAllHealthboxes(0, sAnimHideHpBoxes);
-        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
-        {
-            if (GetBattlerSide(i) != B_SIDE_PLAYER)
-                gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
-            else
-                gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
-        }
-    }
-    else
-    {
-        for (i = 0; i < CONTESTANT_COUNT; i++)
-            gAnimBattlerSpecies[i] = gContestResources->moveAnim->species;
+        if (GetBattlerSide(i) != B_SIDE_PLAYER)
+            gAnimBattlerSpecies[i] = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
+        else
+            gAnimBattlerSpecies[i] = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
     }
 
     if (animType != ANIM_TYPE_MOVE)
@@ -395,7 +371,7 @@ void LaunchBattleAnimation(u32 animType, u32 animId)
         {
             if (animId == sMovesWithQuietBGM[i])
             {
-                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
+                m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MEDIO);
                 break;
             }
         }
@@ -799,14 +775,6 @@ static void Cmd_waitforvisualfinish(void)
     }
 }
 
-static void Cmd_nop(void)
-{
-}
-
-static void Cmd_nop2(void)
-{
-}
-
 static void Cmd_end(void)
 {
     s32 i;
@@ -855,13 +823,10 @@ static void Cmd_end(void)
         if (FuncIsActiveTask(Task_UpdateMonBg))
             DebugPrintf("Move %d animation still has Task_UpdateMonBg active at the end!", gAnimMoveIndex);
 
-        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
-        if (!IsContest())
-        {
-            InitPrioritiesForVisibleBattlers();
-            UpdateOamPriorityInAllHealthboxes(1, sAnimHideHpBoxes);
-            sAnimHideHpBoxes = FALSE;
-        }
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, VOLUMEN_MAXIMO);
+        InitPrioritiesForVisibleBattlers();
+        UpdateOamPriorityInAllHealthboxes(1, sAnimHideHpBoxes);
+        sAnimHideHpBoxes = FALSE;
         gAnimScriptActive = FALSE;
     }
 }
@@ -946,7 +911,7 @@ static void Cmd_monbg(void)
     if (IsBattlerSpriteVisible(battlerId))
     {
         u8 position = GetBattlerPosition(battlerId);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -966,7 +931,7 @@ static void Cmd_monbg(void)
     if (IsBattlerSpriteVisible(battlerId))
     {
         u8 position = GetBattlerPosition(battlerId);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1022,16 +987,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
     {
         u8 battlerPosition;
 
-        if (IsContest() == TRUE)
-        {
-            RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(16)), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void *)(BG_SCREEN_ADDR(30)), 0x1000, 0);
-        }
-        else
-        {
-            RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(8)), 0x2000, 1);
-            RequestDma3Fill(0xFF, (void *)(BG_SCREEN_ADDR(28)), 0x1000, 0);
-        }
+        RequestDma3Fill(0, (void *)(BG_SCREEN_ADDR(8)), 0x2000, 1);
+        RequestDma3Fill(0xFF, (void *)(BG_SCREEN_ADDR(28)), 0x1000, 0);
 
         GetBattleAnimBg1Data(&animBg);
         CpuFill16(0, animBg.bgTiles, 0x1000);
@@ -1044,9 +1001,6 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         battlerSpriteId = gBattlerSpriteIds[battlerId];
 
         gBattle_BG1_X =  -(gSprites[battlerSpriteId].x + gSprites[battlerSpriteId].x2) + 0x20;
-        if (IsContest() && IsSpeciesNotUnown(gContestResources->moveAnim->species))
-            gBattle_BG1_X--;
-
         gBattle_BG1_Y =  -(gSprites[battlerSpriteId].y + gSprites[battlerSpriteId].y2) + 0x20;
         if (setSpriteInvisible)
             gSprites[gBattlerSpriteIds[battlerId]].invisible = TRUE;
@@ -1057,10 +1011,7 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
         LoadPalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);
         CpuCopy32(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], (void *)(BG_PLTT + PLTT_OFFSET_4BPP(animBg.paletteId)), PLTT_SIZE_4BPP);
 
-        if (IsContest())
-            battlerPosition = 0;
-        else
-            battlerPosition = GetBattlerPosition(battlerId);
+        battlerPosition = GetBattlerPosition(battlerId);
 
         DrawBattlerOnBg(1, 0, 0, battlerPosition, animBg.paletteId, animBg.bgTiles, animBg.bgTilemap, animBg.tilesOffset);
     }
@@ -1093,32 +1044,6 @@ void MoveBattlerSpriteToBG(u8 battlerId, bool8 toBG_2, bool8 setSpriteInvisible)
     }
 }
 
-static void FlipBattlerBgTiles(void)
-{
-    s32 i, j;
-    struct BattleAnimBgData animBg;
-    u16 *ptr;
-
-    if (IsSpeciesNotUnown(gContestResources->moveAnim->species))
-    {
-        GetBattleAnimBg1Data(&animBg);
-        ptr = animBg.bgTilemap;
-        for (i = 0; i < 8; i++)
-        {
-            for (j = 0; j < 4; j++)
-            {
-                u16 temp;
-                SWAP(ptr[j + i * 32], ptr[7 - j + i * 32], temp);
-            }
-        }
-        for (i = 0; i < 8; i++)
-        {
-            for (j = 0; j < 8; j++)
-                ptr[j + i * 32] ^= 0x400;
-        }
-    }
-}
-
 void RelocateBattleBgPal(u16 paletteNum, u16 *dest, u32 offset, bool8 largeScreen)
 {
     s32 i, j;
@@ -1141,7 +1066,7 @@ void ResetBattleAnimBg(bool8 toBG2)
     struct BattleAnimBgData animBg;
     GetBattleAnimBg1Data(&animBg);
 
-    if (!toBG2 || IsContest())
+    if (!toBG2)
     {
         ClearBattleAnimBg(1);
         gBattle_BG1_X = 0;
@@ -1234,7 +1159,7 @@ static void Task_ClearMonBg(u8 taskId)
     {
         u8 to_BG2;
         u8 position = GetBattlerPosition(gTasks[taskId].data[2]);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             to_BG2 = FALSE;
         else
             to_BG2 = TRUE;
@@ -1279,7 +1204,7 @@ static void Cmd_monbg_static(void)
     if (IsBattlerSpriteVisible(battlerId))
     {
         u8 position = GetBattlerPosition(battlerId);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1291,7 +1216,7 @@ static void Cmd_monbg_static(void)
     if (animBattlerId > 1 && IsBattlerSpriteVisible(battlerId))
     {
         u8 position = GetBattlerPosition(battlerId);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1343,7 +1268,7 @@ static void Task_ClearMonBgStatic(u8 taskId)
         bool8 toBG_2;
         u8 battlerId = gTasks[taskId].data[2];
         u8 position = GetBattlerPosition(battlerId);
-        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT || IsContest())
+        if (position == B_POSITION_OPPONENT_LEFT || position == B_POSITION_PLAYER_RIGHT)
             toBG_2 = FALSE;
         else
             toBG_2 = TRUE;
@@ -1366,16 +1291,6 @@ static void Cmd_setalpha(void)
     half2 = *(sBattleAnimScriptPtr++) << 8;
     SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
     SetGpuReg(REG_OFFSET_BLDALPHA, half1 | half2);
-}
-
-static void Cmd_setbldcnt(void)
-{
-    u16 half1, half2;
-
-    sBattleAnimScriptPtr++;
-    half1 = *(sBattleAnimScriptPtr++);
-    half2 = *(sBattleAnimScriptPtr++) << 8;
-    SetGpuReg(REG_OFFSET_BLDCNT, half1 | half2);
 }
 
 static void Cmd_blendoff(void)
@@ -1442,16 +1357,6 @@ static void Cmd_goto(void)
     sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
-// Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior.
-// As a result, if misused, this function cannot reliably discern between field and contest status and could result in undefined behavior.
-bool8 IsContest(void)
-{
-    if (!gMain.inBattle)
-        return TRUE;
-    else
-        return FALSE;
-}
-
 #define tBackgroundId   data[0]
 #define tState          data[10]
 
@@ -1470,19 +1375,16 @@ static void Cmd_fadetobg(void)
 
 static void Cmd_fadetobgfromset(void)
 {
-    u8 bg1, bg2, bg3;
+    u8 bg1, bg2;
     u8 taskId;
 
     sBattleAnimScriptPtr++;
     bg1 = sBattleAnimScriptPtr[0];
     bg2 = sBattleAnimScriptPtr[1];
-    bg3 = sBattleAnimScriptPtr[2];
     sBattleAnimScriptPtr += 3;
     taskId = CreateTask(Task_FadeToBg, 5);
 
-    if (IsContest())
-        gTasks[taskId].tBackgroundId = bg3;
-    else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
+    if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_PLAYER)
         gTasks[taskId].tBackgroundId = bg2;
     else
         gTasks[taskId].tBackgroundId = bg1;
@@ -1494,11 +1396,11 @@ static void Task_FadeToBg(u8 taskId)
 {
     if (gTasks[taskId].tState == 0)
     {
-        BeginHardwarePaletteFade(0xE8, 0, 0, 16, 0);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_BLEND, 0, 0, 16, FALSE);
         gTasks[taskId].tState++;
         return;
     }
-    if (gPaletteFade.active)
+    if (gFundidoPaletas.activo)
         return;
     if (gTasks[taskId].tState == 1)
     {
@@ -1510,15 +1412,15 @@ static void Task_FadeToBg(u8 taskId)
         s16 bgId = gTasks[taskId].tBackgroundId;
 
         if (bgId == -1)
-            LoadDefaultBg();
+            DrawMainBattleBackground();
         else
             LoadMoveBg(bgId);
 
-        BeginHardwarePaletteFade(0xE8, 0, 16, 0, 1);
+        EmpiezaFundidoPaletasHardware(BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_BLEND, 0, 16, 0, TRUE);
         gTasks[taskId].tState++;
         return;
     }
-    if (gPaletteFade.active)
+    if (gFundidoPaletas.activo)
         return;
     if (gTasks[taskId].tState == 3)
     {
@@ -1529,36 +1431,9 @@ static void Task_FadeToBg(u8 taskId)
 
 void LoadMoveBg(u16 bgId)
 {
-    if (IsContest())
-    {
-        const u32 *tilemap = gBattleAnimBackgroundTable[bgId].tilemap;
-        void *dmaSrc;
-        void *dmaDest;
-
-        LZDecompressWram(tilemap, gDecompressionBuffer);
-        RelocateBattleBgPal(GetBattleBgPaletteNum(), (void *)gDecompressionBuffer, 0x100, FALSE);
-        dmaSrc = gDecompressionBuffer;
-        dmaDest = (void *)BG_SCREEN_ADDR(26);
-        DmaCopy32(3, dmaSrc, dmaDest, 0x800);
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_SCREEN_ADDR(4));
-        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(GetBattleBgPaletteNum()), PLTT_SIZE_4BPP);
-    }
-    else
-    {
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)BG_SCREEN_ADDR(26));
-        LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_CHAR_ADDR(2));
-        LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
-    }
-}
-
-static void LoadDefaultBg(void)
-{
-    if (IsContest())
-        LoadContestBgAfterMoveAnim();
-    else if (B_TERRAIN_BG_CHANGE == TRUE && gFieldStatuses & STATUS_FIELD_TERRAIN_ANY)
-        DrawTerrainTypeBattleBackground();
-    else
-        DrawMainBattleBackground();
+    LZDecompressVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)BG_SCREEN_ADDR(26));
+    LZDecompressVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_CHAR_ADDR(2));
+    LoadCompressedPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
 }
 
 static void Cmd_restorebg(void)
@@ -1609,17 +1484,12 @@ static void Cmd_changebg(void)
 
 s8 BattleAnimAdjustPanning(s8 pan)
 {
-    if (!IsContest() && gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
+    if (gBattleSpritesDataPtr->healthBoxesData[gBattleAnimAttacker].statusAnimActive)
     {
         if (GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
             pan = SOUND_PAN_TARGET;
         else
             pan = SOUND_PAN_ATTACKER;
-    }
-    else if (IsContest())
-    {
-        if (gBattleAnimAttacker != gBattleAnimTarget || gBattleAnimAttacker != 2 || pan != SOUND_PAN_TARGET)
-            pan *= -1;
     }
     else if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
     {
@@ -2022,12 +1892,6 @@ static void Cmd_jumpargeq(void)
         sBattleAnimScriptPtr += 7;
 }
 
-static void Cmd_jumpifcontest(void)
-{
-    sBattleAnimScriptPtr++;
-    sBattleAnimScriptPtr += 4;
-}
-
 static void Cmd_splitbgprio(void)
 {
     u8 wantedBattler;
@@ -2044,7 +1908,7 @@ static void Cmd_splitbgprio(void)
 
     // Apply only if the given battler is the lead (on left from team's perspective)
     battlerPosition = GetBattlerPosition(battlerId);
-    if (!IsContest() && (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT))
+    if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT)
     {
         SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
         SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
@@ -2054,11 +1918,8 @@ static void Cmd_splitbgprio(void)
 static void Cmd_splitbgprio_all(void)
 {
     sBattleAnimScriptPtr++;
-    if (!IsContest())
-    {
-        SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
-        SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
-    }
+    SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
+    SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
 }
 
 static void Cmd_splitbgprio_foes(void)
@@ -2080,7 +1941,7 @@ static void Cmd_splitbgprio_foes(void)
 
         // Apply only if the given battler is the lead (on left from team's perspective)
         battlerPosition = GetBattlerPosition(battlerId);
-        if (!IsContest() && (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT))
+        if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_OPPONENT_RIGHT)
         {
             SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
             SetAnimBgAttribute(2, BG_ANIM_PRIORITY, 2);
@@ -2110,88 +1971,11 @@ static void Cmd_visible(void)
     sBattleAnimScriptPtr += 2;
 }
 
-// Below two commands are never used
-static void Cmd_teamattack_moveback(void)
-{
-    u8 wantedBattler;
-    u8 priorityRank;
-    u8 spriteId;
-
-    wantedBattler = sBattleAnimScriptPtr[1];
-    sBattleAnimScriptPtr += 2;
-
-    // Apply to double battles when attacking own side
-    if (!IsContest() && IsDoubleBattle()
-     && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
-    {
-        if (wantedBattler == ANIM_ATTACKER)
-        {
-            priorityRank = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
-            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        }
-        else
-        {
-            priorityRank = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
-            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-        }
-        if (spriteId != SPRITE_NONE)
-        {
-            gSprites[spriteId].invisible = FALSE;
-            if (priorityRank == 2)
-                gSprites[spriteId].oam.priority = 3;
-
-            if (priorityRank == 1)
-                ResetBattleAnimBg(FALSE);
-            else
-                ResetBattleAnimBg(TRUE);
-        }
-    }
-}
-
-static void Cmd_teamattack_movefwd(void)
-{
-    u8 wantedBattler;
-    u8 priorityRank;
-    u8 spriteId;
-
-    wantedBattler = sBattleAnimScriptPtr[1];
-    sBattleAnimScriptPtr += 2;
-
-    // Apply to double battles when attacking own side
-    if (IsDoubleBattle()
-     && GetBattlerSide(gBattleAnimAttacker) == GetBattlerSide(gBattleAnimTarget))
-    {
-        if (wantedBattler == ANIM_ATTACKER)
-        {
-            priorityRank = GetBattlerSpriteBGPriorityRank(gBattleAnimAttacker);
-            spriteId = GetAnimBattlerSpriteId(ANIM_ATTACKER);
-        }
-        else
-        {
-            priorityRank = GetBattlerSpriteBGPriorityRank(gBattleAnimTarget);
-            spriteId = GetAnimBattlerSpriteId(ANIM_TARGET);
-        }
-
-        if (spriteId != SPRITE_NONE && priorityRank == 2)
-            gSprites[spriteId].oam.priority = 2;
-    }
-}
-
 static void Cmd_stopsound(void)
 {
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
-}
-
-static void Cmd_jumpifmovetypeequal(void)
-{
-    const u8 *type = sBattleAnimScriptPtr + 1;
-    sBattleAnimScriptPtr += 2;
-    if (*type != GetMoveType(gCurrentMove))
-        sBattleAnimScriptPtr += 4;
-    else
-        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
 }
 
 static void Cmd_createdragondartsprite(void)

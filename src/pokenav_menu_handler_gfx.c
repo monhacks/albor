@@ -94,7 +94,6 @@ static bool32 IsTaskActive_UpdateBgDotsPalette(void);
 static void Task_UpdateBgDotsPalette(u8);
 static void SetupPokenavMenuScanlineEffects(void);
 static void DestroyMenuOptionGlowTask(void);
-static void ResetBldCnt(void);
 static void InitMenuOptionGlow(void);
 static void Task_CurrentMenuOptionGlow(u8);
 static void SetMenuOptionGlow(void);
@@ -361,7 +360,6 @@ static const struct ScanlineEffectParams sPokenavMainMenuScanlineEffectParams =
 {
     .dmaDest = &REG_WIN0H,
     .dmaControl = ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1,
-    .initState = 1,
 };
 
 static bool32 AreAnyTrainerRematchesNearby(void)
@@ -568,7 +566,6 @@ static u32 LoopedTask_OpenConditionMenu(s32 state)
     switch (state)
     {
     case 0:
-        ResetBldCnt();
         StartOptionAnimations_Exit();
         HideMainOrSubMenuLeftHeader(POKENAV_GFX_MAIN_MENU, FALSE);
         PlaySE(SE_SELECT);
@@ -607,7 +604,6 @@ static u32 LoopedTask_ReturnToMainMenu(s32 state)
     switch (state)
     {
     case 0:
-        ResetBldCnt();
         StartOptionAnimations_Exit();
         HideMainOrSubMenuLeftHeader(POKENAV_GFX_CONDITION_MENU, FALSE);
         return LT_INC_AND_PAUSE;
@@ -645,7 +641,6 @@ static u32 LoopedTask_OpenConditionSearchMenu(s32 state)
     switch (state)
     {
     case 0:
-        ResetBldCnt();
         StartOptionAnimations_Exit();
         PlaySE(SE_SELECT);
         return LT_INC_AND_PAUSE;
@@ -678,7 +673,6 @@ static u32 LoopedTask_ReturnToConditionMenu(s32 state)
     switch (state)
     {
     case 0:
-        ResetBldCnt();
         StartOptionAnimations_Exit();
         HideMainOrSubMenuLeftHeader(POKENAV_GFX_SEARCH_MENU, FALSE);
         return LT_INC_AND_PAUSE;
@@ -749,7 +743,6 @@ static u32 LoopedTask_OpenPokenavFeature(s32 state)
         if (WaitForHelpBar())
             return LT_PAUSE;
         SlideMenuHeaderUp();
-        ResetBldCnt();
         StartOptionAnimations_Exit();
         switch (GetPokenavMenuType())
         {
@@ -1206,7 +1199,7 @@ static void AddOptionDescriptionWindow(void)
     gfx->optionDescWindowId = AddWindow(&sOptionDescWindowTemplate);
     PutWindowTilemap(gfx->optionDescWindowId);
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
-    CopyWindowToVram(gfx->optionDescWindowId, COPYWIN_FULL);
+    CopyWindowToVram(gfx->optionDescWindowId, COPIA_COMPLETA_VENTANA);
 }
 
 static void PrintCurrentOptionDescription(void)
@@ -1321,11 +1314,6 @@ static void DestroyMenuOptionGlowTask(void)
     SetPokenavVBlankCallback();
 }
 
-static void ResetBldCnt(void)
-{
-    SetGpuReg(REG_OFFSET_BLDCNT, 0);
-}
-
 static void InitMenuOptionGlow(void)
 {
     SetMenuOptionGlow();
@@ -1354,9 +1342,4 @@ static void SetMenuOptionGlow(void)
     CpuFill16(0, gScanlineEffectRegBuffers[1], DISPLAY_HEIGHT * 2);
     CpuFill16(RGB(16, 23, 28), &gScanlineEffectRegBuffers[0][r4], 0x20);
     CpuFill16(RGB(16, 23, 28), &gScanlineEffectRegBuffers[1][r4], 0x20);
-}
-
-void ResetBldCnt_(void)
-{
-    ResetBldCnt();
 }

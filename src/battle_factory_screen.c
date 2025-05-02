@@ -1147,7 +1147,7 @@ static void CB2_InitSelectScreen(void)
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sSelect_BgTemplates, ARRAY_COUNT(sSelect_BgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sSelect_BgTemplates, ARRAY_COUNT(sSelect_BgTemplates));
         InitWindows(sSelect_WindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
@@ -1217,7 +1217,7 @@ static void CB2_InitSelectScreen(void)
         ShowBg(0);
         ShowBg(1);
         SetVBlankCallback(VBlankCB_SelectScreen);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_1D_MAP);
 #ifdef UBFIX
         if (sFactorySelectScreen && sFactorySelectScreen->fromSummaryScreen)
@@ -1465,11 +1465,11 @@ static void Select_Task_OpenSummaryScreen(u8 taskId)
     {
     case STATE_SUMMARY_FADE:
         gPlttBufferUnfaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4] = gPlttBufferFaded[BG_PLTT_ID(PALNUM_FADE_TEXT) + 4];
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             DestroyTask(sFactorySelectScreen->fadeSpeciesNameTaskId);
             HideMonPic(sFactorySelectScreen->monPics[1], &sFactorySelectScreen->monPicAnimating);
@@ -1503,7 +1503,7 @@ static void Select_Task_Exit(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case 0:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 1:
@@ -1652,7 +1652,7 @@ static void Select_Task_HandleMenu(u8 taskId)
         }
         break;
     case STATE_MENU_REINIT:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             if (sFactorySelectScreen->fromSummaryScreen == TRUE)
             {
@@ -1679,7 +1679,7 @@ static void Select_Task_HandleChooseMons(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_CHOOSE_MONS_INIT:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
             sFactorySelectScreen->fadeSpeciesNameActive = TRUE;
@@ -1738,55 +1738,12 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 
 static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 {
-    u8 i = 0;
-    u8 ivs = 0;
-    u8 level = 0;
-    u32 otId = 0;
-    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 lvlMode = gSaveBlockPtr->frontier.lvlMode;
-    u8 challengeNum = gSaveBlockPtr->frontier.factoryWinStreaks[battleMode][lvlMode] / 7;
-    u8 rentalRank = 0;
 
-    gFacilityTrainerMons = gBattleFrontierMons;
-    if (gSaveBlockPtr->frontier.lvlMode != FRONTIER_LVL_50)
-        level = FRONTIER_MAX_LEVEL_OPEN;
-    else
-        level = FRONTIER_MAX_LEVEL_50;
-
-    rentalRank = GetNumPastRentalsRank(battleMode, lvlMode);
-    otId = T1_READ_32(gSaveBlockPtr->playerTrainerId);
-
-    for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
-    {
-        u16 monId = gSaveBlockPtr->frontier.rentalMons[i].monId;
-        sFactorySelectScreen->mons[i + firstMonId].monId = monId;
-        if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
-        else
-            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
-
-        CreateFacilityMon(&gFacilityTrainerMons[monId],
-                level, ivs, otId, FLAG_FRONTIER_MON_FACTORY,
-                &sFactorySelectScreen->mons[i + firstMonId].monData);
-    }
 }
 
 static void CreateSlateportTentSelectableMons(u8 firstMonId)
 {
-    u8 i;
-    u8 ivs = 0;
-    u8 level = TENT_MIN_LEVEL;
-    u32 otId = 0;
 
-    gFacilityTrainerMons = gSlateportBattleTentMons;
-    otId = T1_READ_32(gSaveBlockPtr->playerTrainerId);
-
-    for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
-    {
-        u16 monId = gSaveBlockPtr->frontier.rentalMons[i].monId;
-        sFactorySelectScreen->mons[i + firstMonId].monId = monId;
-        CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otId, 0, &sFactorySelectScreen->mons[i + firstMonId].monData);
-    }
 }
 
 static void Select_CopyMonsToPlayerParty(void)
@@ -1847,7 +1804,7 @@ static void Select_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySelectScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySelectScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
     ClearWindowTilemap(windowId);
 }
 
@@ -1855,7 +1812,7 @@ static void Select_PrintRentalPkmnString(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_TITLE, PIXEL_FILL(0));
     AddTextPrinterParameterized(SELECT_WIN_TITLE, FONT_NORMAL, gText_RentalPkmn, 2, 1, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_TITLE, COPYWIN_FULL);
+    CopyWindowToVram(SELECT_WIN_TITLE, COPIA_COMPLETA_VENTANA);
 }
 
 static void Select_PrintMonSpecies(void)
@@ -1869,7 +1826,7 @@ static void Select_PrintMonSpecies(void)
     StringCopy(gStringVar4, GetSpeciesName(species));
     x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
     AddTextPrinterParameterized3(SELECT_WIN_SPECIES, FONT_NORMAL, x, 1, sSpeciesNameTextColors, 0, gStringVar4);
-    CopyWindowToVram(SELECT_WIN_SPECIES, COPYWIN_GFX);
+    CopyWindowToVram(SELECT_WIN_SPECIES, COPIA_TILES_VENTANA);
 }
 
 static void Select_PrintSelectMonString(void)
@@ -1887,14 +1844,14 @@ static void Select_PrintSelectMonString(void)
         str = gText_TheseThreePkmnOkay;
 
     AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
+    CopyWindowToVram(SELECT_WIN_INFO, COPIA_TILES_VENTANA);
 }
 
 static void Select_PrintCantSelectSameMon(void)
 {
     FillWindowPixelBuffer(SELECT_WIN_INFO, PIXEL_FILL(0));
     AddTextPrinterParameterized(SELECT_WIN_INFO, FONT_NORMAL, gText_CantSelectSamePkmn, 2, 5, 0, NULL);
-    CopyWindowToVram(SELECT_WIN_INFO, COPYWIN_GFX);
+    CopyWindowToVram(SELECT_WIN_INFO, COPIA_TILES_VENTANA);
 }
 
 static void Select_PrintMenuOptions(void)
@@ -1910,7 +1867,7 @@ static void Select_PrintMenuOptions(void)
         AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_Rent);
 
     AddTextPrinterParameterized3(SELECT_WIN_OPTIONS, FONT_NORMAL, 7, 33, sMenuOptionTextColors, 0, gText_Others2);
-    CopyWindowToVram(SELECT_WIN_OPTIONS, COPYWIN_FULL);
+    CopyWindowToVram(SELECT_WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void Select_PrintYesNoOptions(void)
@@ -1919,7 +1876,7 @@ static void Select_PrintYesNoOptions(void)
     FillWindowPixelBuffer(SELECT_WIN_YES_NO, PIXEL_FILL(0));
     AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 1, sMenuOptionTextColors, 0, gText_Yes2);
     AddTextPrinterParameterized3(SELECT_WIN_YES_NO, FONT_NORMAL, 7, 17, sMenuOptionTextColors, 0, gText_No2);
-    CopyWindowToVram(SELECT_WIN_YES_NO, COPYWIN_FULL);
+    CopyWindowToVram(SELECT_WIN_YES_NO, COPIA_COMPLETA_VENTANA);
 }
 
 static u8 Select_RunMenuOptionFunc(void)
@@ -2350,11 +2307,11 @@ static void Swap_Task_OpenSummaryScreen(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_SUMMARY_FADE:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState = STATE_SUMMARY_CLEAN;
         break;
     case STATE_SUMMARY_CLEAN:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             DestroyTask(sFactorySwapScreen->fadeSpeciesNameTaskId);
             HideMonPic(sFactorySwapScreen->monPic, &sFactorySwapScreen->monPicAnimating);
@@ -2406,7 +2363,7 @@ static void Swap_Task_Exit(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 2:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 0, 16, RGB_BLACK);
         gTasks[taskId].tState++;
         break;
     case 3:
@@ -2606,7 +2563,7 @@ static void Swap_Task_HandleChooseMons(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case STATE_CHOOSE_MONS_INIT:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             sFactorySwapScreen->fadeSpeciesNameActive = TRUE;
             gTasks[taskId].tState = STATE_CHOOSE_MONS_HANDLE_INPUT;
@@ -2990,10 +2947,10 @@ static void Swap_Task_ScreenInfoTransitionOut(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 3:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPIA_TILES_VENTANA);
             if (sFactorySwapScreen->inEnemyScreen == TRUE)
             {
                 // Start "Pkmn for Swap" button slide offscreen
@@ -3118,7 +3075,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 4:
-        if (!gPaletteFade.active)
+        if (!gFundidoPaletas.activo)
         {
             Swap_PrintOneActionString(0);
             gTasks[taskId].tState++;
@@ -3131,7 +3088,7 @@ static void Swap_Task_ScreenInfoTransitionIn(u8 taskId)
         break;
     case 6:
         FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-        CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
+        CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPIA_TILES_VENTANA);
         gTasks[taskId].tState++;
         break;
     case 7:
@@ -3251,7 +3208,7 @@ static void CB2_InitSwapScreen(void)
         SetVBlankCallback(NULL);
         CpuFill32(0, (void *)VRAM, VRAM_SIZE);
         ResetBgsAndClearDma3BusyFlags();
-        InitBgsFromTemplates(0, sSwap_BgTemplates, ARRAY_COUNT(sSwap_BgTemplates));
+        InitBgsFromTemplates(DISPCNT_MODE_0, sSwap_BgTemplates, ARRAY_COUNT(sSwap_BgTemplates));
         InitWindows(sSwap_WindowTemplates);
         DeactivateAllTextPrinters();
         gMain.state++;
@@ -3366,7 +3323,7 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 14:
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        BeginNormalPaletteFade(PALETAS_COMPLETAS, 0, 16, 0, RGB_BLACK);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
         ShowBg(0);
         ShowBg(1);
@@ -3709,7 +3666,7 @@ static void Swap_ErasePopupMenu(u8 windowId)
     gSprites[sFactorySwapScreen->menuCursor1SpriteId].invisible = TRUE;
     gSprites[sFactorySwapScreen->menuCursor2SpriteId].invisible = TRUE;
     FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
-    CopyWindowToVram(windowId, COPYWIN_GFX);
+    CopyWindowToVram(windowId, COPIA_TILES_VENTANA);
     ClearWindowTilemap(windowId);
 }
 
@@ -3717,14 +3674,14 @@ static void Swap_EraseSpeciesWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
+    CopyWindowToVram(SWAP_WIN_SPECIES, COPIA_TILES_VENTANA);
 }
 
 static void Swap_EraseSpeciesAtFadeWindow(void)
 {
     PutWindowTilemap(SWAP_WIN_SPECIES_AT_FADE);
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_GFX);
+    CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPIA_TILES_VENTANA);
 }
 
 static void Swap_EraseActionFadeWindow(void)
@@ -3732,14 +3689,14 @@ static void Swap_EraseActionFadeWindow(void)
     Swap_EraseSpeciesWindow();
     PutWindowTilemap(SWAP_WIN_ACTION_FADE);
     FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPIA_TILES_VENTANA);
 }
 
 static void Swap_PrintPkmnSwap(void)
 {
     FillWindowPixelBuffer(SWAP_WIN_TITLE, PIXEL_FILL(1));
     AddTextPrinterParameterized(SWAP_WIN_TITLE, FONT_NORMAL, gText_PkmnSwap, 2, 1, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_TITLE, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_TITLE, COPIA_COMPLETA_VENTANA);
 }
 
 static void Swap_PrintMonSpecies(void)
@@ -3750,7 +3707,7 @@ static void Swap_PrintMonSpecies(void)
     FillWindowPixelBuffer(SWAP_WIN_SPECIES, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPIA_TILES_VENTANA);
     }
     else
     {
@@ -3762,7 +3719,7 @@ static void Swap_PrintMonSpecies(void)
         StringCopy(gStringVar4, GetSpeciesName(species));
         x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
         AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -3770,7 +3727,7 @@ static void Swap_PrintOnInfoWindow(const u8 *str)
 {
     FillWindowPixelBuffer(SWAP_WIN_INFO, PIXEL_FILL(0));
     AddTextPrinterParameterized(SWAP_WIN_INFO, FONT_NORMAL, str, 2, 5, 0, NULL);
-    CopyWindowToVram(SWAP_WIN_INFO, COPYWIN_GFX);
+    CopyWindowToVram(SWAP_WIN_INFO, COPIA_TILES_VENTANA);
 }
 
 static void Swap_PrintMenuOptions(void)
@@ -3780,7 +3737,7 @@ static void Swap_PrintMenuOptions(void)
     AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15,  1, sSwapMenuOptionsTextColors, 0, gText_Summary2);
     AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 17, sSwapMenuOptionsTextColors, 0, gText_Swap);
     AddTextPrinterParameterized3(SWAP_WIN_OPTIONS, FONT_NORMAL, 15, 33, sSwapMenuOptionsTextColors, 0, gText_Rechoose);
-    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void Swap_PrintYesNoOptions(void)
@@ -3789,7 +3746,7 @@ static void Swap_PrintYesNoOptions(void)
     FillWindowPixelBuffer(SWAP_WIN_YES_NO, PIXEL_FILL(0));
     AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 1,  sSwapMenuOptionsTextColors, 0, gText_Yes3);
     AddTextPrinterParameterized3(SWAP_WIN_YES_NO, FONT_NORMAL, 7, 17, sSwapMenuOptionsTextColors, 0, gText_No3);
-    CopyWindowToVram(SWAP_WIN_YES_NO, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_YES_NO, COPIA_COMPLETA_VENTANA);
 }
 
 static void Swap_PrintActionString(const u8 *str, u32 y, u32 windowId)
@@ -3809,7 +3766,7 @@ static void Swap_PrintActionStrings(void)
         Swap_PrintActionString(gText_Salir, 24, SWAP_WIN_ACTION_FADE);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPIA_COMPLETA_VENTANA);
 }
 
 static void Swap_PrintActionStrings2(void)
@@ -3823,7 +3780,7 @@ static void Swap_PrintActionStrings2(void)
         Swap_PrintActionString(gText_Salir, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
 }
 
 static void Swap_PrintOneActionString(u8 which)
@@ -3838,7 +3795,7 @@ static void Swap_PrintOneActionString(u8 which)
         Swap_PrintActionString(gText_Salir, 32, SWAP_WIN_OPTIONS);
         break;
     }
-    CopyWindowToVram(SWAP_WIN_OPTIONS, COPYWIN_FULL);
+    CopyWindowToVram(SWAP_WIN_OPTIONS, COPIA_COMPLETA_VENTANA);
 }
 
 // For printing the species name once its selected. Keep the current fade but don't keep fading in and out
@@ -3859,7 +3816,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
     FillWindowPixelBuffer(SWAP_WIN_SPECIES_AT_FADE, PIXEL_FILL(0));
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPIA_COMPLETA_VENTANA);
     }
     else
     {
@@ -3871,7 +3828,7 @@ static void Swap_PrintMonSpeciesAtFade(void)
         StringCopy(gStringVar4, GetSpeciesName(species));
         x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
         AddTextPrinterParameterized3(SWAP_WIN_SPECIES_AT_FADE, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPYWIN_FULL);
+        CopyWindowToVram(SWAP_WIN_SPECIES_AT_FADE, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -3886,7 +3843,7 @@ static void Swap_PrintMonSpeciesForTransition(void)
 
     if (sFactorySwapScreen->cursorPos >= FRONTIER_PARTY_SIZE)
     {
-        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_GFX);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPIA_TILES_VENTANA);
     }
     else
     {
@@ -3898,7 +3855,7 @@ static void Swap_PrintMonSpeciesForTransition(void)
         StringCopy(gStringVar4, GetSpeciesName(species));
         x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar4, 86);
         AddTextPrinterParameterized3(SWAP_WIN_SPECIES, FONT_NORMAL, x, 1, sSwapSpeciesNameTextColors, 0, gStringVar4);
-        CopyWindowToVram(SWAP_WIN_SPECIES, COPYWIN_FULL);
+        CopyWindowToVram(SWAP_WIN_SPECIES, COPIA_COMPLETA_VENTANA);
     }
 }
 
@@ -4087,7 +4044,7 @@ static void Swap_TaskCantHaveSameMons(u8 taskId)
         if (sFactorySwapScreen->monPicAnimating != TRUE)
         {
             FillWindowPixelBuffer(SWAP_WIN_ACTION_FADE, PIXEL_FILL(0));
-            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPYWIN_GFX);
+            CopyWindowToVram(SWAP_WIN_ACTION_FADE, COPIA_TILES_VENTANA);
             gTasks[taskId].tState++;
         }
         break;

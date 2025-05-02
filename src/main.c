@@ -6,7 +6,6 @@
 #include "rtc.h"
 #include "scanline_effect.h"
 #include "overworld.h"
-#include "play_time.h"
 #include "random.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
@@ -31,12 +30,6 @@ static void IntrDummy(void);
 // Defined in the linker script so that the test build can override it.
 extern void CB2_FlashNotDetectedScreen(void);
 
-const u8 gGameVersion = GAME_VERSION;
-
-const u8 gGameLanguage = GAME_LANGUAGE; // English
-
-const char BuildDateTime[] = "2005 02 21 11:10";
-
 const IntrFunc gIntrTableTemplate[] =
 {
     VCountIntr, // V-count interrupt
@@ -57,10 +50,7 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-COMMON_DATA u16 gKeyRepeatStartDelay = 0;
 COMMON_DATA struct Main gMain = {0};
-COMMON_DATA u16 gKeyRepeatContinueDelay = 0;
-COMMON_DATA bool8 gSoftResetDisabled = 0;
 COMMON_DATA IntrFunc gIntrTable[INTR_COUNT] = {0};
 COMMON_DATA u32 IntrMain_Buffer[512] = {0};
 COMMON_DATA s8 gPcmDmaCounter = 0;
@@ -76,7 +66,7 @@ void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
-void AgbMain()
+void AgbMain(void)
 {
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
@@ -85,11 +75,10 @@ void AgbMain()
     InitIntrHandlers();
     m4aSoundInit();
     EnableVCountIntrAtLine150();
-    RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
     InitMapMusic();
-    SeedRngWithRtc(); // see comment at SeedRngWithRtc definition below
+    SeedRngWithRtc();
     ClearDma3Requests();
     ResetBgs();
     SetDefaultFontsPointer();
@@ -107,7 +96,7 @@ void AgbMainLoop(void)
     {
         ReadKeys();
         CallCallbacks();
-        PlayTimeCounter_Update();
+        AvanzaSegundos();
         MapMusicMain();
         VBlankIntrWait();
     }
@@ -156,11 +145,6 @@ void SeedRngAndSetTrainerId(void)
     sTrainerId = Random();
 }
 
-u16 GetGeneratedTrainerIdLower(void)
-{
-    return sTrainerId;
-}
-
 void EnableVCountIntrAtLine150(void)
 {
     u16 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
@@ -173,9 +157,9 @@ static void SeedRngWithRtc(void)
     #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
     u32 seconds;
     struct SiiRtcInfo rtc;
-    RtcGetInfo(&rtc);
+    HoraActual();
     seconds =
-        ((HORAS_POR_DIA * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+        ((HORAS_POR_DIA * rtc->day + BCD8(rtc.hour))
         * MINUTOS_POR_HORA + BCD8(rtc.minute))
         * SEGUNDOS_POR_MINUTO + BCD8(rtc.second);
     SeedRng(seconds);
@@ -184,9 +168,6 @@ static void SeedRngWithRtc(void)
 
 void InitKeys(void)
 {
-    gKeyRepeatContinueDelay = 3;
-    gKeyRepeatStartDelay = 30;
-
     gMain.heldKeys = 0;
     gMain.newKeys = 0;
     gMain.newAndRepeatedKeys = 0;
@@ -212,13 +193,13 @@ static void ReadKeys(void)
         if (gMain.keyRepeatCounter == 0)
         {
             gMain.newAndRepeatedKeys = keyInput;
-            gMain.keyRepeatCounter = gKeyRepeatContinueDelay;
+            gMain.keyRepeatCounter = INTERVALO_REPETICION_TECLA;
         }
     }
     else
     {
         // If there is no input or the input has changed, reset the counter.
-        gMain.keyRepeatCounter = gKeyRepeatStartDelay;
+        gMain.keyRepeatCounter = RETRASO_REPETICION_TECLA;
     }
 
     gMain.heldKeysRaw = keyInput;
@@ -252,6 +233,7 @@ void InitIntrHandlers(void)
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
     SetSerialCallback(NULL);
+    SetVCountCallback(NULL);
 
     REG_IME = 1;
 
@@ -268,19 +250,14 @@ void SetHBlankCallback(IntrCallback callback)
     gMain.hblankCallback = callback;
 }
 
-void SetVCountCallback(IntrCallback callback)
-{
-    gMain.vcountCallback = callback;
-}
-
-void RestoreSerialTimer3IntrHandlers(void)
-{
-    gIntrTable[1] = SerialIntr;
-}
-
 void SetSerialCallback(IntrCallback callback)
 {
     gMain.serialCallback = callback;
+}
+
+void SetVCountCallback(IntrCallback callback)
+{
+    gMain.vcountCallback = callback;
 }
 
 static void VBlankIntr(void)
@@ -348,7 +325,6 @@ void DoSoftReset(void)
     DmaStop(1);
     DmaStop(2);
     DmaStop(3);
-    SiiRtcProtect();
     SoftReset(RESET_ALL);
 }
 

@@ -91,3 +91,5 @@ porytiles compile-primary -Wall -o /Users/ivanmartinez/Desktop/pokeemerald/data/
 *Cambio a la habilidad exclusiva de Kecleon, Cambia color, que le hace cambiar de tipo, pero antes de recibir el ataque. Ahora, no es su única habilidad. Además, es de tipo Normal y Fantasma.
 
 paletas: (\d+) (\d+) (\d+) \d+ --> $1 $2 $3
+
+//falta terminar lista de macros (scrcmd...) y terminar strings, después comprobar que todo va bien, y añadir cambios de rama principal.

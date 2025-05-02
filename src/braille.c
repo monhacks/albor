@@ -13,7 +13,7 @@ static const u8 sScrollDistances[] = {
     [OPTIONS_TEXT_SPEED_MID] = 2,
     [OPTIONS_TEXT_SPEED_FAST] = 4,
 };
-static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.fwjpnfont");
+static const u16 sFont_Braille[] = INCBIN_U16("graphics/fonts/braille.latfont");
 
 static void DecompressGlyph_Braille(u16);
 
@@ -174,7 +174,7 @@ u16 FontFunc_Braille(struct TextPrinter *textPrinter)
                 ScrollWindow(textPrinter->printerTemplate.windowId, 0, sScrollDistances[gSaveBlockPtr->optionsTextSpeed], PIXEL_FILL(textPrinter->printerTemplate.bgColor));
                 textPrinter->scrollDistance -= sScrollDistances[gSaveBlockPtr->optionsTextSpeed];
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
+            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPIA_TILES_VENTANA);
         }
         else
         {
@@ -206,7 +206,7 @@ static void DecompressGlyph_Braille(u16 glyph)
     gCurGlyph.height = 16;
 }
 
-u32 GetGlyphWidth_Braille(u16 glyphId, bool32 isJapanese)
+u32 GetGlyphWidth_Braille(u16 glyphId)
 {
     return 16;
 }

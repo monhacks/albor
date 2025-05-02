@@ -59,7 +59,7 @@
 #define VAR_CYCLING_ROAD_RECORD_TIME_H                   0x4029
 #define VAR_FRIENDSHIP_STEP_COUNTER                      0x402A
 #define VAR_POISON_STEP_COUNTER                          0x402B
-#define VAR_RESET_RTC_ENABLE                             0x402C
+#define VAR_UNUSED_0x402C                             0x402C
 #define VAR_UNUSED_0x402D                                0x402D
 #define VAR_UNUSED_0x402E                                0x402E
 
@@ -81,7 +81,7 @@
 #define VAR_REGICE_STEPS_3                               0x403D
 #define VAR_ALTERING_CAVE_WILD_SET                       0x403E
 #define VAR_DISTRIBUTE_EON_TICKET                        0x403F // This var is read and written, but is always zero. The only way to obtain the Eon Ticket in Emerald is via Record Mixing
-#define VAR_DAYS                                         0x4040
+#define VAR_UNUSED_0x4000                                         0x4040
 #define VAR_FANCLUB_FAN_COUNTER                          0x4041
 #define VAR_FANCLUB_LOSE_FAN_TIMER                       0x4042
 #define VAR_DEPT_STORE_FLOOR                             0x4043

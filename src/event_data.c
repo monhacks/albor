@@ -47,30 +47,10 @@ void ClearTempFieldEventData(void)
     FlagClear(FLAG_SYS_CTRL_OBJ_DELETE);
 }
 
-void ClearDailyFlags(void)
+void LimpiaFlagsDiarias(void)
 {
     memset(&gSaveBlockPtr->flags[DAILY_FLAGS_START / 8], 0, DAILY_FLAGS_SIZE);
     memset(&gSaveBlockPtr->trainerFlags[0], 0, TRAINER_FLAGS_SIZE);
-}
-
-void DisableResetRTC(void)
-{
-    VarSet(VAR_RESET_RTC_ENABLE, 0);
-    FlagClear(FLAG_SYS_RESET_RTC_ENABLE);
-}
-
-void EnableResetRTC(void)
-{
-    VarSet(VAR_RESET_RTC_ENABLE, 0x920);
-    FlagSet(FLAG_SYS_RESET_RTC_ENABLE);
-}
-
-bool32 CanResetRTC(void)
-{
-    if (FlagGet(FLAG_SYS_RESET_RTC_ENABLE) && VarGet(VAR_RESET_RTC_ENABLE) == 0x920)
-        return TRUE;
-    else
-        return FALSE;
 }
 
 u16 *GetVarPointer(u16 id)

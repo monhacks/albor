@@ -197,7 +197,7 @@ static void BattleIntroSlide1(u8 taskId)
 
         if (gTasks[taskId].data[2] == 0)
         {
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
             gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
@@ -298,7 +298,7 @@ static void BattleIntroSlide2(u8 taskId)
 
         if (gTasks[taskId].data[2] == 0)
         {
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
             gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
@@ -378,7 +378,7 @@ static void BattleIntroSlide3(u8 taskId)
 
         if (gTasks[taskId].data[2] == 0)
         {
-            gScanlineEffect.state = 3;
+            gScanlineEffect.estado = EFECTO_BARRIDO_PETICION_PARAR;
             gTasks[taskId].tState++;
             CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
