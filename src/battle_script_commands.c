@@ -1098,18 +1098,6 @@ static bool32 TryAegiFormChange(void)
     return TRUE;
 }
 
-bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType)
-{
-      if ((ability == ABILITY_CAMBIACOLOR)
-         && (gBattleMons[battler].types[0] != moveType || gBattleMons[battler].types[1] != moveType
-             || (gBattleMons[battler].types[2] != moveType && gBattleMons[battler].types[2] != TIPO_MISTERIO)))
-    {
-        SET_BATTLER_TYPE(battler, moveType);
-        return TRUE;
-    }
-    return FALSE;
-}
-
 bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef)
 {
     return FALSE;
